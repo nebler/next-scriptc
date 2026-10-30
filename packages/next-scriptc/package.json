@@ -1,0 +1,19 @@
+{
+  "name": "next-scriptc",
+  "version": "0.0.0",
+  "description": "Compile Next.js route handlers marked \"use scriptc\" to native binaries",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./adapter": "./src/adapter.mjs"
+  },
+  "bin": {
+    "next-scriptc": "./src/cli.mjs"
+  },
+  "peerDependencies": {
+    "next": ">=16"
+  },
+  "dependencies": {
+    "scriptc": "0.4.6"
+  }
+}
