@@ -1,3 +1,13 @@
+# Pre-registered workload selection — final round
+
+Selection criterion: choose operations common in real Next.js applications, not operations selected for native performance. The fixed headline set is successful stored-password login using cost-10 bcryptjs, successful stored-password login using Node's built-in async scrypt, authenticated HS256 JWT verification, retained-index search over 3,000 products, uncached Markdown article rendering, and request-dependent full-content RSS. Small JSON `hello` is the transport control; primes is a synchronous CPU control; the million-order report at 1/2/4 workers is the synthetic sharing experiment, including the hand-flattened Node SharedArrayBuffer baseline. Existing CSV and OG-image probe refusals remain reported.
+
+**Every selected workload is reported whatever the result**, including slower execution, compiler refusals, parity failures and Next's default 30-second proxy timeout. No workload will be removed or substituted after this registration. Both Node and native execute the same handler and request fixtures; Node retains its normal production optimization and JIT. Any intended native GET must depend on a realistic request input so both runtimes compute the response on every measured request. Node build prerendered paths are recorded separately.
+
+The pre-registered library experiment compares installed `marked` 18.1.2 and `minisearch` 7.2.0 with their matching upstream TypeScript tags, using the demo's full article/RSS and catalog inputs. It reports Node published-JS, native published-JS and native TS-source steady-state per-call times, byte parity and coverage dynamic-tier counts, including exact compilation refusals. It does not change demo library resolution. One uninterrupted final quick local suite is indicative only; no sandbox run is authorized in this round.
+
+---
+
 # next-scriptc benchmark suite — review round 2
 
 The application workloads are successful cost-10 bcrypt login with JWT issuance, authenticated JWT verification, search over 3,000 products, uncached Markdown rendering, and full-content RSS. `hello` is a small-response control; `primes` is a synchronous CPU control; `report` is a synthetic worker/sharing experiment. CSV and OG-image generation were refused by the route probe and are not successes. See [probe limitations](../examples/probe/RESULTS.md).
