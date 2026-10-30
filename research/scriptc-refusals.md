@@ -145,3 +145,100 @@ full handlers: examples/probe/entries/demo-routes.ts. A five-line reduction is
 examples/probe/repros/minisearch-stored-fields.ts (run with
 --only=minisearch-stored-fields). Node prints the title; scriptc refuses the
 property read at :5:37 with the exact diagnostic above.
+
+
+Adapter shim integration (2026-10-30, scriptc 0.4.6)
+---------------------------------------------------
+
+13. Web subclassing:
+
+```text
+error SC1090: extending classes not declared in the program ('Request') is not supported yet
+error SC1090: extending classes not declared in the program ('Response') is not supported yet
+```
+
+Resolution: composition, not subclassing or a Node fallback.
+
+14. DOM-only body type alias:
+
+```text
+error SC0001: Cannot find name 'BodyInit'.
+```
+
+Resolution: spell the supported string/byte/ReadableStream/null input union.
+
+15. Optional record/capture formulations in cookie code:
+
+```text
+error SC1090: reading 'name' from a value of type '{ name: string; }' is not supported yet
+error SC1090: a logical or conditional receiver containing a runtime-optional capture is not supported yet
+```
+
+The first occurred for `key?.name` on an optional string-or-record parameter.
+The second occurred on a conditional Date receiver and on a conditional string
+receiver inside the initial-cookie loop. Resolution: explicit undefined/type
+branches and named intermediate strings.
+
+16. Older app Node declarations versus scriptc's fallback declarations:
+
+```text
+error SC0001: Property 'isReloadNavigation' does not exist on type 'Request'.
+error SC0001: Property 'isHistoryNavigation' does not exist on type 'Request'.
+error SC0001: Property 'bytes' does not exist on type 'Request'.
+error SC0001: Property 'bytes' does not exist on type 'Response'.
+```
+
+Resolution: unavailable navigation fields are declared never, and bytes() uses
+`new Uint8Array(await arrayBuffer())`. No cast to an invented Request shape.
+Wider Node declarations also required structural compatibility for blob/formData:
+
+```text
+error SC0001: Type '(_request: Request, context: { params: Promise<Record<string, string | string[]>>; }) => Promise<Response>' is not assignable to type 'RouteHandler'.
+  Types of parameters '_request' and 'request' are incompatible.
+    Type 'NextRequest' is missing the following properties from type 'Request': blob, formData
+```
+
+Resolution: declare unsupported methods never, so their calls fail preflight.
+
+17. A structural response record instead of the Response/NextResponse union
+compiled without warnings, but the first ordinary JSON response returned 500.
+Native stderr was exactly:
+
+```text
+[TypeError: expected object at $, got Response]
+```
+
+Resolution: keep the working union and report its SC6104 checked-dynamic cost.
+A mapped `Pick<Response,...>` also emitted SC6104 rather than providing a static
+record. Neither attempted formulation remains in the implementation.
+
+18. Named route context versus the original broad callback signature:
+
+```text
+error SC0001: Type '(_request: Request, context: { params: Promise<{ slug: string; }>; }) => Promise<Response>' is not assignable to type 'RouteHandler'.
+  Types of parameters 'context' and 'context' are incompatible.
+    Type 'RouteContext' is not assignable to type '{ params: Promise<{ slug: string; }>; }'.
+      Types of property 'params' are incompatible.
+        Type 'Promise<Record<string, string | string[]>>' is not assignable to type 'Promise<{ slug: string; }>'.
+          Property 'slug' is missing in type 'Record<string, string | string[]>' but required in type '{ slug: string; }'.
+```
+
+Resolution: a method signature accepts each handler's narrowed context. Runtime
+pattern matching constructs those named params. Both the compile test and real
+posts handler now pass.
+
+19. ServerResponse.end overload selection with the demo's Node declarations:
+
+The single-chunk fast path compiled, but `outgoing.end(chunk.value)` returned
+HTTP 500 under the demo's complete @types/node declarations. Native stderr:
+
+```text
+[TypeError: expected function at $, got Uint8Array]
+```
+
+Resolution: pin the byte overload with
+`outgoing.end(chunk.value as Uint8Array<ArrayBuffer>)`. The assertion copies no
+payload. Standalone fallback declarations did not reproduce the failure, so the
+shim parity fixture now explicitly includes the demo's Node types and asserts
+single-chunk Content-Length as well as response parity. It also tests stdin EOF
+with an active never-ending response.

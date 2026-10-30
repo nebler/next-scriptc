@@ -58,6 +58,7 @@ class ResponseCookies {
       const pair = parts.shift() || "";
       const index = pair.indexOf("=");
       if (index < 0) continue;
+      // Next's parseCookie decodes once and parseSetCookie decodes again.
       const cookie: ResponseCookie = { name: pair.slice(0, index), value: decodeURIComponent(decodeURIComponent(pair.slice(index + 1))) };
       for (const part of parts) {
         const index = part.indexOf("=");

@@ -9,6 +9,12 @@ export async function GET(request: NextRequest, context: RouteContext) {
     return NextResponse.json({ theme: request.cookies.get({ name: "theme" }) });
   }
   if (mode === "next-typed") return typedJson();
+  if (mode === "next-cookie-percent" || mode === "next-cookie-percent-invalid") {
+    const value = mode === "next-cookie-percent" ? "%2525" : "%25";
+    const response = new NextResponse("cookie", { headers: { "set-cookie": `initial=${value}` } });
+    response.cookies.set("other", "value");
+    return response;
+  }
   if (mode === "next-json") {
     const response = NextResponse.json({
       pathname: request.nextUrl.pathname, query: request.nextUrl.searchParams.getAll("q"),

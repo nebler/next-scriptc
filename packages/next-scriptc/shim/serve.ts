@@ -96,6 +96,8 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   // write() compiles without callbacks. The transport can queue bytes for a slow
   // client: scriptc exposes neither write's boolean result nor a drain event.
   const reader = body.getReader();
+  let bodyClosed = false;
+  reader.closed.then(() => { bodyClosed = true; }, () => {});
   let finished = false;
   let disconnected = false;
   outgoing.once("close", () => {
@@ -105,10 +107,18 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
     }
   });
   try {
-    while (true) {
-      const chunk = await reader.read();
-      if (chunk.done || disconnected) break;
+    let chunk = await reader.read();
+    // Consuming a static body's only chunk schedules its stream closure. Give
+    // that microtask time to run without waiting for a streaming body's next chunk.
+    if (!bodyClosed) await Promise.resolve();
+    if (bodyClosed && !chunk.done && !disconnected) {
+      // Pin the byte overload when the app includes Node's callback overload.
+      outgoing.end(chunk.value as Uint8Array<ArrayBuffer>);
+      return;
+    }
+    while (!chunk.done && !disconnected) {
       outgoing.write(chunk.value);
+      chunk = await reader.read();
     }
     if (!disconnected) outgoing.end();
   } finally {
@@ -195,6 +205,11 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
   }
   process.on("SIGTERM", shutdown);
   process.on("SIGINT", shutdown);
+  if (process.env.NEXT_SCRIPTC_PARENT === "1") {
+    // EOF must terminate even an active/never-ending request after parent SIGKILL.
+    process.stdin.on("end", () => process.exit(0));
+    process.stdin.on("data", () => {});
+  }
   server.listen(port, "127.0.0.1", () => {
     const address = server.address();
     const port = address && typeof address === "object" ? address.port : options.port;

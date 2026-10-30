@@ -3,6 +3,7 @@ import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { SignJWT, jwtVerify } from "jose";
 
 const root = path.resolve(import.meta.dirname, "../../..");
@@ -16,7 +17,10 @@ const running = new Set();
 const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate"];
 
 function start(args) {
-  const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, env, detached: true, stdio: ["ignore", "pipe", "pipe"] });
+  const childEnv = args[0] === "start" ? {
+    ...env, NODE_OPTIONS: `${env.NODE_OPTIONS ?? ""} --import=${pathToFileURL(path.join(demo, "test/proxy-timeout.mjs")).href}`,
+  } : env;
+  const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, env: childEnv, detached: true, stdio: ["ignore", "pipe", "pipe"] });
   const state = { child, output: "", listeners: new Set(), done: false };
   for (const stream of [child.stdout, child.stderr]) stream.on("data", (chunk) => {
     state.output += chunk;
@@ -177,6 +181,7 @@ try {
   console.log(`Node dev: ${cases.length} response cases passed.`);
 
   const production = start(["start", "-p", String(port)]);
+  console.log("Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.");
   await ready(production);
   const actual = await responses(true);
   for (let i = 0; i < cases.length; i++) assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);

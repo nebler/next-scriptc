@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { shimPath } from "./paths.mjs";
 import { discoverRoutes, entrySource, withRewrites } from "./routes.mjs";
-import { readManifest } from "./manifest.mjs";
+import { startNativeRoutes } from "./runtime.mjs";
 import { writeNativeConfig } from "./native-config.mjs";
 
 const require = createRequire(import.meta.url);
@@ -25,10 +25,7 @@ const adapter = {
       return withRewrites(config, routes);
     }
     if (phase === "phase-production-server") {
-      const manifest = await readManifest(path.resolve(projectDir, config.distDir));
-      if (manifest.routes.length && process.env.NEXT_SCRIPTC_PROJECT !== projectDir) {
-        throw new Error("[next-scriptc] Start native routes with `next-scriptc start`, which manages their processes. Replace `next start` in your start script.");
-      }
+      await startNativeRoutes(projectDir, path.resolve(projectDir, config.distDir));
     }
     return config;
   },

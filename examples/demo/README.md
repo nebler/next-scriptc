@@ -7,23 +7,34 @@ pnpm --filter demo dev                 # Node / Turbopack, for development and p
 pnpm --filter demo build               # Next build, then serial native compilation
 pnpm --filter demo start               # Native binaries behind Next's rewrites
 node examples/demo/test/e2e.mjs        # Builds; verifies parity and process cleanup
-NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next build
-node examples/demo/bench/threads.mjs   # Requires both builds; runs them sequentially
+pnpm --filter demo exec next start    # Plain next start also owns native binaries
+pnpm --filter demo test:routes         # Builds; compares 31 route cases
 ```
 
-`NEXT_SCRIPTC_BASELINE=node` disables the adapter and selects `.next-node`, keeping
-it separate from the native `.next` build. Start it manually with
-`NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next start`.
-Rebuild both variants after source changes. Missing benchmark builds produce the
-exact build command to run.
+`next-scriptc start` is a compatibility alias for Next's CLI in the same process.
+The production adapter hook starts native binaries in parallel and awaits their
+readiness. A native crash terminates Next; workers exit when Next exits, including
+SIGKILL. Native port conflicts fail startup with the route and port in the error.
 
-The automatic comparison uses port 3417 and checks that it and every native route
-port are free before and after each run. It spawns both servers with the benchmark's
-exact Node executable, requires Node 24.x, and prints its path, the baseline's
-reported `process.version`, CPU count/model, load averages and platform/architecture.
-SIGINT/SIGTERM stop servers started by the script.
-`node examples/demo/bench/threads.mjs http://localhost:3000` instead measures an
-existing production server, which remains owned by its caller.
+`NEXT_SCRIPTC_BASELINE=node` disables the adapter and selects `.next-node`, keeping
+it separate from the native `.next` build. Build and start the Node baseline with:
+
+```sh
+NEXT_SCRIPTC_BASELINE=node pnpm --filter demo build
+NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next start
+```
+
+See [the benchmark guide](../../research/benchmarks.md) for current commands,
+workloads, process-tree memory accounting and measurement limitations. Rebuild
+both variants sequentially after source changes. Local timings on this loaded
+machine are indicative only.
+
+After a fresh build, pass `--skip-build` to either test runner to reuse it.
+Set `E2E_PORT` or `ROUTES_PORT` when another worktree uses the default test port.
+The 31-case parity test uses a test-only 180-second proxy timeout for native
+cost-10 bcrypt on loaded hosts; production keeps Next's 30-second default.
+See [adapter notes](../../research/adapter-notes.md) for lifecycle details and
+current limitations.
 
 ## Shared-graph report
 
@@ -60,22 +71,6 @@ RSS covers only the report binary, excluding Next and the other route binaries.
 Compare growth within each run, not absolute cross-mode totals. RSS includes
 runtime/allocator overhead and retained temporary allocations; it is neither exact
 clone size nor necessarily monotonic.
-
-## Measurement notes
-
-Both benchmark modes use production builds: plain `next start` without the adapter
-versus `next-scriptc start`. `next dev` is used only for development/E2E parity.
-The benchmark warms each thread count, takes three samples, and prints median
-compute time, speedup against one thread, RSS at 1/2/4/8 workers and average RSS
-growth per worker. It then runs back-to-back eight-thread reports for about five
-seconds while probing `/` and `/api/items/new` every ~20 ms, printing sample counts
-and p50/p99 HTTP latency. Both probes run in Next in both modes and are warmed
-before timing. Only one report is in flight; queue saturation and cold starts
-are separate concerns.
-
-The machine is heavily loaded. Output is indicative only, not publishable
-performance data. Both modes use asynchronous workers; the difference under test
-is graph sharing versus cloning, alongside their different runtimes.
 
 ## Worker resolution
 

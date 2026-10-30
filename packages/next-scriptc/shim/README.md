@@ -19,7 +19,9 @@ It covers methods, URL forwarding, params, cookies, binary uploads/responses,
 fetch decompression, response framing, the real Next request/response helpers,
 stream delivery/cancellation, connection reuse, errors, port validation, and shutdown
 with requests in flight. The E2E runner builds sequentially, curls the demo under
-Next dev and native start, checks static/dynamic precedence, and verifies cleanup.
+Next dev and plain `next start`, checks static/dynamic precedence, and verifies
+server-only SIGTERM/SIGKILL cleanup. Managed binaries monitor stdin EOF so
+they exit even when the owning server is killed; standalone binaries do not.
 
 The adapter writes a native-only `tsconfig.json` beside generated entries. It
 extends the app's config, preserves its absolute path aliases, and maps exactly
@@ -44,6 +46,7 @@ scriptc's checked dynamic representation (SC6104 warnings), not a Node fallback.
 Limitations:
 
 - Uploads are buffered. Responses forward each ReadableStream chunk immediately;
+  a closed single-chunk body uses one `end(bytes)` call.
   HEAD cancels its body, and a disconnected client cancels the response reader.
   scriptc 0.4.6's HTTP `write` returns void and exposes no drain event or write
   completion callback. The bridge retains one chunk at a time, but the native
@@ -75,5 +78,5 @@ Limitations:
 
 Compiler diagnostics and their resolutions: [refusal log](../../../research/scriptc-refusals.md).
 
-Investigation, source references, measurements and new compiler refusals:
-[adapter-core report](../IMPLEMENTATION.md).
+Design decisions, source references, measurements and limitations:
+[adapter notes](../../../research/adapter-notes.md).

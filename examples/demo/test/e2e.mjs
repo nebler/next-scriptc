@@ -8,12 +8,17 @@ import { promisify } from "node:util";
 const root = path.resolve(import.meta.dirname, "../../..");
 const demo = path.join(root, "examples/demo");
 const curl = promisify(execFile);
-const port = 3417;
+const port = Number(process.env.E2E_PORT ?? "3417");
 const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml"];
 const running = new Set();
 
 function start(args) {
-  const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, detached: true, stdio: ["ignore", "pipe", "pipe"] });
+  const production = args[0] === "start" || args[0] === "alias";
+  const command = production ? process.execPath : "pnpm";
+  const arguments_ = production
+    ? [args[0] === "alias" ? path.join(root, "packages/next-scriptc/src/cli.mjs") : path.join(demo, "node_modules/next/dist/bin/next"), "start", ...args.slice(1)]
+    : ["--filter", "demo", ...args];
+  const child = spawn(command, arguments_, { cwd: production ? demo : root, detached: true, stdio: ["ignore", "pipe", "pipe"] });
   const state = { child, output: "", listeners: new Set(), done: false };
   for (const stream of [child.stdout, child.stderr]) stream.on("data", (chunk) => {
     state.output += chunk;
@@ -110,12 +115,40 @@ async function assertPortsFree(ports) {
   }
 }
 
+function nativePids(state) {
+  return [...state.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
+}
+
+async function productionReady(state) {
+  // Next logs "Ready" before loading config. A completed HTTP response also
+  // proves the adapter's async readiness barrier has finished.
+  await wait(state, /Ready in/);
+  const response = await fetch(`http://127.0.0.1:${port}/api/hello`, { signal: AbortSignal.timeout(30_000) });
+  await response.arrayBuffer();
+  assert.equal(response.status, 200, state.output);
+  assert.equal(response.headers.get("x-next-scriptc"), "native", state.output);
+}
+
+async function assertGone(pids) {
+  for (let attempt = 0; attempt < 200; attempt++) {
+    const alive = pids.filter((pid) => {
+      try { process.kill(pid, 0); return true; } catch (error) { if (error.code !== "ESRCH") throw error; return false; }
+    });
+    if (!alive.length) return;
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+  assert.fail(`Native processes survived server exit: ${pids}`);
+}
+
 try {
-  const build = start(["build"]);
-  assert.equal((await build.exit).code, 0, build.output);
-  running.delete(build);
+  if (!process.argv.includes("--skip-build")) {
+    const build = start(["build"]);
+    assert.equal((await build.exit).code, 0, build.output);
+    running.delete(build);
+  }
   const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
   const ports = [port, ...manifest.routes.map((route) => route.port)];
+  await assertPortsFree(ports);
   const dev = start(["dev", "-p", String(port)]);
   await wait(dev, /Ready in/);
   const reference = await responses(false);
@@ -124,30 +157,30 @@ try {
   await assertPortsFree(ports);
 
   const production = start(["start", "-p", String(port)]);
-  await wait(production, /Ready in/);
+  await productionReady(production);
   assert.deepEqual(await responses(true), reference, "dev/native body bytes");
   assert.deepEqual(await reportResponses(true), reportReference, "dev/native report result bytes (threads 1, 4, 1)");
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
   assert.equal(pids.length, manifest.routes.length);
-  // Signal just the wrapper: it must terminate both detached Next and native groups.
+  // Signal only the Next server, leaving native children to its lifecycle hook.
   const { stdout: processList } = await curl("ps", ["-axo", "pid=,ppid=,args="]);
   const processes = processList.split("\n").map((line) => line.trim().match(/^(\d+)\s+(\d+)\s+(.+)$/)).filter(Boolean);
-  const descendants = new Set([production.child.pid]);
-  let wrapper;
-  for (let i = 0; i < processes.length; i++) {
-    for (const [, pid, parent, command] of processes) {
-      if (!descendants.has(Number(parent))) continue;
-      descendants.add(Number(pid));
-      if (/node .*next-scriptc.*cli.mjs start/.test(command)) wrapper = Number(pid);
-    }
-    if (wrapper) break;
-  }
-  assert.ok(wrapper, "Missing CLI wrapper descendant");
-  const owned = processes.filter(([, , parent]) => Number(parent) === wrapper).map(([, pid]) => Number(pid));
-  process.kill(wrapper, "SIGTERM");
-  assert.notEqual((await production.exit).code, 0, production.output);
+  const owned = processes.filter(([, , parent]) => Number(parent) === production.child.pid).map(([, pid]) => Number(pid));
+  assert.deepEqual(owned.sort((a, b) => a - b), [...pids].sort((a, b) => a - b), "only native binaries are children of Next; no supervisor or server child");
+  production.child.kill("SIGTERM");
+  assert.equal((await production.exit).code, 143, production.output);
   running.delete(production);
-  for (const pid of new Set([...pids, ...owned])) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
+  await assertGone(pids);
+  await assertPortsFree(ports);
+
+  const killed = start(["start", "-p", String(port)]);
+  await productionReady(killed);
+  const killedPids = nativePids(killed);
+  assert.equal(killedPids.length, manifest.routes.length, "each binary starts exactly once");
+  killed.child.kill("SIGKILL");
+  assert.equal((await killed.exit).signal, "SIGKILL");
+  running.delete(killed);
+  await assertGone(killedPids);
   await assertPortsFree(ports);
 
   const occupied = createServer();
@@ -161,12 +194,13 @@ try {
   } finally { await new Promise((resolve) => occupied.close(resolve)); }
   await assertPortsFree(ports);
   const crashed = start(["start", "-p", String(port)]);
-  await wait(crashed, /Ready in/);
+  await productionReady(crashed);
   const crashPid = Number(crashed.output.match(/native PID (\d+)/)[1]);
   process.kill(crashPid, "SIGKILL");
   assert.notEqual((await crashed.exit).code, 0);
   assert.match(crashed.output, /SIGKILL/);
   running.delete(crashed);
+  await assertGone(nativePids(crashed));
   await assertPortsFree(ports);
 
   const nextPort = createServer();
@@ -178,12 +212,15 @@ try {
     running.delete(conflict);
   } finally { await new Promise((resolve) => nextPort.close(resolve)); }
   await assertPortsFree(ports);
-  const unwrapped = start(["exec", "next", "start", "-p", String(port)]);
-  assert.notEqual((await unwrapped.exit).code, 0);
-  assert.match(unwrapped.output, /Start native routes with `next-scriptc start`/);
-  running.delete(unwrapped);
+  const alias = start(["alias", "-p", String(port)]);
+  await productionReady(alias);
+  assert.equal(nativePids(alias).length, manifest.routes.length);
+  alias.child.kill("SIGTERM");
+  assert.equal((await alias.exit).code, 143, alias.output);
+  running.delete(alias);
+  await assertGone(nativePids(alias));
   await assertPortsFree(ports);
-  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, wrapper SIGTERM cleanup, native crash, native/Next EADDRINUSE, and direct-next-start guard.`);
+  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup, native crash, native/Next EADDRINUSE, and same-process CLI alias.`);
 } finally {
   await Promise.allSettled([...running].map(stop));
 }

@@ -14,7 +14,7 @@ const processes = new Set();
 let comparisons = 0;
 
 function start(command, args, env = {}) {
-  const child = spawn(command, args, { env: { ...process.env, ...env }, stdio: ["ignore", "pipe", "pipe"] });
+  const child = spawn(command, args, { env: { ...process.env, ...env }, stdio: ["pipe", "pipe", "pipe"] });
   const state = { child, stdout: "", stderr: "", exited: false, waiters: new Set() };
   processes.add(state);
   child.stdout.on("data", (data) => {
@@ -198,6 +198,7 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
     await writeFile(nativeEntry, `import ${JSON.stringify(entry)};\n`);
     await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: {
       strict: true, allowImportingTsExtensions: true, noEmit: true,
+      types: ["node"], typeRoots: [path.resolve(directory, "../../../../examples/demo/node_modules/@types")],
       paths: { "next/server": [path.resolve(directory, "../next-server.ts")] },
     } }));
     const build = start(compiler, ["build", nativeEntry, "-o", binary, "--no-keep-llvm"]);
@@ -219,7 +220,12 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
         await compare({ path: `${base}?case=url`, headers: { host }, json: { url: `http://localhost:4321${base}?case=url`, host } });
       }
       await compare({ path: `${base}?case=next-cookie-snapshot`, headers: { cookie: "theme=original" }, json: { theme: { name: "theme", value: "original" } } });
-      await compare({ path: `${base}?case=next-typed`, json: { typed: true } });
+      const single = await compare({ path: `${base}?case=next-typed`, json: { typed: true } });
+      assert.equal(single.headers["content-length"], "14", "single chunk uses end(bytes)");
+      assert.equal(single.headers["transfer-encoding"], undefined);
+      const percent = await compare({ path: `${base}?case=next-cookie-percent`, status: 200, text: "cookie" });
+      assert.deepEqual(percent.headers["set-cookie"], ["initial=%25", "other=value; Path=/"]);
+      await compare({ path: `${base}?case=next-cookie-percent-invalid`, status: 500, text: "" });
       const next = await compare({ path: `${base}?case=next-json&q=one&q=two`, status: 201,
         headers: { cookie: "theme=light; bare; theme=dark%20mode; broken=%FF; eq=a=b; empty=", "x-fixture": "read" } });
       assert.deepEqual(JSON.parse(next.body), {
@@ -327,6 +333,26 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
         await pending;
       }, signal);
     }
+    await pair(binary, { NEXT_SCRIPTC_PARENT: "1" }, async (_compare, { node, native, ports }) => {
+      const responses = [];
+      try {
+        for (const port of ports) await new Promise((resolve, reject) => {
+          http.get({ host: "127.0.0.1", port, path: "/api/a?case=cancel", agent: false }, (response) => {
+            responses.push(response);
+            response.on("error", () => {});
+            response.once("data", resolve);
+          }).on("error", reject);
+        });
+        // EOF must exit even with a never-ending response in flight.
+        for (const state of [node, native]) state.child.stdin.end();
+        const timeout = setTimeout(() => {
+          for (const state of [node, native]) state.child.kill("SIGKILL");
+        }, 3000);
+        try {
+          for (const state of [node, native]) assert.deepEqual(await state.exit, { code: 0, signal: null });
+        } finally { clearTimeout(timeout); }
+      } finally { for (const response of responses) response.destroy(); }
+    });
     for (const port of [undefined, "", "invalid", "-1", "65536", "1.5"]) {
       for (const command of [process.execPath, binary]) {
         const invalid = start(command, command === binary ? [] : ["--import", path.join(directory, "node-next-server.mjs"), entry], { PORT: port });
