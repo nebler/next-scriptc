@@ -81,3 +81,67 @@ calling includes or interpolating the host. The standalone shim compilation did
 not load these wider Node declarations; the demo build exposed the difference.
 
 Duplicate occurrences of the same message at multiple call sites are listed once.
+
+
+Realistic route library probes (2026-10-30, scriptc 0.4.6)
+--------------------------------------------------------
+
+9. Papa Parse 5.7.0 with @types/papaparse 5.5.2 and @types/node 24.19.2:
+
+error SC0001: Duplicate identifier 'strict'.
+
+First source: node_modules/.pnpm/@scriptc+cli-darwin-arm64@0.4.6/node_modules/@scriptc/cli-darwin-arm64/dist/lib/declarations/node-fallback/assert-strict.d.ts:1:1
+
+Build reports 961 declaration errors, including collisions between scriptc's
+Node fallback declarations and @types/node pulled in by @types/papaparse.
+Node successfully serializes and parses the CSV. Repro:
+examples/probe/entries/papaparse.ts. The original first diagnostic remains in
+the initial summary JSON; the final native-only diagnostics replace
+examples/probe/.artifacts/papaparse/build.stderr. No CSV demo route was added.
+
+10. Satori 0.63.2, default compiler options, first native execution refusal:
+
+Uncaught Error: require() of the package 'camelize' in an expression (the package is not compiled into this program) is not supported yet [SC1090 at /Users/noah/code/next-scriptc/node_modules/.pnpm/css-to-react-native@3.2.0/node_modules/css-to-react-native/index.js:15]
+
+Compilation succeeded with SC8023/SC8001 warnings but native startup exited 1;
+Node rendered SVG. This is an observed package startup fence, not evidence of
+a Yoga/WASM failure. Initial logs are preserved under
+examples/probe/.artifacts/satori-default/. The final probe uses React.createElement
+and --node-islands=off to test native compilation without a Node fallback.
+
+
+11. Final native-only library probes (--node-islands=off):
+
+Papa Parse 5.7.0:
+error SC1090: the reference to 'unparse' (a binding form with no lowering) is not supported yet
+error SC1090: the reference to 'parse' (a binding form with no lowering) is not supported yet
+
+Source: examples/probe/routes/papaparse/route.ts:6:20 and :7:23.
+The default build's declaration collision in item 9 happened while attempting
+its Node-island build. Native-only compilation reveals the export binding
+blocker first. Final logs overwrite .artifacts/papaparse/build.stderr with this
+native-only result; the original first diagnostic remains in the initial
+summary-bcryptjs-jose-marked-minisearch-papaparse-satori.json.
+
+Satori 0.63.2, with React.createElement and @types/react 19.3.0:
+error SC2013: cannot compile npm package 'fflate' statically: its createRequire import is used outside a supported call based on the current file
+
+Source: node_modules/.pnpm/satori@0.63.2/node_modules/satori/dist/index.js:5:46174.
+Adding the matching React declarations resolved a preceding SC2013 that React
+ships no own .d.ts declaration surface. Native-only compilation now refuses
+fflate; no SVG demo route was added. This does not establish a Yoga/WASM failure.
+
+12. MiniSearch 7.2.0 search result storeFields access in application TypeScript:
+
+error SC1090: reading 'title' from a value of type '{ id: any; score: number; terms: string[]; queryTerms: any; match: any; }' is not supported yet
+
+The first stored-field read is the reported blocker. The library's
+SearchResult index signature admits these stored fields, but the compiler's
+inferred result shape does not. Supported formulation: retain the catalog in
+a Map by ID, index only the searchable fields, and fetch the typed product
+using each search hit's ID. This is also a normal application design: the
+index ranks IDs while the catalog owns the result metadata. Repro of the
+full handlers: examples/probe/entries/demo-routes.ts. A five-line reduction is
+examples/probe/repros/minisearch-stored-fields.ts (run with
+--only=minisearch-stored-fields). Node prints the title; scriptc refuses the
+property read at :5:37 with the exact diagnostic above.

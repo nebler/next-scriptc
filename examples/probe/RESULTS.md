@@ -220,3 +220,195 @@ then normal installs completed successfully. All authored files and retained
 build artifacts are inside `examples/probe/`; pnpm updated the workspace's
 shared dependency installation/lockfile as part of installing this package.
 No git operations or commits were performed.
+
+## Realistic application libraries and demo handlers — 2026-10-30
+
+The versions below were the npm registry's current published releases when
+queried and are pinned exactly. Measurements use the installed scriptc 0.4.6,
+Node 24.22.0, and sequential release builds. Native-only probe runs use
+`--node-islands=off`; the passing application paths were also compiled together
+with that flag. This tests native execution rather than an embedded Node fallback.
+
+| Library | Version | Compiles natively? | Output matches Node? | First native-only refusal |
+| --- | --- | --- | --- | --- |
+| bcryptjs | 3.0.3 | Yes | Yes | — |
+| jose | 6.2.14 | Yes | Yes | — |
+| marked | 18.1.2 | Yes | Yes | — |
+| minisearch | 7.2.0 | Yes | Yes | —; see stored-field restriction below |
+| papaparse | 5.7.0 | No | Not run natively | `SC1090: the reference to 'unparse' (a binding form with no lowering) is not supported yet` |
+| satori | 0.63.2 | No | Not run natively | `SC2013: cannot compile npm package 'fflate' statically: its createRequire import is used outside a supported call based on the current file` |
+
+Every Node reference exits 0. The four successful library comparisons have
+identical stdout and stderr and matching zero exit status. Their successful
+builds emit no stderr. Passing these exercised operations does not establish
+support for every API in each package: jose coverage still lists three deferred
+unsupported sites, and MiniSearch has unsupported static-method paths outside
+this workload. Complete coverage reports live under `.artifacts/<case>/`.
+
+The bcrypt probe hashes with a fixed salt at **cost 10**, then checks a correct
+and an incorrect password. Its first native run exceeded the original 15-second
+execution bound. A bounded 180-second run completed and matched Node exactly;
+the runner now supports `PROBE_RUN_TIMEOUT_MS` for this case. The original
+result is preserved in `.artifacts/bcryptjs-initial/`, and the successful rerun
+in `.artifacts/bcryptjs/`. This is a correctness check on a heavily loaded
+machine, not a benchmark or a claim that native bcrypt is faster. The longer
+bound does not change the cost factor or remove work.
+
+Jose signs and verifies an HS256 JWT with fixed `iat`, `exp`, issuer, audience
+and subject, and rejects a modified token. Marked renders headings, tables,
+task lists, fenced code, links and Unicode. MiniSearch exercises exact, prefix,
+fuzzy and empty searches. Papa Parse's Node reference round-trips CSV with
+commas, quotes, a newline, Unicode and formula escaping. Satori's Node reference
+renders an SVG with the installed Next package's Geist font; it does not fetch
+a remote font. Supporting declaration packages are also pinned:
+`@types/papaparse` 5.5.2 and `@types/react` 19.3.0.
+
+### Exact refusals and a supported search formulation
+
+Papa Parse's native-only build reports these first two blockers at
+`routes/papaparse/route.ts:6:20` and `:7:23`:
+
+```text
+error SC1090: the reference to 'unparse' (a binding form with no lowering) is not supported yet
+error SC1090: the reference to 'parse' (a binding form with no lowering) is not supported yet
+```
+
+Its initial default-options build also attempted a Node-island build and hit
+961 declaration errors, beginning with `error SC0001: Duplicate identifier
+'strict'.` in scriptc's Node fallback `assert-strict.d.ts`. The final native-only
+logs are in `.artifacts/papaparse/build.stderr`; the original first diagnostic
+remains in the initial library summary JSON.
+
+Satori's final native-only refusal comes from `satori/dist/index.js:5:46174`:
+
+```text
+error SC2013: cannot compile npm package 'fflate' statically: its createRequire import is used outside a supported call based on the current file
+```
+
+An earlier default-options build produced a binary with SC8023/SC8001 warnings,
+but native startup exited 1 before rendering:
+
+```text
+Uncaught Error: require() of the package 'camelize' in an expression (the package is not compiled into this program) is not supported yet [SC1090 at /Users/noah/code/next-scriptc/node_modules/.pnpm/css-to-react-native@3.2.0/node_modules/css-to-react-native/index.js:15]
+```
+
+Those initial logs are preserved in `.artifacts/satori-default/`. The final
+probe uses `React.createElement` and matching React declarations. Neither
+failure establishes a Yoga or WASM limitation: the observed first blockers
+are package imports. No CSV or OG-image demo handler was added.
+
+Reading a MiniSearch custom `storeFields` property from typed application code
+also exposes an inferred-shape restriction:
+
+```text
+error SC1090: reading 'title' from a value of type '{ id: any; score: number; terms: string[]; queryTerms: any; match: any; }' is not supported yet
+```
+
+A five-line repro is [repros/minisearch-stored-fields.ts](./repros/minisearch-stored-fields.ts).
+Node prints the title; the native build refuses its read at line 5, column 37.
+The demo uses a normal alternative: search ranks IDs, and a typed catalog map
+supplies product metadata. That formulation compiles and matches Node across
+the full 3,000-product dataset. These are compile refusals/runtime fences;
+no unexplained native crash or successful-program byte mismatch was found.
+All new refusal diagnostics were appended to
+[research/scriptc-refusals.md](../../research/scriptc-refusals.md).
+
+### Five demo handlers
+
+Every route starts with `"use scriptc"` and uses Web `Request`/`Response`.
+The catalog is generated deterministically; the authored post fixture and
+catalog source together occupy about 16 KB. There is no database or public
+upstream in these workloads.
+
+| Request | Work performed | Why it is representative |
+| --- | --- | --- |
+| `POST /api/login` | Verify a stored cost-10 bcrypt hash and sign an HS256 JWT | Password login with synchronous CPU work on Node's event loop |
+| `GET /api/verify` | Verify signature, algorithm, issuer, audience, required claims and expiry | Authenticated API middleware-style work and low per-request overhead |
+| `GET /api/search?q=desk%20lamp&limit=20` | Search a 3,000-SKU in-memory index built once per process | Small-store catalog search with ranking, prefix and fuzzy matching |
+| `GET /api/posts/reliable-webhooks` | Parse an authored long Markdown guide into 11,074 bytes of HTML | An uncached blog/docs rendering request, including tables, code and Unicode |
+| `GET /api/feed.xml` | Render both posts and XML-escape their HTML into an RSS feed | Full-content RSS with summary descriptions, stable links and publication dates |
+
+The login request body is:
+
+```json
+{"email":"ada@example.com","password":"correct horse battery staple"}
+```
+
+Its JSON response contains `accessToken`, `tokenType` and `expiresIn`.
+Pass that access token as `Authorization: Bearer <accessToken>` to `/api/verify`.
+The committed account/hash/signing-key defaults are public demo fixtures.
+`DEMO_JWT_SECRET` overrides the signing key; `DEMO_JWT_NOW=1793318400` pins the
+clock for repeatable issuance and verification. Without the clock override,
+these handlers use the real clock. Tests supply both overrides to both servers.
+JWT fields are compared in full, including signatures, `iat` and `exp`.
+
+Content is trusted authored Markdown. Rendering and feed generation deliberately
+happen on each request with `cache-control: no-store`; this measures uncached
+application work. A production site may cache either response. Search setup is
+retained at startup rather than repeated inside the handler. No speed, memory
+or latency numbers were collected here.
+
+### Verification completed and integration still pending
+
+[entries/demo-routes.ts](./entries/demo-routes.ts) imports all five final handlers
+and exercises ten complete response cases: successful login; successful and bad
+JWT verification; malformed login shape; exact and fuzzy catalog searches;
+invalid search limit; the full long article; missing article; and RSS. It
+builds and runs a native executable entirely under this probe's `.artifacts/`,
+without touching `examples/demo/.next`.
+
+```text
+Node v24.22.0; scriptc 0.4.6
+route | compiles? | output matches Node? | refusal / runtime diagnostic (first line)
+[demo-routes] coverage, then build (sequential)
+demo-routes | yes | yes |
+```
+
+Build, Node and native execution all exit **0**, with empty stderr and an empty
+`parity.diff`. The comparison includes full status/header/body output, including
+article HTML, RSS XML and the signed JWT. The RSS also passed an independent
+XML parser check for two items, newest first, with the full HTML recovered from
+XML escaping. The reduced MiniSearch repro was confirmed separately as the
+expected refusal. The new HTTP test and the updated probe runner pass
+`node --check`.
+
+**The full `next dev` versus `next-scriptc start` HTTP parity run remains
+pending.** It was intentionally not run because the adapter and benchmark
+agents were using the shared `.next`; the integrating agent will run it after
+their work is combined. No demo server or demo build was started for this work.
+
+[../demo/test/routes.mjs](../demo/test/routes.mjs) defines 31 HTTP cases, including
+invalid credentials/JSON/types, UTF-8 password length, search errors, missing
+posts, malformed/wrong-key/expired/future/incorrect-issuer/incorrect-audience
+JWTs and missing claims. It compares status, content type, cache/security/auth
+headers and exact body bytes, verifies `x-next-scriptc: native`, and checks
+owned native PIDs and ports after shutdown. Both servers are stopped in
+`finally`, including on test failure or SIGINT/SIGTERM. Date and HTTP transport
+framing headers are not application parity fields.
+
+From the workspace root, after integration:
+
+```sh
+pnpm --filter demo test:routes
+```
+
+This command first builds the demo. To reuse an already-current stable build:
+
+```sh
+pnpm --filter demo test:routes --skip-build
+```
+
+Standalone reproducibility, requiring no demo build:
+
+```sh
+PROBE_NODE=/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node \
+PROBE_RUN_TIMEOUT_MS=180000 \
+  node examples/probe/run.mjs --only=bcryptjs,jose,marked,minisearch,papaparse,satori,demo-routes,minisearch-stored-fields
+```
+
+The reduced refusal is expected data, not a successful native workload.
+Artifacts retain commands, exit codes, signals, full streams and diffs.
+All probe processes and their loopback servers exited. No probe process or
+listener remained at the end; unrelated agents' processes were left alone.
+All source/dependency changes remain uncommitted; no commits, staging or branch
+changes were made.

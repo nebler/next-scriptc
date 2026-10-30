@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -101,8 +101,58 @@ function request(port, specification) {
   });
 }
 
+async function assertCancellation(port, path, state) {
+  await new Promise((resolve, reject) => {
+    const req = http.get({ host: "127.0.0.1", port, path, agent: false }, (res) => {
+      res.once("data", () => { res.destroy(); resolve(); });
+      res.on("error", () => {});
+    });
+    req.on("error", reject);
+  });
+  await waitForOutput(state, /shim fixture: stream cancelled/);
+}
+
+async function assertKeepAlive(port, path) {
+  const agent = new http.Agent({ keepAlive: true, maxSockets: 1 });
+  const sockets = [];
+  try {
+    for (let i = 0; i < 2; i++) await new Promise((resolve, reject) => {
+      const req = http.get({ host: "127.0.0.1", port, path, agent }, (res) => {
+        assert.equal(res.headers["keep-alive"], "timeout=60");
+        res.resume();
+        res.on("end", resolve);
+        res.on("error", reject);
+      });
+      req.on("socket", (socket) => sockets.push(socket));
+      req.on("error", reject);
+    });
+    assert.equal(sockets[0], sockets[1], "two requests reuse one connection");
+  } finally { agent.destroy(); }
+}
+
+async function assertStreaming(port, path) {
+  const started = performance.now();
+  let first;
+  const chunks = [];
+  await new Promise((resolve, reject) => {
+    http.get({ host: "127.0.0.1", port, path, agent: false }, (response) => {
+      response.on("data", (chunk) => {
+        first ??= performance.now();
+        chunks.push(chunk);
+      });
+      response.on("end", resolve);
+      response.on("error", reject);
+    }).on("error", reject);
+  });
+  const end = performance.now();
+  assert.equal(chunks[0].toString(), "first:", "first chunk arrives separately");
+  assert.equal(Buffer.concat(chunks).toString(), "first:世界:last");
+  assert.ok(end - first >= 140, `stream buffered: first=${first - started}ms end=${end - started}ms`);
+  console.log(`Streaming port ${port}: first ${(first - started).toFixed(1)}ms, end ${(end - started).toFixed(1)}ms`);
+}
+
 async function pair(binary, env, run, signal = "SIGTERM") {
-  const node = start(process.execPath, [entry], { PORT: "0", ...env });
+  const node = start(process.execPath, ["--import", path.join(directory, "node-next-server.mjs"), entry], { PORT: "0", ...env });
   const native = start(binary, [], { PORT: "0", ...env });
   try {
     const readiness = /next-scriptc: listening on 127\.0\.0\.1:(\d+)/;
@@ -115,7 +165,7 @@ async function pair(binary, env, run, signal = "SIGTERM") {
       assert.equal(actual.runtime, "native");
       const { runtime: nodeRuntime, ...expected } = reference;
       const { runtime: nativeRuntime, ...result } = actual;
-      assert.deepEqual(result, expected, `${specification.method || "GET"} ${specification.path}`);
+      assert.deepEqual(result, expected, `${specification.method || "GET"} ${specification.path}\n${native.stderr}`);
       comparisons++;
       if (specification.status) assert.equal(actual.status, specification.status);
       if (specification.text !== undefined) assert.equal(actual.body.toString(), specification.text);
@@ -144,11 +194,17 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
   });
   await new Promise((resolve) => upstream.listen(0, "127.0.0.1", resolve));
   try {
-    const build = start(compiler, ["build", entry, "-o", binary, "--no-keep-llvm"]);
+    const nativeEntry = path.join(temporary, "entry.ts");
+    await writeFile(nativeEntry, `import ${JSON.stringify(entry)};\n`);
+    await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: {
+      strict: true, allowImportingTsExtensions: true, noEmit: true,
+      paths: { "next/server": [path.resolve(directory, "../next-server.ts")] },
+    } }));
+    const build = start(compiler, ["build", nativeEntry, "-o", binary, "--no-keep-llvm"]);
     const result = await build.exit;
     processes.delete(build);
     assert.equal(result.code, 0, `${build.stdout}\n${build.stderr}`);
-    await pair(binary, { SHIM_UPSTREAM: `http://127.0.0.1:${upstream.address().port}` }, async (compare, { node, native }) => {
+    await pair(binary, { SHIM_UPSTREAM: `http://127.0.0.1:${upstream.address().port}` }, async (compare, { node, native, ports }) => {
       const allow = "GET, HEAD, OPTIONS, PATCH, POST, PUT";
       const base = "/api/hello";
       const json = {
@@ -159,6 +215,33 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await compare({ path: `${base}${json.query}`, status: 200, json, headers: { "x-repeated": ["one", "two"], cookie: ["a=1", "b=2"], "set-cookie": ["request=one", "request=two"] } });
       await compare({ path: `${base}?case=url`, json: { url: `https://public.test:8443${base}?case=url`, host: "public.test:8443" }, headers: { "x-forwarded-host": "public.test:8443", "x-forwarded-proto": "https" } });
       await compare({ path: `${base}?case=url&q=a%20b&q=two&plus=a+b`, json: { url: `https://public.test:8443${base}?case=url&q=a+b&q=two&plus=a+b`, host: "public.test:8443" }, headers: { "x-forwarded-host": "public.test:8443", "x-forwarded-proto": "https" } });
+      for (const host of ["127.0.0.2:4321", "[::1]:4321"]) {
+        await compare({ path: `${base}?case=url`, headers: { host }, json: { url: `http://localhost:4321${base}?case=url`, host } });
+      }
+      await compare({ path: `${base}?case=next-cookie-snapshot`, headers: { cookie: "theme=original" }, json: { theme: { name: "theme", value: "original" } } });
+      await compare({ path: `${base}?case=next-typed`, json: { typed: true } });
+      const next = await compare({ path: `${base}?case=next-json&q=one&q=two`, status: 201,
+        headers: { cookie: "theme=light; bare; theme=dark%20mode; broken=%FF; eq=a=b; empty=", "x-fixture": "read" } });
+      assert.deepEqual(JSON.parse(next.body), {
+        pathname: base, query: ["one", "two"], theme: { name: "theme", value: "dark mode" },
+        flags: [{ name: "theme", value: "dark mode" }, { name: "bare", value: "true" }, { name: "eq", value: "a=b" }, { name: "empty", value: "" }],
+        selected: [{ name: "theme", value: "dark mode" }], missing: [], has: true, header: "read",
+      });
+      assert.deepEqual(next.headers["set-cookie"], [
+        "initial=one; HttpOnly; SameSite=lax", "theme=updated; Path=/; HttpOnly",
+        "second=two; Path=/account; Expires=Wed, 21 Oct 2037 07:28:00 GMT; Max-Age=0; Domain=fixture.test",
+        "flags=hello%20%E4%B8%96%E7%95%8C; Secure; HttpOnly; SameSite=true; Partitioned; Priority=high",
+        "gone=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+        "scoped=; Path=/account; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Domain=fixture.test; Secure",
+      ]);
+      const redirect = await compare({ path: `${base}?case=next-redirect`, status: 307, text: "" });
+      assert.equal(redirect.headers.location, "http://fixture.test:4321/destination?q=%E4%B8%96%E7%95%8C");
+      await compare({ path: `${base}?case=next-redirect-302`, status: 302, text: "" });
+      await compare({ path: `${base}?case=next-invalid-redirect`, status: 500, text: "" });
+      await compare({ path: `${base}?case=next-body`, status: 202, text: "constructed:世界" });
+      for (const [index, port] of ports.entries()) await assertCancellation(port, `${base}?case=cancel`, [node, native][index]);
+      for (const port of ports) await assertKeepAlive(port, base);
+      for (const port of ports) await assertStreaming(port, `${base}?case=slow`);
       const framing = await compare({ path: `${base}?case=framing`, text: "decoded" });
       assert.equal(framing.headers.connection, "x-hop");
       assert.equal(framing.headers["x-hop"], "preserve");
@@ -246,7 +329,7 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
     }
     for (const port of [undefined, "", "invalid", "-1", "65536", "1.5"]) {
       for (const command of [process.execPath, binary]) {
-        const invalid = start(command, command === binary ? [] : [entry], { PORT: port });
+        const invalid = start(command, command === binary ? [] : ["--import", path.join(directory, "node-next-server.mjs"), entry], { PORT: port });
         const result = await invalid.exit;
         assert.notEqual(result.code, 0);
         assert.match(invalid.stderr, /PORT must be an integer between 0 and 65535/);

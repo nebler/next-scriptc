@@ -1,0 +1,76 @@
+{
+  "node": "v24.22.0",
+  "date": "2026-10-30T22:21:22.716Z",
+  "samples": [
+    {
+      "name": "Node next start",
+      "concurrency": 1,
+      "requests": 600,
+      "elapsedMs": 878.9863750000002,
+      "rps": 682.6044374123545,
+      "meanMs": 1.4641382083333303,
+      "p50Ms": 1.201415999999881,
+      "p95Ms": 3.036916999999903
+    },
+    {
+      "name": "Node next start",
+      "concurrency": 16,
+      "requests": 600,
+      "elapsedMs": 321.82883300000003,
+      "rps": 1864.345075632176,
+      "meanMs": 8.46848153999999,
+      "p50Ms": 6.01858299999958,
+      "p95Ms": 18.384124999999585
+    },
+    {
+      "name": "native through Next",
+      "concurrency": 1,
+      "requests": 600,
+      "elapsedMs": 855.0362079999995,
+      "rps": 701.7246689510959,
+      "meanMs": 1.4245970733333417,
+      "p50Ms": 0.924790999999459,
+      "p95Ms": 3.115042000000358
+    },
+    {
+      "name": "native direct",
+      "concurrency": 1,
+      "requests": 600,
+      "elapsedMs": 174.76637500000015,
+      "rps": 3433.154690082686,
+      "meanMs": 0.2909958499999766,
+      "p50Ms": 0.24904200000037235,
+      "p95Ms": 0.5842499999998836
+    },
+    {
+      "name": "native through Next",
+      "concurrency": 16,
+      "requests": 600,
+      "elapsedMs": 120.16400000000067,
+      "rps": 4993.175992809799,
+      "meanMs": 3.180687588333326,
+      "p50Ms": 2.8861669999996593,
+      "p95Ms": 6.288209000000279
+    },
+    {
+      "name": "native direct",
+      "concurrency": 16,
+      "requests": 600,
+      "elapsedMs": 37.091332999999395,
+      "rps": 16176.2857107349,
+      "meanMs": 0.9766470933332964,
+      "p50Ms": 0.8482500000000073,
+      "p95Ms": 2.084874999999556
+    }
+  ],
+  "buildIds": {
+    "native": "X1XikaCNiIpyQh8dV1IhX",
+    "node": "VG1I3a8hFQzjoRO4uwzR9"
+  },
+  "loopbackConnections": [
+    "COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\nroute-1 93012 noah    7u  IPv4 0x86f5c8e17edad69a      0t0  TCP 127.0.0.1:29997->127.0.0.1:54667 (ESTABLISHED)\nnode    93028 noah   22u  IPv4 0xfdef37c19d8fafcf      0t0  TCP 127.0.0.1:54667->127.0.0.1:29997 (ESTABLISHED)\n",
+    "COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\nroute-1 93012 noah    7u  IPv4 0x86f5c8e17edad69a      0t0  TCP 127.0.0.1:29997->127.0.0.1:54667 (ESTABLISHED)\nnode    93028 noah   22u  IPv4 0xfdef37c19d8fafcf      0t0  TCP 127.0.0.1:54667->127.0.0.1:29997 (ESTABLISHED)\n",
+    "COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\nroute-1 93012 noah    7u  IPv4 0x86f5c8e17edad69a      0t0  TCP 127.0.0.1:29997->127.0.0.1:54667 (ESTABLISHED)\nnode    93028 noah   22u  IPv4 0xfdef37c19d8fafcf      0t0  TCP 127.0.0.1:54667->127.0.0.1:29997 (ESTABLISHED)\n"
+  ],
+  "portsFree": true
+}

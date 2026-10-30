@@ -69,13 +69,23 @@ export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", 
 
 export function routeRewrite({ pattern, port }) {
   // Use generated parameter names: Next's segment names need not be valid rewrite names.
-  const source = pattern.split("/").map((segment, index) => {
-    if (/^\[\[\.\.\..+\]\]$/.test(segment)) return `:sc${index}*`;
-    if (/^\[\.\.\..+\]$/.test(segment)) return `:sc${index}+`;
-    if (/^\[.+\]$/.test(segment)) return `:sc${index}`;
-    return segment.replace(/[.*+?^${}()|[\]\\:]/g, "\\$&");
-  }).join("/");
-  return { source, destination: `http://127.0.0.1:${port}${source}` };
+  const segments = pattern.split("/").map((segment, index) => {
+    let parameter;
+    if (/^\[\[\.\.\..+\]\]$/.test(segment)) parameter = `:sc${index}*`;
+    else if (/^\[\.\.\..+\]$/.test(segment)) parameter = `:sc${index}+`;
+    else if (/^\[.+\]$/.test(segment)) parameter = `:sc${index}`;
+    if (parameter) return { source: parameter, destination: parameter };
+    return {
+      source: segment.replace(/[.*+?^${}()|[\]\\:]/g, "\\$&"),
+      // Pattern escapes are not URL escapes: a backslash becomes a slash when
+      // Next parses an external destination (for example feed\\.xml).
+      destination: encodeURIComponent(segment).replace(/[!'()*]/g, (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`),
+    };
+  });
+  return {
+    source: segments.map((segment) => segment.source).join("/"),
+    destination: `http://127.0.0.1:${port}${segments.map((segment) => segment.destination).join("/")}`,
+  };
 }
 
 export function withRewrites(config, routes) {

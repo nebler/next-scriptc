@@ -1,10 +1,15 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
+import { NextRequest, NextResponse } from "./next-server.ts";
 
 // scriptc documents argv[0] as "scriptc"; Node uses its executable path.
 const runtime = process.argv[0] === "scriptc" ? "native" : "1";
 
 export type RouteContext = { params: Promise<Record<string, string | string[]>> };
-export type RouteHandler = (request: Request, context: RouteContext) => Response | Promise<Response>;
+export type RouteResponse = Response | NextResponse;
+// A handler can name the params guaranteed by its own route pattern.
+export type RouteHandler = {
+  handle(request: NextRequest, context: RouteContext): RouteResponse | Promise<RouteResponse>;
+}["handle"];
 export type RouteModule = {
   GET: RouteHandler | undefined;
   HEAD: RouteHandler | undefined;
@@ -51,7 +56,7 @@ function compilePattern(pattern: string) {
   };
 }
 
-async function toRequest(incoming: IncomingMessage, url: string, host: string): Promise<Request> {
+async function toRequest(incoming: IncomingMessage, url: string, host: string): Promise<NextRequest> {
   const headers = new Headers();
   for (let i = 0; i < incoming.rawHeaders.length; i += 2) {
     headers.append(incoming.rawHeaders[i], incoming.rawHeaders[i + 1]);
@@ -59,7 +64,7 @@ async function toRequest(incoming: IncomingMessage, url: string, host: string): 
   // Next's changeOrigin proxy replaces Host but preserves the public host here.
   headers.set("host", host);
   const method = incoming.method || "GET";
-  if (method === "GET" || method === "HEAD") return new Request(url, { method, headers });
+  if (method === "GET" || method === "HEAD") return new NextRequest(url, { method, headers });
   const chunks = await new Promise<Buffer[]>((resolve, reject) => {
     const chunks: Buffer[] = [];
     incoming.on("data", (chunk: Buffer) => chunks.push(chunk));
@@ -69,10 +74,10 @@ async function toRequest(incoming: IncomingMessage, url: string, host: string): 
   });
   const body = chunks.length === 1 ? chunks[0] : Buffer.concat(chunks);
   // HTTP data buffers are ArrayBuffer-backed; keep their existing byte view.
-  return new Request(url, { method, headers, body: body as Uint8Array<ArrayBuffer> });
+  return new NextRequest(url, { method, headers, body: body as Uint8Array<ArrayBuffer> });
 }
 
-async function writeResponse(response: Response, outgoing: ServerResponse, head: boolean): Promise<void> {
+async function writeResponse(response: RouteResponse, outgoing: ServerResponse, head: boolean): Promise<void> {
   outgoing.statusCode = response.status;
   if (response.statusText) outgoing.statusMessage = response.statusText;
   response.headers.forEach((value, name) => {
@@ -88,8 +93,28 @@ async function writeResponse(response: Response, outgoing: ServerResponse, head:
     outgoing.end();
     return;
   }
-  // scriptc 0.4.6's ServerResponse lacks write backpressure/callback support.
-  outgoing.end(new Uint8Array(await response.arrayBuffer()));
+  // write() compiles without callbacks. The transport can queue bytes for a slow
+  // client: scriptc exposes neither write's boolean result nor a drain event.
+  const reader = body.getReader();
+  let finished = false;
+  let disconnected = false;
+  outgoing.once("close", () => {
+    if (!finished) {
+      disconnected = true;
+      reader.cancel().catch((error: unknown) => console.error(error));
+    }
+  });
+  try {
+    while (true) {
+      const chunk = await reader.read();
+      if (chunk.done || disconnected) break;
+      outgoing.write(chunk.value);
+    }
+    if (!disconnected) outgoing.end();
+  } finally {
+    finished = true;
+    reader.releaseLock();
+  }
 }
 
 export function serve(module: RouteModule, options: { pattern: string; port?: number }): void {
@@ -139,7 +164,7 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
       else if (method === "PATCH") handler = patch;
       else if (method === "DELETE") handler = remove;
       else if (method === "OPTIONS") handler = optionsHandler;
-      let response: Response;
+      let response: RouteResponse;
       if (params === null) response = new Response(null, { status: 404 });
       else if (method === "OPTIONS" && !handler) response = new Response(null, { status: 204, headers: { Allow: allow } });
       else if (!handler) response = new Response(null, { status: 405, headers: { Allow: allow } });
@@ -159,6 +184,9 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
       }
     }
   });
+  // httpxy pools loopback sockets across requests. Retain them through short
+  // idle gaps; server.close() still closes idle connections during shutdown.
+  server.keepAliveTimeout = 60_000;
   let closing = false;
   function shutdown(): void {
     if (closing) return;

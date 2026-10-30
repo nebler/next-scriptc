@@ -12,6 +12,8 @@ const version = spawnSync(node, ['--version'], { encoding: 'utf8' });
 if (version.status !== 0 || !version.stdout.startsWith('v24.')) {
   throw new Error('Set PROBE_NODE to a Node 24 executable (the reference uses type stripping).');
 }
+const runTimeoutMs = Number(process.env.PROBE_RUN_TIMEOUT_MS ?? 15_000);
+if (!Number.isSafeInteger(runTimeoutMs) || runTimeoutMs < 1) throw new Error('PROBE_RUN_TIMEOUT_MS must be a positive integer.');
 const only = process.argv.find((arg) => arg.startsWith('--only='))?.slice(7).split(',');
 const selected = only ?? (await readdir(join(root, 'routes'), { withFileTypes: true })).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
 for (const name of selected) {
@@ -30,7 +32,8 @@ const server = createServer((request, response) => {
 });
 server.listen(0, '127.0.0.1');
 await once(server, 'listening');
-const env = { ...process.env, TZ: 'UTC', LC_ALL: 'C', SCRIPTC_CHECKER_SERVER: '0', SCRIPTC_CACHE_DIR: join(root, '.artifacts', 'cache'), PROBE_UPSTREAM: `http://127.0.0.1:${server.address().port}` };
+// The full demo-handler probe also pins JWT issuance and verification; no body fields are excluded.
+const env = { ...process.env, TZ: 'UTC', LC_ALL: 'C', SCRIPTC_CHECKER_SERVER: '0', SCRIPTC_CACHE_DIR: join(root, '.artifacts', 'cache'), PROBE_UPSTREAM: `http://127.0.0.1:${server.address().port}`, DEMO_JWT_NOW: '1793318400', DEMO_JWT_SECRET: 'next-scriptc-probe-only-signing-secret-32-bytes' };
 
 async function run(command, args, dir, label, timeoutMs) {
   if (abort.signal.aborted) throw new Error('Interrupted');
@@ -85,11 +88,11 @@ try {
     const entry = join(root, 'entries', `${name}.ts`);
     const binary = join(dir, 'route');
     console.log(`[${name}] coverage, then build (sequential)`);
-    const coverage = await run(scriptc, ['coverage', entry], dir, 'coverage', 240_000);
-    const build = await run(scriptc, ['build', entry, '-o', binary, '--no-keep-llvm'], dir, 'build', 300_000);
-    const reference = await run(node, ['--import', join(root, 'node-resolve.mjs'), entry], dir, 'node', 15_000);
+    const coverage = await run(scriptc, ['coverage', entry, '--node-islands=off'], dir, 'coverage', 240_000);
+    const build = await run(scriptc, ['build', entry, '-o', binary, '--no-keep-llvm', '--node-islands=off'], dir, 'build', 300_000);
+    const reference = await run(node, ['--import', join(root, 'node-resolve.mjs'), entry], dir, 'node', runTimeoutMs);
     const compiles = build.code === 0 && !build.signal;
-    const native = compiles ? await run(binary, [], dir, 'native', 15_000) : null;
+    const native = compiles ? await run(binary, [], dir, 'native', runTimeoutMs) : null;
     const matches = native && reference.code === native.code && reference.signal === native.signal &&
       reference.stdoutBytes.equals(native.stdoutBytes) && reference.stderrBytes.equals(native.stderrBytes) && !native.timedOut;
     let diff = '';

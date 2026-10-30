@@ -1,8 +1,33 @@
+import { NextResponse, type NextRequest } from "next/server";
 import type { RouteContext } from "../serve.ts";
 
-export async function GET(request: Request, context: RouteContext): Promise<Response> {
+export async function GET(request: NextRequest, context: RouteContext) {
   const url = new URL(request.url);
   const mode = url.searchParams.get("case");
+  if (mode === "next-cookie-snapshot") {
+    request.headers.set("cookie", "theme=changed");
+    return NextResponse.json({ theme: request.cookies.get({ name: "theme" }) });
+  }
+  if (mode === "next-typed") return typedJson();
+  if (mode === "next-json") {
+    const response = NextResponse.json({
+      pathname: request.nextUrl.pathname, query: request.nextUrl.searchParams.getAll("q"),
+      theme: request.cookies.get("theme"), flags: request.cookies.getAll(),
+      selected: request.cookies.getAll({ name: "theme" }), missing: request.cookies.getAll("missing"),
+      has: request.cookies.has("theme"), header: request.headers.get("x-fixture"),
+    }, { status: 201, headers: { "x-next-fixture": "json", "set-cookie": "initial=one; HttpOnly; SameSite=Lax" } });
+    response.cookies.set("theme", "dark 世界", { httpOnly: true, sameSite: "lax", secure: true, priority: "high", partitioned: true });
+    response.cookies.set({ name: "second", value: "two", path: "/account", domain: "fixture.test", expires: new Date("2037-10-21T07:28:00Z"), maxAge: 0 });
+    response.cookies.set("flags", "hello 世界", { path: "", secure: true, httpOnly: true, sameSite: true, partitioned: true, priority: "high" });
+    response.cookies.set("theme", "updated", { httpOnly: true });
+    response.cookies.delete("gone");
+    response.cookies.delete({ name: "scoped", path: "/account", domain: "fixture.test", secure: true });
+    return response;
+  }
+  if (mode === "next-redirect") return NextResponse.redirect(new URL("/destination?q=世界", request.url));
+  if (mode === "next-redirect-302") return NextResponse.redirect("https://fixture.test/other", { status: 302, headers: { "x-fixture": "redirect" } });
+  if (mode === "next-invalid-redirect") return NextResponse.redirect("https://fixture.test", 200);
+  if (mode === "next-body") return new NextResponse("constructed:世界", { status: 202, headers: { "x-fixture": "constructor" } });
   if (mode === "url") return Response.json({ url: request.url, host: request.headers.get("host") });
   if (mode === "fetch") return fetch(process.env.SHIM_UPSTREAM || "");
   if (mode === "framing") return new Response("decoded", { headers: {
@@ -22,6 +47,10 @@ export async function GET(request: Request, context: RouteContext): Promise<Resp
   }
   if (mode === "missing") return new Response("not found", { status: 404, statusText: "Fixture Missing" });
   if (mode === "empty") return new Response(null, { status: 204 });
+  if (mode === "cancel") return new Response(new ReadableStream<Uint8Array>({
+    start(controller) { controller.enqueue(new TextEncoder().encode("first:")); },
+    cancel() { console.log("shim fixture: stream cancelled"); },
+  }));
   if (mode === "stream" || mode === "slow") {
     if (mode === "slow") console.log("shim fixture: slow request started");
     const encoder = new TextEncoder();
@@ -31,7 +60,7 @@ export async function GET(request: Request, context: RouteContext): Promise<Resp
         setTimeout(() => {
           controller.enqueue(encoder.encode("世界:last"));
           controller.close();
-        }, mode === "slow" ? 150 : 10);
+        }, mode === "slow" ? 220 : 10);
       },
     }));
   }
@@ -61,3 +90,5 @@ export function PUT(): Response {
 export async function PATCH(): Promise<Response> {
   throw new Error("shim rejected failure");
 }
+
+function typedJson(): Response { return NextResponse.json({ typed: true }); }

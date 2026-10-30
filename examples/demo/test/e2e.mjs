@@ -9,7 +9,7 @@ const root = path.resolve(import.meta.dirname, "../../..");
 const demo = path.join(root, "examples/demo");
 const curl = promisify(execFile);
 const port = 3417;
-const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new"];
+const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml"];
 const running = new Set();
 
 function start(args) {

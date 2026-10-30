@@ -5,6 +5,7 @@ import path from "node:path";
 import { shimPath } from "./paths.mjs";
 import { discoverRoutes, entrySource, withRewrites } from "./routes.mjs";
 import { readManifest } from "./manifest.mjs";
+import { writeNativeConfig } from "./native-config.mjs";
 
 const require = createRequire(import.meta.url);
 // Preserve the exact discovery snapshot used to emit rewrites; rediscovery could compile a different route set.
@@ -20,7 +21,7 @@ const adapter = {
       if (routes.length && config.output) {
         throw new Error("[next-scriptc] Native routes require the local Next server (output: export/standalone is unsupported).");
       }
-      buildPlans.set(projectDir, routes);
+      buildPlans.set(projectDir, { routes, config });
       return withRewrites(config, routes);
     }
     if (phase === "phase-production-server") {
@@ -32,8 +33,9 @@ const adapter = {
     return config;
   },
   async onBuildComplete({ projectDir, distDir, buildId, outputs }) {
-    const routes = buildPlans.get(projectDir);
-    if (!routes) throw new Error("[next-scriptc] Missing build plan from modifyConfig.");
+    const plan = buildPlans.get(projectDir);
+    if (!plan) throw new Error("[next-scriptc] Missing build plan from modifyConfig.");
+    const { routes, config } = plan;
     const appRoutes = new Set(outputs.appRoutes.map((route) => route.pathname));
     for (const route of routes) {
       if (!appRoutes.has(route.pattern)) throw new Error(`[next-scriptc] Native route ${route.source} is missing from Next's appRoutes output.`);
@@ -41,6 +43,7 @@ const adapter = {
     const output = path.join(distDir, "scriptc");
     await rm(output, { recursive: true, force: true });
     await mkdir(output, { recursive: true });
+    await writeNativeConfig(projectDir, output, config);
     // Next writes a CommonJS package boundary in .next; entries are ES modules.
     await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
     const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
