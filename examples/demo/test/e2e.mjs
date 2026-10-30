@@ -72,6 +72,31 @@ async function responses(native) {
   return results;
 }
 
+async function reportResponses(native) {
+  const results = [];
+  for (const threads of [1, 4, 1]) {
+    const response = await fetch(`http://localhost:${port}/api/report?threads=${threads}`, { signal: AbortSignal.timeout(120_000) });
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get("x-next-scriptc"), native ? "native" : null);
+    const body = await response.json();
+    assert.equal(body.sharedByReference, native);
+    assert.equal(body.threads, threads);
+    assert.equal(body.poolSize, 8);
+    assert.equal(body.workers, results.length === 0 ? 1 : 4, "persistent pool reused");
+    assert.ok(body.elapsedMs > 0);
+    assert.ok(body.rss > 0 && body.datasetRss > 0);
+    // Timing, memory, pool state, and the intentional runtime capability differ.
+    results.push(Buffer.from(JSON.stringify(body.result)));
+  }
+  assert.deepEqual(results[0], results[1], "report result is independent of partition count");
+  assert.deepEqual(results[0], results[2], "persistent pool returns the same report");
+  for (const threads of ["0", "9", "1.5", "nope"]) {
+    const response = await fetch(`http://localhost:${port}/api/report?threads=${threads}`);
+    assert.equal(response.status, 400);
+  }
+  return results;
+}
+
 async function assertPortsFree(ports) {
   for (const port of ports) {
     const server = createServer();
@@ -92,12 +117,14 @@ try {
   const dev = start(["dev", "-p", String(port)]);
   await wait(dev, /Ready in/);
   const reference = await responses(false);
+  const reportReference = await reportResponses(false);
   await stop(dev);
   await assertPortsFree(ports);
 
   const production = start(["start", "-p", String(port)]);
   await wait(production, /Ready in/);
   assert.deepEqual(await responses(true), reference, "dev/native body bytes");
+  assert.deepEqual(await reportResponses(true), reportReference, "dev/native report result bytes (threads 1, 4, 1)");
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
   assert.equal(pids.length, manifest.routes.length);
   // Signal just the wrapper: it must terminate both detached Next and native groups.
@@ -154,7 +181,7 @@ try {
   assert.match(unwrapped.output, /Start native routes with `next-scriptc start`/);
   running.delete(unwrapped);
   await assertPortsFree(ports);
-  console.log(`E2E passed: ${routes.length} curl responses byte-equal; native/static precedence, wrapper SIGTERM cleanup, native crash, native/Next EADDRINUSE, and direct-next-start guard.`);
+  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, wrapper SIGTERM cleanup, native crash, native/Next EADDRINUSE, and direct-next-start guard.`);
 } finally {
   await Promise.allSettled([...running].map(stop));
 }

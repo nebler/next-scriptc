@@ -10,6 +10,9 @@ importers:
 
   examples/demo:
     dependencies:
+      '@scriptc/threads':
+        specifier: ^0.4.6
+        version: 0.4.6
       next:
         specifier: 16.4.3
         version: 16.4.3(@types/node@20.19.43)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -387,6 +390,10 @@ packages:
   '@scriptc/runtime-win32-x64-msvc@0.4.6':
     resolution: {integrity: sha512-1ygFCm06EGjnv+YihGpJ16ja9QYpu9pzFnK4Cj8yAGGA4d3URS0CFVC+R17T7Xpv69Ukcd2Fo/FG7UUbK29uCw==}
 
+  '@scriptc/threads@0.4.6':
+    resolution: {integrity: sha512-s3nMtFePlcNQE1UCKOlAsuOzrYvb3F5YXZLbXztTIR41TqdMujuU7zFU0u8cJ+pR9ncddYif9VPcgM61ZLViDw==}
+    engines: {node: '>=24.0.0'}
+
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
 
@@ -743,6 +750,8 @@ snapshots:
 
   '@scriptc/runtime-win32-x64-msvc@0.4.6':
     optional: true
+
+  '@scriptc/threads@0.4.6': {}
 
   '@swc/helpers@0.5.23':
     dependencies:
