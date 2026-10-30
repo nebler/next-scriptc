@@ -84,7 +84,9 @@ async function reportResponses(native) {
     assert.equal(body.poolSize, 8);
     assert.equal(body.workers, results.length === 0 ? 1 : 4, "persistent pool reused");
     assert.ok(body.elapsedMs > 0);
-    assert.ok(body.rss > 0 && body.datasetRss > 0);
+    assert.ok(body.rss > 0 && body.datasetRss > 0 && body.baselineRss > 0);
+    assert.equal(body.workerRssGrowth, (body.rss - body.datasetRss) / body.workers);
+    assert.equal(body.nodeVersion, native ? null : process.version);
     // Timing, memory, pool state, and the intentional runtime capability differ.
     results.push(Buffer.from(JSON.stringify(body.result)));
   }

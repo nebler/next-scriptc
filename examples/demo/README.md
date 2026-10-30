@@ -1,87 +1,89 @@
 # next-scriptc demo
 
-From the workspace root:
+Use Node 24.x. From the workspace root:
 
 ```sh
-pnpm --filter demo dev                 # Same routes on Node / Turbopack
+pnpm --filter demo dev                 # Node / Turbopack, for development and parity
 pnpm --filter demo build               # Next build, then serial native compilation
 pnpm --filter demo start               # Native binaries behind Next's rewrites
 node examples/demo/test/e2e.mjs        # Builds; verifies parity and process cleanup
-node examples/demo/bench/threads.mjs   # After building; starts/stops both modes sequentially
+NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next build
+node examples/demo/bench/threads.mjs   # Requires both builds; runs them sequentially
 ```
 
-`node examples/demo/bench/threads.mjs http://localhost:3000` benchmarks an already
-running server instead; that server remains owned by its caller. The automatic
-comparison uses port 3417 and checks that it and every native route port are free
-before and after each run. SIGINT/SIGTERM also stop servers started by the script.
+`NEXT_SCRIPTC_BASELINE=node` disables the adapter and selects `.next-node`, keeping
+it separate from the native `.next` build. Start it manually with
+`NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next start`.
+Rebuild both variants after source changes. Missing benchmark builds produce the
+exact build command to run.
+
+The automatic comparison uses port 3417 and checks that it and every native route
+port are free before and after each run. It spawns both servers with the benchmark's
+exact Node executable, requires Node 24.x, and prints its path, the baseline's
+reported `process.version`, CPU count/model, load averages and platform/architecture.
+SIGINT/SIGTERM stop servers started by the script.
+`node examples/demo/bench/threads.mjs http://localhost:3000` instead measures an
+existing production server, which remains owned by its caller.
 
 ## Shared-graph report
 
 `GET /api/report?threads=1` accepts 1–8 threads (default 1). On first use it creates
-one million deterministic `Order` class instances, publishes the graph with
-`@scriptc/threads` 0.4.6, and retains it. Eight numbered regions and integer customer
-IDs keep the data compact. Each report calculates revenue per region and twelve
-five-year monthly pricing projections, with customer/seasonal discounts and
-per-invoice rounding. All arithmetic stays in exact integer cents below 2^53;
-partitioning and reduction order cannot change the result. Workers read fields,
-so Node's removal of class prototypes during structured cloning is harmless.
+one million deterministic `Order` instances and publishes the graph with
+`@scriptc/threads` 0.4.6. Each report calculates revenue for eight regions and twelve
+five-year monthly pricing projections, rounding each invoice in integer cents.
+All totals stay below 2^53, so partitioning cannot change the result. The layout
+constants live in `orders.ts`.
 
-The fixed maximum is eight persistent workers, created lazily as concurrency
-grows, each receiving the entire published graph **once** through `workerData`.
-Every worker calls `publish` on receipt: native reads the original immutable graph
-by reference, while Node freezes its private structured clone. Subsequent requests
-send only start/end indices. The pool never shrinks: after requesting eight threads,
-a one-thread report still holds eight workers. Reports queue to avoid overlapping
-jobs on this pool. A failed worker makes subsequent reports fail rather than
-silently reducing concurrency or hanging a pending request; restart the server to
-recover. Editing the route in dev can replace its module; restart dev before a
-benchmark so the pool starts empty.
+The pool grows lazily to eight persistent workers. Each receives the entire graph
+once through `workerData` and calls `publish`: native reads the original immutable
+graph by reference; Node freezes its private structured clone. Later requests send
+only partition indices. Workers read fields, so Node's removal of class prototypes
+is harmless. After requesting eight threads, a one-thread request still retains
+eight workers. Reports queue to avoid overlapping jobs. A failed worker rejects
+its current request and is removed; the next request recreates the missing worker.
+Surviving jobs finish before the pool is reused. Restart dev after editing the
+route to reset its module and pool.
 
-The response includes `result`, requested `threads`, maximum `poolSize`, resident
-`workers`, `sharedByReference`, `elapsedMs`, `datasetRss`, and `rss` (bytes).
-`elapsedMs` covers job dispatch, worker computation and reduction. Dataset creation,
-publication, worker startup/receipt/publication, request queueing and HTTP overhead
-are excluded. `datasetRss` samples process RSS after publishing the original graph,
-before creating workers; `rss` samples it after the report. RSS includes allocators,
-VM/thread overhead and temporary allocation retention, so it is neither exact graph
-size nor necessarily monotonic. Node's process includes Next dev and its runtime;
-native RSS covers only the report binary, **not** Next or the other route binaries.
-Use the growing RSS within each run to inspect additional worker copies; do not
-interpret the absolute cross-mode difference as graph savings alone.
+`elapsedMs` covers dispatch, computation and reduction. Dataset creation,
+publication, queueing, HTTP overhead and worker startup/cloning/publication are
+excluded. A typed `"ready"` message sent after worker publication keeps setup
+outside this timer, including on the first request.
 
-The benchmark warms each thread count, takes three samples and prints median
-compute time, speedup against one thread, and RSS. It also runs back-to-back
-8-thread reports for about five seconds while probing `/` and the light Node route
-`/api/items/new` every ~20 ms, printing sample counts and p50/p99 HTTP latency.
-Both latency endpoints run in Next in both modes. Probes are warmed before timing.
-There is one report in flight, using all eight workers; queued request saturation
-and cold-start latency are separate concerns.
+The response includes `result`, `threads`, maximum `poolSize`, resident `workers`,
+`sharedByReference`, `elapsedMs`, and `nodeVersion` (null for native). Memory fields
+are bytes: `baselineRss` immediately before dataset creation, `datasetRss` after
+publication but before workers, and `rss` after the report. `workerRssGrowth` is
+`(rss - datasetRss) / workers`, the average growth per resident worker.
 
-Node uses `next dev` because it runs the **same source** without the adapter's
-production native rewrites. This preserves the requested development-mode test
-and avoids a second config/build variant, but dev overhead and Node JIT versus
-native compilation make this an illustrative comparison, not a controlled
-production performance study. Both modes use asynchronous worker threads; Node
-also leaves its event loop available. The distinctive native feature demonstrated
-here is immutable graph sharing, not the existence of parallel workers.
+Node RSS covers the whole production Next server and its worker threads. Native
+RSS covers only the report binary, excluding Next and the other route binaries.
+Compare growth within each run, not absolute cross-mode totals. RSS includes
+runtime/allocator overhead and retained temporary allocations; it is neither exact
+clone size nor necessarily monotonic.
 
-The development machine is heavily loaded. Treat every benchmark output as
-indicative only, not publishable performance numbers.
+## Measurement notes
 
-## Worker resolution investigation
+Both benchmark modes use production builds: plain `next start` without the adapter
+versus `next-scriptc start`. `next dev` is used only for development/E2E parity.
+The benchmark warms each thread count, takes three samples, and prints median
+compute time, speedup against one thread, RSS at 1/2/4/8 workers and average RSS
+growth per worker. It then runs back-to-back eight-thread reports for about five
+seconds while probing `/` and `/api/items/new` every ~20 ms, printing sample counts
+and p50/p99 HTTP latency. Both probes run in Next in both modes and are warmed
+before timing. Only one report is in flight; queue saturation and cold starts
+are separate concerns.
 
-The unmodified adapter generates `.next/scriptc/entry-N.ts` with an absolute import
-of `app/api/report/route.ts`. The constructor in that route is the ordinary
-`new Worker(new URL("./worker.ts", import.meta.url), { workerData })`, without runtime
-branches, loaders or copied worker assets.
+The machine is heavily loaded. Output is indicative only, not publishable
+performance data. Both modes use asynchronous workers; the difference under test
+is graph sharing versus cloning, alongside their different runtimes.
 
-A minimal probe returned `{"value":"worker resolved"}` both through Turbopack
-`next dev` and through the generated native binary, the latter carrying
-`x-next-scriptc: native`. Both logged the route's original
-`file:///…/app/api/report/route.ts` as `import.meta.url`. Turbopack leaves this server
-`node:worker_threads` entry source-relative; Node 26.13.0 runs the TypeScript worker
-using built-in type stripping. The worker's runtime imports use package names only;
-its extensionless `./orders` import is type-only and erased. scriptc discovers the
-worker source at compile time relative to the constructor's source module and
-includes it in the binary. The full E2E test verifies the actual published graph
-and persistent message loop in both modes. No adapter change is needed.
+## Worker resolution
+
+The adapter imports the route into `.next/scriptc/entry-N.ts`. The route uses
+`new Worker(new URL("./worker.ts", import.meta.url), { workerData })`.
+Turbopack preserves this source-relative server worker entry in both development
+and production. Node 24 runs the worker with built-in TypeScript stripping;
+its runtime import of layout constants uses an explicit `.ts` extension.
+scriptc resolves the worker at compile time and includes it in the binary.
+E2E checks dev/native parity; the benchmark checks production Node/native parity.
+No adapter change is needed.

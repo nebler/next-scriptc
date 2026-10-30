@@ -2,11 +2,12 @@
 
 import { Worker } from "node:worker_threads";
 import { publish, sharesPublishedGraphs } from "@scriptc/threads";
-import { Order, type Partition } from "./orders";
+import { Order, regionCount, scenarioCount, totalsLength, projectionIndex, type Partition, type ReportMessage } from "./orders.ts";
 
 const poolSize = 8;
 const rowCount = 1_000_000;
 let orders: Order[] | undefined;
+let baselineRss = 0;
 let datasetRss = 0;
 
 class ReportWorker {
@@ -18,25 +19,25 @@ class ReportWorker {
   constructor(data: Order[]) {
     this.worker = new Worker(new URL("./worker.ts", import.meta.url), { workerData: data });
     this.ready = new Promise<void>((resolve, reject) => {
-      this.worker.on("message", (totals: number[]) => {
-        if (totals.length === 0) resolve();
+      this.worker.on("message", (message: ReportMessage) => {
+        if (typeof message === "string") resolve();
         else {
-          this.pending!.resolve(totals);
+          this.pending!.resolve(message);
           this.pending = undefined;
         }
       });
-      this.worker.on("error", (error: Error) => {
+      const fail = (error: Error) => {
+        if (this.failure) return;
         this.failure = error;
+        const index = pool.indexOf(this);
+        if (index !== -1) pool.splice(index, 1);
         reject(error);
         this.pending?.reject(error);
         this.pending = undefined;
-      });
+      };
+      this.worker.on("error", fail);
       this.worker.on("exit", (code: number) => {
-        const error = new Error(`Report worker exited (${code})`);
-        this.failure = error;
-        reject(error);
-        this.pending?.reject(error);
-        this.pending = undefined;
+        fail(new Error(`Report worker exited (${code})`));
       });
     });
   }
@@ -57,6 +58,7 @@ let queue = Promise.resolve();
 
 async function report(threads: number) {
   if (!orders) {
+    baselineRss = process.memoryUsage().rss;
     orders = [];
     for (let i = 0; i < rowCount; i++) orders.push(new Order(i));
     publish(orders);
@@ -69,24 +71,37 @@ async function report(threads: number) {
   for (let i = 0; i < threads; i++) {
     jobs.push(pool[i].run({ start: Math.floor(i * rowCount / threads), end: Math.floor((i + 1) * rowCount / threads) }));
   }
-  const parts = await Promise.all(jobs);
-  const totals = new Array<number>(104).fill(0);
+  let parts: number[][];
+  try {
+    parts = await Promise.all(jobs);
+  } catch (error) {
+    // Drain surviving jobs before the next queued request can reuse their slots.
+    await Promise.all(jobs.map((job) => job.catch(() => [])));
+    throw error;
+  }
+  const totals = new Array<number>(totalsLength).fill(0);
   for (const part of parts) {
     for (let i = 0; i < totals.length; i++) totals[i] += part[i];
   }
   const projectedRevenueCents: number[][] = [];
-  for (let scenario = 0; scenario < 12; scenario++) {
-    projectedRevenueCents.push(totals.slice(8 + scenario * 8, 16 + scenario * 8));
+  for (let scenario = 0; scenario < scenarioCount; scenario++) {
+    const first = projectionIndex(scenario, 0);
+    projectedRevenueCents.push(totals.slice(first, first + regionCount));
   }
+  const elapsedMs = performance.now() - start;
+  const rss = process.memoryUsage().rss;
   return {
-    result: { orders: rowCount, revenueCents: totals.slice(0, 8), projectedRevenueCents },
+    result: { orders: rowCount, revenueCents: totals.slice(0, regionCount), projectedRevenueCents },
     threads,
     poolSize,
     workers: pool.length,
-    elapsedMs: performance.now() - start,
+    elapsedMs,
     sharedByReference: sharesPublishedGraphs,
+    nodeVersion: sharesPublishedGraphs ? null : process.version,
+    baselineRss,
     datasetRss,
-    rss: process.memoryUsage().rss,
+    rss,
+    workerRssGrowth: (rss - datasetRss) / pool.length,
   };
 }
 

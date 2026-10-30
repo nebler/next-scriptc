@@ -2,9 +2,10 @@ import type { NextConfig } from "next";
 import { withScriptc } from "next-scriptc";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
 };
 
-export default withScriptc(nextConfig);
+export default process.env.NEXT_SCRIPTC_BASELINE === "node"
+  ? { ...nextConfig, distDir: ".next-node" }
+  : withScriptc(nextConfig);
