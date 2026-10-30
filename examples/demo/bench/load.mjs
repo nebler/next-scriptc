@@ -61,7 +61,7 @@ export async function load(base, spec, { concurrency = 1, durationMs, count, int
     return { requests: times.length, elapsedMs, requestsPerSecond: times.length * 1000 / elapsedMs,
       p50Ms: quantile(times, 0.5), p99Ms: quantile(times, 0.99), maxMs: quantile(times, 1),
       connectionsCreated: connectionsCreated - socketsBefore, reusedRequests: reusedRequests - reusedBefore,
-      agentSocketsAtStart: socketsBefore };
+      connectionsCreatedBeforeWindow: socketsBefore };
   }
   try {
     const warmup = warmupMs || warmupCount ? await run(warmupCount ? undefined : warmupMs, warmupCount) : undefined;

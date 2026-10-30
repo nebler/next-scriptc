@@ -16,6 +16,7 @@ for (const close of [false, true]) {
   try {
     const result = await load(base, { path: "/", digest: digest(Buffer.from("fixture")) }, { count: 40, warmupCount: 5 });
     assert.equal(result.requests, 40);
+    assert.equal(result.connectionsCreatedBeforeWindow, close ? 5 : 1);
     assert.equal(result.warmup.requests, 5);
     assert.equal(result.connectionsCreated, close ? 40 : 0);
     assert.equal(sockets, close ? 45 : 1);
