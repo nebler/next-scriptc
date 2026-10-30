@@ -110,6 +110,11 @@ if (values["resume-cold"]) {
   assert.ok(previous.rows.every((row) => row.metric === "cold-start"));
   assert.deepEqual(previous.artifacts, data.artifacts, "Cannot resume cold results from different artifacts");
   for (const name of ["node", "scriptc", "next", "nodeBuildId", "nativeBuildId"]) assert.equal(previous.environment[name], data.environment[name]);
+  const shared = (snapshot) => snapshot.filter(({ file }) => !["examples/demo/bench/run.mjs", "examples/demo/bench/report.mjs"].includes(file));
+  assert.deepEqual(shared(previous.sourceSnapshot), shared(data.sourceSnapshot), "App, adapter, fixtures or transport changed since cold measurements");
+  assert.deepEqual(previous.environment.publicFixtureEnvironment, serverEnv);
+  assert.equal(previous.profile.nativeStart, values["native-start"]);
+  assert.equal(previous.definitions["cold-start"], definitions["cold-start"]);
   data.rows = previous.rows;
   data.coverage = previous.coverage;
   data.resumedCold = { file: values["resume-cold"], startedAt: previous.startedAt, finishedAt: previous.finishedAt,
@@ -135,7 +140,7 @@ function launch(scope, runtime, route) {
   if (scope === "direct") return start(runtime === "node" ? process.execPath : route.binary,
     runtime === "node" ? [route.entry] : [], { cwd: demo, cpus: serverCpus, role: `${runtime}-route`, env: { ...serverEnv, PORT: String(route.port) } });
   return start(process.execPath, productionCommand({ runtime, nativeStart: values["native-start"], next, cli, port: nextPort }),
-    { cwd: demo, cpus: serverCpus, role: runtime === "node" ? "next-server" : "adapter-supervisor", env: { ...serverEnv, NEXT_SCRIPTC_BASELINE: runtime === "node" ? "node" : "" } });
+    { cwd: demo, cpus: serverCpus, role: runtime === "node" || values["native-start"] === "next" ? "next-server" : "adapter-supervisor", env: { ...serverEnv, NEXT_SCRIPTC_BASELINE: runtime === "node" ? "node" : "" } });
 }
 function generator(base, spec, options, ipc = false) {
   const { entry, binary, ...wire } = spec;
@@ -171,18 +176,18 @@ async function cold(scope, runtime, route, repeat) {
 }
 async function steady(scope, runtime, selected) {
   await portsFree(allPorts);
-  const proc = launch(scope, runtime, selected[0]);
+  let proc = launch(scope, runtime, selected[0]);
   const base = `http://127.0.0.1:${scope === "direct" ? selected[0].port : nextPort}`;
   try {
     const initial = scope === "end-to-end" ? active.find((route) => route.id === "hello") : selected[0];
-    const first = await ready(proc, base, initial);
+    let first = await ready(proc, base, initial);
     validate(initial, first);
     // Readiness itself executes one request. "Idle" is after that request and a
     // fixed quiet interval, never a misleading claim of pre-initialization RSS.
     await delay(profile.idleMs, undefined, { signal });
     record({ metric: "memory-idle", scope, runtime, initializedBy: initial.id,
       memory: await census(proc) });
-    for (const route of selected) {
+    for (const [index, route] of selected.entries()) {
       try {
         const hash = validate(route, route === initial ? first : await request(base, route));
         const spec = { ...route, digest: hash };
@@ -208,7 +213,21 @@ async function steady(scope, runtime, selected) {
           record({ metric: "throughput-latency", scope, runtime, route: route.id, category: route.category,
             concurrency, repeat, ...sample });
         }
-      } catch (error) { workloadFailure(error, proc, scope, runtime, route, "steady"); }
+      } catch (error) {
+        workloadFailure(error, proc, scope, runtime, route, "steady");
+        // A proxy timeout does not preempt synchronous work in the binary.
+        // Kill the whole tree before another route can share its CPU budget.
+        if (scope === "end-to-end" && index + 1 < selected.length) {
+          await stop(proc);
+          await portsFree(allPorts);
+          proc = launch(scope, runtime);
+          first = await ready(proc, base, initial);
+          validate(initial, first);
+          await delay(profile.idleMs, undefined, { signal });
+          record({ metric: "memory-idle", scope, runtime, initializedBy: initial.id, restartedAfter: route.id,
+            memory: await census(proc) });
+        }
+      }
     }
   } finally { await stop(proc); await portsFree(allPorts); }
 }
@@ -242,11 +261,12 @@ try {
     } else if (section === "isolation") {
       for (const runtime of values.reverse ? ["native", "node"] : ["node", "native"]) {
         await portsFree(allPorts);
-        const proc = launch("end-to-end", runtime);
+        let proc = launch("end-to-end", runtime);
         const base = `http://127.0.0.1:${nextPort}`;
         try {
           await ready(proc, base, isolation.probes[1]);
-          for (const heavy of isolation.heavy) {
+          for (const probe of isolation.probes) await request(base, probe);
+          for (const [index, heavy] of isolation.heavy.entries()) {
             try {
               await request(base, heavy);
               for (let repeat = 0; repeat < profile.repeats; repeat++) {
@@ -256,7 +276,16 @@ try {
                   record({ metric: loaded ? "isolation-loaded" : "isolation-idle", scope: "end-to-end", runtime, heavyRequest: heavy, repeat, result });
                 }
               }
-            } catch (error) { workloadFailure(error, proc, "end-to-end", runtime, heavy, "isolation"); }
+            } catch (error) {
+              workloadFailure(error, proc, "end-to-end", runtime, heavy, "isolation");
+              if (index + 1 < isolation.heavy.length) {
+                await stop(proc);
+                await portsFree(allPorts);
+                proc = launch("end-to-end", runtime);
+                await ready(proc, base, isolation.probes[1]);
+                for (const probe of isolation.probes) await request(base, probe);
+              }
+            }
           }
         } finally { await stop(proc); await portsFree(allPorts); }
       }
