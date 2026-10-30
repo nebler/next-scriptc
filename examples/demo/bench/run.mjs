@@ -13,7 +13,7 @@ import { threadsBenchmark } from "./threads.mjs";
 import { renderReport, definitions, limitations } from "./report.mjs";
 
 const { values } = parseArgs({ options: { profile: { type: "string", default: "sandbox" },
-  output: { type: "string" }, reverse: { type: "boolean", default: false }, sections: { type: "string" }, "native-start": { type: "string", default: "adapter" } } });
+  output: { type: "string" }, "resume-cold": { type: "string" }, reverse: { type: "boolean", default: false }, sections: { type: "string" }, "native-start": { type: "string", default: "adapter" } } });
 const profile = profiles[values.profile];
 if (!profile) throw new Error("--profile must be sandbox or quick");
 const sections = sectionsOption(values.sections);
@@ -101,6 +101,20 @@ const data = {
 for (const [index, route] of manifest.routes.entries()) data.artifacts.push({ pattern: route.pattern,
   sourceSha256: digest(await readFile(route.source)), entrySha256: digest(await readFile(path.join(demo, ".next/scriptc", `entry-${index}.ts`))),
   binarySha256: digest(await readFile(path.join(demo, ".next/scriptc", route.binary))) });
+// Resume only an interrupted cold section, never merge steady statistics from
+// different harnesses. Preserve the original run and require identical builds.
+if (values["resume-cold"]) {
+  const previous = JSON.parse(await readFile(path.resolve(values["resume-cold"]), "utf8"));
+  assert.equal(previous.status, "failed");
+  assert.equal(previous.profile.name, values.profile);
+  assert.ok(previous.rows.every((row) => row.metric === "cold-start"));
+  assert.deepEqual(previous.artifacts, data.artifacts, "Cannot resume cold results from different artifacts");
+  for (const name of ["node", "scriptc", "next", "nodeBuildId", "nativeBuildId"]) assert.equal(previous.environment[name], data.environment[name]);
+  data.rows = previous.rows;
+  data.coverage = previous.coverage;
+  data.resumedCold = { file: values["resume-cold"], startedAt: previous.startedAt, finishedAt: previous.finishedAt,
+    error: previous.error, environment: previous.environment, sourceSnapshot: previous.sourceSnapshot };
+}
 const fingerprints = new Map();
 function validate(route, response) {
   const hash = digest(response.body);
@@ -109,6 +123,12 @@ function validate(route, response) {
   return hash;
 }
 function record(row) { data.rows.push(row); }
+function workloadFailure(error, proc, scope, runtime, route, phase) {
+  if (signal.aborted || !/HTTP \d+|Request timed out|Generator exited before warmup/.test(String(error))) throw error;
+  record({ metric: "workload-failure", scope, runtime, route: route.id, category: route.category, phase,
+    error: error.stack, serverOutput: proc.output });
+  console.error(`FAILED ${scope}/${runtime}/${route.id}/${phase}: ${error.message}`);
+}
 const nextPort = 3417;
 const allPorts = [nextPort, ...manifest.routes.map((route) => route.port)];
 function launch(scope, runtime, route) {
@@ -146,45 +166,49 @@ async function cold(scope, runtime, route, repeat) {
     const response = await ready(proc, `http://127.0.0.1:${scope === "direct" ? route.port : nextPort}`, route);
     validate(route, response);
     record({ metric: "cold-start", scope, runtime, route: route.id, category: route.category, repeat, ms: response.coldMs });
-  } finally { await stop(proc); await portsFree(allPorts); }
+  } catch (error) { workloadFailure(error, proc, scope, runtime, route, "cold"); }
+  finally { await stop(proc); await portsFree(allPorts); }
 }
 async function steady(scope, runtime, selected) {
   await portsFree(allPorts);
   const proc = launch(scope, runtime, selected[0]);
   const base = `http://127.0.0.1:${scope === "direct" ? selected[0].port : nextPort}`;
   try {
-    const first = await ready(proc, base, selected[0]);
-    validate(selected[0], first);
+    const initial = scope === "end-to-end" ? active.find((route) => route.id === "hello") : selected[0];
+    const first = await ready(proc, base, initial);
+    validate(initial, first);
     // Readiness itself executes one request. "Idle" is after that request and a
     // fixed quiet interval, never a misleading claim of pre-initialization RSS.
     await delay(profile.idleMs, undefined, { signal });
-    record({ metric: "memory-idle", scope, runtime, initializedBy: selected[0].id,
+    record({ metric: "memory-idle", scope, runtime, initializedBy: initial.id,
       memory: await census(proc) });
     for (const route of selected) {
-      const hash = validate(route, route === selected[0] ? first : await request(base, route));
-      const spec = { ...route, digest: hash };
-      console.log(`${scope}/${runtime}/${route.id}: estimated ${route.bounded ? "60–120" : "5–15"} s; ${route.bounded ? "C=1, one warmup + 3 measured requests" : "CPU + C=" + profile.concurrency.join(",")}`);
-      if (route.bounded) {
-        // One sample supplies both CPU and latency: only three cost-10 bcrypts
-        // are measured. No duration window can over-dispatch expensive work.
-        const sample = await sampleLoad(proc, base, spec, { count: 3, concurrency: 1, warmupCount: 1 });
-        assert.equal(sample.result.requests, 3);
-        record({ metric: "cpu-fixed-count", scope, runtime, route: route.id, category: route.category, repeat: 0, ...sample, cpuMsPerRequest: sample.cpuMs / 3 });
-        record({ metric: "throughput-latency", scope, runtime, route: route.id, category: route.category, concurrency: 1, repeat: 0, budget: "3 fixed requests; p99 is max of three, no tail claim", ...sample });
-        continue;
-      }
-      for (let repeat = 0; repeat < profile.repeats; repeat++) {
-        const count = Math.min(route.cpuRequests, profile.cpuCap);
-        const sample = await sampleLoad(proc, base, spec, { count, concurrency: 1, warmupMs: profile.warmupMs });
-        assert.equal(sample.result.requests, count);
-        record({ metric: "cpu-fixed-count", scope, runtime, route: route.id, category: route.category, repeat, ...sample,
-          cpuMsPerRequest: sample.cpuMs / count });
-      }
-      for (const concurrency of profile.concurrency) for (let repeat = 0; repeat < profile.repeats; repeat++) {
-        const sample = await sampleLoad(proc, base, spec, { durationMs: profile.durationMs, concurrency, warmupMs: profile.warmupMs });
-        record({ metric: "throughput-latency", scope, runtime, route: route.id, category: route.category,
-          concurrency, repeat, ...sample });
-      }
+      try {
+        const hash = validate(route, route === initial ? first : await request(base, route));
+        const spec = { ...route, digest: hash };
+        console.log(`${scope}/${runtime}/${route.id}: estimated ${route.bounded ? "60–120" : "5–15"} s; ${route.bounded ? "C=1, one warmup + 3 measured requests" : "CPU + C=" + profile.concurrency.join(",")}`);
+        if (route.bounded) {
+          // One sample supplies both CPU and latency: only three cost-10 bcrypts
+          // are measured. No duration window can over-dispatch expensive work.
+          const sample = await sampleLoad(proc, base, spec, { count: 3, concurrency: 1, warmupCount: 1 });
+          assert.equal(sample.result.requests, 3);
+          record({ metric: "cpu-fixed-count", scope, runtime, route: route.id, category: route.category, repeat: 0, ...sample, cpuMsPerRequest: sample.cpuMs / 3 });
+          record({ metric: "throughput-latency", scope, runtime, route: route.id, category: route.category, concurrency: 1, repeat: 0, budget: "3 fixed requests; p99 is max of three, no tail claim", ...sample });
+          continue;
+        }
+        for (let repeat = 0; repeat < profile.repeats; repeat++) {
+          const count = Math.min(route.cpuRequests, profile.cpuCap);
+          const sample = await sampleLoad(proc, base, spec, { count, concurrency: 1, warmupMs: profile.warmupMs });
+          assert.equal(sample.result.requests, count);
+          record({ metric: "cpu-fixed-count", scope, runtime, route: route.id, category: route.category, repeat, ...sample,
+            cpuMsPerRequest: sample.cpuMs / count });
+        }
+        for (const concurrency of profile.concurrency) for (let repeat = 0; repeat < profile.repeats; repeat++) {
+          const sample = await sampleLoad(proc, base, spec, { durationMs: profile.durationMs, concurrency, warmupMs: profile.warmupMs });
+          record({ metric: "throughput-latency", scope, runtime, route: route.id, category: route.category,
+            concurrency, repeat, ...sample });
+        }
+      } catch (error) { workloadFailure(error, proc, scope, runtime, route, "steady"); }
     }
   } finally { await stop(proc); await portsFree(allPorts); }
 }
@@ -196,6 +220,7 @@ try {
   for (const section of sections) {
     console.log(`Section ${section}: estimated ${estimates[section]} (shared-host load can extend this)`);
     if (section === "coverage") {
+      if (data.resumedCold) continue;
       const compiler = path.resolve(path.dirname(compilerRequire.resolve("scriptc/package.json")), compilerRequire("scriptc/package.json").bin.scriptc);
       const targets = [...active, { id: "report", entry: path.join(demo, ".next/scriptc", `entry-${manifest.routes.findIndex((r) => r.pattern === "/api/report")}.ts`) }];
       for (const route of targets) data.coverage[route.id] = await coverage(compiler, route.entry, demo);
@@ -203,7 +228,9 @@ try {
       for (const scope of ["direct", "end-to-end"]) for (const route of active) {
         const repeats = route.bounded ? 1 : profile.coldRepeats;
         for (let repeat = 0; repeat < repeats; repeat++) {
-          for (const runtime of repeat % 2 ? ["native", "node"] : ["node", "native"]) await cold(scope, runtime, route, repeat);
+          for (const runtime of repeat % 2 ? ["native", "node"] : ["node", "native"]) {
+            if (!data.rows.some((row) => row.metric === "cold-start" && row.scope === scope && row.runtime === runtime && row.route === route.id && row.repeat === repeat)) await cold(scope, runtime, route, repeat);
+          }
         }
       }
     } else if (section === "direct" || section === "production") {
@@ -220,14 +247,16 @@ try {
         try {
           await ready(proc, base, isolation.probes[1]);
           for (const heavy of isolation.heavy) {
-            await request(base, heavy);
-            for (let repeat = 0; repeat < profile.repeats; repeat++) {
-              for (const loaded of [false, true]) {
-                const result = await finish(generator(base, {}, { probes: isolation.probes,
-                  heavy: loaded ? heavy : undefined, durationMs: profile.isolationMs }));
-                record({ metric: loaded ? "isolation-loaded" : "isolation-idle", scope: "end-to-end", runtime, heavyRequest: heavy, repeat, result });
+            try {
+              await request(base, heavy);
+              for (let repeat = 0; repeat < profile.repeats; repeat++) {
+                for (const loaded of [false, true]) {
+                  const result = await finish(generator(base, {}, { probes: isolation.probes,
+                    heavy: loaded ? heavy : undefined, durationMs: profile.isolationMs }));
+                  record({ metric: loaded ? "isolation-loaded" : "isolation-idle", scope: "end-to-end", runtime, heavyRequest: heavy, repeat, result });
+                }
               }
-            }
+            } catch (error) { workloadFailure(error, proc, "end-to-end", runtime, heavy, "isolation"); }
           }
         } finally { await stop(proc); await portsFree(allPorts); }
       }
@@ -242,7 +271,9 @@ try {
   assert.equal(manifest.buildId, (await readFile(path.join(demo, ".next/BUILD_ID"), "utf8")).trim(), "Native build changed during benchmark");
   assert.equal(data.environment.nodeBuildId, (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim(), "Node build changed during benchmark");
   assert.deepEqual(await sourceSnapshot(), data.sourceSnapshot, "Application, benchmark, adapter or lockfile changed during benchmark");
-  data.status = "complete";
+  data.status = data.rows.some((row) => row.metric === "workload-failure") ? "failed" : "complete";
+  if (data.status === "failed") process.exitCode = 1;
+  data.completedSections = sections;
 } catch (error) {
   data.status = "failed";
   data.error = error.stack;

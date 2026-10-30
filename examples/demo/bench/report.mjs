@@ -13,6 +13,7 @@ export const definitions = {
 export const limitations = [
   "Headline application workloads are successful cost-10 login, authenticated JWT verification, 3,000-product search, uncached Markdown rendering and RSS. hello is a small-response control; primes and report are synthetic. These fixtures have no database or remote I/O.",
   "Native bcrypt is a known regression: the earlier correctness probe took 26.8 s for three cost-10 operations versus 0.56 s on Node (~48× slower). Login therefore measures only three requests, C=1, one measured repetition and one separate cold request per surface. Its p99 is simply the maximum of three, not credible tail evidence. No reduced cost, invalid password or 401 shortcut is substituted. CSV and OG-image generation were refused by the probe; see examples/probe/RESULTS.md.",
+  "If a route exceeds Next’s default 30-second upstream proxy timeout, production returns HTTP 500. The suite records that workload as FAILED, preserves server logs, sets dataset status failed/nonzero exit and continues independent workloads. It never increases the production timeout, substitutes a faster error path or counts failed responses as throughput.",
   "Coverage static percentage is not a typed-machine-code percentage: scriptc includes dynamic-tier statements in its compile-statically total. Dynamic counts and package modes are displayed alongside speed; package mode static does not exclude untyped JS operations. Coverage describes the entry graph, not measured hot-path time, so it suggests explanations without proving causality.",
   "Node baseline is a production next build / next start with adapter disabled (.next-node), normal V8 JIT, no debug or memory flags. Direct Node uses the identical generated entry and HTTP shim, without a Next server. Native end-to-end includes the extra Next proxy and all resident route processes.",
   "Next may prerender pure GET handlers such as hello and feed.xml in the Node production build. Its normal static optimization is retained as the strongest application baseline; that comparison can include serving a prerendered body versus computing it. The direct comparison still executes the same entry on every request. Prerendered paths are recorded in the environment.",
@@ -43,13 +44,18 @@ export function renderReport(data) {
   const rows = (metric) => data.rows.filter((row) => row.metric === metric);
   let md = `# next-scriptc benchmark\n\n**${data.label}**\n\nStatus: ${data.status}. Commit: ${data.environment.commit}. Node ${data.environment.node}; scriptc ${data.environment.scriptc}; Next ${data.environment.next}.\n\n${data.environment.cpuModel}; ${data.environment.vcpus} logical CPUs; ${data.environment.platform}/${data.environment.arch}; load averages start ${data.environment.loadAverageStart.join(", ")}, end ${data.environment.loadAverageEnd?.join(", ")}.\n\nStarted ${data.startedAt}; ended ${data.finishedAt}. Profile: ${data.profile.name}. Affinity: ${JSON.stringify(data.environment.affinity)}.\n\nFull environment, build IDs, source/binary hashes, dirty status, raw repetitions, per-process snapshots, requests, and workload configuration are in the adjacent JSON. Brackets below are [min, max] across repeated runs, not confidence intervals.\n\n## Limitations alongside the results\n\n${data.limitations.map((text) => `- ${text}`).join("\n")}\n\n## Workloads\n\n`;
   md += table(["Route", "Kind", "Request / pending"], data.workloads.map((route) => [route.id, route.category, route.enabled === false ? `DISABLED: ${route.pending}` : `${route.method ?? "GET"} ${route.path}`]));
+  if (rows("workload-failure").length) {
+    md += "\n## Failed workloads — dataset status FAILED\n\nNo speed result is claimed for these cases. Successful rows below are partial evidence only. Full server logs are in JSON.\n\n";
+    md += table(["Scope / runtime / route", "Phase", "Failure"], rows("workload-failure").map((r) => [`${r.scope} / ${r.runtime} / ${r.route}`, r.phase, r.error.split("\n")[0]]));
+  }
   md += "\n## Application workloads, C=1 (latency and coverage together)\n\n";
   md += table(["Route", "Scope", "Node p50 ms", "Native p50 ms", "Native / Node latency", "Statements / static % / dynamic tier", "Package modes"], data.workloads.filter((r) => r.category === "realistic" && r.enabled !== false).flatMap((route) => {
     const c = data.coverage?.[route.id];
     return ["direct", "end-to-end"].map((scope) => {
       const p50 = (runtime) => median(rows("throughput-latency").filter((r) => r.route === route.id && r.scope === scope && r.runtime === runtime && r.concurrency === 1).map((r) => r.result.p50Ms));
       const node = p50("node"), native = p50("native");
-      return [route.id, scope, f(node), f(native), node && native ? f(native / node) + "×" : "—", c ? `${c.statements} / ${c.staticPercent}% / ${c.dynamicTierStatements}` : "not collected", c?.packages.map((p) => `${p.name}: ${p.mode}`).join("; ") || "none"];
+      const display = (value, runtime) => rows("workload-failure").some((r) => r.route === route.id && r.scope === scope && r.runtime === runtime && r.phase === "steady") ? "FAILED" : f(value);
+      return [route.id, scope, display(node, "node"), display(native, "native"), node && native ? f(native / node) + "×" : "—", c ? `${c.statements} / ${c.staticPercent}% / ${c.dynamicTierStatements}` : "not collected", c?.packages.map((p) => `${p.name}: ${p.mode}`).join("; ") || "none"];
     });
   }));
   md += "\n## Coverage of every measured entry (controls and synthetic included)\n\n";
