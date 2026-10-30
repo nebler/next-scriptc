@@ -5,10 +5,13 @@ import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
+import { sectionsOption } from "../examples/demo/bench/config.mjs";
 import { Sandbox } from "@vercel/sandbox";
 
 const root = path.resolve(import.meta.dirname, "..");
-const { values } = parseArgs({ options: { reverse: { type: "boolean", default: false } } });
+const { values } = parseArgs({ options: { reverse: { type: "boolean", default: false }, sections: { type: "string" }, "native-start": { type: "string", default: "adapter" } } });
+const sections = sectionsOption(values.sections);
+if (!["next", "adapter"].includes(values["native-start"])) throw new Error("--native-start must be next or adapter");
 const git = (...args) => execFileSync("git", args, { cwd: root, maxBuffer: 128 * 1024 * 1024 });
 // Fail before provisioning if HEAD cannot run the suite. No local patches,
 // ignored files, secrets or node_modules are uploaded.
@@ -17,7 +20,7 @@ const commit = git("rev-parse", "HEAD").toString().trim();
 const archive = git("archive", "--format=tar", "HEAD");
 const archiveSha256 = createHash("sha256").update(archive).digest("hex");
 const stamp = new Date().toISOString().replaceAll(":", "-");
-const destination = path.join(root, "research/benchmarks", `${stamp}-sandbox-${commit.slice(0, 12)}`);
+const destination = path.join(root, "research/benchmarks", `sandbox-${stamp}`);
 const controller = new AbortController();
 for (const name of ["SIGINT", "SIGTERM"]) process.once(name, () => controller.abort(new Error(name)));
 const started = Date.now();
@@ -28,11 +31,12 @@ const sandbox = await Sandbox.create({
   timeout: 30 * 60 * 1000, persistent: false,
 });
 const provenance = { sandbox: sandbox.name, commit, archiveSha256, startedAt: new Date(started).toISOString(),
-  image: "vercel/sandbox/node:24", vcpus: 4, memoryMiB: 8192, reverse: values.reverse, status: "running", steps: [] };
+  image: "vercel/sandbox/node:24", vcpus: 4, memoryMiB: 8192, reverse: values.reverse, sections, nativeStart: values["native-start"], status: "running", steps: [] };
 console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; archive SHA-256 ${archiveSha256}`);
+console.log("Estimated total: 16–25 min including tools/install and both builds; 28 min abort budget, 30 min lifetime. Four vCPUs; app/load split 2+2 via taskset.");
 
-async function step(label, script, sudo = false) {
-  console.log(`\n${label}`);
+async function step(label, estimate, script, sudo = false) {
+  console.log(`\n${label}: estimated ${estimate}`);
   const start = Date.now();
   const result = await sandbox.runCommand({ cmd: "bash", args: ["-lc", `set -euo pipefail\n${script}`], sudo,
     stdout: process.stdout, stderr: process.stderr, signal: controller.signal });
@@ -41,8 +45,8 @@ async function step(label, script, sudo = false) {
 }
 
 try {
-  await sandbox.writeFiles([{ path: "repo.tar", content: archive }]);
-  await step("Install compiler and CPU affinity tools", `
+  await sandbox.writeFiles([{ path: "repo.tar", content: archive }], { signal: controller.signal });
+  await step("Install compiler and CPU affinity tools", "1–2 min", `
     if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then
       if command -v dnf >/dev/null; then dnf install -y -q clang util-linux
       else apt-get update -qq && apt-get install -y -qq clang util-linux; fi
@@ -51,18 +55,18 @@ try {
     clang --version
     nproc
     cat /proc/meminfo | head -3`, true);
-  await step("Install exact lockfile", `
+  await step("Install exact lockfile", "1–2 min", `
     mkdir next-scriptc
     tar -xf repo.tar -C next-scriptc
     cd next-scriptc
     test "$(sha256sum ../repo.tar | cut -d ' ' -f1)" = '${archiveSha256}'
-    npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent
+    timeout 180s npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent
     packages/next-scriptc/node_modules/.bin/scriptc --version`);
   // Sequential, with real exit status preserved. Never hide compiler failures
   // behind grep/"|| true" or build the two Next outputs concurrently.
-  await step("Native production build", "cd next-scriptc && timeout 600s npx -y pnpm@11.1.3 --filter demo build");
-  await step("Node production build", "cd next-scriptc && NEXT_SCRIPTC_BASELINE=node timeout 300s npx -y pnpm@11.1.3 --filter demo build");
-  await step("Full benchmark", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 900s node examples/demo/bench/run.mjs --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
+  await step("Native production build", "2–5 min (10 min ceiling)", "cd next-scriptc && timeout 600s npx -y pnpm@11.1.3 --filter demo build");
+  await step("Node production build", "15–60 s (3 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE=node timeout 180s npx -y pnpm@11.1.3 --filter demo build");
+  await step("Sandbox benchmark", "8–17 min (remaining overall budget)", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 1200s node examples/demo/bench/run.mjs --profile sandbox --native-start=${values["native-start"]} --sections=${sections.join(",")} --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
   provenance.status = "complete";
 } catch (error) {
   provenance.status = "failed";
@@ -75,7 +79,7 @@ try {
   try {
     await mkdir(path.dirname(destination), { recursive: true });
     for (const extension of ["json", "md"]) {
-      const saved = await sandbox.downloadFile({ path: `/vercel/sandbox/bench-results.${extension}` }, { path: `${destination}.${extension}` });
+      const saved = await sandbox.downloadFile({ path: `/vercel/sandbox/bench-results.${extension}` }, { path: `${destination}.${extension}` }, { signal: AbortSignal.timeout(20_000) });
       if (!saved) {
         console.warn(`No ${extension} results (build/startup may have failed).`);
         provenance.status = "failed";
@@ -91,9 +95,9 @@ try {
   finally {
     clearTimeout(deadline);
     try {
-      const stopped = await sandbox.stop();
+      const stopped = await sandbox.stop({ signal: AbortSignal.timeout(30_000) });
       provenance.activeCpuDurationMs = stopped.activeCpuDurationMs;
-      console.log(`Stopped sandbox after ${((Date.now() - started) / 1000).toFixed(0)} s`);
+      console.log(`Stopped sandbox after ${((Date.now() - started) / 1000).toFixed(0)} s; active CPU ${stopped.activeCpuDurationMs == null ? "unavailable" : (stopped.activeCpuDurationMs / 1000).toFixed(1) + " s"}`);
     } catch (error) {
       provenance.status = "failed";
       provenance.stopError = error.message;

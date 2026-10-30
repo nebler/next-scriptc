@@ -31,7 +31,7 @@ if (!isMainThread) {
   });
   parentPort.postMessage("ready");
 } else {
-  const { threads, repeats } = parameters;
+  const { counts, repeats } = parameters;
   const rowCount = 1_000_000;
   const baselineRss = process.memoryUsage().rss;
   const array = () => new Int32Array(new SharedArrayBuffer(rowCount * 4));
@@ -45,33 +45,36 @@ if (!isMainThread) {
   const datasetRss = process.memoryUsage().rss;
   const workers = [];
   try {
-    for (let i = 0; i < threads; i++) {
-      const worker = new Worker(new URL(import.meta.url), { workerData: { data, dimensions: parameters.dimensions } });
-      workers.push(worker);
-      await new Promise((resolve, reject) => { worker.once("message", resolve); worker.once("error", reject); });
-    }
     const samples = [];
-    for (let iteration = 0; iteration <= repeats; iteration++) {
-      const start = performance.now();
-      const parts = await Promise.all(workers.map((worker, i) => new Promise((resolve, reject) => {
-        const fail = (error) => { worker.off("message", finish); reject(error); };
-        const finish = (result) => { worker.off("error", fail); resolve(result); };
-        worker.once("message", finish);
-        worker.once("error", fail);
-        worker.postMessage({ start: Math.floor(i * rowCount / threads), end: Math.floor((i + 1) * rowCount / threads) });
-      })));
-      const totals = new Array(totalsLength).fill(0);
-      for (const part of parts) for (let i = 0; i < totals.length; i++) totals[i] += part[i];
-      const projectedRevenueCents = [];
-      for (let scenario = 0; scenario < scenarioCount; scenario++) {
-        const first = projectionIndex(scenario, 0);
-        projectedRevenueCents.push(totals.slice(first, first + regionCount));
+    for (const threads of counts) {
+      while (workers.length < threads) {
+        const worker = new Worker(new URL(import.meta.url), { workerData: { data, dimensions: parameters.dimensions } });
+        workers.push(worker);
+        await new Promise((resolve, reject) => { worker.once("message", resolve); worker.once("error", reject); });
       }
-      const elapsedMs = performance.now() - start;
-      const rss = process.memoryUsage().rss;
-      if (iteration) samples.push({ elapsedMs, rss, baselineRss, datasetRss,
-        workerRssGrowth: (rss - datasetRss) / threads, workers: threads,
-        result: { orders: rowCount, revenueCents: totals.slice(0, regionCount), projectedRevenueCents } });
+      // Match the object route readiness job, then two warmups at each count.
+      for (let iteration = threads === 1 ? -3 : -2; iteration < repeats; iteration++) {
+        const start = performance.now();
+        const parts = await Promise.all(workers.map((worker, i) => new Promise((resolve, reject) => {
+          const fail = (error) => { worker.off("message", finish); reject(error); };
+          const finish = (result) => { worker.off("error", fail); resolve(result); };
+          worker.once("message", finish);
+          worker.once("error", fail);
+          worker.postMessage({ start: Math.floor(i * rowCount / threads), end: Math.floor((i + 1) * rowCount / threads) });
+        })));
+        const totals = new Array(totalsLength).fill(0);
+        for (const part of parts) for (let i = 0; i < totals.length; i++) totals[i] += part[i];
+        const projectedRevenueCents = [];
+        for (let scenario = 0; scenario < scenarioCount; scenario++) {
+          const first = projectionIndex(scenario, 0);
+          projectedRevenueCents.push(totals.slice(first, first + regionCount));
+        }
+        const elapsedMs = performance.now() - start;
+        const rss = process.memoryUsage().rss;
+        if (iteration >= 0) samples.push({ elapsedMs, rss, baselineRss, datasetRss,
+          threads, repeat: iteration, workers: threads,
+          result: { orders: rowCount, revenueCents: totals.slice(0, regionCount), projectedRevenueCents } });
+      }
     }
     process.stdout.write(JSON.stringify(samples));
   } finally { await Promise.all(workers.map((worker) => worker.terminate())); }

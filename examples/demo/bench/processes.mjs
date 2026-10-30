@@ -17,12 +17,12 @@ if (process.platform === "linux") {
 }
 export const accounting = { cpuTicksPerSecond: ticks, rssPageBytes: pageSize, peakSamplingIntervalMs: 100 };
 
-export function start(command, args, { cwd, env = {}, cpus, role = "entry-or-supervisor" } = {}) {
+export function start(command, args, { cwd, env = {}, cpus, role = "entry-or-supervisor", ipc = false } = {}) {
   signal.throwIfAborted();
   const started = performance.now();
   const child = spawn(cpus ? "taskset" : command, cpus ? ["-c", cpus, command, ...args] : args, {
     cwd, env: { ...process.env, NODE_ENV: "production", NEXT_TELEMETRY_DISABLED: "1", ...env },
-    detached: true, stdio: ["ignore", "pipe", "pipe"],
+    detached: true, stdio: ipc ? ["ignore", "pipe", "pipe", "ipc"] : ["ignore", "pipe", "pipe"],
   });
   const proc = { child, started, role, output: "", stdout: "", done: false, knownPids: new Set() };
   for (const stream of [child.stdout, child.stderr]) stream.on("data", (chunk) => {
@@ -67,13 +67,19 @@ function timeMs(value) {
   return (Number(days) * 86400 + clock.split(":").reduce((sum, part) => sum * 60 + Number(part), 0)) * 1000;
 }
 
-export async function census(proc) {
-  // ps finds descendants even when the adapter creates separate process groups.
-  const { stdout } = await exec("ps", ["-axo", "pid=,ppid=,rss=,time=,command="], { maxBuffer: 16 * 1024 * 1024 });
-  const all = stdout.trim().split("\n").map((line) => {
-    const [, pid, ppid, rss, cpu, command] = line.match(/^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\S+)\s+(.*)$/) ?? [];
-    return { pid: Number(pid), ppid: Number(ppid), rssBytes: Number(rss) * 1024, cpuMs: timeMs(cpu ?? "0"), command };
-  });
+export async function census(proc, sampling = false) {
+  // Discover the complete tree at measurement boundaries. Repeated global ps
+  // scans perturb short local windows; sample only the established stable tree.
+  let all;
+  if (sampling && process.platform === "linux") all = proc.snapshotRows.map((row) => ({ ...row }));
+  else {
+    const args = sampling ? ["-p", [...proc.knownPids].join(","), "-o", "pid=,ppid=,rss=,time=,command="] : ["-axo", "pid=,ppid=,rss=,time=,command="];
+    const { stdout } = await exec("ps", args, { maxBuffer: 16 * 1024 * 1024 });
+    all = stdout.trim().split("\n").map((line) => {
+      const [, pid, ppid, rss, cpu, command] = line.match(/^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\S+)\s+(.*)$/) ?? [];
+      return { pid: Number(pid), ppid: Number(ppid), rssBytes: Number(rss) * 1024, cpuMs: timeMs(cpu ?? "0"), command };
+    });
+  }
   const ids = new Set([proc.child.pid]);
   let previous;
   do {
@@ -92,6 +98,7 @@ export async function census(proc) {
     }
     row.role = row.pid === proc.child.pid ? proc.role : /route-\d+/.test(row.command) ? "native-route" : /next-server|next.*start/.test(row.command) ? "next-server" : "descendant";
   }
+  if (!sampling) proc.snapshotRows = rows;
   if (!rows.length) throw new Error(`Measured process exited: ${proc.output}`);
   return { processes: rows, rssBytes: rows.reduce((sum, row) => sum + row.rssBytes, 0), cpuMs: rows.reduce((sum, row) => sum + row.cpuMs, 0) };
 }
@@ -144,7 +151,7 @@ export async function measure(proc, work) {
   const timer = setInterval(() => {
     if (busy) return;
     busy = true;
-    sampling = census(proc).then((sample) => {
+    sampling = census(proc, true).then((sample) => {
       if (sample.rssBytes > peak.rssBytes) peak = sample;
     }).catch((error) => { samplingError = error; }).finally(() => { busy = false; });
   }, 100);
