@@ -211,8 +211,8 @@ Use any Node 24 executable in `PROBE_NODE` on another machine. See
 The Node reference preloads [node-resolve.mjs](./node-resolve.mjs) solely to map
 `next/server` to the real installed `next/server.js`. Raw Node ESM rejects that
 extensionless path with `ERR_MODULE_NOT_FOUND` and suggests `next/server.js`;
-raw logs are retained at `.artifacts/next-server/node-raw.*`. That Node
-resolution issue is separate from scriptc's build failures.
+that resolution issue is separate from scriptc's build failures. The runner
+only runs the reference with the resolver preload.
 
 No dependency build scripts were blocked in the normal final `pnpm install`;
 `allowBuilds` was not edited. Initial dependency linking used `--ignore-scripts`,

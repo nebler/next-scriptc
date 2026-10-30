@@ -8,10 +8,14 @@ const { findDir } = require("next/dist/lib/find-pages-dir.js");
 const { normalizeAppPath } = require("next/dist/shared/lib/router/utils/app-paths.js");
 const { getSortedRoutes } = require("next/dist/shared/lib/router/utils/sorted-routes.js");
 
-export const methods = ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"];
+const methods = ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"];
+
+export function entrySource(route, importName = "route") {
+  return `import * as ${importName} from ${JSON.stringify(route.source)};\n` +
+    `serve({ ${methods.map((method) => `${method}: ${route.methods.includes(method) ? `${importName}.${method}` : "undefined"}`).join(", ")} }, { pattern: ${JSON.stringify(route.pattern)} });\n`;
+}
 
 export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", "jsx", "js"]) {
-  if (process.platform === "win32") throw new Error("[next-scriptc] Windows is unsupported; use macOS or Linux.");
   const appDir = findDir(projectDir, "app");
   if (!appDir) return [];
   const routes = new Map();

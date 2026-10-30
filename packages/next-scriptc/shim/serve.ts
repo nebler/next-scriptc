@@ -2,7 +2,6 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 
 // scriptc documents argv[0] as "scriptc"; Node uses its executable path.
 const runtime = process.argv[0] === "scriptc" ? "native" : "1";
-const responseHeadersToStrip = ["set-cookie", "content-length", "transfer-encoding", "connection", "keep-alive", "proxy-authenticate", "proxy-authorization", "te", "trailer", "upgrade", "x-middleware-set-cookie"];
 
 export type RouteContext = { params: Promise<Record<string, string | string[]>> };
 export type RouteHandler = (request: Request, context: RouteContext) => Response | Promise<Response>;
@@ -52,14 +51,13 @@ function compilePattern(pattern: string) {
   };
 }
 
-async function toRequest(incoming: IncomingMessage, url: string): Promise<Request> {
+async function toRequest(incoming: IncomingMessage, url: string, host: string): Promise<Request> {
   const headers = new Headers();
   for (let i = 0; i < incoming.rawHeaders.length; i += 2) {
     headers.append(incoming.rawHeaders[i], incoming.rawHeaders[i + 1]);
   }
   // Next's changeOrigin proxy replaces Host but preserves the public host here.
-  const forwardedHost = headers.get("x-forwarded-host");
-  if (forwardedHost) headers.set("host", forwardedHost);
+  headers.set("host", host);
   const method = incoming.method || "GET";
   if (method === "GET" || method === "HEAD") return new Request(url, { method, headers });
   const chunks = await new Promise<Buffer[]>((resolve, reject) => {
@@ -77,12 +75,8 @@ async function toRequest(incoming: IncomingMessage, url: string): Promise<Reques
 async function writeResponse(response: Response, outgoing: ServerResponse, head: boolean): Promise<void> {
   outgoing.statusCode = response.status;
   if (response.statusText) outgoing.statusMessage = response.statusText;
-  const connectionHeaders = (response.headers.get("connection") || "").toLowerCase().split(",").map((name) => name.trim());
   response.headers.forEach((value, name) => {
-    if (responseHeadersToStrip.includes(name) || connectionHeaders.includes(name)) return;
-    // fetch decodes these encodings while retaining the upstream headers.
-    // Constructed Responses may contain compressed bytes and must keep the encoding.
-    if (name === "content-encoding" && response.url && /^(gzip|deflate|br)$/.test(value)) return;
+    if (name === "set-cookie" || name === "x-middleware-set-cookie") return;
     outgoing.setHeader(name, value);
   });
   const cookies = response.headers.getSetCookie();
@@ -149,7 +143,7 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
       if (params === null) response = new Response(null, { status: 404 });
       else if (method === "OPTIONS" && !handler) response = new Response(null, { status: 204, headers: { Allow: allow } });
       else if (!handler) response = new Response(null, { status: 405, headers: { Allow: allow } });
-      else response = await handler(await toRequest(incoming, url.href), { params: Promise.resolve(params) });
+      else response = await handler(await toRequest(incoming, url.href, host), { params: Promise.resolve(params) });
       incoming.resume();
       await writeResponse(response, outgoing, method === "HEAD");
     } catch (error) {

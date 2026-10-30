@@ -31,12 +31,10 @@ Limitations:
   original remote IP missing from the proxy request cannot be recovered here.
   httpxy may also force Connection: close for chunked uploads. The bridge leaves
   transport headers intact on requests; it does not invent original client data.
-- Response framing and hop-by-hop headers are stripped. Encoding is stripped
-  from fetch responses decoded by the runtime; constructed encoded Responses
-  retain it. This deliberately fixes stale upstream framing, whereas Next 16.4.3
-  App Router sendResponse copies these headers directly (its IPC/action paths
-  have separate filters). A reconstructed Response loses fetch's URL metadata;
-  handlers reconstructing a decoded fetch response must remove stale encoding.
+- Response headers are copied like Next 16.4.3 App Router sendResponse, skipping
+  only internal x-middleware-set-cookie and preserving separate Set-Cookie values.
+  Handlers returning decoded fetch bodies must remove stale encoding/framing
+  headers themselves, just as under Next.
 - GET supplies HEAD; automatic OPTIONS is 204 with sorted Allow. Unlike Next's
   405, this bridge also includes Allow on 405.
 - Pattern matching supports dynamic and catch-all segments, percent decoding,

@@ -6,8 +6,10 @@ export async function GET(request: Request, context: RouteContext): Promise<Resp
   if (mode === "url") return Response.json({ url: request.url, host: request.headers.get("host") });
   if (mode === "fetch") return fetch(process.env.SHIM_UPSTREAM || "");
   if (mode === "framing") return new Response("decoded", { headers: {
-    "content-length": "999", "transfer-encoding": "chunked", connection: "x-hop", "x-hop": "remove", "keep-alive": "timeout=5",
+    "content-length": "7", connection: "x-hop", "x-hop": "preserve", "keep-alive": "timeout=5",
+    "proxy-authenticate": "Basic", "x-middleware-set-cookie": "internal=only",
   } });
+  if (mode === "chunked") return new Response("chunked", { headers: { "transfer-encoding": "chunked" } });
   if (mode === "encoded") return new Response(new Uint8Array([1, 2, 3]), { headers: { "content-encoding": "gzip" } });
   if (mode === "throw") throw new Error("shim fixture failure");
   if (mode === "text") return new Response("hello, 世界\n", { headers: { "x-fixture": "text" } });

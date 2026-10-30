@@ -139,7 +139,7 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
   const binary = path.join(temporary, "server");
   const upstream = http.createServer((_request, response) => {
     const body = gzipSync("decoded upstream 世界");
-    response.writeHead(200, { "content-encoding": "gzip", "content-length": body.length });
+    response.writeHead(200, { "content-encoding": "gzip" });
     response.end(body);
   });
   await new Promise((resolve) => upstream.listen(0, "127.0.0.1", resolve));
@@ -160,11 +160,16 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await compare({ path: `${base}?case=url`, json: { url: `https://public.test:8443${base}?case=url`, host: "public.test:8443" }, headers: { "x-forwarded-host": "public.test:8443", "x-forwarded-proto": "https" } });
       await compare({ path: `${base}?case=url&q=a%20b&q=two&plus=a+b`, json: { url: `https://public.test:8443${base}?case=url&q=a+b&q=two&plus=a+b`, host: "public.test:8443" }, headers: { "x-forwarded-host": "public.test:8443", "x-forwarded-proto": "https" } });
       const framing = await compare({ path: `${base}?case=framing`, text: "decoded" });
-      assert.equal(framing.headers["x-hop"], undefined);
-      assert.equal(framing.headers["keep-alive"], undefined);
+      assert.equal(framing.headers.connection, "x-hop");
+      assert.equal(framing.headers["x-hop"], "preserve");
+      assert.equal(framing.headers["keep-alive"], "timeout=5");
+      assert.equal(framing.headers["proxy-authenticate"], "Basic");
+      assert.equal(framing.headers["x-middleware-set-cookie"], undefined);
       assert.equal(framing.headers["content-length"], "7");
+      const chunked = await compare({ path: `${base}?case=chunked`, text: "chunked" });
+      assert.equal(chunked.headers["transfer-encoding"], "chunked");
       const fetched = await compare({ path: `${base}?case=fetch`, text: "decoded upstream 世界" });
-      assert.equal(fetched.headers["content-encoding"], undefined);
+      assert.equal(fetched.headers["content-encoding"], "gzip");
       const encoded = await compare({ path: `${base}?case=encoded` });
       assert.equal(encoded.headers["content-encoding"], "gzip");
       assert.deepEqual(encoded.body, Buffer.from([1, 2, 3]));

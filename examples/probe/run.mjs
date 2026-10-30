@@ -1,6 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { once } from 'node:events';
@@ -12,12 +12,11 @@ const version = spawnSync(node, ['--version'], { encoding: 'utf8' });
 if (version.status !== 0 || !version.stdout.startsWith('v24.')) {
   throw new Error('Set PROBE_NODE to a Node 24 executable (the reference uses type stripping).');
 }
-const names = ['query', 'zod', 'headers', 'next-server', 'fetch', 'crypto', 'cpu', 'stream'];
 const only = process.argv.find((arg) => arg.startsWith('--only='))?.slice(7).split(',');
-const selected = only ?? names;
+const selected = only ?? (await readdir(join(root, 'routes'), { withFileTypes: true })).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
 for (const name of selected) {
   if (!/^[a-z0-9-]+$/.test(name)) throw new Error(`Invalid probe name: ${name}`);
-  await readFile(join(root, 'entries', `${name}.ts`));
+  await access(join(root, 'entries', `${name}.ts`));
 }
 const abort = new AbortController();
 process.once('SIGINT', () => abort.abort());
@@ -89,7 +88,6 @@ try {
     const coverage = await run(scriptc, ['coverage', entry], dir, 'coverage', 240_000);
     const build = await run(scriptc, ['build', entry, '-o', binary, '--no-keep-llvm'], dir, 'build', 300_000);
     const reference = await run(node, ['--import', join(root, 'node-resolve.mjs'), entry], dir, 'node', 15_000);
-    if (name === 'next-server') await run(node, [entry], dir, 'node-raw', 15_000);
     const compiles = build.code === 0 && !build.signal;
     const native = compiles ? await run(binary, [], dir, 'native', 15_000) : null;
     const matches = native && reference.code === native.code && reference.signal === native.signal &&

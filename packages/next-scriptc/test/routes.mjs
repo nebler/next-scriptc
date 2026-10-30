@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { promisify } from "node:util";
 import { test } from "node:test";
-import { discoverRoutes, methods, withRewrites } from "../src/routes.mjs";
+import { discoverRoutes, entrySource, withRewrites } from "../src/routes.mjs";
 import { shimPath } from "../src/paths.mjs";
 
 const require = createRequire(import.meta.url);
@@ -38,10 +38,7 @@ test("discovery exports, Next extensions, rewrite phases, and typed native entri
     assert.equal(rewrites.afterFiles[2].source, "/rest/:sc2+");
     assert.equal(rewrites.afterFiles[3].source, "/old");
     const entry = path.join(temporary, "entry.ts");
-    await writeFile(entry, [`import { serve } from ${JSON.stringify(shimPath)};`, ...routes.flatMap((route, index) => [
-      `import * as r${index} from ${JSON.stringify(route.source)};`,
-      `serve({ ${methods.map((method) => `${method}: ${route.methods.includes(method) ? `r${index}.${method}` : "undefined"}`).join(", ")} }, { pattern: ${JSON.stringify(route.pattern)}, port: 0 });`,
-    ])].join("\n"));
+    await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n` + routes.map((route, index) => entrySource(route, `r${index}`)).join(""));
     await promisify(execFile)(compiler, ["build", entry, "-o", path.join(temporary, "server"), "--no-keep-llvm"], { timeout: 90_000 });
     await route("unsupported", "mdx", '/* comment */\n"use scriptc"; export const GET = () => new Response("no");');
     await assert.rejects(discoverRoutes(temporary, [...extensions, "mdx"]), /Unsupported native route extension/);

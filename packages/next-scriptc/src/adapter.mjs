@@ -3,7 +3,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { shimPath } from "./paths.mjs";
-import { discoverRoutes, methods, withRewrites } from "./routes.mjs";
+import { discoverRoutes, entrySource, withRewrites } from "./routes.mjs";
 import { readManifest } from "./manifest.mjs";
 
 const require = createRequire(import.meta.url);
@@ -15,7 +15,6 @@ const adapter = {
   name: "next-scriptc",
   async modifyConfig(config, { phase, projectDir }) {
     if (process.platform === "win32") throw new Error("[next-scriptc] Windows is unsupported; use macOS or Linux.");
-    if (phase === "phase-development-server") return config;
     if (phase === "phase-production-build") {
       const routes = await discoverRoutes(projectDir, config.pageExtensions);
       if (routes.length && config.output) {
@@ -29,7 +28,6 @@ const adapter = {
       if (manifest.routes.length && process.env.NEXT_SCRIPTC_PROJECT !== projectDir) {
         throw new Error("[next-scriptc] Start native routes with `next-scriptc start`, which manages their processes. Replace `next start` in your start script.");
       }
-      return config;
     }
     return config;
   },
@@ -50,12 +48,7 @@ const adapter = {
     // Serial builds keep CPU/memory use bounded on local development machines.
     for (const [index, route] of routes.entries()) {
       const entry = path.join(output, `entry-${index}.ts`);
-      await writeFile(entry, [
-        `import * as route from ${JSON.stringify(route.source)};`,
-        `import { serve } from ${JSON.stringify(shimPath)};`,
-        `serve({ ${methods.map((method) => `${method}: ${route.methods.includes(method) ? `route.${method}` : "undefined"}`).join(", ")} }, { pattern: ${JSON.stringify(route.pattern)} });`,
-        "",
-      ].join("\n"));
+      await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route)}`);
       console.log(`[next-scriptc] Compiling ${route.source}`);
       await new Promise((resolve, reject) => {
         const child = spawn(compiler, ["build", entry, "-o", path.join(output, route.binary), "--no-keep-llvm"], {
