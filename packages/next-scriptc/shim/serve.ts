@@ -205,10 +205,12 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
   }
   process.on("SIGTERM", shutdown);
   process.on("SIGINT", shutdown);
-  if (process.env.NEXT_SCRIPTC_PARENT === "1") {
-    // EOF must terminate even an active/never-ending request after parent SIGKILL.
-    process.stdin.on("end", () => process.exit(0));
-    process.stdin.on("data", () => {});
+  const parent = Number(process.env.NEXT_SCRIPTC_PARENT);
+  if (parent > 0) {
+    // The expected PID comes from the owner, covering death before we start.
+    setInterval(() => {
+      if (process.ppid !== parent) process.exit(0);
+    }, 1000).unref();
   }
   server.listen(port, "127.0.0.1", () => {
     const address = server.address();

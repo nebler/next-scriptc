@@ -333,26 +333,41 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
         await pending;
       }, signal);
     }
-    await pair(binary, { NEXT_SCRIPTC_PARENT: "1" }, async (_compare, { node, native, ports }) => {
-      const responses = [];
+    for (const command of [process.execPath, binary]) {
+      const args = command === binary ? [] : ["--import", path.join(directory, "node-next-server.mjs"), entry];
+      const owner = start(process.execPath, ["-e", `
+        const child = require("node:child_process").spawn(${JSON.stringify(command)}, ${JSON.stringify(args)}, {
+          env: { ...process.env, PORT: "0", NEXT_SCRIPTC_PARENT: String(process.pid) },
+          stdio: ["ignore", "inherit", "inherit"],
+        });
+        console.log("shim owner: child PID " + child.pid);
+      `]);
+      let response;
+      let pid;
       try {
-        for (const port of ports) await new Promise((resolve, reject) => {
-          http.get({ host: "127.0.0.1", port, path: "/api/a?case=cancel", agent: false }, (response) => {
-            responses.push(response);
-            response.on("error", () => {});
-            response.once("data", resolve);
+        const match = await waitForOutput(owner, /next-scriptc: listening on 127\.0\.0\.1:(\d+)/);
+        pid = Number(owner.stdout.match(/shim owner: child PID (\d+)/)[1]);
+        response = await new Promise((resolve, reject) => {
+          http.get({ host: "127.0.0.1", port: Number(match[1]), path: "/api/a?case=cancel", agent: false }, (res) => {
+            res.on("error", () => {});
+            res.once("data", () => resolve(res));
           }).on("error", reject);
         });
-        // EOF must exit even with a never-ending response in flight.
-        for (const state of [node, native]) state.child.stdin.end();
-        const timeout = setTimeout(() => {
-          for (const state of [node, native]) state.child.kill("SIGKILL");
-        }, 3000);
-        try {
-          for (const state of [node, native]) assert.deepEqual(await state.exit, { code: 0, signal: null });
-        } finally { clearTimeout(timeout); }
-      } finally { for (const response of responses) response.destroy(); }
-    });
+        // Parent death must terminate an asynchronous never-ending response.
+        const started = performance.now();
+        owner.child.kill("SIGKILL");
+        await new Promise((resolve, reject) => {
+          const timer = setTimeout(() => reject(new Error("Worker survived parent death for 2.5 seconds")), 2500);
+          owner.child.stdout.once("close", () => { clearTimeout(timer); resolve(); });
+        });
+        assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
+        console.log(`Parent death during active stream (${command === binary ? "native" : "Node"}): ${(performance.now() - started).toFixed(1)}ms`);
+      } finally {
+        response?.destroy();
+        if (pid) { try { process.kill(pid, "SIGKILL"); } catch (error) { if (error.code !== "ESRCH") throw error; } }
+        await stop(owner);
+      }
+    }
     for (const port of [undefined, "", "invalid", "-1", "65536", "1.5"]) {
       for (const command of [process.execPath, binary]) {
         const invalid = start(command, command === binary ? [] : ["--import", path.join(directory, "node-next-server.mjs"), entry], { PORT: port });

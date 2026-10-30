@@ -31,49 +31,67 @@ async function start(projectDir, distDir) {
   let ready = false;
   let failure;
   try {
-    await Promise.all(manifest.routes.map((route) => new Promise((resolve, reject) => {
+    await Promise.all(manifest.routes.map((route) => {
       const label = `${route.pattern} (native port ${route.port}; check stderr for EADDRINUSE if occupied)`;
-      const child = spawn(path.join(distDir, "scriptc", route.binary), [], {
-        cwd: projectDir,
-        env: { ...process.env, PORT: String(route.port), NEXT_SCRIPTC_PARENT: "1" },
-        // The unwritten stdin pipe is a lifetime lease, including parent SIGKILL.
-        stdio: ["pipe", "pipe", "inherit"],
-      });
-      children.add(child);
-      const exited = new Promise((done) => child.once("close", () => {
-        children.delete(child);
-        done();
-      }));
-      group.push({ child, exited });
-      const lines = createInterface({ input: child.stdout });
-      const timeout = setTimeout(() => finish(new Error(`[next-scriptc] ${label} did not become ready within 30 seconds.`)), 30_000);
-      function finish(error) {
-        clearTimeout(timeout);
-        lines.close();
-        if (error) reject(error);
-        else resolve();
+      let crashes = [];
+      function launch() {
+        return new Promise((resolve, reject) => {
+          const child = spawn(path.join(distDir, "scriptc", route.binary), [], {
+            cwd: projectDir,
+            env: { ...process.env, PORT: String(route.port), NEXT_SCRIPTC_PARENT: String(process.pid) },
+            stdio: ["ignore", "pipe", "inherit"],
+          });
+          children.add(child);
+          const exited = new Promise((done) => child.once("close", () => {
+            children.delete(child);
+            done();
+            if (!ready || stopping) return;
+            const now = Date.now();
+            crashes = crashes.filter((time) => now - time < 30_000);
+            crashes.push(now);
+            if (crashes.length >= 5) {
+              console.error(`[next-scriptc] ${label}: giving up after 5 crashes within 30 seconds; restart Next to retry.`);
+              return;
+            }
+            const delay = 500 * 2 ** (crashes.length - 1);
+            console.error(`[next-scriptc] ${label}: restarting in ${delay} ms.`);
+            setTimeout(() => {
+              if (!stopping) launch().catch((error) => console.error(error.message));
+            }, delay).unref();
+          }));
+          if (!ready) group.push({ child, exited });
+          const lines = createInterface({ input: child.stdout });
+          const timeout = setTimeout(() => {
+            finish(new Error(`[next-scriptc] ${label} did not become ready within 30 seconds.`));
+            child.kill("SIGKILL");
+          }, 30_000);
+          let settled = false;
+          function finish(error) {
+            if (error && !ready) failure = error;
+            if (settled) return;
+            settled = true;
+            clearTimeout(timeout);
+            lines.close();
+            if (error) reject(error);
+            else resolve();
+          }
+          child.once("error", (cause) => finish(new Error(`[next-scriptc] Cannot start ${label}`, { cause })));
+          child.once("exit", (code, signal) => {
+            const error = new Error(`[next-scriptc] ${label} exited (${signal ?? `exit ${code}`}).`);
+            if (ready && settled && !stopping) console.error(error.message);
+            finish(error);
+          });
+          lines.on("line", (line) => {
+            if (line === `next-scriptc: listening on 127.0.0.1:${route.port}`) {
+              console.log(`[next-scriptc] ${route.pattern} → native PID ${child.pid}, port ${route.port}`);
+              finish();
+            }
+          });
+          child.stdout.pipe(process.stdout);
+        });
       }
-      child.once("error", (cause) => {
-        failure = new Error(`[next-scriptc] Cannot start ${label}`, { cause });
-        finish(failure);
-      });
-      child.once("exit", (code, signal) => {
-        const error = new Error(`[next-scriptc] ${label} exited (${signal ?? `exit ${code}`}).`);
-        failure = error;
-        finish(error);
-        if (ready && !stopping) {
-          console.error(error);
-          process.exit(1);
-        }
-      });
-      lines.on("line", (line) => {
-        if (line === `next-scriptc: listening on 127.0.0.1:${route.port}`) {
-          console.log(`[next-scriptc] ${route.pattern} → native PID ${child.pid}, port ${route.port}`);
-          finish();
-        }
-      });
-      child.stdout.pipe(process.stdout);
-    })));
+      return launch();
+    }));
     if (failure) throw failure;
     ready = true;
   } catch (error) {

@@ -8,13 +8,17 @@ pnpm --filter demo build               # Next build, then serial native compilat
 pnpm --filter demo start               # Native binaries behind Next's rewrites
 node examples/demo/test/e2e.mjs        # Builds; verifies parity and process cleanup
 pnpm --filter demo exec next start    # Plain next start also owns native binaries
-pnpm --filter demo test:routes         # Builds; compares 31 route cases
+DEMO_PROXY_TIMEOUT_MS=180000 pnpm --filter demo test:routes # Route parity
 ```
 
 `next-scriptc start` is a compatibility alias for Next's CLI in the same process.
 The production adapter hook starts native binaries in parallel and awaits their
-readiness. A native crash terminates Next; workers exit when Next exits, including
-SIGKILL. Native port conflicts fail startup with the route and port in the error.
+readiness. A crashed binary restarts with bounded backoff; five crashes within
+30 seconds stop retries for that route. Next returns HTTP 500 while its destination
+is down; pages and sibling routes stay available. Workers detect server SIGKILL
+within approximately 1–2 seconds. Native port conflicts fail initial startup with
+the route and port in the error. Next keeps prerendered handlers as static output;
+only handlers needing request-time execution get native binaries.
 
 `NEXT_SCRIPTC_BASELINE=node` disables the adapter and selects `.next-node`, keeping
 it separate from the native `.next` build. Build and start the Node baseline with:
@@ -31,8 +35,9 @@ machine are indicative only.
 
 After a fresh build, pass `--skip-build` to either test runner to reuse it.
 Set `E2E_PORT` or `ROUTES_PORT` when another worktree uses the default test port.
-The 31-case parity test uses a test-only 180-second proxy timeout for native
-cost-10 bcrypt on loaded hosts; production keeps Next's 30-second default.
+For route parity on loaded hosts, set `DEMO_PROXY_TIMEOUT_MS=180000` to give native
+cost-10 bcrypt a 180-second proxy timeout through `experimental.proxyTimeout`.
+Without this test variable, production keeps Next's 30-second default.
 See [adapter notes](../../research/adapter-notes.md) for lifecycle details and
 current limitations.
 

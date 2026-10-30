@@ -8,6 +8,7 @@ import { test } from "node:test";
 import { discoverRoutes, entrySource, routeRewrite, withRewrites } from "../src/routes.mjs";
 import { writeNativeConfig } from "../src/native-config.mjs";
 import { shimPath, nextServerPath } from "../src/paths.mjs";
+import adapter from "../src/adapter.mjs";
 
 const require = createRequire(import.meta.url);
 const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
@@ -88,4 +89,29 @@ test("literal rewrite segments remain literal in external destination URLs", () 
     assert.equal(new URL(rewrite.destination).pathname.includes("\\"), false);
   }
   assert.equal(routeRewrite({ pattern: "/api/feed.xml", port: 20000 }).source, "/api/feed\\.xml");
+});
+
+test("build completion leaves prerendered handlers with Next and preserves user rewrites", async () => {
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".prerender-"));
+  try {
+    const app = path.join(temporary, "app/feed.xml");
+    const distDir = path.join(temporary, ".next");
+    await mkdir(app, { recursive: true });
+    await mkdir(distDir);
+    await writeFile(path.join(app, "route.ts"), '"use scriptc"; export function GET() { return new Response("feed"); }');
+    const config = { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } };
+    const planned = await adapter.modifyConfig(config, { phase: "phase-production-build", projectDir: temporary });
+    const rewrites = await planned.rewrites();
+    const user = { source: "/old-feed", destination: "/feed.xml" };
+    rewrites.beforeFiles.push(user);
+    await writeFile(path.join(distDir, "routes-manifest.json"), JSON.stringify({ rewrites }));
+    await adapter.onBuildComplete({ projectDir: temporary, distDir, buildId: "test", outputs: {
+      appRoutes: [{ pathname: "/feed.xml" }],
+      prerenders: [{ route: "/feed.xml", routeType: "route", response: "complete", compute: "static" }],
+    } });
+    const routing = JSON.parse(await readFile(path.join(distDir, "routes-manifest.json"), "utf8"));
+    assert.deepEqual(routing.rewrites, { beforeFiles: [user], afterFiles: [], fallback: [] });
+    const manifest = JSON.parse(await readFile(path.join(distDir, "scriptc/manifest.json"), "utf8"));
+    assert.deepEqual(manifest.routes, []);
+  } finally { await rm(temporary, { recursive: true, force: true }); }
 });

@@ -11,6 +11,7 @@ const curl = promisify(execFile);
 const port = Number(process.env.E2E_PORT ?? "3417");
 const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml"];
 const running = new Set();
+let nativePatterns;
 
 function start(args) {
   const production = args[0] === "start" || args[0] === "alias";
@@ -36,7 +37,7 @@ function start(args) {
   return state;
 }
 
-function wait(state, expression) {
+function wait(state, expression, offset = 0) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => finish(new Error(`Timeout: ${expression}\n${state.output}`)), 60_000);
     function finish(error) {
@@ -45,7 +46,7 @@ function wait(state, expression) {
       if (error) reject(error); else resolve();
     }
     function check() {
-      if (expression.test(state.output)) finish();
+      if (expression.test(state.output.slice(offset))) finish();
       else if (state.done) finish(new Error(`Exited before ${expression}\n${state.output}`));
     }
     state.listeners.add(check);
@@ -68,7 +69,7 @@ async function responses(native) {
     const split = stdout.indexOf("\r\n\r\n");
     const headers = stdout.subarray(0, split).toString();
     const body = stdout.subarray(split + 4);
-    assert.equal(/x-next-scriptc: native/i.test(headers), native && route !== "/api/items/new", headers);
+    assert.equal(/x-next-scriptc: native/i.test(headers), native && (nativePatterns.has(route.split("?")[0]) || (route.startsWith("/api/items/") && route !== "/api/items/new")), headers);
     results.push(body);
   }
   assert.deepEqual(JSON.parse(results[2]), { url: `http://localhost:${port}/api/url-echo?q=a+b&plus=a+b`, host: `localhost:${port}` });
@@ -123,14 +124,14 @@ async function productionReady(state) {
   // Next logs "Ready" before loading config. A completed HTTP response also
   // proves the adapter's async readiness barrier has finished.
   await wait(state, /Ready in/);
-  const response = await fetch(`http://127.0.0.1:${port}/api/hello`, { signal: AbortSignal.timeout(30_000) });
+  const response = await fetch(`http://127.0.0.1:${port}/api/url-echo?ready=1`, { signal: AbortSignal.timeout(30_000) });
   await response.arrayBuffer();
   assert.equal(response.status, 200, state.output);
   assert.equal(response.headers.get("x-next-scriptc"), "native", state.output);
 }
 
 async function assertGone(pids) {
-  for (let attempt = 0; attempt < 200; attempt++) {
+  for (let attempt = 0; attempt < 100; attempt++) {
     const alive = pids.filter((pid) => {
       try { process.kill(pid, 0); return true; } catch (error) { if (error.code !== "ESRCH") throw error; return false; }
     });
@@ -147,6 +148,11 @@ try {
     running.delete(build);
   }
   const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
+  nativePatterns = new Set(manifest.routes.map((route) => route.pattern));
+  assert.ok(nativePatterns.has("/api/url-echo"), "native static-pattern route remains covered");
+  assert.ok(!nativePatterns.has("/api/feed.xml"), "prerendered handler needs no binary");
+  const routing = JSON.parse(await readFile(path.join(demo, ".next/routes-manifest.json"), "utf8"));
+  assert.ok(!routing.rewrites.beforeFiles.some((route) => route.source.includes("feed")), "prerender rewrite removed");
   const ports = [port, ...manifest.routes.map((route) => route.port)];
   await assertPortsFree(ports);
   const dev = start(["dev", "-p", String(port)]);
@@ -195,11 +201,35 @@ try {
   await assertPortsFree(ports);
   const crashed = start(["start", "-p", String(port)]);
   await productionReady(crashed);
-  const crashPid = Number(crashed.output.match(/native PID (\d+)/)[1]);
+  const crashRoute = manifest.routes.find((route) => route.pattern === "/api/url-echo");
+  const crashPid = Number(crashed.output.match(new RegExp(`native PID (\\d+), port ${crashRoute.port}\\b`))[1]);
   process.kill(crashPid, "SIGKILL");
-  assert.notEqual((await crashed.exit).code, 0);
-  assert.match(crashed.output, /SIGKILL/);
-  running.delete(crashed);
+  await assertGone([crashPid]);
+  const unavailable = await fetch(`http://localhost:${port}/api/url-echo`);
+  assert.equal(unavailable.status, 500, "Next's refused-destination proxy response");
+  await unavailable.arrayBuffer();
+  for (const pathname of ["/", "/api/primes?limit=10", "/api/feed.xml"]) {
+    const response = await fetch(`http://localhost:${port}${pathname}`);
+    assert.equal(response.status, 200, pathname);
+    await response.arrayBuffer();
+  }
+  await wait(crashed, new RegExp(`native PID (?!${crashPid},)\\d+, port ${crashRoute.port}\\b`));
+  const recovered = await fetch(`http://localhost:${port}/api/url-echo`);
+  assert.equal(recovered.status, 200);
+  assert.equal(recovered.headers.get("x-next-scriptc"), "native");
+  await recovered.arrayBuffer();
+  assert.equal(nativePids(crashed).length, manifest.routes.length + 1, "only the crashed route restarted");
+  // Repeated failures stop retrying this route without taking down Next.
+  for (let count = 2; count <= 5; count++) {
+    const offset = crashed.output.length;
+    const matches = [...crashed.output.matchAll(new RegExp(`native PID (\\d+), port ${crashRoute.port}\\b`, "g"))];
+    process.kill(Number(matches.at(-1)[1]), "SIGKILL");
+    await wait(crashed, count === 5 ? /giving up after 5 crashes within 30 seconds/ : new RegExp(`native PID \\d+, port ${crashRoute.port}\\b`), offset);
+  }
+  const stillHealthy = await fetch(`http://localhost:${port}/api/primes?limit=10`);
+  assert.equal(stillHealthy.status, 200);
+  await stillHealthy.arrayBuffer();
+  await stop(crashed);
   await assertGone(nativePids(crashed));
   await assertPortsFree(ports);
 
@@ -220,7 +250,7 @@ try {
   running.delete(alias);
   await assertGone(nativePids(alias));
   await assertPortsFree(ports);
-  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup, native crash, native/Next EADDRINUSE, and same-process CLI alias.`);
+  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup within 2.5s, isolated native crash/recovery (Next proxy HTTP 500), native/Next EADDRINUSE, and same-process CLI alias.`);
 } finally {
   await Promise.allSettled([...running].map(stop));
 }

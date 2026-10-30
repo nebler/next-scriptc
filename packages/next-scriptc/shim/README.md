@@ -20,8 +20,10 @@ fetch decompression, response framing, the real Next request/response helpers,
 stream delivery/cancellation, connection reuse, errors, port validation, and shutdown
 with requests in flight. The E2E runner builds sequentially, curls the demo under
 Next dev and plain `next start`, checks static/dynamic precedence, and verifies
-server-only SIGTERM/SIGKILL cleanup. Managed binaries monitor stdin EOF so
-they exit even when the owning server is killed; standalone binaries do not.
+server-only SIGTERM/SIGKILL cleanup and isolated crash recovery. Managed binaries
+check their parent PID every second and exit within approximately 1–2 seconds
+after owner death; standalone binaries without NEXT_SCRIPTC_PARENT do not check.
+Prerendered handlers remain with Next, retaining its static output and caching.
 
 The adapter writes a native-only `tsconfig.json` beside generated entries. It
 extends the app's config, preserves its absolute path aliases, and maps exactly

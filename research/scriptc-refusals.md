@@ -240,5 +240,5 @@ Resolution: pin the byte overload with
 `outgoing.end(chunk.value as Uint8Array<ArrayBuffer>)`. The assertion copies no
 payload. Standalone fallback declarations did not reproduce the failure, so the
 shim parity fixture now explicitly includes the demo's Node types and asserts
-single-chunk Content-Length as well as response parity. It also tests stdin EOF
-with an active never-ending response.
+single-chunk Content-Length as well as response parity. It also tests parent SIGKILL
+with an active never-ending response; PID polling exits within 2.5 seconds.

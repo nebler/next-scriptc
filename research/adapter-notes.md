@@ -10,7 +10,11 @@ production-server `modifyConfig` reads the build-validated manifest, spawns all
 routes in parallel, and awaits each exact readiness line before returning.
 Startup errors identify the route and native port; an occupied port preserves
 scriptc's EADDRINUSE diagnostic. Failed startup kills and awaits started children.
-A native crash after startup fails the Next process and terminates its siblings.
+A native crash after startup restarts only that binary. Delays are 500, 1,000,
+2,000 and 4,000 ms; a fifth crash within 30 seconds stops retries for that route
+and logs how to retry. Pages and sibling routes stay available. While the native
+port refuses connections, this Next version returns **500**, not 502
+(`dist/server/lib/router-utils/proxy-request.js:76-87`); no extra proxy is added.
 
 The source trace establishes which process owns this work:
 
@@ -35,12 +39,20 @@ Next owns graceful SIGINT/SIGTERM handling
 (`dist/server/lib/start-server.js:304-379`); native binaries remain available
 while it drains requests, with a five-second bound for stuck responses. On process
 exit the adapter kills remaining children.
-Every child also receives an unwritten stdin pipe and `NEXT_SCRIPTC_PARENT=1`.
-The shim subscribes to stdin data/end; EOF exits immediately even with an active
-response, so server SIGKILL cannot leave native orphans. Standalone binaries do
-not monitor stdin without that flag. scriptc's piped stdin data/end support is
-declared in `vendor/scriptc/packages/compiler/ambient/scriptc-node-fallback.d.ts:335-365`
-and exercised with the installed compiler by both EOF and actual parent-SIGKILL tests.
+Every child receives its owner's PID in `NEXT_SCRIPTC_PARENT`; stdin is ignored.
+The shim checks `process.ppid` on an unref'd one-second interval and exits when
+it differs, including during asynchronous never-ending responses. Supplying the
+expected PID also covers owner death before the shim starts. This removes stdin
+watching from the request event loop. Standalone binaries without the variable
+have no monitor. Neither polling nor the previous stdin watcher can preempt a
+handler that blocks the native event loop indefinitely.
+
+scriptc 0.4.6 lowers `process.ppid` to a fresh `getppid()` read
+(`vendor/scriptc/packages/compiler/src/frontend/lowering/builtins/process.ts:850-851`,
+`vendor/scriptc/packages/runtime/src/scr_lib.c:2698-2720`). Interval unref is
+implemented in `vendor/scriptc/packages/runtime/src/scr_async.c:1380-1413`.
+A compiled probe with only the unref'd interval exited immediately; with a live
+handle it detected actual parent SIGKILL and exited in 1,003 ms (indicative).
 
 `next-scriptc start` remains a same-process import of Next's CLI, preserving
 existing package scripts and benchmark callers without a supervisor, a second
@@ -82,9 +94,8 @@ pre-streaming cohort in `benchmarks/local-indicative.md` measured 257.6 MiB / 1,
 for native mode versus 118.5 MiB / 675 ms for Node; changed host load, memory
 pressure and binaries prevent a direct before/after claim across those cohorts.
 
-Reproducer: `node packages/next-scriptc/test/startup-cost.mjs` (both existing
-builds required). Full per-process PID/PPID/RSS/command snapshots, samples, build
-IDs and port cleanup: `packages/next-scriptc/test/startup-cost-results.json`.
+These are historical, indicative samples. The one-off measurement programs and
+JSON results have been removed; the maintained benchmark suite owns measurement.
 
 ## Native-only next/server
 
@@ -134,25 +145,27 @@ Backpressure remains unavailable: scriptc exposes neither write's boolean result
 nor drain/write completion callbacks. The bridge retains one chunk, but the
 transport can queue unbounded bytes for a slow client. Uploads remain buffered;
 request AbortSignal propagation, full NextURL metadata, Web subclass identity,
-blob/formData and Next's route caching remain unsupported. EOF notification is
-handled at native event-loop turns (`vendor/scriptc/packages/runtime/src/scr_events.c:1917-1940`);
-it does not preempt a handler that blocks that loop indefinitely. SIGKILL cleanup
-is tested with idle workers and stdin EOF with an asynchronous never-ending stream.
+blob/formData and runtime route caching remain unsupported. Next retains ownership
+of prerendered routes, including their cache/revalidation behavior. Parent-death
+cleanup is tested with idle workers and an asynchronous never-ending stream;
+normal polling cleanup takes approximately 1–2 seconds on a loaded host.
 
 Next's proxy defaults to 30 seconds
-(`dist/server/lib/router-utils/proxy-request.js:37`). On this loaded host, native
+(`dist/server/lib/router-utils/proxy-request.js:37`); the setting is supported by
+`dist/server/config-schema.js:338` and consumed at `dist/server/lib/router-server.js:470`. On this loaded host, native
 cost-10 bcrypt exceeded that budget and returned proxy HTTP 500 during route
-verification. The route parity test preloads a test-only 180-second config override,
+verification. The demo config reads test-only `DEMO_PROXY_TIMEOUT_MS=180000`,
 matching its HTTP client budget. Production defaults are unchanged; applications
 with these slow handlers must choose an appropriate experimental.proxyTimeout.
-This test override is absent from the startup and direct-latency measurements.
+The test must set that environment variable and must not preload or patch the adapter.
+This override is absent from startup and direct-latency measurements.
 
-Direct-native comparison: `packages/next-scriptc/test/request-cost.mjs` compiles
-the actual hello handler against shims from `5536d9f`, `9d02686` and the working
-copy, with the demo's Node declarations and without checking out files. Each sample uses a fresh binary process, one
+Historical indicative direct-native comparison compiled
+the actual hello handler against shims from `5536d9f`, `9d02686` and `72cf1c5`,
+with the demo's Node declarations and without checking out files. Each sample
+used a fresh binary process, one
 HTTP/1.1 keep-alive connection, 300 warmup requests and 5,000 sequential timed
 requests. Five rounds alternate variant order. Status and body bytes are checked.
-Raw results: `packages/next-scriptc/test/request-cost-results.json`.
 
 Node 24.22.0/macOS arm64, five alternating rounds (25,000 timed requests per
 variant), standalone binaries without the parent lease. Median of per-round
@@ -160,10 +173,10 @@ mean / p50 / p99, milliseconds:
 
 - `5536d9f`: **0.502 / 0.299 / 3.732**; p50 range 0.197–0.386.
 - Review 1 (`9d02686`): **0.436 / 0.254 / 3.026**; p50 range 0.149–0.645.
-- Current: **0.366 / 0.210 / 2.247**; p50 range 0.139–0.247.
+- `72cf1c5`: **0.366 / 0.210 / 2.247**; p50 range 0.139–0.247.
 
-The same five-round protocol with `COST_PARENT_LEASE=1` records the managed
-current binary separately in `request-cost-managed-results.json`. Median
+The same five-round protocol with the stdin parent lease enabled measured
+the managed `72cf1c5` binary separately. Median
 mean / p50 / p99: old **0.607 / 0.363 / 4.151**, review 1
 **0.681 / 0.368 / 4.819**, current **0.838 / 0.387 / 6.205**. The predecessor
 shims ignore this environment flag. Current managed p50 range: 0.274–0.771.
@@ -173,14 +186,32 @@ were approximately 26–34 (standalone) and 27–33 (managed). All numbers are
 **indicative**: overlapping ranges and changing host load do not establish a
 reliable speedup or prove recovery of all wrapper/streaming overhead. Keep the
 single-chunk fast path for its reduced framing/writes; the request wrapper and
-managed stdin monitoring remain costs.
+the prior stdin monitor remained costs.
 
-Reproduce sequentially with Node 24 on PATH:
+The historical scripts and raw JSON were removed after retaining these methods
+and conclusions. Use the maintained benchmark suite for ongoing comparisons.
 
-```sh
-COST_COUNT=5000 node packages/next-scriptc/test/request-cost.mjs
-COST_PARENT_LEASE=1 COST_COUNT=5000 node packages/next-scriptc/test/request-cost.mjs
-```
+Final-review direct-native comparison used the same actual hello body, Node
+24.22.0/macOS arm64, one HTTP/1.1 keep-alive socket, 300 warmups and 5,000 timed
+sequential requests per fresh process, five alternating rounds (25,000 timed
+requests per mode). It compared the previous shim with `NEXT_SCRIPTC_PARENT=1`,
+the new shim with its owner's PID, and the new shim without monitoring. Every
+status/body was checked. Compilation and owned processes ran sequentially.
+Median per-round mean / p50 / p99 in milliseconds, with p50 [min, max]:
+
+- No monitor: **1.511 / 0.574 / 15.225**, **[0.207, 0.654]**.
+- Previous stdin monitor: **1.278 / 0.596 / 10.699**, **[0.204, 0.798]**.
+- Parent PID interval: **1.175 / 0.454 / 11.942**, **[0.145, 0.635]**.
+
+These numbers are **indicative**. End load averages were 53.0 / 41.2 / 37.5;
+overlapping ranges and a slower unmonitored median than the polled median show
+that scheduling noise dominates. The observed p50 decrease from 0.596 to 0.454 ms
+is not a reliable 24% performance claim or proof of a precise overhead bound.
+The implementation now does one parent syscall per second, with no stdin event
+source and no lease work in the request handler. The reviewer's earlier 0.84–0.94
+ms unmonitored versus 0.96–1.13 ms stdin p50 motivated this change; those numbers
+are from a separate loaded-host cohort. The temporary comparison was kept outside
+the repository; ongoing measurements belong in the benchmark suite.
 
 ## Routing and the Next proxy hop
 
@@ -210,43 +241,81 @@ Earlier indicative hop run (review 1, Node 24.22.0/macOS arm64, loaded host):
 Node Next 1.464 / 8.468; native through Next 1.425 / 3.181; native direct
 0.291 / 0.977. Native topology difference: about 1.13 / 2.20 ms, including
 routing/serialization/scheduling/queueing, not a pure TCP-hop measurement.
-Reproducer/raw evidence remain `packages/next-scriptc/test/hop.mjs` and
-`hop-results.json`. Those results precede the current lifecycle/fast-path changes.
-Both builds mark hello STATIC: Node serves its cached route while the native
-rewrite recomputes JSON. This is an application-path comparison, not identical
+These results precede the current lifecycle/fast-path and prerender changes.
+Both historical builds marked hello STATIC: Node served its cached route while
+the native rewrite recomputed JSON. The current adapter leaves prerendered routes
+with Next. That old comparison measured different application paths, not identical
 framework-cache execution or a compiler-only speedup. The public adapter hooks
 do not expose native dispatch inside Next or httpxy agent configuration.
 
+## Prerender ownership and rewrite ordering
+
+With cacheComponents, Next can prerender pure GET handlers such as hello and
+feed.xml. `onBuildComplete.outputs.prerenders` identifies the original matcher
+in `route`; `routeType: "route"`, `response: "complete"`, `compute: "static"`
+identify completed Route Handler bodies (`dist/build/adapter/build-complete.d.ts:91-120,177-182`;
+construction in `dist/build/adapter/build-complete.js:711-715,803-847`). The adapter
+skips compilation and manifest entries for these handlers, leaving all methods
+and revalidation with Next. A dynamic route with prerendered paths also stays
+with Next, preserving its static paths and fallback handling.
+
+Discovery must inject rewrites during build-phase modifyConfig, before Next has
+prerendered anything. At build completion we remove just the skipped routes'
+native destinations from beforeFiles/afterFiles in routes-manifest.json. Next's
+last manifest write is `dist/build/index.js:2679`, before the awaited adapter
+hook at `:2864-2895`; no later write overwrites the adjustment. Plain next start
+reads that file at `dist/server/lib/router-utils/filesystem.js:291-298` and adopts
+its rewrites at `:425-435`. Build-time config and adapter routing summaries still
+contain provisional rewrites, so this solution targets the supported local
+production server, not a deployment adapter consuming those summaries.
+User rewrites and native static-pattern routes that require request data remain.
+
 ## Final verification
 
-All use Node 24.22.0 on PATH and `SCRIPTC_CHECKER_SERVER=0`, sequentially:
+Node 24.22.0/macOS arm64, `SCRIPTC_CHECKER_SERVER=0`, sequential checks:
 
 ```sh
-pnpm --filter demo build
-E2E_PORT=3467 node examples/demo/test/e2e.mjs --skip-build
-ROUTES_PORT=3477 pnpm --filter demo test:routes --skip-build
 node --test packages/next-scriptc/test/routes.mjs
 node packages/next-scriptc/shim/test/parity.mjs
+pnpm --filter demo build
+E2E_PORT=3467 node examples/demo/test/e2e.mjs --skip-build
 pnpm --filter demo exec tsc --noEmit --incremental false
-node packages/next-scriptc/test/startup-cost.mjs
+DEMO_PROXY_TIMEOUT_MS=180000 ROUTES_PORT=3477 pnpm --filter demo test:routes --skip-build
 ```
 
-The fresh final build compiled all ten routes. E2E passed six curl responses,
-report results at 1/4/1 threads, static precedence, exactly-once direct child
-ownership, server-only SIGTERM/SIGKILL, native crash, native/Next port conflicts,
-and the same-process CLI alias. The route suite passed all 31 status/header/body
-comparisons and PID/port cleanup checks with its documented test-only proxy budget.
-Package tests passed both discovery/native compilation and literal-destination
-cases. Shim parity passed 53 full response comparisons plus single-chunk framing,
-separate early streaming chunks, disconnect cancellation, graceful signals during
-requests, socket reuse, and stdin EOF during a never-ending response. The final
-stream sample was Node first/end 9.0/234.4 ms and native 1.6/227.0 ms (indicative). TypeScript exited 0 with no diagnostics.
+- Package tests: 3 passed, including six route extensions, native-only aliases,
+  unsupported helper refusals, literal rewrites, and prerender rewrite removal.
+- Shim parity: 53 identical responses plus framing, early streaming chunks,
+  cancellation, keep-alive reuse and graceful signals. Actual parent SIGKILL
+  during never-ending streams cleaned up Node in 1,005 ms and native in 1,002 ms.
+- Demo build `GNDt9FZee0Fa5xp4inCr7`: 8 native handlers. Both hello and feed.xml
+  remain Next prerenders, absent from the native manifest and rewrites.
+- E2E passed: six curl bodies and report results at 1/4/1 threads; static-pattern
+  native routing; static sibling precedence; direct child ownership; server-only
+  SIGTERM/SIGKILL cleanup within 2.5 seconds; one-route crash/recovery with proxy
+  HTTP 500 and healthy pages/siblings; fifth-crash retry cutoff; startup port
+  conflicts; same-process CLI alias.
+- TypeScript: exit 0, no diagnostics.
+- The tracked route suite passed its 31 Node dev cases but failed production
+  startup with ERR_MODULE_NOT_FOUND for its removed proxy-timeout.mjs preload.
+  That file belongs to the companion agent and was not edited here. It must
+  remove the preload, set `DEMO_PROXY_TIMEOUT_MS=180000` in its child environment,
+  and expect no native marker for prerendered feed.xml (prefer manifest-based
+  marker expectations). A temporary copy outside the repo made only those
+  compatibility changes, with import paths adjusted for its location: all 31
+  dev/production status, content/cache/security/auth headers and body comparisons
+  passed; all 8 native PIDs exited and port 3477/native ports were free. The
+  tracked command remains an integration follow-up, not a claimed passing check.
 
-EOF cannot preempt an indefinitely blocking native handler. Linux, a quiet-host
-benchmark, exhaustive basePath/i18n/proxy.ts combinations, and full deployment
-adapter integration remain unverified. No commits or index/branch changes were made.
+No runtime loop monitor can preempt an indefinitely blocking synchronous native
+handler. Linux, a quiet-host performance comparison, exhaustive basePath/i18n/
+proxy.ts combinations, and deployment adapters consuming provisional routing
+summaries remain unverified. The current manifest adjustment is for local Next
+production startup. No commits, index updates, or branch changes were made;
+HEAD remains `72cf1c52a71b0e45cac80413a3fe67ffe3f0ce4a` on main. All changes are
+uncommitted, and companion-agent files were left untouched.
 
-Final process scan found no owned servers or compiler processes. Bind checks passed
-for 3417, 3427, 3437, 3447, 3467, 3477, and every native port (29996–30005).
-HEAD remains `9d02686917c54c92a42631407a67a058b8420da5`; the index is unchanged and
-all implementation/documentation changes are uncommitted.
+Final bind checks passed for test ports 3467/3477 and all original native ports
+29996–30005 (including the two now-unused prerender ports). The final process
+scan found no commands referencing this checkout; no owned server/compiler or
+probe processes remain. Other worktrees' processes were not touched.

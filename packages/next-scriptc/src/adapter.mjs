@@ -1,9 +1,9 @@
 import { spawn } from "node:child_process";
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { shimPath } from "./paths.mjs";
-import { discoverRoutes, entrySource, withRewrites } from "./routes.mjs";
+import { discoverRoutes, entrySource, routeRewrite, withRewrites } from "./routes.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { writeNativeConfig } from "./native-config.mjs";
 
@@ -32,10 +32,27 @@ const adapter = {
   async onBuildComplete({ projectDir, distDir, buildId, outputs }) {
     const plan = buildPlans.get(projectDir);
     if (!plan) throw new Error("[next-scriptc] Missing build plan from modifyConfig.");
-    const { routes, config } = plan;
+    const { config } = plan;
     const appRoutes = new Set(outputs.appRoutes.map((route) => route.pathname));
-    for (const route of routes) {
+    for (const route of plan.routes) {
       if (!appRoutes.has(route.pattern)) throw new Error(`[next-scriptc] Native route ${route.source} is missing from Next's appRoutes output.`);
+    }
+    const prerendered = new Set(outputs.prerenders.filter((route) =>
+      route.routeType === "route" && route.response === "complete" && route.compute === "static"
+    ).map((route) => route.route));
+    const routes = plan.routes.filter((route) => !prerendered.has(route.pattern));
+    const skipped = plan.routes.filter((route) => prerendered.has(route.pattern));
+    if (skipped.length) {
+      // Rewrites are generated before prerendering. Next reads this manifest at
+      // production startup; the build has finished writing it before this hook.
+      const file = path.join(distDir, "routes-manifest.json");
+      const manifest = JSON.parse(await readFile(file, "utf8"));
+      const destinations = new Set(skipped.map((route) => routeRewrite(route).destination));
+      for (const phase of ["beforeFiles", "afterFiles"]) {
+        manifest.rewrites[phase] = manifest.rewrites[phase].filter((rewrite) => !destinations.has(rewrite.destination));
+      }
+      await writeFile(file, JSON.stringify(manifest) + "\n");
+      for (const route of skipped) console.log(`[next-scriptc] ${route.pattern} is prerendered by Next; serving the static output (native not needed)`);
     }
     const output = path.join(distDir, "scriptc");
     await rm(output, { recursive: true, force: true });
