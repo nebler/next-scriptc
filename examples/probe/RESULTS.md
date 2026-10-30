@@ -412,3 +412,114 @@ All probe processes and their loopback servers exited. No probe process or
 listener remained at the end; unrelated agents' processes were left alone.
 All source/dependency changes remain uncommitted; no commits, staging or branch
 changes were made.
+
+## Final-round TypeScript-source experiment — 2026-10-31 (local, indicative)
+
+Pre-registered in commit `9312fa3` before new measurements. Both libraries were
+cloned with `git clone --depth 1 --branch <tag>` into ignored `.sources/`:
+
+| Library | Tag | Exact upstream commit |
+| --- | --- | --- |
+| marked 18.1.2 | v18.1.2 | `5beecae42b0beb07eaccc3a732560f56867a8301` |
+| minisearch 7.2.0 | v7.2.0 | `3d239d1c3ae7aef1bf5d8945dd7b5f0709f646f5` |
+
+[Runner](source-experiment.mjs); [complete retained results](source-experiment-results.json)
+include every command, exit status, coverage report, build diagnostic, full
+reference/native response and timing. Reproduction commands are in
+[the benchmark protocol](../../research/benchmarks.md#typescript-source-library-experiment).
+Upstream source remains unmodified. Probe-generated copies of the demo handlers
+change only local import resolution and the library import: `marked` becomes
+`.sources/marked/src/marked.ts`; `minisearch` becomes
+`.sources/minisearch/src/MiniSearch.ts`. Demo routes retain npm imports.
+
+Node **24.22.0**, scriptc **0.4.6**, Apple M4 Pro / macOS arm64, heavily loaded
+shared development machine. Builds and executions ran sequentially. Release
+defaults, `--no-keep-llvm --node-islands=off`, no Node tuning. All rows use
+**200 warmup + 500 measured calls in one process**; process startup and search
+index construction are excluded. Timing includes handler invocation and draining
+its Response. Node executes the published JS. Inputs are the demo's full
+`reliable-webhooks` article, default full-content two-post RSS, and search over
+3,000 products for `desk lamp`, `limit=7`. This is one local sample per case,
+without affinity or randomized ordering; ratios are indicative only.
+
+| Workload | Node published JS ms/call | Native published JS ms/call | Native TS source ms/call | Published native body parity | TS native body parity |
+| --- | ---: | ---: | --- | --- | --- |
+| Full Markdown article | 1.133 | 58.737 | Refused (29 errors) | Byte-identical, HTTP 200 | Not executable |
+| Full-content RSS | 1.454 | 57.881 | Refused (same marked build) | Byte-identical, HTTP 200 | Not executable |
+| Catalog search | 1.238 | 5.088 | Refused (4 errors) | Byte-identical, HTTP 200 | Not executable |
+
+The successful published-JS native regressions remain visible: approximately
+**51.8×** Markdown, **39.8×** RSS and **4.1×** search per-call latency versus
+warmed Node in this experiment. These are internal handler-loop timings,
+not the HTTP suite's measurements. They cannot establish why an operation is
+slow. No source-variant speedup or parity claim is possible because neither
+TS-source entry compiled.
+
+| Entry graph | Statements analyzed | Static statements / reported % | Dynamic-tier statements | Build |
+| --- | ---: | --- | ---: | --- |
+| marked published JS (article + feed) | 932 | 932 / 100% | 603 | Pass |
+| marked TS source (article + feed) | 309 | 266 / 86% | 11 | Refused |
+| minisearch published JS | 718 | 718 / 100% | 299 | Pass |
+| minisearch TS source | 92 | 89 / 96% | 12 | Refused |
+
+Both TS coverage commands exit 0 **despite blockers**. Their smaller analyzed
+graphs and dynamic counts describe incomplete/refused compilations, not a
+successful conversion of hot code into typed machine operations. Counts include
+probe/application/Response work and differ from the generated HTTP shim entries.
+Published package mode is `static`; it still includes dynamic-tier statements.
+
+The first marked refusal is exactly, at `src/Hooks.ts:8:3`:
+
+```text
+error SC1090: 'MarkedOptions<ParserOutput, RendererOutput>'-typed class fields are not supported yet (instantiating class '_Hooks' with <unknown, unknown>)
+```
+
+The 29 errors also include `SC2009` for the recursive options/hooks shape and
+`SC1090: assignment to non-variables are not supported yet` on exported
+function-object properties such as `marked.options` and `marked.parse`.
+The first MiniSearch refusal, at the probe copy of `search.ts:7:15`, is exactly:
+
+```text
+error SC2009: values of type 'MiniSearch<any>' cannot be compiled: the record shape is supported, but its member '_options' has type 'OptionsWithDefaults<any>', which does not compile
+```
+
+The other three errors refuse `index.addAll`, `index.search`, and the generic
+`RadixTree<T>` field in `src/SearchableMap/SearchableMap.ts:24:3`. Full diagnostics
+are retained verbatim in JSON. Both builds exit **1**, without a signal. No
+source patches, type erasure, alternate APIs or workload substitution were
+attempted after these refusals.
+
+The experiment does **not** currently justify a demo-route change. If the
+compiler gains support and a future pre-registered repeat shows a useful result,
+the adapter would need version-pinned **native-only module aliases** to TS
+source while Next/Node keep published JS, plus provenance and byte-parity checks.
+Aliases alone do not resolve these compiler blockers.
+
+An initial environment-only attempt failed to launch scriptc's non-executable
+TypeScript helper (`TypeScript server startup: Permission denied`). Re-running
+the installed package's `scripts/install-native.mjs` restored the modes; the
+complete run above followed that repair. This is not classified as a library
+compiler refusal. No demo build or sandbox was used for this experiment.
+
+## Async scrypt login parity — final round
+
+[The standalone entry](entries/login-scrypt.ts) compiles with scriptc 0.4.6 and
+matches Node 24.22.0 byte-for-byte for **11 cases**: successful normalized login
+and JWT issuance; wrong password; unknown email; malformed JSON; null/array
+shape; wrong email type; missing/empty password; a multibyte password above
+bcrypt's 72-byte boundary; and the 1024-byte scrypt input bound. Both executions
+exit 0 with empty stderr. Status, sorted response headers and full body bytes,
+including JWT signature/claims, match. The fixture uses callback `crypto.scrypt`
+with N=32768, r=8, p=1, a stored 16-byte salt/64-byte hash and `timingSafeEqual`.
+
+[Retained evidence](scrypt-parity-results.json) includes all commands, coverage,
+compiler output and the complete response output. Coverage is 1362/1371 (99%)
+with 186 dynamic-tier statements, jose `static` and three deferred unsupported
+sites outside the exercised paths. This graph includes the probe's printing
+code and is different from the HTTP entry graph. Parameters, async scheduling
+and isolation interpretation are documented in
+[the benchmark protocol](../../research/benchmarks.md#async-scrypt-login).
+
+```sh
+node examples/probe/run.mjs --only=login-scrypt
+```

@@ -7,8 +7,6 @@ import { Order, regionCount, scenarioCount, totalsLength, projectionIndex, type 
 const poolSize = 8;
 const rowCount = 1_000_000;
 let orders: Order[] | undefined;
-let baselineRss = 0;
-let datasetRss = 0;
 
 class ReportWorker {
   worker: Worker;
@@ -58,11 +56,9 @@ let queue = Promise.resolve();
 
 async function report(threads: number) {
   if (!orders) {
-    baselineRss = process.memoryUsage().rss;
     orders = [];
     for (let i = 0; i < rowCount; i++) orders.push(new Order(i));
     publish(orders);
-    datasetRss = process.memoryUsage().rss;
   }
   while (pool.length < threads) pool.push(new ReportWorker(orders));
   await Promise.all(pool.map((slot) => slot.ready));
@@ -98,10 +94,7 @@ async function report(threads: number) {
     elapsedMs,
     sharedByReference: sharesPublishedGraphs,
     nodeVersion: sharesPublishedGraphs ? null : process.version,
-    baselineRss,
-    datasetRss,
     rss,
-    workerRssGrowth: (rss - datasetRss) / pool.length,
   };
 }
 

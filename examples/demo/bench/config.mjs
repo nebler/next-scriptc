@@ -10,7 +10,10 @@ const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIiwic3Vi
 export const routes = [
   { id: "login", pattern: "/api/login", path: "/api/login", method: "POST",
     headers: { "content-type": "application/json" }, body: JSON.stringify({ email: " ADA@example.com ", password: "correct horse battery staple" }),
-    category: "realistic", bounded: true, cpuRequests: 3 },
+    category: "realistic", bounded: true },
+  { id: "login-scrypt", pattern: "/api/login-scrypt", path: "/api/login-scrypt", method: "POST",
+    headers: { "content-type": "application/json" }, body: JSON.stringify({ email: " ADA@example.com ", password: "correct horse battery staple" }),
+    category: "realistic", bounded: true },
   { id: "verify", pattern: "/api/verify", path: "/api/verify", headers: { authorization: `Bearer ${token}` }, category: "realistic", cpuRequests: 400 },
   { id: "search", pattern: "/api/search", path: "/api/search?q=desk%20lamp&limit=7", category: "realistic", cpuRequests: 100 },
   { id: "markdown", pattern: "/api/posts/[slug]", path: "/api/posts/reliable-webhooks", category: "realistic", cpuRequests: 100 },
@@ -20,8 +23,8 @@ export const routes = [
   { id: "csv", pattern: "/api/export", enabled: false, category: "refused", pending: "Papa Parse unparse refused in route probe; no CSV route exists" },
 ];
 export const isolation = {
-  // Keep both the real synchronous bcrypt workload and the synthetic CPU control.
-  heavy: [routes[0], { id: "primes", path: "/api/primes?limit=10000000", category: "synthetic" }],
+  // Compare synchronous bcrypt, production-style async scrypt and the CPU control.
+  heavy: [routes[0], routes[1], { id: "primes", path: "/api/primes?limit=10000000", category: "synthetic" }],
   probes: [{ path: "/" }, { path: "/api/hello" }],
 };
 export const profiles = {
@@ -37,8 +40,7 @@ export function sectionsOption(value) {
   if (!sections.length || sections.some((name) => !sectionNames.includes(name))) throw new Error(`--sections must be comma-separated: ${sectionNames.join(",")}`);
   return [...new Set(["coverage", ...sections])];
 }
-// Native production invocation is deliberately kept in this single location.
-// After the adapter switches to plain next start, use --native-start=next.
-export function productionCommand({ runtime, nativeStart, next, cli, port }) {
-  return [runtime === "node" || nativeStart === "next" ? next : cli, "start", "-p", String(port), "-H", "127.0.0.1"];
+// Both builds use the normal production Next CLI.
+export function productionCommand({ next, port }) {
+  return [next, "start", "-p", String(port), "-H", "127.0.0.1"];
 }

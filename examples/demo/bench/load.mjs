@@ -18,7 +18,7 @@ export function request(base, spec, agent) {
       res.on("end", () => {
         const body = Buffer.concat(chunks);
         if (res.statusCode !== (spec.status ?? 200)) {
-          reject(new Error(`${spec.path}: HTTP ${res.statusCode}: ${body.toString().slice(0, 200)}`));
+          reject(new Error(`${spec.path}: HTTP ${res.statusCode} after ${Math.round(performance.now() - started)} ms: ${body.toString().slice(0, 200)}`));
         } else resolve({ ms: performance.now() - started, body, headers: res.headers, reusedSocket: req.reusedSocket });
       });
     });

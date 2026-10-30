@@ -32,5 +32,5 @@ assert.deepEqual(parsed.packages, [{ name: "bcryptjs", mode: "static" }, { name:
 assert.throws(() => parseCoverage("format changed"));
 assert.deepEqual(sectionsOption("threads"), ["coverage", "threads"]);
 assert.throws(() => sectionsOption("missing"));
-assert.equal(productionCommand({ runtime: "native", nativeStart: "next", next: "next", cli: "cli", port: 123 })[0], "next");
+assert.equal(productionCommand({ next: "next", port: 123 })[0], "next");
 console.log("Harness checks passed: warmed socket accounting (keep-alive and reconnect), exact counts at C=8, digest rejection, coverage parsing, section validation, centralized start command. All test sockets closed.");

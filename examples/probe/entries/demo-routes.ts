@@ -17,6 +17,6 @@ async function main() {
   await printResponse("bad-search", search(new Request("http://probe.test/api/search?limit=0")));
   await printResponse("article", await post(new Request("http://probe.test/api/posts/reliable-webhooks"), { params: Promise.resolve({ slug: "reliable-webhooks" }) }));
   await printResponse("missing-article", await post(new Request("http://probe.test/api/posts/missing"), { params: Promise.resolve({ slug: "missing" }) }));
-  await printResponse("rss", feed());
+  await printResponse("rss", feed(new Request("http://probe.test/api/feed.xml")));
 }
 main();

@@ -13,11 +13,10 @@ import { threadsBenchmark } from "./threads.mjs";
 import { renderReport, definitions, limitations } from "./report.mjs";
 
 const { values } = parseArgs({ options: { profile: { type: "string", default: "sandbox" },
-  output: { type: "string" }, "resume-cold": { type: "string" }, reverse: { type: "boolean", default: false }, sections: { type: "string" }, "native-start": { type: "string", default: "adapter" } } });
+  output: { type: "string" }, reverse: { type: "boolean", default: false }, sections: { type: "string" } } });
 const profile = profiles[values.profile];
 if (!profile) throw new Error("--profile must be sandbox or quick");
 const sections = sectionsOption(values.sections);
-if (!["next", "adapter"].includes(values["native-start"])) throw new Error("--native-start must be next or adapter");
 if (!process.version.startsWith("v24.")) throw new Error(`Use Node 24.x; got ${process.version}`);
 if (process.env.NODE_OPTIONS?.trim()) throw new Error("Unset NODE_OPTIONS so neither Node baseline inherits hidden runtime tuning");
 const root = path.resolve(import.meta.dirname, "../../..");
@@ -25,11 +24,12 @@ const demo = path.join(root, "examples/demo");
 const require = createRequire(path.join(demo, "package.json"));
 const compilerRequire = createRequire(path.join(root, "packages/next-scriptc/package.json"));
 const next = require.resolve("next/dist/bin/next");
-const cli = path.join(root, "packages/next-scriptc/src/cli.mjs");
 const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
 assert.equal(manifest.buildId, (await readFile(path.join(demo, ".next/BUILD_ID"), "utf8")).trim());
 await readFile(path.join(demo, ".next-node/BUILD_ID"));
 const active = routes.filter((route) => route.enabled !== false);
+const nodePrerenderedPaths = Object.keys(JSON.parse(await readFile(path.join(demo, ".next-node/prerender-manifest.json"), "utf8")).routes);
+for (const route of active) assert.ok(!nodePrerenderedPaths.includes(route.path.split("?")[0]), `Measured route was prerendered by Node build: ${route.id}`);
 assert.ok(active.length, "Enable at least one workload in bench/config.mjs");
 for (const route of active) {
   const index = manifest.routes.findIndex((item) => item.pattern === route.pattern);
@@ -80,7 +80,7 @@ const data = {
   schemaVersion: 2, status: "running", label: values.profile === "quick" || process.platform !== "linux"
     ? "INDICATIVE ONLY: developer machine / reduced repetitions; not publishable performance evidence"
     : "Controlled sandbox candidate: review limitations and environmental noise before publication",
-  startedAt: new Date().toISOString(), profile: { name: values.profile, ...profile, reverse: values.reverse, sections, nativeStart: values["native-start"] },
+  startedAt: new Date().toISOString(), profile: { name: values.profile, ...profile, reverse: values.reverse, sections, nativeStart: "next start" },
   environment: { node: process.version, nodeExecutable: process.execPath, scriptc: compilerRequire("scriptc/package.json").version,
     next: require("next/package.json").version, commit: process.env.BENCH_COMMIT ?? await git("rev-parse", "HEAD"),
     archiveSha256: process.env.BENCH_ARCHIVE_SHA256,
@@ -91,7 +91,7 @@ const data = {
     cpuAccounting: process.platform === "linux" ? "/proc/PID/stat utime+stime (CLK_TCK)" : "ps TIME user+system; centisecond resolution",
     accounting,
     publicFixtureEnvironment: serverEnv,
-    nodePrerenderedPaths: Object.keys(JSON.parse(await readFile(path.join(demo, ".next-node/prerender-manifest.json"), "utf8")).routes),
+    nodePrerenderedPaths,
     nativeBuildId: manifest.buildId, nodeBuildId: (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim() },
   workloads: routes,
   isolation, definitions, limitations, coverage: {}, artifacts: [], rows: [],
@@ -101,25 +101,6 @@ const data = {
 for (const [index, route] of manifest.routes.entries()) data.artifacts.push({ pattern: route.pattern,
   sourceSha256: digest(await readFile(route.source)), entrySha256: digest(await readFile(path.join(demo, ".next/scriptc", `entry-${index}.ts`))),
   binarySha256: digest(await readFile(path.join(demo, ".next/scriptc", route.binary))) });
-// Resume only an interrupted cold section, never merge steady statistics from
-// different harnesses. Preserve the original run and require identical builds.
-if (values["resume-cold"]) {
-  const previous = JSON.parse(await readFile(path.resolve(values["resume-cold"]), "utf8"));
-  assert.equal(previous.status, "failed");
-  assert.equal(previous.profile.name, values.profile);
-  assert.ok(previous.rows.every((row) => row.metric === "cold-start"));
-  assert.deepEqual(previous.artifacts, data.artifacts, "Cannot resume cold results from different artifacts");
-  for (const name of ["node", "scriptc", "next", "nodeBuildId", "nativeBuildId"]) assert.equal(previous.environment[name], data.environment[name]);
-  const shared = (snapshot) => snapshot.filter(({ file }) => !["examples/demo/bench/run.mjs", "examples/demo/bench/report.mjs"].includes(file));
-  assert.deepEqual(shared(previous.sourceSnapshot), shared(data.sourceSnapshot), "App, adapter, fixtures or transport changed since cold measurements");
-  assert.deepEqual(previous.environment.publicFixtureEnvironment, serverEnv);
-  assert.equal(previous.profile.nativeStart, values["native-start"]);
-  assert.equal(previous.definitions["cold-start"], definitions["cold-start"]);
-  data.rows = previous.rows;
-  data.coverage = previous.coverage;
-  data.resumedCold = { file: values["resume-cold"], startedAt: previous.startedAt, finishedAt: previous.finishedAt,
-    error: previous.error, environment: previous.environment, sourceSnapshot: previous.sourceSnapshot };
-}
 const fingerprints = new Map();
 function validate(route, response) {
   const hash = digest(response.body);
@@ -130,17 +111,20 @@ function validate(route, response) {
 function record(row) { data.rows.push(row); }
 function workloadFailure(error, proc, scope, runtime, route, phase) {
   if (signal.aborted || !/HTTP \d+|Request timed out|Generator exited before warmup/.test(String(error))) throw error;
+  const elapsed = Number(String(error).match(/HTTP 500 after (\d+) ms/)?.[1]);
+  const proxyTimeout = scope === "end-to-end" && runtime === "native" && elapsed >= 29_000 && /socket hang up|ECONNRESET/.test(proc.output);
+  const consequence = proxyTimeout ? "Exceeded Next's default 30 s proxy timeout; production returned HTTP 500 (elapsed time and upstream reset in server log)" : error.message;
   record({ metric: "workload-failure", scope, runtime, route: route.id, category: route.category, phase,
-    error: error.stack, serverOutput: proc.output });
-  console.error(`FAILED ${scope}/${runtime}/${route.id}/${phase}: ${error.message}`);
+    reason: proxyTimeout ? "next-proxy-timeout" : "request-failure", consequence, error: error.stack, serverOutput: proc.output });
+  console.error(`${scope}/${runtime}/${route.id}/${phase}: ${consequence}`);
 }
 const nextPort = 3417;
 const allPorts = [nextPort, ...manifest.routes.map((route) => route.port)];
 function launch(scope, runtime, route) {
   if (scope === "direct") return start(runtime === "node" ? process.execPath : route.binary,
     runtime === "node" ? [route.entry] : [], { cwd: demo, cpus: serverCpus, role: `${runtime}-route`, env: { ...serverEnv, PORT: String(route.port) } });
-  return start(process.execPath, productionCommand({ runtime, nativeStart: values["native-start"], next, cli, port: nextPort }),
-    { cwd: demo, cpus: serverCpus, role: runtime === "node" || values["native-start"] === "next" ? "next-server" : "adapter-supervisor", env: { ...serverEnv, NEXT_SCRIPTC_BASELINE: runtime === "node" ? "node" : "" } });
+  return start(process.execPath, productionCommand({ next, port: nextPort }),
+    { cwd: demo, cpus: serverCpus, role: "next-server", env: { ...serverEnv, DEMO_PROXY_TIMEOUT_MS: "", NEXT_SCRIPTC_BASELINE: runtime === "node" ? "node" : "" } });
 }
 function generator(base, spec, options, ipc = false) {
   const { entry, binary, ...wire } = spec;
@@ -193,7 +177,7 @@ async function steady(scope, runtime, selected) {
         const spec = { ...route, digest: hash };
         console.log(`${scope}/${runtime}/${route.id}: estimated ${route.bounded ? "60–120" : "5–15"} s; ${route.bounded ? "C=1, one warmup + 3 measured requests" : "CPU + C=" + profile.concurrency.join(",")}`);
         if (route.bounded) {
-          // One sample supplies both CPU and latency: only three cost-10 bcrypts
+          // One sample supplies both CPU and latency: only three password derivations
           // are measured. No duration window can over-dispatch expensive work.
           const sample = await sampleLoad(proc, base, spec, { count: 3, concurrency: 1, warmupCount: 1 });
           assert.equal(sample.result.requests, 3);
@@ -234,12 +218,11 @@ async function steady(scope, runtime, selected) {
 
 await mkdir(path.dirname(output), { recursive: true });
 try {
-  const estimates = { coverage: "30–90 s", cold: "60–150 s", direct: "150–240 s", production: "150–240 s", isolation: "30–90 s", threads: "60–180 s" };
-  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Sandbox suite estimate 8–17 min; install/build allowance 8 min; hard runner budget 28 min.`);
+  const estimates = { coverage: "30–90 s", cold: "60–150 s", direct: "150–270 s", production: "150–270 s", isolation: "40–120 s", threads: "60–180 s" };
+  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Sandbox suite estimate 9–18 min; install/build allowance 8 min; hard runner budget 28 min.`);
   for (const section of sections) {
     console.log(`Section ${section}: estimated ${estimates[section]} (shared-host load can extend this)`);
     if (section === "coverage") {
-      if (data.resumedCold) continue;
       const compiler = path.resolve(path.dirname(compilerRequire.resolve("scriptc/package.json")), compilerRequire("scriptc/package.json").bin.scriptc);
       const targets = [...active, { id: "report", entry: path.join(demo, ".next/scriptc", `entry-${manifest.routes.findIndex((r) => r.pattern === "/api/report")}.ts`) }];
       for (const route of targets) data.coverage[route.id] = await coverage(compiler, route.entry, demo);
@@ -248,7 +231,7 @@ try {
         const repeats = route.bounded ? 1 : profile.coldRepeats;
         for (let repeat = 0; repeat < repeats; repeat++) {
           for (const runtime of repeat % 2 ? ["native", "node"] : ["node", "native"]) {
-            if (!data.rows.some((row) => row.metric === "cold-start" && row.scope === scope && row.runtime === runtime && row.route === route.id && row.repeat === repeat)) await cold(scope, runtime, route, repeat);
+            await cold(scope, runtime, route, repeat);
           }
         }
       }

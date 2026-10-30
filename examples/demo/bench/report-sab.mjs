@@ -33,7 +33,6 @@ if (!isMainThread) {
 } else {
   const { counts, repeats } = parameters;
   const rowCount = 1_000_000;
-  const baselineRss = process.memoryUsage().rss;
   const array = () => new Int32Array(new SharedArrayBuffer(rowCount * 4));
   const data = { customer: array(), region: array(), amountCents: array(), quantity: array() };
   for (let i = 0; i < rowCount; i++) {
@@ -42,7 +41,6 @@ if (!isMainThread) {
     data.amountCents[i] = 100 + (i * 7919) % 49_900;
     data.quantity[i] = 1 + i % 5;
   }
-  const datasetRss = process.memoryUsage().rss;
   const workers = [];
   try {
     const samples = [];
@@ -71,7 +69,7 @@ if (!isMainThread) {
         }
         const elapsedMs = performance.now() - start;
         const rss = process.memoryUsage().rss;
-        if (iteration >= 0) samples.push({ elapsedMs, rss, baselineRss, datasetRss,
+        if (iteration >= 0) samples.push({ elapsedMs, rss,
           threads, repeat: iteration, workers: threads,
           result: { orders: rowCount, revenueCents: totals.slice(0, regionCount), projectedRevenueCents } });
       }
