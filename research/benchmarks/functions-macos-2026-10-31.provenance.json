@@ -1,0 +1,22 @@
+{
+  "commit": "0f1142c3459585e9e3c06e93cc54370fe507a935",
+  "measuredAt": "2026-10-31T08:30:14.008395+00:00",
+  "node": "v24.22.0",
+  "cpu": "Apple M4 Pro",
+  "platform": "darwin/arm64",
+  "scriptc": "0.4.6",
+  "revenueSourceSha256": "edcc1f5e29477c3e151f06e3e43d6b4edc9c4ec89cf6a7d0be65122c8d90e6ea",
+  "resultsSha256": "7b3bd8e9d7c778e05dfbb2131c2f290c6a522ab81acbda2373be5f6a7c0bf754",
+  "bundler": "Turbopack for both production variants and rendering control",
+  "commands": [
+    "pnpm --filter demo build",
+    "NEXT_SCRIPTC_BASELINE=node pnpm --filter demo build",
+    "node examples/demo/bench/functions.mjs --skip-build --output=research/benchmarks/functions-macos-2026-10-31.json"
+  ],
+  "affinity": null,
+  "host": "shared, indicative",
+  "warmup": 50,
+  "pageSamples": 200,
+  "echoSamples": 1000,
+  "results": "functions-macos-2026-10-31.json"
+}

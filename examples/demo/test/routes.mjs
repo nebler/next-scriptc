@@ -330,7 +330,9 @@ async function localParity() {
       console.log("Build passed.");
     }
     const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
-    ports = [port, ...manifest.routes.map((route) => route.port)];
+    const functions = JSON.parse(await readFile(path.join(demo, distDir, "scriptc-functions/manifest.json"), "utf8"));
+    const processes = [...manifest.processes, ...functions.processes];
+    ports = [port, ...processes.map((native) => native.port)];
     await portsFree(ports);
     const dev = start(["dev", "-p", String(port)]);
     await ready(dev);
@@ -354,7 +356,7 @@ async function localParity() {
       assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
     }
     const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
-    assert.equal(pids.length, manifest.processes.length);
+    assert.equal(pids.length, processes.length);
     await stop(production);
     for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
     await portsFree(ports);

@@ -81,7 +81,7 @@ function superviseProcess(worker, group) {
 
 function startProcess(worker, group) {
   const { process: native } = worker;
-  const child = spawn(path.join(group.distDir, "scriptc", native.binary), [], {
+  const child = spawn(path.join(group.outputDir, native.binary), [], {
     cwd: group.projectDir,
     env: { ...process.env, PORT: String(native.port), NEXT_SCRIPTC_PARENT: String(process.pid) },
     stdio: ["ignore", "pipe", "inherit"],
@@ -99,12 +99,16 @@ function startProcess(worker, group) {
   return waitForReadiness(worker, group);
 }
 
-async function start(projectDir, distDir) {
+export async function startNativeRoutes(projectDir, distDir) {
   const manifest = await readManifest(distDir);
-  if (!manifest.processes.length) return;
+  return startNativeProcesses(projectDir, path.join(distDir, "scriptc"), manifest.processes);
+}
+
+async function startProcesses(projectDir, outputDir, processes) {
+  if (!processes.length) return;
   installExitHooks();
-  const group = { projectDir, distDir, ready: false, failure: undefined };
-  const workers = manifest.processes.map((native) => ({
+  const group = { projectDir, outputDir, ready: false, failure: undefined };
+  const workers = processes.map((native) => ({
     process: native,
     label: `${native.routes.join(", ")} (native port ${native.port}; check stderr for EADDRINUSE if occupied)`,
     crashes: [],
@@ -120,7 +124,7 @@ async function start(projectDir, distDir) {
   }
 }
 
-export function startNativeRoutes(projectDir, distDir) {
-  if (!starts.has(distDir)) starts.set(distDir, start(projectDir, distDir));
-  return starts.get(distDir);
+export function startNativeProcesses(projectDir, outputDir, processes) {
+  if (!starts.has(outputDir)) starts.set(outputDir, startProcesses(projectDir, outputDir, processes));
+  return starts.get(outputDir);
 }

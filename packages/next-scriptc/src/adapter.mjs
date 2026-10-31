@@ -7,6 +7,8 @@ import { discoverRoutes, processEntrySource, routeRewrite, withRewrites } from "
 import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { writeNativeConfig } from "./native-config.mjs";
+import { prepareFunctions, finishFunctions, startFunctions } from "./functions/build.mjs";
+import { discoverFunctions } from "./functions/extract.mjs";
 
 const require = createRequire(import.meta.url);
 // Preserve the exact discovery snapshot used to emit rewrites; rediscovery could compile a different route set.
@@ -26,12 +28,15 @@ const adapter = {
       buildPlans.set(projectDir, { routes, config });
       if (process.env.NEXT_SCRIPTC_VERCEL) {
         const { vercelAdapter } = await import("./vercel.mjs");
+        const functions = await discoverFunctions(projectDir, path.resolve(projectDir, config.distDir ?? ".next"));
+        if (functions.length) console.warn(`[next-scriptc] Function-level "use scriptc" is not supported on Vercel yet; ${functions.length} module(s) run on Node.`);
         return (await vercelAdapter()).modifyConfig(config, context);
       }
-      return withRewrites(config, routes);
+      return prepareFunctions(withRewrites(config, routes), projectDir);
     }
     if (phase === "phase-production-server") {
       await startNativeRoutes(projectDir, path.resolve(projectDir, config.distDir));
+      await startFunctions(projectDir, path.resolve(projectDir, config.distDir));
     }
     return config;
   },
@@ -101,6 +106,7 @@ const adapter = {
       });
     }
     await writeFile(path.join(output, "manifest.json"), JSON.stringify({ version: 2, buildId, routes, processes }, null, 2) + "\n");
+    await finishFunctions(projectDir, distDir, buildId);
     buildPlans.delete(projectDir);
     console.log(`[next-scriptc] Built ${routes.length} native route(s) in ${processes.length} process(es).`);
   },
