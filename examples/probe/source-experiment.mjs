@@ -53,7 +53,7 @@ for (const lib of libraries) {
     const dir = path.join(out, `${lib.name}-${variant}`);
     await mkdir(dir, { recursive: true });
     for (const [name, route] of Object.entries(lib.routes)) {
-      const original = path.resolve(root, '../demo/app/api', route, 'route.ts');
+      const original = path.resolve(root, '../demo/app/api', route, 'route.native.ts');
       let text = (await readFile(original, 'utf8')).replace(/from "(\.[^"]+)"/g, (_, spec) => `from ${JSON.stringify(path.resolve(path.dirname(original), spec))}`);
       if (variant === 'typescript') text = text.replace(`from "${lib.name}"`, `from ${JSON.stringify(path.join(checkout, lib.source))}`);
       await writeFile(path.join(dir, `${name}.ts`), text);

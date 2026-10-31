@@ -16,6 +16,75 @@ import { readManifest } from "../src/manifest.mjs";
 const require = createRequire(import.meta.url);
 const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
 
+test("native extension preserves Next matching and user extension precedence", async () => {
+  const { createValidFileMatcher, findPageFile } = require("next/dist/server/lib/find-page-file.js");
+  const { getPageFromPath, createPagesMapping } = require("next/dist/build/route-discovery.js");
+  const defaults = ["tsx", "ts", "jsx", "js"];
+  assert.deepEqual(withScriptc().pageExtensions, [...defaults, "native.ts"]);
+  for (const extensions of [["js", "ts"], ["page.ts", "tsx"], ["native.ts", "ts"], []]) {
+    const config = { pageExtensions: extensions };
+    const wrapped = withScriptc(config).pageExtensions;
+    assert.deepEqual(wrapped, extensions.includes("native.ts") ? extensions : [...extensions, "native.ts"]);
+    assert.equal(config.pageExtensions, extensions);
+    const matcher = createValidFileMatcher(wrapped);
+    assert.ok(matcher.isAppRouterRoute("/api/route.native.ts"));
+    assert.equal(getPageFromPath("/api/route.native.ts", wrapped), "/api/route");
+    for (const file of ["/page.tsx", "/api/route.ts", "/api/route.js", "/page.page.ts", "/layout.tsx", "/api/route.mjs"]) {
+      const original = createValidFileMatcher(extensions);
+      assert.equal(matcher.isAppRouterPage(file), original.isAppRouterPage(file), file);
+      assert.equal(matcher.isAppLayoutPage(file), original.isAppLayoutPage(file), file);
+      assert.equal(getPageFromPath(file, wrapped), getPageFromPath(file, extensions), file);
+    }
+  }
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".extensions-"));
+  try {
+    for (const file of ["route.ts", "route.js", "route.native.ts"]) await writeFile(path.join(temporary, file), "");
+    assert.equal(await findPageFile(temporary, "/route", withScriptc({ pageExtensions: ["js", "ts"] }).pageExtensions, true), "/route.js");
+    // Next's build mapping silently keeps the last duplicate instead of failing.
+    const mapping = await createPagesMapping({ isDev: false, pageExtensions: withScriptc().pageExtensions,
+      pagePaths: ["api/route.ts", "api/route.native.ts"], pagesType: "app", appDir: temporary });
+    assert.equal(mapping["api/route"], "private-next-app-dir/api/route.native.ts");
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
+test("discovery rejects legacy directives, non-route native files and conflicting routes", async () => {
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".discovery-"));
+  const app = path.join(temporary, "src/app");
+  await mkdir(app, { recursive: true });
+  try {
+    for (const file of ["page.native.ts", "layout.native.ts", "helper.native.ts", "page.native.js", "route.native.js", "route.native.mjs"]) {
+      await writeFile(path.join(app, file), "export const GET = () => new Response();");
+      await assert.rejects(discoverRoutes(temporary), /Only App Router route.native.ts files can be native/);
+      await rm(path.join(app, file));
+    }
+    for (const extension of ["ts", "js", "mjs", "native.ts"]) {
+      const file = path.join(app, `route.${extension}`);
+      await writeFile(file, '/* migration */\n"use scriptc"; export function GET() {}');
+      await assert.rejects(discoverRoutes(temporary), /Route-level "use scriptc".*Rename the file to route.native.ts and remove the directive/);
+      await rm(file);
+    }
+    await writeFile(path.join(app, "route.native.ts"), 'export function GET() { "use scriptc"; return new Response(); }');
+    for (const extension of ["ts", "js", "custom.ts"]) {
+      const file = path.join(app, `route.${extension}`);
+      await writeFile(file, "export function GET() {}");
+      await assert.rejects(discoverRoutes(temporary, [extension, "native.ts"]), /Conflicting route files.*Keep only one route file per folder/);
+      await rm(file);
+    }
+    await mkdir(path.join(app, "_private"));
+    await writeFile(path.join(app, "_private/route.native.ts"), "export function GET() {}");
+    await writeFile(path.join(app, "_private/helper.native.ts"), "");
+    await assert.rejects(discoverRoutes(temporary), /Only App Router route.native.ts files can be native/);
+    await rm(path.join(app, "_private/helper.native.ts"));
+    const pages = path.join(temporary, "src/pages");
+    await mkdir(pages);
+    await writeFile(path.join(pages, "page.native.ts"), "");
+    await assert.rejects(discoverRoutes(temporary), /Only App Router route.native.ts files can be native/);
+    await rm(pages, { recursive: true });
+    const routes = await discoverRoutes(temporary);
+    assert.deepEqual(routes.map(({ pattern, methods }) => ({ pattern, methods })), [{ pattern: "/", methods: ["GET"] }]);
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
 test("route options validate keys, values, defaults, groups and process membership", async () => {
   const routes = ["/items/new", "/items/[id]", "/rest/[...slug]"].map((pattern, index) => ({ pattern, port: 20000 + index, binary: `route-${index}` }));
   for (const options of [null, [], { workers: true }, { routes: [] }, { routes: { "/items/new": null } },
@@ -25,7 +94,7 @@ test("route options validate keys, values, defaults, groups and process membersh
     assert.throws(() => withScriptc({}, options), /\[next-scriptc\]/);
   }
   for (const pattern of ["/missing", "/items/new/", "/(group)/items/new", "/items/42"]) {
-    assert.throws(() => planRoutes(routes, { routes: { [pattern]: {} } }), /Unknown native route.*use scriptc/);
+    assert.throws(() => planRoutes(routes, { routes: { [pattern]: {} } }), /Unknown native route.*route\.native\.ts/);
   }
   assert.throws(() => planRoutes(routes, { routes: {
     "/items/new": { group: "light", optimization: "speed" }, "/items/[id]": { group: "light" },
@@ -54,13 +123,13 @@ test("grouped build drops prerenders, sorts static/dynamic/catch-all, and valida
     for (const pattern of patterns) {
       const app = path.join(temporary, "app", pattern);
       await mkdir(app, { recursive: true });
-      await writeFile(path.join(app, "route.ts"), `"use scriptc"; export async function GET(request: Request, context: { params: Promise<Record<string, string | string[]>> }) { return Response.json({ route: ${JSON.stringify(pattern)}, params: await context.params, path: new URL(request.url).pathname }); }`);
+      await writeFile(path.join(app, "route.native.ts"), `export async function GET(request: Request, context: { params: Promise<Record<string, string | string[]>> }) { return Response.json({ route: ${JSON.stringify(pattern)}, params: await context.params, path: new URL(request.url).pathname }); }`);
     }
     const distDir = path.join(temporary, ".next");
     await mkdir(distDir);
     const rewrites = Object.assign(async () => [], { [optionsKey]: { routes: Object.fromEntries(patterns.map((pattern) => [pattern, { group: "fixture", optimization: "speed" }])) } });
     const config = { rewrites, experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } };
-    // A real Node route without the directive must not be configurable either.
+    // A Node route must not be configurable either.
     const nodeOnly = path.join(temporary, "app/node");
     await mkdir(nodeOnly);
     await writeFile(path.join(nodeOnly, "route.ts"), 'export function GET() { return new Response("node"); }');
@@ -144,24 +213,24 @@ test("discovery exports, Next extensions, rewrite phases, and typed native entri
     await writeFile(path.join(temporary, "tsconfig.json"), originalConfig);
     await mkdir(path.join(temporary, "helpers"));
     await writeFile(path.join(temporary, "helpers/response.ts"), 'import { NextResponse } from "next/server"; export function json(value: unknown) { return NextResponse.json(value); }');
-    const extensions = ["ts", "js", "mts", "mjs", "tsx", "jsx"];
-    for (const extension of extensions) await route(extension, extension, `"use scriptc"; export function GET() { return new Response("${extension}"); }`);
-    await assert.rejects(discoverRoutes(temporary), /not enabled in Next's pageExtensions/);
-    await route("items/[id]", "ts", '"use scriptc"; const handler = () => new Response("item"); export { handler as POST };');
+    const extensions = withScriptc().pageExtensions;
+    await route("ts", "native.ts", 'export function GET() { return new Response("ts"); }');
+    await assert.rejects(discoverRoutes(temporary, ["ts"]), /requires native.ts in Next's pageExtensions/);
+    await route("items/[id]", "native.ts", 'const handler = () => new Response("item"); export { handler as POST };');
     await route("items/new", "js", 'export function GET() { return new Response("node"); }');
-    await route("rest/[...slug]", "ts", '"use scriptc"; export const GET = () => new Response("rest");');
-    await route("optional/[[...slug]]", "ts", '"use scriptc"; export { GET } from "../../ts/route.ts";');
+    await route("rest/[...slug]", "native.ts", 'export const GET = () => new Response("rest");');
+    await route("optional/[[...slug]]", "native.ts", 'export { GET } from "../../ts/route.native.ts";');
     const routes = await discoverRoutes(temporary, extensions);
-    assert.equal(routes.length, 9);
+    assert.equal(routes.length, 4);
     assert.deepEqual(routes.find((route) => route.pattern === "/items/[id]").methods, ["POST"]);
     const rewrites = await withRewrites({ rewrites: async () => [{ source: "/old", destination: "/new" }] }, routes).rewrites();
-    assert.equal(rewrites.beforeFiles.length, 6);
+    assert.equal(rewrites.beforeFiles.length, 1);
     assert.equal(rewrites.afterFiles.length, 4);
     assert.equal(rewrites.afterFiles[0].source, "/items/:sc2");
     assert.equal(rewrites.afterFiles[1].source, "/optional/:sc2*");
     assert.equal(rewrites.afterFiles[2].source, "/rest/:sc2+");
     assert.equal(rewrites.afterFiles[3].source, "/old");
-    await route("native/[slug]", "ts", '"use scriptc"; import { NextRequest } from "next/server"; import { json } from "@fixture/response"; export async function GET(request: NextRequest, context: { params: Promise<{ slug: string }> }) { const { slug } = await context.params; const response = json({ slug, path: request.nextUrl.pathname, cookie: request.cookies.get("a") }); response.cookies.set("a", "b"); return response; }');
+    await route("native/[slug]", "native.ts", 'import { NextRequest } from "next/server"; import { json } from "@fixture/response"; export async function GET(request: NextRequest, context: { params: Promise<{ slug: string }> }) { const { slug } = await context.params; const response = json({ slug, path: request.nextUrl.pathname, cookie: request.cookies.get("a") }); response.cookies.set("a", "b"); return response; }');
     const nativeRoutes = await discoverRoutes(temporary, extensions);
     const output = path.join(temporary, "native");
     await mkdir(output);
@@ -183,12 +252,9 @@ test("discovery exports, Next extensions, rewrite phases, and typed native entri
       assert.match(error.stderr, /SC0001: This expression is not callable/);
       return true;
     });
-    await route("unsupported", "mdx", '/* comment */\n"use scriptc"; export const GET = () => new Response("no");');
-    await assert.rejects(discoverRoutes(temporary, [...extensions, "mdx"]), /Unsupported native route extension/);
-    await rm(path.join(temporary, "app/unsupported"), { recursive: true });
-    await route("star", "ts", '"use scriptc"; export * from "../ts/route.ts";');
+    await route("star", "native.ts", 'export * from "../ts/route.native.ts";');
     await assert.rejects(discoverRoutes(temporary, extensions), /Use named HTTP method exports/);
-    console.log("Compiled all six route extensions and named function/variable/alias/re-exports; native-only next/server and inherited aliases; unsupported middleware helper rejected.");
+    console.log("Compiled native.ts named function/variable/alias/re-exports; native-only next/server and inherited aliases; unsupported middleware helper rejected.");
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
@@ -211,7 +277,7 @@ test("build completion leaves prerendered handlers with Next and preserves user 
     const distDir = path.join(temporary, ".next");
     await mkdir(app, { recursive: true });
     await mkdir(distDir);
-    await writeFile(path.join(app, "route.ts"), '"use scriptc"; export function GET() { return new Response("feed"); }');
+    await writeFile(path.join(app, "route.native.ts"), 'export function GET() { return new Response("feed"); }');
     const config = { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } };
     const planned = await adapter.modifyConfig(config, { phase: "phase-production-build", projectDir: temporary });
     const rewrites = await planned.rewrites();

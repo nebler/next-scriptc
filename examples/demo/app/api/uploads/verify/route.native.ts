@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { createHash } from "node:crypto";
 
 export async function POST(request: Request) {

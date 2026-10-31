@@ -794,9 +794,18 @@ branch, index, merge or other git mutation was performed.
 `withScriptc(nextConfig, { routes })` now accepts a static route-pattern map.
 Each value supports `group` (a nonempty name) and `optimization` (`release`,
 `speed`, or `dev`). The default remains release and one binary/process per route.
-The selector remains the first-statement `"use scriptc"` directive: Next 16.4.3
-rejects `runtime = "scriptc"` in its segment-config validator. The future runtime
-provider design in [next-primitive.md](next-primitive.md) is unchanged.
+The adapter-era selector is `app/**/route.native.ts`, analogous to `route.go`.
+`withScriptc` appends `native.ts` to the configured `pageExtensions` without
+reordering existing entries; the demo Node baseline enables it too. Next 16.4.3
+accepts compound extensions in `createValidFileMatcher` and strips the longest
+matching extension in `build/route-discovery.js:getPageFromPath`, yielding an
+ordinary App Route. Its `createPagesMapping` keeps the last duplicate rather
+than failing, so discovery rejects sibling route-file conflicts explicitly.
+Only `.native.ts` is supported; other native extensions and non-route native
+files are rejected. Old route-level `"use scriptc"` directives fail with a rename
+and removal message; Babel still detects named HTTP method exports.
+Next 16.4.3 rejects `runtime = "scriptc"` in its segment-config validator. The
+future runtime provider design in [next-primitive.md](next-primitive.md) is unchanged.
 
 Validation rejects non-object options, unknown option names, unsupported values,
 and keys that do not exactly match discovered normalized native patterns (including

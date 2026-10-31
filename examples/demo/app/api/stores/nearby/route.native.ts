@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { stores } from "./stores.ts";
 
 type NearbyStore = { id: number; name: string; distanceMetres: number };

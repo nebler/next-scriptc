@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { marked } from "marked";
 import { posts } from "../content.ts";
 

@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { gzipSync } from "node:zlib";
 
 type ExportRow = { id: string; region: string; amountCents: number; quantity: number };

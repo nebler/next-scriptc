@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { jwtVerify } from "jose";
 import { audience, issuer, jwtKey, now } from "./tokens.ts";
 

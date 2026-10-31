@@ -11,5 +11,6 @@ export function withScriptc(config: NextConfig = {}, options: ScriptcOptions = {
   const rewrites = Object.assign(async () => await original?.call(config) ?? [], {
     [optionsKey]: validateOptions(options),
   });
-  return { ...config, rewrites, adapterPath };
+  const pageExtensions = config.pageExtensions ?? ["tsx", "ts", "jsx", "js"];
+  return { ...config, pageExtensions: pageExtensions.includes("native.ts") ? pageExtensions : [...pageExtensions, "native.ts"], rewrites, adapterPath };
 }

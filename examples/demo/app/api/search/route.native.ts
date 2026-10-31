@@ -1,5 +1,3 @@
-"use scriptc";
-
 import MiniSearch from "minisearch";
 import { products, type Product } from "./catalog.ts";
 

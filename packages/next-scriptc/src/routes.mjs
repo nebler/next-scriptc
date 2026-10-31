@@ -29,28 +29,35 @@ export function processEntrySource(routes, interceptionPatterns = []) {
   ).join(",\n")}\n], { interceptionPatterns: ${JSON.stringify(interceptionPatterns)} });\n`;
 }
 
-export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", "jsx", "js"]) {
+export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", "jsx", "js", "native.ts"]) {
   const appDir = findDir(projectDir, "app");
-  if (!appDir) return [];
   const routes = new Map();
   const { parse } = require("next/dist/compiled/babel/bundle.js").parser();
 
-  async function visit(directory) {
-    for (const entry of await readdir(directory, { withFileTypes: true })) {
+  async function visit(directory, isApp, enabled = isApp) {
+    const entries = await readdir(directory, { withFileTypes: true });
+    for (const entry of entries) {
       const source = path.join(directory, entry.name);
-      if (entry.isDirectory() && !entry.name.startsWith("_")) {
-        await visit(source);
-      } else if (entry.isFile() && entry.name.startsWith("route.")) {
-        const text = await readFile(source, "utf8");
-        const extension = entry.name.slice(6);
-        const supported = ["ts", "js", "mts", "mjs", "tsx", "jsx"].includes(extension);
-        if (!supported) {
-          if (/^(?:\s|\/\/[^\n]*\n|\/\*[\s\S]*?\*\/)*(["'])use scriptc\1/.test(text)) throw new Error(`[next-scriptc] Unsupported native route extension: ${source}`);
-          continue;
+      if (entry.isDirectory()) {
+        await visit(source, isApp, enabled && !entry.name.startsWith("_"));
+      } else if (entry.isFile()) {
+        const native = entry.name === "route.native.ts";
+        if (entry.name.includes(".native.") && (!native || !isApp)) {
+          throw new Error(`[next-scriptc] Unsupported native file ${source}. Only App Router route.native.ts files can be native.`);
         }
-        const ast = parse(text, { sourceType: "module", plugins: ["typescript", ...(extension.endsWith("x") ? ["jsx"] : [])] });
-        if (ast.program.directives[0]?.value.value !== "use scriptc") continue;
-        if (!pageExtensions.includes(extension)) throw new Error(`[next-scriptc] ${source} has "use scriptc" but .${extension} is not enabled in Next's pageExtensions.`);
+        if (!enabled || !entry.name.startsWith("route.")) continue;
+        const extension = entry.name.slice(6);
+        if (native) {
+          if (!pageExtensions.includes(extension)) throw new Error(`[next-scriptc] ${source} requires native.ts in Next's pageExtensions. Use withScriptc(config).`);
+          const conflict = entries.find((other) => other.isFile() && other.name !== entry.name && pageExtensions.some((ext) => other.name === `route.${ext}`));
+          if (conflict) throw new Error(`[next-scriptc] Conflicting route files: ${path.join(directory, conflict.name)} and ${source}. Keep only one route file per folder.`);
+        }
+        if (!native && !["ts", "js", "mts", "mjs", "tsx", "jsx"].includes(extension)) continue;
+        const ast = parse(await readFile(source, "utf8"), { sourceType: "module", plugins: ["typescript", ...(extension.endsWith("x") ? ["jsx"] : [])] });
+        if (ast.program.directives[0]?.value.value === "use scriptc") {
+          throw new Error(`[next-scriptc] Route-level "use scriptc" is no longer supported in ${source}. Rename the file to route.native.ts and remove the directive.`);
+        }
+        if (!native) continue;
         const exported = new Set();
         for (const node of ast.program.body) {
           if (node.type === "ExportAllDeclaration") throw new Error(`[next-scriptc] Use named HTTP method exports instead of export * in ${source}.`);
@@ -71,7 +78,9 @@ export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", 
     }
   }
 
-  await visit(appDir);
+  if (appDir) await visit(appDir, true);
+  const pagesDir = findDir(projectDir, "pages");
+  if (pagesDir) await visit(pagesDir, false);
   const basePort = 20000 + (createHash("sha256").update(projectDir).digest().readUInt16BE(0) % 20000);
   return getSortedRoutes([...routes.keys()]).map((pattern, index) => ({
     pattern,

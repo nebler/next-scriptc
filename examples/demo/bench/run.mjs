@@ -41,6 +41,10 @@ if (groupedExists) {
   validateLightGroup(groupedManifest);
 }
 const available = variants.filter((item) => item.id !== "native-grouped" || groupedExists).map((item) => item.id);
+const routeSets = await Promise.all(available.map(async (id) => Object.values(JSON.parse(
+  await readFile(path.join(demo, variant(id).distDir, "app-path-routes-manifest.json"), "utf8")
+)).sort()));
+for (const [index, routes] of routeSets.entries()) assert.deepEqual(routes, routeSets[0], `${available[index]}: production route set differs from Node baseline`);
 const active = routes.filter((route) => route.enabled !== false);
 const nodePrerenderedPaths = Object.keys(JSON.parse(await readFile(path.join(demo, ".next-node/prerender-manifest.json"), "utf8")).routes);
 for (const route of active) assert.ok(!nodePrerenderedPaths.includes(route.path.split("?")[0]), `Measured route was prerendered by Node build: ${route.id}`);

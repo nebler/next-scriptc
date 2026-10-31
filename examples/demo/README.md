@@ -1,5 +1,12 @@
 # next-scriptc demo
 
+Native handlers use `app/**/route.native.ts`; ordinary `route.ts` handlers stay on Node.
+`withScriptc` appends `native.ts` to `pageExtensions`, preserving configured extensions
+and their order. Only `.native.ts` is supported. Non-route `*.native.*` files,
+route-level `"use scriptc"` directives and sibling route-file conflicts fail the build.
+Migrate the old directive by renaming the file to `route.native.ts` and removing it.
+Development still executes the same TypeScript handlers on Node.
+
 Use Node 24.x. From the workspace root:
 
 ```sh
@@ -24,7 +31,8 @@ the route and port in the error. Next keeps prerendered handlers as static outpu
 only handlers needing request-time execution get native binaries.
 
 `NEXT_SCRIPTC_BASELINE=node` disables the adapter and selects `.next-node`, keeping
-it separate from the native `.next` build. Build and start the Node baseline with:
+it separate from the native `.next` build. Its config also enables `native.ts`, so
+both builds discover the same routes. Build and start the Node baseline with:
 
 ```sh
 NEXT_SCRIPTC_BASELINE=node pnpm --filter demo build
@@ -55,7 +63,7 @@ withScriptc(nextConfig, {
 });
 ```
 
-Keys must exactly match discovered, normalized `"use scriptc"` route patterns.
+Keys must exactly match discovered, normalized `route.native.ts` route patterns.
 Unknown routes/options and invalid values fail the build. Optimization accepts
 `release` (default), `speed` or `dev`; all members of a group must resolve to
 the same mode, including members that omit it. Prerendered routes need no native

@@ -1,5 +1,3 @@
-"use scriptc";
-
 export function GET(request: Request) {
   const value = new URL(request.url).searchParams.get("limit");
   const limit = value === null ? 1_000_000 : Number(value);

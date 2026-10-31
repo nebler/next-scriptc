@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { compareSync } from "bcryptjs";
 import { SignJWT } from "jose";
 import { audience, issuer, jwtKey, now } from "../verify/tokens.ts";

@@ -16,7 +16,7 @@ const lightRoutes = [
 const grouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light";
 
 export default process.env.NEXT_SCRIPTC_BASELINE === "node"
-  ? { ...nextConfig, distDir: ".next-node" }
+  ? { ...nextConfig, pageExtensions: ["tsx", "ts", "jsx", "js", "native.ts"], distDir: ".next-node" }
   : withScriptc({ ...nextConfig, ...(grouped ? { distDir: ".next-grouped" } : {}) }, {
     routes: grouped ? Object.fromEntries(lightRoutes.map((pattern) => [pattern, { group: "light" }])) : {},
   });

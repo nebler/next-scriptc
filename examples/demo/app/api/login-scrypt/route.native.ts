@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { scrypt, timingSafeEqual } from "node:crypto";
 import { SignJWT } from "jose";
 import { audience, issuer, jwtKey, now } from "../verify/tokens.ts";

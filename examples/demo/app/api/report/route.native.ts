@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { Worker } from "node:worker_threads";
 import { publish, sharesPublishedGraphs } from "@scriptc/threads";
 import { Order, regionCount, scenarioCount, totalsLength, projectionIndex, type Partition, type ReportMessage } from "./orders.ts";

@@ -37,7 +37,7 @@ export function planRoutes(discovered, options = {}) {
   const settings = validateOptions(options).routes;
   const patterns = new Set(discovered.map((route) => route.pattern));
   for (const pattern of Object.keys(settings)) {
-    if (!patterns.has(pattern)) throw new Error(`[next-scriptc] Unknown native route ${JSON.stringify(pattern)}. Use a normalized discovered Next route pattern with "use scriptc".`);
+    if (!patterns.has(pattern)) throw new Error(`[next-scriptc] Unknown native route ${JSON.stringify(pattern)}. Use a normalized discovered Next route pattern from route.native.ts.`);
   }
   const groups = new Map();
   return discovered.map((route) => {

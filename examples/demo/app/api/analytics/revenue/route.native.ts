@@ -1,5 +1,3 @@
-"use scriptc";
-
 import { eventsJson, type RevenueEvent } from "./events.ts";
 
 type DailyRevenue = { day: string; region: string; revenueCents: number; units: number; events: number };

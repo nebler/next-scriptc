@@ -1,5 +1,3 @@
-"use scriptc";
-
 export async function POST(request: Request) {
   const params = new URL(request.url).searchParams;
   const width = Number(params.get("width"));
