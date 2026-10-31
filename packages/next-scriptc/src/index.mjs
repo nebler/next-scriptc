@@ -12,5 +12,8 @@ export function withScriptc(config = {}, options = {}) {
     [optionsKey]: validateOptions(options),
   });
   const pageExtensions = config.pageExtensions ?? ["tsx", "ts", "jsx", "js"];
-  return { ...config, pageExtensions: pageExtensions.includes("native.ts") ? pageExtensions : [...pageExtensions, "native.ts"], rewrites, adapterPath };
+  // Function stubs import the shared TypeScript JSON validator. Opt the package
+  // into Next's dependency transpilation when installed under node_modules.
+  const transpilePackages = [...new Set([...(config.transpilePackages ?? []), "next-scriptc"])];
+  return { ...config, transpilePackages, pageExtensions: pageExtensions.includes("native.ts") ? pageExtensions : [...pageExtensions, "native.ts"], rewrites, adapterPath };
 }

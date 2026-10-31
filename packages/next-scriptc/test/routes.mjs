@@ -18,6 +18,10 @@ const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json
 test("native extension preserves Next matching and user extension precedence", async () => {
   const { createValidFileMatcher, findPageFile } = require("next/dist/server/lib/find-page-file.js");
   const { getPageFromPath, createPagesMapping } = require("next/dist/build/route-discovery.js");
+  assert.deepEqual(withScriptc().transpilePackages, ["next-scriptc"]);
+  const userPackages = ["other", "next-scriptc"];
+  assert.deepEqual(withScriptc({ transpilePackages: userPackages }).transpilePackages, userPackages);
+  assert.deepEqual(userPackages, ["other", "next-scriptc"]);
   const defaults = ["tsx", "ts", "jsx", "js"];
   assert.deepEqual(withScriptc().pageExtensions, [...defaults, "native.ts"]);
   for (const extensions of [["js", "ts"], ["page.ts", "tsx"], ["native.ts", "ts"], []]) {
