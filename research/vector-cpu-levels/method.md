@@ -32,3 +32,17 @@ One separate minimal Node 24/x86_64/iad1 diagnostic preview in the linked test
 project, using the Build Output API, reads actual Function CPU flags. It is a
 hardware observation, no inference of fleet-wide guarantees or hosted native
 performance. No domain or project-setting changes.
+
+After the failed upload, the user explicitly approved one replacement within the
+same combined 0.1 vCPU-hour cap and prioritized natural patched int8, then binary,
+then other work. The replacement uses three phases (natural patched+Go+Node;
+binary; remaining kernels), each with two reversed process orders. No measurements
+existed before this prospective order change. Kernel bundle is compressed and
+uploaded separately; HTTP is transferred only after kernels if >85s remain.
+
+The approved replacement failed before a command because the controller used the
+wrong cwd. The user authorized one final replacement, still within the combined
+cap, after local dry-runs. SDK cwd is /vercel. The local amd64 Docker smoke ran
+all 78 small kernel rows, all 16 fallback rows, and all 8 real HTTP rows; path,
+archive hashes, executable modes, result reading and streamed partial checkpoints
+were verified. No emulated timing enters the Linux performance tables.

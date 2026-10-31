@@ -1,0 +1,76 @@
+{
+  "sourceCommit": "ca383ad120de916178d0cca181cf1248c164f040",
+  "startedAt": "2026-10-31T14:43:20.442Z",
+  "status": "failed",
+  "vcpus": 1,
+  "timeoutMs": 330000,
+  "budgetVcpuHours": 0.1,
+  "leaseVcpuHours": 0.09166666666666666,
+  "marginMs": 30000,
+  "files": {
+    "stock-baseline": {
+      "sha256": "4312dc281a75e6f68d7e6b8564defb0440ae14e11fa2b4966254b1db342e7238",
+      "bytes": 386640
+    },
+    "stock-v3": {
+      "sha256": "cd31a87435e44f80927276d86306a52ea20984568e05f35e608bd0e34b9ee25c",
+      "bytes": 388272
+    },
+    "stock-dispatch": {
+      "sha256": "148530ec6ab073baa1903fb87644883c9aa67c98ee962926a7f989881c1418f3",
+      "bytes": 404504
+    },
+    "patched-baseline": {
+      "sha256": "b424d82bb191169fc591ec765de303b8d2f3c31416377fec1dc1e3bf533602e3",
+      "bytes": 387968
+    },
+    "patched-v3": {
+      "sha256": "dc1cad8d7c34bc455ef907e6cbe8a744fa6f0d3895af6eb109fc41ec111e66de",
+      "bytes": 390240
+    },
+    "patched-dispatch": {
+      "sha256": "4a0cc33106a4ed70debd53fb5d7776646d5323ff465c14f6219ad4f9fe303b08",
+      "bytes": 406584
+    },
+    "go-plain": {
+      "sha256": "113777edf980a21d40688f0f802d12bd67717448eb5e6879f877b53884510287",
+      "bytes": 2576544
+    },
+    "go-v3": {
+      "sha256": "1ca3c9ff5775ad39b714bda24aede38a8a5057c762c88be9e01b025ca9820cbe",
+      "bytes": 2568352
+    },
+    "go-simd": {
+      "sha256": "a529782e9e34ae9599e9fd52aca7ab5f8b404cb9d7f7276e03fc16e07274f2dd",
+      "bytes": 2580640
+    },
+    "go-binary": {
+      "sha256": "247e2dcf3efd68291cfcf95017df465835fc3f0c1ac54275e90eb06bb5880bff",
+      "bytes": 2576544
+    },
+    "go-binary-v3": {
+      "sha256": "0818ac263f51bbdad3edc39b9c605235395c0bc9453f12de74c15fa86cd1a508",
+      "bytes": 2568352
+    },
+    "vectors.ts": {
+      "sha256": "0559a279b6520ff21e4dafb3b42bdd74e03076aa0eb3627e976eb71f99b1e625",
+      "bytes": 4930
+    },
+    "worker.mjs": {
+      "sha256": "a9a96c8cd8fec1fd0c99c8a797be90d55b283e2fdb3a1750af77a6b9b53dea32",
+      "bytes": 3372
+    },
+    "http.tar.gz": {
+      "sha256": "6a2e6ca1741be20eed2f6fcf975982c0c7bb56c53185a43c1ff3430bd19ea377",
+      "bytes": 25000569
+    }
+  },
+  "steps": [],
+  "sandbox": "azure-petite-xerinae-AhnnpR",
+  "region": "iad1",
+  "error": "TimeoutError: The operation was aborted due to timeout",
+  "stopped": true,
+  "activeCpuDurationMs": 1662,
+  "elapsedMs": 33155,
+  "observedWallVcpuHours": 0.009209722222222222
+}

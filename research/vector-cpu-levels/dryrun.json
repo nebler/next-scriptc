@@ -1,0 +1,41 @@
+{
+  "note": "Local amd64 Docker/Rosetta correctness dry-run only; no timing claim",
+  "cwd": "/vercel",
+  "rows": 78,
+  "startups": 12,
+  "fallback": 16,
+  "status": "complete",
+  "streamCheckpointEqualsFile": true,
+  "kernelCompressedBytes": 6957166,
+  "httpCompressedBytes": 25000569,
+  "commands": [
+    "pwd",
+    "test -d .",
+    "command -v tar",
+    "node --version",
+    "tar -xzf kernels.tar.gz",
+    "test -x ./patched-baseline",
+    "test -f vectors.ts",
+    "node worker.mjs"
+  ],
+  "partialCheckpointSurvivesTruncation": true,
+  "all11KernelBinaryHashesMatch": true,
+  "httpBinaryHashesModesAndBuildIdMatch": true,
+  "resultDownload": {
+    "path": "kernels.json",
+    "cwd": "sandbox.cwd (SDK /vercel)",
+    "fallback": "local streamed checkpoint"
+  },
+  "httpCommands": [
+    "tar -xzf http.tar.gz",
+    "cd repo",
+    "npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent",
+    "cd ..",
+    "node http-worker.mjs"
+  ],
+  "httpSmoke": {
+    "status": "complete",
+    "rows": 8,
+    "note": "1 timed request per row, native marker/body parity/query change/zero tie/invalid input pass; timing is emulated and unused"
+  }
+}
