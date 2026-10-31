@@ -97,7 +97,8 @@ current limitations.
 
 ## Public demo
 
-https://next-scriptc.vercel.app exposes only `/api/hello`,
+The hosted demo at next-scriptc.vercel.app is paused. To run your own public
+copy, build with the same allowlist: it exposes only `/api/hello`,
 `/api/analytics/revenue`, `/api/stores/nearby`, `/api/heavy/vectors` (POST),
 and `/reports`, plus the static home page/assets. `NEXT_SCRIPTC_PUBLIC_DEMO=1`
 at production build time enables a plain 404 for every other API and `/rewrite/*`.
@@ -105,7 +106,7 @@ The proxy matcher excludes allowed paths, so they incur no proxy invocation.
 Development and builds without the opt-in retain all routes. `/reports` runs
 its `"use native"` functions on Node on Vercel.
 
-The live vector demo uses the **patched scriptc compiler**, not stock 0.4.6:
+The paused vector demo used the **patched scriptc compiler**, not stock 0.4.6:
 the [L1 wrapper](../../research/vector-vercel/patched-cli.sh) reuses the verified
 CLI in `/Users/noah/code/scriptc-fork` with the compatible runtime in
 `/Users/noah/code/scriptc-fork-v4`. The adapter passes `--cpu-dispatch`.
