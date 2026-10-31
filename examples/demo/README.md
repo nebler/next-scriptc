@@ -13,7 +13,9 @@ Named module-level async functions can start with `"use native"`; a file-level
 TypeScript signatures and use a strict JSON boundary in native production;
 development runs the same bodies on Node. See [function-level native code](../../research/function-level.md).
 
-Use Node 24.x. From the workspace root:
+Use Node 24.x and pnpm 11.1.3. Install dependencies first with
+`pnpm install --frozen-lockfile` from the workspace root. Then:
+
 
 ```sh
 pnpm --filter demo dev                 # Node / Turbopack, for development and parity
@@ -156,14 +158,29 @@ Vector retrieval and the stock-versus-patched benchmark are described in
 
 ## Compiler installation
 
-If a fresh install reports `SC3004: TypeScript server startup: Permission denied`,
-scriptc's packaged checker helpers may lack executable permission. Repair the
-installed package with its bundled hook, resolving the real path before invoking
-it (the hook checks its invocation path):
+Use Node 24 and leave optional dependencies enabled. The workspace allows
+scriptc's install hook; external apps using pnpm must approve it with
+`pnpm approve-builds scriptc`. scriptc 0.4.6 publishes Linux x86-64 glibc and musl CLI
+packages and selects the matching platform automatically. Its npm packages supply
+the TypeScript checker, comptime helper, LLVM code generator and runtime pack.
+The host also needs a native linker: install Xcode Command Line Tools on macOS,
+or a C/C++ toolchain with Clang and development libraries on Linux. Vercel
+cross-builds use the adapter's separate Linux runtime-pack setup.
+
+If a fresh or cached install reports `SC3004: TypeScript server startup: Permission denied`,
+rerun scriptc's bundled install hook from the workspace root or your app:
 
 ```sh
-node "$(realpath packages/next-scriptc/node_modules/scriptc/scripts/install-native.mjs)"
+pnpm rebuild scriptc
 ```
 
-Run this from the workspace root. It changes installed dependency modes only.
-No compiler source patch or lockfile edit is needed. Then retry the build/tests.
+This repairs executable permissions on the installed checker, comptime and LLVM
+helpers. It was required in the separate packed-package consumer test. No
+compiler source patch or lockfile edit is needed. Then retry the build/tests.
+
+## Development notes
+
+Next 16.4.3 ships version-matched documentation in
+`node_modules/next/dist/docs/`. Consult it when changing adapter integration.
+`next dev` may generate a local `AGENTS.md`; it is ignored because it is editor
+setup, not part of the example.

@@ -4,6 +4,10 @@ Current usage lives in the [root README](../README.md). Reports below are dated
 experiments with frozen source identities, protocols, raw artifacts and retained
 failures. They are workload observations, not compatibility or production SLAs.
 
+- [Vector search on Vercel](vector-vercel.md): int8 retrieval against Go SIMD,
+  plain Go and Node, with stock/patched compiler controls and retained losses.
+- [Int8 compiler patch](scriptc-int8-range-analysis.md): fork implementation,
+  focused validation and pending full upstream validation.
 - [Final Vercel benchmark](vercel-final.md): five deployment-first pairs, warm
   requests, process CPU/RSS, topology, sizes, recoveries and unavailable cells.
 - [Realistic I/O](realistic-io.md): orders/webhooks, library refusals, hosted Redis

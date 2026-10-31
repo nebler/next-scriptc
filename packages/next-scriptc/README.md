@@ -5,7 +5,24 @@ handlers and `"use native"` functions to native executables with scriptc, withou
 a Next.js fork. Development runs the original TypeScript on Node.
 
 Requires macOS or Linux and Node 24. This workspace uses Next 16.4.3 and pins
-scriptc 0.4.6; the package is currently version `0.0.0`.
+scriptc 0.4.6; the package is currently version `0.0.0` and is not on npm.
+Use pnpm 11.1.3 in your Next 16.4.3 TypeScript app:
+
+```sh
+pnpm add "github:nebler/next-scriptc#path:/packages/next-scriptc"
+pnpm approve-builds scriptc
+pnpm rebuild scriptc
+```
+
+Keep optional dependencies enabled and commit the lockfile to retain the Git
+revision. A packed copy was tested outside the workspace: strict TypeScript,
+`next.config.ts`, `next build`, `next start`, a native hello response and function
+prerendering. The public entry ships JavaScript and TypeScript declarations; no consumer-side
+transpilation setup is required. `withScriptc` enables Next dependency transpilation
+for the function client automatically. A native linker is required, plus
+scriptc's bundled checker/LLVM/runtime helpers. See the
+[compiler installation notes](https://github.com/nebler/next-scriptc/blob/main/examples/demo/README.md#compiler-installation)
+if helper permissions need repair.
 
 ```ts
 // next.config.ts
@@ -37,9 +54,9 @@ Next request context, caches or shared Node state, and small calls can lose to
 transport/serialization overhead.
 
 ```sh
-next dev
-next build
-next start
+pnpm exec next dev
+pnpm exec next build
+pnpm exec next start
 ```
 
 `next start` starts and supervises native processes. `next-scriptc start` is an
@@ -67,7 +84,7 @@ fail builds.
 For Vercel, install/authenticate its CLI and link/pull the app's project first:
 
 ```sh
-next-scriptc vercel-build
+pnpm exec next-scriptc vercel-build
 vercel deploy --prebuilt
 ```
 
@@ -76,7 +93,12 @@ executable Functions. Both commands accept `--prod` for production. Function-lev
 `"use native"` currently runs on Node on Vercel; only native routes are deployed
 as executable Functions.
 
-See the [repository README](../../README.md) for benchmark results with caveats,
+See the [repository README](https://github.com/nebler/next-scriptc#readme) for benchmark results with caveats,
 library refusals, the Go comparison and development commands, and the
 [shim contract](shim/README.md) for supported request/response APIs. This is
 experimental and depends on scriptc and evolving adapter/runtime contracts.
+
+## License
+
+Apache-2.0, copyright next-scriptc contributors. See the
+[license](https://github.com/nebler/next-scriptc/blob/main/LICENSE).

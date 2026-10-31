@@ -4,14 +4,12 @@ import { createHash } from "node:crypto";
 import { constants } from "node:fs";
 import { access, cp, mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { writeNativeConfig } from "../native-config.mjs";
 import { startNativeProcesses } from "../runtime.mjs";
 import { discoverFunctions } from "./extract.mjs";
 import { withFunctions } from "./config.mjs";
 
 const plans = new Map();
-const serve = fileURLToPath(new URL("./serve.ts", import.meta.url));
 
 export async function prepareFunctions(config, projectDir) {
   const distDir = path.resolve(projectDir, config.distDir ?? ".next");
@@ -22,7 +20,7 @@ export async function prepareFunctions(config, projectDir) {
   const output = path.join(distDir, "cache/scriptc-functions");
   await rm(output, { recursive: true, force: true });
   await mkdir(output, { recursive: true });
-  await writeNativeConfig(projectDir, output, config);
+  const { functionServePath: serve } = await writeNativeConfig(projectDir, output, config);
   await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
   let entry = `import { serveFunctions } from ${JSON.stringify(serve)};\n`;
   const cases = [];

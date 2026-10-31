@@ -27,11 +27,11 @@ No native execution crashed or produced a parity mismatch.
 | `cpu` | 24/24, 100% | Yes | Yes | — |
 | `stream` | 25/25, 100% | Yes | Yes | — |
 
-Machine-readable results: [.artifacts/summary.json](./.artifacts/summary.json).
+Machine-readable results: .artifacts/summary.json (`./.artifacts/summary.json`; local-only).
 Coverage counts include entry/printing code and any dependency statements the
 compiler includes; they are not percentages of the Next.js API surface.
 Several entries have native dynamic-tier statements despite the compiler's
-“fully static” summary; see [coverage's dynamic-tier definition](../../vendor/scriptc/docs/content/docs/coverage.mdx).
+“fully static” summary; see coverage's dynamic-tier definition (`../../vendor/scriptc/docs/content/docs/coverage.mdx`; local-only).
 
 The entries cover 15 request cases: query filtering/invalid limits; valid,
 invalid, and malformed zod JSON; present/absent cookie and language headers;
@@ -60,24 +60,24 @@ scriptc: undefined is not representable in the target union (a value narrowed or
 ```
 
 Both commands exit **1**; neither receives a signal. Logs:
-[build.stderr](./.artifacts/next-server/build.stderr),
-[coverage.stderr](./.artifacts/next-server/coverage.stderr).
+build.stderr (`./.artifacts/next-server/build.stderr`; local-only),
+coverage.stderr (`./.artifacts/next-server/coverage.stderr`; local-only).
 
 This is a compiler failure with poor source attribution, rather than a useful
 unsupported-Next-API diagnostic. The local registry defines `SC3004` as
 **“native helper code-generation failure”**:
-[diagnostic codes](../../vendor/scriptc/packages/compiler/src/diagnostics/codes.ts),
-[the catch-all failure conversion](../../vendor/scriptc/packages/compiler/src/native/compiler.ts).
+diagnostic codes (`../../vendor/scriptc/packages/compiler/src/diagnostics/codes.ts`; local-only),
+the catch-all failure conversion (`../../vendor/scriptc/packages/compiler/src/native/compiler.ts`; local-only).
 The message also appears as the compiler's deferred undefined-field read trap:
-[property-access.ts, `DEFERRED_READ_MESSAGE`](../../vendor/scriptc/packages/compiler/src/frontend/lowering/expressions/property-access.ts).
+property-access.ts, `DEFERRED_READ_MESSAGE` (`../../vendor/scriptc/packages/compiler/src/frontend/lowering/expressions/property-access.ts`; local-only).
 These identify the failure class, but do **not** identify the offending field
 inside Next or prove the underlying implementation cause.
 
-Related documented constraints are [union representations](../../vendor/scriptc/docs/content/limitations/types-and-class-definitions/unions.mdx)
-and [checked casts/null assertions](../../vendor/scriptc/docs/content/limitations/runtime-type-checks.mdx).
+Related documented constraints are union representations (`../../vendor/scriptc/docs/content/limitations/types-and-class-definitions/unions.mdx`; local-only)
+and checked casts/null assertions (`../../vendor/scriptc/docs/content/limitations/runtime-type-checks.mdx`; local-only).
 Neither documents this Next import failing at build time. Do not describe this
 as a normal, precisely diagnosed unsupported user assertion: the route has no
-such assertion. [Package support is partial](../../vendor/scriptc/docs/content/docs/dependencies.mdx),
+such assertion. Package support is partial (`../../vendor/scriptc/docs/content/docs/dependencies.mdx`; local-only),
 and installing the package is not enough to establish it compiles.
 
 A four-line repro is [repros/next-request.ts](./repros/next-request.ts).
@@ -104,19 +104,19 @@ This is worth an upstream compiler issue. No upstream issue was filed.
 ```
 
 The full diagnostics are retained verbatim:
-[next-import/build.stderr](./.artifacts/next-import/build.stderr).
+next-import/build.stderr (`./.artifacts/next-import/build.stderr`; local-only).
 They include duplicate `assert`, `AsyncLocalStorage`, Buffer, and crypto
 declarations, and missing browser globals such as `PopStateEvent` in Next's
 transitive declarations. The reduced [.js-spelled import](./repros/next-import-js.ts)
 also fails with the same first diagnostic and count:
-[next-import-js/build.stderr](./.artifacts/next-import-js/build.stderr).
+next-import-js/build.stderr (`./.artifacts/next-import-js/build.stderr`; local-only).
 Node prints `200` for both.
 
 This exposes an integration problem between scriptc's bundled Node fallback
 ambient declarations and Next's declaration graph. It does not establish a
 runtime failure in `NextResponse.json` itself. `SC0001` is the compiler's
-TypeScript-preflight error category; see the [diagnostic registry](../../vendor/scriptc/packages/compiler/src/diagnostics/diagnostic.ts)
-and [documented type-checking environment](../../vendor/scriptc/docs/content/limitations/type-checking.mdx).
+TypeScript-preflight error category; see the diagnostic registry (`../../vendor/scriptc/packages/compiler/src/diagnostics/diagnostic.ts`; local-only)
+and documented type-checking environment (`../../vendor/scriptc/docs/content/limitations/type-checking.mdx`; local-only).
 The latter uses `es2025` plus scriptc's own ambient declarations, so arbitrary
 Next/browser declaration surfaces need not typecheck as they do in a Next app.
 
@@ -163,13 +163,13 @@ quantity, and SKU validation issues and the malformed-JSON response. The native
 build emits no stderr. Coverage reports zod as `static`, but reports nine
 **deferred runtime** sites: SC2001 ×2, SC1090 ×2, SC2002 ×1, SC2004 ×2, and
 SC2020 ×2. Complete messages/locations:
-[zod/coverage.stdout](./.artifacts/zod/coverage.stdout).
+zod/coverage.stdout (`./.artifacts/zod/coverage.stdout`; local-only).
 
 The sites cover code-generation helpers, dynamic `instanceof`, spreading
 `unknown[]` into `Math.min`, JSON-schema record shapes, and a `Map.get`
 lowering. They were not reached by the exercised schema. The docs explicitly
-allow [unsupported package operations to become runtime fences](../../vendor/scriptc/docs/content/docs/dependencies.mdx#unsupported-code-inside-a-package).
-[Runtime code evaluation](../../vendor/scriptc/docs/content/limitations/runtime-code-evaluation.mdx)
+allow unsupported package operations to become runtime fences (`../../vendor/scriptc/docs/content/docs/dependencies.mdx#unsupported-code-inside-a-package`; local-only).
+Runtime code evaluation (`../../vendor/scriptc/docs/content/limitations/runtime-code-evaluation.mdx`; local-only)
 is also a deliberate Node divergence: `Function`/`eval` throw `EvalError`;
 zod 4 detects this and uses its interpreted validation path. Therefore, passing
 this probe does not prove all zod features compile or behave identically.
@@ -186,7 +186,7 @@ shim. Every native and Node program in those comparisons exits **0**, with
 empty stderr. Their exact `.stdout`, `.stderr`, `.json` metadata and empty
 `parity.diff` files live in the corresponding `.artifacts/<name>/` directories.
 The shim-versus-real-Next diff is also retained at
-[next-shim/versus-real-next.diff](./.artifacts/next-shim/versus-real-next.diff).
+next-shim/versus-real-next.diff (`./.artifacts/next-shim/versus-real-next.diff`; local-only).
 
 The comparison prints sorted response header strings and full response bodies.
 It does not compare header insertion order or HTTP wire serialization. The
@@ -197,9 +197,9 @@ entire response text, not by timing chunk delivery or testing cancellation.
 The fetch route performs real HTTP only against the runner-owned loopback
 server, with authentication and an abort timeout; no public upstream is used.
 Crypto/URL/stream support is consistent with the local
-[crypto](../../vendor/scriptc/docs/content/limitations/builtin-apis/crypto.mdx),
-[URL](../../vendor/scriptc/docs/content/limitations/builtin-apis/url.mdx), and
-[Web streams](../../vendor/scriptc/docs/content/limitations/builtin-apis/streams-and-readline.mdx)
+crypto (`../../vendor/scriptc/docs/content/limitations/builtin-apis/crypto.mdx`; local-only),
+URL (`../../vendor/scriptc/docs/content/limitations/builtin-apis/url.mdx`; local-only), and
+Web streams (`../../vendor/scriptc/docs/content/limitations/builtin-apis/streams-and-readline.mdx`; local-only)
 references. The vendor docs describe main and can be ahead of npm 0.4.6;
 measurements here take precedence over broad compatibility claims.
 

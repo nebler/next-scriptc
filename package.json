@@ -4,5 +4,9 @@
   "packageManager": "pnpm@11.1.3",
   "devDependencies": {
     "@vercel/sandbox": "3.9.1"
+  },
+  "scripts": {
+    "test": "pnpm --filter next-scriptc test:unit && pnpm --filter demo test",
+    "test:native": "pnpm --filter next-scriptc test && pnpm --filter next-scriptc test:shim"
   }
 }

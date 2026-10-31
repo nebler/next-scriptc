@@ -7,10 +7,9 @@ import { promisify } from "node:util";
 import { test } from "node:test";
 import { discoverRoutes, entrySource, routeRewrite, withRewrites } from "../src/routes.mjs";
 import { writeNativeConfig } from "../src/native-config.mjs";
-import { shimPath, nextServerPath } from "../src/paths.mjs";
 import adapter from "../src/adapter.mjs";
 import { optionsKey, planRoutes, planProcesses } from "../src/options.mjs";
-import { withScriptc } from "../src/index.ts";
+import { withScriptc } from "../src/index.mjs";
 import { readManifest } from "../src/manifest.mjs";
 
 const require = createRequire(import.meta.url);
@@ -19,6 +18,10 @@ const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json
 test("native extension preserves Next matching and user extension precedence", async () => {
   const { createValidFileMatcher, findPageFile } = require("next/dist/server/lib/find-page-file.js");
   const { getPageFromPath, createPagesMapping } = require("next/dist/build/route-discovery.js");
+  assert.deepEqual(withScriptc().transpilePackages, ["next-scriptc"]);
+  const userPackages = ["other", "next-scriptc"];
+  assert.deepEqual(withScriptc({ transpilePackages: userPackages }).transpilePackages, userPackages);
+  assert.deepEqual(userPackages, ["other", "next-scriptc"]);
   const defaults = ["tsx", "ts", "jsx", "js"];
   assert.deepEqual(withScriptc().pageExtensions, [...defaults, "native.ts"]);
   for (const extensions of [["js", "ts"], ["page.ts", "tsx"], ["native.ts", "ts"], []]) {
@@ -234,9 +237,9 @@ test("discovery exports, Next extensions, rewrite phases, and typed native entri
     const nativeRoutes = await discoverRoutes(temporary, extensions);
     const output = path.join(temporary, "native");
     await mkdir(output);
-    await writeNativeConfig(temporary, output, { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } });
+    const { shimPath } = await writeNativeConfig(temporary, output, { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } });
     const nativeConfig = JSON.parse(await readFile(path.join(output, "tsconfig.json"), "utf8"));
-    assert.deepEqual(nativeConfig.compilerOptions.paths, { "@fixture/*": [path.join(temporary, "helpers/*")], "next/server": [nextServerPath] });
+    assert.deepEqual(nativeConfig.compilerOptions.paths, { "@fixture/*": [path.join(temporary, "helpers/*")], "next/server": [path.join(output, "shim/next-server.ts")] });
     assert.equal(await readFile(path.join(temporary, "tsconfig.json"), "utf8"), originalConfig);
     const entry = path.join(output, "entry.ts");
     await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n` + nativeRoutes.map((route, index) => entrySource(route, `r${index}`)).join(""));
