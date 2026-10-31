@@ -27,7 +27,7 @@ Use the existing project automation bypass if present. A benchmark bypass was cr
 After the first measurement, quick checks can use authenticated CLI access:
 
 ```sh
-vercel curl https://next-scriptc-4nuyh23eg-noahs-projects-8a075d15.vercel.app/api/hello
+vercel curl https://next-scriptc-gtoab62jg-noahs-projects-8a075d15.vercel.app/api/hello
 ```
 
 The client negotiates gzip only for gzip-export (identity elsewhere); Vercel removes the gzip content-encoding when identity is requested. Header and decompressed-body parity remain required on both variants.
@@ -38,7 +38,7 @@ The benchmark sends `x-vercel-protection-bypass` on every HTTPS request. Only th
 
 ```sh
 node --env-file=.env.local examples/demo/bench/vercel/run.mjs \
-  --node https://next-scriptc-4nuyh23eg-noahs-projects-8a075d15.vercel.app
+  --node https://next-scriptc-gtoab62jg-noahs-projects-8a075d15.vercel.app
 
 node --env-file=.env.local examples/demo/bench/vercel/run.mjs \
   --node https://FRESH-NODE-DEPLOYMENT.vercel.app \
@@ -47,7 +47,7 @@ node --env-file=.env.local examples/demo/bench/vercel/run.mjs \
 
 `--fresh` is an operator assertion that **both** deployment URLs have not received application requests. Omit it for existing deployments; those first-response rows explicitly say cold state unknown. Use immutable URLs, matching deployment resources/region/fixtures and a new preview per variant for fresh repetitions (at most five per variant). No automatic deploy loop or idle-eviction claim is implemented. Run one command per paired experiment; do not combine separate baseline/native datasets into a synthetic paired run. Node's response hashes are the native parity reference in that same invocation. Variant order is fixed Node then native and is a potential time/order bias.
 
-The runner uploads just five client/registry files (with a combined SHA-256), no archive or dependencies. It creates a 2-vCPU Node 24 Sandbox in iad1, 4-minute lifetime, 3-minute worker deadline, and stops it in finally. Reports are written even on failure. `--output research/benchmarks/vercel-my-run` overrides the timestamped destination. Each variant issues at most 13,518 requests including warmup, before failures. The worker writes issued counts and reports all six rows including errors; stopped/failed windows never become successful throughput. Remember previous runs when enforcing the overall ~50k invocation and 0.5 vCPU-h task budget. Sandbox provisioned vCPU-h is a conservative wall-time upper bound; platform activeCpuDurationMs is retained separately when supplied.
+The runner uploads just five client/registry files (with a combined SHA-256), no archive or dependencies. It creates a 2-vCPU Node 24 Sandbox in iad1, 4-minute lifetime, 3-minute worker deadline, and stops it in finally. Reports are written even on failure. The Node 24 image working directory is `/vercel`; uploads/downloads use relative paths rather than assuming `/vercel/sandbox`. `--output research/benchmarks/vercel-my-run` overrides the timestamped destination. Each variant issues at most 13,518 requests including warmup, before failures. The worker writes issued counts and reports all six rows including errors; stopped/failed windows never become successful throughput. Remember previous runs when enforcing the overall ~50k invocation and 0.5 vCPU-h task budget. Sandbox provisioned vCPU-h is a conservative wall-time upper bound; platform activeCpuDurationMs is retained separately when supplied.
 
 Regenerate Markdown mechanically:
 

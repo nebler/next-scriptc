@@ -29,6 +29,7 @@ export function report(data) {
   lines.push("", `Issued requests (includes warmup/first/failures): ${data.requestsIssued ?? "unavailable"}. Provisioned Sandbox upper bound: ${number(data.sandbox?.provisionedVcpuHours)} vCPU-h. Platform active CPU: ${number(data.sandbox?.activeCpuDurationMs)} ms (not the provisioned upper bound).`, "",
     "Used memory / ratio: **unavailable / unavailable**. Function memory limits are not RSS. Use deployment-filtered Runtime Logs → Function metadata / Observability for memory, duration and start type; do not infer these from response latency. The public runtime-log schema and CLI may not export those fields on this plan. See README for collection commands.", "",
     "Deployment provenance / resource settings are supplied in the sibling metadata JSON when available; equality must be checked before interpreting native/Node differences. Baseline-only evidence cannot establish a native speedup. All losses, failures, count caps and omissions remain visible.", "");
+  if (data.failureDetails) lines.push(`Worker failure: ${data.failureDetails.workerError}. ${data.failureDetails.cause}. Issued requests are unknown; conservative bound ${data.requestsIssuedUpperBound}. Other worker measurements were not recovered and are not reused.`, "");
   if (data.error) lines.push(`Runner error: ${data.error}`, "");
   return lines.join("\n");
 }
