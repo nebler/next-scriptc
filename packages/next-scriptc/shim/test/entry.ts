@@ -1,8 +1,8 @@
-import { serve } from "../serve.ts";
+import { serve, serveMany, type RouteModule } from "../serve.ts";
 
 const explicit = process.env.SHIM_METHODS === "explicit";
 const empty = process.env.SHIM_METHODS === "empty";
-serve(async () => {
+const load = async () => {
   if (process.env.SHIM_DELAY_INIT) await import("./delayed.ts");
   const route = await import("./route.ts");
   return {
@@ -14,4 +14,13 @@ serve(async () => {
     DELETE: undefined,
     OPTIONS: explicit ? () => new Response("explicit options", { status: 200 }) : undefined,
   };
-}, { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined, interceptionPatterns: process.env.SHIM_INTERCEPTION ? ["^/api/intercepted(?:/|$)"] : [] });
+};
+const options = { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined, interceptionPatterns: process.env.SHIM_INTERCEPTION ? ["^/api/intercepted(?:/|$)"] : [] };
+if (process.env.SHIM_GROUPED) {
+  serveMany([
+    // An unrelated module can stay initializing without blocking this route.
+    { pattern: "/pending", module: () => new Promise<RouteModule>(() => {}) },
+    { pattern: "/api/static", module: async () => ({ GET: () => new Response("static"), HEAD: undefined, POST: undefined, PUT: undefined, PATCH: undefined, DELETE: undefined, OPTIONS: undefined }) },
+    { pattern: options.pattern, module: load },
+  ], options);
+} else serve(load, options);

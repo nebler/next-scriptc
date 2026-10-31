@@ -14,6 +14,7 @@ const clock = 1793318400;
 const secret = "next-scriptc-parity-test-signing-secret-32-bytes";
 const key = new TextEncoder().encode(secret);
 const env = { ...process.env, NEXT_SCRIPTC_BASELINE: "", DEMO_PROXY_TIMEOUT_MS: "180000", DEMO_JWT_NOW: String(clock), DEMO_JWT_SECRET: secret };
+const distDir = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light" ? ".next-grouped" : ".next";
 const running = new Set();
 const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate", "vary", "content-encoding", "content-disposition"];
 const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
@@ -268,7 +269,7 @@ try {
     running.delete(build);
     console.log("Build passed.");
   }
-  const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
+  const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
   ports = [port, ...manifest.routes.map((route) => route.port)];
   await portsFree(ports);
   const dev = start(["dev", "-p", String(port)]);
@@ -293,7 +294,7 @@ try {
     assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
   }
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
-  assert.equal(pids.length, manifest.routes.length);
+  assert.equal(pids.length, manifest.processes.length);
   await stop(production);
   for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
   await portsFree(ports);

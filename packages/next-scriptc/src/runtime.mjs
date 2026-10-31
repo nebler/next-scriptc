@@ -27,7 +27,7 @@ function installExitHooks() {
 }
 
 function waitForReadiness(worker, group) {
-  const { child, route, label } = worker;
+  const { child, process: native, label } = worker;
   return new Promise((resolve, reject) => {
     const lines = createInterface({ input: child.stdout });
     const timeout = setTimeout(() => {
@@ -55,15 +55,15 @@ function waitForReadiness(worker, group) {
       // Generated entries bind before importing the route. Waiting only for
       // listeners overlaps module initialization with Next's own startup, while
       // the native server queues early requests until its module is ready.
-      if (line === `next-scriptc: listening on 127.0.0.1:${route.port}`) {
-        console.log(`[next-scriptc] ${route.pattern} → native PID ${child.pid}, port ${route.port}`);
+      if (line === `next-scriptc: listening on 127.0.0.1:${native.port}`) {
+        console.log(`[next-scriptc] ${native.routes.join(", ")} → native PID ${child.pid}, port ${native.port}`);
         finish();
       }
     });
   });
 }
 
-function superviseRoute(worker, group) {
+function superviseProcess(worker, group) {
   if (!group.ready || stopping) return;
   const now = Date.now();
   worker.crashes = worker.crashes.filter((time) => now - time < 30_000);
@@ -75,15 +75,15 @@ function superviseRoute(worker, group) {
   const delay = 500 * 2 ** (worker.crashes.length - 1);
   console.error(`[next-scriptc] ${worker.label}: restarting in ${delay} ms.`);
   setTimeout(() => {
-    if (!stopping) startRoute(worker, group).catch((error) => console.error(error.message));
+    if (!stopping) startProcess(worker, group).catch((error) => console.error(error.message));
   }, delay).unref();
 }
 
-function startRoute(worker, group) {
-  const { route } = worker;
-  const child = spawn(path.join(group.distDir, "scriptc", route.binary), [], {
+function startProcess(worker, group) {
+  const { process: native } = worker;
+  const child = spawn(path.join(group.distDir, "scriptc", native.binary), [], {
     cwd: group.projectDir,
-    env: { ...process.env, PORT: String(route.port), NEXT_SCRIPTC_PARENT: String(process.pid) },
+    env: { ...process.env, PORT: String(native.port), NEXT_SCRIPTC_PARENT: String(process.pid) },
     stdio: ["ignore", "pipe", "inherit"],
   });
   worker.child = child;
@@ -91,7 +91,7 @@ function startRoute(worker, group) {
   worker.exited = new Promise((resolve) => child.once("close", () => {
     children.delete(child);
     resolve();
-    superviseRoute(worker, group);
+    superviseProcess(worker, group);
   }));
   // One listener per child preserves chunk order without pipe's per-child
   // error/close listeners accumulating on the shared process.stdout stream.
@@ -101,16 +101,16 @@ function startRoute(worker, group) {
 
 async function start(projectDir, distDir) {
   const manifest = await readManifest(distDir);
-  if (!manifest.routes.length) return;
+  if (!manifest.processes.length) return;
   installExitHooks();
   const group = { projectDir, distDir, ready: false, failure: undefined };
-  const workers = manifest.routes.map((route) => ({
-    route,
-    label: `${route.pattern} (native port ${route.port}; check stderr for EADDRINUSE if occupied)`,
+  const workers = manifest.processes.map((native) => ({
+    process: native,
+    label: `${native.routes.join(", ")} (native port ${native.port}; check stderr for EADDRINUSE if occupied)`,
     crashes: [],
   }));
   try {
-    await Promise.all(workers.map((worker) => startRoute(worker, group)));
+    await Promise.all(workers.map((worker) => startProcess(worker, group)));
     if (group.failure) throw group.failure;
     group.ready = true;
   } catch (error) {

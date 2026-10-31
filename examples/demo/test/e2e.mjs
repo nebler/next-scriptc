@@ -9,7 +9,8 @@ const root = path.resolve(import.meta.dirname, "../../..");
 const demo = path.join(root, "examples/demo");
 const curl = promisify(execFile);
 const port = Number(process.env.E2E_PORT ?? "3417");
-const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml", "/api/static-fixture"];
+const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml", "/api/static-fixture", "/api/verify", "/api/stores/nearby?lat=51&lng=0", "/api/analytics/revenue", "/api/export.json.gz?rows=1", "/api/uploads/verify"];
+const distDir = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light" ? ".next-grouped" : ".next";
 const running = new Set();
 let nativePatterns;
 
@@ -71,10 +72,12 @@ for (const [signal, code] of [["SIGINT", 130], ["SIGTERM", 143]]) {
 async function responses(native) {
   const results = [];
   for (const route of routes) {
-    const { stdout } = await curl("curl", ["--silent", "--show-error", "--fail", "--max-time", "30", "-i", `http://localhost:${port}${route}`], { encoding: "buffer" });
+    const { stdout } = await curl("curl", ["--silent", "--show-error", "--compressed", "--max-time", "30", "-i", `http://localhost:${port}${route}`], { encoding: "buffer" });
     const split = stdout.indexOf("\r\n\r\n");
     const headers = stdout.subarray(0, split).toString();
     const body = stdout.subarray(split + 4);
+    const expectedStatus = route === "/api/verify" ? 401 : route === "/api/uploads/verify" ? 405 : 200;
+    assert.equal(Number(headers.match(/^HTTP\/\S+ (\d+)/)[1]), expectedStatus, headers);
     assert.equal(/x-next-scriptc: native/i.test(headers), native && (nativePatterns.has(route.split("?")[0]) || (route.startsWith("/api/items/") && route !== "/api/items/new")), headers);
     results.push(body);
   }
@@ -155,11 +158,15 @@ try {
     assert.equal((await build.exit).code, 0, build.output);
     running.delete(build);
   }
-  const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
+  const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
+  if (process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light") {
+    assert.equal(manifest.processes.length, 9);
+    assert.equal(manifest.processes.find((native) => native.group === "light").routes.length, 8);
+  }
   nativePatterns = new Set(manifest.routes.map((route) => route.pattern));
   assert.ok(nativePatterns.has("/api/url-echo"), "native static-pattern route remains covered");
   assert.ok(!nativePatterns.has("/api/static-fixture"), "prerendered handler needs no binary");
-  const routing = JSON.parse(await readFile(path.join(demo, ".next/routes-manifest.json"), "utf8"));
+  const routing = JSON.parse(await readFile(path.join(demo, distDir, "routes-manifest.json"), "utf8"));
   for (const phase of ["beforeFiles", "afterFiles"]) {
     assert.ok(!routing.rewrites[phase].some((route) => route.source === "/api/static-fixture"), "prerender rewrite removed");
   }
@@ -177,7 +184,7 @@ try {
   assert.deepEqual(await responses(true), reference, "dev/native body bytes");
   assert.deepEqual(await reportResponses(true), reportReference, "dev/native report result bytes (threads 1, 4, 1)");
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
-  assert.equal(pids.length, manifest.routes.length);
+  assert.equal(pids.length, manifest.processes.length);
   // Signal only the Next server, leaving native children to its lifecycle hook.
   const { stdout: processList } = await curl("ps", ["-axo", "pid=,ppid=,args="]);
   const processes = processList.split("\n").map((line) => line.trim().match(/^(\d+)\s+(\d+)\s+(.+)$/)).filter(Boolean);
@@ -192,7 +199,7 @@ try {
   const killed = start(["start", "-p", String(port)]);
   await productionReady(killed);
   const killedPids = nativePids(killed);
-  assert.equal(killedPids.length, manifest.routes.length, "each binary starts exactly once");
+  assert.equal(killedPids.length, manifest.processes.length, "each binary starts exactly once");
   killed.child.kill("SIGKILL");
   assert.equal((await killed.exit).signal, "SIGKILL");
   running.delete(killed);
@@ -212,23 +219,29 @@ try {
   const crashed = start(["start", "-p", String(port)]);
   await productionReady(crashed);
   const crashRoute = manifest.routes.find((route) => route.pattern === "/api/url-echo");
+  const crashProcess = manifest.processes.find((native) => native.id === crashRoute.process);
+  const crashPaths = crashProcess.routes.map((pattern) => pattern.replace("[id]", "test"));
   const crashPid = Number(crashed.output.match(new RegExp(`native PID (\\d+), port ${crashRoute.port}\\b`))[1]);
   process.kill(crashPid, "SIGKILL");
   await assertGone([crashPid]);
-  const unavailable = await fetch(`http://localhost:${port}/api/url-echo`);
-  assert.equal(unavailable.status, 500, "Next's refused-destination proxy response");
-  await unavailable.arrayBuffer();
+  await Promise.all(crashPaths.map(async (pathname) => {
+    const unavailable = await fetch(`http://localhost:${port}${pathname}`);
+    assert.equal(unavailable.status, 500, `${pathname}: shared process is down`);
+    await unavailable.arrayBuffer();
+  }));
   for (const pathname of ["/", "/api/primes?limit=10", "/api/feed.xml"]) {
     const response = await fetch(`http://localhost:${port}${pathname}`);
     assert.equal(response.status, 200, pathname);
     await response.arrayBuffer();
   }
   await wait(crashed, new RegExp(`native PID (?!${crashPid},)\\d+, port ${crashRoute.port}\\b`));
-  const recovered = await fetch(`http://localhost:${port}/api/url-echo`);
-  assert.equal(recovered.status, 200);
-  assert.equal(recovered.headers.get("x-next-scriptc"), "native");
-  await recovered.arrayBuffer();
-  assert.equal(nativePids(crashed).length, manifest.routes.length + 1, "only the crashed route restarted");
+  for (const pathname of crashPaths) {
+    const recovered = await fetch(`http://localhost:${port}${pathname}`);
+    assert.notEqual(recovered.status, 500, `${pathname}: shared process recovered`);
+    assert.equal(recovered.headers.get("x-next-scriptc"), "native");
+    await recovered.arrayBuffer();
+  }
+  assert.equal(nativePids(crashed).length, manifest.processes.length + 1, "only the crashed process restarted");
   // Repeated failures stop retrying this route without taking down Next.
   for (let count = 2; count <= 5; count++) {
     const offset = crashed.output.length;
@@ -254,13 +267,13 @@ try {
   await assertPortsFree(ports);
   const alias = start(["alias", "-p", String(port)]);
   await productionReady(alias);
-  assert.equal(nativePids(alias).length, manifest.routes.length);
+  assert.equal(nativePids(alias).length, manifest.processes.length);
   alias.child.kill("SIGTERM");
   assert.equal((await alias.exit).code, 143, alias.output);
   running.delete(alias);
   await assertGone(nativePids(alias));
   await assertPortsFree(ports);
-  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup within 2.5s, isolated native crash/recovery (Next proxy HTTP 500), native/Next EADDRINUSE, and same-process CLI alias.`);
+  console.log(`E2E passed: ${routes.length} curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup within 2.5s, native process crash/recovery/cutoff (${crashPaths.length} route(s); Next proxy HTTP 500), native/Next EADDRINUSE, and same-process CLI alias.`);
 } finally {
   await Promise.allSettled([...running].map(stop));
 }

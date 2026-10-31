@@ -788,3 +788,121 @@ list, final source hashes, load and checks. The one-minute load at final audit i
 HEAD remains **fd40dda66ca0cc13e66fd624ce1e6b238e703444** on **main**, with an
 empty index diff. All seven changed files are uncommitted. No commit, checkout,
 branch, index, merge or other git mutation was performed.
+
+## Round 4: explicit process groups and optimization
+
+`withScriptc(nextConfig, { routes })` now accepts a static route-pattern map.
+Each value supports `group` (a nonempty name) and `optimization` (`release`,
+`speed`, or `dev`). The default remains release and one binary/process per route.
+The selector remains the first-statement `"use scriptc"` directive: Next 16.4.3
+rejects `runtime = "scriptc"` in its segment-config validator. The future runtime
+provider design in [next-primitive.md](next-primitive.md) is unchanged.
+
+Validation rejects non-object options, unknown option names, unsupported values,
+and keys that do not exactly match discovered normalized native patterns (including
+Node-only routes, trailing-slash variants and concrete dynamic URLs). Discovery
+order uses Next's `getSortedRoutes`; declaration order has no routing effect.
+Omitted optimization resolves to release before checking group conflicts, so
+one explicit speed member cannot silently change the rest of a group. Group
+names are metadata, never filesystem paths.
+
+Next's config normalizer keeps the `rewrites` callback by reference but drops
+symbol properties on the config itself. The wrapper carries validated options
+as symbol metadata on that callback. This keeps options scoped to this config,
+without global mutable config state, unsupported Next keys or public environment
+variables. The build hook snapshots configured routes before emitting rewrites.
+After prerendering, it removes static members and rewrites without reassigning
+ports; even a removed group's first member cannot invalidate remaining rewrites.
+
+Manifest v2 records both route membership and explicit process descriptors
+(id, binary, port, optimization, optional group and ordered route patterns).
+Startup validates unique process IDs/binaries/ports/groups, complete one-to-one
+route membership, matching route/process mode and port, and the Next build ID;
+v1 requires a rebuild. It spawns, waits for readiness, backs off and counts crashes
+once per process. Five crashes in thirty seconds disable that entire process,
+while Next and other processes stay available. Each rewrite targets its process's
+shared port. Serial compiler invocations pass `--optimization MODE --strip
+--no-keep-llvm` explicitly.
+
+The shim factors route initialization/HTTP handling from listener ownership.
+`serve()` passes one route callback straight to the listener; `serveMany()` selects
+among Next-sorted pattern matchers and reuses the same callback implementation.
+There is one listener and lifecycle hook set per process. All route loaders start
+only after bind, and each callback waits for its own module's initialization;
+an unrelated pending async initializer does not block it. Existing Vary,
+HEAD/OPTIONS/405, decoded params, body handling and streaming policy is shared.
+Synchronous initialization/handlers still block the common event loop. Grouped
+routes share helper-module instances, globals, memory and process failure fate.
+
+The demo's `NEXT_SCRIPTC_DEMO_GROUPS=light` selects `.next-grouped` and exactly the
+eight measured light members: hello, verify, url-echo, items/[id], stores/nearby,
+analytics/revenue, export.json.gz and uploads/verify. All retain release mode.
+The sixteen resident routes use nine processes, versus sixteen by default;
+Node `.next-node`, native `.next` and grouped `.next-grouped` builds coexist.
+The environment variable selects demo configuration, not runtime supervision
+policy: production process membership always comes from the built manifest.
+
+Worker-thread offload is deferred. Round 3's retained Markdown worker recovered
+hello's tail for that one blocking handler, but did not implement a general
+binary-body/streaming/cancellation codec, bounded admission and worker lifecycle.
+The light group still exposes hello to gzip and other synchronous member work;
+no new isolation or Linux whole-app memory claim follows from this implementation.
+
+Single-route native hello CPU check used pre-change and final-shim snapshots,
+compiled sequentially with scriptc 0.4.6 release/strip/no-keep-llvm. Each of three
+alternating fresh-process pairs performed 500 untimed warmups, then the existing
+`examples/probe/perf/http-client.mjs` keep-alive harness with 500 more warmups plus
+three 5,000-request windows. CPU is the server's `ps time` delta over those 15,500
+requests, excluding the client and initial warmup, including the second warmup;
+macOS reports it in 10 ms increments. Before: **36.13 [35.48, 36.13] µs/request**;
+after: **35.48 [35.48, 36.13] µs/request** (median [min, max]). This is no observed
+regression, not evidence of a meaningful speedup. The one-minute host load was
+4.20–4.35; there was no affinity or quiet-host guarantee. HTTP response bodies and
+headers were retained by the harness. Snapshots, binaries, client stdout, server
+logs and exact measurements are in `/tmp/next-scriptc-round4/hello-{before,after}`
+and `/tmp/next-scriptc-round4/hello-cpu.json`.
+
+Round 4 verification (logs in `/tmp/next-scriptc-round4/`):
+
+- `pnpm --filter demo build`: pass, 16 native routes in 16 processes; prerendered
+  static-fixture stays with Next. `NEXT_SCRIPTC_DEMO_GROUPS=light pnpm --filter
+  demo build`: pass, the same resident routes in 9 processes, release throughout.
+  Builds ran sequentially. The first build used shell Node 26.13.0; the grouped
+  build and final test runs used Node 24.22.0. The CPU harness client used shell
+  Node 26.13.0 identically for both binaries.
+- `node examples/demo/test/e2e.mjs --skip-build`: pass against both builds,
+  12 curl response bodies plus deterministic report results byte-equal to Node
+  (gzip compared after decompression). Plain Next and CLI-alias ownership,
+  static/Node precedence, signal/parent-death cleanup, busy ports and the
+  five-crash cutoff pass. In grouped mode, all eight members return proxy 500
+  while their process is down and recover after a single process restart;
+  other processes and pages remain healthy.
+- `pnpm --filter demo test:routes --skip-build`: the unchanged **85 cases** pass
+  in default mode and with `NEXT_SCRIPTC_DEMO_GROUPS=light`, including status,
+  representation/security/auth/cache headers and complete body bytes, decoded
+  for gzip. The existing optional compression Vary allowance remains. Cleanup
+  verifies 16 and 9 native processes, respectively, and free listener ports.
+- Node 24 `node packages/next-scriptc/shim/test/parity.mjs`: **98 comparisons**
+  pass (the original 87 plus 11 grouped cases). Grouped checks include static
+  precedence, a never-ready unrelated module, delayed import, params, Vary and
+  interception, methods, malformed encoding, misses and separately arriving
+  stream chunks. Existing cancellation/body-state/shutdown cases also pass.
+- Node 24 `node packages/next-scriptc/test/routes.mjs`: **five tests** pass,
+  including public options validation and preservation of user rewrites, unknown
+  Node-only selectors, conflicting group modes, speed compilation, removal of
+  a prerendered first group member, static/dynamic/optional-catch-all precedence,
+  every fixture member's byte parity, and corrupted/stale manifest rejection.
+- `node examples/demo/bench/check.mjs`: all harness checks pass; sockets close.
+- `pnpm --filter demo exec tsc --noEmit --incremental false` and the explicit
+  package Node-web-declarations `tsc --noEmit` command above: pass, empty logs.
+- `git diff --check`: pass. Next's automatic grouped-tsconfig edits were restored
+  from the pre-test snapshot, leaving no source edits outside the assigned paths.
+
+Both native build directories are retained; `.next-grouped/` is generated,
+untracked output (the demo ignore file is outside this task's assigned source
+paths). No new Linux/quiet-host throughput, tail or whole-app memory study was
+performed; round 3's grouping tradeoffs remain the evidence. Worker offload is
+still future work. Final cleanup binds 3417, 3427, 3437, 45383 and every reserved
+native port 29996–30012; no owned native or compiler-checker process remains.
+`cleanup.json` records the checks. HEAD remains `c05b5fd` on main with an empty
+index diff. All source changes are uncommitted; no git state mutation was used.

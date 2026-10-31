@@ -17,8 +17,8 @@ their ports to bind. Each binary then imports its route while Next continues
 startup; early requests wait for module initialization. Production binaries use
 `--strip`; uncaught errors retain their message, while native debugging needs an
 unstripped rebuild. A crashed binary restarts with bounded backoff; five crashes within
-30 seconds stop retries for that route. Next returns HTTP 500 while its destination
-is down; pages and sibling routes stay available. Workers detect server SIGKILL
+30 seconds stop retries for that process. Next returns HTTP 500 while its destination
+is down; pages and other processes stay available. Workers detect server SIGKILL
 within approximately 1–2 seconds. Native port conflicts fail initial startup with
 the route and port in the error. Next keeps prerendered handlers as static output;
 only handlers needing request-time execution get native binaries.
@@ -30,6 +30,40 @@ it separate from the native `.next` build. Build and start the Node baseline wit
 NEXT_SCRIPTC_BASELINE=node pnpm --filter demo build
 NEXT_SCRIPTC_BASELINE=node pnpm --filter demo exec next start
 ```
+
+`NEXT_SCRIPTC_DEMO_GROUPS=light` puts hello, verify, url-echo, items/[id],
+stores/nearby, analytics/revenue, export.json.gz and uploads/verify into one
+binary, process, port and HTTP listener. It selects `.next-grouped`, so all three
+builds can coexist. Build and test sequentially:
+
+```sh
+NEXT_SCRIPTC_DEMO_GROUPS=light pnpm --filter demo build
+NEXT_SCRIPTC_DEMO_GROUPS=light node examples/demo/test/e2e.mjs --skip-build
+NEXT_SCRIPTC_DEMO_GROUPS=light pnpm --filter demo test:routes --skip-build
+NEXT_SCRIPTC_DEMO_GROUPS=light pnpm --filter demo exec next start
+```
+
+The adapter accepts explicit policy in its second argument:
+
+```ts
+withScriptc(nextConfig, {
+  routes: {
+    "/api/hello": { group: "light" },
+    "/api/verify": { group: "light" },
+    "/api/primes": { optimization: "speed" },
+  },
+});
+```
+
+Keys must exactly match discovered, normalized `"use scriptc"` route patterns.
+Unknown routes/options and invalid values fail the build. Optimization accepts
+`release` (default), `speed` or `dev`; all members of a group must resolve to
+the same mode, including members that omit it. Prerendered routes need no native
+process. Unconfigured routes retain one process per route; the demo uses release
+everywhere. Group members share module state, event-loop latency and crash/restart
+behavior. The measured light group saves memory but increases hello's tail during
+gzip work; choose groups for your workload. Worker offload remains future work;
+see [round 3 measurements](../../research/round3-decisions.md).
 
 See [the benchmark guide](../../research/benchmarks.md) for current commands,
 workloads, process-tree memory accounting and measurement limitations. Rebuild

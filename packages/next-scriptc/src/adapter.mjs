@@ -3,7 +3,8 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { shimPath } from "./paths.mjs";
-import { discoverRoutes, entrySource, routeRewrite, withRewrites } from "./routes.mjs";
+import { discoverRoutes, processEntrySource, routeRewrite, withRewrites } from "./routes.mjs";
+import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { writeNativeConfig } from "./native-config.mjs";
 
@@ -17,7 +18,7 @@ const adapter = {
   async modifyConfig(config, { phase, projectDir }) {
     if (process.platform === "win32") throw new Error("[next-scriptc] Windows is unsupported; use macOS or Linux.");
     if (phase === "phase-production-build") {
-      const routes = await discoverRoutes(projectDir, config.pageExtensions);
+      const routes = planRoutes(await discoverRoutes(projectDir, config.pageExtensions), config.rewrites?.[optionsKey]);
       if (routes.length && config.output) {
         throw new Error("[next-scriptc] Native routes require the local Next server (output: export/standalone is unsupported).");
       }
@@ -65,27 +66,30 @@ const adapter = {
     const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
 
     // Serial builds keep CPU/memory use bounded on local development machines.
-    for (const [index, route] of routes.entries()) {
+    const processes = planProcesses(routes);
+    for (const [index, process] of processes.entries()) {
+      const members = routes.filter((route) => route.process === process.id);
+      const label = members.map((route) => route.pattern).join(", ");
       const entry = path.join(output, `entry-${index}.ts`);
-      await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route, "route", interceptionPatterns)}`);
-      console.log(`[next-scriptc] Compiling ${route.source}`);
+      await writeFile(entry, `import { serve, serveMany } from ${JSON.stringify(shimPath)};\n${processEntrySource(members, interceptionPatterns)}`);
+      console.log(`[next-scriptc] Compiling ${label} (${process.optimization})`);
       await new Promise((resolve, reject) => {
-        const child = spawn(compiler, ["build", entry, "-o", path.join(output, route.binary), "--strip", "--no-keep-llvm"], {
+        const child = spawn(compiler, ["build", entry, "-o", path.join(output, process.binary), "--optimization", process.optimization, "--strip", "--no-keep-llvm"], {
           cwd: projectDir,
           stdio: "inherit",
         });
         child.once("error", (cause) => {
-          reject(new Error(`[next-scriptc] Cannot compile ${route.source}`, { cause }));
+          reject(new Error(`[next-scriptc] Cannot compile ${label}`, { cause }));
         });
         child.once("exit", (code, signal) => {
           if (code === 0) resolve();
-          else reject(new Error(`[next-scriptc] Compilation failed for ${route.source} (${signal ?? `exit ${code}`}). See scriptc diagnostics above.`));
+          else reject(new Error(`[next-scriptc] Compilation failed for ${label} (${signal ?? `exit ${code}`}). See scriptc diagnostics above.`));
         });
       });
     }
-    await writeFile(path.join(output, "manifest.json"), JSON.stringify({ version: 1, buildId, routes }, null, 2) + "\n");
+    await writeFile(path.join(output, "manifest.json"), JSON.stringify({ version: 2, buildId, routes, processes }, null, 2) + "\n");
     buildPlans.delete(projectDir);
-    console.log(`[next-scriptc] Built ${routes.length} native route(s).`);
+    console.log(`[next-scriptc] Built ${routes.length} native route(s) in ${processes.length} process(es).`);
   },
 };
 

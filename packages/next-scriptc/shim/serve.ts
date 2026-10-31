@@ -156,11 +156,11 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   }
 }
 
-export function serve(module: RouteModule | (() => Promise<RouteModule>), options: { pattern: string; port?: number; interceptionPatterns?: string[] }): void {
-  const port = options.port ?? Number(process.env.PORT);
-  if ((options.port === undefined && !process.env.PORT?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
-    throw new Error("next-scriptc: PORT must be an integer between 0 and 65535 (or supply options.port)");
-  }
+type RouteOptions = { pattern: string; interceptionPatterns?: string[] };
+type ListenerOptions = { port?: number };
+type ModuleLoader = RouteModule | (() => Promise<RouteModule>);
+
+function createRoute(module: ModuleLoader, options: RouteOptions) {
   let get: RouteHandler | undefined;
   let head: RouteHandler | undefined;
   let post: RouteHandler | undefined;
@@ -194,7 +194,7 @@ export function serve(module: RouteModule | (() => Promise<RouteModule>), option
   const interceptionRoute = options.pattern.split("/").some((part) =>
     part.startsWith("(.)") || part.startsWith("(..)") || part.startsWith("(...)")
   );
-  const server = createServer(async (incoming, outgoing) => {
+  const handle = async (incoming: IncomingMessage, outgoing: ServerResponse) => {
     try {
       if (initializing) await initializing;
       const forwardedHost = incoming.headers["x-forwarded-host"];
@@ -248,7 +248,57 @@ export function serve(module: RouteModule | (() => Promise<RouteModule>), option
         outgoing.end();
       }
     }
+  };
+  function start(): void {
+    // The parent waits only for bound ports, letting Next initialize alongside
+    // route modules. Connections queue in the kernel during synchronous import;
+    // asynchronous module initialization is awaited by the request callback.
+    if (typeof module === "function") {
+      initializing = module().then(initialize);
+      initializing.catch((error: unknown) => {
+        console.error(error);
+        process.exit(1);
+      });
+    }
+  }
+  return { match, handle, start };
+}
+
+// Entries are ordered by Next's getSortedRoutes at build time. Keep dispatch
+// outside createRoute so the default one-route listener has no extra matching.
+export function serveMany(routes: { module: ModuleLoader; pattern: string }[], options: ListenerOptions & { interceptionPatterns?: string[] } = {}): void {
+  const handlers = routes.map((route) => createRoute(route.module, { pattern: route.pattern, interceptionPatterns: options.interceptionPatterns }));
+  const server = createServer(async (incoming, outgoing) => {
+    try {
+      const pathname = new URL(incoming.url || "/", "http://127.0.0.1").pathname;
+      for (const route of handlers) {
+        if (route.match(pathname) !== null) {
+          await route.handle(incoming, outgoing);
+          return;
+        }
+      }
+    } catch {
+      incoming.resume();
+      await writeResponse(new Response(null, { status: 400 }), outgoing, false);
+      return;
+    }
+    incoming.resume();
+    await writeResponse(new Response(null, { status: 404 }), outgoing, false);
   });
+  listen(server, options, () => { for (const route of handlers) route.start(); });
+}
+
+export function serve(module: ModuleLoader, options: RouteOptions & ListenerOptions): void {
+  const route = createRoute(module, options);
+  listen(createServer(route.handle), options, route.start);
+}
+
+function listen(server: ReturnType<typeof createServer>, options: ListenerOptions, start: () => void): void {
+  const port = options.port ?? Number(process.env.PORT);
+  if ((options.port === undefined && !process.env.PORT?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
+    throw new Error("next-scriptc: PORT must be an integer between 0 and 65535 (or supply options.port)");
+  }
+
   // httpxy pools loopback sockets across requests. Retain them through short
   // idle gaps; server.close() still closes idle connections during shutdown.
   server.keepAliveTimeout = 60_000;
@@ -271,15 +321,6 @@ export function serve(module: RouteModule | (() => Promise<RouteModule>), option
     const address = server.address();
     const port = address && typeof address === "object" ? address.port : options.port;
     console.log(`next-scriptc: listening on 127.0.0.1:${port}`);
-    // The parent waits only for bound ports, letting Next initialize alongside
-    // route modules. Connections queue in the kernel during synchronous import;
-    // asynchronous module initialization is awaited by the request callback.
-    if (typeof module === "function") {
-      initializing = module().then(initialize);
-      initializing.catch((error: unknown) => {
-        console.error(error);
-        process.exit(1);
-      });
-    }
+    start();
   });
 }

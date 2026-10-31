@@ -243,6 +243,25 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await Promise.all(Array.from({ length: 3 }, () => compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" })));
       assert.ok(performance.now() - started >= 180, "early requests await route-module initialization");
     });
+    await pair(binary, { SHIM_GROUPED: "1", SHIM_DELAY_INIT: "1", SHIM_INTERCEPTION: "1" }, async (compare, { ports }) => {
+      await compare({ path: "/api/static", status: 200, text: "static" });
+      await compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" });
+      const dynamic = await compare({ path: "/api/hello%20world/a%2Fb/" });
+      assert.deepEqual(JSON.parse(dynamic.body).params, { id: "hello world", slug: ["a/b"] });
+      for (const pathname of ["/api/intercepted", "/api/ordinary"]) {
+        const expected = nextVary(pathname, ["^/api/intercepted(?:/|$)"]);
+        const response = await compare({ path: `${pathname}?case=next-url`, headers: { "next-url": "/source" }, json: { nextUrl: expected.nextUrl } });
+        assert.equal(response.headers.vary, expected.vary);
+      }
+      await compare({ path: "/api/a", method: "POST", body: JSON.stringify({ value: "group" }), status: 201 });
+      await compare({ path: "/api/a?case=text", method: "HEAD", status: 200, text: "" });
+      const allow = "GET, HEAD, OPTIONS, PATCH, POST, PUT";
+      await compare({ path: "/api/a", method: "OPTIONS", status: 204, allow });
+      await compare({ path: "/api/a", method: "DELETE", status: 405, allow });
+      await compare({ path: "/api/%E0%A4%A", status: 400 });
+      await compare({ path: "/missing", status: 404 });
+      for (const port of ports) await assertStreaming(port, "/api/a?case=slow");
+    });
     await pair(binary, { SHIM_UPSTREAM: `http://127.0.0.1:${upstream.address().port}` }, async (compare, { node, native, ports }) => {
       for (const port of ports) await assertStreaming(port, "/api/a?case=next-stream");
       const allow = "GET, HEAD, OPTIONS, PATCH, POST, PUT";
