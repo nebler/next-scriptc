@@ -1,0 +1,53 @@
+{
+  "note": "Offline disassembly check, no workload measurements. All measured Go variants were built with GOEXPERIMENT=simd; these scalar functions match default Go after normalizing relocated addresses.",
+  "functions": [
+    {
+      "platform": "linux",
+      "function": "IntPlain",
+      "sameInstructions": true,
+      "instructionSha256": "9aea5c350284e751e4ac4592cb873c371e794df7d88de333a4bdf14789034721"
+    },
+    {
+      "platform": "linux",
+      "function": "IntUnrolled",
+      "sameInstructions": true,
+      "instructionSha256": "84acfd095ea653fe23d5244e219c6f379282f6d94161ff3895e87a6e6330813a"
+    },
+    {
+      "platform": "linux",
+      "function": "FloatPlain",
+      "sameInstructions": true,
+      "instructionSha256": "0b589bbe8af4fbaee4c0939217d193b18a1d21279e58f3fedaf124d2f0514aad"
+    },
+    {
+      "platform": "linux",
+      "function": "FloatUnrolled",
+      "sameInstructions": true,
+      "instructionSha256": "7d74c27f3f60545f9bad8620000bb2b13d8364b9b88eabe1a298f8d113635e4b"
+    },
+    {
+      "platform": "mac",
+      "function": "IntPlain",
+      "sameInstructions": true,
+      "instructionSha256": "3e197f76c06d046de63e752f43c02ed28e6e34cfdad63a495cf377a3f13eb257"
+    },
+    {
+      "platform": "mac",
+      "function": "IntUnrolled",
+      "sameInstructions": true,
+      "instructionSha256": "3de80326552c87fd7eb959ff19b28a6f060085a3efec82c458547c74493aa895"
+    },
+    {
+      "platform": "mac",
+      "function": "FloatPlain",
+      "sameInstructions": true,
+      "instructionSha256": "95680168d604ff9328e06d08b5e343646500ea16df20ed5fdd8758bbd5b40e3f"
+    },
+    {
+      "platform": "mac",
+      "function": "FloatUnrolled",
+      "sameInstructions": true,
+      "instructionSha256": "cb6563435f3ab2eba0119c33ecdbe78ac7971e1a25d3f44bc42768c400699711"
+    }
+  ]
+}

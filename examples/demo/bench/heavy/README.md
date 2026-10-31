@@ -82,3 +82,15 @@ budgeted Linux generator, run hosted.mjs with `HEAVY_JOB`, `HEAVY_OUTPUT`,
 revision 2 (20+200 C=1, C=16 2s/400 warmup + 3s/400 measurement, separate process
 CPU windows). That hosted experiment still needs its own budget/registration;
 no hosted result is supplied by the self-hosted controller.
+
+The final stock route uses a synchronous scoring helper after body parsing. The
+initial async-loop route's unexpectedly slow imul measurement is retained in
+`vector-route-before*`; the full separately registered correction is
+`vector-route-sync-before*`. Its 199-second controller uploaded prepared Linux
+builds using `--label=route-sync-before --prebuilt=/absolute/builds.tar`, with a
+remaining-budget check. Both experiments fit the combined 0.3 vCPU-hour task limit.
+Do not overwrite either or provision more under that finished allocation. A future
+patched Linux run can pass `--compiler=/absolute/linux-cli --label=route-patched`;
+it uploads/hashes that CLI and applies the general compiler override during the
+build. Register a new budget first. Full preparation and comparison limits are in
+`research/vector-route.md`; offline vector tables use `node scripts/vector-report.mjs`.
