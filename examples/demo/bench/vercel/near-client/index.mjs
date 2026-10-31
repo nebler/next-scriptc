@@ -49,7 +49,7 @@ export function validateSpec(spec) {
     if (t.kind === 'vector') {
       if (!/^\/api\/(heavy\/vectors(?:-imul)?|heavy-go\/vectors|heavy-go-simd\/vectors)$/.test(u.pathname) || typeof t.body !== 'string' || Buffer.byteLength(t.body) > 4000) throw Error('spec');
     } else if (t.kind === 'report') {
-      if (u.pathname !== '/reports' || ![5000, 200000].includes(t.size) || u.search !== `?size=${t.size}`) throw Error('spec');
+      if (u.pathname !== '/reports' || ![1000, 2000, 3000, 5000, 15000, 200000].includes(t.size) || u.search !== `?size=${t.size}`) throw Error('spec');
     } else throw Error('spec');
   }
 }
@@ -75,10 +75,11 @@ async function sample(target, secret, concurrency, phase, ordinal) {
     serverTiming: h['server-timing'] ?? null, vercelId: h['x-vercel-id'] ?? null, cache: h['x-vercel-cache'] ?? null,
     cacheControl: h['cache-control'] ?? null, contentType: h['content-type'] ?? null,
     targetInstance: h['x-vector-instance'] ?? h['x-native-instance'] ?? null,
-    attempts: h['x-native-attempts'] ?? null, pid: h['x-native-pid'] ?? null };
+    attempts: h['x-native-attempts'] ?? null, pid: h['x-native-pid'] ?? null,
+    readyBeforeCall: h['x-native-ready-before-call'] ?? null, bootMs: h['x-native-boot-ms'] ?? null };
   const failures = [];
   if (row.status !== 200) failures.push('status');
-  if (['HIT', 'STALE', 'PRERENDER'].includes(row.cache)) failures.push('cache');
+  if (row.cache !== 'MISS') failures.push('cache');
   if (!row.vercelId || !/^iad1::iad1::/.test(row.vercelId)) failures.push('region');
   if (typeof row.reusedSocket !== 'boolean') failures.push('socket-observation');
   try {

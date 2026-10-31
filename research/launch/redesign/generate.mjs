@@ -57,11 +57,20 @@ const rows100k = data.vector.rows.value.toLocaleString('en-US'), dims = data.vec
 assert.equal(data.vectorVercel.decimals, 1); assert.equal(data.vector.decimals, 1);
 
 // Spec Sheet (c-spec) is the chosen direction; its revisions live in `spec` so A/B/D stay as first reviewed.
-// Each spec override adds `scope`: a short label set directly under the headline so the measurement boundary is never buried.
+// Lean copy: headline, a scope tag directly under it, one sentence, one essential qualifier. The unit sits on the chart
+// (`axis`, above the ticks); no method footer, since the subtitle carries the sample and the notes carry the rest.
+// Everything longer lives in spec-sheet.html notes.
 const goPlus = rows => rows.map((r, i) => i === 1 ? { ...r, label: 'Go + SIMD', short: ['Go', '+ SIMD'] } : r);
-const wan = extra.vectorWan.results, vr = extra.vectorRss.results;
-assert.deepEqual(wan.map(r => r.label), ['Patched native', 'Go SIMD', 'Go plain', 'Node']);
-const ms0 = v => Math.round(v).toString();
+const vr = extra.vectorRss.results, near = extra.vectorNear.results, un = extra.useNativeFinal;
+assert.deepEqual(near.map(r => r.label), ['Patched native', 'Go SIMD', 'Go plain', 'Node']);
+// Half-up on the reported 3-decimal value: 152.350 → 152.4 (toFixed alone gives 152.3 from the binary float).
+const half1 = v => (Math.round(Number(v.toFixed(3)) * 10 + 1e-6) / 10).toFixed(1);
+const unPair = m => [
+  { label: '"use native"', short: ['“use native”'], value: m.native.value, text: half1(m.native.value), native: true, unit: 'ms' },
+  { label: 'Node.js', short: ['Node.js'], value: m.node.value, text: half1(m.node.value), unit: 'ms' },
+];
+const times2 = (fast, slow) => (slow / fast).toFixed(2) + '×';
+const patched = 'Native uses a patched scriptc. Go\u00a0+\u00a0SIMD is experimental.';
 const charts = {
   'vector-search': {
     title: 'Vector search on Vercel Functions',
@@ -74,12 +83,48 @@ const charts = {
     groups: [{ rows: vectorRows(vv, 1) }], unitStep: 1, unitLabel: '1 ms',
     spec: {
       headline: 'TypeScript faster than Go + SIMD',
-      scope: 'Vector-search server compute',
-      sub: `Find the top 10 of ${rows100k} embeddings. Median of 120 warm requests, sent one at a time. Lower is better.`,
-      method: 'ms · Vercel Functions, iad1',
-      foot: `Full requests including network are about even: ${ms0(wan[0].p50.value)} vs ${ms0(wan[1].p50.value)} ms median. Go\u00a0+\u00a0SIMD uses Go’s experimental archsimd. Native uses a patched scriptc.`,
+      scope: 'Server compute',
+      sub: `Vector search over ${rows100k} embeddings. Median of 120 requests.`,
+      axis: 'ms',
+      foot: patched,
       groups: [{ rows: goPlus(vectorRows(vv, 1)) }],
     },
+  },
+  'vector-e2e': {
+    title: 'Vector search, full request from iad1', dirs: ['c-spec'],
+    headline: 'Full request: ahead of Go + SIMD',
+    scope: 'End to end · client in iad1',
+    sub: `Same vector search, timed from a client in the same region. Median of 60 requests.`,
+    axis: 'ms',
+    foot: `p95 favors Go\u00a0+\u00a0SIMD: ${fmt(near[1].p95.value, 1)} vs ${fmt(near[0].p95.value, 1)}\u00a0ms. Patched scriptc.`,
+    groups: [{ rows: goPlus(vectorRows(near.map(r => ({ label: r.label, value: r.p50.value })), 1)) }], unitStep: 1, unitLabel: '1 ms',
+  },
+  'vector-memory': {
+    title: 'Vector search memory', dirs: ['c-spec'],
+    headline: 'Memory on par with Go, about half of Node.js',
+    scope: 'Process memory (RSS)',
+    sub: `Same vector search, same ${rows100k} embeddings in every runtime. Median of 120 requests.`,
+    axis: 'MiB',
+    foot: 'Not billed memory. Go’s IPC proxy is not counted.',
+    groups: [{ rows: goPlus(vectorRows(vr, 1)).map(r => ({ ...r, unit: 'MiB' })) }], unitStep: 1, unitLabel: '1 MiB',
+  },
+  'use-native-page': {
+    title: 'A use native page, warm, 200k rows', dirs: ['c-spec'],
+    headline: `One “use native” function, ${times2(un.endToEnd200k.native.value, un.endToEnd200k.node.value)} faster page`,
+    scope: 'End to end · 200k rows',
+    sub: 'A Server Component page that calls one native function. Median of 120 warm requests.',
+    axis: 'ms',
+    foot: 'Small inputs lose. Crossover: 5k to 15k rows.',
+    groups: [{ rows: unPair(un.endToEnd200k) }], unitStep: 5, unitLabel: '5 ms',
+  },
+  'use-native-call': {
+    title: 'The use native call itself, warm, 200k rows', dirs: ['c-spec'],
+    headline: `The native call itself, ${times2(un.function200k.native.value, un.function200k.node.value)} faster`,
+    scope: 'Function call · 200k rows',
+    sub: 'Time the page waits on the call, sidecar round trip included. Median of 120 warm requests.',
+    axis: 'ms',
+    foot: 'Loses at 5k rows and below.',
+    groups: [{ rows: unPair(un.function200k) }], unitStep: 5, unitLabel: '5 ms',
   },
   'vector-kernel': {
     title: 'Vector search loop only',
@@ -92,20 +137,12 @@ const charts = {
     groups: [{ rows: vectorRows(vk, 1) }], unitStep: 1, unitLabel: '1 ms',
     spec: {
       headline: 'The search loop alone: TypeScript still leads',
-      scope: 'Search loop only',
-      method: `ms · int8 · ${dims} dimensions · Linux Vercel Sandbox`,
-      foot: 'Same host and data for every runtime. Go\u00a0+\u00a0SIMD is experimental. Native uses a patched scriptc.',
+      scope: 'Loop only · without HTTP',
+      sub: `The same ${rows100k}-embedding search on one Linux Vercel Sandbox. Median search time.`,
+      axis: 'ms',
+      foot: patched,
       groups: [{ rows: goPlus(vectorRows(vk, 1)) }],
     },
-  },
-  'vector-memory': {
-    title: 'Vector search memory', dirs: ['c-spec'],
-    headline: 'Memory on par with Go, about half of Node.js',
-    scope: 'Vector-search process memory',
-    sub: `Memory held while serving the same search over ${rows100k} embeddings. Every runtime keeps the same dataset in memory. Lower is better.`,
-    method: 'Resident memory (RSS) · MiB · median of 120 requests',
-    foot: 'Serving process only, not billed memory. Go’s separate IPC proxy is not counted.',
-    groups: [{ rows: goPlus(vectorRows(vr, 1)).map(r => ({ ...r, unit: 'MiB' })) }], unitStep: 1, unitLabel: '1 MiB',
   },
   'cpu-per-request': {
     title: 'CPU per request, native vs Node.js',
@@ -117,7 +154,12 @@ const charts = {
     big: cpuRange, bigCaption: 'less CPU per request',
     groups: [['Hello world', cpu[0]], ['Revenue report', cpu[1]], ['Nearby-store search', cpu[2]]].map(([name, m]) => ({ name, rows: pair(m, 'ms') })),
     unitStep: 0.1, unitLabel: '0.1 ms',
-    spec: { scope: 'Process CPU per request' },
+    spec: {
+      scope: 'Process CPU, not billed CPU',
+      sub: 'Three routes, measured inside the serving process. Median of 3 × 100 requests.',
+      axis: 'ms / request',
+      foot: 'Not every route wins: Markdown is slower.',
+    },
   },
   memory: {
     title: 'Serving process memory, native vs Node.js',
@@ -128,7 +170,13 @@ const charts = {
     foot: 'Measures the serving process only, not whole-instance or billed memory.',
     big: times(rss.native.value, rss.comparison.value), bigCaption: 'less memory',
     groups: [{ rows: pair(rss, 'MiB') }], unitStep: 1, unitLabel: '1 MiB',
-    spec: { headline: `Hello route, ${times(rss.native.value, rss.comparison.value)} less memory`, scope: 'Hello-route process memory' },
+    spec: {
+      headline: `Hello route, ${times(rss.native.value, rss.comparison.value)} less memory`,
+      scope: 'Process memory (RSS)',
+      sub: 'After the first response. Median of 5 deployments.',
+      axis: 'MiB',
+      foot: 'Process only, not whole-instance or billed memory.',
+    },
   },
   'first-response': {
     title: 'First response after deploy, native vs Node.js',
@@ -139,7 +187,12 @@ const charts = {
     foot: 'Includes network and TLS. Fresh deployments, but not a certified cold start.',
     big: times(firstResponse.native.value, firstResponse.comparison.value), bigCaption: 'sooner first response',
     groups: [{ rows: pair(firstResponse, 'ms') }], unitStep: 5, unitLabel: '5 ms',
-    spec: { scope: 'End to end, network included' },
+    spec: {
+      scope: 'End to end, network included',
+      sub: 'Hello route on a fresh deployment. Median of 5 pairs.',
+      axis: 'ms',
+      foot: 'Fresh deployment, not a certified cold start.',
+    },
   },
 };
 assert.equal(vr.length, 4);
@@ -396,9 +449,9 @@ const C = { bg: '#0a0a0a', fg: '#ededed', muted: '#a1a1a1', grid: '#1f1f1f', cro
 const cross = (x, y, arm = 14) => `<i class="x" style="left:${x - arm}px;top:${y}px;width:${arm * 2}px;height:1px"></i><i class="x" style="left:${x}px;top:${y - arm}px;width:1px;height:${arm * 2}px"></i>`;
 const frame = (w, h, xs, ys, crosses) => xs.map(x => `<i class="ln" style="left:${x}px;top:0;width:1px;height:${h}px"></i>`).join('') + ys.map(y => `<i class="ln" style="left:0;top:${y}px;width:${w}px;height:1px"></i>`).join('') + crosses.map(([x, y, a]) => cross(x, y, a)).join('');
 const frameCss = `.ln{position:absolute;background:${C.grid}}.x{position:absolute;background:${C.cross}}`;
-// Left column: every word (headline, scope label, description, method, caveat). Right column: the chart alone.
+// Left column: headline, scope label, description, caveat. Right column: the chart alone, its unit above the ticks.
 function chartC(s0) {
-  const s = specOf(s0);
+  const s = specOf(s0); assert.ok(s.axis, `${s.title}: Spec Sheet charts carry their unit on the axis`);
   const W = 1200, H = 800, X0 = 488, X1 = 1136, Y0 = 64, Y1 = 736, grouped = s.groups.length > 1;
   const plotL = X0 + 84, plotR = X1 - 44, top = grouped ? 196 : 150, base = 604, ph = base - top;
   const rows = allRows(s), slots = grouped ? s.groups.length : rows.length, slotW = (plotR - plotL) / slots;
@@ -413,6 +466,7 @@ function chartC(s0) {
     const cx = plotL + slotW * (i + .5), bw = rows.length <= 2 ? 112 : 84;
     marks += col(r, cx, bw) + `<span class="cl${r.native ? ' nv' : ''}" style="left:${(cx - slotW / 2).toFixed(1)}px;width:${slotW.toFixed(1)}px;top:${base + 18}px">${r.short ? r.short.filter(Boolean).map(esc).join('<br>') : esc(r.label)}</span>`;
   });
+  const axis = `<span class="ax" style="left:${X0 + 24}px;top:${top - 64}px">${esc(s.axis)}</span>`;
   const legend = grouped ? `<div class="lg"><i style="background:#fff"></i>Native<i style="background:${C.blue}"></i>Node.js</div>` : '';
   return page(W, H, s.title, `body{background:${C.bg};color:${C.fg}}${frameCss}
   .lc{position:absolute;left:96px;top:${Y0 + 40}px;width:360px;bottom:${H - Y1 + 32}px;display:flex;flex-direction:column}
@@ -420,30 +474,35 @@ function chartC(s0) {
   .sc{margin-top:18px;font:500 20px/1.35 'Geist Mono';color:#fff;display:flex;gap:10px;align-items:baseline}.sc i{flex:none;width:10px;height:10px;background:${C.blue};transform:translateY(-1px)}
   .sub{margin-top:16px;font:400 21px/1.4 Geist;color:${C.muted}}
   .bt{margin-top:auto;padding-top:20px;border-top:1px solid ${C.grid}}
-  .m{font:400 20px/1.45 'Geist Mono';color:${C.muted}}
-  .foot{margin-top:10px;font:400 20px/1.4 Geist;color:${C.muted}}
+  .foot{font:400 20px/1.4 Geist;color:${C.muted};text-wrap:pretty}
   .gr{position:absolute;height:1px;background:${C.grid}}.gr.z{background:#555}
-  .tk{position:absolute;font:400 22px 'Geist Mono';color:${C.muted}}
+  .tk{position:absolute;font:400 22px 'Geist Mono';color:${C.muted}}.ax{position:absolute;font:500 22px 'Geist Mono';color:${C.fg}}
   .b{position:absolute}.val{position:absolute;width:140px;text-align:center;font:500 30px Geist}
   .cl{position:absolute;text-align:center;font:400 22px/1.25 Geist;color:${C.muted}}.cl.nv{color:#fff;font-weight:500}
   .lg{position:absolute;right:${W - plotR}px;top:112px;display:flex;align-items:center;gap:10px;font:400 22px Geist;color:${C.muted}}.lg i{width:14px;height:14px}.lg i:nth-of-type(2){margin-left:16px}`,
     frame(W, H, [64, X0, X1], [Y0, Y1], [[64, Y0, 18], [X0, Y0, 14], [X1, Y1, 18], [X0, Y1, 14]])
-    + `<div class="lc" data-col="left"><h1>${esc(s.headline)}</h1>${s.scope ? `<p class="sc"><i></i>${esc(s.scope)}</p>` : ''}<p class="sub">${esc(s.sub)}</p><div class="bt"><p class="m">${esc(s.method)}</p><p class="foot">${esc(s.foot)}</p></div></div><div data-col="right">${legend}${marks}</div>`);
+    + `<div class="lc" data-col="left"><h1>${esc(s.headline)}</h1>${s.scope ? `<p class="sc"><i></i>${esc(s.scope)}</p>` : ''}<p class="sub">${esc(s.sub)}</p><div class="bt"><p class="foot">${esc(s.foot)}</p></div></div><div data-col="right">${axis}${legend}${marks}</div>`);
 }
+// Spec Sheet hero and OG lead with the "use native" directive (the hook), never the route.native.ts filename. The hero
+// code is the same function-level route.ts the route-code image shows (checked against the real extractor above).
 function heroC(w, h, og) {
-  const lines = codeLines(nativeCode, 'ref-dark');
+  const pipe = `<b>"use native"</b> → scriptc → native binary`;
   if (og) return page(w, h, 'next-scriptc', `body{background:${C.bg};color:#fff}${frameCss}
     .wm{position:absolute;left:44px;top:40px;font:400 13px 'Geist Mono';color:${C.muted}}
     h1{position:absolute;left:44px;top:84px;font:600 40px/1.05 Geist;letter-spacing:-.035em}
     .p{position:absolute;left:44px;top:232px;font:400 14px 'Geist Mono';color:${C.muted}}.p b{color:#fff;font-weight:400}`,
-    frame(w, h, [24, 576], [24, 291], [[24, 24, 9], [576, 291, 9]]) + `<div class="wm">next-scriptc</div><h1>TypeScript, compiled<br>to native Vercel<br>Functions.</h1><div class="p"><b>route.native.ts</b> → scriptc → native binary</div>`);
+    frame(w, h, [24, 576], [24, 291], [[24, 24, 9], [576, 291, 9]]) + `<div class="wm">next-scriptc</div><h1>TypeScript, compiled<br>to native Vercel<br>Functions.</h1><div class="p">${pipe}</div>`);
+  const lines = codeLines(routeUseNativeCode, 'ref-dark'), lh = 28, top = 313 - lines.length * lh / 2;
+  const di = lines.findIndex(l => l.directive);
   return page(w, h, 'next-scriptc', `body{background:${C.bg};color:#fff}${frameCss}
-  .wm{position:absolute;left:64px;top:72px;font:400 20px 'Geist Mono';color:${C.fg}}
-  h1{position:absolute;left:64px;top:186px;font:600 56px/1.06 Geist;letter-spacing:-.035em}
-  .p{position:absolute;left:64px;top:474px;font:400 20px 'Geist Mono';color:${C.muted}}.p b{color:#fff;font-weight:400}
-  pre{position:absolute;left:730px;top:228px;font:400 16px/1.75 'Geist Mono';white-space:pre}`,
+  .hook{position:absolute;left:64px;top:62px;font:500 48px/1 'Geist Mono';letter-spacing:-.02em;color:#fff;display:flex;gap:18px;align-items:center}
+  .wm{position:absolute;left:730px;top:76px;font:400 20px 'Geist Mono';color:${C.muted}}
+  h1{position:absolute;left:64px;top:206px;font:600 56px/1.06 Geist;letter-spacing:-.035em}
+  .p{position:absolute;left:64px;top:494px;font:400 20px 'Geist Mono';color:${C.muted}}
+  .hl{position:absolute;left:705px;width:478px;top:${top + di * lh}px;height:${lh}px;background:#141414;border-left:2px solid #fff}
+  pre{position:absolute;left:730px;top:${top}px;font:400 16px/${lh}px 'Geist Mono';white-space:pre}`,
     frame(w, h, [704, 1184], [174, 452, 564], [[704, 174, 12], [1184, 452, 12], [704, 564, 12]])
-    + `<div class="wm">next-scriptc</div><h1>TypeScript, compiled<br>to native Vercel<br>Functions.</h1><div class="p"><b>route.native.ts</b> → scriptc → native binary</div><pre>${lines.map(l => l.html).join('\n')}</pre>`);
+    + `<div class="hook">"use native"</div><div class="wm">next-scriptc</div><h1>TypeScript, compiled<br>to native Vercel<br>Functions.</h1><div class="p">&quot;use native&quot; → scriptc → native binary</div><div class="hl"></div><pre>${lines.map(l => l.html.trim() ? l.html : '').join('\n')}</pre>`);
 }
 function routeC() {
   const lines = codeLines(stripFirst(routeUseNativeCode), 'ref-dark');
@@ -456,20 +515,21 @@ function routeC() {
   pre{position:absolute;left:156px;top:${top}px;font:400 22px/${lh}px 'Geist Mono';white-space:pre}
   .a{position:absolute;right:104px;top:${top + di * lh + 5}px;font:400 20px 'Geist Mono';color:${C.muted}}`,
     frame(1024, 576, [72, 952], [64, 160, 512], [[72, 64, 14], [952, 512, 14], [72, 160, 10]])
-    + `<div class="hl"></div><div class="tab">app/api/hello/route.ts<span>use native</span></div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre><div class="a">← compiles to native</div>`);
+    + `<div class="hl"></div><div class="tab">app/api/hello/route.ts</div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre>`);
 }
 function useC() {
   const lines = codeLines(stripFirst(useNativeCode), 'ref-dark');
   const di = lines.findIndex(l => l.directive), lh = 33, top = 186;
   return page(1000, 800, 'Offload one function with use native', `body{background:${C.bg};color:#fff}${frameCss}
-  .tab{position:absolute;left:96px;top:96px;font:400 20px 'Geist Mono';color:${C.fg}}
+  .tab{position:absolute;left:96px;top:96px;font:400 20px 'Geist Mono';color:${C.fg};display:flex;gap:14px;align-items:center}
+  .tab span{font-size:20px;color:${C.blue};border:1px solid #1d3f73;padding:3px 10px}
   .hl{position:absolute;left:73px;right:73px;top:${top + di * lh - 2}px;height:${lh}px;background:#141414;border-left:2px solid #fff}
   .g{position:absolute;left:96px;top:${top}px;font:400 20px/${lh}px 'Geist Mono';color:#4b4b4b;text-align:right;width:28px;white-space:pre}
   pre{position:absolute;left:148px;top:${top}px;font:400 20px/${lh}px 'Geist Mono';white-space:pre}
   .a{position:absolute;right:104px;top:${top + di * lh + 3}px;font:400 20px 'Geist Mono';color:${C.muted}}
   .foot{position:absolute;left:96px;bottom:${800 - 736 + 30}px;font:400 22px Geist;color:${C.muted}}.foot b{color:#fff;font-weight:500}`,
     frame(1000, 800, [72, 928], [64, 160, 736], [[72, 64, 14], [928, 736, 14], [72, 160, 10]])
-    + `<div class="hl"></div><div class="tab">examples/demo/lib/revenue.ts · simplified</div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre><div class="a">← native</div><p class="foot"><b>One directive</b> compiles this function to native. The route around it stays on Node.js.</p>`);
+    + `<div class="hl"></div><div class="tab">lib/revenue.ts</div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre><p class="foot"><b>One directive</b> compiles this function to native. The route around it stays on Node.js.</p>`);
 }
 
 // ---------- Direction D · Signal ----------

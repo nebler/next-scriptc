@@ -5,7 +5,7 @@ import { revenueEventsJson } from "../app/api/analytics/revenue/events.ts";
 // build the transformed Node module no longer generates unused large fixtures.
 const fixtures = new Map<number, string>();
 export function revenueFixture(size: number): string | undefined {
-  if (![5000, 15000, 50000, 200000].includes(size)) return undefined;
+  if (![1000, 2000, 3000, 5000, 15000, 50000, 200000].includes(size)) return undefined;
   let value = fixtures.get(size);
   if (value === undefined) {
     const begin = performance.now();

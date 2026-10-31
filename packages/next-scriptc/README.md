@@ -90,8 +90,8 @@ vercel deploy --prebuilt
 
 The build wraps `vercel build` and Vercel's Next adapter, producing Linux x86-64
 executable Functions. Both commands accept `--prod` for production. Function-level
-`"use native"` currently runs on Node on Vercel; only native routes are deployed
-as executable Functions.
+`"use native"` calls run in a bundled Linux sidecar inside the Node Function,
+reached over loopback HTTP. Native routes deploy as executable Functions.
 
 See the [repository README](https://github.com/nebler/next-scriptc#readme) for benchmark results with caveats,
 library refusals, the Go comparison and development commands, and the
