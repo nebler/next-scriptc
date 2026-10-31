@@ -38,12 +38,12 @@ export const routes = [
   { id: "csv", pattern: "/api/export", enabled: false, category: "refused", pending: "Papa Parse unparse refused in route probe; no CSV route exists" },
 ];
 export const isolation = {
-  // Compare synchronous bcrypt, production-style async scrypt and the CPU control.
-  heavy: [routes[0], routes[1], { id: "primes", path: "/api/primes?limit=10000000", category: "synthetic" }],
+  // Compare synchronous bcrypt, production-style async scrypt and the CPU control, plus gzip inside the registered light group.
+  heavy: [routes[0], routes[1], { id: "primes", path: "/api/primes?limit=10000000", category: "synthetic" }, routes.find((route) => route.id === "gzip-export")],
   probes: [{ path: "/" }, { path: "/api/hello" }],
 };
 export const profiles = {
-  sandbox: { coldRepeats: 3, repeats: 2, durationMs: 1000, warmupMs: 1000,
+  sandbox: { coldRepeats: 2, repeats: 1, durationMs: 1000, warmupMs: 1000,
     concurrency: [1, 8, 64], isolationMs: 2000, idleMs: 300, threads: [1, 2, 4], cpuCap: 2000 },
   // One full plumbing pass, including every workload and thread variant.
   quick: { coldRepeats: 1, repeats: 1, durationMs: 400, warmupMs: 300,
@@ -55,7 +55,12 @@ export function sectionsOption(value) {
   if (!sections.length || sections.some((name) => !sectionNames.includes(name))) throw new Error(`--sections must be comma-separated: ${sectionNames.join(",")}`);
   return [...new Set(["coverage", ...sections])];
 }
-// Both builds use the normal production Next CLI.
+// All three builds use the normal production Next CLI.
 export function productionCommand({ next, port }) {
   return [next, "start", "-p", String(port), "-H", "127.0.0.1"];
 }
+
+// Expected full-run section budgets, including orchestration and expensive drains.
+// The separate sandbox runner adds tools/install and three sequential builds.
+export const sectionEstimates = { coverage: "0.5–1 min", cold: "2–3 min", direct: "4–5 min",
+  production: "6–7 min", isolation: "2–3 min", threads: "3–4 min" };
