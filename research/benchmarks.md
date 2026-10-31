@@ -1,12 +1,20 @@
-# next-scriptc benchmark suite — review round 2
+# Pre-registered workload selection — final round
 
-The application workloads are successful cost-10 bcrypt login with JWT issuance, authenticated JWT verification, search over 3,000 products, uncached Markdown rendering, and full-content RSS. `hello` is a small-response control; `primes` is a synchronous CPU control; `report` is a synthetic worker/sharing experiment. CSV and OG-image generation were refused by the route probe and are not successes. See [probe limitations](../examples/probe/RESULTS.md).
+Selection criterion: choose operations common in real Next.js applications, not operations selected for native performance. The fixed headline set is successful stored-password login using cost-10 bcryptjs, successful stored-password login using Node's built-in async scrypt, authenticated HS256 JWT verification, retained-index search over 3,000 products, uncached Markdown article rendering, and request-dependent full-content RSS. Small JSON `hello` is the transport control; primes is a synchronous CPU control; the million-order report at 1/2/4 workers is the synthetic sharing experiment, including the hand-flattened Node SharedArrayBuffer baseline. Existing CSV and OG-image probe refusals remain reported.
 
-The direct comparison runs **the identical generated `.next/scriptc/entry-N.ts`**, including the HTTP shim, under Node 24 type stripping and as its scriptc 0.4.6 binary. Production compares a normal optimized Next 16.4.3 `next build` / `next start` with the adapter disabled (`.next-node`) against Next plus all resident native route binaries. Keep Node's normal JIT and Next's static optimizations: Node prerenders `hello` and `feed.xml`; this is explicitly retained as the stronger application baseline. It is not a same-execution-path comparison for prerendered routes. Direct measurements still execute every handler request.
+**Every selected workload is reported whatever the result**, including slower execution, compiler refusals, parity failures and Next's default 30-second proxy timeout. No workload will be removed or substituted after this registration. Both Node and native execute the same handler and request fixtures; Node retains its normal production optimization and JIT. Any intended native GET must depend on a realistic request input so both runtimes compute the response on every measured request. Node build prerendered paths are recorded separately.
 
-## Reproduce locally
+The pre-registered library experiment compares installed `marked` 18.1.2 and `minisearch` 7.2.0 with their matching upstream TypeScript tags, using the demo's full article/RSS and catalog inputs. It reports Node published-JS, native published-JS and native TS-source steady-state per-call times, byte parity and coverage dynamic-tier counts, including exact compilation refusals. It does not change demo library resolution. One uninterrupted final quick local suite is indicative only; no sandbox run is authorized in this round.
 
-Use Node **24.x** and pnpm **11.1.3** on PATH. Build sequentially from an unchanged checkout:
+---
+
+# Benchmark protocol and final-round implementation
+
+The direct comparison executes **the identical generated `.next/scriptc/entry-N.ts`**, HTTP shim included, under Node 24 type stripping and as a scriptc 0.4.6 binary. Production compares optimized Next 16.4.3 `next build` / plain `next start` with the adapter disabled (`.next-node`) against plain `next start` with the adapter and all resident native routes. Node keeps its default JIT, libuv threadpool and Next optimizations. No runtime tuning or speed-only compiler flags are added.
+
+## Reproduce
+
+Use Node **24.x**, pnpm **11.1.3**, and sequential builds from unchanged source:
 
 ```sh
 pnpm install --frozen-lockfile
@@ -16,94 +24,56 @@ node examples/demo/bench/check.mjs
 node examples/demo/bench/run.mjs --profile quick --output research/benchmarks/local-indicative
 ```
 
-The suite uses `process.execPath` for every Node server, worker controller and generator, rejects other Node majors and nonempty `NODE_OPTIONS`, and records exact versions, start mode, source/entry/binary SHA-256s, build IDs, dirty status, CPU masks and load averages. Native compilation uses the adapter's default release settings; no speed-only build flags or runtime tuning are added. Fresh builds are mandatory: source hashes cannot retroactively prove an old binary matches a new source. Final artifact/source/build-ID checks reject concurrent edits or builds.
+`quick` is one complete plumbing pass: every workload, both scopes/runtimes, three isolation loads and all worker variants at 1/2/4 workers. It uses one cold/steady repetition, 300 ms warmup, 400 ms measurement windows and at most 40 fixed-count CPU requests. `sandbox` uses three cold repetitions, two steady repetitions, 1 s warmup/windows, C=1/8/64. **Both password logins are bounded separately:** one cold sample per scope/runtime, one generator warmup plus three measured C=1 requests, once per scope/runtime. The same fixed sample supplies CPU and latency; p99 is only the maximum of three. Readiness/fixture checks execute additional untimed requests. No failed or cheaper authentication path replaces successful password verification.
 
-The full suite is intentionally budgeted rather than a large statistical study. `sandbox` (the default) uses three cold repetitions, two steady repetitions, 1 s warmup and 1 s measurement windows at C=1/8/64. `quick` uses one cold/steady repetition, 300 ms warmup and 400 ms windows, and caps fixed-count CPU samples at 40 requests. Both include **every workload**, both scopes/runtimes, both isolation loads, and all three worker variants at 1/2/4 workers. Login has the separate fixed budget below in either profile.
+All measured responses must have expected status and byte-identical SHA-256 bodies on all four surfaces. Successful JWT fixtures pin `DEMO_JWT_NOW=1793318400` and a public test signing key. Verify uses a precomputed valid HS256 token outside the timed work. Search uses `q=desk%20lamp&limit=7`; Markdown renders the full `reliable-webhooks` guide; RSS renders both full posts. Every server, generator and worker controller uses `process.execPath`. The harness rejects other Node majors and nonempty `NODE_OPTIONS`, records versions, source/entry/binary hashes, build IDs, dirty state, load averages and affinity, then rejects source/artifact/build changes during the run.
 
-```sh
-# Partial rerun; coverage is always added automatically.
-node examples/demo/bench/run.mjs --profile sandbox --sections direct,production
-# A distinct order check, not pooled silently with the first run:
-node examples/demo/bench/run.mjs --profile sandbox --reverse
-```
+Sections are `coverage,cold,direct,production,isolation,threads`; `--sections direct,production` still automatically adds coverage and labels omitted sections absent. `--reverse` reverses steady runtime blocks for a distinct order check. There is no native start selector or results-resume/composition path. A retained local run comes from one uninterrupted invocation of the final harness.
 
-Sections are `coverage,cold,direct,production,isolation,threads`. Selected sections execute in the requested order, preceded by coverage. Omitted sections remain absent in JSON; do not describe a subset as a complete suite. Each section prints its estimated duration before it starts.
+## Async scrypt login
 
-Native production start handling lives in **`bench/config.mjs:productionCommand`**. The current checkout uses `--native-start=adapter` (default, `next-scriptc start`). After integrating the adapter's plain-Next supervisor, pass `--native-start=next` to use `next start`. The sandbox runner forwards the same flag; it does not maintain another start-command implementation. Direct starts are unchanged.
+`POST /api/login-scrypt` keeps the bcrypt route's account normalization, input validation pattern, unknown-user derivation and HS256 JWT issuance. It uses a stored **16-byte salt and 64-byte derived key**, derived with **N=32768 (2^15), r=8, p=1, maxmem=64 MiB**. The salt/hash are public deterministic test fixtures; a real account would receive a fresh random salt. The working-memory term is about `128*N*r = 32 MiB`; 64 MiB allows implementation overhead. This is a realistic bounded demo work factor in the requested range, chosen before timing, not a universal password-policy recommendation. Scrypt has no bcrypt 72-byte truncation; input is explicitly bounded at 1024 UTF-8 bytes to limit request abuse.
 
-## Finding 1: the hello contradiction
+The route wraps callback `crypto.scrypt` in a Promise rather than using `scryptSync`: production Node should keep request handling responsive while password derivation runs in libuv's default threadpool. `crypto.timingSafeEqual` compares equal-length stored/derived Buffers before the email check. Unknown users still do the derivation and comparison. The same JWT fields/signature are compared in full. Parity cases include successful login, wrong password, unknown email, malformed JSON/shape, empty/missing/wrong types, multibyte passwords above bcrypt's boundary, and the scrypt input limit.
 
-The predecessor's 430 req/s was a median of only two **300 ms** windows: 542 and 318 req/s. Their p50s were 0.867 and 0.561 ms; their p99s were 11.32 and 71.75 ms. Averaging run percentiles produced the reported 0.71/41.5 ms. A fast median can coexist with low throughput when a small number of long stalls dominate wall time. Comparing this noisy capacity statistic against a separate 400-request median is not evidence of a stable scriptc slowdown.
+Node documents [async scrypt, its memory bound and salt guidance](https://nodejs.org/docs/latest-v24.x/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback) and [threadpool use](https://nodejs.org/docs/latest-v24.x/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback). The [scriptc crypto reference](https://github.com/vercel-labs/scriptc/blob/main/docs/content/limitations/builtin-apis/crypto.mdx) supports scrypt options and timingSafeEqual but states that native derivations finish **before deferred callbacks**, blocking the caller. Isolation therefore measures runtime scheduling as well as process topology. The existing synchronous bcrypt regression remains reported; its isolation result cannot stand in for async production Node hashing. Async scrypt is also measured as an isolation load, with the same one-outstanding-request policy on both sides.
 
-Two harness problems were found:
+## Dynamic routes and the Node baseline
 
-1. Every warmup and every measurement spawned a **different generator** and destroyed its `http.Agent`. The server was warmed, but neither the measuring generator's V8 code nor its connections were warmed. Short runs disproportionately included client initialization and connection establishment. Process startup itself was already outside the generator's latency/throughput timer; it was inside the old server-CPU interval.
-2. Peak-memory sampling ran a **whole-machine `ps -axo` every 100 ms**, even for a one-process route. That is unnecessary disturbance on a host with thousands of processes and heavy scheduling pressure. It was especially material in three-tick measurement windows. The before/after boundary census still discovers the full tree; periodic sampling now reads the established PIDs only (targeted `ps` on macOS, `/proc/PID/stat` on Linux). Boundary PID sets must match.
+With `cacheComponents: true`, Next prerenders GET handlers that never touch runtime data. The pinned [Next route-handler guide](https://nextjs.org/docs/app/getting-started/route-handlers#with-cache-components), also installed at `examples/demo/node_modules/next/dist/docs/01-app/01-getting-started/15-route-handlers.md`, explicitly lists `request.url` and `request.headers` reads as prerender termination signals. `export const dynamic` is not used.
 
-Every measured sample now warms **the same generator process and keep-alive pool** that it will measure. An IPC barrier lets the controller take CPU/RSS boundaries after warmup and release the generator afterward. The generator records warmup and measured `connectionsCreated`, `reusedRequests`, request counts, elapsed time, p50/p99/max and CPU. Latency includes socket acquisition, body draining and local scheduling. It does not include spawn or warmup. The suite never subtracts a connection cost or changes native results to match expectations.
+`hello` reads `Accept-Language` and returns an English or German greeting with `Vary: Accept-Language`. RSS reads a validated `limit` query parameter and renders that many newest posts; the benchmark's default still includes both complete posts. These are useful request inputs, not dummy cache-busting reads. Both builds compute every measured response. The harness separately records `.next-node/prerender-manifest.json` paths. Ordinary UI and genuinely static output retain normal Next optimization.
 
-[First diagnostic JSON](benchmarks/transport-check-before.json) preserves a focused run before narrowing the sampler. At C=1:
+`test/routes.mjs` sets **DEMO_PROXY_TIMEOUT_MS=180000** for correctness testing only and no longer preloads `test/proxy-timeout.mjs`. The adapter agent owns the config hook that consumes this variable; the reviewer must reconcile the name on merge. Benchmarks clear the variable and keep Next's **default 30 s upstream proxy timeout**. Native production failures with a ≥29 s HTTP 500 and an upstream `ECONNRESET`/socket-hang-up log are identified explicitly as exceeding that default, with elapsed time and full server logs retained. Other failures remain failures with their own diagnostic. A timeout is a real deployment consequence, never counted as low successful throughput. The entire production tree restarts before the next independent workload so abandoned bcrypt computation cannot contaminate later samples.
 
-| Runtime / case | Requests | req/s | p50 ms | p99 ms | New sockets / reused requests |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Node, original 300 ms + global sampler | 642 | 2,139 | 0.258 | 2.452 | 1 / 641 |
-| Native, original 300 ms + global sampler | 227 | 753 | 0.627 | 10.625 | 1 / 226 |
-| Native, original 300 ms without sampler | 985 | 3,282 | 0.216 | 1.325 | 1 / 984 |
-| Native, 400 sequential requests | 400 | 1,988 | 0.299 | 2.252 | 1 / 399 |
-| Native, same-client warmup + 400, sampled | 400 | 2,278 | 0.222 | 2.754 | 0 / 400 (1 warmup socket) |
+## TypeScript-source library experiment
 
-**Connection reuse works in both runtimes.** All 400-request cases used one connection; every request after the first reused it. Reconnecting is ruled out in these checks. The focused [second diagnostic](benchmarks/transport-check.json), using the targeted sampler, also retains one connection; absolute rates changed substantially as machine load changed. These are sequential observations on a loaded Mac, not a randomized causal estimate of sampler cost. They identify harness defects and demonstrate that the historical multi-fold gap is not stable. They cannot uniquely attribute every historical 41 ms tail stall to the sampler, runtime, GC or scheduler. There is no reproducible native-only transport regression here to claim or file upstream; a quiet Linux repeat is still needed.
-
-Reproduce the focused transport check separately from a complete suite:
+See [the probe results](../examples/probe/RESULTS.md) and [retained machine-readable evidence](../examples/probe/source-experiment-results.json). Reproduce independently of the demo builds:
 
 ```sh
-node examples/demo/bench/diagnose.mjs > research/benchmarks/transport-check.json
+mkdir -p examples/probe/.sources
+git clone --depth 1 --branch v18.1.2 https://github.com/markedjs/marked.git examples/probe/.sources/marked
+git clone --depth 1 --branch v7.2.0 https://github.com/lucaong/minisearch.git examples/probe/.sources/minisearch
+node examples/probe/source-experiment.mjs
 ```
 
-It compares old-style short windows with/without sampling, 400 sequential requests, and same-client warmed fixed-count/duration samples. The retained `transport-check-before.json` used the original global sampler. `check.mjs` independently validates generator socket counts against server-side `connection` events for a keep-alive server and one deliberately closing every response, including exact request counts at C=8 and response-digest failure.
+The runner checks the clean tag commit, copies only the application handlers into ignored probe artifacts, resolves their local fixture imports to the originals, and changes **only the library import** for the TS variant. Upstream TS files are unmodified. Node uses the published package. Both native builds use release defaults and `--node-islands=off`. Each successful program warms 200 calls then times 500 calls in the same process; index construction and process startup are outside timing. Timing includes handler invocation and Response draining; a full untimed response is compared byte-for-byte against Node. All variants, counts, commands and compiler refusals are retained, including losses. Demo imports are unchanged. A useful TS-source outcome would require adapter support for **native-only aliases** while Next/Node resolve published JS, with source version/integrity pinned and parity rechecked.
 
-## Findings 3–5: representative requests, bcrypt and coverage
+## Historical diagnostics and cleanup
 
-All successful request fixtures come from `examples/demo/test/routes.mjs`:
+The previous local report was assembled from interrupted and replacement blocks. Those stitched/intermediate artifacts, composition script and one-off transport diagnostics are removed; history retains them. Their conclusions remain relevant: the old generator warmed a different process/connection pool from the measured one, and global `ps -axo` sampling every 100 ms disturbed short windows on this heavily loaded Mac. The corrected harness warms the same generator and keep-alive pool, uses an IPC measurement barrier and samples only established PIDs between boundary censuses. Server-side connection checks demonstrate actual reuse, not just a keep-alive flag. Historical hello p50/throughput disagreement did not establish a stable native transport regression.
 
-- Login: `POST /api/login`, JSON email ` ADA@example.com ` and password `correct horse battery staple`. Normalization and successful bcrypt verification/signing are exercised.
-- Verify: `GET /api/verify`, a precomputed HS256 Bearer token with `role=editor`, `sub=user-42`, `iss=next-scriptc-demo`, `aud=demo-api`, `iat=1793318400`, `exp=1793322000`. The measured response must be **200**, never the missing/invalid-token fast path.
-- Search: `GET /api/search?q=desk%20lamp&limit=7`. The index is initialized once and retained; cold start includes initialization, warmed requests do not rebuild it.
-- Markdown: `GET /api/posts/reliable-webhooks`, rendering the full long guide on every request.
-- Feed: `GET /api/feed.xml`, rendering and escaping both posts on every native/direct request; Node production can serve Next's prerendered body.
-
-Every server receives `DEMO_JWT_NOW=1793318400` and the public test key `DEMO_JWT_SECRET=next-scriptc-parity-test-signing-secret-32-bytes`. They are recorded in JSON. Token construction is outside the workload; the literal token is committed in the registry. Full body SHA-256 must match across all four surfaces and on every load response; unexpected status or changed bytes fail the run. There is no normalization escape hatch.
-
-**Bcrypt is an explicit native regression.** The previous probe needed 26.8 s native versus 0.56 s Node for three cost-10 operations (~48× slower); 201/435 statements in that standalone probe were reported in the dynamic tier. That probe includes hash plus correct/incorrect comparison, while the application does one successful stored-hash comparison and JWT signing. Do not present its ratio as this route's measured ratio.
-
-Login runs C=1, one warmup request and **three measured requests once per runtime/scope**. The same fixed sample supplies CPU and throughput/latency rows; it is not executed twice. Its cold section has one fresh-process request per runtime/scope. Readiness adds one execution in each steady process, and isolation separately warms login then holds one heavy request outstanding. Total normal suite login work is bounded (no C=8/64 duration window). The three-request p99 is the maximum of three and supports no tail claim. No reduced bcrypt cost, wrong password, skipped workload or asymmetric request count is used.
-
-`scriptc coverage <generated entry>` runs sequentially before measurements with the same default policy as the adapter build. JSON contains the exact command, complete stdout/stderr, statements analyzed, static statements, static percentage, **dynamic-tier statement count**, and each npm package's compilation mode for all seven HTTP workloads plus `report`. The generated Markdown places these next to application C=1 speed ratios and provides a table for controls/report too. Importantly, “98% static” and package mode `static` do **not** mean 98% typed machine operations: the static total can include untyped dynamic-tier statements. Coverage describes the entry graph (shim and dependencies included), not sampled hot-path time. It suggests an explanation for slow untyped npm code without proving that all dynamic statements execute or that every dynamic operation is costly. The application entry's totals therefore differ from the smaller standalone bcrypt probe.
-
-## Finding 2: worker memory
-
-The old `(RSS after job − RSS just after dataset construction) / workers` divided a GC-sensitive residual by the worker count. Dataset construction garbage could be reclaimed later, yielding absurd negative “worker allocation” values.
-
-Each variant now starts once and grows its retained pool **1 → 2 → 4** within that process. All counts run the same two complete warmup computations; one additional readiness computation at count 1 is matched in SAB. Each measured response records warmed total process RSS, including the dataset, workers and runtime. The replacement metric is:
-
-```text
-marginal warmed RSS per added worker =
-    (median post-job process RSS at 4 workers − median post-job process RSS at 1 worker) / 3
-```
-
-The baseline is now a warmed process with one resident worker, rather than a dataset-construction high-water mark. This is valid **net resident growth across adding three workers to one process**. It includes GC, allocator and JIT history; it is not exact clone size, unique physical memory, or a causal allocation counter. Negative net differences would remain visible as GC/noise and must not be described as negative worker allocation. Raw 1/2/4-worker RSS and all repetitions are retained. The dataset-before-workers residual is discarded from suite rows and no longer rendered.
-
-One million orders, eight regions, twelve scenarios and sixty months use identical integer-cent arithmetic and exact result totals. Node ordinary object workers clone `workerData`; native publishes the same ordinary object graph. The **Node hand-flattened SharedArrayBuffer baseline** remains alongside them; it uses pure JS parent/workers and avoids loading a TypeScript parser per worker. It is a stronger Node baseline than cloning alone. Its data layout and accesses necessarily differ, so the result concerns sharing ergonomics and overhead, not same-source compiler speed. SAB has no idle HTTP shim, slightly favoring its RSS. Compute time excludes dataset construction, pool initialization and HTTP. Counts ascend and share JIT/GC history; variants run in separate processes. No forced GC or hidden runtime flags are used.
+The old worker metric subtracted a GC-sensitive post-construction RSS high-water mark and divided by workers. It could produce misleading negative allocation claims. The retained metric compares warmed 1-worker and 4-worker states in the same growing process: `(RSS4 - RSS1) / 3`, alongside raw RSS. This is net resident growth including GC/JIT/allocator history, not clone allocation size. Even warmed SAB RSS can fall; negative net deltas remain visible. The stronger Node SAB baseline stays beside Node object clones and native published objects.
 
 ## Metrics and resource isolation
 
 - **Cold start:** monotonic spawn-to-first-fully-drained successful response, fresh process per sample, 2 ms retry polling. It includes route initialization and work, with filesystem caches retained; process-cold, not machine-cold or a platform/serverless cold start. Median averages the middle values; p90 uses nearest rank.
-- **Idle RSS:** each owned process and simultaneous total after readiness plus the profile quiet interval, with the initializing route named. Native production includes Next, all ten binaries and the current supervisor, even for uncalled routes. RSS is not PSS; shared pages can be counted more than once.
+- **Idle RSS:** each owned process and simultaneous total after readiness plus the profile quiet interval, with the initializing route named. Native production includes Next, all route binaries and the current supervisor, even for uncalled routes. RSS is not PSS; shared pages can be counted more than once.
 - **CPU/request:** stable application-tree user+system delta over exactly N sequential successful requests after generator warmup, divided by N. Linux `/proc/PID/stat` uses `utime+stime` and the host's `CLK_TCK`, excluding child-CPU counters; worker-thread CPU is already in process totals. macOS `ps TIME` has centisecond resolution. Generator CPU is separate. CPU boundaries still include census and generator shutdown gaps; tiny fixed counts are noisy. This is not a reproduction of Vercel's Active CPU billing instrumentation.
 - **Peak RSS:** largest simultaneous known-tree RSS total sampled every 100 ms and at boundaries, with each process retained. It is a sampled lower bound, not a kernel high-water mark. Boundary discovery verifies stable PID membership; sampling cannot capture every transient subprocess or spike.
 - **Throughput and latency:** HTTP/1.1 keep-alive, no pipelining; C closed-loop outstanding requests, dispatch until deadline then drain in-flight bodies. Throughput divides completions by actual dispatch-to-last-drain time, including drain. Latency includes request scheduling/socket acquisition/body draining. Nearest-rank per-run p50/p99, with median [min,max] across repetitions, not confidence intervals. No coordinated-omission correction or open-loop SLA claim. Login uses a fixed count instead of a deadline.
 - **Topology cost:** native production minus native direct median p50/p99 and throughput ratio. Separate-run percentile differences are descriptive, not paired hop percentiles. They can be negative under noise and include Next routing/proxy effects.
-- **Isolation:** separate login (realistic) and primes (synthetic) heavy loads. Warm heavy first; baseline/loaded probe `/` and `/api/hello` in parallel, one outstanding request per path, 20 ms pause after completion. Loaded holds one heavy request outstanding, starting 100 ms before probes. Record heavy completions; equal offered concurrency, not equal achieved RPS. An expensive request can outlive the window and is drained, not abandoned.
+- **Isolation:** separate bcrypt login, async scrypt login (realistic) and primes (synthetic) heavy loads. Warm heavy first; baseline/loaded probe `/` and `/api/hello` in parallel, one outstanding request per path, 20 ms pause after completion. Loaded holds one heavy request outstanding, starting 100 ms before probes. Record heavy completions; equal offered concurrency, not equal achieved RPS. An expensive request can outlive the window and is drained, not abandoned.
 
 On Linux, discover four allowed logical CPUs from `/proc/self/status`. Both runtimes' entire application trees inherit the first two through `taskset`; the generator/controller/sampler use the next two. Thread experiments use all four without a sustained external generator. This fits Hobby's **four-vCPU** limit. CPU topology, SMT, memory bandwidth, shared-host interference and container resource accounting remain limitations. macOS cannot pin through taskset, so all local results are indicative. A single Node generator can saturate one JS core; rows flag CPU/wall ratios ≥0.8, marking throughput as a possible client-limited lower bound. This is not a calibrated generator ceiling.
 
@@ -113,77 +83,50 @@ An HTTP failure or timeout is recorded as a `workload-failure` with the server l
 
 All processes started by the suite are owned and shut down in `finally`, including detached descendants. It refuses occupied ports rather than killing unrelated servers; checks port 3417 and every manifest port after each block and final cleanup. Failed measurements preserve partial JSON/Markdown labelled `failed`. SIGINT/SIGTERM abort through cleanup; SIGKILL cannot execute cleanup.
 
-## Findings 6–7: sandbox budget and runner
 
-After the reviewer merges and commits the implementation, use Node 24 with the existing Sandbox authentication in `.env.local`:
+## Sandbox command and budget (not run here)
+
+After merging and committing the implementation, run from the intended branch with Node 24 and existing Sandbox credentials in `.env.local`:
 
 ```sh
 node --env-file=.env.local scripts/sandbox-bench.mjs
-# With the integrated plain-next-start supervisor:
-node --env-file=.env.local scripts/sandbox-bench.mjs --native-start=next
-# Subset or separate order check:
-node --env-file=.env.local scripts/sandbox-bench.mjs --native-start=next --sections direct,production
-node --env-file=.env.local scripts/sandbox-bench.mjs --native-start=next --reverse
+# Independent order check, if requested separately:
+node --env-file=.env.local scripts/sandbox-bench.mjs --reverse
 ```
 
-The runner archives **HEAD of the branch it runs from**, never a hardcoded base commit or uncommitted overlay. It verifies suite presence before provisioning, records the full commit/archive SHA-256 and verifies the uploaded archive remotely. `.env.local`, credentials, ignored files and node_modules are not uploaded. Source/build snapshots and artifact hashes stay in the suite's JSON.
+The runner uploads a SHA-256-verified **HEAD archive**, never uncommitted changes, ignored source clones, credentials or node_modules. It requests `vercel/sandbox/node:24`, four vCPUs, 30-minute lifetime, installs clang and taskset, installs the frozen lockfile and builds native then Node sequentially. Linux application/load affinity is 2+2 logical CPUs; worker experiments use all four. Downloads and provenance include partial failures; nested cleanup always attempts stop and reports active CPU or its unavailability.
 
-The requested image is `vercel/sandbox/node:24`, **four vCPUs**, 30-minute lifetime, below Hobby's 45-minute session maximum. Install clang (missing on the Ubuntu image) and util-linux/taskset with apt or dnf, install exact pnpm 11.1.3/frozen lockfile, then build native and Node sequentially (`NEXT_SCRIPTC_BASELINE=node`). No compiler failure is hidden by a grep pipeline. Every setup/build/suite section prints its estimated duration in advance.
+With the extra bounded scrypt workload and isolation pair, estimated suite time is **9–18 min**, plus **about 8 min** tool/install/build allowance: **17–27 min total**, below the 28-minute overall abort and 30-minute lifetime. Extra scrypt work is bounded to one cold and three measured requests per surface plus untimed checks and one-outstanding isolation; it adds no C=8/64 hashing window. This is a budget estimate, not a measured sandbox guarantee: loaded hosts or slow builds can fail within the ceiling. Native build has a 10-minute timeout, Node build 3 minutes, install 3 minutes; the overall deadline takes precedence. No sandbox was provisioned in this round.
 
-Expected total is **16–25 minutes**, including tools/install and both builds; suite alone is budgeted at **8–17 minutes**. These are estimates, **not sandbox measurements**. Repetitions are cut (3 cold / 2 steady), not workloads. Native build has a 10-minute ceiling, Node build 3 minutes, install 3 minutes. An overall **28-minute abort** reserves download/stop time; the sandbox's 30-minute lifetime is the final backstop. A timeout remains a failed run with partial reports if available. There is no guarantee a complete result will fit on an arbitrarily overloaded host; the lifetime guarantees resources do not outlive the budget.
+## Final local indicative run
 
-Downloads go to **`research/benchmarks/sandbox-<timestamp>.json`**, `.md` and `.provenance.json`. Provenance retains commit/archive identity, section/start flags, each completed step's elapsed time/status and stop metadata. Downloads have bounded timeouts and are inside a nested `try/finally` so even download failure or interruption attempts `sandbox.stop()`. Stop prints **active CPU seconds used** (or explicitly `unavailable` if the SDK omits the field), records the raw value, and reports any stop failure. Never represent a failed stop as successful cleanup. The reviewer runs this command; **no sandbox was provisioned for this implementation task**.
+The only retained local run is [JSON](benchmarks/local-indicative.json) and [generated Markdown](benchmarks/local-indicative.md), produced by **one uninterrupted quick invocation** from clean implementation commit `925ce491982d18ddebd8b874c508ed9c30fb6ab4`. Status **complete**, all six sections, **186 observations**, **398.34 seconds** (6m38s), no workload failures. Both builds, final source/artifact/build-ID checks, worker-result equality and owned-process/port cleanup passed. Node 24.22.0, scriptc 0.4.6, Next 16.4.3, Apple M4 Pro / 12 logical CPUs; load averages fell from 23.55/32.62/35.48 to 18.98/27.56/32.29. No affinity; one repetition. These are indicative plumbing results, not public performance evidence.
 
-## Local indicative validation
+All six headline workloads are retained below. **Latency ratio = native / Node**; greater than 1 is a native loss. Login p50s come from only three measured requests. Each cell is one short local sample, not an uncertainty estimate.
 
-The quick-profile validation dataset is stored in [JSON](benchmarks/local-indicative.json) and [generated Markdown](benchmarks/local-indicative.md). Implementation commits and source snapshots are recorded in JSON. This run is a heavily loaded Apple M4 Pro plumbing check, with no CPU pinning and only one repetition. It is not public performance evidence. The dataset status, workload results, socket counts, coverage, worker memory and elapsed time are in those artifacts; highlights follow below.
+| Workload | Direct Node / native p50 ms | Direct ratio | Production Node / native p50 ms | Production ratio |
+| --- | ---: | ---: | ---: | ---: |
+| bcrypt login + JWT | 120.442 / 13726.338 | 113.967× | 134.053 / 10805.138 | 80.604× |
+| async scrypt login + JWT | 91.054 / 111.367 | 1.223× | 129.924 / 104.601 | 0.805× |
+| authenticated JWT verification | 1.358 / 2.005 | 1.476× | 2.512 / 0.920 | 0.366× |
+| 3,000-product search | 2.379 / 6.038 | 2.538× | 1.759 / 7.632 | 4.340× |
+| full Markdown article | 2.444 / 187.042 | 76.527× | 2.009 / 33.191 | 16.519× |
+| full-content RSS | 2.099 / 35.672 | 16.994× | 3.499 / 43.601 | 12.460× |
 
-The single quick-suite attempt initially stopped at native production login (HTTP 500). Its direct cold login took **41.63 s**, exceeding Next’s default **30 s** proxy timeout. That default is visible in the pinned `next/dist/server/lib/router-utils/proxy-request.js`. The initial failed JSON/Markdown are preserved as `local-indicative-initial-failure.{json,md}`. After adding failure capture, `--resume-cold` imported only its 15 successful cold observations and unchanged coverage, requiring identical source/entry/binary hashes, build IDs and runtime versions. The original environment/error/source snapshot remains under `resumedCold`; no steady-state windows are imported or pooled across harness revisions. This resumes an interrupted attempt rather than repeating completed cold measurements. It is deliberately limited to failures inside the cold section.
+Control results also remain visible: direct hello Node/native p50 **0.697/0.994 ms**, production **0.824/2.089 ms**; primes direct **6.144/5.288 ms**, production **5.575/5.521 ms**. The large native Markdown difference between direct and production, and verification's reversed runtime order across scopes, show why these noisy separate-run ratios cannot be treated as stable proxy costs or close compiler wins. Two samples flagged possible generator saturation; full C=1/8/64 throughput, tails, CPU, socket and peak RSS rows remain in the generated report.
 
-```sh
-node examples/demo/bench/run.mjs --profile quick \
-  --resume-cold research/benchmarks/local-indicative-initial-failure.json \
-  --output research/benchmarks/local-indicative
-```
+Production initialized idle RSS after hello was **117.59 MiB / one process Node** versus **148.95 MiB / twelve processes native**. This includes every resident native binary, not just the called route. Node's recorded prerendered paths are `/`, `/_global-error`, `/_not-found`, `/api/items/new`, `/favicon.ico`; hello and RSS are dynamic in both builds.
 
-The very high host load (about **79** during the initial failure, on 12 logical CPUs) is part of the evidence. A production timeout is a failure, not a low-throughput success; its cells are labelled FAILED. A quiet sandbox may complete this request within the default deadline, but that has not been measured here.
+For the hello isolation probe, Node p99 under bcrypt was **91.860 ms** versus **4.461 ms** under async scrypt; native was **6.338 ms** and **2.903 ms**, respectively. Native/Node primes-loaded hello p99 was **33.021/126.388 ms**. Baseline/loaded rows and sample counts for both probes and all loads are retained. This supports the scheduling distinction: the bcrypt isolation comparison is not a stand-in for production-style async Node password hashing. Small improvements over idle windows are scheduling noise, not evidence that adding load reduces latency.
 
-The resumed attempt reached every section in **577.35 s**, with exact thread-total parity and final source/artifact/build-ID/port checks passing. Its earlier production and isolation blocks were then replaced by a **191.02 s** `--sections production,isolation` rerun after fixing process restart and warming both probes. The initial interrupted cold attempt took **221.73 s**. These durations are separate executions, not a continuous timed benchmark. No complete suite was repeated to select a favorable result.
-
-```sh
-node examples/demo/bench/run.mjs --profile quick --sections production,isolation \
-  --output research/benchmarks/local-indicative-production-rerun
-node research/benchmarks/compose-local.mjs
-```
-
-`compose-local.mjs` reproducibly assembles the report from the retained raw inputs, asserting identical artifacts/runtime/build identities and that the restart path was exercised. It retains cold/direct/threads from `local-indicative-before-restart.json`, replaces **entire** production/isolation blocks from `local-indicative-production-rerun.json`, tags every row with its source run, and preserves both environments/source snapshots. It never pools or selects repetitions. A historical counter key (`agentSocketsAtStart`) is renamed to the accurate `connectionsCreatedBeforeWindow`; its cumulative numeric value is unchanged. The raw inputs remain unmodified. The final report's time span includes the interruption and harness fixes.
-
-**Final local dataset status is FAILED**, with 167 observations: 27 successful cold samples, 27 fixed-count CPU samples, 75 throughput/latency windows, 17 idle snapshots, six isolation windows, nine worker timing/RSS samples, three derived worker-memory rows and three explicit workload failures. Native production login failed cold, steady and isolation; the latter two rerun failures happened before a fresh production tree was started for the next independent workload. The server log records the proxy's `ECONNRESET` / `socket hang up`, consistent with Next's normal 30-second deadline. Failed requests are never included as successful low-throughput samples. All other configured route/runtime cases returned the expected body bytes; all nine worker results shared the same exact result digest. No hidden timeout increase was used.
-
-Indicative direct C=1 results (one short sample; **not publication evidence**):
-
-| Application workload | Node p50 ms | Native p50 ms | Native / Node latency | Entry statements / static / dynamic tier |
-| --- | ---: | ---: | ---: | --- |
-| Cost-10 login + JWT | 322.293 | 20,145.589 | 62.5× slower | 2,084 / 98% / 426; bcryptjs and jose static |
-| Authenticated verify | 2.151 | 1.063 | 0.49× | 1,698 / 97% / 241; jose static |
-| Search | 5.418 | 11.679 | 2.16× slower | 1,023 / 97% / 344; minisearch static |
-| Markdown | 5.896 | 74.569 | 12.65× slower | 1,215 / 98% / 641; marked static |
-| RSS | 4.001 | 79.296 | 19.82× slower | 1,216 / 98% / 640; marked static |
-
-Login's fixed-count CPU cost was **126.7 ms/request Node versus 10,456.7 ms/request native**. Its p50 is based on three requests, and its p99 is merely their maximum. The measured application result and previous three-operation standalone bcrypt probe are different experiments. Both show a large regression; neither is hidden behind a 401 or reduced work factor. Untyped dynamic operations are a plausible explanation, not a hot-path profile proving causation.
-
-The corrected direct hello control shows why p50 alone cannot predict capacity: Node/native p50 **1.091/0.903 ms**, p99 **11.951/14.636 ms**, throughput **505/470 req/s**. Both had **zero measured socket creations** and reused their one warmed socket for **206/206 Node** and **191/191 native** requests. Every direct/application C=1 throughput sample reused all measured requests with no new socket. Production counters describe generator-to-Next sockets, not the additional Next-to-native upstream pool. Connection reuse is therefore demonstrated directly rather than inferred from a keep-alive flag.
-
-The production C=1 verify p50 was **3.681/3.982 ms Node/native**, while production RSS feed was **4.246/60.688 ms**, retaining Next's prerendered Node baseline. Production idle RSS after hello was **112.70 MiB / one process Node** versus **224.61 MiB / twelve processes native**; the restarted native tree was **234.95 MiB**. These are initialized idle snapshots, not fully warmed application footprints.
-
-| Worker variant | Warmed 1-worker RSS MiB | Warmed 4-worker RSS MiB | Net warmed RSS / added worker MiB |
+| Worker variant | Warmed RSS at 1 / 4 workers MiB | Net RSS / added worker MiB | Internal time at 4 workers ms |
 | --- | ---: | ---: | ---: |
-| Node objects / clone | 124.766 | 1,296.828 | 390.688 |
-| Node hand-flattened SAB | 83.859 | 77.469 | −2.130 |
-| Native published objects | 72.219 | 73.188 | 0.323 |
+| Node object clones | 465.16 / 1039.73 | 191.53 | 791.36 |
+| Node hand-flattened SAB | 84.47 / 98.83 | 4.79 | 447.51 |
+| Native published objects | 82.75 / 83.81 | 0.35 | 298.58 |
 
-The small **negative SAB net delta** remains visible: even a warmed process's RSS can fall due to GC, allocator or OS residency changes while workers are added. This is not negative worker allocation or an allocation-saving claim. It illustrates the remaining noise floor and why warmed total RSS and raw count states accompany the net metric. A quiet Linux repeat is needed for any memory comparison. The former construction-high-water-mark subtraction is gone.
+The stronger SAB baseline substantially narrows Node's object-clone cost. These are net warmed RSS differences and synthetic compute times, with GC/history caveats, not physical allocation sizes or application-route speedups.
 
-Load averages started at **45.47 / 31.81 / 24.60**, reached about **79** around the first failure, and ended at **32.97 / 42.29 / 43.70** on the 12-core M4 Pro. Short samples, scheduling noise, GC/RSS drift, and no affinity make all local ratios indicative. The quiet four-vCPU sandbox pass in both runtime orders remains the reviewer's job.
+No login exceeded the default 30-second proxy deadline in **this** run. The historical loaded-Mac run did exceed it (41.63 s native direct cold login and production HTTP 500 with upstream reset); that remains a real-world consequence, summarized here rather than retained as stitched/intermediate result files. The new explicit timeout label was not exercised by this successful run. No timeout increase or login substitution was used.
 
-Harness checks passed for server-side versus generator socket counts (both keep-alive and deliberate close), exact C=8 request counts, digest rejection, coverage parsing, section validation and centralized start selection. Mocked runner success/build-failure/download-failure paths all called stop and printed active CPU; no real Sandbox was created. Local syntax checks and final owned-port/process cleanup were also verified. The checked-in benchmark sources do not change any application or adapter source.
+The standalone native scrypt probe passed 11 full response cases. `test/routes.mjs` now defines 49 HTTP cases and sets `DEMO_PROXY_TIMEOUT_MS`, but its full dev/production correctness run awaits the other agent's config consumer on merge; this branch does not modify that owned file. The final benchmark verifies all successful application fixture bytes across direct/production Node/native. Isolation probes check expected HTTP status; the synthetic worker section compares exact result totals. No real Sandbox was created.

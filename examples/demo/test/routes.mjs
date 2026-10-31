@@ -3,7 +3,6 @@ import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
 import { SignJWT, jwtVerify } from "jose";
 
 const root = path.resolve(import.meta.dirname, "../../..");
@@ -12,15 +11,12 @@ const port = Number(process.env.ROUTES_PORT ?? "3427");
 const clock = 1793318400;
 const secret = "next-scriptc-parity-test-signing-secret-32-bytes";
 const key = new TextEncoder().encode(secret);
-const env = { ...process.env, NEXT_SCRIPTC_BASELINE: "", DEMO_JWT_NOW: String(clock), DEMO_JWT_SECRET: secret };
+const env = { ...process.env, NEXT_SCRIPTC_BASELINE: "", DEMO_PROXY_TIMEOUT_MS: "180000", DEMO_JWT_NOW: String(clock), DEMO_JWT_SECRET: secret };
 const running = new Set();
-const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate"];
+const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate", "vary"];
 
 function start(args) {
-  const childEnv = args[0] === "start" ? {
-    ...env, NODE_OPTIONS: `${env.NODE_OPTIONS ?? ""} --import=${pathToFileURL(path.join(demo, "test/proxy-timeout.mjs")).href}`,
-  } : env;
-  const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, env: childEnv, detached: true, stdio: ["ignore", "pipe", "pipe"] });
+  const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, env, detached: true, stdio: ["ignore", "pipe", "pipe"] });
   const state = { child, output: "", listeners: new Set(), done: false };
   for (const stream of [child.stdout, child.stderr]) stream.on("data", (chunk) => {
     state.output += chunk;
@@ -106,6 +102,8 @@ const cases = [
   { path: "/api/login", method: "POST", body: "[]", status: 400 },
   { path: "/api/login", method: "POST", body: JSON.stringify({ email: 42, password: "password" }), status: 400 },
   { path: "/api/login", method: "POST", body: JSON.stringify({ email: "ada@example.com" }), status: 400 },
+  { path: "/api/login", method: "POST", body: JSON.stringify({ email: "ada@example.com", password: "" }), status: 400 },
+  { path: "/api/login", method: "POST", body: JSON.stringify({ email: "ada@example.com", password: 42 }), status: 400 },
   { path: "/api/login", method: "POST", body: JSON.stringify({ email: "ada@example.com", password: "é".repeat(37) }), status: 400 },
   { path: "/api/search?q=desk%20lamp&limit=7", status: 200, check(body) {
     const result = JSON.parse(body);
@@ -146,6 +144,20 @@ const cases = [
   { path: "/api/verify", headers: { authorization: `Bearer ${await token({ aud: "another-api" })}` }, status: 401 },
   { path: "/api/verify", headers: { authorization: `Bearer ${await token({ exp: undefined })}` }, status: 401 },
 ];
+
+// Both password algorithms share the successful JWT/validation cases. Scrypt
+// has no bcrypt 72-byte truncation limit; its explicit input bound is 1024 bytes.
+for (const test of cases.filter((test) => test.path === "/api/login")) {
+  cases.push({ ...test, path: "/api/login-scrypt",
+    ...(test.body?.includes("é") ? { body: JSON.stringify({ email: "ada@example.com", password: "é".repeat(513) }) } : {}) });
+}
+cases.push(
+  { path: "/api/login-scrypt", method: "POST", body: JSON.stringify({ email: "ada@example.com", password: "é".repeat(37) }), status: 401 },
+  { path: "/api/hello", status: 200, check(body) { assert.equal(JSON.parse(body).message, "Hello from next-scriptc!"); } },
+  { path: "/api/hello", headers: { "accept-language": "de" }, status: 200, check(body) { assert.equal(JSON.parse(body).message, "Hallo von next-scriptc!"); } },
+  { path: "/api/feed.xml?limit=1", status: 200, check(body) { assert.equal((body.toString().match(/<item>/g) ?? []).length, 1); } },
+  { path: "/api/feed.xml?limit=0", status: 400 },
+);
 
 async function responses(native) {
   const results = [];

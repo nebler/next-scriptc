@@ -46,8 +46,7 @@ export async function threadsBenchmark({ demo, manifest, profile, cpus, record }
     for (const sample of samples) {
       expected ??= sample.result;
       assert.deepEqual(sample.result, expected, `Thread totals differ: ${variant}/${sample.threads}`);
-      // The route's dataset-before-GC residual is deliberately discarded.
-      const { result, workerRssGrowth, ...metrics } = sample;
+      const { result, ...metrics } = sample;
       record({ metric: "threads", scope: "internal-worker-dispatch-and-reduction", category: "synthetic",
         variant, ...metrics, resultDigest: digest(Buffer.from(JSON.stringify(result))) });
     }

@@ -7,8 +7,13 @@ function xml(value: string) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
-export function GET() {
-  const items = posts.slice().reverse().map((post) => {
+export function GET(request: Request) {
+  // Feed readers can request a bounded number of the newest full-content posts.
+  const limit = Number(new URL(request.url).searchParams.get("limit") ?? "20");
+  if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
+    return Response.json({ error: "limit must be an integer from 1 to 100" }, { status: 400 });
+  }
+  const items = posts.slice().reverse().slice(0, limit).map((post) => {
     const url = `https://demo.example.com/posts/${post.slug}`;
     const html = marked.parse(post.markdown, { async: false });
     return `<item><title>${xml(post.title)}</title><link>${xml(url)}</link><guid isPermaLink="true">${xml(url)}</guid><pubDate>${new Date(post.published).toUTCString()}</pubDate><description>${xml(post.description)}</description><content:encoded>${xml(html)}</content:encoded></item>`;

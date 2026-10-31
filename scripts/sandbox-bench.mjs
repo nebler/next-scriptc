@@ -9,9 +9,8 @@ import { sectionsOption } from "../examples/demo/bench/config.mjs";
 import { Sandbox } from "@vercel/sandbox";
 
 const root = path.resolve(import.meta.dirname, "..");
-const { values } = parseArgs({ options: { reverse: { type: "boolean", default: false }, sections: { type: "string" }, "native-start": { type: "string", default: "adapter" } } });
+const { values } = parseArgs({ options: { reverse: { type: "boolean", default: false }, sections: { type: "string" } } });
 const sections = sectionsOption(values.sections);
-if (!["next", "adapter"].includes(values["native-start"])) throw new Error("--native-start must be next or adapter");
 const git = (...args) => execFileSync("git", args, { cwd: root, maxBuffer: 128 * 1024 * 1024 });
 // Fail before provisioning if HEAD cannot run the suite. No local patches,
 // ignored files, secrets or node_modules are uploaded.
@@ -31,9 +30,9 @@ const sandbox = await Sandbox.create({
   timeout: 30 * 60 * 1000, persistent: false,
 });
 const provenance = { sandbox: sandbox.name, commit, archiveSha256, startedAt: new Date(started).toISOString(),
-  image: "vercel/sandbox/node:24", vcpus: 4, memoryMiB: 8192, reverse: values.reverse, sections, nativeStart: values["native-start"], status: "running", steps: [] };
+  image: "vercel/sandbox/node:24", vcpus: 4, memoryMiB: 8192, reverse: values.reverse, sections, nativeStart: "next start", status: "running", steps: [] };
 console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; archive SHA-256 ${archiveSha256}`);
-console.log("Estimated total: 16–25 min including tools/install and both builds; 28 min abort budget, 30 min lifetime. Four vCPUs; app/load split 2+2 via taskset.");
+console.log("Estimated total: 17–27 min including tools/install and both builds; 28 min abort budget, 30 min lifetime. Four vCPUs; app/load split 2+2 via taskset.");
 
 async function step(label, estimate, script, sudo = false) {
   console.log(`\n${label}: estimated ${estimate}`);
@@ -66,7 +65,7 @@ try {
   // behind grep/"|| true" or build the two Next outputs concurrently.
   await step("Native production build", "2–5 min (10 min ceiling)", "cd next-scriptc && timeout 600s npx -y pnpm@11.1.3 --filter demo build");
   await step("Node production build", "15–60 s (3 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE=node timeout 180s npx -y pnpm@11.1.3 --filter demo build");
-  await step("Sandbox benchmark", "8–17 min (remaining overall budget)", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 1200s node examples/demo/bench/run.mjs --profile sandbox --native-start=${values["native-start"]} --sections=${sections.join(",")} --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
+  await step("Sandbox benchmark", "9–18 min (remaining overall budget)", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 1200s node examples/demo/bench/run.mjs --profile sandbox --sections=${sections.join(",")} --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
   provenance.status = "complete";
 } catch (error) {
   provenance.status = "failed";

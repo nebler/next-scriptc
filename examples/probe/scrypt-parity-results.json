@@ -1,0 +1,61 @@
+{
+  "node": {
+    "command": [
+      "/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node",
+      "--import",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/node-resolve.mjs",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/entries/login-scrypt.ts"
+    ],
+    "code": 0,
+    "signal": null,
+    "timedOut": false,
+    "stdout": "0\nstatus: 200\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"accessToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIiwic3ViIjoidXNlci00MiIsImlzcyI6Im5leHQtc2NyaXB0Yy1kZW1vIiwiYXVkIjoiZGVtby1hcGkiLCJpYXQiOjE3OTMzMTg0MDAsImV4cCI6MTc5MzMyMjAwMH0.9oJSTv1iCv1Qoiyz-qRhNnmlPBKcfL04DDPbYHvRp6Y\",\"tokenType\":\"Bearer\",\"expiresIn\":3600}\n1\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n2\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n3\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Invalid JSON\"}\n4\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required\"}\n5\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required\"}\n6\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n7\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n8\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n9\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n10\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n",
+    "stderr": ""
+  },
+  "scriptc": "0.4.6",
+  "cases": 11,
+  "environment": {
+    "DEMO_JWT_NOW": "1793318400",
+    "DEMO_JWT_SECRET": "next-scriptc-probe-only-signing-secret-32-bytes"
+  },
+  "parity": true,
+  "coverage": {
+    "command": [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/packages/next-scriptc/node_modules/.bin/scriptc",
+      "coverage",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/entries/login-scrypt.ts",
+      "--node-islands=off"
+    ],
+    "code": 0,
+    "signal": null,
+    "timedOut": false,
+    "stdout": "scriptc coverage /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/entries/login-scrypt.ts\n\n  statements analyzed   1371\n  compile statically    1362  (99%)\n    in dynamic tier     186  (operate on values typed only at runtime; --explain-dynamic lists them)\n  (1 function not analyzed \u2014 signature blocked; their statements count as not static)\n\n  npm package compilation:\n    jose  static\n\n  Node islands   (would-be, report-only: the build is unchanged; --node-islands=off)\n    none\n    SC8002  npm package 'jose' is outside the native subset (R2.3 shape mutation outside the checker's view: 'Object.defineProperty()') and Node islands are off\n\n  deferred to runtime   3 sites (JS statements that throw their fence if executed)\n      \u00d71  SC1090  method calls like 'input.toBase64' is not supported yet (instantiating 'encodeBase64' with (Uint8Array, unknown))\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/lib/buffer_utils.js:40:12\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  method calls like 'Uint8Array.fromBase64'\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/lib/buffer_utils.js:49:12\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  delete expressions\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/lib/key.js:135:35\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n\n  in unreached code   (never lowered \u2014 cannot fail a build)\n      \u00d72  SC1090  constructing values other than classes declared in the program\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/lib/deflate.js:31:52, /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/lib/deflate.js:34:54\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  computed class fields without an initializer and a stable string, number, or module-level literal Symbol()/Symbol.for() key\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/util/errors.js:71:3\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  delete expressions\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/key/export.js:26:76\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  the reference to 'pending' (a binding form with no lowering)\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/jwks/local.js:17:29\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n      \u00d71  SC1090  the reference to 'EdgeRuntime' (a binding form with no lowering)\n          at /Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/node_modules/.pnpm/jose@6.2.14/node_modules/jose/dist/webapi/jwks/remote.js:5:142\n          hint: this form is valid TypeScript but does not compile yet \u2014 rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)\n",
+    "stderr": ""
+  },
+  "build": {
+    "command": [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/packages/next-scriptc/node_modules/.bin/scriptc",
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/entries/login-scrypt.ts",
+      "-o",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/.artifacts/login-scrypt/route",
+      "--no-keep-llvm",
+      "--node-islands=off"
+    ],
+    "code": 0,
+    "signal": null,
+    "timedOut": false,
+    "stdout": "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/.artifacts/login-scrypt/route\n",
+    "stderr": ""
+  },
+  "native": {
+    "command": [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-760f4c58/examples/probe/.artifacts/login-scrypt/route"
+    ],
+    "code": 0,
+    "signal": null,
+    "timedOut": false,
+    "stdout": "0\nstatus: 200\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"accessToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZWRpdG9yIiwic3ViIjoidXNlci00MiIsImlzcyI6Im5leHQtc2NyaXB0Yy1kZW1vIiwiYXVkIjoiZGVtby1hcGkiLCJpYXQiOjE3OTMzMTg0MDAsImV4cCI6MTc5MzMyMjAwMH0.9oJSTv1iCv1Qoiyz-qRhNnmlPBKcfL04DDPbYHvRp6Y\",\"tokenType\":\"Bearer\",\"expiresIn\":3600}\n1\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n2\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n3\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Invalid JSON\"}\n4\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required\"}\n5\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required\"}\n6\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n7\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n8\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n9\nstatus: 401\nheaders: [\"cache-control: no-store\",\"content-type: application/json\"]\nbody: {\"error\":\"Invalid credentials\"}\n10\nstatus: 400\nheaders: [\"content-type: application/json\"]\nbody: {\"error\":\"Email and password required; password must be at most 1024 UTF-8 bytes\"}\n",
+    "stderr": ""
+  }
+}
