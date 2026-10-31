@@ -61,6 +61,14 @@ try {
       throw Object.assign(new Error(`Three-way hosted parity: ${s.path}`), {
         correctness: true,
       });
+    if (
+      s.size &&
+      job.references?.[`${s.id}:${s.size}`] &&
+      job.references[`${s.id}:${s.size}`] !== results[0].digest
+    )
+      throw Object.assign(new Error("Retained paired reference mismatch"), {
+        correctness: true,
+      });
     if (s.size) references.set(`${s.id}:${s.size}`, results[0].digest);
     report.correctness.push({
       ...(s.size ? metadata(s) : { path: s.path, status: s.status }),
