@@ -6,7 +6,7 @@ const draft = readFileSync(file, 'utf8');
 export const count = s => [...s.replace(/https?:\/\/[^\s]+/g, 'x'.repeat(23))].length;
 const blocks = [...draft.matchAll(/### (Tweet [1-6]|Hook [ABC]|Hosted (?:win|tie|loss)|PR (?:open|coming))[^\n]*\n\n<!-- count: (\d+) -->\n```text\n([\s\S]*?)\n```/g)];
 assert.equal(blocks.filter(b => b[1].startsWith('Tweet')).length, 6);
-assert.equal(blocks.length, 14, 'Six tweets, three hooks, three hosted variants, two PR variants');
+assert.equal(blocks.length, 11, 'Six tweets, three hooks, two PR variants');
 for (const [, label, declared, body] of blocks) {
   const n = count(body);
   assert.ok(n <= 280, `${label}: ${n} > 280`);

@@ -11,7 +11,9 @@ In the [final Vercel benchmark](research/vercel-final.md), native versus Node me
 | Hello CPU per request, median | 0.570 ms | 3.064 ms | Self-reported process CPU, not Vercel billed Active CPU |
 | Revenue CPU per request, median | 2.384 ms | 7.029 ms | Same process-counter method and routing limitations |
 
-These previews used one explicit group of 17 native routes, Next 16.4.3 and scriptc 0.4.6, in iad1 with 2,048 MiB allocated. Stable CPU boundary tokens cannot prove every intervening request reached that process. Some CPU rows exhausted their token-change retry limit and remain unavailable. One full-run Sandbox stop timed out after results were downloaded; the raw failure and recovery are retained. These observations do not establish production capacity or total infrastructure efficiency. [Method, raw data and failures](research/vercel-final.md).
+Previews on a Hobby account in iad1, Next 16.4.3, scriptc 0.4.6, one Function with 17 native routes. These observations do not establish production capacity or total infrastructure efficiency. [Method, raw data and failures](research/vercel-final.md).
+
+On a CPU-heavy int8 vector search route, native TypeScript used **10.0 ms** server compute versus **14.2 ms** for Go with explicit SIMD and **108.6 ms** for Node. [Details below](#native-typescript-vs-go-on-a-cpu-heavy-route).
 
 The losses matter too. Full Markdown rendering with `marked` used **40.209 vs 4.593 ms CPU/request**, and warm C=1 p50 was **60.620 vs 24.329 ms**, native versus Node. Regex-heavy library code can be substantially slower. [Source](research/vercel-final.md#process-cpu-per-request-self-reported).
 
@@ -107,7 +109,20 @@ Go also won the raw RGBA thumbnail route locally and image resizing in the [kern
 
 ## Native TypeScript vs Go on a CPU-heavy route
 
-TODO(vector-vercel)
+The [vector route experiment](research/vector-vercel.md) runs exhaustive int8 vector search (100,000 x 768, exact top-10) as a Next.js route on Vercel Functions in iad1, with the same Function configuration for every variant. Server-side compute p50, from after the request body is read to after JSON serialization, over 120 C=1 requests per variant across three fresh preview sets:
+
+| Variant | Compute p50 / p95 | Process CPU/request | RSS |
+| --- | ---: | ---: | ---: |
+| Native, natural `a * b`, patched scriptc, `--cpu-dispatch` | **10.0 / 10.9 ms** | 10.0 ms | 81 MiB |
+| Native, `Math.imul`, stock scriptc 0.4.6, `--cpu-dispatch` | 10.1 / 10.7 ms | 10.0 ms | 81 MiB |
+| Native, natural `a * b`, stock scriptc 0.4.6 | 408.9 / 419.8 ms | 407.3 ms | 81 MiB |
+| Go, experimental `simd/archsimd` AVX2 | 14.2 / 15.4 ms | 14.4 ms | 82 MiB |
+| Go, plain | 50.0 / 57.0 ms | 43.3 ms | 82 MiB |
+| Node, same TypeScript | 108.6 / 116.3 ms | 76.5 ms | 154 MiB |
+
+Every response returned the identical top-10, and the AVX2 dispatch path was verified on the deployed Functions. The natural-multiplication result depends on a [+25-line scriptc range-analysis patch](research/scriptc-int8-range-analysis.md) that is not in a released compiler yet; stock scriptc reaches the same speed when the source uses `Math.imul`.
+
+The route also has losses: the first response after deploy was 1.09 to 1.40 s for native versus 0.34 to 0.42 s for Go SIMD, mostly slower synthetic corpus generation, and a short C=4 window had a worse WAN p95 for native (916 vs 637 ms). The load client ran outside iad1, so end-to-end latency is reported only as secondary data. [Method, raw data and limits](research/vector-vercel.md).
 
 ## Status
 

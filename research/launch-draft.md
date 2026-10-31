@@ -2,18 +2,25 @@
 
 **Review copy. Nothing posted.** Six tweets, in publication order. Only the `text` blocks are tweet copy. Evidence notes, counts, variants and recording directions are editorial material. Counts include spaces and newlines; URLs count as Twitter's fixed 23 characters. Placeholder templates are counted literally and must be recounted after substitution. Run `node research/launch/validate.mjs`.
 
-The narrow claim: Vercel's TypeScript compiler, behind a plain Next.js adapter, can reach Go-class performance on a specific CPU-heavy integer workload. The compiler candidate and CPU dispatch are essential to the natural-code kernel win. The hosted vector comparison is pending. This is neither universal Go parity nor a claim about stock scriptc.
+The narrow claim: Vercel's TypeScript compiler, behind a plain Next.js adapter, can reach Go-class performance on a specific CPU-heavy integer workload. The compiler candidate and CPU dispatch are essential to the natural-code kernel win. The hosted vector comparison is done: on server compute, the patched route beats explicit Go SIMD on Vercel, and stock scriptc matches it with `Math.imul`. This is neither universal Go parity nor a general TypeScript-versus-Go ranking.
 
 ## Thread
 
-### Tweet 1: hook, attach the one-take video (262 chars)
+### Tweet 1: hook, attach Chart B (Vercel) or the one-take video (249 chars)
 
-<!-- count: 262 -->
+<!-- count: 249 -->
 ```text
-Do CPU-heavy Next.js routes need route.go? On an int8 search kernel, TypeScript compiled with Vercel's scriptc beats explicit Go SIMD. A compiler patch plus a plain adapter, no Next.js fork. Native Vercel Functions below; kernel and hosted results kept separate.
+Do CPU-heavy Next.js routes need route.go?
+
+Int8 vector search on Vercel Functions, server compute p50:
+TypeScript via Vercel's scriptc: 10.0 ms
+Go with explicit SIMD: 14.2 ms
+Node: 108.6 ms
+
+Plain Next.js adapter, no fork. Losses are in the thread.
 ```
 
-Evidence: the **kernel-only** claim is [vector-cpu-levels, measurements](vector-cpu-levels.md#measurements); the compiler qualification is [range-analysis, root cause and validation gate](scriptc-int8-range-analysis.md#root-cause). Native Function deployment and no Next.js fork are documented in [Vercel publication method](vercel-final.md#method-review-and-provenance). The route.go context is recorded in [the local RFC investigation](next-primitive.md#evidence-and-scope). No statement here depends on a pending hosted vector win.
+Evidence: all four values are server-side compute p50 from [vector-vercel, measurements](vector-vercel.md#measurements): native patched natural TS + dispatch **9.999**, Go experimental archsimd AVX2 **14.216**, Node **108.593 ms**, pooled 120 C=1 requests per variant over three fresh preview sets, identical top-10 on every response. Compute starts after the request body is read and ends after JSON serialization; network, IPC and platform routing are excluded. Native/Go-SIMD p50 ratio per set: 0.704 / 0.726 / 0.677. Go SIMD is the experimental `simd/archsimd` package, labelled as such; plain Go is in tweet 3. Native Function deployment and no Next.js fork: [Vercel publication method](vercel-final.md#method-review-and-provenance). route.go context: [local RFC investigation](next-primitive.md#evidence-and-scope).
 
 ### Tweet 2: Vercel observations, attach Chart A (245 chars)
 
@@ -36,18 +43,19 @@ Evidence per value, all native/Node:
 
 Media: [Chart A PNG](launch/chart-a-vercel.png). It keeps the Markdown loss alongside the wins. CPU is self-reported process CPU, not billed Active CPU. RSS is not whole-instance usage. These are separate diagnostic measurements, not a single trace of one request.
 
-### Tweet 3: CPU-heavy TypeScript vs Go, attach kernel Chart B (247 chars)
+### Tweet 3: the vector route, stock vs patched (235 chars)
 
-<!-- count: 247 -->
+<!-- count: 235 -->
 ```text
-CPU-heavy int8 search, Linux Sandbox, kernel only:
-Patched native 9.25 ms; explicit Go SIMD 11.89; Go plain 58.66; Node 102.20.
-Natural TS, exact integer results. The compiler patch plus CPU dispatch matters. Vercel route compute is still pending.
+The vector route, same Vercel config, same exact top-10:
+Native TS 10.0 ms, Go SIMD 14.2, Go 50.0, Node 108.6.
+
+Stock scriptc gets there if you write Math.imul. A +25-line compiler patch makes plain a*b hit the same path: 409 to 10 ms.
 ```
 
-Evidence per value: **9.25**, **11.89**, **58.66**, **102.20 ms** round **9.251**, **11.892**, **58.661**, **102.198 ms** respectively, the `int8-i32` patched-dispatch / go-simd / go-plain / node rows in [CPU-policy measurements](vector-cpu-levels.md#measurements). These are median synchronous search times on the same host; no JSON, HTTP, initialization or Vercel Function time is included. Exact integer IDs/scores agree. Go SIMD is explicit experimental `archsimd`, not automatically vectorized ordinary Go: [Go control definitions](vector-route.md#what-is-compared).
+Evidence per value, all server-side compute p50 from [vector-vercel, measurements](vector-vercel.md#measurements): native patched **9.999**, Go SIMD **14.216**, Go plain v1 **50.000**, Node **108.593**, stock 0.4.6 `Math.imul` + dispatch **10.087**, stock 0.4.6 natural `a*b` + dispatch **408.928 ms**. The compiler diff is +25/-2 production lines: [range analysis](scriptc-int8-range-analysis.md). Losses on this same route, keep ready for replies: first response after deploy was 1.09 to 1.40 s for patched native versus 0.34 to 0.42 s for Go SIMD (slower synthetic corpus generation, 583 to 794 vs 350 to 381 ms), and in the short C=4 window patched native had worse WAN p95 (916 vs 637 ms) and lower req/s: [losses and limits](vector-vercel.md#losses-and-limits-on-the-win).
 
-Media: [kernel Chart B PNG](launch/chart-b-int8-kernel.png). If hosted measurements arrive, replace this entire tweet with exactly one hosted variant below and attach the regenerated hosted chart instead. Keep the kernel chart in the repo/video with its label. Do not average the experiments or label kernel time as route compute.
+Media: [Vercel Chart B PNG](launch/chart-b-int8-vercel.png) if it is not already on tweet 1. The [kernel-only chart](launch/chart-b-int8-kernel.png) stays in the repo and video with its label.
 
 ### Tweet 4: one function, still TypeScript (255 chars)
 
@@ -93,25 +101,25 @@ Evidence: [native deployment method/topology](vercel-final.md#method-review-and-
 
 Each replaces Tweet 1 and retains the same video. No handles and no emoji are needed.
 
-### Hook A: question first (254 chars)
+### Hook A: question first (205 chars)
 
-<!-- count: 254 -->
+<!-- count: 205 -->
 ```text
-Before rewriting a CPU-heavy Next.js route in Go, try compiling the TypeScript. Our patched scriptc int8 kernel beats explicit Go SIMD in a Linux Sandbox. next-scriptc puts native TS routes on Vercel through an adapter. Hosted vector timings are pending.
+Before rewriting a CPU-heavy Next.js route in Go, try compiling the TypeScript. On an int8 vector route on Vercel Functions, scriptc-compiled TS used 10.0 ms server compute vs 14.2 ms for explicit Go SIMD.
 ```
 
-Rationale: starts with the developer's decision and states both the patch and measurement boundary. Evidence: [kernel comparison](vector-cpu-levels.md#measurements), [deployment method](vercel-final.md#method-review-and-provenance).
+Rationale: starts with the developer's decision and states the measurement boundary. Evidence: [Vercel route comparison](vector-vercel.md#measurements), [deployment method](vercel-final.md#method-review-and-provenance).
 
-### Hook B: language boundary (261 chars)
+### Hook B: language boundary (266 chars)
 
-<!-- count: 261 -->
+<!-- count: 266 -->
 ```text
 route.go asks you to change languages. What if the compiler changed instead?
 
-Vercel's scriptc, a small compiler patch, and a plain Next.js adapter: TypeScript beats explicit Go SIMD on our int8 kernel. Native routes deploy as Vercel Functions. Losses included.
+Vercel's scriptc, a small compiler patch, and a plain Next.js adapter: TypeScript beats explicit Go SIMD on an int8 vector route. Native routes deploy as Vercel Functions. Losses included.
 ```
 
-Rationale: makes the compiler work the story without promising a universal performance win. Evidence: [compiler root cause](scriptc-int8-range-analysis.md#root-cause), [kernel comparison](vector-cpu-levels.md#measurements), [deployment report](vercel-final.md).
+Rationale: makes the compiler work the story without promising a universal performance win. Evidence: [compiler root cause](scriptc-int8-range-analysis.md#root-cause), [Vercel route comparison](vector-vercel.md#measurements), [deployment report](vercel-final.md).
 
 ### Hook C: measurable mechanism (259 chars)
 
@@ -124,57 +132,9 @@ No Next.js fork. A plain adapter around Vercel's own compiler. With a compiler p
 
 Rationale: opens on the concrete filename and scopes the Go claim immediately. Evidence: [native method](vercel-final.md#method-review-and-provenance), [CPU-policy experiment](vector-cpu-levels.md#measurements).
 
-## Pending hosted vector result: choose one replacement for Tweet 3
+## Hosted vector result: resolved
 
-All four fields mean **server-side compute time in milliseconds**, using the same declared statistic and request window from `{{VECTOR_VERCEL_REPORT_URL}}`:
-
-- Native: `{{VECTOR_VERCEL_NATIVE_MS}}`
-- Explicit Go SIMD: `{{VECTOR_VERCEL_GO_SIMD_MS}}`
-- Plain Go: `{{VECTOR_VERCEL_GO_MS}}`
-- Node: `{{VECTOR_VERCEL_NODE_MS}}`
-
-Every pending field's citation is **PENDING**. No value has been inferred from a Sandbox, the prompt, or a separate host. Add a per-value report section/row to this draft and `chart-data.json` once the evidence arrives. These are editorial templates, blocked from posting until the source and parity checks exist. A win/tie/loss concerns native versus the explicit Go SIMD control only, not all Go programs. A tie means the evidence does not support a stable practical gap; do not infer significance from close medians alone.
-
-### Hosted win (264 chars)
-
-<!-- count: 264 -->
-```text
-Vercel vector compute, ms:
-Native {{VECTOR_VERCEL_NATIVE_MS}}
-Go SIMD {{VECTOR_VERCEL_GO_SIMD_MS}}
-Go {{VECTOR_VERCEL_GO_MS}}
-Node {{VECTOR_VERCEL_NODE_MS}}
-
-Patched native wins this int8 route against explicit Go SIMD. Exact integer results; CPU dispatch enabled.
-```
-
-### Hosted tie (257 chars)
-
-<!-- count: 257 -->
-```text
-Vercel vector compute, ms:
-Native {{VECTOR_VERCEL_NATIVE_MS}}
-Go SIMD {{VECTOR_VERCEL_GO_SIMD_MS}}
-Go {{VECTOR_VERCEL_GO_MS}}
-Node {{VECTOR_VERCEL_NODE_MS}}
-
-Patched native and explicit Go SIMD are comparable here. Same exact int8 results, still TypeScript.
-```
-
-### Hosted loss (264 chars)
-
-<!-- count: 264 -->
-```text
-Vercel vector compute, ms:
-Native {{VECTOR_VERCEL_NATIVE_MS}}
-Go SIMD {{VECTOR_VERCEL_GO_SIMD_MS}}
-Go {{VECTOR_VERCEL_GO_MS}}
-Node {{VECTOR_VERCEL_NODE_MS}}
-
-Go SIMD wins this int8 route. Patched native won the Sandbox kernel; that did not carry over to the route.
-```
-
-Do not use the win wording unless the hosted evidence supports it. Do not present HTTP wall time, process CPU/request or kernel time as interchangeable with server-side compute. Update the template's metric label if the actual method differs; that requires a fresh editorial review.
+The hosted run is a win against explicit Go SIMD on server compute in all three fresh sets ([vector-vercel](vector-vercel.md)). Tweets 1 and 3 use those numbers. The win/tie/loss templates were removed. The route-level losses (first response after deploy, C=4 WAN tail) are listed under tweet 3 and in the reply bank.
 
 ## Upstream status: prepared replies
 
@@ -222,7 +182,7 @@ These are prepared technical answers for review, not an instruction to send repl
 - **Warm performance:** the warm workload comparison is one deployment pair with short closed-loop windows, not sustained capacity or a confidence interval. Nearby-store throughput and several tails lose; gzip saturates the generator. The charts do not imply every latency metric improved. [Warm tables](vercel-final.md#warm-paired-comparison-final-pair-only), [complete losses](vercel-final.md#losses-evidence-and-limits).
 - **Vector scope:** synthetic resident corpus, **100,000 × 768**, exhaustive dot products plus top-10; **20 pooled timed samples** per kernel/control on one shared host. Excludes initialization, allocation, JSON and HTTP. Integer outputs match exactly. No model-quality, ANN, real-embedding or fleet claim. [Method](vector-cpu-levels.md#method-and-scope). CPU ISA and runtime versions are pinned in that report; dispatch falls back on unsupported hosts.
 - **Patch scope:** “small patch” means **25 production insertions / 2 deletions**, plus separate tests and baselines. Selected unit/differential/sanitizer checks pass; full plain/sanitized suite and platform contracts remain a gate. It is not upstream-ready on the present evidence. [Root cause](scriptc-int8-range-analysis.md#root-cause), [validation gate](scriptc-int8-range-analysis.md#tests-and-remaining-gate).
-- **No conflated experiments:** the causal natural-code main/patch change, later CPU-dispatch kernels, stock self-hosted HTTP route and pending hosted patched route are separate datasets. The stock HTTP natural-code loss remains in [vector-route](vector-route.md#final-synchronous-kernel-http-implementation-stock-046). No old/new-host speedup is attributed solely to the patch or CPU flag.
+- **No conflated experiments:** the causal natural-code main/patch change, later CPU-dispatch kernels, stock self-hosted HTTP route and the hosted Vercel route are separate datasets. The stock HTTP natural-code loss remains in [vector-route](vector-route.md#final-synchronous-kernel-http-implementation-stock-046). No old/new-host speedup is attributed solely to the patch or CPU flag.
 - **Function directive:** warm sequential page p50, resident fixtures, self-hosted Linux, includes React/RSC and the strict JSON boundary. The **5k–15k** bracket is observed, not a precise crossover: [round-3 measurements](function-level.md#review-round-3-measurements-after). Function offload serializes across a process boundary, supports a compiler/type subset and has a documented record-narrowing parity limitation. [Boundary and limitations](function-level.md#json-signature-contract-round-3), [parity limitation](function-level.md#review-round-3-measurements-after).
 - **Honest Go/I/O comparison:** keep CSV/bcrypt/raw-image/resize/float/popcount losses. Go-territory hosted recovery has mixed generator allocations and unavailable rows; do not present it as a fully controlled uninterrupted hosted comparison. SDK/Zod refusals and Redis tail losses are part of the story. [Go method](go-territory.md#method-and-provenance), [scouting losses](scouting-summary.md#takeaways), [Redis limitations](realistic-io.md#losses-failures-and-limitations).
 - **Prototype contract:** the adapter's native IPC packaging demonstrates these routes, not an endorsed stable Next.js primitive, complete Node compatibility, automatic adapter composition or a stable public Vercel executable ABI. [Native Function research](vercel-native-functions.md), [Next primitive investigation](next-primitive.md).
@@ -241,7 +201,7 @@ Outputs, all **1600 × 900** pixels (editorial media dimensions, not a measureme
 
 - [Chart A SVG](launch/chart-a-vercel.svg) / [PNG](launch/chart-a-vercel.png): native/Node first response, RSS, process CPU and the Markdown latency loss. Each small chart has a zero baseline and its own unit-labelled scale.
 - [Chart B kernel SVG](launch/chart-b-int8-kernel.svg) / [PNG](launch/chart-b-int8-kernel.png): natural int8, patched native dispatch / experimental Go SIMD / plain Go / Node.
-- [Hosted vector template SVG](launch/chart-b-int8-vercel-pending.svg) / [PNG](launch/chart-b-int8-vercel-pending.png): explicitly PENDING. No bars/ratios until **all** values and source locators exist. Do not attach the template to a published tweet. The filename remains stable after data replacement; the title/subtitle/source line must also be updated in the JSON.
+- [Hosted vector chart SVG](launch/chart-b-int8-vercel.svg) / [PNG](launch/chart-b-int8-vercel.png): Vercel server compute p50 from [vector-vercel](vector-vercel.md#measurements), the headline image.
 
 Renderer used: existing local **Google Chrome headless**, invoked by Node with local file URLs, no network assets or new packages. Override `CHROME_BIN` for another local Chrome/Chromium binary. `--svg-only` skips PNG export. `preview.html` references only local assets. The generator checks citation presence/source text and PNG dimensions; this is a guard against transcription errors, not an automatic semantic source audit.
 
@@ -284,11 +244,11 @@ No deploy command belongs in this recording. Reproducing published Linux/hosted 
 
 - [ ] User reviews every tweet, caption, asset, source and caveat. Nothing is auto-posted.
 - [ ] Replace the public repo/RFC placeholders with real public URLs. Link source permalinks from the repo; do not expose local paths as public citations.
-- [ ] Decide whether to publish with the explicitly pending hosted comparison, or wait for it. Use only one Tweet 3 variant; preserve measurement boundaries.
+- [ ] Re-check tweets 1 and 3 against [vector-vercel](vector-vercel.md#measurements); preserve measurement boundaries (server compute, not WAN latency).
 - [ ] For hosted results: verify handler/corpus/query parity, compiler candidate/runtime versions, CPU policy, region/settings, response digests, statistic/window, server-side timer scope and all unavailable rows. Add each value's source and row locator to the JSON and this draft. Native-vs-Go SIMD wording must match the evidence.
 - [ ] Confirm patch state. Use “PR open” only with a real `{{SCRIPTC_PR_URL}}`; otherwise keep fork/PR-coming language and full-gate status. No implication of upstream acceptance.
 - [ ] Revisit regex issue status if linking one; no filed issue or fix is assumed by this draft.
-- [ ] Regenerate all assets from `chart-data.json`; inspect the PNGs and the pending/filled hosted template. Ratios must still come from exact input values. Check units, runtime labels, loss visibility and source line on a phone.
+- [ ] Regenerate all assets from `chart-data.json`; inspect the PNGs. Ratios must still come from exact input values. Check units, runtime labels, loss visibility and source line on a phone.
 - [ ] Recount final tweet copy after placeholder/URL substitution and any text changes. Each must fit **280 characters** (platform editorial limit). Confirm the actual composer count before posting. Evidence annotations and char-count comments are not tweet copy.
 - [ ] Record one continuous take with frozen-evidence labels visible. Review it for clipped text or accidental claims of live timings.
 - [ ] Keep the full caveats and failed/incomplete run status accessible in the public repo. No certification of cold starts, billed CPU, whole-instance RSS or universal Go equivalence.

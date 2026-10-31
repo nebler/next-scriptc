@@ -2,8 +2,8 @@
   "description": "Frozen observations, not live benchmarks. Every measured value links to its report section and exact row. Edit values here, then run node research/launch/generate.mjs.",
   "vercel": {
     "title": "TypeScript, compiled for Vercel",
-    "subtitle": "Native vs Node \u00b7 lower is better \u00b7 process RSS / process CPU, not billing",
-    "sourceLine": "Source: research/vercel-final.md \u00b7 five preview pairs; warm/CPU: final pair \u00b7 iad1 \u00b7 Hobby",
+    "subtitle": "Native vs Node · lower is better · process RSS / process CPU, not billing",
+    "sourceLine": "Source: research/vercel-final.md · five preview pairs; warm/CPU: final pair · iad1 · Hobby",
     "note": "First response after deploy is end-to-end, not certified process-cold initialization.",
     "metrics": [
       {
@@ -100,18 +100,18 @@
   },
   "vector": {
     "title": "Int8 search: TypeScript vs Go",
-    "subtitle": "KERNEL ONLY \u00b7 Linux Vercel Sandbox \u00b7 median search time \u00b7 lower is better",
-    "sourceLine": "Source: research/vector-cpu-levels.md#measurements \u00b7 same host / corpus / exact integer results",
+    "subtitle": "KERNEL ONLY · Linux Vercel Sandbox · median search time · lower is better",
+    "sourceLine": "Source: research/vector-cpu-levels.md#measurements · same host / corpus / exact integer results",
     "note": "Excludes corpus initialization, JSON, HTTP and platform overhead. Go SIMD uses experimental archsimd.",
     "rows": {
       "value": 100000,
       "source": "research/vector-cpu-levels.md#method-and-scope",
-      "locator": "Kernel: 100,000 rows \u00d7 768 dimensions"
+      "locator": "Kernel: 100,000 rows × 768 dimensions"
     },
     "dimensions": {
       "value": 768,
       "source": "research/vector-cpu-levels.md#method-and-scope",
-      "locator": "Kernel: 100,000 rows \u00d7 768 dimensions"
+      "locator": "Kernel: 100,000 rows × 768 dimensions"
     },
     "results": [
       {
@@ -124,7 +124,7 @@
       },
       {
         "label": "Go SIMD",
-        "detail": "explicit AVX2 \u00b7 experimental",
+        "detail": "explicit AVX2 · experimental",
         "role": "comparison",
         "value": 11.892,
         "source": "research/vector-cpu-levels.md#measurements",
@@ -132,7 +132,7 @@
       },
       {
         "label": "Go plain",
-        "detail": "GOAMD64=v1 \u00b7 no SIMD experiment",
+        "detail": "GOAMD64=v1 · no SIMD experiment",
         "role": "comparison",
         "value": 58.661,
         "source": "research/vector-cpu-levels.md#measurements",
@@ -150,43 +150,44 @@
   },
   "vectorVercel": {
     "title": "Int8 search on Vercel Functions",
-    "subtitle": "SERVER-SIDE COMPUTE \u00b7 pending measurement \u00b7 lower is better",
-    "sourceLine": "Source: PENDING \u00b7 populate every value, source and locator from the hosted route report before posting",
-    "note": "No hosted bar or ratio is drawn until all values and their source citations are present.",
+    "subtitle": "SERVER-SIDE COMPUTE p50 · Vercel Functions, iad1 · lower is better",
+    "sourceLine": "Source: research/vector-vercel.md · 3 fresh preview sets · 120 C=1 requests per variant · identical top-10 on every response",
+    "note": "Request parse → top-10 → JSON. Excludes network/IPC. Stock scriptc with Math.imul: 10.09 ms.",
     "results": [
       {
         "label": "Patched native",
         "detail": "natural TS + --cpu-dispatch",
         "role": "native",
-        "value": "{{VECTOR_VERCEL_NATIVE_MS}}",
-        "source": null,
-        "locator": null
+        "value": 9.999,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Native patched, natural TS + dispatch | 9.999 / 10.886"
       },
       {
         "label": "Go SIMD",
-        "detail": "explicit SIMD \u00b7 experimental",
+        "detail": "explicit SIMD · experimental",
         "role": "comparison",
-        "value": "{{VECTOR_VERCEL_GO_SIMD_MS}}",
-        "source": null,
-        "locator": null
+        "value": 14.216,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go experimental archsimd AVX2, v3 | 14.216 / 15.385"
       },
       {
         "label": "Go plain",
         "detail": "plain Go control",
         "role": "comparison",
-        "value": "{{VECTOR_VERCEL_GO_MS}}",
-        "source": null,
-        "locator": null
+        "value": 50.0,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go plain, v1, no SIMD experiment | 50.000 / 57.002"
       },
       {
         "label": "Node",
         "detail": "same natural TypeScript",
         "role": "comparison",
-        "value": "{{VECTOR_VERCEL_NODE_MS}}",
-        "source": null,
-        "locator": null
+        "value": 108.593,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Node, natural TS | 108.593 / 116.251"
       }
-    ]
+    ],
+    "headline": "lower server compute than Go SIMD on Vercel"
   },
   "functionLevel": {
     "native": {

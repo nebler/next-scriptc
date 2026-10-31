@@ -14,7 +14,7 @@ export function GET(request: Request) {
   for (const event of events) {
     if (event.day &lt; from || event.day &gt; to) continue;
     const key = `${event.day}/${event.region}`;
-    let total = totals.get(key);</pre><small>examples/demo/app/api/analytics/revenue/route.native.ts · excerpt</small></section><section class="chart"><img src="chart-a-vercel.svg" alt="Vercel benchmark chart"></section><section class="chart"><img src="chart-b-int8-kernel.svg" alt="Kernel-only vector chart"></section><section><h1>Offload one function</h1><pre>export async function revenue(from: string, to: string, size: number, profile: boolean) {
+    let total = totals.get(key);</pre><small>examples/demo/app/api/analytics/revenue/route.native.ts · excerpt</small></section><section class="chart"><img src="chart-a-vercel.svg" alt="Vercel benchmark chart"></section><section class="chart"><img src="chart-b-int8-vercel.svg" alt="Vercel vector route chart"></section><section><h1>Offload one function</h1><pre>export async function revenue(from: string, to: string, size: number, profile: boolean) {
   &quot;use native&quot;;
   const begin = profile ? performance.now() : 0;
   const events = JSON.parse(fixtures.get(size)!) as RevenueEvent[];
