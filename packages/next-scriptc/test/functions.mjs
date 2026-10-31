@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { mkdtemp, mkdir, writeFile, symlink, rm } from "node:fs/promises";
-import { createSidecar } from "../src/functions/sidecar.mjs";
+import { chmod, mkdtemp, mkdir, readFile, writeFile, symlink, rm } from "node:fs/promises";
+import { createSidecar, nativeAgent } from "../src/functions/sidecar.mjs";
 import path from "node:path";
 import { discoverFunctions, extractFunctions } from "../src/functions/extract.mjs";
 import loader from "../src/functions/loader.mjs";
@@ -208,4 +208,58 @@ test("function startup checks build identity and reports missing/non-executable 
     await writeFile(path.join(output, "functions"), "not executable", { mode: 0o644 });
     await assert.rejects(startFunctions(temporary, temporary), /Missing or invalid native functions binary/);
   } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
+
+test("sidecar warm-up is optional, bounded and does not block concurrent real calls", { timeout: 20000 }, async () => {
+  const { callNative } = await import("../src/functions/client.mjs");
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".warmup-"));
+  const binary = path.join(temporary, "fixture.cjs");
+  const children = [];
+  try {
+    await writeFile(binary, `#!${process.execPath}
+const {createServer} = require('node:http');
+let warmStarted = 0, warmDone = 0, warmSocket;
+const server = createServer((req,res) => {
+  if (req.url === '/__warmup') {
+    warmStarted++;
+    warmSocket = req.socket.remotePort;
+    req.resume();
+    req.on('end', () => setTimeout(() => { warmDone++; res.end('{"warmup":true,"args":[]}'); }, 2000));
+  } else if (req.url === "/same-socket") res.end(JSON.stringify(req.socket.remotePort === warmSocket));
+  else res.end(JSON.stringify({warmStarted,warmDone}));
+});
+server.listen(0,'127.0.0.1',()=>console.log('next-scriptc: listening on 127.0.0.1:'+server.address().port));
+`);
+    await chmod(binary, 0o755);
+    const cold = createSidecar(binary, { warmup: false }); children.push(cold);
+    const coldPort = await cold.port();
+    await new Promise(r => setTimeout(r, 20));
+    assert.deepEqual(await callNative(coldPort, "real", []), { warmStarted: 0, warmDone: 0 });
+    const warm = createSidecar(binary, { warmup: true, warmupTimeout: 1000 }); children.push(warm);
+    const port = await warm.port();
+    let observation;
+    const deadline = Date.now() + 1000;
+    do {
+      observation = await callNative(port, "real", []);
+      if (!observation.warmStarted) await new Promise(r => setTimeout(r, 5));
+    } while (!observation.warmStarted && Date.now() < deadline);
+    assert.deepEqual(observation, { warmStarted: 1, warmDone: 0 }, "real RPC completes while warm-up is still pending");
+    await new Promise(r => setTimeout(r, 1100));
+    assert.deepEqual(await callNative(port, "real", []), { warmStarted: 1, warmDone: 0 }, "warm-up timeout is harmless to real RPCs");
+    const quickBinary = path.join(temporary, "quick.cjs");
+    await writeFile(quickBinary, (await readFile(binary, "utf8")).replace("2000", "1500"));
+    await chmod(quickBinary, 0o755);
+    const quick = createSidecar(quickBinary, { warmup: true }); children.push(quick);
+    const quickPort = await quick.port();
+    const pool = nativeAgent.getName({ host: "127.0.0.1", port: quickPort });
+    // A platform hold can exceed one second before the warm response arrives.
+    const reuseDeadline = Date.now() + 5000;
+    while (!nativeAgent.freeSockets[pool]?.length && Date.now() < reuseDeadline) await new Promise(r => setTimeout(r, 5));
+    assert.ok(nativeAgent.freeSockets[pool]?.length, "completed warm-up releases a keep-alive socket");
+    assert.equal(await callNative(quickPort, "same-socket", []), true, "real client reuses the bootstrap's warmed connection");
+  } finally {
+    for (const child of children) child.stop();
+    await rm(temporary, { recursive: true, force: true });
+  }
 });

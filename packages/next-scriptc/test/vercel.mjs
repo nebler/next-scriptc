@@ -144,8 +144,14 @@ module.exports.getRequestHandlerWithMetadata = metadata => metadata;
     await symlink("native.func",path.join(functions,"alias.func"));
     const binary = path.join(temporary,"binary");
     await writeFile(binary, `#!${process.execPath}
-console.log("next-scriptc: listening on 127.0.0.1:12345");
-setInterval(() => {}, 1000);
+const {createServer} = require('node:http');
+const {writeFileSync} = require('node:fs');
+const server = createServer((req,res) => {
+  if (req.url !== '/__warmup') throw Error('user dispatch');
+  writeFileSync('warmup.json', JSON.stringify({url:req.url}));
+  req.resume(); res.end('{"warmup":true,"args":[]}');
+});
+server.listen(0,'127.0.0.1',()=>console.log('next-scriptc: listening on 127.0.0.1:'+server.address().port));
 `); await chmod(binary,0o755);
     assert.equal(await bundleFunctionSidecar(functions,binary,{traceRoot:temporary}),1);
     const bootstrap = name => path.join(functions,name+".func/scriptc-bootstrap.cjs");
@@ -160,9 +166,20 @@ setInterval(() => {}, 1000);
 Module._load = function(id, ...args) { if(id.endsWith('.mjs')) throw Error('Vercel rejects require(ESM)'); return load.call(this,id,...args); };
 const handler = require('./scriptc-bootstrap.cjs');
 const runtime = ${attempts} ? require('./scriptc-sidecar.cjs') : null;
+if(runtime && runtime.nativeAgent !== globalThis[Symbol.for('next-scriptc.functions.agent')]) throw Error('separate HTTP pool');
 if(runtime && runtime.startSidecar('./scriptc-functions') !== globalThis[Symbol.for('next-scriptc.functions.sidecar')]) throw Error('duplicate');
-console.log(JSON.stringify({attempts:handler.attempts,pid:handler.pid,metadata:handler.getRequestHandlerWithMetadata({a:1})}));handler.stop();`;
-      const result = JSON.parse(execFileSync(process.execPath,["-e",script],{cwd:path.join(functions,name+".func"),env:{...process.env,VERCEL:"1",NEXT_SCRIPTC_VERCEL:""},encoding:"utf8"}));
+(async () => {
+  try {
+    if(runtime) {
+      await runtime.startSidecar('./scriptc-functions').port();
+      const fs = require('node:fs'), deadline = Date.now() + 3000;
+      while(!fs.existsSync('warmup.json') && Date.now() < deadline) await new Promise(r=>setTimeout(r,5));
+      if(JSON.parse(fs.readFileSync('warmup.json')).url !== '/__warmup') throw Error('missing warm-up');
+    }
+    console.log(JSON.stringify({attempts:handler.attempts,pid:handler.pid,metadata:handler.getRequestHandlerWithMetadata({a:1})}));
+  } finally { handler.stop(); }
+})().catch(error=>{console.error(error);process.exitCode=1;});`;
+      const result = JSON.parse(execFileSync(process.execPath,["-e",script],{cwd:path.join(functions,name+".func"),env:{...process.env,VERCEL:"",NEXT_SCRIPTC_VERCEL:""},encoding:"utf8"}));
       assert.equal(result.attempts,attempts); assert.deepEqual(result.metadata,{a:1});
       if(attempts) assert.ok(result.pid>0);
     }

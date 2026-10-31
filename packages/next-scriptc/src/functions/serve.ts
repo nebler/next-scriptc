@@ -6,8 +6,22 @@ import { serialize } from "./json.ts";
 // result passes the shared strict validator before its typed encoder runs.
 export type FunctionResult = { value: unknown; encode: () => string };
 
-export function serveFunctions(dispatch: (id: string, body: string) => Promise<FunctionResult>): void {
+// Reserved internal RPC. Parse, validate and encode representative JSON without
+// ever entering the generated dispatcher or invoking application code.
+function warmup(input: string, trace: number[] | null): FunctionResult {
+  const args = JSON.parse(input) as unknown[];
+  if (trace) {
+    trace.push(Number(process.hrtime.bigint()) / 1e6);
+    trace.push(Number(process.hrtime.bigint()) / 1e6);
+  }
+  const value = { warmup: true, args };
+  if (trace) trace.push(Number(process.hrtime.bigint()) / 1e6);
+  return { value, encode: () => JSON.stringify(value) };
+}
+
+export function serveFunctions(dispatch: (id: string, body: string, trace: number[] | null) => Promise<FunctionResult>): void {
   const server = createServer(async (incoming: IncomingMessage, outgoing: ServerResponse) => {
+    const trace = process.env.NEXT_SCRIPTC_CALL_TIMING === "1" ? [Number(process.hrtime.bigint()) / 1e6] : null;
     try {
       if (incoming.method !== "POST") throw new Error("Expected POST");
       const chunks = await new Promise<Buffer[]>((resolve, reject) => {
@@ -18,10 +32,20 @@ export function serveFunctions(dispatch: (id: string, body: string) => Promise<F
         incoming.on("error", (error: Error) => reject(error));
         incoming.on("close", () => { if (!ended) reject(new Error("Request aborted")); });
       });
-      const value = await dispatch((incoming.url || "").slice(1), Buffer.concat(chunks).toString("utf8"));
-      const body = serialize(value.value, true, value.encode);
+      const input = Buffer.concat(chunks).toString("utf8");
+      if (trace) trace.push(Number(process.hrtime.bigint()) / 1e6);
+      const value = incoming.url === "/__warmup" ? warmup(input, trace) : await dispatch((incoming.url || "").slice(1), input, trace);
+      const body = serialize(value.value, true, value.encode, trace === null ? null : () => { trace.push(Number(process.hrtime.bigint()) / 1e6); });
+      if (trace) {
+        trace.push(Number(process.hrtime.bigint()) / 1e6);
+        outgoing.setHeader("x-scriptc-call", JSON.stringify(trace));
+      }
       outgoing.setHeader("content-type", "application/json");
       outgoing.end(body);
+      if (trace) {
+        trace.push(Number(process.hrtime.bigint()) / 1e6);
+        console.log("scriptc-call " + JSON.stringify({ side: "native", id: incoming.url, stamps: trace }));
+      }
     } catch (error) {
       outgoing.statusCode = 500;
       outgoing.end(JSON.stringify({ error: error instanceof Error ? error.message : String(error) }));

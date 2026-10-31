@@ -41,7 +41,10 @@ async function dispatch(id: string, body: string): Promise<unknown> {
   return JSON.parse(body);
 }
 function hide(value: unknown): void { Object.defineProperty(value, "hidden", { value: undefined }); }
+let dispatchCalls = 0;
 serveFunctions(async (id: string, body: string) => {
+  if (id === "dispatch-count") { const value = dispatchCalls; return { value, encode: () => JSON.stringify(value) }; }
+  dispatchCalls++;
   if (id === "typed-extra") {
     const value = { a: 1 };
     const alias = value as Record<string, unknown>;
@@ -78,6 +81,12 @@ serveFunctions(async (id: string, body: string) => {
         child.once("error", reject);
         child.once("exit", () => { clearTimeout(timer); reject(new Error(logs)); });
       });
+      assert.deepEqual(await callNative(port, "__warmup", []), { warmup: true, args: [] });
+      assert.equal(await callNative(port, "dispatch-count", []), 0, "warm-up must bypass user dispatch entirely");
+      const pending = callNative(port, "delay", [50, "concurrent real call"]);
+      assert.deepEqual(await callNative(port, "__warmup", []), { warmup: true, args: [] });
+      assert.equal(await pending, "concurrent real call");
+      assert.equal(await callNative(port, "dispatch-count", []), 1);
       const value = [{ a: [1, true, null, "hello"] }];
       assert.deepEqual(await callNative(port, "echo", value), value);
       assert.deepEqual(await callNative(port, "typed-extra", []), { a: 1, extra: true });

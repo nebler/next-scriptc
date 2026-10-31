@@ -37,10 +37,17 @@ export async function prepareFunctions(config, projectDir) {
     for (const fn of module.functions) {
       const name = `fn${index++}`;
       entry += `import { ${fn.name} as ${name} } from ${JSON.stringify(file)};\n`;
-      cases.push(`case ${JSON.stringify(fn.id)}: { const args = JSON.parse(body) as Parameters<typeof ${name}>; const value = await ${name}(${fn.params.map((_, i) => `args[${i}]`).join(", ")}); return { value, encode: () => JSON.stringify(value) }; }`);
+      cases.push(`case ${JSON.stringify(fn.id)}: {
+  const args = JSON.parse(body) as Parameters<typeof ${name}>;
+  if (trace) trace.push(Number(process.hrtime.bigint()) / 1e6); // args parsed
+  if (trace) trace.push(Number(process.hrtime.bigint()) / 1e6); // dispatch start
+  const value = await ${name}(${fn.params.map((_, i) => `args[${i}]`).join(", ")});
+  if (trace) trace.push(Number(process.hrtime.bigint()) / 1e6); // user function done
+  return { value, encode: () => JSON.stringify(value) };
+}`);
     }
   }
-  entry += `serveFunctions(async (id: string, body: string): Promise<FunctionResult> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
+  entry += `serveFunctions(async (id: string, body: string, trace: number[] | null): Promise<FunctionResult> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
   const file = path.join(output, "entry.ts");
   await writeFile(file, entry);
   const compiler = compilerPath();

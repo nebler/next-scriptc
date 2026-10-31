@@ -13,7 +13,7 @@
 // it only AFTER the complete validation, so accessors/toJSON cannot run first.
 // JSON.stringify on an erased native value repeatedly refreshes typed views;
 // the same builtin at the typed call site uses the native JSON encoder.
-export function serialize(value: unknown, plainArrays = false, encode: (() => string) | null = null): string {
+export function serialize(value: unknown, plainArrays = false, encode: (() => string) | null = null, validated: (() => void) | null = null): string {
   const seen = new Set<unknown>();
   function data(descriptor: any): void {
     if (!descriptor || !descriptor.enumerable || descriptor.get || descriptor.set) throw new Error("JSON properties must be enumerable data properties");
@@ -42,6 +42,7 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
   }
   try {
     check(value);
+    if (validated !== null) validated();
     return encode === null ? JSON.stringify(value) : encode();
   } catch (error) {
     throw new Error(`[next-scriptc] JSON serialization failed: ${error instanceof Error ? error.message : String(error)}`);

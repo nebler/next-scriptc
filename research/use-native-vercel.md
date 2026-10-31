@@ -171,3 +171,120 @@ node research/use-native-startup-summarize.mjs
 ```
 
 The build helper temporarily selects the base adapter/runtime and eager fixture for `before`, and restores source files in `finally`. Run it without concurrent builds or edits. The compiler shim adds instrumentation only to generated native sources. The retained baseline measured fixture completion directly; the later shim also logs `modules-ready`. The successful optimized native artifacts use the same compiled native binary as the failed ESM attempt, with the generated bootstrap/runtime corrected to CommonJS before upload. Later source cleanup adds trace fallback coverage and repeat-packaging protection without changing the measured demo path. Measurement labels refuse to overwrite existing records; set `STARTUP_OUTPUT` to a new directory when reproducing the retained run. Fetch runtime logs for each saved deployment before regenerating the summary.
+
+## First-call cost
+
+2026-10-31 follow-up from local `main` at `137257a`, branch `opt/first-call`. **The native handler is not spending 55 ms on first-use initialization. Most of the first-call interval is on the Node side.** A reserved bootstrap RPC can prepare the HTTP client and reuse its connection. The caller still waits for the busy Node process to handle the result during its first SSR render. This change does not make the complete first `await revenue(...)` interval equal to the native handler's compute time.
+
+### Before timeline
+
+`NEXT_SCRIPTC_CALL_TIMING=1` enables monotonic timestamps in the real client, function server and generated dispatcher. The client records call start, serialization, resolved port, socket assignment, connect, request write completion, response headers, body end and result parsing. The server records request callback entry, body read, argument parsing, dispatch, user completion, strict validation, encoding and return from `outgoing.end`. The demo separately records fixture generation, fixture parsing and aggregation in both runtimes. The last server timestamp is write submission, not a claim that the peer has received the bytes. Only enabled traces allocate timestamp arrays or log observations. Arguments and result bodies are not logged.
+
+Two fresh native previews reproduce the first-call problem at **58.565 / 55.298 ms**. Readiness is already observed before their handlers. Each has one first request and ten subsequent C=1 requests from the existing E3 iad1 client. All times below are milliseconds. Native stages are nested inside the client's write-to-headers interval, so those rows must not be added twice.
+
+| Client interval | First native 1 | Second call 1 | First native 2 | Second call 2 |
+| --- | ---: | ---: | ---: | ---: |
+| Argument validation and serialization | 0.229 | 0.029 | 0.199 | 0.030 |
+| Resolve `sidecar.port()` | 0.366 | 0.024 | 0.344 | 0.028 |
+| Resolved port to socket assignment | 10.033 | 1.419 | 9.010 | 1.505 |
+| Socket assignment to connect callback | 35.176 | reused | 29.397 | reused |
+| Connect or socket assignment to request write | 0.429 | 0.150 | 0.255 | 0.163 |
+| Request write to response headers | 8.888 | 5.436 | 13.347 | 14.561 |
+| Headers to body end | 1.369 | 0.251 | 1.212 | 0.341 |
+| Result JSON parse | 0.192 | 0.150 | 0.227 | 0.166 |
+| Complete client trace | 56.682 | 7.459 | 53.990 | 16.793 |
+
+The outer function header also includes the small caller, trace logging and promise-completion costs after the final client timestamp. The socket interval includes Node event-loop scheduling. It is not an isolated 29 to 35 ms TCP handshake measurement.
+
+| Native stage | First 1 | Second 1 | First 2 | Second 2 |
+| --- | ---: | ---: | ---: | ---: |
+| Request callback to body read | 0.131 | 0.016 | 0.132 | 0.014 |
+| JSON parse arguments | 0.012 | 0.007 | 0.013 | 0.007 |
+| Parsed arguments to dispatch | 0.001 | <0.001 | 0.001 | <0.001 |
+| User function, including fixture and trace | 3.373 | 1.553 | 4.025 | 1.614 |
+| Strict result validation | 1.879 | 1.392 | 2.131 | 1.348 |
+| Typed result encoding | 0.055 | 0.049 | 0.065 | 0.052 |
+| Submit response write | 0.111 | 0.061 | 0.104 | 0.073 |
+
+Native generates the lazy 5k fixture in **1.661 / 1.675 ms**, parses it in **0.964 / 1.608 ms**, and aggregates it in **0.600 / 0.595 ms**. Second calls spend about 0.002 ms looking up the stored fixture. The traced Node fallback first call takes **18.238 ms**, including **2.803 ms** fixture generation, **2.092 ms** fixture parsing and **12.586 ms** aggregation. Its second call spends **0.009 / 1.536 / 1.728 ms** in those stages. The fixture is not a native first-call slowdown. No fixture generation or user algorithm was changed.
+
+### Root cause and generic change
+
+Before the change, the first real request needs a new Node HTTP connection. Node does not enter the native request handler until **46.152 / 39.298 ms** after the client's call starts. The native JSON parser, fixture, strict validator and typed encoder then complete within roughly six milliseconds. The connection phases and parent scheduling dominate, rather than native startup or a hidden 50 ms native encoder initialization.
+
+`startSidecar`, the Vercel bootstrap entry point, now schedules one `POST /__warmup` after readiness. The reserved path is handled inside `serveFunctions` before the generated dispatcher. It parses `[]`, constructs an internal result, runs the existing strict validator and encoder, and drains/parses the reply in Node. It never calls an application function or invents arguments for one. A process-global HTTP agent is shared by the CommonJS bootstrap and Next's separately bundled clients. Sharing only the sidecar singleton would leave the real call on a different socket pool.
+
+Warm-up is asynchronous and best effort. Callers waiting on readiness are released before a `setImmediate` schedules it. Real calls do not await warm-up and can use other connections while it is pending. The warm-up has a 30-second total wall deadline, the same timeout duration used for real RPCs, an unreferenced timer and consumed error events. A one-second wall deadline is unsafe across Vercel's multi-second initialization holds. Self-hosted startup does not call the Vercel entry point and keeps automatic warm-up disabled. Restarts prepare a new connection after the replacement becomes ready.
+
+The successful diagnostic preview confirms both an internal warm-up before the first real call and `reused: true` on that call. Native serves the warm-up in **0.392 ms** from request entry through write submission. The first real native request finishes its own write in **5.976 ms**. The outer function interval is still **39.808 ms**. From the client's write to response headers, **31.961 ms** elapse while the Node process consumes **31.821 ms of CPU**. Native writes its response **26.058 ms before Node's headers callback runs**. This remaining delay is parent CPU execution and callback scheduling during SSR. It cannot be removed by warming the native JSON parser or calling user code with fake arguments. Exact Node CPU stacks were not profiled, so Next/React work and GC are not separated here. Making this asynchronous RPC block Node to change that overlap would be a different execution contract and is outside this change.
+
+### Final first-request and subsequent results
+
+The final four previews keep `NEXT_SCRIPTC_CALL_TIMING` and `NEXT_SCRIPTC_STARTUP_TIMING` off. They use only N1's `NATIVE_VERCEL_TIMING=1` launcher. Native was built separately for each upload, with identical final binary and runtime source hashes. Both final native binaries are **1,001,616 bytes**, SHA-256 `da9f119a3bc2aeb04d5814c42c424e18372e2c65b0e8a2da1642b13d65ecc260`. The dormant tracing hooks remain compiled into the binary. Deployed Function counts remain five for native and four for Node; warm-up adds no Vercel Function.
+
+Each first-request row belongs to a fresh deployment. The subsequent window has ten requests, no discarded warmups and no retries. Its p95 is the maximum of those ten samples under the nearest-rank rule. All times are milliseconds. The baseline tracing rows are kept separate from the final timing-only rows.
+
+| Preview | First function | First full handler/render | First iad1 end-to-end | Subsequent function p50 | Subsequent function p95 | Subsequent render p50 | Subsequent iad1 p50 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Before native 1, traced | 58.565 | 281.459 | 416.333 | 7.907 | 29.075 | 17.585 | 56.756 |
+| Before native 2, traced | 55.298 | 254.776 | 371.819 | 7.017 | 17.473 | 15.975 | 47.317 |
+| Final native 1 | 40.583 | 264.522 | 375.426 | 5.877 | 12.036 | 12.717 | 42.174 |
+| Final native 2 | 41.850 | 257.789 | 378.851 | 5.394 | 7.805 | 12.411 | 40.338 |
+| Final Node 1 | 13.269 | 284.623 | 404.195 | 4.497 | 5.606 | 17.791 | 50.906 |
+| Final Node 2 | 15.946 | 347.522 | 465.832 | 2.952 | 4.336 | 15.064 | 57.518 |
+
+The first native caller interval improves from **58.565 / 55.298 ms** in the two traced controls, and O2's **60.563 / 63.025 ms** without call tracing, to **40.583 / 41.850 ms**. This is a partial improvement. It still loses to the final Node controls at **13.269 / 15.946 ms**. N1's roughly six-millisecond Node first call had eager fixture setup outside the bracket; the current lazy fixture setup is inside it. Native's final full first renders overlap the before range, so these samples do not establish a consistent full-render gain from warm-up alone. In the final pair, native full first render is lower than Node's, despite its longer awaited-function metric.
+
+Native still loses on warm 5k function time. The subsequent windows show no large new latency failure, but ten samples per preview cannot prove a tail-latency non-regression. Tracing adds overhead to the before windows, so their warm percentiles are not a controlled comparison against the final tracing-off windows. No size crossover, throughput, resource or fleet-wide cold-start claim is added here. No slow response was filtered out.
+
+### Retained attempts, validation and previews
+
+The initial warm-up attempt, `after-native-1`, returned a first function time of **41.245 ms**, but did not prove socket reuse. Its diagnostic follow-up, `warm-trace-native-1`, took **56.731 ms** and still showed a new connection. The explicitly enabled short-deadline attempt, `warm-trace-native-2`, was worse at **77.765 ms**. That trace shows readiness at **4660.269 ms**, the warm-up reaching native at **6614.801 ms**, and the first real handler at **6617.669 ms**. A one-second wall timer can expire across such a hold and destroy a healthy connection. The warm-up client start/timeout events were not logged, so the precise closure sequence in this attempt is not conclusively isolated. It also retains **10.614 ms** result validation and **12.439 ms** Node result parsing on its first call. Those losses remain in the raw data. A short deadline was not shipped. The environment-only explanation considered during diagnosis was not established by these logs; the Vercel entry point nevertheless now enables warm-up explicitly and is tested with `VERCEL` absent.
+
+`ready-trace-native-1` uses the final 30-second deadline, records the reserved request and confirms first-real-call socket reuse. Its first function time is **39.808 ms**. Its subsequent maximum is **37.039 ms**, also retained. This diagnostic provides the parent CPU and response-callback evidence above. It is not one of the two final timing-only performance previews.
+
+Across all eleven previews, **121 of 121 responses** succeed, route `iad1::iad1::`, avoid cached HIT/STALE/PRERENDER, and match the complete 5k result SHA-256 `58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c`. Each preview retains one observed instance throughout its eleven requests; every native response retains one child and one spawn attempt. These are first-observed requests to fresh previews, not certified platform-cold measurements. Long-idle socket expiry and freeze/thaw beyond these initialization holds remain unmeasured.
+
+Validation passes: root `pnpm test` with 23 package unit tests and 24 demo tests; the requested combined native/protocol/Vercel suite with 16 tests; the complete demo function E2E; and function build lifecycle checks. New checks prove that warm-up bypasses user dispatch in Node and native, succeeds alongside a delayed real call, leaves real calls free to proceed while it is stalled, times out harmlessly, survives a response delayed beyond one second, and supplies a reusable socket to the real client. The CommonJS bootstrap check covers `VERCEL` unset, singleton startup, the shared pool and existing export/grouping behavior. Self-hosted parity, errors, strict validation, Server Actions, browser exclusion, crash rejection and restart remain covered.
+
+Local setup losses are retained in [validation.json](use-native-first-call/validation.json): unsupported unbound timing globals during the first instrumentation build, non-executable checker files after the offline install, a missing test import, a wrong-id local probe, and one root-suite warm-up-test timeout at ten seconds while compiler tests were running concurrently. The helper/import/setup errors were corrected. The final regression fixture allows twenty seconds, includes a response delayed beyond the old one-second deadline, and passes in both the root and combined suites. No hosted measurement request was retried to replace a bad sample.
+
+| Role | Preview | Deployment ID |
+| --- | --- | --- |
+| Before native 1, traced | [next-scriptc-6ai878uo4](https://next-scriptc-6ai878uo4-noahs-projects-8a075d15.vercel.app/reports) | `dpl_ErJLztBHqK5tgsXYJwS7B1kWkS5G` |
+| Before native 2, traced | [next-scriptc-6cfpqyitu](https://next-scriptc-6cfpqyitu-noahs-projects-8a075d15.vercel.app/reports) | `dpl_9TLoyKJgPnymrHD3GHf25NvAbcPG` |
+| Node first-call trace | [next-scriptc-8bk42fmfu](https://next-scriptc-8bk42fmfu-noahs-projects-8a075d15.vercel.app/reports) | `dpl_4fEv5GGFiLDG3AVomnxLRhSkCn89` |
+| Intermediate short deadline, tracing off | [next-scriptc-4gg1rykkt](https://next-scriptc-4gg1rykkt-noahs-projects-8a075d15.vercel.app/reports) | `dpl_4ErvZDSsdgmkGp1xNu5Qg8RmYuKR` |
+| Intermediate short deadline, traced | [next-scriptc-3lyxxt3se](https://next-scriptc-3lyxxt3se-noahs-projects-8a075d15.vercel.app/reports) | `dpl_4FdBUqSNz6EzJz9qy7rdXJLdarnF` |
+| Explicit warm-up, short deadline, traced | [next-scriptc-8kl1uxqq2](https://next-scriptc-8kl1uxqq2-noahs-projects-8a075d15.vercel.app/reports) | `dpl_HCU2ACTdmmZFKh9hvTD2CSLh7wmi` |
+| Final warm-up diagnostic, traced | [next-scriptc-70qt710js](https://next-scriptc-70qt710js-noahs-projects-8a075d15.vercel.app/reports) | `dpl_5JHiaB2JjB3h6RPf1yZGXEnrpkz7` |
+| Final native 1 | [next-scriptc-3jq3vpwwh](https://next-scriptc-3jq3vpwwh-noahs-projects-8a075d15.vercel.app/reports) | `dpl_3X6bAxyboB5ZoEk6Fq8MQoWZ9V3Q` |
+| Final native 2 | [next-scriptc-3g43kosco](https://next-scriptc-3g43kosco-noahs-projects-8a075d15.vercel.app/reports) | `dpl_2KvZpMSmWJhLLTzivQ2vzd1aPkCx` |
+| Final Node 1 | [next-scriptc-lvpcxreoa](https://next-scriptc-lvpcxreoa-noahs-projects-8a075d15.vercel.app/reports) | `dpl_E3Gsja8YZb5h5y3yxKQF5qaoMBuP` |
+| Final Node 2 | [next-scriptc-l9d9iriae](https://next-scriptc-l9d9iriae-noahs-projects-8a075d15.vercel.app/reports) | `dpl_3zDp9NZQHBLY3wJpdLBy5FLxhFmC` |
+
+[Compact summary and trace breakdowns](use-native-first-call/summary.json), per-preview response JSON and runtime JSONL logs are in [use-native-first-call](use-native-first-call/). Source/build metadata and final artifact hashes accompany the final preview records. Preview artifacts were built from the local base with this branch's uncommitted changes; build metadata keeps that dirty status. No production, push, project-setting change, Sandbox, Docker, sub-agent or new iad1 client deployment was used. The main checkout's ignored `.env.local` supplies the bypass without printing or committing it. No `.gitignore` change was needed. Existing toolchain caches were reused, and generated outputs were removed after measurement.
+
+To reproduce in a new raw-data directory, use Node 24, the existing authenticated preview project link and private env files. Each label refuses to overwrite a prior deployment record. Build and measure sequentially, with no concurrent build or source edits in this checkout:
+
+```sh
+export FIRST_CALL_OUTPUT=research/use-native-first-call-repro
+node research/use-native-first-call-build.mjs before
+node research/use-native-first-call-measure.mjs trace-native-1
+# Rebuild before each fresh upload; remove generated outputs between builds.
+node research/use-native-first-call-build.mjs before
+node research/use-native-first-call-measure.mjs trace-native-2
+NEXT_SCRIPTC_BASELINE=node node research/use-native-first-call-build.mjs after
+node research/use-native-first-call-measure.mjs trace-node-1
+node research/use-native-first-call-build.mjs after
+node research/use-native-first-call-measure.mjs final-native-1
+node research/use-native-first-call-build.mjs after
+node research/use-native-first-call-measure.mjs final-native-2
+NEXT_SCRIPTC_BASELINE=node node research/use-native-first-call-build.mjs after
+node research/use-native-first-call-measure.mjs final-node-1
+NEXT_SCRIPTC_BASELINE=node node research/use-native-first-call-build.mjs after
+node research/use-native-first-call-measure.mjs final-node-2
+node research/use-native-first-call-summarize.mjs
+```
+
+The `before` helper disables automatic warm-up only for that build and restores the source in `finally`; its reserved server branch is dormant. `trace-*`, `warm-trace-*` and `ready-trace-*` labels enable call/startup tracing at deployment time. Other labels use only the N1 timing headers. Log ingestion can lag responses, so the helper retries bounded log reads without issuing more target requests. A reproduction need not repeat the retained unsuccessful intermediate implementations. The remaining parent CPU attribution is intentionally bounded to what the monotonic timestamps and process CPU counters establish.
