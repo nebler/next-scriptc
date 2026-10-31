@@ -41,7 +41,7 @@ Evidence per value, all native/Node:
 - **2.38 / 7.03 ms/request** round **2.384 / 7.029** for revenue: [process CPU table, revenue row](vercel-final.md#process-cpu-per-request-self-reported).
 - **2.49 / 5.70 ms/request** round **2.494 / 5.700** for nearby-stores: [process CPU table, nearby-stores row](vercel-final.md#process-cpu-per-request-self-reported).
 
-Media: [Chart A PNG](launch/chart-a-vercel.png). It keeps the Markdown loss alongside the wins. CPU is self-reported process CPU, not billed Active CPU. RSS is not whole-instance usage. These are separate diagnostic measurements, not a single trace of one request.
+Media: [Chart A PNG](launch/chart-a-vercel.png). It shows first response, RSS and CPU/request only. The Markdown loss remains in tweet 5 and the README text. CPU is self-reported process CPU, not billed Active CPU. RSS is not whole-instance usage. These are separate diagnostic measurements, not a single trace of one request.
 
 ### Tweet 3: the vector route, stock vs patched (235 chars)
 
@@ -197,15 +197,19 @@ node research/launch/validate.mjs
 open research/launch/preview.html
 ```
 
-Outputs, all **1600 × 900** pixels (editorial media dimensions, not a measurement):
+Outputs (editorial media dimensions, not measurements):
 
-- [Chart A SVG](launch/chart-a-vercel.svg) / [PNG](launch/chart-a-vercel.png): native/Node first response, RSS, process CPU and the Markdown latency loss. Each small chart has a zero baseline and its own unit-labelled scale.
-- [Chart B kernel SVG](launch/chart-b-int8-kernel.svg) / [PNG](launch/chart-b-int8-kernel.png): natural int8, patched native dispatch / experimental Go SIMD / plain Go / Node.
-- [Hosted vector chart SVG](launch/chart-b-int8-vercel.svg) / [PNG](launch/chart-b-int8-vercel.png): Vercel server compute p50 from [vector-vercel](vector-vercel.md#measurements), the headline image.
+- [Chart A SVG](launch/chart-a-vercel.svg) / [PNG](launch/chart-a-vercel.png) / [README PNG](../.github/assets/chart-vercel-native-vs-node.png): native/Node first response, RSS and process CPU only, 2000 × 1660. Each small chart has a zero baseline and its own unit-labelled scale. Markdown stays in the data and launch text; its panel is excluded.
+- [Chart B kernel SVG](launch/chart-b-int8-kernel.svg) / [PNG](launch/chart-b-int8-kernel.png): natural int8, patched native dispatch / experimental Go SIMD / plain Go / Node, 2000 × 1500, labelled KERNEL ONLY.
+- [Hosted vector chart SVG](launch/chart-b-int8-vercel.svg) / [PNG](launch/chart-b-int8-vercel.png) / [README PNG](../.github/assets/chart-vector-vercel.png): Vercel server compute p50 from [vector-vercel](vector-vercel.md#measurements), the headline image, 2000 × 1500.
+- [Native route](../.github/assets/code-route-native.png)
+- [Function directive](../.github/assets/code-use-native.png)
+- [README hero](../.github/assets/hero.png)
+- [OG image](../.github/assets/og.png)
 
-Renderer used: existing local **Google Chrome headless**, invoked by Node with local file URLs, no network assets or new packages. Override `CHROME_BIN` for another local Chrome/Chromium binary. `--svg-only` skips PNG export. `preview.html` references only local assets. The generator checks citation presence/source text and PNG dimensions; this is a guard against transcription errors, not an automatic semantic source audit.
+Renderer used: existing local **Google Chrome headless** at 2x with embedded Geist fonts and Shiki tokenization. Install pinned dependencies once with `npm ci --prefix research/launch`; generation uses local files only. Override `CHROME_BIN` for another local Chrome/Chromium binary. `--svg-only` skips PNG export. See [visual generation notes](launch/README.md). The generator checks citation presence/source text, fonts, clipping, file size and PNG dimensions; this is a guard against transcription errors, not an automatic semantic source audit.
 
-Palette: mint for native, amber for all comparison runtimes. Markdown's native loss stays mint and is explicitly labelled LOSS; color never substitutes for runtime identity. Dark backgrounds and neutral white/gray text. Separate units/scales rather than combining milliseconds and memory on one axis. Phone review: inspect both in-feed and expanded images; expanded images carry the detailed source line.
+Palette: white for native, blue for comparisons, pure black backgrounds and neutral white/gray text. Separate units/scales rather than combining milliseconds and memory on one axis. The Markdown loss stays in tweet 5 and the README text, not Chart A. Phone review: inspect both in-feed and expanded images; expanded images carry the detailed source line.
 
 ## Video script: one-take, 40 seconds
 
@@ -224,7 +228,7 @@ Set the browser viewport to **1600 × 900**, browser zoom **100%**; use DevTools
 | Shot / time | What the recording page shows | On-screen caption / spoken line |
 | --- | --- | --- |
 | 0–7 s | Actual excerpt of `examples/demo/app/api/analytics/revenue/route.native.ts`, including GET and typed aggregation setup. Intro card is visible before Start. | “CPU-heavy routes can stay TypeScript. A plain adapter compiles this route to a native Vercel Function.” |
-| 7–16 s | Full Chart A, including the Markdown loss. | “On Vercel: lower first-response time and process resources. First response is not certified cold initialization. Markdown loses.” |
+| 7–16 s | Full Chart A: first response, RSS and process CPU. Markdown loss stays in the accompanying text. | “On Vercel: lower first-response time and process resources. First response is not certified cold initialization. Markdown loses.” |
 | 16–25 s | Kernel Chart B with KERNEL ONLY visible. No hosted numbers substituted. | “On this Linux int8 kernel, patched scriptc with CPU dispatch beats explicit Go SIMD. This is not hosted route timing.” |
 | 25–32 s | Actual function signature and `"use native"` excerpt from `examples/demo/lib/revenue.ts`, plus the self-hosted full-page result and crossover bracket. | “A function directive also works. The dashboard win is self-hosted. The serialization boundary matters.” |
 | 32–40 s | Static loss list and fork/validation status. | “Go still wins other workloads. The compiler patch is in a fork, with the full validation gate pending. Source, method and reproduction notes are in the thread.” |

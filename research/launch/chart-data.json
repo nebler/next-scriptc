@@ -33,7 +33,8 @@
         "comparison": {
           "value": 80.039,
           "source": "research/vercel-final.md#process-memory",
-          "locator": "After-first Node RSS: 80.039, 79.664, 80.078, 79.766, 80.262; median 80.039"
+          "locator": "After-first Node RSS: 80.039, 79.664, 80.078, 79.766, 80.262; median 80.039",
+          "decimals": 0
         }
       },
       {
@@ -49,7 +50,8 @@
           "value": 24.329,
           "source": "research/vercel-final.md#warm-paired-comparison-final-pair-only",
           "locator": "markdown | Node C=1 p50 24.329 | Native C=1 p50 60.620"
-        }
+        },
+        "includeInChart": false
       },
       {
         "label": "CPU / request: hello",
@@ -96,12 +98,17 @@
           "locator": "nearby-stores | Node median 5.700 | Native median 2.494"
         }
       }
+    ],
+    "chartSubtitle": "Lower is better · separate scales for each metric",
+    "chartNotes": [
+      "First response after deploy is not certified process-cold initialization.",
+      "Process RSS and self-reported process CPU, not whole-instance memory or billing."
     ]
   },
   "vector": {
     "title": "Int8 search: TypeScript vs Go",
     "subtitle": "KERNEL ONLY · Linux Vercel Sandbox · median search time · lower is better",
-    "sourceLine": "Source: research/vector-cpu-levels.md#measurements · same host / corpus / exact integer results",
+    "sourceLine": "research/vector-cpu-levels.md · same host / corpus · exact integer results",
     "note": "Excludes corpus initialization, JSON, HTTP and platform overhead. Go SIMD uses experimental archsimd.",
     "rows": {
       "value": 100000,
@@ -120,7 +127,8 @@
         "role": "native",
         "value": 9.251,
         "source": "research/vector-cpu-levels.md#measurements",
-        "locator": "int8-i32 | patched-dispatch | p50 9.251 ms"
+        "locator": "int8-i32 | patched-dispatch | p50 9.251 ms",
+        "displayLabel": "Native TS"
       },
       {
         "label": "Go SIMD",
@@ -146,12 +154,17 @@
         "source": "research/vector-cpu-levels.md#measurements",
         "locator": "int8-i32 | node | p50 102.198 ms"
       }
-    ]
+    ],
+    "decimals": 1,
+    "nativeNote": "native TS: patched scriptc + CPU dispatch",
+    "experimentalNote": "Go SIMD = experimental simd/archsimd",
+    "chartSubtitle": "KERNEL ONLY · median search time (ms) · lower is better",
+    "scopeLine": "Excludes corpus initialization, JSON, HTTP and platform overhead."
   },
   "vectorVercel": {
     "title": "Int8 search on Vercel Functions",
     "subtitle": "SERVER-SIDE COMPUTE p50 · Vercel Functions, iad1 · lower is better",
-    "sourceLine": "Source: research/vector-vercel.md · 3 fresh preview sets · 120 C=1 requests per variant · identical top-10 on every response",
+    "sourceLine": "research/vector-vercel.md · 3 fresh preview sets · 120 C=1 requests per variant · identical top-10",
     "note": "Request parse → top-10 → JSON. Excludes network/IPC. Stock scriptc with Math.imul: 10.09 ms.",
     "results": [
       {
@@ -160,7 +173,8 @@
         "role": "native",
         "value": 9.999,
         "source": "research/vector-vercel.md#measurements",
-        "locator": "Native patched, natural TS + dispatch | 9.999 / 10.886"
+        "locator": "Native patched, natural TS + dispatch | 9.999 / 10.886",
+        "displayLabel": "Native TS"
       },
       {
         "label": "Go SIMD",
@@ -187,7 +201,12 @@
         "locator": "Node, natural TS | 108.593 / 116.251"
       }
     ],
-    "headline": "lower server compute than Go SIMD on Vercel"
+    "headline": "lower server compute than Go SIMD on Vercel",
+    "decimals": 1,
+    "nativeNote": "native TS: patched scriptc + CPU dispatch",
+    "experimentalNote": "Go SIMD = experimental simd/archsimd",
+    "chartSubtitle": "Lower is better · server-side compute p50 (ms)",
+    "scopeLine": "Request parse → top-10 → JSON · excludes network / IPC"
   },
   "functionLevel": {
     "native": {
