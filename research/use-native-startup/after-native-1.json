@@ -1,0 +1,99 @@
+{
+  "label": "after-native-1",
+  "id": "dpl_6GJ9sUSQcgsFcuynGfvfebPEJdWx",
+  "url": "https://next-scriptc-87e96g38u-noahs-projects-8a075d15.vercel.app",
+  "status": "failed",
+  "sourceCommit": "53da3a78923227e144da4030d9484aae976df457",
+  "functions": [
+    {
+      "runtime": "nodejs24.x",
+      "bytes": 614734,
+      "regions": [
+        "iad1"
+      ]
+    },
+    {
+      "runtime": "nodejs24.x",
+      "bytes": 249499,
+      "regions": [
+        "iad1"
+      ]
+    },
+    {
+      "runtime": "executable",
+      "bytes": 7102258,
+      "regions": [
+        "iad1"
+      ]
+    },
+    {
+      "runtime": "nodejs24.x",
+      "bytes": 1100477,
+      "regions": [
+        "iad1"
+      ]
+    },
+    {
+      "runtime": "nodejs24.x",
+      "bytes": 1139751,
+      "regions": [
+        "iad1"
+      ]
+    }
+  ],
+  "client": "https://next-scriptc-asjapiuii-noahs-projects-8a075d15.vercel.app",
+  "first": {
+    "instance": "219f91bf-0cb4-4712-b2e3-1d67130777e6",
+    "invocationSequence": 9,
+    "firstInvocation": false,
+    "region": "iad1",
+    "node": "v24.22.2",
+    "availableParallelism": 2,
+    "startedAt": "2026-10-31T21:09:41.815Z",
+    "samples": [
+      {
+        "target": "report-after-native-1",
+        "phase": "measured",
+        "ordinal": 0,
+        "status": 500,
+        "ttfbMs": 305.5061519999872,
+        "totalMs": 305.9171250000363,
+        "socketId": 5,
+        "reusedSocket": false,
+        "bytes": 9194,
+        "sha256": "533ea0b32d19b71faef64ab1a1541d7d3f05e204fd3f7a3076ce7532c091a90f",
+        "serverTiming": null,
+        "vercelId": "iad1::4zl2t-1793480981832-23ed90a2b1ea",
+        "cache": "MISS",
+        "cacheControl": "public, max-age=0, must-revalidate",
+        "contentType": "text/html; charset=utf-8",
+        "targetInstance": null,
+        "attempts": null,
+        "pid": null,
+        "valid": false,
+        "failures": [
+          "status",
+          "region",
+          "result-parse",
+          "result-hash",
+          "timing-instance"
+        ]
+      }
+    ],
+    "windows": [],
+    "status": "failed",
+    "error": "request-or-validation-failed",
+    "elapsedMs": 306.44096500001615,
+    "cpu": {
+      "userMs": 8.253,
+      "systemMs": 1.337,
+      "cores": 0.031294771572069335
+    },
+    "eventLoop": {
+      "utilization": 0.027088604043358857,
+      "delayMaxMs": 10.305535,
+      "delayP99Ms": 10.305535
+    }
+  },
+  "failure": "Vercel runtime rejects require(ESM); retained first attempt before CommonJS bootstrap fix."
+}

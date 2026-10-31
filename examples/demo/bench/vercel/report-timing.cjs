@@ -4,9 +4,12 @@ const { AsyncLocalStorage } = require("node:async_hooks");
 const { randomUUID } = require("node:crypto");
 const storage = globalThis[Symbol.for("next-scriptc.report-timing")] ??= new AsyncLocalStorage();
 const instance = randomUUID();
+function mark(event) { if (process.env.NEXT_SCRIPTC_STARTUP_TIMING === "1") console.error("scriptc-startup " + JSON.stringify({event, uptimeMs:process.uptime()*1000, monoMs:Number(process.hrtime.bigint())/1e6, cpu:process.cpuUsage()})); }
+mark("launcher-module");
 module.exports = function wrap(handler) {
   return function timed(req, res) {
     if (process.env.NATIVE_VERCEL_TIMING !== "1" || !req.url.split("?")[0].endsWith("/reports")) return handler(req, res);
+    mark("handler-start");
     const begin = performance.now(), sample = {}, chunks = [];
     const write = res.write, end = res.end, writeHead = res.writeHead, flushHeaders = res.flushHeaders;
     let head;
@@ -27,6 +30,7 @@ module.exports = function wrap(handler) {
     };
     const bufferedEnd = res.end;
     res.end = function (...args) {
+      mark("handler-end");
       const totalMs = performance.now() - begin;
       res.setHeader("server-timing", `function;dur=${sample.functionMs?.toFixed(3)}, render;dur=${totalMs.toFixed(3)}`);
       res.setHeader("x-native-instance", instance);
