@@ -17,6 +17,7 @@ Use Node 24.x. From the workspace root:
 
 ```sh
 pnpm --filter demo dev                 # Node / Turbopack, for development and parity
+pnpm --filter demo test                # Offline benchmark harness tests
 pnpm --filter demo build               # Next build, then serial native compilation
 pnpm --filter demo start               # Native binaries behind Next's rewrites
 node examples/demo/test/e2e.mjs        # Builds; verifies parity and process cleanup
@@ -152,3 +153,17 @@ switching compilers; changing this variable on `next start` cannot change a bina
 
 Vector retrieval and the stock-versus-patched benchmark are described in
 [vector-route.md](../../research/vector-route.md).
+
+## Compiler installation
+
+If a fresh install reports `SC3004: TypeScript server startup: Permission denied`,
+scriptc's packaged checker helpers may lack executable permission. Repair the
+installed package with its bundled hook, resolving the real path before invoking
+it (the hook checks its invocation path):
+
+```sh
+node "$(realpath packages/next-scriptc/node_modules/scriptc/scripts/install-native.mjs)"
+```
+
+Run this from the workspace root. It changes installed dependency modes only.
+No compiler source patch or lockfile edit is needed. Then retry the build/tests.
