@@ -1,0 +1,1480 @@
+{
+  "date": "2026-10-31T12:15:58.494Z",
+  "platform": "linux",
+  "arch": "x64",
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.90GHz",
+  "loadStart": [
+    0.32,
+    0.08,
+    0.03
+  ],
+  "node": "v24.22.1",
+  "go": "go version go1.27.3 linux/amd64 (cross-compiled on darwin/arm64)",
+  "scriptc": "0.4.6",
+  "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+  "goSourceSha256": "2182aa6ebc0e25b80e62105c978b2fef0b9f1b7db892bb475a3ce85a168bafb1",
+  "binarySha256": "43d1ffec48d890058e32a06cb24b6ad78dea724f852851f97d43bd8d4d809fc8",
+  "iterations": 30,
+  "warmup": 5,
+  "runs": [
+    {
+      "variant": "node",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "samples": [
+        116.39529700000003,
+        117.22186299999998,
+        136.98776299999997,
+        107.83835799999997,
+        116.12269300000003,
+        115.56154500000002,
+        145.70140100000003,
+        115.69594800000004,
+        115.84326299999998,
+        115.71817599999986,
+        135.10179700000026,
+        108.2390049999999,
+        117.40288199999986,
+        116.31592199999977,
+        164.85127299999976,
+        152.48826999999983,
+        123.5165390000002,
+        116.35437599999977,
+        160.07576000000017,
+        116.97378500000013,
+        115.75317300000006,
+        140.3050800000001,
+        119.55181399999992,
+        126.56533600000012,
+        155.85328400000026,
+        122.52895900000021,
+        119.38574000000017,
+        138.35169899999983,
+        115.47079399999984,
+        114.74703399999999
+      ],
+      "phases": [],
+      "count": 30,
+      "warmup": 5,
+      "medianMs": 117.22186299999998,
+      "p95Ms": 160.07576000000017,
+      "peakRssMiB": 263.65625,
+      "timeStderr": "\tCommand being timed: \"/usr/local/bin/node /vercel/examples/scout/dashboard/dashboard.ts\"\n\tUser time (seconds): 4.37\n\tSystem time (seconds): 0.16\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:04.57\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 269984\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 26\n\tMinor (reclaiming a frame) page faults: 74924\n\tVoluntary context switches: 1230\n\tInvoluntary context switches: 1831\n\tSwaps: 0\n\tFile system inputs: 1296\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "native",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "samples": [
+        31.820002000000386,
+        30.24538400000165,
+        31.177246000006562,
+        30.509268999994674,
+        31.85805299999629,
+        30.825157999999647,
+        31.795725000003586,
+        31.047009000001708,
+        31.47933600000397,
+        30.875836999999592,
+        31.485587999995914,
+        30.776684000004025,
+        31.64799800000037,
+        31.391247999999905,
+        31.886054000002332,
+        31.317905999996583,
+        31.959395999998378,
+        30.68492399999377,
+        31.252495000000636,
+        30.710854999997537,
+        31.693992000000435,
+        30.72656399999687,
+        31.0091059999977,
+        30.71867000000202,
+        31.31572199999937,
+        30.920460000001185,
+        32.02832599999965,
+        30.988967000004777,
+        31.782301999999618,
+        31.773243000003276
+      ],
+      "phases": [],
+      "count": 30,
+      "warmup": 5,
+      "medianMs": 31.252495000000636,
+      "p95Ms": 31.959395999998378,
+      "peakRssMiB": 42.48046875,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/native\"\n\tUser time (seconds): 1.09\n\tSystem time (seconds): 0.01\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.10\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 43500\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 6608\n\tVoluntary context switches: 66\n\tInvoluntary context switches: 304\n\tSwaps: 0\n\tFile system inputs: 24\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "go",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "count": 30,
+      "phases": [],
+      "samples": [
+        153.080219,
+        138.916814,
+        155.567882,
+        140.103858,
+        153.188438,
+        138.044701,
+        155.579495,
+        140.82056,
+        155.584816,
+        138.841723,
+        155.298044,
+        139.138309,
+        154.581336,
+        135.624472,
+        153.257981,
+        138.535265,
+        155.683703,
+        139.856806,
+        156.702626,
+        139.437214,
+        156.611236,
+        140.658466,
+        155.870317,
+        140.083559,
+        155.196541,
+        138.9646,
+        153.042601,
+        139.943021,
+        156.644514,
+        138.391771
+      ],
+      "warmup": 5,
+      "medianMs": 140.82056,
+      "p95Ms": 156.644514,
+      "peakRssMiB": 87.47265625,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 4.91\n\tSystem time (seconds): 0.24\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:05.16\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 89572\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 44\n\tMinor (reclaiming a frame) page faults: 149187\n\tVoluntary context switches: 721\n\tInvoluntary context switches: 1387\n\tSwaps: 0\n\tFile system inputs: 5656\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "go-stream",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "count": 30,
+      "phases": [],
+      "samples": [
+        182.905739,
+        182.635671,
+        182.156355,
+        182.49636,
+        182.386928,
+        182.149772,
+        182.475248,
+        185.873707,
+        182.288549,
+        182.786151,
+        182.461955,
+        182.866723,
+        182.059551,
+        182.641227,
+        184.237925,
+        182.861421,
+        182.062772,
+        183.208442,
+        182.184684,
+        182.320689,
+        182.742244,
+        182.709015,
+        183.091936,
+        182.456368,
+        181.896482,
+        182.25919,
+        181.738837,
+        182.858208,
+        182.242261,
+        182.972291
+      ],
+      "warmup": 5,
+      "medianMs": 182.475248,
+      "p95Ms": 184.237925,
+      "peakRssMiB": 34.23828125,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 6.36\n\tSystem time (seconds): 0.03\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:06.40\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 35060\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 8351\n\tVoluntary context switches: 704\n\tInvoluntary context switches: 1633\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "go-v2",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "count": 30,
+      "phases": [],
+      "samples": [
+        137.021624,
+        121.949363,
+        138.887293,
+        117.953295,
+        136.451954,
+        122.36923,
+        140.879466,
+        127.454392,
+        128.683144,
+        135.247101,
+        136.467934,
+        120.112732,
+        138.738086,
+        118.566473,
+        135.475222,
+        122.81865,
+        137.414589,
+        122.070285,
+        136.508769,
+        125.245321,
+        139.263109,
+        117.320915,
+        138.134451,
+        118.29691,
+        135.186149,
+        120.584103,
+        136.617434,
+        116.618617,
+        135.492149,
+        119.217562
+      ],
+      "warmup": 5,
+      "medianMs": 128.683144,
+      "p95Ms": 139.263109,
+      "peakRssMiB": 86.26171875,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 4.29\n\tSystem time (seconds): 0.23\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:04.54\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 88332\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 144420\n\tVoluntary context switches: 522\n\tInvoluntary context switches: 1212\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    }
+  ],
+  "parity": [
+    {
+      "size": 200000,
+      "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "bytes": 22675,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream",
+        "go-v2"
+      ]
+    },
+    {
+      "case": "partial",
+      "sha256": "18bff6252a5ea8a3af91985d9f3ff08fcbde7fbc149540cf5bbfb235ad7144b7",
+      "bytes": 4974,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream",
+        "go-v2"
+      ]
+    },
+    {
+      "case": "none",
+      "sha256": "ba73ea65ad132289e02799f2a8111d96021e661bd31cb02a7bde69b7e012224b",
+      "bytes": 81,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream",
+        "go-v2"
+      ]
+    },
+    {
+      "case": "empty",
+      "sha256": "02514adbe3d218b0ecade98c8dc9e57602cf5e16b37c60478935dff18a459ecb",
+      "bytes": 93,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream",
+        "go-v2"
+      ]
+    },
+    {
+      "case": "escapes",
+      "sha256": "9b07302a3c99896c57667644fbae4c9a384771913d06137c04b3fbb2fd0eadba",
+      "bytes": 245,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream",
+        "go-v2"
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "variant": "node",
+      "size": 200000,
+      "samples": [
+        118.22353399999997,
+        118.44664599999999,
+        134.95394699999997,
+        109.60809100000006,
+        117.46247800000015,
+        118.16326800000002,
+        147.48291399999994,
+        118.85476599999993,
+        117.9618660000001,
+        118.14560899999992,
+        152.69400799999994,
+        119.93660999999975,
+        118.63448999999991,
+        118.38557700000001,
+        140.89885099999992,
+        118.67428999999993,
+        117.90926600000012,
+        118.16413599999987,
+        135.92925699999978,
+        120.92135499999995,
+        133.32580299999972,
+        146.85381499999994,
+        208.923276,
+        112.97695000000022,
+        125.08679299999994,
+        119.91278599999987,
+        151.25296600000001,
+        110.46578999999929,
+        120.45227300000079,
+        118.79576300000008
+      ],
+      "phases": [
+        {
+          "parseMs": 57.41856999999993,
+          "groupMs": 60.71455900000001,
+          "sortMs": 0.08498100000008435,
+          "remainderMs": 0.005423999999948137
+        },
+        {
+          "parseMs": 57.33751600000005,
+          "groupMs": 61.02069299999994,
+          "sortMs": 0.08310900000003585,
+          "remainderMs": 0.00532799999996314
+        },
+        {
+          "parseMs": 57.56572399999993,
+          "groupMs": 77.29578500000002,
+          "sortMs": 0.08572000000003754,
+          "remainderMs": 0.006717999999978019
+        },
+        {
+          "parseMs": 59.68603299999995,
+          "groupMs": 49.58062700000005,
+          "sortMs": 0.33578299999999217,
+          "remainderMs": 0.005648000000064712
+        },
+        {
+          "parseMs": 68.33033999999998,
+          "groupMs": 49.078659000000016,
+          "sortMs": 0.04704100000003564,
+          "remainderMs": 0.006438000000116517
+        },
+        {
+          "parseMs": 68.78083599999991,
+          "groupMs": 49.33126900000002,
+          "sortMs": 0.04574299999990217,
+          "remainderMs": 0.00542000000018561
+        },
+        {
+          "parseMs": 68.45307099999991,
+          "groupMs": 78.93770500000005,
+          "sortMs": 0.08619699999985642,
+          "remainderMs": 0.005941000000120766
+        },
+        {
+          "parseMs": 57.749146999999994,
+          "groupMs": 61.010699999999815,
+          "sortMs": 0.08883700000001227,
+          "remainderMs": 0.006082000000105836
+        },
+        {
+          "parseMs": 57.79336000000012,
+          "groupMs": 60.07687099999998,
+          "sortMs": 0.08536199999980454,
+          "remainderMs": 0.006273000000192042
+        },
+        {
+          "parseMs": 57.56047999999987,
+          "groupMs": 60.49405200000001,
+          "sortMs": 0.08474900000010166,
+          "remainderMs": 0.006327999999939493
+        },
+        {
+          "parseMs": 59.13955400000009,
+          "groupMs": 93.43424400000004,
+          "sortMs": 0.11065000000007785,
+          "remainderMs": 0.009559999999737556
+        },
+        {
+          "parseMs": 58.11611300000004,
+          "groupMs": 61.46946500000013,
+          "sortMs": 0.34410699999989447,
+          "remainderMs": 0.006924999999682768
+        },
+        {
+          "parseMs": 57.77994400000034,
+          "groupMs": 60.798849999999675,
+          "sortMs": 0.049627000000327826,
+          "remainderMs": 0.006068999999570224
+        },
+        {
+          "parseMs": 57.581458999999995,
+          "groupMs": 60.75289500000008,
+          "sortMs": 0.045169999999870925,
+          "remainderMs": 0.006053000000065367
+        },
+        {
+          "parseMs": 57.84563399999979,
+          "groupMs": 82.95901900000035,
+          "sortMs": 0.08808799999997063,
+          "remainderMs": 0.006109999999807769
+        },
+        {
+          "parseMs": 58.14513600000009,
+          "groupMs": 60.430921000000126,
+          "sortMs": 0.09078099999987899,
+          "remainderMs": 0.00745199999983015
+        },
+        {
+          "parseMs": 57.46597400000019,
+          "groupMs": 60.35269299999982,
+          "sortMs": 0.08426800000006551,
+          "remainderMs": 0.006331000000045606
+        },
+        {
+          "parseMs": 57.38023300000032,
+          "groupMs": 60.69423299999971,
+          "sortMs": 0.0844120000001567,
+          "remainderMs": 0.005257999999685126
+        },
+        {
+          "parseMs": 57.946150000000216,
+          "groupMs": 77.89297699999997,
+          "sortMs": 0.08462199999985387,
+          "remainderMs": 0.005507999999736057
+        },
+        {
+          "parseMs": 63.79841899999974,
+          "groupMs": 56.78005600000006,
+          "sortMs": 0.33766700000023775,
+          "remainderMs": 0.005212999999912427
+        },
+        {
+          "parseMs": 79.36273700000038,
+          "groupMs": 53.90799399999969,
+          "sortMs": 0.049390000000130385,
+          "remainderMs": 0.005681999999524123
+        },
+        {
+          "parseMs": 69.68941700000005,
+          "groupMs": 77.108475,
+          "sortMs": 0.05008499999985361,
+          "remainderMs": 0.005838000000039756
+        },
+        {
+          "parseMs": 158.64208999999983,
+          "groupMs": 50.18602099999998,
+          "sortMs": 0.08667199999990771,
+          "remainderMs": 0.008493000000271422
+        },
+        {
+          "parseMs": 61.49051499999996,
+          "groupMs": 51.37740799999983,
+          "sortMs": 0.10073400000010224,
+          "remainderMs": 0.008293000000321626
+        },
+        {
+          "parseMs": 74.8473640000002,
+          "groupMs": 50.149325999999746,
+          "sortMs": 0.08277799999996205,
+          "remainderMs": 0.007325000000037107
+        },
+        {
+          "parseMs": 69.75369499999988,
+          "groupMs": 50.07118899999978,
+          "sortMs": 0.08105700000032812,
+          "remainderMs": 0.006844999999884749
+        },
+        {
+          "parseMs": 104.14415899999949,
+          "groupMs": 46.617936000000554,
+          "sortMs": 0.4830729999994219,
+          "remainderMs": 0.0077980000005482
+        },
+        {
+          "parseMs": 59.57501400000001,
+          "groupMs": 50.81984000000011,
+          "sortMs": 0.06159699999989243,
+          "remainderMs": 0.009338999999272346
+        },
+        {
+          "parseMs": 70.20948000000044,
+          "groupMs": 50.1881829999993,
+          "sortMs": 0.04673400000046968,
+          "remainderMs": 0.007876000000578642
+        },
+        {
+          "parseMs": 68.77135599999929,
+          "groupMs": 49.96960500000023,
+          "sortMs": 0.0463129999998273,
+          "remainderMs": 0.008489000000736269
+        }
+      ],
+      "count": 30,
+      "warmup": 5,
+      "medianMs": 118.79576300000008,
+      "p95Ms": 152.69400799999994,
+      "peakRssMiB": 266.98046875,
+      "timeStderr": "\tCommand being timed: \"/usr/local/bin/node /vercel/examples/scout/dashboard/dashboard.ts\"\n\tUser time (seconds): 4.48\n\tSystem time (seconds): 0.13\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:04.62\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 273388\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 75472\n\tVoluntary context switches: 1331\n\tInvoluntary context switches: 1770\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": {
+        "parseMs": 59.13955400000009,
+        "groupMs": 60.35269299999982,
+        "sortMs": 0.08462199999985387,
+        "remainderMs": 0.006273000000192042
+      }
+    },
+    {
+      "variant": "native",
+      "size": 200000,
+      "samples": [
+        31.74810100000468,
+        30.56651600000623,
+        31.621096999995643,
+        30.164424000002327,
+        31.96291599998949,
+        30.69857300000149,
+        31.649429000011878,
+        30.39438599999994,
+        31.992478999993182,
+        30.3702970000013,
+        31.661688000007416,
+        30.52052300001378,
+        31.70338899998751,
+        30.119940000004135,
+        32.04645999999775,
+        30.481426999991527,
+        31.76960699999472,
+        30.529861999995774,
+        31.943048000001,
+        30.646815999993123,
+        32.04568100000324,
+        30.748592000003555,
+        32.07160900000599,
+        30.486126000003424,
+        32.16917000000831,
+        30.28923300000315,
+        31.570735999994213,
+        30.651898000010988,
+        31.65518699999666,
+        30.426496000000043
+      ],
+      "phases": [
+        {
+          "parseMs": 17.6735389999958,
+          "groupMs": 10.924234999998589,
+          "sortMs": 0.03403999999864027,
+          "remainderMs": 3.1162870000116527
+        },
+        {
+          "parseMs": 17.013063000005786,
+          "groupMs": 10.252305000001797,
+          "sortMs": 0.030629999993834645,
+          "remainderMs": 3.270518000004813
+        },
+        {
+          "parseMs": 17.650070000003325,
+          "groupMs": 10.840619999988121,
+          "sortMs": 0.030479000008199364,
+          "remainderMs": 3.099927999995998
+        },
+        {
+          "parseMs": 16.951268000004347,
+          "groupMs": 10.202048999999533,
+          "sortMs": 0.031711000003269874,
+          "remainderMs": 2.9793959999951767
+        },
+        {
+          "parseMs": 17.540967000008095,
+          "groupMs": 11.061272999999346,
+          "sortMs": 0.03237099999387283,
+          "remainderMs": 3.328304999988177
+        },
+        {
+          "parseMs": 17.092428999996628,
+          "groupMs": 10.305651999995462,
+          "sortMs": 0.03224499999487307,
+          "remainderMs": 3.268247000014526
+        },
+        {
+          "parseMs": 17.541052999993553,
+          "groupMs": 10.894427000006544,
+          "sortMs": 0.03243300000031013,
+          "remainderMs": 3.18151600001147
+        },
+        {
+          "parseMs": 16.954712999999174,
+          "groupMs": 10.217673999999533,
+          "sortMs": 0.030259999999543652,
+          "remainderMs": 3.1917390000016894
+        },
+        {
+          "parseMs": 17.817302000010386,
+          "groupMs": 10.898130000001402,
+          "sortMs": 0.030738000001292676,
+          "remainderMs": 3.2463089999801014
+        },
+        {
+          "parseMs": 17.16396999999415,
+          "groupMs": 10.16946600000665,
+          "sortMs": 0.029871999999159016,
+          "remainderMs": 3.00698900000134
+        },
+        {
+          "parseMs": 17.41476899999543,
+          "groupMs": 10.850271000002977,
+          "sortMs": 0.030641000004834495,
+          "remainderMs": 3.366007000004174
+        },
+        {
+          "parseMs": 17.042556999993394,
+          "groupMs": 10.288694000002579,
+          "sortMs": 0.03202299999247771,
+          "remainderMs": 3.157249000025331
+        },
+        {
+          "parseMs": 17.742167999997037,
+          "groupMs": 10.849671000003582,
+          "sortMs": 0.028079999989131466,
+          "remainderMs": 3.08346999999776
+        },
+        {
+          "parseMs": 16.870877000008477,
+          "groupMs": 10.148704999999609,
+          "sortMs": 0.029081000000587665,
+          "remainderMs": 3.0712769999954617
+        },
+        {
+          "parseMs": 17.685018000003765,
+          "groupMs": 11.011490999997477,
+          "sortMs": 0.03241499999421649,
+          "remainderMs": 3.317536000002292
+        },
+        {
+          "parseMs": 17.10549100000935,
+          "groupMs": 10.225907000000007,
+          "sortMs": 0.04145199999038596,
+          "remainderMs": 3.108576999991783
+        },
+        {
+          "parseMs": 17.779553000000305,
+          "groupMs": 10.853577000001678,
+          "sortMs": 0.03045199999178294,
+          "remainderMs": 3.1060250000009546
+        },
+        {
+          "parseMs": 17.039315000001807,
+          "groupMs": 10.260917000006884,
+          "sortMs": 0.029647999996086583,
+          "remainderMs": 3.199981999990996
+        },
+        {
+          "parseMs": 17.81112800000119,
+          "groupMs": 10.829953000007663,
+          "sortMs": 0.031110999989323318,
+          "remainderMs": 3.270856000002823
+        },
+        {
+          "parseMs": 17.043110000013257,
+          "groupMs": 10.343892999997479,
+          "sortMs": 0.03465999999025371,
+          "remainderMs": 3.225152999992133
+        },
+        {
+          "parseMs": 17.68056500000239,
+          "groupMs": 11.076650999995763,
+          "sortMs": 0.03342500000144355,
+          "remainderMs": 3.255040000003646
+        },
+        {
+          "parseMs": 17.190302000002703,
+          "groupMs": 10.228579000002355,
+          "sortMs": 0.036842999994405545,
+          "remainderMs": 3.2928680000040913
+        },
+        {
+          "parseMs": 17.766746999986935,
+          "groupMs": 11.013709999999264,
+          "sortMs": 0.0344290000066394,
+          "remainderMs": 3.256723000013153
+        },
+        {
+          "parseMs": 17.06496299999708,
+          "groupMs": 10.285401000001002,
+          "sortMs": 0.03288299999258015,
+          "remainderMs": 3.102879000012763
+        },
+        {
+          "parseMs": 18.07672199999797,
+          "groupMs": 10.807239000001573,
+          "sortMs": 0.03251399999135174,
+          "remainderMs": 3.252695000017411
+        },
+        {
+          "parseMs": 16.8881679999904,
+          "groupMs": 10.287544000006164,
+          "sortMs": 0.03309699999226723,
+          "remainderMs": 3.080424000014318
+        },
+        {
+          "parseMs": 17.527444999999716,
+          "groupMs": 10.829442000002018,
+          "sortMs": 0.032991000000038184,
+          "remainderMs": 3.1808579999924405
+        },
+        {
+          "parseMs": 17.168283999999403,
+          "groupMs": 10.368012999999337,
+          "sortMs": 0.0317090000025928,
+          "remainderMs": 3.083892000009655
+        },
+        {
+          "parseMs": 17.53831000000355,
+          "groupMs": 10.818241999993916,
+          "sortMs": 0.0298260000126902,
+          "remainderMs": 3.268808999986504
+        },
+        {
+          "parseMs": 17.091021999993245,
+          "groupMs": 10.204009000008227,
+          "sortMs": 0.032097999996040016,
+          "remainderMs": 3.0993670000025304
+        }
+      ],
+      "count": 30,
+      "warmup": 5,
+      "medianMs": 30.748592000003555,
+      "p95Ms": 32.07160900000599,
+      "peakRssMiB": 42.41796875,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/native\"\n\tUser time (seconds): 1.08\n\tSystem time (seconds): 0.01\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.10\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 43436\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 6610\n\tVoluntary context switches: 60\n\tInvoluntary context switches: 181\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": {
+        "parseMs": 17.190302000002703,
+        "groupMs": 10.368012999999337,
+        "sortMs": 0.03202299999247771,
+        "remainderMs": 3.18151600001147
+      }
+    },
+    {
+      "variant": "go",
+      "size": 200000,
+      "count": 30,
+      "phases": [
+        {
+          "parseMs": 149.730071,
+          "groupMs": 6.707541,
+          "sortMs": 0.035858,
+          "remainderMs": 0.00041299999999128145
+        },
+        {
+          "parseMs": 132.725044,
+          "groupMs": 6.683759,
+          "sortMs": 0.036104,
+          "remainderMs": 0.0005119999999897706
+        },
+        {
+          "parseMs": 148.761751,
+          "groupMs": 6.676445,
+          "sortMs": 0.036633,
+          "remainderMs": 0.0004159999999970021
+        },
+        {
+          "parseMs": 133.963155,
+          "groupMs": 6.664628,
+          "sortMs": 0.037437,
+          "remainderMs": 0.0008190000000111719
+        },
+        {
+          "parseMs": 149.484908,
+          "groupMs": 6.701756,
+          "sortMs": 0.036419,
+          "remainderMs": 0.00039000000002296226
+        },
+        {
+          "parseMs": 136.369741,
+          "groupMs": 6.792349,
+          "sortMs": 0.036285,
+          "remainderMs": 0.0004910000000050291
+        },
+        {
+          "parseMs": 153.224942,
+          "groupMs": 7.253384,
+          "sortMs": 0.065648,
+          "remainderMs": 0.0004939999999965944
+        },
+        {
+          "parseMs": 142.396062,
+          "groupMs": 7.051539,
+          "sortMs": 0.03548,
+          "remainderMs": 0.00038599999998974177
+        },
+        {
+          "parseMs": 175.338048,
+          "groupMs": 6.626386,
+          "sortMs": 0.036735,
+          "remainderMs": 0.0007839999999996392
+        },
+        {
+          "parseMs": 129.76257,
+          "groupMs": 6.644717,
+          "sortMs": 0.034289,
+          "remainderMs": 0.0006679999999772562
+        },
+        {
+          "parseMs": 148.083563,
+          "groupMs": 6.617365,
+          "sortMs": 0.079021,
+          "remainderMs": 0.0004029999999950601
+        },
+        {
+          "parseMs": 129.961073,
+          "groupMs": 6.784465,
+          "sortMs": 0.034839,
+          "remainderMs": 0.0004300000000110951
+        },
+        {
+          "parseMs": 143.665287,
+          "groupMs": 6.686079,
+          "sortMs": 0.037351,
+          "remainderMs": 0.0004919999999871902
+        },
+        {
+          "parseMs": 132.822707,
+          "groupMs": 6.636449,
+          "sortMs": 0.034903,
+          "remainderMs": 0.0004679999999969292
+        },
+        {
+          "parseMs": 150.863266,
+          "groupMs": 6.718236,
+          "sortMs": 0.036903,
+          "remainderMs": 0.0005869999999813733
+        },
+        {
+          "parseMs": 131.817559,
+          "groupMs": 6.603483,
+          "sortMs": 0.036082,
+          "remainderMs": 0.0007650000000060664
+        },
+        {
+          "parseMs": 144.8738,
+          "groupMs": 6.696632,
+          "sortMs": 0.037495,
+          "remainderMs": 0.00043400000001342365
+        },
+        {
+          "parseMs": 133.695766,
+          "groupMs": 6.611412,
+          "sortMs": 0.035221,
+          "remainderMs": 0.0005140000000184997
+        },
+        {
+          "parseMs": 149.009629,
+          "groupMs": 6.712365,
+          "sortMs": 0.0378,
+          "remainderMs": 0.0004900000000230276
+        },
+        {
+          "parseMs": 129.487535,
+          "groupMs": 6.753582,
+          "sortMs": 0.035262,
+          "remainderMs": 0.000877999999983628
+        },
+        {
+          "parseMs": 144.099975,
+          "groupMs": 6.636061,
+          "sortMs": 0.036503,
+          "remainderMs": 0.0009280000000104274
+        },
+        {
+          "parseMs": 133.572216,
+          "groupMs": 6.797083,
+          "sortMs": 0.035584,
+          "remainderMs": 0.0005139999999964132
+        },
+        {
+          "parseMs": 148.798765,
+          "groupMs": 6.831088,
+          "sortMs": 0.036381,
+          "remainderMs": 0.00038200000000143675
+        },
+        {
+          "parseMs": 129.64672,
+          "groupMs": 6.518649,
+          "sortMs": 0.03595,
+          "remainderMs": 0.0006240000000123161
+        },
+        {
+          "parseMs": 142.189179,
+          "groupMs": 6.585323,
+          "sortMs": 0.035684,
+          "remainderMs": 0.0004450000000051843
+        },
+        {
+          "parseMs": 129.669195,
+          "groupMs": 6.781829,
+          "sortMs": 0.035415,
+          "remainderMs": 0.00032900000000998797
+        },
+        {
+          "parseMs": 149.679271,
+          "groupMs": 6.631899,
+          "sortMs": 0.036768,
+          "remainderMs": 0.0004220000000140431
+        },
+        {
+          "parseMs": 135.056216,
+          "groupMs": 6.686944,
+          "sortMs": 0.035714,
+          "remainderMs": 0.000331999999981146
+        },
+        {
+          "parseMs": 149.617439,
+          "groupMs": 6.578497,
+          "sortMs": 0.036884,
+          "remainderMs": 0.0004580000000228568
+        },
+        {
+          "parseMs": 130.438671,
+          "groupMs": 6.677739,
+          "sortMs": 0.036846,
+          "remainderMs": 0.0004959999999979911
+        }
+      ],
+      "samples": [
+        156.473883,
+        139.445419,
+        155.475245,
+        140.666039,
+        156.223473,
+        143.198866,
+        160.544468,
+        149.483467,
+        182.001953,
+        136.442244,
+        154.780352,
+        136.780807,
+        150.389209,
+        139.494527,
+        157.618992,
+        138.457889,
+        151.608361,
+        140.342913,
+        155.760284,
+        136.277257,
+        150.773467,
+        140.405397,
+        155.666616,
+        136.201943,
+        148.810631,
+        136.486768,
+        156.34836,
+        141.779206,
+        156.233278,
+        137.153752
+      ],
+      "warmup": 5,
+      "medianMs": 148.810631,
+      "p95Ms": 160.544468,
+      "peakRssMiB": 84.05078125,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 4.92\n\tSystem time (seconds): 0.22\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:05.19\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 86068\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 144695\n\tVoluntary context switches: 586\n\tInvoluntary context switches: 1526\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": {
+        "parseMs": 142.189179,
+        "groupMs": 6.683759,
+        "sortMs": 0.036285,
+        "remainderMs": 0.0004900000000230276
+      }
+    },
+    {
+      "variant": "go-stream",
+      "size": 200000,
+      "count": 30,
+      "phases": [
+        {
+          "parseMs": 0.00096,
+          "groupMs": 181.628987,
+          "sortMs": 0.035111,
+          "remainderMs": 0.00041200000001195836
+        },
+        {
+          "parseMs": 0.000637,
+          "groupMs": 181.493583,
+          "sortMs": 0.03391,
+          "remainderMs": 0.0003949999999891471
+        },
+        {
+          "parseMs": 0.000613,
+          "groupMs": 182.414817,
+          "sortMs": 0.034434,
+          "remainderMs": 0.0005350000000180141
+        },
+        {
+          "parseMs": 0.000797,
+          "groupMs": 181.455808,
+          "sortMs": 0.0333,
+          "remainderMs": 0.0004210000000140976
+        },
+        {
+          "parseMs": 0.001034,
+          "groupMs": 182.742073,
+          "sortMs": 0.03428,
+          "remainderMs": 0.0003589999999985341
+        },
+        {
+          "parseMs": 0.000604,
+          "groupMs": 182.168081,
+          "sortMs": 0.034263,
+          "remainderMs": 0.0005079999999779011
+        },
+        {
+          "parseMs": 0.000677,
+          "groupMs": 184.090785,
+          "sortMs": 0.032946,
+          "remainderMs": 0.0003259999999824237
+        },
+        {
+          "parseMs": 0.000634,
+          "groupMs": 186.304891,
+          "sortMs": 0.03583,
+          "remainderMs": 0.0007540000000048341
+        },
+        {
+          "parseMs": 0.00066,
+          "groupMs": 186.267319,
+          "sortMs": 0.039703,
+          "remainderMs": 0.00037100000000415967
+        },
+        {
+          "parseMs": 0.000505,
+          "groupMs": 182.848271,
+          "sortMs": 0.034947,
+          "remainderMs": 0.0003489999999882268
+        },
+        {
+          "parseMs": 0.000713,
+          "groupMs": 181.950282,
+          "sortMs": 0.034991,
+          "remainderMs": 0.0003390000000160695
+        },
+        {
+          "parseMs": 0.000733,
+          "groupMs": 182.630823,
+          "sortMs": 0.034941,
+          "remainderMs": 0.0004409999999984704
+        },
+        {
+          "parseMs": 0.000752,
+          "groupMs": 181.680211,
+          "sortMs": 0.035107,
+          "remainderMs": 0.0003139999999852705
+        },
+        {
+          "parseMs": 0.000615,
+          "groupMs": 182.044753,
+          "sortMs": 0.034496,
+          "remainderMs": 0.00037400000001217015
+        },
+        {
+          "parseMs": 0.00088,
+          "groupMs": 182.282972,
+          "sortMs": 0.035058,
+          "remainderMs": 0.00042300000000431576
+        },
+        {
+          "parseMs": 0.000728,
+          "groupMs": 182.833646,
+          "sortMs": 0.035667,
+          "remainderMs": 0.0004239999999989877
+        },
+        {
+          "parseMs": 0.001251,
+          "groupMs": 182.110273,
+          "sortMs": 0.033552,
+          "remainderMs": 0.00037400000000811784
+        },
+        {
+          "parseMs": 0.000624,
+          "groupMs": 182.32733,
+          "sortMs": 0.033748,
+          "remainderMs": 0.0006380000000120178
+        },
+        {
+          "parseMs": 0.000644,
+          "groupMs": 180.968652,
+          "sortMs": 0.033718,
+          "remainderMs": 0.0006490000000031471
+        },
+        {
+          "parseMs": 0.000749,
+          "groupMs": 182.264941,
+          "sortMs": 0.033767,
+          "remainderMs": 0.0003929999999857589
+        },
+        {
+          "parseMs": 0.000632,
+          "groupMs": 181.785414,
+          "sortMs": 0.034,
+          "remainderMs": 0.0007270000000037247
+        },
+        {
+          "parseMs": 0.000786,
+          "groupMs": 183.102999,
+          "sortMs": 0.035766,
+          "remainderMs": 0.0004169999999940818
+        },
+        {
+          "parseMs": 0.000942,
+          "groupMs": 182.256915,
+          "sortMs": 0.033779,
+          "remainderMs": 0.0005819999999898684
+        },
+        {
+          "parseMs": 0.000783,
+          "groupMs": 182.661514,
+          "sortMs": 0.033965,
+          "remainderMs": 0.0005889999999857606
+        },
+        {
+          "parseMs": 0.00064,
+          "groupMs": 183.119171,
+          "sortMs": 0.034377,
+          "remainderMs": 0.00045100000000452417
+        },
+        {
+          "parseMs": 0.001021,
+          "groupMs": 242.850919,
+          "sortMs": 0.035726,
+          "remainderMs": 0.0006509999999874463
+        },
+        {
+          "parseMs": 0.00165,
+          "groupMs": 196.44528,
+          "sortMs": 0.035651,
+          "remainderMs": 0.0004479999999787848
+        },
+        {
+          "parseMs": 0.000643,
+          "groupMs": 182.045349,
+          "sortMs": 0.035235,
+          "remainderMs": 0.00037500000001967904
+        },
+        {
+          "parseMs": 0.00096,
+          "groupMs": 182.02553,
+          "sortMs": 0.033839,
+          "remainderMs": 0.000344000000012952
+        },
+        {
+          "parseMs": 0.000718,
+          "groupMs": 185.091363,
+          "sortMs": 0.034635,
+          "remainderMs": 0.0004109999999941383
+        }
+      ],
+      "samples": [
+        181.66547,
+        181.528525,
+        182.450399,
+        181.490326,
+        182.777746,
+        182.203456,
+        184.124734,
+        186.342109,
+        186.308053,
+        182.884072,
+        181.986325,
+        182.666938,
+        181.716384,
+        182.080238,
+        182.319333,
+        182.870465,
+        182.14545,
+        182.36234,
+        181.003663,
+        182.29985,
+        181.820773,
+        183.139968,
+        182.292218,
+        182.696851,
+        183.154639,
+        242.888317,
+        196.483029,
+        182.081602,
+        182.060673,
+        185.127127
+      ],
+      "warmup": 5,
+      "medianMs": 182.319333,
+      "p95Ms": 196.483029,
+      "peakRssMiB": 33.98828125,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 6.43\n\tSystem time (seconds): 0.02\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:06.48\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 34804\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 8296\n\tVoluntary context switches: 714\n\tInvoluntary context switches: 1615\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": {
+        "parseMs": 0.000718,
+        "groupMs": 182.282972,
+        "sortMs": 0.034434,
+        "remainderMs": 0.0004169999999940818
+      }
+    },
+    {
+      "variant": "go-v2",
+      "size": 200000,
+      "count": 30,
+      "phases": [
+        {
+          "parseMs": 172.250474,
+          "groupMs": 6.692777,
+          "sortMs": 0.038347,
+          "remainderMs": 0.00042699999999564614
+        },
+        {
+          "parseMs": 120.841535,
+          "groupMs": 6.729013,
+          "sortMs": 0.03603,
+          "remainderMs": 0.000553000000002031
+        },
+        {
+          "parseMs": 131.459394,
+          "groupMs": 6.754025,
+          "sortMs": 0.036222,
+          "remainderMs": 0.0004629999999896453
+        },
+        {
+          "parseMs": 117.152619,
+          "groupMs": 6.746381,
+          "sortMs": 0.036911,
+          "remainderMs": 0.0006059999999931398
+        },
+        {
+          "parseMs": 132.455175,
+          "groupMs": 6.639271,
+          "sortMs": 0.036029,
+          "remainderMs": 0.00039399999999299024
+        },
+        {
+          "parseMs": 117.669976,
+          "groupMs": 6.594603,
+          "sortMs": 0.033922,
+          "remainderMs": 0.0008159999999963821
+        },
+        {
+          "parseMs": 132.244171,
+          "groupMs": 6.650181,
+          "sortMs": 0.036175,
+          "remainderMs": 0.00048199999999461174
+        },
+        {
+          "parseMs": 116.622316,
+          "groupMs": 6.617214,
+          "sortMs": 0.034268,
+          "remainderMs": 0.00084499999999995
+        },
+        {
+          "parseMs": 131.152033,
+          "groupMs": 6.499384,
+          "sortMs": 0.035375,
+          "remainderMs": 0.0004680000000202786
+        },
+        {
+          "parseMs": 115.820712,
+          "groupMs": 6.671368,
+          "sortMs": 0.034535,
+          "remainderMs": 0.0005429999999994953
+        },
+        {
+          "parseMs": 130.853382,
+          "groupMs": 6.613157,
+          "sortMs": 0.036809,
+          "remainderMs": 0.00045099999997586654
+        },
+        {
+          "parseMs": 116.68592,
+          "groupMs": 6.653789,
+          "sortMs": 0.035023,
+          "remainderMs": 0.0005620000000010894
+        },
+        {
+          "parseMs": 132.105157,
+          "groupMs": 6.650833,
+          "sortMs": 0.037197,
+          "remainderMs": 0.0003900000000073636
+        },
+        {
+          "parseMs": 116.423042,
+          "groupMs": 6.565348,
+          "sortMs": 0.03577,
+          "remainderMs": 0.0004600000000033119
+        },
+        {
+          "parseMs": 131.260904,
+          "groupMs": 6.631886,
+          "sortMs": 0.036065,
+          "remainderMs": 0.0003619999999837781
+        },
+        {
+          "parseMs": 116.936536,
+          "groupMs": 6.72992,
+          "sortMs": 0.034367,
+          "remainderMs": 0.0004639999999898406
+        },
+        {
+          "parseMs": 132.146947,
+          "groupMs": 6.562265,
+          "sortMs": 0.037277,
+          "remainderMs": 0.00025799999998766393
+        },
+        {
+          "parseMs": 117.393795,
+          "groupMs": 6.696846,
+          "sortMs": 0.036539,
+          "remainderMs": 0.000564000000009876
+        },
+        {
+          "parseMs": 131.993951,
+          "groupMs": 6.755565,
+          "sortMs": 0.03532,
+          "remainderMs": 0.0012669999999874934
+        },
+        {
+          "parseMs": 118.921894,
+          "groupMs": 6.685141,
+          "sortMs": 0.038116,
+          "remainderMs": 0.0009040000000096055
+        },
+        {
+          "parseMs": 191.168849,
+          "groupMs": 11.01481,
+          "sortMs": 0.041998,
+          "remainderMs": 0.00038800000000403095
+        },
+        {
+          "parseMs": 138.835246,
+          "groupMs": 6.87995,
+          "sortMs": 0.035089,
+          "remainderMs": 0.0004999999999954277
+        },
+        {
+          "parseMs": 169.452883,
+          "groupMs": 6.706463,
+          "sortMs": 0.037214,
+          "remainderMs": 0.0008019999999838434
+        },
+        {
+          "parseMs": 126.164295,
+          "groupMs": 10.088791,
+          "sortMs": 0.050464,
+          "remainderMs": 0.0005270000000104427
+        },
+        {
+          "parseMs": 177.295509,
+          "groupMs": 6.56142,
+          "sortMs": 0.041831,
+          "remainderMs": 0.00043999999999772693
+        },
+        {
+          "parseMs": 172.457237,
+          "groupMs": 6.593318,
+          "sortMs": 0.035694,
+          "remainderMs": 0.00048600000001231686
+        },
+        {
+          "parseMs": 164.820232,
+          "groupMs": 12.940716,
+          "sortMs": 0.054199,
+          "remainderMs": 0.0004609999999930503
+        },
+        {
+          "parseMs": 147.424094,
+          "groupMs": 10.00397,
+          "sortMs": 0.050151,
+          "remainderMs": 0.0005329999999986179
+        },
+        {
+          "parseMs": 166.072188,
+          "groupMs": 8.131385,
+          "sortMs": 0.045418,
+          "remainderMs": 0.000833999999975979
+        },
+        {
+          "parseMs": 156.37679,
+          "groupMs": 6.771627,
+          "sortMs": 0.036847,
+          "remainderMs": 0.0009380000000092856
+        }
+      ],
+      "samples": [
+        178.982025,
+        127.607131,
+        138.250104,
+        123.936517,
+        139.130869,
+        124.299317,
+        138.931009,
+        123.274643,
+        137.68726,
+        122.527158,
+        137.503799,
+        123.375294,
+        138.793577,
+        123.02462,
+        137.929217,
+        123.701287,
+        138.746747,
+        124.127744,
+        138.786103,
+        125.646055,
+        202.226045,
+        145.750785,
+        176.197362,
+        136.304077,
+        183.8992,
+        179.086735,
+        177.815608,
+        157.478748,
+        174.249825,
+        163.186202
+      ],
+      "warmup": 5,
+      "medianMs": 138.250104,
+      "p95Ms": 183.8992,
+      "peakRssMiB": 82.91015625,
+      "timeStderr": "\tCommand being timed: \"/vercel/examples/scout/dashboard/.artifacts/go\"\n\tUser time (seconds): 4.77\n\tSystem time (seconds): 0.27\n\tPercent of CPU this job got: 99%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:05.05\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 84900\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 152876\n\tVoluntary context switches: 575\n\tInvoluntary context switches: 1277\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 48\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "phaseMedians": {
+        "parseMs": 131.459394,
+        "groupMs": 6.685141,
+        "sortMs": 0.036222,
+        "remainderMs": 0.00048600000001231686
+      }
+    }
+  ],
+  "loadEnd": [
+    0.91,
+    0.29,
+    0.1
+  ]
+}

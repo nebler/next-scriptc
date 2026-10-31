@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "baseCommit": "2e520061a402f5484fd7d6d9508383a679beb161",
+  "vendorCommit": "ade56e0c73f0e7db30d94e0c574e4eb4a54b0c82",
+  "checks": [
+    {
+      "file": "darwin",
+      "runs": 12,
+      "parityCases": 7,
+      "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+      "goSourceSha256": "7a566baa7ffdda08b539aeb0fb2791804d1a8a3d011f78ed444aca3876722987"
+    },
+    {
+      "file": "linux",
+      "runs": 4,
+      "parityCases": 5,
+      "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+      "goSourceSha256": "7a566baa7ffdda08b539aeb0fb2791804d1a8a3d011f78ed444aca3876722987"
+    },
+    {
+      "file": "darwin-v2",
+      "runs": 15,
+      "parityCases": 7,
+      "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+      "goSourceSha256": "2182aa6ebc0e25b80e62105c978b2fef0b9f1b7db892bb475a3ce85a168bafb1"
+    },
+    {
+      "file": "linux-v2",
+      "runs": 5,
+      "parityCases": 5,
+      "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+      "goSourceSha256": "2182aa6ebc0e25b80e62105c978b2fef0b9f1b7db892bb475a3ce85a168bafb1"
+    }
+  ],
+  "originalRevenueParity": [
+    {
+      "size": 5000,
+      "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "events": 5000,
+      "revenueCents": 375702500,
+      "buckets": 248
+    },
+    {
+      "size": 50000,
+      "sha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "events": 50000,
+      "revenueCents": 3757444900,
+      "buckets": 248
+    },
+    {
+      "size": 200000,
+      "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "events": 200000,
+      "revenueCents": 15029506700,
+      "buckets": 248
+    }
+  ],
+  "ratios": [
+    {
+      "file": "darwin",
+      "size": 5000,
+      "nativeOver": {
+        "node": 0.3178754852049682,
+        "go": 0.2557512277575612,
+        "go-stream": 0.2057741330878564
+      }
+    },
+    {
+      "file": "darwin",
+      "size": 50000,
+      "nativeOver": {
+        "go": 0.2480221434244473,
+        "go-stream": 0.18899766687221234,
+        "node": 0.3170966533513149
+      }
+    },
+    {
+      "file": "darwin",
+      "size": 200000,
+      "nativeOver": {
+        "go": 0.2566965746643178,
+        "go-stream": 0.2016618406153171,
+        "node": 0.31939623404760414
+      }
+    },
+    {
+      "file": "linux",
+      "size": 200000,
+      "nativeOver": {
+        "node": 0.26310997551439674,
+        "go": 0.2097878585032772,
+        "go-stream": 0.1696790248829911
+      }
+    },
+    {
+      "file": "darwin-v2",
+      "size": 5000,
+      "nativeOver": {
+        "node": 0.3194982270872879,
+        "go": 0.25842650577385834,
+        "go-stream": 0.2088138999054322,
+        "go-v2": 0.32251123085188294
+      }
+    },
+    {
+      "file": "darwin-v2",
+      "size": 50000,
+      "nativeOver": {
+        "go": 0.2578747306862944,
+        "go-stream": 0.20421003637149376,
+        "go-v2": 0.29857372123507564,
+        "node": 0.32982842786891653
+      }
+    },
+    {
+      "file": "darwin-v2",
+      "size": 200000,
+      "nativeOver": {
+        "go": 0.25589677627665314,
+        "go-stream": 0.19530831855315609,
+        "go-v2": 0.3036054485010537,
+        "node": 0.30632879069283514
+      }
+    },
+    {
+      "file": "linux-v2",
+      "size": 200000,
+      "nativeOver": {
+        "node": 0.2666097790989778,
+        "go": 0.22193133587879948,
+        "go-stream": 0.1712697768192683,
+        "go-v2": 0.24286393717580165
+      }
+    }
+  ],
+  "sandbox": {
+    "allStopped": true,
+    "elapsedMs": 149935,
+    "allocatedVcpuHoursUpperBound": 0.04164861111111111,
+    "activeCpuDurationMs": 129263
+  }
+}

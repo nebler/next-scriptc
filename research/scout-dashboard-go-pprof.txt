@@ -1,0 +1,38 @@
+File: go
+Type: cpu
+Time: 2026-10-31 13:16:06 CET
+Duration: 11.59s, Total samples = 10.96s (94.53%)
+Showing nodes accounting for 9.83s, 89.69% of 10.96s total
+Dropped 85 nodes (cum <= 0.05s)
+Showing top 30 nodes out of 104
+      flat  flat%   sum%        cum   cum%
+     4.20s 38.32% 38.32%      4.20s 38.32%  runtime.madvise
+     0.74s  6.75% 45.07%      0.74s  6.75%  encoding/json/internal/jsonwire.ConsumeSimpleString (inline)
+     0.48s  4.38% 49.45%      0.48s  4.38%  encoding/json/internal/jsonwire.ConsumeWhitespace (inline)
+     0.41s  3.74% 53.19%      0.41s  3.74%  runtime.pthread_cond_signal
+     0.40s  3.65% 56.84%      1.96s 17.88%  encoding/json/jsontext.(*decoderState).consumeValue
+     0.32s  2.92% 59.76%      1.38s 12.59%  encoding/json/jsontext.(*decoderState).consumeObject
+     0.27s  2.46% 62.23%      0.27s  2.46%  runtime.pthread_cond_wait
+     0.25s  2.28% 64.51%      1.01s  9.22%  encoding/json/jsontext.(*decoderState).ReadValue
+     0.21s  1.92% 66.42%      0.21s  1.92%  runtime.usleep
+     0.20s  1.82% 68.25%      0.20s  1.82%  runtime.kevent
+     0.19s  1.73% 69.98%      0.34s  3.10%  internal/runtime/maps.(*Map).getWithoutKeySmallFastStr
+     0.18s  1.64% 71.62%      0.30s  2.74%  encoding/json/jsontext.(*decoderState).PeekKind
+     0.17s  1.55% 73.18%      0.17s  1.55%  encoding/json/internal/jsonwire.ConsumeSimpleNumber (inline)
+     0.17s  1.55% 74.73%      3.30s 30.11%  encoding/json/v2.makeStructArshaler.func3
+     0.15s  1.37% 76.09%      0.15s  1.37%  runtime.tryDeferToSpanScan
+     0.14s  1.28% 77.37%      0.14s  1.28%  internal/runtime/maps.memHashAES
+     0.14s  1.28% 78.65%      0.26s  2.37%  runtime.mallocgcTinySC2
+     0.13s  1.19% 79.84%      0.15s  1.37%  encoding/json/jsontext.(*decoderState).ReadToken
+     0.13s  1.19% 81.02%      0.13s  1.19%  reflect.Value.Field
+     0.13s  1.19% 82.21%      0.13s  1.19%  runtime.memmove
+     0.10s  0.91% 83.12%      0.10s  0.91%  encoding/json/internal/jsonwire.ParseUint
+     0.10s  0.91% 84.03%      0.10s  0.91%  runtime.memequal
+     0.09s  0.82% 84.85%      0.39s  3.56%  encoding/json/jsontext.(*Decoder).PeekKind
+     0.09s  0.82% 85.68%      0.09s  0.82%  encoding/json/jsontext.(*decodeBuffer).needMore (inline)
+     0.09s  0.82% 86.50%      0.41s  3.74%  encoding/json/v2.makeString
+     0.09s  0.82% 87.32%      0.09s  0.82%  runtime.typePointers.next
+     0.08s  0.73% 88.05%      0.53s  4.84%  encoding/json/v2.makeIntArshaler.func2
+     0.07s  0.64% 88.69%      0.90s  8.21%  encoding/json/v2.makeStringArshaler.func2
+     0.06s  0.55% 89.23%      0.16s  1.46%  runtime.scanObject
+     0.05s  0.46% 89.69%      0.39s  3.56%  runtime.mapaccess2_faststr

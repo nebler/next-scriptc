@@ -1,0 +1,221 @@
+Analysis of sampling native (pid 1135) every 1 millisecond
+Process:         native [1135]
+Path:            /Users/USER/*/native
+Load Address:    0x102d38000
+Identifier:      native
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  node [1132]
+Target Type:     live task
+
+Date/Time:       2026-10-31 13:15:53.375 +0100
+Launch Time:     2026-10-31 13:15:52.589 +0100
+OS Version:      macOS 26.6.1 (25G76)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         42.1M
+Physical footprint (peak):  42.1M
+Idle exit:                  untracked
+----
+
+Call graph:
+    3872 Thread_49452247   DispatchQueue_1: com.apple.main-thread  (serial)
+      2330 sc_f__x25_main  (in native) + 808  [0x102d80104]
+      + 2330 scr_json_parse_schema  (in native) + 88  [0x102d6cf30]
+      +   2330 scr_jschema_read  (in native) + 544  [0x102d6d2a4]
+      +     2257 scr_jschema_array  (in native) + 316  [0x102d770a8]
+      +     ! 2172 scr_jschema_read  (in native) + 196  [0x102d6d148]
+      +     ! : 947 scr_jschema_record  (in native) + 1388,1636,...  [0x102d76d50,0x102d76e48,...]
+      +     ! : 500 scr_jschema_record  (in native) + 1520  [0x102d76dd4]
+      +     ! : | 500 scr_json_number_value  (in native) + 240,200,...  [0x102d7639c,0x102d76374,...]
+      +     ! : 365 scr_jschema_record  (in native) + 1616  [0x102d76e34]
+      +     ! : | 167 scr_json_string_scr  (in native) + 52  [0x102d7563c]
+      +     ! : | + 167 scr_json_plain_bytes  (in native) + 72,28,...  [0x102d58a84,0x102d58a58,...]
+      +     ! : | 85 scr_str_new  (in native) + 48  [0x102d3b23c]
+      +     ! : | + 85 scr_str_alloc  (in native) + 80,4,...  [0x102d3b6f0,0x102d3b6a4,...]
+      +     ! : | 52 scr_str_new  (in native) + 100,48,...  [0x102d3b270,0x102d3b23c,...]
+      +     ! : | 32 scr_str_alloc  (in native) + 192,196  [0x102d3b760,0x102d3b764]
+      +     ! : | 29 scr_json_string_scr  (in native) + 72,52,...  [0x102d75650,0x102d7563c,...]
+      +     ! : 115 scr_jschema_record  (in native) + 920  [0x102d76b7c]
+      +     ! : | 106 _platform_memcmp  (in libsystem_platform.dylib) + 272,260,...  [0x182cf3020,0x182cf3014,...]
+      +     ! : | 9 DYLD-STUB$$memcmp  (in native) + 4  [0x102d84594]
+      +     ! : 98 scr_jschema_record  (in native) + 772  [0x102d76ae8]
+      +     ! : | 98 scr_json_plain_bytes  (in native) + 28,72,...  [0x102d58a58,0x102d58a84,...]
+      +     ! : 56 scr_str_new  (in native) + 1160,1152,...  [0x102d3b694,0x102d3b68c,...]
+      +     ! : 31 scr_json_number_value  (in native) + 700,704  [0x102d76568,0x102d7656c]
+      +     ! : 19 sc_rnew_r9594cd265faf  (in native) + 48  [0x102d7dfc8]
+      +     ! : 18 scr_str_release  (in native) + 44  [0x102d3b9d0]
+      +     ! : 13 scr_jschema_record  (in native) + 1204  [0x102d76c98]
+      +     ! : | 13 scr_str_release  (in native) + 4  [0x102d3b9a8]
+      +     ! : 8 scr_json_string_scr  (in native) + 140,136  [0x102d75694,0x102d75690]
+      +     ! : 2 scr_jschema_record  (in native) + 64  [0x102d76824]
+      +     ! :   2 sc_rnew_r9594cd265faf  (in native) + 12  [0x102d7dfa4]
+      +     ! 62 scr_jschema_read  (in native) + 24,128,...  [0x102d6d09c,0x102d6d104,...]
+      +     ! 23 scr_jschema_record  (in native) + 1808,1796,...  [0x102d76ef4,0x102d76ee8,...]
+      +     53 scr_jschema_array  (in native) + 420,472,...  [0x102d77110,0x102d77144,...]
+      +     13 scr_jschema_read  (in native) + 780,776,...  [0x102d6d390,0x102d6d38c,...]
+      +     7 scr_jschema_array  (in native) + 452  [0x102d77130]
+      +       4 scr_arr_push_many  (in native) + 428  [0x102d461e4]
+      +       : 4 _platform_memmove  (in libsystem_platform.dylib) + 168,0,...  [0x182cf5408,0x182cf5360,...]
+      +       2 scr_arr_push_many  (in native) + 404  [0x102d461cc]
+      +       : 2 scr_arr_grow_dense_to  (in native) + 1240  [0x102d43248]
+      +       1 scr_arr_push_many  (in native) + 564  [0x102d4626c]
+      488 sc_f__x25_main  (in native) + 1084  [0x102d80218]
+      + 337 scr_map_entry_str_slow  (in native) + 656,684,...  [0x102d5148c,0x102d514a8,...]
+      + 97 scr_map_entry_str_slow  (in native) + 948  [0x102d515b0]
+      + ! 97 scr_map_hash_fold  (in native) + 120,268,...  [0x102d51f90,0x102d52024,...]
+      + 54 scr_map_entry_str_slow  (in native) + 644  [0x102d51480]
+      +   42 _platform_memcmp  (in libsystem_platform.dylib) + 48,0,...  [0x182cf2f40,0x182cf2f10,...]
+      +   12 DYLD-STUB$$memcmp  (in native) + 4  [0x102d84594]
+      327 sc_f__x25_main  (in native) + 3308  [0x102d80ac8]
+      + 327 scr_rc_destroy  (in native) + 160  [0x102d7a3d0]
+      +   327 scr_arr_destroy  (in native) + 20  [0x102d44204]
+      +     105 sc_rrelease_r9594cd265faf_slow  (in native) + 196  [0x102d7f568]
+      +     ! 63 sc_rrelease_r9594cd265faf_slow  (in native) + 196  [0x102d7f568]
+      +     ! : 63 sc_rrelease_r9594cd265faf_slow  (in native) + 80,200  [0x102d7f4f4,0x102d7f56c]
+      +     ! 42 scr_str_release  (in native) + 148,240,...  [0x102d3ba38,0x102d3ba94,...]
+      +     74 sc_rrelease_r9594cd265faf_slow  (in native) + 224  [0x102d7f584]
+      +     ! 59 scr_str_release  (in native) + 148,32,...  [0x102d3ba38,0x102d3b9c4,...]
+      +     ! 15 sc_rrelease_r9594cd265faf_slow  (in native) + 224  [0x102d7f584]
+      +     !   15 sc_rrelease_r9594cd265faf_slow  (in native) + 112  [0x102d7f514]
+      +     70 scr_arr_release_contents  (in native) + 672  [0x102d43e48]
+      +     ! 54 sc_rrelease_r9594cd265faf_slow  (in native) + 136,176,...  [0x102d7f52c,0x102d7f554,...]
+      +     ! 16 sc_rrelease_r9594cd265faf  (in native) + 0,32  [0x102d7f474,0x102d7f494]
+      +     46 scr_str_release  (in native) + 44,48  [0x102d3b9d0,0x102d3b9d4]
+      +     32 scr_arr_release_contents  (in native) + 604,664,...  [0x102d43e04,0x102d43e40,...]
+      314 sc_f__x25_main  (in native) + 1020  [0x102d801d8]
+      + 247 scr_str_concat_parts  (in native) + 84,240,...  [0x102d3c38c,0x102d3c428,...]
+      + 45 scr_str_concat_parts  (in native) + 192  [0x102d3c3f8]
+      + ! 45 scr_str_alloc  (in native) + 4,80,...  [0x102d3b6a4,0x102d3b6f0,...]
+      + 22 scr_str_alloc  (in native) + 192  [0x102d3b760]
+      224 start  (in dyld) + 6992  [0x1829204e4]
+      + 224 main  (in native) + 184  [0x102d7dd50]
+      +   70 sc_f__x25_main  (in native) + 1084  [0x102d80218]
+      +   ! 32 sc_f__x25_main  (in native) + 1304,1088,...  [0x102d802f4,0x102d8021c,...]
+      +   ! 21 scr_map_entry_str_slow  (in native) + 0  [0x102d511fc]
+      +   ! 17 scr_map_entry_str  (in native) + 4  [0x102d51014]
+      +   67 sc_f__x25_main  (in native) + 960  [0x102d8019c]
+      +   ! 65 sc_str_cmp_u16  (in native) + 24,0,...  [0x102d7de68,0x102d7de50,...]
+      +   ! 2 sc_f__x25_main  (in native) + 960  [0x102d8019c]
+      +   65 sc_f__x25_main  (in native) + 976  [0x102d801ac]
+      +   ! 56 sc_str_cmp_u16  (in native) + 24,72,...  [0x102d7de68,0x102d7de98,...]
+      +   ! 9 sc_f__x25_main  (in native) + 976,1012  [0x102d801ac,0x102d801d0]
+      +   22 sc_f__x25_main  (in native) + 1328  [0x102d8030c]
+      +     22 sc_f__x25_main  (in native) + 912,1328,...  [0x102d8016c,0x102d8030c,...]
+      47 sc_f__x25_main  (in native) + 1328  [0x102d8030c]
+      + 47 scr_str_release  (in native) + 240,280,...  [0x102d3ba94,0x102d3babc,...]
+      35 scr_map_entry_str_slow  (in native) + 920,916  [0x102d51594,0x102d51590]
+      27 sc_rrelease_r9594cd265faf_slow  (in native) + 224  [0x102d7f584]
+      + 27 scr_str_release  (in native) + 4  [0x102d3b9a8]
+      23 scr_str_release  (in native) + 44,48  [0x102d3b9d0,0x102d3b9d4]
+      21 sc_rrelease_r9594cd265faf_slow  (in native) + 196  [0x102d7f568]
+      + 21 scr_str_release  (in native) + 4  [0x102d3b9a8]
+      18 scr_str_concat_parts  (in native) + 588,584  [0x102d3c584,0x102d3c580]
+      8 ???  (in <unknown binary>)  [0x16d0c66a8]
+      + 8 sc_f__x25_main  (in native) + 1328  [0x102d8030c]
+      +   8 scr_str_release  (in native) + 4  [0x102d3b9a8]
+      4 sc_f__x25_main  (in native) + 1264  [0x102d802cc]
+      + 1 scr_map_append  (in native) + 56  [0x102d52324]
+      + ! 1 scr_map_reserve_append  (in native) + 216  [0x102d52114]
+      + !   1 scr_map_grow_entries  (in native) + 184  [0x102d522c8]
+      + !     1 _realloc  (in libsystem_malloc.dylib) + 452  [0x182b17f14]
+      + !       1 _malloc_zone_realloc  (in libsystem_malloc.dylib) + 148  [0x182b176f8]
+      + !         1 xzm_realloc  (in libsystem_malloc.dylib) + 808  [0x182b07eac]
+      + !           1 _xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib) + 24  [0x182b0cf54]
+      + 1 scr_map_append  (in native) + 280  [0x102d52404]
+      + 1 scr_map_set_str_ref  (in native) + 92  [0x102d50fe8]
+      + ! 1 scr_map_hash_fold  (in native) + 96  [0x102d51f78]
+      + 1 scr_map_set_str_slot  (in native) + 1148  [0x102d529c8]
+      3 sc_f__x25_main  (in native) + 1936  [0x102d8056c]
+      + 3 scr_arr_sort_dense  (in native) + 772  [0x102d4b3e0]
+      +   3 scr_sort_copy  (in native) + 1264  [0x102d483f4]
+      +     1 sc_bf__x25_fn_6a8e3b22cd45  (in native) + 48  [0x102d7f5d0]
+      +     1 scr_sort_merge_high  (in native) + 392  [0x102d4e084]
+      +     ! 1 sc_bf__x25_fn_6a8e3b22cd45  (in native) + 28  [0x102d7f5bc]
+      +     !   1 sc_str_cmp_u16  (in native) + 24  [0x102d7de68]
+      +     1 scr_sort_merge_low  (in native) + 856  [0x102d4dc04]
+      2 sc_f__x25_main  (in native) + 3316  [0x102d80ad0]
+      + 2 scr_rc_destroy  (in native) + 160  [0x102d7a3d0]
+      +   1 scr_map_destroy  (in native) + 492  [0x102d50d9c]
+      +   ! 1 _xzm_free  (in libsystem_malloc.dylib) + 1048  [0x182b08530]
+      +   !   1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x182ca810c]
+      +   1 scr_map_destroy  (in native) + 216  [0x102d50c88]
+      1 sc_jw_4  (in native) + 348  [0x102d7e30c]
+        1 scr_jb_put_number  (in native) + 188  [0x102d57f8c]
+          1 scr_f64_to_str  (in native) + 140  [0x102d390a8]
+
+Total number in stack (recursive counted multiple, when >=5):
+        10       scr_str_release  (in native) + 0  [0x102d3b9a4]
+
+Sort by top of stack, same collapsed (when >= 5):
+        scr_jschema_record  (in native)        970
+        scr_json_number_value  (in native)        531
+        scr_map_entry_str_slow  (in native)        393
+        scr_str_release  (in native)        304
+        scr_json_plain_bytes  (in native)        265
+        scr_str_concat_parts  (in native)        265
+        scr_str_alloc  (in native)        184
+        _platform_memcmp  (in libsystem_platform.dylib)        148
+        sc_rrelease_r9594cd265faf_slow  (in native)        132
+        sc_str_cmp_u16  (in native)        122
+        scr_str_new  (in native)        108
+        scr_map_hash_fold  (in native)        98
+        scr_jschema_read  (in native)        75
+        sc_f__x25_main  (in native)        65
+        scr_jschema_array  (in native)        53
+        scr_json_string_scr  (in native)        37
+        scr_arr_release_contents  (in native)        32
+        DYLD-STUB$$memcmp  (in native)        21
+        sc_rnew_r9594cd265faf  (in native)        21
+        scr_map_entry_str  (in native)        17
+        sc_rrelease_r9594cd265faf  (in native)        16
+
+Binary Images:
+       0x102d38000 -        0x102d8da4f +native (0) <0FD146FE-9F62-3B4E-ACAA-22479E26D748> /Users/*/native
+       0x182878000 -        0x1828cab4b  libobjc.A.dylib (951.7) <40277974-D20C-3EC8-B25C-43AE30D8CC60> /usr/lib/libobjc.A.dylib
+       0x1828cb000 -        0x1828ffd58  libdyld.dylib (1387) <634959D0-592E-349C-B549-B91F2FF09858> /usr/lib/system/libdyld.dylib
+       0x182900000 -        0x1829b34ff  dyld (1.0.0 - 1387) <DF42DD9D-AD11-33A7-8849-9AD5DF30A274> /usr/lib/dyld
+       0x1829b4000 -        0x1829b7228  libsystem_blocks.dylib (96) <A712B95E-BCEE-3F12-9F9B-58E6C2060E53> /usr/lib/system/libsystem_blocks.dylib
+       0x1829b8000 -        0x182a0c55f  libxpc.dylib (3102.160.5) <40BBE226-77D4-332E-9DA8-F0B5BACFB86D> /usr/lib/system/libxpc.dylib
+       0x182a0d000 -        0x182a2d9ff  libsystem_trace.dylib (1861.160.4) <E043667E-AD01-3228-837F-A381F32F2B30> /usr/lib/system/libsystem_trace.dylib
+       0x182a2e000 -        0x182adc5f7  libcorecrypto.dylib (1922.160.10) <D54389FC-4078-370D-A863-9FEF16E00DFD> /usr/lib/system/libcorecrypto.dylib
+       0x182add000 -        0x182b2d257  libsystem_malloc.dylib (812.160.5) <971CDCFE-4D20-300E-A1D6-EC8672FDD258> /usr/lib/system/libsystem_malloc.dylib
+       0x182b2e000 -        0x182b7523f  libdispatch.dylib (1542.160.2) <243E06A0-7BFF-3C3F-8A9B-D7732729B361> /usr/lib/system/libdispatch.dylib
+       0x182b76000 -        0x182b78ffb  libsystem_featureflags.dylib (103) <5E7CDBD5-44AB-34C0-A0F5-FC72F6116CDC> /usr/lib/system/libsystem_featureflags.dylib
+       0x182b79000 -        0x182bfa1e7  libsystem_c.dylib (1752.160.4) <FDC4E366-5C14-3A1E-BC35-D933D28CDCF3> /usr/lib/system/libsystem_c.dylib
+       0x182bfb000 -        0x182c8bae7  libc++.1.dylib (2100.43) <C6DC2145-7B94-3E01-ADE5-96A6C2D078BC> /usr/lib/libc++.1.dylib
+       0x182c8c000 -        0x182ca675f  libc++abi.dylib (2100.43) <DDE77B06-5E25-380B-85B7-BA1A27D09021> /usr/lib/libc++abi.dylib
+       0x182ca7000 -        0x182ce42e7  libsystem_kernel.dylib (12377.161.13) <7CFB3A10-ADB2-32C4-99B5-922A111B3224> /usr/lib/system/libsystem_kernel.dylib
+       0x182ce5000 -        0x182cf1b3b  libsystem_pthread.dylib (539.100.4) <12342372-0084-37A5-9EA6-2E4DC940C685> /usr/lib/system/libsystem_pthread.dylib
+       0x182cf2000 -        0x182cfa963  libsystem_platform.dylib (375.120.2) <4C6BD0FE-25F2-38D8-BE5C-24DAC1DEDCFB> /usr/lib/system/libsystem_platform.dylib
+       0x182cfb000 -        0x182d2a6eb  libsystem_info.dylib (600) <7402662E-F235-3F48-BB65-F64C8CF0F2BB> /usr/lib/system/libsystem_info.dylib
+       0x186cc8000 -        0x186cd1e5f  libsystem_darwin.dylib (1752.160.4) <A095E4FE-0EE1-34DF-B00A-7D349FBC55E0> /usr/lib/system/libsystem_darwin.dylib
+       0x187133000 -        0x1871451b6  libsystem_notify.dylib (348.160.3) <F9B1BAFF-4D09-3A1F-839B-189C21EB5FBB> /usr/lib/system/libsystem_notify.dylib
+       0x189404000 -        0x18941ef7b  libsystem_networkextension.dylib (2226.160.6) <01D14A9E-16DC-372C-8AA8-CC7AD39E797F> /usr/lib/system/libsystem_networkextension.dylib
+       0x1894a1000 -        0x1894b8fdf  libsystem_asl.dylib (406) <FF57F6FA-F3A1-343D-815D-57B769D31445> /usr/lib/system/libsystem_asl.dylib
+       0x18b05a000 -        0x18b062387  libsystem_symptoms.dylib (2169.160.3) <CE07A0DF-31B6-3528-B7CE-91CAD89AA519> /usr/lib/system/libsystem_symptoms.dylib
+       0x18f2ff000 -        0x18f3375b7  libsystem_containermanager.dylib (725.160.3) <2E14025A-52C2-361D-8A8F-5DD45825A2C9> /usr/lib/system/libsystem_containermanager.dylib
+       0x190711000 -        0x1907155d7  libsystem_configuration.dylib (1405.160.3) <A14ED142-2F56-33A6-A23C-EEB8417DC90E> /usr/lib/system/libsystem_configuration.dylib
+       0x190716000 -        0x19071c99f  libsystem_sandbox.dylib (2680.160.6) <6592D3CE-38C6-3C08-9EA5-75D64F37993F> /usr/lib/system/libsystem_sandbox.dylib
+       0x191d71000 -        0x191d741fb  libquarantine.dylib (196.160.2) <78C5B827-8152-358D-90E9-B02F02A68B17> /usr/lib/system/libquarantine.dylib
+       0x192510000 -        0x192516d03  libsystem_coreservices.dylib (191.5.1) <F335DA14-69E8-336E-85A3-11EE239255F0> /usr/lib/system/libsystem_coreservices.dylib
+       0x192a9f000 -        0x192adca77  libsystem_m.dylib (3312.100.1) <3739A40F-2C17-3503-92D6-098141E56E89> /usr/lib/system/libsystem_m.dylib
+       0x192ade000 -        0x192ae1527  libmacho.dylib (1387) <3E43AF47-AD89-3BB4-82B9-A9533F4334DF> /usr/lib/system/libmacho.dylib
+       0x192afb000 -        0x192b083a7  libcommonCrypto.dylib (600035) <72D94140-1281-3886-971B-37C810403C03> /usr/lib/system/libcommonCrypto.dylib
+       0x192b09000 -        0x192b12ca3  libunwind.dylib (2100.2) <B21A1015-83D4-31D8-BA41-88688962D9A6> /usr/lib/system/libunwind.dylib
+       0x192b1b000 -        0x192b25bef  libcopyfile.dylib (240.160.2.0.1) <58F425CF-7D4F-34FD-9620-706A2A7F8BDC> /usr/lib/system/libcopyfile.dylib
+       0x192b26000 -        0x192b29987  libcompiler_rt.dylib (103.3) <D60A9B54-A909-3FD5-93B9-3F38BE0A2BE8> /usr/lib/system/libcompiler_rt.dylib
+       0x192b2a000 -        0x192b2e78b  libsystem_collections.dylib (1752.160.4) <BDA28F78-F479-3C22-B9C7-4ABCB6801592> /usr/lib/system/libsystem_collections.dylib
+       0x192b2f000 -        0x192b324cf  libsystem_secinit.dylib (168.100.7) <C85AF062-AA9B-35BB-904C-C055B2C21602> /usr/lib/system/libsystem_secinit.dylib
+       0x192b33000 -        0x192b35bf7  libremovefile.dylib (85.100.6) <DA9C2B48-7A9C-32EA-888D-6C7AEB5250E6> /usr/lib/system/libremovefile.dylib
+       0x192b36000 -        0x192b36f27  libkeymgr.dylib (31) <18EFA1CE-C535-3EAC-BC2C-7955593B7382> /usr/lib/system/libkeymgr.dylib
+       0x192b37000 -        0x192b3fe37  libsystem_dnssd.dylib (2881.160.4) <2C4C3043-008E-3BD8-BC29-AB9AD235DBA9> /usr/lib/system/libsystem_dnssd.dylib
+       0x192b40000 -        0x192b4509b  libcache.dylib (95) <EA7C2E0B-52BF-3D45-9A33-38F54A535452> /usr/lib/system/libcache.dylib
+       0x192b46000 -        0x192b47ce3  libSystem.B.dylib (1356) <4CC4CAD6-45A6-361E-9343-DE636A0B5C02> /usr/lib/libSystem.B.dylib
+       0x286aef000 -        0x286af6349  libRosetta.dylib (367.9) <F41D814B-FE1F-311A-A778-5F0699628188> /usr/lib/libRosetta.dylib
+       0x288702000 -        0x288705a4b  libsystem_darwindirectory.dylib (122) <6C03D78B-BFAB-3C7A-B713-50881791EE08> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x288706000 -        0x28871039b  libsystem_eligibility.dylib (319.160.17) <A279E124-8499-3FFC-A788-655070028F97> /usr/lib/system/libsystem_eligibility.dylib
+       0x288711000 -        0x28871888b  libsystem_sanitizers.dylib (26.1) <C92FAEE5-DAED-3340-96B3-0C42B005ADF9> /usr/lib/system/libsystem_sanitizers.dylib
+       0x288719000 -        0x288719bb7  libsystem_trial.dylib (474.2.18.2) <2FF186A6-F448-38CD-9A30-8B5B1AEFCA10> /usr/lib/system/libsystem_trial.dylib

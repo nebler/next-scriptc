@@ -1,0 +1,2003 @@
+{
+  "date": "2026-10-31T12:11:24.096Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M4 Pro",
+  "loadStart": [
+    3.76806640625,
+    3.93896484375,
+    4.76025390625
+  ],
+  "node": "v24.22.0",
+  "go": "go version go1.27.3 darwin/arm64",
+  "scriptc": "0.4.6",
+  "sourceSha256": "6e6560456f01ffaac3af98f75a473593735387867fed719adf607eae4bc20269",
+  "goSourceSha256": "7a566baa7ffdda08b539aeb0fb2791804d1a8a3d011f78ed444aca3876722987",
+  "binarySha256": "45a522c60060dc0dddfea99a4046db1303fc186292910acc67c46d64df1f7b90",
+  "iterations": 40,
+  "warmup": 10,
+  "runs": [
+    {
+      "variant": "node",
+      "size": 5000,
+      "inputBytes": 368918,
+      "inputSha256": "d02562b978d1600437800cf1f9bd30fe706ebfdfc12fff11249226b834a42c43",
+      "samples": [
+        1.2753329999999963,
+        1.3369580000000028,
+        1.2604579999999999,
+        1.2762910000000005,
+        1.4187500000000028,
+        1.301957999999999,
+        1.3141669999999976,
+        1.4088749999999948,
+        1.2711249999999978,
+        1.243124999999992,
+        1.374332999999993,
+        1.2625000000000028,
+        1.267792,
+        1.3555000000000064,
+        1.181207999999998,
+        1.230249999999998,
+        1.3708330000000046,
+        1.234459000000001,
+        1.2262089999999972,
+        1.2148749999999922,
+        1.3419590000000028,
+        1.234250000000003,
+        1.2357909999999919,
+        1.3717919999999992,
+        1.2213749999999948,
+        1.2042919999999953,
+        1.1859999999999928,
+        1.2994999999999948,
+        1.174166999999997,
+        1.1875419999999934,
+        1.57974999999999,
+        1.2591249999999974,
+        1.2781249999999886,
+        1.271291000000005,
+        1.2990410000000026,
+        1.2480410000000006,
+        1.2957920000000058,
+        1.2582499999999897,
+        1.3254160000000041,
+        1.1957080000000104
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 1.267792,
+      "p95Ms": 1.4088749999999948,
+      "peakRssMiB": 93.1875,
+      "timeStderr": "(node:84966) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/examples/scout/dashboard/dashboard.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to /Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n        0.12 real         0.13 user         0.01 sys\n            97714176  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                6136  page reclaims\n                  81  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   2  messages sent\n                   0  messages received\n                   0  signals received\n                   1  voluntary context switches\n                 192  involuntary context switches\n          2210842291  instructions retired\n           559961634  cycles elapsed\n            52876304  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "outputBytes": 21679
+    },
+    {
+      "variant": "native",
+      "size": 5000,
+      "inputBytes": 368918,
+      "inputSha256": "d02562b978d1600437800cf1f9bd30fe706ebfdfc12fff11249226b834a42c43",
+      "samples": [
+        0.40199995040893555,
+        0.40299999713897705,
+        0.40400004386901855,
+        0.40299999713897705,
+        0.406000018119812,
+        0.4010000228881836,
+        0.40099990367889404,
+        0.40199995040893555,
+        0.4129999876022339,
+        0.40799999237060547,
+        0.40500009059906006,
+        0.3960000276565552,
+        0.39800000190734863,
+        0.4089999198913574,
+        0.39800000190734863,
+        0.41600000858306885,
+        0.42500007152557373,
+        0.4390000104904175,
+        0.3989999294281006,
+        0.3960000276565552,
+        0.3999999761581421,
+        0.40299999713897705,
+        0.40299999713897705,
+        0.3999999761581421,
+        0.3999999761581421,
+        0.41499996185302734,
+        0.4119999408721924,
+        0.41700005531311035,
+        0.406000018119812,
+        0.40000009536743164,
+        0.41200006008148193,
+        0.4049999713897705,
+        0.406000018119812,
+        0.41100001335144043,
+        0.40699994564056396,
+        0.406000018119812,
+        0.4049999713897705,
+        0.3999999761581421,
+        0.4020000696182251,
+        0.40299999713897705
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 0.40299999713897705,
+      "p95Ms": 0.41700005531311035,
+      "peakRssMiB": 3.4375,
+      "timeStderr": "        0.27 real         0.02 user         0.00 sys\n             3604480  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 388  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                   4  involuntary context switches\n           547282294  instructions retired\n            90595896  cycles elapsed\n             3130088  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "outputBytes": 21679
+    },
+    {
+      "variant": "go",
+      "size": 5000,
+      "inputBytes": 368918,
+      "inputSha256": "d02562b978d1600437800cf1f9bd30fe706ebfdfc12fff11249226b834a42c43",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        1.704458,
+        1.481834,
+        1.495625,
+        1.707292,
+        1.437,
+        1.712666,
+        1.495791,
+        2.134541,
+        1.533958,
+        1.800291,
+        1.519542,
+        1.760458,
+        1.527208,
+        1.836625,
+        1.714375,
+        1.741667,
+        1.493458,
+        2.0735,
+        1.57575,
+        1.86625,
+        1.537292,
+        1.495584,
+        1.800292,
+        1.800208,
+        1.951833,
+        1.484792,
+        1.858416,
+        1.621458,
+        1.66475,
+        1.462542,
+        1.474125,
+        1.58825,
+        1.479,
+        1.634375,
+        1.49975,
+        1.655292,
+        1.437,
+        1.555,
+        1.437125,
+        1.439167
+      ],
+      "warmup": 10,
+      "medianMs": 1.57575,
+      "p95Ms": 1.951833,
+      "peakRssMiB": 11.65625,
+      "timeStderr": "        0.34 real         0.08 user         0.00 sys\n            12222464  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 939  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 136  signals received\n                   7  voluntary context switches\n                 821  involuntary context switches\n          2107292684  instructions retired\n           361448799  cycles elapsed\n             9994720  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "outputBytes": 21679
+    },
+    {
+      "variant": "go-stream",
+      "size": 5000,
+      "inputBytes": 368918,
+      "inputSha256": "d02562b978d1600437800cf1f9bd30fe706ebfdfc12fff11249226b834a42c43",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        1.972125,
+        1.904667,
+        2.080208,
+        1.924542,
+        1.902875,
+        1.908417,
+        1.9205,
+        1.917167,
+        2.141959,
+        2.01475,
+        1.958458,
+        1.971417,
+        1.957417,
+        1.983333,
+        2.052875,
+        2.10475,
+        1.989125,
+        1.936208,
+        1.922083,
+        1.918833,
+        1.92425,
+        2.124875,
+        1.970958,
+        1.962042,
+        1.934041,
+        1.973,
+        1.9395,
+        1.935083,
+        2.039292,
+        1.911334,
+        1.947541,
+        2.009708,
+        2.0015,
+        1.979041,
+        2.141875,
+        1.964959,
+        1.948958,
+        1.9495,
+        1.960709,
+        1.954292
+      ],
+      "warmup": 10,
+      "medianMs": 1.958458,
+      "p95Ms": 2.124875,
+      "peakRssMiB": 11.90625,
+      "timeStderr": "        0.10 real         0.10 user         0.00 sys\n            12484608  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 952  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                  28  signals received\n                   0  voluntary context switches\n                 272  involuntary context switches\n          2733774998  instructions retired\n           415467813  cycles elapsed\n            10306040  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "outputBytes": 21679
+    },
+    {
+      "variant": "native",
+      "size": 50000,
+      "inputBytes": 3689178,
+      "inputSha256": "bc052b05e8b3aa4867cb32dc83d4fb329235850903a4e30f6a6690a4ffa6573b",
+      "samples": [
+        3.7820000648498535,
+        3.8459999561309814,
+        3.791000008583069,
+        3.915000081062317,
+        3.8389999866485596,
+        3.8559999465942383,
+        3.8589999675750732,
+        3.984000086784363,
+        3.850000023841858,
+        3.8240000009536743,
+        3.830999970436096,
+        3.8399999141693115,
+        3.8519999980926514,
+        3.815999984741211,
+        3.8429999351501465,
+        3.9040000438690186,
+        4.026000022888184,
+        3.8310000896453857,
+        3.8209999799728394,
+        3.8200000524520874,
+        3.8320000171661377,
+        3.859000086784363,
+        3.843000054359436,
+        3.8420000076293945,
+        3.98799991607666,
+        3.8809999227523804,
+        3.787999987602234,
+        3.809999942779541,
+        3.8140000104904175,
+        3.871000051498413,
+        3.8109999895095825,
+        3.7929999828338623,
+        3.888000011444092,
+        4.081000089645386,
+        3.8949999809265137,
+        3.918000102043152,
+        3.822000026702881,
+        3.839000105857849,
+        3.9539999961853027,
+        3.9049999713897705
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 3.8429999351501465,
+      "p95Ms": 3.98799991607666,
+      "peakRssMiB": 12.59375,
+      "timeStderr": "        0.19 real         0.19 user         0.00 sys\n            13205504  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 974  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  13  involuntary context switches\n          5098669301  instructions retired\n           777072648  cycles elapsed\n            12747520  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "outputBytes": 22425
+    },
+    {
+      "variant": "go",
+      "size": 50000,
+      "inputBytes": 3689178,
+      "inputSha256": "bc052b05e8b3aa4867cb32dc83d4fb329235850903a4e30f6a6690a4ffa6573b",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        15.47,
+        14.890459,
+        15.764208,
+        15.003209,
+        15.866584,
+        15.158167,
+        15.872583,
+        15.049333,
+        15.646417,
+        15.575,
+        14.910125,
+        16.080833,
+        15.474125,
+        15.431334,
+        15.675875,
+        15.391708,
+        15.604292,
+        15.307959,
+        15.894833,
+        15.311125,
+        15.4415,
+        15.093875,
+        15.587584,
+        15.084916,
+        15.645334,
+        15.037292,
+        15.588291,
+        15.0445,
+        15.810209,
+        15.163042,
+        15.933583,
+        15.298375,
+        16.135333,
+        14.754625,
+        16.645959,
+        15.610625,
+        15.931916,
+        15.873208,
+        16.028833,
+        15.494584
+      ],
+      "warmup": 10,
+      "medianMs": 15.494584,
+      "p95Ms": 16.080833,
+      "peakRssMiB": 31.0625,
+      "timeStderr": "        0.78 real         0.82 user         0.03 sys\n            32571392  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2181  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 658  signals received\n                  53  voluntary context switches\n                5232  involuntary context switches\n         21562652086  instructions retired\n          3365563942  cycles elapsed\n            30310880  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "outputBytes": 22425
+    },
+    {
+      "variant": "go-stream",
+      "size": 50000,
+      "inputBytes": 3689178,
+      "inputSha256": "bc052b05e8b3aa4867cb32dc83d4fb329235850903a4e30f6a6690a4ffa6573b",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        19.78175,
+        19.884625,
+        22.220333,
+        20.442709,
+        19.965417,
+        20.037042,
+        19.962292,
+        20.092625,
+        20.796834,
+        20.14775,
+        21.532208,
+        20.223083,
+        20.377166,
+        21.458416,
+        19.792333,
+        20.414208,
+        21.06975,
+        20.244417,
+        20.480334,
+        20.071958,
+        20.265625,
+        20.648958,
+        20.790542,
+        20.577167,
+        20.335208,
+        20.02125,
+        20.491334,
+        20.275709,
+        20.333083,
+        20.212042,
+        20.192875,
+        20.442292,
+        20.333584,
+        20.651667,
+        20.35575,
+        20.504042,
+        19.849875,
+        20.19375,
+        20.433791,
+        20.644125
+      ],
+      "warmup": 10,
+      "medianMs": 20.333584,
+      "p95Ms": 21.458416,
+      "peakRssMiB": 15.859375,
+      "timeStderr": "        1.02 real         1.02 user         0.01 sys\n            16629760  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1209  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 256  signals received\n                   6  voluntary context switches\n                2101  involuntary context switches\n         26542940893  instructions retired\n          4056844319  cycles elapsed\n            14254560  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "outputBytes": 22425
+    },
+    {
+      "variant": "node",
+      "size": 50000,
+      "inputBytes": 3689178,
+      "inputSha256": "bc052b05e8b3aa4867cb32dc83d4fb329235850903a4e30f6a6690a4ffa6573b",
+      "samples": [
+        12.119332999999983,
+        12.541583000000003,
+        12.356207999999981,
+        12.677666000000016,
+        12.743915999999984,
+        12.723292000000015,
+        12.782167000000015,
+        12.198958000000005,
+        12.041125000000022,
+        13.207041000000004,
+        11.932542000000012,
+        11.809042000000034,
+        14.104582999999991,
+        12.02275000000003,
+        11.84620799999999,
+        12.230042000000026,
+        12.712749999999971,
+        12.475750000000005,
+        14.096915999999965,
+        11.721249999999998,
+        12.314208000000008,
+        11.963374999999985,
+        12.139791000000002,
+        12.181666000000007,
+        12.184708,
+        13.383375000000001,
+        11.585833000000093,
+        11.561791999999969,
+        11.833458000000064,
+        11.928999999999974,
+        11.85145799999998,
+        13.13595799999996,
+        12.048541999999998,
+        11.660166000000004,
+        11.932207999999946,
+        12.028374999999983,
+        12.042083999999932,
+        11.969375000000014,
+        13.643083000000047,
+        12.078916999999933
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 12.119332999999983,
+      "p95Ms": 13.643083000000047,
+      "peakRssMiB": 247.859375,
+      "timeStderr": "(node:85029) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/examples/scout/dashboard/dashboard.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to /Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n        0.70 real         0.71 user         0.04 sys\n           259899392  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n               17000  page reclaims\n                  80  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   2  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 727  involuntary context switches\n         15453576129  instructions retired\n          2955552012  cycles elapsed\n           231026504  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "outputBytes": 22425
+    },
+    {
+      "variant": "go",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        63.273459,
+        62.848375,
+        86.764,
+        63.293667,
+        59.733667,
+        63.208209,
+        60.109334,
+        61.509208,
+        60.481708,
+        62.030292,
+        59.182333,
+        61.352,
+        58.62525,
+        61.117417,
+        58.044125,
+        61.460708,
+        57.832625,
+        60.740208,
+        59.473833,
+        61.823917,
+        58.625458,
+        61.163166,
+        60.643583,
+        61.448958,
+        59.685625,
+        61.816292,
+        59.551125,
+        65.598334,
+        59.684708,
+        63.8665,
+        59.953292,
+        61.213792,
+        59.020708,
+        61.511209,
+        58.045792,
+        60.633625,
+        60.00025,
+        62.4645,
+        59.207917,
+        60.072625
+      ],
+      "warmup": 10,
+      "medianMs": 60.643583,
+      "p95Ms": 63.8665,
+      "peakRssMiB": 86.203125,
+      "timeStderr": "        3.08 real         3.23 user         0.09 sys\n            90390528  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                5716  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                1218  signals received\n                  53  voluntary context switches\n                9740  involuntary context switches\n         84900922270  instructions retired\n         13021107156  cycles elapsed\n            87933480  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "go-stream",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "count": 40,
+      "phases": [],
+      "samples": [
+        74.788375,
+        78.522458,
+        77.10425,
+        78.50775,
+        77.826458,
+        77.2355,
+        77.068584,
+        77.277209,
+        77.436417,
+        78.514416,
+        76.564458,
+        78.377834,
+        76.348584,
+        76.457084,
+        77.030833,
+        77.180958,
+        78.255875,
+        77.78375,
+        78.903875,
+        77.521,
+        76.202084,
+        76.995083,
+        77.116292,
+        76.959291,
+        76.702,
+        78.3355,
+        77.08975,
+        78.001917,
+        77.768958,
+        78.326667,
+        78.925625,
+        77.101917,
+        78.477666,
+        77.193583,
+        76.878875,
+        77.022625,
+        76.476,
+        77.43675,
+        75.511208,
+        77.454375
+      ],
+      "warmup": 10,
+      "medianMs": 77.193583,
+      "p95Ms": 78.522458,
+      "peakRssMiB": 36.734375,
+      "timeStderr": "        3.86 real         3.87 user         0.02 sys\n            38518784  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2543  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 368  signals received\n                  13  voluntary context switches\n                2320  involuntary context switches\n        105544724747  instructions retired\n         15449625522  cycles elapsed\n            36225528  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "node",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "samples": [
+        49.40575000000001,
+        49.07600000000002,
+        49.81433299999992,
+        49.74266699999998,
+        50.27833399999997,
+        50.04549999999995,
+        49.55058299999996,
+        85.31862500000011,
+        46.55479199999991,
+        48.72358299999996,
+        48.48441700000012,
+        48.28925000000004,
+        48.44812500000012,
+        48.874874999999975,
+        50.08674999999994,
+        48.093374999999924,
+        48.0474999999999,
+        47.08104100000014,
+        48.13270899999998,
+        49.1740420000001,
+        49.67066699999987,
+        53.73620800000003,
+        49.28887499999996,
+        48.49520799999982,
+        48.62004200000001,
+        48.300457999999935,
+        49.344125000000076,
+        48.22287499999993,
+        49.535167,
+        49.34224999999992,
+        48.73883399999977,
+        48.270542000000205,
+        49.23454199999969,
+        53.86437500000011,
+        46.50212499999998,
+        48.2755830000001,
+        48.3125,
+        48.025666,
+        48.05654200000026,
+        48.88783400000011
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 48.73883399999977,
+      "p95Ms": 53.73620800000003,
+      "peakRssMiB": 479.390625,
+      "timeStderr": "(node:85103) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/examples/scout/dashboard/dashboard.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to /Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n        2.58 real         2.90 user         0.08 sys\n           502677504  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n               34525  page reclaims\n                  80  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   2  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                1947  involuntary context switches\n         66519668389  instructions retired\n         11788398263  cycles elapsed\n           489326680  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    },
+    {
+      "variant": "native",
+      "size": 200000,
+      "inputBytes": 14756712,
+      "inputSha256": "649cda835b14f5f7d5f6df8c574ddd9b52daadd2a6b3a657a063dceaabef4781",
+      "samples": [
+        15.567000031471252,
+        15.610999941825867,
+        15.550999999046326,
+        15.459999918937683,
+        15.57700002193451,
+        15.65499997138977,
+        15.531000018119812,
+        15.398000001907349,
+        15.294000029563904,
+        15.58300006389618,
+        15.26800000667572,
+        15.600000023841858,
+        15.472999930381775,
+        15.595999956130981,
+        15.355000019073486,
+        15.549999952316284,
+        15.383999943733215,
+        15.536999940872192,
+        15.398000001907349,
+        15.675999999046326,
+        15.34500002861023,
+        15.633999943733215,
+        15.52999997138977,
+        15.801999926567078,
+        15.615000009536743,
+        15.66099989414215,
+        15.621999979019165,
+        15.625,
+        15.664000034332275,
+        15.488999962806702,
+        15.625,
+        15.531999945640564,
+        15.533000111579895,
+        15.48199999332428,
+        15.657999992370605,
+        15.5660001039505,
+        15.602999925613403,
+        15.819999933242798,
+        15.776999950408936,
+        15.80400002002716
+      ],
+      "phases": [],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 15.567000031471252,
+      "p95Ms": 15.801999926567078,
+      "peakRssMiB": 42.5625,
+      "timeStderr": "        0.78 real         0.77 user         0.00 sys\n            44630016  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2892  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 128  involuntary context switches\n         20270764644  instructions retired\n          3107934258  cycles elapsed\n            44172032  peak memory footprint\n",
+      "phaseMedians": null,
+      "outputSha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "outputBytes": 22675
+    }
+  ],
+  "parity": [
+    {
+      "size": 5000,
+      "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "bytes": 21679,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "size": 50000,
+      "sha256": "039ae7d7f8d4a45829bd253b4639f692653da93f739ab0812eb30fe5f981136e",
+      "bytes": 22425,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "size": 200000,
+      "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "bytes": 22675,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "case": "partial",
+      "sha256": "18bff6252a5ea8a3af91985d9f3ff08fcbde7fbc149540cf5bbfb235ad7144b7",
+      "bytes": 4974,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "case": "none",
+      "sha256": "ba73ea65ad132289e02799f2a8111d96021e661bd31cb02a7bde69b7e012224b",
+      "bytes": 81,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "case": "empty",
+      "sha256": "02514adbe3d218b0ecade98c8dc9e57602cf5e16b37c60478935dff18a459ecb",
+      "bytes": 93,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    },
+    {
+      "case": "escapes",
+      "sha256": "9b07302a3c99896c57667644fbae4c9a384771913d06137c04b3fbb2fd0eadba",
+      "bytes": 245,
+      "variants": [
+        "node",
+        "native",
+        "go",
+        "go-stream"
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "variant": "node",
+      "size": 200000,
+      "samples": [
+        47.997209,
+        48.18349999999998,
+        47.57670799999994,
+        48.55008299999997,
+        49.14250000000004,
+        48.473499999999945,
+        49.038332999999966,
+        55.194875000000025,
+        45.960959,
+        47.29608399999984,
+        46.59041699999989,
+        45.822000000000116,
+        47.007416999999805,
+        47.672250000000076,
+        48.34500000000003,
+        48.60466700000006,
+        47.326458,
+        48.90845899999999,
+        47.34720799999991,
+        47.440291000000116,
+        47.523792000000185,
+        52.502500000000055,
+        48.19558400000005,
+        48.232708,
+        48.01641700000005,
+        48.31820799999991,
+        48.37916599999994,
+        48.312374999999975,
+        48.36683300000004,
+        46.892292,
+        47.92716599999994,
+        48.78008399999999,
+        47.97691699999996,
+        54.195708000000195,
+        45.489500000000135,
+        47.176124999999956,
+        46.49437500000022,
+        47.19270800000004,
+        47.69462500000009,
+        47.14770800000042
+      ],
+      "phases": [
+        {
+          "parseMs": 24.919416999999953,
+          "groupMs": 23.049791000000027,
+          "sortMs": 0.025209000000018023,
+          "remainderMs": 0.0027919999999994616
+        },
+        {
+          "parseMs": 24.961084000000028,
+          "groupMs": 23.19283299999995,
+          "sortMs": 0.0272499999999809,
+          "remainderMs": 0.002333000000021457
+        },
+        {
+          "parseMs": 24.05833300000006,
+          "groupMs": 23.49249999999995,
+          "sortMs": 0.023958999999990738,
+          "remainderMs": 0.0019159999999374122
+        },
+        {
+          "parseMs": 24.801958999999897,
+          "groupMs": 23.726333000000068,
+          "sortMs": 0.020250000000032742,
+          "remainderMs": 0.0015409999999747015
+        },
+        {
+          "parseMs": 25.040166999999997,
+          "groupMs": 24.07224999999994,
+          "sortMs": 0.027500000000031832,
+          "remainderMs": 0.0025830000000723885
+        },
+        {
+          "parseMs": 24.79491699999994,
+          "groupMs": 23.65162500000008,
+          "sortMs": 0.02437499999996362,
+          "remainderMs": 0.0025829999999587017
+        },
+        {
+          "parseMs": 24.59029099999998,
+          "groupMs": 24.419459000000074,
+          "sortMs": 0.026250000000004547,
+          "remainderMs": 0.00233299999990777
+        },
+        {
+          "parseMs": 25.174125000000004,
+          "groupMs": 29.94475,
+          "sortMs": 0.07258300000000872,
+          "remainderMs": 0.003417000000013104
+        },
+        {
+          "parseMs": 24.949749999999995,
+          "groupMs": 20.977999999999952,
+          "sortMs": 0.029250000000047294,
+          "remainderMs": 0.003959000000008928
+        },
+        {
+          "parseMs": 26.873792000000094,
+          "groupMs": 20.39037499999995,
+          "sortMs": 0.027749999999969077,
+          "remainderMs": 0.004166999999824839
+        },
+        {
+          "parseMs": 24.53108300000008,
+          "groupMs": 22.030457999999953,
+          "sortMs": 0.026084000000082597,
+          "remainderMs": 0.002791999999772088
+        },
+        {
+          "parseMs": 24.139374999999973,
+          "groupMs": 21.650707999999895,
+          "sortMs": 0.02845800000000054,
+          "remainderMs": 0.0034590000002481247
+        },
+        {
+          "parseMs": 25.184582999999975,
+          "groupMs": 21.79229200000009,
+          "sortMs": 0.027749999999969077,
+          "remainderMs": 0.002791999999772088
+        },
+        {
+          "parseMs": 25.41316699999993,
+          "groupMs": 22.234457999999904,
+          "sortMs": 0.02266700000018318,
+          "remainderMs": 0.001958000000058746
+        },
+        {
+          "parseMs": 25.38325000000009,
+          "groupMs": 22.929749999999785,
+          "sortMs": 0.029083000000127868,
+          "remainderMs": 0.0029170000000249274
+        },
+        {
+          "parseMs": 25.14954200000011,
+          "groupMs": 23.394915999999967,
+          "sortMs": 0.05683399999998073,
+          "remainderMs": 0.003375000000005457
+        },
+        {
+          "parseMs": 25.222083999999995,
+          "groupMs": 22.072000000000116,
+          "sortMs": 0.028957999999875028,
+          "remainderMs": 0.0034160000000156288
+        },
+        {
+          "parseMs": 25.771916000000147,
+          "groupMs": 23.102249999999913,
+          "sortMs": 0.0284590000001117,
+          "remainderMs": 0.005833999999822481
+        },
+        {
+          "parseMs": 25.523415999999997,
+          "groupMs": 21.791499999999814,
+          "sortMs": 0.027375000000120053,
+          "remainderMs": 0.004916999999977634
+        },
+        {
+          "parseMs": 24.76212499999997,
+          "groupMs": 22.65329100000008,
+          "sortMs": 0.023042000000032203,
+          "remainderMs": 0.0018330000000332802
+        },
+        {
+          "parseMs": 24.496624999999995,
+          "groupMs": 23.005083000000013,
+          "sortMs": 0.020750000000134605,
+          "remainderMs": 0.001334000000042579
+        },
+        {
+          "parseMs": 24.886999999999944,
+          "groupMs": 27.536207999999988,
+          "sortMs": 0.07637500000009823,
+          "remainderMs": 0.0029170000000249274
+        },
+        {
+          "parseMs": 25.043957999999975,
+          "groupMs": 23.120625000000018,
+          "sortMs": 0.02820900000006077,
+          "remainderMs": 0.0027919999999994616
+        },
+        {
+          "parseMs": 24.77795900000001,
+          "groupMs": 23.426124999999956,
+          "sortMs": 0.022124999999959982,
+          "remainderMs": 0.006499000000076194
+        },
+        {
+          "parseMs": 24.519291000000067,
+          "groupMs": 23.46591699999999,
+          "sortMs": 0.028916999999864856,
+          "remainderMs": 0.002292000000124972
+        },
+        {
+          "parseMs": 25.526834000000008,
+          "groupMs": 22.761625000000095,
+          "sortMs": 0.027041000000053828,
+          "remainderMs": 0.002707999999756794
+        },
+        {
+          "parseMs": 25.275125000000116,
+          "groupMs": 23.075832999999875,
+          "sortMs": 0.025834000000031665,
+          "remainderMs": 0.0023739999999179418
+        },
+        {
+          "parseMs": 24.920084000000088,
+          "groupMs": 23.356624999999894,
+          "sortMs": 0.03224999999997635,
+          "remainderMs": 0.0034160000000156288
+        },
+        {
+          "parseMs": 24.744957999999997,
+          "groupMs": 23.594459000000143,
+          "sortMs": 0.025415999999950145,
+          "remainderMs": 0.0019999999999527063
+        },
+        {
+          "parseMs": 24.310917000000018,
+          "groupMs": 22.557250000000067,
+          "sortMs": 0.022041999999828477,
+          "remainderMs": 0.002083000000084212
+        },
+        {
+          "parseMs": 24.85504100000003,
+          "groupMs": 23.04941699999995,
+          "sortMs": 0.021000000000185537,
+          "remainderMs": 0.0017079999997804407
+        },
+        {
+          "parseMs": 24.751124999999774,
+          "groupMs": 24.000292000000172,
+          "sortMs": 0.02591600000005201,
+          "remainderMs": 0.00275099999998929
+        },
+        {
+          "parseMs": 25.2482500000001,
+          "groupMs": 22.695458999999573,
+          "sortMs": 0.03000000000020009,
+          "remainderMs": 0.003208000000086031
+        },
+        {
+          "parseMs": 25.35024999999996,
+          "groupMs": 28.778207999999722,
+          "sortMs": 0.06550000000015643,
+          "remainderMs": 0.001750000000356522
+        },
+        {
+          "parseMs": 24.81829199999993,
+          "groupMs": 20.641375000000153,
+          "sortMs": 0.025124999999661668,
+          "remainderMs": 0.004708000000391621
+        },
+        {
+          "parseMs": 26.448084000000108,
+          "groupMs": 20.705375000000004,
+          "sortMs": 0.020958000000064203,
+          "remainderMs": 0.0017079999997804407
+        },
+        {
+          "parseMs": 24.58699999999999,
+          "groupMs": 21.884958000000097,
+          "sortMs": 0.020667000000230473,
+          "remainderMs": 0.0017499999999017746
+        },
+        {
+          "parseMs": 24.787832999999864,
+          "groupMs": 22.381208000000242,
+          "sortMs": 0.020125000000007276,
+          "remainderMs": 0.003541999999924883
+        },
+        {
+          "parseMs": 24.904250000000047,
+          "groupMs": 22.761749999999665,
+          "sortMs": 0.02400000000034197,
+          "remainderMs": 0.004625000000032742
+        },
+        {
+          "parseMs": 24.91120899999987,
+          "groupMs": 22.204499999999825,
+          "sortMs": 0.028999999999996362,
+          "remainderMs": 0.002999000000727392
+        }
+      ],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 47.97691699999996,
+      "p95Ms": 52.502500000000055,
+      "peakRssMiB": 480.234375,
+      "timeStderr": "(node:85169) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/examples/scout/dashboard/dashboard.ts is not specified and it doesn't parse as CommonJS.\nReparsing as ES module because module syntax was detected. This incurs a performance overhead.\nTo eliminate this warning, add \"type\": \"module\" to /Users/noah/.t3/worktrees/next-scriptc/t3-7695a451/package.json.\n(Use `node --trace-warnings ...` to show where the warning was created)\n        2.51 real         2.83 user         0.08 sys\n           503562240  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n               34587  page reclaims\n                  80  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   2  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                1636  involuntary context switches\n         66530547425  instructions retired\n         11518454231  cycles elapsed\n           490244256  peak memory footprint\n",
+      "phaseMedians": {
+        "parseMs": 24.91120899999987,
+        "groupMs": 23.005083000000013,
+        "sortMs": 0.026250000000004547,
+        "remainderMs": 0.002791999999772088
+      }
+    },
+    {
+      "variant": "native",
+      "size": 200000,
+      "samples": [
+        15.333999991416931,
+        15.110000014305115,
+        15.215999960899353,
+        15.180000066757202,
+        15.355000019073486,
+        16.77300000190735,
+        15.662000060081482,
+        15.396000027656555,
+        15.430999994277954,
+        15.174000024795532,
+        15.263000011444092,
+        15.118000030517578,
+        15.269000053405762,
+        15.166000008583069,
+        15.166000008583069,
+        15.18500006198883,
+        15.253000020980835,
+        15.092000007629395,
+        15.208999991416931,
+        15.154000043869019,
+        15.215000033378601,
+        15.151999950408936,
+        15.222000002861023,
+        15.131999969482422,
+        15.151999950408936,
+        15.021999955177307,
+        15.079999923706055,
+        15.062000036239624,
+        15.20800006389618,
+        15.032999992370605,
+        15.152999997138977,
+        15.050999999046326,
+        15.174000024795532,
+        15.439000010490417,
+        15.570000052452087,
+        15.61299991607666,
+        15.097000002861023,
+        15.187999963760376,
+        15.139000058174133,
+        15.098999977111816
+      ],
+      "phases": [
+        {
+          "parseMs": 9.410000085830688,
+          "groupMs": 4.602999925613403,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.309999942779541
+        },
+        {
+          "parseMs": 9.261000037193298,
+          "groupMs": 4.524999976158142,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.312999963760376
+        },
+        {
+          "parseMs": 9.28600001335144,
+          "groupMs": 4.60699999332428,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.312999963760376
+        },
+        {
+          "parseMs": 9.35099995136261,
+          "groupMs": 4.511000037193298,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.308000087738037
+        },
+        {
+          "parseMs": 9.355999946594238,
+          "groupMs": 4.624000072479248,
+          "sortMs": 0.019999980926513672,
+          "remainderMs": 1.3550000190734863
+        },
+        {
+          "parseMs": 10.11299991607666,
+          "groupMs": 5.277000069618225,
+          "sortMs": 0.02199995517730713,
+          "remainderMs": 1.3610000610351562
+        },
+        {
+          "parseMs": 9.638000011444092,
+          "groupMs": 4.669000029563904,
+          "sortMs": 0.013000011444091797,
+          "remainderMs": 1.3420000076293945
+        },
+        {
+          "parseMs": 9.401999950408936,
+          "groupMs": 4.641000032424927,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.3420000076293945
+        },
+        {
+          "parseMs": 9.38700008392334,
+          "groupMs": 4.682999968528748,
+          "sortMs": 0.013000011444091797,
+          "remainderMs": 1.347999930381775
+        },
+        {
+          "parseMs": 9.292999982833862,
+          "groupMs": 4.557999968528748,
+          "sortMs": 0.0140000581741333,
+          "remainderMs": 1.309000015258789
+        },
+        {
+          "parseMs": 9.299000024795532,
+          "groupMs": 4.628999948501587,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3250000476837158
+        },
+        {
+          "parseMs": 9.225000023841858,
+          "groupMs": 4.583999991416931,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.2990000247955322
+        },
+        {
+          "parseMs": 9.297000050544739,
+          "groupMs": 4.63699996471405,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.3240000009536743
+        },
+        {
+          "parseMs": 9.237000107765198,
+          "groupMs": 4.5899999141693115,
+          "sortMs": 0.014999985694885254,
+          "remainderMs": 1.3240000009536743
+        },
+        {
+          "parseMs": 9.245999932289124,
+          "groupMs": 4.5950000286102295,
+          "sortMs": 0.011999964714050293,
+          "remainderMs": 1.3130000829696655
+        },
+        {
+          "parseMs": 9.301999926567078,
+          "groupMs": 4.53600001335144,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3370001316070557
+        },
+        {
+          "parseMs": 9.29799997806549,
+          "groupMs": 4.6269999742507935,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.3170000314712524
+        },
+        {
+          "parseMs": 9.230999946594238,
+          "groupMs": 4.555999994277954,
+          "sortMs": 0.009000062942504883,
+          "remainderMs": 1.2960000038146973
+        },
+        {
+          "parseMs": 9.26199996471405,
+          "groupMs": 4.614000082015991,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3229999542236328
+        },
+        {
+          "parseMs": 9.292999982833862,
+          "groupMs": 4.544000029563904,
+          "sortMs": 0.009000062942504883,
+          "remainderMs": 1.3079999685287476
+        },
+        {
+          "parseMs": 9.29800009727478,
+          "groupMs": 4.581999897956848,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3250000476837158
+        },
+        {
+          "parseMs": 9.282999992370605,
+          "groupMs": 4.486999988555908,
+          "sortMs": 0.01699995994567871,
+          "remainderMs": 1.3650000095367432
+        },
+        {
+          "parseMs": 9.260999917984009,
+          "groupMs": 4.605000019073486,
+          "sortMs": 0.0140000581741333,
+          "remainderMs": 1.3420000076293945
+        },
+        {
+          "parseMs": 9.276000022888184,
+          "groupMs": 4.5299999713897705,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.315999984741211
+        },
+        {
+          "parseMs": 9.263999938964844,
+          "groupMs": 4.5320000648498535,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3459999561309814
+        },
+        {
+          "parseMs": 9.19599997997284,
+          "groupMs": 4.495000004768372,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3209999799728394
+        },
+        {
+          "parseMs": 9.194000005722046,
+          "groupMs": 4.533999919891357,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3420000076293945
+        },
+        {
+          "parseMs": 9.222000002861023,
+          "groupMs": 4.496999979019165,
+          "sortMs": 0.009000062942504883,
+          "remainderMs": 1.3339999914169312
+        },
+        {
+          "parseMs": 9.32200002670288,
+          "groupMs": 4.5329999923706055,
+          "sortMs": 0.009000062942504883,
+          "remainderMs": 1.343999981880188
+        },
+        {
+          "parseMs": 9.22000002861023,
+          "groupMs": 4.4670000076293945,
+          "sortMs": 0.008999943733215332,
+          "remainderMs": 1.3370000123977661
+        },
+        {
+          "parseMs": 9.269999980926514,
+          "groupMs": 4.537999987602234,
+          "sortMs": 0.009999990463256836,
+          "remainderMs": 1.3350000381469727
+        },
+        {
+          "parseMs": 9.215999960899353,
+          "groupMs": 4.48199999332428,
+          "sortMs": 0.008999943733215332,
+          "remainderMs": 1.3440001010894775
+        },
+        {
+          "parseMs": 9.189000010490417,
+          "groupMs": 4.615000009536743,
+          "sortMs": 0.018999934196472168,
+          "remainderMs": 1.3510000705718994
+        },
+        {
+          "parseMs": 9.493000030517578,
+          "groupMs": 4.605000019073486,
+          "sortMs": 0.014999985694885254,
+          "remainderMs": 1.3259999752044678
+        },
+        {
+          "parseMs": 9.549000024795532,
+          "groupMs": 4.610000014305115,
+          "sortMs": 0.018000006675720215,
+          "remainderMs": 1.3930000066757202
+        },
+        {
+          "parseMs": 9.697999954223633,
+          "groupMs": 4.582000017166138,
+          "sortMs": 0.013000011444091797,
+          "remainderMs": 1.3199999332427979
+        },
+        {
+          "parseMs": 9.154000043869019,
+          "groupMs": 4.605999946594238,
+          "sortMs": 0.013000011444091797,
+          "remainderMs": 1.3240000009536743
+        },
+        {
+          "parseMs": 9.254999995231628,
+          "groupMs": 4.559999942779541,
+          "sortMs": 0.013000011444091797,
+          "remainderMs": 1.3600000143051147
+        },
+        {
+          "parseMs": 9.251000046730042,
+          "groupMs": 4.547999978065491,
+          "sortMs": 0.01100003719329834,
+          "remainderMs": 1.3289999961853027
+        },
+        {
+          "parseMs": 9.259999990463257,
+          "groupMs": 4.48800003528595,
+          "sortMs": 0.008999943733215332,
+          "remainderMs": 1.3420000076293945
+        }
+      ],
+      "count": 40,
+      "warmup": 10,
+      "medianMs": 15.174000024795532,
+      "p95Ms": 15.61299991607666,
+      "peakRssMiB": 42.546875,
+      "timeStderr": "        0.77 real         0.76 user         0.00 sys\n            44613632  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2891  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  25  involuntary context switches\n         20275019933  instructions retired\n          3072077305  cycles elapsed\n            44155648  peak memory footprint\n",
+      "phaseMedians": {
+        "parseMs": 9.276000022888184,
+        "groupMs": 4.581999897956848,
+        "sortMs": 0.01100003719329834,
+        "remainderMs": 1.3259999752044678
+      }
+    },
+    {
+      "variant": "go",
+      "size": 200000,
+      "count": 40,
+      "phases": [
+        {
+          "parseMs": 54.686209,
+          "groupMs": 3.573541,
+          "sortMs": 0.019,
+          "remainderMs": 0.0017090000000023094
+        },
+        {
+          "parseMs": 57.167125,
+          "groupMs": 3.698292,
+          "sortMs": 0.020958,
+          "remainderMs": 0.0010000000000001431
+        },
+        {
+          "parseMs": 55.287958,
+          "groupMs": 3.598125,
+          "sortMs": 0.020209,
+          "remainderMs": 0.0016669999999948983
+        },
+        {
+          "parseMs": 55.933167,
+          "groupMs": 3.615541,
+          "sortMs": 0.020084,
+          "remainderMs": 0.0018330000000024056
+        },
+        {
+          "parseMs": 54.678875,
+          "groupMs": 3.611708,
+          "sortMs": 0.019583,
+          "remainderMs": 0.0018339999999995756
+        },
+        {
+          "parseMs": 56.430875,
+          "groupMs": 3.695083,
+          "sortMs": 0.020667,
+          "remainderMs": 0.0014169999999964385
+        },
+        {
+          "parseMs": 55.52275,
+          "groupMs": 3.601333,
+          "sortMs": 0.021334,
+          "remainderMs": 0.001540999999995983
+        },
+        {
+          "parseMs": 57.310834,
+          "groupMs": 3.642125,
+          "sortMs": 0.019375,
+          "remainderMs": 0.001957999999998492
+        },
+        {
+          "parseMs": 54.104875,
+          "groupMs": 3.784958,
+          "sortMs": 0.024292,
+          "remainderMs": 0.0015410000000017701
+        },
+        {
+          "parseMs": 56.894666,
+          "groupMs": 3.569584,
+          "sortMs": 0.021666,
+          "remainderMs": 0.005167000000002548
+        },
+        {
+          "parseMs": 55.452209,
+          "groupMs": 3.670875,
+          "sortMs": 0.022083,
+          "remainderMs": 0.0017499999999984403
+        },
+        {
+          "parseMs": 56.324292,
+          "groupMs": 3.626375,
+          "sortMs": 0.019666,
+          "remainderMs": 0.0010840000000027113
+        },
+        {
+          "parseMs": 54.43875,
+          "groupMs": 3.533625,
+          "sortMs": 0.020542,
+          "remainderMs": 0.001792000000001629
+        },
+        {
+          "parseMs": 56.117541,
+          "groupMs": 3.685542,
+          "sortMs": 0.019458,
+          "remainderMs": 0.0015009999999959535
+        },
+        {
+          "parseMs": 53.155292,
+          "groupMs": 3.715,
+          "sortMs": 0.020666,
+          "remainderMs": 0.0010839999999937185
+        },
+        {
+          "parseMs": 56.204583,
+          "groupMs": 3.694458,
+          "sortMs": 0.021625,
+          "remainderMs": 0.0015839999999987045
+        },
+        {
+          "parseMs": 55.726041,
+          "groupMs": 3.6035,
+          "sortMs": 0.022084,
+          "remainderMs": 0.0016670000000011884
+        },
+        {
+          "parseMs": 57.780792,
+          "groupMs": 3.675958,
+          "sortMs": 0.019417,
+          "remainderMs": 0.0015419999999990615
+        },
+        {
+          "parseMs": 56.383,
+          "groupMs": 3.782542,
+          "sortMs": 0.021667,
+          "remainderMs": 0.001748999999996996
+        },
+        {
+          "parseMs": 56.727333,
+          "groupMs": 3.605417,
+          "sortMs": 0.020167,
+          "remainderMs": 0.0013740000000018078
+        },
+        {
+          "parseMs": 55.312541,
+          "groupMs": 3.562417,
+          "sortMs": 0.0195,
+          "remainderMs": 0.0017919999999989784
+        },
+        {
+          "parseMs": 57.501916,
+          "groupMs": 3.548375,
+          "sortMs": 0.020042,
+          "remainderMs": 0.0010420000000018782
+        },
+        {
+          "parseMs": 55.036541,
+          "groupMs": 3.852375,
+          "sortMs": 0.027209,
+          "remainderMs": 0.001207999999999692
+        },
+        {
+          "parseMs": 58.130583,
+          "groupMs": 3.943792,
+          "sortMs": 0.022667,
+          "remainderMs": 0.0023330000000003556
+        },
+        {
+          "parseMs": 56.253875,
+          "groupMs": 3.6965,
+          "sortMs": 0.02075,
+          "remainderMs": 0.0016669999999976877
+        },
+        {
+          "parseMs": 58.193083,
+          "groupMs": 3.593334,
+          "sortMs": 0.019875,
+          "remainderMs": 0.0014990000000002258
+        },
+        {
+          "parseMs": 56.443791,
+          "groupMs": 3.637917,
+          "sortMs": 0.020542,
+          "remainderMs": 0.001208000000006152
+        },
+        {
+          "parseMs": 57.92175,
+          "groupMs": 3.581916,
+          "sortMs": 0.019667,
+          "remainderMs": 0.0018749999999961749
+        },
+        {
+          "parseMs": 57.399584,
+          "groupMs": 3.871333,
+          "sortMs": 0.023333,
+          "remainderMs": 0.0016670000000056848
+        },
+        {
+          "parseMs": 60.031084,
+          "groupMs": 3.652625,
+          "sortMs": 0.024208,
+          "remainderMs": 0.0016660000000021727
+        },
+        {
+          "parseMs": 56.196375,
+          "groupMs": 3.667666,
+          "sortMs": 0.02025,
+          "remainderMs": 0.0018339999999964392
+        },
+        {
+          "parseMs": 58.221459,
+          "groupMs": 3.62275,
+          "sortMs": 0.022791,
+          "remainderMs": 0.0014999999999945127
+        },
+        {
+          "parseMs": 56.883959,
+          "groupMs": 3.785583,
+          "sortMs": 0.022208,
+          "remainderMs": 0.0015840000000029233
+        },
+        {
+          "parseMs": 58.213708,
+          "groupMs": 3.570958,
+          "sortMs": 0.02025,
+          "remainderMs": 0.0012920000000010597
+        },
+        {
+          "parseMs": 55.897292,
+          "groupMs": 3.817208,
+          "sortMs": 0.020667,
+          "remainderMs": 0.00229099999999648
+        },
+        {
+          "parseMs": 58.533291,
+          "groupMs": 3.551125,
+          "sortMs": 0.020084,
+          "remainderMs": 0.0020419999999992007
+        },
+        {
+          "parseMs": 56.288459,
+          "groupMs": 3.616708,
+          "sortMs": 0.021042,
+          "remainderMs": 0.0058329999999995365
+        },
+        {
+          "parseMs": 59.789625,
+          "groupMs": 3.640708,
+          "sortMs": 0.023375,
+          "remainderMs": 0.0012499999999967884
+        },
+        {
+          "parseMs": 55.955209,
+          "groupMs": 3.643333,
+          "sortMs": 0.020042,
+          "remainderMs": 0.0012499999999936486
+        },
+        {
+          "parseMs": 58.853625,
+          "groupMs": 3.570292,
+          "sortMs": 0.019375,
+          "remainderMs": 0.001333000000001281
+        }
+      ],
+      "samples": [
+        58.280459,
+        60.887375,
+        58.907959,
+        59.570625,
+        58.312,
+        60.148042,
+        59.146958,
+        60.974292,
+        57.915666,
+        60.491083,
+        59.146917,
+        59.971417,
+        57.994709,
+        59.824042,
+        56.892042,
+        59.92225,
+        59.353292,
+        61.477709,
+        60.188958,
+        60.354291,
+        58.89625,
+        61.071375,
+        58.917333,
+        62.099375,
+        59.972792,
+        61.807791,
+        60.103458,
+        61.525208,
+        61.295917,
+        63.709583,
+        59.886125,
+        61.8685,
+        60.693334,
+        61.806208,
+        59.737458,
+        62.106542,
+        59.932042,
+        63.454958,
+        59.619834,
+        62.444625
+      ],
+      "warmup": 10,
+      "medianMs": 59.972792,
+      "p95Ms": 62.444625,
+      "peakRssMiB": 88.515625,
+      "timeStderr": "        3.02 real         3.16 user         0.10 sys\n            92815360  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                5863  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                1259  signals received\n                  66  voluntary context switches\n                9146  involuntary context switches\n         84797496160  instructions retired\n         12828462123  cycles elapsed\n            89408040  peak memory footprint\n",
+      "phaseMedians": {
+        "parseMs": 56.324292,
+        "groupMs": 3.637917,
+        "sortMs": 0.020542,
+        "remainderMs": 0.0015840000000029233
+      }
+    },
+    {
+      "variant": "go-stream",
+      "size": 200000,
+      "count": 40,
+      "phases": [
+        {
+          "parseMs": 0.000667,
+          "groupMs": 77.675916,
+          "sortMs": 0.020875,
+          "remainderMs": 0.001541999999990138
+        },
+        {
+          "parseMs": 0.000708,
+          "groupMs": 75.4125,
+          "sortMs": 0.021792,
+          "remainderMs": 0.0018750000000032144
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 78.580916,
+          "sortMs": 0.024375,
+          "remainderMs": 0.00112499999999386
+        },
+        {
+          "parseMs": 0.000459,
+          "groupMs": 78.186,
+          "sortMs": 0.021666,
+          "remainderMs": 0.0013329999999844473
+        },
+        {
+          "parseMs": 0.000583,
+          "groupMs": 77.217042,
+          "sortMs": 0.0215,
+          "remainderMs": 0.0014999999999819255
+        },
+        {
+          "parseMs": 0.000583,
+          "groupMs": 78.415083,
+          "sortMs": 0.025292,
+          "remainderMs": 0.0013750000000033284
+        },
+        {
+          "parseMs": 0.001458,
+          "groupMs": 78.014042,
+          "sortMs": 0.021458,
+          "remainderMs": 0.0014589999999925253
+        },
+        {
+          "parseMs": 0.000708,
+          "groupMs": 78.323292,
+          "sortMs": 0.019666,
+          "remainderMs": 0.0017090000000061396
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 77.471833,
+          "sortMs": 0.021583,
+          "remainderMs": 0.0014169999999961332
+        },
+        {
+          "parseMs": 0.000667,
+          "groupMs": 77.311708,
+          "sortMs": 0.020709,
+          "remainderMs": 0.0013329999999990051
+        },
+        {
+          "parseMs": 0.000542,
+          "groupMs": 78.379042,
+          "sortMs": 0.021625,
+          "remainderMs": 0.001416000000006308
+        },
+        {
+          "parseMs": 0.000666,
+          "groupMs": 78.698334,
+          "sortMs": 0.022041,
+          "remainderMs": 0.0010010000000037801
+        },
+        {
+          "parseMs": 0.000292,
+          "groupMs": 78.9275,
+          "sortMs": 0.019958,
+          "remainderMs": 0.001374999999998492
+        },
+        {
+          "parseMs": 0.0005,
+          "groupMs": 78.3615,
+          "sortMs": 0.021,
+          "remainderMs": 0.0012079999999920106
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 79.232875,
+          "sortMs": 0.022333,
+          "remainderMs": 0.0012509999999996066
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 78.623166,
+          "sortMs": 0.021209,
+          "remainderMs": 0.0015410000000020477
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 78.192375,
+          "sortMs": 0.021958,
+          "remainderMs": 0.0009580000000092639
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 77.407167,
+          "sortMs": 0.021833,
+          "remainderMs": 0.0019580000000027804
+        },
+        {
+          "parseMs": 0.000792,
+          "groupMs": 79.779417,
+          "sortMs": 0.020875,
+          "remainderMs": 0.0015410000000068737
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 79.372584,
+          "sortMs": 0.021291,
+          "remainderMs": 0.0050000000000005075
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 79.393583,
+          "sortMs": 0.021334,
+          "remainderMs": 0.0014579999999954837
+        },
+        {
+          "parseMs": 0.000459,
+          "groupMs": 79.148125,
+          "sortMs": 0.021833,
+          "remainderMs": 0.0016660000000010451
+        },
+        {
+          "parseMs": 0.000792,
+          "groupMs": 79.299958,
+          "sortMs": 0.020959,
+          "remainderMs": 0.001998999999988489
+        },
+        {
+          "parseMs": 0.00075,
+          "groupMs": 78.981459,
+          "sortMs": 0.021166,
+          "remainderMs": 0.001250000000006874
+        },
+        {
+          "parseMs": 0.000709,
+          "groupMs": 78.537125,
+          "sortMs": 0.023583,
+          "remainderMs": 0.0014169999999914737
+        },
+        {
+          "parseMs": 0.000583,
+          "groupMs": 78.231084,
+          "sortMs": 0.020875,
+          "remainderMs": 0.0012079999999949666
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 78.748334,
+          "sortMs": 0.02025,
+          "remainderMs": 0.0007490000000033199
+        },
+        {
+          "parseMs": 0.000375,
+          "groupMs": 78.542417,
+          "sortMs": 0.020708,
+          "remainderMs": 0.007207999999990503
+        },
+        {
+          "parseMs": 0.000791,
+          "groupMs": 78.986667,
+          "sortMs": 0.018958,
+          "remainderMs": 0.0013759999999911933
+        },
+        {
+          "parseMs": 0.0005,
+          "groupMs": 78.523833,
+          "sortMs": 0.021,
+          "remainderMs": 0.0010419999999990055
+        },
+        {
+          "parseMs": 0.000916,
+          "groupMs": 80.350375,
+          "sortMs": 0.02325,
+          "remainderMs": 0.0015839999999984686
+        },
+        {
+          "parseMs": 0.000542,
+          "groupMs": 79.919917,
+          "sortMs": 0.020791,
+          "remainderMs": 0.0014170000000062223
+        },
+        {
+          "parseMs": 0.000292,
+          "groupMs": 79.003958,
+          "sortMs": 0.020292,
+          "remainderMs": 0.0013750000000078734
+        },
+        {
+          "parseMs": 0.000375,
+          "groupMs": 78.559125,
+          "sortMs": 0.019791,
+          "remainderMs": 0.0012090000000007962
+        },
+        {
+          "parseMs": 0.000667,
+          "groupMs": 77.643166,
+          "sortMs": 0.019917,
+          "remainderMs": 0.0010420000000048342
+        },
+        {
+          "parseMs": 0.000542,
+          "groupMs": 77.365875,
+          "sortMs": 0.01875,
+          "remainderMs": 0.0015000000000043208
+        },
+        {
+          "parseMs": 0.000541,
+          "groupMs": 76.860417,
+          "sortMs": 0.018917,
+          "remainderMs": 0.0011250000000036682
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 77.170417,
+          "sortMs": 0.021041,
+          "remainderMs": 0.001041999999994967
+        },
+        {
+          "parseMs": 0.000625,
+          "groupMs": 78.215083,
+          "sortMs": 0.020083,
+          "remainderMs": 0.0013339999999995751
+        },
+        {
+          "parseMs": 0.000709,
+          "groupMs": 79.684833,
+          "sortMs": 0.020917,
+          "remainderMs": 0.0012910000000062212
+        }
+      ],
+      "samples": [
+        77.699,
+        75.436875,
+        78.607041,
+        78.209458,
+        77.240625,
+        78.442333,
+        78.038417,
+        78.345375,
+        77.495458,
+        77.334417,
+        78.402625,
+        78.722042,
+        78.949125,
+        78.384208,
+        79.257084,
+        78.646541,
+        78.215916,
+        77.431583,
+        79.802625,
+        79.3995,
+        79.417,
+        79.172083,
+        79.323708,
+        79.004625,
+        78.562834,
+        78.25375,
+        78.769958,
+        78.570708,
+        79.007792,
+        78.546375,
+        80.376125,
+        79.942667,
+        79.025917,
+        78.5805,
+        77.664792,
+        77.386667,
+        76.881,
+        77.193125,
+        78.237125,
+        79.70775
+      ],
+      "warmup": 10,
+      "medianMs": 78.546375,
+      "p95Ms": 79.802625,
+      "peakRssMiB": 37.296875,
+      "timeStderr": "        3.92 real         3.92 user         0.02 sys\n            39108608  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2578  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 372  signals received\n                   7  voluntary context switches\n                2788  involuntary context switches\n        105697650025  instructions retired\n         15610889089  cycles elapsed\n            36864528  peak memory footprint\n",
+      "phaseMedians": {
+        "parseMs": 0.000625,
+        "groupMs": 78.523833,
+        "sortMs": 0.021,
+        "remainderMs": 0.0013750000000078734
+      }
+    }
+  ],
+  "loadEnd": [
+    4.5224609375,
+    4.10302734375,
+    4.79443359375
+  ]
+}
