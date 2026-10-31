@@ -243,6 +243,21 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await Promise.all(Array.from({ length: 3 }, () => compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" })));
       assert.ok(performance.now() - started >= 180, "early requests await route-module initialization");
     });
+    for (const grouped of ["", "1"]) await pair(binary, { SHIM_VERCEL: "1", SHIM_GROUPED: grouped, SHIM_DELAY_INIT: "1" }, async (compare, { node, native }) => {
+      for (const state of [node, native]) assert.doesNotMatch(state.stdout, /fixture: .*loader/, "Vercel readiness does not initialize route modules");
+      if (grouped) {
+        await compare({ path: "/api/static", status: 200, text: "static" });
+        for (const state of [node, native]) assert.doesNotMatch(state.stdout, /fixture: .*loader/, "a request does not initialize unrelated modules");
+      }
+      const started = performance.now();
+      await Promise.all(Array.from({ length: 3 }, () => compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" })));
+      assert.ok(performance.now() - started >= 180, "concurrent first requests await initialization");
+      await compare({ path: "/api/a", method: "OPTIONS", status: 204, allow: "GET, HEAD, OPTIONS, PATCH, POST, PUT" });
+      for (const state of [node, native]) {
+        assert.equal((state.stdout.match(/fixture: route-loader/g) || []).length, 1, "load once across concurrent and later requests");
+        assert.doesNotMatch(state.stdout, /fixture: pending-loader/);
+      }
+    });
     for (const grouped of ["", "1"]) await pair(binary, { SHIM_VERCEL: "1", SHIM_GROUPED: grouped }, async (compare) => {
       const headers = { "x-matched-path": "/api/hello.rsc", "x-forwarded-host": "public.test", "x-forwarded-proto": "https" };
       const rewritten = await compare({ path: "/rewritten?case=url&q=a%20b&nxtPid=hello", headers,
