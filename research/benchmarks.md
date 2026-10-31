@@ -374,3 +374,15 @@ sides. Serializing its raw issue objects (which contain function references)
 hits scriptc's JSON.stringify runtime-handle refusal; the successful standalone
 flatten probe checks matching valid output and invalid-error JSON. Full route
 parity must pass before any route performance window.
+
+Before any hosted preview (local results already retained at b3bce276): the
+approved Redis resource is now connected. The local revision-1 mixed latency
+included client validation after body drain; disclose that deviation rather
+than relabel or rerun those results. Hosted client revision 2 captures the
+monotonic body-drain timestamp in the transport and uses it directly for
+scheduled latency, retaining dispatch lag/service time. This restores the
+registered endpoint before any hosted measurements; all hosted pairs use the
+new frozen commit. No requests, schedules, counts or acceptance rules change.
+The Linux musl/IPC/TLS check runs in local Docker, not Sandbox, using the exact
+native binary hash that will be uploaded. Its real Upstash commands and all
+hosted parity/cleanup calls are charged to the shared ledger.

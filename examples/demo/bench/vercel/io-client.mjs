@@ -5,7 +5,7 @@ import https from "node:https";
 import { workloads, spec, digest } from "../io/fixtures.mjs";
 import { cpuDelta } from "./cpu.mjs";
 
-export const ioProtocol = { revision: 1, warmup: 10, sequentialCount: 80, concurrentWarmup: 32, concurrentCount: 256,
+export const ioProtocol = { revision: 2, warmup: 10, sequentialCount: 80, concurrentWarmup: 32, concurrentCount: 256,
   concurrency: 16, requestTimeoutMs: 15000, cpuRequests: 100, cpuWindows: 3, cpuMaxAttempts: 5,
   openLoopSeconds: 30, steadyRate: 20, burstRate: 60, maxSockets: 128, maxInFlight: 256 };
 export const quantile = (values, q) => values.length ? [...values].sort((a, b) => a - b)[Math.max(0, Math.ceil(values.length * q) - 1)] : null;
@@ -34,7 +34,8 @@ export function createIoClient({ secret, budget = 12000, timeoutMs = ioProtocol.
         res.on("error", fail); res.on("aborted", () => fail(new Error("Response aborted")));
         res.on("end", () => {
           clearTimeout(timer);
-          const ms = performance.now() - started;
+          const completedAtMs = performance.now();
+          const ms = completedAtMs - started;
           const body = Buffer.concat(chunks);
           const headers = Object.fromEntries(["x-vercel-id", "x-vercel-cache", "server-timing", "content-type", "cache-control"].filter((key) => res.headers[key] !== undefined).map((key) => [key, res.headers[key]]));
           try {
@@ -44,9 +45,9 @@ export function createIoClient({ secret, budget = 12000, timeoutMs = ioProtocol.
             if (!String(res.headers["content-type"]).startsWith("application/json")) throw correctness("Unexpected content-type");
             const hash = digest(body);
             if (fixture.expected && fixture.expected !== hash) throw correctness("Response bytes differ from independent fixture");
-            resolve({ ms, digest: hash, bytes: body.length, headers, reusedSocket: req.reusedSocket,
+            resolve({ ms, completedAtMs, digest: hash, bytes: body.length, headers, reusedSocket: req.reusedSocket,
               ...(fixture.diagnostic ? { body: JSON.parse(body) } : {}) });
-          } catch (error) { error.ms = ms; error.headers = headers; reject(error); }
+          } catch (error) { error.ms = ms; error.completedAtMs = completedAtMs; error.headers = headers; reject(error); }
         });
       });
       timer = setTimeout(() => req.destroy(new Error("Absolute request deadline")), timeoutMs);
@@ -90,11 +91,11 @@ export async function openLoop(client, base, { arrivals = arrivalSchedule(), max
       tasks.push((async () => {
         try {
           const response = await client.request(base, spec(arrival.workload, arrival.index, "mixed"), pool);
-          Object.assign(row, { status: "complete", ...response, scheduledLatencyMs: performance.now() - start - arrival.scheduledMs });
+          Object.assign(row, { status: "complete", ...response, scheduledLatencyMs: (response.completedAtMs ?? performance.now()) - start - arrival.scheduledMs });
         } catch (error) {
           if (error.correctness) fatal = true;
           Object.assign(row, { status: "failed", error: error.message, correctness: Boolean(error.correctness), serviceMs: error.ms,
-            scheduledLatencyMs: performance.now() - start - arrival.scheduledMs, headers: error.headers });
+            scheduledLatencyMs: (error.completedAtMs ?? performance.now()) - start - arrival.scheduledMs, headers: error.headers });
         } finally { inFlight--; }
       })());
     }
