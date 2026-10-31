@@ -42,7 +42,7 @@ try {
   const result = await sandbox.runCommand({ cmd: "timeout", args: ["--signal=TERM", "--kill-after=5s", "180s", "node", "examples/demo/bench/vercel/worker.mjs"],
     env: { VERCEL_AUTOMATION_BYPASS_SECRET: process.env.VERCEL_AUTOMATION_BYPASS_SECRET },
     stdout: process.stdout, stderr: process.stderr, signal: AbortSignal.timeout(190_000) });
-  const saved = await sandbox.downloadFile({ path: "/vercel/sandbox/result.json" }, { path: `${destination}.partial.json` });
+  const saved = await sandbox.downloadFile({ path: "result.json" }, { path: `${destination}.partial.json` });
   if (!saved) throw new Error(`No worker results; exit ${result.exitCode}`);
   Object.assign(data, JSON.parse(await readFile(`${destination}.partial.json`)));
   await rm(`${destination}.partial.json`);

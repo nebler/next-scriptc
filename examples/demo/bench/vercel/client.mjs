@@ -52,7 +52,7 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
       const start = performance.now();
       let timer;
       const req = https.request(new URL(spec.path, base), { agent, method: spec.method ?? "GET", headers: {
-        "accept-encoding": "identity", ...spec.headers, "x-vercel-protection-bypass": secret,
+        "accept-encoding": spec.responseEncoding === "gzip" ? "gzip" : "identity", ...spec.headers, "x-vercel-protection-bypass": secret,
       } }, (res) => {
         const chunks = [];
         res.on("data", (chunk) => chunks.push(chunk));

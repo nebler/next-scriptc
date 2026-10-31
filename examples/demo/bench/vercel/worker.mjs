@@ -3,7 +3,7 @@ import os from "node:os";
 import { measure } from "./client.mjs";
 
 const job = JSON.parse(await readFile("job.json"));
-const data = { environment: { node: process.version, platform: process.platform, arch: process.arch,
+const data = { environment: { node: process.version, platform: process.platform, arch: process.arch, cwd: process.cwd(),
   cpus: os.cpus().length, cpuModel: os.cpus()[0]?.model, loadavg: os.loadavg() } };
 try {
   Object.assign(data, await measure(job.deployments, { fresh: job.fresh, secret: process.env.VERCEL_AUTOMATION_BYPASS_SECRET,

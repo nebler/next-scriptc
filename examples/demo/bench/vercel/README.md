@@ -30,6 +30,8 @@ After the first measurement, quick checks can use authenticated CLI access:
 vercel curl https://next-scriptc-4nuyh23eg-noahs-projects-8a075d15.vercel.app/api/hello
 ```
 
+The client negotiates gzip only for gzip-export (identity elsewhere); Vercel removes the gzip content-encoding when identity is requested. Header and decompressed-body parity remain required on both variants.
+
 The benchmark sends `x-vercel-protection-bypass` on every HTTPS request. Only that secret is forwarded to the Sandbox command environment. The local OIDC token authenticates Sandbox provisioning and is not uploaded. If it expires, preserve the bypass entry, run `vercel env pull .env.local --yes`, restore the bypass entry privately, and remove only duplicate `.gitignore` entries the CLI appended (do not discard unrelated edits).
 
 ## Measure
