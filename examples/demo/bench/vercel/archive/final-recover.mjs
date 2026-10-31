@@ -4,7 +4,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
-const root = path.resolve(import.meta.dirname, "../../../..");
+const root = path.resolve(import.meta.dirname, "../../../../..");
 process.chdir(root);
 const prefix = "research/benchmarks/vercel-final";
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();

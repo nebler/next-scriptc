@@ -1,5 +1,10 @@
 # Performance levers for next-scriptc
 
+> Historical exploration. `vendor/scriptc/` source links require an optional,
+> ignored compiler checkout and are unavailable in a fresh clone. Current
+> publication results and their retained raw evidence are in the
+> [research index](README.md).
+
 **INDICATIVE ONLY — loaded shared Apple M4 Pro / macOS arm64, 2026-10-31. These measurements are not publishable performance claims.** Base HEAD: `42a2368537b08e050c08759e197a685e4483ba81`; installed scriptc **0.4.6**, Node **24.22.0**, Next **16.4.3**. No compiler/runtime changes, demo build, dependency install, commit, branch or index changes were made. Another agent changed the adapter concurrently; HTTP tests use a fixed [shim snapshot](../examples/probe/perf/shim/serve.ts), not that agent's moving implementation.
 
 The useful outcome is selective: typed application compute can be competitive; arbitrary JS packages are not made fast by an optimization flag. Markdown is primarily a regex-engine problem. Search pays substantial dynamic-value, map and reference-count costs. Keeping `release` as the adapter default is justified; globally enabling `speed` is not.

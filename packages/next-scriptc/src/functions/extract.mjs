@@ -90,6 +90,7 @@ export function extractFunctions(text, source) {
       ImportExpression() { fail(owner, "dynamic import is unsupported"); },
       CallExpression(p) { if (p.node.callee.type === "Import") fail(owner, "dynamic import is unsupported"); },
       JSXElement() { fail(owner, "React/JSX is unsupported"); },
+      JSXFragment() { fail(owner, "React/JSX is unsupported"); },
     });
   }
   for (const fn of functions) include(program.scope.getBinding(fn.name), fn.name);
@@ -150,6 +151,7 @@ export async function discoverFunctions(projectDir, distDir, config) {
           const ast = parse(await readFile(file, "utf8"), { sourceType: "module", plugins: ["typescript", "jsx"] });
           traverse(ast, {
             JSXElement() { fail(`unsupported React/JSX in ${file}`); },
+            JSXFragment() { fail(`unsupported React/JSX in ${file}`); },
             ImportExpression() { fail(`unsupported dynamic import in ${file}`); },
             CallExpression(p) { if (p.node.callee.type === "Import") fail(`unsupported dynamic import in ${file}`); },
           });

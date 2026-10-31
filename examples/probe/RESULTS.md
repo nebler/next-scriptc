@@ -1,5 +1,12 @@
 # Route handler probe results
 
+> Historical probe record. Links into `.artifacts/` and `vendor/scriptc/` refer
+> to ignored local outputs/source checkouts that are not included in this
+> repository. Original linked files are unavailable in a fresh checkout; the
+> [probe runner](README.md) can generate new evidence, which must be labeled as
+> a new run. Current adapter usage and retained publication evidence are indexed
+> in the [root README](../../README.md).
+
 Measured 2026-10-30 on macOS arm64, scriptc **0.4.6**, Node **24.22.0**,
 Next **16.4.3**, zod **4.6.7**, and `@types/node` **24.19.2**.
 The compiler is the installed workspace dependency, not the vendor checkout.

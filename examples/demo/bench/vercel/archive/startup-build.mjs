@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import path from 'node:path';
-import { root, demo } from './build.mjs';
+import { root, demo } from '../build.mjs';
 
 const mode = process.argv[2];
 assert(['group', 'isolated'].includes(mode), 'Usage: startup-build.mjs group|isolated');

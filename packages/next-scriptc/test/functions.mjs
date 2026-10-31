@@ -69,6 +69,8 @@ test("rejects unsupported scopes, APIs and exports with the function name", () =
     ['function helper() { return process.env.KEY; } async function bad() { "use native"; return helper(); }', /function bad: unsupported reference process/],
     ['async function bad() { "use native"; return fetch("/"); }', /function bad: unsupported reference fetch/],
     ['async function bad() { "use native"; return this; }', /function bad: unsupported reference this/],
+    ['async function bad() { "use native"; return <span />; }', /function bad: React\/JSX is unsupported/],
+    ['async function bad() { "use native"; return <>text</>; }', /function bad: React\/JSX is unsupported/],
     ['async function bad({x}: {x:number}) { "use native"; return x; }', /function bad: parameters/],
     ['const values: number[] = []; values.push(1); async function bad() { "use native"; return values; }', /function bad: unsupported module initialization/],
     ['let value = 1; value++; async function bad() { "use native"; return value; }', /function bad: reference value is reassigned/],
@@ -112,6 +114,7 @@ test("discovery supports inline route functions and rejects indirect Next/client
     for (const [text, error] of [
       ['import { connection } from "next/server"; export function helper() { return connection(); }', /function native: reference helper: unsupported import next\/server/],
       ['"use client"; export function helper() { return 1; }', /function native: reference helper: import of client module/],
+      ['export function helper() { return <>text</>; }', /function native: reference helper: unsupported React\/JSX/],
     ]) {
       await writeFile(helper, text);
       await assert.rejects(discoverFunctions(temporary, path.join(temporary, ".next"), config), error);
@@ -142,8 +145,18 @@ test("function startup checks build identity and reports missing/non-executable 
     const output = path.join(temporary, "scriptc-functions");
     await mkdir(output);
     await writeFile(path.join(temporary, "BUILD_ID"), "current\n");
+    await startFunctions(temporary, temporary); // No native functions in this build.
+    await writeFile(path.join(output, "manifest.json"), "{");
+    await assert.rejects(startFunctions(temporary, temporary), /Cannot read native functions manifest.*Rebuild/);
     await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId: "stale" }));
     await assert.rejects(startFunctions(temporary, temporary), /build ID mismatch/);
+    for (const processes of [null, {}, [], [null], [{ binary: "other" }],
+      ...[undefined, "1234", 0, -1, 1.5, 65536].map((port) => [{ binary: "functions", port, routes: ["label"] }]),
+      ...[undefined, "label", [], [null], [""]].map((routes) => [{ binary: "functions", port: 1234, routes }]),
+    ]) {
+      await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId: "current", processes }));
+      await assert.rejects(startFunctions(temporary, temporary), /Invalid native functions manifest.*Rebuild/);
+    }
     await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId: "current", processes: [{ binary: "functions", port: 1234, routes: ["arbitrary label"] }] }));
     await assert.rejects(startFunctions(temporary, temporary), /Missing or invalid native functions binary/);
     await writeFile(path.join(output, "functions"), "not executable", { mode: 0o644 });

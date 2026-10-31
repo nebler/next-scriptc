@@ -1,3 +1,5 @@
+> Historical investigation. For current usage see the [root README](../README.md); for the final Vercel measurements see [vercel-final.md](vercel-final.md). Earlier protocols and failures below are retained as evidence.
+
 # Vercel fresh deployment, scale-out tail and process memory
 
 Measured 2026-10-31 on next-scriptc, Next 16.4.3 / scriptc 0.4.6. Preview only, Linux x86-64, iad1, 2048 MiB / 300 seconds in both variants. **Untouched deployment-first responses are slower natively in all three pairs**: medians 834 ms native and 228 ms Node. The former 101-request verification history is absent from these six samples. This still measures first-response latency, not certified process-cold initialization.
@@ -151,7 +153,7 @@ Open questions: exact Vercel start types and server durations remain unavailable
 
 ### Diagnostic build and timeline
 
-Two diagnostic previews preceded the six uninstrumented comparison previews. `bench/vercel/startup-build.mjs` compiled an ignored copy of the shim, with stdout JSON at shim evaluation, bind, route-loader invocation/completion, request callback entry and response `end()` call. `startup-proxy.py` instrumented a copy of the pinned public Go source at main, child spawn, port readiness, IPC announcement, proxy bind and proxy request receipt. It preserved announcement-before-bind ordering. No diagnostic code, runtime flags, timestamps, headers or measurements were added to the benchmarked handlers or serving shim. Existing listener logging remains unchanged. `response-end-called` means `ServerResponse.end()` returned, not that the peer received or the kernel flushed all bytes. Shim evaluation is the earliest instrumented TS statement; child spawn brackets earlier runtime initialization.
+Two diagnostic previews preceded the six uninstrumented comparison previews. [archived startup builder](../examples/demo/bench/vercel/archive/startup-build.mjs) compiled an ignored copy of the shim, with stdout JSON at shim evaluation, bind, route-loader invocation/completion, request callback entry and response `end()` call. [archived proxy instrumentation](../examples/demo/bench/vercel/archive/startup-proxy.py) instrumented a copy of the pinned public Go source at main, child spawn, port readiness, IPC announcement, proxy bind and proxy request receipt. It preserved announcement-before-bind ordering. No diagnostic code, runtime flags, timestamps, headers or measurements were added to the benchmarked handlers or serving shim. Existing listener logging remains unchanged. `response-end-called` means `ServerResponse.end()` returned, not that the peer received or the kernel flushed all bytes. Shim evaluation is the earliest instrumented TS statement; child spawn brackets earlier runtime initialization.
 
 The first grouped diagnostic response was **871.122 ms**. Correlation uses request `iad1::iad1::85r6l-1793437530524-73961e67d1fc`, the ID epoch, client wall time, embedded event timestamps and the runtime-log envelope. Embedded event times and log receipt times must be distinguished:
 
@@ -299,7 +301,7 @@ The Function contains only `.vc-config.json` and one stripped static Linux x86-6
 
 ### Warm C=16, scale-out and startup errors
 
-Pair 2 was reused only after its cold measurement. The existing `startup-scaleout.mjs` worker ran unchanged (a temporary copy changes only its hardcoded output destination from round 2 to round 3): hello, native then Node, one reference response, 32 warmup + 700 measured requests per variant at C=16, three-second measured ceiling. **1,466 HTTP attempts, zero failures**. Both measured windows are count-limited, approximately 1.17 / 1.29 seconds, and all 700 measured requests per variant reuse sockets with zero new client connections. The generator uses 0.233 native / 0.147 Node CPU cores; neither reports saturation.
+Pair 2 was reused only after its cold measurement. The existing [archived scale-out controller](../examples/demo/bench/vercel/archive/startup-scaleout.mjs) worker ran unchanged (a temporary copy changes only its hardcoded output destination from round 2 to round 3): hello, native then Node, one reference response, 32 warmup + 700 measured requests per variant at C=16, three-second measured ceiling. **1,466 HTTP attempts, zero failures**. Both measured windows are count-limited, approximately 1.17 / 1.29 seconds, and all 700 measured requests per variant reuse sockets with zero new client connections. The generator uses 0.233 native / 0.147 Node CPU cores; neither reports saturation.
 
 | Metric, ms | Round 2 native / Node | Round 3 native / Node |
 | --- | ---: | ---: |

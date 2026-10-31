@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next-scriptc start",
-    "test:routes": "node test/routes.mjs"
+    "test:routes": "node test/routes.mjs",
+    "test": "node --test bench/heavy/test.mjs bench/heavy/vector-test.mjs bench/vercel/test.mjs bench/vercel/io-test.mjs"
   },
   "dependencies": {
     "@scriptc/threads": "^0.4.6",
