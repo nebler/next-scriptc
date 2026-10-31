@@ -19,6 +19,6 @@ try{
   const start=performance.now();let bytes=0;let times=[];
   for(let i=0;i<count;i++){const t=performance.now();bytes+=await request();times.push(performance.now()-t);}
   times.sort((a,b)=>a-b);
-  console.log(JSON.stringify({rep:r,count,ms:performance.now()-start,p50:times[Math.floor(count/2)],p95:times[Math.floor(count*.95)],bytes,sockets:sockets.size,first}));
+  console.log(JSON.stringify({rep:r,count,ms:performance.now()-start,p50:times[Math.floor(count/2)],p95:times[Math.floor(count*.95)],p99:times[Math.min(count-1,Math.ceil(count*.99)-1)],bytes,sockets:sockets.size,first}));
  }
 }finally{agent.destroy();}
