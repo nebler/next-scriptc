@@ -1,3 +1,5 @@
+> Historical investigation. For current usage see the [root README](../README.md); for the final Vercel measurements see [vercel-final.md](vercel-final.md). Earlier protocols and failures below are retained as evidence.
+
 # Native scriptc binaries as Vercel Functions
 
 Research date: 2026-10-30. Read-only investigation; no deployment, login, project creation, package installation, or downloaded-code execution was performed.

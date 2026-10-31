@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { serverEnv } from '../config.mjs';
+import { serverEnv } from '../../config.mjs';
 const label = process.argv[2];
 assert(/^[a-z0-9-]+$/.test(label ?? ''), 'Supply a unique research label');
 const project = JSON.parse(await readFile('.vercel/project.json'));

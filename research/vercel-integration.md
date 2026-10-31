@@ -1,3 +1,5 @@
+> Historical investigation. For current usage see the [root README](../README.md); for the final Vercel measurements see [vercel-final.md](vercel-final.md). Earlier protocols and failures below are retained as evidence.
+
 > Current packaging: round 3 replaces the separate Go IPC proxy with in-process TypeScript IPC compiled by scriptc 0.4.6. See the appended round-3 record; the round-2 results below remain historical.
 
 # Next 16.4.3 / Vercel integration, review round 2

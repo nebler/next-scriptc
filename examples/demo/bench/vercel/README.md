@@ -1,5 +1,10 @@
 # Vercel preview benchmark
 
+The counts and deployment identities below describe the recorded experiments,
+not the evolving demo's current route count. Start with the
+[final report](../../../../research/vercel-final.md) for publication results.
+One-time startup and recovery controllers are in [archive/](archive/README.md).
+
 Run from the repository root with Node 24, pnpm 11.1.3 and Vercel CLI 65.8.0. The fixed protocol is pre-registered in `research/benchmarks.md`. No packages/next-scriptc source changes, project setting changes or new measured-route instrumentation are needed.
 
 ## Prepare and deploy the Node baseline
@@ -7,8 +12,7 @@ Run from the repository root with Node 24, pnpm 11.1.3 and Vercel CLI 65.8.0. Th
 ```sh
 pnpm install --frozen-lockfile
 mkdir -p .vercel
-cp /Users/noah/code/next-scriptc/.vercel/project.json .vercel/project.json
-cp /Users/noah/code/next-scriptc/.env.local .env.local
+vercel link
 vercel project inspect --non-interactive
 vercel pull --yes --environment=preview
 node examples/demo/bench/vercel/deploy-node.mjs
@@ -115,34 +119,34 @@ See `research/vercel-cold-start-memory.md`'s appended round 2 and the
 invocation budget. Its three fresh pairs used `run.mjs --fresh --mode cold`
 without changes. All eight round 2 previews were deleted.
 
-The `startup-*` helpers are separate research tools, not the measured protocol:
+The archived `startup-*` helpers are separate research tools, not the measured protocol:
 
-- `startup-build.mjs group|isolated` compiles an instrumented copy of the current
+- `archive/startup-build.mjs group|isolated` compiles an instrumented copy of the current
   shim after a grouped native build. `isolated` compiles only hello. To reproduce
   the original bug, use the pre-fix shim/application tree at merge `1e9b65b`;
   instrumenting the fixed shim measures different initialization behavior.
-- `startup-proxy.py <bootstrap directory>` instruments a clean copy of public
+- `archive/startup-proxy.py <bootstrap directory>` instruments a clean copy of public
   proxy commit `84878e532142f0ac584953695658b324eb9e5b80`. Build using
   `GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath '-ldflags=-s -w'`.
   It retains the public proxy's IPC-before-bind order. Diagnostic artifacts are
   explicitly substituted into the prepared `.vercel/output`; never use them
   for the uninstrumented pairs.
-- `startup-deploy.mjs LABEL` uploads only the explicitly prepared output, saves
+- `archive/startup-deploy.mjs LABEL` uploads only the explicitly prepared output, saves
   accepted deployment identity before inspection, and rejects production.
-  `startup-deploy.mjs check-traces [FUNCTIONS_DIRECTORY]` checks traced generated
+  `archive/startup-deploy.mjs check-traces [FUNCTIONS_DIRECTORY]` checks traced generated
   metadata without deploying. Always rebuild the variant immediately before
   uploading: copying `.vercel/output` alone leaves live `.next` trace references.
   The guard understands Next's salted `sha256(salt + 'file:' + bytes)` metadata
   fingerprints, excludes renamed trace inputs and does not interpret compiler
   128-bit fingerprints. It is a useful guard, not a complete frozen-input proof.
-- `startup-sandbox.mjs` expects the recorded original/fixed/diagnostic binary
+- `archive/startup-sandbox.mjs` expects the recorded original/fixed/diagnostic binary
   layout under ignored `.vercel/round2`. Compile its eviction helper first:
-  `zig cc -target x86_64-linux-musl -Os -static -s examples/demo/bench/vercel/cold-file.c -o .vercel/round2/cold-file`.
+  `zig cc -target x86_64-linux-musl -Os -static -s examples/demo/bench/vercel/archive/cold-file.c -o .vercel/round2/cold-file`.
   It runs three starts per binary/path and records advisory cache eviction,
   handshake timing and any connection refusals. This is not guaranteed hardware
   disk-cold measurement.
-- `startup-request.mjs URL` issues 21 hello-only diagnostic requests from iad1;
-  `startup-scaleout.mjs NATIVE_URL NODE_URL` caps its separate hello C=16 probe at
+- `archive/startup-request.mjs URL` issues 21 hello-only diagnostic requests from iad1;
+  `archive/startup-scaleout.mjs NATIVE_URL NODE_URL` caps its separate hello C=16 probe at
   1,466 attempts. Neither is a fresh paired benchmark. Use Node 24 with
   `--env-file=.env.local`; no secrets are put in arguments or artifacts.
 - `function-sizes.py LABEL OUTPUT_ROOT REPO_ROOT DEPLOYMENT_JSON` reports the
@@ -156,10 +160,10 @@ saved exact deployment IDs, never by project name. The round 2 report explicitly
 records its live-trace packaging limitation rather than claiming byte-identical
 Node repetitions.
 
-## Final publication run
+## Archived final publication run
 
-The prospective method is appended to `research/benchmarks.md`; commit it before
-any deployment. `final-run.mjs` executes the five pairs and CPU experiment exactly
+The prospective method was appended to `research/benchmarks.md` before deployment.
+`archive/final-run.mjs` executed the five pairs and CPU experiment exactly
 once, records each preview identity before the next build, captures live trace
 sizes, guards source drift, and accounts for Sandbox/request budgets. It refuses
 to restart a run with saved previews. Run with Node 24, the documented Zig on
