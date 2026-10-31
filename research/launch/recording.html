@@ -1,0 +1,22 @@
+<!doctype html><meta charset="utf-8"><title>next-scriptc evidence walkthrough</title><style>body{margin:0;background:#101518;color:#f1f4f3;font-family:'Helvetica Neue',sans-serif}main{width:1600px;height:900px;position:relative;overflow:hidden}section{display:none;padding:64px}section.active{display:block}h1{font-size:60px;margin:0 0 28px}p{font-size:32px;line-height:1.4}pre{font-size:26px;line-height:1.4;white-space:pre-wrap;color:#72e0bf}img{width:1600px;height:900px}.chart{padding:0}footer{position:absolute;bottom:10px;right:28px;background:#101518;color:#a9b8be;font-size:19px}button{font-size:32px;padding:20px;color:#101518;background:#72e0bf;border:0}small{font-size:24px;color:#a9b8be}</style><main><section class="active"><h1>CPU-heavy routes. Still TypeScript.</h1><p>route.native.ts → scriptc → native Vercel Function</p><p>Plain adapter. No Next.js fork.</p><small>Recorded benchmark evidence. This is not a live timing demo.</small><p><button id="start">Start 40-second walkthrough</button></p></section><section><h1>Same TypeScript source</h1><pre>
+export function GET(request: Request) {
+  const params = new URL(request.url).searchParams;
+  const from = params.get(&quot;from&quot;) ?? &quot;2026-01-01&quot;;
+  const to = params.get(&quot;to&quot;) ?? &quot;2026-01-31&quot;;
+  if (!validDay(from) || !validDay(to) || from &gt; to) {
+    return Response.json({ error: &quot;from and to must be ordered ISO calendar dates&quot; }, { status: 400 });
+  }
+  // This fixture is trusted application data; query parameters are validated above.
+  const events = JSON.parse(eventsJson) as RevenueEvent[];
+  const totals = new Map&lt;string, DailyRevenue&gt;();
+  let matched = 0;
+  let revenueCents = 0;
+  for (const event of events) {
+    if (event.day &lt; from || event.day &gt; to) continue;
+    const key = `${event.day}/${event.region}`;
+    let total = totals.get(key);</pre><small>examples/demo/app/api/analytics/revenue/route.native.ts · excerpt</small></section><section class="chart"><img src="chart-a-vercel.svg" alt="Vercel benchmark chart"></section><section class="chart"><img src="chart-b-int8-kernel.svg" alt="Kernel-only vector chart"></section><section><h1>Offload one function</h1><pre>export async function revenue(from: string, to: string, size: number, profile: boolean) {
+  &quot;use native&quot;;
+  const begin = profile ? performance.now() : 0;
+  const events = JSON.parse(fixtures.get(size)!) as RevenueEvent[];
+  const parsed = profile ? performance.now() : 0;
+  const totals = new Map&lt;string, DailyRevenue&gt;();</pre><p>Self-hosted Linux dashboard: 200k rows, 48 vs 113 ms.</p><small>Native vs Node · full page p50 · research/function-level.md, review round 3</small><p>Observed crossover: between 5k and 15k rows.</p></section><section><h1>Where Go still wins</h1><p>CSV, bcrypt, raw thumbnails and resize.</p><p>Go SIMD wins float search. Go popcount wins binary search.</p><p>Compiler patch in a fork. Full validation gate pending.</p><small>Sources: go-territory.md · scouting-summary.md · vector-cpu-levels.md · scriptc-int8-range-analysis.md</small></section><footer id="clock">Frozen source reports · no live requests</footer></main><script>const scenes=[...document.querySelectorAll('section')];let begun=false;document.getElementById('start').onclick=()=>{if(begun)return;begun=true;const began=performance.now();function tick(){const s=(performance.now()-began)/1000;const index=s<7?1:s<16?2:s<25?3:s<32?4:5;scenes.forEach((n,i)=>n.classList.toggle('active',i===index));document.getElementById('clock').textContent='Recorded evidence · not live timings · '+Math.min(40,Math.floor(s))+' / 40 s';if(s<40)requestAnimationFrame(tick)}tick()};</script>

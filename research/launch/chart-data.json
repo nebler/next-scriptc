@@ -1,0 +1,218 @@
+{
+  "description": "Frozen observations, not live benchmarks. Every measured value links to its report section and exact row. Edit values here, then run node research/launch/generate.mjs.",
+  "vercel": {
+    "title": "TypeScript, compiled for Vercel",
+    "subtitle": "Native vs Node \u00b7 lower is better \u00b7 process RSS / process CPU, not billing",
+    "sourceLine": "Source: research/vercel-final.md \u00b7 five preview pairs; warm/CPU: final pair \u00b7 iad1 \u00b7 Hobby",
+    "note": "First response after deploy is end-to-end, not certified process-cold initialization.",
+    "metrics": [
+      {
+        "label": "First response after deploy",
+        "unit": "ms",
+        "decimals": 0,
+        "native": {
+          "value": 125.542,
+          "source": "research/vercel-final.md#deployment-first-latency",
+          "locator": "First response | Node 240.431 | Native 125.542; medians"
+        },
+        "comparison": {
+          "value": 240.431,
+          "source": "research/vercel-final.md#deployment-first-latency",
+          "locator": "First response | Node 240.431 | Native 125.542; medians"
+        }
+      },
+      {
+        "label": "Serving process RSS",
+        "unit": "MiB",
+        "decimals": 1,
+        "native": {
+          "value": 5.602,
+          "source": "research/vercel-final.md#process-memory",
+          "locator": "After-first native RSS: 5.602, 5.602, 5.602, 5.602, 5.598; median 5.602"
+        },
+        "comparison": {
+          "value": 80.039,
+          "source": "research/vercel-final.md#process-memory",
+          "locator": "After-first Node RSS: 80.039, 79.664, 80.078, 79.766, 80.262; median 80.039"
+        }
+      },
+      {
+        "label": "Markdown warm latency",
+        "unit": "ms",
+        "decimals": 2,
+        "native": {
+          "value": 60.62,
+          "source": "research/vercel-final.md#warm-paired-comparison-final-pair-only",
+          "locator": "markdown | Node C=1 p50 24.329 | Native C=1 p50 60.620"
+        },
+        "comparison": {
+          "value": 24.329,
+          "source": "research/vercel-final.md#warm-paired-comparison-final-pair-only",
+          "locator": "markdown | Node C=1 p50 24.329 | Native C=1 p50 60.620"
+        }
+      },
+      {
+        "label": "CPU / request: hello",
+        "unit": "ms/request",
+        "decimals": 2,
+        "native": {
+          "value": 0.57,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "hello | Node median 3.064 | Native median 0.570"
+        },
+        "comparison": {
+          "value": 3.064,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "hello | Node median 3.064 | Native median 0.570"
+        }
+      },
+      {
+        "label": "CPU / request: revenue",
+        "unit": "ms/request",
+        "decimals": 2,
+        "native": {
+          "value": 2.384,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "revenue | Node median 7.029 | Native median 2.384"
+        },
+        "comparison": {
+          "value": 7.029,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "revenue | Node median 7.029 | Native median 2.384"
+        }
+      },
+      {
+        "label": "CPU / request: nearby",
+        "unit": "ms/request",
+        "decimals": 2,
+        "native": {
+          "value": 2.494,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "nearby-stores | Node median 5.700 | Native median 2.494"
+        },
+        "comparison": {
+          "value": 5.7,
+          "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+          "locator": "nearby-stores | Node median 5.700 | Native median 2.494"
+        }
+      }
+    ]
+  },
+  "vector": {
+    "title": "Int8 search: TypeScript vs Go",
+    "subtitle": "KERNEL ONLY \u00b7 Linux Vercel Sandbox \u00b7 median search time \u00b7 lower is better",
+    "sourceLine": "Source: research/vector-cpu-levels.md#measurements \u00b7 same host / corpus / exact integer results",
+    "note": "Excludes corpus initialization, JSON, HTTP and platform overhead. Go SIMD uses experimental archsimd.",
+    "rows": {
+      "value": 100000,
+      "source": "research/vector-cpu-levels.md#method-and-scope",
+      "locator": "Kernel: 100,000 rows \u00d7 768 dimensions"
+    },
+    "dimensions": {
+      "value": 768,
+      "source": "research/vector-cpu-levels.md#method-and-scope",
+      "locator": "Kernel: 100,000 rows \u00d7 768 dimensions"
+    },
+    "results": [
+      {
+        "label": "Patched native",
+        "detail": "natural TS + --cpu-dispatch",
+        "role": "native",
+        "value": 9.251,
+        "source": "research/vector-cpu-levels.md#measurements",
+        "locator": "int8-i32 | patched-dispatch | p50 9.251 ms"
+      },
+      {
+        "label": "Go SIMD",
+        "detail": "explicit AVX2 \u00b7 experimental",
+        "role": "comparison",
+        "value": 11.892,
+        "source": "research/vector-cpu-levels.md#measurements",
+        "locator": "int8-i32 | go-simd | p50 11.892 ms"
+      },
+      {
+        "label": "Go plain",
+        "detail": "GOAMD64=v1 \u00b7 no SIMD experiment",
+        "role": "comparison",
+        "value": 58.661,
+        "source": "research/vector-cpu-levels.md#measurements",
+        "locator": "int8-i32 | go-plain | p50 58.661 ms"
+      },
+      {
+        "label": "Node",
+        "detail": "same natural TypeScript",
+        "role": "comparison",
+        "value": 102.198,
+        "source": "research/vector-cpu-levels.md#measurements",
+        "locator": "int8-i32 | node | p50 102.198 ms"
+      }
+    ]
+  },
+  "vectorVercel": {
+    "title": "Int8 search on Vercel Functions",
+    "subtitle": "SERVER-SIDE COMPUTE \u00b7 pending measurement \u00b7 lower is better",
+    "sourceLine": "Source: PENDING \u00b7 populate every value, source and locator from the hosted route report before posting",
+    "note": "No hosted bar or ratio is drawn until all values and their source citations are present.",
+    "results": [
+      {
+        "label": "Patched native",
+        "detail": "natural TS + --cpu-dispatch",
+        "role": "native",
+        "value": "{{VECTOR_VERCEL_NATIVE_MS}}",
+        "source": null,
+        "locator": null
+      },
+      {
+        "label": "Go SIMD",
+        "detail": "explicit SIMD \u00b7 experimental",
+        "role": "comparison",
+        "value": "{{VECTOR_VERCEL_GO_SIMD_MS}}",
+        "source": null,
+        "locator": null
+      },
+      {
+        "label": "Go plain",
+        "detail": "plain Go control",
+        "role": "comparison",
+        "value": "{{VECTOR_VERCEL_GO_MS}}",
+        "source": null,
+        "locator": null
+      },
+      {
+        "label": "Node",
+        "detail": "same natural TypeScript",
+        "role": "comparison",
+        "value": "{{VECTOR_VERCEL_NODE_MS}}",
+        "source": null,
+        "locator": null
+      }
+    ]
+  },
+  "functionLevel": {
+    "native": {
+      "value": 48.097,
+      "source": "research/function-level.md#page-curve-old-vs-new",
+      "locator": "Linux | 200,000 | R3 native p50 48.097"
+    },
+    "node": {
+      "value": 112.881,
+      "source": "research/function-level.md#page-curve-old-vs-new",
+      "locator": "Linux | 200,000 | R3 Node p50 112.881"
+    },
+    "rows": {
+      "value": 200000,
+      "source": "research/function-level.md#page-curve-old-vs-new",
+      "locator": "Linux | 200,000 events"
+    },
+    "crossoverLow": {
+      "value": 5000,
+      "source": "research/function-level.md#review-round-3-measurements-after",
+      "locator": "Linux 5k still loses; observed crossover between 5k and 15k"
+    },
+    "crossoverHigh": {
+      "value": 15000,
+      "source": "research/function-level.md#review-round-3-measurements-after",
+      "locator": "Linux 15k wins; observed crossover between 5k and 15k"
+    }
+  }
+}
