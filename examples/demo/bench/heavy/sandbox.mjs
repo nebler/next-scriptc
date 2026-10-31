@@ -7,7 +7,12 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "../../../..");
 process.chdir(root);
 const hosted = process.argv.includes("--hosted");
-const prefix = `research/benchmarks/heavy-${hosted ? "vercel" : "self"}`;
+const attempt = process.argv
+  .find((arg) => arg.startsWith("--attempt="))
+  ?.split("=")[1];
+if (attempt && !/^[a-z0-9-]+$/.test(attempt))
+  throw new Error("Invalid attempt label");
+const prefix = `research/benchmarks/heavy-${hosted ? "vercel" : "self"}${attempt ? "-" + attempt : ""}`;
 try {
   await access(`${prefix}-controller.json`);
   throw new Error(
@@ -81,7 +86,10 @@ async function step(label, script, sudo = false, timeout = 300000) {
 try {
   if (hosted) {
     const linux = JSON.parse(
-      await readFile("research/benchmarks/heavy-self.json"),
+      await readFile(
+        process.env.HEAVY_LINUX_REFERENCE ??
+          "research/benchmarks/heavy-self.json",
+      ),
     );
     if (
       linux.variants.length !== 3 ||
@@ -159,7 +167,7 @@ try {
       .digest("hex");
     await step(
       "CPU tools",
-      `if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then dnf install -y -q clang util-linux; fi\nnode --version\nnproc\ncat /sys/fs/cgroup/cpu.max`,
+      `if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then if command -v dnf >/dev/null; then dnf install -y -q clang util-linux; else apt-get update -qq && apt-get install -y -qq clang util-linux; fi; fi\nnode --version\nnproc\ncat /sys/fs/cgroup/cpu.max`,
       true,
       120000,
     );
