@@ -6,7 +6,6 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { isDeepStrictEqual } from "node:util";
 import { writeNativeConfig } from "./native-config.mjs";
-import { shimPath } from "./paths.mjs";
 import { processEntrySource } from "./routes.mjs";
 import { planProcesses } from "./options.mjs";
 
@@ -89,7 +88,7 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
   if (!routes.length) return;
   const build = process.env.NEXT_SCRIPTC_VERCEL;
   await mkdir(build);
-  await writeNativeConfig(projectDir, build, config);
+  const { shimPath } = await writeNativeConfig(projectDir, build, config);
   await writeFile(path.join(build, "package.json"), '{"type":"module"}\n');
   const functionsDir = path.join(distDir, "output/functions");
   const runtime = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
