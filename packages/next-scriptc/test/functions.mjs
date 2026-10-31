@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { mkdtemp, mkdir, writeFile, symlink, rm } from "node:fs/promises";
+import { createSidecar } from "../src/functions/sidecar.mjs";
 import path from "node:path";
 import { discoverFunctions, extractFunctions } from "../src/functions/extract.mjs";
 import loader from "../src/functions/loader.mjs";
@@ -9,6 +10,44 @@ import { serializeLegacy } from "../../../examples/demo/bench/function-json-lega
 
 const source = "/project/app/page.tsx";
 const extract = (text) => extractFunctions(text, source);
+
+test("sidecar shares eager startup, strips IPC env, restarts once, and fails loudly", async () => {
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".sidecar-"));
+  const binary = path.join(temporary, "server");
+  const old = process.env.VERCEL_IPC_PATH;
+  process.env.VERCEL_IPC_PATH = "/must-not-reach-child";
+  let sidecar;
+  try {
+    await writeFile(binary, `#!${process.execPath}\nconst http = require('node:http');\nif (Object.keys(process.env).some(k => k.startsWith('VERCEL_IPC'))) process.exit(9);\nconst s = http.createServer((q,r) => r.end(String(process.pid)));\ns.listen(Number(process.env.PORT), '127.0.0.1', () => console.log('next-scriptc: listening on 127.0.0.1:' + s.address().port));\n`, { mode: 0o755 });
+    sidecar = createSidecar(binary);
+    assert.equal(sidecar.state.attempts, 1, "eager before any call");
+    const first = sidecar.port();
+    assert.equal(first, sidecar.port(), "concurrent callers share startup");
+    const port = await first;
+    assert.equal(await (await fetch(`http://127.0.0.1:${port}`)).text(), String(sidecar.state.pid));
+    const exited = async () => {
+      process.kill(sidecar.state.pid, "SIGKILL");
+      const deadline = Date.now() + 3000;
+      while (sidecar.state.ready && Date.now() < deadline) await new Promise(r => setTimeout(r, 5));
+      assert.equal(sidecar.state.ready, false);
+    };
+    await exited();
+    const restart = sidecar.port();
+    assert.equal(restart, sidecar.port());
+    await restart;
+    assert.equal(sidecar.state.attempts, 2);
+    await exited();
+    await assert.rejects(sidecar.port(), /exited after restart/);
+    const missing = createSidecar(path.join(temporary, "missing"));
+    try { await assert.rejects(missing.port(), /Cannot start native functions sidecar/); }
+    finally { missing.stop(); }
+  } finally {
+    sidecar?.stop();
+    if (old === undefined) delete process.env.VERCEL_IPC_PATH;
+    else process.env.VERCEL_IPC_PATH = old;
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
 
 test("extracts only the dependency closure; keeps types and source bodies", () => {
   const text = `import { connection } from "next/server";

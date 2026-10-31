@@ -8,6 +8,7 @@ import { isDeepStrictEqual } from "node:util";
 import { prepareNativeSources } from "./native-config.mjs";
 import { processEntrySource } from "./routes.mjs";
 import { planProcesses } from "./options.mjs";
+import { takeFunctionPlan } from "./functions/build.mjs";
 
 const require = createRequire(import.meta.url);
 const version = require("scriptc/package.json").version;
@@ -84,10 +85,40 @@ export async function replaceFunctions(functionsDir, replacements) {
   }
 }
 
+// Next shares Node outputs via symlinks. Copy once per physical Node bundle;
+// tracing is not used to guess whether a bundled/chunked client is reachable.
+export async function bundleFunctionSidecar(functionsDir, binary) {
+  const owners = new Set(await Promise.all((await functionDirectories(functionsDir)).map((file) => realpath(file))));
+  let count = 0;
+  for (const owner of owners) {
+    const config = JSON.parse(await readFile(path.join(owner, ".vc-config.json"), "utf8"));
+    if (!config.runtime?.startsWith("nodejs")) continue;
+    await copyFile(binary, path.join(owner, "scriptc-functions"));
+    await chmod(path.join(owner, "scriptc-functions"), 0o755);
+    count++;
+  }
+  return count;
+}
+
+export async function buildVercelFunctions({ projectDir, distDir }) {
+  const plan = takeFunctionPlan(projectDir);
+  if (!plan) return;
+  const build = process.env.NEXT_SCRIPTC_VERCEL;
+  await mkdir(build, { recursive: true });
+  const runtime = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
+  const binary = path.join(build, "functions");
+  run(compilerPath(), ["build", path.join(plan.output, "entry.ts"), "-o", binary, "--optimization", "release", "--cpu-dispatch", "--strip", "--no-keep-llvm", "--node-islands=off"], {
+    cwd: projectDir,
+    env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: runtime },
+  });
+  const count = await bundleFunctionSidecar(path.join(distDir, "output/functions"), binary);
+  console.log(`[next-scriptc] Bundled native functions sidecar in ${count} shared Node Function(s)`);
+}
+
 export async function buildVercelRoutes({ projectDir, distDir, config, outputs }, routes) {
   if (!routes.length) return;
   const build = process.env.NEXT_SCRIPTC_VERCEL;
-  await mkdir(build);
+  await mkdir(build, { recursive: true });
   const { shimPath } = await prepareNativeSources(projectDir, build, config);
   await writeFile(path.join(build, "package.json"), '{"type":"module"}\n');
   const functionsDir = path.join(distDir, "output/functions");

@@ -3,7 +3,25 @@ import { chmod, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rm, symlink,
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
-import { planVercelFunction, replaceFunctions } from "../src/vercel.mjs";
+import { bundleFunctionSidecar, planVercelFunction, replaceFunctions } from "../src/vercel.mjs";
+
+test("sidecar packaging preserves shared Node aliases and excludes executable/Edge outputs", async () => {
+  const temporary = await mkdtemp(path.join(tmpdir(), "scriptc-sidecar-"));
+  try {
+    const functions = path.join(temporary, "functions");
+    for (const [name, runtime] of [["node", "nodejs24.x"], ["native", "executable"], ["edge", "edge"]]) {
+      await mkdir(path.join(functions, `${name}.func`), { recursive: true });
+      await writeFile(path.join(functions, `${name}.func/.vc-config.json`), JSON.stringify({ runtime }));
+    }
+    await symlink("node.func", path.join(functions, "alias.func"));
+    const binary = path.join(temporary, "binary");
+    await writeFile(binary, "sidecar");
+    assert.equal(await bundleFunctionSidecar(functions, binary), 1);
+    assert.equal(await readFile(path.join(functions, "alias.func/scriptc-functions"), "utf8"), "sidecar");
+    assert.equal((await lstat(path.join(functions, "node.func/scriptc-functions"))).mode & 0o777, 0o755);
+    for (const name of ["native", "edge"]) await assert.rejects(readFile(path.join(functions, `${name}.func/scriptc-functions`)), { code: "ENOENT" });
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});
 
 test("native replacement preserves shared Node aliases, variants and prerender files", async () => {
   const temporary = await mkdtemp(path.join(tmpdir(), "scriptc-vercel-"));

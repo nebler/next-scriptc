@@ -1,10 +1,12 @@
 import { Agent, request } from "node:http";
 import { serialize } from "./json.ts";
+import { sidecar } from "./sidecar.mjs";
 
 const agent = new Agent({ keepAlive: true, maxSockets: 64, maxFreeSockets: 8 });
 
 export async function callNative(port, id, args) {
   const body = serialize(args);
+  if (sidecar) port = await sidecar.port();
   return new Promise((resolve, reject) => {
     const req = request({ hostname: "127.0.0.1", port, method: "POST", path: `/${id}`, agent, headers: { "content-type": "application/json", "content-length": Buffer.byteLength(body) } }, (response) => {
       let text = "";

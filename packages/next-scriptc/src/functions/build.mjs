@@ -11,6 +11,12 @@ import { withFunctions } from "./config.mjs";
 
 const plans = new Map();
 
+export function takeFunctionPlan(projectDir) {
+  const plan = plans.get(projectDir);
+  plans.delete(projectDir);
+  return plan;
+}
+
 export async function prepareFunctions(config, projectDir) {
   const distDir = path.resolve(projectDir, config.distDir ?? ".next");
   const modules = await discoverFunctions(projectDir, distDir, config);

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { revenue } from "../../lib/revenue.ts";
 import { reportAction } from "../../lib/report-action.ts";
+import { timeRevenue } from "../../lib/report-timing.ts";
 
 type Props = { searchParams: Promise<{ from?: string; to?: string; error?: string; message?: string; size?: string; profile?: string }> };
 
@@ -9,7 +10,7 @@ async function Report({ searchParams }: Props) {
   await connection();
   const params = await searchParams;
   try {
-    const result = await revenue(params.from ?? "2026-01-01", params.to ?? "2026-01-31", [5000, 15000, 50000, 200000].includes(Number(params.size)) ? Number(params.size) : 5000, params.profile === "1");
+    const result = await timeRevenue(() => revenue(params.from ?? "2026-01-01", params.to ?? "2026-01-31", [5000, 15000, 50000, 200000].includes(Number(params.size)) ? Number(params.size) : 5000, params.profile === "1"));
     if (params.error) throw new Error(params.error);
     return <><h1>{params.message ?? "Revenue report"}</h1><pre id="result">{JSON.stringify(result)}</pre></>;
   } catch (error) {

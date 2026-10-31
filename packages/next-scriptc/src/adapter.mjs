@@ -8,7 +8,6 @@ import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { prepareNativeSources } from "./native-config.mjs";
 import { prepareFunctions, finishFunctions, startFunctions } from "./functions/build.mjs";
-import { discoverFunctions } from "./functions/extract.mjs";
 
 const require = createRequire(import.meta.url);
 // Preserve the exact discovery snapshot used to emit rewrites; rediscovery could compile a different route set.
@@ -28,9 +27,7 @@ const adapter = {
       buildPlans.set(projectDir, { routes, config });
       if (process.env.NEXT_SCRIPTC_VERCEL) {
         const { vercelAdapter } = await import("./vercel.mjs");
-        const functions = await discoverFunctions(projectDir, path.resolve(projectDir, config.distDir ?? ".next"));
-        if (functions.length) console.warn(`[next-scriptc] Function-level "use native" is not supported on Vercel yet; ${functions.length} module(s) run on Node.`);
-        return (await vercelAdapter()).modifyConfig(config, context);
+        return (await vercelAdapter()).modifyConfig(await prepareFunctions(config, projectDir), context);
       }
       return prepareFunctions(withRewrites(config, routes), projectDir);
     }
@@ -55,9 +52,10 @@ const adapter = {
     const routes = plan.routes.filter((route) => !prerendered.has(route.pattern));
     const skipped = plan.routes.filter((route) => prerendered.has(route.pattern));
     if (process.env.NEXT_SCRIPTC_VERCEL) {
-      const { vercelAdapter, buildVercelRoutes } = await import("./vercel.mjs");
+      const { vercelAdapter, buildVercelRoutes, buildVercelFunctions } = await import("./vercel.mjs");
       await (await vercelAdapter()).onBuildComplete(context);
       await buildVercelRoutes(context, routes);
+      await buildVercelFunctions(context);
       buildPlans.delete(projectDir);
       return;
     }
