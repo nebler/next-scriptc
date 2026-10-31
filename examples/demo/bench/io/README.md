@@ -92,3 +92,29 @@ matching JWT fixtures/Redis namespace and its REST env vars loaded. It resets
 between whole stateful sequences. Query logs for listener starts and record
 absent Node logs as unavailable, never zero. Report every loss and unavailable
 cell; keep local and hosted tables separate.
+
+The one-shot controller used for the retained evidence is:
+
+```sh
+node --env-file=.env.local examples/demo/bench/vercel/io-hosted.mjs
+```
+
+It refuses an existing provenance file/ledger, freezes source hashes, calls the
+shared deploy helper for each preview, verifies identical native bytes, runs
+local Docker musl/IPC/Redis TLS validation without warming the preview, and
+reserves each Sandbox budget before measurement. Do not delete its evidence to
+restart it. A CPU token retry-limit exhaustion retains failed runner/controller
+status and an unavailable CPU median even when all workload windows completed.
+
+After log export, hosted parity, stopped-Sandbox checks and exact-ID cleanup:
+
+```sh
+node examples/demo/bench/io/audit.mjs
+node examples/demo/bench/io/report.mjs
+```
+
+The report generator keeps the local revision-1 metric (through validation)
+separate from hosted revision 2 (scheduled arrival through actual body drain).
+Its tables show every ratio, including local startup/mixed losses and hosted
+C=1 tail losses. Reports may be regenerated; frozen measured files and raw
+artifacts must remain unchanged.

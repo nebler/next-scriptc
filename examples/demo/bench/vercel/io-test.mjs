@@ -68,3 +68,14 @@ test("correctness failure cancels future arrivals but retains all scheduled outc
   assert.equal(result.samples.length, 3); assert.equal(result.errors, 3);
   assert.equal(result.samples.filter((r) => r.status === "cancelled").length, 2);
 });
+
+test("scheduled latency stops at transport body drain before delayed client validation", async () => {
+  const client = { agent: () => ({ createConnection() {}, destroy() {} }), request: async () => {
+    const completedAtMs = performance.now();
+    await delay(80); // model expensive post-drain validation
+    return { ms: 0, completedAtMs };
+  } };
+  const result = await openLoop(client, "http://localhost", { arrivals: [{ index: 0, scheduledMs: 0, workload: "orders-get" }] });
+  assert.ok(result.elapsedMs >= 70);
+  assert.ok(result.samples[0].scheduledLatencyMs < result.elapsedMs - 60);
+});

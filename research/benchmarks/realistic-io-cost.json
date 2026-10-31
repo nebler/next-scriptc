@@ -1,0 +1,65 @@
+{
+  "previews": 6,
+  "runs": [
+    {
+      "output": "research/benchmarks/realistic-io-hosted-pair-1",
+      "requestsReserved": 104,
+      "sandboxVcpuHoursReserved": 0.03333333333333333,
+      "status": "complete",
+      "requestsObserved": 104,
+      "sandbox": {
+        "id": "violet-vague-asp-tUunD9",
+        "region": "iad1",
+        "vcpus": 2,
+        "activeCpuDurationMs": 3157
+      }
+    },
+    {
+      "output": "research/benchmarks/realistic-io-hosted-pair-2",
+      "requestsReserved": 104,
+      "sandboxVcpuHoursReserved": 0.03333333333333333,
+      "status": "complete",
+      "requestsObserved": 104,
+      "sandbox": {
+        "id": "tan-frail-meadowlark-jH7DFo",
+        "region": "iad1",
+        "vcpus": 2,
+        "activeCpuDurationMs": 3134
+      }
+    },
+    {
+      "output": "research/benchmarks/realistic-io-hosted-pair-3",
+      "requestsReserved": 7420,
+      "sandboxVcpuHoursReserved": 0.13333333333333333,
+      "status": "failed",
+      "requestsObserved": 6302,
+      "sandbox": {
+        "id": "harlequin-dependent-thrush-MBSceo",
+        "region": "iad1",
+        "vcpus": 2,
+        "activeCpuDurationMs": 15374
+      }
+    }
+  ],
+  "sandboxVcpuHoursReserved": 0.2,
+  "invocationsReserved": 8128,
+  "redisCommandsReserved": 35512,
+  "notes": [
+    "500 HTTP / 2000 Redis reserved for validation and cleanup; one earlier Upstash PING included"
+  ],
+  "final": {
+    "measuredFunctionAttempts": 6510,
+    "hostedParityAttempts": 248,
+    "totalFunctionAttempts": 6758,
+    "localIpcHttpProbes": 2,
+    "modeledRedisBeforeHostedParityAndCleanup": 14961,
+    "cleanupRedisCommands": 4,
+    "redisBudgetAccounting": "conservative shared reservation includes all setup/parity/cleanup; modeled commands include EVAL plus internal calls, not a provider billing export",
+    "allSandboxesStopped": true,
+    "sandboxCreationToStoppedStatusVcpuHours": 0.0910688888888889,
+    "sandboxActiveCpuMs": 21665,
+    "previewsDeleted": 4,
+    "previewsRetained": 2,
+    "fullRunStatus": "failed: Node orders-get CPU 2/3 accepted after five attempts; all workload windows complete"
+  }
+}
