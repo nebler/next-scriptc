@@ -82,3 +82,64 @@ test("a failed memory probe preserves measured rows and issued counts", async ()
     assert(result.requestsIssued > 1000);
   } finally { restore(); }
 });
+
+const { cpuDelta } = await import("./cpu.mjs");
+test("CPU windows retain instance changes as discarded and reject invalid counters", () => {
+  const before = { instance: "a", pid: 1, cpu: { user: 1000, system: 2000 } };
+  const after = { instance: "a", pid: 1, cpu: { user: 11000, system: 7000 } };
+  assert.equal(cpuDelta(before, after, 100).cpuMsPerRequest, 0.15);
+  assert.deepEqual(cpuDelta(before, { ...after, instance: "b" }, 100), { status: "discarded", reason: "instance-token-changed" });
+  assert.throws(() => cpuDelta(before, { ...after, pid: 2 }, 100), /PID changed/);
+  assert.throws(() => cpuDelta(before, { ...after, cpu: { user: 0, system: 7000 } }, 100), /nonmonotonic/);
+  assert.throws(() => cpuDelta(before, { ...after, cpu: { user: NaN, system: 7000 } }, 100), /nonmonotonic/);
+  assert.throws(() => cpuDelta(before, { ...after, instance: undefined }, 100), /instance token/);
+});
+
+test("CPU sampling keeps one pool per workload, repeats only token changes, and checks every digest", async () => {
+  const { measureCpu } = await import("./cpu.mjs");
+  const { workloads } = await import("./client.mjs");
+  const original = https.request;
+  let calls = 0, diagnostics = 0, work = 0;
+  const agents = new Map();
+  https.request = (url, options, callback) => {
+    calls++;
+    const isDiagnostic = url.pathname === "/api/diagnostics/memory";
+    if (!isDiagnostic) {
+      work++;
+      const prior = agents.get(url.pathname);
+      if (prior) assert.equal(options.agent, prior);
+      agents.set(url.pathname, options.agent);
+      assert.equal(options.agent.maxSockets, 1);
+    }
+    // First window changes token, all later boundaries are stable.
+    const payload = isDiagnostic ? Buffer.from(JSON.stringify({ instance: diagnostics++ === 0 ? "old" : "stable", pid: 1,
+      cpu: { user: work * 1000, system: 0 } })) : body;
+    const req = new EventEmitter();
+    req.reusedSocket = true;
+    req.destroy = (error) => req.emit("error", error);
+    req.end = () => queueMicrotask(() => {
+      const res = new EventEmitter(); res.statusCode = 200;
+      res.headers = { "x-vercel-cache": "MISS" };
+      if (url.pathname === "/api/export.json.gz") Object.assign(res.headers, workloads.find((w) => w.id === "gzip-export").responseHeaders);
+      callback(res);
+      res.emit("data", url.pathname === "/api/export.json.gz" ? (awaitGzip(payload)) : payload);
+      res.emit("end");
+    });
+    return req;
+  };
+  const { gzipSync: awaitGzip } = await import("node:zlib");
+  try {
+    const result = await measureCpu([{ variant: "node", url: "https://example.test" }], { secret: "test-only",
+      references: Object.fromEntries(workloads.map((w) => [w.id, digest(body)])) });
+    assert.equal(result.status, "complete");
+    assert.equal(result.deployments[0].rows[0].attempts.length, 4);
+    assert.equal(result.deployments[0].rows[0].attempts[0].status, "discarded");
+    for (const row of result.deployments[0].rows) for (const attempt of row.attempts) {
+      assert.equal(attempt.requests, 100);
+      assert.equal(attempt.reusedRequests, 100);
+      if (attempt.status === "accepted") assert.equal(attempt.cpuMsPerRequest, 1);
+    }
+    assert.equal(calls, result.requestsIssued);
+    assert.equal(calls, 6 * (21 + 306) + 102);
+  } finally { https.request = original; }
+});

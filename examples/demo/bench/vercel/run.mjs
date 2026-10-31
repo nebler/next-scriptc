@@ -10,10 +10,10 @@ import { report } from "./report.mjs";
 const root = path.resolve(import.meta.dirname, "../../../..");
 const { values } = parseArgs({ options: { node: { type: "string" }, native: { type: "string" },
   mode: { type: "string", default: "full" }, "native-first": { type: "boolean", default: false },
-  fresh: { type: "boolean", default: false }, output: { type: "string" } } });
+  reference: { type: "string" }, fresh: { type: "boolean", default: false }, output: { type: "string" } } });
 if (!values.node && !values.native) throw new Error("--node and/or --native immutable preview origins are required");
 if (!process.env.VERCEL_AUTOMATION_BYPASS_SECRET) throw new Error("Load VERCEL_AUTOMATION_BYPASS_SECRET from ignored .env.local");
-if (!["full", "cold", "tail", "idle"].includes(values.mode)) throw new Error("--mode must be full, cold, tail or idle");
+if (!["full", "cold", "tail", "idle", "cpu"].includes(values.mode)) throw new Error("--mode must be full, cold, tail, idle or cpu");
 const deployments = (values["native-first"] ? ["native", "node"] : ["node", "native"]).filter((variant) => values[variant]).map((variant) => {
   const url = new URL(values[variant]);
   if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.pathname !== "/" || !url.hostname.endsWith(".vercel.app")) {
@@ -36,12 +36,26 @@ for (const deployment of deployments) {
   if (!helloFunction || !memoryFunction || helloFunction.functionName !== memoryFunction.functionName) throw new Error("Memory diagnostic must share the measured hello Function");
   if (deployment.server.functions.some((fn) => fn.regions?.length !== 1 || fn.regions[0] !== "iad1")) throw new Error("Every function must be pinned to iad1");
 }
+let references;
+if (values.mode === "cpu") {
+  if (!values.reference || values.fresh) throw new Error("CPU requires --reference full-pair.json and already-measured deployments");
+  const full = JSON.parse(await readFile(values.reference));
+  if (full.status !== "complete") throw new Error("CPU reference must be a complete paired full run");
+  for (const d of deployments) if (!full.deployments.some((r) => r.variant === d.variant && r.url === d.url)) throw new Error("CPU deployment differs from full reference");
+  const node = full.deployments.find((d) => d.variant === "node");
+  const native = full.deployments.find((d) => d.variant === "native");
+  references = Object.fromEntries(node.rows.map((r) => {
+    const other = native.rows.find((n) => n.workload === r.workload);
+    if (r.status !== "measured" || other?.status !== "measured" || r.first.digest !== other.first.digest) throw new Error("Unvalidated CPU reference");
+    return [r.workload, r.first.digest];
+  }));
+}
 const project = JSON.parse(await readFile(path.join(root, ".vercel/project.json")));
 const remote = JSON.parse(execFileSync("vercel", ["api", `/v9/projects/${project.projectId}`], { cwd: root, encoding: "utf8" }));
 const platform = { observedAt: new Date().toISOString(), projectResourceConfig: remote.resourceConfig };
 const stamp = new Date().toISOString().replaceAll(":", "-");
 const destination = path.resolve(root, values.output ?? `research/benchmarks/vercel-${stamp}`);
-const files = ["client.mjs", "worker.mjs", "diagnostics.mjs"].map((name) => `examples/demo/bench/vercel/${name}`)
+const files = ["client.mjs", "worker.mjs", "diagnostics.mjs", "cpu.mjs"].map((name) => `examples/demo/bench/vercel/${name}`)
   .concat(["examples/demo/bench/config.mjs", "examples/demo/bench/load.mjs", "examples/demo/bench/fixtures.mjs"]);
 const uploaded = await Promise.all(files.map(async (file) => ({ path: file, content: await readFile(path.join(root, file)) })));
 const hash = createHash("sha256");
@@ -57,7 +71,7 @@ try {
   data.sandbox = { id: sandbox.name, region: sandbox.region, vcpus: sandbox.vcpus };
   if (sandbox.region !== "iad1" || sandbox.vcpus !== 2) throw new Error("Sandbox region/resources differ from registration");
   console.log(`Sandbox ${sandbox.name}: ${sandbox.region}, ${sandbox.vcpus} vCPUs; 4-minute lifetime, 3-minute command ceiling`);
-  await sandbox.writeFiles([...uploaded, { path: "job.json", content: Buffer.from(JSON.stringify({ deployments, fresh: values.fresh, mode: values.mode })) }]);
+  await sandbox.writeFiles([...uploaded, { path: "job.json", content: Buffer.from(JSON.stringify({ deployments, fresh: values.fresh, mode: values.mode, references })) }]);
   const result = await sandbox.runCommand({ cmd: "timeout", args: ["--signal=TERM", "--kill-after=5s", "180s", "node", "examples/demo/bench/vercel/worker.mjs"],
     env: { VERCEL_AUTOMATION_BYPASS_SECRET: process.env.VERCEL_AUTOMATION_BYPASS_SECRET },
     stdout: process.stdout, stderr: process.stderr, signal: AbortSignal.timeout(190_000) });

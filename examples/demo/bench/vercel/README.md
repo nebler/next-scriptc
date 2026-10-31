@@ -86,7 +86,7 @@ vercel logs requests --deployment https://DEPLOYMENT.vercel.app --since 30m --li
 vercel inspect https://DEPLOYMENT.vercel.app --json
 ```
 
-The CLI and public runtime-log schema may omit memory/start type/duration; the dashboard Logs → selected request → Function metadata or Observability is the honest platform source if available. Correlate with recorded first-response x-vercel-id and timestamps, retain export/provenance and units, and distinguish peak memory from RSS. Function allocation from inspect (2048 MiB here) is **not** used memory. Do not infer cold from latency, fill unavailable memory with the limit, or put process.memoryUsage() in the measured hot path. The `/api/diagnostics/memory` route is excluded from the workload registry. The runner refuses a deployment unless control-plane mappings show this route and hello in the same Function. Responses report process RSS, Linux VmRSS/VmHWM, PID and a module instance token. Samples after first hello and after the full load window may reach different instances. Native RSS excludes the Go proxy; Node RSS excludes platform processes. Neither is whole-instance memory. The Linux artifact check verifies the RSS API against internal and external procfs reads and captures the real IPC handshake.
+The CLI and public runtime-log schema may omit memory/start type/duration; the dashboard Logs → selected request → Function metadata or Observability is the honest platform source if available. Correlate with recorded first-response x-vercel-id and timestamps, retain export/provenance and units, and distinguish peak memory from RSS. Function allocation from inspect (2048 MiB here) is **not** used memory. Do not infer cold from latency, fill unavailable memory with the limit, or put process.memoryUsage() in the measured hot path. The `/api/diagnostics/memory` route is excluded from the workload registry. The runner refuses a deployment unless control-plane mappings show this route and hello in the same Function. Responses report process RSS, Linux VmRSS/VmHWM, PID and a module instance token. Samples after first hello and after the full load window may reach different instances. Native RSS includes its sole executable process; there is no Go proxy. Node RSS includes all threads and in-process launcher work; separate platform processes are excluded. Neither is whole-instance memory. The Linux artifact check verifies the RSS API against internal and external procfs reads and captures the real IPC handshake.
 
 ## Separate cold, tail and idle experiments
 
@@ -155,3 +155,37 @@ Sandbox, including failed attempts, and remove experiment previews only by their
 saved exact deployment IDs, never by project name. The round 2 report explicitly
 records its live-trace packaging limitation rather than claiming byte-identical
 Node repetitions.
+
+## Final publication run
+
+The prospective method is appended to `research/benchmarks.md`; commit it before
+any deployment. `final-run.mjs` executes the five pairs and CPU experiment exactly
+once, records each preview identity before the next build, captures live trace
+sizes, guards source drift, and accounts for Sandbox/request budgets. It refuses
+to restart a run with saved previews. Run with Node 24, the documented Zig on
+PATH, and `--env-file=.env.local`. Inspect partial evidence after any failure;
+never delete artifacts to turn a retry into an apparent first attempt.
+
+`check-memory.mjs [OUTPUT.json]` now validates the single in-process executable,
+RSS and CPU against Linux procfs, including positive CPU deltas during real prime
+route work. It records raw observations before assertions, tick frequency and a
+Node worker-thread scope check. This check is diagnostic, not a workload result.
+
+The shared `/api/diagnostics/memory` returns cumulative CPU in **microseconds**,
+plus procfs ticks. CPU-only measurement requires a completed paired full report:
+
+```sh
+node --env-file=.env.local examples/demo/bench/vercel/run.mjs \
+  --node "$NODE_URL" --native "$NATIVE_URL" --mode cpu \
+  --reference research/benchmarks/vercel-final-pair-5.json \
+  --output research/benchmarks/vercel-final-cpu
+```
+
+CPU is **process CPU per request, self-reported**, not Vercel billed Active CPU.
+Each workload uses one keep-alive agent/maxSockets=1 for its reference, 20 warmups,
+and all before/100-request/after windows. Three accepted windows, at most five
+attempts; token-changing windows are retained as discarded. No other failure is
+retried. Same tokens do not establish routing affinity for intervening requests.
+The delta includes process/background and diagnostic boundary overhead, all
+threads and any in-process launcher. Only separate processes are excluded. There
+is no Go proxy. No idle correction or platform CPU accounting is inferred.
