@@ -74,7 +74,9 @@ export function extractFunctions(text, source) {
       if (!p.isReferencedIdentifier()) return;
       const dependency = p.scope.getBinding(p.node.name) ?? types.get(p.node.name);
       if (!dependency) {
-        if (!globals.has(p.node.name)) fail(owner, `unsupported reference ${p.node.name}`);
+        // Unbound type names (ReadonlyArray, Record, utility types, type
+        // parameters) belong to TypeScript, not the runtime-global allowlist.
+        if (!globals.has(p.node.name) && !p.findParent((parent) => parent.isTSType())) fail(owner, `unsupported reference ${p.node.name}`);
       } else if (dependency.scope === program.scope || types.has(p.node.name)) include(dependency, owner);
     };
     statement.traverse({

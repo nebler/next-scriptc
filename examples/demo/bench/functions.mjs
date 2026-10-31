@@ -108,6 +108,8 @@ export async function revenue(_from: string, _to: string, size: number, _profile
   }
 }
 
+await checkpoint("render-control");
+
 // A separate probe compares bulk-descriptor validation, legacy reflection and replacer/stringify in-process.
 // It imports the very same source/result serializer and uses the production HTTP handler.
 const output = path.join(demo, ".next/cache/function-profile");
@@ -128,5 +130,4 @@ try {
 } finally { await stop(state); }
 await checkpoint("complete");
 const json = JSON.stringify(results, null, 2) + "\n";
-if (destination) await writeFile(destination, json);
 console.log(json);

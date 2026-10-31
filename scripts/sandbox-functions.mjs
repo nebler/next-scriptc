@@ -1,4 +1,5 @@
-// Benchmarks committed HEAD only. At most 2 vCPUs * 7.5 minutes = 0.25
+// Archives committed HEAD; functions-only mode renames unused route files
+// only in the disposable copy (recorded in provenance). At most 2 vCPUs * 7.5 minutes = 0.25
 // vCPU-hours, including installation/builds. Always stop; never upload secrets.
 // node --env-file=.env.local scripts/sandbox-functions.mjs
 import { execFileSync } from "node:child_process";
