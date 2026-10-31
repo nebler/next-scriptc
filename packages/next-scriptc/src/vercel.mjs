@@ -10,7 +10,6 @@ import { processEntrySource } from "./routes.mjs";
 import { planProcesses } from "./options.mjs";
 
 const require = createRequire(import.meta.url);
-const proxyCommit = "84878e532142f0ac584953695658b324eb9e5b80";
 const version = require("scriptc/package.json").version;
 
 function run(command, args, options = {}) {
@@ -44,20 +43,7 @@ async function toolchain(cache) {
     run("tar", ["-xzf", archive, "-C", temporary]);
     await rm(archive);
   });
-  const proxy = await cached(cache, `ipc-proxy-${proxyCommit}`, async (temporary) => {
-    const source = path.join(temporary, "source");
-    run("git", ["init", "--quiet", source]);
-    run("git", ["remote", "add", "origin", "https://github.com/vercel/vercel.git"], { cwd: source });
-    run("git", ["sparse-checkout", "set", "internals/ipc-proxy/bootstrap"], { cwd: source });
-    run("git", ["fetch", "--quiet", "--depth=1", "--filter=blob:none", "origin", proxyCommit], { cwd: source });
-    run("git", ["checkout", "--quiet", "--detach", "FETCH_HEAD"], { cwd: source });
-    run("go", ["build", "-trimpath", "-ldflags=-s -w", "-o", path.join(temporary, "executable"), "."], {
-      cwd: path.join(source, "internals/ipc-proxy/bootstrap"),
-      env: { ...process.env, GOOS: "linux", GOARCH: "amd64", CGO_ENABLED: "0" },
-    });
-    await rm(source, { recursive: true });
-  });
-  return { runtime: path.join(runtime, "package"), executable: path.join(proxy, "executable") };
+  return path.join(runtime, "package");
 }
 
 async function functionDirectories(directory) {
@@ -91,9 +77,8 @@ export async function replaceFunctions(functionsDir, replacements) {
     const [main, ...aliases] = route.functions;
     for (const file of route.functions) await rm(file, { recursive: true, force: true });
     await mkdir(main, { recursive: true });
-    await copyFile(route.binary, path.join(main, "user-server"));
-    await copyFile(route.executable, path.join(main, "executable"));
-    for (const name of ["user-server", "executable"]) await chmod(path.join(main, name), 0o755);
+    await copyFile(route.binary, path.join(main, "executable"));
+    await chmod(path.join(main, "executable"), 0o755);
     await writeFile(path.join(main, ".vc-config.json"), JSON.stringify(route.config, null, 2) + "\n");
     for (const alias of aliases) await symlink(path.relative(path.dirname(alias), main), alias);
   }
@@ -106,7 +91,7 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
   await writeNativeConfig(projectDir, build, config);
   await writeFile(path.join(build, "package.json"), '{"type":"module"}\n');
   const functionsDir = path.join(distDir, "output/functions");
-  const { runtime, executable } = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
+  const runtime = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
   const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
   const replacements = [];
   const processes = planProcesses(routes);
@@ -122,7 +107,7 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
       cwd: projectDir,
       env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: runtime },
     });
-    replacements.push({ functions, binary, executable, config: functionConfig });
+    replacements.push({ functions, binary, config: functionConfig });
   }
   await replaceFunctions(functionsDir, replacements);
   console.log(`[next-scriptc] Built ${routes.length} native routes in ${processes.length} Vercel Functions (${((performance.now() - started) / 1000).toFixed(1)}s compilation)`);

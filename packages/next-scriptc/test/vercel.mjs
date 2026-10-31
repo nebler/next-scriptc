@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { chmod, lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
+import { chmod, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
@@ -24,12 +24,13 @@ test("native replacement preserves shared Node aliases, variants and prerender f
     await writeFile(binary, "native binary");
     await chmod(binary, 0o755);
     const config = { runtime: "executable", handler: "executable", maxDuration: 30, memory: 1024, regions: ["iad1"], supportsResponseStreaming: true };
-    await replaceFunctions(functions, [{ functions: [native, variant], binary, executable: binary, config }]);
+    await replaceFunctions(functions, [{ functions: [native, variant], binary, config }]);
     assert.equal(await readFile(path.join(node, "node.js"), "utf8"), "original Node function");
     assert.equal(await readFile(path.join(alias, "node.js"), "utf8"), "original Node function");
-    assert.equal(await readFile(path.join(variant, "user-server"), "utf8"), "native binary");
+    assert.equal(await readFile(path.join(variant, "executable"), "utf8"), "native binary");
+    assert.deepEqual((await readdir(native)).sort(), [".vc-config.json", "executable"]);
     assert.ok((await lstat(variant)).isSymbolicLink());
-    assert.equal((await lstat(path.join(native, "user-server"))).mode & 0o777, 0o755);
+    assert.equal((await lstat(path.join(native, "executable"))).mode & 0o777, 0o755);
     assert.deepEqual(JSON.parse(await readFile(path.join(native, ".vc-config.json"))), config);
     assert.equal(await readFile(prerender, "utf8"), '{"expiration":false}');
     await assert.rejects(readFile(path.join(native, "node.js")), { code: "ENOENT" });
@@ -54,11 +55,11 @@ test("grouped routes share one Function across nested aliases and preserve indep
     assert.equal(plan.functions.length, 4);
     const binary = path.join(temporary, "binary");
     await writeFile(binary, "multi-route executable");
-    await replaceFunctions(functionsDir, [{ ...plan, binary, executable: binary }]);
+    await replaceFunctions(functionsDir, [{ ...plan, binary }]);
     const owner = path.join(functionsDir, "api/hello.func");
     for (const file of plan.functions) {
       assert.equal(await realpath(file), await realpath(owner));
-      assert.equal(await readFile(path.join(file, "user-server"), "utf8"), "multi-route executable");
+      assert.equal(await readFile(path.join(file, "executable"), "utf8"), "multi-route executable");
       assert.equal((await lstat(file)).isSymbolicLink(), file !== owner);
     }
     assert.equal(JSON.parse(await readFile(path.join(functionsDir, "node.func/.vc-config.json"))).runtime, "nodejs24.x");
