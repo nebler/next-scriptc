@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 import { withScriptc } from "next-scriptc";
 
+const publicDemo = process.env.NODE_ENV === "production" && process.env.NEXT_SCRIPTC_PUBLIC_DEMO === "1";
 const nextConfig: NextConfig = {
+  // Inline the opt-in into Next's output; runtime env changes cannot open the proxy.
+  env: { NEXT_SCRIPTC_PUBLIC_DEMO: publicDemo ? "1" : "0" },
   cacheComponents: true,
   partialPrefetching: true,
   async rewrites() {

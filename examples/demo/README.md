@@ -95,6 +95,52 @@ Without this test variable, production keeps Next's 30-second default.
 See [adapter notes](../../research/adapter-notes.md) for lifecycle details and
 current limitations.
 
+## Public demo
+
+https://next-scriptc.vercel.app exposes only `/api/hello`,
+`/api/analytics/revenue`, `/api/stores/nearby`, `/api/heavy/vectors` (POST),
+and `/reports`, plus the static home page/assets. `NEXT_SCRIPTC_PUBLIC_DEMO=1`
+at production build time enables a plain 404 for every other API and `/rewrite/*`.
+The proxy matcher excludes allowed paths, so they incur no proxy invocation.
+Development and builds without the opt-in retain all routes. `/reports` runs
+its `"use native"` functions on Node on Vercel.
+
+The live vector demo uses the **patched scriptc compiler**, not stock 0.4.6:
+the [L1 wrapper](../../research/vector-vercel/patched-cli.sh) reuses the verified
+CLI in `/Users/noah/code/scriptc-fork` with the compatible runtime in
+`/Users/noah/code/scriptc-fork-v4`. The adapter passes `--cpu-dispatch`.
+Public vector responses expose `server-timing: compute;dur=…` and
+`x-vector-dispatch: avx2` (the actual selected dispatch global), without the
+benchmark's process diagnostics. Expect roughly 10 ms warm compute and
+roughly 0.6 s corpus generation per cold instance; this is not a capacity guarantee.
+
+Exact maintainer commands from the repository root (authenticated Vercel CLI
+65.8.0, existing `next-scriptc` project link, LLVM tools installed):
+
+```sh
+export PATH=/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin:/Users/noah/.local/share/zig-0.16.0:$PATH
+pnpm install --frozen-lockfile
+vercel pull --yes --environment=production
+# Reuse the existing compiler cache if available; do not rebuild the shared fork.
+export SCRIPTC_CACHE_DIR=/tmp/vector-vercel/cache
+export SCRIPTC_CHECKER_SERVER=0
+node examples/demo/bench/vercel/public-build.mjs
+vercel deploy --prebuilt --prod --regions iad1 --json
+```
+
+`public-build.mjs` checks the linked project identity, stages production env and
+local Next/Node-24 settings, then runs `pnpm exec next-scriptc vercel-build --prod`
+from `examples/demo` with `NEXT_SCRIPTC_PUBLIC_DEMO=1`,
+`NEXT_SCRIPTC_DEMO_GROUPS=vercel`, and `SCRIPTC_COMPILER` set to the absolute path
+of `bench/vercel/public-compiler.mjs`. That executable wrapper invokes the L1
+compiler, records this binary's dispatch symbol, and strips it. The helper adds
+only public per-Function settings and moves output to root `.vercel/output`
+for monorepo trace resolution. It changes no hosted project settings. Do not
+use the preview benchmark deploy helper for production. Keep pulled env files
+private and undo any duplicate `.gitignore` lines added by Vercel.
+After deployment, remove this checkout's `examples/demo/.next*`,
+`examples/demo/.vercel/scriptc-build`, and root `.vercel/output` to reclaim disk.
+
 ## Shared-graph report
 
 `GET /api/report?threads=1` accepts 1–8 threads (default 1). On first use it creates
