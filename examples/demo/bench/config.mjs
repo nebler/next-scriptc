@@ -1,3 +1,5 @@
+import { uploadSha256 } from "./fixtures.mjs";
+
 // One registry for identical requests across direct and production surfaces.
 // These are public parity-test fixtures, never production credentials.
 export const serverEnv = {
@@ -18,6 +20,19 @@ export const routes = [
   { id: "search", pattern: "/api/search", path: "/api/search?q=desk%20lamp&limit=7", category: "realistic", cpuRequests: 100 },
   { id: "markdown", pattern: "/api/posts/[slug]", path: "/api/posts/reliable-webhooks", category: "realistic", cpuRequests: 100 },
   { id: "feed", pattern: "/api/feed.xml", path: "/api/feed.xml", category: "realistic", cpuRequests: 100 },
+  { id: "upload-integrity", pattern: "/api/uploads/verify", path: "/api/uploads/verify", method: "POST",
+    headers: { "content-type": "application/octet-stream", "x-content-sha256": uploadSha256 }, bodyFixture: "upload-1mib",
+    category: "realistic", cpuRequests: 100 },
+  { id: "gzip-export", pattern: "/api/export.json.gz", path: "/api/export.json.gz?rows=5000",
+    responseEncoding: "gzip", responseHeaders: { "content-type": "application/json; charset=utf-8", "content-encoding": "gzip",
+      "content-disposition": 'attachment; filename="export.json.gz"', "cache-control": "no-store" },
+    category: "realistic", cpuRequests: 100 },
+  { id: "revenue", pattern: "/api/analytics/revenue", path: "/api/analytics/revenue?from=2026-01-01&to=2026-01-31",
+    category: "realistic", cpuRequests: 100 },
+  { id: "image-histogram", pattern: "/api/images/histogram", path: "/api/images/histogram?width=512&height=512", method: "POST",
+    headers: { "content-type": "application/octet-stream" }, bodyFixture: "rgba-512", category: "realistic", cpuRequests: 100 },
+  { id: "nearby-stores", pattern: "/api/stores/nearby", path: "/api/stores/nearby?lat=51.5074&lng=-0.1278&radiusKm=1000",
+    category: "realistic", cpuRequests: 100 },
   { id: "hello", pattern: "/api/hello", path: "/api/hello", category: "control", cpuRequests: 2000 },
   { id: "primes", pattern: "/api/primes", path: "/api/primes?limit=1000000", category: "synthetic", cpuRequests: 40 },
   { id: "csv", pattern: "/api/export", enabled: false, category: "refused", pending: "Papa Parse unparse refused in route probe; no CSV route exists" },

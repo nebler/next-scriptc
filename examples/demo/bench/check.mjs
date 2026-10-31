@@ -1,6 +1,11 @@
 // Focused harness regression checks; no application benchmark repetitions.
 import assert from "node:assert/strict";
 import http from "node:http";
+import { gzipSync } from "node:zlib";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
+import { fixtureBody } from "./fixtures.mjs";
 import { load, digest } from "./load.mjs";
 import { parseCoverage } from "./coverage.mjs";
 import { sectionsOption, productionCommand } from "./config.mjs";
@@ -26,6 +31,34 @@ for (const close of [false, true]) {
     assert.equal(concurrent.requests, 43);
   } finally { server.closeAllConnections(); await new Promise((resolve) => server.close(resolve)); }
 }
+// Exercise real subprocess serialization and full binary uploads, rather than
+// placing a MiB body in argv. Also reject wrong gzip headers and decoded bytes.
+let uploadRequests = 0;
+const server = http.createServer(async (req, res) => {
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  if (req.method === "POST") {
+    assert.deepEqual(Buffer.concat(chunks), fixtureBody("upload-1mib"));
+    assert.equal(Number(req.headers["content-length"]), 1024 * 1024);
+    uploadRequests++;
+  }
+  res.setHeader("content-encoding", "gzip");
+  res.setHeader("content-type", "application/json");
+  res.end(gzipSync('"fixture"'));
+});
+await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+try {
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const spec = { path: "/", method: "POST", bodyFixture: "upload-1mib", responseEncoding: "gzip",
+    responseHeaders: { "content-encoding": "gzip", "content-type": "application/json" }, digest: digest(Buffer.from('"fixture"')) };
+  const { stdout } = await promisify(execFile)(process.execPath, [fileURLToPath(new URL("./load.mjs", import.meta.url)),
+    JSON.stringify({ base, spec, count: 2, warmupCount: 1 })], { timeout: 10_000 });
+  assert.equal(JSON.parse(stdout).requests, 2);
+  assert.equal(uploadRequests, 3);
+  await assert.rejects(load(base, { ...spec, method: "GET", bodyFixture: undefined, responseHeaders: { "content-encoding": "br" } }, { count: 1 }), /unexpected content-encoding/);
+  await assert.rejects(load(base, { ...spec, method: "GET", bodyFixture: undefined, digest: "wrong" }, { count: 1 }), /Response changed/);
+} finally { server.closeAllConnections(); await new Promise((resolve) => server.close(resolve)); }
+
 const parsed = parseCoverage(`statements analyzed 435\ncompile statically 430 (99%)\n in dynamic tier 201\n\n npm package compilation:\n   bcryptjs  static\n   jose  static\n\n diagnostics`);
 assert.equal(parsed.dynamicTierStatements, 201);
 assert.deepEqual(parsed.packages, [{ name: "bcryptjs", mode: "static" }, { name: "jose", mode: "static" }]);
@@ -33,4 +66,4 @@ assert.throws(() => parseCoverage("format changed"));
 assert.deepEqual(sectionsOption("threads"), ["coverage", "threads"]);
 assert.throws(() => sectionsOption("missing"));
 assert.equal(productionCommand({ next: "next", port: 123 })[0], "next");
-console.log("Harness checks passed: warmed socket accounting (keep-alive and reconnect), exact counts at C=8, digest rejection, coverage parsing, section validation, centralized start command. All test sockets closed.");
+console.log("Harness checks passed: warmed socket accounting (keep-alive and reconnect), exact counts at C=8, digest rejection, subprocess 1 MiB uploads, gzip decoded parity/headers, coverage parsing, section validation, centralized start command. All test sockets closed.");

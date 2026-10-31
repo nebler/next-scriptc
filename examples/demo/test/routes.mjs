@@ -4,6 +4,8 @@ import { readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import path from "node:path";
 import { SignJWT, jwtVerify } from "jose";
+import { createHash } from "node:crypto";
+import { fixtureBody, uploadSha256 } from "../bench/fixtures.mjs";
 
 const root = path.resolve(import.meta.dirname, "../../..");
 const demo = path.join(root, "examples/demo");
@@ -13,7 +15,7 @@ const secret = "next-scriptc-parity-test-signing-secret-32-bytes";
 const key = new TextEncoder().encode(secret);
 const env = { ...process.env, NEXT_SCRIPTC_BASELINE: "", DEMO_PROXY_TIMEOUT_MS: "180000", DEMO_JWT_NOW: String(clock), DEMO_JWT_SECRET: secret };
 const running = new Set();
-const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate", "vary"];
+const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate", "vary", "content-encoding", "content-disposition"];
 const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
 
 function start(args) {
@@ -160,13 +162,95 @@ cases.push(
   { path: "/api/feed.xml?limit=0", status: 400 },
 );
 
+const upload = fixtureBody("upload-1mib");
+const image = fixtureBody("rgba-512");
+const integrityHeaders = { "content-type": "application/octet-stream", "x-content-sha256": uploadSha256 };
+cases.push(
+  { path: "/api/uploads/verify", method: "POST", headers: integrityHeaders, body: upload, status: 200, check(body) {
+    assert.deepEqual(JSON.parse(body), { verified: true, sha256: uploadSha256, bytes: upload.length });
+  } },
+  { path: "/api/uploads/verify", method: "POST", headers: { "x-content-sha256": "0".repeat(64) }, body: upload, status: 422 },
+  { path: "/api/uploads/verify", method: "POST", body: "abc", status: 400 },
+  { path: "/api/uploads/verify", method: "POST", headers: { "x-content-sha256": "nope" }, status: 400 },
+  { path: "/api/uploads/verify", method: "POST", headers: { "x-content-sha256": createHash("sha256").update("").digest("hex").toUpperCase() }, body: "", status: 200 },
+  { path: "/api/uploads/verify", method: "POST", headers: integrityHeaders, body: Buffer.alloc(4 * 1024 * 1024 + 1), status: 413 },
+  { path: "/api/export.json.gz?rows=5000", status: 200, gzip: true, check(body) {
+    const rows = JSON.parse(body).rows;
+    assert.equal(rows.length, 5000);
+    assert.deepEqual(rows[0], { id: "invoice-1", region: "region-0", amountCents: 100, quantity: 1 });
+    assert.equal(rows[4999].id, "invoice-5000");
+  } },
+  { path: "/api/export.json.gz?rows=1", status: 200, gzip: true, check(body) { assert.equal(JSON.parse(body).rows.length, 1); } },
+  ...["0", "5001", "nope", "1.5"].map((rows) => ({ path: `/api/export.json.gz?rows=${rows}`, status: 400 })),
+  { path: "/api/analytics/revenue?from=2026-01-01&to=2026-01-31", status: 200, check(body) {
+    const result = JSON.parse(body);
+    let expected = 0;
+    for (let i = 0; i < 5000; i++) expected += (100 + (i * 7919) % 49900) * (1 + i % 5);
+    assert.equal(result.events, 5000);
+    assert.equal(result.revenueCents, expected);
+    assert.equal(result.daily.length, 31 * 8);
+    assert.equal(result.daily.reduce((sum, day) => sum + day.revenueCents, 0), expected);
+  } },
+  { path: "/api/analytics/revenue?from=2026-01-10&to=2026-01-10", status: 200, check(body) {
+    const result = JSON.parse(body);
+    let expected = 0;
+    let count = 0;
+    for (let i = 0; i < 5000; i++) if (i % 31 === 9) { expected += (100 + (i * 7919) % 49900) * (1 + i % 5); count++; }
+    assert.equal(result.events, count);
+    assert.equal(result.revenueCents, expected);
+    assert.ok(result.daily.every((day) => day.day === "2026-01-10"));
+  } },
+  { path: "/api/analytics/revenue?from=2027-01-01&to=2027-01-31", status: 200, check(body) { assert.deepEqual(JSON.parse(body).daily, []); } },
+  ...["from=2026-02-30", "from=nope", "from=2026-02-01&to=2026-01-01"].map((query) => ({ path: `/api/analytics/revenue?${query}`, status: 400 })),
+  { path: "/api/images/histogram?width=512&height=512", method: "POST", body: image, status: 200, check(body) {
+    const result = JSON.parse(body);
+    const histogram = Array(256).fill(0);
+    for (let i = 0; i < image.length; i += 4) histogram[(77 * image[i] + 150 * image[i + 1] + 29 * image[i + 2]) >>> 8]++;
+    assert.deepEqual(result.histogram, histogram);
+    assert.equal(result.pixels, 512 * 512);
+    assert.equal(result.mean, histogram.reduce((sum, count, luma) => sum + count * luma, 0) / result.pixels);
+    assert.equal(result.min, histogram.findIndex((count) => count > 0));
+    assert.equal(result.max, histogram.findLastIndex((count) => count > 0));
+  } },
+  { path: "/api/images/histogram?width=2&height=1", method: "POST", body: Buffer.from([0, 0, 0, 0, 255, 255, 255, 255]), status: 200, check(body) {
+    const result = JSON.parse(body);
+    assert.equal(result.min, 0); assert.equal(result.max, 255); assert.equal(result.mean, 127.5);
+    assert.equal(result.histogram[0], 1); assert.equal(result.histogram[255], 1);
+  } },
+  ...["width=0&height=1", "width=1.5&height=1", "width=1025&height=1024", "width=nope&height=1", ""].map((query) => ({ path: `/api/images/histogram?${query}`, method: "POST", body: image, status: 400 })),
+  { path: "/api/images/histogram?width=2&height=2", method: "POST", body: "short", status: 400 },
+  { path: "/api/stores/nearby?lat=51.5074&lng=-0.1278&radiusKm=1000", status: 200, check(body) {
+    const result = JSON.parse(body);
+    assert.ok(result.total >= 20);
+    assert.equal(result.stores.length, 20);
+    for (let i = 0; i < result.stores.length; i++) {
+      const store = result.stores[i];
+      assert.ok(Number.isInteger(store.distanceMetres) && store.distanceMetres <= 1000000);
+      if (i) assert.ok(store.distanceMetres > result.stores[i - 1].distanceMetres ||
+        (store.distanceMetres === result.stores[i - 1].distanceMetres && store.id > result.stores[i - 1].id));
+    }
+  } },
+  { path: "/api/stores/nearby?lat=-85&lng=-179&radiusKm=0.001", status: 200, check(body) {
+    assert.deepEqual(JSON.parse(body).stores, [{ id: 1, name: "Store 1", distanceMetres: 0 }]);
+  } },
+  { path: "/api/stores/nearby?lat=90&lng=180&radiusKm=0.001", status: 200, check(body) { assert.equal(JSON.parse(body).total, 0); } },
+  ...["lat=91&lng=0", "lat=0&lng=-181", "lat=nope&lng=0", "lat=0", "lat=&lng=0", "lat=0&lng=0&radiusKm=0", "lat=0&lng=0&radiusKm=20001"].map((query) => ({ path: `/api/stores/nearby?${query}`, status: 400 })),
+);
+
 async function responses(native) {
   const results = [];
   for (const test of cases) {
     const response = await fetch(`http://localhost:${port}${test.path}`, {
-      method: test.method ?? "GET", headers: test.headers, body: test.body, signal: AbortSignal.timeout(180_000),
+      method: test.method ?? "GET", headers: { "accept-encoding": "identity", ...test.headers }, body: test.body, signal: AbortSignal.timeout(180_000),
     });
+    // fetch validates and decompresses gzip. Compare these decoded bytes and
+    // the representation headers, allowing different valid compressed streams.
     const body = Buffer.from(await response.arrayBuffer());
+    if (test.gzip) {
+      assert.equal(response.headers.get("content-encoding"), "gzip");
+      assert.equal(response.headers.get("content-type"), "application/json; charset=utf-8");
+      assert.equal(response.headers.get("content-disposition"), 'attachment; filename="export.json.gz"');
+    }
     assert.equal(response.status, test.status, `${test.path}: unexpected status; ${body.subarray(0, 256).toString()}`);
     assert.equal(response.headers.get("x-next-scriptc"), native ? "native" : null, test.path);
     await test.check?.(body);
@@ -213,7 +297,7 @@ try {
   await stop(production);
   for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
   await portsFree(ports);
-  console.log(`Native: ${cases.length} responses match status, content/cache/security/auth headers and body bytes; Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.`);
+  console.log(`Native: ${cases.length} responses match status, content/cache/security/auth headers and body bytes (decompressed for gzip); Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.`);
   console.log(`Cleanup passed: all ${pids.length} native processes exited; HTTP port ${port} and all native ports are free.`);
 } catch (error) {
   for (const state of running) console.error(state.output.slice(-8000));

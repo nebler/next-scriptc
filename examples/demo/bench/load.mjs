@@ -1,16 +1,19 @@
 // Separate-process, closed-loop HTTP/1.1 generator. No pipelining. Latency runs
 // from dispatch to fully drained body; failures invalidate the entire sample.
 import http from "node:http";
+import { gunzipSync } from "node:zlib";
+import { fixtureBody } from "./fixtures.mjs";
 import { createHash } from "node:crypto";
 import { setTimeout as delay } from "node:timers/promises";
 import { pathToFileURL } from "node:url";
 
 export function request(base, spec, agent) {
   return new Promise((resolve, reject) => {
+    const body = spec.bodyFixture ? fixtureBody(spec.bodyFixture) : spec.body;
     const started = performance.now();
     const req = http.request(new URL(spec.path, base), {
       method: spec.method ?? "GET", agent: agent ?? false,
-      headers: { "accept-encoding": "identity", ...spec.headers },
+      headers: { "accept-encoding": "identity", ...(body === undefined ? {} : { "content-length": Buffer.byteLength(body) }), ...spec.headers },
     }, (res) => {
       const chunks = [];
       res.on("data", (chunk) => chunks.push(chunk));
@@ -19,12 +22,22 @@ export function request(base, spec, agent) {
         const body = Buffer.concat(chunks);
         if (res.statusCode !== (spec.status ?? 200)) {
           reject(new Error(`${spec.path}: HTTP ${res.statusCode} after ${Math.round(performance.now() - started)} ms: ${body.toString().slice(0, 200)}`));
-        } else resolve({ ms: performance.now() - started, body, headers: res.headers, reusedSocket: req.reusedSocket });
+        } else {
+          try {
+            for (const [name, expected] of Object.entries(spec.responseHeaders ?? {})) {
+              if (res.headers[name] !== expected) throw new Error(`${spec.path}: unexpected ${name}: ${res.headers[name]}`);
+            }
+            // Valid gzip streams can differ. Check decoded bytes; client CPU is
+            // reported separately. Latency includes decompression on both sides.
+            const decoded = spec.responseEncoding === "gzip" ? gunzipSync(body) : body;
+            resolve({ ms: performance.now() - started, body: decoded, headers: res.headers, reusedSocket: req.reusedSocket });
+          } catch (error) { reject(error); }
+        }
       });
     });
     req.setTimeout(120_000, () => req.destroy(new Error(`Request timed out: ${spec.path}`)));
     req.on("error", reject);
-    req.end(spec.body);
+    req.end(body);
   });
 }
 
