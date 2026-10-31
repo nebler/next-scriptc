@@ -69,7 +69,7 @@ assert.equal(productionCommand({ next: "next", port: 123 })[0], "next");
 console.log("Harness checks passed: warmed socket accounting (keep-alive and reconnect), exact counts at C=8, digest rejection, subprocess 1 MiB uploads, gzip decoded parity/headers, coverage parsing, section validation, centralized start command. All test sockets closed.");
 
 // Production topology selection must never leak a parent's baseline/group flag.
-const { variants, variant, runtimesFor, groupedAvailability, validateLightGroup, lightPatterns } = await import("./variants.mjs");
+const { variants, variant, runtimesFor, groupedAvailability, validateLightGroup, validateReleaseBuild, lightPatterns } = await import("./variants.mjs");
 const { deriveSummary } = await import("./summary.mjs");
 assert.deepEqual(variants.map((v) => v.distDir), [".next-node", ".next", ".next-grouped"]);
 assert.deepEqual(variant("node").env, { NEXT_SCRIPTC_BASELINE: "node", NEXT_SCRIPTC_DEMO_GROUPS: "" });
@@ -86,6 +86,12 @@ await assert.rejects(groupedAvailability({ exists: false, profile: "sandbox" }),
 assert.equal((await groupedAvailability({ exists: true, profile: "sandbox" })).status, "available");
 const grouped = { routes: lightPatterns.map((pattern) => ({ pattern, port: 123, binary: "group" })) };
 validateLightGroup(grouped);
+validateReleaseBuild({ routes: [{ pattern: "/a", binary: "a", port: 1, optimization: "release" }], processes: [{ optimization: "release" }] });
+assert.throws(() => validateReleaseBuild({ routes: [{ optimization: "speed" }] }), /release optimization/);
+assert.throws(() => validateReleaseBuild({ routes: [], processes: [{ optimization: "speed" }] }), /release optimization/);
+assert.throws(() => validateReleaseBuild(grouped), /separate processes/);
+assert.throws(() => validateLightGroup({ routes: grouped.routes.map((r) => ({ ...r, optimization: "speed" })) }), /release optimization/);
+
 assert.throws(() => validateLightGroup({ routes: grouped.routes.slice(1) }), /missing/);
 assert.throws(() => validateLightGroup({ routes: [...grouped.routes, { pattern: "/api/login", port: 123, binary: "group" }] }), /unregistered/);
 assert.throws(() => validateLightGroup({ routes: grouped.routes.map((r, i) => ({ ...r, port: 123 + i })) }), /eight-route/);

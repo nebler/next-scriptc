@@ -20,10 +20,19 @@ export async function groupedAvailability({ exists, profile }) {
   if (profile !== "quick") throw new Error("Final sandbox suite requires .next-grouped; build with NEXT_SCRIPTC_DEMO_GROUPS=light first");
   return { status: "skipped", reason: ".next-grouped does not exist; local quick verification covers Node vs native only" };
 }
+export function validateReleaseBuild(manifest, grouped = false) {
+  if ([...manifest.routes, ...(manifest.processes ?? [])].some((item) => (item.optimization ?? "release") !== "release"))
+    throw new Error("Final benchmark requires release optimization for every native process and route");
+  const separate = grouped ? manifest.routes.filter((route) => !lightPatterns.includes(route.pattern)) : manifest.routes;
+  if (new Set(separate.map((route) => route.binary)).size !== separate.length || new Set(separate.map((route) => route.port)).size !== separate.length)
+    throw new Error("Final benchmark requires separate processes for every route outside the registered light group");
+}
 export function validateLightGroup(manifest) {
+  validateReleaseBuild(manifest, true);
   const members = lightPatterns.map((pattern) => {
     const route = manifest.routes.find((item) => item.pattern === pattern);
     if (!route) throw new Error(`Grouped build missing ${pattern}`);
+    if (typeof route.binary !== "string" || !Number.isInteger(route.port)) throw new Error(`Invalid grouped process for ${pattern}`);
     return route;
   });
   if (new Set(members.map((route) => route.binary)).size !== 1 || new Set(members.map((route) => route.port)).size !== 1)

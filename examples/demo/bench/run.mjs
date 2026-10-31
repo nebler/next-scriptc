@@ -6,7 +6,7 @@ import { readFile, readdir, mkdir, writeFile, stat } from "node:fs/promises";
 import { parseArgs } from "node:util";
 import { setTimeout as delay } from "node:timers/promises";
 import { routes, profiles, isolation, serverEnv, sectionsOption, productionCommand, sectionEstimates } from "./config.mjs";
-import { variants, variant, runtimesFor, groupedAvailability, validateLightGroup } from "./variants.mjs";
+import { variants, variant, runtimesFor, groupedAvailability, validateLightGroup, validateReleaseBuild } from "./variants.mjs";
 import { request, digest } from "./load.mjs";
 import { exec, start, ready, stop, finish, census, measure, portsFree, cleanup, signal, accounting } from "./processes.mjs";
 import { coverage } from "./coverage.mjs";
@@ -26,6 +26,7 @@ const require = createRequire(path.join(demo, "package.json"));
 const compilerRequire = createRequire(path.join(root, "packages/next-scriptc/package.json"));
 const next = require.resolve("next/dist/bin/next");
 const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
+validateReleaseBuild(manifest);
 assert.equal(manifest.buildId, (await readFile(path.join(demo, ".next/BUILD_ID"), "utf8")).trim());
 await readFile(path.join(demo, ".next-node/BUILD_ID"));
 let groupedExists = true;
@@ -108,7 +109,7 @@ const data = {
     nativeBuildId: manifest.buildId, nodeBuildId: (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim(), groupedBuildId: groupedManifest?.buildId },
   variants: variants.map((item) => ({ ...item, ...(item.id === "native-grouped" ? groupedState : { status: "available" }) })),
   workloads: routes,
-  isolation, definitions, limitations, coverage: {}, artifacts: [], rows: [],
+  isolation, definitions, limitations, coverage: {}, artifacts: [], rows: [], processLogs: [],
   sourceSnapshot: await sourceSnapshot(),
 };
 // Hash source and native artifacts so a dirty/local run is still identifiable.
@@ -149,10 +150,14 @@ function workloadFailure(error, proc, scope, runtime, route, phase) {
 const nextPort = 3417;
 const allPorts = [nextPort, ...manifest.routes.map((route) => route.port), ...(groupedManifest?.routes.map((route) => route.port) ?? [])];
 function launch(scope, runtime, route) {
-  if (scope === "direct") return start(runtime === "node" ? process.execPath : route.binary,
+  let proc;
+  if (scope === "direct") proc = start(runtime === "node" ? process.execPath : route.binary,
     runtime === "node" ? [route.entry] : [], { cwd: demo, cpus: serverCpus, role: `${runtime}-route`, env: { ...serverEnv, PORT: String(route.port), NEXT_SCRIPTC_BASELINE: "", NEXT_SCRIPTC_DEMO_GROUPS: "" } });
-  return start(process.execPath, productionCommand({ next, port: nextPort }),
+  else proc = start(process.execPath, productionCommand({ next, port: nextPort }),
     { cwd: demo, cpus: serverCpus, role: "next-server", env: { ...serverEnv, DEMO_PROXY_TIMEOUT_MS: "", ...variant(runtime).env } });
+  proc.exited.then(() => data.processLogs.push({ scope, runtime, route: route?.id, code: proc.code,
+    error: proc.error?.stack, output: proc.output }));
+  return proc;
 }
 function generator(base, spec, options, ipc = false) {
   const { entry, binary, ...wire } = spec;
