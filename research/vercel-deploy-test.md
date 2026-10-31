@@ -222,3 +222,15 @@ The following are implementation implications, not results verified by this isol
 5. Keep the existing self-hosted spawn/rewrite flow separate from Vercel's lifecycle. Native workers on Vercel are started by `executable`, not by a `next start` process.
 
 The immediate open question is whether these exact accepted binaries execute correctly under the hosted Functions supervisor. Preview targeting on this empty project must be resolved before that question can be answered within the stated constraints.
+
+## Hosted verification (2026-10-31, orchestrator)
+
+After the user approved production deployments on this test project, the same artifact (rebuilt with the default `release` optimization instead of `speed`, matching the benchmarks) was deployed with `vercel deploy --prebuilt --prod --yes` from the repository root: `https://next-scriptc-4de66z408-noahs-projects-8a075d15.vercel.app` (Production, READY in 5 s).
+
+**The scriptc binary runs as a hosted Vercel Function.** Checked with `vercel curl` (the deployment is behind Vercel Authentication; plain `curl` returns `302` to `vercel.com/sso-api`):
+
+- `GET /api/hello` → `200`, body `{"message":"Hello from next-scriptc!"}`, `x-next-scriptc: native`, `x-vercel-id: fra1::iad1::…` (edge fra1, function iad1), Next's App Route `Vary` preserved, `content-length: 38`.
+- Five further GETs with distinct query strings → all `200`.
+- `HEAD /api/hello` → `200`; `POST /api/hello` → `405` with `allow: GET, HEAD, OPTIONS`.
+
+Round-trip times from the orchestrator's machine in Germany (0.21–0.35 s) are dominated by the transatlantic network and are not a function latency measurement; cold start and warm latency need the in-region benchmark client.

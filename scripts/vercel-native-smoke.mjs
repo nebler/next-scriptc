@@ -34,7 +34,7 @@ try {
   run("npm", ["pack", "@scriptc/runtime-linux-x64-musl@0.4.6", "--ignore-scripts", "--silent", "--pack-destination", temporary]);
   run("tar", ["-xzf", path.join(temporary, "scriptc-runtime-linux-x64-musl-0.4.6.tgz"), "-C", temporary]);
   run(path.join(root, "packages/next-scriptc/node_modules/.bin/scriptc"), [
-    "build", entry, "-o", path.join(func, "user-server"), "--optimization", "speed", "--strip", "--no-keep-llvm",
+    "build", entry, "-o", path.join(func, "user-server"), "--strip", "--no-keep-llvm",
   ], {
     cwd: project,
     env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: path.join(temporary, "package") },
