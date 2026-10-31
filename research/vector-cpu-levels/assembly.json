@@ -2,7 +2,9 @@
   {
     "name": "stock-baseline",
     "matchingInstructionCount": 0,
-    "excerpts": []
+    "excerpts": [],
+    "popcntInstructions": 0,
+    "ymmInstructions": 0
   },
   {
     "name": "stock-v3",
@@ -44,7 +46,9 @@
       " 104e08f: c5 b1 f5 ff                  \tvpmaddwd\t%xmm7, %xmm9, %xmm7",
       " 104e093: c5 dd fe c0                  \tvpaddd\t%ymm0, %ymm4, %ymm0",
       " 104e097: c5 d5 fe c9                  \tvpaddd\t%ymm1, %ymm5, %ymm1"
-    ]
+    ],
+    "popcntInstructions": 0,
+    "ymmInstructions": 19
   },
   {
     "name": "stock-dispatch",
@@ -86,12 +90,16 @@
       " 105056f: c5 b1 f5 ff                  \tvpmaddwd\t%xmm7, %xmm9, %xmm7",
       " 1050573: c5 dd fe c0                  \tvpaddd\t%ymm0, %ymm4, %ymm0",
       " 1050577: c5 d5 fe c9                  \tvpaddd\t%ymm1, %ymm5, %ymm1"
-    ]
+    ],
+    "popcntInstructions": 0,
+    "ymmInstructions": 19
   },
   {
     "name": "patched-baseline",
     "matchingInstructionCount": 0,
-    "excerpts": []
+    "excerpts": [],
+    "popcntInstructions": 0,
+    "ymmInstructions": 0
   },
   {
     "name": "patched-v3",
@@ -133,7 +141,9 @@
       " 104e598: c5 b1 f5 ff                  \tvpmaddwd\t%xmm7, %xmm9, %xmm7",
       " 104e59c: c5 dd fe c0                  \tvpaddd\t%ymm0, %ymm4, %ymm0",
       " 104e5a0: c5 d5 fe c9                  \tvpaddd\t%ymm1, %ymm5, %ymm1"
-    ]
+    ],
+    "popcntInstructions": 0,
+    "ymmInstructions": 35
   },
   {
     "name": "patched-dispatch",
@@ -175,6 +185,8 @@
       " 1050b98: c5 b1 f5 ff                  \tvpmaddwd\t%xmm7, %xmm9, %xmm7",
       " 1050b9c: c5 dd fe c0                  \tvpaddd\t%ymm0, %ymm4, %ymm0",
       " 1050ba0: c5 d5 fe c9                  \tvpaddd\t%ymm1, %ymm5, %ymm1"
-    ]
+    ],
+    "popcntInstructions": 0,
+    "ymmInstructions": 35
   }
 ]

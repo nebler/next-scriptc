@@ -1,4 +1,5 @@
 // Exactly one VM. Prepare all artifacts first; caller supplies OIDC via env file.
+import {execFileSync} from 'node:child_process';
 import {Sandbox} from '@vercel/sandbox';
 import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -12,7 +13,7 @@ const files=names.map(name=>({path:name,content:readFileSync(path.join(art,name)
 files.push({path:'vectors.ts',content:readFileSync('examples/scout/vectors/vectors.ts')},{path:'worker.mjs',content:readFileSync(path.join(dir,'worker.mjs'))});
 const http=existsSync(path.join(art,'http.tar.gz'));
 if(http)files.push({path:'http.tar.gz',content:readFileSync(path.join(art,'http.tar.gz'))});
-const report={status:'starting',vcpus:1,timeoutMs:330000,budgetVcpuHours:0.1,leaseVcpuHours:330000/3600000,marginMs:30000,files:Object.fromEntries(files.map(f=>[f.path,{sha256:sha(f.content),bytes:f.content.length}])),steps:[]};
+const report={sourceCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),startedAt:new Date().toISOString(),status:'starting',vcpus:1,timeoutMs:330000,budgetVcpuHours:0.1,leaseVcpuHours:330000/3600000,marginMs:30000,files:Object.fromEntries(files.map(f=>[f.path,{sha256:sha(f.content),bytes:f.content.length}])),steps:[]};
 const save=()=>writeFileSync(output,JSON.stringify(report,null,2)+'\n');
 save();
 const begin=Date.now();let sandbox;

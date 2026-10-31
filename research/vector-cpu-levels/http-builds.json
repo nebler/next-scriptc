@@ -1,0 +1,62 @@
+[
+  {
+    "name": "baseline",
+    "args": [
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/demo/.next/scriptc/entry-0.ts",
+      "--optimization",
+      "release",
+      "--strip",
+      "--no-keep-llvm",
+      "-o",
+      "/tmp/vector-cpu-levels/http-baseline",
+      "--target-cpu",
+      "baseline"
+    ],
+    "runtimePack": "/Users/noah/code/scriptc-fork-v4/packages/runtime-linux-x64-musl",
+    "buildMs": 19766.9835,
+    "bytes": 11142976,
+    "sha256": "85859ae5a29912100854678fb577dd28f4684235438e7e1d32d05cbc8678c28e",
+    "entrySha256": "6f48feacc6f5d8fff1acce9c939c5af1e83177e61d189d35c4d2c3b12f2b023a"
+  },
+  {
+    "name": "dispatch",
+    "args": [
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/demo/.next/scriptc/entry-0.ts",
+      "--optimization",
+      "release",
+      "--strip",
+      "--no-keep-llvm",
+      "-o",
+      "/tmp/vector-cpu-levels/http-dispatch",
+      "--cpu-dispatch"
+    ],
+    "runtimePack": "/Users/noah/code/scriptc-fork-v4/packages/runtime-linux-x64-musl",
+    "buildMs": 67194.488375,
+    "bytes": 18121744,
+    "sha256": "1e78ae3b452e0e37ecf3b947920e6ba2534e0016b26f48a3145ffe50cd57e428",
+    "entrySha256": "6f48feacc6f5d8fff1acce9c939c5af1e83177e61d189d35c4d2c3b12f2b023a"
+  },
+  {
+    "name": "functions",
+    "args": [
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/demo/.next/cache/scriptc-functions/entry.ts",
+      "--optimization",
+      "release",
+      "--strip",
+      "--no-keep-llvm",
+      "-o",
+      "/tmp/vector-cpu-levels/http-functions",
+      "--node-islands=off",
+      "--target-cpu",
+      "baseline"
+    ],
+    "runtimePack": "/Users/noah/code/scriptc-fork-v4/packages/runtime-linux-x64-musl",
+    "buildMs": 3702.860832999999,
+    "bytes": 954016,
+    "sha256": "f1849b29f651e23f7a6b28ec6e5ac2ac64fdad4e9a14cced96fb8272de42c4ca",
+    "entrySha256": "0b99d3892203c858857eed9c71e63a2b6a56b34b8652e2a8c3f36c560445168d"
+  }
+]
