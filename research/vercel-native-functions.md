@@ -2,6 +2,9 @@
 
 # Native scriptc binaries as Vercel Functions
 
+Local `vendor/scriptc/` citations below require the optional, ignored compiler
+source checkout used for this investigation; those files are not bundled here.
+
 Research date: 2026-10-30. Read-only investigation; no deployment, login, project creation, package installation, or downloaded-code execution was performed.
 
 ## Short answer
