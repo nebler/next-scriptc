@@ -11,4 +11,4 @@ serve({
   PATCH: explicit || empty ? undefined : route.PATCH,
   DELETE: undefined,
   OPTIONS: explicit ? () => new Response("explicit options", { status: 200 }) : undefined,
-}, { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined });
+}, { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined, interceptionPatterns: process.env.SHIM_INTERCEPTION ? ["^/api/intercepted(?:/|$)"] : [] });

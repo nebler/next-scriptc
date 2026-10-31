@@ -42,11 +42,13 @@ const adapter = {
     ).map((route) => route.route));
     const routes = plan.routes.filter((route) => !prerendered.has(route.pattern));
     const skipped = plan.routes.filter((route) => prerendered.has(route.pattern));
+    const file = path.join(distDir, "routes-manifest.json");
+    const manifest = JSON.parse(await readFile(file, "utf8"));
+    const { isInterceptionRouteRewrite } = require("next/dist/lib/is-interception-route-rewrite.js");
+    const interceptionPatterns = manifest.rewrites.beforeFiles.filter(isInterceptionRouteRewrite).map((rewrite) => rewrite.regex);
     if (skipped.length) {
       // Rewrites are generated before prerendering. Next reads this manifest at
       // production startup; the build has finished writing it before this hook.
-      const file = path.join(distDir, "routes-manifest.json");
-      const manifest = JSON.parse(await readFile(file, "utf8"));
       const destinations = new Set(skipped.map((route) => routeRewrite(route).destination));
       for (const phase of ["beforeFiles", "afterFiles"]) {
         manifest.rewrites[phase] = manifest.rewrites[phase].filter((rewrite) => !destinations.has(rewrite.destination));
@@ -65,7 +67,7 @@ const adapter = {
     // Serial builds keep CPU/memory use bounded on local development machines.
     for (const [index, route] of routes.entries()) {
       const entry = path.join(output, `entry-${index}.ts`);
-      await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route)}`);
+      await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route, "route", interceptionPatterns)}`);
       console.log(`[next-scriptc] Compiling ${route.source}`);
       await new Promise((resolve, reject) => {
         const child = spawn(compiler, ["build", entry, "-o", path.join(output, route.binary), "--no-keep-llvm"], {

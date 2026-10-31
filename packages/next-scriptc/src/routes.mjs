@@ -10,9 +10,9 @@ const { getSortedRoutes } = require("next/dist/shared/lib/router/utils/sorted-ro
 
 const methods = ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"];
 
-export function entrySource(route, importName = "route") {
+export function entrySource(route, importName = "route", interceptionPatterns = []) {
   return `import * as ${importName} from ${JSON.stringify(route.source)};\n` +
-    `serve({ ${methods.map((method) => `${method}: ${route.methods.includes(method) ? `${importName}.${method}` : "undefined"}`).join(", ")} }, { pattern: ${JSON.stringify(route.pattern)} });\n`;
+    `serve({ ${methods.map((method) => `${method}: ${route.methods.includes(method) ? `${importName}.${method}` : "undefined"}`).join(", ")} }, { pattern: ${JSON.stringify(route.pattern)}${interceptionPatterns.length ? `, interceptionPatterns: ${JSON.stringify(interceptionPatterns)}` : ""} });\n`;
 }
 
 export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", "jsx", "js"]) {

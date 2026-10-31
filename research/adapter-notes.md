@@ -319,3 +319,115 @@ Final bind checks passed for test ports 3467/3477 and all original native ports
 29996–30005 (including the two now-unused prerender ports). The final process
 scan found no commands referencing this checkout; no owned server/compiler or
 probe processes remain. Other worktrees' processes were not touched.
+
+## Fix round: App Route Vary and proxy compression
+
+Next 16.4.3's `dist/server/base-server.js:1409-1427,1489` sets the
+App Router Vary value before dispatch. It includes `next-url` only for
+interception paths; the regexes come from interception rewrites
+(`dist/server/next-server.js:637-640`). The shim now follows that order,
+including automatic methods and handler failures, and removes `next-url` from
+ordinary handler requests. `dist/server/send-response.js:28-52` appends the
+handler's Vary. `dist/server/base-http/node.js:120-126` deduplicates whole
+values, not individual tokens; even `*` is appended after the framework value.
+
+### Known divergence: external-rewrite compression
+
+Native responses go through Next's external-rewrite HTTP proxy, rather than its
+App Route response pipeline. With default compression enabled, compressible
+native responses can therefore have an additional `Vary: Accept-Encoding` and
+be gzip/deflate encoded, while equivalent Node App Route responses are not.
+The decoded body bytes still match. The extra Vary token can appear even on
+small bodies, HEAD requests, or requests that don't accept compression: Next's
+middleware appends it before checking size, method, or accepted encodings.
+
+Source evidence below refers to the installed, pinned Next 16.4.3 `dist/` files
+(relative to `examples/demo/node_modules/next/`):
+
+- `server/lib/router-server.js:142-144,318-320` constructs `compression()`
+  unless `config.compress === false`, then runs `compress(req, res, ()=>{})`
+  before route resolution. At `468-470`, external destinations return
+  `proxyRequest(...)`; `server/lib/router-utils/proxy-request.js:28-34` creates
+  a `ProxyServer` from `next/dist/compiled/httpxy`.
+- `server/send-response.js:34-52` copies App Route response headers using
+  `res.appendHeader(name, value)`. `server/base-http/node.js:120-126` stores
+  these as arrays: `this._res.setHeader(name, [...currentValues, value])`.
+  In particular, Content-Type becomes an array in this path; the HTTP proxy
+  instead receives a string Content-Type across the loopback hop.
+- `compiled/compression/index.js:14` rejects non-string MIME values with
+  `if(!a||typeof a!=="string"){return false}`. The default `shouldCompress`
+  filter at line 22 reads `e.getHeader("Content-Type")` and calls this check.
+  Thus a normal Node App Route's array Content-Type skips compression before
+  the Vary append; the proxied string Content-Type passes for compressible MIME
+  types. A user-configured string Content-Type can change the Node behavior too.
+- At that same minified line 22, the exact order is
+  `if(!i(a,o)){nocompress("filtered");return}`, then
+  `if(!shouldTransform(a,o)){nocompress("no transform");return}`, then
+  `r(o,"Accept-Encoding")`, followed by threshold, existing Content-Encoding,
+  HEAD and negotiation checks. `shouldTransform` reads Cache-Control and tests
+  `/(?:^|,)\s*?no-transform\s*?(?:,|$)/`.
+
+There is no supported per-response compression switch preserving all headers.
+`Cache-Control: no-transform` does skip both compression and the Vary append,
+but adding it changes observable cache policy. Changing Content-Type does too.
+Setting Content-Encoding (even an existing non-identity encoding), using HEAD,
+or staying below the default 1024-byte threshold does not prevent the append.
+The public `compress: false` config option is documented in
+`dist/docs/01-app/03-api-reference/05-config/01-next-config-js/compress.md`;
+it disables compression globally, changing unrelated responses. The adapter
+does not set any of these. The httpxy prototype monkeypatch and its test have
+been removed; the runtime no longer modifies Next's response handling.
+
+**Input for what a proper in-Next primitive would need:** only Next can remove
+this divergence while retaining its public API contract: native dispatch needs
+to participate in App Route response sending, or Next needs to expose a
+supported per-route opt-out before its compression/Vary logic. An adapter
+using external rewrites cannot preserve the internal Content-Type array across
+HTTP or control that middleware without an observable header/config change.
+
+The demo route comparison requires Next's exact App Route Vary prefix and
+retains any handler Vary suffix; native Vary must match that complete Node
+value or have only `, Accept-Encoding` appended, in that order. Every other
+compared header, status and decoded body stays
+byte-for-byte equal. Shim parity additionally checks `next-url` removal and
+preservation against Next's actual `BaseServer.setVaryHeader` for ordinary,
+interception-rewrite matching/nonmatching, and all four interception markers. This
+test-only use of the pinned Next implementation does not patch the server.
+
+The E2E prerender fixture is now `/api/static-fixture`; hello and feed remain
+dynamic demo/benchmark routes. Its report assertions also follow the current
+RSS-only payload. Runtime lifecycle helpers keep startup readiness,
+restart policy and cleanup separate. Child stdout chunks are forwarded with
+writes on data events, avoiding pipe listeners on shared stdout.
+
+Follow-up verification uses Node 24.22.0 and `SCRIPTC_CHECKER_SERVER=0`.
+All requested checks pass:
+
+- `pnpm --filter demo build`: 11 native routes; static fixture prerendered.
+- `node examples/demo/test/e2e.mjs`: seven curl responses and report results
+  byte-equal; lifecycle, recovery, crash cutoff and port-conflict checks pass.
+- `pnpm --filter demo test:routes --skip-build`: 49 comparisons pass with only
+  the documented Vary allowance; all 11 native processes exit, ports free.
+- `node packages/next-scriptc/shim/test/parity.mjs`: 64 comparisons pass;
+  streaming gaps are 221–222 ms, parent-death cleanup is 990–999 ms.
+- `node packages/next-scriptc/test/routes.mjs`: three tests pass.
+- `node examples/demo/bench/check.mjs`: harness checks pass; sockets closed.
+- Package `tsc --noEmit`: exit 0 with the explicit command below.
+
+The explicit package type check uses the package's Node web declarations:
+
+```sh
+pnpm --filter demo exec tsc --noEmit --strict --skipLibCheck --allowJs \
+  --allowImportingTsExtensions --target ES2022 --lib ESNext \
+  --module ESNext --moduleResolution Bundler --types node \
+  ../../packages/next-scriptc/src/index.ts \
+  ../../packages/next-scriptc/shim/serve.ts \
+  ../../packages/next-scriptc/shim/next-server.ts
+```
+
+The previous round's busy-port preflights and E2E signal cleanup are retained.
+Final binds succeed for 3417, 3427, 3437 and 29996–30007, including the skipped
+fixture's reserved port. No owned Next servers, native workers, shim fixtures,
+test compilers or checker servers remain. HEAD stays at `42a2368` on `main`;
+no commits or index/branch changes were made. Companion probe/performance files
+and processes were left untouched.

@@ -14,6 +14,7 @@ const key = new TextEncoder().encode(secret);
 const env = { ...process.env, NEXT_SCRIPTC_BASELINE: "", DEMO_PROXY_TIMEOUT_MS: "180000", DEMO_JWT_NOW: String(clock), DEMO_JWT_SECRET: secret };
 const running = new Set();
 const relevantHeaders = ["content-type", "cache-control", "x-content-type-options", "www-authenticate", "vary"];
+const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
 
 function start(args) {
   const child = spawn("pnpm", ["--filter", "demo", ...args], { cwd: root, env, detached: true, stdio: ["ignore", "pipe", "pipe"] });
@@ -71,7 +72,7 @@ async function portsFree(ports) {
   for (const number of ports) {
     const server = createServer();
     await new Promise((resolve, reject) => {
-      server.once("error", reject);
+      server.once("error", (cause) => reject(new Error(`Route parity requires free port ${number}; stop the process using it before starting.`, { cause })));
       server.listen(number, "127.0.0.1", resolve);
     });
     await new Promise((resolve) => server.close(resolve));
@@ -176,6 +177,7 @@ async function responses(native) {
 
 let ports = [port];
 try {
+  await portsFree(ports);
   if (!process.argv.includes("--skip-build")) {
     const build = start(["build"]);
     assert.equal((await build.exit).code, 0, build.output);
@@ -196,13 +198,22 @@ try {
   console.log("Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.");
   await ready(production);
   const actual = await responses(true);
-  for (let i = 0; i < cases.length; i++) assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
+  for (let i = 0; i < cases.length; i++) {
+    const expectedVary = reference[i].headers.find(([name]) => name === "vary");
+    const actualVary = actual[i].headers.find(([name]) => name === "vary");
+    assert.ok(expectedVary[1] === appVary || expectedVary[1]?.startsWith(`${appVary}, `), `${cases[i].path}: Next App Route Vary prefix`);
+    // External rewrites pass through Next's compression middleware (see
+    // research/adapter-notes.md). Only its appended token may differ.
+    assert.ok(actualVary[1] === expectedVary[1] || actualVary[1] === `${expectedVary[1]}, Accept-Encoding`, `${cases[i].path}: native Vary: ${actualVary[1]}`);
+    actualVary[1] = expectedVary[1];
+    assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
+  }
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
   assert.equal(pids.length, manifest.routes.length);
   await stop(production);
   for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
   await portsFree(ports);
-  console.log(`Native: ${cases.length} responses byte-equal (status, content/cache/security/auth headers and body); x-next-scriptc: native verified.`);
+  console.log(`Native: ${cases.length} responses match status, content/cache/security/auth headers and body bytes; Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.`);
   console.log(`Cleanup passed: all ${pids.length} native processes exited; HTTP port ${port} and all native ports are free.`);
 } catch (error) {
   for (const state of running) console.error(state.output.slice(-8000));

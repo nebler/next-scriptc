@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import http from "node:http";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
@@ -12,6 +13,18 @@ const entry = path.join(directory, "entry.ts");
 const compiler = path.resolve(directory, "../../node_modules/.bin/scriptc");
 const processes = new Set();
 let comparisons = 0;
+
+// Use Next's real decision independently of the serve.ts shared by both peers.
+function nextVary(pathname, interceptionPatterns = []) {
+  const require = createRequire(import.meta.url);
+  const { default: BaseServer } = require("next/dist/server/base-server.js");
+  const server = Object.create(BaseServer.prototype);
+  server.interceptionRoutePatterns = interceptionPatterns.map((value) => new RegExp(value));
+  const req = { headers: { "next-url": "/source" } };
+  const headers = {};
+  server.setVaryHeader(req, { appendHeader(name, value) { headers[name] = value; } }, true, pathname);
+  return { vary: headers.vary, nextUrl: req.headers["next-url"] ?? null };
+}
 
 function start(command, args, env = {}) {
   const child = spawn(command, args, { env: { ...process.env, ...env }, stdio: ["pipe", "pipe", "pipe"] });
@@ -220,6 +233,14 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
         await compare({ path: `${base}?case=url`, headers: { host }, json: { url: `http://localhost:4321${base}?case=url`, host } });
       }
       await compare({ path: `${base}?case=next-cookie-snapshot`, headers: { cookie: "theme=original" }, json: { theme: { name: "theme", value: "original" } } });
+      const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
+      for (const value of ["accept-language", "*", appVary, "RSC, accept-language"]) {
+        const result = await compare({ path: `${base}?case=vary&value=${encodeURIComponent(value)}` });
+        assert.equal(result.headers.vary, value === appVary ? appVary : `${appVary}, ${value}`);
+      }
+      const expected = nextVary(base);
+      const nextUrl = await compare({ path: `${base}?case=next-url`, headers: { "next-url": "/source" }, json: { nextUrl: expected.nextUrl } });
+      assert.equal(nextUrl.headers.vary, expected.vary);
       const single = await compare({ path: `${base}?case=next-typed`, json: { typed: true } });
       assert.equal(single.headers["content-length"], "14", "single chunk uses end(bytes)");
       assert.equal(single.headers["transfer-encoding"], undefined);
@@ -278,7 +299,8 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await compare({ path: base, method: "OPTIONS", status: 204, text: "", allow });
       await compare({ path: `${base}?case=text`, method: "HEAD", status: 200, text: "" });
       await compare({ path: `${base}?case=missing`, method: "HEAD", status: 404, text: "" });
-      await compare({ path: `${base}?case=throw`, status: 500, text: "" });
+      const failure = await compare({ path: `${base}?case=throw`, status: 500, text: "" });
+      assert.equal(failure.headers.vary, appVary);
       await compare({ path: base, method: "PUT", status: 500, text: "" });
       await compare({ path: base, method: "PATCH", status: 500, text: "" });
       await compare({ path: "/elsewhere", status: 404, text: "" });
@@ -292,6 +314,21 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       assert.match(node.stderr, /shim rejected failure/);
       assert.match(native.stderr, /shim rejected failure/);
     });
+    await pair(binary, { SHIM_INTERCEPTION: "1" }, async (compare) => {
+      for (const pathname of ["/api/intercepted", "/api/ordinary"]) {
+        const expected = nextVary(pathname, ["^/api/intercepted(?:/|$)"]);
+        const result = await compare({ path: `${pathname}?case=next-url`, headers: { "next-url": "/source" }, json: { nextUrl: expected.nextUrl } });
+        assert.equal(result.headers.vary, expected.vary);
+      }
+    });
+    for (const marker of ["(.)", "(..)", "(...)", "(..)(..)"]) {
+      const pathname = `/api/${marker}intercepted`;
+      await pair(binary, { SHIM_PATTERN: pathname }, async (compare) => {
+        const expected = nextVary(pathname);
+        const result = await compare({ path: `${pathname}?case=next-url`, headers: { "next-url": "/source" }, json: { nextUrl: expected.nextUrl } });
+        assert.equal(result.headers.vary, expected.vary);
+      });
+    }
     await pair(binary, { SHIM_PATTERN: "/api/[id]/[...slug]" }, async (compare) => {
       await compare({ path: "/api/a", status: 404 });
       const result = await compare({ path: "/api/a/b/c" });

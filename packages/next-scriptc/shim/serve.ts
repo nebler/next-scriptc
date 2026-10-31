@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "./next-server.ts";
 
 // scriptc documents argv[0] as "scriptc"; Node uses its executable path.
 const runtime = process.argv[0] === "scriptc" ? "native" : "1";
+const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
 
 export type RouteContext = { params: Promise<Record<string, string | string[]>> };
 export type RouteResponse = Response | NextResponse;
@@ -56,13 +57,14 @@ function compilePattern(pattern: string) {
   };
 }
 
-async function toRequest(incoming: IncomingMessage, url: string, host: string): Promise<NextRequest> {
+async function toRequest(incoming: IncomingMessage, url: string, host: string, intercepted: boolean): Promise<NextRequest> {
   const headers = new Headers();
   for (let i = 0; i < incoming.rawHeaders.length; i += 2) {
     headers.append(incoming.rawHeaders[i], incoming.rawHeaders[i + 1]);
   }
   // Next's changeOrigin proxy replaces Host but preserves the public host here.
   headers.set("host", host);
+  if (!intercepted) headers.delete("next-url");
   const method = incoming.method || "GET";
   if (method === "GET" || method === "HEAD") return new NextRequest(url, { method, headers });
   const chunks = await new Promise<Buffer[]>((resolve, reject) => {
@@ -82,7 +84,12 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   if (response.statusText) outgoing.statusMessage = response.statusText;
   response.headers.forEach((value, name) => {
     if (name === "set-cookie" || name === "x-middleware-set-cookie") return;
-    outgoing.setHeader(name, value);
+    if (name === "vary") {
+      // Next sendResponse appends Vary, deduplicating whole header values only.
+      const current = outgoing.getHeader("vary");
+      if (typeof current === "string" && current !== value) outgoing.setHeader(name, [current, value]);
+      else if (current !== value) outgoing.setHeader(name, value);
+    } else outgoing.setHeader(name, value);
   });
   const cookies = response.headers.getSetCookie();
   if (cookies.length) outgoing.setHeader("set-cookie", cookies);
@@ -127,7 +134,7 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   }
 }
 
-export function serve(module: RouteModule, options: { pattern: string; port?: number }): void {
+export function serve(module: RouteModule, options: { pattern: string; port?: number; interceptionPatterns?: string[] }): void {
   const port = options.port ?? Number(process.env.PORT);
   if ((options.port === undefined && !process.env.PORT?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
     throw new Error("next-scriptc: PORT must be an integer between 0 and 65535 (or supply options.port)");
@@ -140,6 +147,10 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
   const remove = module.DELETE;
   const optionsHandler = module.OPTIONS;
   const match = compilePattern(options.pattern);
+  const interceptionPatterns = (options.interceptionPatterns || []).map((pattern) => new RegExp(pattern));
+  const interceptionRoute = options.pattern.split("/").some((part) =>
+    part.startsWith("(.)") || part.startsWith("(..)") || part.startsWith("(...)")
+  );
   const allowed = ["OPTIONS"];
   if (get) allowed.push("GET");
   if (head) allowed.push("HEAD");
@@ -165,6 +176,12 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
         await writeResponse(new Response(null, { status: 400 }), outgoing, false);
         return;
       }
+      // BaseServer.setVaryHeader runs before App Route dispatch, including
+      // automatic HEAD/OPTIONS/405 and handler failures, but after route matching.
+      const intercepted = interceptionRoute || interceptionPatterns.some((pattern) => pattern.test(url.pathname));
+      if (params !== null) {
+        outgoing.setHeader("vary", intercepted ? `${appVary}, next-url` : appVary);
+      }
       const method = incoming.method || "GET";
       let handler: RouteHandler | undefined;
       if (method === "GET") handler = get;
@@ -178,7 +195,7 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
       if (params === null) response = new Response(null, { status: 404 });
       else if (method === "OPTIONS" && !handler) response = new Response(null, { status: 204, headers: { Allow: allow } });
       else if (!handler) response = new Response(null, { status: 405, headers: { Allow: allow } });
-      else response = await handler(await toRequest(incoming, url.href, host), { params: Promise.resolve(params) });
+      else response = await handler(await toRequest(incoming, url.href, host, intercepted), { params: Promise.resolve(params) });
       incoming.resume();
       await writeResponse(response, outgoing, method === "HEAD");
     } catch (error) {
@@ -186,7 +203,9 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
       incoming.resume();
       if (outgoing.headersSent) outgoing.destroy();
       else {
-        for (const name of outgoing.getHeaderNames()) outgoing.removeHeader(name);
+        for (const name of outgoing.getHeaderNames()) {
+          if (name !== "vary") outgoing.removeHeader(name);
+        }
         outgoing.statusCode = 500;
         outgoing.statusMessage = "Internal Server Error";
         outgoing.setHeader("x-next-scriptc", runtime);

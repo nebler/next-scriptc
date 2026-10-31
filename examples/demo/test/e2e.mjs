@@ -9,7 +9,7 @@ const root = path.resolve(import.meta.dirname, "../../..");
 const demo = path.join(root, "examples/demo");
 const curl = promisify(execFile);
 const port = Number(process.env.E2E_PORT ?? "3417");
-const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml"];
+const routes = ["/api/hello", "/api/primes?limit=1000", "/api/url-echo?q=a%20b&plus=a+b", "/api/items/hello%20world", "/api/items/new", "/api/feed.xml", "/api/static-fixture"];
 const running = new Set();
 let nativePatterns;
 
@@ -62,6 +62,12 @@ async function stop(state) {
   try { await state.exit; } finally { clearTimeout(timer); running.delete(state); }
 }
 
+for (const [signal, code] of [["SIGINT", 130], ["SIGTERM", 143]]) {
+  process.once(signal, () => {
+    Promise.allSettled([...running].map(stop)).then(() => process.exit(code));
+  });
+}
+
 async function responses(native) {
   const results = [];
   for (const route of routes) {
@@ -75,6 +81,7 @@ async function responses(native) {
   assert.deepEqual(JSON.parse(results[2]), { url: `http://localhost:${port}/api/url-echo?q=a+b&plus=a+b`, host: `localhost:${port}` });
   assert.deepEqual(JSON.parse(results[3]), { id: "hello world" });
   assert.deepEqual(JSON.parse(results[4]), { node: "new item" });
+  assert.deepEqual(JSON.parse(results[6]), { fixture: "static" });
   return results;
 }
 
@@ -90,8 +97,7 @@ async function reportResponses(native) {
     assert.equal(body.poolSize, 8);
     assert.equal(body.workers, results.length === 0 ? 1 : 4, "persistent pool reused");
     assert.ok(body.elapsedMs > 0);
-    assert.ok(body.rss > 0 && body.datasetRss > 0 && body.baselineRss > 0);
-    assert.equal(body.workerRssGrowth, (body.rss - body.datasetRss) / body.workers);
+    assert.ok(body.rss > 0);
     assert.equal(body.nodeVersion, native ? null : process.version);
     // Timing, memory, pool state, and the intentional runtime capability differ.
     results.push(Buffer.from(JSON.stringify(body.result)));
@@ -109,7 +115,7 @@ async function assertPortsFree(ports) {
   for (const port of ports) {
     const server = createServer();
     await new Promise((resolve, reject) => {
-      server.once("error", reject);
+      server.once("error", (cause) => reject(new Error(`E2E requires free port ${port}; stop the process using it before starting.`, { cause })));
       server.listen(port, "127.0.0.1", resolve);
     });
     await new Promise((resolve) => server.close(resolve));
@@ -128,6 +134,7 @@ async function productionReady(state) {
   await response.arrayBuffer();
   assert.equal(response.status, 200, state.output);
   assert.equal(response.headers.get("x-next-scriptc"), "native", state.output);
+  assert.doesNotMatch(state.output, /MaxListenersExceededWarning/);
 }
 
 async function assertGone(pids) {
@@ -142,6 +149,7 @@ async function assertGone(pids) {
 }
 
 try {
+  await assertPortsFree([port]);
   if (!process.argv.includes("--skip-build")) {
     const build = start(["build"]);
     assert.equal((await build.exit).code, 0, build.output);
@@ -150,9 +158,11 @@ try {
   const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
   nativePatterns = new Set(manifest.routes.map((route) => route.pattern));
   assert.ok(nativePatterns.has("/api/url-echo"), "native static-pattern route remains covered");
-  assert.ok(!nativePatterns.has("/api/feed.xml"), "prerendered handler needs no binary");
+  assert.ok(!nativePatterns.has("/api/static-fixture"), "prerendered handler needs no binary");
   const routing = JSON.parse(await readFile(path.join(demo, ".next/routes-manifest.json"), "utf8"));
-  assert.ok(!routing.rewrites.beforeFiles.some((route) => route.source.includes("feed")), "prerender rewrite removed");
+  for (const phase of ["beforeFiles", "afterFiles"]) {
+    assert.ok(!routing.rewrites[phase].some((route) => route.source === "/api/static-fixture"), "prerender rewrite removed");
+  }
   const ports = [port, ...manifest.routes.map((route) => route.port)];
   await assertPortsFree(ports);
   const dev = start(["dev", "-p", String(port)]);

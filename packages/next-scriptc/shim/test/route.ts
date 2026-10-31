@@ -8,6 +8,8 @@ export async function GET(request: NextRequest, context: RouteContext) {
     request.headers.set("cookie", "theme=changed");
     return NextResponse.json({ theme: request.cookies.get({ name: "theme" }) });
   }
+  if (mode === "vary") return new Response("vary", { headers: { vary: url.searchParams.get("value") || "" } });
+  if (mode === "next-url") return Response.json({ nextUrl: request.headers.get("next-url") });
   if (mode === "next-typed") return typedJson();
   if (mode === "next-cookie-percent" || mode === "next-cookie-percent-invalid") {
     const value = mode === "next-cookie-percent" ? "%2525" : "%25";
