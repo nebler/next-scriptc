@@ -17,13 +17,18 @@ const stamp = new Date().toISOString().replaceAll(":", "-");
 const destination = path.join(root, "research/benchmarks", `functions-linux-${stamp}`);
 const controller = new AbortController();
 for (const name of ["SIGINT", "SIGTERM"]) process.once(name, () => controller.abort(new Error(name)));
+const lifetimeMs = Number(process.env.FUNCTION_SANDBOX_LIFETIME_MS ?? 450000);
+if (!Number.isFinite(lifetimeMs) || lifetimeMs < 30000 || lifetimeMs > 450000) throw new Error("Sandbox lifetime must be 30–450 seconds");
+const functionsOnly = process.env.FUNCTION_SANDBOX_FUNCTIONS_ONLY === "1";
+const pageSamples = Number(process.env.FUNCTION_BENCH_PAGES ?? 200);
+const warmup = Number(process.env.FUNCTION_BENCH_WARMUP ?? 50);
 const started = Date.now();
-const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", resources: { vcpus: 2 }, timeout: 7.5 * 60 * 1000, persistent: false });
-const deadline = setTimeout(() => controller.abort(new Error("7 minute command budget exhausted")), 7 * 60 * 1000);
+const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", resources: { vcpus: 2 }, timeout: lifetimeMs, persistent: false });
+const deadline = setTimeout(() => controller.abort(new Error("Sandbox command budget exhausted")), lifetimeMs - 20000);
 deadline.unref();
 const provenance = { sandbox: sandbox.name, cwd: sandbox.cwd, commit, archiveSha256, startedAt: new Date(started).toISOString(), image: "vercel/sandbox/node:24", vcpus: 2, memoryMiB: 4096,
-  lifetimeMs: 7.5 * 60 * 1000, maxVcpuHours: 2 * 7.5 / 60, affinity: "app and native: CPU 0; load generator: CPU 1; C=1", status: "running", steps: [] };
-console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; maximum 0.25 vCPU-hours`);
+  lifetimeMs, maxVcpuHours: 2 * lifetimeMs / 3600000, functionsOnly, pageSamples, warmup, affinity: "app and native: CPU 0; load generator: CPU 1; C=1", status: "running", steps: [] };
+console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; maximum ${provenance.maxVcpuHours.toFixed(4)} vCPU-hours`);
 async function step(label, script, sudo = false) {
   const begin = Date.now();
   const result = await sandbox.runCommand({ cmd: "bash", cwd: sandbox.cwd, args: ["-lc", `set -euo pipefail\n${script}`], sudo, stdout: process.stdout, stderr: process.stderr, signal: controller.signal });
@@ -49,13 +54,17 @@ try {
     timeout 120s npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent
     find node_modules/.pnpm -type f \\( -name tsc-ts -o -name tsc -o -name scriptc-comptime \\) -exec chmod +x {} +
     packages/next-scriptc/node_modules/.bin/scriptc --version`);
+  if (functionsOnly) await step("Function-only benchmark fixture", `
+    cd next-scriptc
+    node --input-type=module -e 'import { readdir, rename } from "node:fs/promises"; for (const file of await readdir("examples/demo/app", { recursive: true })) if (file.endsWith("/route.native.ts")) await rename("examples/demo/app/" + file, "examples/demo/app/" + file.replace("route.native.ts", "route.ts"));'
+  `);
   await step("Native and Node production builds", `
     cd next-scriptc
     SCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_BASELINE= timeout 240s npx -y pnpm@11.1.3 --filter demo build
     NEXT_SCRIPTC_BASELINE=node timeout 90s npx -y pnpm@11.1.3 --filter demo build`);
   await step("Page curve, profile and overhead", `
     cd next-scriptc
-    BENCH_COMMIT='${commit}' FUNCTION_SERVER_CPU=0 FUNCTION_BENCH_CALLS=1000 FUNCTION_BENCH_PAGES=200 FUNCTION_BENCH_WARMUP=50 \
+    BENCH_COMMIT='${commit}' FUNCTION_SERVER_CPU=0 FUNCTION_BENCH_CALLS=1000 FUNCTION_BENCH_PAGES=${pageSamples} FUNCTION_BENCH_WARMUP=${warmup} \
       timeout --signal=TERM --kill-after=5s 180s taskset -c 1 node examples/demo/bench/functions.mjs --skip-build --output=../functions.json`);
   provenance.status = "complete";
 } catch (error) {

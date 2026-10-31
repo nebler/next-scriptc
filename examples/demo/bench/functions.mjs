@@ -18,6 +18,7 @@ const pageCalls = Number(process.env.FUNCTION_BENCH_PAGES ?? 200);
 const warmup = Number(process.env.FUNCTION_BENCH_WARMUP ?? 50);
 const port = Number(process.env.FUNCTION_TEST_PORT ?? 3461);
 const sizes = [5000, 15000, 50000, 200000];
+const destination = process.argv.find((arg) => arg.startsWith("--output="))?.slice(9);
 const require = createRequire(path.resolve(demo, "../../packages/next-scriptc/package.json"));
 const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
 const summary = (times) => {
@@ -40,6 +41,10 @@ const results = { node: process.version, cpu: cpus()[0].model, scriptc: require(
   commit: process.env.BENCH_COMMIT ?? (await promisify(execFile)("git", ["rev-parse", "HEAD"])).stdout.trim(),
   sourceSha256: createHash("sha256").update(await readFile(path.join(demo, "lib/revenue.ts"))).digest("hex"),
   platform: `${process.platform}/${process.arch}`, warmup, method: "sequential C=1; ms; full page bodies consumed; alternating runtime order by size; server/load affinity supplied by harness", sizes: {} };
+async function checkpoint(phase) {
+  results.phase = phase;
+  if (destination) await writeFile(destination, JSON.stringify(results, null, 2) + "\n");
+}
 if (!process.argv.includes("--skip-build")) { await build(false); await build(true); }
 const states = [];
 try {
@@ -66,6 +71,7 @@ try {
     row.nativeCall = await time(async () => assert.equal((await callNative(nativePort, revenueId, args)).events, size));
     row.nativeBody = await samples(async () => (await callNative(nativePort, revenueId, [...args.slice(0, 3), true])).timings);
     row.nodeProfile = await samples(() => profile(size));
+    await checkpoint(`page-${size}`);
   }
 } finally { await Promise.all(states.map(stop)); }
 
@@ -85,8 +91,8 @@ try {
 const values: Record<string, Result> = ${JSON.stringify(values)};
 export async function revenue(_from: string, _to: string, size: number, _profile: boolean) { return values[String(size)]; }
 `);
-  assert.ok(configText.includes('distDir: ".next-node"'));
-  await writeFile(configFile, configText.replace('distDir: ".next-node"', 'distDir: ".next-render"'));
+  assert.ok(configText.includes('".next-node"'));
+  await writeFile(configFile, configText.replace('".next-node"', '".next-render"'));
   await build(true);
   control = await start(port + 1, true);
   for (const size of sizes) results.sizes[size].renderControl = await time(async () => {
@@ -120,7 +126,7 @@ try {
   await wait(state, /listening on/);
   for (const size of sizes) results.sizes[size].nativeProfile = await samples(() => callNative(port, "profile", [size]));
 } finally { await stop(state); }
+await checkpoint("complete");
 const json = JSON.stringify(results, null, 2) + "\n";
-const destination = process.argv.find((arg) => arg.startsWith("--output="))?.slice(9);
 if (destination) await writeFile(destination, json);
 console.log(json);
