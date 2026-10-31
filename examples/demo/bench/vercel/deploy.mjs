@@ -11,6 +11,10 @@ if (project.projectName !== "next-scriptc") throw new Error("Link the next-scrip
 const recent = JSON.parse(execFileSync("vercel", ["api", `/v6/deployments?projectId=${project.projectId}&limit=1`], { cwd: root, encoding: "utf8" }));
 if (!recent.deployments?.length) throw new Error("Refusing first-ever deployment: Vercel may implicitly promote it to production");
 const metadata = await buildDemo();
+if (process.env.HEAVY_GO_BENCH === "1") {
+  const { addHeavyGo } = await import("./heavy-go.mjs");
+  metadata.heavyGo = await addHeavyGo();
+}
 const args = ["deploy", "--prebuilt", "--regions", "iad1", "--environment", "preview", "--force", "--json"];
 for (const [key, value] of Object.entries({ ...serverEnv, NEXT_SCRIPTC_BASELINE: metadata.variant === "node" ? "node" : "" })) args.push("--env", `${key}=${value}`);
 const response = JSON.parse(execFileSync("vercel", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] }));

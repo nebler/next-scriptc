@@ -162,7 +162,10 @@ try {
   const functions = JSON.parse(await readFile(path.join(demo, distDir, "scriptc-functions/manifest.json"), "utf8"));
   const processCount = manifest.processes.length + functions.processes.length;
   if (process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light") {
-    assert.equal(manifest.processes.length, 9);
+    // Eight members share one process; every other dynamic route stays separate.
+    const outside = manifest.routes.filter((route) => route.group !== "light");
+    assert.equal(manifest.processes.length, outside.length + 1);
+    assert.equal(new Set(outside.map((route) => route.process)).size, outside.length);
     assert.equal(manifest.processes.find((native) => native.group === "light").routes.length, 8);
   }
   nativePatterns = new Set(manifest.routes.map((route) => route.pattern));

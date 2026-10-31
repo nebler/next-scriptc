@@ -1,3 +1,4 @@
+import { edgeCases as heavyEdges, spec as heavySpec } from "../bench/heavy/fixtures.mjs";
 import assert from "node:assert/strict";
 import { execFile, spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
@@ -244,6 +245,11 @@ cases.push(
 cases.push(...ioCases({ token: validToken, clock, env }));
 for (const invalid of [await token({ exp: clock - 1 }), await token({ aud: "wrong" }), await token({ sub: "../bad" }), await token({}, new TextEncoder().encode("wrong-signing-key-at-least-32-bytes"))]) {
   cases.push({ path: "/api/app/orders", headers: { cookie: `session=${invalid}` }, status: 401 });
+}
+
+// Heavy route contracts extend the existing cases without changing their assertions.
+for (const test of [...[heavySpec("csv", 40000), heavySpec("json", 10000), heavySpec("thumbnail", 512), heavySpec("bcrypt", 10)], ...heavyEdges()]) {
+  cases.push({ ...test, status: test.status ?? 200 });
 }
 
 async function deployedResponse(baseURL, test) {

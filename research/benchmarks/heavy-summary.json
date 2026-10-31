@@ -1,0 +1,853 @@
+{
+  "selfFile": "research/benchmarks/heavy-self-path-recovery.json",
+  "hostedFile": "research/benchmarks/heavy-vercel.json",
+  "status": {
+    "self": "failed",
+    "vercelPrimaryWorkerRaw": "running",
+    "vercelPrimaryController": "failed",
+    "goOnly": "complete",
+    "bcryptDiagnostic": "complete"
+  },
+  "values": [
+    {
+      "environment": "self",
+      "variant": "node",
+      "workload": "csv",
+      "size": 100000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 618.0742309999987,
+      "p95Ms": 873.1100460000016,
+      "requestsPerSecond": 1.777840364911572,
+      "cpuMs": 1024,
+      "rssMiB": 873.83984375,
+      "sequentialCount": 40,
+      "concurrentCount": 19,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 7.1630274629005894,
+          "p95Ms": 8.120672814044132,
+          "requestsPerSecond": 0.09743692996994188,
+          "cpuMs": 8.159362549800797,
+          "rssMiB": 3.185109775892018
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "node",
+      "workload": "json",
+      "size": 30000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 55.97585000000254,
+      "p95Ms": 80.66029200000048,
+      "requestsPerSecond": 17.120774986904205,
+      "cpuMs": 79.5,
+      "rssMiB": 894.1484375,
+      "sequentialCount": 40,
+      "concurrentCount": 49,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 0.5555399022000507,
+          "p95Ms": 0.6696142926885372,
+          "requestsPerSecond": 0.9817625883637098,
+          "cpuMs": 0.6045627376425855,
+          "rssMiB": 0.6858425242619542
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "node",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 17.10774500000116,
+      "p95Ms": 37.283708999995724,
+      "requestsPerSecond": 48.95483845608496,
+      "cpuMs": 31,
+      "rssMiB": 898.2734375,
+      "sequentialCount": 40,
+      "concurrentCount": 100,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 1.238485579153241,
+          "p95Ms": 0.9885609580492937,
+          "requestsPerSecond": 0.5058785368999983,
+          "cpuMs": 1.158878504672897,
+          "rssMiB": 1.8438384502513692
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "node",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 95.1191700000054,
+      "p95Ms": 109.0238859999954,
+      "requestsPerSecond": 10.579720261497616,
+      "cpuMs": 103.33333333333333,
+      "rssMiB": 952.71875,
+      "sequentialCount": 3,
+      "concurrentCount": 16,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 1.3473354417318393,
+          "p95Ms": 1.5343789472138238,
+          "requestsPerSecond": 0.37644081548666963,
+          "cpuMs": 1.476190476190476,
+          "rssMiB": 1.9111560372050747
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "native",
+      "workload": "csv",
+      "size": 100000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 377.39473500000895,
+      "p95Ms": 420.547584999993,
+      "requestsPerSecond": 2.799661274318243,
+      "cpuMs": 400.5,
+      "rssMiB": 418.57421875,
+      "sequentialCount": 40,
+      "concurrentCount": 17,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 0.6105977503534034,
+          "p95Ms": 0.48166618506642656,
+          "requestsPerSecond": 1.574754027174704,
+          "cpuMs": 0.39111328125,
+          "rssMiB": 0.4790056458786874
+        },
+        "go": {
+          "p50Ms": 4.373728454566746,
+          "p95Ms": 3.91145349451328,
+          "requestsPerSecond": 0.1534391978657056,
+          "cpuMs": 3.191235059760956,
+          "rssMiB": 1.5256855653956773
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "native",
+      "workload": "json",
+      "size": 30000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 52.937625999999,
+      "p95Ms": 81.40872299997136,
+      "requestsPerSecond": 20.813054370319602,
+      "cpuMs": 76.25,
+      "rssMiB": 2393.98046875,
+      "sequentialCount": 40,
+      "concurrentCount": 55,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 0.9457225928681137,
+          "p95Ms": 1.0092788035031026,
+          "requestsPerSecond": 1.2156607622166429,
+          "cpuMs": 0.9591194968553459,
+          "rssMiB": 2.677385955561769
+        },
+        "go": {
+          "p50Ms": 0.5253866367503301,
+          "p95Ms": 0.6758275121332631,
+          "requestsPerSecond": 1.1934902564860117,
+          "cpuMs": 0.5798479087452472,
+          "rssMiB": 1.836265142185988
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "native",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 21.256442000012612,
+      "p95Ms": 44.53251099999761,
+      "requestsPerSecond": 50.105262262329674,
+      "cpuMs": 31.25,
+      "rssMiB": 2465.26953125,
+      "sequentialCount": 40,
+      "concurrentCount": 100,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1.2425040237629899,
+          "p95Ms": 1.1944227705457824,
+          "requestsPerSecond": 1.0234996956894609,
+          "cpuMs": 1.0080645161290323,
+          "rssMiB": 2.7444533349568183
+        },
+        "go": {
+          "p50Ms": 1.5388233154703388,
+          "p95Ms": 1.1807597183666303,
+          "requestsPerSecond": 0.517766528572978,
+          "cpuMs": 1.1682242990654206,
+          "rssMiB": 5.060328583913981
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "native",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "failed",
+      "experiment": "self / 4 vCPU",
+      "error": "HTTP 500; route=/api/heavy/bcrypt; platform=absent; request=absent",
+      "p50Ms": 12829.047722999996,
+      "p95Ms": 12839.40462799999,
+      "requestsPerSecond": null,
+      "cpuMs": 12823.333333333334,
+      "rssMiB": 632.0625,
+      "sequentialCount": 3,
+      "concurrentCount": null,
+      "generatorSaturated": false,
+      "concurrentCountLimited": null,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 134.87341955359017,
+          "p95Ms": 117.76689585253392,
+          "requestsPerSecond": null,
+          "cpuMs": 124.0967741935484,
+          "rssMiB": 0.6634303145603044
+        },
+        "go": {
+          "p50Ms": 181.71973831212009,
+          "p95Ms": 180.69904567485102,
+          "requestsPerSecond": null,
+          "cpuMs": 183.1904761904762,
+          "rssMiB": 1.2679188509367874
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "go",
+      "workload": "csv",
+      "size": 100000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 86.28673200000776,
+      "p95Ms": 107.5169590000005,
+      "requestsPerSecond": 18.2460630221007,
+      "cpuMs": 125.5,
+      "rssMiB": 274.3515625,
+      "sequentialCount": 40,
+      "concurrentCount": 44,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 0.13960577495748716,
+          "p95Ms": 0.12314250591041796,
+          "requestsPerSecond": 10.263049136590078,
+          "cpuMs": 0.12255859375,
+          "rssMiB": 0.31396092140024945
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "go",
+      "workload": "json",
+      "size": 30000,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 100.7593690000067,
+      "p95Ms": 120.45784099999582,
+      "requestsPerSecond": 17.43881381285792,
+      "cpuMs": 131.5,
+      "rssMiB": 1303.72265625,
+      "sequentialCount": 40,
+      "concurrentCount": 43,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 1.8000507183008767,
+          "p95Ms": 1.4933970360533173,
+          "requestsPerSecond": 1.0185761933205117,
+          "cpuMs": 1.6540880503144655,
+          "rssMiB": 1.4580606547780273
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "go",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 13.813438999990467,
+      "p95Ms": 37.715133999998216,
+      "requestsPerSecond": 96.7719222801546,
+      "cpuMs": 26.75,
+      "rssMiB": 487.17578125,
+      "sequentialCount": 40,
+      "concurrentCount": 100,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 0.8074377423786437,
+          "p95Ms": 1.0115714077696116,
+          "requestsPerSecond": 1.9767590974069715,
+          "cpuMs": 0.8629032258064516,
+          "rssMiB": 0.5423468633402622
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "self",
+      "variant": "go",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "complete",
+      "experiment": "self / 4 vCPU",
+      "error": null,
+      "p50Ms": 70.59798699998646,
+      "p95Ms": 71.05408099998021,
+      "requestsPerSecond": 28.104604565315157,
+      "cpuMs": 70,
+      "rssMiB": 498.50390625,
+      "sequentialCount": 3,
+      "concurrentCount": 16,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": null,
+      "ratios": {
+        "node": {
+          "p50Ms": 0.7422056668490953,
+          "p95Ms": 0.6517294843075325,
+          "requestsPerSecond": 2.6564600831266967,
+          "cpuMs": 0.6774193548387097,
+          "rssMiB": 0.5232435136287598
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "node",
+      "workload": "csv",
+      "size": 40000,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 469.6924430000072,
+      "p95Ms": 567.627754000001,
+      "requestsPerSecond": 29.685385465681463,
+      "cpuMs": 361.06185,
+      "rssMiB": 268.95703125,
+      "sequentialCount": 200,
+      "concurrentCount": 103,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 2.6233583632483093,
+          "p95Ms": 2.0282802479865265,
+          "requestsPerSecond": 0.43708717899109273,
+          "cpuMs": 8.652301753049054,
+          "rssMiB": 11.45640599001664
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "node",
+      "workload": "json",
+      "size": 10000,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 109.5418490000011,
+      "p95Ms": 150.43074300000444,
+      "requestsPerSecond": 124.62103948161341,
+      "cpuMs": 50.761449999999996,
+      "rssMiB": 294.515625,
+      "sequentialCount": 200,
+      "concurrentCount": 390,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 1.0036841108859273,
+          "p95Ms": 0.896053148108728,
+          "requestsPerSecond": 1.0956982733331946,
+          "cpuMs": 1.3774800921007464,
+          "rssMiB": 22.737032569360675
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "node",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 228.5731439999945,
+      "p95Ms": 325.1065290000406,
+      "requestsPerSecond": 53.61730717446276,
+      "cpuMs": 69.2193,
+      "rssMiB": 286.9609375,
+      "sequentialCount": 200,
+      "concurrentCount": 174,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 1.0847922303575679,
+          "p95Ms": 0.9158890271867538,
+          "requestsPerSecond": 0.9452779620567064,
+          "cpuMs": 5.116667405863308,
+          "rssMiB": 16.202470224966916
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "node",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 112.6576280000154,
+      "p95Ms": 121.59444299997995,
+      "requestsPerSecond": 60.358767990022436,
+      "cpuMs": 92.14,
+      "rssMiB": 93.30078125,
+      "sequentialCount": 3,
+      "concurrentCount": 16,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        },
+        "go": {
+          "p50Ms": 1.1635154281926068,
+          "p95Ms": 1.2379292362015015,
+          "requestsPerSecond": 0.7008911481678015,
+          "cpuMs": 1.3361950200849806,
+          "rssMiB": 5.2691374365762185
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "native",
+      "workload": "csv",
+      "size": 40000,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 304.43766000005417,
+      "p95Ms": 374.89178499998525,
+      "requestsPerSecond": 42.45889796519322,
+      "cpuMs": 163.91775,
+      "rssMiB": 22.71875,
+      "sequentialCount": 200,
+      "concurrentCount": 143,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.6481638453783884,
+          "p95Ms": 0.6604535848681997,
+          "requestsPerSecond": 1.4302963326610294,
+          "cpuMs": 0.45398800787178156,
+          "rssMiB": 0.08446981249909227
+        },
+        "go": {
+          "p50Ms": 1.700366044528579,
+          "p95Ms": 1.3395849609000625,
+          "requestsPerSecond": 0.6251641891641149,
+          "cpuMs": 3.9280412363722634,
+          "rssMiB": 0.967720465890183
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "native",
+      "workload": "json",
+      "size": 10000,
+      "status": "complete",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 169.0279809999629,
+      "p95Ms": 206.29872399999294,
+      "requestsPerSecond": 83.78927578376619,
+      "cpuMs": 93.74905,
+      "rssMiB": 9.43359375,
+      "sequentialCount": 200,
+      "concurrentCount": 263,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 1.5430448047299365,
+          "p95Ms": 1.3713867251189928,
+          "requestsPerSecond": 0.6723525668884223,
+          "cpuMs": 1.8468552415267887,
+          "rssMiB": 0.03203087696960051
+        },
+        "go": {
+          "p50Ms": 1.5487295528925158,
+          "p95Ms": 1.2288353923173925,
+          "requestsPerSecond": 0.7366955466107854,
+          "cpuMs": 2.544006328195067,
+          "rssMiB": 0.7282870928829915
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "native",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "running",
+      "experiment": "primary / 2 vCPU",
+      "error": null,
+      "p50Ms": 225.64735899999505,
+      "p95Ms": 310.94347600004403,
+      "requestsPerSecond": 53.47600767832579,
+      "cpuMs": null,
+      "rssMiB": null,
+      "sequentialCount": 200,
+      "concurrentCount": 184,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "interrupted",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.9871997866906029,
+          "p95Ms": 0.9564356549726665,
+          "requestsPerSecond": 0.9973646663067729,
+          "cpuMs": null,
+          "rssMiB": null
+        },
+        "go": {
+          "p50Ms": 1.0709066584126143,
+          "p95Ms": 0.8759889215996411,
+          "requestsPerSecond": 0.9427868391938334,
+          "cpuMs": null,
+          "rssMiB": null
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "go",
+      "workload": "csv",
+      "size": 40000,
+      "status": "complete",
+      "experiment": "Go-only / 1 vCPU",
+      "error": null,
+      "p50Ms": 179.04242499999964,
+      "p95Ms": 279.8566689999989,
+      "requestsPerSecond": 67.91639492652887,
+      "cpuMs": 41.73015,
+      "rssMiB": 23.4765625,
+      "sequentialCount": 200,
+      "concurrentCount": 219,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.38119077210700814,
+          "p95Ms": 0.4930285156564039,
+          "requestsPerSecond": 2.2878731019021235,
+          "cpuMs": 0.11557618175390173,
+          "rssMiB": 0.08728740940844988
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "go",
+      "workload": "json",
+      "size": 10000,
+      "status": "complete",
+      "experiment": "Go-only / 1 vCPU",
+      "error": null,
+      "p50Ms": 109.13976599999296,
+      "p95Ms": 167.8814960000018,
+      "requestsPerSecond": 113.73663946964803,
+      "cpuMs": 36.85095,
+      "rssMiB": 12.953125,
+      "sequentialCount": 200,
+      "concurrentCount": 352,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.9963294119674013,
+          "p95Ms": 1.1160052303936092,
+          "requestsPerSecond": 0.9126600126492183,
+          "cpuMs": 0.7259633048307328,
+          "rssMiB": 0.043981113056395564
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "go",
+      "workload": "thumbnail",
+      "size": 1024,
+      "status": "complete",
+      "experiment": "Go-only / 1 vCPU",
+      "error": null,
+      "p50Ms": 210.70684100000653,
+      "p95Ms": 354.96279499999946,
+      "requestsPerSecond": 56.72120722861653,
+      "cpuMs": 13.5282,
+      "rssMiB": 17.7109375,
+      "sequentialCount": 200,
+      "concurrentCount": 185,
+      "generatorSaturated": false,
+      "concurrentCountLimited": false,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.9218355109995408,
+          "p95Ms": 1.0918353319196341,
+          "requestsPerSecond": 1.057889890740953,
+          "cpuMs": 0.19543971117881861,
+          "rssMiB": 0.06171898396449865
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "go",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "complete",
+      "experiment": "Go-only / 1 vCPU",
+      "error": null,
+      "p50Ms": 96.8252119999961,
+      "p95Ms": 98.22406599999522,
+      "requestsPerSecond": 86.11717832049413,
+      "cpuMs": 68.957,
+      "rssMiB": 17.70703125,
+      "sequentialCount": 3,
+      "concurrentCount": 16,
+      "generatorSaturated": false,
+      "concurrentCountLimited": true,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 0.8594643231791004,
+          "p95Ms": 0.8078006163489841,
+          "requestsPerSecond": 1.4267550711891548,
+          "cpuMs": 0.7483937486433687,
+          "rssMiB": 0.1897843835042914
+        },
+        "go": {
+          "p50Ms": 1,
+          "p95Ms": 1,
+          "requestsPerSecond": 1,
+          "cpuMs": 1,
+          "rssMiB": 1
+        }
+      }
+    },
+    {
+      "environment": "vercel",
+      "variant": "native",
+      "workload": "bcrypt",
+      "size": 10,
+      "status": "diagnostic-only",
+      "experiment": "C1 diagnostic / 1 vCPU",
+      "error": "C1/CPU shared samples; C16 unmeasured",
+      "p50Ms": 11973.73717,
+      "p95Ms": 12079.358619,
+      "requestsPerSecond": null,
+      "cpuMs": 11938.958,
+      "rssMiB": 24.9140625,
+      "sequentialCount": 3,
+      "concurrentCount": null,
+      "generatorSaturated": false,
+      "concurrentCountLimited": null,
+      "cpuStatus": "complete",
+      "ratios": {
+        "node": {
+          "p50Ms": 106.28430034048262,
+          "p95Ms": 99.34137055097158,
+          "requestsPerSecond": null,
+          "cpuMs": 129.5741046233992,
+          "rssMiB": 0.2670295164329077
+        },
+        "go": {
+          "p50Ms": 123.66342322080826,
+          "p95Ms": 122.97758696937458,
+          "requestsPerSecond": null,
+          "cpuMs": 173.13627332975625,
+          "rssMiB": 1.4070152217074785
+        }
+      }
+    }
+  ]
+}

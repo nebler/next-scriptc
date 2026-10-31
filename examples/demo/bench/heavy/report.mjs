@@ -1,0 +1,236 @@
+// Mechanical numeric tables from retained evidence; prose lives in research/go-territory.md.
+import { readFile, writeFile } from "node:fs/promises";
+import { quantile } from "./client.mjs";
+const selfFile =
+  process.argv[2] ?? "research/benchmarks/heavy-self-path-recovery.json";
+const hostedFile = process.argv[3] ?? "research/benchmarks/heavy-vercel.json";
+const read = async (file) => {
+  try {
+    return JSON.parse(await readFile(file));
+  } catch {
+    return null;
+  }
+};
+const self = await read(selfFile),
+  hosted = await read(hostedFile),
+  goFollowup = await read("research/benchmarks/heavy-vercel-go.json"),
+  bcryptFollowup = await read(
+    "research/benchmarks/heavy-vercel-native-bcrypt.json",
+  );
+const values = [];
+for (const environment of ["self", "vercel"]) {
+  const rows =
+    environment === "self"
+      ? (self?.variants ?? []).flatMap((v) =>
+          v.rows.map((r) => ({ ...r, variant: v.variant })),
+        )
+      : [
+          ...(hosted?.rows ?? []).map((r) => ({
+            ...r,
+            experiment: "primary / 2 vCPU",
+          })),
+          ...(goFollowup?.rows ?? []).map((r) => ({
+            ...r,
+            experiment: "Go-only / 1 vCPU",
+          })),
+          ...(bcryptFollowup
+            ? [
+                {
+                  ...bcryptFollowup,
+                  id: "bcrypt",
+                  experiment: "C1 diagnostic / 1 vCPU",
+                  status:
+                    bcryptFollowup.status === "complete"
+                      ? "diagnostic-only"
+                      : bcryptFollowup.status,
+                  error: "C1/CPU shared samples; C16 unmeasured",
+                },
+              ]
+            : []),
+        ];
+  for (const r of rows) {
+    const seq = r.sequential?.status === "complete" ? r.sequential : null;
+    const concurrent =
+      r.concurrent?.status === "complete" ? r.concurrent : null;
+    values.push({
+      environment,
+      variant: r.variant,
+      workload: r.id,
+      size: r.size,
+      status: r.status,
+      experiment: r.experiment ?? "self / 4 vCPU",
+      error: r.error ?? null,
+      p50Ms: seq?.p50Ms ?? null,
+      p95Ms: seq?.p95Ms ?? null,
+      requestsPerSecond: concurrent?.requestsPerSecond ?? null,
+      cpuMs:
+        environment === "self"
+          ? (seq?.accounting?.cpuMsPerRequest ?? null)
+          : (r.cpu?.medianMs ?? null),
+      rssMiB:
+        environment === "self" && seq?.accounting?.peak
+          ? seq.accounting.peak.rssBytes / 1048576
+          : environment === "vercel" && r.cpu?.status === "complete"
+            ? quantile(
+                r.cpu.attempts
+                  .filter((a) => a.accepted)
+                  .map((a) => a.after.body.rss),
+                0.5,
+              ) / 1048576
+            : null,
+      sequentialCount: seq?.requests ?? null,
+      concurrentCount: concurrent?.requests ?? null,
+      generatorSaturated: Boolean(
+        seq?.generatorSaturationSuspected ||
+          concurrent?.generatorSaturationSuspected,
+      ),
+      concurrentCountLimited: concurrent?.countLimited ?? null,
+      cpuStatus: r.cpu ? (r.cpu.status ?? "interrupted") : null,
+    });
+  }
+}
+// Missing/failed stages retain explicit cells for every registered combination.
+for (const environment of ["self", "vercel"])
+  for (const workload of ["csv", "json", "thumbnail", "bcrypt"])
+    for (const variant of ["node", "native", "go"]) {
+      if (
+        !values.some(
+          (r) =>
+            r.environment === environment &&
+            r.workload === workload &&
+            r.variant === variant,
+        )
+      )
+        values.push({
+          environment,
+          workload,
+          variant,
+          status: "unavailable",
+          error: "stage not reached",
+          p50Ms: null,
+          p95Ms: null,
+          requestsPerSecond: null,
+          cpuMs: null,
+          rssMiB: null,
+          sequentialCount: null,
+          concurrentCount: null,
+          generatorSaturated: false,
+          concurrentCountLimited: null,
+          cpuStatus: null,
+        });
+    }
+const metrics = ["p50Ms", "p95Ms", "requestsPerSecond", "cpuMs", "rssMiB"];
+const ratio = (v, b) => (v !== null && b !== null && b !== 0 ? v / b : null);
+for (const r of values) {
+  r.ratios = {};
+  for (const base of ["node", "go"]) {
+    const b = values.find(
+      (v) =>
+        v.environment === r.environment &&
+        v.workload === r.workload &&
+        v.variant === base,
+    );
+    r.ratios[base] = Object.fromEntries(
+      metrics.map((m) => [m, ratio(r[m], b?.[m] ?? null)]),
+    );
+  }
+}
+const fmt = (n) =>
+  n === null || n === undefined ? "unavailable" : n.toFixed(3);
+const table = (headers, rows) =>
+  `| ${headers.join(" | ")} |\n| ${headers.map(() => "---").join(" | ")} |\n${rows.map((r) => `| ${r.join(" | ")} |`).join("\n")}\n`;
+let md =
+  "<!-- Generated by examples/demo/bench/heavy/report.mjs. Do not substitute historical rows. -->\n";
+for (const environment of ["self", "vercel"]) {
+  md += `\n### ${environment === "self" ? "Self-hosted Linux" : "Vercel previews"} values\n\n`;
+  md += table(
+    [
+      "Workload",
+      "Variant",
+      "C=1 p50 / p95 ms",
+      "C=16 req/s",
+      "CPU ms/request",
+      "RSS MiB (scope below)",
+      "C=1 / C=16 count",
+    ],
+    values
+      .filter((r) => r.environment === environment)
+      .map((r) => [
+        r.workload,
+        `${r.variant} (${r.experiment})`,
+        `${fmt(r.p50Ms)} / ${fmt(r.p95Ms)}`,
+        fmt(r.requestsPerSecond),
+        fmt(r.cpuMs),
+        fmt(r.rssMiB),
+        `${r.sequentialCount ?? "—"} / ${r.concurrentCount ?? "—"}`,
+      ]),
+  );
+  md +=
+    "\nRatios: variant / reference. ↓ latency/CPU/RSS; ↑ throughput. Missing values have no ratio.\n\n";
+  md += table(
+    [
+      "Workload / variant",
+      "p50 vs Node / Go ↓",
+      "p95 vs Node / Go ↓",
+      "req/s vs Node / Go ↑",
+      "CPU vs Node / Go ↓",
+      "RSS vs Node / Go ↓",
+    ],
+    values
+      .filter((r) => r.environment === environment)
+      .map((r) => [
+        `${r.workload} / ${r.variant}`,
+        ...metrics.map(
+          (m) => `${fmt(r.ratios.node[m])} / ${fmt(r.ratios.go[m])}`,
+        ),
+      ]),
+  );
+}
+md += "\n### Failed, diagnostic-only or incomplete rows\n\n";
+const failed = values.filter(
+  (r) =>
+    r.status !== "complete" ||
+    ["unavailable", "interrupted"].includes(r.cpuStatus),
+);
+md += failed.length
+  ? failed
+      .map(
+        (r) =>
+          `- ${r.environment} ${r.variant} ${r.workload}: ${r.error ?? "CPU series interrupted or instance-token attempts exhausted"}. Completed subwindows remain separately labeled in the values table.`,
+      )
+      .join("\n") + "\n"
+  : "None.\n";
+md += "\n### Generator saturation / short-window flags\n\n";
+md +=
+  values
+    .filter((r) => r.generatorSaturated)
+    .map(
+      (r) =>
+        `- ${r.environment} ${r.variant} ${r.workload}: at least one measured window reached ≥0.8 generator CPU cores; throughput cannot isolate server capacity.`,
+    )
+    .join("\n") + "\n";
+md +=
+  "\nAll count/duration caps, actual elapsed times and per-window warmup samples are in the raw artifacts. Bcrypt is a bounded batch; its three sequential samples do not establish a latency distribution.\n";
+await writeFile(
+  "research/benchmarks/heavy-summary.json",
+  JSON.stringify(
+    {
+      selfFile,
+      hostedFile,
+      status: {
+        self: self?.status ?? "absent",
+        vercelPrimaryWorkerRaw: hosted?.status ?? "absent",
+        vercelPrimaryController:
+          (await read("research/benchmarks/heavy-vercel-controller.json"))
+            ?.status ?? "absent",
+        goOnly: goFollowup?.status ?? "absent",
+        bcryptDiagnostic: bcryptFollowup?.status ?? "absent",
+      },
+      values,
+    },
+    null,
+    2,
+  ) + "\n",
+);
+await writeFile("research/benchmarks/heavy-tables.md", md);
+console.log(md);
