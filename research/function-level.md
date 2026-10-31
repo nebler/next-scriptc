@@ -6,7 +6,7 @@
 
 A named, module-level async function can start its block body with `"use scriptc"`, including in a `.tsx` Server Component module. A file-level directive selects all its named exported async functions (declarations or block-bodied arrows, including local export aliases). The original TypeScript signatures remain at the call site. Production stubs invoke one compiled binary containing all discovered functions. In dev there is no transform or native process; the same bodies execute as JS. Server Components, Server Actions and route handlers can call them.
 
-The demo's `/reports?size=5000|50000|200000` is one monthly revenue dashboard at three realistic input sizes. `lib/revenue.ts` uses a **function-body directive**, the existing revenue route's unchanged grouping/summing/sorting loop, and the existing fixture generator extended with a size parameter. Both runtimes pre-generate the same stored JSON exports during module initialization, parse an export per query, and return the same 248 day/region rows. Fixture generation is outside the timed function on both sides; no workload or algorithm was tuned for scriptc. The existing native route keeps its original 5,000-event default.
+The demo's `/reports?size=5000|15000|50000|200000` is one monthly revenue dashboard at four realistic input sizes. `lib/revenue.ts` uses a **function-body directive**, the existing revenue route's unchanged grouping/summing/sorting loop, and the existing fixture generator extended with a size parameter. Both runtimes pre-generate the same stored JSON exports during module initialization, parse an export per query, and return the same 248 day/region rows. Fixture generation is outside the timed function on both sides; no workload or algorithm was tuned for scriptc. The existing native route keeps its original 5,000-event default.
 
 `connection()` inside Suspense precedes the call, so the partial static shell contains request-time report content. Search parameters select dates and size. The report's normal path makes **one** native call; its heading is ordinary JSX. The file-level `echo`/`fail` example lives in `lib/native-example.ts`, called by the separately tested `/api/function-example` route and Server Action. The form's redirect uses the action's returned value. The benchmark does not invoke that action or file-level example through the page. `?profile=1` enables the same `performance.now()` body timers in either runtime, with normal latency windows leaving profiling disabled.
 
@@ -41,7 +41,7 @@ Optional parameters, properties and tuple elements are **rejected**, even with `
 
 TypeScript is structural and permits assertions, unchecked `JSON.parse` and extra properties. It cannot express finite numbers, dense arrays, acyclic objects or enumerable data descriptors. Consequently **type checking alone cannot safely remove the residual traversal**. Production results retain checks for all of these cases, including extra properties, Date/toJSON, symbols, accessors and hidden properties, then use plain `JSON.stringify`. The new traversal obtains all descriptors once per container and reads their values without invoking getters, instead of calling `getOwnPropertyDescriptor` and reading the original object separately for every field. An explicit descriptor type avoids scriptc's `any` tier. Shared acyclic objects remain legal; cycles fail. Array prototypes must be ordinary arrays as well. Node-side argument validation is unchanged.
 
-The benchmark compares this production traversal with the previous strict traversal, plain stringify and a finite-number replacer. The replacer is a diagnostic lower bound only: JSON invokes `toJSON` before the replacer sees the value, and omits symbol/nonenumerable fields. It cannot preserve the existing rejection contract. No unsafe fast path or Node execution fallback is used. Dev/baseline continue to run untransformed JS; valid JSON data produces the same serialized bytes. Build errors prevent unsupported signatures from reaching production, while invalid runtime values fail at the transport boundary.
+The benchmark compares this production traversal with the previous strict traversal, plain stringify and a finite-number replacer. The replacer is a diagnostic lower bound only: JSON invokes `toJSON` before the replacer sees the value, and omits symbol/nonenumerable fields. It cannot preserve the existing rejection contract. No unsafe fast path or Node execution fallback is used. Dev/baseline continue to run untransformed JS; the demo produces byte-identical JSON in verification. Build errors prevent unsupported signatures from reaching production, while invalid values exposed by the compiler fail at the transport boundary. An existing record-narrowing limitation is documented below.
 
 ## Transport, errors and lifecycle
 
@@ -51,7 +51,106 @@ Socket failures reject in-flight calls without retrying possibly completed work.
 
 The supervisor has **one cache keyed by output directory**. Route startup reads its build manifest, then shares that cache with function startup. Function startup checks the build ID and an executable regular binary; it no longer pins a port range or display label. Missing/non-executable binaries fail with a rebuild instruction. The CLI build's exit hook kills its prerender worker on both successful and failed builds. `test/function-build.mjs` verifies a real static prerender contains the native return value, then deliberately fails TypeScript after the worker is ready, asserting the PID is gone after both exits. This confirms `next build` CLI lifecycle, not a process-lifetime guarantee for unsupported programmatic calls to Next's internal build API.
 
-## Review-round measurements
+## Review-round-3 measurements (after)
+
+The native result boundary is about **2.4× cheaper**, while retaining the rejection rules for values exposed by the compiler. It is still much more expensive than plain stringify. **Linux 5k still loses** (15.728 vs 14.201 ms), while 15k wins (14.866 vs 16.013 ms): the observed crossover is now **between 5k and 15k**, with overlapping scheduling tails and no confidence interval. macOS wins all four page windows, including 5k; this only gives an observed upper bound of 5k, not a measured lower crossover bracket. At macOS 5k the complete native call (2.099 ms) still exceeds Node parse+aggregate (1.796 ms), so the small page win is not evidence that the function offload itself is always faster.
+
+The core revenue algorithm and existing fixture contents are unchanged; the only workload addition is a fourth stored export at 15k. Warm C=1 calls consume the full page and check event counts. **The new Linux window has 10 warmups and 50 page/profile samples**, versus 50/200 in round 2 and the new macOS window. Both retain 1,000 echo samples. Adding 15k changes the alternating runtime order: native first at 5k/50k, Node first at 15k/200k. Linux also uses the function-only fixture described below. These are single windows on shared hosts; page deltas cannot all be attributed to the serializer. The same-process legacy/new micro-benchmark provides the stronger direct comparison.
+
+### Page curve: old vs new
+
+All times are milliseconds. R2 is the retained round-2 window, R3 the new window; `—` means not measured in round 2.
+
+| Platform | Events | R2 native p50 / p99 | R3 native p50 / p99 | R2 Node p50 / p99 | R3 Node p50 / p99 | R3 rendering control p50 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Linux | 5,000 | 17.246 / 47.348 | 15.728 / 28.299 | 12.660 / 28.607 | 14.201 / 28.374 | 11.193 |
+| Linux | 15,000 | — | 14.866 / 31.111 | — | 16.013 / 27.285 | 8.558 |
+| Linux | 50,000 | 27.301 / 88.701 | 19.121 / 86.386 | 36.018 / 92.142 | 35.532 / 46.715 | 8.444 |
+| Linux | 200,000 | 52.328 / 111.701 | 48.097 / 98.049 | 119.972 / 203.565 | 112.881 / 195.632 | 7.841 |
+| macOS (indicative) | 5,000 | 8.849 / 18.060 | 6.785 / 10.415 | 8.073 / 11.275 | 7.686 / 10.168 | 6.065 |
+| macOS (indicative) | 15,000 | — | 7.544 / 9.555 | — | 11.177 / 13.372 | 5.826 |
+| macOS (indicative) | 50,000 | 14.988 / 22.789 | 11.835 / 14.392 | 32.303 / 101.054 | 24.240 / 26.913 | 5.806 |
+| macOS (indicative) | 200,000 | 32.704 / 35.525 | 31.740 / 34.294 | 78.466 / 88.310 | 82.139 / 90.216 | 5.785 |
+
+### Boundary micro-benchmark at 5k: old vs new
+
+The new probe imports the production `serializeResult`, the legacy argument/strict serializer and the same revenue function. Each native and Node probe compares all serialization outputs for equality. Result timing includes the same 248 rows plus diagnostic timing fields. Native probe builds use release optimization and `--node-islands=off`, with no compiler change.
+
+| Operation (p50 ms) | R2 Linux | R3 Linux | R2 macOS | R3 macOS |
+| --- | ---: | ---: | ---: | ---: |
+| Node arguments: unchanged strict checks + stringify | 0.0033 | 0.0030 | 0.0012 | 0.0010 |
+| Native arguments: parse | 0.0005 | 0.0004 | 0.0000 | 0.0000 |
+| Native result: production checks + plain stringify | 4.0087 | 1.6901 | 3.0820 | 1.2800 |
+| Native result: legacy checks + stringify, same R3 probe | — | 4.1576 | — | 3.1000 |
+| Native result: plain stringify | 0.0147 | 0.0141 | 0.0100 | 0.0110 |
+| Native result: finite-number replacer (insufficient contract) | — | 0.1761 | — | 0.1340 |
+| Node result: checks + stringify (diagnostic only) | 0.2046 | 0.4929 | 0.1179 | 0.2667 |
+| Node result: parse | 0.0868 | 0.0862 | 0.0564 | 0.0583 |
+
+Same-probe native legacy → bulk traversal is **4.158 → 1.690 ms on Linux** and **3.100 → 1.280 ms on macOS**. Relative to the retained R2 production values (4.009 / 3.082), the new cost is about 58% lower. The finite-only replacer is faster (0.176 / 0.134 ms), but would miss lossy object shapes and cannot replace these checks safely. Bulk descriptor allocation is slower in Node than the old traversal (0.493 vs 0.201 ms in the R3 diagnostic); that is why the production Node **argument** path still uses its original cheap validator. The Node page has no result-transport serializer cost.
+
+| Echo round trip | R2 p50 / p99 | R3 p50 / p99 |
+| --- | ---: | ---: |
+| Linux | 0.146 / 2.330 | 0.121 / 2.220 |
+| macOS (indicative) | 0.077 / 0.164 | 0.080 / 0.190 |
+
+### New compute and complete-call profile
+
+Independent medians; these columns are not an additive per-request trace. Native body timers come from the real production binary; Node timers are the same TypeScript executed in-process.
+
+| Platform | Events | Native parse | Native aggregate | Node parse | Node aggregate | Complete native call |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Linux | 5,000 | 0.417 | 0.283 | 1.390 | 0.963 | 2.692 |
+| Linux | 15,000 | 1.247 | 0.820 | 4.073 | 2.738 | 4.191 |
+| Linux | 50,000 | 4.131 | 2.659 | 13.902 | 9.078 | 9.436 |
+| Linux | 200,000 | 16.738 | 10.726 | 54.896 | 57.047 | 33.126 |
+| macOS (indicative) | 5,000 | 0.360 | 0.223 | 0.969 | 0.826 | 2.099 |
+| macOS (indicative) | 15,000 | 1.095 | 0.607 | 2.872 | 2.312 | 3.488 |
+| macOS (indicative) | 50,000 | 3.634 | 1.960 | 9.635 | 7.677 | 7.699 |
+| macOS (indicative) | 200,000 | 14.495 | 7.988 | 38.569 | 33.545 | 26.814 |
+
+### Provenance, budget and limits
+
+- Linux: Intel(R) Xeon(R) Processor @ 2.90GHz, linux/x64, Node v24.22.1, scriptc 0.4.6, 2 vCPUs / 4 GiB, server/native pinned to CPU 0 and load to CPU 1. [Raw results](benchmarks/functions-linux-2026-10-31T08-55-36.833Z.json), [archive SHA, command steps, allocation and stopped status](benchmarks/functions-linux-2026-10-31T08-55-36.833Z.provenance.json).
+- macOS: Apple M4 Pro, darwin/arm64, Node v24.22.0, scriptc 0.4.6, shared host, no affinity; **indicative**. [Raw results](benchmarks/functions-round3-macos-2026-10-31.json), [source/result/binary hashes and commands](benchmarks/functions-round3-macos-2026-10-31.provenance.json).
+- Both retained windows use harness snapshot `1496b2b0c04ffeddfffc854c4bdb2da0feebd95f` and revenue source SHA-256 `8c5798815e497d271cbd9c89eb65c83868eec6250b18d8050841be667df963a2`. Runtime implementation was committed as `da6c7e3`; the next commit changes only the benchmark harness. Native artifacts are built on each OS.
+- The original harness expected the literal `distDir: ".next-node"`; main now has a Vercel-dependent conditional. Both first attempts hit that stale assertion after page timing. The Linux attempt stopped after 310.000 s (no results file; its samples are not reconstructed or selectively retained). [Failure provenance](benchmarks/functions-linux-2026-10-31T08-48-35.713Z.provenance.json). The harness now matches the output-directory string and saves checkpoints after each size, so a later control/probe failure no longer discards page results.
+- The Linux retry was capped at 135 s and completed in 111.644 s. To stay within budget it uses `FUNCTION_SANDBOX_FUNCTIONS_ONLY=1`: **only inside the disposable archive**, unrelated `route.native.ts` files are renamed `route.ts`. Their bodies execute as ordinary Node routes; the report, native function, stubs, HTTP handler and serializer are unchanged. This avoids compiling/starting 16 unused native route workers. No timed request targets those routes. The page floor/idle-worker setup therefore differs from R2 and macOS; do not interpret cross-window page deltas as a controlled serializer-only experiment. The in-process old/new micro-benchmark uses exactly the same result and process.
+- **Both Linux sandboxes were stopped.** Combined conservative allocated upper bound: **0.234247 vCPU-hours**, below 0.25; reported active CPU totals 549,626 ms (0.152674 vCPU-hours). The first attempt used 0.172222 allocated hours; the retry 0.062024. No third sandbox was started. `.env.local` was copied from the requested main checkout, ignored by Git and excluded from both archives.
+
+Retained retry command (its cap is a retry budget, not a claim that the full default benchmark fits in 135 seconds):
+
+```sh
+FUNCTION_SANDBOX_LIFETIME_MS=135000 FUNCTION_SANDBOX_FUNCTIONS_ONLY=1 \
+  FUNCTION_BENCH_PAGES=50 FUNCTION_BENCH_WARMUP=10 \
+  node --env-file=.env.local scripts/sandbox-functions.mjs
+```
+
+### Verification and remaining questions
+
+All requested suites passed with Node 24.22.0 and `SCRIPTC_CHECKER_SERVER=0`:
+
+```sh
+node --test packages/next-scriptc/test/*.mjs
+node --test packages/next-scriptc/shim/test/parity.mjs
+node examples/demo/test/functions.mjs
+FUNCTION_WEBPACK=1 node examples/demo/test/functions.mjs
+node examples/demo/test/function-build.mjs
+DEMO_PROXY_TIMEOUT_MS=180000 node examples/demo/test/e2e.mjs
+DEMO_PROXY_TIMEOUT_MS=180000 node examples/demo/test/routes.mjs
+```
+
+- Package: **19 passed**. The type tests cover 26 accepted/rejected signature cases plus extended-tsconfig/imported-inference integration, strict-null requirements, standard utility types through extraction, and path-rich errors. Runtime tests compare Node/native rejection of Date, undefined, NaN/Infinity, cycles, getters, sparse arrays, symbols and an invalid extra property retained in a dynamic record after a narrowing assertion. Node tests additionally cover nonenumerable properties and sparse arrays with a compensating extra key. Shared acyclic objects serialize normally.
+- Shim: **104 HTTP comparisons** passed, including parent death during streams.
+- Function E2E: Turbopack and webpack passed; **raw JSON text** is byte-identical between native production and untransformed dev at **5k, 15k, 50k and 200k**. Range/empty/error cases, file-level echo/fail, route and Server Action calls, browser chunks, native crash/restart and no native worker in dev all passed.
+- Build lifecycle: native prerender succeeded; successful and deliberately failed builds terminated their worker. The isolated fixture now explicitly enables strict TypeScript, matching the JSON checker requirement.
+- Default demo E2E: 12 curl/report comparisons plus process ownership, crash/recovery/cutoff and SIGTERM/SIGKILL cleanup passed. Default routes: **85 cases per runtime**, headers/status/body parity, all **17** native processes and ports cleaned up. No Vercel integration source was edited and no deployment was made.
+
+**Existing compiler limit:** a statically narrowed record may lose extra fields during scriptc lowering *before either validator sees it*. For example, with `const value = { value: 1, hidden: undefined } as { value: number }`, native `Object.getOwnPropertyNames(value)` exposes only `value`; both the old and new serializers emit `{"value":1}`, whereas Node rejects the hidden undefined field. This was reproduced against both serializers with scriptc 0.4.6. The dynamic-record assertion regression retains and rejects that extra field, but it does not prove arbitrary assertion/assignment equivalence. Signature checks are not a proof of body soundness, and the adapter cannot validate fields the compiler has erased. This is a pre-existing compiler parity question, not a removed runtime check; applications should avoid narrowing away result fields. A compiler fix or a stricter source-level restriction needs separate investigation.
+
+Other open questions: lowering the remaining bulk-descriptor allocation cost without dropping checks, repeated Linux windows/confidence intervals (especially the 5k–15k bracket), a lower-size macOS crossover, and concurrent/cold-start/memory/data-placement costs. This remains a warm C=1 prototype measurement.
+
+## Review-round-2 measurements (before)
 
 The 5k case loses in both final windows. Native compute is substantially faster, but strict result reflection/validation erases that small saving. As the event count grows while the dashboard result remains 248 rows, compute amortizes the fixed boundary/rendering costs. The observed crossover is **between 5k and 50k events**, not a precisely identified threshold.
 

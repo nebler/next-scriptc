@@ -1,0 +1,42 @@
+{
+  "sandbox": "orange-distant-canidae-y7HTQ1",
+  "cwd": "/vercel",
+  "commit": "da6c7e3f88295bd5be4ac79723ccdbdd417e36a3",
+  "archiveSha256": "f53d15fcb6cbdcdff57bc9d4fdfeb79365493c5fe8faea4bb41d974f9a3f6671",
+  "startedAt": "2026-10-31T08:48:35.714Z",
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 2,
+  "memoryMiB": 4096,
+  "lifetimeMs": 450000,
+  "maxVcpuHours": 0.25,
+  "affinity": "app and native: CPU 0; load generator: CPU 1; C=1",
+  "status": "failed",
+  "steps": [
+    {
+      "label": "Compiler and affinity tools",
+      "elapsedMs": 15381,
+      "exitCode": 0
+    },
+    {
+      "label": "Exact lockfile install",
+      "elapsedMs": 14192,
+      "exitCode": 0
+    },
+    {
+      "label": "Native and Node production builds",
+      "elapsedMs": 135943,
+      "exitCode": 0
+    },
+    {
+      "label": "Page curve, profile and overhead",
+      "elapsedMs": 141130,
+      "exitCode": 1
+    }
+  ],
+  "error": "Error: Page curve, profile and overhead: exit 1\n    at step (file:///Users/noah/.t3/worktrees/next-scriptc/t3-4d2927c8/scripts/sandbox-functions.mjs:31:36)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-4d2927c8/scripts/sandbox-functions.mjs:56:3",
+  "downloadError": "No results file",
+  "activeCpuDurationMs": 419393,
+  "stopped": true,
+  "elapsedMs": 310000,
+  "allocatedVcpuHoursUpperBound": 0.17222222222222222
+}

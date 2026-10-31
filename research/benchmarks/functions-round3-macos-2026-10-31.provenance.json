@@ -1,0 +1,25 @@
+{
+  "commit": "1496b2b0c04ffeddfffc854c4bdb2da0feebd95f",
+  "measuredAt": "2026-10-31T09:01:46.991543+00:00",
+  "node": "v24.22.0",
+  "cpu": "Apple M4 Pro",
+  "platform": "darwin/arm64",
+  "scriptc": "0.4.6",
+  "revenueSourceSha256": "8c5798815e497d271cbd9c89eb65c83868eec6250b18d8050841be667df963a2",
+  "resultsSha256": "69ad315ca81939aead11fe007b91d74a1e5ca0225f2653c8623322f1faa311f5",
+  "nativeBinarySha256": "b193ae6234ecbd426493293a4914109e7dee06a686f6ab02a71bf40f27e3c234",
+  "bundler": "Turbopack for both production variants and rendering control",
+  "commands": [
+    "node examples/demo/test/e2e.mjs",
+    "node examples/demo/test/routes.mjs",
+    "NEXT_SCRIPTC_BASELINE=node pnpm --filter demo build",
+    "node examples/demo/bench/functions.mjs --skip-build --output=research/benchmarks/functions-round3-macos-2026-10-31.json"
+  ],
+  "artifactNote": "Native production artifacts built during verification at da6c7e3; 1496b2b changes only benchmark/checkpoint harnesses. Runtime sources identical. No local tests/builds ran concurrently with the retained window.",
+  "affinity": null,
+  "host": "shared, indicative",
+  "warmup": 50,
+  "pageSamples": 200,
+  "echoSamples": 1000,
+  "results": "functions-round3-macos-2026-10-31.json"
+}
