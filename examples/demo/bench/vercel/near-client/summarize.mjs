@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import { readFileSync, writeFileSync } from 'node:fs';
+const directory = process.env.NEAR_OUTPUT ?? 'research/vercel-near-client';
+const load = name => JSON.parse(readFileSync(`${directory}/${name}.json`));
+const run = load('run'); assert.equal(run.status, 'complete');
+const q = (xs, p) => xs.toSorted((a, b) => a - b)[Math.ceil(xs.length * p) - 1];
+const batches = run.batches.map(b => ({ name: b.name, ...load(b.name) }));
+const summary = samples => ({ count: samples.length, e2eP50Ms: q(samples.map(s => s.totalMs), .5), e2eP95Ms: q(samples.map(s => s.totalMs), .95), ttfbP50Ms: q(samples.map(s => s.ttfbMs), .5), computeP50Ms: q(samples.map(s => s.computeMs), .5), computeP95Ms: q(samples.map(s => s.computeMs), .95), overheadP50Ms: q(samples.map(s => s.totalMs - s.computeMs), .5), renderP50Ms: samples[0]?.renderMs === undefined ? undefined : q(samples.map(s => s.renderMs), .5), transportBeyondRenderP50Ms: samples[0]?.renderMs === undefined ? undefined : q(samples.map(s => s.totalMs - s.renderMs), .5), reusedCount: samples.filter(s => s.reusedSocket).length, instances: [...new Set(samples.map(s => s.targetInstance))] });
+const all = batches.flatMap(b => b.samples);
+assert(all.every(s => s.status === 200 && /^iad1::iad1::/.test(s.vercelId)));
+assert(batches.filter(b => b.status === 'complete').flatMap(b => b.samples).every(s => s.valid));
+const rows = run.targets.map(t => {
+  const warm = batches.filter(b => b.name.includes('-c1-')).flatMap(b => b.samples).filter(s => s.target === t.id && s.phase === 'measured');
+  const warmups = batches.filter(b => b.name.includes('-c1-')).flatMap(b => b.samples).filter(s => s.target === t.id && s.phase === 'warmup');
+  assert.equal(warm.length, 60); assert.equal(warmups.length, 10);
+  assert(warm.every(s => s.reusedSocket && s.ttfbMs >= 0 && s.ttfbMs <= s.totalMs));
+  assert(all.filter(s => s.target === t.id).every(s => s.resultSha256 === t.expected));
+  const c4 = batches.find(b => b.name.startsWith('vector-c4-') && b.status === 'complete' && b.windows?.[0]?.target === t.id);
+  if (t.kind === 'vector') { assert(c4); assert.equal(c4.samples.filter(s => s.phase === 'warmup').length, 4); }
+  const first = batches.find(b => b.name.endsWith('-first')).samples.find(s => s.target === t.id) ?? batches.filter(b => b.name.endsWith('-first')).flatMap(b => b.samples).find(s => s.target === t.id);
+  return { id: t.id, ...summary(warm), first: { e2eMs: first.totalMs, computeMs: first.computeMs, instance: first.targetInstance, vercelId: first.vercelId }, ...(c4 ? { c4: { ...summary(c4.samples.filter(s => s.phase === 'measured')), ...c4.windows[0] } } : {}) };
+});
+const cpuMs = batches.reduce((s, b) => s + b.cpu.userMs + b.cpu.systemMs, 0), wallMs = batches.reduce((s, b) => s + b.elapsedMs, 0);
+const out = { rows, validation: { requests: all.length, failed: all.filter(s => !s.valid).length, regions: [...new Set(batches.map(b => b.region))], targetIdPrefixes: [...new Set(all.map(s => s.vercelId.split('::').slice(0, 2).join('::')))], cacheStates: [...new Set(all.map(s => s.cache))], reused: all.filter(s => s.reusedSocket).length, warmC1Reused: rows.reduce((s, r) => s + r.reusedCount, 0) }, client: { invocations: batches.length, instances: [...new Set(batches.map(b => b.instance))], cpuMs, wallMs, meanCores: cpuMs / wallMs, maxInvocationCores: Math.max(...batches.map(b => b.cpu.cores)), maxC4Cores: Math.max(...batches.flatMap(b => b.windows).map(w => w.cpuCores)), maxEventLoopUtilization: Math.max(...batches.map(b => b.eventLoop.utilization)), maxEventLoopDelayMs: Math.max(...batches.map(b => b.eventLoop.delayMaxMs)), maxInvocationMs: Math.max(...batches.map(b => b.elapsedMs)) } };
+out.validation.protocolResponses = batches.filter(b => b.status === 'complete').reduce((s, b) => s + b.samples.length, 0);
+out.validation.applicationOrResultFailures = all.filter(s => s.status !== 200 || s.resultSha256 !== run.targets.find(t => t.id === s.target).expected).length;
+out.validation.failedBatches = batches.filter(b => b.status !== 'complete').map(b => ({ name: b.name, recorded: b.samples.length, reason: 'socket-observation', dispatched: b.name.includes('-v2-') ? 4 : b.samples.length }));
+out.validation.dispatchedRequests = all.length + out.validation.failedBatches.reduce((s, b) => s + b.dispatched - b.recorded, 0);
+out.client.maxSuccessfulInvocationCores = Math.max(...batches.filter(b => b.status === 'complete').map(b => b.cpu.cores));
+out.client.maxC1InvocationCores = Math.max(...batches.filter(b => b.name.includes('-c1-')).map(b => b.cpu.cores));
+writeFileSync(`${directory}/summary.json`, JSON.stringify(out) + '\n');
+console.log(JSON.stringify(out, null, 2));
