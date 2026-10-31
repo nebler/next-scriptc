@@ -159,6 +159,8 @@ try {
     running.delete(build);
   }
   const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
+  const functions = JSON.parse(await readFile(path.join(demo, distDir, "scriptc-functions/manifest.json"), "utf8"));
+  const processCount = manifest.processes.length + functions.processes.length;
   if (process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light") {
     assert.equal(manifest.processes.length, 9);
     assert.equal(manifest.processes.find((native) => native.group === "light").routes.length, 8);
@@ -170,7 +172,7 @@ try {
   for (const phase of ["beforeFiles", "afterFiles"]) {
     assert.ok(!routing.rewrites[phase].some((route) => route.source === "/api/static-fixture"), "prerender rewrite removed");
   }
-  const ports = [port, ...manifest.routes.map((route) => route.port)];
+  const ports = [port, ...manifest.routes.map((route) => route.port), ...functions.processes.map((native) => native.port)];
   await assertPortsFree(ports);
   const dev = start(["dev", "-p", String(port)]);
   await wait(dev, /Ready in/);
@@ -184,7 +186,7 @@ try {
   assert.deepEqual(await responses(true), reference, "dev/native body bytes");
   assert.deepEqual(await reportResponses(true), reportReference, "dev/native report result bytes (threads 1, 4, 1)");
   const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
-  assert.equal(pids.length, manifest.processes.length);
+  assert.equal(pids.length, processCount);
   // Signal only the Next server, leaving native children to its lifecycle hook.
   const { stdout: processList } = await curl("ps", ["-axo", "pid=,ppid=,args="]);
   const processes = processList.split("\n").map((line) => line.trim().match(/^(\d+)\s+(\d+)\s+(.+)$/)).filter(Boolean);
@@ -199,7 +201,7 @@ try {
   const killed = start(["start", "-p", String(port)]);
   await productionReady(killed);
   const killedPids = nativePids(killed);
-  assert.equal(killedPids.length, manifest.processes.length, "each binary starts exactly once");
+  assert.equal(killedPids.length, processCount, "each binary starts exactly once");
   killed.child.kill("SIGKILL");
   assert.equal((await killed.exit).signal, "SIGKILL");
   running.delete(killed);
@@ -241,7 +243,7 @@ try {
     assert.equal(recovered.headers.get("x-next-scriptc"), "native");
     await recovered.arrayBuffer();
   }
-  assert.equal(nativePids(crashed).length, manifest.processes.length + 1, "only the crashed process restarted");
+  assert.equal(nativePids(crashed).length, processCount + 1, "only the crashed process restarted");
   // Repeated failures stop retrying this route without taking down Next.
   for (let count = 2; count <= 5; count++) {
     const offset = crashed.output.length;
@@ -267,7 +269,7 @@ try {
   await assertPortsFree(ports);
   const alias = start(["alias", "-p", String(port)]);
   await productionReady(alias);
-  assert.equal(nativePids(alias).length, manifest.processes.length);
+  assert.equal(nativePids(alias).length, processCount);
   alias.child.kill("SIGTERM");
   assert.equal((await alias.exit).code, 143, alias.output);
   running.delete(alias);
