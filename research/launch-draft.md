@@ -85,17 +85,17 @@ Evidence per value: **2.5x** rounds **60.620 / 24.329 = 2.492x**, native/Node wa
 
 Non-numeric loss claims: [Go-territory Linux values and hosted limitations](go-territory.md#self-hosted-linux-values), [resize scout summary](scouting-summary.md#takeaways), [float and binary CPU-policy results](vector-cpu-levels.md#measurements). Thumbnails are raw RGBA arithmetic, not image decoding/encoding. Hosted Go-territory completion used a different generator allocation and contains incomplete/diagnostic-only rows; use the self-hosted evidence for the broad list, not a claim of one clean hosted three-way experiment. The regex explanation is a plausible implementation explanation from the existing draft, not isolated causal proof; measured Markdown behavior is the claim.
 
-### Tweet 6: mechanism, repo and RFC (254 chars)
+### Tweet 6: mechanism, repo and RFC (277 chars)
 
-<!-- count: 254 -->
+<!-- count: 277 -->
 ```text
 How: scriptc compiles route.native.ts into a Linux binary that speaks Vercel's Function protocol. next-scriptc wraps Vercel's Next.js adapter and substitutes native routes. Dev runs the same TS on Node.
 
-Repo: {{REPO_URL}}
-Next primitive RFC: {{RFC_URL}}
+Repo: https://github.com/nebler/next-scriptc
+Next primitive RFC: https://github.com/nebler/next-scriptc/blob/main/research/next-primitive.md
 ```
 
-Evidence: [native deployment method/topology](vercel-final.md#method-review-and-provenance), [native Function design](vercel-native-functions.md), [function dev behavior](function-level.md#what-works), [Next primitive investigation/RFC material](next-primitive.md). Fill `{{REPO_URL}}` with the user's public repository and `{{RFC_URL}}` with its published `research/next-primitive.md` permalink or the user's actual RFC. This checkout has no configured remote. The route.go prototype is [Next.js PR](https://github.com/vercel/next.js/pull/100130) and [adapter-vercel PR](https://github.com/nextjs/adapter-vercel/pull/147), context links rather than an RFC for this adapter. No public scriptc primitive is implied.
+Evidence: [native deployment method/topology](vercel-final.md#method-review-and-provenance), [native Function design](vercel-native-functions.md), [function dev behavior](function-level.md#what-works), [Next primitive investigation/RFC material](next-primitive.md). The repository is public; the RFC link points at `research/next-primitive.md` on `main`. The route.go prototype is [Next.js PR](https://github.com/vercel/next.js/pull/100130) and [adapter-vercel PR](https://github.com/nextjs/adapter-vercel/pull/147), context links rather than an RFC for this adapter. No public scriptc primitive is implied.
 
 ## Alternative hooks
 
