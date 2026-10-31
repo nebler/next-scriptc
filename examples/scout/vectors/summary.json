@@ -1,0 +1,935 @@
+{
+  "assertions": 210,
+  "summary": {
+    "mac-results.json": [
+      {
+        "key": "20000/384/float/node",
+        "n": 20000,
+        "d": 384,
+        "kind": "float",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 5.005770999999996,
+        "p95Ms": 5.941541000000029,
+        "peakRssMiB": 108.546875,
+        "processMediansMs": [
+          5.081083000000007,
+          4.975729000000015
+        ]
+      },
+      {
+        "key": "20000/384/float/release",
+        "n": 20000,
+        "d": 384,
+        "kind": "float",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 3.2024999260902405,
+        "p95Ms": 3.378000020980835,
+        "peakRssMiB": 31.140625,
+        "processMediansMs": [
+          3.2079999446868896,
+          3.192000091075897
+        ]
+      },
+      {
+        "key": "20000/384/float/speed",
+        "n": 20000,
+        "d": 384,
+        "kind": "float",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 3.2609999775886536,
+        "p95Ms": 3.537999987602234,
+        "peakRssMiB": 31.140625,
+        "processMediansMs": [
+          3.406000018119812,
+          3.175999939441681
+        ]
+      },
+      {
+        "key": "20000/384/float/go",
+        "n": 20000,
+        "d": 384,
+        "kind": "float",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 4.508271000000001,
+        "p95Ms": 4.816,
+        "peakRssMiB": 34.703125,
+        "processMediansMs": [
+          4.4733125000000005,
+          4.5816669999999995
+        ]
+      },
+      {
+        "key": "20000/384/int8/node",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 4.9305835000000116,
+        "p95Ms": 6.035041000000007,
+        "peakRssMiB": 85.28125,
+        "processMediansMs": [
+          5.866583500000004,
+          4.90347899999999
+        ]
+      },
+      {
+        "key": "20000/384/int8/release",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 4.7075000405311584,
+        "p95Ms": 4.819999933242798,
+        "peakRssMiB": 9.171875,
+        "processMediansMs": [
+          4.731999933719635,
+          4.703500032424927
+        ]
+      },
+      {
+        "key": "20000/384/int8/speed",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 4.648499965667725,
+        "p95Ms": 4.861999988555908,
+        "peakRssMiB": 9.171875,
+        "processMediansMs": [
+          4.639999985694885,
+          4.656000018119812
+        ]
+      },
+      {
+        "key": "20000/384/int8/go",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 2.5081040000000003,
+        "p95Ms": 2.586416,
+        "peakRssMiB": 12.625,
+        "processMediansMs": [
+          2.480458,
+          2.518167
+        ]
+      },
+      {
+        "key": "20000/384/int8-i32/node",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-i32",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 4.234583999999984,
+        "p95Ms": 4.9012500000000045,
+        "peakRssMiB": 84.9375,
+        "processMediansMs": [
+          4.230312999999995,
+          4.241687499999998
+        ]
+      },
+      {
+        "key": "20000/384/int8-i32/release",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-i32",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 39.21249997615814,
+        "p95Ms": 41.49199998378754,
+        "peakRssMiB": 9.1875,
+        "processMediansMs": [
+          39.30699998140335,
+          39.12449997663498
+        ]
+      },
+      {
+        "key": "20000/384/int8-i32/speed",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-i32",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 39.0799999833107,
+        "p95Ms": 43.51700007915497,
+        "peakRssMiB": 9.1875,
+        "processMediansMs": [
+          40.83600002527237,
+          38.67149996757507
+        ]
+      },
+      {
+        "key": "20000/384/int8-i32/go",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-i32",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 2.531479,
+        "p95Ms": 2.581125,
+        "peakRssMiB": 12.671875,
+        "processMediansMs": [
+          2.5385210000000002,
+          2.5065005
+        ]
+      },
+      {
+        "key": "20000/384/int8-imul/node",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-imul",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 4.298790999999994,
+        "p95Ms": 5.501541000000003,
+        "peakRssMiB": 84.515625,
+        "processMediansMs": [
+          4.315270999999996,
+          4.272416499999991
+        ]
+      },
+      {
+        "key": "20000/384/int8-imul/release",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-imul",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 0.22950005531311035,
+        "p95Ms": 0.24399995803833008,
+        "peakRssMiB": 9.1875,
+        "processMediansMs": [
+          0.23199999332427979,
+          0.22699999809265137
+        ]
+      },
+      {
+        "key": "20000/384/int8-imul/speed",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-imul",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 0.2395000457763672,
+        "p95Ms": 0.2609999179840088,
+        "peakRssMiB": 9.1875,
+        "processMediansMs": [
+          0.2395000457763672,
+          0.2399999499320984
+        ]
+      },
+      {
+        "key": "20000/384/int8-imul/go",
+        "n": 20000,
+        "d": 384,
+        "kind": "int8-imul",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 2.5315415000000003,
+        "p95Ms": 2.610167,
+        "peakRssMiB": 12.703125,
+        "processMediansMs": [
+          2.539021,
+          2.4832495000000003
+        ]
+      },
+      {
+        "key": "20000/384/binary/node",
+        "n": 20000,
+        "d": 384,
+        "kind": "binary",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 0.2669789999999992,
+        "p95Ms": 0.2766249999999957,
+        "peakRssMiB": 77.5625,
+        "processMediansMs": [
+          0.2675205000000034,
+          0.25664550000000474
+        ]
+      },
+      {
+        "key": "20000/384/binary/release",
+        "n": 20000,
+        "d": 384,
+        "kind": "binary",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 0.14100003242492676,
+        "p95Ms": 0.15299999713897705,
+        "peakRssMiB": 2.75,
+        "processMediansMs": [
+          0.1419999599456787,
+          0.13700008392333984
+        ]
+      },
+      {
+        "key": "20000/384/binary/speed",
+        "n": 20000,
+        "d": 384,
+        "kind": "binary",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 0.13950002193450928,
+        "p95Ms": 0.14500010013580322,
+        "peakRssMiB": 2.75,
+        "processMediansMs": [
+          0.1434999704360962,
+          0.1369999647140503
+        ]
+      },
+      {
+        "key": "20000/384/binary/go",
+        "n": 20000,
+        "d": 384,
+        "kind": "binary",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 0.09368699999999999,
+        "p95Ms": 0.101083,
+        "peakRssMiB": 5.75,
+        "processMediansMs": [
+          0.094625,
+          0.09175
+        ]
+      },
+      {
+        "key": "20000/384/binary/go-plain",
+        "n": 20000,
+        "d": 384,
+        "kind": "binary",
+        "runtime": "go-plain",
+        "count": 60,
+        "medianMs": 0.226854,
+        "p95Ms": 0.229458,
+        "peakRssMiB": 5.640625,
+        "processMediansMs": [
+          0.227583,
+          0.2209165
+        ]
+      },
+      {
+        "key": "100000/768/float/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 51.549958500000116,
+        "p95Ms": 53.40141700000004,
+        "peakRssMiB": 371.65625,
+        "processMediansMs": [
+          51.67412500000023,
+          51.48445800000013
+        ]
+      },
+      {
+        "key": "100000/768/float/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 37.81549996137619,
+        "p95Ms": 38.9889999628067,
+        "peakRssMiB": 294.8125,
+        "processMediansMs": [
+          37.97099995613098,
+          37.68699997663498
+        ]
+      },
+      {
+        "key": "100000/768/float/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 39.78149998188019,
+        "p95Ms": 44.82599997520447,
+        "peakRssMiB": 294.8125,
+        "processMediansMs": [
+          40.58149999380112,
+          37.88849997520447
+        ]
+      },
+      {
+        "key": "100000/768/float/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 50.765333,
+        "p95Ms": 51.781959,
+        "peakRssMiB": 298.671875,
+        "processMediansMs": [
+          50.8627915,
+          50.6824165
+        ]
+      },
+      {
+        "key": "100000/768/int8/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 49.5412080000001,
+        "p95Ms": 52.50791699999991,
+        "peakRssMiB": 151.390625,
+        "processMediansMs": [
+          48.83239600000002,
+          50.25737500000014
+        ]
+      },
+      {
+        "key": "100000/768/int8/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 48.93949997425079,
+        "p95Ms": 50.871999979019165,
+        "peakRssMiB": 75.09375,
+        "processMediansMs": [
+          49.81949996948242,
+          48.09099996089935
+        ]
+      },
+      {
+        "key": "100000/768/int8/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 49.1884999871254,
+        "p95Ms": 50.37300002574921,
+        "peakRssMiB": 75.09375,
+        "processMediansMs": [
+          49.426500022411346,
+          48.96050000190735
+        ]
+      },
+      {
+        "key": "100000/768/int8/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 24.9972915,
+        "p95Ms": 25.48775,
+        "peakRssMiB": 78.625,
+        "processMediansMs": [
+          24.957042,
+          25.1296045
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 41.79574949999994,
+        "p95Ms": 48.83249999999998,
+        "peakRssMiB": 151.359375,
+        "processMediansMs": [
+          42.25360449999994,
+          41.62460450000009
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 407.16899996995926,
+        "p95Ms": 428.4609999656677,
+        "peakRssMiB": 75.09375,
+        "processMediansMs": [
+          409.87399995326996,
+          401.7014999985695
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 403.18049997091293,
+        "p95Ms": 423.18099999427795,
+        "peakRssMiB": 75.109375,
+        "processMediansMs": [
+          405.744000017643,
+          399.4384999871254
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 25.1976875,
+        "p95Ms": 25.834708,
+        "peakRssMiB": 78.703125,
+        "processMediansMs": [
+          25.5259795,
+          24.996458500000003
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 53.40237499999989,
+        "p95Ms": 68.32895800000006,
+        "peakRssMiB": 151.078125,
+        "processMediansMs": [
+          41.944270500000016,
+          59.46227099999999
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 2.041000008583069,
+        "p95Ms": 2.162999987602234,
+        "peakRssMiB": 75.109375,
+        "processMediansMs": [
+          2.018499970436096,
+          2.065500020980835
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 2.072000026702881,
+        "p95Ms": 2.194999933242798,
+        "peakRssMiB": 75.109375,
+        "processMediansMs": [
+          2.0804999470710754,
+          2.06850004196167
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 25.067979,
+        "p95Ms": 25.774416,
+        "peakRssMiB": 78.828125,
+        "processMediansMs": [
+          25.126541500000002,
+          24.9411045
+        ]
+      },
+      {
+        "key": "100000/768/binary/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "node",
+        "count": 60,
+        "medianMs": 2.5414374999999723,
+        "p95Ms": 10.134208999999942,
+        "peakRssMiB": 87.046875,
+        "processMediansMs": [
+          2.5378334999999765,
+          2.5457079999999905
+        ]
+      },
+      {
+        "key": "100000/768/binary/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "release",
+        "count": 60,
+        "medianMs": 1.3819999694824219,
+        "p95Ms": 1.4520000219345093,
+        "peakRssMiB": 11,
+        "processMediansMs": [
+          1.3805000185966492,
+          1.38400000333786
+        ]
+      },
+      {
+        "key": "100000/768/binary/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "speed",
+        "count": 60,
+        "medianMs": 1.3804999589920044,
+        "p95Ms": 1.4529999494552612,
+        "peakRssMiB": 11,
+        "processMediansMs": [
+          1.3760000467300415,
+          1.3835000395774841
+        ]
+      },
+      {
+        "key": "100000/768/binary/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "go",
+        "count": 60,
+        "medianMs": 0.8887499999999999,
+        "p95Ms": 0.956333,
+        "peakRssMiB": 14.53125,
+        "processMediansMs": [
+          0.8917705,
+          0.8808335
+        ]
+      },
+      {
+        "key": "100000/768/binary/go-plain",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "go-plain",
+        "count": 60,
+        "medianMs": 2.199875,
+        "p95Ms": 2.293041,
+        "peakRssMiB": 14.515625,
+        "processMediansMs": [
+          2.1932289999999997,
+          2.203937
+        ]
+      }
+    ],
+    "linux-results.json": [
+      {
+        "key": "100000/768/float/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "node",
+        "count": 30,
+        "medianMs": 115.12749499999995,
+        "p95Ms": 120.6225400000003,
+        "peakRssMiB": 364.42578125,
+        "processMediansMs": [
+          115.12749499999995
+        ]
+      },
+      {
+        "key": "100000/768/float/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "release",
+        "count": 30,
+        "medianMs": 91.17549100000178,
+        "p95Ms": 91.52716800000053,
+        "peakRssMiB": 295.453125,
+        "processMediansMs": [
+          91.17549100000178
+        ]
+      },
+      {
+        "key": "100000/768/float/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "speed",
+        "count": 30,
+        "medianMs": 91.24291449999873,
+        "p95Ms": 91.5095469999942,
+        "peakRssMiB": 295.453125,
+        "processMediansMs": [
+          91.24291449999873
+        ]
+      },
+      {
+        "key": "100000/768/float/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "float",
+        "runtime": "go",
+        "count": 30,
+        "medianMs": 90.5624875,
+        "p95Ms": 96.988522,
+        "peakRssMiB": 296.44921875,
+        "processMediansMs": [
+          90.5624875
+        ]
+      },
+      {
+        "key": "100000/768/int8/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "node",
+        "count": 30,
+        "medianMs": 114.70307399999979,
+        "p95Ms": 115.00787300000002,
+        "peakRssMiB": 143.98828125,
+        "processMediansMs": [
+          114.70307399999979
+        ]
+      },
+      {
+        "key": "100000/768/int8/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "release",
+        "count": 30,
+        "medianMs": 87.18265150000661,
+        "p95Ms": 87.47809800000687,
+        "peakRssMiB": 75.69921875,
+        "processMediansMs": [
+          87.18265150000661
+        ]
+      },
+      {
+        "key": "100000/768/int8/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "speed",
+        "count": 30,
+        "medianMs": 87.18199349999486,
+        "p95Ms": 91.84436999999161,
+        "peakRssMiB": 75.7109375,
+        "processMediansMs": [
+          87.18199349999486
+        ]
+      },
+      {
+        "key": "100000/768/int8/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8",
+        "runtime": "go",
+        "count": 30,
+        "medianMs": 68.538083,
+        "p95Ms": 69.526159,
+        "peakRssMiB": 76.40625,
+        "processMediansMs": [
+          68.538083
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "node",
+        "count": 30,
+        "medianMs": 102.20661799999993,
+        "p95Ms": 102.59811300000001,
+        "peakRssMiB": 143.6015625,
+        "processMediansMs": [
+          102.20661799999993
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "release",
+        "count": 30,
+        "medianMs": 396.01098150000325,
+        "p95Ms": 400.9682590000011,
+        "peakRssMiB": 75.7109375,
+        "processMediansMs": [
+          396.01098150000325
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "speed",
+        "count": 30,
+        "medianMs": 396.1768329999977,
+        "p95Ms": 397.1292189999949,
+        "peakRssMiB": 75.71875,
+        "processMediansMs": [
+          396.1768329999977
+        ]
+      },
+      {
+        "key": "100000/768/int8-i32/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-i32",
+        "runtime": "go",
+        "count": 30,
+        "medianMs": 68.50661,
+        "p95Ms": 68.830202,
+        "peakRssMiB": 76.40625,
+        "processMediansMs": [
+          68.50661
+        ]
+      },
+      {
+        "key": "100000/768/binary/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "node",
+        "count": 30,
+        "medianMs": 6.581309999999917,
+        "p95Ms": 21.50708099999997,
+        "peakRssMiB": 79.1796875,
+        "processMediansMs": [
+          6.581309999999917
+        ]
+      },
+      {
+        "key": "100000/768/binary/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "release",
+        "count": 30,
+        "medianMs": 6.713266000006115,
+        "p95Ms": 6.766080000001239,
+        "peakRssMiB": 11.734375,
+        "processMediansMs": [
+          6.713266000006115
+        ]
+      },
+      {
+        "key": "100000/768/binary/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "speed",
+        "count": 30,
+        "medianMs": 6.701370000009774,
+        "p95Ms": 6.887729999987641,
+        "peakRssMiB": 11.87890625,
+        "processMediansMs": [
+          6.701370000009774
+        ]
+      },
+      {
+        "key": "100000/768/binary/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "go",
+        "count": 30,
+        "medianMs": 1.9883739999999999,
+        "p95Ms": 2.14816,
+        "peakRssMiB": 12.28125,
+        "processMediansMs": [
+          1.9883739999999999
+        ]
+      },
+      {
+        "key": "100000/768/binary/go-plain",
+        "n": 100000,
+        "d": 768,
+        "kind": "binary",
+        "runtime": "go-plain",
+        "count": 30,
+        "medianMs": 4.7150645,
+        "p95Ms": 4.747606,
+        "peakRssMiB": 12.28125,
+        "processMediansMs": [
+          4.7150645
+        ]
+      }
+    ],
+    "linux-imul-results.json": [
+      {
+        "key": "100000/768/int8-imul/node",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "node",
+        "count": 30,
+        "medianMs": 132.49964950000003,
+        "p95Ms": 135.96589700000004,
+        "peakRssMiB": 142.39453125,
+        "processMediansMs": [
+          132.49964950000003
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/release",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "release",
+        "count": 30,
+        "medianMs": 23.87884800000029,
+        "p95Ms": 24.17388100000244,
+        "peakRssMiB": 75.234375,
+        "processMediansMs": [
+          23.87884800000029
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/speed",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "speed",
+        "count": 30,
+        "medianMs": 23.643286499998794,
+        "p95Ms": 23.95826500000112,
+        "peakRssMiB": 75.28515625,
+        "processMediansMs": [
+          23.643286499998794
+        ]
+      },
+      {
+        "key": "100000/768/int8-imul/go",
+        "n": 100000,
+        "d": 768,
+        "kind": "int8-imul",
+        "runtime": "go",
+        "count": 30,
+        "medianMs": 61.4004385,
+        "p95Ms": 63.81712,
+        "peakRssMiB": 76.58203125,
+        "processMediansMs": [
+          61.4004385
+        ]
+      }
+    ]
+  }
+}
