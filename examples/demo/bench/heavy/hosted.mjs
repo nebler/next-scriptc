@@ -2,7 +2,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { workloads, metadata, spec, sizes, edgeCases } from "./fixtures.mjs";
 import { createClient, quantile } from "./client.mjs";
-const job = JSON.parse(await readFile("heavy-job.json"));
+const job = JSON.parse(await readFile(process.env.HEAVY_JOB ?? "heavy-job.json"));
 const client = createClient({
   secret: process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
   budget: job.requestBudget ?? 20000,
@@ -26,10 +26,10 @@ const report = {
 const references = new Map();
 async function save() {
   report.requestsIssued = client.issued;
-  await writeFile("heavy-hosted.json", JSON.stringify(report, null, 2) + "\n");
+  await writeFile(process.env.HEAVY_OUTPUT ?? "heavy-hosted.json", JSON.stringify(report, null, 2) + "\n");
 }
 function remap(s, t) {
-  return { ...s, path: s.path.replace("/api/heavy/", t.prefix) };
+  return { ...s, path: s.path.replace("/api/heavy/", t.prefix) + (t.query ? (s.path.includes("?") ? "&" : "?") + t.query : "") };
 }
 async function diagnostic(t, pool) {
   return client.request(
@@ -42,7 +42,7 @@ try {
   // Correctness first for every hosted size; larger upload fixtures exceed platform limit.
   for (const s of [
     ...workloads(true),
-    spec("thumbnail", 512),
+    ...(process.env.HEAVY_VECTOR_SUITE === "1" ? [] : [spec("thumbnail", 512)]),
     ...edgeCases(),
   ]) {
     const results = [];
@@ -84,6 +84,7 @@ try {
       p.destroy();
     }
     for (const original of workloads(true)) {
+      if (t.variant.startsWith("go-") && original.id === "vectors-imul") continue;
       const s = remap(original, t);
       s.expected = references.get(`${s.id}:${s.size}`);
       const row = {

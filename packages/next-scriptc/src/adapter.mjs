@@ -1,3 +1,4 @@
+import { compilerPath } from "./paths.mjs";
 import { spawn } from "node:child_process";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -81,7 +82,7 @@ const adapter = {
     await writeNativeConfig(projectDir, output, config);
     // Next writes a CommonJS package boundary in .next; entries are ES modules.
     await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
-    const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
+    const compiler = compilerPath();
 
     // Serial builds keep CPU/memory use bounded on local development machines.
     const processes = planProcesses(routes);

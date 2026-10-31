@@ -87,6 +87,7 @@ export function createClient({
                     "content-type",
                     "cache-control",
                     "x-next-scriptc",
+                    "x-vector-init-ms",
                   ]
                     .filter((k) => res.headers[k] !== undefined)
                     .map((k) => [k, res.headers[k]]),

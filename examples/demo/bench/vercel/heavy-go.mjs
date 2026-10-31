@@ -29,7 +29,7 @@ export async function addHeavyGo() {
       (await readFile(path.join(cache, "commit"), "utf8")).trim() ===
       proxyCommit;
   } catch {}
-  const env = { GOOS: "linux", GOARCH: "amd64", CGO_ENABLED: "0" };
+  const env = { GOOS: "linux", GOARCH: "amd64", CGO_ENABLED: "0", ...(process.env.HEAVY_VECTOR_SUITE === "1" ? { GOEXPERIMENT: "simd" } : {}) };
   if (!cached) {
     const source = path.join(cache, "source");
     await rm(source, { recursive: true, force: true });
@@ -112,7 +112,7 @@ export async function addHeavyGo() {
       2,
     ) + "\n",
   );
-  for (const name of ["json", "thumbnail", "bcrypt", "diagnostics"])
+  for (const name of ["json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"])
     await symlink(
       "csv.func",
       path.join(output, `functions/api/heavy-go/${name}.func`),
@@ -121,7 +121,7 @@ export async function addHeavyGo() {
   const config = JSON.parse(await readFile(configFile));
   // These explicit routes precede Next's catch-all routing and preserve the public URL.
   config.routes.unshift(
-    ...["csv", "json", "thumbnail", "bcrypt", "diagnostics"].map((name) => ({
+    ...["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"].map((name) => ({
       src: `^/api/heavy-go/${name}$`,
       dest: `/api/heavy-go/${name}`,
     })),
@@ -137,7 +137,7 @@ export async function addHeavyGo() {
     go: execFileSync("go", ["version"], { encoding: "utf8" }).trim(),
     env,
     hashes,
-    paths: ["csv", "json", "thumbnail", "bcrypt", "diagnostics"].map(
+    paths: ["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"].map(
       (name) => `api/heavy-go/${name}`,
     ),
   };

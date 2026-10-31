@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
-import { edgeCases, sizes, spec, metadata, digest } from "./fixtures.mjs";
+import { edgeCases, sizes, selected, spec, metadata, digest } from "./fixtures.mjs";
 import { createClient } from "./client.mjs";
 export async function parity(targets, client = createClient()) {
   const rows = [];
   const cases = [
-    ...Object.entries(sizes).flatMap(([id, values]) =>
+    ...Object.entries(sizes).filter(([id]) => selected(id)).flatMap(([id, values]) =>
       values.map((size) => spec(id, size)),
     ),
     ...edgeCases(),
@@ -24,7 +24,7 @@ export async function parity(targets, client = createClient()) {
               path: s.path.replace(
                 "/api/heavy/",
                 target.prefix ?? "/api/heavy/",
-              ),
+              ) + (target.query ? (s.path.includes("?") ? "&" : "?") + target.query : ""),
             },
             pool,
           )),

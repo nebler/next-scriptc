@@ -138,3 +138,17 @@ its runtime import of layout constants uses an explicit `.ts` extension.
 scriptc resolves the worker at compile time and includes it in the binary.
 E2E checks dev/native parity; the benchmark checks production Node/native parity.
 No adapter change is needed.
+
+## Selecting a local compiler
+
+`SCRIPTC_COMPILER=/absolute/path/to/scriptc pnpm --filter demo build` overrides
+only the build-time CLI for native routes and `"use native"` functions. It also
+applies to Vercel native builds. The value is one executable file (or an executable
+wrapper), never shell arguments; relative/empty values fail. Leaving it unset
+uses the pinned scriptc dependency. No link, override, or lockfile change is needed.
+The custom CLI must use the installed scriptc runtime ABI; Vercel cross-builds
+still resolve runtime packs at the installed dependency version. Rebuild after
+switching compilers; changing this variable on `next start` cannot change a binary.
+
+Vector retrieval and the stock-versus-patched benchmark are described in
+[vector-route.md](../../research/vector-route.md).

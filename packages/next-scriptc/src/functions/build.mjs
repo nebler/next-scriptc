@@ -1,8 +1,8 @@
+import { compilerPath } from "../paths.mjs";
 import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import { constants } from "node:fs";
 import { access, cp, mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeNativeConfig } from "../native-config.mjs";
@@ -10,7 +10,6 @@ import { startNativeProcesses } from "../runtime.mjs";
 import { discoverFunctions } from "./extract.mjs";
 import { withFunctions } from "./config.mjs";
 
-const require = createRequire(import.meta.url);
 const plans = new Map();
 const serve = fileURLToPath(new URL("./serve.ts", import.meta.url));
 
@@ -40,7 +39,7 @@ export async function prepareFunctions(config, projectDir) {
   entry += `serveFunctions(async (id: string, body: string): Promise<unknown> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
   const file = path.join(output, "entry.ts");
   await writeFile(file, entry);
-  const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
+  const compiler = compilerPath();
   console.log(`[next-scriptc] Compiling ${index} native function(s)`);
   await new Promise((resolve, reject) => {
     const child = spawn(compiler, ["build", file, "-o", path.join(output, "functions"), "--optimization", "release", "--strip", "--no-keep-llvm", "--node-islands=off"], { cwd: projectDir, stdio: "inherit" });

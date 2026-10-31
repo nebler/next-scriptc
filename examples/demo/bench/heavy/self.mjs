@@ -11,12 +11,17 @@ const root = path.resolve(import.meta.dirname, "../../../.."),
 const port = 3519,
   goPort = 3520;
 const cpus = process.env.HEAVY_APP_CPUS;
+const vectorSuite = process.env.HEAVY_VECTOR_SUITE === "1";
+if (vectorSuite && process.env.HEAVY_WORKLOADS !== "vectors,vectors-imul")
+  throw new Error("Vector suite requires HEAVY_WORKLOADS=vectors,vectors-imul");
+const variants = vectorSuite ? ["node", "native", "go-plain", "go-unrolled", "go-simd"] : ["node", "native", "go"];
 const client = createClient({ budget: 10000 });
 const output = process.argv[2] ?? path.resolve("heavy-self.json");
 const report = {
   status: "running",
   sourceCommit: process.env.BENCH_COMMIT,
   node: process.version,
+  protocol: { revision: 2, vectorSuite, sequential: { warmup: 5, count: 40 }, concurrent: { concurrency: 16, warmup: { count: 100, durationMs: 1000 }, measured: { count: 100, durationMs: 2000 } } },
   startedAt: new Date().toISOString(),
   machine: {
     cpu: await readFile("/proc/cpuinfo", "utf8"),
@@ -126,7 +131,9 @@ for (const entry of manifest.processes)
 
 try {
   for (const phase of ["validation", "measurement"])
-    for (const variant of ["node", "native", "go"]) {
+    for (const variant of variants) {
+      const isGo = variant.startsWith("go");
+      const query = vectorSuite && isGo ? `kernel=${variant.slice(3)}` : "";
       const procs = [];
       const row =
         phase === "validation"
@@ -134,7 +141,7 @@ try {
           : report.variants.find((v) => v.variant === variant);
       if (phase === "validation") report.variants.push(row);
       try {
-        if (variant === "go") {
+        if (isGo) {
           const p = start(path.join(demo, "go/user-server"), [], {
             cwd: demo,
             env: { PORT: String(goPort) },
@@ -169,7 +176,7 @@ try {
         procs.push(p);
         await ready(p, `http://localhost:${port}`, { path: "/api/hello" });
         const base = `http://localhost:${port}`,
-          prefix = variant === "go" ? "/api/heavy-go/" : "/api/heavy/";
+          prefix = isGo ? "/api/heavy-go/" : "/api/heavy/";
         // All sizes plus edge contracts. Cross-variant digests are checked before their timings.
         if (phase === "validation") {
           const validationPool = client.agent(base, 1);
@@ -178,7 +185,7 @@ try {
             { path: prefix + "diagnostics", diagnostic: true },
             validationPool,
           );
-          row.parity = await parity([{ variant, url: base, prefix }], client);
+          row.parity = await parity([{ variant, url: base, prefix, query }], client);
           for (const [i, record] of row.parity.rows.entries()) {
             const hash = record.results[0].digest;
             if (references.has(i) && references.get(i) !== hash)
@@ -230,18 +237,20 @@ try {
           pool.destroy();
         }
         for (const s of workloads()) {
+          if (vectorSuite && isGo && s.id === "vectors-imul") continue;
           const result = { ...metadata(s), status: "running" };
           row.rows.push(result);
           await save();
           try {
             const original = s.path;
-            s.path = original.replace("/api/heavy/", prefix);
+            s.path = original.replace("/api/heavy/", prefix) + (query ? `?${query}` : "");
             s.expected = row.parity.rows.find(
               (r) => r.id === s.id && r.size === s.size,
             ).results[0].digest;
             const pool = client.agent(base, 1);
             try {
               result.reference = await client.request(base, s, pool);
+              if (s.id.startsWith("vectors")) result.routeFirst = { ...result.reference, note: "First vector request in fresh measurement server; not certified process-cold. Header records corpus generation only." };
             } finally {
               pool.destroy();
             }
