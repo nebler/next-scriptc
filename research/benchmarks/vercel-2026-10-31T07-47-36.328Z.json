@@ -1,0 +1,38 @@
+{
+  "mode": "baseline-only",
+  "status": "failed",
+  "startedAt": "2026-10-31T07:47:36.331Z",
+  "sourceCommit": "90df26f16e57b24fa4f812e981e284c4ef257715",
+  "dirty": false,
+  "clientSha256": "03d8c1d550eaa369463560879aa84fcb209639b7b97dec35eaf9e9e4fb078cca",
+  "deployments": [
+    {
+      "variant": "node",
+      "url": "https://next-scriptc-4nuyh23eg-noahs-projects-8a075d15.vercel.app"
+    }
+  ],
+  "sandbox": {
+    "id": "ivory-huge-prawn-sBtVQT",
+    "region": "iad1",
+    "vcpus": 2,
+    "activeCpuDurationMs": 10385,
+    "provisionedVcpuHours": 0.027907777777777778
+  },
+  "error": "No worker results; exit 1",
+  "elapsedMs": 50234,
+  "requestsIssued": null,
+  "requestsIssuedUpperBound": 13518,
+  "failureDetails": {
+    "workerError": "gzip-export: Unexpected content-encoding: undefined",
+    "controllerError": "No worker results; exit 1",
+    "cause": "Controller downloaded /vercel/sandbox/result.json, but Node 24 image working directory was /vercel; stopped ephemeral Sandbox before recovery",
+    "stdoutStatuses": {
+      "hello": "measured; result data unrecovered",
+      "verify": "measured; result data unrecovered",
+      "revenue": "measured; result data unrecovered",
+      "gzip-export": "failed",
+      "nearby-stores": "measured; result data unrecovered",
+      "markdown": "measured; result data unrecovered"
+    }
+  }
+}
