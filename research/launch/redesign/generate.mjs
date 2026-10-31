@@ -56,6 +56,12 @@ const vv = data.vectorVercel.results, vk = data.vector.results;
 const rows100k = data.vector.rows.value.toLocaleString('en-US'), dims = data.vector.dimensions.value;
 assert.equal(data.vectorVercel.decimals, 1); assert.equal(data.vector.decimals, 1);
 
+// Spec Sheet (c-spec) is the chosen direction; its revisions live in `spec` so A/B/D stay as first reviewed.
+// Each spec override adds `scope`: a short label set directly under the headline so the measurement boundary is never buried.
+const goPlus = rows => rows.map((r, i) => i === 1 ? { ...r, label: 'Go + SIMD', short: ['Go', '+ SIMD'] } : r);
+const wan = extra.vectorWan.results, vr = extra.vectorRss.results;
+assert.deepEqual(wan.map(r => r.label), ['Patched native', 'Go SIMD', 'Go plain', 'Node']);
+const ms0 = v => Math.round(v).toString();
 const charts = {
   'vector-search': {
     title: 'Vector search on Vercel Functions',
@@ -66,6 +72,14 @@ const charts = {
     foot: 'Excludes network. Go with SIMD uses Go’s experimental archsimd package. Native uses a patched scriptc.',
     big: times(vv[0].value, vv[1].value), bigCaption: 'faster than Go with SIMD',
     groups: [{ rows: vectorRows(vv, 1) }], unitStep: 1, unitLabel: '1 ms',
+    spec: {
+      headline: 'TypeScript faster than Go + SIMD',
+      scope: 'Vector-search server compute',
+      sub: `Find the top 10 of ${rows100k} embeddings. Median of 120 warm requests, sent one at a time. Lower is better.`,
+      method: 'ms · Vercel Functions, iad1',
+      foot: `Full requests including network are about even: ${ms0(wan[0].p50.value)} vs ${ms0(wan[1].p50.value)} ms median. Go\u00a0+\u00a0SIMD uses Go’s experimental archsimd. Native uses a patched scriptc.`,
+      groups: [{ rows: goPlus(vectorRows(vv, 1)) }],
+    },
   },
   'vector-kernel': {
     title: 'Vector search loop only',
@@ -76,6 +90,22 @@ const charts = {
     foot: 'Same host and data for every runtime. Go with SIMD is experimental. Native uses a patched scriptc.',
     big: times(vk[0].value, vk[1].value), bigCaption: 'faster than Go with SIMD, loop only',
     groups: [{ rows: vectorRows(vk, 1) }], unitStep: 1, unitLabel: '1 ms',
+    spec: {
+      headline: 'The search loop alone: TypeScript still leads',
+      scope: 'Search loop only',
+      method: `ms · int8 · ${dims} dimensions · Linux Vercel Sandbox`,
+      foot: 'Same host and data for every runtime. Go\u00a0+\u00a0SIMD is experimental. Native uses a patched scriptc.',
+      groups: [{ rows: goPlus(vectorRows(vk, 1)) }],
+    },
+  },
+  'vector-memory': {
+    title: 'Vector search memory', dirs: ['c-spec'],
+    headline: 'Memory on par with Go, about half of Node.js',
+    scope: 'Vector-search process memory',
+    sub: `Memory held while serving the same search over ${rows100k} embeddings. Every runtime keeps the same dataset in memory. Lower is better.`,
+    method: 'Resident memory (RSS) · MiB · median of 120 requests',
+    foot: 'Serving process only, not billed memory. Go’s separate IPC proxy is not counted.',
+    groups: [{ rows: goPlus(vectorRows(vr, 1)).map(r => ({ ...r, unit: 'MiB' })) }], unitStep: 1, unitLabel: '1 MiB',
   },
   'cpu-per-request': {
     title: 'CPU per request, native vs Node.js',
@@ -87,6 +117,7 @@ const charts = {
     big: cpuRange, bigCaption: 'less CPU per request',
     groups: [['Hello world', cpu[0]], ['Revenue report', cpu[1]], ['Nearby-store search', cpu[2]]].map(([name, m]) => ({ name, rows: pair(m, 'ms') })),
     unitStep: 0.1, unitLabel: '0.1 ms',
+    spec: { scope: 'Process CPU per request' },
   },
   memory: {
     title: 'Serving process memory, native vs Node.js',
@@ -97,6 +128,7 @@ const charts = {
     foot: 'Measures the serving process only, not whole-instance or billed memory.',
     big: times(rss.native.value, rss.comparison.value), bigCaption: 'less memory',
     groups: [{ rows: pair(rss, 'MiB') }], unitStep: 1, unitLabel: '1 MiB',
+    spec: { headline: `Hello route, ${times(rss.native.value, rss.comparison.value)} less memory`, scope: 'Hello-route process memory' },
   },
   'first-response': {
     title: 'First response after deploy, native vs Node.js',
@@ -107,8 +139,10 @@ const charts = {
     foot: 'Includes network and TLS. Fresh deployments, but not a certified cold start.',
     big: times(firstResponse.native.value, firstResponse.comparison.value), bigCaption: 'sooner first response',
     groups: [{ rows: pair(firstResponse, 'ms') }], unitStep: 5, unitLabel: '5 ms',
+    spec: { scope: 'End to end, network included' },
   },
 };
+assert.equal(vr.length, 4);
 
 function scale(max) {
   const raw = max / 4, mag = 10 ** Math.floor(Math.log10(raw));
@@ -119,15 +153,34 @@ function scale(max) {
 }
 const tickText = t => String(Number(t.toFixed(2)));
 const allRows = s => s.groups.flatMap(g => g.rows);
-for (const s of Object.values(charts)) s.scale = scale(Math.max(...allRows(s).map(r => r.value)));
+for (const s of Object.values(charts)) { s.scale = scale(Math.max(...allRows(s).map(r => r.value))); if (s.spec?.groups) s.spec.scale = scale(Math.max(...s.spec.groups.flatMap(g => g.rows).map(r => r.value))); }
+const specOf = s => ({ ...s, ...s.spec });
 
 // ---------- Code ----------
+const stripFirst = s => s.split('\n').slice(1).join('\n');
 const nativeCode = `// app/api/hello/route.native.ts
 export function GET() {
   return Response.json({
     message: "Hello from native TypeScript!"
   });
 }`;
+// Spec Sheet route code: the user asked for a "use native" directive. A route.native.ts file is excluded from function
+// extraction, and a file-level directive in any route file fails the build, so the directive goes where the adapter
+// supports it: a named module-level async function with a JSON result, called from an ordinary route.ts handler.
+const routeUseNativeCode = `// app/api/hello/route.ts
+async function greet(name: string) {
+  "use native";
+  return { message: \`Hello, \${name}!\` };
+}
+
+export async function GET() {
+  return Response.json(await greet("world"));
+}`;
+{
+  const { extractFunctions } = await import(pathToFileURL(join(root, 'packages/next-scriptc/src/functions/extract.mjs')).href);
+  const found = extractFunctions(stripFirst(routeUseNativeCode), '/project/app/api/hello/route.ts');
+  assert.deepEqual(found?.functions.map(f => f.name), ['greet'], 'Route code directive must be a valid function-level "use native"');
+}
 const revenueSource = readFileSync(join(root, 'examples/demo/lib/revenue.ts'), 'utf8');
 for (const f of ['"use native";', 'event.day < from || event.day > to', 'event.amountCents * event.quantity']) assert.ok(revenueSource.includes(f));
 const useNativeCode = `// examples/demo/lib/revenue.ts · simplified
@@ -182,7 +235,6 @@ function codeLines(source, theme, opts = {}) {
     return { html: spans || ' ', directive, raw };
   });
 }
-const stripFirst = s => s.split('\n').slice(1).join('\n');
 
 // ---------- Fonts, shell and in-page QA ----------
 const nm = '../../node_modules/geist/dist/fonts';
@@ -202,7 +254,8 @@ const W=document.body.offsetWidth,H=document.body.offsetHeight,outside=[],frags=
 while(n=w.nextNode()){const t=n.textContent.trim();if(!t)continue;const el=n.parentElement;if(el.closest('script,style'))continue;min=Math.min(min,parseFloat(getComputedStyle(el).fontSize));const r=document.createRange();r.selectNodeContents(n);id++;for(const b of r.getClientRects()){if(b.width<1)continue;if(b.left<-.5||b.top<-.5||b.right>W+.5||b.bottom>H+.5)outside.push(t.slice(0,40));const fs=parseFloat(getComputedStyle(el).fontSize),em=b.top+(b.height-fs)/2;frags.push({id,t:t.slice(0,30),l:b.left,r:b.right,tp:em,bt:em+fs})}}
 const overlap=[];for(let i=0;i<frags.length;i++)for(let j=i+1;j<frags.length;j++){const a=frags[i],b=frags[j];if(a.id===b.id)continue;const ix=Math.min(a.r,b.r)-Math.max(a.l,b.l);const iy=Math.min(a.bt,b.bt)-Math.max(a.tp,b.tp);if(ix>2&&iy>2)overlap.push(a.t+' × '+b.t+' ['+Math.round(iy)+'px]')}
 const boxes=[];for(const el of document.querySelectorAll('body *')){if(el.closest('[data-bleed],script,style'))continue;const b=el.getBoundingClientRect();if(!b.width&&!b.height)continue;if(b.left<-.5||b.top<-.5||b.right>W+.5||b.bottom>H+.5)boxes.push(el.getAttribute('class')||el.tagName)}
-const fonts=faces.every(f=>document.fonts.check(f));document.body.dataset.qa=JSON.stringify({fonts,outside,overlap:overlap.slice(0,10),boxes:boxes.slice(0,10),minFont:min,text:document.body.innerText.replace(/\\s+/g,' ').trim()});})()`;
+let split=null;const L=document.querySelector('[data-col=left]'),R=document.querySelector('[data-col=right]');if(L&&R){const ext=(root,f,init)=>{let v=init;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let t;while(t=tw.nextNode()){if(!t.textContent.trim())continue;const g=document.createRange();g.selectNodeContents(t);for(const b of g.getClientRects())v=f(v,b)}return v};split={leftRight:ext(L,(v,b)=>Math.max(v,b.right),0),rightLeft:ext(R,(v,b)=>Math.min(v,b.left),1e9),leftText:L.innerText.replace(/\\s+/g,' ').trim(),rightText:R.innerText.replace(/\\s+/g,' ').trim()}}
+const fonts=faces.every(f=>document.fonts.check(f));document.body.dataset.qa=JSON.stringify({fonts,split,outside,overlap:overlap.slice(0,10),boxes:boxes.slice(0,10),minFont:min,text:document.body.innerText.replace(/\\s+/g,' ').trim()});})()`;
 const page = (w, h, title, css, body) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${fontCss}*{box-sizing:border-box;margin:0;padding:0}html,body{width:${w}px;height:${h}px;overflow:hidden}body{position:relative;font-family:Geist,sans-serif;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 0}.num{font-variant-numeric:tabular-nums}h1,.sub,.cap{text-wrap:balance}${css}</style></head><body>${body}<script>${qaScript}</script></body></html>`;
 
 // ---------- Unit tally (direction D) ----------
@@ -343,9 +396,11 @@ const C = { bg: '#0a0a0a', fg: '#ededed', muted: '#a1a1a1', grid: '#1f1f1f', cro
 const cross = (x, y, arm = 14) => `<i class="x" style="left:${x - arm}px;top:${y}px;width:${arm * 2}px;height:1px"></i><i class="x" style="left:${x}px;top:${y - arm}px;width:1px;height:${arm * 2}px"></i>`;
 const frame = (w, h, xs, ys, crosses) => xs.map(x => `<i class="ln" style="left:${x}px;top:0;width:1px;height:${h}px"></i>`).join('') + ys.map(y => `<i class="ln" style="left:0;top:${y}px;width:${w}px;height:1px"></i>`).join('') + crosses.map(([x, y, a]) => cross(x, y, a)).join('');
 const frameCss = `.ln{position:absolute;background:${C.grid}}.x{position:absolute;background:${C.cross}}`;
-function chartC(s) {
-  const W = 1200, H = 800, X0 = 488, X1 = 1136, Y0 = 64, Y1 = 736;
-  const plotL = X0 + 84, plotR = X1 - 40, top = 180, base = 556, ph = base - top, grouped = s.groups.length > 1;
+// Left column: every word (headline, scope label, description, method, caveat). Right column: the chart alone.
+function chartC(s0) {
+  const s = specOf(s0);
+  const W = 1200, H = 800, X0 = 488, X1 = 1136, Y0 = 64, Y1 = 736, grouped = s.groups.length > 1;
+  const plotL = X0 + 84, plotR = X1 - 44, top = grouped ? 196 : 150, base = 604, ph = base - top;
   const rows = allRows(s), slots = grouped ? s.groups.length : rows.length, slotW = (plotR - plotL) / slots;
   let marks = s.scale.ticks.map(t => { const y = base - ph * t / s.scale.top; return `<i class="gr${t === 0 ? ' z' : ''}" style="left:${plotL}px;top:${y.toFixed(1)}px;width:${plotR - plotL}px"></i><span class="tk" style="right:${W - plotL + 14}px;top:${(y - 13).toFixed(1)}px">${tickText(t)}</span>`; }).join('');
   const col = (r, cx, bw) => { const bh = ph * r.value / s.scale.top; return `<i class="b" style="left:${(cx - bw / 2).toFixed(1)}px;top:${(base - bh).toFixed(1)}px;width:${bw}px;height:${bh.toFixed(1)}px;background:${r.native ? '#fff' : C.blue}"></i><span class="val num" style="left:${(cx - 70).toFixed(1)}px;top:${(base - bh - 44).toFixed(1)}px">${r.text}</span>`; };
@@ -360,19 +415,20 @@ function chartC(s) {
   });
   const legend = grouped ? `<div class="lg"><i style="background:#fff"></i>Native<i style="background:${C.blue}"></i>Node.js</div>` : '';
   return page(W, H, s.title, `body{background:${C.bg};color:${C.fg}}${frameCss}
-  .lc{position:absolute;left:96px;top:${Y0 + 36}px;width:356px;bottom:${H - Y1 + 30}px;display:flex;flex-direction:column}
-  .k{font:400 20px/1.45 'Geist Mono';color:${C.muted}}
-  h1{margin-top:28px;font:600 46px/1.08 Geist;letter-spacing:-.03em}
-  .sub{margin-top:24px;font:400 23px/1.4 Geist;color:${C.muted}}
-  .m{margin-top:auto;font:400 20px/1.45 'Geist Mono';color:${C.muted}}
+  .lc{position:absolute;left:96px;top:${Y0 + 40}px;width:360px;bottom:${H - Y1 + 32}px;display:flex;flex-direction:column}
+  h1{font:600 44px/1.08 Geist;letter-spacing:-.03em}
+  .sc{margin-top:18px;font:500 20px/1.35 'Geist Mono';color:#fff;display:flex;gap:10px;align-items:baseline}.sc i{flex:none;width:10px;height:10px;background:${C.blue};transform:translateY(-1px)}
+  .sub{margin-top:16px;font:400 21px/1.4 Geist;color:${C.muted}}
+  .bt{margin-top:auto;padding-top:20px;border-top:1px solid ${C.grid}}
+  .m{font:400 20px/1.45 'Geist Mono';color:${C.muted}}
+  .foot{margin-top:10px;font:400 20px/1.4 Geist;color:${C.muted}}
   .gr{position:absolute;height:1px;background:${C.grid}}.gr.z{background:#555}
   .tk{position:absolute;font:400 22px 'Geist Mono';color:${C.muted}}
   .b{position:absolute}.val{position:absolute;width:140px;text-align:center;font:500 30px Geist}
   .cl{position:absolute;text-align:center;font:400 22px/1.25 Geist;color:${C.muted}}.cl.nv{color:#fff;font-weight:500}
-  .lg{position:absolute;right:${W - plotR}px;top:100px;display:flex;align-items:center;gap:10px;font:400 22px Geist;color:${C.muted}}.lg i{width:14px;height:14px}.lg i:nth-of-type(2){margin-left:16px}
-  .foot{position:absolute;left:${X0 + 32}px;right:${W - X1 + 32}px;top:${Y1 - 70}px;font:400 20px/1.4 Geist;color:${C.muted}}`,
+  .lg{position:absolute;right:${W - plotR}px;top:112px;display:flex;align-items:center;gap:10px;font:400 22px Geist;color:${C.muted}}.lg i{width:14px;height:14px}.lg i:nth-of-type(2){margin-left:16px}`,
     frame(W, H, [64, X0, X1], [Y0, Y1], [[64, Y0, 18], [X0, Y0, 14], [X1, Y1, 18], [X0, Y1, 14]])
-    + `<div class="lc"><div class="k">${esc(s.kicker)}</div><h1>${esc(s.headline)}</h1><p class="sub">${esc(s.sub)}</p><p class="m">${esc(s.method)}</p></div>${legend}${marks}<p class="foot">${esc(s.foot)}</p>`);
+    + `<div class="lc" data-col="left"><h1>${esc(s.headline)}</h1>${s.scope ? `<p class="sc"><i></i>${esc(s.scope)}</p>` : ''}<p class="sub">${esc(s.sub)}</p><div class="bt"><p class="m">${esc(s.method)}</p><p class="foot">${esc(s.foot)}</p></div></div><div data-col="right">${legend}${marks}</div>`);
 }
 function heroC(w, h, og) {
   const lines = codeLines(nativeCode, 'ref-dark');
@@ -390,14 +446,17 @@ function heroC(w, h, og) {
     + `<div class="wm">next-scriptc</div><h1>TypeScript, compiled<br>to native Vercel<br>Functions.</h1><div class="p"><b>route.native.ts</b> → scriptc → native binary</div><pre>${lines.map(l => l.html).join('\n')}</pre>`);
 }
 function routeC() {
-  const lines = codeLines(stripFirst(nativeCode), 'ref-dark');
-  return page(1024, 576, 'A route.native.ts handler', `body{background:${C.bg};color:#fff}${frameCss}
+  const lines = codeLines(stripFirst(routeUseNativeCode), 'ref-dark');
+  const di = lines.findIndex(l => l.directive), lh = 36, top = 196;
+  return page(1024, 576, 'A route that calls a use native function', `body{background:${C.bg};color:#fff}${frameCss}
   .tab{position:absolute;left:96px;top:96px;font:400 20px 'Geist Mono';color:${C.fg};display:flex;gap:14px;align-items:center}
   .tab span{font-size:20px;color:${C.blue};border:1px solid #1d3f73;padding:3px 10px}
-  .g{position:absolute;left:96px;top:196px;font:400 23px/1.65 'Geist Mono';color:#4b4b4b;text-align:right;width:28px;white-space:pre}
-  pre{position:absolute;left:156px;top:196px;font:400 23px/1.65 'Geist Mono';white-space:pre}`,
+  .hl{position:absolute;left:73px;right:73px;top:${top + di * lh - 2}px;height:${lh}px;background:#141414;border-left:2px solid #fff}
+  .g{position:absolute;left:96px;top:${top}px;font:400 22px/${lh}px 'Geist Mono';color:#4b4b4b;text-align:right;width:28px;white-space:pre}
+  pre{position:absolute;left:156px;top:${top}px;font:400 22px/${lh}px 'Geist Mono';white-space:pre}
+  .a{position:absolute;right:104px;top:${top + di * lh + 5}px;font:400 20px 'Geist Mono';color:${C.muted}}`,
     frame(1024, 576, [72, 952], [64, 160, 512], [[72, 64, 14], [952, 512, 14], [72, 160, 10]])
-    + `<div class="tab">app/api/hello/route.native.ts<span>native</span></div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre>`);
+    + `<div class="hl"></div><div class="tab">app/api/hello/route.ts<span>use native</span></div><div class="g">${lines.map((_, i) => i + 1).join('\n')}</div><pre>${lines.map(l => l.html).join('\n')}</pre><div class="a">← compiles to native</div>`);
 }
 function useC() {
   const lines = codeLines(stripFirst(useNativeCode), 'ref-dark');
@@ -486,14 +545,15 @@ const assets = [
   { id: 'og', w: 600, h: 315, make: r => r.hero(600, 315, true) },
   { id: 'code-route-native', w: 1024, h: 576, make: r => r.route() },
   { id: 'code-use-native', w: 1000, h: 800, make: r => r.use() },
-  ...Object.keys(charts).map(id => ({ id, w: 1200, h: 800, chart: true, make: r => r.chart(charts[id]) })),
+  ...Object.keys(charts).map(id => ({ id, w: 1200, h: 800, chart: true, dirs: charts[id].dirs, make: r => r.chart(charts[id]) })),
 ];
 const only = process.argv.find(a => a.startsWith('--only='))?.slice(7).split(',');
-const jobs = assets.filter(a => !only || only.includes(a.id)).flatMap(a => directions.map(d => ({ ...a, dir: d, name: `${a.id}--${d.id}`, html: a.make(render[d.id[0]]) })));
+const dirsArg = process.argv.find(a => a.startsWith('--dirs='))?.slice(7).split(',');
+const jobs = assets.filter(a => !only || only.includes(a.id)).flatMap(a => directions.filter(d => (!a.dirs || a.dirs.includes(d.id)) && (!dirsArg || dirsArg.includes(d.id))).map(d => ({ ...a, dir: d, name: `${a.id}--${d.id}`, html: a.make(render[d.id[0]]) })));
 for (const j of jobs) writeFileSync(join(srcDir, `${j.name}.html`), j.html);
 
 // Expected strings per chart for validate.mjs (computed here from chart-data, rechecked there independently).
-const expected = id => { const s = charts[id]; return { headline: s.headline, values: allRows(s).map(r => r.text), big: s.big }; };
+const expected = (id, dir) => { const s = dir === 'c-spec' ? specOf(charts[id]) : charts[id]; return { headline: s.headline, values: allRows(s).map(r => r.text), big: s.big }; };
 
 const chrome = [process.env.CHROME_BIN, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser', '/usr/bin/google-chrome'].filter(Boolean).find(existsSync);
 const manifestPath = join(dir, 'manifest.json');
@@ -514,7 +574,7 @@ if (!process.argv.includes('--html-only')) {
         const buf = await sharp(out).png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
         writeFileSync(out, buf);
         const meta = await sharp(out).metadata();
-        ok({ asset: j.id, direction: j.dir.id, name: j.name, png: `png/${j.name}.png`, src: `src/${j.name}.html`, width: meta.width, height: meta.height, cssWidth: j.w, bytes: buf.length, qa, ...(j.chart ? { expected: expected(j.id) } : {}) });
+        ok({ asset: j.id, direction: j.dir.id, name: j.name, png: `png/${j.name}.png`, src: `src/${j.name}.html`, width: meta.width, height: meta.height, cssWidth: j.w, bytes: buf.length, qa, ...(j.chart ? { expected: expected(j.id, j.dir.id) } : {}) });
       } catch (e) { fail(e); }
     });
   });

@@ -11,6 +11,8 @@ Compile Next.js `route.native.ts` handlers and `"use native"` functions to nativ
 | Measurement | Native TypeScript | Go SIMD | Go | Node | Evidence |
 | --- | ---: | ---: | ---: | ---: | --- |
 | Vector search, server compute p50 | **10.0 ms** (patched) | 14.2 ms | 50.0 ms | 108.6 ms | [Vector route](research/vector-vercel.md#measurements) |
+| Vector search, end-to-end p50 from an iad1 client | **36.0 ms** (patched) | 39.8 ms | 83.6 ms | 93.1 ms | [In-region client](research/vercel-near-client.md) |
+| `"use native"` page, 200k rows, end-to-end p50 from iad1 | **97.4 ms** | | | 203.3 ms | [In-region client](research/vercel-near-client.md) |
 | First hello after deploy, median | **126 ms** | | | 240 ms | [Five preview pairs](research/vercel-final.md#deployment-first-latency) |
 | Process RSS after first hello | **5.6 MiB** | | | about 80 MiB | [Serving-process memory](research/vercel-final.md#process-memory) |
 | Hello CPU/request, median | **0.570 ms** | | | 3.064 ms | [Process CPU](research/vercel-final.md#process-cpu-per-request-self-reported) |
@@ -134,7 +136,7 @@ The [three-way route experiment](research/go-territory.md) found clear Go wins f
 
 Go also won the raw RGBA thumbnail route locally and image resizing in the [kernel scouting results](research/scouting-summary.md); its popcount intrinsic won binary-embedding search. Other cases differ: Go lost the self-hosted JSON transform on latency and CPU. Kernel-only Linux scouts are not hosted route benchmarks. Hosted Go comparisons used a separate completion run and a different generator size, so their ratios are descriptive, not one uninterrupted controlled three-way run.
 
-The route also has losses: the first response after deploy was 1.09 to 1.40 s for native versus 0.34 to 0.42 s for Go SIMD, mostly slower synthetic corpus generation, and a short C=4 window had a worse WAN p95 for native (916 vs 637 ms). The load client ran outside iad1, so end-to-end latency is reported only as secondary data. [Method, raw data and limits](research/vector-vercel.md).
+The route also has losses: the first response after deploy was 1.09 to 1.40 s for native versus 0.34 to 0.42 s for Go SIMD, mostly slower synthetic corpus generation, and a short C=4 window had a worse WAN p95 for native (916 vs 637 ms). From a client Function inside iad1, end-to-end p50 was 36.0 ms native versus 39.8 ms Go SIMD, about 25 ms of which is platform routing and transport for every variant; native lost p95 there (70.5 vs 63.7 ms). [Method, raw data and limits](research/vector-vercel.md), [in-region measurement](research/vercel-near-client.md).
 
 ## Status
 
@@ -173,6 +175,8 @@ The integration runners build and launch local Next/native servers; run them seq
 - [Final Vercel comparison](research/vercel-final.md): deployment-first latency, warm requests, CPU, memory, sizes and failures.
 - [Realistic I/O](research/realistic-io.md): Redis-backed orders and webhooks, hosted and local.
 - [Function-level native code](research/function-level.md): JSON boundary costs and dashboard crossover.
+- ["use native" on Vercel](research/use-native-vercel.md): sidecar packaging and Vercel measurements.
+- [In-region client](research/vercel-near-client.md): end-to-end latency measured from inside iad1.
 - [Go territory](research/go-territory.md): CSV, JSON, raw thumbnails and bcrypt.
 - [Scouting summary](research/scouting-summary.md): kernel candidates, wins and losses.
 - [Benchmark protocol and history](research/benchmarks.md), [research index](research/README.md).

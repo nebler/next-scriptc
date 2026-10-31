@@ -158,6 +158,8 @@ Current evidence: [range-analysis validation gate and preserved patch](scriptc-i
 
 ## Reply bank
 
+- **"Server compute only? What about end to end?"** Measured from a client Function inside iad1: vector route p50 36.0 ms native vs 39.8 ms Go SIMD vs 93.1 ms Node; about 25 ms of every request is platform routing/transport. Native lost p95 there (70.5 vs 63.7 ms). The "use native" page at 200k rows: 97.4 vs 203.3 ms end to end. [vercel-near-client](vercel-near-client.md).
+
 These are prepared technical answers for review, not an instruction to send replies. Attach the relevant source permalink when publishing. Numeric statements below each have their own source.
 
 - **“It's a fork.”** The Next.js integration is an adapter with no Next.js fork. The natural int8 improvement does use a scriptc compiler candidate in a local fork. Its production diff is **25 insertions and 2 deletions**, not the entire test patch: [root cause](scriptc-int8-range-analysis.md#root-cause). The ordinary Vercel publication results use the stock toolchain and predate that candidate: [publication method](vercel-final.md#method-review-and-provenance). Use the selected upstream-status reply above.

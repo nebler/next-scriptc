@@ -1,22 +1,237 @@
 {
   "description": "Measured values used by the redesign gallery notes but absent from ../chart-data.json. Same contract: every value links to a report section and exact row, and generate.mjs checks the value text exists in that report.",
   "vectorRss": {
-    "note": "Median post-work serving-process RSS during the hosted vector benchmark. Every runtime holds the same 100,000 x 768 int8 corpus, so most of this memory is the data itself. Go excludes its separate IPC proxy. Not whole-instance or billed memory.",
+    "note": "Median post-work serving-process RSS across the same 120 C=1 hosted vector requests as the compute chart. Every runtime holds the same 100,000 x 768 int8 corpus (76,800,000 bytes), so most of this memory is the data itself. Go excludes its separate IPC proxy. Not whole-instance or billed memory. Shown in the Spec Sheet vector-memory chart.",
     "results": [
-      { "label": "Patched native", "value": 81.137, "source": "research/vector-vercel.md#measurements", "locator": "Native patched, natural TS + dispatch | RSS MiB 81.137" },
-      { "label": "Go SIMD", "value": 81.789, "source": "research/vector-vercel.md#measurements", "locator": "Go experimental archsimd AVX2, v3 | RSS MiB 81.789" },
-      { "label": "Go plain", "value": 81.82, "source": "research/vector-vercel.md#measurements", "locator": "Go plain, v1, no SIMD experiment | RSS MiB 81.820" },
-      { "label": "Node", "value": 153.711, "source": "research/vector-vercel.md#measurements", "locator": "Node, natural TS | RSS MiB 153.711" }
+      {
+        "label": "Patched native",
+        "value": 81.137,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Native patched, natural TS + dispatch | RSS MiB 81.137"
+      },
+      {
+        "label": "Go SIMD",
+        "value": 81.789,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go experimental archsimd AVX2, v3 | RSS MiB 81.789"
+      },
+      {
+        "label": "Go plain",
+        "value": 81.82,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go plain, v1, no SIMD experiment | RSS MiB 81.820"
+      },
+      {
+        "label": "Node",
+        "value": 153.711,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Node, natural TS | RSS MiB 153.711"
+      }
     ]
   },
   "rssAfterLoad": {
     "note": "Pair 5 only, after load. A different request history from the after-first medians; reported in the gallery, not in the images.",
-    "native": { "value": 13.754, "source": "research/vercel-final.md#process-memory", "locator": "5 / after load | Native RSS 13.754" },
-    "node": { "value": 170.602, "source": "research/vercel-final.md#process-memory", "locator": "5 / after load | Node RSS 170.602" }
+    "native": {
+      "value": 13.754,
+      "source": "research/vercel-final.md#process-memory",
+      "locator": "5 / after load | Native RSS 13.754"
+    },
+    "node": {
+      "value": 170.602,
+      "source": "research/vercel-final.md#process-memory",
+      "locator": "5 / after load | Node RSS 170.602"
+    }
   },
   "markdownCpu": {
     "note": "The loss behind the CPU image footnote.",
-    "native": { "value": 40.209, "source": "research/vercel-final.md#process-cpu-per-request-self-reported", "locator": "markdown | Native median 40.209" },
-    "node": { "value": 4.593, "source": "research/vercel-final.md#process-cpu-per-request-self-reported", "locator": "markdown | Node median 4.593" }
+    "native": {
+      "value": 40.209,
+      "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+      "locator": "markdown | Native median 40.209"
+    },
+    "node": {
+      "value": 4.593,
+      "source": "research/vercel-final.md#process-cpu-per-request-self-reported",
+      "locator": "markdown | Node median 4.593"
+    }
+  },
+  "vectorWan": {
+    "note": "Same hosted vector run as the compute chart: full client-observed request time (WAN), 120 C=1 warm requests per runtime from a Mac in Europe to iad1, including network round trip, TLS reuse, platform routing and IPC. Nearest-rank p50/p95.",
+    "results": [
+      {
+        "label": "Patched native",
+        "p50": {
+          "value": 156.972,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Native patched, natural TS + dispatch | WAN p50 / p95 156.972 / 249.987"
+        },
+        "p95": {
+          "value": 249.987,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Native patched, natural TS + dispatch | WAN p50 / p95 156.972 / 249.987"
+        }
+      },
+      {
+        "label": "Go SIMD",
+        "p50": {
+          "value": 160.152,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Go experimental archsimd AVX2, v3 | WAN p50 / p95 160.152 / 247.778"
+        },
+        "p95": {
+          "value": 247.778,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Go experimental archsimd AVX2, v3 | WAN p50 / p95 160.152 / 247.778"
+        }
+      },
+      {
+        "label": "Go plain",
+        "p50": {
+          "value": 197.441,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Go plain, v1, no SIMD experiment | WAN p50 / p95 197.441 / 295.312"
+        },
+        "p95": {
+          "value": 295.312,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Go plain, v1, no SIMD experiment | WAN p50 / p95 197.441 / 295.312"
+        }
+      },
+      {
+        "label": "Node",
+        "p50": {
+          "value": 258.712,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Node, natural TS | WAN p50 / p95 258.712 / 377.915"
+        },
+        "p95": {
+          "value": 377.915,
+          "source": "research/vector-vercel.md#measurements",
+          "locator": "Node, natural TS | WAN p50 / p95 258.712 / 377.915"
+        }
+      }
+    ]
+  },
+  "vectorC4": {
+    "note": "Short C=4 closed-loop WAN windows (48 requests per runtime: 3 sets x at most 2 s or 16 requests). Secondary observations, not sustained throughput. Native loses WAN p50/p95 and req/s to Go SIMD here.",
+    "results": [
+      {
+        "label": "Patched native",
+        "p50": {
+          "value": 167.111,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "patched-natural | WAN p50 / p95 167.111 / 916.029"
+        },
+        "p95": {
+          "value": 916.029,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "patched-natural | WAN p50 / p95 167.111 / 916.029"
+        }
+      },
+      {
+        "label": "Go SIMD",
+        "p50": {
+          "value": 160.17,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-simd | WAN p50 / p95 160.170 / 636.837"
+        },
+        "p95": {
+          "value": 636.837,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-simd | WAN p50 / p95 160.170 / 636.837"
+        }
+      },
+      {
+        "label": "Go plain",
+        "p50": {
+          "value": 226.034,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-plain | WAN p50 / p95 226.034 / 333.407"
+        },
+        "p95": {
+          "value": 333.407,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-plain | WAN p50 / p95 226.034 / 333.407"
+        }
+      },
+      {
+        "label": "Node",
+        "p50": {
+          "value": 324.79,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "node | WAN p50 / p95 324.790 / 866.846"
+        },
+        "p95": {
+          "value": 866.846,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "node | WAN p50 / p95 324.790 / 866.846"
+        }
+      }
+    ],
+    "reqPerSet": {
+      "native": [
+        {
+          "value": 11.258,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "patched-natural | Per-set req/s 11.258 / 12.639 / 15.237"
+        },
+        {
+          "value": 12.639,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "patched-natural | Per-set req/s 11.258 / 12.639 / 15.237"
+        },
+        {
+          "value": 15.237,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "patched-natural | Per-set req/s 11.258 / 12.639 / 15.237"
+        }
+      ],
+      "goSimd": [
+        {
+          "value": 18.138,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-simd | Per-set req/s 18.138 / 16.356 / 16.292"
+        },
+        {
+          "value": 16.356,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-simd | Per-set req/s 18.138 / 16.356 / 16.292"
+        },
+        {
+          "value": 16.292,
+          "source": "research/vector-vercel.md#short-concurrency-windows",
+          "locator": "go-simd | Per-set req/s 18.138 / 16.356 / 16.292"
+        }
+      ]
+    }
+  },
+  "vectorCpu": {
+    "note": "Mean process CPU per request around the same compute interval. Go excludes its separate IPC proxy. Gallery notes only.",
+    "results": [
+      {
+        "label": "Patched native",
+        "value": 9.969,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Native patched, natural TS + dispatch | CPU ms/request 9.969"
+      },
+      {
+        "label": "Go SIMD",
+        "value": 14.405,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go experimental archsimd AVX2, v3 | CPU ms/request 14.405"
+      },
+      {
+        "label": "Go plain",
+        "value": 43.287,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Go plain, v1, no SIMD experiment | CPU ms/request 43.287"
+      },
+      {
+        "label": "Node",
+        "value": 76.472,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Node, natural TS | CPU ms/request 76.472"
+      }
+    ]
   }
 }
