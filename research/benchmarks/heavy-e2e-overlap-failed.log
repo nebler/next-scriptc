@@ -1,0 +1,32 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: $ next build
+▲ Next.js 16.4.3 (Turbopack)
+  Applying modifyConfig from next-scriptc
+[next-scriptc] Compiling 3 native function(s)
+/Users/noah/.t3/worktrees/next-scriptc/t3-5a761011/examples/demo/.next/cache/scriptc-functions/functions
+Unhandled 'error' event: Error: listen EADDRINUSE: address already in use 127.0.0.1:46998
+
+> Build error occurred
+Error: [next-scriptc] native functions (native port 46998; check stderr for EADDRINUSE if occupied) exited (exit 1).
+    at ChildProcess.<anonymous> (../../packages/next-scriptc/src/runtime.mjs:50:21)
+/Users/noah/.t3/worktrees/next-scriptc/t3-5a761011/examples/demo:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] demo@0.1.0 build: `next build`
+Exit status 1
+
+
+1 !== 0
+
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-5a761011/examples/demo/test/e2e.mjs:158:12
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.0

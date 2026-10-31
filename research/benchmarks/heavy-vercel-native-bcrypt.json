@@ -1,0 +1,284 @@
+{
+  "status": "complete",
+  "method": "C1/CPU share the same three measured requests, 1 warmup; no C16",
+  "variant": "native",
+  "id": "bcrypt",
+  "size": 10,
+  "path": "/api/heavy/bcrypt",
+  "requestBytes": 43,
+  "requestSha256": "225074addd8a7db51788ead69a14b8034c8ca054e0e6acaaa0b5e9f4c04a7e40",
+  "samples": [
+    {
+      "ms": 12079.358619,
+      "digest": "4777fd11fad7faeece7b07aa7f05c87ce5a5fd41a9ac0ee5ee683b5b7efe71f7",
+      "bytes": 24,
+      "reusedSocket": true,
+      "headers": {
+        "x-vercel-id": "iad1::iad1::bcgv2-1793446021958-dab87edd874e",
+        "x-vercel-cache": "MISS",
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "x-next-scriptc": "native"
+      }
+    },
+    {
+      "ms": 11973.73717,
+      "digest": "4777fd11fad7faeece7b07aa7f05c87ce5a5fd41a9ac0ee5ee683b5b7efe71f7",
+      "bytes": 24,
+      "reusedSocket": true,
+      "headers": {
+        "x-vercel-id": "iad1::iad1::ls9rp-1793446034093-752b138ac172",
+        "x-vercel-cache": "MISS",
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "x-next-scriptc": "native"
+      }
+    },
+    {
+      "ms": 11951.287327999999,
+      "digest": "4777fd11fad7faeece7b07aa7f05c87ce5a5fd41a9ac0ee5ee683b5b7efe71f7",
+      "bytes": 24,
+      "reusedSocket": true,
+      "headers": {
+        "x-vercel-id": "iad1::iad1::ls9rp-1793446046159-6215168c9041",
+        "x-vercel-cache": "MISS",
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "x-next-scriptc": "native"
+      }
+    }
+  ],
+  "cpu": {
+    "attempts": [
+      {
+        "before": {
+          "ms": 36.92760599999929,
+          "digest": "af94fe0371a6b7fdbdf526c9109713063b022f7794e4e6a82daa4b03fd7d54ed",
+          "bytes": 1894,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 17252693,
+              "system": 3637011
+            },
+            "rss": 26136576,
+            "procCpuTicks": {
+              "user": 1725,
+              "system": 363
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342196128 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25524 kB\nRssAnon:\t   18916 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342186332 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     348 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t908\nnonvoluntary_ctxt_switches:\t710\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::bcgv2-1793446021923-8bde5cf022d9",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "after": {
+          "ms": 31.34301399999822,
+          "digest": "ec6c81c9ab71d30de58df9604d47c5d14f5481380981904e494a7e5854cfbec2",
+          "bytes": 1894,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 29311070,
+              "system": 3637013
+            },
+            "rss": 26124288,
+            "procCpuTicks": {
+              "user": 2931,
+              "system": 363
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342195104 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25512 kB\nRssAnon:\t   18904 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342185308 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     348 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t914\nnonvoluntary_ctxt_switches:\t757\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::ls9rp-1793446034038-35c8bf8970c4",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "count": 1,
+        "deltaUs": 12058379,
+        "msPerRequest": 12058.379,
+        "accepted": true
+      },
+      {
+        "before": {
+          "ms": 21.616454000002705,
+          "digest": "f60f4d561ab5a4211c01d65a351c671ca4b38f3fce9cce02f7c10fe04e692758",
+          "bytes": 1894,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 29311520,
+              "system": 3640324
+            },
+            "rss": 26124288,
+            "procCpuTicks": {
+              "user": 2931,
+              "system": 364
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342195104 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25512 kB\nRssAnon:\t   18904 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342185308 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     348 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t918\nnonvoluntary_ctxt_switches:\t762\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::ls9rp-1793446034071-be225a4d9c9d",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "after": {
+          "ms": 48.30961199999729,
+          "digest": "d6cd694a50629464bbc32f3499d51562c749ffb12a080177a14220c0ed344a46",
+          "bytes": 1895,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 41250477,
+              "system": 3640325
+            },
+            "rss": 26124288,
+            "procCpuTicks": {
+              "user": 4125,
+              "system": 364
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342195104 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25512 kB\nRssAnon:\t   18904 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342185308 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     348 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t926\nnonvoluntary_ctxt_switches:\t1166\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::gqrbd-1793446046066-87b53539d3eb",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "count": 1,
+        "deltaUs": 11938958,
+        "msPerRequest": 11938.958,
+        "accepted": true
+      },
+      {
+        "before": {
+          "ms": 41.6179140000022,
+          "digest": "446c26783410b9098c459ceb0898967c35de252b8b51ae57f55d977da34063f9",
+          "bytes": 1895,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 41254085,
+              "system": 3640325
+            },
+            "rss": 26124288,
+            "procCpuTicks": {
+              "user": 4125,
+              "system": 364
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342195104 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25512 kB\nRssAnon:\t   18904 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342185308 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     348 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t929\nnonvoluntary_ctxt_switches:\t1170\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::ls9rp-1793446046117-1387a8f4d741",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "after": {
+          "ms": 44.915194000001065,
+          "digest": "4cc3f5e14d13f90c137ae0d6ed08061bc6435727f861784d3ae1b3eb418713fd",
+          "bytes": 1895,
+          "reusedSocket": true,
+          "body": {
+            "instance": "1793445498088-0.674586251385622",
+            "pid": 8,
+            "cpu": {
+              "user": 53183682,
+              "system": 3640325
+            },
+            "rss": 26124288,
+            "procCpuTicks": {
+              "user": 5318,
+              "system": 364
+            },
+            "availableParallelism": 2,
+            "status": "Name:\texecutable\nUmask:\t0002\nState:\tR (running)\nTgid:\t8\nNgid:\t0\nPid:\t8\nPPid:\t2\nTracerPid:\t0\nUid:\t993\t993\t993\t993\nGid:\t990\t990\t990\t990\nFDSize:\t256\nGroups:\t \nNStgid:\t8\nNSpid:\t8\nNSpgid:\t2\nNSsid:\t0\nVmPeak:\t1342879468 kB\nVmSize:\t1342195104 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   68160 kB\nVmRSS:\t   25512 kB\nRssAnon:\t   18904 kB\nRssFile:\t    6608 kB\nRssShmem:\t       0 kB\nVmData:\t1342185308 kB\nVmStk:\t     132 kB\nVmExe:\t    8244 kB\nVmLib:\t       8 kB\nVmPTE:\t     352 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nThreads:\t2\nSigQ:\t0/9091\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000180000000\nSigCgt:\t0000000000004002\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t6\nSpeculation_Store_Bypass:\tthread force mitigated\nCpus_allowed:\t3\nCpus_allowed_list:\t0-1\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t935\nnonvoluntary_ctxt_switches:\t1206\n",
+            "cpuMax": "unavailable",
+            "cgroup": "11:pids:/\n10:freezer:/\n9:hugetlb:/\n8:devices:/\n7:net_cls,net_prio:/\n6:blkio:/\n5:cpuset:/\n4:perf_event:/\n3:memory:/\n2:cpu,cpuacct:/\n1:name=systemd:/\n",
+            "cpuQuota": "unavailable",
+            "cpuPeriod": "unavailable"
+          },
+          "headers": {
+            "x-vercel-id": "iad1::iad1::h7ggv-1793446058110-7222f23ff715",
+            "x-vercel-cache": "MISS",
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        "count": 1,
+        "deltaUs": 11929597,
+        "msPerRequest": 11929.597,
+        "accepted": true
+      }
+    ],
+    "accepted": [
+      12058.379,
+      11938.958,
+      11929.597
+    ],
+    "status": "complete",
+    "medianMs": 11938.958
+  },
+  "requestsIssued": 10,
+  "sequential": {
+    "status": "complete",
+    "requests": 3,
+    "p50Ms": 11973.73717,
+    "p95Ms": 12079.358619,
+    "samplesMs": [
+      12079.358619,
+      11973.73717,
+      11951.287327999999
+    ]
+  }
+}
