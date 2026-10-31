@@ -294,3 +294,65 @@ FUNCTION_WEBPACK=1 node examples/demo/test/functions.mjs
 - Route parity, **default and light**: **85 response cases each** in Node dev and native production, matching status/headers/body. Cleanup checks both route and function manifests: **17** default or **10** grouped native processes, including the function port.
 
 Use Node 24 on PATH. A fresh macOS install again exposed scriptc's non-executable checker helpers (`SC3004: TypeScript server startup: Permission denied`); restoring installed `tsc-ts`, `tsc`, and `scriptc-comptime` execute bits fixed it. No compiler/source workaround was added. The Linux harness applies the same executable-mode repair after the frozen-lockfile install.
+
+## Call overhead optimization
+
+Baseline captured before production edits on 2026-10-31, macOS 26.6.1 arm64, Apple M4 Pro, Node 24.22.0, scriptc 0.4.6, release optimization and `--node-islands=off`. The local harness is `examples/demo/bench/function-overhead.mjs`; [before data](function-overhead-before.json) retains p50, p95 and maxima. These are function-call timings rather than rendered page or hosted measurements. The harness imports the real revenue function and generator, adding stored 1k/2k/3k exports only in its temporary module. It alternates native and Node per iteration, with 100 warmups and 300 samples at each size, checks event counts on every call and exact output JSON per size. The breakdown uses a separately instrumented copy of the production HTTP listener, 100 warmups and 1,000 samples per input. The in-process component probe has 100 warmups and 300 samples.
+
+Before changing code, the 5k breakdown identified strict result traversal as the dominant boundary cost: **1.299 ms** p50 for native validation/stringify, versus **0.650 ms** dispatch including argument parsing and computation. Client argument validation/stringify was 0.005417 ms, synchronous HTTP submission 0.015917 ms, native body assembly 0.002 ms, Node response reception after headers 0.025291 ms, and Node result parsing 0.057458 ms. The remaining 0.108958 ms combines HTTP parsing before the server callback, OS transport, response-header processing and event-loop/Agent scheduling. Echo's complete instrumented boundary was 0.074959 ms p50. An isolated component probe measured native argument parsing at timer resolution (0 ms median), revenue JSON parse at 0.358 ms, aggregation at 0.216 ms, and plain result stringify at 0.011 ms. Components use separate windows; their medians should not be added into a reconstructed call. The harness cannot accurately separate one-way transport from scheduling with independent process clocks. Node does not revalidate a parsed JSON result, and argument validation is not duplicated natively.
+
+### What changed
+
+The wire protocol stays loopback HTTP with the existing keep-alive Agent. Measurements did not justify replacing it with sockets or stdio. `client.mjs`, `runtime.mjs`, function manifest fields and **`sidecar.mjs` are unchanged**. Both self-hosted and Vercel continue to discover the same numeric port through `next-scriptc: listening on 127.0.0.1:<port>`. No merge interface change is required in the packaging/startup branch.
+
+Two native-side costs changed. The descriptor dictionaries now remain in scriptc's checked dynamic representation rather than converting each dictionary and descriptor to native typed records. A CPU sample showed descriptor conversion, record identity tracking and repeated materialization. Despite scriptc's general warning about `any` in loops, this small reflective path is faster without those conversions. All descriptor, prototype, symbol, finite-number, density and cycle checks remain in the same order. There is no Node island; builds still use `--node-islands=off`.
+
+The generated dispatcher now returns an internal `{ value, encode }` envelope. Its encoder closes over the concrete function return type and calls the ordinary `JSON.stringify` builtin. `serveFunctions` passes both to the shared serializer, which completes the full strict traversal **before** invoking the encoder. This preserves getter/toJSON rejection before encoding while allowing scriptc to use its typed JSON encoder. Previously, encoding the erased `unknown` return repeatedly refreshed the observed typed views. The envelope is never transmitted. HTTP status/error bodies, native thrown messages, timeouts, rejection on crash and process restart behavior are unchanged.
+
+Several probes did not help: replacing descriptor-map lookups with `Object.values`, moving the recursive closures to module scope, iterative traversal, and removing the optional descriptor parameter type stayed near the original cost or lost. Manually encoding from descriptor values measured about 0.97 ms even with cached escaped keys, so it was discarded. The successful isolated validation plus typed encoding probe measured 0.576 ms versus 1.299 ms for the baseline serializer. The real server window below is the end-to-end evidence. Temporary experiment binaries are removed.
+
+### Before and after boundary
+
+All values below are p50 **milliseconds** from [before](function-overhead-before.json) and [after](function-overhead-after.json). The HTTP client/server timing boundaries are identical. The after dispatcher carries the typed encoder used by generated production entries. Result parsing already guarantees JSON data on Node; there is no redundant result-validation traversal to remove.
+
+| Component | Echo before | Echo after | Revenue 5k before | Revenue 5k after |
+| --- | ---: | ---: | ---: | ---: |
+| Node argument validation + stringify | 0.001833 | 0.002041 | 0.005417 | 0.004708 |
+| Node synchronous HTTP request submission | 0.008417 | 0.008833 | 0.015917 | 0.014416 |
+| Native body assembly after HTTP callback | 0.001 | 0.001 | 0.002 | 0.002 |
+| Native dispatch, including argument parse and call | 0.001 | 0.001 | 0.650 | 0.662 |
+| Native strict result validation + encoding | 0.002 | 0.001 | **1.299** | **0.357** |
+| Node response reception, headers to end | 0.011292 | 0.012708 | 0.025291 | 0.024375 |
+| Node result parse | 0.000334 | 0.000417 | 0.057458 | 0.059375 |
+| Transport / HTTP parser / scheduling residual | 0.047792 | 0.046583 | 0.108958 | 0.087250 |
+| Complete instrumented boundary | 0.074959 | 0.076792 | **2.186459** | **1.216125** |
+
+The 5k result boundary fell about **73%** in that server window; the complete uninstrumented call fell about **43%** below. Echo's complete median got slightly slower, and the response parse did not improve. The isolated after component probe was noisier and slower overall: revenue parse/aggregate were 0.523/0.322 ms versus 0.358/0.216 before; strict result validation plus typed encoding was 0.838 ms versus 1.324 before. Native argument parse was 0.001 ms versus 0 at timer resolution, and typed plain stringify was 0.014 ms versus 0.011. These windows remain in the data; the compute algorithm was not changed. The cross-process residual is calculated per sample before summarizing, but cannot be uniquely assigned to outbound versus inbound transport, native HTTP parsing or event-loop/Agent scheduling. No subtraction of independently summarized medians is presented as a direct one-way measurement.
+
+### Local revenue curve
+
+Complete caller `await revenue(...)` duration, without profiling fields, in milliseconds. This is the same function used by `/reports`; generation is module setup, and every timed query parses its stored export. Node runs the original source in-process; native uses the production client and listener with a compiled dispatcher. Both produce the same complete JSON, including ordering and all 248 rows. Native and Node timing windows alternate within each size; before/after windows are separate.
+
+| Events | Node before p50 / p95 | Native before p50 / p95 | Node after p50 / p95 | Native after p50 / p95 |
+| ---: | ---: | ---: | ---: | ---: |
+| 1,000 | 0.585 / 1.449 | 3.053 / 8.446 | 0.392 / 0.503 | 0.761 / 1.257 |
+| 2,000 | 0.728 / 0.774 | 1.930 / 2.269 | 0.752 / 0.866 | 0.929 / 1.251 |
+| 3,000 | 1.185 / 1.619 | 2.359 / 3.349 | 1.082 / 1.237 | 1.028 / 1.415 |
+| 5,000 | 1.748 / 1.967 | 2.395 / 2.685 | 1.797 / 2.507 | 1.359 / 1.941 |
+| 15,000 | 5.107 / 7.332 | 3.679 / 5.856 | 5.272 / 5.553 | 2.703 / 2.975 |
+| 200,000 | 114.686 / 328.644 | 39.492 / 62.409 | 75.396 / 152.555 | 26.513 / 55.132 |
+
+The observed local **median crossover moved from 5k–15k to 2k–3k**. The 3k median win is small and its p95 still loses. Both p50 and p95 win at 5k and larger in the after window; both still lose at 1k and 2k. This is a bracket, not a universal threshold. The after native maximum at 3k was 7.997 ms versus Node's 2.220, and at 5k it was 7.915 versus Node's 5.210, so the median/p95 win is not a claim of uniformly better tails. The before 200k Node maximum was 446.615 ms and native maximum 211.264; the after maxima were 251.206 and 69.660. No measured outlier was discarded. Large changes in the unchanged Node 200k control show why the entire cross-window delta cannot be credited to this fixed boundary optimization.
+
+Reproduce with Node 24 on PATH and `SCRIPTC_CHECKER_SERVER=0`:
+
+```sh
+BENCH_REVISION=53da3a7 node examples/demo/bench/function-overhead.mjs /tmp/function-overhead-before.json
+node examples/demo/bench/function-overhead.mjs /tmp/function-overhead-after.json
+```
+
+Limits: macOS arm64 on a shared host, one before/after pair, sequential C=1, no confidence intervals or hosted remeasurement. The baseline's 1k window was particularly noisy. The process split, duplicated fixture setup, event-loop waits and fixed-size result boundary remain. Descriptor representation and typed encoding are compiler-dependent optimizations, verified here with scriptc 0.4.6. The component probe and instrumented HTTP window include extra timers and run separately from the uninstrumented curve. Vercel CPU allocation, cold starts, sidecar placement/start timing and Linux scheduling can shift the crossover. No Vercel deployment, push or Docker operation was performed.
+
+Validation on Node 24.22.0 passed: root `pnpm test` (20 package tests, 24 demo tests), `SCRIPTC_CHECKER_SERVER=0 node --test packages/next-scriptc/test/function-native.mjs`, `SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/functions.mjs` with both Turbopack and `FUNCTION_WEBPACK=1`, and `SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/function-build.mjs`. Function E2E used `FUNCTION_TEST_PORT=4361`. Focused coverage checks typed numeric/string/shared-value encoding, preservation of valid extra properties, rejection of hidden properties before the encoder runs, fragmented multi-byte HTTP bodies, 32 concurrent delayed successes/errors, and rejection of 16 pending calls on process death, under both Node and native listeners. Existing E2E verifies self-hosted restart; the sidecar startup/restart fixture passes in the root suite. Both benchmark reproduction modes compile and run. Generated demo/package build outputs and temporary probe binaries were cleaned after validation.
+
+Initial profiling setup failures (installed checker helper execute bits and the echo probe's incorrect revenue tuple cast) were fixed before the retained baseline. Baseline reproduction also needed its module package marker written before importing staged TypeScript. These were setup/harness failures, not discarded latency samples.

@@ -124,7 +124,11 @@ test("JSON boundary rejects lossy values instead of silently coercing them", () 
     assert.equal(serialize(valid), serializeLegacy(valid));
     assert.equal(serialize(valid, true), serializeLegacy(valid));
     assert.equal(serialize(valid), JSON.stringify(valid));
+    assert.equal(serialize(valid, true, () => JSON.stringify(valid)), JSON.stringify(valid));
   }
+  let encodings = 0;
+  assert.equal(serialize(value, true, () => { encodings++; return JSON.stringify(value); }), JSON.stringify(value));
+  assert.equal(encodings, 1, "valid data uses the supplied typed encoder once");
   const customArray = Object.setPrototypeOf([1], null);
   assert.equal(serialize(customArray), serializeLegacy(customArray));
   assert.throws(() => serialize(customArray, true), /JSON/);
@@ -134,6 +138,9 @@ test("JSON boundary rejects lossy values instead of silently coercing them", () 
   const extra = [1]; extra.x = 2;
   const holeAndExtra = Array(1); holeAndExtra.extra = 1;
   for (const invalid of [holeAndExtra, undefined, NaN, Infinity, 1n, () => 1, Symbol(), new Date(), new Map(), { x: undefined }, [undefined], Array(2), cyclic, hidden, getter, extra, { [Symbol()]: 1 }]) {
+    let encoded = false;
+    assert.throws(() => serialize(invalid, true, () => { encoded = true; return "null"; }), /JSON/);
+    assert.equal(encoded, false, "typed encoding follows complete strict validation");
     assert.throws(() => serialize(invalid), /JSON/);
     assert.throws(() => serialize(invalid, true), /JSON/);
     assert.throws(() => serializeLegacy(invalid), /JSON/);

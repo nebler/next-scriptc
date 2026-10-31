@@ -119,7 +119,7 @@ await writeFile(path.join(output, "tsconfig.json"), JSON.stringify({ compilerOpt
 const entry = path.join(output, "entry.ts");
 await writeFile(entry, `import { serveFunctions } from ${JSON.stringify(path.resolve(demo, "../../packages/next-scriptc/src/functions/serve.ts"))};
 import { profile } from ${JSON.stringify(path.join(demo, "bench/function-profile.ts"))};
-serveFunctions(async (_id: string, body: string): Promise<unknown> => { const args = JSON.parse(body) as [number]; return profile(args[0]); });\n`);
+serveFunctions(async (_id: string, body: string) => { const args = JSON.parse(body) as [number]; const value = await profile(args[0]); return { value, encode: () => JSON.stringify(value) }; });\n`);
 await promisify(execFile)(compiler, ["build", entry, "-o", path.join(output, "profile"), "--optimization", "release", "--strip", "--no-keep-llvm", "--node-islands=off"], { env: { ...process.env, SCRIPTC_CHECKER_SERVER: "0" } });
 const child = spawn(process.env.FUNCTION_SERVER_CPU ? "taskset" : path.join(output, "profile"), process.env.FUNCTION_SERVER_CPU ? ["-c", process.env.FUNCTION_SERVER_CPU, path.join(output, "profile")] : [], { env: { ...process.env, PORT: String(port), NEXT_SCRIPTC_PARENT: String(process.pid) }, stdio: ["ignore", "pipe", "pipe"] });
 const state = { child, output: "", exit: new Promise((resolve) => child.once("close", resolve)) };

@@ -13,7 +13,7 @@ export async function profile(size: number) {
   const parsed = performance.now();
   const result = await revenue(decoded[0], decoded[1], decoded[2], decoded[3]);
   const computed = performance.now();
-  const json = serialize(result, true);
+  const json = serialize(result, true, () => JSON.stringify(result));
   const serialized = performance.now();
   const plain = JSON.stringify(result);
   const stringified = performance.now();
