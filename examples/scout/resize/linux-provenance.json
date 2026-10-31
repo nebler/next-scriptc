@@ -1,0 +1,45 @@
+{
+  "startedAt": "2026-10-31T12:13:19.388Z",
+  "name": "tan-defensive-gorilla-as8iu6",
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 1,
+  "timeoutMs": 180000,
+  "maxVcpuHours": 0.05,
+  "sources": {
+    "kernel.ts": "7b48ea74b06f235617e06dab3c7a216ceddc81eb1f68076beb19b389eaa4b4a0",
+    "bench.ts": "ddafc1660da6d2c7f8e209e790e382636c3ed69093af1b6930da49f880a45631",
+    "run.mjs": "6df69985f3e7f8eb7239651bfa79cbd59ad582df50fa2d41d547328033c9a77d",
+    "main.go": "a11e93187f3bf16564befe492fec15e5b799337fbec91f80926a3be8a6fddf66",
+    "go.mod": "6310b10980e1f4fe5d7af3cdcef76f85ed290c1a5fb175419dd0a0026438635f",
+    "go.sum": "ec2cec0933931eab585c47b791dce197e45aea9a30204b0f10e25751e6e697e5"
+  },
+  "goVersion": "go version go1.27.3 darwin/arm64",
+  "goCrossBuild": "GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build",
+  "steps": [
+    {
+      "label": "system tools",
+      "elapsedMs": 17623,
+      "exitCode": 0
+    },
+    {
+      "label": "compiler install",
+      "elapsedMs": 7721,
+      "exitCode": 0
+    },
+    {
+      "label": "compile release and speed",
+      "elapsedMs": 1000,
+      "exitCode": 0
+    },
+    {
+      "label": "largest kernel matrix",
+      "elapsedMs": 46346,
+      "exitCode": 0
+    }
+  ],
+  "status": "complete",
+  "stopped": true,
+  "activeCpuDurationMs": 71786,
+  "elapsedMs": 77722,
+  "allocatedVcpuHoursUpperBound": 0.021589444444444446
+}
