@@ -102,7 +102,31 @@ export async function GET(request: NextRequest, context: RouteContext) {
 }
 
 export async function POST(request: Request): Promise<Response> {
-  if (new URL(request.url).searchParams.get("case") === "binary") {
+  const mode = new URL(request.url).searchParams.get("case");
+  if (mode === "body-state") {
+    const before = request.bodyUsed;
+    const clone = request.clone();
+    const bytes = new Uint8Array(await request.arrayBuffer());
+    const after = request.bodyUsed;
+    bytes.fill(0);
+    let rejected = false;
+    try { await request.text(); } catch { rejected = true; }
+    return Response.json({ before, after, rejected, clone: await clone.text() });
+  }
+  if (mode === "body-lock") {
+    const reader = request.body!.getReader();
+    const before = request.bodyUsed;
+    let readRejected = false;
+    let cloneRejected = false;
+    try { await request.arrayBuffer(); } catch { readRejected = true; }
+    try { request.clone(); } catch { cloneRejected = true; }
+    const chunk = await reader.read();
+    reader.releaseLock();
+    return Response.json({ before, after: request.bodyUsed, readRejected, cloneRejected, length: chunk.value?.length });
+  }
+  if (mode === "body-text") return Response.json({ text: await request.text(), used: request.bodyUsed });
+  if (mode === "body-bytes") return new Response(await request.bytes());
+  if (mode === "binary") {
     return new Response(new Uint8Array(await request.arrayBuffer()), { headers: { "content-type": request.headers.get("content-type") || "application/octet-stream" } });
   }
   return Response.json({ method: request.method, body: await request.json() }, { status: 201 });

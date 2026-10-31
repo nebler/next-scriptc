@@ -114,6 +114,26 @@ function request(port, specification) {
   });
 }
 
+async function assertAbortedUpload(port, state) {
+  const offset = state.stderr.length;
+  await new Promise((resolve, reject) => {
+    const req = http.request({ host: "127.0.0.1", port, path: "/api/a", method: "POST", agent: false,
+      headers: { "content-length": "1048576" } });
+    req.on("error", () => {});
+    req.on("close", resolve);
+    req.on("socket", (socket) => socket.once("connect", () => {
+      req.write("partial");
+      setTimeout(() => req.destroy(), 30);
+    }));
+    req.setTimeout(5000, () => { req.destroy(); reject(new Error("Aborted upload did not close")); });
+  });
+  const deadline = performance.now() + 5000;
+  while (!/aborted/i.test(state.stderr.slice(offset)) && performance.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+  assert.match(state.stderr.slice(offset), /aborted/i);
+}
+
 async function assertCancellation(port, path, state) {
   await new Promise((resolve, reject) => {
     const req = http.get({ host: "127.0.0.1", port, path, agent: false }, (res) => {
@@ -277,6 +297,7 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await compare({ path: `${base}?case=next-invalid-redirect`, status: 500, text: "" });
       await compare({ path: `${base}?case=next-body`, status: 202, text: "constructed:世界" });
       for (const [index, port] of ports.entries()) await assertCancellation(port, `${base}?case=cancel`, [node, native][index]);
+      for (const [index, port] of ports.entries()) await assertAbortedUpload(port, [node, native][index]);
       for (const port of ports) await assertKeepAlive(port, base);
       for (const port of ports) await assertStreaming(port, `${base}?case=slow`);
       const framing = await compare({ path: `${base}?case=framing`, text: "decoded" });
@@ -304,6 +325,19 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await compare({ path: base, method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ value: [1, "世界", true] }), status: 201, json: { method: "POST", body: { value: [1, "世界", true] } } });
       const posted = await compare({ path: `${base}?case=binary`, method: "POST", chunks: [Buffer.from([0, 255]), Buffer.from([128, 1])], headers: { "content-type": "application/octet-stream" } });
       assert.deepEqual(posted.body, Buffer.from([0, 255, 128, 1]));
+      for (const payload of ["", "hello 世界", "x".repeat(1024 * 1024)]) {
+        for (const chunked of [false, true]) {
+          const input = chunked ? { chunks: [Buffer.from(payload)] } : { body: payload };
+          await compare({ path: `${base}?case=body-state`, method: "POST", ...input,
+            json: { before: false, after: true, rejected: true, clone: payload } });
+          await compare({ path: `${base}?case=body-text`, method: "POST", ...input,
+            json: { text: payload, used: true } });
+          await compare({ path: `${base}?case=body-bytes`, method: "POST", ...input, text: payload });
+        }
+      }
+      // A one-byte body keeps the reader result independent of HTTP chunking.
+      await compare({ path: `${base}?case=body-lock`, method: "POST", body: "x",
+        json: { before: false, after: true, readRejected: true, cloneRejected: true, length: 1 } });
       await compare({ path: base, method: "POST", body: "broken json", status: 500, text: "" });
       await compare({ path: base, method: "DELETE", status: 405, text: "", allow });
       await compare({ path: base, method: "OPTIONS", status: 204, text: "", allow });

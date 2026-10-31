@@ -17,7 +17,8 @@ Parity compiles one fixture and checks Node 24 against native status, statusText
 headers (except date/runtime marker), and body bytes, with expected-value checks.
 It covers methods, URL forwarding, params, cookies, binary uploads/responses,
 fetch decompression, response framing, the real Next request/response helpers,
-stream delivery/cancellation, connection reuse, errors, port validation, and shutdown
+body consumption/locking/cloning, interrupted uploads, stream delivery/cancellation,
+connection reuse, errors, port validation, and shutdown
 with requests in flight. The E2E runner builds sequentially, curls the demo under
 Next dev and plain `next start`, checks static/dynamic precedence, and verifies
 server-only SIGTERM/SIGKILL cleanup and isolated crash recovery. Managed binaries
@@ -47,7 +48,11 @@ scriptc's checked dynamic representation (SC6104 warnings), not a Node fallback.
 
 Limitations:
 
-- Uploads are buffered. Responses forward each ReadableStream chunk immediately;
+- Uploads retain their owned HTTP chunks until end, then supply a closed Web
+  stream without an intermediate concatenation or constructor snapshot copy.
+  Web body readers still provide their normal independent results. Incomplete
+  uploads reject on close even when the transport omits an aborted/error event.
+  Responses forward each ReadableStream chunk immediately;
   a closed single-chunk body uses one `end(bytes)` call.
   HEAD cancels its body, and a disconnected client cancels the response reader.
   scriptc 0.4.6's HTTP `write` returns void and exposes no drain event or write

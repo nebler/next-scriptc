@@ -4,9 +4,11 @@ import path from "node:path";
 import { nextServerPath } from "./paths.mjs";
 
 const require = createRequire(import.meta.url);
-const loadJsConfig = require("next/dist/build/load-jsconfig.js").default;
 
 export async function writeNativeConfig(projectDir, output, config) {
+  // Production startup never writes compiler configuration. Load Next's
+  // TypeScript/config tooling only when building native entries.
+  const loadJsConfig = require("next/dist/build/load-jsconfig.js").default;
   const { jsConfig, jsConfigPath, resolvedBaseUrl } = await loadJsConfig(projectDir, config);
   const paths = {};
   for (const [name, targets] of Object.entries(jsConfig?.compilerOptions?.paths ?? {})) {

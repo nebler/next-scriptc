@@ -169,3 +169,100 @@ For context, the successful **published-JS** variants in that same experiment us
 On Node 24.22.0 / scriptc 0.4.6 / the loaded Apple M4 Pro, builds were run sequentially with release, `--node-islands=off`, `--no-keep-llvm`, checker server disabled. `marked-regex`, `sha256-bulk`, `bcrypt-dynamic` and `minisearch-costs` all built with exit **0**. `next-request` reproduced **one SC3004 at 1:1**, exit **1**. Both source reductions refused as detailed above; source tag commits were verified. The first marked reduction also logged a separate `console.log` Promise-union inspect refusal (30 total); awaiting the result removed that unrelated repro artifact, leaving the 29 upstream-source errors. No source patches or generic erasure were used.
 
 Fresh bcrypt coverage exits **0** and confirms the named dynamic kernel. Logs are local ignored `examples/probe/.artifacts/upstream-drafts/`; the material counts/diagnostics are transcribed above, while original source-experiment diagnostics remain committed in JSON. No reduced repro executable was timed in this round. The full HTTP parity suite separately passed 85 cases (including the reused article/search handlers). All owned compiler/server processes exited; no issue was filed.
+
+
+## Round 3: upload profiling and async typed-array ownership
+
+**Environment:** scriptc 0.4.6 release, Node 24.22.0, Apple M4 Pro/macOS
+arm64, 2026-10-31. Loaded shared machine, no affinity; indicative only. These
+are new local diagnostics, not revisions to the pinned Linux round 2 results.
+
+Sequential 1 MiB upload load through the unchanged real handlers was sampled
+with `/usr/bin/sample PID 5 1 -file FILE`; the identical generated HTTP entry
+ran under Node with `--cpu-prof`. In histogram, **2,557/3,842 main-thread
+samples (66.6%)** were in POST: 997 handler leaves, 921 `scr_bytes_release`
+and 639 `scr_bytes_retain_v`. These retain/release calls are children of the
+handler's loop, not chunk collection. `Buffer.concat` has 62 inclusive samples;
+Request construction 45; Web body collection 159. The Node profile spends
+46.5% in POST, 6.7% in GC, 2.2% in BufferSource snapshot copying and 1.9% in
+`Buffer.concat`, including idle/startup samples in the denominator.
+
+For upload verification, **3,265/3,815 native samples (85.6%)** end in
+`scr_sha256_blocks`; Node spends 37.7% in `Hash.update`, 7.5% in GC and 28.5%
+idle. The native upload loss is principally hashing on this platform. This
+supplies the native profile previously missing from draft B; it does not prove
+which hashing backend or instruction-set change would help on Linux.
+
+**Minimal typed-array reduction:** save the following as `array-buffer-loop.ts`,
+run with Node 24, then build/run with the common release command above. No HTTP,
+Next, adapter, hashing, Response serialization or native-only application
+algorithm is involved. Both async variants create and consume the same Request;
+the helper moves only the numeric loop out of the async frame.
+
+```ts
+const size = 1024 * 1024;
+const globalBytes = new Uint8Array(size);
+for (let i = 0; i < size; i++) globalBytes[i] = i % 251;
+function sum(bytes: Uint8Array): number {
+  let total = 0;
+  for (let i = 0; i < bytes.length; i += 4) total += (77 * bytes[i] + 150 * bytes[i + 1] + 29 * bytes[i + 2]) >>> 8;
+  return total;
+}
+async function inline(request: Request): Promise<number> {
+  const bytes = new Uint8Array(await request.arrayBuffer());
+  let total = 0;
+  for (let i = 0; i < bytes.length; i += 4) total += (77 * bytes[i] + 150 * bytes[i + 1] + 29 * bytes[i + 2]) >>> 8;
+  return total;
+}
+async function helper(request: Request): Promise<number> {
+  const bytes = new Uint8Array(await request.arrayBuffer());
+  return sum(bytes);
+}
+async function main() {
+  const expected = sum(globalBytes);
+  for (const kind of ['global', 'inline', 'helper']) {
+    for (let rep = 0; rep < 3; rep++) {
+      const start = performance.now();
+      for (let i = 0; i < 1000; i++) {
+        const value = kind === 'global' ? sum(globalBytes) : await (kind === 'inline' ? inline : helper)(new Request('http://fixture.test', { method: 'POST', body: globalBytes }));
+        if (value !== expected) throw new Error('parity');
+      }
+      console.log(JSON.stringify({kind,rep,ms:performance.now()-start,expected}));
+    }
+  }
+}
+main();
+```
+
+All results were **32554081**. Median ms/call across three windows
+of 1,000 calls in one process: native global **0.261**, inline **0.497**, helper
+**0.356**; Node global **0.359**, inline **0.645**, helper **0.921** (the Node
+helper windows vary **0.599–0.943**). No warmed, alternating-process kernel speed
+claim follows from these diagnostic windows. Global excludes Request work and
+is not a same-work baseline for the other rows. The inline/helper difference,
+together with the actual HTTP stacks, suggests avoidable byte ownership traffic
+for a typed-array local kept in an async frame. It does **not** establish that
+`Request.arrayBuffer()` itself is the main histogram bottleneck. Investigate
+hoisting typed-array references/bounds out of loops in resumed async functions;
+no handler rewrite or compiler fork was shipped.
+
+A separate same-file 1 MiB Request-construction/arrayBuffer diagnostic compares
+BufferSource versus a closed stream holding the same owned Uint8Array. Native
+medians are **0.0911 → 0.0834 ms/call**; Node **0.1694 → 0.0898 ms/call**
+(three windows, 1,000 calls each, BufferSource then stream, no HTTP).
+This supports eliminating constructor snapshot copies but is not evidence that
+all HTTP upload latency disappears. Web collection still copies to produce the
+independent ArrayBuffer required by its API.
+
+**Additional transport discrepancy:** `http.createServer` with `data`, `end`,
+`aborted`, `error`, and `close` listeners receives a POST declaring
+Content-Length 1048576, then seven bytes followed by a client FIN. Node emits
+`data(7), aborted, error(Error: aborted), close(complete=false)`. The installed
+native emits `data(7), close(complete=true)` without end/error/aborted. The shim
+now rejects a pending collection on close, tracking end itself without trusting
+complete or allocating errors on normal closes. The parity suite exercises the interrupted upload and
+subsequent successful requests on both runtimes. This is an HTTP runtime issue,
+independent of the upload kernel/copy costs.
+
+Raw samples, CPU profiles, exact reduction, builds and clients are local ignored
+artifacts in `packages/next-scriptc/.next/round3/`. No issue has been filed.

@@ -74,14 +74,27 @@ async function toRequest(incoming: IncomingMessage, url: string, host: string, i
   if (method === "GET" || method === "HEAD") return new NextRequest(url, { method, headers }, cookie);
   const chunks = await new Promise<Buffer[]>((resolve, reject) => {
     const chunks: Buffer[] = [];
+    let ended = false;
     incoming.on("data", (chunk: Buffer) => chunks.push(chunk));
-    incoming.on("end", () => resolve(chunks));
+    incoming.on("end", () => { ended = true; resolve(chunks); });
     incoming.on("error", (error: Error) => reject(error));
     incoming.on("aborted", () => reject(new Error("Request aborted")));
+    // scriptc can report an incomplete FIN as close alone (with complete=true).
+    // Track end ourselves and avoid constructing errors on normal closes.
+    incoming.on("close", () => {
+      if (!ended) reject(new Error("Request aborted"));
+    });
   });
-  const body = chunks.length === 1 ? chunks[0] : Buffer.concat(chunks);
-  // HTTP data buffers are ArrayBuffer-backed; keep their existing byte view.
-  return new NextRequest(url, { method, headers, body: body as Uint8Array<ArrayBuffer> }, cookie);
+  // The transport owns these buffers. A stream passes their byte views to
+  // Request without concatenating them or snapshotting a Buffer in its constructor.
+  // Keep consumption, locking, clone/tee and bodyUsed in the Web implementation.
+  const body = new ReadableStream<Uint8Array>({
+    start(controller) {
+      for (const chunk of chunks) controller.enqueue(chunk);
+      controller.close();
+    },
+  });
+  return new NextRequest(url, { method, headers, body }, cookie);
 }
 
 async function writeResponse(response: RouteResponse, outgoing: ServerResponse, head: boolean): Promise<void> {

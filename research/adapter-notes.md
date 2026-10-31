@@ -586,3 +586,205 @@ fixture. Port binds succeeded for **3417, 3427, 3437, 45173 and every native por
 No commit, branch, index or other git mutation was performed. The initial HEAD
 was `adc6ff5`; another actor advanced main to `05c896f` (the round 1 benchmark
 record) during this run. All implementation changes here remain uncommitted.
+
+## Optimization round 3 — upload copies, startup tooling, regression check
+
+2026-10-31; implementation base `fd40dda` on main, with the round 2 merge and
+sandbox reports already present. Node 24.22.0, scriptc 0.4.6 release, Next 16.4.3,
+Apple M4 Pro/macOS arm64. **All local timings below are indicative:** shared
+loaded host, no CPU affinity, another research worktree active. They cannot
+replace the quiet, pinned four-vCPU Linux round 2 baseline. No route algorithm,
+fixture, password cost, parity expectation, optimization mode or git state was
+changed. Builds and application modes owned by this task run sequentially.
+
+### Profile first, then remove the two avoidable body copies
+
+The round 2 baseline remains direct native/Node p50 **5.254/2.198 ms** for the
+1 MiB RGBA histogram and **2.750/2.086 ms** for 1 MiB SHA-256 verification.
+The unchanged handlers were first profiled under sequential HTTP keep-alive
+upload load, with `/usr/bin/sample PID 5 1 -file FILE` for native and
+`node --cpu-prof --cpu-prof-dir=... --cpu-prof-name=... ENTRY.ts` for Node.
+Native binaries for this diagnostic retain symbols; production still strips.
+
+Histogram's native main thread has **3,842 samples**, with **2,557 (66.6%)** in
+the handler: 997 handler leaves, 921 `scr_bytes_release`, 639
+`scr_bytes_retain_v`. The ownership calls sit inside the handler's numeric loop.
+`Buffer.concat` accounts for 62 inclusive samples, Request construction 45,
+and Web body collection 159. These disjoint observed call paths are diagnostic
+sample shares, not exact per-request CPU-cycle attribution. Node spends **46.5%**
+in POST, **6.7%** in GC, **2.2%** in BufferSource snapshot copying and **1.9%**
+in concat (whole-process profile including idle/setup).
+
+SHA-256 upload has **3,265/3,815 native samples (85.6%)** in
+`scr_sha256_blocks`. Node spends **37.7%** in Hash.update, **7.5%** in GC and
+**28.5%** idle. On this platform the request-body path is secondary to hashing;
+the histogram also pays typed-array ownership traffic absent from the simpler
+module-global kernel probe. The kernel-only parity result did not establish
+parity for the full async upload handler.
+
+`toRequest` now gives Web Request a closed stream of the owned HTTP chunks.
+This removes **Buffer.concat** and the **BufferSource constructor snapshot**;
+it needs neither an allocation based on an untrusted content-length nor a
+second implementation of Web body state. It still waits for HTTP end before
+calling the handler. Web Request retains bodyUsed, clone/tee, locking, text,
+JSON, bytes and arrayBuffer semantics. ArrayBuffer readers still make their
+required independent result; this is not a zero-copy claim. Chunked uploads
+use the same path. Public NextRequest construction is unchanged.
+
+An expanded interrupted-upload check exposed a pre-existing runtime discrepancy:
+for a 1 MiB Content-Length and only seven bytes followed by FIN, native emits
+close without end/aborted/error and reports complete=true. Node reports aborted,
+error and complete=false. Pending collection now rejects on close; a local end flag avoids relying on
+complete and avoids allocating an Error on every successful upload's close. No timeout or
+request-body shortcut was added. AbortSignal propagation after handler dispatch
+remains outside the shim's supported subset.
+
+A same-file Request-construction/arrayBuffer microdiagnostic, 1 MiB and three
+windows of 1,000 calls, measures BufferSource → owned closed stream:
+**native 0.0911 → 0.0834 ms/call; Node 0.1694 → 0.0898**. This excludes HTTP and
+is not an application speed claim. A separate Request/typed-array reduction
+places the same luma sum inline in an async frame versus in a typed helper:
+native **0.497 vs 0.356 ms/call**, with identical 32554081 totals. Its global
+kernel is **0.261 ms**, excluding Request work. The reduction and the real
+profiles are appended to [upstream issue drafts](upstream-issues.md), together
+with the incomplete-FIN discrepancy and the newly measured SHA profile. No
+issue was filed and no compiler/runtime fork or route rewrite was introduced.
+
+Final direct HTTP measurements use the same generated static entry, handler,
+1 MiB deterministic payload, valid digest/JWT and C=1 keep-alive client on each
+side. Three fresh processes per variant, alternating before/after order;
+100 warmups and three windows of 500 calls per process. Every status and full
+body is checked on every call; bodies also match across all variants/runtimes.
+Server-only ps TIME deltas include 1,600 calls and have 10 ms quantization.
+Medians of nine p50 windows, with observed window ranges in brackets:
+
+- Histogram native: **1.504 [1.449,2.665] → 1.400 [1.390,3.130] ms**;
+  server CPU **1.363 → 1.288 ms/request**.
+- Histogram identical shim under Node: **1.076 [1.040,1.302] →
+  0.945 [0.893,1.098] ms**; CPU **1.869 → 1.319 ms/request**.
+- SHA upload native: **4.648 [4.596,8.171] → 4.553 [4.500,4.618] ms**;
+  CPU **4.425 → 4.350 ms/request**.
+- SHA upload identical shim under Node: **1.178 [1.070,2.012] →
+  0.937 [0.904,1.071] ms**; CPU **1.731 → 1.338 ms/request**.
+
+Native median latency improves about 6.9%/2.1% locally, and still loses to Node.
+The shared shim optimization helps Node more. Slow final windows (including
+3.130 ms after histogram and 8.171 ms before SHA) are retained in the ranges;
+these are not confidence intervals or evidence of a stable tail improvement.
+Earlier exploratory windows varied widely while the other worktree built
+(native SHA 4.5–9.2 ms); they remain local artifacts rather than being pooled
+with the final interleaved pass. No Linux upload improvement or universal ratio
+is inferred from these Mac results.
+
+### Startup: defer build-only config tooling
+
+Tracing timestamps surround modifyConfig, readManifest, each spawn and parsed
+readiness line. In the original three-run trace, manifest reads take **1.5–3.5
+ms**; all 16 listeners become ready **12.4–32.6 ms** after the first spawn.
+Final interleaved traces using the rebuilt binaries show manifest ranges of
+**0.7–7.4 ms** before / **1.5–3.5 ms** after; spawn-to-all-ready is
+**10.3–16.9 ms** before / **10.6–13.0 ms** after. Readiness callbacks are
+processed in a batch after the spawn loop. There is no evidenced large
+readManifest or readline bottleneck to justify a new readiness protocol.
+
+The static import graph did eagerly require Next's build/load-jsconfig module,
+which also loads TypeScript/config tooling, during production startup. Its
+require now lives inside writeNativeConfig, the only function that uses it.
+This is a small build-only dependency change with no worker lifecycle or
+per-request overhead. The 16 route processes and existing listener/module
+initialization overlap remain intact.
+
+Five fresh processes per mode, alternating order, measured spawn of plain
+`next start` to a successful drained hello. Both native variants reuse exactly
+the same **final rebuilt production binaries**; a Node load hook restores the
+original eager require for the before variant, while recording the same
+timestamps. Medians [min,max]:
+
+- Native before: **337.1 [329.9,364.3] ms**.
+- Native after: **322.3 [318.6,325.3] ms**.
+- Node baseline: **314.2 [309.6,410.4] ms**.
+- Next's config-timing line: **50 → 42 ms** median.
+
+The concrete dependency removal yields an indicative local **14.7 ms / 4.4%**
+end-to-end median improvement, with native still about **8.2 ms** behind Node.
+An earlier five-run pass reused the original round 2 binaries and measured
+native **418.5 → 331.9 ms**, Node **524.6 ms**; those much noisier samples are
+retained in `startup-round2-binaries/`, not credited as an 86.6 ms saving or
+pooled with the final pass. There is no two-CPU Linux affinity facility on this
+host. The remaining Linux **463 vs 402 ms** gap is not resolved or attributed
+to inherent contention by this experiment. The observed spawn budget and loaded
+outliers are consistent with contention, but a pinned Linux trace is still
+required to separate process startup/initialization competition from Next
+startup itself.
+
+### Round 1 versus round 2 hot-path check
+
+The exact `4ddbf17` shim and next-server snapshot were compared with current
+round 2 sources, using the unchanged real hello and successful JWT verify
+handlers. This reuses the perf-levers method: C=1 keep-alive, 500 warmups, three
+windows of 5,000 calls, three fresh native processes per variant, alternating
+order; server CPU excludes the generator, spans 15,500 requests and is quantized
+to 10 ms. Builds use the same installed release compiler, unstripped for local
+diagnostics. All full response bodies match. There is no Next proxy in this
+comparison.
+
+- Hello CPU **37.42 [36.77,37.42] → 34.84 [34.84,50.97] µs/request**;
+  p50 **0.07217 → 0.07017 ms**. One round 2 window reaches 0.17179 ms;
+  it is retained, not dropped.
+- Verify CPU **60.65 [60.00,60.65] → 58.06 [57.42,58.06] µs/request**;
+  p50 **0.09475 → 0.09263 ms**.
+
+There is **no measured net per-request regression** from the round 2 shim.
+Deferred import runs once at listener startup; after initialization the request
+callback checks a null promise without awaiting. Lazy headers/Web Request avoid
+work on hello and defer it until required on verify. The bounded NextResponse
+branch and its guard are included in the aggregate measurements; these two
+handlers return ordinary Response.json, so the bounded-body path itself is not
+exercised. Individual branch costs were not separately attributed. No GET-path
+optimization was justified or shipped. The pinned Linux C=64 throughput loss
+cannot be causally reproduced here; both original rows flagged generator
+saturation and had unchanged CPU/request. Do not call the lower saturated
+throughput a demonstrated adapter regression, or claim this sequential check
+calibrates C=64 server capacity.
+
+### Verification and evidence
+
+The shim parity suite now has **87 comparisons**, adding empty/Unicode/1 MiB
+bodies, content-length and chunked transport, clone mutation isolation,
+bodyUsed/repeated reads, text/bytes/JSON/arrayBuffer, locked-stream rejection and
+incomplete uploads. It still checks every previous status/header/body, cookie,
+streaming, routing, lifecycle and parent-death expectation. No parity is weakened.
+
+All required commands passed under Node 24 on the final code, with builds and
+application workloads run sequentially:
+
+- `pnpm --filter demo build`: 16 native routes, static precedence preserved.
+- `node examples/demo/test/e2e.mjs`: its normal second build, seven curl cases,
+  report threads 1/4/1, plain Next ownership, graceful/forced cleanup,
+  crash/recovery/cutoff, port conflicts and CLI alias all pass.
+- `pnpm --filter demo test:routes --skip-build`: **85 cases** pass against Node;
+  all 16 workers exit and the HTTP/native ports are free. Existing test-only
+  180-second bcrypt proxy timeout remains; production timeout is unchanged.
+- `node packages/next-scriptc/shim/test/parity.mjs`: **87 comparisons** pass,
+  including the new body-state/abort cases; parent-death cleanup is about 1 s.
+- `node packages/next-scriptc/test/routes.mjs`: **three tests**, all pass.
+- `node examples/demo/bench/check.mjs`: all harness checks pass, sockets closed.
+- Package `tsc --noEmit`: the explicit Node-web-declarations command documented
+  above exits 0 with an empty diagnostic log.
+- `git diff --check`: passes.
+
+Raw profiles, exact before/round1 snapshots, generated entries, binaries, clients,
+source-load trace, timings, reductions and command logs are retained locally in
+ignored `packages/next-scriptc/.next/round3/`. `summary.json` contains final HTTP
+aggregates; `startup.json` contains all 15 interleaved cold samples. No new
+committed benchmark harness duplicates examples/probe/perf.
+
+Final cleanup found no owned probe, load generator, native server or shim fixture.
+Bind checks pass for **3417, 3427, 3437, every native reserved port 29996–30012,
+45383, 45384 and the final shim stream ports**. The required tests also verify
+all their spawned workers exit. `completion.json` records the exact free-port
+list, final source hashes, load and checks. The one-minute load at final audit is
+12.50, reinforcing the indicative-only treatment of close measurements.
+HEAD remains **fd40dda66ca0cc13e66fd624ce1e6b238e703444** on **main**, with an
+empty index diff. All seven changed files are uncommitted. No commit, checkout,
+branch, index, merge or other git mutation was performed.
