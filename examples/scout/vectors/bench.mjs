@@ -10,7 +10,7 @@ const artifacts = path.join(dir, '.artifacts');
 mkdirSync(artifacts, { recursive: true });
 const node = process.env.VECTOR_NODE || '/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node';
 const go = process.env.VECTOR_GO || '/opt/homebrew/bin/go';
-const compiler = path.join(root, 'packages/next-scriptc/node_modules/.bin/scriptc');
+const compiler = process.env.VECTOR_COMPILER || path.join(root, 'packages/next-scriptc/node_modules/.bin/scriptc');
 if (!process.argv.includes('--skip-build')) {
   for (const mode of ['release', 'speed']) execFileSync(compiler, ['build', path.join(dir, 'vectors.ts'), '--optimization', mode, '--keep-llvm', '-o', path.join(artifacts, `vectors-${mode}`)], { cwd: root, env: { ...process.env, SCRIPTC_CHECKER_SERVER: '0' }, stdio: 'inherit' });
   execFileSync(go, ['build', '-o', path.join(artifacts, 'vectors-go'), path.join(dir, 'vectors.go')], { cwd: root, stdio: 'inherit' });

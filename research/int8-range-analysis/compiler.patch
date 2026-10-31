@@ -1,0 +1,228 @@
+diff --git a/packages/compiler/src/backend/llvm/wrapping-sums.test.ts b/packages/compiler/src/backend/llvm/wrapping-sums.test.ts
+new file mode 100644
+index 000000000..8071848a2
+--- /dev/null
++++ b/packages/compiler/src/backend/llvm/wrapping-sums.test.ts
+@@ -0,0 +1,89 @@
++import { expect, test } from "vitest";
++import { F64, type IrExpr } from "../../ir/ir.js";
++import type { LlvmEmitterContext } from "./expr-context.js";
++import { emitWrappingSum, integerOrNaNRange, markWrappingOperands } from "./wrapping-sums.js";
++
++const loc = { file: "wrapping-sums.ts", start: 0, end: 0 };
++const num = (value: number): IrExpr => ({ kind: "numLit", value, type: F64, loc });
++const bin = (op: "+" | "-" | "*", left: IrExpr, right: IrExpr): IrExpr & { kind: "bin" } => ({
++  kind: "bin",
++  op,
++  left,
++  right,
++  type: F64,
++  loc,
++});
++function fixture() {
++  const lines: string[] = [];
++  let temp = 0;
++  const ranges = new Map<IrExpr, { min: number; max: number }>();
++  const host = {
++    B: { tmp: () => `%t${temp++}`, line: (line: string) => lines.push(line) },
++    integerRanges: ranges,
++    integerOrNaNLocals: new Map(),
++    wrappingSums: new Set(),
++  } as unknown as LlvmEmitterContext;
++  return { host, lines, ranges };
++}
++
++test("a parent wrapping sum accepts an exact product that may be negative zero", () => {
++  for (const op of ["+", "-", "*"] as const) {
++    const { host, lines, ranges } = fixture();
++    const x = num(0),
++      y = num(-1);
++    ranges.set(x, { min: -128, max: 127 });
++    ranges.set(y, { min: -128, max: 127 });
++    const product = bin("*", x, y);
++    const parent = bin(op, num(17), product);
++    markWrappingOperands(host, parent);
++    expect(integerOrNaNRange(host, product)).toBeNull();
++    const result = emitWrappingSum(
++      host,
++      parent,
++      { name: "17.0", type: F64 },
++      { name: "%product", type: F64, uint32: "%bits", ordered: "%valid" },
++      { name: "17", type: "i32", signed: true, range: { min: 17, max: 17 } },
++      null,
++    );
++    expect(result).toBeDefined();
++    expect(lines.join("\n")).toMatch(/(?:add|sub|mul) i32/);
++    expect(lines.join("\n")).toContain("%bits");
++    expect(result?.ordered).toBe("%valid");
++  }
++});
++
++test("wrapping range proofs reject rounded products and inexact enclosing sums", () => {
++  for (const product of [
++    bin("*", num(3), num(3002399751580331)),
++    bin("*", num(-2147483648), num(-2147483648)),
++  ]) {
++    const { host, lines } = fixture();
++    const sum = bin("+", num(17), product);
++    markWrappingOperands(host, sum);
++    expect(
++      emitWrappingSum(
++        host,
++        sum,
++        { name: "17.0", type: F64 },
++        { name: "%product", type: F64, uint32: "%bits" },
++        null,
++        null,
++      ),
++    ).toBeUndefined();
++    expect(lines).toEqual([]);
++  }
++  const { host, ranges } = fixture();
++  const sum = bin("+", num(9007199254740991), bin("*", num(-2), num(0)));
++  ranges.set(sum.right, { min: 0, max: 2 });
++  markWrappingOperands(host, sum);
++  expect(
++    emitWrappingSum(
++      host,
++      sum,
++      { name: "%large", type: F64 },
++      { name: "%product", type: F64 },
++      null,
++      null,
++    ),
++  ).toBeUndefined();
++});
+diff --git a/packages/compiler/src/backend/llvm/wrapping-sums.ts b/packages/compiler/src/backend/llvm/wrapping-sums.ts
+index 7c421175c..8b1d94e8f 100644
+--- a/packages/compiler/src/backend/llvm/wrapping-sums.ts
++++ b/packages/compiler/src/backend/llvm/wrapping-sums.ts
+@@ -104,6 +104,29 @@ const ELEMENT_RANGES: Partial<Record<string, IntegerRange>> = {
+   i32: { min: -2147483648, max: 2147483647 },
+ };
+ 
++/** A range used only for wrapping arithmetic: zero may have either sign.
++ * Unlike integerOrNaNRange, this is not a proof for ordinary Number or
++ * index consumers. Every intermediate must still be exact, and NaN must
++ * still propagate through the entire arithmetic expression. */
++function wrappingRange(host: LlvmEmitterContext, e: IrExpr): IntegerRange | null {
++  const range = integerOrNaNRange(host, e);
++  if (range) return range;
++  if (e.kind !== "bin" || (e.op !== "+" && e.op !== "-" && e.op !== "*")) return null;
++  const left = wrappingRange(host, e.left);
++  const right = left && wrappingRange(host, e.right);
++  if (!right) return null;
++  if (e.op !== "*") return integerArithmeticRange(e.op, left!, right);
++  if (!exactProduct(left!, right)) return null;
++  const products = [
++    left!.min * right.min,
++    left!.min * right.max,
++    left!.max * right.min,
++    left!.max * right.max,
++  ];
++  // Canonicalize the interval endpoints, not the expression's Number value.
++  return { min: Math.min(...products) + 0, max: Math.max(...products) + 0 };
++}
++
+ /** The low 32 bits of an operand (0 for NaN), and an i1 that is false when
+  * it is NaN (null when it never is). */
+ function wrappingOperand(
+@@ -161,8 +184,8 @@ export function emitWrappingSum(
+   ri: LlInteger | null,
+ ): { uint32: string; ordered: string } | undefined {
+   if ((e.op !== "+" && e.op !== "-" && e.op !== "*") || !host.wrappingSums.has(e)) return undefined;
+-  const leftRange = li ? li.range : integerOrNaNRange(host, e.left);
+-  const rightRange = leftRange && (ri ? ri.range : integerOrNaNRange(host, e.right));
++  const leftRange = li ? li.range : wrappingRange(host, e.left);
++  const rightRange = leftRange && (ri ? ri.range : wrappingRange(host, e.right));
+   if (!rightRange) return undefined;
+   if (
+     e.op === "*"
+diff --git a/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/signed-products-wrapping-sums.ts.json b/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/signed-products-wrapping-sums.ts.json
+new file mode 100644
+index 000000000..d7437a6a4
+--- /dev/null
++++ b/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/signed-products-wrapping-sums.ts.json
+@@ -0,0 +1,6 @@
++{
++ "order": [
++  "<repo>/tests/corpus/signed-products-wrapping-sums.ts"
++ ],
++ "diags": []
++}
+diff --git a/tests/corpus/signed-products-wrapping-sums.ts b/tests/corpus/signed-products-wrapping-sums.ts
+new file mode 100644
+index 000000000..a18fc9285
+--- /dev/null
++++ b/tests/corpus/signed-products-wrapping-sums.ts
+@@ -0,0 +1,60 @@
++// Signed zero is disposable only at a wrapping consumer. Missing reads
++// poison the whole sum, rather than contributing Math.imul's zero.
++function dot(a: Int8Array, b: Int8Array, n: number): number {
++  let sum = 17;
++  for (let i = 0; i < n; i++) sum = (sum + a[i]! * b[i]!) | 0;
++  return sum;
++}
++function plain(a: Int8Array, b: Int8Array, n: number, start: number): number {
++  let sum = start;
++  for (let i = 0; i < n; i++) sum += a[i]! * b[i]!;
++  return sum;
++}
++const a = new Int8Array([0, -1, -128, 127, 0, 1]);
++const b = new Int8Array([-1, 0, -128, -128, -1, 1]);
++for (let n = 0; n <= 8; n++) {
++  const sum = plain(a, b, n, 0);
++  const negative = plain(a, b, n, -0);
++  console.log("dot", n, dot(a, b, n), sum, Object.is(sum, -0), Object.is(negative, -0));
++}
++for (let i = -1; i <= a.length; i++) {
++  const product = a[i]! * b[i]!;
++  console.log("zero", i, Object.is(product, -0), 1 / product,
++    Object.is(product + 0, -0), Object.is(product - 0, -0),
++    (13 + a[i]! * b[i]!) | 0, (13 - a[i]! * b[i]!) >>> 0,
++    ((a[i]! * b[i]! - 0) * -3 + 7) ^ 1);
++}
++// Every integer typed-array width, both in bounds and NaN-coded reads.
++const i16 = new Int16Array([0, -1, -32768, 32767]);
++const u16 = new Uint16Array([0, 1, 65535, 32768]);
++const u8 = new Uint8Array([0, 1, 255, 128]);
++const clamp = new Uint8ClampedArray([0, -1, 256, 128]);
++const i32 = new Int32Array([0, -1, -2147483648, 2147483647]);
++const u32 = new Uint32Array([0, 1, 4294967295, 2147483648]);
++for (let i = -1; i <= 4; i++) {
++  console.log("widths", i, (i16[i]! * u16[i]! + 2147483647) | 0,
++    (u8[i]! * i16[i]! - 1) | 0, (clamp[i]! * i16[i]! + 19) >>> 0,
++    (i32[i]! * -1 + 1) | 0, (u32[i]! * -1 + 1) >>> 0,
++    (i32[i]! * u16[i]! + u32[i]!) | 0,
++    (u32[i]! * i16[i]! - i32[i]!) >>> 0,
++    (i32[i]! * i32[i]! + 3) | 0, (u32[i]! * u32[i]! + 3) >>> 0);
++  // The inner product is exact but the parent exceeds the safe range.
++  console.log("boundary", (i32[i]! * 2097151 + 9007199254740991) | 0,
++    (u32[i]! * -2097153 + 7) | 0);
++}
++// Two invalid operands and a later valid iteration exercise NaN reset.
++const many = new Int8Array(1024);
++const other = new Int8Array(1024);
++for (let i = 0; i < many.length; i++) { many[i] = i; other[i] = 127 - i; }
++console.log("long", dot(many, other, 1024), dot(many, other, 1025));
++let recovery = 123;
++for (let i = -2; i < 4; i++) recovery = (recovery + a[i]! * b[i]!) | 0;
++console.log("recovery", recovery);
++// Arbitrary Number values, floats, infinities and rounded large products
++// must keep JS multiplication and addition before ToInt32.
++function numbers(x: number, y: number, z: number): number { return (z + x * y) | 0; }
++const xs = [0, -0, -1, 1.5, NaN, Infinity, 3, 94906267];
++const ys = [-1, -0, 0, -2.25, 7, 0, 3002399751580331, 94906267];
++for (let i = 0; i < xs.length; i++) console.log("number", numbers(xs[i]!, ys[i]!, 17));
++const floats = new Float64Array([0, -0, -1.25, NaN, Infinity]);
++for (let i = 0; i <= floats.length; i++) console.log("float", (17 + floats[i]! * -3) | 0);
+diff --git a/tests/harness/corpus-costs/signed-products-wrapping-sums.ts.json b/tests/harness/corpus-costs/signed-products-wrapping-sums.ts.json
+new file mode 100644
+index 000000000..a2713c34e
+--- /dev/null
++++ b/tests/harness/corpus-costs/signed-products-wrapping-sums.ts.json
+@@ -0,0 +1,4 @@
++{
++  "plain": 4001,
++  "san": 74781
++}

@@ -1,0 +1,28 @@
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-fork
+
+ ❯ packages/compiler/src/backend/llvm/wrapping-sums.test.ts (2 tests | 1 failed) 5ms
+   × a parent wrapping sum accepts an exact product that may be negative zero 4ms
+     → expected undefined to be defined
+   ✓ wrapping range proofs reject rounded products and inexact enclosing sums 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/compiler/src/backend/llvm/wrapping-sums.test.ts > a parent wrapping sum accepts an exact product that may be negative zero
+AssertionError: expected undefined to be defined
+ ❯ packages/compiler/src/backend/llvm/wrapping-sums.test.ts:35:20
+     33|       { name: "17.0", type: F64 },
+     34|       { name: "%product", type: F64, uint32: "%bits", ordered: "%valid…
+     35|     expect(result).toBeDefined();
+       |                    ^
+     36|     expect(lines.join("\n")).toContain(`i32 17`);
+     37|     expect(lines.join("\n")).toContain("%bits");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  13:42:26
+   Duration  312ms (transform 99ms, setup 0ms, collect 113ms, tests 5ms, environment 0ms, prepare 45ms)
+

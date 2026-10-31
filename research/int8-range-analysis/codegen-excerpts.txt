@@ -1,0 +1,135 @@
+LLVM helper 22.1.8, release O2, arm64-apple-macosx14.0.0; no fast-math flags.
+Functions outside int8i32Search: floatSearch, int8Search, int8imulSearch, binarySearch,
+and popcount are byte-identical before/after in emitted LLVM.
+
+=== main: int8i32Search pre-optimization LLVM ===
+  %t129 = fmul double %t107, %t124
+  %t130 = mul i32 %t108, %t125
+  %t131 = and i1 %t109, %t126
+  %t132 = select i1 %t131, i32 %t130, i32 0
+  %t133 = fadd double %t88, %t129
+  %t135 = fcmp oge double %t133, 0xC3E0000000000000
+  %t136 = fcmp olt double %t133, 0x43E0000000000000
+  %t137 = and i1 %t135, %t136
+  br i1 %t137, label %uint32.coerce.fast27, label %uint32.coerce.slow28
+uint32.coerce.fast27:
+  %t138 = fptosi double %t133 to i64
+  %t139 = trunc i64 %t138 to i32
+  br label %uint32.coerce.done29
+uint32.coerce.slow28:
+  %t140 = bitcast double %t133 to i64
+  %t141 = lshr i64 %t140, 52
+  %t142 = and i64 %t141, 2047
+  %t143 = and i64 %t140, 4503599627370495
+  %t144 = or i64 %t143, 4503599627370496
+  %t145 = sub i64 %t142, 1075
+  %t146 = icmp ult i64 %t145, 64
+  %t147 = select i1 %t146, i64 %t145, i64 0
+  %t148 = shl i64 %t144, %t147
+  %t149 = select i1 %t146, i64 %t148, i64 0
+  %t150 = trunc i64 %t149 to i32
+  %t151 = icmp slt i64 %t140, 0
+  %t152 = sub i32 0, %t150
+  %t153 = select i1 %t151, i32 %t152, i32 %t150
+  br label %uint32.coerce.done29
+uint32.coerce.done29:
+  %t154 = phi i32 [ %t139, %uint32.coerce.fast27 ], [ %t153, %uint32.coerce.slow28 ]
+  %t155 = or i32 %t154, 0
+  %t134 = sitofp i32 %t155 to double
+  store i32 %t155, ptr %sc_l_sum_0
+  br label %loop.u16
+loop.u16:
+  %t156 = load double, ptr %sc_l_j_0
+  %t158 = fptosi double %t156 to i64
+  %t159 = add nsw i64 %t158, 1
+
+=== main: optimized ARM64 loop ===
+LBB9_98:
+	ldrsb	w12, [x10], #1
+	scvtf	d2, w8
+	ldrsb	w13, [x9], #1
+	scvtf	d0, w12
+	scvtf	d1, w13
+	fmul	d0, d0, d1
+	fadd	d0, d0, d2
+	fmov	x8, d0
+	ubfx	x12, x8, #52, #11
+	sub	x12, x12, #1075
+	lsl	x13, x8, x12
+	cmp	x12, #64
+	csel	w12, w13, wzr, lo
+	cmp	x8, #0
+	cneg	w8, w12, mi
+	fcmp	d0, d14
+	fcvtzs	x12, d0
+	fccmp	d0, d15, #0, ge
+	csel	w8, w8, w12, pl
+	subs	x11, x11, #1
+	b.ne	LBB9_98
+	b	LBB9_81
+LBB9_99:
+
+=== patched: int8i32Search pre-optimization LLVM ===
+  %t129 = fmul double %t107, %t124
+  %t130 = mul i32 %t108, %t125
+  %t131 = and i1 %t109, %t126
+  %t132 = select i1 %t131, i32 %t130, i32 0
+  %t133 = fadd double %t88, %t129
+  %t134 = add i32 %t87, %t132
+  %t135 = select i1 %t131, i32 %t134, i32 0
+  %t137 = or i32 %t135, 0
+  %t136 = sitofp i32 %t137 to double
+  store i32 %t137, ptr %sc_l_sum_0
+  br label %loop.u16
+loop.u16:
+  %t138 = load double, ptr %sc_l_j_0
+  %t140 = fptosi double %t138 to i64
+  %t141 = add nsw i64 %t140, 1
+  %t143 = trunc i64 %t141 to i32
+  %t142 = sitofp i64 %t141 to double
+  store double %t142, ptr %sc_l_j_0
+  br label %loop.c14
+entry.slow13:
+
+=== patched: optimized ARM64 loop ===
+LBB9_111:
+	ldp	q16, q19, [x9, #-16]
+	subs	x13, x13, #32
+	ldp	q17, q18, [x12, #-16]
+	add	x9, x9, #32
+	add	x12, x12, #32
+	smull2.8h	v20, v16, v17
+	smull.8h	v16, v16, v17
+	smull2.8h	v17, v19, v18
+	smull.8h	v18, v19, v18
+	saddw2.4s	v4, v4, v20
+	saddw.4s	v2, v2, v20
+	saddw2.4s	v3, v3, v16
+	saddw.4s	v1, v1, v16
+	saddw2.4s	v7, v7, v17
+	saddw.4s	v6, v6, v17
+	saddw2.4s	v0, v0, v18
+	saddw.4s	v5, v5, v18
+	b.ne	LBB9_111
+	add.4s	v0, v0, v3
+	add.4s	v3, v7, v4
+	and	x9, x21, #0x7fffffffffffffe0
+	add.4s	v1, v5, v1
+	add.4s	v2, v6, v2
+	cmp	x9, x21
+	add.4s	v0, v0, v3
+	add.4s	v1, v1, v2
+	add.4s	v0, v1, v0
+	addv.4s	s0, v0
+	fmov	w9, s0
+	b.eq	LBB9_81
+	and	x12, x21, #0x7fffffffffffffe0
+	and	x13, x21, #0x7fffffffffffffe0
+	and	x14, x21, #0x18
+	cbz	x14, LBB9_117
+LBB9_114:
+	movi.2d	v0, #0000000000000000
+	movi.2d	v1, #0000000000000000
+	add	x13, x8, x12
+	add	x13, x10, x13
+
