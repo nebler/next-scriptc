@@ -24,7 +24,7 @@ if (mode === 'reference') {
   process.exit(0);
 }
 const client = load('client-deployment');
-const secret = parseEnv(readFileSync(process.env.NEAR_ENV_FILE ?? '/Users/noah/code/next-scriptc/.env.local','utf8')).VERCEL_AUTOMATION_BYPASS_SECRET;
+const secret = parseEnv(readFileSync(process.env.NEAR_ENV_FILE ?? '.env.local','utf8')).VERCEL_AUTOMATION_BYPASS_SECRET;
 assert(secret,'Missing private bypass');
 const references = load('reference');
 function target(d,size) { return {id:`report-${d.label}-${size}`,url:`${d.url}/reports?size=${size}`,kind:'report',size,expected:references[size]}; }
