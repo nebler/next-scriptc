@@ -21,9 +21,20 @@ linker. See the [compiler installation notes](examples/demo/README.md#compiler-i
 for requirements and helper-permission repair. CI installs with `--ignore-scripts`
 and never compiles native code.
 
-For adapter changes, run the integration commands in the root
-[Tests section](README.md#tests) sequentially. They build and launch local Next
-and native servers. Use the installed Next documentation in
+For adapter changes, also run the integration commands below. They build and
+launch local Next and native servers, so run them one at a time:
+
+```sh
+SCRIPTC_CHECKER_SERVER=0 pnpm --filter next-scriptc test
+SCRIPTC_CHECKER_SERVER=0 pnpm --filter next-scriptc test:shim
+pnpm --filter demo test
+SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/functions.mjs
+SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/function-build.mjs
+SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/e2e.mjs
+SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/routes.mjs
+```
+
+Use the installed Next documentation in
 `examples/demo/node_modules/next/dist/docs/` for version-specific adapter APIs.
 
 Include a small reproduction and the Node, Next and scriptc versions in bug
