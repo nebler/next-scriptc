@@ -107,6 +107,9 @@ try {
   const content = await readFile(".vercel/output/functions/api/analytics/revenue.func/executable");
   const build = JSON.parse(await readFile(".vercel/native-build.json"));
   data.sourceCommit = build.sourceCommit;
+  data.buildDirty = build.dirty;
+  // Conservatively charge the full 3 diagnostics + 24 prime requests on failure too.
+  data.validationRequestsIssued = 27;
   data.artifactSha256 = createHash("sha256").update(content).digest("hex");
   sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", region: "iad1", resources: { vcpus: 1 }, timeout: 90_000, persistent: false });
   data.sandbox = { id: sandbox.name, region: sandbox.region, vcpus: sandbox.vcpus };

@@ -2,14 +2,15 @@ import assert from "node:assert/strict";
 import { EventEmitter } from "node:events";
 import https from "node:https";
 import test from "node:test";
-import { createClient, measure } from "./client.mjs";
+import { gzipSync } from "node:zlib";
+import { createClient, measure, workloads } from "./client.mjs";
 import { digest } from "../load.mjs";
 
 const body = Buffer.from('{"ok":true}');
-function transport(statusFor) {
+function transport(statusFor, payloadFor = () => body) {
   let calls = 0;
   const original = https.request;
-  https.request = (_url, _options, callback) => {
+  https.request = (url, _options, callback) => {
     const index = calls++;
     const req = new EventEmitter();
     req.reusedSocket = true;
@@ -18,8 +19,11 @@ function transport(statusFor) {
       const res = new EventEmitter();
       res.statusCode = statusFor(index);
       res.headers = { "x-vercel-cache": "MISS", "x-vercel-id": `test-${index}` };
+      const spec = workloads.find((w) => new URL(w.path, "https://example.test").pathname === url.pathname);
+      Object.assign(res.headers, spec?.responseHeaders);
       callback(res);
-      res.emit("data", res.statusCode === 200 ? body : Buffer.from("sensitive error body"));
+      const payload = res.statusCode === 200 ? payloadFor(index) : Buffer.from("sensitive error body");
+      res.emit("data", spec?.responseEncoding === "gzip" ? gzipSync(payload) : payload);
       res.emit("end");
     });
     return req;
@@ -84,6 +88,28 @@ test("a failed memory probe preserves measured rows and issued counts", async ()
 });
 
 const { cpuDelta } = await import("./cpu.mjs");
+test("cold-only failure cannot become a complete deployment", async () => {
+  const { diagnose } = await import("./diagnostics.mjs");
+  const restore = transport((index) => index === 4 ? 500 : 200);
+  try {
+    const result = await diagnose([{ variant: "node", url: "https://example.test" }], { mode: "cold", fresh: true, secret: "test-only" });
+    assert.equal(result.status, "failed");
+    assert.equal(result.deployments[0].warm.status, "failed");
+    assert.equal(result.requestsIssued, 5);
+  } finally { restore(); }
+});
+
+test("a changed response stops the full experiment before further workloads", async () => {
+  const restore = transport(() => 200, (index) => index === 7 ? Buffer.from("changed") : body);
+  try {
+    const result = await measure([{ variant: "node", url: "https://example.test" }, { variant: "native", url: "https://other.test" }], { secret: "test-only" });
+    assert.equal(result.status, "failed");
+    assert.equal(result.stoppedOnCorrectnessFailure, true);
+    assert.equal(result.deployments.length, 1);
+    assert.equal(result.requestsIssued, 8);
+  } finally { restore(); }
+});
+
 test("CPU windows retain instance changes as discarded and reject invalid counters", () => {
   const before = { instance: "a", pid: 1, cpu: { user: 1000, system: 2000 } };
   const after = { instance: "a", pid: 1, cpu: { user: 11000, system: 7000 } };

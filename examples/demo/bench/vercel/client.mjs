@@ -2,6 +2,7 @@ import https from "node:https";
 import { gunzipSync } from "node:zlib";
 import { routes } from "../config.mjs";
 import { digest, quantile } from "../load.mjs";
+const correctnessFailure = (message) => Object.assign(new Error(message), { correctness: true });
 
 export const workloads = ["hello", "verify", "revenue", "gzip-export", "nearby-stores", "markdown"]
   .map((id) => routes.find((route) => route.id === id));
@@ -27,10 +28,13 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
         row.first = { ...first, deploymentFirst: spec === workloads[0], confirmedCold: null };
         if (spec === workloads[0]) await sampleMemory(results.at(-1), "memoryAfterFirst", deployment.url);
         const reference = expected.get(spec.id);
-        if (reference && reference !== first.digest) throw new Error("Cross-variant response digest mismatch");
+        if (reference && reference !== first.digest) throw correctnessFailure("Cross-variant response digest mismatch");
         expected.set(spec.id, first.digest);
         row.status = "validated";
-      } catch (error) { row.status = "failed"; row.error = error.message; }
+      } catch (error) {
+        row.status = "failed"; row.error = error.message;
+        if (error.correctness) return { protocol, deployments: results, requestsIssued: client.issued, status: "failed", stoppedOnCorrectnessFailure: true };
+      }
       finally { agent.destroy(); }
     }
     for (const row of rows) {
@@ -38,12 +42,15 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
       const spec = workloads.find((route) => route.id === row.workload);
       try {
         row.sequential = await window(deployment.url, spec, 1, protocol.sequentialWarmup, { count: protocol.sequentialCount }, row.first.digest);
-        if (row.sequential.error) throw new Error(row.sequential.error);
+        if (row.sequential.error) throw Object.assign(new Error(row.sequential.error), { correctness: row.sequential.correctness });
         row.concurrent = await window(deployment.url, spec, protocol.concurrency, { count: protocol.concurrentWarmup, durationMs: protocol.concurrentWarmupMs },
           { count: protocol.concurrentCap, durationMs: protocol.durationMs }, row.first.digest);
-        if (row.concurrent.error) throw new Error(row.concurrent.error);
+        if (row.concurrent.error) throw Object.assign(new Error(row.concurrent.error), { correctness: row.concurrent.correctness });
         row.status = "measured";
-      } catch (error) { row.status = "failed"; row.error = error.message; }
+      } catch (error) {
+        row.status = "failed"; row.error = error.message;
+        if (error.correctness) return { protocol, deployments: results, requestsIssued: client.issued, status: "failed", stoppedOnCorrectnessFailure: true };
+      }
       onRow(deployment.variant, row);
     }
     await sampleMemory(results.at(-1), "memoryAfterLoad", deployment.url);
@@ -85,9 +92,9 @@ export function createClient(secret, budget = 25_476) {
             // Error bodies and headers can contain credentials. Preserve status,
             // platform error code and request ID, never echo response content.
             if (res.statusCode !== 200) throw new Error(`HTTP ${res.statusCode}; x-vercel-error=${res.headers["x-vercel-error"] ?? "absent"}; request=${res.headers["x-vercel-id"] ?? "absent"}`);
-            if (["HIT", "STALE", "PRERENDER"].includes(res.headers["x-vercel-cache"])) throw new Error(`Dynamic route served from CDN: ${res.headers["x-vercel-cache"]}`);
+            if (["HIT", "STALE", "PRERENDER"].includes(res.headers["x-vercel-cache"])) throw correctnessFailure(`Dynamic route served from CDN: ${res.headers["x-vercel-cache"]}`);
             for (const [name, value] of Object.entries(spec.responseHeaders ?? {})) {
-              if (res.headers[name] !== value) throw new Error(`Unexpected ${name}: ${res.headers[name]}`);
+              if (res.headers[name] !== value) throw correctnessFailure(`Unexpected ${name}: ${res.headers[name]}`);
             }
             const decoded = spec.responseEncoding === "gzip" ? gunzipSync(body) : body;
             resolve({ ms, digest: digest(decoded), bytes: decoded.length, wireBytes: body.length,
@@ -129,7 +136,7 @@ export function createClient(secret, budget = 25_476) {
           const dispatchMs = performance.now() - start;
           try {
             const response = await request(base, spec, agent);
-            if (response.digest !== reference) throw new Error(`Response changed: ${spec.path}`);
+            if (response.digest !== reference) throw correctnessFailure(`Response changed: ${spec.path}`);
             reused += Number(response.reusedSocket);
             times.push(response.ms);
             if (retainSamples) samples.push({ dispatchMs, ms: response.ms, requestId: response.headers["x-vercel-id"] });
@@ -143,7 +150,7 @@ export function createClient(secret, budget = 25_476) {
       const elapsedMs = performance.now() - start;
       const used = process.cpuUsage(cpu);
       const cpuMs = (used.user + used.system) / 1000;
-      return { status: failure ? "failed" : "complete", ...(failure ? { error: failure.message } : {}),
+      return { status: failure ? "failed" : "complete", ...(failure ? { error: failure.message, correctness: Boolean(failure.correctness) } : {}),
         ...(retainSamples ? { samples } : {}), requests: times.length, elapsedMs, requestsPerSecond: times.length * 1000 / elapsedMs,
         p50Ms: quantile(times, 0.5), p95Ms: quantile(times, 0.95), p99Ms: quantile(times, 0.99),
         countLimited: dispatched === count, connectionsCreated: connections - connectionsBefore,
@@ -152,7 +159,7 @@ export function createClient(secret, budget = 25_476) {
     }
     try {
       const warmup = await run(typeof warmupLimits === "number" ? { count: warmupLimits } : warmupLimits);
-      if (warmup.error) return { status: "failed", error: warmup.error, warmup };
+      if (warmup.error) return { status: "failed", error: warmup.error, correctness: warmup.correctness, warmup };
       return { ...await run(limits), warmup };
     } finally { agent.destroy(); }
   }

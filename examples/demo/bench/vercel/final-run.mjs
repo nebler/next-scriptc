@@ -3,21 +3,25 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 const root = path.resolve(import.meta.dirname, "../../../..");
 process.chdir(root);
 const prefix = "research/benchmarks/vercel-final";
 const git = (...args) => execFileSync("git", args, { encoding: "utf8" }).trim();
-if (existsSync(`${prefix}-pair-1-node-deployment.json`)) throw new Error("Run already started; do not duplicate previews/measurements");
+if (existsSync(`${prefix}-provenance.json`)) throw new Error("Run already started; do not duplicate previews/measurements");
+if (process.version !== "v24.22.0" || process.env.NODE_OPTIONS || process.env.DEMO_PROXY_TIMEOUT_MS) throw new Error("Use untuned Node 24.22.0 and default proxy timeout");
+if (git("status", "--porcelain", "--untracked-files=all")) throw new Error("Commit the frozen harness before starting");
 const provenance = { sourceCommit: git("rev-parse", "HEAD"), baseCommit: "c7bac69f241fe35376a2ab9992a284c0a59116ec",
   preregistrationCommit: "935d3b3ba02fd5e965b56ff5fcc906ac9f3eb2f0", startedAt: new Date().toISOString(),
   toolchain: { node: process.version, next: "16.4.3", scriptc: "0.4.6", zig: "0.16.0", vercelCli: "65.8.0" },
   sourceTrees: Object.fromEntries(["examples/demo/app", "packages/next-scriptc", "pnpm-lock.yaml"].map((p) => [p, git("rev-parse", `HEAD:${p}`)])),
   deploymentOrder: [], measurementOrder: [], deployments: [], status: "running" };
-const linux = JSON.parse(readFileSync(`${prefix}-linux.json`));
+const linuxPrevious = JSON.parse(readFileSync(`${prefix}-linux.json`));
+const linux = JSON.parse(readFileSync(`${prefix}-linux-current.json`));
 if (linux.status !== "complete") throw new Error("Linux CPU/RSS verification must pass first");
 const cost = { limits: { previews: 12, httpAttempts: 40000, provisionedVcpuHours: 0.3 }, previews: 0,
-  validationLocalHttpAttempts: linux.validationRequestsIssued, hostedHttpAttempts: 0,
-  sandboxes: [{ artifact: `${prefix}-linux.json`, ...linux.sandbox }], status: "running" };
+  validationLocalHttpAttempts: linuxPrevious.validationRequestsIssued + linux.validationRequestsIssued, hostedHttpAttempts: 0,
+  sandboxes: [{ artifact: `${prefix}-linux.json`, ...linuxPrevious.sandbox }, { artifact: `${prefix}-linux-current.json`, ...linux.sandbox }], status: "running" };
 function save() {
   cost.httpAttempts = cost.validationLocalHttpAttempts + cost.hostedHttpAttempts;
   cost.provisionedVcpuHours = cost.sandboxes.reduce((n, s) => n + s.provisionedVcpuHours, 0);
@@ -41,7 +45,7 @@ function run(mode, pair, output, requests, extra = []) {
       cost.hostedHttpAttempts += data.requestsIssued ?? requests;
       if (data.sandbox) cost.sandboxes.push({ artifact: `${output}.json`, ...data.sandbox });
       save();
-    }
+    } else { cost.hostedHttpAttempts += requests; cost.sandboxes.push({ artifact: output, provisionedVcpuHours: 0.134, status: "unknown; charged full reservation" }); save(); }
   }
   const data = JSON.parse(readFileSync(`${output}.json`));
   if (data.status !== "complete") throw new Error(`Failed ${mode} run; stop and inspect ${output}.json`);
@@ -58,7 +62,17 @@ try {
       if (variant === "node") env.NEXT_SCRIPTC_BASELINE = "node";
       else env.NEXT_SCRIPTC_DEMO_GROUPS = "vercel";
       console.log(`PAIR ${i}: building/deploying ${variant}`);
-      execFileSync(process.execPath, ["examples/demo/bench/vercel/deploy.mjs"], { stdio: "inherit", env });
+      try { execFileSync(process.execPath, ["examples/demo/bench/vercel/deploy.mjs"], { stdio: "inherit", env }); }
+      catch (error) {
+        const acceptedFile = `.vercel/${variant}-accepted.json`;
+        if (existsSync(acceptedFile)) {
+          const accepted = JSON.parse(readFileSync(acceptedFile));
+          if (accepted.sourceCommit === provenance.sourceCommit && !provenance.deployments.some((d) => d.id === accepted.id)) {
+            cost.previews++; provenance.deployments.push({ pair: i, variant, ...accepted, status: "inspection failed; not measured" }); save();
+          }
+        }
+        throw error;
+      }
       const file = `${prefix}-pair-${i}-${variant}-deployment.json`;
       const raw = readFileSync(`.vercel/${variant}-deployment.json`);
       writeFileSync(file, raw);
@@ -71,6 +85,10 @@ try {
       save(); // Save identity before more operations/builds can fail.
       const sizes = execFileSync("python3", ["examples/demo/bench/vercel/function-sizes.py", `pair-${i}-${variant}`, ".vercel/output", root, file]);
       writeFileSync(`${prefix}-pair-${i}-${variant}-sizes.json`, sizes);
+      if (variant === "native") {
+        const artifact = readFileSync(".vercel/output/functions/api/analytics/revenue.func/executable");
+        if (createHash("sha256").update(artifact).digest("hex") !== linux.artifactSha256) throw new Error("Native binary differs from Linux CPU/RSS validation; stop before application traffic");
+      }
     }
     provenance.measurementOrder.push(order);
     run(i === 5 ? "full" : "cold", pair, `${prefix}-pair-${i}`, i === 5 ? 25456 : 128,

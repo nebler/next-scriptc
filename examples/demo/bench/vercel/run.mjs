@@ -34,6 +34,12 @@ for (const deployment of deployments) {
   const helloFunction = deployment.server.functions.find((fn) => fn.path === "api/hello");
   const memoryFunction = deployment.server.functions.find((fn) => fn.path === "api/diagnostics/memory");
   if (!helloFunction || !memoryFunction || helloFunction.functionName !== memoryFunction.functionName) throw new Error("Memory diagnostic must share the measured hello Function");
+  for (const route of ["api/verify", "api/analytics/revenue", "api/export.json.gz", "api/stores/nearby", "api/posts/[slug]"]) {
+    const fn = deployment.server.functions.find((entry) => entry.path === route);
+    if (!fn || fn.functionName !== helloFunction.functionName) throw new Error(`Workload must share diagnostic Function: ${route}`);
+  }
+  if (helloFunction.runtime !== (deployment.variant === "node" ? "nodejs24.x" : "executable")
+    || deployment.server.functions.some((fn) => fn.allocatedMemoryMiB !== 2048 || fn.timeoutSeconds !== 300)) throw new Error("Runtime/resources differ from registration");
   if (deployment.server.functions.some((fn) => fn.regions?.length !== 1 || fn.regions[0] !== "iad1")) throw new Error("Every function must be pinned to iad1");
 }
 let references;

@@ -14,7 +14,7 @@ export async function diagnose(deployments, { mode, fresh, secret }) {
       const agent = new https.Agent({ keepAlive: true, maxSockets: 1 });
       try {
         const response = await client.request(deployment.url, spec, agent);
-        if (expected.has(spec.id) && expected.get(spec.id) !== response.digest) throw new Error(`Cross-variant digest mismatch: ${spec.id}`);
+        if (expected.has(spec.id) && expected.get(spec.id) !== response.digest) throw Object.assign(new Error(`Cross-variant digest mismatch: ${spec.id}`), { correctness: true });
         expected.set(spec.id, response.digest);
         return response;
       } finally { agent.destroy(); }
@@ -28,6 +28,7 @@ export async function diagnose(deployments, { mode, fresh, secret }) {
           for (const spec of workloads.slice(1, 3)) row.routeFirst.push({ workload: spec.id, ...await one(spec) });
         }
         row.warm = await client.window(deployment.url, hello, 1, 20, { count: 40 }, row.first.digest);
+        if (row.warm.error) throw Object.assign(new Error(row.warm.error), { correctness: row.warm.correctness });
         row.firstMinusWarmP50Ms = row.first.ms - row.warm.p50Ms;
       } else if (mode === "tail") {
         // Change both variant and first concurrent workload order explicitly.
@@ -49,7 +50,10 @@ export async function diagnose(deployments, { mode, fresh, secret }) {
         if (deployment.variant === "native") row.verifyAfter = await verifyWindow();
       } else throw new Error(`Unknown diagnostic mode: ${mode}`);
       row.status = "complete";
-    } catch (error) { row.status = "failed"; row.error = error.message; }
+    } catch (error) {
+      row.status = "failed"; row.error = error.message;
+      if (error.correctness) return { mode, deployments: results, requestsIssued: client.issued, status: "failed", stoppedOnCorrectnessFailure: true };
+    }
     row.finishedAt = new Date().toISOString();
     console.log(`${deployment.variant} ${mode}: ${row.status}`);
   }
