@@ -1,4 +1,5 @@
 // Verify the actual grouped Linux artifact before deploying it.
+import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { readFile, writeFile } from "node:fs/promises";
 import { Sandbox } from "@vercel/sandbox";
@@ -54,16 +55,20 @@ async function check() {
 const started = Date.now();
 const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", region: "iad1", resources: { vcpus: 1 }, timeout: 90_000, persistent: false });
 const destination = "research/benchmarks/vercel-memory-linux.json";
-let data = { sandbox: { id: sandbox.name, region: sandbox.region, vcpus: sandbox.vcpus } };
+let data = { checkedAt: new Date().toISOString(), scriptc: "0.4.6", sandbox: { id: sandbox.name, region: sandbox.region, vcpus: sandbox.vcpus } };
 try {
+  const artifacts = await Promise.all(["executable", "user-server"].map(async (name) => ({ path: name, content: await readFile(`.vercel/output/functions/api/analytics/revenue.func/${name}`), mode: 0o755 })));
+  const build = JSON.parse(await readFile(".vercel/native-build.json"));
+  data.sourceCommit = build.sourceCommit;
+  data.artifactSha256 = Object.fromEntries(artifacts.map((file) => [file.path, createHash("sha256").update(file.content).digest("hex")]));
   await sandbox.writeFiles([
-    ...await Promise.all(["executable", "user-server"].map(async (name) => ({ path: name, content: await readFile(`.vercel/output/functions/api/analytics/revenue.func/${name}`), mode: 0o755 }))),
+    ...artifacts,
     { path: "check.mjs", content: Buffer.from(`import assert from "node:assert/strict";\nawait (${check.toString()})();`) },
   ]);
   const command = await sandbox.runCommand({ cmd: "node", args: ["check.mjs"], stdout: process.stdout, stderr: process.stderr });
   assert.equal(command.exitCode, 0);
   const result = await sandbox.readFileToBuffer({ path: "result.json" });
-  Object.assign(data, JSON.parse(result.toString()));
+  Object.assign(data, JSON.parse(result.toString()), { status: "complete" });
 } finally {
   const stopped = await sandbox.stop();
   data.sandbox.activeCpuDurationMs = stopped.activeCpuDurationMs ?? null;

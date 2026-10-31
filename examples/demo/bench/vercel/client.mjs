@@ -25,7 +25,7 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
       try {
         const first = await request(deployment.url, spec, agent);
         row.first = { ...first, deploymentFirst: spec === workloads[0], confirmedCold: null };
-        if (spec === workloads[0]) results.at(-1).memoryAfterFirst = await memory(deployment.url);
+        if (spec === workloads[0]) await sampleMemory(results.at(-1), "memoryAfterFirst", deployment.url);
         const reference = expected.get(spec.id);
         if (reference && reference !== first.digest) throw new Error("Cross-variant response digest mismatch");
         expected.set(spec.id, first.digest);
@@ -46,11 +46,16 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
       } catch (error) { row.status = "failed"; row.error = error.message; }
       onRow(deployment.variant, row);
     }
-    results.at(-1).memoryAfterLoad = await memory(deployment.url);
+    await sampleMemory(results.at(-1), "memoryAfterLoad", deployment.url);
   }
   return { protocol, deployments: results, requestsIssued: client.issued,
-    status: results.some((deployment) => deployment.rows.some((row) => row.status === "failed")) ? "failed" : "complete" };
+    status: results.some((deployment) => deployment.rows.some((row) => row.status === "failed")
+      || deployment.memoryAfterFirst?.status === "failed" || deployment.memoryAfterLoad?.status === "failed") ? "failed" : "complete" };
 
+  async function sampleMemory(deployment, key, url) {
+    try { deployment[key] = await memory(url); }
+    catch (error) { deployment[key] = { status: "failed", error: error.message }; }
+  }
 }
 
 // Shared transport for paired, cold-only and tail diagnostics; one request counter.
@@ -70,8 +75,8 @@ export function createClient(secret, budget = 25_476) {
       } }, (res) => {
         const chunks = [];
         res.on("data", (chunk) => chunks.push(chunk));
-        res.on("error", reject);
-        res.on("aborted", () => reject(new Error("Response aborted")));
+        res.on("error", (error) => { clearTimeout(timer); reject(error); });
+        res.on("aborted", () => { clearTimeout(timer); reject(new Error("Response aborted")); });
         res.on("end", () => {
           clearTimeout(timer);
           const body = Buffer.concat(chunks);
