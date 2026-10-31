@@ -1,0 +1,19 @@
+✔ vector routes agree with an independent one-coordinate ranking and zero ties (367.67425ms)
+✔ query changes affect retrieval, both forms agree; invalid int8 input is rejected (366.986792ms)
+node cold: failed
+✔ a failing concurrent warmup drains and retains all outstanding timings without measuring (1.754333ms)
+✔ the shared request budget cannot be exceeded by concurrent workers (5.523917ms)
+✔ response mismatch invalidates the window and retains its error (0.284459ms)
+✔ a failed memory probe preserves measured rows and issued counts (301.53425ms)
+✔ cold-only failure cannot become a complete deployment (2.269417ms)
+✔ a changed response stops the full experiment before further workloads (0.33675ms)
+✔ CPU windows retain instance changes as discarded and reject invalid counters (1.498834ms)
+✔ CPU sampling keeps one pool per workload, repeats only token changes, and checks every digest (36.211542ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1098.629291

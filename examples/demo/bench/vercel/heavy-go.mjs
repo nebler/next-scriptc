@@ -19,7 +19,7 @@ const run = (cmd, args, cwd, env = {}) =>
     env: { ...process.env, ...env },
     stdio: "inherit",
   });
-export async function addHeavyGo() {
+export async function addHeavyGo({ prefix = "heavy-go", goamd64 = process.env.GOAMD64 ?? "v1", experiment = process.env.HEAVY_VECTOR_SUITE === "1" ? "simd" : "" } = {}) {
   const output = path.join(root, ".vercel/output");
   const cache = path.join(root, ".vercel/heavy-proxy");
   await mkdir(cache, { recursive: true });
@@ -29,7 +29,7 @@ export async function addHeavyGo() {
       (await readFile(path.join(cache, "commit"), "utf8")).trim() ===
       proxyCommit;
   } catch {}
-  const env = { GOOS: "linux", GOARCH: "amd64", CGO_ENABLED: "0", ...(process.env.HEAVY_VECTOR_SUITE === "1" ? { GOEXPERIMENT: "simd" } : {}) };
+  const env = { GOOS: "linux", GOARCH: "amd64", CGO_ENABLED: "0", GOAMD64: goamd64, GOEXPERIMENT: experiment };
   if (!cached) {
     const source = path.join(cache, "source");
     await rm(source, { recursive: true, force: true });
@@ -73,7 +73,7 @@ export async function addHeavyGo() {
     );
     await writeFile(path.join(cache, "commit"), proxyCommit + "\n");
   }
-  const func = path.join(output, "functions/api/heavy-go/csv.func");
+  const func = path.join(output, `functions/api/${prefix}/csv.func`);
   await mkdir(func, { recursive: true });
   run(
     "go",
@@ -115,15 +115,15 @@ export async function addHeavyGo() {
   for (const name of ["json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"])
     await symlink(
       "csv.func",
-      path.join(output, `functions/api/heavy-go/${name}.func`),
+      path.join(output, `functions/api/${prefix}/${name}.func`),
     );
   const configFile = path.join(output, "config.json");
   const config = JSON.parse(await readFile(configFile));
   // These explicit routes precede Next's catch-all routing and preserve the public URL.
   config.routes.unshift(
     ...["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"].map((name) => ({
-      src: `^/api/heavy-go/${name}$`,
-      dest: `/api/heavy-go/${name}`,
+      src: `^/api/${prefix}/${name}$`,
+      dest: `/api/${prefix}/${name}`,
     })),
   );
   await writeFile(configFile, JSON.stringify(config, null, 2) + "\n");
@@ -133,16 +133,16 @@ export async function addHeavyGo() {
       .update(await readFile(path.join(func, name)))
       .digest("hex");
   const metadata = {
-    proxyCommit,
+    proxyCommit, prefix,
     go: execFileSync("go", ["version"], { encoding: "utf8" }).trim(),
     env,
     hashes,
     paths: ["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"].map(
-      (name) => `api/heavy-go/${name}`,
+      (name) => `api/${prefix}/${name}`,
     ),
   };
   await writeFile(
-    path.join(root, ".vercel/heavy-go-build.json"),
+    path.join(root, `.vercel/${prefix}-build.json`),
     JSON.stringify(metadata, null, 2) + "\n",
   );
   return metadata;

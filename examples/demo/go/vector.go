@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"net/http"
 	"next-scriptc-heavy/vectors"
+	"os"
 	"strconv"
+	"strings"
 	"sync"
+	"syscall"
 	"time"
 )
 
@@ -30,6 +33,12 @@ func initVectors() {
 }
 func vectorSearch(w http.ResponseWriter, r *http.Request) {
 	b, e := body(w, r)
+	var before syscall.Rusage
+	measured := os.Getenv("VECTOR_VERCEL_TIMING") == "1"
+	if measured {
+		syscall.Getrusage(syscall.RUSAGE_SELF, &before)
+	}
+	start := time.Now()
 	var input struct {
 		Embedding []*float64 `json:"embedding"`
 	}
@@ -59,7 +68,31 @@ func vectorSearch(w http.ResponseWriter, r *http.Request) {
 	}
 	hits := vectors.Search(vectorCorpus, query, vectorRows, vectors.IntKernel(name))
 	w.Header().Set("x-vector-init-ms", strconv.FormatFloat(vectorInitMs, 'f', 6, 64))
-	writeJSON(w, struct {
+	payload, err := json.Marshal(struct {
 		Results []vectors.Hit `json:"results"`
 	}{hits})
+	if err != nil {
+		panic(err)
+	}
+	computeMs := float64(time.Since(start).Nanoseconds()) / 1e6
+	if measured {
+		var after syscall.Rusage
+		syscall.Getrusage(syscall.RUSAGE_SELF, &after)
+		micros := func(u syscall.Rusage) int64 {
+			return u.Utime.Sec*1000000 + int64(u.Utime.Usec) + u.Stime.Sec*1000000 + int64(u.Stime.Usec)
+		}
+		w.Header().Set("Server-Timing", "compute;dur="+strconv.FormatFloat(computeMs, 'f', 6, 64))
+		w.Header().Set("x-vector-cpu-us", strconv.FormatInt(micros(after)-micros(before), 10))
+		rss := int64(0)
+		for _, line := range strings.Split(file("/proc/self/status"), "\n") {
+			if strings.HasPrefix(line, "VmRSS:") {
+				n, _ := strconv.ParseInt(strings.Fields(line)[1], 10, 64)
+				rss = n * 1024
+			}
+		}
+		w.Header().Set("x-vector-rss", strconv.FormatInt(rss, 10))
+		w.Header().Set("x-vector-instance", instance)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(payload)
 }

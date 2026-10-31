@@ -1,3 +1,4 @@
+import { measured } from "../vectors/measure.ts";
 import { corpus, rows, dimensions } from "../vectors/data.ts";
 import { query, insert, response } from "../vectors/common.ts";
 import { invalid } from "../common.ts";
@@ -17,8 +18,11 @@ function search(data: Int8Array, embedding: Int8Array, n: number, d: number): Re
 
 export async function POST(request: Request) {
   try {
-    const embedding = query(await request.text());
-    return search(corpus, embedding, rows, dimensions);
+    const text = await request.text();
+    return measured(() => {
+      const embedding = query(text);
+      return search(corpus, embedding, rows, dimensions);
+    });
   } catch {
     return invalid();
   }

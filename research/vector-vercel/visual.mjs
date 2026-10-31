@@ -1,0 +1,17 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+const {rows}=JSON.parse(readFileSync('research/vector-vercel/summary.json'));
+const p=rows[0],g=rows.find(r=>r.variant==='go-simd');
+const f=x=>x.toFixed(2);
+const labels={'patched-natural':'Patched native · natural TS','stock-natural':'Stock native · natural TS','stock-imul':'Stock native · Math.imul','go-simd':'Go experimental SIMD · AVX2','go-plain':'Go plain','node':'Node · natural TS'};
+const html=`<!doctype html><html><head><meta charset="utf-8"><style>
+body{font-family:var(--font-sans,system-ui);font-size:14px;color:var(--foreground);line-height:1.5;margin:0}p{margin:0 0 14px}strong{font-weight:650}.muted{font-size:12px;color:var(--muted-foreground)}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:13px;min-width:620px}th,td{padding:9px 7px;text-align:right;border-bottom:1px solid var(--border)}th{font-size:11px;color:var(--muted-foreground);font-weight:500}th:first-child,td:first-child{text-align:left;padding-left:0}.focus{background:var(--accent-surface);font-weight:650}.after{margin-top:14px}select{font:inherit;color:inherit;background:var(--background);border:1px solid var(--border);border-radius:5px;padding:4px 8px;margin-left:8px}label{font-size:12px;color:var(--muted-foreground)}
+</style></head><body>
+<p><strong>Vercel server compute: ${f(p.computeP50Ms)} ms vs ${f(g.computeP50Ms)} ms.</strong> Patched natural TypeScript ${p.computeP50Ms<g.computeP50Ms?'beats':'trails'} experimental Go SIMD by ${f(Math.abs(1-p.computeP50Ms/g.computeP50Ms)*100)}% at p50 in this run.</p>
+<p class="muted">100,000 × 768 signed int8 vectors · exact top-10 parity · iad1 · 3 fresh preview sets · 120 measured C=1 requests per variant</p>
+<label>View<select id="view"><option value="all">All three sets</option><option value="0">Set 1</option><option value="1">Set 2</option><option value="2">Set 3</option></select></label>
+<div class="scroll"><table><thead><tr><th>Variant</th><th>Compute<br>p50 / p95 ms</th><th>CPU<br>ms/request</th><th>RSS<br>MiB</th><th>WAN<br>p50 / p95 ms</th></tr></thead><tbody id="body"></tbody></table></div>
+<p class="muted after">Compute includes query validation, exhaustive search, top-k and JSON serialization after the body read. CPU is a self-reported process delta around that work; RSS is process resident memory, excluding Go’s separate proxy. WAN latency includes the Mac-to-iad1 round trip.</p>
+<p class="muted">Native dispatch level 3 was read directly from each measured process; code audit confirms AVX2 widening and dot products. Hobby documents 1 vCPU. Short windows and uncontrolled placement do not establish fleet performance or sustained capacity.</p>
+<script>const data=${JSON.stringify(rows)};const names=${JSON.stringify(labels)};const f=x=>x.toFixed(2);function draw(){const v=document.getElementById('view').value;document.getElementById('body').innerHTML=data.map(r=>{const x=v==='all'?r:r.sets[Number(v)],cpu=v==='all'?r.cpuMsPerRequest:x.cpuMeanMs,rss=v==='all'?r.rssMiB:x.rssMedianMiB;return '<tr class="'+(r.variant==='patched-natural'?'focus':'')+'"><td>'+names[r.variant]+'</td><td>'+f(x.computeP50Ms)+' / '+f(x.computeP95Ms)+'</td><td>'+f(cpu)+'</td><td>'+f(rss)+'</td><td>'+f(x.e2eP50Ms)+' / '+f(x.e2eP95Ms)+'</td></tr>'}).join('')}document.getElementById('view').addEventListener('change',draw);draw();</script>
+</body></html>`;
+writeFileSync('research/vector-vercel/results.html',html);

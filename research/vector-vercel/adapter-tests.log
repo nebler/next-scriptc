@@ -1,0 +1,59 @@
+✔ compiler override is an absolute file path and default remains installed scriptc (3.103375ms)
+✔ Node/native dispatcher parity, JSON return failures and thrown messages (2138.054958ms)
+✔ JSON signature checker accepts data types and identifies rejected type paths (225.193375ms)
+✔ discovery checks imported inferred types using extended project tsconfig (672.060166ms)
+✔ extracts only the dependency closure; keeps types and source bodies (10.205083ms)
+✔ file directive selects named exported async declarations and aliases (1.860333ms)
+✔ rejects the old directive without treating strings or comments as directives (1.866ms)
+✔ rejects unsupported scopes, APIs and exports with the function name (9.581625ms)
+✔ JSON boundary rejects lossy values instead of silently coercing them (0.643375ms)
+✔ discovery supports inline route functions and rejects indirect Next/client imports through aliases (490.851708ms)
+✔ Turbopack conditions target discovered paths literally and preserve user rules (2.881334ms)
+✔ function startup checks build identity and reports missing/non-executable binaries (4.305625ms)
+⚠ Duplicate page detected. pages/route.js and pages/route.ts both resolve to /route.
+✔ native extension preserves Next matching and user extension precedence (296.316834ms)
+✔ discovery rejects legacy directives, non-route native files and conflicting routes (30.625417ms)
+✔ route options validate keys, values, defaults, groups and process membership (0.63125ms)
+[next-scriptc] /aaa-static is prerendered by Next; serving the static output (native not needed)
+[next-scriptc] Compiling /items/new, /items/[id], /items/[[...rest]] (speed)
+warning SC6104: parameter 'routes' (declared '{ module: ModuleLoader; pattern: string; }[]') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '{ module: ModuleLoader; pattern: string; }[]' cannot be compiled: the array shape is supported, but its element type '{ module: ModuleLoader; pattern: string; }' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'module' (declared 'ModuleLoader') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type 'ModuleLoader' cannot be compiled: the union shape is supported, but its arm 'RouteModule' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'route' (declared '{ module: ModuleLoader; pattern: string; }') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '{ module: ModuleLoader; pattern: string; }' cannot be compiled: the record shape is supported, but its member 'module.GET()' has type 'RouteResponse', which does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'get' (declared '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined' cannot be compiled: the union shape is supported, but its arm '(request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'body' (declared 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined') is held as a checked-dynamic value: its type has no static lowering (values of type 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'Uint8Array<ArrayBufferLike>' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+The program compiled. Declared types that compile keep these slots static.
+/Users/noah/.t3/worktrees/next-scriptc/t3-87f7e6e9/packages/next-scriptc/test/.grouped-mnB2pe/.next/scriptc/route-0
+[next-scriptc] Built 3 native route(s) in 1 process(es).
+✔ grouped build drops prerenders, sorts static/dynamic/catch-all, and validates manifest (1988.114416ms)
+Compiled native.ts named function/variable/alias/re-exports; native-only next/server and inherited aliases; unsupported middleware helper rejected.
+✔ discovery exports, Next extensions, rewrite phases, and typed native entries (5839.678375ms)
+✔ literal rewrite segments remain literal in external destination URLs (1.811542ms)
+[next-scriptc] /feed.xml is prerendered by Next; serving the static output (native not needed)
+[next-scriptc] Built 0 native route(s) in 0 process(es).
+✔ build completion leaves prerendered handlers with Next and preserves user rewrites (2.880125ms)
+✔ native replacement preserves shared Node aliases, variants and prerender files (9.44475ms)
+✔ grouped routes share one Function across nested aliases and preserve independent Functions (13.210458ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8355.728708

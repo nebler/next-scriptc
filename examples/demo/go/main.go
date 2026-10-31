@@ -278,16 +278,18 @@ func diagnostics(w http.ResponseWriter, r *http.Request) {
 		user, _ = strconv.ParseInt(fields[11], 10, 64)
 		system, _ = strconv.ParseInt(fields[12], 10, 64)
 	}
-	writeJSON(w, map[string]any{"instance": instance, "pid": os.Getpid(), "cpu": map[string]int64{"user": usage.Utime.Sec*1000000 + int64(usage.Utime.Usec), "system": usage.Stime.Sec*1000000 + int64(usage.Stime.Usec)}, "rss": rss, "procCpuTicks": map[string]int64{"user": user, "system": system}, "availableParallelism": runtime.NumCPU(), "status": status, "cpuMax": file("/sys/fs/cgroup/cpu.max"), "cgroup": file("/proc/self/cgroup"), "cpuQuota": file("/sys/fs/cgroup/cpu/cpu.cfs_quota_us"), "cpuPeriod": file("/sys/fs/cgroup/cpu/cpu.cfs_period_us")})
+	writeJSON(w, map[string]any{"instance": instance, "pid": os.Getpid(), "cpu": map[string]int64{"user": usage.Utime.Sec*1000000 + int64(usage.Utime.Usec), "system": usage.Stime.Sec*1000000 + int64(usage.Stime.Usec)}, "rss": rss, "procCpuTicks": map[string]int64{"user": user, "system": system}, "cpuInfo": file("/proc/cpuinfo"), "availableParallelism": runtime.NumCPU(), "status": status, "cpuMax": file("/sys/fs/cgroup/cpu.max"), "cgroup": file("/proc/self/cgroup"), "cpuQuota": file("/sys/fs/cgroup/cpu/cpu.cfs_quota_us"), "cpuPeriod": file("/sys/fs/cgroup/cpu/cpu.cfs_period_us")})
 }
 func handler() http.Handler {
 	mux := http.NewServeMux()
 	for name, fn := range map[string]http.HandlerFunc{"csv": csvReport, "json": jsonReport, "thumbnail": thumbnail, "bcrypt": password, "vectors": vectorSearch, "vectors-imul": vectorSearch} {
 		mux.HandleFunc("POST /api/heavy/"+name, fn)
 		mux.HandleFunc("POST /api/heavy-go/"+name, fn)
+		mux.HandleFunc("POST /api/heavy-go-simd/"+name, fn)
 	}
 	mux.HandleFunc("GET /api/heavy/diagnostics", diagnostics)
 	mux.HandleFunc("GET /api/heavy-go/diagnostics", diagnostics)
+	mux.HandleFunc("GET /api/heavy-go-simd/diagnostics", diagnostics)
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store")
 		mux.ServeHTTP(w, r)

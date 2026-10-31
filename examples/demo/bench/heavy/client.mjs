@@ -88,6 +88,10 @@ export function createClient({
                     "cache-control",
                     "x-next-scriptc",
                     "x-vector-init-ms",
+                    "server-timing",
+                    "x-vector-cpu-us",
+                    "x-vector-rss",
+                    "x-vector-instance",
                   ]
                     .filter((k) => res.headers[k] !== undefined)
                     .map((k) => [k, res.headers[k]]),
