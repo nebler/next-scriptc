@@ -106,3 +106,52 @@ Revision 2 replaces the old 32-request C=16 warmup with 2 seconds / 1,000 reques
 Cold-only mode collects hello first, memory, verify/revenue route-first, then 20 + 40 warm hello requests (64 requests per deployment). Only hello is deployment-first; the diagnostic and other routes may initialize modules in the shared Function. Idle mode collects hello, memory, then the same warm baseline (62 requests per deployment). Tail mode targets original warmup versus longer warmup/windows, retains per-request dispatch offsets/durations/request IDs, and stops on failure. Failed windows preserve available drained partial measurements and invalidate throughput. The first failed diagnostic predates that retention improvement and preserves its issued count/error but lacks partial timings. A native-only repeat is a separately retained experiment, not a replacement or a stitched paired result.
 
 Run `node --test examples/demo/bench/vercel/test.mjs` for budget enforcement, failure draining/retention, parity invalidation and memory-probe failure preservation. Failed memory probes mark the full run failed while preserving its workload rows and request count.
+
+## Round 2 startup attribution
+
+See `research/vercel-cold-start-memory.md`'s appended round 2 and the
+`vercel-round2-*` artifacts. That round has its own **8-preview / 5,000-HTTP-attempt /
+0.25-Sandbox-vCPU-hour** limit; the older full/tail defaults above exceed its
+invocation budget. Its three fresh pairs used `run.mjs --fresh --mode cold`
+without changes. All eight round 2 previews were deleted.
+
+The `startup-*` helpers are separate research tools, not the measured protocol:
+
+- `startup-build.mjs group|isolated` compiles an instrumented copy of the current
+  shim after a grouped native build. `isolated` compiles only hello. To reproduce
+  the original bug, use the pre-fix shim/application tree at merge `1e9b65b`;
+  instrumenting the fixed shim measures different initialization behavior.
+- `startup-proxy.py <bootstrap directory>` instruments a clean copy of public
+  proxy commit `84878e532142f0ac584953695658b324eb9e5b80`. Build using
+  `GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath '-ldflags=-s -w'`.
+  It retains the public proxy's IPC-before-bind order. Diagnostic artifacts are
+  explicitly substituted into the prepared `.vercel/output`; never use them
+  for the uninstrumented pairs.
+- `startup-deploy.mjs LABEL` uploads only the explicitly prepared output, saves
+  accepted deployment identity before inspection, and rejects production.
+  `startup-deploy.mjs check-traces [FUNCTIONS_DIRECTORY]` checks traced generated
+  metadata without deploying. Always rebuild the variant immediately before
+  uploading: copying `.vercel/output` alone leaves live `.next` trace references.
+  The guard understands Next's salted `sha256(salt + 'file:' + bytes)` metadata
+  fingerprints, excludes renamed trace inputs and does not interpret compiler
+  128-bit fingerprints. It is a useful guard, not a complete frozen-input proof.
+- `startup-sandbox.mjs` expects the recorded original/fixed/diagnostic binary
+  layout under ignored `.vercel/round2`. Compile its eviction helper first:
+  `zig cc -target x86_64-linux-musl -Os -static -s examples/demo/bench/vercel/cold-file.c -o .vercel/round2/cold-file`.
+  It runs three starts per binary/path and records advisory cache eviction,
+  handshake timing and any connection refusals. This is not guaranteed hardware
+  disk-cold measurement.
+- `startup-request.mjs URL` issues 21 hello-only diagnostic requests from iad1;
+  `startup-scaleout.mjs NATIVE_URL NODE_URL` caps its separate hello C=16 probe at
+  1,466 attempts. Neither is a fresh paired benchmark. Use Node 24 with
+  `--env-file=.env.local`; no secrets are put in arguments or artifacts.
+- `function-sizes.py LABEL OUTPUT_ROOT REPO_ROOT DEPLOYMENT_JSON` reports the
+  union of traced files for each **deployed** Function group, local ZIP estimates,
+  binary hashes and inspect-reported uploaded ZIP sizes. Capture before changing
+  `.next`; uncompressed payload excludes platform layers and packaging overhead.
+
+Keep diagnostic exports, failures and cold-only pairs separate. Record every
+Sandbox, including failed attempts, and remove experiment previews only by their
+saved exact deployment IDs, never by project name. The round 2 report explicitly
+records its live-trace packaging limitation rather than claiming byte-identical
+Node repetitions.

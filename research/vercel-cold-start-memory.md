@@ -144,3 +144,106 @@ Hosted verification: **85/85 parity cases + 25/25 smoke checks pass**; 85 + 16 r
 Retained artifacts include the failed tail result; no outliers, losses or failed deployments were replaced in a headline comparison. The final same-commit full pair is the only revised-protocol paired comparison. After measurements, an additional tested error-path fix preserves full-run rows/counts if a memory diagnostic fails and clears response-abort timers. It does not change the successful-run protocol; the uploaded client hash and source commit identify the measured version.
 
 Open questions: exact Vercel start types and server durations remain unavailable without Observability Plus; whole-instance/process-tree and aggregate memory remain unmeasured; executable-runtime platform concurrency is undocumented here; the startup-associated HTTP 500 needs a readiness/transport investigation. Three preview samples do not generalize to production prewarming or prove cold-start distributions. The longer warmup has evidence for reducing this transient, not for eliminating every tail. No package/runtime/proxy change was made for these measurements.
+
+## Round 2 — startup attribution and matched-route initialization (2026-10-31)
+
+**The dominant excess is ours: the Vercel shim started every grouped route loader after binding.** Literal `import()` deferred execution until called, but `serveMany` called all 17 loaders in the listening callback. Their synchronous initialization blocked the event loop before hello could run. Binding in ~6 ms was therefore an inadequate readiness/performance metric. Moving initialization to the first request **for the matched route** reduces the uninstrumented native deployment-first median from **834.307 to 158.696 ms**, with the grouped binary essentially unchanged in size. The contemporaneous Node median is **224.314 ms**. This does not establish universal process-cold performance or remove the cost of initializing a heavyweight route when that route is first requested.
+
+### Diagnostic build and timeline
+
+Two diagnostic previews preceded the six uninstrumented comparison previews. `bench/vercel/startup-build.mjs` compiled an ignored copy of the shim, with stdout JSON at shim evaluation, bind, route-loader invocation/completion, request callback entry and response `end()` call. `startup-proxy.py` instrumented a copy of the pinned public Go source at main, child spawn, port readiness, IPC announcement, proxy bind and proxy request receipt. It preserved announcement-before-bind ordering. No diagnostic code, runtime flags, timestamps, headers or measurements were added to the benchmarked handlers or serving shim. Existing listener logging remains unchanged. `response-end-called` means `ServerResponse.end()` returned, not that the peer received or the kernel flushed all bytes. Shim evaluation is the earliest instrumented TS statement; child spawn brackets earlier runtime initialization.
+
+The first grouped diagnostic response was **871.122 ms**. Correlation uses request `iad1::iad1::85r6l-1793437530524-73961e67d1fc`, the ID epoch, client wall time, embedded event timestamps and the runtime-log envelope. Embedded event times and log receipt times must be distinguished:
+
+| Event | Embedded UTC time | Observation |
+| --- | --- | --- |
+| Go main / child spawned | 09:05:05.095 / .106 | Before the operator request; initialization/prewarming occurred |
+| Shim evaluated / user listener bound | 09:05:05.130 / .144 | ~24 ms from child spawn to shim marker, another 14 ms to bind |
+| Child port ready / IPC announced / proxy bound | 09:05:05.157 / .157–.160 / .160 | ~65 ms from Go main; readiness did not wait for module completion |
+| Last early module-start / next module-start | 09:05:05.168 / 09:05:30.626 | 25.458 s gap; consistent with suspension/scheduling during prewarming, not 25 s of measured CPU work |
+| Client dispatch / request-ID arrival epoch | 09:05:30.482 / .524 | ~42 ms connection/edge interval, inferred from the ID epoch |
+| Proxy received hello | 09:05:30.636 | ~112 ms after arrival epoch |
+| Route initialization callbacks completed | 09:05:31.350–.351 | **714–715 ms after proxy receipt**, before hello's callback |
+| Shim received hello / response end called | 09:05:31.351 / .351 | Sub-millisecond at this timestamp resolution |
+| Client body drained | approximately 09:05:31.353 | Total 871.122 ms including connection setup |
+
+The log envelopes assign the older main/listen records to **09:05:30.631–.632**, around first invocation; their embedded timestamps are ~25 seconds earlier. Consequently listener log timestamps alone cannot certify actual process creation time. This also qualifies the earlier listener-count evidence: distinct ports establish additional listeners/capacity, but their log receipt times need not equal their actual bind times. The frozen/scheduled interval is not added to request latency. Clock synchronization is not independently calibrated, so cross-process/edge differences are approximate; the large in-process dispatch delay and Linux experiment independently support attribution.
+
+The hello-only diagnostic Function returned **244.516 ms**. Its user binary is 2.297 MB instead of 9.890 MB. It initialized hello at bind time in under a millisecond, and proxy receipt → shim receipt → response-end took **~2 ms**, versus ~715 ms for the group. It was truly its own Function: hello and its `.rsc` alias map to a separate executable, while other routes retain the original group. It intentionally has no memory route in that Function and uses the separate hello-only diagnostic client. This one observation confounds size and removed initialization and is **not** a standalone estimate of the download penalty. The fixed, still-large group below separates those explanations.
+
+Raw evidence: [group diagnostic](benchmarks/vercel-round2-diagnostic-group.json), [group runtime logs](benchmarks/vercel-round2-diagnostic-group-logs.jsonl), [isolated diagnostic](benchmarks/vercel-round2-diagnostic-isolated.json), [isolated runtime logs](benchmarks/vercel-round2-diagnostic-isolated-logs.jsonl). All embedded timestamps are retained, including the pre-request gap.
+
+### Same artifacts on Linux
+
+An iad1, 1-vCPU Node 24 Sandbox ran the original grouped binary, the fixed grouped binary, and both diagnostic binaries, directly and through their recorded proxies, three times each. Artifact hashes match the hosted native binaries. A tiny static musl helper calls `fsync` then `posix_fadvise(..., POSIX_FADV_DONTNEED)` on each relevant artifact before each spawn. Every call returned success. This requests Linux page-cache eviction; it does **not** prove physical disk reads or flush host/storage caches. Parent timing includes process spawn and local HTTP response drain. CPU affinity and storage latency were not controlled.
+
+| Binary / path | Spawn → readiness, median [range] ms | Spawn → hello body drained, median [range] ms |
+| --- | ---: | ---: |
+| Original 17-route group, direct | 5.249 [4.240, 7.514] | **518.588 [508.466, 574.618]** |
+| Fixed 17-route group, direct | 3.898 [3.802, 3.998] | **6.086 [5.972, 8.844]** |
+| Original group, public proxy | 61.793 [60.165, 62.504] | **483.679 [480.272, 487.436]** |
+| Fixed group, same public proxy | 58.143 [56.938, 58.219] | **61.801 [59.770, 63.363]** |
+| Hello-only diagnostic, direct | 2.308 [2.212, 2.531] | 3.892 [3.844, 4.275] |
+| Hello-only diagnostic, diagnostic proxy | 57.780 [57.549, 58.209] | 60.601 [60.275, 60.880] |
+
+Direct and proxied runs are separate trials; do not subtract their medians as an exact proxy-overhead estimate. The group diagnostic also reproduces the delay (~498 ms direct, ~503 ms proxied), corroborating that instrumentation did not create it. The fixed group and tiny isolated binary have similar proxied startup. The ~50 ms poll is visible, but cannot explain the prior ~600 ms excess. Native startup's heavy work is reproducible without Vercel Function provisioning, DNS, TLS or the edge. The search route's top-level `index.addAll(products)` is an obvious heavy initializer; this experiment attributes the aggregate grouped initialization, not a precise per-module CPU breakdown.
+
+[Controlled/advised Linux observations](benchmarks/vercel-round2-startup-sandbox.json) include every trial, stdout and handshake. [Earlier cache-uncontrolled run](benchmarks/vercel-round2-startup-sandbox-cache-uncontrolled.json) and [initial failed run](benchmarks/vercel-round2-startup-sandbox-initial.json) remain separate and are included in cost.
+
+### Minimal fix and fresh comparison
+
+Commit `3a10a8e` changes only the serving shim and its parity fixtures: Vercel listeners bind without calling route loaders; the matched route starts and awaits its loader on first dispatch. An initialized flag plus the shared initialization Promise prevents repeated or concurrent initialization. Self-hosted startup behavior is preserved. Automatic methods still wait for exports. All 17 routes remain grouped; no route code, dataset, optimization setting, resource allocation or proxy binary changed. The initializer's existing fatal-rejection behavior is retained. This fixes cross-route startup work, not general head-of-line blocking if a later request deliberately initializes a heavy route in the shared process.
+
+Six untouched previews were deployed in order Node/native, Node/native, native/Node, then measured Node/native, native/Node, Node/native. Each pair used the existing C1 cold-only harness unchanged: hello first, memory, verify/revenue route-first, then 20 warmup + 40 measured hello requests. Every deployment uses iad1/x86_64/2048 MiB/300 s; every cross-variant digest matches. No operator route request, parity run, browser visit or health probe preceded first hello. Fresh means untouched deployment, **not certified cold process**: diagnostic timestamps demonstrate platform prewarming is possible.
+
+| Pair | Node first / warm p50 ms | Native first / warm p50 ms | Node/native measurement order |
+| --- | ---: | ---: | --- |
+| 1 | 224.314 / 28.594 | 158.696 / 24.009 | Node first |
+| 2 | 240.753 / 23.605 | 163.397 / 22.926 | Native first |
+| 3 | 217.536 / 23.191 | 115.976 / 22.437 | Node first |
+| Median [range] | **224.314 [217.536, 240.753]** / 23.605 | **158.696 [115.976, 163.397]** / 22.926 | Three observations per variant |
+
+Native first-minus-warm median is **134.687 ms [93.540, 140.471]**, Node **195.720 ms [194.345, 217.149]**. Native's first median falls **675.611 ms (81.0%)** from round 1; Node stays near its earlier 228.315 ms. This is a small before/after comparison, not a confidence interval or randomized platform study. Native's remaining ~135 ms end-to-end excess contains connection setup, activation/routing, the proxy handshake if it was not prewarmed, and hello initialization. It is not isolated provisioning duration.
+
+**Packaging limitation:** native repeats reuse the exact fixed ELF hashes, but copied Build Output trees do not freeze `filePathMap`'s live `.next` sources. Node pair 1 was uploaded before the fixed native build; pairs 2/3 afterward. Their uploaded App Route ZIPs are 724,462 versus 724,337 bytes with different digests. The saved build fingerprints differ for four shared generated files: build-manifest, middleware-build-manifest, BUILD_ID, required-server-files. There are no source changes between pairs and all route parity/digests pass, but this is **not a byte-identical Node package repetition**, and equality of non-overlapping route-specific traces cannot be established from those shared fingerprints. Treat this as a limit on benchmark precision, not hide the drift. The research deploy helper now refuses changed SHA-256-tracked `.next` metadata before creating a preview; future repetitions must rebuild immediately before upload or freeze every traced input. This guard was added after these eight deployments. The helper supplies the same fixed JWT fixture values but omitted the existing deploy helper's runtime `NEXT_SCRIPTC_BASELINE` flag; that flag is read only by build-time next.config in this tree. Both deployed baseline mappings contain exclusively Node Functions.
+
+[Pair 1](benchmarks/vercel-round2-pair-1.json), [pair 2](benchmarks/vercel-round2-pair-2.json), [pair 3](benchmarks/vercel-round2-pair-3.json), [build/source provenance and trace fingerprints](benchmarks/vercel-round2-provenance.json). Per-preview deployment manifests retain distinct Function names, immutable URLs, output digests/sizes and topology. Identical native output digests may benefit from platform artifact caches across previews; fresh URLs do not disable those caches. No independent cache-of-image experiment is claimed.
+
+### Function and binary sizes
+
+Decimal bytes. Uncompressed sizes below are the **local union of physical output and traced application files per deployed Function**, deduplicated by deployment path, excluding `.vc-config.json`. They are payload estimates, not total platform image/layer sizes. Compressed sizes are the **actual uploaded Function ZIP size reported by `vercel inspect`** for the identified deployment; they include deployment packaging overhead. Local deflate-6 estimates are retained in raw records and deliberately not substituted for inspect. The Node trace-size capture also inherits the live-trace limitation above. Private runtime layers/download/extraction telemetry are unavailable.
+
+| Deployment / Function | Uncompressed payload bytes | Uploaded ZIP bytes |
+| --- | ---: | ---: |
+| Node pair 1: App Routes (40 mappings) | 2,020,966 | **724,462** |
+| Node pair 1: pages (17 mappings) | 1,938,098 | 652,818 |
+| Fixed native pair 1: 17-route executable (34 mappings) | **17,139,488** | **7,526,761** |
+| Fixed native pair 1: pages | 1,938,098 | 652,693 |
+| Fixed native pair 1: retained Node App Routes | 1,743,469 | 585,649 |
+| Group diagnostic: executable | 17,131,632 | 7,500,195 |
+| Group diagnostic: pages / retained Node routes | 1,938,098 / 1,743,469 | 652,695 / 585,651 |
+| Isolated diagnostic: hello executable | 9,539,176 | **4,412,293** |
+| Isolated deployment: remaining diagnostic executable group | 17,131,632 | 7,500,195 |
+| Isolated deployment: pages / retained Node routes | 1,938,098 / 1,743,469 | 652,695 / 585,651 |
+
+The isolated deployment retains the diagnostic group's ELF and proxy for other routes; hello is detached into its own Function. Full file lists, owner mappings and hashes are in the [Node](benchmarks/vercel-round2-node-sizes.json), [fixed](benchmarks/vercel-round2-fixed-sizes.json), [group diagnostic](benchmarks/vercel-round2-diagnostic-group-sizes.json) and [isolated](benchmarks/vercel-round2-diagnostic-isolated-sizes.json) records. Counts are route/output mappings, including `.rsc`, not independent Functions.
+
+Original grouped `user-server`: **9,896,688 bytes**; fixed: **9,897,600 (+912)**; diagnostic group: **9,889,744**; diagnostic hello-only: **2,297,288**. Public Go `executable`: **7,241,888 bytes**, identical across original and fixed. Both are statically linked, stripped x86-64 Linux ELFs. The adapter already passes scriptc `--strip --no-keep-llvm` with `x86_64-linux-musl`; the proxy already uses `CGO_ENABLED=0`, `-trimpath`, `-ldflags=-s -w`. Gzip-9 of the original proxy alone is 3,035,950 bytes (standalone compression is not the actual Function ZIP). There is no remaining obvious debug-symbol stripping fix. Static runtime/proxy size costs upload/storage and may affect activation, but **a 912-byte increase cannot explain the 676 ms improvement**; download/extraction is not the dominant defect established here. No Go rewrite, alternative libc, custom proxy release or speculative linker tuning was made.
+
+### Startup 500: confirmed facts and unresolved attribution
+
+The exact prior request is now independently retained in [CDN request logs](benchmarks/vercel-round2-prior-failure-request.jsonl): arrival **08:42:05.672Z**, iad1, MISS, WAF allow, HTTP **500**. Its only [runtime record](benchmarks/vercel-round2-prior-failure-logs.jsonl) is the user listener at **08:42:05.949Z**. No shim exception, proxy transport error, child-exit record or platform error code was exported. The older client preserved status and request ID but not response body or the native response marker; these cannot now be recovered. A log envelope at listener time does not prove when the listener actually bound.
+
+The pinned proxy polls the **user port**, then sends `server-started` for port 3000, then calls `ListenAndServe`. The race is real: in the cache-uncontrolled Linux run an HTTP attempt immediately upon IPC readiness saw **ECONNREFUSED once with the unmodified public proxy**, and twice with the diagnostic proxy; bounded retries subsequently succeeded. The initial checker also failed at this boundary. Instrumentation is not required for reproduction. The page-cache-advised repeat had no refusals; the race is scheduling-sensitive, not guaranteed.
+
+There is no explicit HTTP-500 mapping in this public request path. `httputil.ReverseProxy`'s default upstream transport-error handler writes **502** and logs `http: proxy error`; user responses are forwarded. The shim writes 500 on caught route errors and logs the exception. A refused connection to the not-yet-bound proxy occurs **outside** that handler and would require a platform-side mapping. Thus the readiness race is a credible cause for the startup-associated 500, **not a proven explanation of that specific response**. The eager module work explains latency, not an observed exception. Do not relabel the original 500 as fixed or assert that every upstream error becomes 500. Source: [pinned proxy](https://github.com/vercel/vercel/blob/84878e532142f0ac584953695658b324eb9e5b80/internals/ipc-proxy/bootstrap/proxy.go), [readiness poll](https://github.com/vercel/vercel/blob/84878e532142f0ac584953695658b324eb9e5b80/internals/ipc-proxy/bootstrap/utils.go), and the installed Go standard-library `ReverseProxy.defaultErrorHandler` (HTTP 502).
+
+A separate fixed-build C=16 repeat used pair 2 after its cold-only run: 32 warmup + 700 measured hello requests on each variant, **1,466 total including references, zero failures**. Native runtime logs show **15 new listeners** at 09:15:04.853–.882, beyond the initial listener. Native/Node warmup p99 is **454/817 ms**; measured p99 **78.6/80.2 ms**, measured p50 **23.4/25.1 ms**. Windows are count-limited (~1.17/1.29 s) and cannot establish sustained capacity or eliminate the readiness race. [Raw scale-out](benchmarks/vercel-round2-scaleout.json), [native listener export](benchmarks/vercel-round2-scaleout-native-logs.jsonl), [Node export](benchmarks/vercel-round2-scaleout-node-logs.jsonl).
+
+### Verification, budget and next question
+
+Package tests **17/17**, compiled shim parity **113 HTTP comparisons**, benchmark harness tests **4/4**, demo local e2e, and **85/85 local route cases** pass. The new shim cases verify no Vercel loader runs at readiness, unrelated routes remain unloaded, concurrent first requests await one initialization, and subsequent automatic methods use initialized exports. Hosted final-pair verification passes **85/85 parity + 25/25 smoke checks**, after all fresh measurements. Reports include worker behavior, streaming and process cleanup; intentional local crash-recovery HTTP 500 tests are unrelated to the hosted failure. [Hosted parity](benchmarks/vercel-round2-hosted-parity.txt), [hosted smoke](benchmarks/vercel-round2-hosted-smoke.txt), [validation record](benchmarks/vercel-round2-validation.json).
+
+This round created **8/8 allowed previews**, issued **2,137/5,000 HTTP attempts** (a conservative Function-invocation upper bound), and used **0.057650/0.25 provisioned Sandbox vCPU-hours** including the failed initial checker; platform reported active CPU is **42,064 ms**. All nine Sandboxes stopped. **All eight new previews were deleted** after evidence/verification capture; prior-round deployments were left alone. No production deployment, domain attachment, project-setting change, push or merge to main occurred. [Cost ledger and cleanup](benchmarks/vercel-round2-cost.json), [deletion record](benchmarks/vercel-round2-cleanup.json).
+
+Open questions for Vercel: for `n66xb-1793436125672-c12c177be4bb` on `dpl_Fk8Z5TZBTi4UJBMu1ozCQRG6Wxye`, did the executable launcher attempt port 3000 before it was bound, and which private runtime condition produced the 500? Does `server-started` require an already-bound HTTP port, and can the public proxy bind it before announcement? Can initialization/activation, image download/extraction, prewarm suspension/resume and first-dispatch timestamps be exposed separately? The large cold excess no longer needs a platform-only explanation; those questions concern the unresolved error and residual activation variability. No exact download/extraction attribution is possible from the public logs available here.

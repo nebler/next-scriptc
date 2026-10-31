@@ -1,0 +1,467 @@
+{
+  "status": "complete",
+  "startedAt": "2026-10-31T09:11:38.635Z",
+  "artifacts": {
+    "original/user-server": {
+      "bytes": 9896688,
+      "sha256": "0b4395ff14a0b207989833a4478bfa581419d1f3b86736b8a32cfdc2781c374a"
+    },
+    "original/executable": {
+      "bytes": 7241888,
+      "sha256": "acdabb85da02103ac5bce79e8ccda69e2bb26841153a4f3c8a667760e540bcfa"
+    },
+    "fixed/user-server": {
+      "bytes": 9897600,
+      "sha256": "e59f8bf1a701fbfaf1e00aa61426351f8033a895eac2a02066261935d38bbe3f"
+    },
+    "fixed/executable": {
+      "bytes": 7241888,
+      "sha256": "acdabb85da02103ac5bce79e8ccda69e2bb26841153a4f3c8a667760e540bcfa"
+    },
+    "group/user-server": {
+      "bytes": 9889744,
+      "sha256": "cd40a76ae2ec69358cdf1f29f1213be40f34cd71bcc29300a3d5a4886a307c7c"
+    },
+    "group/executable": {
+      "bytes": 7241888,
+      "sha256": "cd3a9fab5220da1bc64fb109d7e63bba868450aad9bb1710bc4c97a7a29a480e"
+    },
+    "isolated/user-server": {
+      "bytes": 2297288,
+      "sha256": "3ee0ca852ef8c32c947c929bc24cc6e6ee20c630f4f34bdaf1c5473aee2f7e01"
+    },
+    "isolated/executable": {
+      "bytes": 7241888,
+      "sha256": "cd3a9fab5220da1bc64fb109d7e63bba868450aad9bb1710bc4c97a7a29a480e"
+    }
+  },
+  "sandbox": {
+    "id": "harlequin-rural-ermine-5m3RWw",
+    "region": "iad1",
+    "vcpus": 1,
+    "activeCpuDurationMs": 8467,
+    "provisionedVcpuHours": 0.012288888888888889
+  },
+  "observations": [
+    {
+      "variant": "original",
+      "viaProxy": false,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437931295,
+      "readinessErrors": [],
+      "readyMs": 7.514012000000008,
+      "responseMs": 574.618055,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:46349\n",
+      "stderr": ""
+    },
+    {
+      "variant": "original",
+      "viaProxy": false,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437931875,
+      "readinessErrors": [],
+      "readyMs": 4.240007999999989,
+      "responseMs": 508.46575700000005,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:37487\n",
+      "stderr": ""
+    },
+    {
+      "variant": "original",
+      "viaProxy": false,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437932387,
+      "readinessErrors": [],
+      "readyMs": 5.248689000000013,
+      "responseMs": 518.587675,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:36675\n",
+      "stderr": ""
+    },
+    {
+      "variant": "original",
+      "viaProxy": true,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437932910,
+      "readinessErrors": [],
+      "readyMs": 62.5038790000001,
+      "responseMs": 487.435612,
+      "messages": [
+        {
+          "atMs": 62.42567400000007,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:39327\n",
+      "stderr": ""
+    },
+    {
+      "variant": "original",
+      "viaProxy": true,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437933403,
+      "readinessErrors": [],
+      "readyMs": 61.79262599999993,
+      "responseMs": 480.2723310000001,
+      "messages": [
+        {
+          "atMs": 61.725484999999935,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:40387\n",
+      "stderr": ""
+    },
+    {
+      "variant": "original",
+      "viaProxy": true,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437933889,
+      "readinessErrors": [],
+      "readyMs": 60.16467999999986,
+      "responseMs": 483.67873999999983,
+      "messages": [
+        {
+          "atMs": 60.1110349999999,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 54,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:38541\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": false,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934377,
+      "readinessErrors": [],
+      "readyMs": 3.8019020000001547,
+      "responseMs": 5.971880999999939,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:32787\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": false,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934384,
+      "readinessErrors": [],
+      "readyMs": 3.897871000000123,
+      "responseMs": 6.086331000000428,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:45419\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": false,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934392,
+      "readinessErrors": [],
+      "readyMs": 3.9982899999999972,
+      "responseMs": 8.843997999999829,
+      "messages": [],
+      "stdout": "next-scriptc: listening on 127.0.0.1:36813\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": true,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934403,
+      "readinessErrors": [],
+      "readyMs": 58.21880299999975,
+      "responseMs": 61.80143999999973,
+      "messages": [
+        {
+          "atMs": 58.15698900000007,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 51,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:43687\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": true,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934468,
+      "readinessErrors": [],
+      "readyMs": 56.93803100000014,
+      "responseMs": 59.77007400000002,
+      "messages": [
+        {
+          "atMs": 56.86434599999984,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 51,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:43615\n",
+      "stderr": ""
+    },
+    {
+      "variant": "fixed",
+      "viaProxy": true,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934531,
+      "readinessErrors": [],
+      "readyMs": 58.14303800000016,
+      "responseMs": 63.36342000000013,
+      "messages": [
+        {
+          "atMs": 58.09184000000005,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "next-scriptc: listening on 127.0.0.1:44371\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": false,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437934598,
+      "readinessErrors": [],
+      "readyMs": 6.9537160000004405,
+      "responseMs": 497.3454660000002,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":963,\"at\":1793437934602,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":963,\"at\":1793437934603,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:34129\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":963,\"at\":1793437934603,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":963,\"at\":1793437934604,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":963,\"at\":1793437935093,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":963,\"at\":1793437935094,\"elapsedMs\":492}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": false,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437935098,
+      "readinessErrors": [],
+      "readyMs": 4.848629999999957,
+      "responseMs": 499.0643269999996,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":966,\"at\":1793437935102,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:37663\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":966,\"at\":1793437935103,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":966,\"at\":1793437935595,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":966,\"at\":1793437935596,\"elapsedMs\":494}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": false,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437935600,
+      "readinessErrors": [],
+      "readyMs": 4.350945000000138,
+      "responseMs": 497.774461,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":969,\"at\":1793437935603,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":969,\"at\":1793437935604,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:43537\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":969,\"at\":1793437935604,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":969,\"at\":1793437935605,\"elapsedMs\":2}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":969,\"at\":1793437936095,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":969,\"at\":1793437936096,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":969,\"at\":1793437936097,\"elapsedMs\":494}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": true,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437936102,
+      "readinessErrors": [],
+      "readyMs": 58.806024000000434,
+      "responseMs": 503.1917430000003,
+      "messages": [
+        {
+          "atMs": 58.78799000000072,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 53,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437936107,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437936109,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.475,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":978,\"at\":1793437936111,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:38343\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":978,\"at\":1793437936112,\"elapsedMs\":1}\n{\"at\":1793437936161,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":53.199,\"stage\":\"child-port-ready\"}\n{\"at\":1793437936161,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":53.237,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437936161,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":53.272,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437936161,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":53.291,\"stage\":\"proxy-listening\"}\n{\"at\":1793437936165,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":57.62,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":978,\"at\":1793437936602,\"elapsedMs\":491}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":978,\"at\":1793437936603,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":978,\"at\":1793437936604,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":978,\"at\":1793437936604,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":978,\"at\":1793437936604,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":978,\"at\":1793437936604,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":978,\"at\":1793437936604,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"response-end-called\",\"route\":\"/api/hello\",\"pid\":978,\"at\":1793437936605,\"elapsedMs\":494}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": true,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437936610,
+      "readinessErrors": [],
+      "readyMs": 59.25010199999997,
+      "responseMs": 502.0466239999996,
+      "messages": [
+        {
+          "atMs": 59.234488999999485,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 54,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437936614,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437936615,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.185,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":986,\"at\":1793437936618,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:36805\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":986,\"at\":1793437936619,\"elapsedMs\":1}\n{\"at\":1793437936669,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.383,\"stage\":\"child-port-ready\"}\n{\"at\":1793437936669,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.423,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437936669,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.458,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437936669,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.481,\"stage\":\"proxy-listening\"}\n{\"at\":1793437936670,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":55.834,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":986,\"at\":1793437937110,\"elapsedMs\":492}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":986,\"at\":1793437937111,\"elapsedMs\":493}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "group",
+      "viaProxy": true,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937116,
+      "readinessErrors": [],
+      "readyMs": 60.60626400000001,
+      "responseMs": 504.71293200000036,
+      "messages": [
+        {
+          "atMs": 60.59016799999972,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437937121,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437937123,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.539,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":995,\"at\":1793437937126,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":995,\"at\":1793437937126,\"elapsedMs\":0}\nnext-scriptc: listening on 127.0.0.1:33887\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/analytics/revenue\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/diagnostics/memory\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/export.json.gz\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/feed.xml\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/images/histogram\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/items/[id]\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/login-scrypt\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/posts/[slug]\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/primes\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/report\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/search\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/stores/nearby\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/uploads/verify\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/url-echo\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/verify\",\"pid\":995,\"at\":1793437937127,\"elapsedMs\":1}\n{\"at\":1793437937174,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.517,\"stage\":\"child-port-ready\"}\n{\"at\":1793437937174,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.556,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437937174,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.673,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437937174,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.693,\"stage\":\"proxy-listening\"}\n{\"at\":1793437937178,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":56.313,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/analytics/revenue\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/diagnostics/memory\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/export.json.gz\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/feed.xml\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/images/histogram\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/items/[id]\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/login-scrypt\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/posts/[slug]\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/primes\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/report\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/search\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/stores/nearby\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/uploads/verify\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/url-echo\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/verify\",\"pid\":995,\"at\":1793437937619,\"elapsedMs\":493}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":995,\"at\":1793437937620,\"elapsedMs\":494}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"response-end-called\",\"route\":\"/api/hello\",\"pid\":995,\"at\":1793437937620,\"elapsedMs\":494}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": false,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937624,
+      "readinessErrors": [],
+      "readyMs": 2.5305129999997007,
+      "responseMs": 3.891736999999921,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":998,\"at\":1793437937626,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":998,\"at\":1793437937627,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:44039\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":998,\"at\":1793437937627,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":998,\"at\":1793437937627,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":998,\"at\":1793437937628,\"elapsedMs\":2}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": false,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937630,
+      "readinessErrors": [],
+      "readyMs": 2.2120190000005095,
+      "responseMs": 3.8443230000002586,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":1000,\"at\":1793437937631,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":1000,\"at\":1793437937632,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:44839\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":1000,\"at\":1793437937632,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":1000,\"at\":1793437937632,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":1000,\"at\":1793437937633,\"elapsedMs\":2}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": false,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937635,
+      "readinessErrors": [],
+      "readyMs": 2.307748000000174,
+      "responseMs": 4.275101000000177,
+      "messages": [],
+      "stdout": "{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":1002,\"at\":1793437937637,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":1002,\"at\":1793437937637,\"elapsedMs\":0}\nnext-scriptc: listening on 127.0.0.1:43711\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":1002,\"at\":1793437937637,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":1002,\"at\":1793437937638,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":1002,\"at\":1793437937639,\"elapsedMs\":2}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": true,
+      "repeat": 0,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937642,
+      "readinessErrors": [],
+      "readyMs": 58.20883599999979,
+      "responseMs": 60.60077100000035,
+      "messages": [
+        {
+          "atMs": 58.19437999999991,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437937647,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437937648,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.54,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":1010,\"at\":1793437937650,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":1010,\"at\":1793437937650,\"elapsedMs\":0}\nnext-scriptc: listening on 127.0.0.1:42687\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":1010,\"at\":1793437937650,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":1010,\"at\":1793437937650,\"elapsedMs\":0}\n{\"at\":1793437937700,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.675,\"stage\":\"child-port-ready\"}\n{\"at\":1793437937700,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.858,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437937700,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.899,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437937700,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.921,\"stage\":\"proxy-listening\"}\n{\"at\":1793437937701,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.214,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":1010,\"at\":1793437937702,\"elapsedMs\":52}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"response-end-called\",\"route\":\"/api/hello\",\"pid\":1010,\"at\":1793437937702,\"elapsedMs\":52}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": true,
+      "repeat": 1,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937705,
+      "readinessErrors": [],
+      "readyMs": 57.54931899999974,
+      "responseMs": 60.880167999999685,
+      "messages": [
+        {
+          "atMs": 57.53439199999957,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437937710,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437937712,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.279,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":1018,\"at\":1793437937713,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":1018,\"at\":1793437937713,\"elapsedMs\":0}\nnext-scriptc: listening on 127.0.0.1:40077\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":1018,\"at\":1793437937713,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":1018,\"at\":1793437937713,\"elapsedMs\":0}\n{\"at\":1793437937763,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.359,\"stage\":\"child-port-ready\"}\n{\"at\":1793437937763,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.403,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437937763,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.44,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437937763,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.55,\"stage\":\"proxy-listening\"}\n{\"at\":1793437937765,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":54.632,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":1018,\"at\":1793437937766,\"elapsedMs\":53}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"response-end-called\",\"route\":\"/api/hello\",\"pid\":1018,\"at\":1793437937766,\"elapsedMs\":53}\n",
+      "stderr": ""
+    },
+    {
+      "variant": "isolated",
+      "viaProxy": true,
+      "repeat": 2,
+      "cacheAdvice": "fsync + POSIX_FADV_DONTNEED: 0; executable: fsync + POSIX_FADV_DONTNEED: 0",
+      "startedAt": 1793437937770,
+      "readinessErrors": [],
+      "readyMs": 57.77981500000078,
+      "responseMs": 60.275401000000784,
+      "messages": [
+        {
+          "atMs": 57.75579700000071,
+          "type": "server-started",
+          "payload": {
+            "initDuration": 52,
+            "httpPort": 3000
+          }
+        }
+      ],
+      "stdout": "{\"at\":1793437937775,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":0,\"stage\":\"proxy-main\"}\n{\"at\":1793437937776,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":1.303,\"stage\":\"child-started\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"shim-evaluated\",\"route\":\"\",\"pid\":1026,\"at\":1793437937777,\"elapsedMs\":0}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"listening\",\"route\":\"\",\"pid\":1026,\"at\":1793437937778,\"elapsedMs\":1}\nnext-scriptc: listening on 127.0.0.1:44785\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-start\",\"route\":\"/api/hello\",\"pid\":1026,\"at\":1793437937778,\"elapsedMs\":1}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"module-initialized\",\"route\":\"/api/hello\",\"pid\":1026,\"at\":1793437937778,\"elapsedMs\":1}\n{\"at\":1793437937827,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.25,\"stage\":\"child-port-ready\"}\n{\"at\":1793437937827,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.295,\"stage\":\"before-ipc-ready\"}\n{\"at\":1793437937827,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.33,\"stage\":\"after-ipc-ready\"}\n{\"at\":1793437937827,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":52.431,\"stage\":\"proxy-listening\"}\n{\"at\":1793437937829,\"diagnostic\":\"ipc-proxy-startup-v1\",\"elapsedMs\":53.761,\"stage\":\"proxy-request\"}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"request-received\",\"route\":\"/api/hello\",\"pid\":1026,\"at\":1793437937829,\"elapsedMs\":52}\n{\"diagnostic\":\"next-scriptc-startup-v1\",\"stage\":\"response-end-called\",\"route\":\"/api/hello\",\"pid\":1026,\"at\":1793437937829,\"elapsedMs\":52}\n",
+      "stderr": ""
+    }
+  ]
+}

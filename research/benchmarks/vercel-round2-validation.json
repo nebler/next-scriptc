@@ -1,0 +1,104 @@
+{
+  "sourceCommit": "3a10a8e8da7e54571de8070893a22c432baedc05",
+  "checks": {
+    "package": {
+      "sha256": "64ddfd71316445ef330fac09c346dc7368b5856765b302f66a7785cb4e805a6d",
+      "lastLines": [
+        "[next-scriptc] Built 0 native route(s) in 0 process(es).",
+        "\u2714 build completion leaves prerendered handlers with Next and preserves user rewrites (2.639792ms)",
+        "\u2714 native replacement preserves shared Node aliases, variants and prerender files (6.046208ms)",
+        "\u2714 grouped routes share one Function across nested aliases and preserve independent Functions (7.177583ms)",
+        "\u2139 tests 17",
+        "\u2139 suites 0",
+        "\u2139 pass 17",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 5237.384458"
+      ]
+    },
+    "shim": {
+      "sha256": "3639ae6686680cb9a985b6ff1f86bc764b954985bab5d509687dc10d6dca023f",
+      "lastLines": [
+        "Parent death during active stream (Node): 995.9ms",
+        "Parent death during active stream (native): 1002.8ms",
+        "Compared 113 requests: identical status, statusText, headers (except date/runtime marker), and body.",
+        "\u2714 shim HTTP parity: Node 24 and scriptc native (9120.161458ms)",
+        "\u2139 tests 1",
+        "\u2139 suites 0",
+        "\u2139 pass 1",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 9162.121708"
+      ]
+    },
+    "e2e": {
+      "sha256": "bb6bc9e03e7b5f6102407c1559e793fb9087973bbf69e0d9e6580f8999e40f60",
+      "lastLines": [
+        "E2E passed: 12 curl responses and report results (threads 1, 4, 1) byte-equal; native/static precedence, plain-next-start ownership, server-only SIGTERM/SIGKILL cleanup within 2.5s, native process crash/recovery/cutoff (1 route(s); Next proxy HTTP 500), native/Next EADDRINUSE, and same-process CLI alias."
+      ]
+    },
+    "routes": {
+      "sha256": "ed9b1ce24b0fcd91f76f200cf21283f18c38eabe2a70c5f81bb6b6541246adef",
+      "lastLines": [
+        "Node dev: 85 response cases passed.",
+        "Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.",
+        "Native: 85 responses match status, content/cache/security/auth headers and body bytes (decompressed for gzip); Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.",
+        "Cleanup passed: all 18 native processes exited; HTTP port 3427 and all native ports are free."
+      ]
+    },
+    "harness": {
+      "sha256": "5774b2b2ff57850ad0d266d6b74911044851ea97029bcd637c0c8c833cd797b2",
+      "lastLines": [
+        "\u2714 a failing concurrent warmup drains and retains all outstanding timings without measuring (1.086041ms)",
+        "\u2714 the shared request budget cannot be exceeded by concurrent workers (0.2275ms)",
+        "\u2714 response mismatch invalidates the window and retains its error (0.107666ms)",
+        "\u2714 a failed memory probe preserves measured rows and issued counts (47.490708ms)",
+        "\u2139 tests 4",
+        "\u2139 suites 0",
+        "\u2139 pass 4",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 96.308041"
+      ]
+    },
+    "traceGuardFresh": {
+      "sha256": "e2f09ae3c231fdc7f948cda1edaa8f83063bedf1c33dfd83ab0b3bb19e741b86",
+      "lastLines": [
+        "Traced SHA-256 metadata matches the current build"
+      ]
+    },
+    "traceGuardStale": {
+      "sha256": "8cfeb181b1a848d9d222fa5b333fd71b66b3dfd55d7b618021739d774c199a5f",
+      "lastLines": [
+        "",
+        "    at verifyTraces (file:///Users/noah/.t3/worktrees/next-scriptc/t3-518253f2/examples/demo/bench/vercel/startup-deploy.mjs:28:14)",
+        "    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-518253f2/examples/demo/bench/vercel/startup-deploy.mjs:32:1 {",
+        "  generatedMessage: false,",
+        "  code: 'ERR_ASSERTION',",
+        "  actual: 'cca234e0d12cc006f9512ce65a0869640cbcc7cf087da2ea873f123522847c61',",
+        "  expected: 'e4ba75048ea8c69567141bfed89ddbd6254aef9ccef66ee094c78ff526c2902b',",
+        "  operator: 'strictEqual',",
+        "  diff: 'simple'",
+        "}",
+        "",
+        "Node.js v24.22.0"
+      ]
+    }
+  },
+  "summary": {
+    "packageTests": 17,
+    "shimHttpComparisons": 113,
+    "harnessTests": 4,
+    "localRouteCases": 85,
+    "localE2E": "pass",
+    "hostedParityCases": 85,
+    "hostedSmokeChecks": 25,
+    "traceGuard": "fresh succeeds; stale fails before deploy; guard added after experiments"
+  }
+}
