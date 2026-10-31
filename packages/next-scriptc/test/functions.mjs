@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, writeFile, symlink, rm } from "node:fs/promises";
 import path from "node:path";
 import { discoverFunctions, extractFunctions } from "../src/functions/extract.mjs";
 import loader from "../src/functions/loader.mjs";
-import { serialize } from "../src/functions/json.ts";
+import { serialize, serializeResult } from "../src/functions/json.ts";
 
 const source = "/project/app/page.tsx";
 const extract = (text) => extractFunctions(text, source);
@@ -64,11 +64,18 @@ test("rejects unsupported scopes, APIs and exports with the function name", () =
 test("JSON boundary rejects lossy values instead of silently coercing them", () => {
   const value = { a: [1, null, "text", true], b: {} };
   assert.deepEqual(JSON.parse(serialize(value)), value);
+  assert.equal(serializeResult(value), serialize(value));
+  const shared = { n: 1 };
+  assert.equal(serializeResult([shared, shared]), JSON.stringify([shared, shared]));
   const cyclic = {}; cyclic.self = cyclic;
   const hidden = Object.defineProperty({}, "x", { value: undefined });
   const getter = { get x() { return 1; } };
   const extra = [1]; extra.x = 2;
-  for (const invalid of [undefined, NaN, Infinity, 1n, () => 1, Symbol(), new Date(), new Map(), { x: undefined }, [undefined], Array(2), cyclic, hidden, getter, extra, { [Symbol()]: 1 }]) assert.throws(() => serialize(invalid), /JSON/);
+  const holeAndExtra = Array(1); holeAndExtra.extra = 1;
+  for (const invalid of [holeAndExtra, undefined, NaN, Infinity, 1n, () => 1, Symbol(), new Date(), new Map(), { x: undefined }, [undefined], Array(2), cyclic, hidden, getter, extra, { [Symbol()]: 1 }]) {
+    assert.throws(() => serialize(invalid), /JSON/);
+    assert.throws(() => serializeResult(invalid), /JSON/);
+  }
 });
 
 test("discovery supports inline route functions and rejects indirect Next/client imports through aliases", async () => {
@@ -77,7 +84,7 @@ test("discovery supports inline route functions and rejects indirect Next/client
     await symlink(path.resolve(import.meta.dirname, "../../../examples/demo/node_modules"), path.join(temporary, "node_modules"));
     await mkdir(path.join(temporary, "app"));
     await mkdir(path.join(temporary, "lib"));
-    await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: { paths: { "@lib/*": ["./lib/*"] }, moduleResolution: "bundler" } }));
+    await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, paths: { "@lib/*": ["./lib/*"] }, moduleResolution: "bundler" } }));
     await writeFile(path.join(temporary, "app/route.ts"), 'import { helper } from "@lib/helper"; async function native() { "use scriptc"; return helper(); } export async function GET() { return Response.json(await native()); }');
     const helper = path.join(temporary, "lib/helper.ts");
     const config = { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } };

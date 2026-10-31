@@ -1,6 +1,6 @@
 # Function-level `"use scriptc"`
 
-2026-10-31, review round 2. Next **16.4.3**, scriptc **0.4.6**, self-hosted `next build` + plain `next start`. No Next fork, monkeypatch, compiler change or deployment. The Linux Sandbox measurements below use the same committed dashboard source as macOS; macOS results remain indicative.
+2026-10-31, review rounds 2–3. Next **16.4.3**, scriptc **0.4.6**, self-hosted `next build` + plain `next start`. No Next fork, monkeypatch, compiler change or deployment. The Linux Sandbox measurements below use the same committed dashboard source as macOS; macOS results remain indicative.
 
 ## What works
 
@@ -33,7 +33,15 @@ Unsupported uses fail the build with source/function/reference context: componen
 
 This is an explicit **process and data boundary**. Native module instances are independent of Node module instances. Shared mutable globals, Node object identity, React request context, cookies/headers, Next's patched fetch, redirect/notFound error identities, caches and other framework effects are not transferred. Imported application modules must be suitable for independent native execution; this prototype does not prove purity or forbid every possible property mutation/alias. Use deterministic compute functions rather than relying on shared state or initialization side effects. No source-map/debugger integration is provided for extracted code.
 
-Arguments and results must be strict JSON **at runtime**, rather than constrained by a recursive TypeScript type. This retains existing signatures but detects BigInt, undefined/void, nonfinite numbers, functions, symbols, cycles, class instances, Date/Map/Set, sparse/extended arrays, symbol properties, accessors and nonenumerable object properties. Native reflection on unsupported objects can itself throw; it is wrapped as an explicit JSON-serialization failure. Arguments are checked in Node before sending, results in native before serialization. Functions must still validate their application inputs; JSON transport is not schema validation. Dev/baseline execute ordinary JS without imposing the production transport boundary.
+### JSON signature contract (round 3)
+
+Production discovery creates a TypeScript program from the project's `typescript.tsconfigPath` (default `tsconfig.json`), including `extends`, paths, ambient declarations and imported types. The checker inspects each selected function's parameters and awaited return, including inferred returns. It accepts JSON primitives/literals, unions, readonly/mutable arrays, tuples, recursively defined object aliases/interfaces/anonymous objects and JSON-valued string/number index signatures. Errors include source, function, parameter/return, nested property/array/index path and offending type.
+
+Optional parameters, properties and tuple elements are **rejected**, even with `exactOptionalPropertyTypes`; represent absence with a **required `| null`** slot. Explicit `undefined`, `void`, `any`, `unknown`, unresolved generics, bigint, symbols/symbol keys, callable/constructable objects, accessors and class instances are rejected. Date/Map/Set also fail through their non-JSON members. `strictNullChecks` must be enabled so the checker can see undefined unions; projects with no tsconfig use strict defaults. There is no unsafe opt-in. Functions still validate application inputs; this is a JSON contract, not an input schema or proof of purity.
+
+TypeScript is structural and permits assertions, unchecked `JSON.parse` and extra properties. It cannot express finite numbers, dense arrays, acyclic objects or enumerable data descriptors. Consequently **type checking alone cannot safely remove the residual traversal**. Production results retain checks for all of these cases, including extra properties, Date/toJSON, symbols, accessors and hidden properties, then use plain `JSON.stringify`. The new traversal obtains all descriptors once per container and reads their values without invoking getters, instead of calling `getOwnPropertyDescriptor` and reading the original object separately for every field. An explicit descriptor type avoids scriptc's `any` tier. Shared acyclic objects remain legal; cycles fail. Array prototypes must be ordinary arrays as well. Node-side argument validation is unchanged.
+
+The benchmark compares this production traversal with the previous strict traversal, plain stringify and a finite-number replacer. The replacer is a diagnostic lower bound only: JSON invokes `toJSON` before the replacer sees the value, and omits symbol/nonenumerable fields. It cannot preserve the existing rejection contract. No unsafe fast path or Node execution fallback is used. Dev/baseline continue to run untransformed JS; valid JSON data produces the same serialized bytes. Build errors prevent unsupported signatures from reaching production, while invalid runtime values fail at the transport boundary.
 
 ## Transport, errors and lifecycle
 

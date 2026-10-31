@@ -16,7 +16,7 @@ for (const mode of ["native", "node", "dev"]) {
     for (const query of ["", "?from=2026-01-10&to=2026-01-13", "?from=2027-01-01", "?error=expected-message"]) values.push(await report(port, query));
     assert.equal(JSON.parse(values[0].value).events, 5000);
     assert.deepEqual(values[3], { kind: "error", value: "expected-message" });
-    for (const size of [50000, 200000]) {
+    for (const size of [15000, 50000, 200000]) {
       const large = await report(port, `?size=${size}`);
       assert.equal(JSON.parse(large.value).events, size);
       values.push(large);
@@ -60,4 +60,6 @@ for (const mode of ["native", "node", "dev"]) {
 }
 assert.deepEqual(results[0], results[1], "native / Node production results match");
 assert.deepEqual(results[0], results[2], "native / untransformed dev results match");
+// Compare the actual JSON text, including key/row order, not parsed objects.
+for (const index of [0, 4, 5, 6]) assert.equal(results[0][index].value, results[2][index].value, "5k/15k/50k/200k native and dev JSON bytes match");
 console.log("Function E2E passed, including native in-flight crash rejection and restart");

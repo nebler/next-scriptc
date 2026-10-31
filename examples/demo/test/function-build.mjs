@@ -11,6 +11,7 @@ const directory = await mkdtemp(path.join(demo, ".function-build-"));
 try {
   await symlink(path.join(demo, "node_modules"), path.join(directory, "node_modules"));
   await mkdir(path.join(directory, "app"));
+  await writeFile(path.join(directory, "tsconfig.json"), '{"compilerOptions":{"strict":true,"allowImportingTsExtensions":true,"noEmit":true,"jsx":"react-jsx","moduleResolution":"bundler","module":"esnext"}}');
   await writeFile(path.join(directory, "package.json"), '{"type":"module"}');
   await writeFile(path.join(directory, "next.config.ts"), 'import { withScriptc } from "next-scriptc"; export default withScriptc();');
   await writeFile(path.join(directory, "app/layout.tsx"), 'export default function Layout({children}: {children: React.ReactNode}) { return <html><body>{children}</body></html>; }');

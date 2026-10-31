@@ -2,7 +2,7 @@ import { performance } from "node:perf_hooks";
 import { revenueEventsJson, type RevenueEvent } from "../app/api/analytics/revenue/events.ts";
 
 // The same stored monthly exports exist in both runtimes; generation is setup.
-const fixtures = new Map([5000, 50000, 200000].map((size) => [size, revenueEventsJson(size)]));
+const fixtures = new Map([5000, 15000, 50000, 200000].map((size) => [size, revenueEventsJson(size)]));
 
 type DailyRevenue = { day: string; region: string; revenueCents: number; units: number; events: number };
 

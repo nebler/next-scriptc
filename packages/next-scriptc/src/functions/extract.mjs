@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
+import { checkFunctionTypes } from "./types.mjs";
 
 const require = createRequire(import.meta.url);
 const babel = require("next/dist/compiled/babel/bundle.js");
@@ -117,13 +118,16 @@ export async function discoverFunctions(projectDir, distDir, config) {
     }
   }
   await visit(projectDir);
-  if (modules.length && config) {
+  if (modules.length) {
     const ts = require(require.resolve("typescript", { paths: [projectDir] }));
-    const { jsConfig, resolvedBaseUrl } = await require("next/dist/build/load-jsconfig.js").default(projectDir, config);
-    const raw = jsConfig?.compilerOptions ?? {};
-    const options = typeof raw.moduleResolution === "number" ? raw : ts.convertCompilerOptionsFromJson(raw, projectDir).options;
+    const configFile = path.resolve(projectDir, config?.typescript?.tsconfigPath ?? "tsconfig.json");
+    const loaded = ts.sys.fileExists(configFile) ? ts.readConfigFile(configFile, ts.sys.readFile) : { config: { compilerOptions: { strict: true, allowJs: true } } };
+    const parsed = ts.parseJsonConfigFileContent(loaded.config ?? {}, ts.sys, projectDir, undefined, configFile);
+    const errors = [loaded.error, ...parsed.errors].filter((error) => error && error.code !== 18003);
+    if (errors.length) throw new Error(`[next-scriptc] ${ts.formatDiagnosticsWithColorAndContext(errors, { getCanonicalFileName: (f) => f, getCurrentDirectory: () => projectDir, getNewLine: () => "\n" })}`);
+    const options = parsed.options;
+    if (!(options.strictNullChecks ?? options.strict)) throw new Error("[next-scriptc] Native function JSON type checking requires strictNullChecks in the project tsconfig (undefined must remain visible).");
     options.moduleResolution ??= ts.ModuleResolutionKind.Bundler;
-    options.baseUrl ??= resolvedBaseUrl?.baseUrl ?? projectDir;
     const cache = ts.createModuleResolutionCache(projectDir, (file) => file, options);
     for (const module of modules) {
       for (const dependency of module.imports) {
@@ -150,6 +154,8 @@ export async function discoverFunctions(projectDir, distDir, config) {
         await check(dependency.specifier, module.source);
       }
     }
+    const program = ts.createProgram({ rootNames: [...new Set([...parsed.fileNames, ...modules.map((module) => module.source)])], options });
+    checkFunctionTypes(ts, program, modules);
   }
   return modules;
 }

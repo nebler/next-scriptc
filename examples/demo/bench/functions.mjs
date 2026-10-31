@@ -17,7 +17,7 @@ const count = Number(process.env.FUNCTION_BENCH_CALLS ?? 1000);
 const pageCalls = Number(process.env.FUNCTION_BENCH_PAGES ?? 200);
 const warmup = Number(process.env.FUNCTION_BENCH_WARMUP ?? 50);
 const port = Number(process.env.FUNCTION_TEST_PORT ?? 3461);
-const sizes = [5000, 50000, 200000];
+const sizes = [5000, 15000, 50000, 200000];
 const require = createRequire(path.resolve(demo, "../../packages/next-scriptc/package.json"));
 const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
 const summary = (times) => {
@@ -102,8 +102,8 @@ export async function revenue(_from: string, _to: string, size: number, _profile
   }
 }
 
-// A separate probe times strict native result validation/stringify in-process.
-// It imports the very same source/validator and uses the production HTTP handler.
+// A separate probe compares bulk-descriptor validation, legacy reflection and replacer/stringify in-process.
+// It imports the very same source/result serializer and uses the production HTTP handler.
 const output = path.join(demo, ".next/cache/function-profile");
 await mkdir(output, { recursive: true });
 await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');

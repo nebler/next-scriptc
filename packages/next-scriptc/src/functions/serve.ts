@@ -1,5 +1,5 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { serialize } from "./json.ts";
+import { serializeResult } from "./json.ts";
 
 export function serveFunctions(dispatch: (id: string, body: string) => Promise<unknown>): void {
   const server = createServer(async (incoming: IncomingMessage, outgoing: ServerResponse) => {
@@ -14,7 +14,7 @@ export function serveFunctions(dispatch: (id: string, body: string) => Promise<u
         incoming.on("close", () => { if (!ended) reject(new Error("Request aborted")); });
       });
       const value = await dispatch((incoming.url || "").slice(1), Buffer.concat(chunks).toString("utf8"));
-      const body = serialize(value);
+      const body = serializeResult(value);
       outgoing.setHeader("content-type", "application/json");
       outgoing.end(body);
     } catch (error) {

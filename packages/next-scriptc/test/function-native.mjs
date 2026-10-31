@@ -26,6 +26,11 @@ serveFunctions(async (id: string, body: string): Promise<unknown> => {
   if (id === "date") return new Date();
   if (id === "undefined") return undefined;
   if (id === "nan") return NaN;
+  if (id === "extra") { const value = JSON.parse('{"value":1}') as Record<string, unknown>; value.hidden = undefined; return value as { value: number }; }
+  if (id === "getter") return { get value() { throw new Error("getter invoked"); } };
+  if (id === "sparse") return Array(1);
+  if (id === "symbol") return { [Symbol("hidden")]: 1 };
+  if (id === "nestedNan") return { rows: [{ value: Infinity }] };
   if (id === "cycle") { const value: Record<string, unknown> = {}; value.self = value; return value; }
   return JSON.parse(body);
 });`);
@@ -49,7 +54,7 @@ serveFunctions(async (id: string, body: string): Promise<unknown> => {
       const value = [{ a: [1, true, null, "hello"] }];
       assert.deepEqual(await callNative(port, "echo", value), value);
       await assert.rejects(callNative(port, "throw", []), { message: "expected native message" });
-      for (const id of ["date", "undefined", "nan", "cycle"]) await assert.rejects(callNative(port, id, []), /JSON/);
+      for (const id of ["date", "undefined", "nan", "cycle", "extra", "getter", "sparse", "symbol", "nestedNan"]) await assert.rejects(callNative(port, id, []), /JSON/, `${native ? "native" : "Node"}/${id}`);
       assert.equal(await callNative(port, "echo", ["still alive"]).then((v) => v[0]), "still alive");
       child.kill("SIGTERM"); await exited;
     }

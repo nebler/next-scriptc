@@ -1,4 +1,4 @@
-// Benchmarks committed HEAD only. At most 2 vCPUs * 8 minutes = 0.267
+// Benchmarks committed HEAD only. At most 2 vCPUs * 7.5 minutes = 0.25
 // vCPU-hours, including installation/builds. Always stop; never upload secrets.
 // node --env-file=.env.local scripts/sandbox-functions.mjs
 import { execFileSync } from "node:child_process";
@@ -18,12 +18,12 @@ const destination = path.join(root, "research/benchmarks", `functions-linux-${st
 const controller = new AbortController();
 for (const name of ["SIGINT", "SIGTERM"]) process.once(name, () => controller.abort(new Error(name)));
 const started = Date.now();
-const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", resources: { vcpus: 2 }, timeout: 8 * 60 * 1000, persistent: false });
+const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", resources: { vcpus: 2 }, timeout: 7.5 * 60 * 1000, persistent: false });
 const deadline = setTimeout(() => controller.abort(new Error("7 minute command budget exhausted")), 7 * 60 * 1000);
 deadline.unref();
 const provenance = { sandbox: sandbox.name, cwd: sandbox.cwd, commit, archiveSha256, startedAt: new Date(started).toISOString(), image: "vercel/sandbox/node:24", vcpus: 2, memoryMiB: 4096,
-  lifetimeMs: 8 * 60 * 1000, maxVcpuHours: 2 * 8 / 60, affinity: "app and native: CPU 0; load generator: CPU 1; C=1", status: "running", steps: [] };
-console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; maximum 0.267 vCPU-hours`);
+  lifetimeMs: 7.5 * 60 * 1000, maxVcpuHours: 2 * 7.5 / 60, affinity: "app and native: CPU 0; load generator: CPU 1; C=1", status: "running", steps: [] };
+console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; maximum 0.25 vCPU-hours`);
 async function step(label, script, sudo = false) {
   const begin = Date.now();
   const result = await sandbox.runCommand({ cmd: "bash", cwd: sandbox.cwd, args: ["-lc", `set -euo pipefail\n${script}`], sudo, stdout: process.stdout, stderr: process.stderr, signal: controller.signal });
