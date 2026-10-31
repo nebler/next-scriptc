@@ -1,0 +1,878 @@
+[
+  {
+    "asset": "code-route-native",
+    "direction": "a-monolith",
+    "name": "code-route-native--a-monolith",
+    "png": "png/code-route-native--a-monolith.png",
+    "src": "src/code-route-native--a-monolith.html",
+    "width": 2048,
+    "height": 1152,
+    "cssWidth": 1024,
+    "bytes": 70563,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 24,
+      "text": "route.native.ts Rename the file. The route compiles to native code. export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "code-route-native",
+    "direction": "b-editorial",
+    "name": "code-route-native--b-editorial",
+    "png": "png/code-route-native--b-editorial.png",
+    "src": "src/code-route-native--b-editorial.html",
+    "width": 2048,
+    "height": 1152,
+    "cssWidth": 1024,
+    "bytes": 112471,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "One file suffix moves a route to native code. Same Next.js app, same Web Response API. app/api/hello/route.native.ts export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "code-route-native",
+    "direction": "c-spec",
+    "name": "code-route-native--c-spec",
+    "png": "png/code-route-native--c-spec.png",
+    "src": "src/code-route-native--c-spec.html",
+    "width": 2048,
+    "height": 1152,
+    "cssWidth": 1024,
+    "bytes": 61459,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "app/api/hello/route.native.ts native 1 2 3 4 5 export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "code-route-native",
+    "direction": "d-signal",
+    "name": "code-route-native--d-signal",
+    "png": "png/code-route-native--d-signal.png",
+    "src": "src/code-route-native--d-signal.html",
+    "width": 2048,
+    "height": 1152,
+    "cssWidth": 1024,
+    "bytes": 100105,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 19,
+      "text": "route.native.ts app/api/hello export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "code-use-native",
+    "direction": "a-monolith",
+    "name": "code-use-native--a-monolith",
+    "png": "png/code-use-native--a-monolith.png",
+    "src": "src/code-use-native--a-monolith.html",
+    "width": 2000,
+    "height": 1600,
+    "cssWidth": 1000,
+    "bytes": 149048,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 21,
+      "text": "One line moves one function. “use native” compiles this function to native code. The rest of the app stays on Node.js. import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; }"
+    }
+  },
+  {
+    "asset": "code-use-native",
+    "direction": "b-editorial",
+    "name": "code-use-native--b-editorial",
+    "png": "png/code-use-native--b-editorial.png",
+    "src": "src/code-use-native--b-editorial.html",
+    "width": 2000,
+    "height": 1600,
+    "cssWidth": 1000,
+    "bytes": 187997,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Offload one function with a directive. examples/demo/lib/revenue.ts · simplified import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; } ← compiles to native"
+    }
+  },
+  {
+    "asset": "code-use-native",
+    "direction": "c-spec",
+    "name": "code-use-native--c-spec",
+    "png": "png/code-use-native--c-spec.png",
+    "src": "src/code-use-native--c-spec.html",
+    "width": 2000,
+    "height": 1600,
+    "cssWidth": 1000,
+    "bytes": 144966,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "examples/demo/lib/revenue.ts · simplified 1 2 3 4 5 6 7 8 9 10 11 12 13 14 import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; } ← native One directive compiles this function to native. The route around it stays on Node.js."
+    }
+  },
+  {
+    "asset": "code-use-native",
+    "direction": "d-signal",
+    "name": "code-use-native--d-signal",
+    "png": "png/code-use-native--d-signal.png",
+    "src": "src/code-use-native--d-signal.html",
+    "width": 2000,
+    "height": 1600,
+    "cssWidth": 1000,
+    "bytes": 207906,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 17,
+      "text": "One directive, one native function. The rest of the route stays on Node.js. revenue.ts examples/demo/lib · simplified import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; }"
+    }
+  },
+  {
+    "asset": "cpu-per-request",
+    "direction": "a-monolith",
+    "name": "cpu-per-request--a-monolith",
+    "png": "png/cpu-per-request--a-monolith.png",
+    "src": "src/cpu-per-request--a-monolith.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 176052,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "Native vs Node.js · Vercel Functions 2.3–5.4× less CPU per request CPU time per request, measured inside the serving process. Lower is better. Hello world 0.57 ms Native 3.06 ms Node.js Revenue report 2.38 ms Native 7.03 ms Node.js Nearby-store search 2.49 ms Native 5.70 ms Node.js Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively."
+    },
+    "expected": {
+      "headline": "Same routes, 2.3–5.4× less CPU per request",
+      "values": [
+        "0.57",
+        "3.06",
+        "2.38",
+        "7.03",
+        "2.49",
+        "5.70"
+      ],
+      "big": "2.3–5.4×"
+    }
+  },
+  {
+    "asset": "cpu-per-request",
+    "direction": "b-editorial",
+    "name": "cpu-per-request--b-editorial",
+    "png": "png/cpu-per-request--b-editorial.png",
+    "src": "src/cpu-per-request--b-editorial.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 182499,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "NATIVE VS NODE.JS · VERCEL FUNCTIONS Same routes, 2.3–5.4× less CPU per request CPU time per request, measured inside the serving process. Lower is better. Native Node.js ms per request 0 2 4 6 8 Hello world 0.57 3.06 Revenue report 2.38 7.03 Nearby-store search 2.49 5.70 Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively."
+    },
+    "expected": {
+      "headline": "Same routes, 2.3–5.4× less CPU per request",
+      "values": [
+        "0.57",
+        "3.06",
+        "2.38",
+        "7.03",
+        "2.49",
+        "5.70"
+      ],
+      "big": "2.3–5.4×"
+    }
+  },
+  {
+    "asset": "cpu-per-request",
+    "direction": "c-spec",
+    "name": "cpu-per-request--c-spec",
+    "png": "png/cpu-per-request--c-spec.png",
+    "src": "src/cpu-per-request--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 186384,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions Same routes, 2.3–5.4× less CPU per request CPU time per request, measured inside the serving process. Lower is better. ms per request · median of 3 windows of 100 requests Native Node.js 0 2 4 6 8 0.57 3.06 Hello world 2.38 7.03 Revenue report 2.49 5.70 Nearby-store search Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively."
+    },
+    "expected": {
+      "headline": "Same routes, 2.3–5.4× less CPU per request",
+      "values": [
+        "0.57",
+        "3.06",
+        "2.38",
+        "7.03",
+        "2.49",
+        "5.70"
+      ],
+      "big": "2.3–5.4×"
+    }
+  },
+  {
+    "asset": "cpu-per-request",
+    "direction": "d-signal",
+    "name": "cpu-per-request--d-signal",
+    "png": "png/cpu-per-request--d-signal.png",
+    "src": "src/cpu-per-request--d-signal.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 186278,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions = 0.1 ms Same routes, 2.3–5.4× less CPU per request CPU time per request, measured inside the serving process. Lower is better. Hello world 0.57 ms Native 3.06 ms Node.js Revenue report 2.38 ms Native 7.03 ms Node.js Nearby-store search 2.49 ms Native 5.70 ms Node.js Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively."
+    },
+    "expected": {
+      "headline": "Same routes, 2.3–5.4× less CPU per request",
+      "values": [
+        "0.57",
+        "3.06",
+        "2.38",
+        "7.03",
+        "2.49",
+        "5.70"
+      ],
+      "big": "2.3–5.4×"
+    }
+  },
+  {
+    "asset": "first-response",
+    "direction": "a-monolith",
+    "name": "first-response--a-monolith",
+    "png": "png/first-response--a-monolith.png",
+    "src": "src/first-response--a-monolith.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 100196,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "Native vs Node.js · Vercel Functions 1.9× sooner first response Time to the first hello response on a fresh deployment, end to end. Lower is better. Native 126 ms Node.js 240 ms Includes network and TLS. Fresh deployments, but not a certified cold start."
+    },
+    "expected": {
+      "headline": "First response after deploy, 1.9× sooner",
+      "values": [
+        "126",
+        "240"
+      ],
+      "big": "1.9×"
+    }
+  },
+  {
+    "asset": "first-response",
+    "direction": "b-editorial",
+    "name": "first-response--b-editorial",
+    "png": "png/first-response--b-editorial.png",
+    "src": "src/first-response--b-editorial.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 127951,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "NATIVE VS NODE.JS · VERCEL FUNCTIONS First response after deploy, 1.9× sooner Time to the first hello response on a fresh deployment, end to end. Lower is better. 0 100 200 300 Native 126 ms Node.js 240 ms Includes network and TLS. Fresh deployments, but not a certified cold start."
+    },
+    "expected": {
+      "headline": "First response after deploy, 1.9× sooner",
+      "values": [
+        "126",
+        "240"
+      ],
+      "big": "1.9×"
+    }
+  },
+  {
+    "asset": "first-response",
+    "direction": "c-spec",
+    "name": "first-response--c-spec",
+    "png": "png/first-response--c-spec.png",
+    "src": "src/first-response--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 143074,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions First response after deploy, 1.9× sooner Time to the first hello response on a fresh deployment, end to end. Lower is better. ms · median of 5 deployment pairs · iad1 0 100 200 300 126 Native 240 Node.js Includes network and TLS. Fresh deployments, but not a certified cold start."
+    },
+    "expected": {
+      "headline": "First response after deploy, 1.9× sooner",
+      "values": [
+        "126",
+        "240"
+      ],
+      "big": "1.9×"
+    }
+  },
+  {
+    "asset": "first-response",
+    "direction": "d-signal",
+    "name": "first-response--d-signal",
+    "png": "png/first-response--d-signal.png",
+    "src": "src/first-response--d-signal.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 111467,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions = 5 ms First response after deploy, 1.9× sooner Time to the first hello response on a fresh deployment, end to end. Lower is better. 126 ms Native 240 ms Node.js Includes network and TLS. Fresh deployments, but not a certified cold start."
+    },
+    "expected": {
+      "headline": "First response after deploy, 1.9× sooner",
+      "values": [
+        "126",
+        "240"
+      ],
+      "big": "1.9×"
+    }
+  },
+  {
+    "asset": "hero",
+    "direction": "a-monolith",
+    "name": "hero--a-monolith",
+    "png": "png/hero--a-monolith.png",
+    "src": "src/hero--a-monolith.html",
+    "width": 2400,
+    "height": 1256,
+    "cssWidth": 1200,
+    "bytes": 94642,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "next-scriptc TypeScript, compiled to native. Name a Next.js route route.native.ts and it ships as a native Vercel Function."
+    }
+  },
+  {
+    "asset": "hero",
+    "direction": "b-editorial",
+    "name": "hero--b-editorial",
+    "png": "png/hero--b-editorial.png",
+    "src": "src/hero--b-editorial.html",
+    "width": 2400,
+    "height": 1256,
+    "cssWidth": 1200,
+    "bytes": 165166,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 16,
+      "text": "NEXT-SCRIPTC TypeScript routes, compiled to native Vercel Functions. A Next.js adapter powered by scriptc. No fork of Next.js. // app/api/hello/route.native.ts export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "hero",
+    "direction": "c-spec",
+    "name": "hero--c-spec",
+    "png": "png/hero--c-spec.png",
+    "src": "src/hero--c-spec.html",
+    "width": 2400,
+    "height": 1256,
+    "cssWidth": 1200,
+    "bytes": 106820,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 16,
+      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. route.native.ts → scriptc → native binary // app/api/hello/route.native.ts export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "hero",
+    "direction": "d-signal",
+    "name": "hero--d-signal",
+    "png": "png/hero--d-signal.png",
+    "src": "src/hero--d-signal.html",
+    "width": 2400,
+    "height": 1256,
+    "cssWidth": 1200,
+    "bytes": 144004,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 16,
+      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. A Next.js adapter powered by scriptc. Rename a route to .native.ts route.native.ts app/api/hello export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+    }
+  },
+  {
+    "asset": "memory",
+    "direction": "a-monolith",
+    "name": "memory--a-monolith",
+    "png": "png/memory--a-monolith.png",
+    "src": "src/memory--a-monolith.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 104655,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "Native vs Node.js · Vercel Functions 14.3× less memory Memory held by the process serving a hello route, after its first response. Lower is better. Native 5.6 MiB Node.js 80 MiB Measures the serving process only, not whole-instance or billed memory."
+    },
+    "expected": {
+      "headline": "Same route, 14.3× less memory",
+      "values": [
+        "5.6",
+        "80"
+      ],
+      "big": "14.3×"
+    }
+  },
+  {
+    "asset": "memory",
+    "direction": "b-editorial",
+    "name": "memory--b-editorial",
+    "png": "png/memory--b-editorial.png",
+    "src": "src/memory--b-editorial.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 127353,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "NATIVE VS NODE.JS · VERCEL FUNCTIONS Same route, 14.3× less memory Memory held by the process serving a hello route, after its first response. Lower is better. 0 25 50 75 100 Native 5.6 MiB Node.js 80 MiB Measures the serving process only, not whole-instance or billed memory."
+    },
+    "expected": {
+      "headline": "Same route, 14.3× less memory",
+      "values": [
+        "5.6",
+        "80"
+      ],
+      "big": "14.3×"
+    }
+  },
+  {
+    "asset": "memory",
+    "direction": "c-spec",
+    "name": "memory--c-spec",
+    "png": "png/memory--c-spec.png",
+    "src": "src/memory--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 143152,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions Same route, 14.3× less memory Memory held by the process serving a hello route, after its first response. Lower is better. Resident memory (RSS) · MiB · median of 5 deployments 0 25 50 75 100 5.6 Native 80 Node.js Measures the serving process only, not whole-instance or billed memory."
+    },
+    "expected": {
+      "headline": "Same route, 14.3× less memory",
+      "values": [
+        "5.6",
+        "80"
+      ],
+      "big": "14.3×"
+    }
+  },
+  {
+    "asset": "memory",
+    "direction": "d-signal",
+    "name": "memory--d-signal",
+    "png": "png/memory--d-signal.png",
+    "src": "src/memory--d-signal.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 114116,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Native vs Node.js · Vercel Functions = 1 MiB Same route, 14.3× less memory Memory held by the process serving a hello route, after its first response. Lower is better. 5.6 MiB Native 80 MiB Node.js Measures the serving process only, not whole-instance or billed memory."
+    },
+    "expected": {
+      "headline": "Same route, 14.3× less memory",
+      "values": [
+        "5.6",
+        "80"
+      ],
+      "big": "14.3×"
+    }
+  },
+  {
+    "asset": "og",
+    "direction": "a-monolith",
+    "name": "og--a-monolith",
+    "png": "png/og--a-monolith.png",
+    "src": "src/og--a-monolith.html",
+    "width": 1200,
+    "height": 630,
+    "cssWidth": 600,
+    "bytes": 46376,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 14,
+      "text": "next-scriptc TypeScript, compiled to native. Name a Next.js route route.native.ts and it ships as a native Vercel Function."
+    }
+  },
+  {
+    "asset": "og",
+    "direction": "b-editorial",
+    "name": "og--b-editorial",
+    "png": "png/og--b-editorial.png",
+    "src": "src/og--b-editorial.html",
+    "width": 1200,
+    "height": 630,
+    "cssWidth": 600,
+    "bytes": 61492,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 13,
+      "text": "NEXT-SCRIPTC TypeScript routes, compiled to native Vercel Functions. A Next.js adapter · route.native.ts"
+    }
+  },
+  {
+    "asset": "og",
+    "direction": "c-spec",
+    "name": "og--c-spec",
+    "png": "png/og--c-spec.png",
+    "src": "src/og--c-spec.html",
+    "width": 1200,
+    "height": 630,
+    "cssWidth": 600,
+    "bytes": 47314,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 13,
+      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. route.native.ts → scriptc → native binary"
+    }
+  },
+  {
+    "asset": "og",
+    "direction": "d-signal",
+    "name": "og--d-signal",
+    "png": "png/og--d-signal.png",
+    "src": "src/og--d-signal.html",
+    "width": 1200,
+    "height": 630,
+    "cssWidth": 600,
+    "bytes": 50088,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 13,
+      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. app/api/hello/route.native.ts"
+    }
+  },
+  {
+    "asset": "vector-kernel",
+    "direction": "a-monolith",
+    "name": "vector-kernel--a-monolith",
+    "png": "png/vector-kernel--a-monolith.png",
+    "src": "src/vector-kernel--a-monolith.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 152032,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "Vector search · search loop only 1.3× faster than Go with SIMD, loop only The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. TypeScript, native 9.3 ms Go with SIMD 11.9 ms Go 58.7 ms TypeScript on Node.js 102.2 ms Same host and data for every runtime. Go with SIMD is experimental. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "The search loop alone: TypeScript still leads",
+      "values": [
+        "9.3",
+        "11.9",
+        "58.7",
+        "102.2"
+      ],
+      "big": "1.3×"
+    }
+  },
+  {
+    "asset": "vector-kernel",
+    "direction": "b-editorial",
+    "name": "vector-kernel--b-editorial",
+    "png": "png/vector-kernel--b-editorial.png",
+    "src": "src/vector-kernel--b-editorial.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 175248,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "VECTOR SEARCH · SEARCH LOOP ONLY The search loop alone: TypeScript still leads The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. 0 50 100 150 TypeScript, native 9.3 ms Go with SIMD 11.9 ms Go 58.7 ms TypeScript on Node.js 102.2 ms Same host and data for every runtime. Go with SIMD is experimental. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "The search loop alone: TypeScript still leads",
+      "values": [
+        "9.3",
+        "11.9",
+        "58.7",
+        "102.2"
+      ],
+      "big": "1.3×"
+    }
+  },
+  {
+    "asset": "vector-kernel",
+    "direction": "c-spec",
+    "name": "vector-kernel--c-spec",
+    "png": "png/vector-kernel--c-spec.png",
+    "src": "src/vector-kernel--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 182525,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Vector search · search loop only The search loop alone: TypeScript still leads The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. Kernel only · int8 · 768 dimensions · median · Linux Vercel Sandbox 0 50 100 150 9.3 TypeScript native 11.9 Go with SIMD 58.7 Go 102.2 TypeScript on Node.js Same host and data for every runtime. Go with SIMD is experimental. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "The search loop alone: TypeScript still leads",
+      "values": [
+        "9.3",
+        "11.9",
+        "58.7",
+        "102.2"
+      ],
+      "big": "1.3×"
+    }
+  },
+  {
+    "asset": "vector-kernel",
+    "direction": "d-signal",
+    "name": "vector-kernel--d-signal",
+    "png": "png/vector-kernel--d-signal.png",
+    "src": "src/vector-kernel--d-signal.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 161152,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Vector search · search loop only = 1 ms The search loop alone: TypeScript still leads The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. 9.3 ms TypeScript, native 11.9 ms Go with SIMD 58.7 ms Go 102.2 ms TypeScript on Node.js Same host and data for every runtime. Go with SIMD is experimental. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "The search loop alone: TypeScript still leads",
+      "values": [
+        "9.3",
+        "11.9",
+        "58.7",
+        "102.2"
+      ],
+      "big": "1.3×"
+    }
+  },
+  {
+    "asset": "vector-search",
+    "direction": "a-monolith",
+    "name": "vector-search--a-monolith",
+    "png": "png/vector-search--a-monolith.png",
+    "src": "src/vector-search--a-monolith.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 140776,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "Vector search · Vercel Functions 1.4× faster than Go with SIMD Time to find the 10 closest of 100,000 embeddings, per request. Lower is better. TypeScript, native 10.0 ms Go with SIMD 14.2 ms Go 50.0 ms TypeScript on Node.js 108.6 ms Excludes network. Go with SIMD uses Go’s experimental archsimd package. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "Vector search in TypeScript, faster than Go with SIMD",
+      "values": [
+        "10.0",
+        "14.2",
+        "50.0",
+        "108.6"
+      ],
+      "big": "1.4×"
+    }
+  },
+  {
+    "asset": "vector-search",
+    "direction": "b-editorial",
+    "name": "vector-search--b-editorial",
+    "png": "png/vector-search--b-editorial.png",
+    "src": "src/vector-search--b-editorial.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 196065,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 22,
+      "text": "VECTOR SEARCH · VERCEL FUNCTIONS Vector search in TypeScript, faster than Go with SIMD Time to find the 10 closest of 100,000 embeddings, per request. Lower is better. 0 50 100 150 TypeScript, native 10.0 ms Go with SIMD 14.2 ms Go 50.0 ms TypeScript on Node.js 108.6 ms Excludes network. Go with SIMD uses Go’s experimental archsimd package. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "Vector search in TypeScript, faster than Go with SIMD",
+      "values": [
+        "10.0",
+        "14.2",
+        "50.0",
+        "108.6"
+      ],
+      "big": "1.4×"
+    }
+  },
+  {
+    "asset": "vector-search",
+    "direction": "c-spec",
+    "name": "vector-search--c-spec",
+    "png": "png/vector-search--c-spec.png",
+    "src": "src/vector-search--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 188749,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Vector search · Vercel Functions Vector search in TypeScript, faster than Go with SIMD Time to find the 10 closest of 100,000 embeddings, per request. Lower is better. int8 · 768 dimensions · server compute, median of 120 requests 0 50 100 150 10.0 TypeScript native 14.2 Go with SIMD 50.0 Go 108.6 TypeScript on Node.js Excludes network. Go with SIMD uses Go’s experimental archsimd package. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "Vector search in TypeScript, faster than Go with SIMD",
+      "values": [
+        "10.0",
+        "14.2",
+        "50.0",
+        "108.6"
+      ],
+      "big": "1.4×"
+    }
+  },
+  {
+    "asset": "vector-search",
+    "direction": "d-signal",
+    "name": "vector-search--d-signal",
+    "png": "png/vector-search--d-signal.png",
+    "src": "src/vector-search--d-signal.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 170434,
+    "qa": {
+      "fonts": true,
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Vector search · Vercel Functions = 1 ms Vector search in TypeScript, faster than Go with SIMD Time to find the 10 closest of 100,000 embeddings, per request. Lower is better. 10.0 ms TypeScript, native 14.2 ms Go with SIMD 50.0 ms Go 108.6 ms TypeScript on Node.js Excludes network. Go with SIMD uses Go’s experimental archsimd package. Native uses a patched scriptc."
+    },
+    "expected": {
+      "headline": "Vector search in TypeScript, faster than Go with SIMD",
+      "values": [
+        "10.0",
+        "14.2",
+        "50.0",
+        "108.6"
+      ],
+      "big": "1.4×"
+    }
+  }
+]

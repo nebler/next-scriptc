@@ -1,0 +1,22 @@
+{
+  "description": "Measured values used by the redesign gallery notes but absent from ../chart-data.json. Same contract: every value links to a report section and exact row, and generate.mjs checks the value text exists in that report.",
+  "vectorRss": {
+    "note": "Median post-work serving-process RSS during the hosted vector benchmark. Every runtime holds the same 100,000 x 768 int8 corpus, so most of this memory is the data itself. Go excludes its separate IPC proxy. Not whole-instance or billed memory.",
+    "results": [
+      { "label": "Patched native", "value": 81.137, "source": "research/vector-vercel.md#measurements", "locator": "Native patched, natural TS + dispatch | RSS MiB 81.137" },
+      { "label": "Go SIMD", "value": 81.789, "source": "research/vector-vercel.md#measurements", "locator": "Go experimental archsimd AVX2, v3 | RSS MiB 81.789" },
+      { "label": "Go plain", "value": 81.82, "source": "research/vector-vercel.md#measurements", "locator": "Go plain, v1, no SIMD experiment | RSS MiB 81.820" },
+      { "label": "Node", "value": 153.711, "source": "research/vector-vercel.md#measurements", "locator": "Node, natural TS | RSS MiB 153.711" }
+    ]
+  },
+  "rssAfterLoad": {
+    "note": "Pair 5 only, after load. A different request history from the after-first medians; reported in the gallery, not in the images.",
+    "native": { "value": 13.754, "source": "research/vercel-final.md#process-memory", "locator": "5 / after load | Native RSS 13.754" },
+    "node": { "value": 170.602, "source": "research/vercel-final.md#process-memory", "locator": "5 / after load | Node RSS 170.602" }
+  },
+  "markdownCpu": {
+    "note": "The loss behind the CPU image footnote.",
+    "native": { "value": 40.209, "source": "research/vercel-final.md#process-cpu-per-request-self-reported", "locator": "markdown | Native median 40.209" },
+    "node": { "value": 4.593, "source": "research/vercel-final.md#process-cpu-per-request-self-reported", "locator": "markdown | Node median 4.593" }
+  }
+}

@@ -57,18 +57,18 @@ Evidence per value, all server-side compute p50 from [vector-vercel, measurement
 
 Media: [Vercel Chart B PNG](launch/chart-b-int8-vercel.png) if it is not already on tweet 1. The [kernel-only chart](launch/chart-b-int8-kernel.png) stays in the repo and video with its label.
 
-### Tweet 4: one function, still TypeScript (255 chars)
+### Tweet 4: one function, still TypeScript (260 chars)
 
-<!-- count: 255 -->
+<!-- count: 260 -->
 ```text
 You can also mark one async function "use native".
 
-A Server Component dashboard over 200k rows: native 48 ms vs Node 113 ms, full page p50 on self-hosted Linux.
+On Vercel, in a Server Component over 200k rows, the function takes 67 ms native vs 172 ms on Node. It runs as a sidecar inside the same Function.
 
-The observed crossover was between 5k and 15k rows. Function offload is self-hosted for now.
+Small calls lose: the crossover was between 5k and 15k rows.
 ```
 
-Evidence per value: **200k rows**, **48 / 113 ms** round the Linux review-round-3 page row **200,000 events**, **48.097 / 112.881 ms** in [the page curve](function-level.md#page-curve-old-vs-new). **5k / 15k** are the measured lower/upper bracket: native loses the smaller page window and wins the larger; no exact threshold or confidence interval was established: [review-round-3 analysis](function-level.md#review-round-3-measurements-after). This is full-page warm sequential latency with a resident fixture, including React rendering, not isolated function CPU. Vercel function-level deployment is unproven: [sidecar/network discussion](function-level.md#vercel-sidecar-or-network-call).
+Evidence per value, all server-side `await revenue(...)` function time p50 on Vercel previews (iad1, 40 C=1 requests per size and variant, identical result JSON): **67.438 vs 171.692 ms** at 200k events; 5k loses (5.139 vs 3.874 ms); 15k median wins (7.018 vs 11.188) but p95 loses (17.381 vs 12.104): [use-native-vercel results](use-native-vercel.md#results). First call on a fresh instance: function 66.0 vs 5.7 ms and full first render 806 vs 514 ms, a loss to keep ready for replies: [first-call cost](use-native-vercel.md#first-call-cost-and-eager-start). One preview pair; hosted Server Actions and concurrency are unmeasured.
 
 ### Tweet 5: honest losses (259 chars)
 
