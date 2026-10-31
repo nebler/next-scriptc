@@ -58,15 +58,20 @@ function compilePattern(pattern: string) {
 }
 
 async function toRequest(incoming: IncomingMessage, url: string, host: string, intercepted: boolean): Promise<NextRequest> {
-  const headers = new Headers();
+  // Keep an owned snapshot for NextRequest's lazy Headers, retaining repeated
+  // fields. URL/params-only handlers need not construct Web headers at all.
+  const headers: [string, string][] = [];
   for (let i = 0; i < incoming.rawHeaders.length; i += 2) {
-    headers.append(incoming.rawHeaders[i], incoming.rawHeaders[i + 1]);
+    const name = incoming.rawHeaders[i];
+    const lower = name.toLowerCase();
+    if (lower === "host" || (lower === "next-url" && !intercepted)) continue;
+    headers.push([name, incoming.rawHeaders[i + 1]]);
   }
   // Next's changeOrigin proxy replaces Host but preserves the public host here.
-  headers.set("host", host);
-  if (!intercepted) headers.delete("next-url");
+  headers.push(["host", host]);
   const method = incoming.method || "GET";
-  if (method === "GET" || method === "HEAD") return new NextRequest(url, { method, headers });
+  const cookie = incoming.headers.cookie || "";
+  if (method === "GET" || method === "HEAD") return new NextRequest(url, { method, headers }, cookie);
   const chunks = await new Promise<Buffer[]>((resolve, reject) => {
     const chunks: Buffer[] = [];
     incoming.on("data", (chunk: Buffer) => chunks.push(chunk));
@@ -76,7 +81,7 @@ async function toRequest(incoming: IncomingMessage, url: string, host: string, i
   });
   const body = chunks.length === 1 ? chunks[0] : Buffer.concat(chunks);
   // HTTP data buffers are ArrayBuffer-backed; keep their existing byte view.
-  return new NextRequest(url, { method, headers, body: body as Uint8Array<ArrayBuffer> });
+  return new NextRequest(url, { method, headers, body: body as Uint8Array<ArrayBuffer> }, cookie);
 }
 
 async function writeResponse(response: RouteResponse, outgoing: ServerResponse, head: boolean): Promise<void> {
@@ -98,6 +103,10 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   if (!body || head) {
     if (body) await body.cancel();
     outgoing.end();
+    return;
+  }
+  if (!(response instanceof Response) && response.bufferedBody) {
+    outgoing.end(new Uint8Array(await response.arrayBuffer()));
     return;
   }
   // write() compiles without callbacks. The transport can queue bytes for a slow
@@ -134,33 +143,47 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   }
 }
 
-export function serve(module: RouteModule, options: { pattern: string; port?: number; interceptionPatterns?: string[] }): void {
+export function serve(module: RouteModule | (() => Promise<RouteModule>), options: { pattern: string; port?: number; interceptionPatterns?: string[] }): void {
   const port = options.port ?? Number(process.env.PORT);
   if ((options.port === undefined && !process.env.PORT?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
     throw new Error("next-scriptc: PORT must be an integer between 0 and 65535 (or supply options.port)");
   }
-  const get = module.GET;
-  const head = module.HEAD || get;
-  const post = module.POST;
-  const put = module.PUT;
-  const patch = module.PATCH;
-  const remove = module.DELETE;
-  const optionsHandler = module.OPTIONS;
+  let get: RouteHandler | undefined;
+  let head: RouteHandler | undefined;
+  let post: RouteHandler | undefined;
+  let put: RouteHandler | undefined;
+  let patch: RouteHandler | undefined;
+  let remove: RouteHandler | undefined;
+  let optionsHandler: RouteHandler | undefined;
+  let allow = "";
+  let initializing: Promise<void> | null = null;
+  function initialize(route: RouteModule): void {
+    get = route.GET;
+    head = route.HEAD || get;
+    post = route.POST;
+    put = route.PUT;
+    patch = route.PATCH;
+    remove = route.DELETE;
+    optionsHandler = route.OPTIONS;
+    const allowed = ["OPTIONS"];
+    if (get) allowed.push("GET");
+    if (head) allowed.push("HEAD");
+    if (post) allowed.push("POST");
+    if (put) allowed.push("PUT");
+    if (patch) allowed.push("PATCH");
+    if (remove) allowed.push("DELETE");
+    allow = allowed.sort().join(", ");
+    initializing = null;
+  }
+  if (typeof module !== "function") initialize(module);
   const match = compilePattern(options.pattern);
   const interceptionPatterns = (options.interceptionPatterns || []).map((pattern) => new RegExp(pattern));
   const interceptionRoute = options.pattern.split("/").some((part) =>
     part.startsWith("(.)") || part.startsWith("(..)") || part.startsWith("(...)")
   );
-  const allowed = ["OPTIONS"];
-  if (get) allowed.push("GET");
-  if (head) allowed.push("HEAD");
-  if (post) allowed.push("POST");
-  if (put) allowed.push("PUT");
-  if (patch) allowed.push("PATCH");
-  if (remove) allowed.push("DELETE");
-  const allow = allowed.sort().join(", ");
   const server = createServer(async (incoming, outgoing) => {
     try {
+      if (initializing) await initializing;
       const forwardedHost = incoming.headers["x-forwarded-host"];
       const forwardedProto = incoming.headers["x-forwarded-proto"];
       const host = typeof forwardedHost === "string" && forwardedHost ? forwardedHost : incoming.headers.host || "127.0.0.1";
@@ -235,5 +258,15 @@ export function serve(module: RouteModule, options: { pattern: string; port?: nu
     const address = server.address();
     const port = address && typeof address === "object" ? address.port : options.port;
     console.log(`next-scriptc: listening on 127.0.0.1:${port}`);
+    // The parent waits only for bound ports, letting Next initialize alongside
+    // route modules. Connections queue in the kernel during synchronous import;
+    // asynchronous module initialization is awaited by the request callback.
+    if (typeof module === "function") {
+      initializing = module().then(initialize);
+      initializing.catch((error: unknown) => {
+        console.error(error);
+        process.exit(1);
+      });
+    }
   });
 }

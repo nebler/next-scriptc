@@ -218,7 +218,13 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
     const result = await build.exit;
     processes.delete(build);
     assert.equal(result.code, 0, `${build.stdout}\n${build.stderr}`);
+    await pair(binary, { SHIM_DELAY_INIT: "1" }, async (compare) => {
+      const started = performance.now();
+      await Promise.all(Array.from({ length: 3 }, () => compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" })));
+      assert.ok(performance.now() - started >= 180, "early requests await route-module initialization");
+    });
     await pair(binary, { SHIM_UPSTREAM: `http://127.0.0.1:${upstream.address().port}` }, async (compare, { node, native, ports }) => {
+      for (const port of ports) await assertStreaming(port, "/api/a?case=next-stream");
       const allow = "GET, HEAD, OPTIONS, PATCH, POST, PUT";
       const base = "/api/hello";
       const json = {
@@ -232,6 +238,10 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       for (const host of ["127.0.0.2:4321", "[::1]:4321"]) {
         await compare({ path: `${base}?case=url`, headers: { host }, json: { url: `http://localhost:4321${base}?case=url`, host } });
       }
+      await compare({ path: `${base}?case=request-lazy`, headers: { cookie: "theme=original" }, json: {
+        sameHeaders: true, sameSignal: true, cloned: "after", bodyUsed: false,
+        cookie: { name: "theme", value: "original" }, url: `http://fixture.test:4321${base}?case=request-lazy`, method: "GET",
+      } });
       await compare({ path: `${base}?case=next-cookie-snapshot`, headers: { cookie: "theme=original" }, json: { theme: { name: "theme", value: "original" } } });
       const appVary = "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch";
       for (const value of ["accept-language", "*", appVary, "RSC, accept-language"]) {

@@ -12,8 +12,11 @@ DEMO_PROXY_TIMEOUT_MS=180000 pnpm --filter demo test:routes # Route parity
 ```
 
 `next-scriptc start` is a compatibility alias for Next's CLI in the same process.
-The production adapter hook starts native binaries in parallel and awaits their
-readiness. A crashed binary restarts with bounded backoff; five crashes within
+The production adapter hook starts native binaries in parallel and waits for
+their ports to bind. Each binary then imports its route while Next continues
+startup; early requests wait for module initialization. Production binaries use
+`--strip`; uncaught errors retain their message, while native debugging needs an
+unstripped rebuild. A crashed binary restarts with bounded backoff; five crashes within
 30 seconds stop retries for that route. Next returns HTTP 500 while its destination
 is down; pages and sibling routes stay available. Workers detect server SIGKILL
 within approximately 1–2 seconds. Native port conflicts fail initial startup with

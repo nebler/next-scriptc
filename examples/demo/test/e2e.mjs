@@ -127,8 +127,8 @@ function nativePids(state) {
 }
 
 async function productionReady(state) {
-  // Next logs "Ready" before loading config. A completed HTTP response also
-  // proves the adapter's async readiness barrier has finished.
+  // Next logs "Ready" before loading config. A completed HTTP response proves
+  // both the native listener barrier and this route's initialization finished.
   await wait(state, /Ready in/);
   const response = await fetch(`http://127.0.0.1:${port}/api/url-echo?ready=1`, { signal: AbortSignal.timeout(30_000) });
   await response.arrayBuffer();

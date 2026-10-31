@@ -7,7 +7,11 @@ relative to the installed Next package unless prefixed `vendor/scriptc`.
 
 Plain `next start` owns the native route binaries directly. The adapter's async
 production-server `modifyConfig` reads the build-validated manifest, spawns all
-routes in parallel, and awaits each exact readiness line before returning.
+routes in parallel, and awaits each exact listening line before returning.
+Generated entries use literal dynamic imports **after** binding the HTTP port.
+Next therefore initializes alongside route modules (including the search index);
+early requests wait for module initialization instead of hitting an unbound port.
+The listening line means transport readiness, not completed module execution.
 Startup errors identify the route and native port; an occupied port preserves
 scriptc's EADDRINUSE diagnostic. Failed startup kills and awaits started children.
 A native crash after startup restarts only that binary. Delays are 500, 1,000,
@@ -431,3 +435,154 @@ fixture's reserved port. No owned Next servers, native workers, shim fixtures,
 test compilers or checker servers remain. HEAD stays at `42a2368` on `main`;
 no commits or index/branch changes were made. Companion probe/performance files
 and processes were left untouched.
+
+## Optimization round 2 — 2026-10-31
+
+**Indicative only: loaded shared Apple M4 Pro / macOS arm64, Node 24.22.0,
+scriptc 0.4.6, Next 16.4.3.** These local measurements do not replace the quiet
+four-vCPU Linux [round 1 baseline](benchmarks/sandbox-2026-10-31T00-39-05.856Z.md).
+The ≤ Node cold-start target and a large hello CPU improvement are **not proven**.
+No grouping, compiler/runtime patch, response caching, route algorithm change,
+optimization-mode change, or git mutation was performed.
+
+### Startup: bind before importing the route
+
+`entrySource` now emits a literal dynamic import inside a loader passed to
+`serve`. scriptc 0.4.6 supports this ordering: a probe printed `BEFORE LISTEN`,
+`LISTEN`, then `MODULE INIT` before a deliberately slow initializer. The HTTP
+server binds, reports its exact listening line, and starts the loader. The
+adapter still awaits all listening lines, preserving initial port-conflict
+failure and cleanup. It no longer waits for every route's module execution
+before allowing Next to initialize. Synchronous module work leaves incoming
+connections in the kernel queue; request callbacks await asynchronous module
+initialization. The promise check clears after initialization. Import failures
+print their error and exit the route process, entering existing supervision.
+There is no additional proxy or process in the serving path.
+
+The shim test now imports a fixture with a 250 ms top-level await. Three requests
+sent immediately after listening all wait and succeed. Existing method, route,
+stream, cookie, crash/restart and process-ownership checks continue to pass.
+
+Cold measurements reuse `bench/processes.mjs` (`start`, `ready`, `stop`,
+`portsFree`) and `bench/config.mjs`'s normal production command. Each sample is
+spawn `next start` to a fully drained successful HTTP 200; connection refusal is
+retried every 2 ms, and an HTTP 500 fails the sample. Each path uses three fresh
+processes per runtime, alternating runtime order. Both native and baseline Node
+builds have the same unchanged demo route sources; the baseline `.next-node`
+build is reused. No server modes run together. Median milliseconds:
+
+- `/api/hello`: native **1,065.8 → 350.2**; Node **572.9 → 323.0**.
+- `/api/search?q=desk%20lamp&limit=7`: native **888.3 → 622.4**; Node
+  **604.3 → 423.2**.
+- `/`: native **901.6 → 408.9**; Node **405.2 → 370.3**.
+
+Node's changing baseline demonstrates substantial environmental drift. Native
+hello after samples are **4,655.4, 320.2, 350.2 ms**; the first launch of the new
+binaries is retained, not discarded. Search still pays its native index setup
+when search itself is requested. The serialization regression is addressed, but
+native did not reach Node's median on these three paths. Quiet Linux repeats
+remain necessary; neither a universal ≤ Node claim nor the source of the first
+launch outlier is established.
+
+### Request adaptation and bounded responses
+
+Transport-owned requests retain their header pairs and cookie snapshot, build
+Headers on first access, and materialize a Web Request only for body, signal,
+clone or other Web-only state. URL/method/headers-only handlers avoid that Web
+Request and its additional URL parse/header copy. Public two-argument
+NextRequest construction still eagerly validates and snapshots its inputs.
+Header and signal identities survive materialization; clone takes the current
+headers, and cookies retain their original snapshot. Routing still parses the
+URL and canonicalizes forwarded query strings, preserving escape/path/query
+semantics. `nextUrl` remains lazy.
+
+Native NextResponse tracks string, Uint8Array and JSON construction as bounded.
+Those bodies use `arrayBuffer()` and one `end(bytes)` without reader/cancellation
+bookkeeping. HEAD still cancels without reading. NextResponse streams retain the
+streaming path; a new delayed-stream test verifies that the first chunk is sent
+before completion. Ordinary Web Responses retain the existing single-closed-
+chunk coalescing and streaming/cancellation path. There is no supported portable
+API to recover a Web Response's original body type; content type/length cannot
+safely identify a non-stream body. The general plain-Response `arrayBuffer()`
+lever is therefore **not implemented**. In particular, hello uses plain
+`Response.json`, so its response is not put through the new NextResponse branch.
+No private symbols, compiler-specific runtime hooks or blanket buffering were
+introduced.
+
+Direct hello measurements reuse `perf/transport.py`'s server/client/process-CPU
+helpers and the unchanged `perf/http-client.mjs`: one keep-alive connection,
+500 initial warmup requests, then a server-only `ps TIME` delta across another
+500 warmups plus three windows of 5,000 requests. Three fresh processes per
+variant are interleaved after/before, before/after, after/before. Production after
+uses the actual stripped `.next` hello binary, including its deferred generated
+entry; before uses the original shim and NextRequest snapshot with the unchanged
+hello handler. First responses in every window match body and all headers except
+Date. CPU is quantized to 10 ms. Medians [observed min,max]:
+
+- CPU µs/request: **41.29 [40.65,41.94] → 39.35 [38.06,39.35]** (~4.7% lower).
+- p50 ms: **0.07533 [0.07342,0.07629] → 0.07417 [0.07217,0.07713]**.
+
+These small local differences do not establish a general latency/throughput win.
+A separate interleaved static-entry helper check measured **52.90 → 51.61 µs**
+and p50 **0.09758 → 0.10113 ms**. Earlier non-interleaved runs looked much better
+(**87.74 → 65.81 µs**, p50 **0.21396 → 0.12646 ms**); they are retained as evidence
+of host drift, not credited as a 25% optimization. The NextResponse fast path was
+parity-tested but not given a separate isolated performance claim.
+
+### Production stripping and diagnostics
+
+Production compilation now passes `--strip`, retaining the default release
+optimization and serial builds. The same new hello helper entry is **2,020,008 →
+1,879,872 bytes** unstripped/stripped (**6.9% smaller**). Across the eleven actual
+production route binaries, total bytes changed **36,366,408 → 34,214,280**; that
+comparison includes the shim/startup changes as well as stripping and is not an
+isolated strip measurement. No RSS, steady-state or startup gain is attributed
+to file size.
+
+Two tiny fixtures were each compiled with and without stripping. Both uncaught
+exceptions exited 1 and printed exactly `Uncaught Error: round2 native crash
+diagnostic`; neither printed a source stack. Both deliberate SIGSEGV fixtures
+exited with signal 11 and printed no runtime stderr stack. Core dumps were
+disabled for the crash probe. E2E confirms the supervisor still reports route,
+port and exit signal. Existing stderr diagnostics are preserved sufficiently for
+this prototype; native symbolication/profiling needs an unstripped rebuild.
+OS crash-report symbolication and Linux crash diagnostics were not verified.
+
+### Verification and retained local evidence
+
+All required commands passed under Node 24, sequentially where they compile or
+run application workloads:
+
+- `pnpm --filter demo build` (then E2E's normal second production build).
+- `node examples/demo/test/e2e.mjs`: seven response cases and report results for
+  threads 1/4/1; plain Next ownership, static precedence, signal cleanup, isolated
+  crash/recovery/cutoff, native/Next port conflicts and CLI alias.
+- `pnpm --filter demo test:routes --skip-build`: **49 comparisons**, all workers
+  exited and ports free. The existing test-only 180 s bcrypt proxy timeout remains.
+- `node packages/next-scriptc/shim/test/parity.mjs`: **68 comparisons**, delayed
+  module requests, header/signal/clone/cookie behavior, streaming/cancellation,
+  HEAD, cookies, routing/methods, shutdown and parent-death cleanup.
+- `node packages/next-scriptc/test/routes.mjs`: **three tests**, including native
+  compilation of deferred entries, all six extensions, aliases/re-exports, and
+  prerender/rewrite behavior.
+- `node examples/demo/bench/check.mjs`: harness checks pass, all sockets closed.
+- Package `tsc --noEmit`: passes with the explicit Node-only Web declarations
+  command in the preceding round's section (`--lib ESNext --types node`).
+- `git diff --check`: passes.
+
+Raw samples, original shim snapshots/binaries, actual production-binary hash,
+probe controllers, command logs, crash diagnostics, sizes and provenance are
+retained in the ignored local directory
+`packages/next-scriptc/node_modules/.cache/adapter-round2-2026-10-31/`.
+`cold-before.json`, `cold-after.json`, `http-paired-production.json`,
+`http-paired.json`, `strip-size.json` and `crash-diagnostics.json` are the primary
+evidence. The controllers invoke existing benchmark/profiling helpers instead
+of adding a second committed harness. Only local artifact import paths were
+adjusted when moving evidence out of the source tree.
+
+The final process audit found no owned compiler, server, native worker, probe or
+fixture. Port binds succeeded for **3417, 3427, 3437, 45173 and every native port**
+(29996–30007 except prerendered 30005). No process or listener was left running.
+No commit, branch, index or other git mutation was performed. The initial HEAD
+was `adc6ff5`; another actor advanced main to `05c896f` (the round 1 benchmark
+record) during this run. All implementation changes here remain uncommitted.

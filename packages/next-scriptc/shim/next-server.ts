@@ -114,40 +114,68 @@ export class NextRequest {
   declare readonly formData: never;
   private parsedUrl: URL | null = null;
   private parsedCookies: RequestCookies | null = null;
-  private request: Request;
+  private request: Request | null = null;
+  private incoming: { url: string; init: RequestInit } | null = null;
+  private parsedHeaders: Headers | null = null;
   private requestUrl: string | null = null;
   private cookieHeader: string;
-  constructor(input: string | URL | Request, init?: RequestInit) {
-    this.request = new Request(input, init?.body ? { ...init, duplex: "half" } : init);
-    this.cookieHeader = this.request.headers.get("cookie") ?? "";
+  constructor(input: string | URL | Request, init?: RequestInit, incomingCookie?: string) {
+    if (typeof input === "string" && incomingCookie !== undefined) {
+      // Internal transport path: serve already validated the URL and HTTP
+      // method, owns the header pairs, and has snapshotted the cookie field.
+      this.incoming = { url: input, init: init ?? {} };
+      this.cookieHeader = incomingCookie;
+    } else {
+      this.request = new Request(input, init?.body ? { ...init, duplex: "half" } : init);
+      this.cookieHeader = this.request.headers.get("cookie") ?? "";
+    }
+  }
+  private get webRequest(): Request {
+    if (!this.request) {
+      const incoming = this.incoming!;
+      const init = incoming.init;
+      this.request = new Request(incoming.url, { ...init, headers: this.headers, ...(init.body ? { duplex: "half" } : {}) });
+    }
+    return this.request;
   }
   get nextUrl(): URL { return this.parsedUrl ??= new URL(this.url); }
   get cookies(): RequestCookies { return this.parsedCookies ??= new RequestCookies(this.cookieHeader); }
   get url(): string {
-    return this.requestUrl ??= this.request.url.replace(/^(https?:\/\/)(?:127(?:\.\d+){3}|\[::1\])(?=[:/])/, "$1localhost");
+    return this.requestUrl ??= (this.incoming ? this.incoming.url : this.webRequest.url).replace(/^(https?:\/\/)(?:127(?:\.\d+){3}|\[::1\])(?=[:/])/, "$1localhost");
   }
-  get method() { return this.request.method; }
-  get headers() { return this.request.headers; }
-  get body() { return this.request.body; }
-  get bodyUsed() { return this.request.bodyUsed; }
-  get signal() { return this.request.signal; }
-  get cache() { return this.request.cache; }
-  get credentials() { return this.request.credentials; }
-  get destination() { return this.request.destination; }
-  get integrity() { return this.request.integrity; }
-  get keepalive() { return this.request.keepalive; }
-  get mode() { return this.request.mode; }
-  get redirect() { return this.request.redirect; }
-  get referrer() { return this.request.referrer; }
-  get referrerPolicy() { return this.request.referrerPolicy; }
-  get duplex() { return this.request.duplex; }
+  get method() { return this.incoming ? this.incoming.init.method || "GET" : this.webRequest.method; }
+  get headers(): Headers { return this.incoming ? this.parsedHeaders ??= new Headers(this.incoming.init.headers) : this.webRequest.headers; }
+  get body() { return this.webRequest.body; }
+  get bodyUsed() { return this.webRequest.bodyUsed; }
+  get signal() { return this.webRequest.signal; }
+  get cache() { return this.webRequest.cache; }
+  get credentials() { return this.webRequest.credentials; }
+  get destination() { return this.webRequest.destination; }
+  get integrity() { return this.webRequest.integrity; }
+  get keepalive() { return this.webRequest.keepalive; }
+  get mode() { return this.webRequest.mode; }
+  get redirect() { return this.webRequest.redirect; }
+  get referrer() { return this.webRequest.referrer; }
+  get referrerPolicy() { return this.webRequest.referrerPolicy; }
+  get duplex() { return this.webRequest.duplex; }
   declare readonly isHistoryNavigation: never;
   declare readonly isReloadNavigation: never;
-  json() { return this.request.json(); }
-  text() { return this.request.text(); }
-  async bytes() { return new Uint8Array(await this.request.arrayBuffer()); }
-  arrayBuffer() { return this.request.arrayBuffer(); }
-  clone() { return this.request.clone(); }
+  json() { return this.webRequest.json(); }
+  text() { return this.webRequest.text(); }
+  async bytes() { return new Uint8Array(await this.webRequest.arrayBuffer()); }
+  arrayBuffer() { return this.webRequest.arrayBuffer(); }
+  clone() {
+    const clone = this.webRequest.clone();
+    // Headers handed to application code retain their identity even after a
+    // body/signal getter materializes the Web Request. Clone their current state.
+    if (this.incoming) {
+      const names: string[] = [];
+      clone.headers.forEach((_value, name) => names.push(name));
+      for (const name of names) clone.headers.delete(name);
+      this.headers.forEach((value, name) => clone.headers.append(name, value));
+    }
+    return clone;
+  }
 }
 
 export class NextResponse {
@@ -155,11 +183,14 @@ export class NextResponse {
   declare readonly formData: never;
   declare readonly type: never;
   readonly cookies: ResponseCookies;
+  private boundedBody: boolean;
   private response: Response;
   constructor(body?: string | Uint8Array | ReadableStream<Uint8Array> | null, init?: ResponseInit) {
     this.response = new Response(body, init);
+    this.boundedBody = typeof body === "string" || body instanceof Uint8Array;
     this.cookies = new ResponseCookies(this.response.headers);
   }
+  get bufferedBody() { return this.boundedBody; }
   get body() { return this.response.body; }
   get headers() { return this.response.headers; }
   get status() { return this.response.status; }
@@ -175,7 +206,10 @@ export class NextResponse {
   clone() { return this.response.clone(); }
   static json(body: unknown, init?: ResponseInit): NextResponse {
     const response = Response.json(body, init);
-    return new NextResponse(response.body, { status: response.status, statusText: response.statusText, headers: response.headers });
+    const result = new NextResponse(response.body, { status: response.status, statusText: response.statusText, headers: response.headers });
+    // Response.json validates and serializes synchronously; its body is bounded.
+    result.boundedBody = true;
+    return result;
   }
   static redirect(url: string | URL, init?: number | ResponseInit): NextResponse {
     const status = typeof init === "number" ? init : init?.status ?? 307;

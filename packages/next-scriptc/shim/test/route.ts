@@ -4,6 +4,23 @@ import type { RouteContext } from "../serve.ts";
 export async function GET(request: NextRequest, context: RouteContext) {
   const url = new URL(request.url);
   const mode = url.searchParams.get("case");
+  if (mode === "request-lazy") {
+    const headers = request.headers;
+    headers.set("x-lazy", "before");
+    const signal = request.signal;
+    headers.set("x-lazy", "after");
+    return Response.json({
+      sameHeaders: headers === request.headers, sameSignal: signal === request.signal,
+      cloned: request.clone().headers.get("x-lazy"), bodyUsed: request.bodyUsed,
+      cookie: request.cookies.get("theme"), url: request.url, method: request.method,
+    });
+  }
+  if (mode === "next-stream") return new NextResponse(new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.enqueue(new TextEncoder().encode("first:"));
+      setTimeout(() => { controller.enqueue(new TextEncoder().encode("世界:last")); controller.close(); }, 220);
+    },
+  }));
   if (mode === "next-cookie-snapshot") {
     request.headers.set("cookie", "theme=changed");
     return NextResponse.json({ theme: request.cookies.get({ name: "theme" }) });

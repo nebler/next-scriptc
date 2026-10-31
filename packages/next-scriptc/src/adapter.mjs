@@ -70,7 +70,7 @@ const adapter = {
       await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route, "route", interceptionPatterns)}`);
       console.log(`[next-scriptc] Compiling ${route.source}`);
       await new Promise((resolve, reject) => {
-        const child = spawn(compiler, ["build", entry, "-o", path.join(output, route.binary), "--no-keep-llvm"], {
+        const child = spawn(compiler, ["build", entry, "-o", path.join(output, route.binary), "--strip", "--no-keep-llvm"], {
           cwd: projectDir,
           stdio: "inherit",
         });

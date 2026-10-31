@@ -52,6 +52,9 @@ function waitForReadiness(worker, group) {
       finish(error);
     });
     lines.on("line", (line) => {
+      // Generated entries bind before importing the route. Waiting only for
+      // listeners overlaps module initialization with Next's own startup, while
+      // the native server queues early requests until its module is ready.
       if (line === `next-scriptc: listening on 127.0.0.1:${route.port}`) {
         console.log(`[next-scriptc] ${route.pattern} → native PID ${child.pid}, port ${route.port}`);
         finish();
