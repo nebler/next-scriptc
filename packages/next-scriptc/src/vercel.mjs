@@ -1,5 +1,6 @@
 import { compilerPath } from "./paths.mjs";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { chmod, copyFile, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -85,19 +86,92 @@ export async function replaceFunctions(functionsDir, replacements) {
   }
 }
 
-// Next shares Node outputs via symlinks. Copy once per physical Node bundle;
-// tracing is not used to guess whether a bundled/chunked client is reachable.
-export async function bundleFunctionSidecar(functionsDir, binary) {
+// Trace paths are relative to Next's outputFileTracingRoot, not the .func
+// directory. Bundlers may inline the client, so inspect traced chunks too.
+export async function functionUsesNative(owner, config, traceRoot) {
+  let files;
+  if (config.filePathMap && typeof config.filePathMap === "object" && !Array.isArray(config.filePathMap)) {
+    files = Object.entries(config.filePathMap).map(([target, source]) => ({ target, source, root: traceRoot }));
+  } else {
+    // Unbundled handlers can expose the NFT trace directly.
+    try {
+      const trace = path.join(owner, config.handler + ".nft.json");
+      const nft = JSON.parse(await readFile(trace, "utf8"));
+      if (!Array.isArray(nft.files)) return true;
+      files = nft.files.map((source) => ({ target: typeof source === "string" ? path.resolve(path.dirname(trace), source) : source, source, root: path.dirname(trace) }));
+    } catch { return true; }
+  }
+  if (!files.length) return true;
+  if (typeof config.handler === "string") files.push({ target: config.handler, source: config.handler, root: owner });
+  let uncertain = false;
+  for (const { target, source, root } of files) {
+    if (typeof source !== "string") { uncertain = true; continue; }
+    if ([target, source].some((file) => /(?:^|\/)(?:next-scriptc\/src\/functions\/(?:client\.mjs|sidecar\.mjs)|scriptc-functions\/manifest\.json)$/.test(file))) return true;
+    if (!/\.[cm]?[jt]sx?$/.test(source)) continue;
+    let content;
+    try { content = await readFile(path.resolve(owner, target), "utf8"); }
+    catch {
+      try { content = await readFile(path.resolve(root, source), "utf8"); }
+      catch { uncertain = true; continue; }
+    }
+    // Symbol.for's stable process singleton name survives minification and
+    // identifies the native client even when its source path is not traced.
+    if (content.includes("next-scriptc.functions.sidecar")) return true;
+  }
+  return uncertain;
+}
+
+async function bootstrapFunction(owner, config) {
+  const original = config.handler;
+  if (original === "scriptc-bootstrap.cjs") return;
+  if (typeof original !== "string" || !original || path.isAbsolute(original) || path.relative(owner, path.resolve(owner, original)).startsWith("..")) {
+    throw new Error("[next-scriptc] Invalid Node Function handler");
+  }
+  const source = await readFile(path.join(owner, original));
+  // Keep Next's existing bundling groups: the CLI compares handler bytes. A
+  // wrapper on only native outputs would split a shared group into more paid
+  // Functions; identical wrappers around different launchers would merge them.
+  const digest = createHash("sha256").update(source).digest("hex");
+  const wrapper = "scriptc-bootstrap.cjs";
+  const runtime = "scriptc-sidecar.cjs";
+  await writeFile(path.join(owner, wrapper), `// Original launcher: ${digest}
+const { existsSync } = require("node:fs");
+const { join } = require("node:path");
+const binary = join(__dirname, "scriptc-functions");
+if (existsSync(binary)) require("./${runtime}").startSidecar(binary);
+module.exports = require(${JSON.stringify("./" + original)});
+`);
+  config.handler = wrapper;
+}
+
+// Copy once per physical Node output. A conservative unknown trace includes
+// the binary. All launchers get the same conditional bootstrap so Vercel can
+// retain its existing shared Function groups when it unions their traced files.
+export async function bundleFunctionSidecar(functionsDir, binary, { traceRoot = process.cwd() } = {}) {
   const owners = new Set(await Promise.all((await functionDirectories(functionsDir)).map((file) => realpath(file))));
-  let count = 0;
+  let count = 0, runtimeSource;
   for (const owner of owners) {
     const config = JSON.parse(await readFile(path.join(owner, ".vc-config.json"), "utf8"));
     if (!config.runtime?.startsWith("nodejs")) continue;
-    await copyFile(binary, path.join(owner, "scriptc-functions"));
-    await chmod(path.join(owner, "scriptc-functions"), 0o755);
+    if (await functionUsesNative(owner, config, traceRoot)) {
+      await copyFile(binary, path.join(owner, "scriptc-functions"));
+      await chmod(path.join(owner, "scriptc-functions"), 0o755);
+      // Vercel's runtime loader rejects require(ESM), even on Node 24. Use
+      // Next's shipped Babel to compile our own tiny runtime, not user code.
+      if (!runtimeSource) {
+        const babel = require("next/dist/compiled/babel/bundle.js");
+        runtimeSource = babel.core().transformSync(await readFile(new URL("./functions/sidecar.mjs", import.meta.url), "utf8"), {
+          babelrc: false, configFile: false, plugins: [babel.pluginTransformModulesCommonjs()],
+        }).code;
+      }
+      await writeFile(path.join(owner, "scriptc-sidecar.cjs"), runtimeSource);
+      count++;
+    }
+    // Architecture is part of Vercel's bundling signature too. Keep otherwise
+    // identical native/non-native outputs compatible on macOS build hosts.
     config.architecture = "x86_64";
+    await bootstrapFunction(owner, config);
     await writeFile(path.join(owner, ".vc-config.json"), JSON.stringify(config, null, 2) + "\n");
-    count++;
   }
   return count;
 }
@@ -113,7 +187,9 @@ export async function buildVercelFunctions({ projectDir, distDir }) {
     cwd: projectDir,
     env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: runtime },
   });
-  const count = await bundleFunctionSidecar(path.join(distDir, "output/functions"), binary);
+  const required = JSON.parse(await readFile(path.join(distDir, "required-server-files.json"), "utf8"));
+  const traceRoot = required.config.outputFileTracingRoot || projectDir;
+  const count = await bundleFunctionSidecar(path.join(distDir, "output/functions"), binary, { traceRoot });
   console.log(`[next-scriptc] Bundled native functions sidecar in ${count} shared Node Function(s)`);
 }
 

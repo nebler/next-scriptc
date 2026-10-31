@@ -1,15 +1,13 @@
 import { performance } from "node:perf_hooks";
-import { revenueEventsJson, type RevenueEvent } from "../app/api/analytics/revenue/events.ts";
-
-// The same stored monthly exports exist in both runtimes; generation is setup.
-const fixtures = new Map([5000, 15000, 50000, 200000].map((size) => [size, revenueEventsJson(size)]));
+import type { RevenueEvent } from "../app/api/analytics/revenue/events.ts";
+import { revenueFixture } from "./revenue-fixtures.ts";
 
 type DailyRevenue = { day: string; region: string; revenueCents: number; units: number; events: number };
 
 export async function revenue(from: string, to: string, size: number, profile: boolean) {
   "use native";
   const begin = profile ? performance.now() : 0;
-  const events = JSON.parse(fixtures.get(size)!) as RevenueEvent[];
+  const events = JSON.parse(revenueFixture(size)!) as RevenueEvent[];
   const parsed = profile ? performance.now() : 0;
   const totals = new Map<string, DailyRevenue>();
   let matched = 0;
