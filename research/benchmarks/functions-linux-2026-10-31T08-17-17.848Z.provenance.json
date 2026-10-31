@@ -1,0 +1,31 @@
+{
+  "sandbox": "indigo-broad-emu-H8CcTd",
+  "commit": "d93067000b3209e23ca541ddf5ba2a5426f838eb",
+  "archiveSha256": "810555b3493813c90ad0f77e6876e565e72c782fe2b9563e7d7a313190201db3",
+  "startedAt": "2026-10-31T08:17:17.849Z",
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 2,
+  "memoryMiB": 4096,
+  "lifetimeMs": 480000,
+  "maxVcpuHours": 0.26666666666666666,
+  "affinity": "app and native: CPU 0; load generator: CPU 1; C=1",
+  "status": "failed",
+  "steps": [
+    {
+      "label": "Compiler and affinity tools",
+      "elapsedMs": 13773,
+      "exitCode": 0
+    },
+    {
+      "label": "Exact lockfile install",
+      "elapsedMs": 287,
+      "exitCode": 1
+    }
+  ],
+  "error": "Error: Exact lockfile install: exit 1\n    at step (file:///Users/noah/.t3/worktrees/next-scriptc/t3-87b901d6/scripts/sandbox-functions.mjs:31:36)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-87b901d6/scripts/sandbox-functions.mjs:43:3",
+  "downloadError": "No results file",
+  "activeCpuDurationMs": 19608,
+  "stopped": true,
+  "elapsedMs": 17315,
+  "allocatedVcpuHoursUpperBound": 0.009619444444444444
+}
