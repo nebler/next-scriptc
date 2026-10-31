@@ -802,8 +802,9 @@ matching extension in `build/route-discovery.js:getPageFromPath`, yielding an
 ordinary App Route. Its `createPagesMapping` keeps the last duplicate rather
 than failing, so discovery rejects sibling route-file conflicts explicitly.
 Only `.native.ts` is supported; other native extensions and non-route native
-files are rejected. Old route-level `"use scriptc"` directives fail with a rename
+files are rejected. Route-level `"use native"` and the old `"use scriptc"` directives fail with a rename
 and removal message; Babel still detects named HTTP method exports.
+Function-level opt-in uses `"use native"`; see [function-level.md](function-level.md).
 Next 16.4.3 rejects `runtime = "scriptc"` in its segment-config validator. The
 future runtime provider design in [next-primitive.md](next-primitive.md) is unchanged.
 

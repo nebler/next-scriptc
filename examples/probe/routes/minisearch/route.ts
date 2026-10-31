@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import MiniSearch from "minisearch";
 const index = new MiniSearch({ fields: ["title", "text"], storeFields: ["title"], searchOptions: { boost: { title: 2 }, prefix: true, fuzzy: 0.2 } });

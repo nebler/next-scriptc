@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 const products = [
   { id: 1, name: "Desk lamp", price: 39 },

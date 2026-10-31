@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 export async function GET(request: Request, context: { params: Promise<{ sku: string }> }) {
   const { sku } = await context.params;

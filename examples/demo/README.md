@@ -3,9 +3,15 @@
 Native handlers use `app/**/route.native.ts`; ordinary `route.ts` handlers stay on Node.
 `withScriptc` appends `native.ts` to `pageExtensions`, preserving configured extensions
 and their order. Only `.native.ts` is supported. Non-route `*.native.*` files,
-route-level `"use scriptc"` directives and sibling route-file conflicts fail the build.
+route-level `"use native"` or `"use scriptc"` directives and sibling route-file conflicts fail the build.
 Migrate the old directive by renaming the file to `route.native.ts` and removing it.
 Development still executes the same TypeScript handlers on Node.
+
+Named module-level async functions can start with `"use native"`; a file-level
+`"use native"` selects its named exported async functions. This replaces
+`"use scriptc"`, which fails discovery with a rename error. Calls keep their
+TypeScript signatures and use a strict JSON boundary in native production;
+development runs the same bodies on Node. See [function-level native code](../../research/function-level.md).
 
 Use Node 24.x. From the workspace root:
 

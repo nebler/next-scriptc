@@ -7,7 +7,7 @@ const fixtures = new Map([5000, 15000, 50000, 200000].map((size) => [size, reven
 type DailyRevenue = { day: string; region: string; revenueCents: number; units: number; events: number };
 
 export async function revenue(from: string, to: string, size: number, profile: boolean) {
-  "use scriptc";
+  "use native";
   const begin = profile ? performance.now() : 0;
   const events = JSON.parse(fixtures.get(size)!) as RevenueEvent[];
   const parsed = profile ? performance.now() : 0;

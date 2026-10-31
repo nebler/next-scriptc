@@ -57,13 +57,13 @@ test("discovery rejects legacy directives, non-route native files and conflictin
       await assert.rejects(discoverRoutes(temporary), /Only App Router route.native.ts files can be native/);
       await rm(path.join(app, file));
     }
-    for (const extension of ["ts", "js", "mjs", "native.ts"]) {
+    for (const extension of ["ts", "js", "mjs", "native.ts"]) for (const directive of ["use native", "use scriptc"]) {
       const file = path.join(app, `route.${extension}`);
-      await writeFile(file, '/* migration */\n"use scriptc"; export function GET() {}');
-      await assert.rejects(discoverRoutes(temporary), /Route-level "use scriptc".*Rename the file to route.native.ts and remove the directive/);
+      await writeFile(file, `/* migration */\n"${directive}"; export function GET() {}`);
+      await assert.rejects(discoverRoutes(temporary), /Route-level "use (?:native|scriptc)".*Rename the file to route.native.ts and remove the directive/);
       await rm(file);
     }
-    await writeFile(path.join(app, "route.native.ts"), 'export function GET() { "use scriptc"; return new Response(); }');
+    await writeFile(path.join(app, "route.native.ts"), 'export function GET() { "use native"; return new Response(); }');
     for (const extension of ["ts", "js", "custom.ts"]) {
       const file = path.join(app, `route.${extension}`);
       await writeFile(file, "export function GET() {}");

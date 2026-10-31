@@ -4,7 +4,8 @@ import { mkdtemp, mkdir, writeFile, symlink, rm } from "node:fs/promises";
 import path from "node:path";
 import { discoverFunctions, extractFunctions } from "../src/functions/extract.mjs";
 import loader from "../src/functions/loader.mjs";
-import { serialize, serializeResult } from "../src/functions/json.ts";
+import { serialize } from "../src/functions/json.ts";
+import { serializeLegacy } from "../../../examples/demo/bench/function-json-legacy.ts";
 
 const source = "/project/app/page.tsx";
 const extract = (text) => extractFunctions(text, source);
@@ -16,7 +17,7 @@ import { Suspense } from "react";
 type Result = { sum: number };
 const factor = 2;
 function sum(rows: Row[]) { return rows.length * factor; }
-async function report(count: number): Promise<Result> { "use scriptc"; return { sum: sum(data) + count }; }
+async function report(count: number): Promise<Result> { "use native"; return { sum: sum(data) + count }; }
 export default async function Page() { await connection(); return <Suspense>{(await report(2)).sum}</Suspense>; }`;
   const module = extract(text);
   assert.equal(module.functions.length, 1);
@@ -34,39 +35,58 @@ export default async function Page() { await connection(); return <Suspense>{(aw
 });
 
 test("file directive selects named exported async declarations and aliases", () => {
-  const module = extract(`"use scriptc"; function helper(x: number) { return x + 1; } export async function add(x: number) { return helper(x); } const echo = async (x: string) => { return x; }; export { echo as renamed };`);
+  const module = extract(`"use native"; function helper(x: number) { return x + 1; } export async function add(x: number) { return helper(x); } const echo = async (x: string) => { return x; }; export { echo as renamed };`);
   assert.deepEqual(module.functions.map((fn) => fn.name), ["add", "echo"]);
   assert.match(module.native, /function helper/);
-  assert.equal(extract(`"use scriptc"; export type { Row } from "./types"; export async function f() { return 1; }`).functions.length, 1);
-  assert.equal(extract(`"use scriptc"; export const named = async function inner(x: number) { return x; };`).functions[0].name, "named");
+  assert.equal(extract(`"use native"; export type { Row } from "./types"; export async function f() { return 1; }`).functions.length, 1);
+  assert.equal(extract(`"use native"; export const named = async function inner(x: number) { return x; };`).functions[0].name, "named");
   assert.equal(extract(`async function plain() { return 1; }`), null);
+});
+
+test("rejects the old directive without treating strings or comments as directives", () => {
+  for (const text of [
+    '"use scriptc"; export async function old() { return 1; }',
+    '"use strict"; "use scriptc"; export async function old() { return 1; }',
+    'async function old() { "use scriptc"; return 1; }',
+    'const old = async () => { "use scriptc"; return 1; };',
+    'function Page() { async function old() { "use scriptc"; return 1; } }',
+    '"use native"; export async function old() { "use scriptc"; return 1; }',
+  ]) assert.throws(() => extract(text), /\/project\/app\/page.tsx: "use scriptc" was renamed to "use native"/);
+  assert.equal(extract('// "use scriptc"\nexport const text = "use scriptc";'), null);
+  assert.equal(extract('async function plain() { const x = 1; "use scriptc"; return x; }'), null);
 });
 
 test("rejects unsupported scopes, APIs and exports with the function name", () => {
   for (const [text, expected] of [
-    ['export function bad() { "use scriptc"; return 1; }', /function bad: must be async/],
-    ['"use scriptc"; export const bad = 1;', /function bad: all value exports/],
-    ['"use scriptc"; export default async function bad() {}', /function <exports>/],
-    ['"use scriptc"; export { f } from "./other";', /function <exports>/],
-    ['"use client"; export async function bad() { "use scriptc"; }', /function bad:.*use client/],
-    ['function Page() { const local = 1; async function bad() { "use scriptc"; return local; } }', /function bad:.*component-scope/],
-    ['import { connection } from "next/server"; async function bad() { "use scriptc"; return connection(); }', /function bad: reference connection.*next\/server/],
-    ['import { cache } from "react"; async function bad() { "use scriptc"; return cache(() => 1); }', /function bad: reference cache.*react/],
-    ['function helper() { return process.env.KEY; } async function bad() { "use scriptc"; return helper(); }', /function bad: unsupported reference process/],
-    ['async function bad() { "use scriptc"; return fetch("/"); }', /function bad: unsupported reference fetch/],
-    ['async function bad() { "use scriptc"; return this; }', /function bad: unsupported reference this/],
-    ['async function bad({x}: {x:number}) { "use scriptc"; return x; }', /function bad: parameters/],
-    ['const values: number[] = []; values.push(1); async function bad() { "use scriptc"; return values; }', /function bad: unsupported module initialization/],
-    ['let value = 1; value++; async function bad() { "use scriptc"; return value; }', /function bad: reference value is reassigned/],
+    ['export function bad() { "use native"; return 1; }', /function bad: must be async/],
+    ['"use native"; export const bad = 1;', /function bad: all value exports/],
+    ['"use native"; export default async function bad() {}', /function <exports>/],
+    ['"use native"; export { f } from "./other";', /function <exports>/],
+    ['"use client"; export async function bad() { "use native"; }', /function bad:.*use client/],
+    ['function Page() { const local = 1; async function bad() { "use native"; return local; } }', /function bad:.*component-scope/],
+    ['import { connection } from "next/server"; async function bad() { "use native"; return connection(); }', /function bad: reference connection.*next\/server/],
+    ['import { cache } from "react"; async function bad() { "use native"; return cache(() => 1); }', /function bad: reference cache.*react/],
+    ['function helper() { return process.env.KEY; } async function bad() { "use native"; return helper(); }', /function bad: unsupported reference process/],
+    ['async function bad() { "use native"; return fetch("/"); }', /function bad: unsupported reference fetch/],
+    ['async function bad() { "use native"; return this; }', /function bad: unsupported reference this/],
+    ['async function bad({x}: {x:number}) { "use native"; return x; }', /function bad: parameters/],
+    ['const values: number[] = []; values.push(1); async function bad() { "use native"; return values; }', /function bad: unsupported module initialization/],
+    ['let value = 1; value++; async function bad() { "use native"; return value; }', /function bad: reference value is reassigned/],
   ]) assert.throws(() => extract(text), expected, text);
 });
 
 test("JSON boundary rejects lossy values instead of silently coercing them", () => {
   const value = { a: [1, null, "text", true], b: {} };
   assert.deepEqual(JSON.parse(serialize(value)), value);
-  assert.equal(serializeResult(value), serialize(value));
   const shared = { n: 1 };
-  assert.equal(serializeResult([shared, shared]), JSON.stringify([shared, shared]));
+  for (const valid of [null, false, 42, "text", [], {}, value, [shared, shared]]) {
+    assert.equal(serialize(valid), serializeLegacy(valid));
+    assert.equal(serialize(valid, true), serializeLegacy(valid));
+    assert.equal(serialize(valid), JSON.stringify(valid));
+  }
+  const customArray = Object.setPrototypeOf([1], null);
+  assert.equal(serialize(customArray), serializeLegacy(customArray));
+  assert.throws(() => serialize(customArray, true), /JSON/);
   const cyclic = {}; cyclic.self = cyclic;
   const hidden = Object.defineProperty({}, "x", { value: undefined });
   const getter = { get x() { return 1; } };
@@ -74,7 +94,8 @@ test("JSON boundary rejects lossy values instead of silently coercing them", () 
   const holeAndExtra = Array(1); holeAndExtra.extra = 1;
   for (const invalid of [holeAndExtra, undefined, NaN, Infinity, 1n, () => 1, Symbol(), new Date(), new Map(), { x: undefined }, [undefined], Array(2), cyclic, hidden, getter, extra, { [Symbol()]: 1 }]) {
     assert.throws(() => serialize(invalid), /JSON/);
-    assert.throws(() => serializeResult(invalid), /JSON/);
+    assert.throws(() => serialize(invalid, true), /JSON/);
+    assert.throws(() => serializeLegacy(invalid), /JSON/);
   }
 });
 
@@ -85,7 +106,7 @@ test("discovery supports inline route functions and rejects indirect Next/client
     await mkdir(path.join(temporary, "app"));
     await mkdir(path.join(temporary, "lib"));
     await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, paths: { "@lib/*": ["./lib/*"] }, moduleResolution: "bundler" } }));
-    await writeFile(path.join(temporary, "app/route.ts"), 'import { helper } from "@lib/helper"; async function native() { "use scriptc"; return helper(); } export async function GET() { return Response.json(await native()); }');
+    await writeFile(path.join(temporary, "app/route.ts"), 'import { helper } from "@lib/helper"; async function native() { "use native"; return helper(); } export async function GET() { return Response.json(await native()); }');
     const helper = path.join(temporary, "lib/helper.ts");
     const config = { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } };
     for (const [text, error] of [

@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import { NextRequest, NextResponse } from "./next-shim.ts";
 

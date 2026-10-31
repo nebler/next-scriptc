@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 export async function POST(request: Request, context: { params: Promise<{ tenant: string }> }) {
   const { tenant } = await context.params;

@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import Papa from "papaparse";
 export function GET() {

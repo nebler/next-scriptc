@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import { hashSync, compareSync } from "bcryptjs";
 const salt = "$2b$10$N9qo8uLOickgx2ZMRZoMye";

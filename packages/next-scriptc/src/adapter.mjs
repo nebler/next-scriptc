@@ -29,7 +29,7 @@ const adapter = {
       if (process.env.NEXT_SCRIPTC_VERCEL) {
         const { vercelAdapter } = await import("./vercel.mjs");
         const functions = await discoverFunctions(projectDir, path.resolve(projectDir, config.distDir ?? ".next"));
-        if (functions.length) console.warn(`[next-scriptc] Function-level "use scriptc" is not supported on Vercel yet; ${functions.length} module(s) run on Node.`);
+        if (functions.length) console.warn(`[next-scriptc] Function-level "use native" is not supported on Vercel yet; ${functions.length} module(s) run on Node.`);
         return (await vercelAdapter()).modifyConfig(config, context);
       }
       return prepareFunctions(withRewrites(config, routes), projectDir);

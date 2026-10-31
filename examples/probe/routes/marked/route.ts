@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import { marked } from "marked";
 export function GET() {

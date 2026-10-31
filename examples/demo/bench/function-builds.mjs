@@ -20,7 +20,7 @@ try {
   for (const order of [["targeted", "none", "broad"], ["none", "broad", "targeted"], ["broad", "targeted", "none"]]) {
     for (const mode of order) {
       await writeFile(configFile, mode === "broad" ? broad : config);
-      for (const [source, text] of originals) await writeFile(source, mode === "none" ? text.replaceAll('"use scriptc"', '"use javascript"') : text);
+      for (const [source, text] of originals) await writeFile(source, mode === "none" ? text.replaceAll('"use native"', '"use javascript"') : text);
       const begin = performance.now();
       const state = run(["build"]);
       let compiling, nativeMs;

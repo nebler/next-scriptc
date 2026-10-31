@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import { SignJWT, jwtVerify } from "jose";
 const key = new TextEncoder().encode("probe-only-signing-key-at-least-32-bytes");

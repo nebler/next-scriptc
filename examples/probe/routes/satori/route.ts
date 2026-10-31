@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import satori from "satori";
 import { createElement } from "react";

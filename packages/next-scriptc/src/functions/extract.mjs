@@ -9,13 +9,18 @@ const babel = require("next/dist/compiled/babel/bundle.js");
 const { parse } = babel.parser();
 const traverse = babel.traverse().default;
 const globals = new Set(["Array", "ArrayBuffer", "BigInt", "Boolean", "Date", "Error", "Infinity", "Int8Array", "Int16Array", "Int32Array", "JSON", "Map", "Math", "NaN", "Number", "Object", "Promise", "RangeError", "RegExp", "Set", "String", "TypeError", "Uint8Array", "Uint16Array", "Uint32Array", "Float32Array", "Float64Array", "decodeURIComponent", "encodeURIComponent", "isNaN", "parseFloat", "parseInt", "undefined"]);
-const marked = (node) => node?.directives?.some((directive) => directive.value.value === "use scriptc");
+function marked(node, source) {
+  if (node?.directives?.some((directive) => directive.value.value === "use scriptc")) {
+    throw new Error(`[next-scriptc] ${source}: "use scriptc" was renamed to "use native". Replace the directive to keep the function native.`);
+  }
+  return node?.directives?.some((directive) => directive.value.value === "use native");
+}
 const forbidden = (name) => /^(?:next|react|react-dom)(?:\/|$)/.test(name);
 
 export function extractFunctions(text, source) {
-  if (!text.includes("use scriptc")) return null;
+  if (!text.includes("use native") && !text.includes("use scriptc")) return null;
   const ast = parse(text, { sourceType: "module", plugins: ["typescript", "jsx"] });
-  const fileLevel = marked(ast.program);
+  const fileLevel = marked(ast.program, source);
   const client = ast.program.directives.some((directive) => directive.value.value === "use client");
   const functions = [];
   let program;
@@ -29,8 +34,8 @@ export function extractFunctions(text, source) {
       const name = (declaration?.isVariableDeclarator() ? declaration.node.id.name : p.node.id?.name) ?? "<anonymous>";
       const binding = program.scope.getBinding(name);
       const exported = binding?.referencePaths.some((ref) => ref.parentPath.isExportSpecifier()) || statement?.isExportNamedDeclaration() || statement?.parentPath.isExportNamedDeclaration();
-      if (!marked(p.node.body) && !(fileLevel && topLevel && exported)) return;
-      if (client) fail(name, '"use scriptc" is forbidden in a "use client" module');
+      if (!marked(p.node.body, source) && !(fileLevel && topLevel && exported)) return;
+      if (client) fail(name, '"use native" is forbidden in a "use client" module');
       if (!topLevel || !declaration || !binding) fail(name, "must be a named module-level function; component-scope closures are unsupported");
       if (!p.node.async || p.node.generator) fail(name, "must be async and cannot be a generator");
       if (p.node.body?.type !== "BlockStatement") fail(name, "must have a block body");
@@ -44,10 +49,10 @@ export function extractFunctions(text, source) {
   if (fileLevel) {
     for (const p of program.get("body")) {
       if (p.node.exportKind === "type") continue;
-      if (p.isExportDefaultDeclaration() || p.isExportAllDeclaration() || p.isExportNamedDeclaration() && p.node.source) fail("<exports>", "use local named async function exports in a use scriptc file");
+      if (p.isExportDefaultDeclaration() || p.isExportAllDeclaration() || p.isExportNamedDeclaration() && p.node.source) fail("<exports>", "use local named async function exports in a use native file");
       if (!p.isExportNamedDeclaration() || p.node.exportKind === "type") continue;
       const names = p.node.declaration?.id ? [p.node.declaration.id.name] : p.node.declaration?.declarations?.map((d) => d.id.name) ?? p.node.specifiers.filter((s) => s.exportKind !== "type").map((s) => s.local.name);
-      for (const name of names) if (!functions.some((fn) => fn.name === name)) fail(name, "all value exports in a use scriptc file must be async functions");
+      for (const name of names) if (!functions.some((fn) => fn.name === name)) fail(name, "all value exports in a use native file must be async functions");
     }
   }
   if (!functions.length) return null;

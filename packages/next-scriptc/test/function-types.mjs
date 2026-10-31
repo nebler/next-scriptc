@@ -61,12 +61,12 @@ test("discovery checks imported inferred types using extended project tsconfig",
     await writeFile(path.join(directory, "base.json"), JSON.stringify({ compilerOptions: { strict: true, paths: { "@data/*": ["./lib/*"] }, moduleResolution: "bundler" } }));
     await writeFile(path.join(directory, "project.json"), '{"extends":"./base.json"}');
     await writeFile(path.join(directory, "lib/data.ts"), 'export interface Input { value: number | null }; export function helper() { return { rows: [{ invalid: undefined }] }; }');
-    await writeFile(path.join(directory, "native.ts"), 'import { helper, type Input } from "@data/data"; export async function report(input: Input) { "use scriptc"; return helper(); }');
+    await writeFile(path.join(directory, "native.ts"), 'import { helper, type Input } from "@data/data"; export async function report(input: Input) { "use native"; return helper(); }');
     const config = { typescript: { tsconfigPath: "project.json" } };
     await assert.rejects(discoverFunctions(directory, path.join(directory, ".next"), config), /function report: return.rows\[\].invalid:.*undefined/);
     await writeFile(path.join(directory, "lib/data.ts"), 'export interface Input { value: number | null }; export function helper() { return { rows: [{ valid: 1 }] }; }');
     assert.equal((await discoverFunctions(directory, path.join(directory, ".next"), config)).length, 1);
-    await writeFile(path.join(directory, "native.ts"), 'export async function report(input: ReadonlyArray<Record<string, number | null>>): Promise<Readonly<{ rows: number[] }>> { "use scriptc"; return { rows: [] }; }');
+    await writeFile(path.join(directory, "native.ts"), 'export async function report(input: ReadonlyArray<Record<string, number | null>>): Promise<Readonly<{ rows: number[] }>> { "use native"; return { rows: [] }; }');
     assert.equal((await discoverFunctions(directory, path.join(directory, ".next"), config)).length, 1, "standard JSON utility types survive extraction");
     await writeFile(path.join(directory, "base.json"), '{"compilerOptions":{"strictNullChecks":false}}');
     await assert.rejects(discoverFunctions(directory, path.join(directory, ".next"), config), /requires strictNullChecks/);

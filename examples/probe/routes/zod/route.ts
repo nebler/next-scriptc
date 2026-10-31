@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 import { z } from "zod";
 

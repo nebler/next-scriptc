@@ -54,8 +54,9 @@ export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", 
         }
         if (!native && !["ts", "js", "mts", "mjs", "tsx", "jsx"].includes(extension)) continue;
         const ast = parse(await readFile(source, "utf8"), { sourceType: "module", plugins: ["typescript", ...(extension.endsWith("x") ? ["jsx"] : [])] });
-        if (ast.program.directives[0]?.value.value === "use scriptc") {
-          throw new Error(`[next-scriptc] Route-level "use scriptc" is no longer supported in ${source}. Rename the file to route.native.ts and remove the directive.`);
+        const directive = ast.program.directives[0]?.value.value;
+        if (directive === "use native" || directive === "use scriptc") {
+          throw new Error(`[next-scriptc] Route-level "${directive}" is no longer supported in ${source}. Rename the file to route.native.ts and remove the directive.`);
         }
         if (!native) continue;
         const exported = new Set();

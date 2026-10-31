@@ -1,4 +1,4 @@
-"use scriptc";
+"use native";
 
 export async function GET(request: Request, context: { params: Promise<{ job: string }> }) {
   const { job } = await context.params;
