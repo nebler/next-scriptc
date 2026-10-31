@@ -46,7 +46,7 @@
     "width": 2048,
     "height": 1152,
     "cssWidth": 1024,
-    "bytes": 102565,
+    "bytes": 92053,
     "qa": {
       "fonts": true,
       "split": null,
@@ -54,7 +54,7 @@
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "app/api/hello/route.ts use native 1 2 3 4 5 6 7 8 async function greet(name: string) { \"use native\"; return { message: `Hello, ${name}!` }; } export async function GET() { return Response.json(await greet(\"world\")); } ← compiles to native"
+      "text": "app/api/hello/route.ts 1 2 3 4 5 6 7 8 async function greet(name: string) { \"use native\"; return { message: `Hello, ${name}!` }; } export async function GET() { return Response.json(await greet(\"world\")); }"
     }
   },
   {
@@ -123,14 +123,15 @@
     "width": 2000,
     "height": 1600,
     "cssWidth": 1000,
-    "bytes": 144966,
+    "bytes": 137135,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "examples/demo/lib/revenue.ts · simplified 1 2 3 4 5 6 7 8 9 10 11 12 13 14 import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; } ← native One directive compiles this function to native. The route around it stays on Node.js."
+      "text": "lib/revenue.ts 1 2 3 4 5 6 7 8 9 10 11 12 13 14 import type { RevenueEvent } from \"../app/api/analytics/revenue/events.ts\"; export async function revenue( events: RevenueEvent[], from: string, to: string ) { \"use native\"; let revenueCents = 0; for (const event of events) { if (event.day < from || event.day > to) continue; revenueCents += event.amountCents * event.quantity; } return { from, to, revenueCents }; } One directive compiles this function to native. The route around it stays on Node.js."
     }
   },
   {
@@ -223,20 +224,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 185885,
+    "bytes": 157709,
     "qa": {
       "fonts": true,
       "split": {
-        "leftRight": 441.8828125,
-        "rightLeft": 544.796875,
-        "leftText": "Same routes, 2.3–5.4× less CPU per request Process CPU per request CPU time per request, measured inside the serving process. Lower is better. ms per request · median of 3 windows of 100 requests Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively.",
-        "rightText": "Native Node.js 0 2 4 6 8 0.57 3.06 Hello world 2.38 7.03 Revenue report 2.49 5.70 Nearby-store search"
+        "leftRight": 440,
+        "rightLeft": 512,
+        "leftText": "Same routes, 2.3–5.4× less CPU per request Process CPU, not billed CPU Three routes, measured inside the serving process. Median of 3 × 100 requests. Not every route wins: Markdown is slower.",
+        "rightText": "ms / request Native Node.js 0 2 4 6 8 0.57 3.06 Hello world 2.38 7.03 Revenue report 2.49 5.70 Nearby-store search"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "Same routes, 2.3–5.4× less CPU per request Process CPU per request CPU time per request, measured inside the serving process. Lower is better. ms per request · median of 3 windows of 100 requests Self-reported process CPU, not billed CPU. Not every route wins: Markdown rendering is slower natively. Native Node.js 0 2 4 6 8 0.57 3.06 Hello world 2.38 7.03 Revenue report 2.49 5.70 Nearby-store search"
+      "text": "Same routes, 2.3–5.4× less CPU per request Process CPU, not billed CPU Three routes, measured inside the serving process. Median of 3 × 100 requests. Not every route wins: Markdown is slower. ms / request Native Node.js 0 2 4 6 8 0.57 3.06 Hello world 2.38 7.03 Revenue report 2.49 5.70 Nearby-store search"
     },
     "expected": {
       "headline": "Same routes, 2.3–5.4× less CPU per request",
@@ -345,20 +346,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 134869,
+    "bytes": 111251,
     "qa": {
       "fonts": true,
       "split": {
         "leftRight": 452,
-        "rightLeft": 518.3984375,
-        "leftText": "First response after deploy, 1.9× sooner End to end, network included Time to the first hello response on a fresh deployment, end to end. Lower is better. ms · median of 5 deployment pairs · iad1 Includes network and TLS. Fresh deployments, but not a certified cold start.",
-        "rightText": "0 100 200 300 126 Native 240 Node.js"
+        "rightLeft": 512,
+        "leftText": "First response after deploy, 1.9× sooner End to end, network included Hello route on a fresh deployment. Median of 5 pairs. Fresh deployment, not a certified cold start.",
+        "rightText": "ms 0 100 200 300 126 Native 240 Node.js"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "First response after deploy, 1.9× sooner End to end, network included Time to the first hello response on a fresh deployment, end to end. Lower is better. ms · median of 5 deployment pairs · iad1 Includes network and TLS. Fresh deployments, but not a certified cold start. 0 100 200 300 126 Native 240 Node.js"
+      "text": "First response after deploy, 1.9× sooner End to end, network included Hello route on a fresh deployment. Median of 5 pairs. Fresh deployment, not a certified cold start. ms 0 100 200 300 126 Native 240 Node.js"
     },
     "expected": {
       "headline": "First response after deploy, 1.9× sooner",
@@ -408,6 +409,7 @@
     "bytes": 94642,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
@@ -427,6 +429,7 @@
     "bytes": 165166,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
@@ -443,14 +446,15 @@
     "width": 2400,
     "height": 1256,
     "cssWidth": 1200,
-    "bytes": 106820,
+    "bytes": 138065,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 16,
-      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. route.native.ts → scriptc → native binary // app/api/hello/route.native.ts export function GET() { return Response.json({ message: \"Hello from native TypeScript!\" }); }"
+      "text": "\"use native\" next-scriptc TypeScript, compiled to native Vercel Functions. \"use native\" → scriptc → native binary // app/api/hello/route.ts async function greet(name: string) { \"use native\"; return { message: `Hello, ${name}!` }; } export async function GET() { return Response.json(await greet(\"world\")); }"
     }
   },
   {
@@ -465,6 +469,7 @@
     "bytes": 144004,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
@@ -535,20 +540,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 134506,
+    "bytes": 102438,
     "qa": {
       "fonts": true,
       "split": {
-        "leftRight": 450.8046875,
-        "rightLeft": 518.3984375,
-        "leftText": "Hello route, 14.3× less memory Hello-route process memory Memory held by the process serving a hello route, after its first response. Lower is better. Resident memory (RSS) · MiB · median of 5 deployments Measures the serving process only, not whole-instance or billed memory.",
-        "rightText": "0 25 50 75 100 5.6 Native 80 Node.js"
+        "leftRight": 430.890625,
+        "rightLeft": 512,
+        "leftText": "Hello route, 14.3× less memory Process memory (RSS) After the first response. Median of 5 deployments. Process only, not whole-instance or billed memory.",
+        "rightText": "MiB 0 25 50 75 100 5.6 Native 80 Node.js"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "Hello route, 14.3× less memory Hello-route process memory Memory held by the process serving a hello route, after its first response. Lower is better. Resident memory (RSS) · MiB · median of 5 deployments Measures the serving process only, not whole-instance or billed memory. 0 25 50 75 100 5.6 Native 80 Node.js"
+      "text": "Hello route, 14.3× less memory Process memory (RSS) After the first response. Median of 5 deployments. Process only, not whole-instance or billed memory. MiB 0 25 50 75 100 5.6 Native 80 Node.js"
     },
     "expected": {
       "headline": "Hello route, 14.3× less memory",
@@ -633,14 +638,15 @@
     "width": 1200,
     "height": 630,
     "cssWidth": 600,
-    "bytes": 47314,
+    "bytes": 46978,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 13,
-      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. route.native.ts → scriptc → native binary"
+      "text": "next-scriptc TypeScript, compiled to native Vercel Functions. \"use native\" → scriptc → native binary"
     }
   },
   {
@@ -660,6 +666,104 @@
       "boxes": [],
       "minFont": 13,
       "text": "next-scriptc TypeScript, compiled to native Vercel Functions. app/api/hello/route.native.ts"
+    }
+  },
+  {
+    "asset": "use-native-call",
+    "direction": "c-spec",
+    "name": "use-native-call--c-spec",
+    "png": "png/use-native-call--c-spec.png",
+    "src": "src/use-native-call--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 115651,
+    "qa": {
+      "fonts": true,
+      "split": {
+        "leftRight": 452.84375,
+        "rightLeft": 512,
+        "leftText": "The native call itself, 2.48× faster Function call · 200k rows Time the page waits on the call, sidecar round trip included. Median of 120 warm requests. Loses at 5k rows and below.",
+        "rightText": "ms 0 50 100 150 200 61.5 “use native” 152.4 Node.js"
+      },
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "The native call itself, 2.48× faster Function call · 200k rows Time the page waits on the call, sidecar round trip included. Median of 120 warm requests. Loses at 5k rows and below. ms 0 50 100 150 200 61.5 “use native” 152.4 Node.js"
+    },
+    "expected": {
+      "headline": "The native call itself, 2.48× faster",
+      "values": [
+        "61.5",
+        "152.4"
+      ]
+    }
+  },
+  {
+    "asset": "use-native-page",
+    "direction": "c-spec",
+    "name": "use-native-page--c-spec",
+    "png": "png/use-native-page--c-spec.png",
+    "src": "src/use-native-page--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 128381,
+    "qa": {
+      "fonts": true,
+      "split": {
+        "leftRight": 424.2421875,
+        "rightLeft": 512,
+        "leftText": "One “use native” function, 2.13× faster page End to end · 200k rows A Server Component page that calls one native function. Median of 120 warm requests. Small inputs lose. Crossover: 5k to 15k rows.",
+        "rightText": "ms 0 50 100 150 200 91.7 “use native” 195.7 Node.js"
+      },
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "One “use native” function, 2.13× faster page End to end · 200k rows A Server Component page that calls one native function. Median of 120 warm requests. Small inputs lose. Crossover: 5k to 15k rows. ms 0 50 100 150 200 91.7 “use native” 195.7 Node.js"
+    },
+    "expected": {
+      "headline": "One “use native” function, 2.13× faster page",
+      "values": [
+        "91.7",
+        "195.7"
+      ]
+    }
+  },
+  {
+    "asset": "vector-e2e",
+    "direction": "c-spec",
+    "name": "vector-e2e--c-spec",
+    "png": "png/vector-e2e--c-spec.png",
+    "src": "src/vector-e2e--c-spec.html",
+    "width": 2400,
+    "height": 1600,
+    "cssWidth": 1200,
+    "bytes": 139853,
+    "qa": {
+      "fonts": true,
+      "split": {
+        "leftRight": 450.40625,
+        "rightLeft": 512,
+        "leftText": "Full request: ahead of Go + SIMD End to end · client in iad1 Same vector search, timed from a client in the same region. Median of 60 requests. p95 favors Go + SIMD: 63.7 vs 70.5 ms. Patched scriptc.",
+        "rightText": "ms 0 25 50 75 100 36.0 TypeScript native 39.8 Go + SIMD 83.6 Go 93.1 TypeScript on Node.js"
+      },
+      "outside": [],
+      "overlap": [],
+      "boxes": [],
+      "minFont": 20,
+      "text": "Full request: ahead of Go + SIMD End to end · client in iad1 Same vector search, timed from a client in the same region. Median of 60 requests. p95 favors Go + SIMD: 63.7 vs 70.5 ms. Patched scriptc. ms 0 25 50 75 100 36.0 TypeScript native 39.8 Go + SIMD 83.6 Go 93.1 TypeScript on Node.js"
+    },
+    "expected": {
+      "headline": "Full request: ahead of Go + SIMD",
+      "values": [
+        "36.0",
+        "39.8",
+        "83.6",
+        "93.1"
+      ]
     }
   },
   {
@@ -729,20 +833,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 172906,
+    "bytes": 150860,
     "qa": {
       "fonts": true,
       "split": {
-        "leftRight": 451.3203125,
-        "rightLeft": 518.3984375,
-        "leftText": "The search loop alone: TypeScript still leads Search loop only The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. ms · int8 · 768 dimensions · Linux Vercel Sandbox Same host and data for every runtime. Go + SIMD is experimental. Native uses a patched scriptc.",
-        "rightText": "0 50 100 150 9.3 TypeScript native 11.9 Go + SIMD 58.7 Go 102.2 TypeScript on Node.js"
+        "leftRight": 442.8984375,
+        "rightLeft": 512,
+        "leftText": "The search loop alone: TypeScript still leads Loop only · without HTTP The same 100,000-embedding search on one Linux Vercel Sandbox. Median search time. Native uses a patched scriptc. Go + SIMD is experimental.",
+        "rightText": "ms 0 50 100 150 9.3 TypeScript native 11.9 Go + SIMD 58.7 Go 102.2 TypeScript on Node.js"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "The search loop alone: TypeScript still leads Search loop only The same 100,000-embedding search, timed without HTTP, JSON or startup. Lower is better. ms · int8 · 768 dimensions · Linux Vercel Sandbox Same host and data for every runtime. Go + SIMD is experimental. Native uses a patched scriptc. 0 50 100 150 9.3 TypeScript native 11.9 Go + SIMD 58.7 Go 102.2 TypeScript on Node.js"
+      "text": "The search loop alone: TypeScript still leads Loop only · without HTTP The same 100,000-embedding search on one Linux Vercel Sandbox. Median search time. Native uses a patched scriptc. Go + SIMD is experimental. ms 0 50 100 150 9.3 TypeScript native 11.9 Go + SIMD 58.7 Go 102.2 TypeScript on Node.js"
     },
     "expected": {
       "headline": "The search loop alone: TypeScript still leads",
@@ -793,20 +897,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 185567,
+    "bytes": 148454,
     "qa": {
       "fonts": true,
       "split": {
-        "leftRight": 452,
-        "rightLeft": 518.3984375,
-        "leftText": "Memory on par with Go, about half of Node.js Vector-search process memory Memory held while serving the same search over 100,000 embeddings. Every runtime keeps the same dataset in memory. Lower is better. Resident memory (RSS) · MiB · median of 120 requests Serving process only, not billed memory. Go’s separate IPC proxy is not counted.",
-        "rightText": "0 50 100 150 200 81.1 TypeScript native 81.8 Go + SIMD 81.8 Go 153.7 TypeScript on Node.js"
+        "leftRight": 423.5859375,
+        "rightLeft": 512,
+        "leftText": "Memory on par with Go, about half of Node.js Process memory (RSS) Same vector search, same 100,000 embeddings in every runtime. Median of 120 requests. Not billed memory. Go’s IPC proxy is not counted.",
+        "rightText": "MiB 0 50 100 150 200 81.1 TypeScript native 81.8 Go + SIMD 81.8 Go 153.7 TypeScript on Node.js"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "Memory on par with Go, about half of Node.js Vector-search process memory Memory held while serving the same search over 100,000 embeddings. Every runtime keeps the same dataset in memory. Lower is better. Resident memory (RSS) · MiB · median of 120 requests Serving process only, not billed memory. Go’s separate IPC proxy is not counted. 0 50 100 150 200 81.1 TypeScript native 81.8 Go + SIMD 81.8 Go 153.7 TypeScript on Node.js"
+      "text": "Memory on par with Go, about half of Node.js Process memory (RSS) Same vector search, same 100,000 embeddings in every runtime. Median of 120 requests. Not billed memory. Go’s IPC proxy is not counted. MiB 0 50 100 150 200 81.1 TypeScript native 81.8 Go + SIMD 81.8 Go 153.7 TypeScript on Node.js"
     },
     "expected": {
       "headline": "Memory on par with Go, about half of Node.js",
@@ -830,6 +934,7 @@
     "bytes": 140776,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
@@ -859,6 +964,7 @@
     "bytes": 196065,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],
@@ -885,20 +991,20 @@
     "width": 2400,
     "height": 1600,
     "cssWidth": 1200,
-    "bytes": 182471,
+    "bytes": 135708,
     "qa": {
       "fonts": true,
       "split": {
-        "leftRight": 452,
-        "rightLeft": 518.3984375,
-        "leftText": "TypeScript faster than Go + SIMD Vector-search server compute Find the top 10 of 100,000 embeddings. Median of 120 warm requests, sent one at a time. Lower is better. ms · Vercel Functions, iad1 Full requests including network are about even: 157 vs 160 ms median. Go + SIMD uses Go’s experimental archsimd. Native uses a patched scriptc.",
-        "rightText": "0 50 100 150 10.0 TypeScript native 14.2 Go + SIMD 50.0 Go 108.6 TypeScript on Node.js"
+        "leftRight": 452.5625,
+        "rightLeft": 512,
+        "leftText": "TypeScript faster than Go + SIMD Server compute Vector search over 100,000 embeddings. Median of 120 requests. Native uses a patched scriptc. Go + SIMD is experimental.",
+        "rightText": "ms 0 50 100 150 10.0 TypeScript native 14.2 Go + SIMD 50.0 Go 108.6 TypeScript on Node.js"
       },
       "outside": [],
       "overlap": [],
       "boxes": [],
       "minFont": 20,
-      "text": "TypeScript faster than Go + SIMD Vector-search server compute Find the top 10 of 100,000 embeddings. Median of 120 warm requests, sent one at a time. Lower is better. ms · Vercel Functions, iad1 Full requests including network are about even: 157 vs 160 ms median. Go + SIMD uses Go’s experimental archsimd. Native uses a patched scriptc. 0 50 100 150 10.0 TypeScript native 14.2 Go + SIMD 50.0 Go 108.6 TypeScript on Node.js"
+      "text": "TypeScript faster than Go + SIMD Server compute Vector search over 100,000 embeddings. Median of 120 requests. Native uses a patched scriptc. Go + SIMD is experimental. ms 0 50 100 150 10.0 TypeScript native 14.2 Go + SIMD 50.0 Go 108.6 TypeScript on Node.js"
     },
     "expected": {
       "headline": "TypeScript faster than Go + SIMD",
@@ -923,6 +1029,7 @@
     "bytes": 170434,
     "qa": {
       "fonts": true,
+      "split": null,
       "outside": [],
       "overlap": [],
       "boxes": [],

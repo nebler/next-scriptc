@@ -233,5 +233,180 @@
         "locator": "Node, natural TS | CPU ms/request 76.472"
       }
     ]
+  },
+  "vectorNear": {
+    "note": "Full request time measured from a client inside Vercel iad1, end of body drain. 60 measured C=1 requests per row after 10 warmups, set 1 of the L1 previews. A different window from the server-compute chart; never subtract one from the other. Drawn in the Spec Sheet vector-e2e chart (p50); p95 in its caption note.",
+    "results": [
+      {
+        "label": "Patched native",
+        "p50": {
+          "value": 35.975,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Patched native, natural TS | End-to-end p50 / p95 ms 35.975 / 70.506"
+        },
+        "p95": {
+          "value": 70.506,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Patched native, natural TS | End-to-end p50 / p95 ms 35.975 / 70.506"
+        }
+      },
+      {
+        "label": "Go SIMD",
+        "p50": {
+          "value": 39.836,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Go experimental SIMD | End-to-end p50 / p95 ms 39.836 / 63.711"
+        },
+        "p95": {
+          "value": 63.711,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Go experimental SIMD | End-to-end p50 / p95 ms 39.836 / 63.711"
+        }
+      },
+      {
+        "label": "Go plain",
+        "p50": {
+          "value": 83.633,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Go plain | End-to-end p50 / p95 ms 83.633 / 100.302"
+        },
+        "p95": {
+          "value": 100.302,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Go plain | End-to-end p50 / p95 ms 83.633 / 100.302"
+        }
+      },
+      {
+        "label": "Node",
+        "p50": {
+          "value": 93.126,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Node, natural TS | End-to-end p50 / p95 ms 93.126 / 119.734"
+        },
+        "p95": {
+          "value": 119.734,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Node, natural TS | End-to-end p50 / p95 ms 93.126 / 119.734"
+        }
+      }
+    ],
+    "controls": [
+      {
+        "label": "Stock native, Math.imul",
+        "p50": {
+          "value": 34.733,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Stock native, Math.imul | End-to-end p50 / p95 ms 34.733 / 50.753"
+        },
+        "p95": {
+          "value": 50.753,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Stock native, Math.imul | End-to-end p50 / p95 ms 34.733 / 50.753"
+        }
+      },
+      {
+        "label": "Stock native, natural TS",
+        "p50": {
+          "value": 440.12,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Stock native, natural TS | End-to-end p50 / p95 ms 440.120 / 489.308"
+        },
+        "p95": {
+          "value": 489.308,
+          "source": "research/vercel-near-client.md#c1-results",
+          "locator": "Stock native, natural TS | End-to-end p50 / p95 ms 440.120 / 489.308"
+        }
+      }
+    ]
+  },
+  "vectorStockCompute": {
+    "note": "Stock scriptc 0.4.6 controls from the same hosted compute run (server compute p50). Notes only.",
+    "results": [
+      {
+        "label": "Stock native, Math.imul",
+        "value": 10.087,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Native stock 0.4.6, Math.imul + dispatch | 10.087 / 10.723"
+      },
+      {
+        "label": "Stock native, natural TS",
+        "value": 408.928,
+        "source": "research/vector-vercel.md#measurements",
+        "locator": "Native stock 0.4.6, natural TS + dispatch | 408.928 / 419.811"
+      }
+    ]
+  },
+  "useNativeFinal": {
+    "note": "Final hosted use-native measurement after O1 + O2: /reports Server Component page, warm, 2 fresh preview pairs x 60 C=1 requests = 120 pooled samples per row, client inside iad1. First-call (fresh-instance) values are excluded on purpose.",
+    "endToEnd200k": {
+      "node": {
+        "value": 195.709,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "200,000 | Node fallback",
+        "locator": "200,000 | Node fallback | iad1 end-to-end p50 195.709"
+      },
+      "native": {
+        "value": 91.703,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "200,000 | Native sidecar",
+        "locator": "200,000 | Native sidecar | iad1 end-to-end p50 91.703"
+      }
+    },
+    "function200k": {
+      "node": {
+        "value": 152.35,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "200,000 | Node fallback",
+        "locator": "200,000 | Node fallback | Function p50 152.350"
+      },
+      "native": {
+        "value": 61.489,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "200,000 | Native sidecar",
+        "locator": "200,000 | Native sidecar | Function p50 61.489"
+      }
+    },
+    "function5k": {
+      "node": {
+        "value": 3.829,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Node fallback",
+        "locator": "5,000 | Node fallback | Function p50 3.829"
+      },
+      "native": {
+        "value": 4.277,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Native sidecar",
+        "locator": "5,000 | Native sidecar | Function p50 4.277"
+      }
+    },
+    "endToEnd5k": {
+      "node": {
+        "value": 34.642,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Node fallback",
+        "locator": "5,000 | Node fallback | iad1 end-to-end p50 34.642"
+      },
+      "native": {
+        "value": 32.564,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Native sidecar",
+        "locator": "5,000 | Native sidecar | iad1 end-to-end p50 32.564"
+      }
+    },
+    "endToEnd5kP95": {
+      "node": {
+        "value": 59.261,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Node fallback",
+        "locator": "5,000 | Node fallback | iad1 end-to-end p95 59.261"
+      },
+      "native": {
+        "value": 68.827,
+        "source": "research/use-native-vercel.md#warm-results-and-crossover",
+        "row": "5,000 | Native sidecar",
+        "locator": "5,000 | Native sidecar | iad1 end-to-end p95 68.827"
+      }
+    }
   }
 }

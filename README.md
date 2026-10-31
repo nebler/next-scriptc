@@ -2,9 +2,23 @@
 
 A Next.js adapter that compiles route handlers and server functions to native executables with [scriptc](https://github.com/vercel-labs/scriptc). It does not fork Next.js.
 
-![next-scriptc](.github/assets/hero.png)
+!["use native": compile TypeScript functions to native code](research/launch/redesign/png/hero--c-spec.png)
 
 Experimental. Version `0.0.0`, not on npm. Tested with Next 16.4.3 and scriptc 0.4.6.
+
+## Benchmarks
+
+Native code pays off when a call does a lot of compute for a small payload. It loses on small calls, where the process boundary costs more than the work saves.
+
+[![Warm 200k-row page response: 91.7 ms with "use native" versus 195.7 ms on Node.js, median of 120 requests](research/launch/redesign/png/use-native-page--c-spec.png)](research/use-native-vercel.md#final-hosted-measurement-after-o1--o2)
+
+| Vercel preview, iad1 | Node | Native |
+| --- | ---: | ---: |
+| `"use native"` page, 200k rows, end-to-end p50 | 195.7 ms | 91.7 ms |
+| Same page, 5k rows, `"use native"` call time p50 | 3.8 ms | 4.3 ms |
+| Markdown rendering with `marked`, process CPU per request | 4.6 ms | 40.2 ms |
+
+The `"use native"` rows are warm requests from a client in iad1, 120 per row ([final hosted measurement](research/use-native-vercel.md#final-hosted-measurement-after-o1--o2)). The call crosses over between 5k and 15k rows. Each row is one workload, measured over short windows on a handful of previews. The table is not a claim about production capacity or billed CPU. In route experiments, Go also beat native TypeScript at CSV parsing and bcrypt. One vector-search route reached 10.0 ms of server compute against 14.2 ms for Go SIMD, but only with a patched scriptc compiler.
 
 ## Two ways to go native
 
@@ -99,17 +113,7 @@ vercel deploy --prebuilt
 
 `vercel-build` runs `vercel build` with Vercel's Next adapter, then replaces native routes with Linux x86-64 executable Functions. For function-level `"use native"`, it bundles a Linux sidecar into each Node Function. Calls reach the sidecar over loopback HTTP, and the first call can wait for the sidecar to start. Pass `--prod` to both commands for production. See [`"use native"` on Vercel](research/use-native-vercel.md) for measurements and limits.
 
-## What to expect
-
-Native code pays off when a call does a lot of compute for a small payload. It loses on small calls, where the process boundary costs more than the work saves.
-
-| Vercel preview, iad1 | Node | Native |
-| --- | ---: | ---: |
-| `"use native"` page, 200k rows, end-to-end p50 | 203.3 ms | 97.4 ms |
-| Same page, 5k rows, end-to-end p50 | 40.5 ms | 42.1 ms |
-| Markdown rendering with `marked`, process CPU per request | 4.6 ms | 40.2 ms |
-
-Each row is one workload, measured over short windows on a handful of previews. The table is not a claim about production capacity or billed CPU. In route experiments, Go also beat native TypeScript at CSV parsing and bcrypt. One vector-search route reached 10.0 ms of server compute against 14.2 ms for Go SIMD, but only with a patched scriptc compiler.
+## Limits
 
 Limits that matter on day one:
 
