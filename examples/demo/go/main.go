@@ -282,7 +282,7 @@ func diagnostics(w http.ResponseWriter, r *http.Request) {
 }
 func handler() http.Handler {
 	mux := http.NewServeMux()
-	for name, fn := range map[string]http.HandlerFunc{"csv": csvReport, "json": jsonReport, "thumbnail": thumbnail, "bcrypt": password} {
+	for name, fn := range map[string]http.HandlerFunc{"csv": csvReport, "json": jsonReport, "thumbnail": thumbnail, "bcrypt": password, "vectors": vectorSearch, "vectors-imul": vectorSearch} {
 		mux.HandleFunc("POST /api/heavy/"+name, fn)
 		mux.HandleFunc("POST /api/heavy-go/"+name, fn)
 	}
@@ -294,6 +294,7 @@ func handler() http.Handler {
 	})
 }
 func main() {
+	initVectors()
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3101"

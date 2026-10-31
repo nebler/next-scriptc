@@ -248,7 +248,7 @@ for (const invalid of [await token({ exp: clock - 1 }), await token({ aud: "wron
 }
 
 // Heavy route contracts extend the existing cases without changing their assertions.
-for (const test of [...[heavySpec("csv", 40000), heavySpec("json", 10000), heavySpec("thumbnail", 512), heavySpec("bcrypt", 10)], ...heavyEdges()]) {
+for (const test of [...[heavySpec("csv", 40000), heavySpec("json", 10000), heavySpec("thumbnail", 512), heavySpec("bcrypt", 10), heavySpec("vectors", 100000), heavySpec("vectors-imul", 100000)], ...heavyEdges()]) {
   cases.push({ ...test, status: test.status ?? 200 });
 }
 

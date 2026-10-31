@@ -1,0 +1,2387 @@
+{
+  "note": "Shared macOS host; correctness only",
+  "status": "complete",
+  "cases": 36,
+  "rows": [
+    {
+      "id": "vectors",
+      "size": 100000,
+      "path": "/api/heavy/vectors",
+      "requestBytes": 2813,
+      "requestSha256": "2b76366ea1c876b589c134c61cb68fda5882a29e86b92ba797503c7f6436ab80",
+      "results": [
+        {
+          "variant": "node",
+          "ms": 379.60400000000027,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 837.7157909999996,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 61.4311660000003,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 41.46979199999987,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 13.108874999999898,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "size": 100000,
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 2813,
+      "requestSha256": "2b76366ea1c876b589c134c61cb68fda5882a29e86b92ba797503c7f6436ab80",
+      "results": [
+        {
+          "variant": "node",
+          "ms": 155.7245409999996,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 743.0029169999998,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 36.76545900000019,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 25.911291999999776,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 6.400749999999789,
+          "digest": "f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a",
+          "bytes": 290,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1,
+      "requestSha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.79424999999992,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.0684999999994034,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.7770839999993768,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.6330840000000535,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.4945420000003651,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 4,
+      "requestSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.3767500000003565,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.6311249999998836,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.5549999999993815,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5065829999994094,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.726542000000336,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 2,
+      "requestSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.2026669999995647,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.649333999999726,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.5778749999999491,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5257089999995515,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.5132499999999709,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 2,
+      "requestSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.9488750000000437,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.4960419999997612,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.5930830000006608,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5894579999994676,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.5784589999993841,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 18,
+      "requestSha256": "ac920ec51e11cf2c63ca7528f6f16ece84a0d016a2b8c14a390799f36eff243b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.7958330000001297,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.2424169999994774,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.7235000000000582,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.4605840000003809,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.49854099999993196,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 16,
+      "requestSha256": "deedfa8db0ac643f2c7405a6d5cf79183ff1dbee2218738ce5365f2d8a61a4d1",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.1604580000002898,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.6550000000006548,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.6753749999998035,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.7677499999999782,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.6701670000002196,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1551,
+      "requestSha256": "40a7f4226d755a47c5554d72a1933f2037b4b2ef5aa225d37bef209291a6bed4",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 66.46554200000082,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 650.975375,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 36.600625000000036,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 25.833042000000205,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 6.066791999999623,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 3855,
+      "requestSha256": "035e2e978d506435a9c6fff9e5235d50ff660f43efb07e58509e46cc0cce016c",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 64.702542,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 827.2654170000005,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 50.98604200000045,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 48.44470799999999,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 21.82245800000055,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 3087,
+      "requestSha256": "b0fbaadebb786a3c93217961f01de6a63fe3ac6320ce22b3acc5d5331523ac16",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 128.2196669999994,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1191.2204999999994,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 53.74737500000083,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 38.34791600000062,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 12.809374999998909,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1549,
+      "requestSha256": "3f18357b9ef627d3f84e9920fb320dceb2f7ad0c2e94a38ee7d04d28541789d0",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 3.255209000000832,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.5241249999999127,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.5782089999993332,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.121292000001631,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.9650410000012926,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1553,
+      "requestSha256": "02f89d565999dc935830d3207913811b609e2008bac031d187907b89f6c3991b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 3.5067920000001322,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 4.068957999999839,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.1347920000007434,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.7331659999999829,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.7572909999998956,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1553,
+      "requestSha256": "e9dc6c1974b0b10dab0028dc0a62ebd194a1a0e041f49267f00dec2248cd2434",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.590457999998762,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.316625000001295,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.5296250000010332,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.8147920000010345,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 1.0748330000005808,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1554,
+      "requestSha256": "a2008a028e00425176e5286c85e882aa48aaa40445f860e060674c4d4862e43e",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 3.16150000000016,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 4.0865409999987605,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 2.823291999999128,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.3029159999987314,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.9755839999997988,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1553,
+      "requestSha256": "cbb49974e36180229784afad0b940c845337e2e0b6dbd552362a65c8dc4bf278",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 4.7807080000002316,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.8676249999989523,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.1173749999998108,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.9172909999997501,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.8879579999993439,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1553,
+      "requestSha256": "d77bb237e05245b5c8de46d354dc852005c8cedcdd11975fb233b03e7c9a6369",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 3.27074999999968,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.502209000000221,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.531208999998853,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 4.485457999999198,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 7.9782909999994445,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1554,
+      "requestSha256": "4828d0f2d57e2f3fe331c3b1f84c88bbb00704e7098ad6342e6876f18caf7dac",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 8.443708000000697,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 6.6958749999994325,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.6077920000006998,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.2945420000014565,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 1.8327079999999114,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors",
+      "path": "/api/heavy/vectors",
+      "requestBytes": 1554,
+      "requestSha256": "56d9407271b78f108d7aa7649f3928ce598e7296fd02ff8355a58a48d682341b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 8.492917000001398,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 8.904500000000553,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 4.107166000001598,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 3.7942500000008295,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 2.6184589999993477,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1,
+      "requestSha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 13.542124999999942,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 18.265625,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 8.825333000000683,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.9282920000005106,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.7870419999999285,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 4,
+      "requestSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 7.488999999999578,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 8.072124999998778,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 3.6120000000009895,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 2.675208999999086,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 4.646082999999635,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 2,
+      "requestSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 4.02599999999984,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 3.3231249999989814,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 2.203125,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.3661659999997937,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 1.067957999999635,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 2,
+      "requestSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 5.155083999999988,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 3.2739160000000993,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.834791999999652,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.961790999999721,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.6386249999995925,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 18,
+      "requestSha256": "ac920ec51e11cf2c63ca7528f6f16ece84a0d016a2b8c14a390799f36eff243b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.4139589999995223,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.242667000000438,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.725666000000274,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.8765000000003056,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 3.4240419999987353,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 16,
+      "requestSha256": "deedfa8db0ac643f2c7405a6d5cf79183ff1dbee2218738ce5365f2d8a61a4d1",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 7.296249999999418,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 2.428125000000364,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 2.032916000000114,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 1.0889170000009472,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 1.4269999999996799,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1551,
+      "requestSha256": "40a7f4226d755a47c5554d72a1933f2037b4b2ef5aa225d37bef209291a6bed4",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 135.54683300000033,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 942.434541999999,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 59.65400000000045,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 51.19862499999908,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 16.759791999998924,
+          "digest": "66ccf782dd4b6de6d14fb05e8cd57657b9a48b44acdcef1e475d3a2c29b804b0",
+          "bytes": 203,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 3855,
+      "requestSha256": "035e2e978d506435a9c6fff9e5235d50ff660f43efb07e58509e46cc0cce016c",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 147.25391599999966,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 759.9797499999986,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 36.533957999999984,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 25.978791999999885,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 6.2161250000008295,
+          "digest": "450f50c5e3987b28c3fc18030ef2b6a2e8d9105a9c15e837ed1a7949aa7df1cd",
+          "bytes": 293,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 3087,
+      "requestSha256": "b0fbaadebb786a3c93217961f01de6a63fe3ac6320ce22b3acc5d5331523ac16",
+      "status": 200,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 91.7922090000011,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "258.3489169999998"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 647.583541,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native",
+            "x-vector-init-ms": "723.8409999608994"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 36.44404200000099,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 25.916583000000173,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 6.2884589999994205,
+          "digest": "693dc0d691bf9ab71ada7df16e295f954c81700f2b6d5ceafa7048f21561d0ed",
+          "bytes": 294,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-vector-init-ms": "491.220167"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1549,
+      "requestSha256": "3f18357b9ef627d3f84e9920fb320dceb2f7ad0c2e94a38ee7d04d28541789d0",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.976833999999144,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.4732500000009168,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.7159590000010212,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5340420000011363,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.5956249999999272,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1553,
+      "requestSha256": "02f89d565999dc935830d3207913811b609e2008bac031d187907b89f6c3991b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.420124999998734,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.462082999998529,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.7198750000006839,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5909169999995356,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.6567500000001019,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1553,
+      "requestSha256": "e9dc6c1974b0b10dab0028dc0a62ebd194a1a0e041f49267f00dec2248cd2434",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.4020419999997102,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.1981660000001284,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.6931249999997817,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.8447080000005371,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.6935410000005504,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1554,
+      "requestSha256": "a2008a028e00425176e5286c85e882aa48aaa40445f860e060674c4d4862e43e",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.4213330000002316,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 9.40508299999965,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.3683750000000146,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.9926250000007713,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 1.244542000000365,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1553,
+      "requestSha256": "cbb49974e36180229784afad0b940c845337e2e0b6dbd552362a65c8dc4bf278",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 2.0197919999991427,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 4.013833000000886,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 1.0206249999991996,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.7302500000005239,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.8722500000003492,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1553,
+      "requestSha256": "d77bb237e05245b5c8de46d354dc852005c8cedcdd11975fb233b03e7c9a6369",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.640000000001237,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.3783329999987473,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.8756250000005821,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.748583000000508,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.6558750000003783,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1554,
+      "requestSha256": "4828d0f2d57e2f3fe331c3b1f84c88bbb00704e7098ad6342e6876f18caf7dac",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.232625000000553,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.192166000000725,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.7201250000016444,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.6328749999993306,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.5450839999994059,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    },
+    {
+      "id": "vectors-imul",
+      "path": "/api/heavy/vectors-imul",
+      "requestBytes": 1554,
+      "requestSha256": "56d9407271b78f108d7aa7649f3928ce598e7296fd02ff8355a58a48d682341b",
+      "status": 400,
+      "results": [
+        {
+          "variant": "node",
+          "ms": 1.5154590000001917,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "native",
+          "ms": 1.2036250000001019,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store",
+            "x-next-scriptc": "native"
+          }
+        },
+        {
+          "variant": "go-plain",
+          "ms": 0.6499999999996362,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-unrolled",
+          "ms": 0.5326249999998254,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        },
+        {
+          "variant": "go-simd",
+          "ms": 0.5462920000009035,
+          "digest": "f97b957d728e0670f129662fa94ac6ebaae5d6a749779be18b59232fe1b05e86",
+          "bytes": 25,
+          "reusedSocket": false,
+          "headers": {
+            "content-type": "application/json",
+            "cache-control": "no-store"
+          }
+        }
+      ]
+    }
+  ]
+}

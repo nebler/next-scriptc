@@ -24,7 +24,7 @@ const grouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light";
 // Vercel bundles the Node baseline's App Routes into one Function. Explicitly
 // share native routes too: one cold start and no isolation between members.
 const vercelGrouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "vercel";
-const heavyRoutes = ["csv", "json", "thumbnail", "bcrypt", "diagnostics"].map((name) => `/api/heavy/${name}`);
+const heavyRoutes = ["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"].map((name) => `/api/heavy/${name}`);
 const vercelRoutes = [...lightRoutes, ...heavyRoutes, "/api/diagnostics/memory",
   "/api/app/orders", "/api/app/webhooks/payment", "/api/app/diagnostics/redis", "/api/app/diagnostics/process",
   "/api/feed.xml", "/api/images/histogram", "/api/login", "/api/login-scrypt",

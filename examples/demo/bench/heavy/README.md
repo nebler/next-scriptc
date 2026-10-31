@@ -42,3 +42,55 @@ This execution retained two setup failures (package-manager fallback and a wrong
 The original hosted worker timed out during the third native-thumbnail CPU window, before native bcrypt and Go. `complete-go.mjs` is a run-specific, guarded completion of previously unmeasured Go rows. It checks the exact retained interruption state, reserves its remaining invocation/wall budget, re-inspects the same immutable preview, verifies original digests, and uses a separately disclosed one-vCPU generator. It does not resume or repeat measured Node/native rows. Keep both hosted artifacts; their concatenation is not a successful uninterrupted run. The primary native-bcrypt stage and the incomplete thumbnail CPU series stay missing. A final separately registered bcrypt-followup.mjs diagnostic uses only the previously unmeasured native C1 row, with CPU boundaries around the same three C1 samples; it does not supply C16 or rewrite the primary artifact. A new complete paired run would require a new prospective protocol/budget.
 
 `report.mjs` generates numeric tables/ratios, with each absent combination explicit. `audit.mjs` recomputes percentiles, deltas, CPU/procfs consistency, parity digests, coverage and conservative costs. Run these against retained JSON after collection; they never request workloads or substitute measurements.
+
+## Vector retrieval
+
+`/api/heavy/vectors` is the natural int8 reduction and `/api/heavy/vectors-imul`
+is its explicitly labelled control. POST `{ "embedding": [768 signed int8 integers] }`.
+Both scan the same 100k×768 corpus generated once at module init and return exact
+top-10 `{results:[{id,score}]}`. Go accepts both paths and `?kernel=plain|unrolled|simd`
+(default unrolled); SIMD needs `GOEXPERIMENT=simd`, Go 1.27.3, NEON or AVX2.
+SIMD-unavailable returns 503, never silently reports a scalar fallback as SIMD.
+
+Use `HEAVY_WORKLOADS=vectors,vectors-imul` to select vector fixtures/edge cases.
+`HEAVY_VECTOR_SUITE=1` expands self.mjs to Node natural/imul, native natural/imul,
+and Go plain/unrolled/SIMD (seven measured rows). This also expands hosted deployment
+targets and avoids duplicate Go imul timing. The ordinary runner retains its existing
+three targets and now includes both vector fixtures. `vector-test.mjs` checks an
+independent ranking oracle; `routes.mjs` and parity.mjs exercise invalid and boundary
+queries. `HEAVY_OUTPUT` on local-check.mjs keeps vector correctness evidence separate.
+
+Bounded Linux controllers, run from committed source:
+
+```sh
+# Prepare .vercel/vector-tools binaries as documented in research/vector-route.md.
+node --env-file=.env.local examples/demo/bench/heavy/vector-sandbox.mjs --scout
+node --env-file=.env.local examples/demo/bench/heavy/vector-sandbox.mjs
+```
+
+They reserve 1×330s for scout and 2×510s for route-before respectively, allow time
+for downloads, stop in finally and refuse to overwrite evidence. Don't use the
+older heavy sandbox controller for the vector budget. An extra attempt needs a
+prospective remaining-budget check; a new label alone is not permission to spend.
+
+Hosted wiring (not deployed by this task): `HEAVY_RUN_NAME=vector HEAVY_VECTOR_SUITE=1
+HEAVY_WORKLOADS=vectors,vectors-imul node examples/demo/bench/heavy/deploy.mjs` builds
+two previews and creates `.vercel/vector-job.json`. The existing pinned Vercel Go
+IPC proxy serves both Go paths from the same executable Function. In a separately
+budgeted Linux generator, run hosted.mjs with `HEAVY_JOB`, `HEAVY_OUTPUT`,
+`HEAVY_WORKLOADS=vectors,vectors-imul`, and `HEAVY_VECTOR_SUITE=1`. It uses hosted
+revision 2 (20+200 C=1, C=16 2s/400 warmup + 3s/400 measurement, separate process
+CPU windows). That hosted experiment still needs its own budget/registration;
+no hosted result is supplied by the self-hosted controller.
+
+The final stock route uses a synchronous scoring helper after body parsing. The
+initial async-loop route's unexpectedly slow imul measurement is retained in
+`vector-route-before*`; the full separately registered correction is
+`vector-route-sync-before*`. Its 199-second controller uploaded prepared Linux
+builds using `--label=route-sync-before --prebuilt=/absolute/builds.tar`, with a
+remaining-budget check. Both experiments fit the combined 0.3 vCPU-hour task limit.
+Do not overwrite either or provision more under that finished allocation. A future
+patched Linux run can pass `--compiler=/absolute/linux-cli --label=route-patched`;
+it uploads/hashes that CLI and applies the general compiler override during the
+build. Register a new budget first. Full preparation and comparison limits are in
+`research/vector-route.md`; offline vector tables use `node scripts/vector-report.mjs`.

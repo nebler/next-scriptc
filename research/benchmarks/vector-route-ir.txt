@@ -1,0 +1,58 @@
+Stock scriptc 0.4.6; final route source 98463cc.
+Linux GNU runtime 0.4.6, release, portable x86-64.
+These are pre-LLVM-optimization IR excerpts, not final SIMD assembly.
+Full generated IR SHA256: b8cb6963e194b033e5240c064ddcc21c680fb387100a96ae0059baa482c8158d
+
+natural synchronous borrowed helper:
+define internal ptr @sc_bf__x25_m145876000_search(ptr %p_sc_l_data_0, ptr %p_sc_l_embedding_0, double %p_sc_l_n_0, double %p_sc_l_d_0) #0 personality ptr @__gcc_personality_v0 { ; %m145876000.search
+  ... bytes.version.fast9, product and reduction ...
+  %t851 = fmul double %t831, %t846
+  %t852 = mul i32 %t832, %t847
+  %t853 = and i1 %t833, %t848
+  %t854 = select i1 %t853, i32 %t852, i32 0
+  %t855 = fadd double %t814, %t851
+  %t857 = fcmp oge double %t855, 0xC3E0000000000000
+  %t858 = fcmp olt double %t855, 0x43E0000000000000
+  %t859 = and i1 %t857, %t858
+  br i1 %t859, label %uint32.coerce.fast223, label %uint32.coerce.slow224
+uint32.coerce.fast223:
+  %t860 = fptosi double %t855 to i64
+  %t861 = trunc i64 %t860 to i32
+  br label %uint32.coerce.done225
+uint32.coerce.slow224:
+  %t862 = bitcast double %t855 to i64
+  %t863 = lshr i64 %t862, 52
+  %t864 = and i64 %t863, 2047
+  %t865 = and i64 %t862, 4503599627370495
+  %t866 = or i64 %t865, 4503599627370496
+  %t867 = sub i64 %t864, 1075
+  %t868 = icmp ult i64 %t867, 64
+  %t869 = select i1 %t868, i64 %t867, i64 0
+  %t870 = shl i64 %t866, %t869
+
+imul synchronous borrowed helper:
+define internal ptr @sc_bf__x25_m2617749240_search(ptr %p_sc_l_data_0, ptr %p_sc_l_embedding_0, double %p_sc_l_n_0, double %p_sc_l_d_0) #0 personality ptr @__gcc_personality_v0 { ; %m2617749240.search
+  ... bytes.version.fast9, product and reduction ...
+  %t755 = mul i32 %t736, %t751
+  %t756 = sitofp i32 %t755 to double
+  %t758 = sext i32 %t717 to i64
+  %t759 = sext i32 %t755 to i64
+  %t760 = add nsw i64 %t758, %t759
+  %t762 = trunc i64 %t760 to i32
+  %t761 = sitofp i64 %t760 to double
+  %t763 = add i32 %t717, %t755
+  %t765 = or i32 %t763, 0
+  %t764 = sitofp i32 %t765 to double
+  store i32 %t765, ptr %sc_l_sum_0
+  br label %loop.u198
+loop.u198:
+  %t766 = load i64, ptr %s677
+  %t767 = add nsw i64 %t766, 1
+  store i64 %t767, ptr %s677
+  br label %loop.c196
+loop.short.end194:
+  %t714 = icmp sgt i64 %t712, 64
+  br i1 %t714, label %loop.short.poll195, label %loop.e189
+loop.short.poll195:
+  %t768 = load atomic i32, ptr @scr_exc_flag monotonic, align 4
+  %t769 = icmp ne i32 %t768, 0

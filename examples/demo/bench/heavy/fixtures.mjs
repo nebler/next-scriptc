@@ -38,6 +38,14 @@ export function rgbaFixture(size) {
   }
   return bytes;
 }
+export function vectorFixture(seed = 0xabcdef01) {
+  let state = seed;
+  const embedding = Array.from({ length: 768 }, () => {
+    state ^= state << 13; state ^= state >>> 17; state ^= state << 5;
+    return ((state >>> 0) % 256) - 128;
+  });
+  return Buffer.from(JSON.stringify({ embedding }));
+}
 export function spec(id, size) {
   let path = `/api/heavy/${id}`,
     body,
@@ -51,6 +59,7 @@ export function spec(id, size) {
     contentType = "application/octet-stream";
     path += `?width=${size}&height=${size}`;
   } else if (id === "bcrypt") body = Buffer.from(JSON.stringify({ password }));
+  else if (id === "vectors" || id === "vectors-imul") body = vectorFixture();
   else throw new Error(`Unknown fixture: ${id}`);
   return {
     id,
@@ -68,9 +77,16 @@ export const sizes = {
   json: [10000, 30000],
   thumbnail: [512, 1024],
   bcrypt: [10],
+  vectors: [100000],
+  "vectors-imul": [100000],
 };
+export function selected(id) {
+  const filter = process.env.HEAVY_WORKLOADS?.split(",");
+  if (filter?.some((name) => !(name in sizes))) throw new Error("Unknown HEAVY_WORKLOADS");
+  return !filter || filter.includes(id);
+}
 export function workloads(hosted = false) {
-  return Object.entries(sizes).map(([id, values]) =>
+  return Object.entries(sizes).filter(([id]) => selected(id)).map(([id, values]) =>
     spec(
       id,
       hosted && ["csv", "json"].includes(id) ? values[0] : values.at(-1),
@@ -142,5 +158,16 @@ export function edgeCases() {
       body: Buffer.from(JSON.stringify({ password })),
       status: i === 0 ? 200 : 400,
     })),
-  ];
+    ...["vectors", "vectors-imul"].flatMap((id) => [
+      ...["{", "null", "[]", "{}", '{"embedding":null}', '{"embedding":[]}'].map((body) => ({ body, status: 400 })),
+      ...[
+        { embedding: Array(768).fill(0) },
+        { embedding: Array(768).fill(-128) },
+        { embedding: Array(768).fill(127) },
+        { embedding: Array(767).fill(0) },
+        { embedding: Array(769).fill(0) },
+        ...[128, -129, 0.5, "1", null, true].map((x) => ({ embedding: [x, ...Array(767).fill(0)] })),
+      ].map((value, i) => ({ body: JSON.stringify(value), status: i < 3 ? 200 : 400 })),
+    ].map((s) => ({ ...s, id, path: `/api/heavy/${id}`, method: "POST", body: Buffer.from(s.body) }))),
+  ].filter((s) => selected(s.id));
 }

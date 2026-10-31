@@ -1,5 +1,43 @@
 # Pre-registered workload selection — final round
 
+## Vector retrieval — prospective protocol (2026-10-31)
+
+### Synchronous-kernel revision, registered before its Linux measurement
+
+The complete first route experiment (`vector-route-before*`, source 52f0a6a)
+found native imul **420.606 ms**, versus its 24.354 ms kernel scout: the HTTP
+implementation did not preserve that fast path. Keep every first result. Refactor
+both TS forms identically into a synchronous typed-array scoring helper with
+explicit corpus/query/N/D parameters, called after awaiting the body. Do not alter
+data, input/output, Go kernels, optimization settings or workload counts. Local
+correctness/diagnosis can verify the new shape before spending. A second **complete
+seven-row** stock-0.4.6 experiment is a new implementation revision, not a selective
+replacement for the first. Its artifacts are `vector-route-sync-before*`.
+
+First route Sandbox stopped after 310,969 ms at 2 vCPU = 0.172760556 vCPU-h.
+Remaining allowance under 0.3 is 0.127239444 vCPU-h. Reserve a second 2-vCPU
+**199,000 ms** hard lifetime plus **30,000 ms** for provisioning/cleanup:
+2×(310.969+199+30)/3600 = **0.299982778 vCPU-h** total upper allocation.
+Skip remote builds to fit: build both Next artifacts on Mac from committed source,
+cross-compile all native route/functions entries with the public Linux GNU runtime
+0.4.6/Zig, and upload the prepared `.next`/`.next-node` trees. Linux still installs
+the frozen dependency lockfile, runs ordinary `next start`, validates every target
+and CPU/procfs counter before timing, and retains artifact hashes/build IDs. No
+runtime source needs a Mac path: manifests keep their frozen source labels/ports,
+while binaries and Next chunks are self-contained. Disclose this build-host change;
+do not pool or directly attribute cross-VM deltas to the refactor. Same app CPU 0 /
+client CPU 1, body-drain metrics, parity, windows/counts, all rows, default timeout,
+no tuning/retries. Stop in finally; retain partials if the reservation is insufficient.
+No further route Sandbox is allowed under this task's budget.
+
+Registered on main a7efb81 before vector implementation or measurements. Synthetic resident exhaustive RAG retrieval: 100,000 rows × 768 signed int8 dimensions, top-10 descending dot product, smaller ID wins ties. Corpus is seeded xorshift32 at module initialization, 76,800,000 bytes; request is JSON `{ "embedding": [768 signed integers] }`. HTTP timing includes JSON parse, validation, query conversion, scoring, selection and serialization. Natural `(sum + a*b)|0` and separately labelled `Math.imul` routes share everything except the multiply. The same route files run on Node and stock scriptc 0.4.6; keep the expected natural-code regression. Go 1.27.3: plain, four independent accumulators, and experimental `GOEXPERIMENT=simd` archsimd (NEON / feature-checked AVX2). No compiler fork changes here. SIMD is an explicit experimental baseline, not ordinary Go auto-vectorization. Compare all IDs and exact int8 scores, including ties, negative extremes and invalid requests. Float32 reference kernels retain float64 products/accumulation; unrolled/SIMD sums may reassociate, so require identical top-10 IDs and scores within 1e-10 absolute + 1e-12 relative, retain maximum error. No float32-accumulator substitution.
+
+Scout: both 20k×384 and 100k×768; Node natural number-sum, i32 and imul idioms, Go plain/unrolled/SIMD; native natural/imul release controls. Mac two reversed process orders, 10 warmups + 20 samples; Linux one forward/reverse pair, 5 warmups + 10 samples. Initialization and parity outside kernel timing, retain every raw sample, version, binary/source hash and peak process RSS. Linux one nonpersistent 1-vCPU Sandbox with hard lifetime ≤330 seconds (≤0.091667 vCPU-h, including a 30-second cleanup/provisioning margin stays ≤0.1). Cross-build locally, no installs in that VM. No selective repeat or outlier removal.
+
+Route before: one nonpersistent Linux 2-vCPU Sandbox, hard lifetime ≤510 seconds (0.283334 vCPU-h reservation; 30-second provisioning/cleanup margin totals 0.3). App affinity CPU 0, generator CPU 1; all requests through production `next start`, including Next external rewrite for Go. Frozen committed archive; builds may use both CPUs before timing. Sequential Node/native/Go variants; natural + imul Node/native and plain/unrolled/SIMD Go (seven measured rows). Validate bytes across every variant before timing. First vector request per fresh measurement process recorded separately as route-first (not certified process-cold); corpus generation duration in diagnostic header, excluded from response body. Warm protocol follows heavy revision 2 accounting: 5+40 C=1, C=16 warmup 1s/100 and measurement 2s/100 (first limit wins); body-drain latency, full owned Next + native/Go process-tree CPU and 100ms sampled summed RSS. Report cap status/client CPU. No request retries, default proxy timeout, no tuned Node flags. Tick quantization/shared-page double counting disclosed. Record initialization separately, no subtracting it from timed warm rows. If time runs out retain partials and report missing rows. Stock compiler 0.4.6 before must precede patched-compiler reruns, which use new artifact names and the same protocol. Budgets cover all attempts; no duplicate active work.
+
+Vercel wiring uses existing heavy revision 2 hosted runner and pinned Go IPC proxy, with both vector routes/Go variants available. No preview is planned in this task; at most two if trivial. No hosted numbers may be inferred from Sandbox. Existing four heavy workloads remain available; vector-only selection is explicit so historical evidence is not overwritten. Report all failures and losses in research/vector-route.md and raw evidence under research/benchmarks/vector-*.
+
 Selection criterion: choose operations common in real Next.js applications, not operations selected for native performance. The fixed headline set is successful stored-password login using cost-10 bcryptjs, successful stored-password login using Node's built-in async scrypt, authenticated HS256 JWT verification, retained-index search over 3,000 products, uncached Markdown article rendering, and request-dependent full-content RSS. Small JSON `hello` is the transport control; primes is a synchronous CPU control; the million-order report at 1/2/4 workers is the synthetic sharing experiment, including the hand-flattened Node SharedArrayBuffer baseline. Existing CSV and OG-image probe refusals remain reported.
 
 **Every selected workload is reported whatever the result**, including slower execution, compiler refusals, parity failures and Next's default 30-second proxy timeout. No workload will be removed or substituted after this registration. Both Node and native execute the same handler and request fixtures; Node retains its normal production optimization and JIT. Any intended native GET must depend on a realistic request input so both runtimes compute the response on every measured request. Node build prerendered paths are recorded separately.

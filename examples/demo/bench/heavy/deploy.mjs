@@ -1,7 +1,9 @@
 // Two previews only; no aliases, project changes or production deployments.
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile, access } from "node:fs/promises";
-const prefix = "research/benchmarks/heavy-deployments.json";
+const run = process.env.HEAVY_RUN_NAME ?? "heavy";
+if (!/^[a-z0-9-]+$/.test(run)) throw new Error("Invalid HEAVY_RUN_NAME");
+const prefix = `research/benchmarks/${run}-deployments.json`;
 try {
   await access(prefix);
   throw new Error("Deployments already started; inspect retained identities");
@@ -87,6 +89,10 @@ try {
       deploymentId: native.id,
     },
   ];
+  if (process.env.HEAVY_VECTOR_SUITE === "1") {
+    const go = targets.pop();
+    targets.push(...["plain", "unrolled", "simd"].map((kernel) => ({ ...go, variant: `go-${kernel}`, query: `kernel=${kernel}` })));
+  }
   for (const t of targets) {
     const preview = data.previews.find((p) => p.id === t.deploymentId);
     const info = preview.metadata.deployed;
@@ -99,7 +105,7 @@ try {
     t.functions = funcs
       .filter((o) => o.path.startsWith(t.prefix.slice(1)))
       .map((o) => ({ path: o.path, ...o.lambda }));
-    for (const route of ["csv", "json", "thumbnail", "bcrypt", "diagnostics"]) {
+    for (const route of ["csv", "json", "thumbnail", "bcrypt", "vectors", "vectors-imul", "diagnostics"]) {
       const fn = t.functions.find((o) => o.path === t.prefix.slice(1) + route);
       if (
         !fn ||
@@ -117,7 +123,7 @@ try {
   const remote = cli(["api", `/v9/projects/${project.projectId}`]);
   data.platform = { resourceConfig: remote.resourceConfig };
   await writeFile(
-    ".vercel/heavy-job.json",
+    `.vercel/${run}-job.json`,
     JSON.stringify(
       { sourceCommit: data.sourceCommit, targets, platform: data.platform },
       null,

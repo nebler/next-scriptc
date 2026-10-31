@@ -1,3 +1,4 @@
+import { compilerPath } from "./paths.mjs";
 import { execFileSync } from "node:child_process";
 import { chmod, copyFile, lstat, mkdir, mkdtemp, readFile, readdir, realpath, rename, rm, symlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -92,7 +93,7 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
   await writeFile(path.join(build, "package.json"), '{"type":"module"}\n');
   const functionsDir = path.join(distDir, "output/functions");
   const runtime = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
-  const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
+  const compiler = compilerPath();
   const replacements = [];
   const processes = planProcesses(routes);
   const started = performance.now();

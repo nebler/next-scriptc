@@ -55,12 +55,14 @@ try {
     [
       { variant: "node", url: "http://localhost:3519" },
       { variant: "native", url: "http://localhost:3521" },
-      { variant: "go", url: "http://localhost:3520" },
+      ...(process.env.HEAVY_VECTOR_SUITE === "1"
+        ? ["plain", "unrolled", "simd"].map((kernel) => ({ variant: `go-${kernel}`, url: "http://localhost:3520", query: `kernel=${kernel}` }))
+        : [{ variant: "go", url: "http://localhost:3520" }]),
     ],
     createClient(),
   );
   await writeFile(
-    path.join(root, "research/benchmarks/heavy-local-parity.json"),
+    path.join(root, process.env.HEAVY_OUTPUT ?? "research/benchmarks/heavy-local-parity.json"),
     JSON.stringify(
       { note: "Shared macOS host; correctness only", ...result },
       null,
