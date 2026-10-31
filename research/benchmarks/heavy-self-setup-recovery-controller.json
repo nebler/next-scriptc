@@ -1,0 +1,41 @@
+{
+  "status": "failed",
+  "sourceCommit": "e7b332f7bd2f348fd147c06d07548763ec98574f",
+  "startedAt": "2026-10-31T11:02:38.146Z",
+  "steps": [
+    {
+      "label": "CPU tools",
+      "elapsedMs": 15858,
+      "exitCode": 0
+    },
+    {
+      "label": "Install frozen archive",
+      "elapsedMs": 12597,
+      "exitCode": 0
+    },
+    {
+      "label": "Build native then Node",
+      "elapsedMs": 56176,
+      "exitCode": 0
+    },
+    {
+      "label": "Production three-way",
+      "elapsedMs": 2415,
+      "exitCode": 1
+    }
+  ],
+  "hardLifetimeMs": 480000,
+  "archiveSha256": "d1f6cb2bb297db7e9ec07cb78c46843f71b2be6e86bdc8d061aeb17ad482bf97",
+  "sandbox": {
+    "id": "gray-varying-wallaby-36ZNo7",
+    "region": "iad1",
+    "vcpus": 4,
+    "activeCpuDurationMs": 215161,
+    "provisionedVcpuHoursUpperBound": 0.5333333333333333,
+    "observedWallVcpuHours": 0.10645777777777778
+  },
+  "goBinarySha256": "9622ae2b3a5ced13aa7d24493f5832336139bb5bbdef4c345b802997de208bee",
+  "error": "Production three-way exit 1",
+  "downloadError": "No worker artifact",
+  "elapsedMs": 95812
+}

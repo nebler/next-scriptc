@@ -42,7 +42,14 @@ if (
 )
   throw new Error("Use untuned Node 24.22.0/default proxy timeout");
 const vcpus = hosted ? 2 : 4;
-const lifetime = hosted ? 540000 : 480000;
+const requestedLifetime = Number(process.env.HEAVY_SELF_LIFETIME_MS ?? 480000);
+if (
+  !Number.isInteger(requestedLifetime) ||
+  requestedLifetime < 60000 ||
+  requestedLifetime > 480000
+)
+  throw new Error("Invalid self-hosted lifetime");
+const lifetime = hosted ? 540000 : requestedLifetime;
 const report = {
   status: "running",
   sourceCommit: commit,
@@ -191,7 +198,7 @@ try {
     );
     await step(
       "Production three-way",
-      `cd repo\nBENCH_COMMIT=${commit} HEAVY_APP_CPUS=0,1 taskset -c 2,3 node examples/demo/bench/heavy/self.mjs /vercel/sandbox/heavy-self.json`,
+      `cd repo\nBENCH_COMMIT=${commit} HEAVY_APP_CPUS=0,1 taskset -c 2,3 node examples/demo/bench/heavy/self.mjs ../heavy-self.json`,
       false,
       360000,
     );

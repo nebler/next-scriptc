@@ -1,5 +1,5 @@
 // Linux production-hop comparison. Run from a frozen committed archive.
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { start, ready, census, stop } from "../processes.mjs";
@@ -12,7 +12,7 @@ const port = 3519,
   goPort = 3520;
 const cpus = process.env.HEAVY_APP_CPUS;
 const client = createClient({ budget: 10000 });
-const output = process.argv[2] ?? "/vercel/sandbox/heavy-self.json";
+const output = process.argv[2] ?? path.resolve("heavy-self.json");
 const report = {
   status: "running",
   sourceCommit: process.env.BENCH_COMMIT,
@@ -34,6 +34,7 @@ const report = {
 const owned = [];
 async function save() {
   report.requestsIssued = client.issued;
+  await mkdir(path.dirname(output), { recursive: true });
   await writeFile(output, JSON.stringify(report, null, 2) + "\n");
 }
 async function snapshot(procs) {
@@ -307,6 +308,8 @@ try {
 } catch (e) {
   report.status = "failed";
   report.error = e.stack;
+  console.error(e.stack);
+  for (const p of owned) console.error(p.output);
   process.exitCode = 1;
 } finally {
   for (const p of owned.reverse()) await stop(p);
