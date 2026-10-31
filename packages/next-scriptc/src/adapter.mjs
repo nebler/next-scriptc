@@ -15,7 +15,8 @@ const buildPlans = new Map();
 /** @type {import("next").NextAdapter} */
 const adapter = {
   name: "next-scriptc",
-  async modifyConfig(config, { phase, projectDir }) {
+  async modifyConfig(config, context) {
+    const { phase, projectDir } = context;
     if (process.platform === "win32") throw new Error("[next-scriptc] Windows is unsupported; use macOS or Linux.");
     if (phase === "phase-production-build") {
       const routes = planRoutes(await discoverRoutes(projectDir, config.pageExtensions), config.rewrites?.[optionsKey]);
@@ -23,6 +24,10 @@ const adapter = {
         throw new Error("[next-scriptc] Native routes require the local Next server (output: export/standalone is unsupported).");
       }
       buildPlans.set(projectDir, { routes, config });
+      if (process.env.NEXT_SCRIPTC_VERCEL) {
+        const { vercelAdapter } = await import("./vercel.mjs");
+        return (await vercelAdapter()).modifyConfig(config, context);
+      }
       return withRewrites(config, routes);
     }
     if (phase === "phase-production-server") {
@@ -30,7 +35,8 @@ const adapter = {
     }
     return config;
   },
-  async onBuildComplete({ projectDir, distDir, buildId, outputs }) {
+  async onBuildComplete(context) {
+    const { projectDir, distDir, buildId, outputs } = context;
     const plan = buildPlans.get(projectDir);
     if (!plan) throw new Error("[next-scriptc] Missing build plan from modifyConfig.");
     const { config } = plan;
@@ -43,6 +49,13 @@ const adapter = {
     ).map((route) => route.route));
     const routes = plan.routes.filter((route) => !prerendered.has(route.pattern));
     const skipped = plan.routes.filter((route) => prerendered.has(route.pattern));
+    if (process.env.NEXT_SCRIPTC_VERCEL) {
+      const { vercelAdapter, buildVercelRoutes } = await import("./vercel.mjs");
+      await (await vercelAdapter()).onBuildComplete(context);
+      await buildVercelRoutes(context, routes);
+      buildPlans.delete(projectDir);
+      return;
+    }
     const file = path.join(distDir, "routes-manifest.json");
     const manifest = JSON.parse(await readFile(file, "utf8"));
     const { isInterceptionRouteRewrite } = require("next/dist/lib/is-interception-route-rewrite.js");
