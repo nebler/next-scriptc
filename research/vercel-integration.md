@@ -1,174 +1,120 @@
-# Next 16.4.3 / Vercel prebuilt integration
+# Next 16.4.3 / Vercel integration, review round 2
 
-Tested 2026-10-31, starting at `efe8c91`. CLI 65.8.0, `@vercel/next` 28.0.0, scriptc 0.4.6, macOS arm64, Zig 0.16.0, Go 1.27.3. Local parity uses Node 24.22.0.
+Tested 2026-10-31. This supersedes the round-1 Hobby Function-limit blocker. The implementation is committed as `fdac32411f3b126611288069a47125e6bff3b12b`, after cleanly merging `28f013e` into main `f6f9a2e` (merge commit `aac42b6`). No main merge, push, hosted project setting change, domain attachment or load benchmark was performed.
 
-## Result and deployment blocker
+## Final preview deployments
 
-`next-scriptc vercel-build --prod` builds the whole demo's Vercel output and replaces its 16 non-prerendered native App Routes with independent Linux executable Functions. Pages, assets, Node Functions, prerender files, and Vercel's routing configuration are produced by the Vercel adapter. No Next.js fork or runtime monkeypatch is involved.
+Both were built from the same clean implementation commit and independently inspected as `target: preview`, `readyState: READY`:
 
-**The full app has not been successfully deployed.** The linked project's Hobby plan rejects this artifact:
+- Native: https://next-scriptc-pidoydgzs-noahs-projects-8a075d15.vercel.app (`dpl_DFisKMoaNnsaMTvCKiWpHTsZMtTg`).
+- Node: https://next-scriptc-q8iy94v29-noahs-projects-8a075d15.vercel.app (`dpl_F412QH9y8gVsRbnNDcuzPPsX7b5Y`).
 
-```text
-No more than 12 Serverless Functions can be added to a Deployment on the Hobby plan. Create a team (Pro plan) to deploy more.
-```
+[Machine-readable provenance and complete Function path lists](vercel-integration-round2.json) retain the deployed Function names, runtimes, region, memory, timeout, architecture/build evidence and configuration hashes. These URLs received verification traffic; they are not untouched cold-start samples. No load measurements were made.
 
-The 16 independent native Functions alone exceed this limit. Mapping groups to Functions would violate the requested deployment model. No plan change, grouping workaround, or reduced deployment was made.
+Toolchain: Node 24.22.0, Next 16.4.3, pnpm 11.1.3, Vercel CLI 65.8.0, `@vercel/next` 28.0.0, scriptc 0.4.6, Zig 0.16.0 and Go 1.27.3. Native `user-server` is a stripped, statically linked Linux x86-64 ELF. Its `executable` IPC proxy is built from pinned public Vercel commit `84878e532142f0ac584953695658b324eb9e5b80` with `GOOS=linux GOARCH=amd64 CGO_ENABLED=0`.
 
-Rejected deployment: https://next-scriptc-7mzizdcls-noahs-projects-8a075d15.vercel.app
+## Node topology first, then explicit native grouping
 
-ID: `dpl_EPAS9GNSWc12iZK3YLGxigg8iNoB`. `vercel inspect --json` independently reports `readyState: "ERROR"`. This is not a working application URL. There is no new READY URL from this integration. The earlier isolated hello invocation remains the hosted-execution evidence in [vercel-deploy-test.md](vercel-deploy-test.md).
+The final Node baseline has **two deployed Functions**. Counting local directories would be misleading: the adapter emits 42 real `.func` directories and six symlink aliases, marks Node bundles `experimentalAllowBundling`, and Vercel bundles those 48 paths into two distinct `lambda.functionName` values at deployment.
 
-Consequently, full hosted Node/native case results, URL/header parity, streaming behavior, and page/asset/rewrite behavior remain unverified. A project permitting at least 16 native Functions plus Next's retained Functions is needed to finish these checks.
-
-## Build path evidence and choice
-
-Packages were fetched with `npm pack --ignore-scripts` into fresh `/tmp/scriptc-vercel-sources.7pFBim/` subdirectories and unpacked without executing their code:
-
-- `vercel@65.8.0`
-- `@vercel/next@28.0.0`
-- `@next-community/adapter-vercel@0.0.0`
-
-The installed Next package is 16.4.3. Relevant source facts:
-
-- Next `dist/server/config-shared.js:189` defaults `adapterPath` to `NEXT_ADAPTER_PATH`. Explicit user config overrides the default. `dist/server/config.js:1158` imports the selected adapter and calls its `modifyConfig`.
-- `@vercel/next/dist/index.js:18048` enables the new adapter only when `NEXT_ENABLE_ADAPTER === "1"` (and the minimum Next version is met, without `NEXT_BUILDER_INTEGRATION`). It sets `NEXT_ADAPTER_PATH` to its bundled `dist/adapter/index.js` and `NEXT_ADAPTER_VERCEL_CONFIG` to its build config. Otherwise it runs the legacy manifest builder.
-- After Next builds, `dist/index.js:18127` checks `<outputDirectory>/output/config.json`. If present, it returns that Build Output API directory. Otherwise it reads the legacy `.next` manifests. The builder defaults `outputDirectory` to `.next` at line 17844.
-- The bundled adapter comes from `@next-community/adapter-vercel` (the builder's package metadata names development version `0.0.1-beta.34`). The separately inspected 0.0.0 package is not an added dependency.
-
-The first implementation tried the simpler legacy builder plus post-processing. Next built successfully, but the builder then failed:
+The page Function serves 12 paths: `index`, `_global-error`, `_not-found`, their `.rsc` variants, and the three `index.segments` plus three `_global-error.segments` variants. The App Route Function serves all 18 route patterns below, each with its `.rsc` variant (36 paths):
 
 ```text
-ENOENT: no such file or directory, open '<demo>/.next/server/app/_global-error.html'
+/api/analytics/revenue
+/api/export.json.gz
+/api/feed.xml
+/api/hello
+/api/images/histogram
+/api/items/[id]
+/api/items/new
+/api/login
+/api/login-scrypt
+/api/posts/[slug]
+/api/primes
+/api/report
+/api/search
+/api/static-fixture
+/api/stores/nearby
+/api/uploads/verify
+/api/url-echo
+/api/verify
 ```
 
-With `NEXT_ENABLE_ADAPTER=1`, our explicit `adapterPath` still selects next-scriptc, so merely setting the flag does not compose the adapters. The implementation delegates both production build hooks to the adapter at the builder-supplied `NEXT_ADAPTER_PATH`, then replaces native Functions in that adapter’s completed `<distDir>/output`. Vercel consumes the resulting Build Output API tree to produce `.vercel/output`. This completed successfully. It adds no direct Vercel package dependency or hardcoded path into its package tree.
+Consequently, `NEXT_SCRIPTC_DEMO_GROUPS=vercel` in the explicit demo config puts all native route patterns into one group. Next excludes the complete static `/api/static-fixture` prerender from native compilation; `/api/items/new` is an ordinary Node route, also prerendered. The other **16 routes compile together into one binary**, using the existing `planProcesses` / `processEntrySource` / `serveMany` path. The default package behavior still gives ungrouped routes separate Functions.
 
-This chooses the composite adapter (option a), rather than a standalone post-processor (option b). The trade-off is dependence on the opt-in Vercel adapter environment contract and its NextAdapter hooks. A legacy-only post-processor would have fewer dependencies, but does not build this pinned demo cleanly. Direct standalone use of our build-mode flag without Vercel's supplied adapter fails explicitly.
+The native deployment has **three Functions**: the page Function (12 paths), one executable Function for all 16 dynamic native routes and their `.rsc` aliases (32 paths), and one retained Node Function for `/api/items/new`, `/api/static-fixture` and their `.rsc` variants (four paths). Every one of the 32 executable paths has the same deployed `lambda.functionName`; the artifact has one real native `.func` directory and 31 relative `.func` symlinks. This directly verifies that Vercel counts the shared executable Function once. The Hobby deployment succeeds below its 12-Function limit.
 
-`NEXT_SCRIPTC_VERCEL` is an absolute native build directory set only by the CLI command. It is deliberately not inferred from `VERCEL` or `NOW_BUILDER`: those identify a platform, not this packaging workflow, and should not silently change ordinary self-hosted builds. In this mode, no loopback rewrites are generated and no self-hosting binaries are built. The original discovered route options are retained. Vercel’s adapter receives the normal Node representation of native routes before their Function directories are replaced. Native compilation happens inside the build-complete hook, so Vercel only reports build success after it finishes.
+All shared native routes have one cold-start/failure/resource domain and no process isolation. Their modules initialize together at native startup; Node's bundled launcher loads the selected route. Shared initialization can change cold-start behavior, which is part of the adapter comparison, not a claimed equivalence of runtime internals. This is the closest topology to Node's shared dynamic-route Function. The two retained static routes necessarily occupy a separate Node Function on the native deployment.
 
-The root `vercel.json` selects `examples/demo/package.json` with the pinned `@vercel/next@28.0.0` public builder. This avoids changing the linked project's existing Other-framework/root-directory settings. This is the demo's monorepo configuration, not package-level framework detection. The command currently supports one native Next app per build; a second native app fails exclusive build-directory creation rather than overwriting the first app’s entries.
+For arbitrary user groups, Function settings copied from each member must agree (`memory`, `maxDuration`, `regions`, `environment`, `functionFailoverRegions`, `framework`). Incompatible settings fail explicitly. Optimization conflicts already fail in the shared route planner. No Vercel grouping default or implicit demo grouping is introduced.
 
-## Output and replacement
+## Same build/deploy pipeline and settings
 
-Observed native build output:
+Both variants use `examples/demo/bench/vercel/build.mjs`. It writes only an ignored local demo `.vercel/project.json` override: framework `nextjs`, Node `24.x`, no root directory, output directory `.next`. It invokes the package's `next-scriptc vercel-build`, enabling `NEXT_ENABLE_ADAPTER=1` in both variants. The baseline uses Vercel's bundled adapter directly; the native config selects next-scriptc, which delegates the two build hooks to the builder-supplied `NEXT_ADAPTER_PATH` and replaces the native Functions afterward. This is Next's public adapter API, without a fork or monkeypatch.
 
-```text
-.vercel/output/
-  config.json
-  static/...
-  functions/api/hello.func/
-    .vc-config.json
-    executable
-    user-server
-  functions/api/hello.rsc.func -> hello.func
-  functions/api/items/[id].func/...
-  functions/api/items/[id].rsc.func -> [id].func
-  functions/api/static-fixture.func/...          # retained Next output
-  functions/api/static-fixture.rsc.func/...      # retained Next output
-  functions/api/static-fixture.prerender-config.json
-  functions/api/static-fixture.prerender-fallback.body
-```
+After building, the demo helper pins **every Function** to `architecture: x86_64`, `regions: [iad1]`, `memory: 2048`, `maxDuration: 300`, and pins output regions to `iad1`. Deployed inspection confirms both variants use `nodejs24.x` for retained Node Functions and the same 2048 MiB/300 seconds/iad1 configuration; native routes use `executable`. Node bundles containing `.node` addons are refused on this macOS cross-architecture build host.
 
-The Vercel adapter emits `.rsc` variants even for App Routes. Next's `outputs.appRoutes` identifies them by the same `filePath` as the main route; the native build uses those actual output pathnames instead of guessing a fixed set of suffixes. These variants become relative symlinks to one native Function per route. Page prefetch/segment variants are not touched.
+The round-1 root `vercel.json` used legacy `builds` solely to select `examples/demo/package.json` from a linked monorepo root whose hosted framework is Other. It changed whole-project build behavior and was unnecessary when building the demo explicitly. It is removed. The old Node helper's different `.next-node`/legacy-adapter/`--standalone` pipeline is replaced by a compatibility entrypoint to the shared helper. The new path enables the same Vercel adapter for both variants.
 
-App Route parameters remain in Function filenames (`[id]`, catch-all patterns), while `config.json` contains the matching regexes and destinations. For example the demo's dynamic rule targets `/api/items/[id]$2?nxtPid=$nxtPid`. The replacement does not regenerate or edit these rules. Hosted original-path/internal-query handling is still a required verification, not established by preserving the file names alone.
+The V3 adapter's `filePathMap` entries are relative to the repository root. Building and uploading from the demo directory failed to find root `node_modules/.pnpm/...`. The helper now builds from the demo, then moves the completed output to repository-root `.vercel/output` and deploys from that root. Both variants follow the same process. Mapped Node dependencies remain in the workspace: upload immediately after building, before another Next build can replace traced files. This is not a portable standalone archive.
 
-Before removal, every Function's symlink target is inspected. If an original Node Function is physically stored at a replaced route's path but also serves unrelated Node aliases, its directory moves to a retained alias and the other retained aliases are retargeted. Replacement never follows a symlink to delete its target. A regression test covers this sharing case and the `.rsc` alias, permissions, retained configuration, and prerender metadata.
+The demo helper removes the old root output before starting so a failed build cannot leave the previous variant deployable there. The package CLI also removes its output on a build/compile failure. Runtime packs and the pinned proxy are cached atomically; native binaries are rebuilt. Compilation remains sequential, bounded by existing planner groups: the demo needs only one compilation now, so parallel compilation would provide no benefit here.
 
-Node `.vc-config.json` files contain `filePathMap` and `fileHashes` pointing at traced Next/project dependencies, plus Node launcher fields. Native Functions replace that entire directory/config rather than retaining Node trace metadata. Replacement happens after Vercel’s adapter emits its output and before the builder consumes it. The retained Node Functions keep Vercel’s normal `filePathMap` references into the repository. In the inspected V3 adapter output, even `vercel build --standalone` did not inline these mapped files (for example the static fixture Function still referenced `examples/demo/.next/routes-manifest-deterministic.json` and Next package files outside its directory). The command therefore uses normal `vercel build`. Deploy from the same workspace immediately after building; rebuilding Next or removing dependencies before upload can invalidate those references. This output is not a portable standalone archive.
+Final local wall times, including dependency check, Next, native build and output pinning/staging, excluding upload: **Node 3.67 s**, **native 20.68 s**. Native compilation/replacement took **17.4 s**. An earlier cache-cold native build took 18.76 s (12.5 s compilation), and an intermediate warm build took 13.85 s (11.4 s compilation). These are observed build times on this shared Mac, not controlled performance benchmarks. The fresh worktree needed executable permissions restored on scriptc's bundled TypeScript/compiler helpers after installation; no dependency or generated toolchain file was committed.
 
-Routes classified by Next as complete static prerenders are excluded using the same criterion as self-hosting. The demo's `/api/static-fixture` retains its Node revalidation Function, `.rsc` output, prerender config, and fallback body. No native marker is expected on its static response. A separate local Next/Vercel-adapter fixture also built `[id]`, `[...parts]`, and `[[...parts]]` native routes plus a user rewrite, a force-static route and a `generateStaticParams` force-static dynamic route. The build selection included only the three non-prerendered patterns and their actual `.rsc` variants. Both static handlers, including `/api/prerender/one` and its parent pattern Function/prerender files, stayed entirely with Next. The generated rewrite and catch-all regex/destination rules were preserved. These are build-shape checks; their hosted request semantics remain unverified.
+## Hosted bugs found and fixed
 
-Native configuration is:
+Direct native routes worked in round 1's packaging, but sharing the Function exposed missing platform routing integration. Vercel retains the public request URL while putting the selected destination in `x-matched-path`; the bundled Node adapter dispatches from that header and strips `.rsc` for route selection. Native originally matched only the public URL, yielding 404 for `/rewrite/hello`, `/rewrite/items/42` and `/api/hello.rsc`.
 
-```json
-{
-  "runtime": "executable",
-  "handler": "executable",
-  "architecture": "x86_64",
-  "supportsResponseStreaming": true
-}
-```
+Generated Vercel entries now explicitly enable this dispatch contract. They interpolate `nxtP` route parameters for template destinations, preserve the public URL separately, and omit internal `nxtP`/`nxtI` query fields from the Web Request. Self-hosted entries ignore the platform routing header. The generated entry still uses the shared single-route or multi-route runtime, rather than a second HTTP server implementation.
 
-Where present, `memory`, `maxDuration`, `regions`, `environment`, `functionFailoverRegions`, and `framework` are copied from the original Node Function config. Node launcher, tracing, file maps/hashes, multi-payload, and Node bundling settings are omitted. Project defaults continue to apply when an original field is absent.
+The bundled Node handler runs Next with `minimalMode: true`, which omits the App Route Vary prefix. Native originally added that prefix unconditionally; the initial comparison was stopped after 20 header mismatches. Explicit Vercel mode now omits the prefix while preserving handler-supplied Vary, matching Node. Local/self-hosted Vary behavior remains covered by the shim suite.
 
-`withScriptc({ ... }, { routes: { ... } })` optimization applies per route. `group` remains a self-hosting process setting; Vercel always gets independent Functions. There is no Vercel group mapping.
+The next full run passed 83/85 cases. Cases 56 and 57 (gzip export) failed because the test client requested `Accept-Encoding: identity` while demanding `Content-Encoding: gzip`. Separate probes showed **both variants** correctly return decoded JSON without that header for identity, and gzip with the header when gzip is negotiated. The hosted test now requests gzip for its gzip cases, matching the existing benchmark client. This was a client/platform representation difference, not a native compression defect. The final comparison still checks the gzip header and decoded body; it does not relax that assertion. Only CDN `Accept-Encoding` in Vary is normalized by the two-URL harness.
 
-## Cross-compilation and cache
+## Reproduce
 
-The old isolated `scripts/vercel-native-smoke.mjs` is replaced by `packages/next-scriptc/src/vercel.mjs`; the Sandbox check can still consume `functions/api/hello.func/{executable,user-server}` after this command.
-
-Each route uses the existing `entrySource`, shim and `writeNativeConfig`, and is compiled serially with its configured optimization, `--strip --no-keep-llvm`, `SCRIPTC_TARGET=x86_64-linux-musl`, and the version-matched runtime pack. No Node worker is included in a native Function.
-
-Cache under `.vercel/cache/scriptc/`:
-
-- `runtime-linux-x64-musl-0.4.6/package`: `npm pack @scriptc/runtime-linux-x64-musl@0.4.6 --ignore-scripts`, unpacked once.
-- `ipc-proxy-84878e532142f0ac584953695658b324eb9e5b80/executable`: built from the exact public Git commit with `GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -trimpath -ldflags='-s -w'`.
-
-Cache entries are built in temporary directories and renamed into place after success; failed builds do not leave completed entries. Concurrent cache creators can reuse the winner. Downloaded proxy source is removed after compilation. The second complete native build reused both entries without another npm pack or Git fetch. Native route binaries themselves are rebuilt each time.
-
-A failed Next build, compilation or replacement removes `.vercel/output`, so a failed command cannot leave an apparently deployable partial artifact. Generated entries, credentials, runtime packs, source downloads and binaries are ignored and uncommitted.
-
-## Request URL and platform assumptions
-
-The pinned [Go proxy](https://github.com/vercel/vercel/blob/84878e532142f0ac584953695658b324eb9e5b80/internals/ipc-proxy/bootstrap/proxy.go) strips `x-vercel-internal-*` after reading invocation identifiers and forwards the request through `httputil.ReverseProxy`; its Director explicitly copies `X-Forwarded-Host` into the outgoing Host, and it retains ordinary forwarded host/protocol headers. The shim currently prefers `x-forwarded-host` over `host`, derives HTTPS from `x-forwarded-proto`, and reserializes the query when a forwarded host is present. It uses this URL to construct `NextRequest`, whose `nextUrl` derives from it.
-
-This source evidence does not establish the exact header values supplied by hosted Functions. The full deployment was rejected before invocation; `/api/url-echo` still needs a hosted comparison, including spaces, plus signs, repeated parameters, rewrites and dynamic parameters. No shim URL change was made without that evidence.
-
-Only local prebuilt compilation has been validated. The [documented build image](https://vercel.com/docs/builds/build-image) is Amazon Linux 2023 and its package list includes gcc/git/tar but does not list clang, Zig, or scriptc. It permits additional package installation, and scriptc distributes Linux compiler packages. Thus “remote builds are impossible because clang/scriptc are absent” is **not established**. Provisioned remote compilation is untested; this command requires a host with the documented toolchain available.
-
-The executable IPC bridge is pinned public Vercel source, not a promise of a stable supported third-party executable ABI. See [platform research](vercel-native-functions.md).
-
-## Reproduction and verification
-
-From the repository root, after supplying the existing ignored project link and credentials:
+From the repository root, with Node 24 and the documented toolchain on PATH:
 
 ```sh
 pnpm install --frozen-lockfile
-vercel project inspect --non-interactive
-vercel pull --yes --environment=production
-PATH=/Users/noah/.local/share/zig-0.16.0:$PATH node packages/next-scriptc/src/cli.mjs vercel-build --prod
-vercel deploy --prebuilt --prod --yes \
-  --env DEMO_JWT_NOW=1793318400 \
-  --env DEMO_JWT_SECRET=next-scriptc-parity-test-signing-secret-32-bytes
+mkdir -p .vercel
+cp /Users/noah/code/next-scriptc/.vercel/project.json .vercel/project.json
+cp /Users/noah/code/next-scriptc/.env.local .env.local
+vercel pull --yes --environment=preview
+
+# Each command produces repository-root .vercel/output for deploy --prebuilt.
+NEXT_SCRIPTC_BASELINE=node node examples/demo/bench/vercel/build.mjs
+NEXT_SCRIPTC_DEMO_GROUPS=vercel node examples/demo/bench/vercel/build.mjs
+
+# Or build and deploy each preview through one command, saving provenance.
+NEXT_SCRIPTC_BASELINE=node node examples/demo/bench/vercel/deploy.mjs
+NEXT_SCRIPTC_DEMO_GROUPS=vercel node examples/demo/bench/vercel/deploy.mjs
 ```
 
-Use your own Zig path. Node, Vercel CLI, Git, npm, tar, and Go must be on PATH. The JWT values above are public test fixture values, not application credentials. They keep comparisons deterministic. Deployment remains blocked by the linked account's Function limit.
+Do not run those two builds concurrently: they share the demo's `.next` tree. `deploy-node.mjs` remains a compatibility alias for the baseline command. Deployment helpers check existing project history to avoid the first-deploy implicit-production trap, deploy with explicit preview intent, and inspect the returned target/state. They never set a hosted project setting or assign a domain.
 
-For a Node-only baseline, build and deploy **before** rebuilding the native artifact, retaining its returned URL:
-
-```sh
-NEXT_SCRIPTC_BASELINE=node node packages/next-scriptc/src/cli.mjs vercel-build --prod
-# Run the same prebuilt deploy command and test fixture env values above.
-```
-
-The demo uses `.next` for Vercel builds so the builder finds its output, including when grouping options are present; local baselines still use `.next-node` and local grouped builds still use `.next-grouped`.
-
-Once both deployments exist:
+Public deterministic JWT fixture values from `bench/config.mjs` are supplied identically at build/runtime. The copied main-checkout `.env.local` did **not** expose `VERCEL_AUTOMATION_BYPASS_SECRET` in this worktree. Its existing `VERCEL_OIDC_TOKEN` worked with `x-vercel-trusted-oidc-idp-token`; verification used it without changing protection. The runners prefer the automation-bypass header when its secret is present. No secret was printed or committed. The load benchmark still requires its automation bypass in the operator's environment; it deliberately does not forward the local OIDC token into its Sandbox.
 
 ```sh
-ROUTES_NODE_URL=https://<node-deployment> \
-ROUTES_NATIVE_URL=https://<native-deployment> \
+export ROUTES_NODE_URL=https://next-scriptc-q8iy94v29-noahs-projects-8a075d15.vercel.app
+export ROUTES_NATIVE_URL=https://next-scriptc-pidoydgzs-noahs-projects-8a075d15.vercel.app
 node --env-file=.env.local examples/demo/test/routes.mjs
-vercel curl '/api/url-echo?q=a%20b&plus=a+b&dup=1&dup=2' --deployment https://<native-deployment>
+node --env-file=.env.local examples/demo/test/vercel.mjs
 ```
 
-The runner reuses all 85 test cases and prints PASS/FAIL per case and a final count. It uses a private environment bypass secret if supplied, otherwise `vercel curl` for automatic authenticated access; protection is not disabled. It compares status, decoded body, and selected application/security/cache/auth headers. It verifies the runtime marker separately. Only the CDN compression `Accept-Encoding` Vary token is normalized; platform headers such as date/server/request IDs are outside the existing selected header set. No hosted parity result is claimed yet. Platform differences in checked headers will surface as failures.
+The hosted smoke suite additionally checks pages, a referenced Next JavaScript asset, favicon/public SVG, missing-page 404, Node/static routes, static/dynamic rewrites, `.rsc` aliases, RSC-header routing, URL echo, primes and the report worker route. Report result totals must agree; `sharedByReference` intentionally differs between Node and native. Its timing/RSS/version fields are not route-parity assertions.
 
-Also check `/`, `/favicon.ico`, a referenced `/_next/static/` asset, `/api/items/new`, `/api/static-fixture`, a missing page, `/api/report?threads=1`, and App Route RSC/rewritten URLs on both deployments. Report `sharedByReference` according to runtime for `/api/report`; it intentionally differs between Node and native. No load benchmark belongs to this check.
+The executable IPC proxy remains a pinned implementation of Vercel's public source, not a guarantee of a stable third-party executable ABI. Remote Vercel build-host provisioning remains untested; the working command cross-compiles locally. See [platform research](vercel-native-functions.md) and the [Build Output API's documented Function symlinks](https://vercel.com/docs/build-output-api/primitives).
 
-Local results:
+## Final verification results
 
-- `node --test packages/next-scriptc/test/*.mjs`: **8/8 passed**.
-- Node 24 `packages/next-scriptc/shim/test/parity.mjs`: **98 HTTP comparisons passed**.
-- `node examples/demo/test/e2e.mjs`: **passed** (12 responses, report thread cases, precedence, ownership, crash/recovery, ports, SIGTERM/SIGKILL cleanup and CLI alias).
-- `NEXT_SCRIPTC_DEMO_GROUPS=light node examples/demo/test/e2e.mjs`: **passed**, grouped crash affects the expected eight member routes.
-- Node 24 `examples/demo/test/routes.mjs --skip-build`: **85/85 passed**, 16 processes cleaned up.
-- Node 24 `NEXT_SCRIPTC_DEMO_GROUPS=light ... routes.mjs --skip-build`: **85/85 passed**, nine processes cleaned up.
-- Native Vercel builds: **passed**, 16 route binaries each time; cache reuse observed.
-- Node baseline Vercel build: **passed**.
-- Two-URL comparison entrypoint against local Node/native production servers: **85/85 passed**; this exercises the comparison runner, not hosted Vercel behavior.
-- Full native deploy: **ERROR, Hobby Function-count limit**; hosted tests **blocked**, not passed or skipped as successful.
+- **85/85 hosted route cases PASS**, on the final URLs above. [Every case, method and path](vercel-parity-round2.txt) is recorded individually. Status, selected content/cache/security/auth headers, decoded bodies and native markers agree. No final failures or unexplained exclusions remain.
+- **25/25 hosted smoke checks PASS**. [Individual results](vercel-smoke-round2.txt) include every non-workload surface described above. All 16 dynamic native route patterns were invoked successfully across the parity and smoke suites with `x-next-scriptc: native`. The complete static fixture correctly has no native marker.
+- URL echo PASS for ordinary and `.rsc` URLs. Each variant returned its own public HTTPS origin/Host and the requested path. The query normalized `q=a%20b` to `q=a+b`, retained `plus=a+b`, repeated `dup` keys, `%2F` and Unicode identically. Exact returned URLs are in the JSON provenance.
+- Node report and native report deterministic totals match. `sharedByReference` is respectively false/true as intended.
+- Local package tests **9/9 PASS**; compiled Node-24/native shim parity **104 HTTP comparisons PASS**, including both single-route and grouped Vercel dispatch fixtures. Syntax checks and `git diff --check` passed.
 
-Test execution notes: the first shim invocation used Node 26 and correctly failed the suite's explicit Node-24 prerequisite; it passed under Node 24. Node 26's route runner hit `ECONNRESET` during early-response image validation, while both complete suites passed under Node 24. An overlapping grouped/default run initially contended for their shared native port range; the final successful runs were isolated. A first prebuilt upload after a concurrent self-host rebuild lost a traced `.next` file. Rebuilding and uploading without an intervening Next build reached the independent account-limit rejection. The attempt with Vercel’s `--standalone` flag still retained V3 `filePathMap` references, as noted above.
+Each **final deployment** received exactly **101 HTTP verification requests**: 85 parity requests plus 16 smoke requests. This includes one `threads=1` report request per deployment, which initializes that Function instance's report graph/worker pool. These previews are suitable for the operator's paired benchmark with cold state unknown; omit `--fresh`. Earlier debugging requests used earlier preview URLs, not this final pair. No load benchmark was run, so load request count is zero.
+
+Remaining operational question: the operator must supply the automation-bypass secret expected by `bench/vercel/run.mjs`; it was absent from the copied main-checkout file during this round. Existing OIDC access was enough for all verification and did not require changing project protection. The documented executable ABI and local-build/toolchain limitations remain prototype constraints, not unresolved parity failures.
