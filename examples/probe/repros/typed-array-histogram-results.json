@@ -1,0 +1,369 @@
+{
+  "sourceSha256": "09013a1495ad2cac7e6891e545d592f8eca6497c02ada07f557e5c6ec08028af",
+  "date": "2026-10-31T02:39:46.573Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M4 Pro",
+  "node": "v24.22.0",
+  "scriptc": "0.4.6",
+  "warmups": 100,
+  "callsPerWindow": 500,
+  "windowsPerProcess": 3,
+  "loadAverageStart": [
+    19.49462890625,
+    15.65625,
+    10.75927734375
+  ],
+  "commands": [
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/packages/next-scriptc/node_modules/.bin/scriptc",
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts",
+      "-o",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/release",
+      "--optimization",
+      "release",
+      "--strip",
+      "--no-keep-llvm"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/packages/next-scriptc/node_modules/.bin/scriptc",
+      "build",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts",
+      "-o",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/speed",
+      "--optimization",
+      "speed",
+      "--strip",
+      "--no-keep-llvm"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/packages/next-scriptc/node_modules/.bin/scriptc",
+      "coverage",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts",
+      "--explain-dynamic"
+    ],
+    [
+      "/Users/noah/.local/state/fnm_multishells/85803_1793413448130/bin/node",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/release"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/speed"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/speed"
+    ],
+    [
+      "/Users/noah/.local/state/fnm_multishells/85803_1793413448130/bin/node",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/release"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/release"
+    ],
+    [
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/speed"
+    ],
+    [
+      "/Users/noah/.local/state/fnm_multishells/85803_1793413448130/bin/node",
+      "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts"
+    ]
+  ],
+  "builds": [
+    {
+      "mode": "release",
+      "ms": 2063.01,
+      "stdout": "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/release\n"
+    },
+    {
+      "mode": "speed",
+      "ms": 493.4314169999998,
+      "stdout": "/Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/.artifacts/typed-array-final/speed\n"
+    }
+  ],
+  "runs": [
+    {
+      "runtime": "node",
+      "order": [
+        "node",
+        "release",
+        "speed"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 260.49520900000005,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 260.49066700000003,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 262.905,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "release",
+      "order": [
+        "node",
+        "release",
+        "speed"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 459.6759999990463,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 460.35199999809265,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 460.33899998664856,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "speed",
+      "order": [
+        "node",
+        "release",
+        "speed"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 442.7719999551773,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 443.62800002098083,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 442.8839999437332,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "speed",
+      "order": [
+        "speed",
+        "node",
+        "release"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 442.8379999399185,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 451.43999993801117,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 451.4119999408722,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "node",
+      "order": [
+        "speed",
+        "node",
+        "release"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 268.3845,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 268.637417,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 264.33391699999993,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "release",
+      "order": [
+        "speed",
+        "node",
+        "release"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 460.4470000267029,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 459.2760000228882,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 460.87600004673004,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "release",
+      "order": [
+        "release",
+        "speed",
+        "node"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 459.4670000076294,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 460.02699995040894,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 459.4099999666214,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "speed",
+      "order": [
+        "release",
+        "speed",
+        "node"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 442.73600006103516,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 442.4280000925064,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 442.8380000591278,
+          "expected": 66683127
+        }
+      ]
+    },
+    {
+      "runtime": "node",
+      "order": [
+        "release",
+        "speed",
+        "node"
+      ],
+      "rows": [
+        {
+          "rep": 0,
+          "count": 500,
+          "ms": 261.893208,
+          "expected": 66683127
+        },
+        {
+          "rep": 1,
+          "count": 500,
+          "ms": 260.50058299999995,
+          "expected": 66683127
+        },
+        {
+          "rep": 2,
+          "count": 500,
+          "ms": 261.333083,
+          "expected": 66683127
+        }
+      ]
+    }
+  ],
+  "coverage": "scriptc coverage /Users/noah/.t3/worktrees/next-scriptc/t3-d639e65c/examples/probe/repros/typed-array-histogram.ts\n\n  statements analyzed   27\n  compile statically    27  (100%)\n\n  fully static — all analyzed statements compile to native code.\n\n  dynamic tier   (tier assignment, report-only; --tier=auto)\n    0 functions already operate on dynamic values (0 statements)\n\n    0 demotion requests (refusals and fences the dynamic tier would replace)\n",
+  "loadAverageEnd": [
+    20.89453125,
+    16.0791015625,
+    10.9658203125
+  ],
+  "summary": {
+    "node": {
+      "medianMs": 0.523786416,
+      "minMs": 0.520981334,
+      "maxMs": 0.5372748340000001,
+      "windows": 9
+    },
+    "release": {
+      "medianMs": 0.9200539999008178,
+      "minMs": 0.9185520000457764,
+      "maxMs": 0.92175200009346,
+      "windows": 9
+    },
+    "speed": {
+      "medianMs": 0.8856760001182556,
+      "minMs": 0.8848560001850129,
+      "maxMs": 0.9028799998760223,
+      "windows": 9
+    }
+  }
+}

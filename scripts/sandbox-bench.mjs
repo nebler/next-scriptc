@@ -5,7 +5,7 @@ import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import { sectionsOption } from "../examples/demo/bench/config.mjs";
+import { sectionsOption, sectionEstimates } from "../examples/demo/bench/config.mjs";
 import { Sandbox } from "@vercel/sandbox";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -23,16 +23,17 @@ const destination = path.join(root, "research/benchmarks", `sandbox-${stamp}`);
 const controller = new AbortController();
 for (const name of ["SIGINT", "SIGTERM"]) process.once(name, () => controller.abort(new Error(name)));
 const started = Date.now();
-const deadline = setTimeout(() => controller.abort(new Error("28 minute benchmark budget exhausted")), 28 * 60 * 1000);
+const deadline = setTimeout(() => controller.abort(new Error("40 minute benchmark budget exhausted")), 40 * 60 * 1000);
 deadline.unref();
 const sandbox = await Sandbox.create({
   image: "vercel/sandbox/node:24", resources: { vcpus: 4 },
-  timeout: 30 * 60 * 1000, persistent: false,
+  timeout: 44 * 60 * 1000, persistent: false,
 });
 const provenance = { sandbox: sandbox.name, commit, archiveSha256, startedAt: new Date(started).toISOString(),
   image: "vercel/sandbox/node:24", vcpus: 4, memoryMiB: 8192, reverse: values.reverse, sections, nativeStart: "next start", status: "running", steps: [] };
 console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; archive SHA-256 ${archiveSha256}`);
-console.log("Estimated total: 17–27 min including tools/install and both builds; 28 min abort budget, 30 min lifetime. Four vCPUs; app/load split 2+2 via taskset.");
+for (const section of sections) console.log(`Benchmark section ${section}: estimated ${sectionEstimates[section]}`);
+console.log("Estimated total: 28–35 min including tools/install and three builds; 40 min abort budget, 44 min lifetime. Four vCPUs; app/load split 2+2 via taskset.");
 
 async function step(label, estimate, script, sudo = false) {
   console.log(`\n${label}: estimated ${estimate}`);
@@ -62,10 +63,11 @@ try {
     timeout 180s npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent
     packages/next-scriptc/node_modules/.bin/scriptc --version`);
   // Sequential, with real exit status preserved. Never hide compiler failures
-  // behind grep/"|| true" or build the two Next outputs concurrently.
-  await step("Native production build", "2–5 min (10 min ceiling)", "cd next-scriptc && timeout 600s npx -y pnpm@11.1.3 --filter demo build");
-  await step("Node production build", "15–60 s (3 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE=node timeout 180s npx -y pnpm@11.1.3 --filter demo build");
-  await step("Sandbox benchmark", "9–18 min (remaining overall budget)", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 1200s node examples/demo/bench/run.mjs --profile sandbox --sections=${sections.join(",")} --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
+  // behind grep/"|| true" or build the three Next outputs concurrently.
+  await step("Native production build", "2–3 min (10 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE= NEXT_SCRIPTC_DEMO_GROUPS= timeout 600s npx -y pnpm@11.1.3 --filter demo build");
+  await step("Node production build", "15–60 s (3 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE=node NEXT_SCRIPTC_DEMO_GROUPS= timeout 180s npx -y pnpm@11.1.3 --filter demo build");
+  await step("Grouped native production build", "2–3 min (10 min ceiling)", "cd next-scriptc && NEXT_SCRIPTC_BASELINE= NEXT_SCRIPTC_DEMO_GROUPS=light timeout 600s npx -y pnpm@11.1.3 --filter demo build");
+  await step("Sandbox benchmark", "18–23 min (remaining overall budget)", `cd next-scriptc && BENCH_COMMIT='${commit}' BENCH_ARCHIVE_SHA256='${archiveSha256}' timeout --signal=TERM --kill-after=15s 2100s node examples/demo/bench/run.mjs --profile sandbox --sections=${sections.join(",")} --output /vercel/sandbox/bench-results${values.reverse ? " --reverse" : ""}`);
   provenance.status = "complete";
 } catch (error) {
   provenance.status = "failed";

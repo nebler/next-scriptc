@@ -67,3 +67,68 @@ assert.deepEqual(sectionsOption("threads"), ["coverage", "threads"]);
 assert.throws(() => sectionsOption("missing"));
 assert.equal(productionCommand({ next: "next", port: 123 })[0], "next");
 console.log("Harness checks passed: warmed socket accounting (keep-alive and reconnect), exact counts at C=8, digest rejection, subprocess 1 MiB uploads, gzip decoded parity/headers, coverage parsing, section validation, centralized start command. All test sockets closed.");
+
+// Production topology selection must never leak a parent's baseline/group flag.
+const { variants, variant, runtimesFor, groupedAvailability, validateLightGroup, validateReleaseBuild, lightPatterns } = await import("./variants.mjs");
+const { deriveSummary } = await import("./summary.mjs");
+assert.deepEqual(variants.map((v) => v.distDir), [".next-node", ".next", ".next-grouped"]);
+assert.deepEqual(variant("node").env, { NEXT_SCRIPTC_BASELINE: "node", NEXT_SCRIPTC_DEMO_GROUPS: "" });
+assert.deepEqual(variant("native").env, { NEXT_SCRIPTC_BASELINE: "", NEXT_SCRIPTC_DEMO_GROUPS: "" });
+assert.equal(variant("native-grouped").env.NEXT_SCRIPTC_DEMO_GROUPS, "light");
+assert.throws(() => variant("typo"));
+const ids = variants.map((v) => v.id);
+assert.deepEqual(runtimesFor("direct", ids, true), ["native", "node"]);
+assert.deepEqual(runtimesFor("end-to-end", ids), ids);
+assert.deepEqual(runtimesFor("end-to-end", ids, true), [...ids].reverse());
+assert.deepEqual(runtimesFor("end-to-end", ids), ids); // reverse never mutates registry
+assert.equal((await groupedAvailability({ exists: false, profile: "quick" })).status, "skipped");
+await assert.rejects(groupedAvailability({ exists: false, profile: "sandbox" }), /requires .next-grouped/);
+assert.equal((await groupedAvailability({ exists: true, profile: "sandbox" })).status, "available");
+const grouped = { routes: lightPatterns.map((pattern) => ({ pattern, port: 123, binary: "group" })) };
+validateLightGroup(grouped);
+validateReleaseBuild({ routes: [{ pattern: "/a", binary: "a", port: 1, optimization: "release" }], processes: [{ optimization: "release" }] });
+assert.throws(() => validateReleaseBuild({ routes: [{ optimization: "speed" }] }), /release optimization/);
+assert.throws(() => validateReleaseBuild({ routes: [], processes: [{ optimization: "speed" }] }), /release optimization/);
+assert.throws(() => validateReleaseBuild(grouped), /separate processes/);
+assert.throws(() => validateLightGroup({ routes: grouped.routes.map((r) => ({ ...r, optimization: "speed" })) }), /release optimization/);
+
+assert.throws(() => validateLightGroup({ routes: grouped.routes.slice(1) }), /missing/);
+assert.throws(() => validateLightGroup({ routes: [...grouped.routes, { pattern: "/api/login", port: 123, binary: "group" }] }), /unregistered/);
+assert.throws(() => validateLightGroup({ routes: grouped.routes.map((r, i) => ({ ...r, port: 123 + i })) }), /eight-route/);
+
+const measured = { variants: variants.map((v) => ({ ...v, status: "available" })),
+  workloads: [{ id: "fixture" }, { id: "bounded", bounded: true }, { id: "refused", enabled: false, pending: "compiler refusal" }], rows: [] };
+for (const [i, runtime] of ids.entries()) for (const value of [1, 3]) {
+  const factor = i + 1;
+  measured.rows.push(
+    { scope: "end-to-end", runtime, route: "fixture", metric: "throughput-latency", peak: { rssBytes: value * factor * 2 ** 20 }, concurrency: 1, result: { p50Ms: value * factor } },
+    { scope: "end-to-end", runtime, route: "fixture", metric: "throughput-latency", peak: { rssBytes: value * factor * 2 ** 20 }, concurrency: 64, result: { requestsPerSecond: 100 * value / factor, generatorSaturationSuspected: i === 2 } },
+    { scope: "end-to-end", runtime, route: "fixture", metric: "cpu-fixed-count", cpuMsPerRequest: value * factor, peak: { rssBytes: value * factor * 2 ** 20 } },
+    { scope: "end-to-end", runtime, route: "fixture", metric: "cold-start", ms: 10 * value * factor },
+    { scope: "end-to-end", runtime, metric: "memory-idle", memory: { rssBytes: 5 * value * factor * 2 ** 20 } });
+}
+measured.rows.push({ scope: "direct", runtime: "node", route: "fixture", metric: "cold-start", ms: 999999 });
+let summary = deriveSummary(measured);
+const fixture = summary.workloads[0].variants;
+assert.equal(fixture[0].cells.latency.value, 2); // median, not first/best row
+assert.equal(fixture[1].cells.latency.ratio, 2);
+assert.equal(fixture[2].cells.throughput.value, 200 / 3);
+assert.ok(Math.abs(fixture[2].cells.throughput.ratio - 1 / 3) < 1e-12);
+assert.equal(fixture[2].cells.throughput.saturation, true);
+assert.equal(fixture[0].cells.cold.value, 20); // excludes direct
+assert.equal(summary.memory[1].idleMiB, 20);
+assert.equal(summary.memory[2].loadedMiB, 9); // max simultaneous peak, not sum
+assert.equal(summary.memory[2].loadedRatio, 3);
+assert.match(summary.workloads[1].variants[0].cells.throughput.status, /bounded C=1/);
+assert.match(summary.workloads[2].variants[0].cells.cold.status, /compiler refusal/);
+measured.rows.push({ scope: "end-to-end", runtime: "native", route: "fixture", metric: "workload-failure", phase: "steady", reason: "next-proxy-timeout" });
+summary = deriveSummary(measured);
+assert.equal(summary.workloads[0].variants[1].cells.latency.value, null);
+assert.match(summary.workloads[0].variants[1].cells.cpu.status, /FAILED/);
+assert.equal(summary.workloads[0].variants[1].cells.cold.value, 40); // independent cold phase
+assert.match(summary.memory[1].status, /partial/);
+measured.variants[2] = { ...measured.variants[2], status: "skipped", reason: "missing grouped build" };
+assert.match(deriveSummary(measured).workloads[0].variants[2].cells.cold.status, /skipped/);
+measured.rows = measured.rows.filter((r) => r.runtime !== "node");
+assert.equal(deriveSummary(measured).workloads[0].variants[2].cells.cpu.ratio, null);
+console.log("Variant and summary checks passed: three production modes, direct exclusion, explicit grouped skip/requirement, light membership, medians, ratios/directions, saturation, peak RSS, bounded/refused/failed/absent cells.");

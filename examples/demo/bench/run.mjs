@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { readFile, readdir, mkdir, writeFile } from "node:fs/promises";
+import { readFile, readdir, mkdir, writeFile, stat } from "node:fs/promises";
 import { parseArgs } from "node:util";
 import { setTimeout as delay } from "node:timers/promises";
-import { routes, profiles, isolation, serverEnv, sectionsOption, productionCommand } from "./config.mjs";
+import { routes, profiles, isolation, serverEnv, sectionsOption, productionCommand, sectionEstimates } from "./config.mjs";
+import { variants, variant, runtimesFor, groupedAvailability, validateLightGroup, validateReleaseBuild } from "./variants.mjs";
 import { request, digest } from "./load.mjs";
 import { exec, start, ready, stop, finish, census, measure, portsFree, cleanup, signal, accounting } from "./processes.mjs";
 import { coverage } from "./coverage.mjs";
@@ -25,8 +26,21 @@ const require = createRequire(path.join(demo, "package.json"));
 const compilerRequire = createRequire(path.join(root, "packages/next-scriptc/package.json"));
 const next = require.resolve("next/dist/bin/next");
 const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc/manifest.json"), "utf8"));
+validateReleaseBuild(manifest);
 assert.equal(manifest.buildId, (await readFile(path.join(demo, ".next/BUILD_ID"), "utf8")).trim());
 await readFile(path.join(demo, ".next-node/BUILD_ID"));
+let groupedExists = true;
+try { await stat(path.join(demo, ".next-grouped")); }
+catch (error) { if (error.code !== "ENOENT") throw error; groupedExists = false; }
+const groupedState = await groupedAvailability({ exists: groupedExists, profile: values.profile });
+if (groupedState.status === "skipped") console.log(`SKIP native-grouped: ${groupedState.reason}`);
+let groupedManifest;
+if (groupedExists) {
+  groupedManifest = JSON.parse(await readFile(path.join(demo, ".next-grouped/scriptc/manifest.json"), "utf8"));
+  assert.equal(groupedManifest.buildId, (await readFile(path.join(demo, ".next-grouped/BUILD_ID"), "utf8")).trim());
+  validateLightGroup(groupedManifest);
+}
+const available = variants.filter((item) => item.id !== "native-grouped" || groupedExists).map((item) => item.id);
 const active = routes.filter((route) => route.enabled !== false);
 const nodePrerenderedPaths = Object.keys(JSON.parse(await readFile(path.join(demo, ".next-node/prerender-manifest.json"), "utf8")).routes);
 for (const route of active) assert.ok(!nodePrerenderedPaths.includes(route.path.split("?")[0]), `Measured route was prerendered by Node build: ${route.id}`);
@@ -77,7 +91,7 @@ async function sourceSnapshot() {
 const stamp = new Date().toISOString().replaceAll(":", "-");
 const output = path.resolve(values.output ?? path.join(root, "research/benchmarks", `${stamp}-${values.profile}`));
 const data = {
-  schemaVersion: 2, status: "running", label: values.profile === "quick" || process.platform !== "linux"
+  schemaVersion: 3, status: "running", label: values.profile === "quick" || process.platform !== "linux"
     ? "INDICATIVE ONLY: developer machine / reduced repetitions; not publishable performance evidence"
     : "Controlled sandbox candidate: review limitations and environmental noise before publication",
   startedAt: new Date().toISOString(), profile: { name: values.profile, ...profile, reverse: values.reverse, sections, nativeStart: "next start" },
@@ -92,15 +106,30 @@ const data = {
     accounting,
     publicFixtureEnvironment: serverEnv,
     nodePrerenderedPaths,
-    nativeBuildId: manifest.buildId, nodeBuildId: (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim() },
+    nativeBuildId: manifest.buildId, nodeBuildId: (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim(), groupedBuildId: groupedManifest?.buildId },
+  variants: variants.map((item) => ({ ...item, ...(item.id === "native-grouped" ? groupedState : { status: "available" }) })),
   workloads: routes,
-  isolation, definitions, limitations, coverage: {}, artifacts: [], rows: [],
+  isolation, definitions, limitations, coverage: {}, artifacts: [], rows: [], processLogs: [],
   sourceSnapshot: await sourceSnapshot(),
 };
 // Hash source and native artifacts so a dirty/local run is still identifiable.
 for (const [index, route] of manifest.routes.entries()) data.artifacts.push({ pattern: route.pattern,
   sourceSha256: digest(await readFile(route.source)), entrySha256: digest(await readFile(path.join(demo, ".next/scriptc", `entry-${index}.ts`))),
   binarySha256: digest(await readFile(path.join(demo, ".next/scriptc", route.binary))) });
+async function groupedSnapshot() {
+  if (!groupedManifest) return undefined;
+  const files = [];
+  async function walk(dir) {
+    for (const item of await readdir(dir, { withFileTypes: true })) {
+      const file = path.join(dir, item.name);
+      if (item.isDirectory()) await walk(file);
+      else if (item.isFile()) files.push({ file: path.relative(demo, file), sha256: digest(await readFile(file)) });
+    }
+  }
+  await walk(path.join(demo, ".next-grouped/scriptc"));
+  return files.sort((a, b) => a.file.localeCompare(b.file));
+}
+data.groupedArtifacts = await groupedSnapshot();
 const fingerprints = new Map();
 function validate(route, response) {
   const hash = digest(response.body);
@@ -112,19 +141,23 @@ function record(row) { data.rows.push(row); }
 function workloadFailure(error, proc, scope, runtime, route, phase) {
   if (signal.aborted || !/HTTP \d+|Request timed out|Generator exited before warmup/.test(String(error))) throw error;
   const elapsed = Number(String(error).match(/HTTP 500 after (\d+) ms/)?.[1]);
-  const proxyTimeout = scope === "end-to-end" && runtime === "native" && elapsed >= 29_000 && /socket hang up|ECONNRESET/.test(proc.output);
+  const proxyTimeout = scope === "end-to-end" && runtime.startsWith("native") && elapsed >= 29_000 && /socket hang up|ECONNRESET/.test(proc.output);
   const consequence = proxyTimeout ? "Exceeded Next's default 30 s proxy timeout; production returned HTTP 500 (elapsed time and upstream reset in server log)" : error.message;
   record({ metric: "workload-failure", scope, runtime, route: route.id, category: route.category, phase,
     reason: proxyTimeout ? "next-proxy-timeout" : "request-failure", consequence, error: error.stack, serverOutput: proc.output });
   console.error(`${scope}/${runtime}/${route.id}/${phase}: ${consequence}`);
 }
 const nextPort = 3417;
-const allPorts = [nextPort, ...manifest.routes.map((route) => route.port)];
+const allPorts = [nextPort, ...manifest.routes.map((route) => route.port), ...(groupedManifest?.routes.map((route) => route.port) ?? [])];
 function launch(scope, runtime, route) {
-  if (scope === "direct") return start(runtime === "node" ? process.execPath : route.binary,
-    runtime === "node" ? [route.entry] : [], { cwd: demo, cpus: serverCpus, role: `${runtime}-route`, env: { ...serverEnv, PORT: String(route.port) } });
-  return start(process.execPath, productionCommand({ next, port: nextPort }),
-    { cwd: demo, cpus: serverCpus, role: "next-server", env: { ...serverEnv, DEMO_PROXY_TIMEOUT_MS: "", NEXT_SCRIPTC_BASELINE: runtime === "node" ? "node" : "" } });
+  let proc;
+  if (scope === "direct") proc = start(runtime === "node" ? process.execPath : route.binary,
+    runtime === "node" ? [route.entry] : [], { cwd: demo, cpus: serverCpus, role: `${runtime}-route`, env: { ...serverEnv, PORT: String(route.port), NEXT_SCRIPTC_BASELINE: "", NEXT_SCRIPTC_DEMO_GROUPS: "" } });
+  else proc = start(process.execPath, productionCommand({ next, port: nextPort }),
+    { cwd: demo, cpus: serverCpus, role: "next-server", env: { ...serverEnv, DEMO_PROXY_TIMEOUT_MS: "", ...variant(runtime).env } });
+  proc.exited.then(() => data.processLogs.push({ scope, runtime, route: route?.id, code: proc.code,
+    error: proc.error?.stack, output: proc.output }));
+  return proc;
 }
 function generator(base, spec, options, ipc = false) {
   const { entry, binary, ...wire } = spec;
@@ -218,10 +251,9 @@ async function steady(scope, runtime, selected) {
 
 await mkdir(path.dirname(output), { recursive: true });
 try {
-  const estimates = { coverage: "30–90 s", cold: "60–150 s", direct: "150–270 s", production: "150–270 s", isolation: "40–120 s", threads: "60–180 s" };
-  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Round 2 sandbox suite estimate 18–20 min; install/builds extra; hard runner budget 28 min.`);
+  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Full sandbox estimate 28–35 min including tools/install and three builds; runner abort budget 40 min.`);
   for (const section of sections) {
-    console.log(`Section ${section}: estimated ${estimates[section]} (shared-host load can extend this)`);
+    console.log(`Section ${section}: estimated ${sectionEstimates[section]} (shared-host load can extend this)`);
     if (section === "coverage") {
       const compiler = path.resolve(path.dirname(compilerRequire.resolve("scriptc/package.json")), compilerRequire("scriptc/package.json").bin.scriptc);
       const targets = [...active, { id: "report", entry: path.join(demo, ".next/scriptc", `entry-${manifest.routes.findIndex((r) => r.pattern === "/api/report")}.ts`) }];
@@ -230,19 +262,19 @@ try {
       for (const scope of ["direct", "end-to-end"]) for (const route of active) {
         const repeats = route.bounded ? 1 : profile.coldRepeats;
         for (let repeat = 0; repeat < repeats; repeat++) {
-          for (const runtime of repeat % 2 ? ["native", "node"] : ["node", "native"]) {
+          for (const runtime of runtimesFor(scope, available, Boolean(repeat % 2) !== values.reverse)) {
             await cold(scope, runtime, route, repeat);
           }
         }
       }
     } else if (section === "direct" || section === "production") {
       const scope = section === "direct" ? "direct" : "end-to-end";
-      for (const runtime of values.reverse ? ["native", "node"] : ["node", "native"]) {
+      for (const runtime of runtimesFor(scope, available, values.reverse)) {
         if (scope === "direct") for (const route of active) await steady(scope, runtime, [route]);
         else await steady(scope, runtime, active);
       }
     } else if (section === "isolation") {
-      for (const runtime of values.reverse ? ["native", "node"] : ["node", "native"]) {
+      for (const runtime of runtimesFor("end-to-end", available, values.reverse)) {
         await portsFree(allPorts);
         let proc = launch("end-to-end", runtime);
         const base = `http://127.0.0.1:${nextPort}`;
@@ -256,7 +288,7 @@ try {
                 for (const loaded of [false, true]) {
                   const result = await finish(generator(base, {}, { probes: isolation.probes,
                     heavy: loaded ? heavy : undefined, durationMs: profile.isolationMs }));
-                  record({ metric: loaded ? "isolation-loaded" : "isolation-idle", scope: "end-to-end", runtime, heavyRequest: heavy, repeat, result });
+                  record({ metric: loaded ? "isolation-loaded" : "isolation-idle", scope: "end-to-end", runtime, heavyRequest: heavy, lightGroupRelation: heavy.id === "gzip-export" ? "inside" : "outside", repeat, result });
                 }
               }
             } catch (error) {
@@ -282,6 +314,10 @@ try {
   }
   assert.equal(manifest.buildId, (await readFile(path.join(demo, ".next/BUILD_ID"), "utf8")).trim(), "Native build changed during benchmark");
   assert.equal(data.environment.nodeBuildId, (await readFile(path.join(demo, ".next-node/BUILD_ID"), "utf8")).trim(), "Node build changed during benchmark");
+  if (groupedManifest) {
+    assert.equal(data.environment.groupedBuildId, (await readFile(path.join(demo, ".next-grouped/BUILD_ID"), "utf8")).trim(), "Grouped build changed during benchmark");
+    assert.deepEqual(await groupedSnapshot(), data.groupedArtifacts, "Grouped artifacts changed during benchmark");
+  }
   assert.deepEqual(await sourceSnapshot(), data.sourceSnapshot, "Application, benchmark, adapter or lockfile changed during benchmark");
   data.status = data.rows.some((row) => row.metric === "workload-failure") ? "failed" : "complete";
   if (data.status === "failed") process.exitCode = 1;

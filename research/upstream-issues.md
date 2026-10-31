@@ -266,3 +266,43 @@ independent of the upload kernel/copy costs.
 
 Raw samples, CPU profiles, exact reduction, builds and clients are local ignored
 artifacts in `packages/next-scriptc/.next/round3/`. No issue has been filed.
+
+## F. Fully static typed-array RGBA histogram loop remains slower than Node
+
+**Draft title:** `Typed Uint8Array → Uint32Array histogram in an async function is 1.76× Node steady-state time (0 dynamic-tier statements)`
+
+**Standalone repro:** [typed-array-histogram.ts](../examples/probe/repros/typed-array-histogram.ts), **28 lines**, no imports, HTTP, Next, adapter, Request/Response, hashing or image decoding. It uses the demo's unchanged deterministic 512×512 RGBA fixture and Rec.601 histogram kernel: typed `Uint8Array` reads, typed `Uint32Array` increments, sum, min and max. `await Promise.resolve(bytes)` keeps the local typed view in a resumed async function without including HTTP/body collection. The fixed bytes initialize before warmup. Each call allocates the 256-bin result and consumes all bins in a weighted checksum; the timed region includes the async call/await and checksum. All runs return **66683127**. No demo route was changed.
+
+Reproduce from the repository root with Node 24 (set `REPRO_NODE` to its absolute path if the shell default differs):
+
+```sh
+node examples/probe/repros/time-typed-array.mjs
+# The controller builds the SAME file sequentially with these two modes:
+packages/next-scriptc/node_modules/.bin/scriptc build \
+  examples/probe/repros/typed-array-histogram.ts -o /tmp/histogram-release \
+  --optimization release --strip --no-keep-llvm
+# Repeat with --optimization speed and a separate output.
+packages/next-scriptc/node_modules/.bin/scriptc coverage \
+  examples/probe/repros/typed-array-histogram.ts --explain-dynamic
+node examples/probe/repros/typed-array-histogram.ts
+```
+
+**New local measurements:** Node **24.22.0**, scriptc **0.4.6**, Apple M4 Pro, macOS arm64, 2026-10-31. Shared loaded host, no affinity: load averages **19.49/15.66/10.76 → 20.89/16.08/10.97**. Each fresh process warms **100 calls**, then measures **three windows of 500 calls**. Three rotating process orders are fixed in the controller: Node/release/speed, speed/Node/release, release/speed/Node. Nine windows per runtime are all retained; medians below are across all nine per-window ms/call values, not chosen runs or confidence intervals. No application suite ran concurrently with this repro.
+
+| Runtime | Median ms/call | Min–max ms/call | Runtime / Node time (lower is better) |
+| --- | ---: | ---: | ---: |
+| Node | 0.523786 | 0.520981–0.537275 | 1.000× |
+| Native release | 0.920054 | 0.918552–0.921752 | 1.757× |
+| Native speed | 0.885676 | 0.884856–0.902880 | 1.691× |
+
+Both native builds exit **0**. `coverage --explain-dynamic` exits **0**: **27 statements analyzed, 27 compile statically (100%), 0 functions / 0 statements in the dynamic tier, 0 demotion requests**. No dynamic explanations are emitted. This reduction is fully static, so an explanation based solely on untyped third-party JS/dynamic-tier execution cannot account for it. Speed improves this local median by about 3.7% relative to release but retains the native loss; it does not justify switching the demo or selecting a different final-run optimization.
+
+**Prior route context, kept separate:** Linux round 3 direct HTTP p50 was **4.409 ms native vs 1.603 ms Node** (about **2.75×**). The earlier Mac HTTP profile attributed **2,557/3,842 main-thread samples (66.6%)** to POST and its byte retain/release children: 997 handler leaves, 921 `scr_bytes_release`, 639 `scr_bytes_retain_v`. Those are samples from the full HTTP handler, not a fresh profile of this reduction. The standalone numbers above are new local steady-state results and do not replace Linux route latency or establish the same slowdown ratio on Linux.
+
+**Expected:** ordinary typed byte reads and integer histogram updates should compile to a competitive numeric loop while preserving async ownership semantics.
+
+**Actual:** the same no-HTTP program produces the same checksum but takes 1.76× Node time under native release; speed retains a 1.69× loss despite zero dynamic-tier statements.
+
+**Investigation suggested:** inspect retain/release and bounds/reference handling for typed-array locals across async suspension, plus typed histogram increments and min/max lowering. The full-route stacks motivate this direction; this repro has no new native profile and no synchronous comparison, so it does not isolate ownership as the sole cause, prove an async-only regression, or show which optimization would recover the gap. Do not rewrite the application loop as an alleged compiler fix.
+
+[Complete measured evidence](../examples/probe/repros/typed-array-histogram-results.json) retains the source SHA-256, exact commands, build output, full coverage output, all 27 timing windows, checksums and host load. No issue was filed and no sandbox was run.
