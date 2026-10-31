@@ -9,10 +9,12 @@ import { report } from "./report.mjs";
 
 const root = path.resolve(import.meta.dirname, "../../../..");
 const { values } = parseArgs({ options: { node: { type: "string" }, native: { type: "string" },
+  mode: { type: "string", default: "full" }, "native-first": { type: "boolean", default: false },
   fresh: { type: "boolean", default: false }, output: { type: "string" } } });
 if (!values.node) throw new Error("--node https://<immutable-preview>.vercel.app is required; --native is optional");
 if (!process.env.VERCEL_AUTOMATION_BYPASS_SECRET) throw new Error("Load VERCEL_AUTOMATION_BYPASS_SECRET from ignored .env.local");
-const deployments = ["node", "native"].filter((variant) => values[variant]).map((variant) => {
+if (!["full", "cold", "tail", "idle"].includes(values.mode)) throw new Error("--mode must be full, cold, tail or idle");
+const deployments = (values["native-first"] ? ["native", "node"] : ["node", "native"]).filter((variant) => values[variant]).map((variant) => {
   const url = new URL(values[variant]);
   if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.pathname !== "/" || !url.hostname.endsWith(".vercel.app")) {
     throw new Error("Use an immutable Vercel HTTPS deployment origin without credentials/path/query");
@@ -29,6 +31,9 @@ for (const deployment of deployments) {
       path: output.path, functionName: output.lambda.functionName, runtime: output.lambda.runtime,
       regions: output.lambda.deployedTo, allocatedMemoryMiB: output.lambda.memorySize, timeoutSeconds: output.lambda.timeout,
     })) };
+  const helloFunction = deployment.server.functions.find((fn) => fn.path === "api/hello");
+  const memoryFunction = deployment.server.functions.find((fn) => fn.path === "api/diagnostics/memory");
+  if (!helloFunction || !memoryFunction || helloFunction.functionName !== memoryFunction.functionName) throw new Error("Memory diagnostic must share the measured hello Function");
   if (deployment.server.functions.some((fn) => fn.regions?.length !== 1 || fn.regions[0] !== "iad1")) throw new Error("Every function must be pinned to iad1");
 }
 const project = JSON.parse(await readFile(path.join(root, ".vercel/project.json")));
@@ -36,7 +41,7 @@ const remote = JSON.parse(execFileSync("vercel", ["api", `/v9/projects/${project
 const platform = { observedAt: new Date().toISOString(), projectResourceConfig: remote.resourceConfig };
 const stamp = new Date().toISOString().replaceAll(":", "-");
 const destination = path.resolve(root, values.output ?? `research/benchmarks/vercel-${stamp}`);
-const files = ["client.mjs", "worker.mjs"].map((name) => `examples/demo/bench/vercel/${name}`)
+const files = ["client.mjs", "worker.mjs", "diagnostics.mjs"].map((name) => `examples/demo/bench/vercel/${name}`)
   .concat(["examples/demo/bench/config.mjs", "examples/demo/bench/load.mjs", "examples/demo/bench/fixtures.mjs"]);
 const uploaded = await Promise.all(files.map(async (file) => ({ path: file, content: await readFile(path.join(root, file)) })));
 const hash = createHash("sha256");
@@ -52,7 +57,7 @@ try {
   data.sandbox = { id: sandbox.name, region: sandbox.region, vcpus: sandbox.vcpus };
   if (sandbox.region !== "iad1" || sandbox.vcpus !== 2) throw new Error("Sandbox region/resources differ from registration");
   console.log(`Sandbox ${sandbox.name}: ${sandbox.region}, ${sandbox.vcpus} vCPUs; 4-minute lifetime, 3-minute command ceiling`);
-  await sandbox.writeFiles([...uploaded, { path: "job.json", content: Buffer.from(JSON.stringify({ deployments, fresh: values.fresh })) }]);
+  await sandbox.writeFiles([...uploaded, { path: "job.json", content: Buffer.from(JSON.stringify({ deployments, fresh: values.fresh, mode: values.mode })) }]);
   const result = await sandbox.runCommand({ cmd: "timeout", args: ["--signal=TERM", "--kill-after=5s", "180s", "node", "examples/demo/bench/vercel/worker.mjs"],
     env: { VERCEL_AUTOMATION_BYPASS_SECRET: process.env.VERCEL_AUTOMATION_BYPASS_SECRET },
     stdout: process.stdout, stderr: process.stderr, signal: AbortSignal.timeout(190_000) });
