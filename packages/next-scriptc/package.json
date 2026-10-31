@@ -21,7 +21,7 @@
   "scripts": {
     "test": "node --test test/*.mjs",
     "test:shim": "node --test shim/test/parity.mjs shim/test/vercel-ipc.mjs",
-    "test:unit": "node --test --test-skip-pattern=\"Node/native dispatcher parity|grouped build drops prerenders|discovery exports, Next extensions\" test/*.mjs"
+    "test:unit": "node --test --test-skip-pattern=\"grouped build drops prerenders|discovery exports, Next extensions\" test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs"
   },
   "files": [
     "src",
