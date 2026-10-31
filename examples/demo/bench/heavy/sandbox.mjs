@@ -99,6 +99,12 @@ try {
     if (!process.env.VERCEL_AUTOMATION_BYPASS_SECRET)
       throw new Error("Load ignored bypass secret");
     const job = JSON.parse(await readFile(".vercel/heavy-job.json"));
+    const probes = JSON.parse(
+      await readFile("research/benchmarks/heavy-vercel-vcpu.json"),
+    );
+    job.externalDiagnosticRequests = probes.requestsIssued;
+    job.requestBudget = 20000 - probes.requestsIssued;
+    if (job.requestBudget <= 0) throw new Error("Invocation budget exhausted");
     report.job = job;
     sandbox = await Sandbox.create({
       image: "vercel/sandbox/node:24",
@@ -211,7 +217,7 @@ try {
     } catch (e) {
       report.downloadError = e.message;
       report.status = "failed";
-      if (hosted) report.requestsCharged = 20000;
+      if (hosted) report.requestsCharged = report.job?.requestBudget ?? 20000;
     } finally {
       try {
         const stopped = await sandbox.stop({

@@ -5,7 +5,7 @@ import { createClient, quantile } from "./client.mjs";
 const job = JSON.parse(await readFile("heavy-job.json"));
 const client = createClient({
   secret: process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
-  budget: 20000,
+  budget: job.requestBudget ?? 20000,
 });
 const report = {
   status: "running",
@@ -85,78 +85,90 @@ try {
       };
       report.rows.push(row);
       await save();
-      row.sequential = await client.window(
-        t.url,
-        s,
-        1,
-        s.id === "bcrypt" ? 1 : 20,
-        { count: s.id === "bcrypt" ? 3 : 200 },
-      );
-      if (row.sequential.error) throw new Error(row.sequential.error);
-      row.concurrent = await client.window(
-        t.url,
-        s,
-        16,
-        s.id === "bcrypt" ? 0 : { count: 400, durationMs: 2000 },
-        s.id === "bcrypt" ? { count: 16 } : { count: 400, durationMs: 3000 },
-      );
-      if (row.concurrent.error) throw new Error(row.concurrent.error);
-      row.cpu = { attempts: [], accepted: [] };
-      const pool = client.agent(t.url, 1);
       try {
-        const count = s.id === "bcrypt" ? 1 : 20;
-        // Sequential warm window has already warmed the route; dedicated CPU connection warms once.
-        await client.request(t.url, s, pool);
-        for (
-          let attempt = 0;
-          attempt < 5 && row.cpu.accepted.length < 3;
-          attempt++
-        ) {
-          const before = await diagnostic(t, pool);
-          let reused = 0;
-          const start = performance.now();
-          for (let i = 0; i < count; i++)
-            reused += Number(
-              (await client.request(t.url, s, pool)).reusedSocket,
-            );
-          const after = await diagnostic(t, pool);
-          const elapsedMs = performance.now() - start;
-          const delta =
-            after.body.cpu.user +
-            after.body.cpu.system -
-            before.body.cpu.user -
-            before.body.cpu.system;
-          if (!Number.isFinite(delta) || delta < 0)
-            throw new Error("Nonmonotonic/nonfinite process CPU");
-          const entry = {
-            before,
-            after,
-            count,
-            reused,
-            elapsedMs,
-            deltaUs: delta,
-            msPerRequest: delta / count / 1000,
-            accepted: before.body.instance === after.body.instance,
-          };
-          row.cpu.attempts.push(entry);
-          if (entry.accepted) row.cpu.accepted.push(entry.msPerRequest);
-          await save();
+        row.sequential = await client.window(
+          t.url,
+          s,
+          1,
+          s.id === "bcrypt" ? 1 : 20,
+          { count: s.id === "bcrypt" ? 3 : 200 },
+        );
+        if (row.sequential.error)
+          throw Object.assign(new Error(row.sequential.error), {
+            correctness: row.sequential.correctness,
+          });
+        row.concurrent = await client.window(
+          t.url,
+          s,
+          16,
+          s.id === "bcrypt" ? 0 : { count: 400, durationMs: 2000 },
+          s.id === "bcrypt" ? { count: 16 } : { count: 400, durationMs: 3000 },
+        );
+        if (row.concurrent.error)
+          throw Object.assign(new Error(row.concurrent.error), {
+            correctness: row.concurrent.correctness,
+          });
+        row.cpu = { attempts: [], accepted: [] };
+        const pool = client.agent(t.url, 1);
+        try {
+          const count = s.id === "bcrypt" ? 1 : 20;
+          // Sequential warm window has already warmed the route; dedicated CPU connection warms once.
+          await client.request(t.url, s, pool);
+          for (
+            let attempt = 0;
+            attempt < 5 && row.cpu.accepted.length < 3;
+            attempt++
+          ) {
+            const before = await diagnostic(t, pool);
+            let reused = 0;
+            const start = performance.now();
+            for (let i = 0; i < count; i++)
+              reused += Number(
+                (await client.request(t.url, s, pool)).reusedSocket,
+              );
+            const after = await diagnostic(t, pool);
+            const elapsedMs = performance.now() - start;
+            const delta =
+              after.body.cpu.user +
+              after.body.cpu.system -
+              before.body.cpu.user -
+              before.body.cpu.system;
+            if (!Number.isFinite(delta) || delta < 0)
+              throw new Error("Nonmonotonic/nonfinite process CPU");
+            const entry = {
+              before,
+              after,
+              count,
+              reused,
+              elapsedMs,
+              deltaUs: delta,
+              msPerRequest: delta / count / 1000,
+              accepted: before.body.instance === after.body.instance,
+            };
+            row.cpu.attempts.push(entry);
+            if (entry.accepted) row.cpu.accepted.push(entry.msPerRequest);
+            await save();
+          }
+          row.cpu.status =
+            row.cpu.accepted.length === 3 ? "complete" : "unavailable";
+          row.cpu.medianMs =
+            row.cpu.status === "complete"
+              ? quantile(row.cpu.accepted, 0.5)
+              : null;
+        } finally {
+          pool.destroy();
         }
-        row.cpu.status =
-          row.cpu.accepted.length === 3 ? "complete" : "unavailable";
-        row.cpu.medianMs =
-          row.cpu.status === "complete"
-            ? quantile(row.cpu.accepted, 0.5)
-            : null;
-      } finally {
-        pool.destroy();
+        row.status = "complete";
+      } catch (e) {
+        row.status = "failed";
+        row.error = e.message;
+        if (e.correctness) throw e;
       }
-      row.status = "complete";
       console.log(
         t.variant,
         s.id,
-        row.sequential.p50Ms,
-        row.concurrent.requestsPerSecond,
+        row.sequential?.p50Ms,
+        row.concurrent?.requestsPerSecond,
       );
       await save();
     }
@@ -167,7 +179,10 @@ try {
       last.destroy();
     }
   }
-  report.status = "complete";
+  report.status = report.rows.some((r) => r.status !== "complete")
+    ? "failed"
+    : "complete";
+  if (report.status !== "complete") process.exitCode = 1;
 } catch (e) {
   report.status = "failed";
   report.error = e.stack;
