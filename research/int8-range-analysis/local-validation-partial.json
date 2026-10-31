@@ -1,0 +1,543 @@
+{
+  "status": "Partial, stopped by user because host disk was exhausted. Full validation gate not met. No fork commit.",
+  "date": "2026-10-31",
+  "evidenceRoot": "/tmp/scriptc-full-validation.JRQXQc",
+  "containerEvidenceMount": "/evidence",
+  "baseCommit": "cedd2f27bb6bc07bdf1bf837d407ef95950026eb",
+  "candidateDiffSHA256": "345419416fef6d32a3adfe4ccc14b961222812c4856ce45bcb2faceac537d54f",
+  "environment": {
+    "platform": "Native Linux arm64 Ubuntu 24.04 in Docker Desktop on macOS; not x86-64 Vercel Sandbox",
+    "node": "24.22.0",
+    "pnpm": "11.1.3",
+    "clangLLVM": "22.1.8",
+    "zig": "0.16.0, hidden on ordinary-lane PATH",
+    "initialVMRAMGiB": 8,
+    "resumedVMRAMGiB": 16,
+    "VMCPUs": 12,
+    "containerCPUSet": "0-5",
+    "resumedVMSwapGiB": 2
+  },
+  "completedCounts": {
+    "plainCorpus": {
+      "passed": 9433,
+      "failed": 11,
+      "skipped": 176
+    },
+    "plainPackageFiles": {
+      "files": 756,
+      "scopeFiles": 774,
+      "passed": 6861,
+      "skipped": 506,
+      "failed": 9
+    },
+    "partialCompletedSubtotal": {
+      "passed": 16294,
+      "failed": 20,
+      "skipped": 682
+    }
+  },
+  "corpusMerge": [
+    {
+      "evidence": "linux-plain-corpus-1.json",
+      "passed": 3130,
+      "failed": 6,
+      "skipped": 66,
+      "reportedElapsedSeconds": 5667.108
+    },
+    {
+      "evidence": "linux-plain-corpus-3.json",
+      "passed": 3162,
+      "failed": 4,
+      "skipped": 44,
+      "reportedElapsedSeconds": 5661.879
+    },
+    {
+      "evidence": "linux-plain-corpus-2-llvm-repair.json",
+      "passed": 1571,
+      "failed": 0,
+      "skipped": 33,
+      "reportedElapsedSeconds": 2996.306
+    },
+    {
+      "evidence": "plain-shard2-completed-differential.json",
+      "passed": 1570,
+      "failed": 1,
+      "skipped": 33,
+      "source": "Completed official differential file summary in linux-plain-corpus-2-oom.log; interrupted LLVM part excluded."
+    }
+  ],
+  "packageMerge": {
+    "method": "Parse the two frozen NDJSON journals. For each journal select only files with moduleEnd; sum the counts field of those terminal events. Assert original and resume completed-file sets are disjoint; union them. Discard case results from any file without moduleEnd in that attempt, including the original partial emit-llvm.test.ts (completed in resume). The interrupted resume has no final JSON; use its 578 moduleEnd events, not a nonexistent whole-run summary. Recovery runs stay separate. No complete NDJSON line was omitted.",
+    "journals": [
+      {
+        "evidence": "linux-plain-files.ndjson",
+        "sha256": "3459c5dd3fb9bdb698939170f3da8a9be6df07e2ddeb1d2191520445db67a6f4",
+        "completedFiles": 178,
+        "counts": {
+          "passed": 4025,
+          "skipped": 342,
+          "failed": 8
+        },
+        "completedFileListSHA256": "28d9b628907b1ecd68bae7abaa40426c8371874cd625aa3552f33b651492b367"
+      },
+      {
+        "evidence": "linux-plain-files-resume.ndjson",
+        "sha256": "3f18d00f1b7e2f702e6310c2a77651396f9ae229e9d5f0291eda22081a3820c7",
+        "completedFiles": 578,
+        "counts": {
+          "passed": 2836,
+          "skipped": 164,
+          "failed": 1
+        },
+        "completedFileListSHA256": "b21d21b8f275ec93eea10ab277eec2b32b34afc6780ae7d92906de96ba09600d"
+      }
+    ],
+    "unfinishedFiles": [
+      "packages/compiler/src/backend/json-literal.test.ts",
+      "packages/compiler/src/backend/link-plan-core.test.ts",
+      "packages/compiler/src/backend/llvm/common.test.ts",
+      "packages/compiler/src/frontend/tsc-codes.test.ts",
+      "packages/compiler/src/native/task.test.ts",
+      "packages/compiler/test/compat-exports.test.ts",
+      "packages/runtime-pack-common/test/glibc-toolchain.test.ts",
+      "packages/runtime/src/scr_dyn_methods.test.ts",
+      "packages/runtime/test/node-island-host.test.ts",
+      "tests/harness/effect.test.ts",
+      "tests/harness/effect4.test.ts",
+      "tests/harness/llvm-package-symbols.test.ts",
+      "tests/harness/npm-shape-overlay.test.ts",
+      "tests/harness/npm.test.ts",
+      "tests/harness/oracle-env.test.ts",
+      "tests/harness/self-hosting-native-frontend-programs.test.ts",
+      "tests/harness/self-hosting-native-frontend.test.ts",
+      "tests/harness/smoke.test.ts"
+    ],
+    "unfinishedFileObservedResultsExcluded": [
+      {
+        "file": "tests/harness/effect.test.ts",
+        "observedCountsExcludedFromTotals": {
+          "passed": 64,
+          "failed": 1
+        },
+        "failedCases": [
+          "published Effect /workspace/tests/fixtures/effect/gen-number-typed.ts matches Node statically"
+        ]
+      },
+      {
+        "file": "tests/harness/effect4.test.ts",
+        "observedCountsExcludedFromTotals": {
+          "passed": 163,
+          "failed": 2
+        },
+        "failedCases": [
+          "published Effect 4 /workspace/tests/fixtures/effect4/state-sync-ref.ts matches Node statically",
+          "published Effect 4 /workspace/tests/fixtures/effect4/stream-error.ts matches Node statically"
+        ]
+      }
+    ]
+  },
+  "failureClassifications": [
+    {
+      "id": "date-timezone",
+      "completedFailureCount": 1,
+      "classification": "environment; exact base reproduced; focused recovery passed",
+      "detail": "5963-date-to-string.ts lacked US/Pacific on Ubuntu until tzdata-legacy was installed. Both harnesses pass on candidate and base afterward. Raw failure remains in totals.",
+      "evidence": [
+        "linux-plain-corpus-2-oom.log",
+        "plain-shard2-completed-differential.json",
+        "base-linux-date-no-tzdata.json",
+        "base-linux-date-legacy.json",
+        "candidate-linux-date-legacy.json"
+      ]
+    },
+    {
+      "id": "net-ip-ordering",
+      "completedFailureCount": 2,
+      "classification": "environment; exact base reproduced; focused recovery passed",
+      "detail": "net-unix-socket-connect.ts: Node oracle itself gets IPv4 ECONNREFUSED against an IPv6 localhost listener. NODE_OPTIONS=--dns-result-order=ipv4first passes both harnesses on candidate and base; primary lane retained default ordering.",
+      "evidence": [
+        "base-linux-corpus-failures-plain.json",
+        "base-linux-net-ipv4.json",
+        "candidate-linux-net-ipv4.json"
+      ]
+    },
+    {
+      "id": "missing-libnode-arm64",
+      "completedFailureCount": 4,
+      "classification": "pre-existing platform capability; exact base reproduced",
+      "detail": "7009-finalization-registry-wasm-loader/main.ts and 8217-intl-segmenter-word-construct/main.ts each fail both harnesses with SC8005 missing Linux arm64 libnode pack.",
+      "evidence": [
+        "base-linux-corpus-failures-plain.json"
+      ]
+    },
+    {
+      "id": "fdlibm-arm64",
+      "completedFailureCount": 4,
+      "classification": "pre-existing numeric parity; exact base reproduced",
+      "detail": "7717-math-fdlibm.ts and 7718-math-fdlibm.cjs each mismatch Node in both harnesses. Full candidate/base native stdout, stderr and status are byte-identical. Underlying numeric discrepancy remains.",
+      "evidence": [
+        "base-linux-corpus-failures-plain.json",
+        "candidate-linux-math-plain.json",
+        "math-base-candidate-comparison.json"
+      ]
+    },
+    {
+      "id": "deep-expression",
+      "completedFailureCount": 1,
+      "classification": "pre-existing; exact base reproduced",
+      "detail": "errors.test.ts: 7000-level expression triggers TS7 Maximum call stack size exceeded in request/updateSnapshot, before backend lowering.",
+      "evidence": [
+        "linux-plain-files.ndjson",
+        "base-linux-deep-expression.json"
+      ]
+    },
+    {
+      "id": "coverage-audit-timeout",
+      "completedFailureCount": 1,
+      "classification": "resource/time-limit observation; base comparison unresolved",
+      "detail": "coverage.test.ts: whole-corpus static audit exceeded 600000ms. It calls frontend analysis without codegen; the modified LLVM wrapping helper is not on that path. No healthy retry or base result exists, so this is not a demonstrated green recovery.",
+      "evidence": [
+        "linux-plain-files.ndjson"
+      ],
+      "pending": "Eight-shard recovery and unsharded base audit were canceled before execution."
+    },
+    {
+      "id": "library-k10-lsan",
+      "completedFailureCount": 1,
+      "classification": "pre-existing leak; exact base reproduced; focused policy recovery passed",
+      "detail": "library-mode.test.ts K10: trap probe leaks 56 bytes under LeakSanitizer on both. ASAN_OPTIONS=detect_leaks=0 passes both with ASan and RC audit retained, matching sandbox sanitizer policy. This test instruments explicitly even in the plain lane.",
+      "evidence": [
+        "base-linux-ffi-library-plain.json",
+        "base-linux-k10-rcaudit.json",
+        "candidate-linux-k10-rcaudit.json"
+      ]
+    },
+    {
+      "id": "ffi-timer-fairness",
+      "completedFailureCount": 1,
+      "classification": "pre-existing timing assertion; exact base reproduced",
+      "detail": "ffi.test.ts manifest ABI case: only foreignTimerTicks>0 boolean differs (true expected, false observed). Callback count, sum and order agree. Official focused candidate/base fail; direct execution of the same binary sometimes passes.",
+      "evidence": [
+        "base-linux-ffi-library-plain.json",
+        "candidate-linux-ffi-retry.json"
+      ]
+    },
+    {
+      "id": "hidden-zig",
+      "completedFailureCount": 1,
+      "classification": "infrastructure; exact base reproduced",
+      "detail": "self-hosting-native-driver.test.ts: production CLI bootstrap fails zig ENOENT because ordinary-lane PATH hides Zig.",
+      "evidence": [
+        "base-linux-bootstrap-hidden-zig.json"
+      ],
+      "pending": "Separate native-extra run with Zig on PATH was not run."
+    },
+    {
+      "id": "input-tracker-timestamp",
+      "completedFailureCount": 1,
+      "classification": "pre-existing test/filesystem timing collision; base minimal repro",
+      "detail": "input-tracker.test.ts settled-file identity assertion: official focus passes on both and 40 further base attempts pass. Exact test read/write logic against base reproduces unchanged identity after rewrite at iteration 1, retaining the test marker digest. No general production-cache diagnosis is claimed.",
+      "evidence": [
+        "base-linux-input-tracker.json",
+        "candidate-linux-input-tracker.json",
+        "base-linux-input-tracker-repro.json",
+        "input-tracker-repro.mts"
+      ]
+    },
+    {
+      "id": "emitter-heap",
+      "completedFailureCount": 2,
+      "classification": "resource; exact base reproduced at same heap limit",
+      "detail": "self-hosting-llvm-emitter.test.ts: both cases share a failed seed compilation exhausting the old 2048MiB Node heap. Base explicitly limited to 2048MiB reproduces both in 154s. A candidate 3072MiB attempt passed its first case but was manually resource-aborted during fixed point; it is not a completed recovery.",
+      "evidence": [
+        "base-linux-emitter-heap2048.json",
+        "linux-plain-emitter-overlap-interrupted.ndjson",
+        "linux-plain-emitter-overlap-interrupted.log"
+      ],
+      "pending": "Full isolated higher-heap retry was not run."
+    },
+    {
+      "id": "fifo-server-reaping",
+      "completedFailureCount": 1,
+      "classification": "infrastructure; exact base reproduced; focused recovery passed",
+      "detail": "rpc-process.test.ts FIFO server: container PID1 sleep infinity does not reap orphaned cat. Base minimal repro shows State Z, PPid 1. Focused original candidate/base fail; local subreaper wrapper runs the full three-case file 3/3 on both. Primary resume ran without that wrapper.",
+      "evidence": [
+        "base-linux-rpc-process.json",
+        "candidate-linux-rpc-process.json",
+        "base-linux-rpc-process-repro.json",
+        "base-linux-rpc-process-reaper.json",
+        "candidate-linux-rpc-process-reaper.json",
+        "subreaper.py"
+      ]
+    }
+  ],
+  "interruptedFailureClassification": {
+    "classification": "Validation infrastructure, pause-associated 600s timeouts; not independently base-confirmed",
+    "cases": [
+      "effect/gen-number-typed.ts",
+      "effect4/state-sync-ref.ts",
+      "effect4/stream-error.ts"
+    ],
+    "evidence": [
+      "linux-plain-files-resume.ndjson",
+      "plain-workers-disk-pause.json",
+      "plain-workers-disk-resume.json",
+      "plain-disk-guard-events.ndjson"
+    ],
+    "detail": "All three deadlines crossed SIGSTOP disk-pressure pauses. Their files have no moduleEnd and all their results, including 227 observed passes, are excluded from completed totals. Healthy base/candidate focused retries were queued but canceled by the stop request."
+  },
+  "completedPackageFailureCases": [
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/errors.test.ts",
+      "test": "checked catch-binding casts > a 7000-level expression is a named deferred fence, not a stack overflow (JS lane)"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/coverage.test.ts",
+      "test": "every corpus program is 100% static (corpus and coverage agree)"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/library-mode.test.ts",
+      "test": "library mode, llvm emission > K10: K5/K7 under ASan"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/ffi.test.ts",
+      "test": "outbound native FFI, llvm backend > calls the manifest-bound archive across every v1 ABI class plus v2/v3/v4/v5 callback ABI classes"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/self-hosting-native-driver.test.ts",
+      "test": "the production CLI passes all bootstrap contracts with Node unavailable"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "packages/compiler/src/frontend/input-tracker.test.ts",
+      "test": "a settled file an earlier run read keeps that run's digest until it is written"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/self-hosting-llvm-emitter.test.ts",
+      "test": "the complete LLVM emitter bootstraps natively (llvm) > the complete LLVM emitter bootstraps natively (llvm): emitter cases and programs"
+    },
+    {
+      "journal": "linux-plain-files.ndjson",
+      "file": "tests/harness/self-hosting-llvm-emitter.test.ts",
+      "test": "the complete LLVM emitter bootstraps natively (llvm) > the complete LLVM emitter bootstraps natively (llvm): fixed point"
+    },
+    {
+      "journal": "linux-plain-files-resume.ndjson",
+      "file": "packages/compiler/src/frontend/ts7/rpc-process.test.ts",
+      "test": "a FIFO server echoes, and exits when its transport closes"
+    }
+  ],
+  "resources": {
+    "oldVMKernelOOMKills": 2,
+    "oldOOMDetails": "One initial package command and corpus shard 2 LLVM worker. Initial package OOM results excluded; the completed corpus differential shard 2 was retained and only its incomplete LLVM harness rerun.",
+    "resumedCgroupOOMKillBaseline": 0,
+    "resumedCgroupOOMKillFinal": 0,
+    "manualEmitterResourceAbort": true,
+    "diskPauses": [
+      {
+        "startUTC": "2026-10-31T20:20:27Z",
+        "durationSeconds": 551.967775,
+        "workers": [
+          48160,
+          50964
+        ]
+      },
+      {
+        "startUTC": "2026-10-31T20:34:36.767679Z",
+        "serialResumeUTC": "2026-10-31T20:48:05.479194Z",
+        "worker": 48160,
+        "durationSeconds": 808.711515
+      },
+      {
+        "startUTC": "2026-10-31T20:49:59.633547Z",
+        "detail": "Resumed worker paused again and remained paused until final termination; no new shards launched."
+      }
+    ],
+    "diskFloorBytes": 4294967296,
+    "resourceSampleCount": 536,
+    "belowFloorSamples": 22,
+    "firstBelowFloorUTC": "2026-10-31T21:02:42.553204+00:00",
+    "lastBelowFloorUTC": "2026-10-31T21:07:59.935481+00:00",
+    "minimumSampledHostDiskFreeBytes": 3201708032,
+    "floorBreachContext": "Host headroom fell below the floor while test workers were already paused. No new shards were launched. User then ordered termination. Earlier notes claiming no sampled breach apply only to the earlier interval.",
+    "hostSwap": "macOS swap allocation reached approximately 13GiB, separate from Linux VM swap. No OS or Docker settings were changed by this agent.",
+    "evidence": [
+      "resource-samples.ndjson",
+      "resource-latest.json",
+      "resources-resume.log",
+      "plain-disk-guard-events.ndjson"
+    ]
+  },
+  "authorizedGeneratedOutputArchival": [
+    {
+      "scope": "Only completed plain corpus generated .ll output in exact hashed output directories; source/CAS/future-phase outputs excluded",
+      "removedFiles": 14159,
+      "removedBytes": 3378561590,
+      "archive": "/tmp/scriptc-full-validation.JRQXQc/completed-plain-llvm.tar.gz",
+      "archiveBytes": 675203769,
+      "archiveSHA256": "b90b42cfe2bb253faa4a03312f5f020a01c01a74c10cfbfe717c9a0ab64b30db",
+      "verification": "Full archive member list and every member checksum, plus extraction and checksum of 19 samples (31831267 bytes); originals rehashed before unlink. Zero overlap with pending SAN keys.",
+      "evidence": [
+        "completed-plain-llvm-archive-verification.json",
+        "completed-plain-llvm-test-extraction.json",
+        "completed-plain-llvm-reuse-audit.json",
+        "completed-plain-llvm-removal.json"
+      ]
+    },
+    {
+      "scope": "Only generated .ll/executables in completed npm-static-<16hex> directories; fixed workspace paths excluded",
+      "removedFiles": 134,
+      "removedBytes": 631022752,
+      "archive": "/tmp/scriptc-full-validation.JRQXQc/completed-plain-npm-static-output.tar.gz",
+      "archiveBytes": 150465221,
+      "archiveSHA256": "9b45f4e0fd5ff290ed612f8ab5555bd831225c51fc23426a808dd58efd22118b",
+      "verification": "Full member list and every member checksum, plus actual extraction and checksum of 12 samples (125197 bytes); originals rehashed before unlink.",
+      "evidence": [
+        "completed-plain-npm-static-archive-verification.json",
+        "completed-plain-npm-static-removal.json"
+      ]
+    }
+  ],
+  "additionalExecutablePrune": {
+    "files": 1010,
+    "bytes": 650277296,
+    "scope": "Completed plain corpus regenerable executables only",
+    "evidence": "prune-completed-plain-corpus-actual.json"
+  },
+  "preservation": "Archives, raw evidence, summaries/JSON/logs, source, candidate patch, CAS and incomplete emitter outputs retained. Nothing outside validation-container generated test outputs was deleted. Container retained, not removed. Supabase containers were not modified.",
+  "commands": {
+    "corpus": "CI=1 SCRIPTC_TEST_SHARD=i/3 SCRIPTC_TEST_WORKERS=1 pnpm test --reporter=default --reporter=json --outputFile.json=/evidence/linux-plain-corpus-i.json tests/harness/differential.test.ts tests/harness/llvm-differential.test.ts (i=1,2,3; SCRIPTC_SAN and ASAN_OPTIONS unset)",
+    "corpusRepair": "CI=1 SCRIPTC_TEST_SHARD=2/3 SCRIPTC_TEST_WORKERS=1 pnpm test --reporter=default --reporter=json --outputFile.json=/evidence/linux-plain-corpus-2-llvm-repair.json tests/harness/llvm-differential.test.ts",
+    "packageOriginal": "CI=1 SCRIPTC_TEST_WORKERS=1 pnpm test --reporter=default --reporter=json --reporter=/evidence/progress-reporter.mjs --outputFile.json=/evidence/linux-plain-files.json --exclude=tests/harness/differential.test.ts --exclude=tests/harness/llvm-differential.test.ts",
+    "packageResume": "resume-plain.sh: same package exclusions/reporters, SCRIPTC_TEST_WORKERS=2, explicit 596-file list plain-remaining-files.txt, output basename linux-plain-files-resume; SCRIPTC_SAN/ASAN_OPTIONS/SCRIPTC_TEST_SHARD/NODE_OPTIONS unset"
+  },
+  "timing": {
+    "firstValidationUTC": "2026-10-31T13:10:19.322Z",
+    "resumeJournalStartUTC": "2026-10-31T17:35:45.917Z",
+    "containerStoppedUTC": "2026-10-31T21:08:49.883064546Z",
+    "totalElapsedSeconds": 28710.561,
+    "resumeElapsedSeconds": 12783.966,
+    "note": "Elapsed wall times include interruptions, Docker restart and disk pauses; not CPU-hours. Original corpus shards took 5477/5663/5668s; the second-shard LLVM repair took 2996.306s. durations.txt linux-plain-files=282s is the discarded early OOM attempt, not the 178-file journal."
+  },
+  "hostChecks": {
+    "lint": "passed",
+    "format:check": "passed",
+    "TS7Baselines": "passed",
+    "DarwinInvariants": {
+      "passed": 34,
+      "skipped": 1
+    },
+    "DarwinArtifact": {
+      "passed": 6,
+      "filteredSkipped": 42
+    },
+    "DarwinBehaviorPlain": {
+      "passed": 14
+    },
+    "DarwinBehaviorSanitizedPinnedLLVM22": {
+      "passed": 14
+    },
+    "initialHostSanitizedFailure": {
+      "classification": "Toolchain, exact base reproduced, pinned LLVM22 recovery passed",
+      "detail": "Apple Clang21 rejects llvm.coro.end return type; both candidate and base recover with LLVM22.1.8. Selected host checks do not substitute for Linux sanitized lane.",
+      "evidence": [
+        "base-host-old-clang.json",
+        "base-host-clang22.json",
+        "host-san-clang22.json"
+      ]
+    }
+  },
+  "notRun": [
+    "18 unfinished plain package files listed above (2 interrupted, 16 unstarted)",
+    "Healthy candidate/base retries of the three Effect pause timeouts",
+    "8-shard coverage recovery and unsharded base coverage audit",
+    "Complete isolated higher-heap emitter retry",
+    "Plain native-extra with Zig on PATH",
+    "Entire planned Linux sanitized lane: corpus, case-sharded files, emitter, ordinary files and native-extra",
+    "Official full x86-64 Vercel pnpm test:sandbox plain and sanitized gate"
+  ],
+  "conclusion": "No completed failure has been demonstrated to be caused by the patch. The coverage timeout has no completed base comparison, pause failures have no healthy focused retry, and substantial coverage is missing. This does not establish no regressions. Official pnpm test:sandbox is required before an upstream PR. Fork patch intentionally remains uncommitted.",
+  "shutdown": {
+    "host": {
+      "UTC": "2026-10-31T21:08:37.929212+00:00",
+      "terminated": [
+        {
+          "pid": 11309,
+          "command": "/opt/homebrew/Cellar/python@3.15/3.15.0_1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /tmp/scriptc-full-validation.JRQXQc/plain-disk-guard-plain-only.py"
+        },
+        {
+          "pid": 67521,
+          "command": "/opt/homebrew/Cellar/python@3.15/3.15.0_1/Frameworks/Python.framework/Versions/3.15/Resources/Python.app/Contents/MacOS/Python /tmp/scriptc-full-validation.JRQXQc/resource-monitor.py"
+        }
+      ]
+    },
+    "container": {
+      "UTC": "2026-10-31T21:08:39.152694+00:00",
+      "terminated": [
+        {
+          "pid": 50,
+          "ppid": 0,
+          "stat": "Ss",
+          "comm": "bash"
+        },
+        {
+          "pid": 56,
+          "ppid": 50,
+          "stat": "Sl",
+          "comm": "MainThread"
+        },
+        {
+          "pid": 68,
+          "ppid": 56,
+          "stat": "S",
+          "comm": "sh"
+        },
+        {
+          "pid": 69,
+          "ppid": 68,
+          "stat": "Sl",
+          "comm": "node (vitest)"
+        },
+        {
+          "pid": 98,
+          "ppid": 69,
+          "stat": "Sl",
+          "comm": "esbuild"
+        },
+        {
+          "pid": 48160,
+          "ppid": 69,
+          "stat": "Tl",
+          "comm": "node (vitest 1)"
+        },
+        {
+          "pid": 50964,
+          "ppid": 69,
+          "stat": "Tl",
+          "comm": "node (vitest 2)"
+        },
+        {
+          "pid": 76844,
+          "ppid": 76838,
+          "stat": "R",
+          "comm": "ps"
+        }
+      ],
+      "forced": [
+        56,
+        48160,
+        50964
+      ],
+      "pid1PreservedUntilDockerStop": true
+    },
+    "finalState": "exited",
+    "finishedAt": "2026-10-31T21:08:49.883064546Z",
+    "hostVerification": "No task-owned controller/guard/pruner/Vitest/base-comparison processes remain. Unrelated host Vitest processes were left untouched."
+  }
+}

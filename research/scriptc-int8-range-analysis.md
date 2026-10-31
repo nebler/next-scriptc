@@ -152,3 +152,46 @@ Fork candidate (uncommitted, base `cedd2f27b`):
 - `tests/harness/corpus-costs/signed-products-wrapping-sums.ts.json`
 
 Next-scriptc branch `t3/int8-range-analysis`: `examples/scout/vectors/bench.mjs`, this report, and `research/int8-range-analysis/` (compiler patch, CLI adapter, paired vector/regression/Sandbox runners, raw JSON/provenance, LLVM/assembly excerpts, and test logs). Generated native executables, compiler bundles, and runtime packs are outside version control.
+
+## Local validation (partial, stopped)
+
+On 2026-10-31 the user stopped validation because host disk space was exhausted. **The plain lane is incomplete, the full Linux sanitized lane never started, and the fork patch remains uncommitted.** No completed failure was demonstrated to be patch-caused; the incomplete coverage and unresolved retries do not establish absence of regressions. The official full `pnpm test:sandbox` plain and sanitized gate remains required before an upstream PR.
+
+The environment was native Linux arm64 Ubuntu 24.04 in Docker Desktop, rather than x86-64 Sandbox. The user increased VM RAM from 8 to 16 GiB; the container retained six effective CPUs. The linked summary records toolchain versions, exact base and unchanged candidate hash.
+
+| Completed scope | Passed | Failed | Skipped |
+|---|---:|---:|---:|
+| Plain corpus, both harnesses | 9,433 | 11 | 176 |
+| Plain packages, 756 of 774 files | 6,861 | 9 | 506 |
+| Partial completed subtotal | 16,294 | 20 | 682 |
+
+Corpus counts combine valid shard 1 and 3 JSON, shard 2's completed differential file summary, and the successful LLVM-only shard 2 repair. The interrupted LLVM results are discarded. Package counts sum only terminal `moduleEnd.counts` in `linux-plain-files.ndjson` (178 files: 4,025/8/342) and `linux-plain-files-resume.ndjson` (578 files: 2,836/1/164). Their completed-file sets are disjoint. Every partial-file result from either attempt is excluded; the original partial `emit-llvm.test.ts` was completed in the resume. Both Effect files remain incomplete, so their 227 observed passes and three pause-associated failures are outside the table. Eighteen package files remain unfinished: two interrupted and sixteen unstarted. Focused recoveries do not replace raw failures or add to these totals.
+
+The following accounts for all 20 completed failures. Evidence filenames resolve under `/tmp/scriptc-full-validation.JRQXQc`; [local-validation-partial.json](int8-range-analysis/local-validation-partial.json) records the complete evidence references, journal hashes, commands and unfinished-file list.
+
+| Failure | Count | Classification and evidence |
+|---|---:|---|
+| `5963-date-to-string.ts` | 1 | Environment, base reproduced: missing `US/Pacific`. Installing `tzdata-legacy` makes both harnesses pass on candidate and base. `base-linux-date-legacy.json`, `candidate-linux-date-legacy.json`. |
+| `net-unix-socket-connect.ts` | 2 | Environment, base reproduced: Node oracle IPv4/IPv6 ordering. Both harnesses pass on both revisions with `--dns-result-order=ipv4first`. `base-linux-net-ipv4.json`, `candidate-linux-net-ipv4.json`. |
+| `7009-finalization-registry-wasm-loader/main.ts`, `8217-intl-segmenter-word-construct/main.ts` | 4 | Pre-existing missing Linux arm64 libnode pack, SC8005. `base-linux-corpus-failures-plain.json`. |
+| `7717-math-fdlibm.ts`, `7718-math-fdlibm.cjs` | 4 | Pre-existing arm64 Node/native numeric mismatch. Candidate/base native stdout, stderr and status are byte-identical. `math-base-candidate-comparison.json`. |
+| `errors.test.ts`, 7000-level expression | 1 | Pre-existing TS7 stack panic before backend lowering. `base-linux-deep-expression.json`. |
+| `coverage.test.ts`, whole-corpus static audit | 1 | Resource/time-limit observation: 600-second timeout. Base comparison and eight-shard recovery were not run. It uses frontend analysis without codegen; this is unresolved validation, not a recovered pass. `linux-plain-files.ndjson`. |
+| `library-mode.test.ts`, K10 | 1 | Pre-existing 56-byte LeakSanitizer trap-probe leak, base reproduced. Both pass with `detect_leaks=0`, retaining ASan and RC audit. `base-linux-ffi-library-plain.json`, `base-linux-k10-rcaudit.json`, `candidate-linux-k10-rcaudit.json`. |
+| `ffi.test.ts`, manifest ABI case | 1 | Pre-existing timer-fairness assertion, base reproduced. Only the timer-ticked boolean differs; callback count, sum and order agree. `base-linux-ffi-library-plain.json`, `candidate-linux-ffi-retry.json`. |
+| `self-hosting-native-driver.test.ts` | 1 | Infrastructure, base reproduced: hidden Zig causes `ENOENT`. Correct-PATH native-extra was not run. `base-linux-bootstrap-hidden-zig.json`. |
+| `input-tracker.test.ts`, settled-file identity | 1 | Pre-existing test/filesystem timing collision. Official focused retries pass on both; exact test read/write logic reproduces the identity collision on base. `base-linux-input-tracker-repro.json`. |
+| `self-hosting-llvm-emitter.test.ts` | 2 | Resource, base reproduced at the original 2048 MiB heap limit. A 3072 MiB candidate attempt passed its first case, then was resource-aborted during fixed point. Full recovery remains pending. `base-linux-emitter-heap2048.json`, `linux-plain-emitter-overlap-interrupted.ndjson`. |
+| `rpc-process.test.ts`, FIFO server | 1 | Infrastructure, base reproduced: container PID 1 leaves an orphaned `cat` zombie. A local subreaper wrapper passes all three file cases on both revisions. `base-linux-rpc-process-repro.json`, `base-linux-rpc-process-reaper.json`, `candidate-linux-rpc-process-reaper.json`. |
+
+The interrupted Effect cases `gen-number-typed.ts`, `state-sync-ref.ts` and `stream-error.ts` exceeded 600-second deadlines across disk-pressure `SIGSTOP` pauses. These are classified as validation infrastructure observations; healthy candidate/base retries were canceled before execution, so they are not independently base-confirmed. Their raw failures remain in `linux-plain-files-resume.ndjson` and are excluded from completed-file totals.
+
+Earlier host lint, formatting and TS7 baselines passed. Selected Darwin checks passed: invariants 34 with one conditional skip, artifact checks 6 with 42 filtered skips, and behavior 14 each plain and sanitized with LLVM 22.1.8. An initial Apple Clang 21 coroutine-intrinsic failure reproduced on base and recovered with pinned LLVM 22 (`base-host-old-clang.json`, `base-host-clang22.json`, `host-san-clang22.json`). These selections do not replace the full Linux sanitized lane.
+
+Corpus used three shards with one worker each, followed by the LLVM-only repair. Package resume used two workers and an explicit 596-file list. Commands and phase durations are in the summary. Total elapsed time was 7h 58m 31s, including restart and pauses; package resume occupied 3h 33m 4s.
+
+The original 8 GiB VM incurred two kernel OOM kills, one package attempt and one corpus shard; their incomplete results were discarded or repaired as described above. The resumed cgroup OOM counter stayed at zero. One emitter retry was manually resource-aborted. Disk pauses included 552 seconds, then 809 seconds before one worker resumed, followed by another pause until shutdown. macOS swap allocation reached about 13 GiB. Despite workers already being paused, host headroom later fell below the 4 GiB floor: 22 resource samples, minimum 3,201,708,032 bytes (2.98 GiB). No new shards were launched. `resource-samples.ndjson` and `plain-disk-guard-events.ndjson` retain these events.
+
+Verified archival removed 4,009,584,342 bytes of completed generated corpus/npm-static output; a separate executable prune removed 650,277,296 bytes. `NOTES.md` and the summary record archive paths/hashes, member checksums, sample extractions, removal manifests and reuse audits. Source, patch, CAS, incomplete outputs and evidence were retained.
+
+Not run: the 18 remaining package files, healthy retries of the three Effect timeouts, coverage recovery and base audit, a complete isolated higher-heap emitter retry, plain native-extra, and the entire planned Linux sanitized lane (corpus, case shards, emitter, ordinary files and native-extra). All validation controllers, guards, pruners, tests and comparisons were terminated. `scriptc-int8-validation` was stopped at 21:08:49 UTC and retained; no Supabase container was modified. Only this report and its concise summary are committed.
