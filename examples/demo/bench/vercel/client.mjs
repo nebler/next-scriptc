@@ -38,8 +38,10 @@ export async function measure(deployments, { fresh = false, secret, onRow = () =
       const spec = workloads.find((route) => route.id === row.workload);
       try {
         row.sequential = await window(deployment.url, spec, 1, protocol.sequentialWarmup, { count: protocol.sequentialCount }, row.first.digest);
+        if (row.sequential.error) throw new Error(row.sequential.error);
         row.concurrent = await window(deployment.url, spec, protocol.concurrency, { count: protocol.concurrentWarmup, durationMs: protocol.concurrentWarmupMs },
           { count: protocol.concurrentCap, durationMs: protocol.durationMs }, row.first.digest);
+        if (row.concurrent.error) throw new Error(row.concurrent.error);
         row.status = "measured";
       } catch (error) { row.status = "failed"; row.error = error.message; }
       onRow(deployment.variant, row);
@@ -126,14 +128,18 @@ export function createClient(secret, budget = 25_476) {
             reused += Number(response.reusedSocket);
             times.push(response.ms);
             if (retainSamples) samples.push({ dispatchMs, ms: response.ms, requestId: response.headers["x-vercel-id"] });
-          } catch (error) { failure ??= error; }
+          } catch (error) {
+            failure ??= error;
+            if (retainSamples) samples.push({ dispatchMs, ms: performance.now() - start - dispatchMs, error: error.message });
+          }
         }
       }));
-      if (failure) throw failure; // All outstanding requests have drained.
+      // Keep failed windows and drained outstanding samples; never present their throughput as valid.
       const elapsedMs = performance.now() - start;
       const used = process.cpuUsage(cpu);
       const cpuMs = (used.user + used.system) / 1000;
-      return { ...(retainSamples ? { samples } : {}), requests: times.length, elapsedMs, requestsPerSecond: times.length * 1000 / elapsedMs,
+      return { status: failure ? "failed" : "complete", ...(failure ? { error: failure.message } : {}),
+        ...(retainSamples ? { samples } : {}), requests: times.length, elapsedMs, requestsPerSecond: times.length * 1000 / elapsedMs,
         p50Ms: quantile(times, 0.5), p95Ms: quantile(times, 0.95), p99Ms: quantile(times, 0.99),
         countLimited: dispatched === count, connectionsCreated: connections - connectionsBefore,
         connectionsBefore, reusedRequests: reused, generatorCpuMs: cpuMs,
@@ -141,6 +147,7 @@ export function createClient(secret, budget = 25_476) {
     }
     try {
       const warmup = await run(typeof warmupLimits === "number" ? { count: warmupLimits } : warmupLimits);
+      if (warmup.error) return { status: "failed", error: warmup.error, warmup };
       return { ...await run(limits), warmup };
     } finally { agent.destroy(); }
   }

@@ -39,7 +39,7 @@ function diagnosticReport(data) {
     "All observations, deployment mappings, per-request tail timings and Sandbox provenance are retained in the sibling JSON. First-response latency includes DNS/TCP/TLS; confirmed process-cold state is unavailable. Diagnostic RSS is process-only and may reach any instance.", ""];
   for (const d of data.deployments ?? []) {
     lines.push(`- ${d.variant}: ${d.url}; ${d.status}; hello first ${number(d.first?.ms)} ms; warm p50 ${number(d.warm?.p50Ms)} ms; excess ${number(d.firstMinusWarmP50Ms)} ms.`);
-    for (const key of ["original", "longWarmup"]) if (d[key]) lines.push(`  ${key}: ${d[key].requests} requests / ${number(d[key].elapsedMs)} ms; ${number(d[key].requestsPerSecond)} req/s; p50/p95/p99 ${number(d[key].p50Ms)}/${number(d[key].p95Ms)}/${number(d[key].p99Ms)} ms; capped=${d[key].countLimited}. Warmup ${d[key].warmup.requests} / ${number(d[key].warmup.elapsedMs)} ms.`);
+    for (const key of ["original", "longWarmup"]) if (d[key]) lines.push(`  ${key}: ${d[key].requests} requests / ${number(d[key].elapsedMs)} ms; ${number(d[key].requestsPerSecond)} req/s; p50/p95/p99 ${number(d[key].p50Ms)}/${number(d[key].p95Ms)}/${number(d[key].p99Ms)} ms; capped=${d[key].countLimited}. Warmup ${d[key].warmup?.requests} / ${number(d[key].warmup?.elapsedMs)} ms.`);
     if (d.error) lines.push(`  Error: ${d.error}`);
   }
   lines.push("", `Issued requests: ${data.requestsIssued ?? "unknown"}; Sandbox provisioned upper bound ${number(data.sandbox?.provisionedVcpuHours)} vCPU-h.`, "");

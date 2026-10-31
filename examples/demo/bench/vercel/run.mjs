@@ -11,7 +11,7 @@ const root = path.resolve(import.meta.dirname, "../../../..");
 const { values } = parseArgs({ options: { node: { type: "string" }, native: { type: "string" },
   mode: { type: "string", default: "full" }, "native-first": { type: "boolean", default: false },
   fresh: { type: "boolean", default: false }, output: { type: "string" } } });
-if (!values.node) throw new Error("--node https://<immutable-preview>.vercel.app is required; --native is optional");
+if (!values.node && !values.native) throw new Error("--node and/or --native immutable preview origins are required");
 if (!process.env.VERCEL_AUTOMATION_BYPASS_SECRET) throw new Error("Load VERCEL_AUTOMATION_BYPASS_SECRET from ignored .env.local");
 if (!["full", "cold", "tail", "idle"].includes(values.mode)) throw new Error("--mode must be full, cold, tail or idle");
 const deployments = (values["native-first"] ? ["native", "node"] : ["node", "native"]).filter((variant) => values[variant]).map((variant) => {

@@ -33,6 +33,8 @@ async function check() {
       const status = readFileSync(`/proc/${body.pid}/status`, "utf8");
       const externalRss = Number(status.match(/^VmRSS:\s+(\d+)/m)[1]) * 1024;
       assert(body.rss > 0 && body.procRss > 0 && body.peakRss >= body.procRss);
+      assert(Math.abs(body.rss - body.procRss) < 2 * 1024 * 1024, "RSS API disagrees with procfs by >=2 MiB");
+      assert(Math.abs(body.procRss - externalRss) < 2 * 1024 * 1024);
       observations.push({ ...body, externalRss, rssMinusProc: body.rss - body.procRss });
     }
     // Also observe the Node API against procfs in this same Linux environment.

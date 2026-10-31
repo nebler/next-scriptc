@@ -41,8 +41,10 @@ export async function diagnose(deployments, { mode, fresh, secret }) {
         row.memoryBefore = await client.memory(deployment.url);
         row.original = await client.window(deployment.url, hello, 16, 32,
           { count: 700, durationMs: 3000 }, row.first.digest, true);
+        if (row.original.error) throw new Error(row.original.error);
         row.longWarmup = await client.window(deployment.url, hello, 16,
           { count: 1500, durationMs: 3000 }, { count: 4500, durationMs: 10_000 }, row.first.digest, true);
+        if (row.longWarmup.error) throw new Error(row.longWarmup.error);
         row.memoryAfterLoad = await client.memory(deployment.url);
         if (deployment.variant === "native") row.verifyAfter = await verifyWindow();
       } else throw new Error(`Unknown diagnostic mode: ${mode}`);
