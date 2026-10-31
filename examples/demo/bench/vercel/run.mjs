@@ -20,6 +20,20 @@ const deployments = ["node", "native"].filter((variant) => values[variant]).map(
   return { variant, url: url.origin };
 });
 if (new Set(deployments.map((deployment) => deployment.url)).size !== deployments.length) throw new Error("Variants must have distinct deployment URLs");
+// Control-plane inspection does not invoke/warm application routes.
+for (const deployment of deployments) {
+  const info = JSON.parse(execFileSync("vercel", ["inspect", deployment.url, "--json"], { cwd: root, encoding: "utf8" }));
+  if (info.name !== "next-scriptc" || info.target === "production" || info.readyState !== "READY") throw new Error("Use a READY preview of next-scriptc");
+  deployment.server = { id: info.id, target: info.target, createdAt: info.createdAt,
+    functions: info.builds.flatMap((build) => build.output ?? []).filter((output) => output.lambda).map((output) => ({
+      path: output.path, functionName: output.lambda.functionName, runtime: output.lambda.runtime,
+      regions: output.lambda.deployedTo, allocatedMemoryMiB: output.lambda.memorySize, timeoutSeconds: output.lambda.timeout,
+    })) };
+  if (deployment.server.functions.some((fn) => fn.regions?.length !== 1 || fn.regions[0] !== "iad1")) throw new Error("Every function must be pinned to iad1");
+}
+const project = JSON.parse(await readFile(path.join(root, ".vercel/project.json")));
+const remote = JSON.parse(execFileSync("vercel", ["api", `/v9/projects/${project.projectId}`], { cwd: root, encoding: "utf8" }));
+const platform = { observedAt: new Date().toISOString(), projectResourceConfig: remote.resourceConfig };
 const stamp = new Date().toISOString().replaceAll(":", "-");
 const destination = path.resolve(root, values.output ?? `research/benchmarks/vercel-${stamp}`);
 const files = ["client.mjs", "worker.mjs"].map((name) => `examples/demo/bench/vercel/${name}`)
@@ -28,7 +42,7 @@ const uploaded = await Promise.all(files.map(async (file) => ({ path: file, cont
 const hash = createHash("sha256");
 for (const file of uploaded) hash.update(file.path).update("\0").update(file.content);
 const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
-const data = { mode: deployments.length === 1 ? "baseline-only" : "Node/native comparison", status: "running", startedAt: new Date().toISOString(),
+const data = { mode: deployments.length === 1 ? "baseline-only" : "Node/native comparison", status: "running", platform, startedAt: new Date().toISOString(),
   sourceCommit: git("rev-parse", "HEAD"), dirty: Boolean(git("status", "--porcelain")), clientSha256: hash.digest("hex"), deployments };
 await mkdir(path.dirname(destination), { recursive: true });
 const started = Date.now();
