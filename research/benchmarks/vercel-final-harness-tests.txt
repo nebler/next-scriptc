@@ -1,0 +1,17 @@
+node cold: failed
+✔ a failing concurrent warmup drains and retains all outstanding timings without measuring (2.154541ms)
+✔ the shared request budget cannot be exceeded by concurrent workers (1.430458ms)
+✔ response mismatch invalidates the window and retains its error (0.210916ms)
+✔ a failed memory probe preserves measured rows and issued counts (147.928667ms)
+✔ cold-only failure cannot become a complete deployment (1.892125ms)
+✔ a changed response stops the full experiment before further workloads (0.449041ms)
+✔ CPU windows retain instance changes as discarded and reject invalid counters (0.840292ms)
+✔ CPU sampling keeps one pool per workload, repeats only token changes, and checks every digest (16.44025ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 259.37

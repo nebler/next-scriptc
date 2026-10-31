@@ -1,0 +1,211 @@
+{
+  "sourceCommit": "10d23f6d4487cdf213a871cf8491202b9f83a494",
+  "baseCommit": "c7bac69f241fe35376a2ab9992a284c0a59116ec",
+  "preregistrationCommit": "935d3b3ba02fd5e965b56ff5fcc906ac9f3eb2f0",
+  "startedAt": "2026-10-31T10:16:39.976Z",
+  "toolchain": {
+    "node": "v24.22.0",
+    "next": "16.4.3",
+    "scriptc": "0.4.6",
+    "zig": "0.16.0",
+    "vercelCli": "65.8.0"
+  },
+  "sourceTrees": {
+    "examples/demo/app": "85cf8e65dd364702631fdce9085c2a651daef4ce",
+    "packages/next-scriptc": "ffe5c06f2d354d1f427eddf4b4c02267c9ca72ff",
+    "pnpm-lock.yaml": "cea0fb9b4a63b731d4a8d01c3f9b49d4e3b25765"
+  },
+  "deploymentOrder": [
+    "node",
+    "native",
+    "native",
+    "node",
+    "node",
+    "native",
+    "native",
+    "node",
+    "node",
+    "native"
+  ],
+  "measurementOrder": [
+    [
+      "node",
+      "native"
+    ],
+    [
+      "native",
+      "node"
+    ],
+    [
+      "node",
+      "native"
+    ],
+    [
+      "native",
+      "node"
+    ],
+    [
+      "node",
+      "native"
+    ]
+  ],
+  "deployments": [
+    {
+      "pair": 1,
+      "variant": "node",
+      "id": "dpl_66QXRdmFia1oij2W8vTXo5ESeEFX",
+      "url": "https://next-scriptc-kfpgdpuha-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-1-node-deployment.json"
+    },
+    {
+      "pair": 1,
+      "variant": "native",
+      "id": "dpl_5G5SocCUN4iqpW2tfSqSZmP2t3Wr",
+      "url": "https://next-scriptc-wn67b1fx8-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-1-native-deployment.json"
+    },
+    {
+      "pair": 2,
+      "variant": "native",
+      "id": "dpl_9hnBhmLvghvstHUYQgzY3CLitxGv",
+      "url": "https://next-scriptc-nrikp7x4f-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-2-native-deployment.json"
+    },
+    {
+      "pair": 2,
+      "variant": "node",
+      "id": "dpl_7feEoGqJdpYGBLDbDCpKRoeYyxQK",
+      "url": "https://next-scriptc-rd7y2qjm5-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-2-node-deployment.json"
+    },
+    {
+      "pair": 3,
+      "variant": "node",
+      "id": "dpl_SAUwhM15NjDoatSngGphrCSPkcaq",
+      "url": "https://next-scriptc-b3n0v05t9-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-3-node-deployment.json"
+    },
+    {
+      "pair": 3,
+      "variant": "native",
+      "id": "dpl_FJ6oupBeL2eaytzrhUazBsUYTraY",
+      "url": "https://next-scriptc-djdzyywc6-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-3-native-deployment.json"
+    },
+    {
+      "pair": 4,
+      "variant": "native",
+      "id": "dpl_2vmo1AG8teHxDuaPBYoXUxFcrvpQ",
+      "url": "https://next-scriptc-280x5gmd3-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-4-native-deployment.json"
+    },
+    {
+      "pair": 4,
+      "variant": "node",
+      "id": "dpl_J1E8heTdcL1HifWwGWpmfKzMbfUf",
+      "url": "https://next-scriptc-gp94jvw2x-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-4-node-deployment.json"
+    },
+    {
+      "pair": 5,
+      "variant": "node",
+      "id": "dpl_BV8QT167tRZPZQBcp32S8bi8dZ7n",
+      "url": "https://next-scriptc-frotnpfro-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-5-node-deployment.json"
+    },
+    {
+      "pair": 5,
+      "variant": "native",
+      "id": "dpl_CeVoNfNnLX23kXn5qu2Q4qrd2aNS",
+      "url": "https://next-scriptc-nu2tks703-noahs-projects-8a075d15.vercel.app",
+      "artifact": "research/benchmarks/vercel-final-pair-5-native-deployment.json"
+    }
+  ],
+  "status": "complete-with-limitations",
+  "error": "Command failed: /Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node --env-file=.env.local examples/demo/bench/vercel/run.mjs --node https://next-scriptc-frotnpfro-noahs-projects-8a075d15.vercel.app --native https://next-scriptc-nu2tks703-noahs-projects-8a075d15.vercel.app --mode full --output research/benchmarks/vercel-final-pair-5 --fresh",
+  "recovery": {
+    "artifact": "research/benchmarks/vercel-final-control-failure.json",
+    "reason": "unmeasured pair-2 upload failed; no new deployment found",
+    "startedAt": "2026-10-31T10:19:49.835Z",
+    "status": "complete"
+  },
+  "controlFailures": [
+    {
+      "stage": "full-run shutdown",
+      "rawArtifact": "research/benchmarks/vercel-final-pair-5.json",
+      "recoveryArtifact": "research/benchmarks/vercel-final-sandbox-recovery.json",
+      "referenceArtifact": "research/benchmarks/vercel-final-pair-5-reference.json"
+    }
+  ],
+  "postRunAudit": {
+    "at": "2026-10-31T10:30:26.324Z",
+    "allTrackedFilesUnchangedFromSourceCommit": true,
+    "hashes": {
+      "examples/demo/bench/check.mjs": "05b745814e1094d2848c30dc999314d9af5407a3b771a31c44cff06a489bc986",
+      "examples/demo/bench/config.mjs": "f1e289e6e4ac8ec3cfbcbbacedbe7e646e84f7a5ba5edb056fce09578a5492c1",
+      "examples/demo/bench/coverage.mjs": "1f68c78ac423232077a700b13a63a225da233d352c32618982be4bcb8542a8ff",
+      "examples/demo/bench/evidence/README.md": "4ef640e220773979f51528469d3bc611b5365dda03e1d3bcb01eece3b690ae32",
+      "examples/demo/bench/evidence/checksums.json": "215e26b0f9118efb2cf0807d2e66cb5bfa5460907b92263e481f685da9fef668",
+      "examples/demo/bench/evidence/round4-attempt1.json.gz": "0eb3ed326a04872d6dd3af5423b275c80484d153b0e3aabb7e81efe7f502d3ed",
+      "examples/demo/bench/evidence/round4-attempt1.md.gz": "d67939ccbb340c02413f2eb8d289d4e53ab10155ab6fc7cc7f71d75d68357840",
+      "examples/demo/bench/evidence/round4-followup.json.gz": "6b2c679377f5ad5fb19092d86cdf8828139279767a42870cbe089c133b6d4232",
+      "examples/demo/bench/evidence/round4-followup.md.gz": "8ef01a5e83a8718dd9e8a4c45be25c1605f4cb1e45262f6f62d5135e0c3f0c6f",
+      "examples/demo/bench/fixtures.mjs": "a28116ebc503f2c272b313f103a8566e76c7cb2cc20638225af42c2cb16367a2",
+      "examples/demo/bench/function-builds.mjs": "743392729445d8c1f944f345c25f754b374c4cea45f0ab61a6c7bf78eb68b186",
+      "examples/demo/bench/function-json-legacy.ts": "1fde9fd0721801931e80f39e66dda1cc896ffb7926168f07dd6ee0199a6e717d",
+      "examples/demo/bench/function-json.mjs": "3094781b8b5f39a6238ad5d46eecb957b05cd83f2b9d719793ad3fc42af0cbc0",
+      "examples/demo/bench/function-profile.ts": "895f6ee1fcbe88fcd89bcf59358ade1275daf8c499ce3f6c01fbd9736f9df90f",
+      "examples/demo/bench/functions.mjs": "e34e03d3fb4e91ce1ad9166f2ae1d8888484363a546a290ee490a30a2a3ad8fc",
+      "examples/demo/bench/load.mjs": "b1e4d1df6ad7cb6c03d3563b30483980143369009f97d68747e1eacf7586a615",
+      "examples/demo/bench/processes.mjs": "d9735d34c384c1b9d82b9f01a9b53f76acd768f18d706b44a8cd93d4190f8a0c",
+      "examples/demo/bench/report-sab.mjs": "cc7c42215c22c32f51cd12ced69d944891e0a97d462f77ca56a4b31ade3ab4ed",
+      "examples/demo/bench/report.mjs": "bc2ffc19047055551f8bfab42212842a133338c51ddec5435b780c400bbce6d8",
+      "examples/demo/bench/run.mjs": "7039664f07305bbbbc59e53f720278d196792e18b54d1833e98f85a713e2749c",
+      "examples/demo/bench/summary.mjs": "a9f9ce94a5b2e8ad38265a87fbc9fc9d3ceaf43ca6fbbdb035af36b531866aca",
+      "examples/demo/bench/threads.mjs": "468070f791cfe112beb3ebda9cb8c45930af2fa48cc1afabb550f0fe0de60ad4",
+      "examples/demo/bench/variants.mjs": "6df978abcc73452ee5931ffacf9598630e272e216e40739b16af40475be3988e",
+      "examples/demo/bench/vercel/README.md": "9c4c140ac47ae0af4ea1e50778dacad6e6004dd02e03b6c879be3f33514ecbea",
+      "examples/demo/bench/vercel/build.mjs": "75b2c0b275dc7f5a1e307af78342bb9781931f4d134843f105c5b4646af97f80",
+      "examples/demo/bench/vercel/check-memory.mjs": "fd4c2d5512cc99dc5bbb2a9d74ccc7e4418792bc7d127b2fceb4a88211476501",
+      "examples/demo/bench/vercel/client.mjs": "2d91e88dd0343343d713980074c4dc8f915c5965f275e887c34df32b9ba12e71",
+      "examples/demo/bench/vercel/cold-file.c": "1043f55598790cb2a41e5518fb13629b44ae643479c2c5b0ce6ee4880b2d501c",
+      "examples/demo/bench/vercel/cpu.mjs": "96d270bfd643f001311eeeb07b59535ba6c2e30d0d4ea72ca647044564c18ce6",
+      "examples/demo/bench/vercel/deploy-node.mjs": "da5c488e69f4fcba86600f85f495a55113f51d1f734cadc2d610ae6ebd64be84",
+      "examples/demo/bench/vercel/deploy.mjs": "8ef397dd26f67794e90a2988fcba4b6913d86ee588055e86216cae131f73b9a7",
+      "examples/demo/bench/vercel/diagnostics.mjs": "49cbfadd44847df5e412c64bd8fcc186d86a6bb4ee94df7447e9dcc7ef8c98c0",
+      "examples/demo/bench/vercel/final-run.mjs": "1ca4738168de87fb2b71a7a7ae569e0cc5a55ed06a0c4dfa662da7fb51210b80",
+      "examples/demo/bench/vercel/function-sizes.py": "c89c5157738ca298b92cd593beedd916b0f4c3a4c5ecf5d4d4d32a4f35f070aa",
+      "examples/demo/bench/vercel/report.mjs": "f39874c5d1a4348694fc060b06d5c419897d87eb7f09a6b5e07b27f273ac738a",
+      "examples/demo/bench/vercel/run.mjs": "320dc44eab21b9e97c034bb1aed7cab06c0d5811896bb0731ef12c40129cd265",
+      "examples/demo/bench/vercel/startup-build.mjs": "ca8eac55e07f875bec67c1ae3de64140233a5b269def0baa57a44364f93aea60",
+      "examples/demo/bench/vercel/startup-deploy.mjs": "bf3ca0459ccfd04fc90349427920c1b151d72509f2cf5b1dced2dcc8d9714c3e",
+      "examples/demo/bench/vercel/startup-proxy.py": "60dc1e7a476a31cdf714828317f8b268365966dbcebf93130e5721edc51f401d",
+      "examples/demo/bench/vercel/startup-request.mjs": "8434286a2589933d15b790b96b2ad9c6dbdc406fe680c57d024f8bb835ca19a6",
+      "examples/demo/bench/vercel/startup-sandbox.mjs": "e011a901e021a50bb83dd5dfd43c04aeb7f0c408568d33d7f8ec329493723e67",
+      "examples/demo/bench/vercel/startup-scaleout.mjs": "001942c259739a45353a31a530ba60310939b0a29aa507464801bcfa3825f2e4",
+      "examples/demo/bench/vercel/test.mjs": "e8be53981f17071b43ace29ba988830d334e1ac17f7e8b145e8778b1397288c0",
+      "examples/demo/bench/vercel/worker.mjs": "620a094b9af65bf57efd5a80c1b819517476487732dc7888fddba56499d12482",
+      "examples/demo/next.config.ts": "680b3579dff1bd836beafc33b51de90280b68fcd0769fbd9721af975d72e7de6"
+    }
+  },
+  "cpuCoverage": {
+    "status": "incomplete",
+    "rawRunnerStatus": "failed",
+    "reason": "registered token retry exhaustion; no failed CPU rows",
+    "unavailable": [
+      "node verify",
+      "node gzip-export"
+    ]
+  },
+  "finishedAt": "2026-10-31T10:33:55.965Z",
+  "completion": {
+    "workloadDatasets": "5 paired datasets complete",
+    "fullRunner": "failed only on Sandbox stop timeout; raw status retained",
+    "cpuCoverage": "10 complete rows; Node verify and gzip-export unavailable after token retry exhaustion; raw failed runner status retained",
+    "parity": "85/85",
+    "smoke": "25/25",
+    "cleanup": "complete; final pair retained",
+    "allSandboxesIndependentlyConfirmedStopped": true,
+    "rawArtifactsPreserved": true
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "recordedAt": "2026-10-31T10:19:49.772005+00:00",
+  "stage": "pair 2 native deployment, before application traffic",
+  "rawError": "Error: fetch failed; deploy_failed; vercel deploy --prebuilt exited 1",
+  "initialProvenance": {
+    "sourceCommit": "10d23f6d4487cdf213a871cf8491202b9f83a494",
+    "baseCommit": "c7bac69f241fe35376a2ab9992a284c0a59116ec",
+    "preregistrationCommit": "935d3b3ba02fd5e965b56ff5fcc906ac9f3eb2f0",
+    "startedAt": "2026-10-31T10:16:39.976Z",
+    "toolchain": {
+      "node": "v24.22.0",
+      "next": "16.4.3",
+      "scriptc": "0.4.6",
+      "zig": "0.16.0",
+      "vercelCli": "65.8.0"
+    },
+    "sourceTrees": {
+      "examples/demo/app": "85cf8e65dd364702631fdce9085c2a651daef4ce",
+      "packages/next-scriptc": "ffe5c06f2d354d1f427eddf4b4c02267c9ca72ff",
+      "pnpm-lock.yaml": "cea0fb9b4a63b731d4a8d01c3f9b49d4e3b25765"
+    },
+    "deploymentOrder": [
+      "node",
+      "native"
+    ],
+    "measurementOrder": [
+      [
+        "node",
+        "native"
+      ]
+    ],
+    "deployments": [
+      {
+        "pair": 1,
+        "variant": "node",
+        "id": "dpl_66QXRdmFia1oij2W8vTXo5ESeEFX",
+        "url": "https://next-scriptc-kfpgdpuha-noahs-projects-8a075d15.vercel.app",
+        "artifact": "research/benchmarks/vercel-final-pair-1-node-deployment.json"
+      },
+      {
+        "pair": 1,
+        "variant": "native",
+        "id": "dpl_5G5SocCUN4iqpW2tfSqSZmP2t3Wr",
+        "url": "https://next-scriptc-wn67b1fx8-noahs-projects-8a075d15.vercel.app",
+        "artifact": "research/benchmarks/vercel-final-pair-1-native-deployment.json"
+      }
+    ],
+    "status": "failed",
+    "error": "Command failed: /Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node examples/demo/bench/vercel/deploy.mjs"
+  },
+  "initialCost": {
+    "limits": {
+      "previews": 12,
+      "httpAttempts": 40000,
+      "provisionedVcpuHours": 0.3
+    },
+    "previews": 2,
+    "validationLocalHttpAttempts": 54,
+    "hostedHttpAttempts": 128,
+    "sandboxes": [
+      {
+        "artifact": "research/benchmarks/vercel-final-linux.json",
+        "id": "violet-large-viper-uKqXHL",
+        "region": "iad1",
+        "vcpus": 1,
+        "activeCpuDurationMs": 4139,
+        "provisionedVcpuHours": 0.0027527777777777776
+      },
+      {
+        "artifact": "research/benchmarks/vercel-final-linux-current.json",
+        "id": "purple-vague-capybara-SPbZyn",
+        "region": "iad1",
+        "vcpus": 1,
+        "activeCpuDurationMs": 3070,
+        "provisionedVcpuHours": 0.0024783333333333333
+      },
+      {
+        "artifact": "research/benchmarks/vercel-final-pair-1.json",
+        "id": "yellow-patient-leopon-J2tnis",
+        "region": "iad1",
+        "vcpus": 2,
+        "activeCpuDurationMs": 2078,
+        "provisionedVcpuHours": 0.0038794444444444445
+      }
+    ],
+    "status": "stopped",
+    "httpAttempts": 182,
+    "provisionedVcpuHours": 0.009110555555555556,
+    "activeCpuDurationMs": 9287
+  },
+  "deploymentListAfterFailure": [
+    {
+      "uid": "dpl_5G5SocCUN4iqpW2tfSqSZmP2t3Wr",
+      "url": "next-scriptc-wn67b1fx8-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441841019,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_66QXRdmFia1oij2W8vTXo5ESeEFX",
+      "url": "next-scriptc-kfpgdpuha-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441812294,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_Hy4XfLgHzxqXzYMex7a5ynTtS2hH",
+      "url": "next-scriptc-a518fyz3w-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441751657,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_5mJtNLUvQG6xpeYH5UExkUPuL9uz",
+      "url": "next-scriptc-zm14vcru4-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441731675,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_5T1TX7S4RqXo5uZxvrTHRNUcRNGP",
+      "url": "next-scriptc-kxvkejm4g-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441694161,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_2BGfkKbyJL9w3BQdP1K3kSgrtt5x",
+      "url": "next-scriptc-frdwe5caz-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441672987,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_Bjkn1BzXWu5rQD4HAhtxW1py9bBa",
+      "url": "next-scriptc-nu7r2c4sg-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441641283,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_3YTCxknJMGRp7HpEGmDFRCYKGMda",
+      "url": "next-scriptc-pn5j9gyfw-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441622305,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_GKVQpiXcQLTSEHBGk6M6TPfkfV48",
+      "url": "next-scriptc-32uxd7e6o-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441530306,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_622z4T8FurC8aASbgGGy83yKMQxL",
+      "url": "next-scriptc-jpirduupb-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441504626,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_Creji73z3CH3Hv6CeUzib81sFMRi",
+      "url": "next-scriptc-pc8q471y9-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441473691,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_EEntnvDfkWQmysxYxsDbb4vetnGC",
+      "url": "next-scriptc-5j04e3zcp-noahs-projects-8a075d15.vercel.app",
+      "created": 1793441438574,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_oAnqyMDgqui3k4phu3NupBS6wcgE",
+      "url": "next-scriptc-9nfz6chx8-noahs-projects-8a075d15.vercel.app",
+      "created": 1793440418542,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_2EA6TVve7TMYLvnn3XprhfTDhwab",
+      "url": "next-scriptc-duyujjeez-noahs-projects-8a075d15.vercel.app",
+      "created": 1793440397056,
+      "state": "READY",
+      "target": null
+    },
+    {
+      "uid": "dpl_5ViN9ue9gqhYj3NzAkbkP2mSo67E",
+      "url": "next-scriptc-oh4dr4zl9-noahs-projects-8a075d15.vercel.app",
+      "created": 1793436470419,
+      "state": "READY",
+      "target": null
+    }
+  ],
+  "recoveryDecision": "No new deployment found after pair-1 native ID; retry unmeasured pair-2 native build/upload, then finish frozen pairs 2\u20135 and CPU. No measurements repeated, selected or removed."
+}
