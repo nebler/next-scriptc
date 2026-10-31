@@ -21,12 +21,12 @@ const started = Date.now();
 const sandbox = await Sandbox.create({ image: "vercel/sandbox/node:24", resources: { vcpus: 2 }, timeout: 8 * 60 * 1000, persistent: false });
 const deadline = setTimeout(() => controller.abort(new Error("7 minute command budget exhausted")), 7 * 60 * 1000);
 deadline.unref();
-const provenance = { sandbox: sandbox.name, commit, archiveSha256, startedAt: new Date(started).toISOString(), image: "vercel/sandbox/node:24", vcpus: 2, memoryMiB: 4096,
+const provenance = { sandbox: sandbox.name, cwd: sandbox.cwd, commit, archiveSha256, startedAt: new Date(started).toISOString(), image: "vercel/sandbox/node:24", vcpus: 2, memoryMiB: 4096,
   lifetimeMs: 8 * 60 * 1000, maxVcpuHours: 2 * 8 / 60, affinity: "app and native: CPU 0; load generator: CPU 1; C=1", status: "running", steps: [] };
 console.log(`Sandbox ${sandbox.name}; HEAD ${commit}; maximum 0.267 vCPU-hours`);
 async function step(label, script, sudo = false) {
   const begin = Date.now();
-  const result = await sandbox.runCommand({ cmd: "bash", args: ["-lc", `set -euo pipefail\n${script}`], sudo, stdout: process.stdout, stderr: process.stderr, signal: controller.signal });
+  const result = await sandbox.runCommand({ cmd: "bash", cwd: sandbox.cwd, args: ["-lc", `set -euo pipefail\n${script}`], sudo, stdout: process.stdout, stderr: process.stderr, signal: controller.signal });
   provenance.steps.push({ label, elapsedMs: Date.now() - begin, exitCode: result.exitCode });
   if (result.exitCode !== 0) throw new Error(`${label}: exit ${result.exitCode}`);
 }
@@ -41,21 +41,22 @@ try {
     clang --version
     lscpu | head -20`, true);
   await step("Exact lockfile install", `
-    mkdir /vercel/sandbox/next-scriptc
-    tar -xf /vercel/sandbox/repo.tar -C /vercel/sandbox/next-scriptc
-    cd /vercel/sandbox/next-scriptc
+    pwd
+    mkdir next-scriptc
+    tar -xf repo.tar -C next-scriptc
+    cd next-scriptc
     test "$(sha256sum ../repo.tar | cut -d ' ' -f1)" = '${archiveSha256}'
     timeout 120s npx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent
     find node_modules/.pnpm -type f \\( -name tsc-ts -o -name tsc -o -name scriptc-comptime \\) -exec chmod +x {} +
     packages/next-scriptc/node_modules/.bin/scriptc --version`);
   await step("Native and Node production builds", `
-    cd /vercel/sandbox/next-scriptc
+    cd next-scriptc
     SCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_BASELINE= timeout 240s npx -y pnpm@11.1.3 --filter demo build
     NEXT_SCRIPTC_BASELINE=node timeout 90s npx -y pnpm@11.1.3 --filter demo build`);
   await step("Page curve, profile and overhead", `
-    cd /vercel/sandbox/next-scriptc
+    cd next-scriptc
     BENCH_COMMIT='${commit}' FUNCTION_SERVER_CPU=0 FUNCTION_BENCH_CALLS=1000 FUNCTION_BENCH_PAGES=200 FUNCTION_BENCH_WARMUP=50 \
-      timeout --signal=TERM --kill-after=5s 180s taskset -c 1 node examples/demo/bench/functions.mjs --skip-build --output=/vercel/sandbox/functions.json`);
+      timeout --signal=TERM --kill-after=5s 180s taskset -c 1 node examples/demo/bench/functions.mjs --skip-build --output=../functions.json`);
   provenance.status = "complete";
 } catch (error) {
   provenance.status = "failed";
@@ -65,7 +66,7 @@ try {
 } finally {
   try {
     await mkdir(path.dirname(destination), { recursive: true });
-    const saved = await sandbox.downloadFile({ path: "/vercel/sandbox/functions.json" }, { path: `${destination}.json` }, { signal: AbortSignal.timeout(15_000) });
+    const saved = await sandbox.downloadFile({ path: "functions.json", cwd: sandbox.cwd }, { path: `${destination}.json` }, { signal: AbortSignal.timeout(15_000) });
     if (!saved) throw new Error("No results file");
   } catch (error) {
     provenance.status = "failed";
