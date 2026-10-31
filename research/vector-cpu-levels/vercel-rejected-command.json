@@ -1,0 +1,43 @@
+{
+  "startedAt": "2026-10-31T14:31:55.395Z",
+  "sourceCommit": "a6ef54d8546e4e36fdf9b53a345dd631f74d027b",
+  "project": {
+    "projectId": "prj_loKFn5UhqXo1q4KesfMY8SZjQzEu",
+    "orgId": "team_9rYDB0tDX0ClFOCXmxrMd48y",
+    "projectName": "next-scriptc"
+  },
+  "previewAttempts": 0,
+  "config": {
+    "version": 3,
+    "regions": [
+      "iad1"
+    ]
+  },
+  "functionConfig": {
+    "runtime": "nodejs24.x",
+    "handler": "index.mjs",
+    "launcherType": "Nodejs",
+    "architecture": "x86_64",
+    "regions": [
+      "iad1"
+    ],
+    "memory": 2048,
+    "maxDuration": 30
+  },
+  "handler": "import {readFileSync} from 'node:fs';\nimport os from 'node:os';\nexport default function handler(req,res){res.setHeader('cache-control','no-store');res.setHeader('content-type','application/json');res.end(JSON.stringify({region:process.env.VERCEL_REGION,arch:process.arch,node:process.version,model:os.cpus()[0]?.model,cpuinfo:readFileSync('/proc/cpuinfo','utf8')}));}\n",
+  "args": [
+    "deploy",
+    "--prebuilt",
+    "--regions",
+    "iad1",
+    "--environment",
+    "preview",
+    "--skip-domain",
+    "--force",
+    "--json"
+  ],
+  "status": "failed",
+  "error": "Error: Command failed: vercel deploy --prebuilt --regions iad1 --environment preview --skip-domain --force --json",
+  "deployCommandAttempts": 1,
+  "note": "CLI rejected --skip-domain locally before creating a deployment."
+}

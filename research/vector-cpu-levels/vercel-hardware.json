@@ -1,0 +1,76 @@
+{
+  "startedAt": "2026-10-31T14:34:15.695Z",
+  "sourceCommit": "a6ef54d8546e4e36fdf9b53a345dd631f74d027b",
+  "project": {
+    "projectId": "prj_loKFn5UhqXo1q4KesfMY8SZjQzEu",
+    "orgId": "team_9rYDB0tDX0ClFOCXmxrMd48y",
+    "projectName": "next-scriptc"
+  },
+  "previewAttempts": 1,
+  "config": {
+    "version": 3,
+    "regions": [
+      "iad1"
+    ]
+  },
+  "functionConfig": {
+    "runtime": "nodejs24.x",
+    "handler": "index.mjs",
+    "launcherType": "Nodejs",
+    "architecture": "x86_64",
+    "regions": [
+      "iad1"
+    ],
+    "memory": 2048,
+    "maxDuration": 30
+  },
+  "handler": "import {readFileSync} from 'node:fs';\nimport os from 'node:os';\nexport default function handler(req,res){res.setHeader('cache-control','no-store');res.setHeader('content-type','application/json');res.end(JSON.stringify({region:process.env.VERCEL_REGION,arch:process.arch,node:process.version,model:os.cpus()[0]?.model,cpuinfo:readFileSync('/proc/cpuinfo','utf8')}));}\n",
+  "args": [
+    "deploy",
+    "--prebuilt",
+    "--regions",
+    "iad1",
+    "--environment",
+    "preview",
+    "--force",
+    "--json"
+  ],
+  "accepted": {
+    "id": "dpl_Ex7FvnjSCUqypZqwpDad2YmsJtVi",
+    "url": "https://next-scriptc-eizf24ecn-noahs-projects-8a075d15.vercel.app"
+  },
+  "deployment": {
+    "id": "dpl_Ex7FvnjSCUqypZqwpDad2YmsJtVi",
+    "target": "preview",
+    "readyState": "READY",
+    "url": "next-scriptc-eizf24ecn-noahs-projects-8a075d15.vercel.app"
+  },
+  "responses": [
+    {
+      "at": "2026-10-31T14:34:26.317Z",
+      "headers": "HTTP/2 200 \r\nage: 0\r\ncache-control: no-store\r\ncontent-type: application/json\r\ndate: Sat, 31 Oct 2026 14:34:26 GMT\r\nserver: Vercel\r\nstrict-transport-security: max-age=63072000; includeSubDomains; preload\r\nx-robots-tag: noindex\r\nx-vercel-cache: MISS\r\nx-vercel-id: fra1::iad1::dvbzs-1793457265994-5988cf569467\r\ncontent-length: 2348\r\n\r\n",
+      "body": {
+        "region": "iad1",
+        "arch": "x64",
+        "node": "v24.22.2",
+        "model": "Intel(R) Xeon(R) Processor @ 2.50GHz",
+        "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 63\nmodel name\t: Intel(R) Xeon(R) Processor @ 2.50GHz\nstepping\t: 2\nmicrocode\t: 0x1\ncpu MHz\t\t: 2499.990\ncache size\t: 36608 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 22\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid smap xsaveopt arat md_clear arch_capabilities\nbugs\t\t: spectre_v1 spectre_v2 spec_store_bypass swapgs taa mmio_stale_data eibrs_pbrsb ibpb_no_ret its\nbogomips\t: 4999.98\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 63\nmodel name\t: Intel(R) Xeon(R) Processor @ 2.50GHz\nstepping\t: 2\nmicrocode\t: 0x1\ncpu MHz\t\t: 2499.990\ncache size\t: 36608 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 1\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 22\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid smap xsaveopt arat md_clear arch_capabilities\nbugs\t\t: spectre_v1 spectre_v2 spec_store_bypass swapgs taa mmio_stale_data eibrs_pbrsb ibpb_no_ret its\nbogomips\t: 4999.98\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\n"
+      }
+    },
+    {
+      "at": "2026-10-31T14:34:27.545Z",
+      "headers": "HTTP/2 200 \r\nage: 0\r\ncache-control: no-store\r\ncontent-type: application/json\r\ndate: Sat, 31 Oct 2026 14:34:27 GMT\r\nserver: Vercel\r\nstrict-transport-security: max-age=63072000; includeSubDomains; preload\r\nx-robots-tag: noindex\r\nx-vercel-cache: MISS\r\nx-vercel-id: fra1::iad1::trclv-1793457267281-3598762cb11f\r\ncontent-length: 2348\r\n\r\n",
+      "body": {
+        "region": "iad1",
+        "arch": "x64",
+        "node": "v24.22.2",
+        "model": "Intel(R) Xeon(R) Processor @ 2.50GHz",
+        "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 63\nmodel name\t: Intel(R) Xeon(R) Processor @ 2.50GHz\nstepping\t: 2\nmicrocode\t: 0x1\ncpu MHz\t\t: 2499.990\ncache size\t: 36608 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 0\ncpu cores\t: 2\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 22\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid smap xsaveopt arat md_clear arch_capabilities\nbugs\t\t: spectre_v1 spectre_v2 spec_store_bypass swapgs taa mmio_stale_data eibrs_pbrsb ibpb_no_ret its\nbogomips\t: 4999.98\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 63\nmodel name\t: Intel(R) Xeon(R) Processor @ 2.50GHz\nstepping\t: 2\nmicrocode\t: 0x1\ncpu MHz\t\t: 2499.990\ncache size\t: 36608 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 1\ncpu cores\t: 2\napicid\t\t: 1\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 22\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm cpuid_fault invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid smap xsaveopt arat md_clear arch_capabilities\nbugs\t\t: spectre_v1 spectre_v2 spec_store_bypass swapgs taa mmio_stale_data eibrs_pbrsb ibpb_no_ret its\nbogomips\t: 4999.98\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\n"
+      }
+    }
+  ],
+  "status": "partial",
+  "error": "SyntaxError: Unexpected token 'P', \"Protected \"... is not valid JSON",
+  "successfulHardwareResponses": 2,
+  "note": "Two HTTP 200 JSON hardware responses retained. Third CLI invocation returned a non-JSON protection response and parsing failed; no redeployment or settings changes."
+}

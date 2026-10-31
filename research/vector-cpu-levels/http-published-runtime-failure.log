@@ -1,0 +1,121 @@
+file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312
+        throw new CcCompileError(linker, detail, `${linker} failed linking ${basename(plan.outputPath)} from the precompiled runtime pack.\n${detail}` +
+              ^
+
+CcCompileError: zig failed linking http-baseline from the precompiled runtime pack.
+ld.lld: error: undefined symbol: scr_builtin_statics_install
+>>> referenced by entry-0.ts
+>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)
+    at linkNativeExecutable (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async compileExecutableNative (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:376:9)
+    at async compileTracked (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:1656:9)
+    at async Object.compile (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:221:24)
+    at async build (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:571:24)
+    at async main (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:683:20)
+    at async runCli (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:715:16)
+    at async file:///Users/noah/code/scriptc-fork/packages/cli/dist/main.js:19:20 {
+  driver: 'zig',
+  stderr: 'ld.lld: error: undefined symbol: scr_builtin_statics_install\n' +
+    '>>> referenced by entry-0.ts\n' +
+    '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)'
+}
+
+Node.js v24.22.0
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/research/int8-range-analysis/source-cli.sh build /Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/demo/.next/scriptc/entry-0.ts --optimization release --strip --no-keep-llvm -o /tmp/vector-cpu-levels/http-baseline --target-cpu baseline
+file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312
+        throw new CcCompileError(linker, detail, `${linker} failed linking ${basename(plan.outputPath)} from the precompiled runtime pack.\n${detail}` +
+              ^
+
+CcCompileError: zig failed linking http-baseline from the precompiled runtime pack.
+ld.lld: error: undefined symbol: scr_builtin_statics_install
+>>> referenced by entry-0.ts
+>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)
+    at linkNativeExecutable (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async compileExecutableNative (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:376:9)
+    at async compileTracked (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:1656:9)
+    at async Object.compile (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:221:24)
+    at async build (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:571:24)
+    at async main (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:683:20)
+    at async runCli (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:715:16)
+    at async file:///Users/noah/code/scriptc-fork/packages/cli/dist/main.js:19:20 {
+  driver: 'zig',
+  stderr: 'ld.lld: error: undefined symbol: scr_builtin_statics_install\n' +
+    '>>> referenced by entry-0.ts\n' +
+    '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)'
+}
+
+Node.js v24.22.0
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:943:11)
+    at execFileSync (node:child_process:979:15)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/research/vector-cpu-levels/build-http.mjs:15:13
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    '',
+    'file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312\n' +
+      '        throw new CcCompileError(linker, detail, `${linker} failed linking ${basename(plan.outputPath)} from the precompiled runtime pack.\\n${detail}` +\n' +
+      '              ^\n' +
+      '\n' +
+      'CcCompileError: zig failed linking http-baseline from the precompiled runtime pack.\n' +
+      'ld.lld: error: undefined symbol: scr_builtin_statics_install\n' +
+      '>>> referenced by entry-0.ts\n' +
+      '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)\n' +
+      '    at linkNativeExecutable (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312:15)\n' +
+      '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+      '    at async compileExecutableNative (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:376:9)\n' +
+      '    at async compileTracked (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:1656:9)\n' +
+      '    at async Object.compile (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:221:24)\n' +
+      '    at async build (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:571:24)\n' +
+      '    at async main (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:683:20)\n' +
+      '    at async runCli (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:715:16)\n' +
+      '    at async file:///Users/noah/code/scriptc-fork/packages/cli/dist/main.js:19:20 {\n' +
+      "  driver: 'zig',\n" +
+      "  stderr: 'ld.lld: error: undefined symbol: scr_builtin_statics_install\\n' +\n" +
+      "    '>>> referenced by entry-0.ts\\n' +\n" +
+      "    '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)'\n" +
+      '}\n' +
+      '\n' +
+      'Node.js v24.22.0\n'
+  ],
+  pid: 260,
+  stdout: '',
+  stderr: 'file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312\n' +
+    '        throw new CcCompileError(linker, detail, `${linker} failed linking ${basename(plan.outputPath)} from the precompiled runtime pack.\\n${detail}` +\n' +
+    '              ^\n' +
+    '\n' +
+    'CcCompileError: zig failed linking http-baseline from the precompiled runtime pack.\n' +
+    'ld.lld: error: undefined symbol: scr_builtin_statics_install\n' +
+    '>>> referenced by entry-0.ts\n' +
+    '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)\n' +
+    '    at linkNativeExecutable (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/backend/linker.js:312:15)\n' +
+    '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n' +
+    '    at async compileExecutableNative (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:376:9)\n' +
+    '    at async compileTracked (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:1656:9)\n' +
+    '    at async Object.compile (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/index.js:221:24)\n' +
+    '    at async build (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:571:24)\n' +
+    '    at async main (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:683:20)\n' +
+    '    at async runCli (file:///Users/noah/code/scriptc-fork/packages/compiler/dist/cli/command.js:715:16)\n' +
+    '    at async file:///Users/noah/code/scriptc-fork/packages/cli/dist/main.js:19:20 {\n' +
+    "  driver: 'zig',\n" +
+    "  stderr: 'ld.lld: error: undefined symbol: scr_builtin_statics_install\\n' +\n" +
+    "    '>>> referenced by entry-0.ts\\n' +\n" +
+    "    '>>>               /tmp/vector-cpu-levels/.scriptc-native-program-object-260-kvviafue86.part27.o:(sc_f__x25_main)'\n" +
+    '}\n' +
+    '\n' +
+    'Node.js v24.22.0\n'
+}
+
+Node.js v24.22.0

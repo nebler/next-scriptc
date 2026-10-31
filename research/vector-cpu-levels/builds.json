@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-10-31T14:29:50.857Z",
+  "node": "v24.22.0",
+  "sourceCommit": "a6ef54d8546e4e36fdf9b53a345dd631f74d027b",
+  "forkCommit": "cedd2f27bb6bc07bdf1bf837d407ef95950026eb",
+  "forkDiffSha256": "345419416fef6d32a3adfe4ccc14b961222812c4856ce45bcb2faceac537d54f",
+  "sourceSha256": "0559a279b6520ff21e4dafb3b42bdd74e03076aa0eb3627e976eb71f99b1e625",
+  "builds": [
+    {
+      "name": "stock-baseline",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/stock-baseline",
+        "--target-cpu",
+        "baseline"
+      ],
+      "status": 0,
+      "buildMs": 475.959875,
+      "bytes": 386640,
+      "sha256": "4312dc281a75e6f68d7e6b8564defb0440ae14e11fa2b4966254b1db342e7238",
+      "file": "/tmp/vector-cpu-levels/stock-baseline: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    },
+    {
+      "name": "stock-v3",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/stock-v3",
+        "--target-cpu",
+        "x86-64-v3"
+      ],
+      "status": 0,
+      "buildMs": 271.47958399999993,
+      "bytes": 388272,
+      "sha256": "cd31a87435e44f80927276d86306a52ea20984568e05f35e608bd0e34b9ee25c",
+      "file": "/tmp/vector-cpu-levels/stock-v3: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    },
+    {
+      "name": "stock-dispatch",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/stock-dispatch",
+        "--cpu-dispatch"
+      ],
+      "status": 0,
+      "buildMs": 324.05445800000007,
+      "bytes": 404504,
+      "sha256": "148530ec6ab073baa1903fb87644883c9aa67c98ee962926a7f989881c1418f3",
+      "file": "/tmp/vector-cpu-levels/stock-dispatch: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    },
+    {
+      "name": "patched-baseline",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/patched-baseline",
+        "--target-cpu",
+        "baseline"
+      ],
+      "status": 0,
+      "buildMs": 2723.975208,
+      "bytes": 387968,
+      "sha256": "b424d82bb191169fc591ec765de303b8d2f3c31416377fec1dc1e3bf533602e3",
+      "file": "/tmp/vector-cpu-levels/patched-baseline: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    },
+    {
+      "name": "patched-v3",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/patched-v3",
+        "--target-cpu",
+        "x86-64-v3"
+      ],
+      "status": 0,
+      "buildMs": 2747.6106249999993,
+      "bytes": 390240,
+      "sha256": "dc1cad8d7c34bc455ef907e6cbe8a744fa6f0d3895af6eb109fc41ec111e66de",
+      "file": "/tmp/vector-cpu-levels/patched-v3: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    },
+    {
+      "name": "patched-dispatch",
+      "args": [
+        "build",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-6ef0c862/examples/scout/vectors/vectors.ts",
+        "--optimization",
+        "release",
+        "--strip",
+        "--keep-llvm",
+        "-o",
+        "/tmp/vector-cpu-levels/patched-dispatch",
+        "--cpu-dispatch"
+      ],
+      "status": 0,
+      "buildMs": 3059.139791999999,
+      "bytes": 406584,
+      "sha256": "4a0cc33106a4ed70debd53fb5d7776646d5323ff465c14f6219ad4f9fe303b08",
+      "file": "/tmp/vector-cpu-levels/patched-dispatch: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped"
+    }
+  ]
+}

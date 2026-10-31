@@ -1,0 +1,14 @@
+import {execFileSync} from 'node:child_process';
+import {mkdirSync,cpSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import path from 'node:path';
+const stage='/tmp/vector-cpu-levels/http-stage',art='/tmp/vector-cpu-levels';
+mkdirSync(path.join(stage,'repo/examples/demo'),{recursive:true});
+const archive=execFileSync('git',['archive','--format=tar','HEAD'],{maxBuffer:2**28});
+execFileSync('tar',['-xf','-','-C',path.join(stage,'repo')],{input:archive});
+cpSync('examples/demo/.next',path.join(stage,'repo/examples/demo/.next'),{recursive:true,filter:file=>!file.includes('/.next/cache')&&!file.includes('/.next/dev')});
+copyFileSync(path.join(art,'http-functions'),path.join(stage,'repo/examples/demo/.next/scriptc-functions/functions'));
+for(const name of ['http-baseline','http-dispatch','http-go'])copyFileSync(path.join(art,name),path.join(stage,name));
+copyFileSync('research/vector-cpu-levels/http-worker.mjs',path.join(stage,'http-worker.mjs'));
+execFileSync('tar',['-czf',path.join(art,'http.tar.gz'),'-C',stage,'.']);
+writeFileSync('research/vector-cpu-levels/http-prepared.json',JSON.stringify({sourceCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),buildId:readFileSync('examples/demo/.next/BUILD_ID','utf8').trim(),archiveSha256:createHash('sha256').update(archive).digest('hex'),tarSha256:createHash('sha256').update(readFileSync(path.join(art,'http.tar.gz'))).digest('hex')},null,2)+'\n');

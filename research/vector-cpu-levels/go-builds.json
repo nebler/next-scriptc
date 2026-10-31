@@ -1,0 +1,109 @@
+{
+  "go": "go version go1.27.3 darwin/arm64",
+  "rows": [
+    {
+      "name": "go-plain",
+      "args": [
+        "build",
+        "-C",
+        "examples/demo/go",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/go-plain",
+        "./cmd/vectors"
+      ],
+      "GOAMD64": "v1",
+      "GOEXPERIMENT": "",
+      "bytes": 2576544,
+      "sha256": "113777edf980a21d40688f0f802d12bd67717448eb5e6879f877b53884510287"
+    },
+    {
+      "name": "go-v3",
+      "args": [
+        "build",
+        "-C",
+        "examples/demo/go",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/go-v3",
+        "./cmd/vectors"
+      ],
+      "GOAMD64": "v3",
+      "GOEXPERIMENT": "",
+      "bytes": 2568352,
+      "sha256": "1ca3c9ff5775ad39b714bda24aede38a8a5057c762c88be9e01b025ca9820cbe"
+    },
+    {
+      "name": "go-simd",
+      "args": [
+        "build",
+        "-C",
+        "examples/demo/go",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/go-simd",
+        "./cmd/vectors"
+      ],
+      "GOAMD64": "v1",
+      "GOEXPERIMENT": "simd",
+      "bytes": 2580640,
+      "sha256": "a529782e9e34ae9599e9fd52aca7ab5f8b404cb9d7f7276e03fc16e07274f2dd"
+    },
+    {
+      "name": "go-binary",
+      "args": [
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/go-binary",
+        "examples/scout/vectors/vectors.go"
+      ],
+      "GOAMD64": "v1",
+      "GOEXPERIMENT": "",
+      "bytes": 2576544,
+      "sha256": "247e2dcf3efd68291cfcf95017df465835fc3f0c1ac54275e90eb06bb5880bff"
+    },
+    {
+      "name": "go-binary-v3",
+      "args": [
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/go-binary-v3",
+        "examples/scout/vectors/vectors.go"
+      ],
+      "GOAMD64": "v3",
+      "GOEXPERIMENT": "",
+      "bytes": 2568352,
+      "sha256": "0818ac263f51bbdad3edc39b9c605235395c0bc9453f12de74c15fa86cd1a508"
+    },
+    {
+      "name": "http-go",
+      "args": [
+        "build",
+        "-C",
+        "examples/demo/go",
+        "-trimpath",
+        "-buildvcs=false",
+        "-ldflags=-s -w",
+        "-o",
+        "/tmp/vector-cpu-levels/http-go",
+        "."
+      ],
+      "GOAMD64": "v1",
+      "GOEXPERIMENT": "simd",
+      "bytes": 6676640,
+      "sha256": "872f33a72f3971cfd8d7f7187b91e777f1e354544621633d028f423de4ad0cf3"
+    }
+  ]
+}
