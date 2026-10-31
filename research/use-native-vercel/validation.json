@@ -1,0 +1,67 @@
+{
+  "commands": [
+    {
+      "command": "pnpm test",
+      "result": "pass",
+      "packageUnitTests": 20,
+      "demoHarnessTests": 24
+    },
+    {
+      "command": "SCRIPTC_CHECKER_SERVER=0 node --test packages/next-scriptc/test/function-native.mjs",
+      "result": "pass",
+      "tests": 1
+    },
+    {
+      "command": "SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/function-build.mjs",
+      "result": "pass",
+      "cases": [
+        "native prerender",
+        "type failure cleanup",
+        "old file directive rejected",
+        "old function directive rejected"
+      ]
+    },
+    {
+      "command": "SCRIPTC_CHECKER_SERVER=0 node examples/demo/test/functions.mjs",
+      "result": "pass",
+      "cases": [
+        "native/Node/dev",
+        "5k/15k/50k/200k JSON byte parity",
+        "date ranges/errors",
+        "route handlers",
+        "Server Actions",
+        "no browser stubs",
+        "in-flight native crash rejection and restart"
+      ]
+    }
+  ],
+  "parity": {
+    "5000": {
+      "requests": 102,
+      "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+    },
+    "15000": {
+      "requests": 100,
+      "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+    },
+    "200000": {
+      "requests": 100,
+      "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+    }
+  },
+  "sidecar": {
+    "spawnAttempts": [
+      "1"
+    ],
+    "pids": [
+      "16"
+    ]
+  },
+  "setupFailures": [
+    "CommonJS sidecar unit fixture initially lacked .cjs extension; corrected and root suite passed.",
+    "First baseline preview kept PPR; CDN guard/timing-header setup failure retained in node-setup-ppr.json."
+  ],
+  "productionDeployments": 0,
+  "sandboxes": 0,
+  "dockerOperations": 0
+}

@@ -95,6 +95,8 @@ export async function bundleFunctionSidecar(functionsDir, binary) {
     if (!config.runtime?.startsWith("nodejs")) continue;
     await copyFile(binary, path.join(owner, "scriptc-functions"));
     await chmod(path.join(owner, "scriptc-functions"), 0o755);
+    config.architecture = "x86_64";
+    await writeFile(path.join(owner, ".vc-config.json"), JSON.stringify(config, null, 2) + "\n");
     count++;
   }
   return count;

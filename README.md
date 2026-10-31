@@ -88,7 +88,7 @@ pnpm exec next-scriptc vercel-build
 vercel deploy --prebuilt
 ```
 
-`vercel-build` runs `vercel build` with Vercel's Next adapter enabled, then replaces native route outputs with Linux x86-64 executable Functions. It accepts only `--prod`; production builds and prebuilt deploys must both use that flag. Function-level `"use native"` is **not supported on Vercel yet**; those functions run on Node there. The demo's separate [Vercel benchmark tooling](examples/demo/bench/vercel/README.md) adds grouping and resource controls for its larger route set.
+`vercel-build` runs `vercel build` with Vercel's Next adapter enabled, then replaces native route outputs with Linux x86-64 executable Functions. It accepts only `--prod`; production builds and prebuilt deploys must both use that flag. Function-level `"use native"` bundles a Linux sidecar in each shared Node Function and calls it over loopback HTTP. Verified on a dynamic server-rendered Vercel preview: small calls can lose and the first call can wait for startup. [Measurements and limits](research/use-native-vercel.md). The demo's separate [Vercel benchmark tooling](examples/demo/bench/vercel/README.md) adds grouping and resource controls for its larger route set.
 
 ## Native functions
 
@@ -115,7 +115,7 @@ Self-hosted:  Next -> loopback HTTP -> supervised native route process
 Vercel:       Vercel's Next adapter -> executable Function -> native HTTP + IPC
 ```
 
-Routes default to one native process each. Explicit groups share a process, module state, event loop and failure domain. Self-hosted requests still pass through Next; native process RSS alone excludes that frontend. On Vercel the executable handles HTTP and platform IPC in one process. [Adapter notes](research/adapter-notes.md).
+Routes default to one native process each. Explicit groups share a process, module state, event loop and failure domain. Self-hosted requests still pass through Next; native process RSS alone excludes that frontend. On Vercel native routes handle HTTP and platform IPC in one executable; function-level calls use a child process inside the Node Function instance. [Adapter notes](research/adapter-notes.md).
 
 ## Supported surface and limits
 

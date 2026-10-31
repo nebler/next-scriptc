@@ -19,6 +19,7 @@ test("sidecar packaging preserves shared Node aliases and excludes executable/Ed
     assert.equal(await bundleFunctionSidecar(functions, binary), 1);
     assert.equal(await readFile(path.join(functions, "alias.func/scriptc-functions"), "utf8"), "sidecar");
     assert.equal((await lstat(path.join(functions, "node.func/scriptc-functions"))).mode & 0o777, 0o755);
+    assert.equal(JSON.parse(await readFile(path.join(functions, "node.func/.vc-config.json"))).architecture, "x86_64");
     for (const name of ["native", "edge"]) await assert.rejects(readFile(path.join(functions, `${name}.func/scriptc-functions`)), { code: "ENOENT" });
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
