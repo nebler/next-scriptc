@@ -8,10 +8,13 @@ const root = path.resolve(import.meta.dirname, "../../../..");
 process.chdir(root);
 const scout = process.argv.includes("--scout");
 const customCompiler = process.argv.find(a => a.startsWith("--compiler="))?.slice(11);
+const prebuilt = process.argv.find(a => a.startsWith("--prebuilt="))?.slice(11);
 const label = process.argv.find(a => a.startsWith("--label="))?.slice(8) ?? (scout ? "scout-linux" : "route-before");
 if (!/^[a-z0-9-]+$/.test(label)) throw new Error("Invalid label");
 if (customCompiler && (scout || !process.argv.some(a => a.startsWith("--label=")) || label === "route-before" || !path.isAbsolute(customCompiler)))
   throw new Error("Custom compiler needs an absolute Linux CLI path and an explicit new route label");
+if (prebuilt && (scout || customCompiler || label !== "route-sync-before" || !path.isAbsolute(prebuilt)))
+  throw new Error("Prebuilt artifacts require the registered route-sync-before label and an absolute tar path");
 const prefix = `research/benchmarks/vector-${label}`;
 for (const suffix of [".json", "-controller.json"]) {
   try { await access(prefix + suffix); throw new Error("Evidence exists; inspect before any new experiment"); }
@@ -23,7 +26,12 @@ const git = (...args) => execFileSync("git", args, { maxBuffer: 128 * 1024 * 102
 if (git("diff", "HEAD", "--", "examples/demo", "examples/scout/vectors", "packages/next-scriptc", "pnpm-lock.yaml").length)
   throw new Error("Commit measured source first");
 const commit = git("rev-parse", "HEAD").toString().trim();
-const vcpus = scout ? 1 : 2, lifetime = scout ? 330000 : 510000;
+const vcpus = scout ? 1 : 2, lifetime = scout ? 330000 : prebuilt ? 199000 : 510000;
+if (prebuilt) {
+  const prior = JSON.parse(await readFile("research/benchmarks/vector-route-before-controller.json"));
+  if (!prior.stopped || prior.observedWallVcpuHours + ((lifetime + 30000) * vcpus) / 3600000 > .3)
+    throw new Error("No remaining registered route budget");
+}
 const report = { status: "running", sourceCommit: commit, startedAt: new Date().toISOString(), hardLifetimeMs: lifetime, vcpus, steps: [] };
 const sha = b => createHash("sha256").update(b).digest("hex");
 const save = () => writeFile(prefix + "-controller.json", JSON.stringify(report, null, 2) + "\n");
@@ -55,16 +63,27 @@ try {
     report.customCompilerSha256 = sha(content);
     files.push({ path: "custom-scriptc", content, mode: 0o755 });
   }
+  if (prebuilt) {
+    const content = await readFile(prebuilt);
+    report.prebuiltSha256 = sha(content);
+    files.push({ path: "builds.tar", content });
+  }
   await sandbox.writeFiles([{ path: "repo.tar", content: archive }, ...files]);
   await command("Unpack", "mkdir repo\ntar -xf repo.tar -C repo\nnode --version\nuname -a\nhead -26 /proc/cpuinfo\ncat /sys/fs/cgroup/cpu.max || true");
   if (scout) {
     await command("Scout paired orders", `mkdir -p repo/examples/scout/vectors/.artifacts\ncp fair-go-linux fair-native-linux rss-linux repo/examples/scout/vectors/.artifacts/\ncd repo\nBENCH_COMMIT=${commit} VECTOR_COMPILER_VERSION='scriptc 0.4.6 (cross-built release portable x86-64)' VECTOR_GO_VERSION='go1.27.3 cross-built CGO_ENABLED=0 GOEXPERIMENT=simd' node examples/scout/vectors/fair.mjs ../result.json --skip-build`);
   } else {
-    await command("CPU/build tools", "if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then if command -v dnf >/dev/null; then dnf install -y -q clang util-linux; else apt-get update -qq && apt-get install -y -qq clang util-linux; fi; fi", true);
+    await command("CPU/build tools", prebuilt
+      ? "command -v taskset"
+      : "if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then if command -v dnf >/dev/null; then dnf install -y -q clang util-linux; else apt-get update -qq && apt-get install -y -qq clang util-linux; fi; fi", true);
     await command("Frozen dependencies", "cd repo\nnpx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent\nnode node_modules/.pnpm/scriptc@0.4.6/node_modules/scriptc/scripts/install-native.mjs\ncp ../heavy-go-linux examples/demo/go/user-server\nchmod +x examples/demo/go/user-server");
-    const compilerEnv = customCompiler ? 'SCRIPTC_COMPILER="$(pwd)/../custom-scriptc" ' : "";
-    if (customCompiler) await command("Custom compiler version", "./custom-scriptc --version");
-    await command("Build native and Node", `cd repo\n${compilerEnv}SCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_DEMO_GROUPS=vercel HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build\nNEXT_SCRIPTC_BASELINE=node NEXT_SCRIPTC_DEMO_GROUPS= HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build`);
+    if (prebuilt) {
+      await command("Install prepared Linux builds", "tar -xf builds.tar -C repo/examples/demo");
+    } else {
+      const compilerEnv = customCompiler ? 'SCRIPTC_COMPILER="$(pwd)/../custom-scriptc" ' : "";
+      if (customCompiler) await command("Custom compiler version", "./custom-scriptc --version");
+      await command("Build native and Node", `cd repo\n${compilerEnv}SCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_DEMO_GROUPS=vercel HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build\nNEXT_SCRIPTC_BASELINE=node NEXT_SCRIPTC_DEMO_GROUPS= HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build`);
+    }
     await command("Vector production suite", `cd repo\nBENCH_COMMIT=${commit} HEAVY_VECTOR_SUITE=1 HEAVY_WORKLOADS=vectors,vectors-imul HEAVY_APP_CPUS=0 taskset -c 1 node examples/demo/bench/heavy/self.mjs ../result.json`);
   }
   report.status = "complete";

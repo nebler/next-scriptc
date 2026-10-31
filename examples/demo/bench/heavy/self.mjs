@@ -250,7 +250,7 @@ try {
             const pool = client.agent(base, 1);
             try {
               result.reference = await client.request(base, s, pool);
-              if (s.id.startsWith("vectors")) result.routeFirst = { ...result.reference, note: "First vector request in fresh measurement server; not certified process-cold. Header records corpus generation only." };
+              if (s.id.startsWith("vectors")) result.routeFirst = { ...result.reference, note: "First request to this route in measurement server; corpus may already be initialized by startup or an earlier route. Not certified process-cold. Header records corpus generation only." };
             } finally {
               pool.destroy();
             }

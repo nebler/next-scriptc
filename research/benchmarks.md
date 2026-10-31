@@ -2,6 +2,34 @@
 
 ## Vector retrieval — prospective protocol (2026-10-31)
 
+### Synchronous-kernel revision, registered before its Linux measurement
+
+The complete first route experiment (`vector-route-before*`, source 52f0a6a)
+found native imul **420.606 ms**, versus its 24.354 ms kernel scout: the HTTP
+implementation did not preserve that fast path. Keep every first result. Refactor
+both TS forms identically into a synchronous typed-array scoring helper with
+explicit corpus/query/N/D parameters, called after awaiting the body. Do not alter
+data, input/output, Go kernels, optimization settings or workload counts. Local
+correctness/diagnosis can verify the new shape before spending. A second **complete
+seven-row** stock-0.4.6 experiment is a new implementation revision, not a selective
+replacement for the first. Its artifacts are `vector-route-sync-before*`.
+
+First route Sandbox stopped after 310,969 ms at 2 vCPU = 0.172760556 vCPU-h.
+Remaining allowance under 0.3 is 0.127239444 vCPU-h. Reserve a second 2-vCPU
+**199,000 ms** hard lifetime plus **30,000 ms** for provisioning/cleanup:
+2×(310.969+199+30)/3600 = **0.299982778 vCPU-h** total upper allocation.
+Skip remote builds to fit: build both Next artifacts on Mac from committed source,
+cross-compile all native route/functions entries with the public Linux GNU runtime
+0.4.6/Zig, and upload the prepared `.next`/`.next-node` trees. Linux still installs
+the frozen dependency lockfile, runs ordinary `next start`, validates every target
+and CPU/procfs counter before timing, and retains artifact hashes/build IDs. No
+runtime source needs a Mac path: manifests keep their frozen source labels/ports,
+while binaries and Next chunks are self-contained. Disclose this build-host change;
+do not pool or directly attribute cross-VM deltas to the refactor. Same app CPU 0 /
+client CPU 1, body-drain metrics, parity, windows/counts, all rows, default timeout,
+no tuning/retries. Stop in finally; retain partials if the reservation is insufficient.
+No further route Sandbox is allowed under this task's budget.
+
 Registered on main a7efb81 before vector implementation or measurements. Synthetic resident exhaustive RAG retrieval: 100,000 rows × 768 signed int8 dimensions, top-10 descending dot product, smaller ID wins ties. Corpus is seeded xorshift32 at module initialization, 76,800,000 bytes; request is JSON `{ "embedding": [768 signed integers] }`. HTTP timing includes JSON parse, validation, query conversion, scoring, selection and serialization. Natural `(sum + a*b)|0` and separately labelled `Math.imul` routes share everything except the multiply. The same route files run on Node and stock scriptc 0.4.6; keep the expected natural-code regression. Go 1.27.3: plain, four independent accumulators, and experimental `GOEXPERIMENT=simd` archsimd (NEON / feature-checked AVX2). No compiler fork changes here. SIMD is an explicit experimental baseline, not ordinary Go auto-vectorization. Compare all IDs and exact int8 scores, including ties, negative extremes and invalid requests. Float32 reference kernels retain float64 products/accumulation; unrolled/SIMD sums may reassociate, so require identical top-10 IDs and scores within 1e-10 absolute + 1e-12 relative, retain maximum error. No float32-accumulator substitution.
 
 Scout: both 20k×384 and 100k×768; Node natural number-sum, i32 and imul idioms, Go plain/unrolled/SIMD; native natural/imul release controls. Mac two reversed process orders, 10 warmups + 20 samples; Linux one forward/reverse pair, 5 warmups + 10 samples. Initialization and parity outside kernel timing, retain every raw sample, version, binary/source hash and peak process RSS. Linux one nonpersistent 1-vCPU Sandbox with hard lifetime ≤330 seconds (≤0.091667 vCPU-h, including a 30-second cleanup/provisioning margin stays ≤0.1). Cross-build locally, no installs in that VM. No selective repeat or outlier removal.
