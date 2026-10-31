@@ -27,7 +27,7 @@ Chrome renders at device scale factor 2. The generator waits for all three font 
 
 | File | Purpose |
 | --- | --- |
-| `.github/assets/code-route-native.png` | Single framed hello route, 2000×1600. |
+| `.github/assets/code-route-native.png` | Content-fitted hello route with equal vertical padding, 2048×1152 (16:9). |
 | `.github/assets/code-use-native.png` | Simplified real revenue function with directive highlighted, 2000×1600. |
 | `.github/assets/chart-vector-vercel.png` | Hosted int8 server-compute p50, 2000×1500. |
 | `.github/assets/chart-vercel-native-vs-node.png` | First response, RSS and three CPU/request comparisons, 2000×1660. |

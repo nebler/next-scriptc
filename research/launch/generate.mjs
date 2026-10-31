@@ -91,8 +91,11 @@ function code(source,lang,x,y,size,lh,highlightWidth=0) {
 }
 
 function routeNative() {
-  const w=1000,h=800;
-  return svg('A TypeScript native route',w,h,frame(w,h,102,102,898,698)+code(nativeCode,'typescript',128,156,23.4,36));
+  const w=1024,h=576,lh=36,padding=30;
+  // Loaded Geist Mono at 23.4px extends 24px above and 7px below its baseline.
+  const contentHeight=(nativeCode.split('\n').length-1)*lh+31;
+  const contentTop=(h-contentHeight)/2;
+  return svg('A TypeScript native route',w,h,frame(w,h,102,contentTop-padding,w-102,contentTop+contentHeight+padding)+code(nativeCode,'typescript',128,contentTop+24,23.4,lh));
 }
 function useNative() {
   const w=1000,h=800;
@@ -156,27 +159,20 @@ function chartB(d,kernel=false) {
 }
 function hero() {
   const w=1200,h=628;
-  let out=line(736,0,736,h)+line(1136,0,1136,h)+line(0,564,w,564)+plus(736,564);
+  let out=line(704,0,704,h)+line(1184,0,1184,h)+line(0,564,w,564)+plus(704,564);
   out+=text(64,86,'next-scriptc',21,C.text,'class="mono"');
   out+=text(64,250,'route.native.ts',54,C.muted);
   out+=text(64,326,'TypeScript, compiled',58,C.white,'class="bold" letter-spacing="-2"');
   out+=text(64,392,'to native',58,C.white,'class="bold" letter-spacing="-2"');
   out+=text(64,458,'Vercel Functions.',58,C.white,'class="bold" letter-spacing="-2"');
   out+=text(64,533,'A Next.js adapter powered by scriptc',18,C.muted);
-  out+=line(736,174,1200,174)+line(736,454,1200,454)+plus(736,174)+plus(1136,454);
-  const heroCode=`// route.native.ts
-export function GET() {
-  return Response.json({
-    message:
-      "Hello from native TS!"
-  });
-}`;
-  out+=code(heroCode,'typescript',762,225,16,28);
+  out+=line(704,174,1200,174)+line(704,454,1200,454)+plus(704,174)+plus(1184,454);
+  out+=code(nativeCode,'typescript',730,249,16,28);
   return svg('next-scriptc: TypeScript, compiled to native Vercel Functions',w,h,out);
 }
 
 const specs=[
-  {name:'code-route-native',w:1000,h:800,svg:routeNative()},
+  {name:'code-route-native',w:1024,h:576,svg:routeNative()},
   {name:'code-use-native',w:1000,h:800,svg:useNative()},
   {name:'chart-vector-vercel',w:1000,h:750,svg:chartB(data.vectorVercel),legacy:'chart-b-int8-vercel'},
   {name:'chart-vercel-native-vs-node',w:1000,h:830,svg:chartA(),legacy:'chart-a-vercel'},
