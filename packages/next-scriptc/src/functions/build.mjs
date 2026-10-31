@@ -67,16 +67,24 @@ export async function startFunctions(projectDir, distDir) {
   const output = path.join(distDir, "scriptc-functions");
   let manifest;
   try { manifest = JSON.parse(await readFile(path.join(output, "manifest.json"), "utf8")); }
-  catch (error) { if (error.code === "ENOENT") return; throw error; }
+  catch (cause) {
+    if (cause.code === "ENOENT") return;
+    throw new Error("[next-scriptc] Cannot read native functions manifest. Rebuild the application.", { cause });
+  }
   if (manifest?.buildId !== (await readFile(path.join(distDir, "BUILD_ID"), "utf8")).trim()) {
     throw new Error("[next-scriptc] Native functions build ID mismatch. Rebuild the application.");
   }
+  const processes = manifest.processes;
+  const native = Array.isArray(processes) && processes.length === 1 ? processes[0] : null;
+  if (!native || native.binary !== "functions" || !Number.isInteger(native.port) || native.port < 1 || native.port > 65535 ||
+      !Array.isArray(native.routes) || !native.routes.length || native.routes.some((label) => typeof label !== "string" || !label.trim())) {
+    throw new Error("[next-scriptc] Invalid native functions manifest. Rebuild the application.");
+  }
   try {
-    if (manifest.processes?.length !== 1 || manifest.processes[0].binary !== "functions" ||
-        !(await stat(path.join(output, "functions"))).isFile()) throw new Error("Invalid binary");
+    if (!(await stat(path.join(output, "functions"))).isFile()) throw new Error("Invalid binary");
     await access(path.join(output, "functions"), constants.X_OK);
   } catch (cause) {
     throw new Error("[next-scriptc] Missing or invalid native functions binary. Rebuild the application.", { cause });
   }
-  await startNativeProcesses(projectDir, output, manifest.processes);
+  await startNativeProcesses(projectDir, output, processes);
 }

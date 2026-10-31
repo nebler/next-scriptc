@@ -14,5 +14,17 @@
   },
   "dependencies": {
     "scriptc": "0.4.6"
+  },
+  "scripts": {
+    "test": "node --test test/*.mjs",
+    "test:shim": "node --test shim/test/parity.mjs shim/test/vercel-ipc.mjs"
+  },
+  "files": [
+    "src",
+    "shim/*.ts",
+    "shim/README.md"
+  ],
+  "engines": {
+    "node": ">=24"
   }
 }
