@@ -3,9 +3,11 @@ import { chmod, copyFile, lstat, mkdir, mkdtemp, readFile, readdir, realpath, re
 import { createRequire } from "node:module";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 import { writeNativeConfig } from "./native-config.mjs";
 import { shimPath } from "./paths.mjs";
-import { entrySource } from "./routes.mjs";
+import { processEntrySource } from "./routes.mjs";
+import { planProcesses } from "./options.mjs";
 
 const require = createRequire(import.meta.url);
 const proxyCommit = "84878e532142f0ac584953695658b324eb9e5b80";
@@ -107,28 +109,50 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
   const { runtime, executable } = await toolchain(path.join(path.dirname(build), "cache/scriptc"));
   const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
   const replacements = [];
-  for (const [index, route] of routes.entries()) {
-    const main = outputs.appRoutes.find((item) => item.pathname === route.pattern);
-    const functions = outputs.appRoutes.filter((item) => item.filePath === main.filePath).map((item) =>
-      path.join(functionsDir, `${item.pathname === "/" ? "index" : item.pathname.slice(1)}.func`)
-    );
-    const original = JSON.parse(await readFile(path.join(functions[0], ".vc-config.json"), "utf8"));
-    const functionConfig = { runtime: "executable", handler: "executable", architecture: "x86_64", supportsResponseStreaming: true };
-    for (const key of ["memory", "maxDuration", "regions", "environment", "functionFailoverRegions", "framework"]) {
-      if (original[key] !== undefined) functionConfig[key] = original[key];
-    }
+  const processes = planProcesses(routes);
+  const started = performance.now();
+  for (const [index, nativeProcess] of processes.entries()) {
+    const members = routes.filter((route) => route.process === nativeProcess.id);
+    const { functions, config: functionConfig } = await planVercelFunction(functionsDir, outputs.appRoutes, members);
     const entry = path.join(build, `entry-${index}.ts`);
     const binary = path.join(build, `route-${index}`);
-    await writeFile(entry, `import { serve } from ${JSON.stringify(shimPath)};\n${entrySource(route)}`);
-    console.log(`[next-scriptc] Compiling Vercel Function ${route.pattern} (${route.optimization})`);
-    run(compiler, ["build", entry, "-o", binary, "--optimization", route.optimization, "--strip", "--no-keep-llvm"], {
+    await writeFile(entry, `import { serve, serveMany } from ${JSON.stringify(shimPath)};\n${processEntrySource(members, [], { vercel: true })}`);
+    console.log(`[next-scriptc] Compiling Vercel Function ${members.map((route) => route.pattern).join(", ")} (${nativeProcess.optimization})`);
+    run(compiler, ["build", entry, "-o", binary, "--optimization", nativeProcess.optimization, "--strip", "--no-keep-llvm"], {
       cwd: projectDir,
       env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: runtime },
     });
     replacements.push({ functions, binary, executable, config: functionConfig });
   }
   await replaceFunctions(functionsDir, replacements);
-  console.log(`[next-scriptc] Built ${routes.length} native Vercel Functions`);
+  console.log(`[next-scriptc] Built ${routes.length} native routes in ${processes.length} Vercel Functions (${((performance.now() - started) / 1000).toFixed(1)}s compilation)`);
+}
+
+// Preserve every output variant identified by Next, including .rsc aliases.
+// A group has one deployment configuration; reject incompatible route settings
+// rather than silently applying the first member's memory/region/timeout.
+export async function planVercelFunction(functionsDir, appRoutes, members) {
+  const functions = new Set();
+  let config;
+  for (const route of members) {
+    const main = appRoutes.find((item) => item.pathname === route.pattern);
+    if (!main) throw new Error(`[next-scriptc] Missing Vercel output for ${route.pattern}`);
+    const file = path.join(functionsDir, `${route.pattern.slice(1) || "index"}.func`);
+    const original = JSON.parse(await readFile(path.join(file, ".vc-config.json"), "utf8"));
+    const current = { runtime: "executable", handler: "executable", architecture: "x86_64", supportsResponseStreaming: true };
+    for (const key of ["memory", "maxDuration", "regions", "environment", "functionFailoverRegions", "framework"]) {
+      if (original[key] !== undefined) current[key] = original[key];
+    }
+    if (config && !isDeepStrictEqual(config, current)) {
+      throw new Error(`[next-scriptc] Group ${JSON.stringify(route.group)} has incompatible Vercel Function settings at ${route.pattern}`);
+    }
+    config = current;
+    functions.add(file);
+    for (const item of appRoutes.filter((item) => item.filePath === main.filePath)) {
+      functions.add(path.join(functionsDir, `${item.pathname.slice(1) || "index"}.func`));
+    }
+  }
+  return { functions: [...functions], config };
 }
 
 export async function buildVercel(args) {

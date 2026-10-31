@@ -156,8 +156,22 @@ async function writeResponse(response: RouteResponse, outgoing: ServerResponse, 
   }
 }
 
-type RouteOptions = { pattern: string; interceptionPatterns?: string[] };
+type RouteOptions = { pattern: string; interceptionPatterns?: string[]; vercel?: boolean };
 type ListenerOptions = { port?: number };
+
+// Vercel keeps the public URL in incoming.url while routing to a different
+// Function path. Follow its adapter's matched-path contract only in explicitly
+// built Vercel entries; self-hosted servers never trust this routing header.
+function routePath(incoming: IncomingMessage, vercel: boolean | undefined, url = new URL(incoming.url || "/", "http://127.0.0.1")): string {
+  if (!vercel) return url.pathname;
+  const matched = incoming.headers["x-matched-path"];
+  const pathname = typeof matched === "string" ? Buffer.from(matched, "latin1").toString("utf8") : url.pathname;
+  return pathname.replace(/\.rsc$/, "").replace(/\[\[?((?:\.\.\.)?)([^\]]+)\]\]?/g, (placeholder, rest: string, name: string) => {
+    const value = url.searchParams.get(`nxtP${name}`);
+    if (value === null) return placeholder;
+    return rest ? value.split("/").map(encodeURIComponent).join("/") : encodeURIComponent(value);
+  });
+}
 type ModuleLoader = RouteModule | (() => Promise<RouteModule>);
 
 function createRoute(module: ModuleLoader, options: RouteOptions) {
@@ -202,11 +216,17 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
       const host = typeof forwardedHost === "string" && forwardedHost ? forwardedHost : incoming.headers.host || "127.0.0.1";
       const protocol = typeof forwardedProto === "string" && forwardedProto.includes("https") ? "https" : "http";
       const url = new URL(incoming.url || "/", `${protocol}://${host}`);
+      const pathname = options.vercel ? routePath(incoming, true, url) : url.pathname;
       // Next reserializes the query before Node route execution; its proxy uses querystring instead.
       if (typeof forwardedHost === "string") url.search = url.searchParams.toString();
+      if (options.vercel) {
+        for (const key of [...url.searchParams.keys()]) {
+          if (key.startsWith("nxtP") || key.startsWith("nxtI")) url.searchParams.delete(key);
+        }
+      }
       let params: Record<string, string | string[]> | null;
       try {
-        params = match(url.pathname);
+        params = match(pathname);
       } catch {
         incoming.resume();
         await writeResponse(new Response(null, { status: 400 }), outgoing, false);
@@ -215,7 +235,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
       // BaseServer.setVaryHeader runs before App Route dispatch, including
       // automatic HEAD/OPTIONS/405 and handler failures, but after route matching.
       const intercepted = interceptionRoute || interceptionPatterns.some((pattern) => pattern.test(url.pathname));
-      if (params !== null) {
+      if (params !== null && !options.vercel) {
         outgoing.setHeader("vary", intercepted ? `${appVary}, next-url` : appVary);
       }
       const method = incoming.method || "GET";
@@ -266,11 +286,11 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
 
 // Entries are ordered by Next's getSortedRoutes at build time. Keep dispatch
 // outside createRoute so the default one-route listener has no extra matching.
-export function serveMany(routes: { module: ModuleLoader; pattern: string }[], options: ListenerOptions & { interceptionPatterns?: string[] } = {}): void {
-  const handlers = routes.map((route) => createRoute(route.module, { pattern: route.pattern, interceptionPatterns: options.interceptionPatterns }));
+export function serveMany(routes: { module: ModuleLoader; pattern: string }[], options: ListenerOptions & { interceptionPatterns?: string[]; vercel?: boolean } = {}): void {
+  const handlers = routes.map((route) => createRoute(route.module, { pattern: route.pattern, interceptionPatterns: options.interceptionPatterns, vercel: options.vercel }));
   const server = createServer(async (incoming, outgoing) => {
     try {
-      const pathname = new URL(incoming.url || "/", "http://127.0.0.1").pathname;
+      const pathname = routePath(incoming, options.vercel);
       for (const route of handlers) {
         if (route.match(pathname) !== null) {
           await route.handle(incoming, outgoing);

@@ -239,15 +239,19 @@ cases.push(
 );
 
 async function deployedResponse(baseURL, test) {
-  if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
+  const auth = process.env.VERCEL_AUTOMATION_BYPASS_SECRET
+    ? { "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET }
+    : process.env.VERCEL_OIDC_TOKEN ? { "x-vercel-trusted-oidc-idp-token": process.env.VERCEL_OIDC_TOKEN } : null;
+  if (auth) {
     return fetch(new URL(test.path, baseURL), {
       method: test.method ?? "GET", body: test.body,
-      headers: { "accept-encoding": "identity", ...test.headers, "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET },
+      headers: { "accept-encoding": test.gzip ? "gzip" : "identity", ...test.headers, ...auth },
+      redirect: "manual",
       signal: AbortSignal.timeout(180_000),
     });
   }
   const args = ["curl", test.path, "--deployment", baseURL, "--", "--silent", "--show-error", "--include", "--compressed", "--max-time", "180", "--request", test.method ?? "GET"];
-  for (const [name, value] of Object.entries({ "accept-encoding": "identity", ...test.headers })) args.push("--header", `${name}: ${value}`);
+  for (const [name, value] of Object.entries({ "accept-encoding": test.gzip ? "gzip" : "identity", ...test.headers })) args.push("--header", `${name}: ${value}`);
   if (test.body !== undefined) args.push("--data-binary", "@-");
   const output = await new Promise((resolve, reject) => {
     const child = execFile("vercel", args, { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 }, (error, stdout) => error ? reject(error) : resolve(stdout));

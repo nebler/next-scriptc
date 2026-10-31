@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { chmod, lstat, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { chmod, lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { test } from "node:test";
-import { replaceFunctions } from "../src/vercel.mjs";
+import { planVercelFunction, replaceFunctions } from "../src/vercel.mjs";
 
 test("native replacement preserves shared Node aliases, variants and prerender files", async () => {
   const temporary = await mkdtemp(path.join(tmpdir(), "scriptc-vercel-"));
@@ -33,5 +33,40 @@ test("native replacement preserves shared Node aliases, variants and prerender f
     assert.deepEqual(JSON.parse(await readFile(path.join(native, ".vc-config.json"))), config);
     assert.equal(await readFile(prerender, "utf8"), '{"expiration":false}');
     await assert.rejects(readFile(path.join(native, "node.js")), { code: "ENOENT" });
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});
+
+test("grouped routes share one Function across nested aliases and preserve independent Functions", async () => {
+  const temporary = await mkdtemp(path.join(tmpdir(), "scriptc-vercel-group-"));
+  try {
+    const functionsDir = path.join(temporary, "functions");
+    const members = [{ pattern: "/api/hello", group: "all" }, { pattern: "/api/items/[id]", group: "all" }];
+    const appRoutes = members.flatMap(({ pattern }) => [
+      { pathname: pattern, filePath: `${pattern}/route.js` },
+      { pathname: `${pattern}.rsc`, filePath: `${pattern}/route.js` },
+    ]);
+    for (const route of [...appRoutes, { pathname: "/node" }]) {
+      const directory = path.join(functionsDir, `${route.pathname.slice(1)}.func`);
+      await mkdir(directory, { recursive: true });
+      await writeFile(path.join(directory, ".vc-config.json"), JSON.stringify({ runtime: "nodejs24.x", memory: 1024, regions: ["iad1"] }));
+    }
+    const plan = await planVercelFunction(functionsDir, appRoutes, members);
+    assert.equal(plan.functions.length, 4);
+    const binary = path.join(temporary, "binary");
+    await writeFile(binary, "multi-route executable");
+    await replaceFunctions(functionsDir, [{ ...plan, binary, executable: binary }]);
+    const owner = path.join(functionsDir, "api/hello.func");
+    for (const file of plan.functions) {
+      assert.equal(await realpath(file), await realpath(owner));
+      assert.equal(await readFile(path.join(file, "user-server"), "utf8"), "multi-route executable");
+      assert.equal((await lstat(file)).isSymbolicLink(), file !== owner);
+    }
+    assert.equal(JSON.parse(await readFile(path.join(functionsDir, "node.func/.vc-config.json"))).runtime, "nodejs24.x");
+    assert.equal(plan.config.memory, 1024);
+    // Re-plan with conflicting Vercel settings: sharing must fail explicitly.
+    await rm(path.join(functionsDir, "api/items/[id].func"));
+    await mkdir(path.join(functionsDir, "api/items/[id].func"));
+    await writeFile(path.join(functionsDir, "api/items/[id].func/.vc-config.json"), '{"memory":2048}');
+    await assert.rejects(planVercelFunction(functionsDir, appRoutes, members), /incompatible Vercel Function settings/);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });

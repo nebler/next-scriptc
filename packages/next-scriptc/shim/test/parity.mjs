@@ -243,6 +243,17 @@ test("shim HTTP parity: Node 24 and scriptc native", { timeout: 360_000 }, async
       await Promise.all(Array.from({ length: 3 }, () => compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" })));
       assert.ok(performance.now() - started >= 180, "early requests await route-module initialization");
     });
+    for (const grouped of ["", "1"]) await pair(binary, { SHIM_VERCEL: "1", SHIM_GROUPED: grouped }, async (compare) => {
+      const headers = { "x-matched-path": "/api/hello.rsc", "x-forwarded-host": "public.test", "x-forwarded-proto": "https" };
+      const rewritten = await compare({ path: "/rewritten?case=url&q=a%20b&nxtPid=hello", headers,
+        status: 200, json: { url: "https://public.test/rewritten?case=url&q=a+b", host: "public.test" } });
+      assert.equal(rewritten.headers.vary, undefined, "Vercel minimal mode omits the App Route Vary prefix");
+      await compare({ path: "/api/hello.rsc?case=url", headers, status: 200,
+        json: { url: "https://public.test/api/hello.rsc?case=url", host: "public.test" } });
+      const dynamic = await compare({ path: "/rewritten?nxtPid=a%2Fb&nxtPslug=one%2Ftwo", headers: { "x-matched-path": "/api/[id]/[[...slug]]" }, status: 200 });
+      assert.deepEqual(JSON.parse(dynamic.body).params, { id: "a/b", slug: ["one", "two"] });
+      assert.equal(JSON.parse(dynamic.body).query, "");
+    });
     await pair(binary, { SHIM_GROUPED: "1", SHIM_DELAY_INIT: "1", SHIM_INTERCEPTION: "1" }, async (compare, { ports }) => {
       await compare({ path: "/api/static", status: 200, text: "static" });
       await compare({ path: "/api/a?case=text", status: 200, text: "hello, 世界\n" });

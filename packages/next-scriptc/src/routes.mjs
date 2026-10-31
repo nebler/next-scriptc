@@ -10,8 +10,8 @@ const { getSortedRoutes } = require("next/dist/shared/lib/router/utils/sorted-ro
 
 const methods = ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"];
 
-export function entrySource(route, importName = "route", interceptionPatterns = []) {
-  return `serve(${moduleSource(route, importName)}, { pattern: ${JSON.stringify(route.pattern)}${interceptionPatterns.length ? `, interceptionPatterns: ${JSON.stringify(interceptionPatterns)}` : ""} });\n`;
+export function entrySource(route, importName = "route", interceptionPatterns = [], options = {}) {
+  return `serve(${moduleSource(route, importName)}, { pattern: ${JSON.stringify(route.pattern)}${interceptionPatterns.length ? `, interceptionPatterns: ${JSON.stringify(interceptionPatterns)}` : ""}${options.vercel ? ", vercel: true" : ""} });\n`;
 }
 
 function moduleSource(route, importName) {
@@ -21,12 +21,12 @@ function moduleSource(route, importName) {
     `}`;
 }
 
-export function processEntrySource(routes, interceptionPatterns = []) {
-  if (routes.length === 1) return entrySource(routes[0], "route", interceptionPatterns);
+export function processEntrySource(routes, interceptionPatterns = [], options = {}) {
+  if (routes.length === 1) return entrySource(routes[0], "route", interceptionPatterns, options);
   const sorted = new Map(routes.map((route) => [route.pattern, route]));
   return `serveMany([\n${getSortedRoutes([...sorted.keys()]).map((pattern, index) =>
     `  { pattern: ${JSON.stringify(pattern)}, module: ${moduleSource(sorted.get(pattern), `route${index}`)} }`
-  ).join(",\n")}\n], { interceptionPatterns: ${JSON.stringify(interceptionPatterns)} });\n`;
+  ).join(",\n")}\n], { interceptionPatterns: ${JSON.stringify(interceptionPatterns)}${options.vercel ? ", vercel: true" : ""} });\n`;
 }
 
 export async function discoverRoutes(projectDir, pageExtensions = ["tsx", "ts", "jsx", "js", "native.ts"]) {

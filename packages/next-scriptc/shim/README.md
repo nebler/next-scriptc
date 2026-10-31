@@ -69,6 +69,11 @@ Limitations:
   original remote IP missing from the proxy request cannot be recovered here.
   httpxy may also force Connection: close for chunked uploads. The bridge leaves
   transport headers intact on requests; it does not invent original client data.
+- Generated Vercel entries explicitly enable matched-path dispatch for rewrites
+  and RSC aliases, interpolate routed parameters, and remove internal `nxtP`/`nxtI`
+  query fields. The public request URL remains separate from the dispatch path.
+  App Route Vary prefixes are omitted like Next in Vercel minimal mode. Self-hosted
+  entries ignore the platform routing header and retain the normal Vary behavior.
 - Response headers are copied like Next 16.4.3 App Router sendResponse, skipping
   only internal x-middleware-set-cookie and preserving separate Set-Cookie values.
   Handlers returning decoded fetch bodies must remove stale encoding/framing

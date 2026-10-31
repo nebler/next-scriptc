@@ -15,7 +15,7 @@ const load = async () => {
     OPTIONS: explicit ? () => new Response("explicit options", { status: 200 }) : undefined,
   };
 };
-const options = { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined, interceptionPatterns: process.env.SHIM_INTERCEPTION ? ["^/api/intercepted(?:/|$)"] : [] };
+const options = { pattern: explicit || empty ? "/api/static" : process.env.SHIM_PATTERN || "/api/[id]/[[...slug]]", port: explicit ? 0 : undefined, interceptionPatterns: process.env.SHIM_INTERCEPTION ? ["^/api/intercepted(?:/|$)"] : [], vercel: process.env.SHIM_VERCEL === "1" };
 if (process.env.SHIM_GROUPED) {
   serveMany([
     // An unrelated module can stay initializing without blocking this route.

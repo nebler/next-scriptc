@@ -14,7 +14,26 @@ vercel pull --yes --environment=preview
 node examples/demo/bench/vercel/deploy-node.mjs
 ```
 
-Select Node 24 in your shell before running the helper. It uses the demo's ignored local `.vercel/project.json` to override framework=nextjs, Node=24.x and outputDirectory=.next-node without changing hosted settings (the hosted project stays framework=Other, root=.). It builds with NEXT_SCRIPTC_BASELINE=node using Vercel's Next builder and `--standalone`: otherwise the native CLI's monorepo filePathMap upload looks for root node_modules relative to the demo and fails. The helper checks the effective Next config has no adapterPath. It pins Build Output regions=iad1 and all Node function architectures=x86_64 to match the later scriptc executable. The JS functions contain no `.node` addons; their presence aborts this cross-architecture packaging. Hosted function config, not the project's default Node=26, determines the deployed Node=24 runtime. Public JWT fixture environment values come from bench/config.mjs and are attached at runtime. Keep them identical on the native deployment.
+Select Node 24 in your shell before running the helper. `deploy-node.mjs` delegates to the same `build.mjs`/`deploy.mjs` pipeline as the native variant. Both enable Vercel's bundled Next adapter (`NEXT_ENABLE_ADAPTER=1`), build from `examples/demo` with outputDirectory=.next, and stage the completed Build Output tree at the repository root so monorepo-relative `filePathMap` entries resolve during upload. The ignored demo project link overrides framework=nextjs and Node=24.x locally. Hosted settings are unchanged. The old root legacy `builds` configuration is removed.
+
+Both variants pin x86_64, iad1, 2048 MiB and 300 seconds in the output. Native Node addons abort cross-architecture packaging. The hosted project defaults do not override the emitted nodejs24.x/executable runtime. Public JWT fixture values from bench/config.mjs are applied at build and runtime.
+
+Build only, producing the repository-root `.vercel/output` for `vercel deploy --prebuilt`:
+
+```sh
+NEXT_SCRIPTC_BASELINE=node node examples/demo/bench/vercel/build.mjs
+NEXT_SCRIPTC_DEMO_GROUPS=vercel node examples/demo/bench/vercel/build.mjs
+```
+
+Build and deploy a native preview:
+
+```sh
+NEXT_SCRIPTC_DEMO_GROUPS=vercel node examples/demo/bench/vercel/deploy.mjs
+```
+
+`NEXT_SCRIPTC_BASELINE=node node examples/demo/bench/vercel/deploy.mjs` deploys the baseline through that same command. All helpers are preview-only. The package-level `next-scriptc vercel-build [--prod]` remains available for another app's linked working directory; the demo helper supplies its local link and benchmark resource pins.
+
+The current adapter pipeline bundles the baseline into two Functions: pages and all App Routes. The demo's explicit `vercel` group combines the 16 dynamic native routes into one executable Function with relative `.func` symlinks for every member and `.rsc` alias. Its two retained static App Routes and pages remain Node output. The native deployment therefore has three Functions. Shared native routes share a cold start, initialized module state, resources and failure domain; they have no process isolation. This mirrors Node's shared dynamic-route Function. See [integration evidence](../../../../research/vercel-integration.md) for exact path lists and hosted checks.
 
 **First-ever deployment trap:** on 2026-10-31 CLI `vercel deploy --prebuilt --environment preview` created a production-target deployment because this project had never been deployed. It assigned the default aliases despite the explicit preview argument. That deployment was deleted without benchmark traffic; a second deployment was verified as preview. The helper now refuses a project with no deployment history and rejects a returned production target. No `--prod` command was run. This is a platform default to check before using this procedure on another empty project.
 
