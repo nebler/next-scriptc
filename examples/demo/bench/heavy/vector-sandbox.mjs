@@ -7,8 +7,11 @@ import path from "node:path";
 const root = path.resolve(import.meta.dirname, "../../../..");
 process.chdir(root);
 const scout = process.argv.includes("--scout");
+const customCompiler = process.argv.find(a => a.startsWith("--compiler="))?.slice(11);
 const label = process.argv.find(a => a.startsWith("--label="))?.slice(8) ?? (scout ? "scout-linux" : "route-before");
 if (!/^[a-z0-9-]+$/.test(label)) throw new Error("Invalid label");
+if (customCompiler && (scout || !process.argv.some(a => a.startsWith("--label=")) || label === "route-before" || !path.isAbsolute(customCompiler)))
+  throw new Error("Custom compiler needs an absolute Linux CLI path and an explicit new route label");
 const prefix = `research/benchmarks/vector-${label}`;
 for (const suffix of [".json", "-controller.json"]) {
   try { await access(prefix + suffix); throw new Error("Evidence exists; inspect before any new experiment"); }
@@ -47,6 +50,11 @@ try {
     report[name + "Sha256"] = sha(content);
     return { path: name, content, mode: 0o755 };
   }));
+  if (customCompiler) {
+    const content = await readFile(customCompiler);
+    report.customCompilerSha256 = sha(content);
+    files.push({ path: "custom-scriptc", content, mode: 0o755 });
+  }
   await sandbox.writeFiles([{ path: "repo.tar", content: archive }, ...files]);
   await command("Unpack", "mkdir repo\ntar -xf repo.tar -C repo\nnode --version\nuname -a\nhead -26 /proc/cpuinfo\ncat /sys/fs/cgroup/cpu.max || true");
   if (scout) {
@@ -54,7 +62,9 @@ try {
   } else {
     await command("CPU/build tools", "if ! command -v clang >/dev/null || ! command -v taskset >/dev/null; then if command -v dnf >/dev/null; then dnf install -y -q clang util-linux; else apt-get update -qq && apt-get install -y -qq clang util-linux; fi; fi", true);
     await command("Frozen dependencies", "cd repo\nnpx -y pnpm@11.1.3 install --frozen-lockfile --reporter=silent\nnode node_modules/.pnpm/scriptc@0.4.6/node_modules/scriptc/scripts/install-native.mjs\ncp ../heavy-go-linux examples/demo/go/user-server\nchmod +x examples/demo/go/user-server");
-    await command("Build stock native and Node", "cd repo\nSCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_DEMO_GROUPS=vercel HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build\nNEXT_SCRIPTC_BASELINE=node NEXT_SCRIPTC_DEMO_GROUPS= HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build");
+    const compilerEnv = customCompiler ? 'SCRIPTC_COMPILER="$(pwd)/../custom-scriptc" ' : "";
+    if (customCompiler) await command("Custom compiler version", "./custom-scriptc --version");
+    await command("Build native and Node", `cd repo\n${compilerEnv}SCRIPTC_CHECKER_SERVER=0 NEXT_SCRIPTC_DEMO_GROUPS=vercel HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build\nNEXT_SCRIPTC_BASELINE=node NEXT_SCRIPTC_DEMO_GROUPS= HEAVY_GO_ORIGIN=http://127.0.0.1:3520 npx -y pnpm@11.1.3 --filter demo build`);
     await command("Vector production suite", `cd repo\nBENCH_COMMIT=${commit} HEAVY_VECTOR_SUITE=1 HEAVY_WORKLOADS=vectors,vectors-imul HEAVY_APP_CPUS=0 taskset -c 1 node examples/demo/bench/heavy/self.mjs ../result.json`);
   }
   report.status = "complete";
