@@ -6,6 +6,24 @@ Selection criterion: choose operations common in real Next.js applications, not 
 
 The pre-registered library experiment compares installed `marked` 18.1.2 and `minisearch` 7.2.0 with their matching upstream TypeScript tags, using the demo's full article/RSS and catalog inputs. It reports Node published-JS, native published-JS and native TS-source steady-state per-call times, byte parity and coverage dynamic-tier counts, including exact compilation refusals. It does not change demo library resolution. One uninterrupted final quick local suite is indicative only; no sandbox run is authorized in this round.
 
+## Round 2 additions
+
+Registered before any Round 2 measurements. These five candidates were **already explored locally** in [perf-levers.md](perf-levers.md#common-cpu-candidates-wins-and-losses-retained) using [candidates.ts](../examples/probe/perf/candidates.ts) on a heavily loaded Apple M4 Pro. This is prospective registration of realistic HTTP workloads, not a claim that the candidate selection was blind to performance. **All five are included regardless of outcome**, including the SHA-256 loss and near-parity gzip/image results. Compiler refusals, parity failures, timeouts and regressions remain reportable; none may be dropped or replaced after timing.
+
+| Workload | Fixed benchmark request / work | Common Next.js use |
+| --- | --- | --- |
+| SHA-256 bulk integrity | `POST /api/uploads/verify`, deterministic 1 MiB body and its provided SHA-256; hash the received bytes and compare the digest | Upload integrity checks |
+| Gzip JSON export | `GET /api/export.json.gz?rows=5000`, serialize 5,000 deterministic records and gzip at level 6 per request | Downloadable data exports |
+| Revenue aggregation | `GET /api/analytics/revenue?from=2026-01-01&to=2026-01-31`, parse 5,000 stored JSON events; filter inclusive dates and total integer cents × quantity by region/day | Analytics and dashboard APIs |
+| Raw image histogram | `POST /api/images/histogram?width=512&height=512`, deterministic 1 MiB RGBA upload; integer Rec.601 luma histogram, min/max/mean | Image upload preprocessing/analysis, excluding decoding/resizing |
+| Nearby stores | `GET /api/stores/nearby?lat=51.5074&lng=-0.1278&radiusKm=1000`, haversine filter/sort of 20,000 deterministic stores, return the nearest 20 plus total matches | Store locators |
+
+The same typed route files, algorithms, fixtures, validation and request bodies run under Node and native; fixtures initialize at module load, outputs compute per request. GET routes use meaningful request parameters to remain dynamic with Cache Components. Release remains the native default; no native-only speed flags or algorithm changes. Nearby-store output rounds distances to metres and sorts by rounded distance then ID for deterministic ties across libm implementations.
+
+Each addition uses **100 fixed-count CPU requests per repetition** (quick caps at 40), normal profile warmups and C=1/8/64 windows, all four surfaces and all cold repetitions. Counts and windows are identical across runtimes. Two 1 MiB body fixtures are generated in each generator process, outside timing, and reused. Gzip parity compares **decompressed bytes and representation headers**, since different valid gzip encodings are allowed; decompression/digest checking occurs in the client equally for both runtimes and its CPU is reported separately. Existing workload budgets are unchanged.
+
+Budget before measurement: the five additions contribute approximately **4–6 minutes** (about 280 s of configured warmup/windows plus fixed requests, cold starts, coverage and orchestration). Against round 1's roughly 14-minute total, target suite time is **18–20 minutes**, excluding installation/builds; loaded hosts can exceed this estimate. No sandbox run is authorized for this implementation round. Local verification is sequential build, Node-dev/native parity and harness self-checks; it does not produce publishable timing claims.
+
 ---
 
 # Benchmark protocol and final-round implementation
