@@ -183,6 +183,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
   let remove: RouteHandler | undefined;
   let optionsHandler: RouteHandler | undefined;
   let allow = "";
+  let initialized = false;
   let initializing: Promise<void> | null = null;
   function initialize(route: RouteModule): void {
     get = route.GET;
@@ -200,6 +201,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
     if (patch) allowed.push("PATCH");
     if (remove) allowed.push("DELETE");
     allow = allowed.sort().join(", ");
+    initialized = true;
     initializing = null;
   }
   if (typeof module !== "function") initialize(module);
@@ -210,6 +212,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
   );
   const handle = async (incoming: IncomingMessage, outgoing: ServerResponse) => {
     try {
+      if (options.vercel) start();
       if (initializing) await initializing;
       const forwardedHost = incoming.headers["x-forwarded-host"];
       const forwardedProto = incoming.headers["x-forwarded-proto"];
@@ -273,7 +276,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
     // The parent waits only for bound ports, letting Next initialize alongside
     // route modules. Connections queue in the kernel during synchronous import;
     // asynchronous module initialization is awaited by the request callback.
-    if (typeof module === "function") {
+    if (typeof module === "function" && !initialized && !initializing) {
       initializing = module().then(initialize);
       initializing.catch((error: unknown) => {
         console.error(error);
@@ -305,12 +308,14 @@ export function serveMany(routes: { module: ModuleLoader; pattern: string }[], o
     incoming.resume();
     await writeResponse(new Response(null, { status: 404 }), outgoing, false);
   });
-  listen(server, options, () => { for (const route of handlers) route.start(); });
+  // Serverless groups must not initialize unrelated routes on startup. A module
+  // can build a large index synchronously and block every route in this process.
+  listen(server, options, () => { if (!options.vercel) for (const route of handlers) route.start(); });
 }
 
 export function serve(module: ModuleLoader, options: RouteOptions & ListenerOptions): void {
   const route = createRoute(module, options);
-  listen(createServer(route.handle), options, route.start);
+  listen(createServer(route.handle), options, () => { if (!options.vercel) route.start(); });
 }
 
 function listen(server: ReturnType<typeof createServer>, options: ListenerOptions, start: () => void): void {

@@ -1,0 +1,1173 @@
+{
+  "note": "Build Output filePathMap points to live .next files. Copied output trees do not freeze them. Pair 1 Node was uploaded before the native build; Node pairs 2/3 afterward. Only four shared trace fingerprints differ between the saved builds. This cannot prove equality of non-overlapping route-specific files. Actual deployed ZIP digests and sizes are retained per preview. Application source trees are identical. No deployment followed the later local non-Vercel build.",
+  "sharedTraceCount": 140,
+  "changedSharedTraces": {
+    "examples/demo/.next/build-manifest.json": {
+      "nodeBuildFingerprint": "e4ba75048ea8c69567141bfed89ddbd6254aef9ccef66ee094c78ff526c2902b",
+      "nativeBuildFingerprint": "deb7b0a3a643e1ba887f873c6e3c5cfe23dcd042926245fcb2a0f562734ed5ea"
+    },
+    "examples/demo/.next/server/middleware-build-manifest.js": {
+      "nodeBuildFingerprint": "e11121eaa98b99183f56e96ad09bdc1ac61b4e1880a7ae08e4d1013a2a7c1f8a",
+      "nativeBuildFingerprint": "aa078bf91ba1e58ac0a7fbf1f2f6b69010d309b76155e21b83d49a94189a23f4"
+    },
+    "examples/demo/.next/BUILD_ID": {
+      "nodeBuildFingerprint": "24934346ffbcce103074f49f751369388af33bfe8e7b97c4dcb7ddb78c52e3f4",
+      "nativeBuildFingerprint": "6fcc5e0e6bc83522c528cb287648055d355d49bda3a279201c237d3663bd7ea0"
+    },
+    "examples/demo/.next/required-server-files.json": {
+      "nodeBuildFingerprint": "073b49a12743a7c26ccf118db4da5a33bafd0a5c9f06682d6d9bd61ba732fe0d",
+      "nativeBuildFingerprint": "3d82699cc05d2fe1b18b07aa5b505808fd859eaf7dd3f8f818edeeeb9f781e2b"
+    }
+  },
+  "builds": {
+    "base": {
+      "variant": "native",
+      "buildSeconds": 14.574447791,
+      "node": "v24.22.0",
+      "next": "16.4.3",
+      "sourceCommit": "1e9b65b4138238959db92e9c883e88b7aab98205",
+      "dirty": true,
+      "builtAt": "2026-10-31T09:03:32.308Z",
+      "groups": "vercel",
+      "functions": [
+        {
+          "owner": "_global-error.func",
+          "paths": [
+            "_global-error.func",
+            "_global-error.segments/__PAGE__.segment.rsc.func",
+            "_global-error.segments/_full.segment.rsc.func",
+            "_global-error.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_global-error.rsc.func",
+          "paths": [
+            "_global-error.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.func",
+          "paths": [
+            "_not-found.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.rsc.func",
+          "paths": [
+            "_not-found.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/analytics/revenue.func",
+          "paths": [
+            "api/analytics/revenue.func",
+            "api/analytics/revenue.rsc.func",
+            "api/diagnostics/memory.func",
+            "api/diagnostics/memory.rsc.func",
+            "api/export.json.gz.func",
+            "api/export.json.gz.rsc.func",
+            "api/feed.xml.func",
+            "api/feed.xml.rsc.func",
+            "api/hello.func",
+            "api/hello.rsc.func",
+            "api/images/histogram.func",
+            "api/images/histogram.rsc.func",
+            "api/items/[id].func",
+            "api/items/[id].rsc.func",
+            "api/login-scrypt.func",
+            "api/login-scrypt.rsc.func",
+            "api/login.func",
+            "api/login.rsc.func",
+            "api/posts/[slug].func",
+            "api/posts/[slug].rsc.func",
+            "api/primes.func",
+            "api/primes.rsc.func",
+            "api/report.func",
+            "api/report.rsc.func",
+            "api/search.func",
+            "api/search.rsc.func",
+            "api/stores/nearby.func",
+            "api/stores/nearby.rsc.func",
+            "api/uploads/verify.func",
+            "api/uploads/verify.rsc.func",
+            "api/url-echo.func",
+            "api/url-echo.rsc.func",
+            "api/verify.func",
+            "api/verify.rsc.func"
+          ],
+          "runtime": "executable",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.func",
+          "paths": [
+            "api/function-example.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.rsc.func",
+          "paths": [
+            "api/function-example.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.func",
+          "paths": [
+            "api/items/new.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.rsc.func",
+          "paths": [
+            "api/items/new.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.func",
+          "paths": [
+            "api/static-fixture.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.rsc.func",
+          "paths": [
+            "api/static-fixture.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.func",
+          "paths": [
+            "index.func",
+            "index.segments/__PAGE__.segment.rsc.func",
+            "index.segments/_full.segment.rsc.func",
+            "index.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.rsc.func",
+          "paths": [
+            "index.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.func",
+          "paths": [
+            "reports.func",
+            "reports.segments/_full.segment.rsc.func",
+            "reports.segments/_tree.segment.rsc.func",
+            "reports.segments/reports/__PAGE__.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.rsc.func",
+          "paths": [
+            "reports.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        }
+      ]
+    },
+    "node": {
+      "variant": "node",
+      "buildSeconds": 3.206144375,
+      "node": "v24.22.0",
+      "next": "16.4.3",
+      "sourceCommit": "1e9b65b4138238959db92e9c883e88b7aab98205",
+      "dirty": true,
+      "builtAt": "2026-10-31T09:08:18.582Z",
+      "groups": "",
+      "functions": [
+        {
+          "owner": "_global-error.func",
+          "paths": [
+            "_global-error.func",
+            "_global-error.segments/__PAGE__.segment.rsc.func",
+            "_global-error.segments/_full.segment.rsc.func",
+            "_global-error.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_global-error.rsc.func",
+          "paths": [
+            "_global-error.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.func",
+          "paths": [
+            "_not-found.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.rsc.func",
+          "paths": [
+            "_not-found.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/analytics/revenue.func",
+          "paths": [
+            "api/analytics/revenue.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/analytics/revenue.rsc.func",
+          "paths": [
+            "api/analytics/revenue.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/diagnostics/memory.func",
+          "paths": [
+            "api/diagnostics/memory.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/diagnostics/memory.rsc.func",
+          "paths": [
+            "api/diagnostics/memory.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/export.json.gz.func",
+          "paths": [
+            "api/export.json.gz.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/export.json.gz.rsc.func",
+          "paths": [
+            "api/export.json.gz.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/feed.xml.func",
+          "paths": [
+            "api/feed.xml.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/feed.xml.rsc.func",
+          "paths": [
+            "api/feed.xml.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.func",
+          "paths": [
+            "api/function-example.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.rsc.func",
+          "paths": [
+            "api/function-example.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/hello.func",
+          "paths": [
+            "api/hello.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/hello.rsc.func",
+          "paths": [
+            "api/hello.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/images/histogram.func",
+          "paths": [
+            "api/images/histogram.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/images/histogram.rsc.func",
+          "paths": [
+            "api/images/histogram.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/[id].func",
+          "paths": [
+            "api/items/[id].func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/[id].rsc.func",
+          "paths": [
+            "api/items/[id].rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.func",
+          "paths": [
+            "api/items/new.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.rsc.func",
+          "paths": [
+            "api/items/new.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/login-scrypt.func",
+          "paths": [
+            "api/login-scrypt.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/login-scrypt.rsc.func",
+          "paths": [
+            "api/login-scrypt.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/login.func",
+          "paths": [
+            "api/login.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/login.rsc.func",
+          "paths": [
+            "api/login.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/posts/[slug].func",
+          "paths": [
+            "api/posts/[slug].func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/posts/[slug].rsc.func",
+          "paths": [
+            "api/posts/[slug].rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/primes.func",
+          "paths": [
+            "api/primes.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/primes.rsc.func",
+          "paths": [
+            "api/primes.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/report.func",
+          "paths": [
+            "api/report.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/report.rsc.func",
+          "paths": [
+            "api/report.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/search.func",
+          "paths": [
+            "api/search.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/search.rsc.func",
+          "paths": [
+            "api/search.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.func",
+          "paths": [
+            "api/static-fixture.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.rsc.func",
+          "paths": [
+            "api/static-fixture.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/stores/nearby.func",
+          "paths": [
+            "api/stores/nearby.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/stores/nearby.rsc.func",
+          "paths": [
+            "api/stores/nearby.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/uploads/verify.func",
+          "paths": [
+            "api/uploads/verify.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/uploads/verify.rsc.func",
+          "paths": [
+            "api/uploads/verify.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/url-echo.func",
+          "paths": [
+            "api/url-echo.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/url-echo.rsc.func",
+          "paths": [
+            "api/url-echo.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/verify.func",
+          "paths": [
+            "api/verify.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/verify.rsc.func",
+          "paths": [
+            "api/verify.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.func",
+          "paths": [
+            "index.func",
+            "index.segments/__PAGE__.segment.rsc.func",
+            "index.segments/_full.segment.rsc.func",
+            "index.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.rsc.func",
+          "paths": [
+            "index.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.func",
+          "paths": [
+            "reports.func",
+            "reports.segments/_full.segment.rsc.func",
+            "reports.segments/_tree.segment.rsc.func",
+            "reports.segments/reports/__PAGE__.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.rsc.func",
+          "paths": [
+            "reports.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        }
+      ]
+    },
+    "fixed": {
+      "variant": "native",
+      "buildSeconds": 13.98881875,
+      "node": "v24.22.0",
+      "next": "16.4.3",
+      "sourceCommit": "3a10a8e8da7e54571de8070893a22c432baedc05",
+      "dirty": true,
+      "builtAt": "2026-10-31T09:09:28.952Z",
+      "groups": "vercel",
+      "functions": [
+        {
+          "owner": "_global-error.func",
+          "paths": [
+            "_global-error.func",
+            "_global-error.segments/__PAGE__.segment.rsc.func",
+            "_global-error.segments/_full.segment.rsc.func",
+            "_global-error.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_global-error.rsc.func",
+          "paths": [
+            "_global-error.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.func",
+          "paths": [
+            "_not-found.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "_not-found.rsc.func",
+          "paths": [
+            "_not-found.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/analytics/revenue.func",
+          "paths": [
+            "api/analytics/revenue.func",
+            "api/analytics/revenue.rsc.func",
+            "api/diagnostics/memory.func",
+            "api/diagnostics/memory.rsc.func",
+            "api/export.json.gz.func",
+            "api/export.json.gz.rsc.func",
+            "api/feed.xml.func",
+            "api/feed.xml.rsc.func",
+            "api/hello.func",
+            "api/hello.rsc.func",
+            "api/images/histogram.func",
+            "api/images/histogram.rsc.func",
+            "api/items/[id].func",
+            "api/items/[id].rsc.func",
+            "api/login-scrypt.func",
+            "api/login-scrypt.rsc.func",
+            "api/login.func",
+            "api/login.rsc.func",
+            "api/posts/[slug].func",
+            "api/posts/[slug].rsc.func",
+            "api/primes.func",
+            "api/primes.rsc.func",
+            "api/report.func",
+            "api/report.rsc.func",
+            "api/search.func",
+            "api/search.rsc.func",
+            "api/stores/nearby.func",
+            "api/stores/nearby.rsc.func",
+            "api/uploads/verify.func",
+            "api/uploads/verify.rsc.func",
+            "api/url-echo.func",
+            "api/url-echo.rsc.func",
+            "api/verify.func",
+            "api/verify.rsc.func"
+          ],
+          "runtime": "executable",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.func",
+          "paths": [
+            "api/function-example.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/function-example.rsc.func",
+          "paths": [
+            "api/function-example.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.func",
+          "paths": [
+            "api/items/new.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/items/new.rsc.func",
+          "paths": [
+            "api/items/new.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.func",
+          "paths": [
+            "api/static-fixture.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "api/static-fixture.rsc.func",
+          "paths": [
+            "api/static-fixture.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.func",
+          "paths": [
+            "index.func",
+            "index.segments/__PAGE__.segment.rsc.func",
+            "index.segments/_full.segment.rsc.func",
+            "index.segments/_tree.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "index.rsc.func",
+          "paths": [
+            "index.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.func",
+          "paths": [
+            "reports.func",
+            "reports.segments/_full.segment.rsc.func",
+            "reports.segments/_tree.segment.rsc.func",
+            "reports.segments/reports/__PAGE__.segment.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        },
+        {
+          "owner": "reports.rsc.func",
+          "paths": [
+            "reports.rsc.func"
+          ],
+          "runtime": "nodejs24.x",
+          "architecture": "x86_64",
+          "regions": [
+            "iad1"
+          ],
+          "memory": 2048,
+          "maxDuration": 300
+        }
+      ]
+    }
+  },
+  "applicationTree": {
+    "examples/demo/app": "c1b3f1c323cf80dafc6ca377fbc83b7087abb7a5",
+    "examples/demo/lib": "3a34a99edaabc7f48bb4d7f39a28f39afafa3f1f",
+    "packages/next-scriptc/shim": "3ac66ed33a92a1996c5c973ce36c00cd2db3eb22",
+    "packages/next-scriptc/src": "0dd932dc1ecf5dde4a26ab4059a061e5acec8a21"
+  }
+}

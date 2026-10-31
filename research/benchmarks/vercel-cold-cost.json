@@ -1,0 +1,76 @@
+{
+  "deploymentsCreated": 7,
+  "deploymentsByVariant": {
+    "node": 4,
+    "native": 3
+  },
+  "deploymentsRetained": 6,
+  "deploymentsDeletedUnused": 1,
+  "sandboxRuns": [
+    {
+      "artifact": "vercel-cold-pair-1.json",
+      "requestsIssued": 128,
+      "provisionedVcpuHours": 0.004181666666666667,
+      "activeCpuDurationMs": 2209
+    },
+    {
+      "artifact": "vercel-cold-pair-2.json",
+      "requestsIssued": 128,
+      "provisionedVcpuHours": 0.004402777777777778,
+      "activeCpuDurationMs": 2500
+    },
+    {
+      "artifact": "vercel-tail.json",
+      "requestsIssued": 6834,
+      "provisionedVcpuHours": 0.009392777777777778,
+      "activeCpuDurationMs": 8178
+    },
+    {
+      "artifact": "vercel-tail-native-repeat.json",
+      "requestsIssued": 6800,
+      "provisionedVcpuHours": 0.0076527777777777774,
+      "activeCpuDurationMs": 4878
+    },
+    {
+      "artifact": "vercel-idle.json",
+      "requestsIssued": 124,
+      "provisionedVcpuHours": 0.003375,
+      "activeCpuDurationMs": 2239
+    },
+    {
+      "artifact": "vercel-revision-2-full.json",
+      "requestsIssued": 23318,
+      "provisionedVcpuHours": 0.07445388888888889,
+      "activeCpuDurationMs": 32358
+    },
+    {
+      "artifact": "vercel-memory-linux-initial.json",
+      "requestsIssued": 0,
+      "provisionedVcpuHours": 0.004342222222222222,
+      "activeCpuDurationMs": 2236
+    },
+    {
+      "artifact": "vercel-memory-linux.json",
+      "requestsIssued": 0,
+      "provisionedVcpuHours": 0.004978055555555556,
+      "activeCpuDurationMs": 4048
+    }
+  ],
+  "postMeasurementVerification": {
+    "parityCases": 85,
+    "parityRequestsPerVariant": 85,
+    "smokeChecks": 25,
+    "smokeRequestsPerVariant": 16,
+    "httpRequests": 202
+  },
+  "httpAttemptsTotal": 37534,
+  "functionInvocationUpperBound": 37534,
+  "provisionedSandboxVcpuHoursUpperBound": 0.11277916666666667,
+  "platformActiveCpuDurationMs": 58646,
+  "limits": {
+    "deployments": 12,
+    "functionInvocations": 40000,
+    "sandboxVcpuHours": 0.4
+  },
+  "note": "HTTP counts conservatively include cache/static/page requests; memory checker requests are local to Sandbox artifacts, not deployed Function invocations. Control-plane inspect/log/build API calls are not application traffic. Provisioned upper bounds include provisioning/stop overhead; platform active CPU is recorded separately."
+}
