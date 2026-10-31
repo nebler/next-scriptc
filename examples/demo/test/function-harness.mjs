@@ -7,7 +7,8 @@ const require = createRequire(path.join(demo, "package.json"));
 const next = require.resolve("next/dist/bin/next");
 
 export function run(args, baseline = false) {
-  const child = spawn(process.execPath, [next, ...args], {
+  const affinity = process.env.FUNCTION_SERVER_CPU && args[0] === "start";
+  const child = spawn(affinity ? "taskset" : process.execPath, [...(affinity ? ["-c", process.env.FUNCTION_SERVER_CPU, process.execPath] : []), next, ...args], {
     cwd: demo,
     env: { ...process.env, NEXT_SCRIPTC_BASELINE: baseline ? "node" : "", SCRIPTC_CHECKER_SERVER: "0" },
     stdio: ["ignore", "pipe", "pipe"],
@@ -30,8 +31,13 @@ export async function wait(state, pattern, offset = 0) {
 }
 
 export async function build(baseline) {
-  const state = run(["build"], baseline);
+  const state = run(["build", ...(process.env.FUNCTION_WEBPACK ? ["--webpack"] : [])], baseline);
   const { code } = await state.exit;
+  // The build's supervisor owns all prerender workers, including failed builds.
+  for (const match of state.output.matchAll(/native PID (\d+)/g)) {
+    try { process.kill(Number(match[1]), 0); throw new Error(`Build leaked native PID ${match[1]}`); }
+    catch (error) { if (error.code !== "ESRCH") throw error; }
+  }
   if (code !== 0) throw new Error(state.output);
   console.log(`Built ${baseline ? "Node" : "native"} demo`);
 }

@@ -16,6 +16,11 @@ for (const mode of ["native", "node", "dev"]) {
     for (const query of ["", "?from=2026-01-10&to=2026-01-13", "?from=2027-01-01", "?error=expected-message"]) values.push(await report(port, query));
     assert.equal(JSON.parse(values[0].value).events, 5000);
     assert.deepEqual(values[3], { kind: "error", value: "expected-message" });
+    for (const size of [50000, 200000]) {
+      const large = await report(port, `?size=${size}`);
+      assert.equal(JSON.parse(large.value).events, size);
+      values.push(large);
+    }
     const api = await fetch(`http://127.0.0.1:${port}/api/function-example?value=route-call`);
     assert.deepEqual(await api.json(), { value: "route-call" });
     const failed = await fetch(`http://127.0.0.1:${port}/api/function-example?error=route-failure`);

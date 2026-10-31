@@ -1,87 +1,126 @@
+// Run after native + Node production builds, or omit --skip-build to build both.
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { execFile, spawn } from "node:child_process";
-import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
-import { Agent, request } from "node:http";
-import { cpus, tmpdir } from "node:os";
+import { createHash } from "node:crypto";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
+import { cpus } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
 import { callNative } from "../../../packages/next-scriptc/src/functions/client.mjs";
 import { extractFunctions } from "../../../packages/next-scriptc/src/functions/extract.mjs";
-import { build, demo, report, start, stop } from "../test/function-harness.mjs";
+import { revenue } from "../lib/revenue.ts";
+import { profile } from "./function-profile.ts";
+import { build, demo, report, start, stop, wait } from "../test/function-harness.mjs";
 
-const count = Number(process.env.FUNCTION_BENCH_CALLS ?? "1000");
-const port = Number(process.env.FUNCTION_TEST_PORT ?? "3461");
-const warmup = 100;
-const compilerRequire = createRequire(path.resolve(demo, "../../packages/next-scriptc/package.json"));
-const compiler = path.resolve(path.dirname(compilerRequire.resolve("scriptc/package.json")), compilerRequire("scriptc/package.json").bin.scriptc);
+const count = Number(process.env.FUNCTION_BENCH_CALLS ?? 1000);
+const pageCalls = Number(process.env.FUNCTION_BENCH_PAGES ?? 200);
+const warmup = Number(process.env.FUNCTION_BENCH_WARMUP ?? 50);
+const port = Number(process.env.FUNCTION_TEST_PORT ?? 3461);
+const sizes = [5000, 50000, 200000];
+const require = createRequire(path.resolve(demo, "../../packages/next-scriptc/package.json"));
+const compiler = path.resolve(path.dirname(require.resolve("scriptc/package.json")), require("scriptc/package.json").bin.scriptc);
 const summary = (times) => {
   times.sort((a, b) => a - b);
   return { calls: times.length, p50: times[Math.floor(times.length * .5)], p99: times[Math.floor(times.length * .99)] };
 };
-async function time(call, calls = count) {
+async function time(call, calls = pageCalls) {
   for (let i = 0; i < warmup; i++) await call();
   const times = [];
   for (let i = 0; i < calls; i++) { const begin = performance.now(); await call(); times.push(performance.now() - begin); }
   return summary(times);
 }
-const results = { node: process.version, cpu: cpus()[0].model, scriptc: compilerRequire("scriptc/package.json").version, pageSourceSha256: createHash("sha256").update(await readFile(path.join(demo, "app/reports/page.tsx"))).digest("hex"), platform: `${process.platform}/${process.arch}`, warmup, method: "sequential C=1, ms, full response consumed" };
-for (const baseline of [false, true]) {
-  if (!process.argv.includes("--skip-build")) await build(baseline);
-  const pagePort = port + Number(baseline);
-  const state = await start(pagePort, baseline);
-  try {
-    results[baseline ? "nodePage" : "nativePage"] = await time(async () => {
-      const value = await report(pagePort);
-      assert.equal(JSON.parse(value.value).events, 5000);
-    }, Math.min(count, 500));
-    if (!baseline) {
-      const source = path.join(demo, "lib/native-example.ts");
-      const fn = extractFunctions(await readFile(source, "utf8"), source).functions.find((fn) => fn.name === "echo");
-      const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc-functions/manifest.json"), "utf8"));
-      results.actualStubHTTP = await time(async () => assert.equal(await callNative(manifest.processes[0].port, fn.id, ["hello"]), "hello"));
+async function samples(call) {
+  for (let i = 0; i < warmup; i++) await call();
+  const values = [];
+  for (let i = 0; i < pageCalls; i++) values.push(await call());
+  return Object.fromEntries(Object.keys(values[0]).map((key) => [key, summary(values.map((value) => value[key]))]));
+}
+const results = { node: process.version, cpu: cpus()[0].model, scriptc: require("scriptc/package.json").version,
+  commit: process.env.BENCH_COMMIT ?? (await promisify(execFile)("git", ["rev-parse", "HEAD"])).stdout.trim(),
+  sourceSha256: createHash("sha256").update(await readFile(path.join(demo, "lib/revenue.ts"))).digest("hex"),
+  platform: `${process.platform}/${process.arch}`, warmup, method: "sequential C=1; ms; full page bodies consumed; alternating runtime order by size; server/load affinity supplied by harness", sizes: {} };
+if (!process.argv.includes("--skip-build")) { await build(false); await build(true); }
+const states = [];
+try {
+  states.push(await start(port));
+  states.push(await start(port + 1, true));
+  const manifest = JSON.parse(await readFile(path.join(demo, ".next/scriptc-functions/manifest.json"), "utf8"));
+  async function id(file, name) {
+    const source = path.join(demo, file);
+    return extractFunctions(await readFile(source, "utf8"), source).functions.find((fn) => fn.name === name).id;
+  }
+  const nativePort = manifest.processes[0].port;
+  const echoId = await id("lib/native-example.ts", "echo");
+  const revenueId = await id("lib/revenue.ts", "revenue");
+  results.callOverhead = await time(async () => assert.equal(await callNative(nativePort, echoId, ["hello"]), "hello"), count);
+  for (const [index, size] of sizes.entries()) {
+    const row = results.sizes[size] = {};
+    for (const baseline of index % 2 ? [true, false] : [false, true]) {
+      row[baseline ? "nodePage" : "nativePage"] = await time(async () => {
+        const value = await report(port + Number(baseline), `?size=${size}`);
+        assert.equal(JSON.parse(value.value).events, size);
+      });
     }
-  } finally { await stop(state); }
+    const args = ["2026-01-01", "2026-01-31", size, false];
+    row.nativeCall = await time(async () => assert.equal((await callNative(nativePort, revenueId, args)).events, size));
+    row.nativeBody = await samples(async () => (await callNative(nativePort, revenueId, [...args.slice(0, 3), true])).timings);
+    row.nodeProfile = await samples(() => profile(size));
+  }
+} finally { await Promise.all(states.map(stop)); }
+
+// A control build renders the identical page/results with compute precomputed.
+// No benchmark switch or cache is added to the production app. Use a separate
+// output so subsequent --skip-build parity tests still use the real baseline.
+const sourceFile = path.join(demo, "lib/revenue.ts");
+const configFile = path.join(demo, "next.config.ts");
+const sourceText = await readFile(sourceFile, "utf8");
+const configText = await readFile(configFile, "utf8");
+const tsconfigFile = path.join(demo, "tsconfig.json");
+const tsconfigText = await readFile(tsconfigFile, "utf8");
+let control;
+try {
+  const values = Object.fromEntries(await Promise.all(sizes.map(async (size) => [size, await revenue("2026-01-01", "2026-01-31", size, false)])));
+  await writeFile(sourceFile, `type Result = { from: string; to: string; events: number; revenueCents: number; daily: { day: string; region: string; revenueCents: number; units: number; events: number }[]; timings: { parseMs: number; aggregateMs: number } | null };
+const values: Record<string, Result> = ${JSON.stringify(values)};
+export async function revenue(_from: string, _to: string, size: number, _profile: boolean) { return values[String(size)]; }
+`);
+  assert.ok(configText.includes('distDir: ".next-node"'));
+  await writeFile(configFile, configText.replace('distDir: ".next-node"', 'distDir: ".next-render"'));
+  await build(true);
+  control = await start(port + 1, true);
+  for (const size of sizes) results.sizes[size].renderControl = await time(async () => {
+    const value = await report(port + 1, `?size=${size}`);
+    assert.deepEqual(JSON.parse(value.value), values[size]);
+  });
+} finally {
+  try { if (control) await stop(control); }
+  finally {
+    await writeFile(sourceFile, sourceText);
+    await writeFile(configFile, configText);
+    await writeFile(tsconfigFile, tsconfigText);
+  }
 }
 
-// Same production request handler and validator; only its listen address changes.
-const output = path.join(demo, ".next/cache/function-transport");
+// A separate probe times strict native result validation/stringify in-process.
+// It imports the very same source/validator and uses the production HTTP handler.
+const output = path.join(demo, ".next/cache/function-profile");
 await mkdir(output, { recursive: true });
 await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
-const serve = path.resolve(demo, "../../packages/next-scriptc/src/functions/serve.ts");
-const json = path.resolve(path.dirname(serve), "json.ts");
-let text = (await readFile(serve, "utf8")).replace('"./json.ts"', JSON.stringify(json));
-const listen = /  server\.listen\(port, "127\.0\.0\.1", \(\) => \{[\s\S]*?\n  \}\);/;
-assert.match(text, listen);
-text = text.replace(listen, `  const ready = () => console.log("transport-ready");
-  if (process.env.SOCKET) server.listen(process.env.SOCKET, ready);
-  else server.listen(port, "127.0.0.1", ready);`);
-text += '\nserveFunctions(async (_id: string, body: string): Promise<unknown> => { const args = JSON.parse(body) as [string]; return args[0]; });\n';
-await writeFile(path.join(output, "entry.ts"), text);
 await writeFile(path.join(output, "tsconfig.json"), JSON.stringify({ compilerOptions: { strict: true, skipLibCheck: true, target: "esnext", module: "nodenext", allowImportingTsExtensions: true, noEmit: true } }));
-await promisify(execFile)(compiler, ["build", path.join(output, "entry.ts"), "-o", path.join(output, "transport"), "--strip", "--no-keep-llvm", "--node-islands=off"], { env: { ...process.env, SCRIPTC_CHECKER_SERVER: "0" } });
-const socket = path.join(tmpdir(), `sc-functions-${process.pid}.sock`);
-for (const unix of [false, true]) {
-  const child = spawn(path.join(output, "transport"), [], { env: { ...process.env, PORT: String(port), SOCKET: unix ? socket : "" }, stdio: ["ignore", "pipe", "inherit"] });
-  const exited = new Promise((resolve) => child.once("close", resolve));
-  const agent = new Agent({ keepAlive: true, maxSockets: 64, maxFreeSockets: 8 });
-  try {
-    await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error("Transport readiness timeout")), 30_000);
-      child.stdout.on("data", (chunk) => { if (String(chunk).includes("transport-ready")) { clearTimeout(timer); resolve(); } });
-      child.once("error", (error) => { clearTimeout(timer); reject(error); });
-      child.once("exit", (code) => { clearTimeout(timer); reject(new Error(`Transport exited ${code}`)); });
-    });
-    results[unix ? "probeUDS" : "probeHTTP"] = await time(() => new Promise((resolve, reject) => {
-      const body = '["hello"]';
-      const req = request({ ...(unix ? { socketPath: socket } : { hostname: "127.0.0.1", port }), agent, path: "/echo", method: "POST", headers: { "content-type": "application/json", "content-length": Buffer.byteLength(body) } }, (res) => {
-        let result = ""; res.setEncoding("utf8");
-        res.on("data", (chunk) => { result += chunk; }); res.on("error", reject);
-        res.on("end", () => { try { assert.equal(JSON.parse(result), "hello"); resolve(); } catch (error) { reject(error); } });
-      });
-      req.on("error", reject); req.end(body);
-    }));
-  } finally { agent.destroy(); child.kill("SIGTERM"); await exited; await rm(socket, { force: true }); }
-}
-console.log(JSON.stringify(results, null, 2));
+const entry = path.join(output, "entry.ts");
+await writeFile(entry, `import { serveFunctions } from ${JSON.stringify(path.resolve(demo, "../../packages/next-scriptc/src/functions/serve.ts"))};
+import { profile } from ${JSON.stringify(path.join(demo, "bench/function-profile.ts"))};
+serveFunctions(async (_id: string, body: string): Promise<unknown> => { const args = JSON.parse(body) as [number]; return profile(args[0]); });\n`);
+await promisify(execFile)(compiler, ["build", entry, "-o", path.join(output, "profile"), "--optimization", "release", "--strip", "--no-keep-llvm", "--node-islands=off"], { env: { ...process.env, SCRIPTC_CHECKER_SERVER: "0" } });
+const child = spawn(process.env.FUNCTION_SERVER_CPU ? "taskset" : path.join(output, "profile"), process.env.FUNCTION_SERVER_CPU ? ["-c", process.env.FUNCTION_SERVER_CPU, path.join(output, "profile")] : [], { env: { ...process.env, PORT: String(port), NEXT_SCRIPTC_PARENT: String(process.pid) }, stdio: ["ignore", "pipe", "pipe"] });
+const state = { child, output: "", exit: new Promise((resolve) => child.once("close", resolve)) };
+for (const stream of [child.stdout, child.stderr]) stream.on("data", (chunk) => { state.output += chunk; });
+try {
+  await wait(state, /listening on/);
+  for (const size of sizes) results.sizes[size].nativeProfile = await samples(() => callNative(port, "profile", [size]));
+} finally { await stop(state); }
+const json = JSON.stringify(results, null, 2) + "\n";
+const destination = process.argv.find((arg) => arg.startsWith("--output="))?.slice(9);
+if (destination) await writeFile(destination, json);
+console.log(json);

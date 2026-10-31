@@ -99,7 +99,7 @@ function startProcess(worker, group) {
   return waitForReadiness(worker, group);
 }
 
-async function start(projectDir, distDir) {
+export async function startNativeRoutes(projectDir, distDir) {
   const manifest = await readManifest(distDir);
   return startNativeProcesses(projectDir, path.join(distDir, "scriptc"), manifest.processes);
 }
@@ -122,11 +122,6 @@ async function startProcesses(projectDir, outputDir, processes) {
     await Promise.all(workers.map(({ exited }) => exited));
     throw error;
   }
-}
-
-export function startNativeRoutes(projectDir, distDir) {
-  if (!starts.has(distDir)) starts.set(distDir, start(projectDir, distDir));
-  return starts.get(distDir);
 }
 
 export function startNativeProcesses(projectDir, outputDir, processes) {

@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { constants } from "node:fs";
+import { access, cp, mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -49,7 +50,7 @@ export async function prepareFunctions(config, projectDir) {
   const processes = [{ binary: "functions", port, routes: ["native functions"] }];
   plans.set(projectDir, { output, processes });
   await startNativeProcesses(projectDir, output, processes);
-  return withFunctions(config, modules, port);
+  return withFunctions(config, modules, port, projectDir);
 }
 
 export async function finishFunctions(projectDir, distDir, buildId) {
@@ -68,11 +69,15 @@ export async function startFunctions(projectDir, distDir) {
   let manifest;
   try { manifest = JSON.parse(await readFile(path.join(output, "manifest.json"), "utf8")); }
   catch (error) { if (error.code === "ENOENT") return; throw error; }
-  if (manifest.buildId !== (await readFile(path.join(distDir, "BUILD_ID"), "utf8")).trim() ||
-      manifest.processes?.length !== 1 || manifest.processes[0].binary !== "functions" ||
-      !Array.isArray(manifest.processes[0].routes) || manifest.processes[0].routes.length !== 1 || manifest.processes[0].routes[0] !== "native functions" ||
-      !Number.isInteger(manifest.processes[0].port) || manifest.processes[0].port < 40000 || manifest.processes[0].port >= 50000) {
-    throw new Error("[next-scriptc] Invalid native functions manifest. Rebuild the application.");
+  if (manifest?.buildId !== (await readFile(path.join(distDir, "BUILD_ID"), "utf8")).trim()) {
+    throw new Error("[next-scriptc] Native functions build ID mismatch. Rebuild the application.");
+  }
+  try {
+    if (manifest.processes?.length !== 1 || manifest.processes[0].binary !== "functions" ||
+        !(await stat(path.join(output, "functions"))).isFile()) throw new Error("Invalid binary");
+    await access(path.join(output, "functions"), constants.X_OK);
+  } catch (cause) {
+    throw new Error("[next-scriptc] Missing or invalid native functions binary. Rebuild the application.", { cause });
   }
   await startNativeProcesses(projectDir, output, manifest.processes);
 }

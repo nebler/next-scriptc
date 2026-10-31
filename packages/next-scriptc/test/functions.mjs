@@ -92,3 +92,33 @@ test("discovery supports inline route functions and rejects indirect Next/client
     assert.equal((await discoverFunctions(temporary, path.join(temporary, ".next"), config)).length, 1);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
+
+test("Turbopack conditions target discovered paths literally and preserve user rules", async () => {
+  const { withFunctions } = await import("../src/functions/config.mjs");
+  const existing = { loaders: ["user-loader"] };
+  const modules = [{ source: "/repo/app/items/[id]/page.tsx", hash: "hash", functions: [] }];
+  const config = withFunctions({ turbopack: { root: "/repo", rules: { "*": existing, "*.svg": { as: "*.js" } } } }, modules, 41000, "/repo");
+  assert.equal(config.turbopack.rules["*"][0], existing);
+  const condition = config.turbopack.rules["*"][1].condition.all[0].any[0].path;
+  assert.ok(condition.test("app/items/[id]/page.tsx"));
+  assert.ok(!condition.test("app/items/i/page.tsx"));
+  assert.ok(!condition.test("other/app/items/[id]/page.tsx"));
+  assert.ok(!condition.test("app/page.tsx"));
+  assert.deepEqual(config.turbopack.rules["*.svg"], { as: "*.js" });
+});
+
+test("function startup checks build identity and reports missing/non-executable binaries", async () => {
+  const { startFunctions } = await import("../src/functions/build.mjs");
+  const temporary = await mkdtemp(path.join(import.meta.dirname, ".function-manifest-"));
+  try {
+    const output = path.join(temporary, "scriptc-functions");
+    await mkdir(output);
+    await writeFile(path.join(temporary, "BUILD_ID"), "current\n");
+    await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId: "stale" }));
+    await assert.rejects(startFunctions(temporary, temporary), /build ID mismatch/);
+    await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId: "current", processes: [{ binary: "functions", port: 1234, routes: ["arbitrary label"] }] }));
+    await assert.rejects(startFunctions(temporary, temporary), /Missing or invalid native functions binary/);
+    await writeFile(path.join(output, "functions"), "not executable", { mode: 0o644 });
+    await assert.rejects(startFunctions(temporary, temporary), /Missing or invalid native functions binary/);
+  } finally { await rm(temporary, { recursive: true, force: true }); }
+});

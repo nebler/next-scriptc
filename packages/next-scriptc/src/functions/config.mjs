@@ -1,21 +1,25 @@
+import path from "node:path";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
+const require = createRequire(import.meta.url);
+const { findRootDirAndLockFiles } = require("next/dist/lib/find-root.js");
 const loader = fileURLToPath(new URL("./loader.mjs", import.meta.url));
 const client = fileURLToPath(new URL("./client.mjs", import.meta.url));
 
-export function withFunctions(config, modules, port) {
+export function withFunctions(config, modules, port, projectDir) {
   if (!modules.length) return config;
   const options = { modules: Object.fromEntries(modules.map(({ source, hash, functions }) => [source, { hash, functions }])), port, client };
   const rules = { ...config.turbopack?.rules };
-  for (const extension of ["ts", "tsx", "js", "jsx", "mts", "mjs", "cts", "cjs"]) {
-    const key = `*.${extension}`;
-    const existing = rules[key];
-    rules[key] = [
-      ...(existing ? Array.isArray(existing) ? existing : [existing] : []),
-      { condition: { all: ["production", "node", { not: "browser" }, { not: "foreign" }] }, loaders: [{ loader, options: { ...options, server: true } }] },
-      { condition: { all: ["production", { any: ["browser", "edge-light"] }, { not: "foreign" }] }, loaders: [{ loader, options: { ...options, server: false } }] },
-    ];
-  }
+  const root = config.turbopack?.root ?? findRootDirAndLockFiles(projectDir).rootDir;
+  // Regex conditions avoid treating route segments such as [id] as glob syntax.
+  const files = { any: modules.map(({ source }) => ({ path: new RegExp("^" + path.relative(root, source).split(path.sep).join("/").replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$") })) };
+  const existing = rules["*"];
+  rules["*"] = [
+    ...(existing ? Array.isArray(existing) ? existing : [existing] : []),
+    { condition: { all: [files, "production", "node", { not: "browser" }] }, loaders: [{ loader, options: { ...options, server: true } }] },
+    { condition: { all: [files, "production", { any: ["browser", "edge-light"] }] }, loaders: [{ loader, options: { ...options, server: false } }] },
+  ];
   const webpack = config.webpack;
   return {
     ...config,

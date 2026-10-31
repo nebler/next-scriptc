@@ -111,8 +111,6 @@ export async function discoverFunctions(projectDir, distDir, config) {
       if (entry.isDirectory()) await visit(source);
       else if (entry.isFile() && /\.(?:[cm]?[jt]s|[jt]sx)$/.test(entry.name) && !/^route\.native\./.test(entry.name)) {
         const text = await readFile(source, "utf8");
-        // Legacy route directives belong to the route adapter, not this pipeline.
-        if (/^route\./.test(entry.name) && /^(?:\s|\/\/[^\n]*\n|\/\*[\s\S]*?\*\/)*(["'])use scriptc\1/.test(text)) continue;
         const module = extractFunctions(text, source);
         if (module) modules.push(module);
       }
