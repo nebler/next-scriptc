@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   async rewrites() {
     return [
+      ...(process.env.HEAVY_GO_ORIGIN ? [{ source: "/api/heavy-go/:path*", destination: `${process.env.HEAVY_GO_ORIGIN}/api/heavy/:path*` }] : []),
       { source: "/rewrite/hello", destination: "/api/hello" },
       { source: "/rewrite/items/:id", destination: "/api/items/:id" },
     ];
@@ -23,7 +24,8 @@ const grouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light";
 // Vercel bundles the Node baseline's App Routes into one Function. Explicitly
 // share native routes too: one cold start and no isolation between members.
 const vercelGrouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "vercel";
-const vercelRoutes = [...lightRoutes, "/api/diagnostics/memory",
+const heavyRoutes = ["csv", "json", "thumbnail", "bcrypt", "diagnostics"].map((name) => `/api/heavy/${name}`);
+const vercelRoutes = [...lightRoutes, ...heavyRoutes, "/api/diagnostics/memory",
   "/api/feed.xml", "/api/images/histogram", "/api/login", "/api/login-scrypt",
   "/api/posts/[slug]", "/api/primes", "/api/report", "/api/search", "/api/static-fixture",
 ];

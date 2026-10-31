@@ -1,3 +1,4 @@
+import { edgeCases as heavyEdges, spec as heavySpec } from "../bench/heavy/fixtures.mjs";
 import assert from "node:assert/strict";
 import { execFile, spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
@@ -237,6 +238,11 @@ cases.push(
   { path: "/api/stores/nearby?lat=90&lng=180&radiusKm=0.001", status: 200, check(body) { assert.equal(JSON.parse(body).total, 0); } },
   ...["lat=91&lng=0", "lat=0&lng=-181", "lat=nope&lng=0", "lat=0", "lat=&lng=0", "lat=0&lng=0&radiusKm=0", "lat=0&lng=0&radiusKm=20001"].map((query) => ({ path: `/api/stores/nearby?${query}`, status: 400 })),
 );
+
+// Heavy route contracts extend the existing cases without changing their assertions.
+for (const test of [...[heavySpec("csv", 40000), heavySpec("json", 10000), heavySpec("thumbnail", 512), heavySpec("bcrypt", 10)], ...heavyEdges()]) {
+  cases.push({ ...test, status: test.status ?? 200 });
+}
 
 async function deployedResponse(baseURL, test) {
   const auth = process.env.VERCEL_AUTOMATION_BYPASS_SECRET
