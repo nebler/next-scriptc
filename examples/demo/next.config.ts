@@ -5,8 +5,9 @@ const publicDemo = process.env.NODE_ENV === "production" && process.env.NEXT_SCR
 const nextConfig: NextConfig = {
   // Inline the opt-in into Next's output; runtime env changes cannot open the proxy.
   env: { NEXT_SCRIPTC_PUBLIC_DEMO: publicDemo ? "1" : "0" },
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Timing previews need response headers from the complete dynamic render.
+  cacheComponents: process.env.NATIVE_VERCEL_TIMING !== "1",
+  partialPrefetching: process.env.NATIVE_VERCEL_TIMING !== "1",
   async rewrites() {
     return [
       ...(process.env.HEAVY_GO_ORIGIN ? [{ source: "/api/heavy-go/:path*", destination: `${process.env.HEAVY_GO_ORIGIN}/api/heavy/:path*` }] : []),

@@ -13,7 +13,7 @@ const extract = (text) => extractFunctions(text, source);
 
 test("sidecar shares eager startup, strips IPC env, restarts once, and fails loudly", async () => {
   const temporary = await mkdtemp(path.join(import.meta.dirname, ".sidecar-"));
-  const binary = path.join(temporary, "server");
+  const binary = path.join(temporary, "server.cjs");
   const old = process.env.VERCEL_IPC_PATH;
   process.env.VERCEL_IPC_PATH = "/must-not-reach-child";
   let sidecar;
