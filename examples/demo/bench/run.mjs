@@ -219,7 +219,7 @@ async function steady(scope, runtime, selected) {
 await mkdir(path.dirname(output), { recursive: true });
 try {
   const estimates = { coverage: "30–90 s", cold: "60–150 s", direct: "150–270 s", production: "150–270 s", isolation: "40–120 s", threads: "60–180 s" };
-  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Sandbox suite estimate 9–18 min; install/build allowance 8 min; hard runner budget 28 min.`);
+  console.log(`Profile ${values.profile}; sections ${sections.join(",")}. Round 2 sandbox suite estimate 18–20 min; install/builds extra; hard runner budget 28 min.`);
   for (const section of sections) {
     console.log(`Section ${section}: estimated ${estimates[section]} (shared-host load can extend this)`);
     if (section === "coverage") {
