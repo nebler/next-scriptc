@@ -52,27 +52,11 @@ export function createVercelServer(handle: (incoming: IncomingMessage, outgoing:
 }
 
 export function vercelRequestHeaders(incoming: IncomingMessage): string[] {
-  // Match the Go proxy's internal-prefix and ReverseProxy hop-header removal.
+  // The platform's internal invocation headers are for the runtime, not the handler.
   const rawHeaders = incoming.rawHeaders;
-  const connection = incoming.headers.connection || "";
-  const removed = ["connection", "proxy-connection", "keep-alive", "proxy-authenticate", "proxy-authorization", "te", "trailer", "transfer-encoding", "upgrade", ...connection.toLowerCase().split(",").map((name) => name.trim())];
-  const te = incoming.headers.te;
-  const trailers = typeof te === "string" && te.toLowerCase().split(",").some((value) => value.trim() === "trailers");
-  const forwarded: string[] = [];
   const headers: string[] = [];
   for (let i = 0; i < rawHeaders.length; i += 2) {
-    const name = rawHeaders[i];
-    const lower = name.toLowerCase();
-    if (lower.startsWith("x-vercel-internal-") || removed.includes(lower)) {
-      continue;
-    }
-    if (lower === "x-forwarded-for") forwarded.push(rawHeaders[i + 1]);
-    else headers.push(name, rawHeaders[i + 1]);
-  }
-  forwarded.push("127.0.0.1");
-  headers.push("x-forwarded-for", forwarded.join(", "));
-  if (trailers) {
-    headers.push("te", "trailers");
+    if (!rawHeaders[i].toLowerCase().startsWith("x-vercel-internal-")) headers.push(rawHeaders[i], rawHeaders[i + 1]);
   }
   return headers;
 }

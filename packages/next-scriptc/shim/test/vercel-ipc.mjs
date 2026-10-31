@@ -100,7 +100,7 @@ test("Vercel executable IPC: startup, concurrency, streams, errors, aborts and p
           ...headers("18446744073709551615"), "x-matched-path": "/api/[id]",
           "x-forwarded-host": "public.example", "x-forwarded-proto": "https",
           "X-Vercel-Internal-Secret": "private", "x-public": "kept",
-          connection: "close, x-hop", "x-hop": "removed", "x-forwarded-for": "192.0.2.1",
+          "x-forwarded-for": "192.0.2.1",
         });
         assert.equal(echo.status, 200);
         const observation = JSON.parse(echo.body);
@@ -109,8 +109,8 @@ test("Vercel executable IPC: startup, concurrency, streams, errors, aborts and p
         assert.equal(seen.host, "public.example");
         assert.equal(seen["x-matched-path"], "/api/[id]");
         assert.equal(seen["x-public"], "kept");
-        assert.equal(seen["x-forwarded-for"], "192.0.2.1, 127.0.0.1");
-        assert.ok(!Object.keys(seen).some((name) => name.startsWith("x-vercel-internal-") || name === "x-hop"));
+        assert.equal(seen["x-forwarded-for"], "192.0.2.1");
+        assert.ok(!Object.keys(seen).some((name) => name.startsWith("x-vercel-internal-")));
         await completion(1);
         assert.match(ends()[0].raw, /"requestId":18446744073709551615/);
         assert.equal(ends()[0].value.payload.context.invocationId, invocation);
