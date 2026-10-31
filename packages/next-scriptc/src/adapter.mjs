@@ -6,7 +6,7 @@ import path from "node:path";
 import { discoverRoutes, processEntrySource, routeRewrite, withRewrites } from "./routes.mjs";
 import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
-import { writeNativeConfig } from "./native-config.mjs";
+import { prepareNativeSources } from "./native-config.mjs";
 import { prepareFunctions, finishFunctions, startFunctions } from "./functions/build.mjs";
 import { discoverFunctions } from "./functions/extract.mjs";
 
@@ -78,7 +78,7 @@ const adapter = {
     const output = path.join(distDir, "scriptc");
     await rm(output, { recursive: true, force: true });
     await mkdir(output, { recursive: true });
-    const { shimPath } = await writeNativeConfig(projectDir, output, config);
+    const { shimPath } = await prepareNativeSources(projectDir, output, config);
     // Next writes a CommonJS package boundary in .next; entries are ES modules.
     await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
     const compiler = compilerPath();

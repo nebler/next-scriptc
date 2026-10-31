@@ -16,6 +16,3 @@ export function compilerPath(env = process.env) {
 }
 
 export const adapterPath = fileURLToPath(new URL("./adapter.mjs", import.meta.url));
-export const shimPath = fileURLToPath(new URL("../shim/serve.ts", import.meta.url));
-
-export const nextServerPath = fileURLToPath(new URL("../shim/next-server.ts", import.meta.url));

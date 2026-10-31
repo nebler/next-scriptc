@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 
-export async function writeNativeConfig(projectDir, output, config) {
+export async function prepareNativeSources(projectDir, output, config) {
   // Production startup never writes compiler configuration. Load Next's
   // TypeScript/config tooling only when building native entries.
   const loadJsConfig = require("next/dist/build/load-jsconfig.js").default;

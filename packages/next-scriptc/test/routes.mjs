@@ -6,7 +6,7 @@ import path from "node:path";
 import { promisify } from "node:util";
 import { test } from "node:test";
 import { discoverRoutes, entrySource, routeRewrite, withRewrites } from "../src/routes.mjs";
-import { writeNativeConfig } from "../src/native-config.mjs";
+import { prepareNativeSources } from "../src/native-config.mjs";
 import adapter from "../src/adapter.mjs";
 import { optionsKey, planRoutes, planProcesses } from "../src/options.mjs";
 import { withScriptc } from "../src/index.mjs";
@@ -237,7 +237,7 @@ test("discovery exports, Next extensions, rewrite phases, and typed native entri
     const nativeRoutes = await discoverRoutes(temporary, extensions);
     const output = path.join(temporary, "native");
     await mkdir(output);
-    const { shimPath } = await writeNativeConfig(temporary, output, { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } });
+    const { shimPath } = await prepareNativeSources(temporary, output, { experimental: {}, typescript: { tsconfigPath: "tsconfig.json" } });
     const nativeConfig = JSON.parse(await readFile(path.join(output, "tsconfig.json"), "utf8"));
     assert.deepEqual(nativeConfig.compilerOptions.paths, { "@fixture/*": [path.join(temporary, "helpers/*")], "next/server": [path.join(output, "shim/next-server.ts")] });
     assert.equal(await readFile(path.join(temporary, "tsconfig.json"), "utf8"), originalConfig);
