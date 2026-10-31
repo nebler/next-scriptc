@@ -20,3 +20,37 @@ The raw HTTP, Web-only and buffered-response variants are diagnostic ablations. 
 All controllers track their own child process groups and terminate them in `finally`. Ports are checked before starting servers. Profiling deliberately terminates a bounded warmed native loop after `sample` completes. No unrelated process is killed, no git operation mutates repository state, and no compiler source or runtime pack is modified.
 
 `options.py` also runs the alternating Web-response-only type specialization in `typed.py`. The specialization is a negative result for CPU speed; it is retained along with the successful ablation outputs.
+
+## Round 3 decisions
+
+`round3.py` reuses `run.py`'s entry generator and owned process runner. It adds
+all current demo routes, three alternating uncached builds per mode (stripped,
+as in production), and four fresh-process alternating steady windows per mode.
+Generated entries are ignored in `round3-generated/`; results and binaries live
+under `.artifacts/perf-levers/round3/`. It resumes completed matrix cells; remove
+that artifact directory for a completely fresh run. Never run the phases in
+parallel, or alongside another sustained benchmark.
+
+```sh
+pnpm install
+PROBE_NODE=/path/to/node24 python3 examples/probe/perf/round3.py
+PROBE_NODE=/path/to/node24 python3 examples/probe/perf/round3.py http-build
+PROBE_NODE=/path/to/node24 python3 examples/probe/perf/round3-topology.py
+```
+
+The topology probe imports the existing `shim/grouped.ts` without changing its
+transport. It compares the sixteen resident native routes (excluding the
+prerendered `static-fixture` and Node-only `items/new`) in sixteen, nine, and one
+processes, plus a one-process prototype moving Markdown to a single retained
+worker. Each topology has three fresh repetitions, reversing order on the middle
+repeat. Each initializes every real handler with a successful full-size fixture,
+then probes hello idle and during continuous C=1 Markdown and gzip loads. Each
+p50/p99 is empirical over 300 timed requests after 30 warmups; three repetitions
+are descriptive, not a tail SLA. Process RSS includes report's retained worker;
+no Next frontend is started by this direct topology experiment.
+
+`round3-worker-proxy.ts` is a bounded GET-only feasibility probe. It serializes
+Markdown's URL, headers and slug to a typed message and returns status, headers
+and text, admitting one job and rejecting overflow with 503. It does not provide
+a general streaming, cancellation, binary-upload, multi-cookie or worker-restart
+implementation. The real Markdown handler executes in the worker on every call.
