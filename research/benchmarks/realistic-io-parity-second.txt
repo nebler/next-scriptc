@@ -1,0 +1,81 @@
+Build passed.
+Node dev: 119 response cases passed.
+Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.
+$ next-scriptc start -p 3427
+▲ Next.js 16.4.3
+- Local:         http://localhost:3427
+- Network:       http://192.168.0.134:3427
+✓ Ready in 125ms
+  Applying modifyConfig from next-scriptc
+next-scriptc: listening on 127.0.0.1:28899
+[next-scriptc] /api/analytics/revenue → native PID 26604, port 28899
+next-scriptc: listening on 127.0.0.1:28900
+[next-scriptc] /api/app/diagnostics/process → native PID 26605, port 28900
+next-scriptc: listening on 127.0.0.1:28901
+[next-scriptc] /api/app/diagnostics/redis → native PID 26606, port 28901
+next-scriptc: listening on 127.0.0.1:28902
+[next-scriptc] /api/app/orders → native PID 26607, port 28902
+scriptc: this program calls into Node.js (@scriptc/node), but no libnode pack was recorded at build time; set SCRIPTC_LIBNODE to a pack directory
+next-scriptc: listening on 127.0.0.1:28903
+[next-scriptc] /api/app/webhooks/payment → native PID 26608, port 28903
+scriptc: this program calls into Node.js (@scriptc/node), but no libnode pack was recorded at build time; set SCRIPTC_LIBNODE to a pack directory
+next-scriptc: listening on 127.0.0.1:28904
+[next-scriptc] /api/diagnostics/memory → native PID 26609, port 28904
+next-scriptc: listening on 127.0.0.1:28905
+[next-scriptc] /api/export.json.gz → native PID 26610, port 28905
+next-scriptc: listening on 127.0.0.1:28906
+[next-scriptc] /api/feed.xml → native PID 26611, port 28906
+next-scriptc: listening on 127.0.0.1:28907
+[next-scriptc] /api/hello → native PID 26612, port 28907
+next-scriptc: listening on 127.0.0.1:28908
+[next-scriptc] /api/images/histogram → native PID 26613, port 28908
+next-scriptc: listening on 127.0.0.1:28909
+[next-scriptc] /api/items/[id] → native PID 26614, port 28909
+next-scriptc: listening on 127.0.0.1:28910
+[next-scriptc] /api/login → native PID 26615, port 28910
+next-scriptc: listening on 127.0.0.1:28911
+[next-scriptc] /api/login-scrypt → native PID 26616, port 28911
+next-scriptc: listening on 127.0.0.1:28912
+[next-scriptc] /api/posts/[slug] → native PID 26617, port 28912
+next-scriptc: listening on 127.0.0.1:28913
+[next-scriptc] /api/primes → native PID 26618, port 28913
+next-scriptc: listening on 127.0.0.1:28914
+[next-scriptc] /api/report → native PID 26619, port 28914
+next-scriptc: listening on 127.0.0.1:28915
+[next-scriptc] /api/search → native PID 26620, port 28915
+next-scriptc: listening on 127.0.0.1:28917
+[next-scriptc] /api/stores/nearby → native PID 26621, port 28917
+next-scriptc: listening on 127.0.0.1:28918
+[next-scriptc] /api/uploads/verify → native PID 26622, port 28918
+next-scriptc: listening on 127.0.0.1:28919
+[next-scriptc] /api/url-echo → native PID 26623, port 28919
+next-scriptc: listening on 127.0.0.1:28920
+[next-scriptc] /api/verify → native PID 26624, port 28920
+Error: [next-scriptc] /api/app/webhooks/payment (native port 28903; check stderr for EADDRINUSE if occupied) exited (exit 1).
+    at ChildProcess.<anonymous> (../../packages/next-scriptc/src/runtime.mjs:50:21)
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+[TypeError: fetch failed] {
+  [cause]: SocketError: other side closed
+      at Socket.onHttpSocketEnd (node:internal/deps/undici/undici:7833:26)
+      at Socket.emit (node:events:526:24)
+      at endReadableNT (node:internal/streams/readable:1783:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+    code: 'UND_ERR_SOCKET',
+    socket: {
+      localAddress: '::1',
+      localPort: 56593,
+      remoteAddress: '::1',
+      remotePort: 3427,
+      remoteFamily: 'IPv6',
+      timeout: undefined,
+      bytesWritten: 297,
+      bytesRead: 0
+    }
+  }
+}
+
+Node.js v24.22.0

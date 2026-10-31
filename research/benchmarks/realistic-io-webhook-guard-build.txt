@@ -1,0 +1,20 @@
+warning SC6104: parameter 'module' (declared 'ModuleLoader') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type 'ModuleLoader' cannot be compiled: the union shape is supported, but its arm 'RouteModule' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'module' (declared 'ModuleLoader') is held as a checked-dynamic value: its type has no static lowering (values of type 'ModuleLoader' cannot be compiled: the union shape is supported, but its arm 'RouteModule' does not compile); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'get' (declared '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined' cannot be compiled: the union shape is supported, but its arm '(request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse' does not compile (instantiating 'createRoute' with (unknown, { interceptionPatterns: string[] | undefined; pattern: string; port:...))); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'body' (declared 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined') is held as a checked-dynamic value: its type has no static lowering (values of type 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'Uint8Array<ArrayBufferLike>' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+The program compiled. Declared types that compile keep these slots static.
+/tmp/next-scriptc-io-payment-server

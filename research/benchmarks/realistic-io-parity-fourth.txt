@@ -1,0 +1,65 @@
+$ next build
+▲ Next.js 16.4.3 (Turbopack)
+  Applying modifyConfig from next-scriptc
+[next-scriptc] Compiling 3 native function(s)
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/.next/cache/scriptc-functions/functions
+next-scriptc: listening on 127.0.0.1:48899
+[next-scriptc] native functions → native PID 54547, port 48899
+✓ Running next.config.ts took 2.4s
+- Cache Components enabled
+- Partial Prefetching enabled
+- Experiments (use with caution):
+  · proxyTimeout: 180000
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 485ms
+  Running TypeScript ...
+bench/io/probes/payment-zod.ts(2,16): error TS2393: Duplicate function implementation.
+Failed to type check.
+
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] demo@0.1.0 build: `next build`
+Exit status 1
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: $ next build
+▲ Next.js 16.4.3 (Turbopack)
+  Applying modifyConfig from next-scriptc
+[next-scriptc] Compiling 3 native function(s)
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/.next/cache/scriptc-functions/functions
+next-scriptc: listening on 127.0.0.1:48899
+[next-scriptc] native functions → native PID 54547, port 48899
+✓ Running next.config.ts took 2.4s
+- Cache Components enabled
+- Partial Prefetching enabled
+- Experiments (use with caution):
+  · proxyTimeout: 180000
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 485ms
+  Running TypeScript ...
+bench/io/probes/payment-zod.ts(2,16): error TS2393: Duplicate function implementation.
+Failed to type check.
+
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] demo@0.1.0 build: `next build`
+Exit status 1
+
+
+1 !== 0
+
+    at localParity (file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:348:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:335:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.0

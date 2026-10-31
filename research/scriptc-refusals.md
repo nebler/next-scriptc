@@ -242,3 +242,66 @@ payload. Standalone fallback declarations did not reproduce the failure, so the
 shim parity fixture now explicitly includes the demo's Node types and asserts
 single-chunk Content-Length as well as response parity. It also tests parent SIGKILL
 with an active never-ending response; PID polling exits within 2.5 seconds.
+
+Realistic Redis I/O suite (2026-10-31, scriptc 0.4.6)
+---------------------------------------------------
+
+20. `@upstash/redis` 1.36.2 builds, but its native SET/GET probe exits at startup:
+
+```text
+Uncaught Error: classes extending builtin bases as values (the inherited runtime constructor has no class-value adapter) are not supported yet [SC1090 at .../@upstash/redis/chunk-Q3SWX4BB.mjs:3593]
+```
+
+Node performs SET/GET against SRH successfully. The application uses the same
+plain JSON-command REST fetch on both sides; no SDK/runtime substitution.
+Repro: `examples/demo/bench/io/probes/upstash.ts`. Exact compiler/runtime logs:
+`research/benchmarks/realistic-io-upstash-*`.
+
+21. `fetch(url, { cache: "no-store", ... })`:
+
+```text
+error SC2020: 'RequestInit option 'cache' in a static build' is part of the standard library types but has no scriptc lowering yet
+hint: the compiler does not preserve this RequestInit member's conversion or transport behavior
+```
+
+The original inline options also produced SC0001 because `cache` is absent from
+scriptc's RequestInit. A normally inferred options variable exposes SC2020.
+Both application variants omit this member and rely on Next 16's default
+uncached fetch for request-dependent handlers. Response no-store and complete
+independent expected response bytes are checked. No Next/shim behavior changed.
+
+22. Zod 4.6.7 order and event schemas work in direct probes but fail when loaded
+through the real adapter's async route entry with native-only preflight:
+
+```text
+error SC1016: circular imports (the binding 'CONSTANT_CATCH' declared in .../zod/v4/core/util.js can be accessed before its declaration runs, and this use is resolved from its type rather than its storage) are not supported yet
+```
+
+Location: util.js:871, `fn[CONSTANT_CATCH] = true`. The default build succeeds
+but exits during route initialization with:
+
+```text
+scriptc: this program calls into Node.js (@scriptc/node), but no libnode pack was recorded at build time; set SCRIPTC_LIBNODE to a pack directory
+```
+
+A singleton-enum schema spelling also fails. Minimal repro:
+`examples/demo/bench/io/probes/payment-zod.ts` (async import), with its sibling
+schema. The actual order-entry and event-entry diagnostics, failed parity runs
+and standalone success/timing data remain under `research/benchmarks/realistic-io-*`.
+The final order route uses Valibot 1.5.0 on BOTH runtimes; the webhook uses the
+same explicit envelope/type/range guard on BOTH. Zod's standalone successes do
+not establish route integration. No compiler, adapter or shim fix is included.
+
+23. Valibot 1.5.0 minValue/maxValue numeric schema initialization:
+
+```text
+'number.toJSON' is part of the standard library types but has no scriptc lowering yet (instantiating 'minValue' with (number, unknown)) [SC2020 at .../valibot/dist/index.mjs:2443]
+```
+
+Both route variants use the library's standard `check` predicate for the same
+inclusive numeric bound, after `number` and `integer`. Raw Valibot issue objects
+also include function references, and native JSON.stringify refuses with
+`Uncaught Error: JSON.stringify of a runtime handle is not supported yet`.
+Both routes use Valibot's normal `flatten` error projection instead. Repros:
+`bench/io/probes/valibot-min-value.ts`, `valibot-issues.ts` and the working
+`valibot.ts`. No library code is patched.

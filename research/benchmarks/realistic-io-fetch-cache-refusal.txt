@@ -1,0 +1,10 @@
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/app/api/app/common.ts:38:36 - error SC2020: 'RequestInit option 'cache' in a static build' is part of the standard library types but has no scriptc lowering yet
+
+  37 |     method: "POST", headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+  38 |     body: JSON.stringify(command), cache: "no-store" as const,
+     |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+  39 |     signal: AbortSignal.timeout(10000),
+
+  hint: the compiler does not preserve this RequestInit member's conversion or transport behavior
+
+1 error.

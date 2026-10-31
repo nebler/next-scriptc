@@ -1,0 +1,10 @@
+/Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/util.js:871:8 - error SC1016: circular imports (the binding 'CONSTANT_CATCH' declared in /Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/util.js can be accessed before its declaration runs, and this use is resolved from its type rather than its storage) are not supported yet
+
+  870 |     const fn = () => value;
+  871 |     fn[CONSTANT_CATCH] = true;
+      |        ^~~~~~~~~~~~~~
+  872 |     return fn;
+
+  hint: ES-module cycles of let/const/function bindings compile as-is; rewrite the named construct (a named import instead of a namespace, a const instead of a default-export expression or var, a class declared before the code that can reach it) or break the named edge
+
+1 error.

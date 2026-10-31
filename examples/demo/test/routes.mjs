@@ -5,6 +5,9 @@ import { createServer } from "node:net";
 import path from "node:path";
 import { SignJWT, jwtVerify } from "jose";
 import { createHash } from "node:crypto";
+import { ioCases } from "./io-cases.mjs";
+import { seed } from "../bench/io/seed.mjs";
+import { emulator } from "../bench/io/emulator.mjs";
 import { fixtureBody, uploadSha256 } from "../bench/fixtures.mjs";
 
 const root = path.resolve(import.meta.dirname, "../../..");
@@ -238,6 +241,11 @@ cases.push(
   ...["lat=91&lng=0", "lat=0&lng=-181", "lat=nope&lng=0", "lat=0", "lat=&lng=0", "lat=0&lng=0&radiusKm=0", "lat=0&lng=0&radiusKm=20001"].map((query) => ({ path: `/api/stores/nearby?${query}`, status: 400 })),
 );
 
+cases.push(...ioCases({ token: validToken, clock, env }));
+for (const invalid of [await token({ exp: clock - 1 }), await token({ aud: "wrong" }), await token({ sub: "../bad" }), await token({}, new TextEncoder().encode("wrong-signing-key-at-least-32-bytes"))]) {
+  cases.push({ path: "/api/app/orders", headers: { cookie: `session=${invalid}` }, status: 401 });
+}
+
 async function deployedResponse(baseURL, test) {
   const auth = process.env.VERCEL_AUTOMATION_BYPASS_SECRET
     ? { "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET }
@@ -297,10 +305,18 @@ async function responses(native, baseURL, selected = cases) {
 if (process.env.ROUTES_NODE_URL || process.env.ROUTES_NATIVE_URL) {
   assert.ok(process.env.ROUTES_NODE_URL && process.env.ROUTES_NATIVE_URL, "Set both ROUTES_NODE_URL and ROUTES_NATIVE_URL");
   let failures = 0;
+  // Hosted stateful cases run as full sequences, with a namespace reset per variant.
+  // Never reset an inherited database without explicit selection.
+  assert.equal(process.env.IO_ALLOW_RESET, "1", "Set IO_ALLOW_RESET=1 for the dedicated benchmark Redis namespace");
+  const hostedResults = [];
+  for (const [native, url] of [[false, process.env.ROUTES_NODE_URL], [true, process.env.ROUTES_NATIVE_URL]]) {
+    await seed(env);
+    hostedResults.push(await responses(native, url));
+  }
   for (const [index, test] of cases.entries()) {
     try {
-      const [expected] = await responses(false, process.env.ROUTES_NODE_URL, [test]);
-      const [actual] = await responses(true, process.env.ROUTES_NATIVE_URL, [test]);
+      const expected = hostedResults[0][index];
+      const actual = hostedResults[1][index];
       // Vercel terminates compression at its CDN. Only that Vary token can differ.
       for (const result of [expected, actual]) {
         const vary = result.headers.find(([name]) => name === "vary");
@@ -321,7 +337,11 @@ if (process.env.ROUTES_NODE_URL || process.env.ROUTES_NATIVE_URL) {
 
 async function localParity() {
   let ports = [port];
+  let redis;
   try {
+    redis = await emulator();
+    Object.assign(env, redis.env, { DEMO_REDIS_PREFIX: "next-scriptc:parity" });
+    await seed(env);
     await portsFree(ports);
     if (!process.argv.includes("--skip-build")) {
       const build = start(["build"]);
@@ -341,6 +361,7 @@ async function localParity() {
     await portsFree(ports);
     console.log(`Node dev: ${cases.length} response cases passed.`);
 
+    await seed(env);
     const production = start(["start", "-p", String(port)]);
     console.log("Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.");
     await ready(production);
@@ -367,6 +388,7 @@ async function localParity() {
     throw error;
   } finally {
     await Promise.allSettled([...running].map(stop));
+    await redis?.stop();
     await portsFree(ports);
   }
 }

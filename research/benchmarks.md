@@ -248,3 +248,129 @@ Critical review of `935d3b3` and `4ccfccb` found no reason to change the six wor
 The earlier Linux validation used a dirty build and a binary from another worktree. Preserve it unchanged and charge its 27 local validation requests and 0.002752778 provisioned vCPU-hours. The rebuilt executable contains absolute source paths and has a different hash; run a second Linux check (`vercel-final-linux-current.json`) before deploying and include both costs. Each uploaded native binary must match that second validated SHA-256 before any application traffic. This validates the actual executable rather than assuming that equal source commits imply byte-identical artifacts. Builds remain immediate-build/upload pairs, with no adapter/shim or workload changes. A local preflight build's TypeScript-helper permission failure was resolved with scriptc's bundled install hook; it created no preview or Sandbox.
 
 The prior CPU tests correctly cover per-process cumulative microseconds, positive work deltas, 100 Hz procfs quantization, token-change rejection and Node worker-thread inclusion. They do not prove Vercel instance affinity, account for other processes, or establish billed Active CPU. Those limitations remain explicit. No numbers from earlier hosted rounds will populate final-run cells.
+
+## Realistic Redis I/O suite — 2026-10-31, before workload measurements
+
+This round adds cookie HS256 authentication → Redis REST → JSON shaping (GET
+orders, latest 50 records); authentication → zod 4.6.7 strict nested validation →
+server catalog pricing → atomic bounded-list write (POST orders); and raw-body
+HMAC-SHA256/timestamp verification → zod event validation → atomic idempotency
+marker/payment-ledger update (payment webhook). Webhook replays return success
+with `duplicate:true`, without reapplying the ledger update. No read-through cache
+is selected. All three workloads, errors, losses and refusals will be reported.
+`@upstash/redis` 1.36.2 is probed first; its native startup refusal, if observed,
+selects plain REST fetch for **both** variants. No adapter/shim changes. Library
+compile/parity probes may precede this registration; workload timing may not.
+
+Same route files, dependencies, release mode, fixtures and clock in Node and
+native. Node keeps its production optimizations/JIT and zod's normal JIT path;
+native may use zod's interpreted path, which is part of the result. Public demo
+signing fixtures are not production credentials. The load generator alternates
+70% GET (reader user-42), 20% POST (user-writer), 10% unique webhooks. Distinct
+reader/writer accounts keep GET bytes fixed during mixed traffic; this is a
+workload limitation. Both variants receive identical request bodies/order/IDs,
+with the same isolated Redis namespace reset before each variant. Fresh webhook
+IDs exercise the update path, not a cheaper replay path. POST order IDs are
+client-supplied correlation IDs, not an idempotent create API. Workload error
+responses invalidate throughput and are retained. No retries except the stated
+CPU token rule. Seed/cleanup commands count toward the Redis budget.
+
+Hosted prerequisite: the orchestrator must connect the approved free Upstash
+Redis resource in iad1. If absent when hosted measurement is ready, stop at
+local SRH/Redis results; no substitute hosted database or invented numbers.
+The [current Upstash pricing](https://upstash.com/pricing/redis), checked today,
+states 500,000 free commands/month; this task uses <125,000 (25%), counting a
+conservative four commands per workload request (EVAL plus internal calls),
+seed, diagnostics and cleanup. Local SRH commands do not consume this allowance.
+Local production measurements are separately labeled Mac/loopback/emulator,
+with no inference that they describe hosted latency or cold starts.
+
+Hosted plan: three fresh Node/native preview pairs (six previews), all through
+`bench/vercel/deploy.mjs`, frozen commit and identical resources: iad1/x86_64,
+2048 MiB, 300s; Node 24, Next 16.4.3, scriptc 0.4.6. Explicit `vercel` group
+includes all app routes plus the existing memory diagnostic. Inspect deployed
+functionName mappings and the Hobby ≤12 Function count before application
+requests. Build/upload each variant immediately; preserve accepted IDs and
+partial artifacts before continuing. Alternate Node-first/native-first/Node-first
+build and request order. GET orders is the first operator request on every
+preview (database seeded from outside it), followed by memory and 10 warmups +
+40 C=1 reference requests in pairs 1–2. These are deployment-first observations,
+not certified process-cold starts; include network/TLS/platform/Redis.
+
+Pair 3: route-first requests, then per route 10 warmups + 80 measured C=1;
+C=16 32 warmups + 256 measured, on one keep-alive pool per window; no pipelining.
+Nearest-rank p50/p95/p99; throughput uses drained duration including validation.
+Retain raw samples/errors, caps, connection counts and generator CPU. Flag ≥0.8
+client CPU cores. Memory before/after load is process RSS/VmHWM, not allocated
+memory or whole-instance peak. Mixed open-loop schedule: 30 seconds, steady
+20 req/s, 60 req/s during seconds [8,10), [18,20), [28,30), exactly 840 planned
+arrivals per variant. Choose routes by repeating a fixed ten-request 7/2/1 cycle.
+Dispatch independent of completion, max 128 sockets. Measure from **scheduled**
+arrival through body drain; retain dispatch lag and service time separately.
+A 256-in-flight safety cap records rejected scheduled arrivals as errors, never
+silently delays/drops them. Errors include timeouts/status/schema/body/cache
+failures; report error rate over all planned arrivals and error-inclusive tail
+latencies. This tests one bounded profile, not maximum sustainable capacity.
+
+Process CPU uses `bench/vercel/cpu.mjs`'s `cpuDelta`: one maxSockets=1 pool,
+10 warmups, immediate diagnostic boundaries around 100 C=1 requests, three
+accepted windows, maximum five attempts for token changes only. Retain every
+attempt; unavailable medians stay unavailable. Same boundary token does not
+prove every request reached that process. Delta includes framework, diagnostic
+and background work, excludes other processes and is not billed Active CPU.
+Separate `/api/app/diagnostics/redis` does the actual 50-row LRANGE and reports
+HTTP/TLS/body-drain/envelope RTT, 20 samples after load; no timing in measured
+routes. Query logs for listener starts if available; Node's absent listener log
+is unavailable, not zero instances. Verify TLS certificate handling in a Linux
+musl artifact and hosted runtime before drawing hosted performance conclusions.
+
+Hard task limits: ≤10 previews (two held in reserve for diagnosed deployment
+failures, not replacement workload windows; two unused), ≤40k Function attempts,
+≤0.3 provisioned Sandbox vCPU-hours, <125k Redis commands. Keep an explicit cost
+ledger, charge failed/unknown runs conservatively, stop on correctness failure,
+and retain every loss. Local protocol uses the same warm/open-loop/CPU settings;
+local production-start timing is not a hosted first-response substitute. Commit
+implementation and registration before any hosted deploy; record source/client
+hashes and commands. No push, production deployment, domain/project-setting
+change or merge to main.
+
+Pre-measurement portability clarification: `/api/app/diagnostics/process` uses the
+same cumulative process.cpuUsage/RSS/token method as the existing Linux-only
+memory route, adding procfs RSS/VmHWM when readable and null on macOS. The I/O
+client uses this separate diagnostic for local and hosted boundaries. It must
+share the measured Function, as must the retained existing memory diagnostic.
+No instrumentation is added to measured handlers. Closed/open-loop rows compare
+full body hashes to independently generated expected responses (including
+created order data), so correctness does not rely only on Node/native agreeing.
+
+Pre-load amendment from correctness preflight (no route load measurements yet):
+the zod **order** schema compiles and its direct valid/invalid outputs match.
+The webhook zod schema loaded through the adapter's async module hits SC1016
+(`CONSTANT_CATCH` circular binding in zod/v4/core/util.js:871). The default build
+silently needs an unavailable libnode runtime and exits; native-only preflight
+retains the actual diagnostic. A singleton-enum spelling also fails. Webhook
+validation therefore uses the same explicit event-envelope/type/range guard in
+both variants; zod remains in POST orders. No adapter/shim change or Node fallback.
+All original diagnostics and failed parity attempts remain retained.
+
+Final pre-load validation selection: the **order** route also hits the same
+SC1016 when compiled through its real async route entry; standalone success
+was insufficient. Its exact native-only build diagnostic and the failed default
+startup are retained. The final POST route uses **Valibot 1.5.0** on both sides,
+with strict id/email/items/SKU/integer quantity constraints; it compiles through
+the real adapter entry without libnode. The webhook retains the identical
+explicit guard on both sides. The standalone zod speed/parity probe remains
+reported as such and is not claimed as successful zod route integration. These
+changes precede all closed/open-loop route measurements and hosted deployment.
+
+Valibot preflight limitation: minValue/maxValue's Date-or-number implementation
+hits deferred SC2020 (`number.toJSON`, minValue at dist/index.mjs:2443) during
+schema initialization. The shared schema uses Valibot's normal `check` predicate
+for the same inclusive 1–20 range after number/integer validation, on BOTH sides.
+Library code is unmodified; the exact initialization failure remains reported.
+
+Valibot error responses use the library's standard `flatten` projection on BOTH
+sides. Serializing its raw issue objects (which contain function references)
+hits scriptc's JSON.stringify runtime-handle refusal; the successful standalone
+flatten probe checks matching valid output and invalid-error JSON. Full route
+parity must pass before any route performance window.

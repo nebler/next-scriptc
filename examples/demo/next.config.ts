@@ -24,6 +24,7 @@ const grouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "light";
 // share native routes too: one cold start and no isolation between members.
 const vercelGrouped = process.env.NEXT_SCRIPTC_DEMO_GROUPS === "vercel";
 const vercelRoutes = [...lightRoutes, "/api/diagnostics/memory",
+  "/api/app/orders", "/api/app/webhooks/payment", "/api/app/diagnostics/redis", "/api/app/diagnostics/process",
   "/api/feed.xml", "/api/images/histogram", "/api/login", "/api/login-scrypt",
   "/api/posts/[slug]", "/api/primes", "/api/report", "/api/search", "/api/static-fixture",
 ];

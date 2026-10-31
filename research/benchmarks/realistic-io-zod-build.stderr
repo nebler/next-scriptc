@@ -1,0 +1,6 @@
+warning SC6101: 1 function that likely runs often uses untyped values, which runs slower than typed code:
+  run (zod.ts:5): `createOrder` is `any`, in a loop
+  untyped code in npm packages: zod (1108 functions)
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.

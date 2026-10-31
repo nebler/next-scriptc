@@ -1,0 +1,17 @@
+file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/bench/io/emulator.mjs:31
+    throw new Error("Local parity requires a working Docker daemon with Compose/SRH", { cause: error });
+          ^
+
+Error: Local parity requires a working Docker daemon with Compose/SRH
+    at emulator (file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/bench/io/emulator.mjs:31:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async localParity (file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:339:13)
+    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:332:3 {
+  [cause]: Error: SRH readiness timeout
+      at emulator (file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/bench/io/emulator.mjs:24:27)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async localParity (file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:339:13)
+      at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-0304a063/examples/demo/test/routes.mjs:332:3
+}
+
+Node.js v24.22.0
