@@ -25,7 +25,7 @@ const result = { date: new Date().toISOString(), platform: os.platform(), arch: 
 const destination = process.env.VECTOR_OUTPUT || path.join(dir, 'mac-results.json');
 for (let round = 0; round < 2; round++) {
   const order = round === 0 ? ['node','release','speed','go'] : ['go','speed','release','node'];
-  for (const [n,d] of [[20000,384],[100000,768]]) for (const kind of ['float','int8','int8-i32','binary']) {
+  for (const [n,d] of [[20000,384],[100000,768]]) for (const kind of ['float','int8','int8-i32','int8-imul','binary']) {
     for (const runtime of order) {
       const command = commands[runtime];
       const args = [...command, kind, String(n), String(d), '30', '15'];

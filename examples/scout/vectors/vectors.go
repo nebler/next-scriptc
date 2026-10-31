@@ -144,7 +144,7 @@ func main() {
 		switch kind {
 		case "float":
 			floatSearch(f, fq, n, d, scores, ids)
-		case "int8", "int8-i32":
+		case "int8", "int8-i32", "int8-imul":
 			int8Search(i, iq, n, d, scores, ids)
 		case "binary", "binary-plain":
 			binarySearch(b, bq, n, d/32, kind == "binary", scores, ids)

@@ -32,6 +32,14 @@ function int8i32Search(data: Int8Array, query: Int8Array, n: number, d: number, 
     insert(sum, row, scores, ids);
   }
 }
+function int8imulSearch(data: Int8Array, query: Int8Array, n: number, d: number, scores: Float64Array, ids: Int32Array): void {
+  for (let row = 0; row < n; row++) {
+    let sum = 0;
+    const base = row * d;
+    for (let j = 0; j < d; j++) sum = (sum + Math.imul(data[base + j], query[j])) | 0;
+    insert(sum, row, scores, ids);
+  }
+}
 function popcount(x: number): number {
   x = x - ((x >>> 1) & 0x55555555);
   x = (x & 0x33333333) + ((x >>> 2) & 0x33333333);
@@ -60,8 +68,8 @@ if (n < 10 || d < 32 || d % 32 !== 0 || d > 768 || iterations < 1) throw new Err
 // Allocate only the representation being measured, outside the timed region.
 const f = new Float32Array(kind === 'float' ? n * d : 0);
 const fq = new Float32Array(kind === 'float' ? d : 0);
-const i = new Int8Array(kind === 'int8' || kind === 'int8-i32' ? n * d : 0);
-const iq = new Int8Array(kind === 'int8' || kind === 'int8-i32' ? d : 0);
+const i = new Int8Array(kind === 'int8' || kind === 'int8-i32' || kind === 'int8-imul' ? n * d : 0);
+const iq = new Int8Array(kind === 'int8' || kind === 'int8-i32' || kind === 'int8-imul' ? d : 0);
 const b = new Uint32Array(kind === 'binary' ? n * (d / 32) : 0);
 const bq = new Uint32Array(kind === 'binary' ? d / 32 : 0);
 for (let j = 0; j < d; j++) {
@@ -83,6 +91,7 @@ function search(): void {
   if (kind === 'float') floatSearch(f, fq, n, d, scores, ids);
   else if (kind === 'int8') int8Search(i, iq, n, d, scores, ids);
   else if (kind === 'int8-i32') int8i32Search(i, iq, n, d, scores, ids);
+  else if (kind === 'int8-imul') int8imulSearch(i, iq, n, d, scores, ids);
   else if (kind === 'binary') binarySearch(b, bq, n, d / 32, scores, ids);
   else throw new Error('unknown kind');
 }
