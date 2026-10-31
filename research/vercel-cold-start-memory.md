@@ -247,3 +247,83 @@ Package tests **17/17**, compiled shim parity **113 HTTP comparisons**, benchmar
 This round created **8/8 allowed previews**, issued **2,137/5,000 HTTP attempts** (a conservative Function-invocation upper bound), and used **0.057650/0.25 provisioned Sandbox vCPU-hours** including the failed initial checker; platform reported active CPU is **42,064 ms**. All nine Sandboxes stopped. **All eight new previews were deleted** after evidence/verification capture; prior-round deployments were left alone. No production deployment, domain attachment, project-setting change, push or merge to main occurred. [Cost ledger and cleanup](benchmarks/vercel-round2-cost.json), [deletion record](benchmarks/vercel-round2-cleanup.json).
 
 Open questions for Vercel: for `n66xb-1793436125672-c12c177be4bb` on `dpl_Fk8Z5TZBTi4UJBMu1ozCQRG6Wxye`, did the executable launcher attempt port 3000 before it was bound, and which private runtime condition produced the 500? Does `server-started` require an already-bound HTTP port, and can the public proxy bind it before announcement? Can initialization/activation, image download/extraction, prewarm suspension/resume and first-dispatch timestamps be exposed separately? The large cold excess no longer needs a platform-only explanation; those questions concern the unresolved error and residual activation variability. No exact download/extraction attribution is possible from the public logs available here.
+
+## Round 3 — one native process, in-process Vercel IPC (2026-10-31)
+
+Starting at main `308fced`, implementation commit `171843f` removes the separate Go IPC proxy. The scriptc 0.4.6 binary is now the Function's sole `executable`, connects directly to `VERCEL_IPC_PATH`, and announces its bound HTTP listener. There is no `user-server`, second process, user-port polling or reverse-proxy HTTP hop. The [integration record](vercel-integration.md#round-3--in-process-executable-ipc-2026-10-31) documents the protocol with pinned Vercel Go/Rust source links and local harness. Earlier round-1/2 results above are unchanged.
+
+### Reproduction and controls
+
+Six previews were built/deployed with the existing `examples/demo/bench/vercel/deploy.mjs`: Node/native, Node/native, native/Node. Each build was immediately uploaded before another Next build could replace its traced files. All use source `171843f`, identical committed application/package/dependency trees, Next 16.4.3, scriptc 0.4.6, Node 24.22.0, Zig 0.16.0, Vercel CLI 65.8.0, iad1/x86_64/2048 MiB/300 s. Native still shares all **17 dynamic native routes in one Function**. Node has two deployed Functions; native has three, including the retained Node Function. The latter now has six path mappings because main also contains `/api/function-example` and its `.rsc` variant. Function-level native modules stay Node on Vercel; this change does not alter them.
+
+Measurement order was Node/native, native/Node, Node/native. No operator application request, browser visit, health probe or parity request preceded the first hello. Only control-plane inspection and local artifact-size capture occurred. Each pair ran the existing cold-only method unchanged:
+
+```sh
+node --env-file=.env.local examples/demo/bench/vercel/run.mjs \
+  --node "$NODE_URL" --native "$NATIVE_URL" --mode cold --fresh \
+  --output research/benchmarks/vercel-round3-pair-1
+# Pair 2 also passes --native-first. Pair 3 again measures Node first.
+```
+
+Hello uses a fresh HTTPS pool, followed by memory, verify/revenue route-first requests, then 20 warmup + 40 measured C=1 hello requests. First response includes DNS/TCP/TLS, routing, activation/initialization and full body drain. Warm requests use an existing keep-alive pool. **Fresh is an untouched deployment, not certified process-cold**; platform prewarming/probes and shared artifact caches remain uncontrolled. Source-tree hashes, toolchain, deployment/measurement order and native binary SHA-256 are in [provenance](benchmarks/vercel-round3-provenance.json). Per-upload manifests and sizes preserve each exact deployment. Dirty flags reflect research evidence/documents; implementation/application sources had no uncommitted changes.
+
+### Before/after deployment-first and C=1 latency
+
+Milliseconds, shown to three decimals. Before values are the prior round-2 fixed lazy-route implementation, with the Go proxy; after values are direct IPC. These are distinct deployment samples, not repeated measurements of the same cold process.
+
+| Pair | Before Node first / native first | After Node first / native first | After Node warm p50 / native warm p50 | Measurement order |
+| --- | ---: | ---: | ---: | --- |
+| 1 | 224.314 / 158.696 | 291.472 / 133.069 | 25.634 / 21.961 | Node first |
+| 2 | 240.753 / 163.397 | 224.609 / 136.934 | 25.419 / 22.497 | Native first |
+| 3 | 217.536 / 115.976 | 224.302 / 113.689 | 24.352 / 21.581 | Node first |
+| Median | **224.314 / 158.696** | **224.609 / 133.069** | **25.419 / 21.961** | Three samples per variant |
+
+Native deployment-first median falls **25.627 ms (16.1%)**, range now **113.689–136.934 ms**, versus **115.976–163.397 ms** before. Node's median is nearly unchanged (+0.295 ms), but its new first pair is 291.472 ms; the new range is 224.302–291.472 ms. Native is faster in all three new pairs. Native first-minus-warm p50 median is **111.108 ms**, versus **134.687 ms** before; Node is **199.950 ms**, versus **195.720 ms** before. New warm C=1 native median is **21.961 ms**, versus **22.926 ms** before; Node is **25.419 ms**, versus **23.605 ms** before. There are zero failed first, route-first or warm requests in these runs.
+
+This small before/after sample supports a lower observed native median, not a precise effect size, confidence interval or attribution of each millisecond to socket/process/polling/download changes. The proxy's 50 ms polling cadence is removed, but the measured 25.6 ms change is end-to-end and cannot be assigned solely to it. All three native ELFs have identical SHA-256 and identical uploaded Function ZIP size. Each Node bundle was rebuilt just before upload, avoiding the round-2 stale-live-trace limitation; generated build IDs/metadata and ZIP bytes can still differ (App Route ZIP 724,516 / 724,516 / 724,513 bytes). Neither byte-identical Node packages nor independent artifact-cache misses are claimed.
+
+Raw paired results: [pair 1](benchmarks/vercel-round3-pair-1.json), [pair 2](benchmarks/vercel-round3-pair-2.json), [pair 3](benchmarks/vercel-round3-pair-3.json). Their Markdown companions retain the existing harness report.
+
+### Function size
+
+Decimal bytes, using the same definitions as round 2: uncompressed payload is the local union of physical and traced deployed files excluding `.vc-config.json`; compressed bytes are the actual uploaded Function ZIP reported by `vercel inspect`, not the helper's separate deflate estimate.
+
+| Artifact | Before, separate proxy | After, direct IPC | Change |
+| --- | ---: | ---: | ---: |
+| scriptc binary | 9,897,600 (`user-server`) | 9,925,216 (`executable`) | +27,616 |
+| Go proxy | 7,241,888 | 0 | −7,241,888 |
+| Shared native Function payload | **17,139,488** | **9,925,216** | **−7,214,272 (42.1%)** |
+| Uploaded native Function ZIP | **7,526,761** | **4,332,912** | **−3,193,849 (42.4%)** |
+
+The Function contains only `.vc-config.json` and one stripped static Linux x86-64 ELF; there is no `user-server`. Native executable SHA-256 is `7bd62d1fa0e892da85fc67bdff28c5f51c5e2792cc52363f7417ff60ac7da750`. Pair-1 Node App Routes are 2,021,088 payload / 724,516 uploaded bytes; Node pages 1,938,291 / 652,882. Retained Node Functions on the native preview are 1,938,169 / 652,741 (pages) and 1,743,469 / 585,687 (App Routes). Full mappings, hashes and the independent ZIP estimates: [native sizes](benchmarks/vercel-round3-pair-1-native-sizes.json), [Node sizes](benchmarks/vercel-round3-pair-1-node-sizes.json). Size reduction does not establish how much time the private platform spends downloading/extracting images.
+
+### Warm C=16, scale-out and startup errors
+
+Pair 2 was reused only after its cold measurement. The existing `startup-scaleout.mjs` worker ran unchanged (a temporary copy changes only its hardcoded output destination from round 2 to round 3): hello, native then Node, one reference response, 32 warmup + 700 measured requests per variant at C=16, three-second measured ceiling. **1,466 HTTP attempts, zero failures**. Both measured windows are count-limited, approximately 1.17 / 1.29 seconds, and all 700 measured requests per variant reuse sockets with zero new client connections. The generator uses 0.233 native / 0.147 Node CPU cores; neither reports saturation.
+
+| Metric, ms | Round 2 native / Node | Round 3 native / Node |
+| --- | ---: | ---: |
+| C=16 warmup p99 | 454 / 817 | **385 / 725** |
+| C=16 measured p50 | 23.4 / 25.1 | **22.6 / 25.3** |
+| C=16 measured p99 | 78.6 / 80.2 | **83.6 / 92.1** |
+
+Native startup/scale-out warmup tails are lower and measured p50 is comparable. The measured native p99 is **5.0 ms higher**, with Node also higher by 11.9 ms; do not describe every percentile as improved. This short observation shows no startup failures or qualitative scale-out regression, but cannot prove sustained capacity or statistical non-regression. [Raw scale-out samples and every request ID](benchmarks/vercel-round3-scaleout.json).
+
+[Native runtime logs](benchmarks/vercel-round3-pair-2-native-runtime.jsonl) show **14 additional listener records at 09:56:39.399–.427Z**, beyond the initial cold-run listener, confirming scale-out during this test. Node's [runtime log query](benchmarks/vercel-round3-pair-2-node-runtime.jsonl) returns no records; lack of startup log lines is not evidence of no Node scale-out. CDN request-error queries for **all six new previews return zero HTTP 5xx records**, with no excluded intervals or pagination. The per-preview `vercel-round3-pair-*-request-errors.jsonl` files preserve those query summaries.
+
+The scriptc listener is bound before `server-started`, independently tested by immediately connecting at IPC readiness. This removes the old Go proxy's readiness ordering race. It **does not identify the cause of the historical startup 500** from round 1/2, which remains unattributed. No exact private launcher failure mapping is inferred from the new zero-error samples.
+
+### Parity, local validation, budget and cleanup
+
+After all first-response measurements, final pair 3 passed **85/85 hosted route cases** and **25/25 smoke checks**: rewrites, `.rsc` and RSC headers, public URL/Host/query behavior, static/Node surfaces, report worker results and the full route suite. [Hosted parity](benchmarks/vercel-round3-hosted-parity.txt), [smoke output](benchmarks/vercel-round3-hosted-smoke.txt), [smoke request counts and URL observations](benchmarks/vercel-round3-hosted-smoke.json). Those checks issued 101 requests per deployment; they did not contaminate the earlier fresh samples.
+
+All requested local suites pass on Node 24: package **19/19**, shim **113 HTTP comparisons**, the new compiled fake-platform IPC test for both listener forms, demo E2E, **85/85 local route cases**, and function E2E including 200k-row results, Server Actions and in-flight crash recovery. Individual command summaries are saved as `benchmarks/vercel-round3-local-{package,shim,e2e,routes,functions}.txt`. `git diff --check` passes. The IPC harness also covers malformed IDs, exact uint64 maximum, concurrent invocations, keep-alive completion, streaming/errors/aborts, ping, socket loss and self-hosted isolation.
+
+This round created **6/10 allowed previews**, issued **2,052/15,000 HTTP attempts** (a conservative upper bound on Function invocations), and used **0.018927/0.25 provisioned Sandbox vCPU-hours**; Sandbox-reported active CPU is **10,386 ms**. Breakdown: three cold pairs × 128 requests, 170 parity, 32 smoke, 1,466 scale-out. All four Sandboxes stopped. [Budget ledger](benchmarks/vercel-round3-cost.json). The four measurement-only previews were deleted; final verified pair 3 is retained for orchestrator review:
+
+- Native: https://next-scriptc-duyujjeez-noahs-projects-8a075d15.vercel.app (`dpl_2EA6TVve7TMYLvnn3XprhfTDhwab`).
+- Node: https://next-scriptc-9nfz6chx8-noahs-projects-8a075d15.vercel.app (`dpl_oAnqyMDgqui3k4phu3NupBS6wcgE`).
+
+[Cleanup record](benchmarks/vercel-round3-cleanup.json). No production deploy, domain attachment, project-setting change, main merge or push occurred. Secrets and local project links were copied only into ignored files; no secret values are in the research artifacts.
+
+Remaining questions are the stability of Vercel's public-source executable IPC ABI, private activation/image timing, and the old unexplained 500. There is no scriptc 0.4.6 socket blocker. Existing shim limitations (no response backpressure, no handler AbortSignal propagation or `waitUntil`) remain; the transport cancellation and invocation-end paths are tested without claiming those APIs.

@@ -1,5 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { NextRequest, NextResponse } from "./next-server.ts";
+import { createVercelServer, vercelRequestHeaders } from "./vercel-ipc.ts";
 
 // scriptc documents argv[0] as "scriptc"; Node uses its executable path.
 const runtime = process.argv[0] === "scriptc" ? "native" : "1";
@@ -57,15 +58,16 @@ function compilePattern(pattern: string) {
   };
 }
 
-async function toRequest(incoming: IncomingMessage, url: string, host: string, intercepted: boolean): Promise<NextRequest> {
+async function toRequest(incoming: IncomingMessage, url: string, host: string, intercepted: boolean, ipc: boolean): Promise<NextRequest> {
   // Keep an owned snapshot for NextRequest's lazy Headers, retaining repeated
   // fields. URL/params-only handlers need not construct Web headers at all.
   const headers: [string, string][] = [];
-  for (let i = 0; i < incoming.rawHeaders.length; i += 2) {
-    const name = incoming.rawHeaders[i];
+  const rawHeaders = ipc ? vercelRequestHeaders(incoming) : incoming.rawHeaders;
+  for (let i = 0; i < rawHeaders.length; i += 2) {
+    const name = rawHeaders[i];
     const lower = name.toLowerCase();
     if (lower === "host" || (lower === "next-url" && !intercepted)) continue;
-    headers.push([name, incoming.rawHeaders[i + 1]]);
+    headers.push([name, rawHeaders[i + 1]]);
   }
   // Next's changeOrigin proxy replaces Host but preserves the public host here.
   headers.push(["host", host]);
@@ -254,7 +256,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
       if (params === null) response = new Response(null, { status: 404 });
       else if (method === "OPTIONS" && !handler) response = new Response(null, { status: 204, headers: { Allow: allow } });
       else if (!handler) response = new Response(null, { status: 405, headers: { Allow: allow } });
-      else response = await handler(await toRequest(incoming, url.href, host, intercepted), { params: Promise.resolve(params) });
+      else response = await handler(await toRequest(incoming, url.href, host, intercepted, Boolean(options.vercel && process.env.VERCEL_IPC_PATH)), { params: Promise.resolve(params) });
       incoming.resume();
       await writeResponse(response, outgoing, method === "HEAD");
     } catch (error) {
@@ -291,7 +293,7 @@ function createRoute(module: ModuleLoader, options: RouteOptions) {
 // outside createRoute so the default one-route listener has no extra matching.
 export function serveMany(routes: { module: ModuleLoader; pattern: string }[], options: ListenerOptions & { interceptionPatterns?: string[]; vercel?: boolean } = {}): void {
   const handlers = routes.map((route) => createRoute(route.module, { pattern: route.pattern, interceptionPatterns: options.interceptionPatterns, vercel: options.vercel }));
-  const server = createServer(async (incoming, outgoing) => {
+  const server = httpServer(async (incoming, outgoing) => {
     try {
       const pathname = routePath(incoming, options.vercel);
       for (const route of handlers) {
@@ -307,7 +309,7 @@ export function serveMany(routes: { module: ModuleLoader; pattern: string }[], o
     }
     incoming.resume();
     await writeResponse(new Response(null, { status: 404 }), outgoing, false);
-  });
+  }, options.vercel);
   // Serverless groups must not initialize unrelated routes on startup. A module
   // can build a large index synchronously and block every route in this process.
   listen(server, options, () => { if (!options.vercel) for (const route of handlers) route.start(); });
@@ -315,12 +317,17 @@ export function serveMany(routes: { module: ModuleLoader; pattern: string }[], o
 
 export function serve(module: ModuleLoader, options: RouteOptions & ListenerOptions): void {
   const route = createRoute(module, options);
-  listen(createServer(route.handle), options, () => { if (!options.vercel) route.start(); });
+  listen(httpServer(route.handle, options.vercel), options, () => { if (!options.vercel) route.start(); });
 }
 
-function listen(server: ReturnType<typeof createServer>, options: ListenerOptions, start: () => void): void {
-  const port = options.port ?? Number(process.env.PORT);
-  if ((options.port === undefined && !process.env.PORT?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
+function httpServer(handle: (incoming: IncomingMessage, outgoing: ServerResponse) => Promise<void>, vercel: boolean | undefined) {
+  return vercel && process.env.VERCEL_IPC_PATH ? createVercelServer(handle) : createServer(handle);
+}
+
+function listen(server: ReturnType<typeof createServer>, options: ListenerOptions & { vercel?: boolean }, start: () => void): void {
+  const defaultPort = options.vercel && process.env.VERCEL_IPC_PATH ? "3000" : process.env.PORT;
+  const port = options.port ?? Number(defaultPort);
+  if ((options.port === undefined && !defaultPort?.trim()) || !Number.isInteger(port) || port < 0 || port > 65535) {
     throw new Error("next-scriptc: PORT must be an integer between 0 and 65535 (or supply options.port)");
   }
 
