@@ -1,0 +1,43 @@
+{
+  "sourceCommit": "171843fd7b0d1b7a7ec41c3c158106182d909179",
+  "baseCommit": "308fced6491f3dc57d3dbf44a8b2eec311e344d3",
+  "branch": "t3/vercel-in-process-ipc",
+  "toolchain": {
+    "node": "v24.22.0",
+    "scriptc": "0.4.6",
+    "next": "16.4.3",
+    "zig": "0.16.0",
+    "vercelCli": "65.8.0"
+  },
+  "sourceTrees": {
+    "examples/demo": "90e6baf840c4a821f23f97274e9878536434f464",
+    "packages/next-scriptc": "eb0723371de3e22cc291f0dcd4aeaa44bdb14e0c",
+    "pnpm-lock.yaml": "cea0fb9b4a63b731d4a8d01c3f9b49d4e3b25765"
+  },
+  "buildAndUpload": "Each preview is rebuilt and immediately uploaded via examples/demo/bench/vercel/deploy.mjs; no saved filePathMap tree is reused after another build.",
+  "deploymentOrder": [
+    "node",
+    "native",
+    "node",
+    "native",
+    "native",
+    "node"
+  ],
+  "measurementOrder": [
+    [
+      "node",
+      "native"
+    ],
+    [
+      "native",
+      "node"
+    ],
+    [
+      "node",
+      "native"
+    ]
+  ],
+  "freshDefinition": "No operator HTTP/application request before the existing cold-only harness. Control-plane inspection and local file size capture only. Platform probes/prewarming cannot be excluded.",
+  "nativeExecutableSha256": "7bd62d1fa0e892da85fc67bdff28c5f51c5e2792cc52363f7417ff60ac7da750",
+  "selfHostedValidation": "All requested local suites passed; raw summaries are vercel-round3-local-*.txt."
+}
