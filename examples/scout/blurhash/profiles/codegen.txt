@@ -1,0 +1,373 @@
+=== Unoptimized LLVM: fast-copy integer and bounds guards: /tmp/scout-blurhash.ll:3266-3315 ===
+bytes.version.fast68:
+  call void @llvm.experimental.noalias.scope.decl(metadata !{!{!"encode.2.0", !{!"scriptc typed-array views"}}})
+  call void @llvm.experimental.noalias.scope.decl(metadata !{!{!"encode.2.1", !{!"scriptc typed-array views"}}})
+  call void @llvm.experimental.noalias.scope.decl(metadata !{!{!"encode.2.2", !{!"scriptc typed-array views"}}})
+  call void @llvm.experimental.noalias.scope.decl(metadata !{!{!"encode.2.3", !{!"scriptc typed-array views"}}})
+  call void @llvm.experimental.noalias.scope.decl(metadata !{!{!"encode.2.4", !{!"scriptc typed-array views"}}})
+  store double 0x0000000000000000, ptr %sc_l_y_1
+  br label %loop.c277
+loop.c277:
+  %t1390 = load double, ptr %sc_l_y_1
+  %t1391 = load double, ptr %sc_l_height_0
+  %t1393 = fptosi double %t1390 to i64
+  %t1392 = fcmp olt double %t1390, %t1391
+  br i1 %t1392, label %loop.b278, label %loop.e276
+loop.b278:
+  store double 0x0000000000000000, ptr %sc_l_x_1
+  br label %loop.c281
+loop.c281:
+  %t1394 = load double, ptr %sc_l_x_1
+  %t1395 = load double, ptr %sc_l_width_0
+  %t1397 = fptosi double %t1394 to i64
+  %t1396 = fcmp olt double %t1394, %t1395
+  br i1 %t1396, label %loop.b282, label %loop.e280
+loop.b282:
+  %t1398 = load double, ptr %sc_l_y_1
+  %t1399 = load double, ptr %sc_l_width_0
+  %t1401 = fptosi double %t1398 to i64
+  %t1400 = fmul double %t1398, %t1399
+  %t1402 = load double, ptr %sc_l_x_1
+  %t1404 = fptosi double %t1402 to i64
+  %t1403 = fadd double %t1400, %t1402
+  %t1405 = fmul double %t1403, 0x4010000000000000
+  store double %t1405, ptr %sc_l_p_0
+  %t1406 = load ptr, ptr @sc_g_e_linear, !tbaa !10
+  %t1407 = load ptr, ptr %sc_l_rgba_0
+  %t1408 = load double, ptr %sc_l_p_0
+  %t1409 = getelementptr inbounds %ScrBytes, ptr %t1407, i64 0, i32 3
+  %t1410 = load ptr, ptr %t1409, !tbaa !6, !invariant.load !{}
+  %t1411 = getelementptr inbounds %ScrBytes, ptr %t1407, i64 0, i32 1
+  %t1412 = load i64, ptr %t1411, !tbaa !6, !invariant.load !{}
+  %t1413 = fptosi double %t1408 to i64
+  %t1414 = freeze i64 %t1413
+  %t1415 = sitofp i64 %t1414 to double
+  %t1416 = fcmp oeq double %t1415, %t1408
+  %t1417 = icmp ult i64 %t1414, %t1412
+  %t1418 = and i1 %t1416, %t1417
+  br i1 %t1418, label %bytes.index.valid287, label %bytes.index.invalid286
+bytes.index.invalid286:
+  br label %bytes.read.invalid284
+bytes.index.valid287:
+
+=== Unoptimized LLVM: basis-table validity guard: /tmp/scout-blurhash.ll:3532-3590 ===
+  %t1549 = trunc i64 %t1547 to i32
+  %t1548 = sitofp i32 %t1549 to double
+  %t1550 = load double, ptr %sc_l_width_0
+  %t1551 = fmul double %t1548, %t1550
+  %t1552 = load double, ptr %sc_l_x_1
+  %t1554 = fptosi double %t1552 to i64
+  %t1553 = fadd double %t1551, %t1552
+  %t1555 = getelementptr inbounds %ScrBytes, ptr %t1546, i64 0, i32 3
+  %t1556 = load ptr, ptr %t1555, !tbaa !6, !invariant.load !{}
+  %t1557 = getelementptr inbounds %ScrBytes, ptr %t1546, i64 0, i32 1
+  %t1558 = load i64, ptr %t1557, !tbaa !6, !invariant.load !{}
+  %t1559 = fptosi double %t1553 to i64
+  %t1560 = freeze i64 %t1559
+  %t1561 = sitofp i64 %t1560 to double
+  %t1562 = fcmp oeq double %t1561, %t1553
+  %t1563 = icmp ult i64 %t1560, %t1558
+  %t1564 = and i1 %t1562, %t1563
+  br i1 %t1564, label %bytes.index.valid334, label %bytes.index.invalid333
+bytes.index.invalid333:
+  br label %bytes.read.invalid331
+bytes.index.valid334:
+  %t1565 = getelementptr inbounds double, ptr %t1556, i64 %t1560
+  %t1566 = load double, ptr %t1565, align 1, !tbaa !8, !alias.scope !{!{!"encode.2.2", !{!"scriptc typed-array views"}}}, !noalias !{!{!"encode.2.0", !{!"scriptc typed-array views"}}, !{!"encode.2.1", !{!"scriptc typed-array views"}}, !{!"encode.2.3", !{!"scriptc typed-array views"}}, !{!"encode.2.4", !{!"scriptc typed-array views"}}}
+  br label %bytes.read.ok335
+bytes.read.ok335:
+  br label %bytes.read.done332
+bytes.read.invalid331:
+  br label %bytes.read.done332
+bytes.read.done332:
+  %t1567 = phi double [ %t1566, %bytes.read.ok335 ], [ 0x7FF8000000000000, %bytes.read.invalid331 ]
+  %t1568 = load ptr, ptr %sc_l_ys_0
+  %t1569 = load i64, ptr %s1519
+  %t1571 = trunc i64 %t1569 to i32
+  %t1570 = sitofp i32 %t1571 to double
+  %t1572 = load double, ptr %sc_l_height_0
+  %t1573 = fmul double %t1570, %t1572
+  %t1574 = load double, ptr %sc_l_y_1
+  %t1576 = fptosi double %t1574 to i64
+  %t1575 = fadd double %t1573, %t1574
+  %t1577 = getelementptr inbounds %ScrBytes, ptr %t1568, i64 0, i32 3
+  %t1578 = load ptr, ptr %t1577, !tbaa !6, !invariant.load !{}
+  %t1579 = getelementptr inbounds %ScrBytes, ptr %t1568, i64 0, i32 1
+  %t1580 = load i64, ptr %t1579, !tbaa !6, !invariant.load !{}
+  %t1581 = fptosi double %t1575 to i64
+  %t1582 = freeze i64 %t1581
+  %t1583 = sitofp i64 %t1582 to double
+  %t1584 = fcmp oeq double %t1583, %t1575
+  %t1585 = icmp ult i64 %t1582, %t1580
+  %t1586 = and i1 %t1584, %t1585
+  br i1 %t1586, label %bytes.index.valid339, label %bytes.index.invalid338
+bytes.index.invalid338:
+  br label %bytes.read.invalid336
+bytes.index.valid339:
+  %t1587 = getelementptr inbounds double, ptr %t1578, i64 %t1582
+  %t1588 = load double, ptr %t1587, align 1, !tbaa !8, !alias.scope !{!{!"encode.2.3", !{!"scriptc typed-array views"}}}, !noalias !{!{!"encode.2.0", !{!"scriptc typed-array views"}}, !{!"encode.2.1", !{!"scriptc typed-array views"}}, !{!"encode.2.2", !{!"scriptc typed-array views"}}, !{!"encode.2.4", !{!"scriptc typed-array views"}}}
+  br label %bytes.read.ok340
+bytes.read.ok340:
+  br label %bytes.read.done337
+bytes.read.invalid336:
+
+=== Optimized AArch64: per-pixel bounds checks: /tmp/scout-blurhash.s:738-770 ===
+	b.pl	LBB4_57
+LBB4_61:
+	fadd	d19, d17, d18
+	fcvtzs	x17, d19, #2
+	fmul	d20, d19, d16
+	scvtf	d22, x17
+	cmp	x17, x11
+	fccmp	d20, d22, #0, lo
+	b.ne	LBB4_66
+	ldrb	w0, [x12, x17]
+	cmp	x9, x0
+	b.ls	LBB4_66
+	ldr	d19, [x10, x0, lsl #3]
+	fcmp	d20, d22
+	b.eq	LBB4_67
+LBB4_64:
+	fadd	d21, d20, d2
+	fcvtzs	x0, d21
+	scvtf	d23, x0
+	cmp	x0, x11
+	fccmp	d21, d23, #0, lo
+	b.eq	LBB4_68
+	mov	x17, #9221120237041090560
+	fmov	d21, x17
+	b	LBB4_70
+LBB4_66:
+	mov	x0, #9221120237041090560
+	fmov	d19, x0
+	fcmp	d20, d22
+	b.ne	LBB4_64
+LBB4_67:
+	add	x0, x17, #1
+	cmp	x0, x11
+
+=== Optimized AArch64: four x-components unrolled; two-channel SLP, separate blue: /tmp/scout-blurhash.s:840-901 ===
+	cset	w7, lo
+	b	LBB4_80
+LBB4_78:
+	ldr	d22, [x16, x23, lsl #3]
+LBB4_79:
+	fmul	d21, d21, d22
+	ldur	q23, [x22, #24]
+	ldr	d24, [x22, #40]
+	add	x17, x17, #1
+	cmp	x17, #3
+	fmul.2d	v22, v19, v21[0]
+	fmul	d21, d20, d21
+	fmul.2d	v22, v22, v1[0]
+	fmul	d21, d1, d21
+	fadd.2d	v22, v23, v22
+	fadd	d21, d21, d24
+	stur	q22, [x22, #24]
+	str	d21, [x22, #40]
+	add	x22, x22, #96
+	b.eq	LBB4_60
+LBB4_80:
+	ucvtf	d21, w17
+	fmul	d21, d8, d21
+	fadd	d21, d4, d21
+	fcvtzs	x23, d21
+	scvtf	d22, x23
+	fcmp	d21, d22
+	ccmp	x23, x15, #2, eq
+	cset	w24, lo
+	cmp	x17, #0
+	fcsel	d21, d3, d1, eq
+	cbz	w3, LBB4_83
+	ldr	d22, [x14, x0, lsl #3]
+	cbnz	w24, LBB4_84
+LBB4_82:
+	mov	x21, #9221120237041090560
+	fmov	d23, x21
+	b	LBB4_85
+LBB4_83:
+	mov	x21, #9221120237041090560
+	fmov	d22, x21
+	cbz	w24, LBB4_82
+LBB4_84:
+	ldr	d23, [x16, x23, lsl #3]
+LBB4_85:
+	fmul	d22, d22, d23
+	ldur	d24, [x22, #-32]
+	fmul.2d	v23, v19, v22[0]
+	fmul	d22, d20, d22
+	fmul.2d	v23, v23, v21[0]
+	fmul	d21, d21, d22
+	ldur	q22, [x22, #-48]
+	fadd.2d	v22, v22, v23
+	fadd	d21, d21, d24
+	stur	q22, [x22, #-48]
+	stur	d21, [x22, #-32]
+	cbz	w5, LBB4_88
+	ldr	d21, [x14, x1, lsl #3]
+	cbnz	w24, LBB4_89
+LBB4_87:
+	mov	x21, #9221120237041090560
+	fmov	d22, x21
+
+=== Optimized x86-64 baseline: two-channel SLP: /tmp/scout-blurhash-linux.s:1035-1060 ===
+	andb	%sil, %cl
+	movq	104(%rsp), %rdi
+	xorl	%esi, %esi
+	jmp	.LBB4_89
+	.p2align	4
+.LBB4_88:
+	mulsd	%xmm3, %xmm0
+	movupd	-16(%rdi), %xmm3
+	movapd	%xmm9, %xmm14
+	mulsd	%xmm0, %xmm14
+	unpcklpd	%xmm0, %xmm0
+	mulpd	%xmm13, %xmm0
+	mulpd	%xmm7, %xmm0
+	addpd	%xmm3, %xmm0
+	movupd	%xmm0, -16(%rdi)
+	mulsd	%xmm4, %xmm14
+	addsd	(%rdi), %xmm14
+	movsd	%xmm14, (%rdi)
+	incq	%rsi
+	addq	$96, %rdi
+	cmpq	$3, %rsi
+	je	.LBB4_66
+.LBB4_89:
+	xorl	%r10d, %r10d
+	testq	%rsi, %rsi
+	sete	%r12b
+
+=== V8 final non-OSR TurboFan optimization_id=8: guards and scalar accumulation ===
+--- Optimized code ---
+optimization_id = 8
+source_position = 1044
+kind = TURBOFAN_JS
+name = encode
+compiler = turbofan
+address = 0x2171cfe9cd29
+
+Instructions (size = 11488)
+0x12ce532dc   47c  f240011f       tst x8, #0x1
+0x12ce532e0   480  54012340       b.eq #+0x2468 (addr 0x12ce55748)
+0x12ce532e4   484  f85ff10f       ldur x15, [x8, #-1]
+0x12ce532e8   488  58011d93       ldr x19, pc+9136 (addr 0x000000012ce55698)    ;; object: 0x3ab9977c5f91 <Map[104](UINT8ELEMENTS)>
+0x12ce532ec   48c  eb1301ff       cmp x15, x19
+0x12ce532f0   490  540122e1       b.ne #+0x245c (addr 0x12ce5574c)
+0x12ce532f4   494  f843f10f       ldur x15, [x8, #63]
+0x12ce532f8   498  f844f113       ldur x19, [x8, #79]
+0x12ce532fc   49c  f8447114       ldur x20, [x8, #71]
+0x12ce53300   4a0  f841f115       ldur x21, [x8, #31]
+0x12ce53304   4a4  b84472b6       ldur w22, [x21, #71]
+0x12ce53308   4a8  721e02df       tst w22, #0x4
+0x12ce5330c   4ac  54012221       b.ne #+0x2444 (addr 0x12ce55750)
+0x12ce53310   4b0  93407dd6       sxtw x22, w14
+0x12ce53314   4b4  eb0f02df       cmp x22, x15
+0x12ce53318   4b8  540121e2       b.hs #+0x243c (addr 0x12ce55754)
+0x12ce5331c   4bc  8b140277       add x23, x19, x20
+0x12ce53320   4c0  38766af6       ldrb w22, [x23, x22]
+0x12ce53324   4c4  58011bf7       ldr x23, pc+9084 (addr 0x000000012ce556a0)    ;; object: 0x1546d6154bb9 <Float64Array map = 0x3ab9977c28e1>
+0x12ce53328   4c8  f843f2f8       ldur x24, [x23, #63]
+0x12ce5332c   4cc  f844f2f9       ldur x25, [x23, #79]
+0x12ce53330   4d0  f84472fc       ldur x28, [x23, #71]
+0x12ce53334   4d4  f841f2f7       ldur x23, [x23, #31]
+0x12ce53338   4d8  b84472e0       ldur w0, [x23, #71]
+0x12ce5333c   4dc  721e001f       tst w0, #0x4
+0x12ce53340   4e0  540120c1       b.ne #+0x2418 (addr 0x12ce55758)
+0x12ce53344   4e4  eb1802df       cmp x22, x24
+0x12ce53348   4e8  540120a2       b.hs #+0x2414 (addr 0x12ce5575c)
+0x12ce5334c   4ec  8b1c0320       add x0, x25, x28
+0x12ce53350   4f0  fc767804       ldr d4, [x0, x22, lsl #3]
+0x12ce53354   4f4  310005d6       adds w22, w14, #0x1 (1)
+0x12ce53358   4f8  54012046       b.vs #+0x2408 (addr 0x12ce55760)
+0x12ce5335c   4fc  93407ed6       sxtw x22, w22
+0x12ce53360   500  eb0f02df       cmp x22, x15
+0x12ce53364   504  54012002       b.hs #+0x2400 (addr 0x12ce55764)
+0x12ce534dc   67c  0b03047b       add w27, w3, w3, lsl #1
+0x12ce534e0   680  721e009f       tst w4, #0x4
+0x12ce534e4   684  54011681       b.ne #+0x22d0 (addr 0x12ce557b4)
+0x12ce534e8   688  eb13037f       cmp cp, x19
+0x12ce534ec   68c  54011662       b.hs #+0x22cc (addr 0x12ce557b8)
+0x12ce534f0   690  8b010304       add x4, x24, x1
+0x12ce534f4   694  fc7b788b       ldr d11, [x4, x27, lsl #3]
+0x12ce534f8   698  1e6a0929       fmul d9, d9, d10
+0x12ce534fc   69c  1e69088a       fmul d10, d4, d9
+0x12ce53500   6a0  1e67094a       fmul d10, d10, d7
+0x12ce53504   6a4  1e6a296a       fadd d10, d11, d10
+0x12ce53508   6a8  8b010304       add x4, x24, x1
+0x12ce5350c   6ac  fc3b788a       str d10, [x4, x27, lsl #3]
+0x12ce53510   6b0  11000764       add w4, w27, #0x1 (1)
+0x12ce53514   6b4  eb13009f       cmp x4, x19
+0x12ce53518   6b8  54011522       b.hs #+0x22a4 (addr 0x12ce557bc)
+0x12ce5351c   6bc  8b010308       add x8, x24, x1
+0x12ce53520   6c0  fc64790a       ldr d10, [x8, x4, lsl #3]
+0x12ce53524   6c4  1e6908ab       fmul d11, d5, d9
+0x12ce53528   6c8  1e67096b       fmul d11, d11, d7
+0x12ce5352c   6cc  1e6b294a       fadd d10, d10, d11
+0x12ce53530   6d0  8b010308       add x8, x24, x1
+0x12ce53534   6d4  fc24790a       str d10, [x8, x4, lsl #3]
+0x12ce53538   6d8  11000b68       add w8, w27, #0x2 (2)
+0x12ce5353c   6dc  eb13011f       cmp x8, x19
+0x12ce53540   6e0  54011402       b.hs #+0x2280 (addr 0x12ce557c0)
+0x12ce53544   6e4  8b010304       add x4, x24, x1
+0x12ce53548   6e8  fc68788a       ldr d10, [x4, x8, lsl #3]
+0x12ce5354c   6ec  1e6908c9       fmul d9, d6, d9
+0x12ce53550   6f0  1e670927       fmul d7, d9, d7
+0x12ce53554   6f4  1e672947       fadd d7, d10, d7
+0x12ce53558   6f8  8b010304       add x4, x24, x1
+0x12ce5355c   6fc  fc287887       str d7, [x4, x8, lsl #3]
+0x12ce53560   700  d2800028       movz x8, #0x1
+0x12ce53564   704  14000002       b #+0x8 (addr 0x12ce5356c)
+0x12ce53568   708  aa0403e8       mov x8, x4
+0x12ce5356c   70c  7100111f       cmp w8, #0x4 (4)
+0x12ce53570   710  54000902       b.hs #+0x120 (addr 0x12ce53690)
+0x12ce53574   714  350001c8       cbnz w8, #+0x38 (addr 0x12ce535ac)
+0x12ce53578   718  350001ae       cbnz w14, #+0x34 (addr 0x12ce535ac)
+0x12ce5357c   71c  9b267ce4       smull x4, w7, w6
+0x12ce53580   720  eb24c09f       cmp x4, w4, sxtw
+0x12ce53584   724  9a9f07fb       cset cp, ne
+0x12ce53588   728  6a1b037f       tst w27, w27
+0x12ce5358c   72c  540111c1       b.ne #+0x2238 (addr 0x12ce557c4)
+0x12ce53590   730  35000084       cbnz w4, #+0x10 (addr 0x12ce535a0)
+0x12ce53594   734  2a0600fb       orr w27, w7, w6
+0x12ce53598   738  7100037f       cmp w27, #0x0 (0)
+0x12ce5359c   73c  5401116b       b.lt #+0x222c (addr 0x12ce557c8)
+0x12ce535a0   740  1e620087       scvtf d7, w4
+0x12ce535a4   744  1e671847       fdiv d7, d2, d7
+0x12ce535a8   748  1400000c       b #+0x30 (addr 0x12ce535d8)
+
+=== Go optimized AArch64: scalar reduction excerpt ===
+  main.go:97		0x10011f4a8		1400001b		JMP 27(PC)
+  main.go:102		0x10011f4ac		fc6b7907		FMOVD (R8)(R11<<3), F7
+  main.go:102		0x10011f4b0		1e6608e6		FMULD F6, F7, F6
+  main.go:103		0x10011f4b4		8b0a098e		ADD R10<<2, R12, R14
+  main.go:103		0x10011f4b8		8b0e05cf		ADD R14<<1, R14, R15
+  main.go:104		0x10011f4bc		d37df1ce		LSL $3, R14, R14
+  main.go:104		0x10011f4c0		8b0e05ce		ADD R14<<1, R14, R14
+  main.go:104		0x10011f4c4		910423f0		ADD $264, RSP, R16
+  main.go:104		0x10011f4c8		fc6e6a07		FMOVD (R16)(R14), F7
+  main.go:104		0x10011f4cc		1e6208c8		FMULD F2, F6, F8
+  main.go:104		0x10011f4d0		1e680808		FMULD F8, F0, F8
+  main.go:104		0x10011f4d4		1e6828e7		FADDD F8, F7, F7
+  main.go:104		0x10011f4d8		fc2e6a07		FMOVD F7, (R16)(R14)
+  main.go:105		0x10011f4dc		910005ee		ADD $1, R15, R14
+  main.go:105		0x10011f4e0		fc6e7a07		FMOVD (R16)(R14<<3), F7
+  main.go:105		0x10011f4e4		1e6308c8		FMULD F3, F6, F8
+  main.go:105		0x10011f4e8		1e680808		FMULD F8, F0, F8
+  main.go:105		0x10011f4ec		1e6828e7		FADDD F8, F7, F7
+  main.go:105		0x10011f4f0		fc2e7a07		FMOVD F7, (R16)(R14<<3)
+  main.go:106		0x10011f4f4		910009ee		ADD $2, R15, R14
+  main.go:106		0x10011f4f8		fc6e7a07		FMOVD (R16)(R14<<3), F7
+  main.go:106		0x10011f4fc		1e6408c6		FMULD F4, F6, F6
+  main.go:106		0x10011f500		1e660806		FMULD F6, F0, F6
+  main.go:106		0x10011f504		1e6628e6		FADDD F6, F7, F6
+  main.go:106		0x10011f508		fc2e7a06		FMOVD F6, (R16)(R14<<3)
+  main.go:97		0x10011f50c		9100058c		ADD $1, R12, R12
+  main.go:102		0x10011f510		1e6040a0		FMOVD F5, F0
+  main.go:97		0x10011f514		f100119f		CMP $4, R12
+  main.go:97		0x10011f518		54fffbea		BGE -33(PC)
+  main.go:99		0x10011f51c		b500004c		CBNZ R12, 2(PC)
+  main.go:99		0x10011f520		b400006a		CBZ R10, 3(PC)
+  main.go:67		0x10011f524		1e604005		FMOVD F0, F5
+  main.go:100		0x10011f528		14000003		JMP 3(PC)
+  main.go:102		0x10011f52c		1e604005		FMOVD F0, F5

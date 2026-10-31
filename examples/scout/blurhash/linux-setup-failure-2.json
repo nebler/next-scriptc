@@ -1,0 +1,45 @@
+{
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 1,
+  "timeoutMs": 160000,
+  "maxVcpuHours": 0.044444444444444446,
+  "priorFailedSetupMs": 6400,
+  "totalMaxVcpuHours": 0.04622222222222222,
+  "parentCommit": "2e520061a402f5484fd7d6d9508383a679beb161",
+  "goVersion": "go version go1.27.3 darwin/arm64",
+  "scriptcVersion": "0.4.6",
+  "nativeTarget": "x86_64-linux-musl",
+  "goTarget": "linux/amd64 CGO_ENABLED=0",
+  "sources": [
+    {
+      "path": "scout/blurhash.ts",
+      "sha256": "51ddbbab69428ad01896593dc2ce65fea229535dbb616454fa1aa0fb3f2812a7"
+    },
+    {
+      "path": "scout/run.mjs",
+      "sha256": "c70845de72085ad8154157f5e480e42f53c34a27cbaebed3c18da92768a454f8"
+    },
+    {
+      "path": "scout/bin-release",
+      "sha256": "8fc5f7bc01ad667235e298adeab079b2ae25547ba2d6f2fa942b592cf68b360e"
+    },
+    {
+      "path": "scout/bin-speed",
+      "sha256": "eb08298c337cd26d5fd77721590bdc407916fd26803eae79228ce06735455a3b"
+    },
+    {
+      "path": "scout/bin-go",
+      "sha256": "fedd4fbbafc39e98f1aca9d91afbf8d01b0832311890980a81829110d2e1298f"
+    }
+  ],
+  "status": "failed",
+  "sandbox": "cyan-distinguished-grouse-H9u3Ye",
+  "exitCode": 1,
+  "stdout": "Linux e405f6ae-159 6.18.56 #1 SMP Thu Oct 29 18:14:48 UTC 2026 x86_64 GNU/Linux\nArchitecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  1\nOn-line CPU(s) list:                     0\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Processor @ 2.90GHz\nCPU family:                              6\nModel:                                   106\nThread(s) per core:                      1\nCore(s) per socket:                      1\nSocket(s):                               1\nStepping:                                6\nBogoMIPS:                                5799.92\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc pebs bts rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq dtes64 ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves wbnoinvd arat avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               48 KiB (1 instance)\nL1i cache:                               32 KiB (1 instance)\nv24.22.1\n/usr/local/bin/node\n",
+  "stderr": "",
+  "error": "Error: Linux run failed: exit 1, results false",
+  "stopped": true,
+  "activeCpuDurationMs": 1403,
+  "elapsedMs": 6517,
+  "allocatedVcpuHoursUpperBound": 0.0018102777777777778
+}

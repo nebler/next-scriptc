@@ -1,0 +1,52 @@
+{
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 1,
+  "timeoutMs": 160000,
+  "maxVcpuHours": 0.044444444444444446,
+  "priorFailedSetupMs": 12917,
+  "totalMaxVcpuHours": 0.0480325,
+  "parentCommit": "2e520061a402f5484fd7d6d9508383a679beb161",
+  "goVersion": "go version go1.27.3 darwin/arm64",
+  "scriptcVersion": "0.4.6",
+  "nativeTarget": "x86_64-linux-musl",
+  "goTarget": "linux/amd64 CGO_ENABLED=0",
+  "sources": [
+    {
+      "path": "scout/blurhash.ts",
+      "sha256": "51ddbbab69428ad01896593dc2ce65fea229535dbb616454fa1aa0fb3f2812a7"
+    },
+    {
+      "path": "scout/run.mjs",
+      "sha256": "fd7b04cf67b8d861ccdd383252f4edc3ad2854c80e0bbe3f534bc7b09ce8e06b"
+    },
+    {
+      "path": "scout/rss/main.go",
+      "sha256": "80e9d9eeb026c308b2b2108fab50f2adb82faa9313d51dc90745c560fb7a9ba7"
+    },
+    {
+      "path": "scout/bin-release",
+      "sha256": "8fc5f7bc01ad667235e298adeab079b2ae25547ba2d6f2fa942b592cf68b360e"
+    },
+    {
+      "path": "scout/bin-speed",
+      "sha256": "eb08298c337cd26d5fd77721590bdc407916fd26803eae79228ce06735455a3b"
+    },
+    {
+      "path": "scout/bin-go",
+      "sha256": "fedd4fbbafc39e98f1aca9d91afbf8d01b0832311890980a81829110d2e1298f"
+    },
+    {
+      "path": "scout/bin-rss",
+      "sha256": "023f50ebfa56070e3ead461ab09bf63cea5a5329b030aa9f0143ea4115fc0e82"
+    }
+  ],
+  "status": "complete",
+  "sandbox": "magenta-additional-tiger-WZLt2H",
+  "exitCode": 0,
+  "stdout": "Linux f6c2b281-a03 6.18.56 #1 SMP Thu Oct 29 18:14:48 UTC 2026 x86_64 GNU/Linux\nArchitecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 57 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  1\nOn-line CPU(s) list:                     0\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Processor @ 2.90GHz\nCPU family:                              6\nModel:                                   106\nThread(s) per core:                      1\nCore(s) per socket:                      1\nSocket(s):                               1\nStepping:                                6\nBogoMIPS:                                5799.96\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc pebs bts rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq dtes64 ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves wbnoinvd arat avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm md_clear flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               48 KiB (1 instance)\nL1i cache:                               32 KiB (1 instance)\nv24.22.1\n/usr/local/bin/node\n",
+  "stderr": "2048 node: 220.096 / 426.913 ms, 93.3 MiB, L%HV9y2F$6SNdMfRfRfQgdfRfPfQ\n2048 release: 136.028 / 136.653 ms, 16.6 MiB, L%HV9y2F$6SNdMfRfRfQgdfRfPfQ\n2048 speed: 135.995 / 136.536 ms, 16.6 MiB, L%HV9y2F$6SNdMfRfRfQgdfRfPfQ\n2048 go-library: 221.136 / 232.366 ms, 37.5 MiB, L%HV9y2F$6SNdMfRfRfQgdfRfPfQ\n2048 go-port: 147.631 / 148.416 ms, 23.3 MiB, L%HV9y2F$6SNdMfRfRfQgdfRfPfQ\n",
+  "stopped": true,
+  "activeCpuDurationMs": 33711,
+  "elapsedMs": 42538,
+  "allocatedVcpuHoursUpperBound": 0.01181611111111111
+}

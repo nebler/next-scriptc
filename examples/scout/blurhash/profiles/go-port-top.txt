@@ -1,0 +1,18 @@
+File: scout-blurhash-go
+Type: cpu
+Time: 2026-10-31 13:20:38 CET
+Duration: 6.05s, Total samples = 5230ms (86.42%)
+Showing nodes accounting for 5210ms, 99.62% of 5230ms total
+Dropped 13 nodes (cum <= 26.15ms)
+      flat  flat%   sum%        cum   cum%
+    4930ms 94.26% 94.26%     5130ms 98.09%  main.encode
+     190ms  3.63% 97.90%      190ms  3.63%  runtime.asyncPreempt
+      90ms  1.72% 99.62%       90ms  1.72%  runtime.madvise
+         0     0% 99.62%     5130ms 98.09%  main.main
+         0     0% 99.62%     5130ms 98.09%  main.main.func1
+         0     0% 99.62%      100ms  1.91%  runtime.(*mheap).alloc.func1
+         0     0% 99.62%      100ms  1.91%  runtime.(*mheap).allocSpan
+         0     0% 99.62%     5130ms 98.09%  runtime.main
+         0     0% 99.62%       90ms  1.72%  runtime.sysUsed (inline)
+         0     0% 99.62%       90ms  1.72%  runtime.sysUsedOS (inline)
+         0     0% 99.62%      100ms  1.91%  runtime.systemstack

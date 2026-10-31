@@ -1,0 +1,292 @@
+{
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpus": "Apple M4 Pro",
+  "timestamp": "2026-10-31T12:14:12.681Z",
+  "sourceSha256": "51ddbbab69428ad01896593dc2ce65fea229535dbb616454fa1aa0fb3f2812a7",
+  "versions": {
+    "node": "v24.22.0",
+    "go": "go version go1.27.3 darwin/arm64"
+  },
+  "results": [
+    {
+      "variant": "node",
+      "size": 512,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9,2C$1SKdJfOfPfSgYfPfRfO",
+      "samples": [6.219999999999999,6.202290999999988,6.192542000000003,6.247584000000003,6.2193340000000035,6.078999999999979,6.13304100000002,6.193624999999997,6.224458000000027,6.124917000000011,6.06533300000001,6.150584000000009,6.378458999999992,6.616416999999984,6.3963329999999985,6.1810839999999985,6.18912499999999,6.186458000000016,6.210374999999999,6.218916000000007,6.192291999999981,6.179541,6.132999999999981,6.332667000000015,6.271082999999976,6.132374999999968,6.194458999999995,6.211415999999986,6.1997499999999945,6.176166000000023],
+      "medianMs": 6.193624999999997,
+      "p95Ms": 6.3963329999999985,
+      "peakRssMiB": 82.59375,
+      "command": [
+        "/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-a3348abb/examples/scout/blurhash/blurhash.ts",
+        "512",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.30 real         0.31 user         0.01 sys\n            86605824  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                5469  page reclaims\n                  79  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   1  voluntary context switches\n                 307  involuntary context switches\n          9724636353  instructions retired\n          1269134682  cycles elapsed\n            41093232  peak memory footprint\n"
+    },
+    {
+      "variant": "release",
+      "size": 512,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9,2C$1SKdJfOfPfSgYfPfRfO",
+      "samples": [2.6010000705718994,2.5709999799728394,2.621000051498413,2.6149998903274536,2.6100000143051147,2.6109999418258667,2.662000060081482,2.5429999828338623,2.5299999713897705,2.528999924659729,2.631999969482422,2.6600000858306885,2.6579999923706055,2.549999952316284,2.680999994277954,2.6759999990463257,2.5959999561309814,2.60099995136261,2.6019999980926514,2.6080000400543213,2.684999942779541,2.6299999952316284,2.6299999952316284,2.6540000438690186,2.674999952316284,2.6470000743865967,2.6160000562667847,2.625999927520752,2.5450000762939453,2.659999966621399],
+      "medianMs": 2.6160000562667847,
+      "p95Ms": 2.680999994277954,
+      "peakRssMiB": 2.859375,
+      "command": [
+        "/tmp/scout-blurhash-release",
+        "512",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.09 real         0.09 user         0.00 sys\n             2998272  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 337  page reclaims\n                  15  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  44  involuntary context switches\n          2716907579  instructions retired\n           379434744  cycles elapsed\n             2572864  peak memory footprint\n"
+    },
+    {
+      "variant": "speed",
+      "size": 512,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9,2C$1SKdJfOfPfSgYfPfRfO",
+      "samples": [2.638000011444092,2.6059999465942383,2.569000005722046,2.5740000009536743,2.541999936103821,2.656000018119812,2.628999948501587,2.6139999628067017,2.615000009536743,2.6360000371932983,2.628000020980835,2.6139999628067017,2.60699999332428,2.611999988555908,2.6110000610351562,2.6109999418258667,2.6130000352859497,2.614000082015991,2.6330000162124634,2.6269999742507935,2.6130000352859497,2.6169999837875366,2.6190000772476196,2.631999969482422,2.718999981880188,2.6759999990463257,2.5889999866485596,2.603999972343445,2.593999981880188,2.5670000314712524],
+      "medianMs": 2.6139999628067017,
+      "p95Ms": 2.6759999990463257,
+      "peakRssMiB": 2.84375,
+      "command": [
+        "/tmp/scout-blurhash-speed",
+        "512",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.09 real         0.09 user         0.00 sys\n             2981888  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 336  page reclaims\n                  15  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  43  involuntary context switches\n          2717096749  instructions retired\n           380231815  cycles elapsed\n             2556480  peak memory footprint\n"
+    },
+    {
+      "variant": "go-library",
+      "size": 512,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9,2C$1SKdJfOfPfSgYfPfRfO",
+      "samples": [6.711792,6.803167,6.6855,6.676833,6.533041,6.475625,6.7595,6.559292,6.785125,6.804917,6.767834,6.485625,6.999917,6.902834,6.981667,6.880667,6.604875,6.669333,6.797625,6.576042,6.749,6.573125,6.536292,6.606833,6.534666,6.697,6.633125,6.620625,6.953875,6.802666],
+      "medianMs": 6.6855,
+      "p95Ms": 6.981667,
+      "peakRssMiB": 11.171875,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "library",
+        "512",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.25 real         0.24 user         0.00 sys\n            11714560  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 784  page reclaims\n                 130  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                  59  signals received\n                   2  voluntary context switches\n                 685  involuntary context switches\n          8057118128  instructions retired\n           996447377  cycles elapsed\n             9667064  peak memory footprint\n"
+    },
+    {
+      "variant": "go-port",
+      "size": 512,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9,2C$1SKdJfOfPfSgYfPfRfO",
+      "samples": [3.456958,3.515709,3.393209,3.399875,3.465083,3.482042,3.46175,3.536208,3.535542,3.495667,3.435334,3.436334,3.456667,3.441791,3.435333,3.438125,3.454833,3.570833,3.598291,3.495709,3.446292,3.434375,3.4455,3.440709,3.437875,3.435417,3.451542,3.444833,3.434583,3.439125],
+      "medianMs": 3.4455,
+      "p95Ms": 3.570833,
+      "peakRssMiB": 6.9375,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "port",
+        "512",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.12 real         0.12 user         0.00 sys\n             7274496  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 632  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   6  signals received\n                   0  voluntary context switches\n                 136  involuntary context switches\n          4733615769  instructions retired\n           506693686  cycles elapsed\n             5259744  peak memory footprint\n"
+    },
+    {
+      "variant": "release",
+      "size": 1024,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9#2G$4SKdNfRfPfPgbfPfPfP",
+      "samples": [10.41700005531311,10.396000027656555,10.514999985694885,10.33299994468689,10.360000014305115,10.474000096321106,10.60699999332428,10.504999995231628,10.38700008392334,10.33299994468689,10.365000009536743,10.351999998092651,10.472000002861023,10.534000039100647,10.519999980926514,10.481000065803528,10.393999934196472,10.554999947547913,10.478999972343445,10.396999955177307,10.546000003814697,10.457000017166138,10.398000001907349,10.287999987602234,10.287000060081482,10.449999928474426,10.222000002861023,10.623999953269958,10.322999954223633,10.371000051498413],
+      "medianMs": 10.398000001907349,
+      "p95Ms": 10.60699999332428,
+      "peakRssMiB": 5.90625,
+      "command": [
+        "/tmp/scout-blurhash-release",
+        "1024",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.37 real         0.37 user         0.00 sys\n             6193152  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 544  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  66  involuntary context switches\n         10787163467  instructions retired\n          1495525040  cycles elapsed\n             5784152  peak memory footprint\n"
+    },
+    {
+      "variant": "speed",
+      "size": 1024,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9#2G$4SKdNfRfPfPgbfPfPfP",
+      "samples": [10.20800006389618,10.210000038146973,10.20799994468689,10.215999960899353,10.216000080108643,10.198000073432922,10.212000012397766,10.235999941825867,10.2260000705719,10.226999998092651,10.229000091552734,10.223999977111816,10.245000004768372,10.212999939918518,10.217000007629395,10.233000040054321,10.222000002861023,10.199999928474426,10.205000042915344,10.230999946594238,10.21399998664856,10.223000049591064,10.215000033378601,10.223999977111816,10.217000007629395,10.240999937057495,10.199000000953674,10.287000060081482,10.235000014305115,10.205999970436096],
+      "medianMs": 10.217000007629395,
+      "p95Ms": 10.245000004768372,
+      "peakRssMiB": 5.90625,
+      "command": [
+        "/tmp/scout-blurhash-speed",
+        "1024",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.37 real         0.36 user         0.00 sys\n             6193152  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 544  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                  13  involuntary context switches\n         10786112298  instructions retired\n          1480710122  cycles elapsed\n             5784152  peak memory footprint\n"
+    },
+    {
+      "variant": "go-library",
+      "size": 1024,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9#2G$4SKdNfRfPfPgbfPfPfP",
+      "samples": [26.657291,26.892083,26.903709,26.576542,26.5,26.833208,26.642041,26.472208,27.162291,26.236958,26.808625,26.703042,26.597792,26.378833,26.444375,27.172333,27.3785,26.917791,26.887125,26.670042,27.098459,26.547416,26.641666,26.756541,26.516542,26.710208,26.672458,26.543417,26.773625,26.467041],
+      "medianMs": 26.670042,
+      "p95Ms": 27.172333,
+      "peakRssMiB": 16.25,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "library",
+        "1024",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.96 real         0.96 user         0.00 sys\n            17039360  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1228  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 182  signals received\n                   4  voluntary context switches\n                1127  involuntary context switches\n         32050850229  instructions retired\n          3848075367  cycles elapsed\n            14975504  peak memory footprint\n"
+    },
+    {
+      "variant": "go-port",
+      "size": 1024,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9#2G$4SKdNfRfPfPgbfPfPfP",
+      "samples": [13.859709,13.853542,13.79125,14.011542,13.757958,14.016792,13.735417,13.795541,13.962541,13.753208,14.624083,14.455917,14.502666,14.19125,13.776666,13.94425,13.787,13.979167,13.810875,13.973792,14.082875,13.779084,14.083917,13.773417,14.094875,13.774209,13.921542,14.019583,14.038041,14.024041],
+      "medianMs": 13.94425,
+      "p95Ms": 14.502666,
+      "peakRssMiB": 11.40625,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "port",
+        "1024",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        0.50 real         0.50 user         0.00 sys\n            11960320  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                 919  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                  24  signals received\n                   0  voluntary context switches\n                 198  involuntary context switches\n         18844455678  instructions retired\n          2001240699  cycles elapsed\n             9896416  peak memory footprint\n"
+    },
+    {
+      "variant": "node",
+      "size": 1024,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9#2G$4SKdNfRfPfPgbfPfPfP",
+      "samples": [24.885333000000003,24.774292000000003,24.696541999999965,24.973291000000017,24.775040999999987,24.64908300000002,24.78720800000002,24.573999999999955,24.69145800000001,24.50720899999999,24.97470800000002,24.54929100000004,24.85583299999996,24.75675000000001,24.750625000000014,24.34354200000007,24.719541999999933,24.73950000000002,24.762416999999914,24.74745900000005,24.788082999999915,24.81979100000001,24.969333000000006,24.27937499999996,24.528040999999916,24.656292000000008,24.721959000000084,24.679333000000042,24.65095800000006,24.863125000000082],
+      "medianMs": 24.73950000000002,
+      "p95Ms": 24.973291000000017,
+      "peakRssMiB": 83.015625,
+      "command": [
+        "/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-a3348abb/examples/scout/blurhash/blurhash.ts",
+        "1024",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        1.00 real         1.01 user         0.01 sys\n            87048192  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                5490  page reclaims\n                  80  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 369  involuntary context switches\n         36299515183  instructions retired\n          4042939562  cycles elapsed\n            41486400  peak memory footprint\n"
+    },
+    {
+      "variant": "speed",
+      "size": 2048,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9y2F$6SNdMfRfRfQgdfRfPfQ",
+      "samples": [41.384000062942505,43.71599996089935,41.12899994850159,43.32200002670288,43.40499997138977,41.94099998474121,41.348999977111816,43.644999980926514,44.973999977111816,43.75,41.480000019073486,41.319000005722046,43.6599999666214,43.37699997425079,41.94099998474121,41.187999963760376,41.82799994945526,43.11900007724762,43.61299991607666,41.91500008106232,41.32800006866455,43.384000062942505,43.526999950408936,43.90900003910065,41.27300000190735,41.49299991130829,41.3950001001358,41.48599994182587,43.7389999628067,41.51699995994568],
+      "medianMs": 41.94099998474121,
+      "p95Ms": 43.90900003910065,
+      "peakRssMiB": 18.125,
+      "command": [
+        "/tmp/scout-blurhash-speed",
+        "2048",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        1.54 real         1.53 user         0.00 sys\n            19005440  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1326  page reclaims\n                   1  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 542  involuntary context switches\n         43047359587  instructions retired\n          6072782655  cycles elapsed\n            18612848  peak memory footprint\n"
+    },
+    {
+      "variant": "go-library",
+      "size": 2048,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9y2F$6SNdMfRfRfQgdfRfPfQ",
+      "samples": [109.623291,108.683917,108.102958,108.717958,107.218208,106.361375,106.684208,109.826709,107.413584,108.290333,108.607458,107.387542,107.053667,106.223833,106.988458,106.957959,108.271667,109.966291,108.644333,109.392292,107.986333,108.039167,107.053875,107.58225,106.82075,107.08425,106.605125,106.784375,108.920875,110.286875],
+      "medianMs": 107.58225,
+      "p95Ms": 109.966291,
+      "peakRssMiB": 42.453125,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "library",
+        "2048",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        3.89 real         3.89 user         0.02 sys\n            44515328  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                2899  page reclaims\n                   8  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                 296  signals received\n                  10  voluntary context switches\n                2189  involuntary context switches\n        128006187944  instructions retired\n         15466868286  cycles elapsed\n            42353168  peak memory footprint\n"
+    },
+    {
+      "variant": "go-port",
+      "size": 2048,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9y2F$6SNdMfRfRfQgdfRfPfQ",
+      "samples": [56.040208,55.950708,56.893708,55.84275,56.12875,56.799209,56.036625,56.520209,56.131542,55.467167,55.93275,55.805375,55.882125,55.907791,55.77675,56.220209,55.86275,56.203709,56.206333,56.102708,55.638709,56.318417,55.950041,60.106667,55.719375,55.828625,56.050292,55.830625,55.86825,55.9185],
+      "medianMs": 55.950041,
+      "p95Ms": 56.893708,
+      "peakRssMiB": 25.296875,
+      "command": [
+        "/tmp/scout-blurhash-go",
+        "port",
+        "2048",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        2.03 real         2.02 user         0.00 sys\n            26525696  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1810  page reclaims\n                   0  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                  92  signals received\n                   3  voluntary context switches\n                 618  involuntary context switches\n         75261269132  instructions retired\n          7995134613  cycles elapsed\n            24478200  peak memory footprint\n"
+    },
+    {
+      "variant": "node",
+      "size": 2048,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9y2F$6SNdMfRfRfQgdfRfPfQ",
+      "samples": [100.01295899999991,99.81041599999992,100.62866600000007,99.46579199999996,100.99924999999985,99.39308400000004,100.07187500000009,99.77654099999995,100.00704199999996,98.97675000000004,99.51179200000001,100.925209,98.66183300000012,98.92387500000018,97.86470800000006,98.75366699999995,97.2552499999997,97.33283299999994,97.68612499999972,97.31670799999984,97.72350000000006,98.31945900000028,98.35983299999998,97.64212499999985,97.66466700000001,99.11237500000016,97.79500000000007,97.44020799999998,97.24429099999998,98.37575000000015],
+      "medianMs": 98.66183300000012,
+      "p95Ms": 100.925209,
+      "peakRssMiB": 100.28125,
+      "command": [
+        "/Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node",
+        "/Users/noah/.t3/worktrees/next-scriptc/t3-a3348abb/examples/scout/blurhash/blurhash.ts",
+        "2048",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        3.66 real         3.67 user         0.01 sys\n           105152512  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                6594  page reclaims\n                  81  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 374  involuntary context switches\n        136512359383  instructions retired\n         14544670723  cycles elapsed\n            59508824  peak memory footprint\n"
+    },
+    {
+      "variant": "release",
+      "size": 2048,
+      "iterations": 30,
+      "warmup": 5,
+      "hash": "L%HV9y2F$6SNdMfRfRfQgdfRfPfQ",
+      "samples": [41.8639999628067,41.35900008678436,41.449999928474426,41.51700007915497,41.41099989414215,41.44699990749359,41.557000041007996,41.39900004863739,41.6710000038147,41.57699990272522,41.7150000333786,41.50100004673004,40.59600007534027,41.63199996948242,41.75600004196167,41.580999970436096,40.57000005245209,40.64900004863739,42.496999979019165,41.19700002670288,41.050999999046326,41.175000071525574,43.47500002384186,41.53699994087219,41.25100004673004,40.66499996185303,40.539000034332275,40.59399998188019,40.56000006198883,40.973999977111816],
+      "medianMs": 41.41099989414215,
+      "p95Ms": 42.496999979019165,
+      "peakRssMiB": 18.125,
+      "command": [
+        "/tmp/scout-blurhash-release",
+        "2048",
+        "30",
+        "5"
+      ],
+      "timeStderr": "        1.50 real         1.49 user         0.00 sys\n            19005440  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                1314  page reclaims\n                  15  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   1  messages sent\n                   0  messages received\n                   0  signals received\n                   0  voluntary context switches\n                 184  involuntary context switches\n         43041551848  instructions retired\n          5928416495  cycles elapsed\n            18612848  peak memory footprint\n"
+    }
+  ]
+}

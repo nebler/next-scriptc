@@ -1,0 +1,43 @@
+{
+  "image": "vercel/sandbox/node:24",
+  "vcpus": 1,
+  "timeoutMs": 175000,
+  "maxVcpuHours": 0.04861111111111111,
+  "parentCommit": "2e520061a402f5484fd7d6d9508383a679beb161",
+  "goVersion": "go version go1.27.3 darwin/arm64",
+  "scriptcVersion": "0.4.6",
+  "nativeTarget": "x86_64-linux-musl",
+  "goTarget": "linux/amd64 CGO_ENABLED=0",
+  "sources": [
+    {
+      "path": "scout/blurhash.ts",
+      "sha256": "51ddbbab69428ad01896593dc2ce65fea229535dbb616454fa1aa0fb3f2812a7"
+    },
+    {
+      "path": "scout/run.mjs",
+      "sha256": "864554c0bd9c8f9d40d1a0be5b79260c3cc9a6309db808897ab946d4cac110ac"
+    },
+    {
+      "path": "scout/bin-release",
+      "sha256": "8fc5f7bc01ad667235e298adeab079b2ae25547ba2d6f2fa942b592cf68b360e"
+    },
+    {
+      "path": "scout/bin-speed",
+      "sha256": "eb08298c337cd26d5fd77721590bdc407916fd26803eae79228ce06735455a3b"
+    },
+    {
+      "path": "scout/bin-go",
+      "sha256": "fedd4fbbafc39e98f1aca9d91afbf8d01b0832311890980a81829110d2e1298f"
+    }
+  ],
+  "status": "failed",
+  "sandbox": "silver-quarrelsome-moose-5ZcCtA",
+  "exitCode": 2,
+  "stdout": "Linux f5941eff-8bb 6.18.56 #1 SMP Thu Oct 29 18:14:48 UTC 2026 x86_64 GNU/Linux\nArchitecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  1\nOn-line CPU(s) list:                     0\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Processor @ 2.50GHz\nCPU family:                              6\nModel:                                   85\nThread(s) per core:                      1\nCore(s) per socket:                      1\nSocket(s):                               1\nStepping:                                4\nBogoMIPS:                                4999.99\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault pti ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat umip pku ospke md_clear flush_l1d arch_capabilities\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               32 KiB (1 instance)\nL1i cache:                               32 KiB (1 instance)\nv24.22.1\n/usr/local/bin/node\n",
+  "stderr": "ls: cannot access '/usr/bin/time': No such file or directory\n",
+  "error": "Error: Linux run failed: exit 2, results false",
+  "stopped": true,
+  "activeCpuDurationMs": 2348,
+  "elapsedMs": 6400,
+  "allocatedVcpuHoursUpperBound": 0.0017777777777777779
+}
