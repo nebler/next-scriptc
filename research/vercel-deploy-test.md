@@ -1,5 +1,7 @@
 # Isolated scriptc / Vercel deploy test
 
+Historical smoke-test record. The smoke builder has been replaced by the package command documented in [vercel-integration.md](vercel-integration.md), which also records the full-app deployment blocker.
+
 Test date: 2026-10-31. Source baseline: `7877175911939e07306bab6184cd17a2cbe88d4b`.
 
 ## Result and limit

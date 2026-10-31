@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import path from "node:path";
@@ -238,10 +238,40 @@ cases.push(
   ...["lat=91&lng=0", "lat=0&lng=-181", "lat=nope&lng=0", "lat=0", "lat=&lng=0", "lat=0&lng=0&radiusKm=0", "lat=0&lng=0&radiusKm=20001"].map((query) => ({ path: `/api/stores/nearby?${query}`, status: 400 })),
 );
 
-async function responses(native) {
+async function deployedResponse(baseURL, test) {
+  if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
+    return fetch(new URL(test.path, baseURL), {
+      method: test.method ?? "GET", body: test.body,
+      headers: { "accept-encoding": "identity", ...test.headers, "x-vercel-protection-bypass": process.env.VERCEL_AUTOMATION_BYPASS_SECRET },
+      signal: AbortSignal.timeout(180_000),
+    });
+  }
+  const args = ["curl", test.path, "--deployment", baseURL, "--", "--silent", "--show-error", "--include", "--compressed", "--max-time", "180", "--request", test.method ?? "GET"];
+  for (const [name, value] of Object.entries({ "accept-encoding": "identity", ...test.headers })) args.push("--header", `${name}: ${value}`);
+  if (test.body !== undefined) args.push("--data-binary", "@-");
+  const output = await new Promise((resolve, reject) => {
+    const child = execFile("vercel", args, { encoding: "buffer", maxBuffer: 16 * 1024 * 1024 }, (error, stdout) => error ? reject(error) : resolve(stdout));
+    child.stdin.end(test.body);
+  });
+  let offset = 0;
+  let end;
+  let status;
+  let lines;
+  do {
+    end = output.indexOf("\r\n\r\n", offset);
+    assert.ok(end >= 0, "Missing HTTP headers from vercel curl");
+    lines = output.subarray(offset, end).toString().split("\r\n");
+    status = Number(lines.shift().split(" ")[1]);
+    offset = end + 4;
+  } while (status < 200);
+  const headers = new Headers(lines.map((line) => { const colon = line.indexOf(":"); return [line.slice(0, colon), line.slice(colon + 1).trim()]; }));
+  return { status, headers, arrayBuffer: async () => output.subarray(offset) };
+}
+
+async function responses(native, baseURL, selected = cases) {
   const results = [];
-  for (const test of cases) {
-    const response = await fetch(`http://localhost:${port}${test.path}`, {
+  for (const test of selected) {
+    const response = baseURL ? await deployedResponse(baseURL, test) : await fetch(`http://localhost:${port}${test.path}`, {
       method: test.method ?? "GET", headers: { "accept-encoding": "identity", ...test.headers }, body: test.body, signal: AbortSignal.timeout(180_000),
     });
     // fetch validates and decompresses gzip. Compare these decoded bytes and
@@ -260,50 +290,77 @@ async function responses(native) {
   return results;
 }
 
-let ports = [port];
-try {
-  await portsFree(ports);
-  if (!process.argv.includes("--skip-build")) {
-    const build = start(["build"]);
-    assert.equal((await build.exit).code, 0, build.output);
-    running.delete(build);
-    console.log("Build passed.");
+if (process.env.ROUTES_NODE_URL || process.env.ROUTES_NATIVE_URL) {
+  assert.ok(process.env.ROUTES_NODE_URL && process.env.ROUTES_NATIVE_URL, "Set both ROUTES_NODE_URL and ROUTES_NATIVE_URL");
+  let failures = 0;
+  for (const [index, test] of cases.entries()) {
+    try {
+      const [expected] = await responses(false, process.env.ROUTES_NODE_URL, [test]);
+      const [actual] = await responses(true, process.env.ROUTES_NATIVE_URL, [test]);
+      // Vercel terminates compression at its CDN. Only that Vary token can differ.
+      for (const result of [expected, actual]) {
+        const vary = result.headers.find(([name]) => name === "vary");
+        vary[1] = vary[1]?.split(",").map((token) => token.trim()).filter((token) => token.toLowerCase() !== "accept-encoding").join(", ") ?? null;
+      }
+      assert.deepEqual(actual, expected);
+      console.log(`PASS ${index + 1}/${cases.length} ${test.method ?? "GET"} ${test.path}`);
+    } catch (error) {
+      failures++;
+      console.error(`FAIL ${index + 1}/${cases.length} ${test.method ?? "GET"} ${test.path}`, error);
+    }
   }
-  const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
-  ports = [port, ...manifest.routes.map((route) => route.port)];
-  await portsFree(ports);
-  const dev = start(["dev", "-p", String(port)]);
-  await ready(dev);
-  const reference = await responses(false);
-  await stop(dev);
-  await portsFree(ports);
-  console.log(`Node dev: ${cases.length} response cases passed.`);
+  console.log(`Deployed parity: ${cases.length - failures}/${cases.length} cases passed.`);
+  process.exitCode = failures ? 1 : 0;
+} else {
+  await localParity();
+}
 
-  const production = start(["start", "-p", String(port)]);
-  console.log("Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.");
-  await ready(production);
-  const actual = await responses(true);
-  for (let i = 0; i < cases.length; i++) {
-    const expectedVary = reference[i].headers.find(([name]) => name === "vary");
-    const actualVary = actual[i].headers.find(([name]) => name === "vary");
-    assert.ok(expectedVary[1] === appVary || expectedVary[1]?.startsWith(`${appVary}, `), `${cases[i].path}: Next App Route Vary prefix`);
-    // External rewrites pass through Next's compression middleware (see
-    // research/adapter-notes.md). Only its appended token may differ.
-    assert.ok(actualVary[1] === expectedVary[1] || actualVary[1] === `${expectedVary[1]}, Accept-Encoding`, `${cases[i].path}: native Vary: ${actualVary[1]}`);
-    actualVary[1] = expectedVary[1];
-    assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
+async function localParity() {
+  let ports = [port];
+  try {
+    await portsFree(ports);
+    if (!process.argv.includes("--skip-build")) {
+      const build = start(["build"]);
+      assert.equal((await build.exit).code, 0, build.output);
+      running.delete(build);
+      console.log("Build passed.");
+    }
+    const manifest = JSON.parse(await readFile(path.join(demo, distDir, "scriptc/manifest.json"), "utf8"));
+    ports = [port, ...manifest.routes.map((route) => route.port)];
+    await portsFree(ports);
+    const dev = start(["dev", "-p", String(port)]);
+    await ready(dev);
+    const reference = await responses(false);
+    await stop(dev);
+    await portsFree(ports);
+    console.log(`Node dev: ${cases.length} response cases passed.`);
+
+    const production = start(["start", "-p", String(port)]);
+    console.log("Native parity uses a test-only 180s proxy timeout for cost-10 bcrypt on loaded hosts.");
+    await ready(production);
+    const actual = await responses(true);
+    for (let i = 0; i < cases.length; i++) {
+      const expectedVary = reference[i].headers.find(([name]) => name === "vary");
+      const actualVary = actual[i].headers.find(([name]) => name === "vary");
+      assert.ok(expectedVary[1] === appVary || expectedVary[1]?.startsWith(`${appVary}, `), `${cases[i].path}: Next App Route Vary prefix`);
+      // External rewrites pass through Next's compression middleware (see
+      // research/adapter-notes.md). Only its appended token may differ.
+      assert.ok(actualVary[1] === expectedVary[1] || actualVary[1] === `${expectedVary[1]}, Accept-Encoding`, `${cases[i].path}: native Vary: ${actualVary[1]}`);
+      actualVary[1] = expectedVary[1];
+      assert.deepEqual(actual[i], reference[i], `${cases[i].path}: dev/native status, headers and body bytes`);
+    }
+    const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
+    assert.equal(pids.length, manifest.processes.length);
+    await stop(production);
+    for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
+    await portsFree(ports);
+    console.log(`Native: ${cases.length} responses match status, content/cache/security/auth headers and body bytes (decompressed for gzip); Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.`);
+    console.log(`Cleanup passed: all ${pids.length} native processes exited; HTTP port ${port} and all native ports are free.`);
+  } catch (error) {
+    for (const state of running) console.error(state.output.slice(-8000));
+    throw error;
+  } finally {
+    await Promise.allSettled([...running].map(stop));
+    await portsFree(ports);
   }
-  const pids = [...production.output.matchAll(/native PID (\d+)/g)].map((match) => Number(match[1]));
-  assert.equal(pids.length, manifest.processes.length);
-  await stop(production);
-  for (const pid of pids) assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
-  await portsFree(ports);
-  console.log(`Native: ${cases.length} responses match status, content/cache/security/auth headers and body bytes (decompressed for gzip); Vary matches except optional compression Accept-Encoding; x-next-scriptc: native verified.`);
-  console.log(`Cleanup passed: all ${pids.length} native processes exited; HTTP port ${port} and all native ports are free.`);
-} catch (error) {
-  for (const state of running) console.error(state.output.slice(-8000));
-  throw error;
-} finally {
-  await Promise.allSettled([...running].map(stop));
-  await portsFree(ports);
 }
