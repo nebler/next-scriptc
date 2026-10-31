@@ -3,11 +3,11 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
 const dir=import.meta.dirname;
 const get=n=>JSON.parse(readFileSync(`${dir}/${n}.json`));
-const data=get('kernels'),first=get('controller'),controller=get('replacement'),builds=get('builds');
+const data=get('kernels'),first=get('controller'),controller=get('final-attempt'),builds=get('builds');
 assert.equal(data.status,'complete');assert.equal(controller.stopped,true);assert.ok(controller.combinedWallVcpuHours<=.1);
 const median=xs=>{const s=xs.slice().sort((a,b)=>a-b);return s.length%2?s[s.length>>1]:(s[s.length/2-1]+s[s.length/2])/2};
 const kinds=['int8-i32','int8-imul','float','binary'];
-const summary={method:data.method,rows:[],startup:[],process:[],fallback:[],budget:{failed:first,replacement:controller}};
+const summary={method:data.method,rows:[],startup:[],process:[],fallback:[],budget:{failedUpload:first,failedCwd:get('replacement'),finalAttempt:controller}};
 for(const mode of kinds){
  const runs=data.runs.filter(r=>r.mode===mode), runtimes=[...new Set(runs.map(r=>r.runtime))];
  const p50=Object.fromEntries(runtimes.map(runtime=>[runtime,median(runs.filter(r=>r.runtime===runtime).flatMap(r=>r.times))]));

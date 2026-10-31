@@ -104,7 +104,8 @@ export async function buildVercelRoutes({ projectDir, distDir, config, outputs }
     const binary = path.join(build, `route-${index}`);
     await writeFile(entry, `import { serve, serveMany } from ${JSON.stringify(shimPath)};\n${processEntrySource(members, [], { vercel: true })}`);
     console.log(`[next-scriptc] Compiling Vercel Function ${members.map((route) => route.pattern).join(", ")} (${nativeProcess.optimization})`);
-    run(compiler, ["build", entry, "-o", binary, "--optimization", nativeProcess.optimization, "--strip", "--no-keep-llvm"], {
+    // Vercel targets x86-64 Linux; dispatch retains baseline support on older CPUs.
+    run(compiler, ["build", entry, "-o", binary, "--optimization", nativeProcess.optimization, "--cpu-dispatch", "--strip", "--no-keep-llvm"], {
       cwd: projectDir,
       env: { ...process.env, SCRIPTC_TARGET: "x86_64-linux-musl", SCRIPTC_RUNTIME_PACK: runtime },
     });

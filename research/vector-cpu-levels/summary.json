@@ -1,0 +1,1063 @@
+{
+  "method": {
+    "rounds": 2,
+    "warmup": 5,
+    "iterations": 10,
+    "n": 100000,
+    "d": 768,
+    "floatTolerance": "1e-10 + 1e-12*abs(reference)",
+    "order": "user-prioritized phases: patched natural+Go+Node; binary; remaining kernels. Within each phase round 1 reverses round 0"
+  },
+  "rows": [
+    {
+      "mode": "int8-i32",
+      "runtime": "node",
+      "ms": 102.19769050000002,
+      "p95Ms": 103.4695840000004,
+      "ratioGoSIMD": 8.594050554173219,
+      "ratioGoPlain": 1.7421681592004015,
+      "ratioNode": 1,
+      "maxScoreError": 0,
+      "processMs": 2871.140784000001,
+      "roundMs": [
+        102.30589150000026,
+        102.14071150000007
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "patched-baseline",
+      "ms": 17.571004500005074,
+      "p95Ms": 18.821584999997867,
+      "ratioGoSIMD": 1.477588194232713,
+      "ratioGoPlain": 0.29953362365929204,
+      "ratioNode": 0.17193152226864725,
+      "maxScoreError": 0,
+      "processMs": 820.3024140000005,
+      "roundMs": [
+        17.420560499998828,
+        17.571004500005074
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "patched-v3",
+      "ms": 9.17995300000257,
+      "p95Ms": 11.013080999997328,
+      "ratioGoSIMD": 0.7719644130994934,
+      "ratioGoPlain": 0.1564910297024831,
+      "ratioNode": 0.08982544473451255,
+      "maxScoreError": 0,
+      "processMs": 644.6018989999995,
+      "roundMs": [
+        9.13604750000377,
+        9.223014499999408
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "patched-dispatch",
+      "ms": 9.251001000000542,
+      "p95Ms": 10.46542000000045,
+      "ratioGoSIMD": 0.7779390109672942,
+      "ratioGoPlain": 0.1577021878291077,
+      "ratioNode": 0.09052064635453323,
+      "maxScoreError": 0,
+      "processMs": 643.8077914999999,
+      "roundMs": [
+        9.251001000000542,
+        9.192844000004698
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "go-plain",
+      "ms": 58.661209,
+      "p95Ms": 59.285726,
+      "ratioGoSIMD": 4.932962704425506,
+      "ratioGoPlain": 1,
+      "ratioNode": 0.5739974035910331,
+      "maxScoreError": 0,
+      "processMs": 1322.1835920000003,
+      "roundMs": [
+        58.421276500000005,
+        58.6818575
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "go-v3",
+      "ms": 58.478969,
+      "p95Ms": 59.350101,
+      "ratioGoSIMD": 4.917637702800421,
+      "ratioGoPlain": 0.9968933473566833,
+      "ratioNode": 0.5722141930399101,
+      "maxScoreError": 0,
+      "processMs": 1326.8824790000008,
+      "roundMs": [
+        58.3646355,
+        58.9241965
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "go-simd",
+      "ms": 11.891679,
+      "p95Ms": 15.867098,
+      "ratioGoSIMD": 1,
+      "ratioGoPlain": 0.20271793239038083,
+      "ratioNode": 0.11635956685342119,
+      "maxScoreError": 0,
+      "processMs": 582.4147694999997,
+      "roundMs": [
+        11.014088000000001,
+        12.487324
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "stock-baseline",
+      "ms": 396.5359024999925,
+      "p95Ms": 397.9572130000015,
+      "ratioGoSIMD": 33.345661491534756,
+      "ratioGoPlain": 6.759763551753468,
+      "ratioNode": 3.8800867275957907,
+      "maxScoreError": 0,
+      "processMs": 6886.664101499999,
+      "roundMs": [
+        396.8098929999978,
+        396.4849430000031
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "stock-v3",
+      "ms": 377.8246799999906,
+      "p95Ms": 383.10473900000216,
+      "ratioGoSIMD": 31.77218961258462,
+      "ratioGoPlain": 6.440792585778289,
+      "ratioNode": 3.696998221305114,
+      "maxScoreError": 0,
+      "processMs": 6553.246670500004,
+      "roundMs": [
+        377.5478829999993,
+        378.7897349999985
+      ]
+    },
+    {
+      "mode": "int8-i32",
+      "runtime": "stock-dispatch",
+      "ms": 377.8940705000059,
+      "p95Ms": 381.33007100000395,
+      "ratioGoSIMD": 31.77802482727678,
+      "ratioGoPlain": 6.441975488435738,
+      "ratioNode": 3.6976772043591906,
+      "maxScoreError": 0,
+      "processMs": 6550.876096999997,
+      "roundMs": [
+        377.6431029999949,
+        378.26341949999915
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "node",
+      "ms": 101.94235149999997,
+      "p95Ms": 102.96429399999988,
+      "ratioGoSIMD": 8.886272672918526,
+      "ratioGoPlain": 1.745252921829512,
+      "ratioNode": 1,
+      "maxScoreError": 0,
+      "processMs": 2183.870960500004,
+      "roundMs": [
+        101.81527900000003,
+        102.02425300000004
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "stock-baseline",
+      "ms": 16.94173400001455,
+      "p95Ms": 17.213726999994833,
+      "ratioGoSIMD": 1.4768039549900316,
+      "ratioGoPlain": 0.29004246350334373,
+      "ratioNode": 0.16618935850243313,
+      "maxScoreError": 0,
+      "processMs": 796.7936614999999,
+      "roundMs": [
+        16.85247199999867,
+        16.99472849999438
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "stock-v3",
+      "ms": 8.674084500002209,
+      "p95Ms": 9.070110000000568,
+      "ratioGoSIMD": 0.7561163630304899,
+      "ratioGoPlain": 0.1485003150807733,
+      "ratioNode": 0.08508813434622617,
+      "maxScoreError": 0,
+      "processMs": 637.1177655000029,
+      "roundMs": [
+        8.406564000004437,
+        8.90227100001357
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "stock-dispatch",
+      "ms": 8.849745500003337,
+      "p95Ms": 9.45211399999971,
+      "ratioGoSIMD": 0.7714286598437291,
+      "ratioGoPlain": 0.15150763116670313,
+      "ratioNode": 0.0868112748998471,
+      "maxScoreError": 0,
+      "processMs": 635.5676334999953,
+      "roundMs": [
+        8.895425000002433,
+        8.849745500003337
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "patched-baseline",
+      "ms": 17.23494650000066,
+      "p95Ms": 18.10783000002266,
+      "ratioGoSIMD": 1.5023631675022593,
+      "ratioGoPlain": 0.2950622611123649,
+      "ratioNode": 0.16906561646265994,
+      "maxScoreError": 0,
+      "processMs": 802.8714394999988,
+      "roundMs": [
+        17.199943000006897,
+        17.33310450000863
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "patched-v3",
+      "ms": 9.054228499997407,
+      "p95Ms": 9.624629999976605,
+      "ratioGoSIMD": 0.7892533584914124,
+      "ratioGoPlain": 0.15500837985410332,
+      "ratioNode": 0.08881714387368639,
+      "maxScoreError": 0,
+      "processMs": 660.5391744999979,
+      "roundMs": [
+        9.068103500001598,
+        9.054228499997407
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "patched-dispatch",
+      "ms": 9.351466499989328,
+      "p95Ms": 12.249582999997074,
+      "ratioGoSIMD": 0.8151634721764118,
+      "ratioGoPlain": 0.1600970940178595,
+      "ratioNode": 0.09173288983812906,
+      "maxScoreError": 0,
+      "processMs": 645.2655484999996,
+      "roundMs": [
+        8.77389000000403,
+        10.007806999987224
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "go-plain",
+      "ms": 58.4112195,
+      "p95Ms": 58.910173,
+      "ratioGoSIMD": 5.091681877033176,
+      "ratioGoPlain": 1,
+      "ratioNode": 0.5729828539417203,
+      "maxScoreError": 0,
+      "processMs": 1316.186557000001,
+      "roundMs": [
+        58.255506499999996,
+        58.5835715
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "go-v3",
+      "ms": 58.464197,
+      "p95Ms": 73.243265,
+      "ratioGoSIMD": 5.096299903825795,
+      "ratioGoPlain": 1.000906974729401,
+      "ratioNode": 0.5735025349106256,
+      "maxScoreError": 0,
+      "processMs": 1330.3360974999996,
+      "roundMs": [
+        58.248611,
+        58.766075
+      ]
+    },
+    {
+      "mode": "int8-imul",
+      "runtime": "go-simd",
+      "ms": 11.471891,
+      "p95Ms": 11.858926,
+      "ratioGoSIMD": 1,
+      "ratioGoPlain": 0.19639875863232062,
+      "ratioNode": 0.11253312123175815,
+      "maxScoreError": 0,
+      "processMs": 560.8648834999985,
+      "roundMs": [
+        11.561395000000001,
+        11.350788
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "node",
+      "ms": 115.94770300000005,
+      "p95Ms": 117.05436499999996,
+      "ratioGoSIMD": 2.6822332658755856,
+      "ratioGoPlain": 1.251165591204962,
+      "ratioNode": 1,
+      "maxScoreError": 0,
+      "processMs": 2972.071337999998,
+      "roundMs": [
+        115.89548200000002,
+        116.1778875
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "stock-baseline",
+      "ms": 92.38778349999484,
+      "p95Ms": 100.99530599999707,
+      "ratioGoSIMD": 2.137218589523913,
+      "ratioGoPlain": 0.9969357975369897,
+      "ratioNode": 0.7968056383143253,
+      "maxScoreError": 0,
+      "processMs": 2150.7121284999994,
+      "roundMs": [
+        91.90982149999763,
+        95.30896699998993
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "stock-v3",
+      "ms": 91.47708399999829,
+      "p95Ms": 92.55155099999683,
+      "ratioGoSIMD": 2.1161512597631242,
+      "ratioGoPlain": 0.9871086440113761,
+      "ratioNode": 0.7889512395083691,
+      "maxScoreError": 0,
+      "processMs": 2113.3019219999987,
+      "roundMs": [
+        91.77070549999917,
+        91.41179000001284
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "stock-dispatch",
+      "ms": 91.32908899999893,
+      "p95Ms": 91.69604499998968,
+      "ratioGoSIMD": 2.11272767221537,
+      "ratioGoPlain": 0.9855116632443697,
+      "ratioNode": 0.787674845098043,
+      "maxScoreError": 0,
+      "processMs": 2107.5290310000055,
+      "roundMs": [
+        91.3139319999973,
+        91.42154850000225
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "patched-baseline",
+      "ms": 91.97077350000473,
+      "p95Ms": 92.21263999999792,
+      "ratioGoSIMD": 2.1275718430577393,
+      "ratioGoPlain": 0.9924359363954887,
+      "ratioNode": 0.7932091030730009,
+      "maxScoreError": 0,
+      "processMs": 2200.620845999998,
+      "roundMs": [
+        92.09158750000643,
+        91.84346699999878
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "patched-v3",
+      "ms": 91.45641749999777,
+      "p95Ms": 91.85685300000478,
+      "ratioGoSIMD": 2.1156731789356793,
+      "ratioGoPlain": 0.9868856364569162,
+      "ratioNode": 0.7887729996686328,
+      "maxScoreError": 0,
+      "processMs": 2114.489377500002,
+      "roundMs": [
+        91.30991099999665,
+        91.54567999999563
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "patched-dispatch",
+      "ms": 91.22464900000341,
+      "p95Ms": 91.69120299999486,
+      "ratioGoSIMD": 2.1103116481370314,
+      "ratioGoPlain": 0.9843846746886772,
+      "ratioNode": 0.7867740941793678,
+      "maxScoreError": 0,
+      "processMs": 2108.6459200000027,
+      "roundMs": [
+        91.2822984999948,
+        91.15717900000163
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "go-plain",
+      "ms": 92.6717485,
+      "p95Ms": 93.140573,
+      "ratioGoSIMD": 2.143787588733481,
+      "ratioGoPlain": 1,
+      "ratioNode": 0.799254716585459,
+      "maxScoreError": 0,
+      "processMs": 1945.3578455000024,
+      "roundMs": [
+        92.562917,
+        92.72748849999999
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "go-v3",
+      "ms": 92.162669,
+      "p95Ms": 92.861099,
+      "ratioGoSIMD": 2.1320109865710792,
+      "ratioGoPlain": 0.9945066375865347,
+      "ratioNode": 0.7948641207665835,
+      "maxScoreError": 0,
+      "processMs": 1934.4989399999977,
+      "roundMs": [
+        92.0987105,
+        92.26084750000001
+      ]
+    },
+    {
+      "mode": "float",
+      "runtime": "go-simd",
+      "ms": 43.228046,
+      "p95Ms": 44.371852,
+      "ratioGoSIMD": 1,
+      "ratioGoPlain": 0.46646412417695987,
+      "ratioNode": 0.3728236513663404,
+      "maxScoreError": 1.0658141036401503e-13,
+      "processMs": 1533.1210560000036,
+      "roundMs": [
+        42.971367,
+        43.4138815
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "node",
+      "ms": 7.001919499999985,
+      "p95Ms": 8.994610000000193,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 3.1147176326094423,
+      "ratioNode": 1,
+      "maxScoreError": 0,
+      "processMs": 1316.0215835,
+      "roundMs": [
+        6.676843500000018,
+        7.98637199999996
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "stock-baseline",
+      "ms": 6.855238500000269,
+      "p95Ms": 9.148224999997183,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 3.049468396729495,
+      "ratioNode": 0.9790513158570707,
+      "maxScoreError": 0,
+      "processMs": 914.5579610000023,
+      "roundMs": [
+        7.195653999995557,
+        6.848254500000621
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "stock-v3",
+      "ms": 6.515768000004755,
+      "p95Ms": 6.71291800000472,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 2.8984591267590574,
+      "ratioNode": 0.9305688247350985,
+      "maxScoreError": 0,
+      "processMs": 918.2126470000003,
+      "roundMs": [
+        6.520695999999589,
+        6.514241500000935
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "stock-dispatch",
+      "ms": 6.968386000000464,
+      "p95Ms": 9.218786999990698,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 3.0998006682353707,
+      "ratioNode": 0.9952108132634885,
+      "maxScoreError": 0,
+      "processMs": 908.561524499999,
+      "roundMs": [
+        9.056710500000918,
+        6.491020999994362
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "patched-baseline",
+      "ms": 6.779653000005055,
+      "p95Ms": 6.818342999991728,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 3.015845118197845,
+      "ratioNode": 0.968256347420885,
+      "maxScoreError": 0,
+      "processMs": 940.6052395000006,
+      "roundMs": [
+        6.775723499995365,
+        6.78308300000208
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "patched-v3",
+      "ms": 6.46117800000502,
+      "p95Ms": 6.6055169999890495,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 2.874175437755874,
+      "ratioNode": 0.9227723912000179,
+      "maxScoreError": 0,
+      "processMs": 883.2223230000018,
+      "roundMs": [
+        6.46117800000502,
+        6.458181499998318
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "patched-dispatch",
+      "ms": 6.456691500003217,
+      "p95Ms": 7.286301000000094,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 2.87217967349947,
+      "ratioNode": 0.9221316383319217,
+      "maxScoreError": 0,
+      "processMs": 881.7478785000003,
+      "roundMs": [
+        6.4524820000006,
+        6.474273500003619
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "go-binary",
+      "ms": 2.248011,
+      "p95Ms": 2.330331,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 1,
+      "ratioNode": 0.3210563903226829,
+      "maxScoreError": 0,
+      "processMs": 748.6814274999997,
+      "roundMs": [
+        2.2126945,
+        2.2830935
+      ]
+    },
+    {
+      "mode": "binary",
+      "runtime": "go-binary-v3",
+      "ms": 2.0729345,
+      "p95Ms": 2.347858,
+      "ratioGoSIMD": null,
+      "ratioGoPlain": 0.9221193757503856,
+      "ratioNode": 0.2960523182250245,
+      "maxScoreError": 0,
+      "processMs": 707.9198115000017,
+      "roundMs": [
+        2.0729345,
+        2.068034
+      ]
+    }
+  ],
+  "startup": [
+    {
+      "runtime": "stock-baseline",
+      "bytes": 386640,
+      "medianMs": 1.1154460000107065,
+      "p95Ms": 1.4129240000038408,
+      "samples": [
+        1.2672109999984968,
+        1.1914899999974295,
+        1.2826420000055805,
+        1.4129240000038408,
+        0.9511200000124518,
+        1.0831919999909587,
+        0.7721629999869037,
+        0.8823350000020582,
+        0.855799000011757,
+        1.3356069999863394,
+        0.9068520000146236,
+        1.3745290000224486,
+        0.9585059999953955,
+        0.9191120000032242,
+        0.9028180000022985,
+        0.9963029999926221,
+        1.3502169999992475,
+        0.9514799999888055,
+        1.334848000027705,
+        0.9291239999874961,
+        1.3644050000002608,
+        1.1691529999952763,
+        1.3452910000050906,
+        1.4006870000157505,
+        1.1453340000007302,
+        1.3192630000121426,
+        1.0855580000206828,
+        1.0334900000016205,
+        1.7375309999915771,
+        0.8603859999857377
+      ]
+    },
+    {
+      "runtime": "stock-v3",
+      "bytes": 388272,
+      "medianMs": 0.9853694999910658,
+      "p95Ms": 1.5182389999972656,
+      "samples": [
+        1.1888279999839142,
+        1.3901950000145007,
+        0.9812429999874439,
+        1.0094439999957103,
+        0.8658090000099037,
+        0.7968709999986459,
+        0.827610000007553,
+        0.8698159999912605,
+        0.9439769999880809,
+        0.9106020000181161,
+        1.1511639999807812,
+        0.9894959999946877,
+        1.5182389999972656,
+        0.8514499999873806,
+        1.1870150000031572,
+        3.255228000023635,
+        1.121077999996487,
+        1.2738440000102855,
+        1.0242549999966286,
+        1.14623000001302,
+        1.3652489999949466,
+        0.9535650000034366,
+        0.9022009999898728,
+        0.9416459999920335,
+        1.2780229999916628,
+        0.9603200000128709,
+        1.1683150000171736,
+        0.9505319999880157,
+        0.9487410000001546,
+        0.8731840000255033
+      ]
+    },
+    {
+      "runtime": "stock-dispatch",
+      "bytes": 404504,
+      "medianMs": 1.0355500000005122,
+      "p95Ms": 1.3663240000023507,
+      "samples": [
+        0.9874659999914002,
+        0.9993720000202302,
+        1.1966630000097211,
+        1.344213000003947,
+        1.2285280000069179,
+        0.8491280000016559,
+        1.23469500002102,
+        1.2476559999922756,
+        0.9113309999811463,
+        1.0130199999839533,
+        1.317765000014333,
+        1.3519500000111293,
+        0.9018340000184253,
+        0.8841759999922942,
+        1.067272000014782,
+        1.0669400000188034,
+        1.3471669999998994,
+        0.9449119999771938,
+        1.0450300000084098,
+        1.3663240000023507,
+        1.4075420000008307,
+        0.9977380000054836,
+        0.9240240000071935,
+        1.3338189999922179,
+        0.9439410000049975,
+        1.0260699999926146,
+        0.9479020000144374,
+        0.9778879999939818,
+        0.9299879999889527,
+        1.2260700000042561
+      ]
+    },
+    {
+      "runtime": "patched-baseline",
+      "bytes": 387968,
+      "medianMs": 1.0472109999973327,
+      "p95Ms": 1.553360000019893,
+      "samples": [
+        1.0829159999848343,
+        1.553360000019893,
+        1.1968920000072103,
+        0.8882560000056401,
+        0.8940650000004098,
+        1.1668840000056662,
+        0.9165670000074897,
+        0.8902850000013132,
+        1.2660289999912493,
+        1.1784460000053514,
+        0.9374689999967813,
+        0.9418129999830853,
+        1.3116429999936372,
+        1.1697599999897648,
+        0.9231199999921955,
+        1.5181830000074115,
+        0.9232649999903515,
+        0.9019830000179354,
+        1.1443189999845345,
+        0.9849370000010822,
+        1.0116609999968205,
+        1.3855530000000726,
+        2.037200999999186,
+        1.082760999997845,
+        1.1002300000109244,
+        1.3123559999803547,
+        0.949531999998726,
+        0.9464419999858364,
+        0.8568610000074841,
+        0.9600439999776427
+      ]
+    },
+    {
+      "runtime": "patched-v3",
+      "bytes": 390240,
+      "medianMs": 0.9901924999867333,
+      "p95Ms": 1.3039029999927152,
+      "samples": [
+        0.9439790000033099,
+        1.268555999995442,
+        0.8693409999832511,
+        1.3039029999927152,
+        0.8697199999878649,
+        0.8892110000015236,
+        0.9847089999821037,
+        0.9216190000006463,
+        0.9235050000133924,
+        1.0195269999967422,
+        1.1778530000010505,
+        1.1372080000001006,
+        0.8717910000123084,
+        0.8568699999887031,
+        0.9349740000034217,
+        1.2158399999898393,
+        1.399727999989409,
+        1.086966000002576,
+        0.8668389999947976,
+        1.0158850000007078,
+        0.9956759999913629,
+        1.227852999989409,
+        0.9469460000109393,
+        1.2780329999804962,
+        1.2777679999999236,
+        0.9526119999936782,
+        1.296121999999741,
+        0.8818740000133403,
+        1.1313549999904353,
+        0.8369499999971595
+      ]
+    },
+    {
+      "runtime": "patched-dispatch",
+      "bytes": 406584,
+      "medianMs": 1.0087670000066282,
+      "p95Ms": 1.5321980000007898,
+      "samples": [
+        1.0353260000119917,
+        0.8753549999964889,
+        0.922443999996176,
+        0.8566240000072867,
+        1.408622999995714,
+        1.0601519999909215,
+        1.209235999995144,
+        1.465704000002006,
+        0.9761069999949541,
+        1.3171690000162926,
+        0.9271429999789689,
+        0.9484599999850616,
+        1.2163640000217129,
+        1.0643310000014026,
+        0.876672000013059,
+        0.8393939999805298,
+        1.0280340000172146,
+        1.2516689999902155,
+        0.9439390000188723,
+        0.9894999999960419,
+        1.4114279999921564,
+        1.1358369999798015,
+        0.9553679999953602,
+        1.081017000018619,
+        0.9671680000028573,
+        1.6610529999888968,
+        0.9204549999849405,
+        1.5321980000007898,
+        0.8418040000251494,
+        0.9439759999804664
+      ]
+    }
+  ],
+  "process": [],
+  "fallback": [
+    {
+      "runtime": "stock-dispatch",
+      "level": "baseline",
+      "mode": "int8-i32",
+      "ms": 396.67963100000634
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "baseline",
+      "mode": "int8-imul",
+      "ms": 17.285189000016544
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "baseline",
+      "mode": "float",
+      "ms": 92.30533699999796
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "baseline",
+      "mode": "binary",
+      "ms": 6.730856999987736
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "x86-64-v3",
+      "mode": "int8-i32",
+      "ms": 378.3015369999921
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "x86-64-v3",
+      "mode": "int8-imul",
+      "ms": 10.405580999999074
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "x86-64-v3",
+      "mode": "float",
+      "ms": 93.30990500000189
+    },
+    {
+      "runtime": "stock-dispatch",
+      "level": "x86-64-v3",
+      "mode": "binary",
+      "ms": 6.5126429999945685
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "baseline",
+      "mode": "int8-i32",
+      "ms": 32.81893700000364
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "baseline",
+      "mode": "int8-imul",
+      "ms": 17.8399400000053
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "baseline",
+      "mode": "float",
+      "ms": 92.80615600000601
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "baseline",
+      "mode": "binary",
+      "ms": 6.773820000002161
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "x86-64-v3",
+      "mode": "int8-i32",
+      "ms": 9.60438500001328
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "x86-64-v3",
+      "mode": "int8-imul",
+      "ms": 13.231165000004694
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "x86-64-v3",
+      "mode": "float",
+      "ms": 92.90378599998076
+    },
+    {
+      "runtime": "patched-dispatch",
+      "level": "x86-64-v3",
+      "mode": "binary",
+      "ms": 6.428012000018498
+    }
+  ],
+  "budget": {
+    "failedUpload": {
+      "sourceCommit": "ca383ad120de916178d0cca181cf1248c164f040",
+      "startedAt": "2026-10-31T14:43:20.442Z",
+      "status": "failed",
+      "vcpus": 1,
+      "timeoutMs": 330000,
+      "budgetVcpuHours": 0.1,
+      "leaseVcpuHours": 0.09166666666666666,
+      "marginMs": 30000,
+      "files": {
+        "stock-baseline": {
+          "sha256": "4312dc281a75e6f68d7e6b8564defb0440ae14e11fa2b4966254b1db342e7238",
+          "bytes": 386640
+        },
+        "stock-v3": {
+          "sha256": "cd31a87435e44f80927276d86306a52ea20984568e05f35e608bd0e34b9ee25c",
+          "bytes": 388272
+        },
+        "stock-dispatch": {
+          "sha256": "148530ec6ab073baa1903fb87644883c9aa67c98ee962926a7f989881c1418f3",
+          "bytes": 404504
+        },
+        "patched-baseline": {
+          "sha256": "b424d82bb191169fc591ec765de303b8d2f3c31416377fec1dc1e3bf533602e3",
+          "bytes": 387968
+        },
+        "patched-v3": {
+          "sha256": "dc1cad8d7c34bc455ef907e6cbe8a744fa6f0d3895af6eb109fc41ec111e66de",
+          "bytes": 390240
+        },
+        "patched-dispatch": {
+          "sha256": "4a0cc33106a4ed70debd53fb5d7776646d5323ff465c14f6219ad4f9fe303b08",
+          "bytes": 406584
+        },
+        "go-plain": {
+          "sha256": "113777edf980a21d40688f0f802d12bd67717448eb5e6879f877b53884510287",
+          "bytes": 2576544
+        },
+        "go-v3": {
+          "sha256": "1ca3c9ff5775ad39b714bda24aede38a8a5057c762c88be9e01b025ca9820cbe",
+          "bytes": 2568352
+        },
+        "go-simd": {
+          "sha256": "a529782e9e34ae9599e9fd52aca7ab5f8b404cb9d7f7276e03fc16e07274f2dd",
+          "bytes": 2580640
+        },
+        "go-binary": {
+          "sha256": "247e2dcf3efd68291cfcf95017df465835fc3f0c1ac54275e90eb06bb5880bff",
+          "bytes": 2576544
+        },
+        "go-binary-v3": {
+          "sha256": "0818ac263f51bbdad3edc39b9c605235395c0bc9453f12de74c15fa86cd1a508",
+          "bytes": 2568352
+        },
+        "vectors.ts": {
+          "sha256": "0559a279b6520ff21e4dafb3b42bdd74e03076aa0eb3627e976eb71f99b1e625",
+          "bytes": 4930
+        },
+        "worker.mjs": {
+          "sha256": "a9a96c8cd8fec1fd0c99c8a797be90d55b283e2fdb3a1750af77a6b9b53dea32",
+          "bytes": 3372
+        },
+        "http.tar.gz": {
+          "sha256": "6a2e6ca1741be20eed2f6fcf975982c0c7bb56c53185a43c1ff3430bd19ea377",
+          "bytes": 25000569
+        }
+      },
+      "steps": [],
+      "sandbox": "azure-petite-xerinae-AhnnpR",
+      "region": "iad1",
+      "error": "TimeoutError: The operation was aborted due to timeout",
+      "stopped": true,
+      "activeCpuDurationMs": 1662,
+      "elapsedMs": 33155,
+      "observedWallVcpuHours": 0.009209722222222222
+    },
+    "failedCwd": {
+      "status": "failed",
+      "sandbox": "olive-comprehensive-gamefowl-dBhEz7",
+      "vcpus": 1,
+      "leaseMs": 250000,
+      "marginMs": 30000,
+      "previousElapsedMs": 33155,
+      "combinedReservationVcpuHours": 0.0869875,
+      "files": {
+        "kernels.tar.gz": "5f6475f868052bb8864d147b39d65efe17c3eb917aec8dd0222295468b2feba6",
+        "vectors.ts": "0559a279b6520ff21e4dafb3b42bdd74e03076aa0eb3627e976eb71f99b1e625",
+        "worker.mjs": "91cbf39a92567b13ceb4a1bfb964837f4890db34fe40d4d46a59a0f29c7d9659"
+      },
+      "steps": [],
+      "replaces": "azure-petite-xerinae-AhnnpR",
+      "error": "Error: Status code 400 is not ok: [internal] failed to start command: failed to receive started event: invalid_argument: failed to start process: chdir /vercel/sandbox: no such file or directory",
+      "stopped": true,
+      "activeCpuDurationMs": 1457,
+      "elapsedMs": 17487,
+      "combinedWallVcpuHours": 0.014067222222222222
+    },
+    "finalAttempt": {
+      "status": "complete",
+      "sandbox": "tan-convincing-hare-Cne3KA",
+      "vcpus": 1,
+      "leaseMs": 250000,
+      "marginMs": 30000,
+      "previousElapsedMs": 50642,
+      "combinedReservationVcpuHours": 0.091845,
+      "files": {
+        "kernels.tar.gz": "5f6475f868052bb8864d147b39d65efe17c3eb917aec8dd0222295468b2feba6",
+        "vectors.ts": "0559a279b6520ff21e4dafb3b42bdd74e03076aa0eb3627e976eb71f99b1e625",
+        "worker.mjs": "2dfc5f510f51a68cd099fc07821d3f9710f476e92cc5bc993612be988d157b1c"
+      },
+      "steps": [
+        {
+          "label": "verify SDK cwd and commands",
+          "exitCode": 0,
+          "elapsedMs": 579
+        },
+        {
+          "label": "kernels, startup, fallback",
+          "exitCode": 0,
+          "elapsedMs": 151473
+        }
+      ],
+      "replaces": [
+        "azure-petite-xerinae-AhnnpR",
+        "olive-comprehensive-gamefowl-dBhEz7"
+      ],
+      "cwd": "/vercel",
+      "kernelFinishedAfterMs": 164802,
+      "httpSkipped": "65198 ms left; require >85000 including transfer/install",
+      "stopped": true,
+      "activeCpuDurationMs": 153372,
+      "elapsedMs": 166504,
+      "combinedWallVcpuHours": 0.060318333333333335
+    }
+  }
+}
