@@ -2,14 +2,20 @@
 // arrays, non-finite numbers, or values fabricated by assertions/JSON.parse.
 // Read descriptors in one batch per container. Besides avoiding a reflection
 // call per field, traversing descriptor values never invokes user getters.
-// The explicit descriptor type keeps scriptc out of its dynamic `any` tier.
-type DataDescriptor = { enumerable: boolean; get: unknown; set: unknown; value: unknown };
+// Keep the built-in descriptor dictionaries in their checked dynamic form.
+// Converting them to native records copies descriptors and installs identity
+// observers for each field. Measured with scriptc 0.4.6, that costs more than
+// these short dynamic lookups. This is not a Node island or an unchecked path.
 
 // Native results already required ordinary array prototypes; Node arguments
 // accepted any dense array. Preserve both policies with the same traversal.
-export function serialize(value: unknown, plainArrays = false): string {
+// A generated dispatcher can retain its concrete return type in encode. Invoke
+// it only AFTER the complete validation, so accessors/toJSON cannot run first.
+// JSON.stringify on an erased native value repeatedly refreshes typed views;
+// the same builtin at the typed call site uses the native JSON encoder.
+export function serialize(value: unknown, plainArrays = false, encode: (() => string) | null = null): string {
   const seen = new Set<unknown>();
-  function data(descriptor: DataDescriptor | undefined): void {
+  function data(descriptor: any): void {
     if (!descriptor || !descriptor.enumerable || descriptor.get || descriptor.set) throw new Error("JSON properties must be enumerable data properties");
     check(descriptor.value);
   }
@@ -23,7 +29,7 @@ export function serialize(value: unknown, plainArrays = false): string {
     const array = Array.isArray(value);
     if (!array && Object.getPrototypeOf(value) !== Object.prototype) throw new Error("Expected a plain JSON object");
     if (array && plainArrays && Object.getPrototypeOf(value) !== Array.prototype) throw new Error("Expected a plain JSON object or array");
-    const descriptors = Object.getOwnPropertyDescriptors(value) as Record<string, DataDescriptor>;
+    const descriptors: any = Object.getOwnPropertyDescriptors(value);
     const keys = Object.keys(descriptors);
     if (array) {
       const length = (value as unknown[]).length;
@@ -36,7 +42,7 @@ export function serialize(value: unknown, plainArrays = false): string {
   }
   try {
     check(value);
-    return JSON.stringify(value);
+    return encode === null ? JSON.stringify(value) : encode();
   } catch (error) {
     throw new Error(`[next-scriptc] JSON serialization failed: ${error instanceof Error ? error.message : String(error)}`);
   }

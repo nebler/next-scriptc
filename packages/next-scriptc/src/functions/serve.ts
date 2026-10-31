@@ -1,7 +1,12 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { serialize } from "./json.ts";
 
-export function serveFunctions(dispatch: (id: string, body: string) => Promise<unknown>): void {
+// The envelope is internal only. The wire remains POST /<function-id>, JSON
+// arguments and a JSON result (or status 500 with {error: message}). Every
+// result passes the shared strict validator before its typed encoder runs.
+export type FunctionResult = { value: unknown; encode: () => string };
+
+export function serveFunctions(dispatch: (id: string, body: string) => Promise<FunctionResult>): void {
   const server = createServer(async (incoming: IncomingMessage, outgoing: ServerResponse) => {
     try {
       if (incoming.method !== "POST") throw new Error("Expected POST");
@@ -14,7 +19,7 @@ export function serveFunctions(dispatch: (id: string, body: string) => Promise<u
         incoming.on("close", () => { if (!ended) reject(new Error("Request aborted")); });
       });
       const value = await dispatch((incoming.url || "").slice(1), Buffer.concat(chunks).toString("utf8"));
-      const body = serialize(value, true);
+      const body = serialize(value.value, true, value.encode);
       outgoing.setHeader("content-type", "application/json");
       outgoing.end(body);
     } catch (error) {

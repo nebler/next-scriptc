@@ -28,7 +28,7 @@ export async function prepareFunctions(config, projectDir) {
   await mkdir(output, { recursive: true });
   const { functionServePath: serve } = await prepareNativeSources(projectDir, output, config);
   await writeFile(path.join(output, "package.json"), '{"type":"module"}\n');
-  let entry = `import { serveFunctions } from ${JSON.stringify(serve)};\n`;
+  let entry = `import { serveFunctions, type FunctionResult } from ${JSON.stringify(serve)};\n`;
   const cases = [];
   let index = 0;
   for (const [moduleIndex, module] of modules.entries()) {
@@ -37,10 +37,10 @@ export async function prepareFunctions(config, projectDir) {
     for (const fn of module.functions) {
       const name = `fn${index++}`;
       entry += `import { ${fn.name} as ${name} } from ${JSON.stringify(file)};\n`;
-      cases.push(`case ${JSON.stringify(fn.id)}: { const args = JSON.parse(body) as Parameters<typeof ${name}>; return await ${name}(${fn.params.map((_, i) => `args[${i}]`).join(", ")}); }`);
+      cases.push(`case ${JSON.stringify(fn.id)}: { const args = JSON.parse(body) as Parameters<typeof ${name}>; const value = await ${name}(${fn.params.map((_, i) => `args[${i}]`).join(", ")}); return { value, encode: () => JSON.stringify(value) }; }`);
     }
   }
-  entry += `serveFunctions(async (id: string, body: string): Promise<unknown> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
+  entry += `serveFunctions(async (id: string, body: string): Promise<FunctionResult> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
   const file = path.join(output, "entry.ts");
   await writeFile(file, entry);
   const compiler = compilerPath();
