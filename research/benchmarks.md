@@ -36,7 +36,7 @@ Sections are `coverage,cold,direct,production,isolation,threads`; `--sections di
 
 The route wraps callback `crypto.scrypt` in a Promise rather than using `scryptSync`: production Node should keep request handling responsive while password derivation runs in libuv's default threadpool. `crypto.timingSafeEqual` compares equal-length stored/derived Buffers before the email check. Unknown users still do the derivation and comparison. The same JWT fields/signature are compared in full. Parity cases include successful login, wrong password, unknown email, malformed JSON/shape, empty/missing/wrong types, multibyte passwords above bcrypt's boundary, and the scrypt input limit.
 
-Node documents [async scrypt, its memory bound and salt guidance](https://nodejs.org/docs/latest-v24.x/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback) and [threadpool use](https://nodejs.org/docs/latest-v24.x/api/crypto.html#crypto_scrypt_password_salt_keylen_options_callback). The [scriptc crypto reference](https://github.com/vercel-labs/scriptc/blob/main/docs/content/limitations/builtin-apis/crypto.mdx) supports scrypt options and timingSafeEqual but states that native derivations finish **before deferred callbacks**, blocking the caller. Isolation therefore measures runtime scheduling as well as process topology. The existing synchronous bcrypt regression remains reported; its isolation result cannot stand in for async production Node hashing. Async scrypt is also measured as an isolation load, with the same one-outstanding-request policy on both sides.
+Node documents [async scrypt, its memory bound and salt guidance](https://nodejs.org/docs/latest-v24.x/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback) and [threadpool use](https://nodejs.org/docs/latest-v24.x/api/crypto.html#cryptoscryptpassword-salt-keylen-options-callback). The [scriptc crypto reference](https://github.com/vercel-labs/scriptc/blob/main/docs/content/limitations/builtin-apis/crypto.mdx) supports scrypt options and timingSafeEqual but states that native derivations finish **before deferred callbacks**, blocking the caller. Isolation therefore measures runtime scheduling as well as process topology. The existing synchronous bcrypt regression remains reported; its isolation result cannot stand in for async production Node hashing. Async scrypt is also measured as an isolation load, with the same one-outstanding-request policy on both sides.
 
 ## Dynamic routes and the Node baseline
 
@@ -100,4 +100,33 @@ With the extra bounded scrypt workload and isolation pair, estimated suite time 
 
 ## Final local indicative run
 
-Pending the final implementation checks. Only one uninterrupted quick invocation will replace [JSON](benchmarks/local-indicative.json) and [generated Markdown](benchmarks/local-indicative.md). It is a loaded-Mac plumbing check, not public performance evidence.
+The only retained local run is [JSON](benchmarks/local-indicative.json) and [generated Markdown](benchmarks/local-indicative.md), produced by **one uninterrupted quick invocation** from clean implementation commit `925ce491982d18ddebd8b874c508ed9c30fb6ab4`. Status **complete**, all six sections, **186 observations**, **398.34 seconds** (6m38s), no workload failures. Both builds, final source/artifact/build-ID checks, worker-result equality and owned-process/port cleanup passed. Node 24.22.0, scriptc 0.4.6, Next 16.4.3, Apple M4 Pro / 12 logical CPUs; load averages fell from 23.55/32.62/35.48 to 18.98/27.56/32.29. No affinity; one repetition. These are indicative plumbing results, not public performance evidence.
+
+All six headline workloads are retained below. **Latency ratio = native / Node**; greater than 1 is a native loss. Login p50s come from only three measured requests. Each cell is one short local sample, not an uncertainty estimate.
+
+| Workload | Direct Node / native p50 ms | Direct ratio | Production Node / native p50 ms | Production ratio |
+| --- | ---: | ---: | ---: | ---: |
+| bcrypt login + JWT | 120.442 / 13726.338 | 113.967× | 134.053 / 10805.138 | 80.604× |
+| async scrypt login + JWT | 91.054 / 111.367 | 1.223× | 129.924 / 104.601 | 0.805× |
+| authenticated JWT verification | 1.358 / 2.005 | 1.476× | 2.512 / 0.920 | 0.366× |
+| 3,000-product search | 2.379 / 6.038 | 2.538× | 1.759 / 7.632 | 4.340× |
+| full Markdown article | 2.444 / 187.042 | 76.527× | 2.009 / 33.191 | 16.519× |
+| full-content RSS | 2.099 / 35.672 | 16.994× | 3.499 / 43.601 | 12.460× |
+
+Control results also remain visible: direct hello Node/native p50 **0.697/0.994 ms**, production **0.824/2.089 ms**; primes direct **6.144/5.288 ms**, production **5.575/5.521 ms**. The large native Markdown difference between direct and production, and verification's reversed runtime order across scopes, show why these noisy separate-run ratios cannot be treated as stable proxy costs or close compiler wins. Two samples flagged possible generator saturation; full C=1/8/64 throughput, tails, CPU, socket and peak RSS rows remain in the generated report.
+
+Production initialized idle RSS after hello was **117.59 MiB / one process Node** versus **148.95 MiB / twelve processes native**. This includes every resident native binary, not just the called route. Node's recorded prerendered paths are `/`, `/_global-error`, `/_not-found`, `/api/items/new`, `/favicon.ico`; hello and RSS are dynamic in both builds.
+
+For the hello isolation probe, Node p99 under bcrypt was **91.860 ms** versus **4.461 ms** under async scrypt; native was **6.338 ms** and **2.903 ms**, respectively. Native/Node primes-loaded hello p99 was **33.021/126.388 ms**. Baseline/loaded rows and sample counts for both probes and all loads are retained. This supports the scheduling distinction: the bcrypt isolation comparison is not a stand-in for production-style async Node password hashing. Small improvements over idle windows are scheduling noise, not evidence that adding load reduces latency.
+
+| Worker variant | Warmed RSS at 1 / 4 workers MiB | Net RSS / added worker MiB | Internal time at 4 workers ms |
+| --- | ---: | ---: | ---: |
+| Node object clones | 465.16 / 1039.73 | 191.53 | 791.36 |
+| Node hand-flattened SAB | 84.47 / 98.83 | 4.79 | 447.51 |
+| Native published objects | 82.75 / 83.81 | 0.35 | 298.58 |
+
+The stronger SAB baseline substantially narrows Node's object-clone cost. These are net warmed RSS differences and synthetic compute times, with GC/history caveats, not physical allocation sizes or application-route speedups.
+
+No login exceeded the default 30-second proxy deadline in **this** run. The historical loaded-Mac run did exceed it (41.63 s native direct cold login and production HTTP 500 with upstream reset); that remains a real-world consequence, summarized here rather than retained as stitched/intermediate result files. The new explicit timeout label was not exercised by this successful run. No timeout increase or login substitution was used.
+
+The standalone native scrypt probe passed 11 full response cases. `test/routes.mjs` now defines 49 HTTP cases and sets `DEMO_PROXY_TIMEOUT_MS`, but its full dev/production correctness run awaits the other agent's config consumer on merge; this branch does not modify that owned file. The final benchmark verifies all successful application fixture bytes across direct/production Node/native. Isolation probes check expected HTTP status; the synthetic worker section compares exact result totals. No real Sandbox was created.
