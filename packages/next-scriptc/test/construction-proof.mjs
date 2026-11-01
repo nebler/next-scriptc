@@ -46,8 +46,10 @@ test('whole closure allowlist rejects adversarial construction and keeps strict 
  assert.equal(constructionProof('function a(x:number):number{return b(x)} function b(x:number):number{return a(x)} export function f(x:number){return {n:a(x)}}').eligible,false);
  assert.equal(constructionProof('function a(x:number[]):number[]{return x.map(v=>a(x)[0])} export function f(x:number[]){return a(x)}').eligible,false);
  const fn={boundary,constructionProof:constructionProof(source)};
- assert.match(signature(fn,0).source,/serialize\(value,true/);
+ assert.match(signature(fn,0,false,false).source,/serialize\(value,true/);
  assert.doesNotMatch(signature(fn,0,false,true).source,/serialize\(value,true/);
+ // Default since 2026-11-01: proved functions take the construction path.
+ assert.doesNotMatch(signature(fn,0).source,/serialize\(value,true/);
 });
 test('screened native results match bytes and survive adversarial boundary data',async()=>{
  const dir=await mkdtemp(path.join(os.tmpdir(),'construction-native-'));

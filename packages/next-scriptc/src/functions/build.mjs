@@ -31,7 +31,7 @@ export async function prepareFunctions(config, projectDir) {
     const candidates=await discoverPromotions(projectDir,distDir,config);
     // Next cleans distDir after modifyConfig, but preserves its cache.
     const output=promotionOutput;
-    promotions=await buildPromotion(candidates,output,{linux:!!process.env.NEXT_SCRIPTC_VERCEL});
+    promotions=await buildPromotion(candidates,output,{linux:!!process.env.NEXT_SCRIPTC_VERCEL,...(process.env.NEXT_SCRIPTC_STRICT_RESULTS==='1'?{constructionResults:false}:{})});
     if(promotions.length&&config.output)throw new Error('[next-scriptc] Auto promotion requires the local Next server (export/standalone unsupported).');
     promotionFile=path.join(distDir,'scriptc-promotion/promotion.node');
   }

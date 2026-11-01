@@ -423,3 +423,10 @@ The full adapter suite passes 84 tests; both Node 24 shim tests pass.
 Temporary installs and symlinks are removed. No compiler, Docker, Vercel,
 third-party source, or root README change.
 [Design, evidence, and validation](dependency-closures.md).
+
+## 21. Construction results on by default (2026-11-01)
+
+- **Decision (Noah, after R2):** functions that pass the construction proof skip the reflective result check by default.
+- **Why:** R2's recommendation to keep it opt-in rested on scriptc lowering correctness. That risk is the same for the strict path. The construction path only removes result inspection, which the proof, the adversarial tests and 960k+ fuzzer comparisons cover. Shadow verification still guards native output in both modes. D2's stand-in run passes the amended gate only on this path.
+- **Opt-out:** `NEXT_SCRIPTC_STRICT_RESULTS=1` builds with strict validation. The switch is `constructionResultsDefault` in `promotion-signature.mjs`.
+- **Needs hosted confirmation** at the next Vercel checkpoint.

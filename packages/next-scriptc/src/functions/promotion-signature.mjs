@@ -1,5 +1,9 @@
 // Single switch for builder and signature defaults. Keep opt-in until approved.
-export const constructionResultsDefault = false;
+// Construction-proved functions skip reflective result validation (see
+// research/construction-proof-v2.md, default-on-readiness.md). Turned on
+// 2026-11-01 after the fuzzer and crash guard; opt out per build with
+// NEXT_SCRIPTC_STRICT_RESULTS=1.
+export const constructionResultsDefault = true;
 import {constructionValidator} from './construction-validator.mjs';
 // Build-time, host-independent lowering of a checked TypeScript signature.
 const abi = k => ({number:'f64',boolean:'bool',null:'bool',bytes:'bytes',json:'string',string:'string'})[k];
