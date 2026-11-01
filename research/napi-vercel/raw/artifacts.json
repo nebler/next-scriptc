@@ -1,0 +1,43 @@
+{
+  "compiler": "/Users/noah/code/next-scriptc/packages/next-scriptc/node_modules/scriptc/bin/scriptc.exe",
+  "args": [
+    "build",
+    "/Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/.checks/napi-vercel/stage/sidecar.ts",
+    "-o",
+    "/Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/.checks/napi-vercel/functions",
+    "--optimization",
+    "release",
+    "--strip",
+    "--no-keep-llvm",
+    "--node-islands=off"
+  ],
+  "scriptc": "0.4.6",
+  "pack": {
+    "name": "@scriptc/runtime-linux-x64-gnu",
+    "version": "0.4.6",
+    "description": "Precompiled scriptc runtime pack for Linux x64 glibc",
+    "license": "Apache-2.0",
+    "homepage": "https://scriptc.dev",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/vercel-labs/scriptc.git",
+      "directory": "packages/runtime-linux-x64-gnu"
+    },
+    "files": [
+      "artifacts",
+      "runtime-pack.json"
+    ],
+    "publishConfig": {
+      "access": "public"
+    },
+    "scripts": {
+      "build": "true",
+      "build:native": "node scripts/build.mjs"
+    }
+  },
+  "addon": {
+    "sha256": "9f579716b498a7c74ad0f4e7d6c09a357062d3c4656be54cc9c74a69c81771c8",
+    "bytes": 676944
+  },
+  "sidecarSha256": "75eacc5b94262d7eb63ecc84f8ec2c3b3114b998c2a8aeee551cf8fe9100a40b"
+}

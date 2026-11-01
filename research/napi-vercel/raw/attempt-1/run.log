@@ -1,0 +1,37 @@
+  Inspect         https://vercel.com/noahs-projects-8a075d15/next-scriptc/6t6m837NbEygQmxghuZLdRM8BkPU
+  Preview         https://next-scriptc-pee18yk1i-noahs-projects-8a075d15.vercel.app
+Preview 1 dpl_6t6m837NbEygQmxghuZLdRM8BkPU https://next-scriptc-pee18yk1i-noahs-projects-8a075d15.vercel.app
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+500 !== 200
+
+    at request (file:///Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/research/napi-vercel/run.mjs:29:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/research/napi-vercel/run.mjs:33:100 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 500,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'200' !== '503'
+
+    at pause (file:///Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/research/napi-vercel/run.mjs:14:344)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-2f99fb70/research/napi-vercel/run.mjs:37:128
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '200',
+  expected: '503',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.13.0

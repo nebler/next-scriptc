@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_E1f1NFba49jqsiMyC4JAFHGqEt3M",
+    "url": "https://next-scriptc-go1c53wvg-noahs-projects-8a075d15.vercel.app",
+    "productionUrl": null,
+    "inspectorUrl": "https://vercel.com/noahs-projects-8a075d15/next-scriptc/E1f1NFba49jqsiMyC4JAFHGqEt3M",
+    "readyState": "READY",
+    "target": null,
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_E1f1NFba49jqsiMyC4JAFHGqEt3M",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "message": "Deployment next-scriptc-go1c53wvg-noahs-projects-8a075d15.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel git connect",
+      "when": "Automatically deploy changes on every push"
+    },
+    {
+      "command": "vercel curl https://next-scriptc-go1c53wvg-noahs-projects-8a075d15.vercel.app",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect next-scriptc-go1c53wvg-noahs-projects-8a075d15.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}
