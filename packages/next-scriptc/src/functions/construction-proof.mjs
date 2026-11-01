@@ -3,7 +3,7 @@
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 export function constructionProof(text, ts) {
- try { ts ??= require(require.resolve('typescript',{paths:[new URL('../../../../examples/demo/',import.meta.url).pathname]})); }
+ try { ts ??= require(require.resolve('typescript',{paths:[process.cwd(),new URL('../../../../examples/demo/',import.meta.url).pathname]})); }
  catch { return {eligible:false,reason:'TypeScript checker unavailable',version:1}; }
  const file='/__next_scriptc_construction__.ts';
  const options={strict:true,noUncheckedIndexedAccess:true,target:ts.ScriptTarget.ESNext};
