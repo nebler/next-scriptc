@@ -24,3 +24,20 @@ Suggested regression checks:
 - Both reactors instantiate and return identical outputs in a SIMD-capable runtime.
 - Library builds and executable builds use the same feature selection, and cached scalar objects are not reused for SIMD.
 - A typed-array reduction checks whether bounds checks, aliasing, or JavaScript arithmetic semantics still block vectorization. Enabling target features alone does not resolve those barriers.
+
+## Local loop-limit finding and target feature sketch (2026-11-01)
+
+The [minimal-repro investigation](wasm-vectorization.md) identifies a separate library-mode cause: module-global numeric limits are absent from counted-loop matching. A local TypeScript-backend patch on `next-scriptc/wasm-counted-globals`, commit `b46987ce9`, admits immutable numeric globals in arithmetic bodies that cannot invoke user code. It preserves runtime values and guarded fallback. The S1-shaped integer loop then vectorizes at width 4 for wasm, width 16 for arm64, and width 8 for AVX2. Strict float wasm reduction remains scalar. Focused tests and non-timed correctness pass; the full gate and performance round are pending. No issue or PR has been filed.
+
+The following is an **untested integration sketch**, not an applied C++ patch. Keep the default scalar for compatibility:
+
+```cpp
+// Add bool WasmSimd to the helper's target-construction options.
+const StringRef Features =
+    WasmSimd && TargetTriple.getArch() == Triple::wasm32 ? "+simd128" : "";
+return std::unique_ptr<TargetMachine>(Definition->createTargetMachine(
+    TargetTriple, "generic", Features, targetOptions(TargetTriple), Reloc::PIC_,
+    CodeModel::Small, codeGenLevel(OptLevel)));
+```
+
+The CLI parser would add `--wasm-simd`; the compiler's target options and native-helper request would carry `wasmSimd: boolean`, default false. Reject it for non-wasm32 targets. Pass the feature to the target machine used by LLVM optimization as well as final emission. Include it in program/object/module cache keys and propagate `-msimd128` to auxiliary IR compilation and compatible linking. Add tests for option parsing, helper request propagation, feature-aware cache separation, scalar versus SIMD lane instructions, and identical reactor outputs. No helper rebuild or implementation validation has run for this sketch.

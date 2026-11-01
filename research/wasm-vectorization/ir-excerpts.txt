@@ -1,0 +1,170 @@
+full-opt.ll
+
+loop.b64.i.i:                                     ; preds = %bytes.read.done72.i.i, %loop.b64.lr.ph.i.i
+  %sc_l_j_1.0180.i.i = phi double [ 0.000000e+00, %loop.b64.lr.ph.i.i ], [ %t226.i.i, %bytes.read.done72.i.i ]
+  %sc_l_sum_0.0179.i.i = phi i32 [ 0, %loop.b64.lr.ph.i.i ], [ %t222.i.i, %bytes.read.done72.i.i ]
+  %t172.i.i = fadd double %t161.i.i, %sc_l_j_1.0180.i.i
+  %t178.i.i = fptosi double %t172.i.i to i64
+  %t179.i.i = freeze i64 %t178.i.i
+  %t180.i.i = sitofp i64 %t179.i.i to double
+  %t181.i.i = fcmp oeq double %t172.i.i, %t180.i.i
+  %t182.i.i = icmp ult i64 %t179.i.i, %t184.i.i
+  %t183.i.i = and i1 %t182.i.i, %t181.i.i
+  br i1 %t183.i.i, label %bytes.index.valid69.i.i, label %bytes.read.done67.i.i
+
+bytes.index.valid69.i.i:                          ; preds = %loop.b64.i.i
+  %t175.i.i = load ptr, ptr %t174.i.i, align 8, !tbaa !11, !invariant.load !13
+  %t185.i.i = trunc nuw i64 %t179.i.i to i32
+  %t186.i.i = getelementptr inbounds i8, ptr %t175.i.i, i32 %t185.i.i
+  %t187.i.i = load i8, ptr %t186.i.i, align 1, !tbaa !14
+  %t188.i.i = sext i8 %t187.i.i to i32
+  br label %bytes.read.done67.i.i
+
+bytes.read.done67.i.i:                            ; preds = %bytes.index.valid69.i.i, %loop.b64.i.i
+  %t191.i.i = phi i32 [ %t188.i.i, %bytes.index.valid69.i.i ], [ 0, %loop.b64.i.i ]
+  %t199.i.i = fptosi double %sc_l_j_1.0180.i.i to i64
+  %t203.i.i = icmp ult i64 %t199.i.i, %t202.i.i
+  br i1 %t203.i.i, label %bytes.index.valid74.i.i, label %bytes.read.done72.i.i
+
+bytes.index.valid74.i.i:                          ; preds = %bytes.read.done67.i.i
+  %t198.i.i = load ptr, ptr %t197.i.i, align 8, !tbaa !11, !invariant.load !13
+  %t204.i.i = trunc nuw i64 %t199.i.i to i32
+  %t205.i.i = getelementptr inbounds i8, ptr %t198.i.i, i32 %t204.i.i
+  %t206.i.i = load i8, ptr %t205.i.i, align 1, !tbaa !14
+  %t207.i.i = sext i8 %t206.i.i to i32
+  br label %bytes.read.done72.i.i
+
+bytes.read.done72.i.i:                            ; preds = %bytes.index.valid74.i.i, %bytes.read.done67.i.i
+  %t210.i.i = phi i32 [ %t207.i.i, %bytes.index.valid74.i.i ], [ 0, %bytes.read.done67.i.i ]
+  %t214.i.i = mul nsw i32 %t210.i.i, %t191.i.i
+  %t222.i.i = add i32 %t214.i.i, %sc_l_sum_0.0179.i.i
+  %t226.i.i = fadd double %sc_l_j_1.0180.i.i, 1.000000e+00
+  %t165.i.i = fcmp olt double %t226.i.i, %t160.i.i
+  br i1 %t165.i.i, label %loop.b64.i.i, label %loop.e62.i.i
+
+loop.e62.i.i:                                     ; preds = %bytes.read.done72.i.i, %loop.b60.i.i
+  %sc_l_sum_0.0.lcssa.i.i = phi i32 [ 0, %loop.b60.i.i ], [ %t222.i.i, %bytes.read.done72.i.i ]
+
+fixed-full-opt.ll
+vector.body:                                      ; preds = %loop.b99.lr.ph.i.i, %vector.body
+  %index = phi i64 [ %index.next, %vector.body ], [ 0, %loop.b99.lr.ph.i.i ]
+  %vec.phi = phi <4 x i32> [ %21, %vector.body ], [ zeroinitializer, %loop.b99.lr.ph.i.i ]
+  %13 = trunc i64 %index to i32
+  %14 = add nuw nsw i64 %index, %t186.i.i
+  %15 = trunc i64 %14 to i32
+  %16 = getelementptr inbounds i8, ptr %t370.i.i, i32 %15
+  %wide.load = load <4 x i8>, ptr %16, align 1, !tbaa !14
+  %17 = sext <4 x i8> %wide.load to <4 x i32>
+  %18 = getelementptr inbounds i8, ptr %t386.i.i, i32 %13
+  %wide.load48 = load <4 x i8>, ptr %18, align 1, !tbaa !14
+  %19 = sext <4 x i8> %wide.load48 to <4 x i32>
+  %20 = mul nsw <4 x i32> %19, %17
+  %21 = add <4 x i32> %20, %vec.phi
+  %index.next = add nuw i64 %index, 4
+  %22 = icmp eq i64 %index.next, %n.vec
+  br i1 %22, label %middle.block, label %vector.body, !llvm.loop !16
+
+middle.block:                                     ; preds = %vector.body
+  %23 = tail call i32 @llvm.vector.reduce.add.v4i32(<4 x i32> %21)
+  br i1 %cmp.n, label %bytes.version.done64.i.i, label %loop.b99.i.i.preheader
+
+loop.b99.i.i.preheader:                           ; preds = %loop.b99.lr.ph.i.i, %middle.block
+  %s349.0193.i.i.ph = phi i64 [ 0, %loop.b99.lr.ph.i.i ], [ %n.vec, %middle.block ]
+  %sc_l_sum_0.3192.i.i.ph = phi i32 [ 0, %loop.b99.lr.ph.i.i ], [ %23, %middle.block ]
+  br label %loop.b99.i.i
+
+loop.b71.i.i:                                     ; preds = %bytes.read.done79.i.i, %loop.b71.lr.ph.i.i
+  %sc_l_j_1.0197.i.i = phi double [ 0.000000e+00, %loop.b71.lr.ph.i.i ], [ %t276.i.i, %bytes.read.done79.i.i ]
+  %sc_l_sum_0.0196.i.i = phi i32 [ 0, %loop.b71.lr.ph.i.i ], [ %t272.i.i, %bytes.read.done79.i.i ]
+
+stock-wasm-natural-wasm-opt.ll
+loop.b5.i.i:                                      ; preds = %uint32.coerce.done17.i.i, %loop.c4.preheader.i.i
+  %s17.019.i.i = phi i32 [ 0, %loop.c4.preheader.i.i ], [ %t89.i.i, %uint32.coerce.done17.i.i ]
+  %sc_l_sum_0.018.i.i = phi i32 [ 0, %loop.c4.preheader.i.i ], [ %t86.i.i, %uint32.coerce.done17.i.i ]
+  %t50.i.i = icmp ult i32 %s17.019.i.i, %t2.i.i
+  br i1 %t50.i.i, label %bytes.read.done11.i.i, label %uint32.coerce.slow16.i.i
+
+bytes.read.done11.i.i:                            ; preds = %loop.b5.i.i
+  %t24.i.i = sitofp i32 %sc_l_sum_0.018.i.i to double
+  %t29.i.i = load ptr, ptr %t28.i.i, align 4, !tbaa !0, !invariant.load !3
+  %t32.i.i = getelementptr inbounds i8, ptr %t29.i.i, i32 %s17.019.i.i
+  %t33.i.i = load i8, ptr %t32.i.i, align 1, !tbaa !4
+  %t39.i.i = sitofp i8 %t33.i.i to double
+  %t45.i.i = load ptr, ptr %t44.i.i, align 4, !tbaa !0, !invariant.load !3
+  %t52.i.i = getelementptr inbounds i8, ptr %t45.i.i, i32 %s17.019.i.i
+  %t53.i.i = load i8, ptr %t52.i.i, align 1, !tbaa !4
+  %0 = sitofp i8 %t53.i.i to double
+  %1 = fmul nnan double %t39.i.i, %0
+
+stock-wasm-sum-wasm-opt.ll
+vector.body:                                      ; preds = %vector.body, %vector.ph
+  %index = phi i32 [ 0, %vector.ph ], [ %index.next, %vector.body ]
+  %vec.phi = phi <4 x i32> [ zeroinitializer, %vector.ph ], [ %1, %vector.body ]
+  %0 = getelementptr inbounds [4 x i8], ptr %t12.i.i, i32 %index
+  %wide.load = load <4 x i32>, ptr %0, align 1, !tbaa !4
+  %1 = add <4 x i32> %wide.load, %vec.phi
+  %index.next = add nuw i32 %index, 4
+  %2 = icmp eq i32 %index.next, %n.vec
+  br i1 %2, label %middle.block, label %vector.body, !llvm.loop !6
+
+middle.block:                                     ; preds = %vector.body
+  %3 = tail call i32 @llvm.vector.reduce.add.v4i32(<4 x i32> %1)
+  %cmp.n = icmp eq i32 %t3.i.i, %n.vec
+  br i1 %cmp.n, label %loop.e0.loopexit.i.i, label %loop.b2.i.i.preheader
+
+loop.b2.i.i.preheader:                            ; preds = %loop.b2.lr.ph.i.i, %middle.block
+  %s0.03.i.i.ph = phi i32 [ 0, %loop.b2.lr.ph.i.i ], [ %n.vec, %middle.block ]
+  %sc_l_sum_0.02.i.i.ph = phi i32 [ 0, %loop.b2.lr.ph.i.i ], [ %3, %middle.block ]
+  br label %loop.b2.i.i
+
+loop.b2.i.i:                                      ; preds = %loop.b2.i.i.preheader, %loop.b2.i.i
+  %s0.03.i.i = phi i32 [ %t31.i.i, %loop.b2.i.i ], [ %s0.03.i.i.ph, %loop.b2.i.i.preheader ]
+  %sc_l_sum_0.02.i.i = phi i32 [ %t24.i.i, %loop.b2.i.i ], [ %sc_l_sum_0.02.i.i.ph, %loop.b2.i.i.preheader ]
+  %t15.i.i = getelementptr inbounds [4 x i8], ptr %t12.i.i, i32 %s0.03.i.i
+  %t16.i.i = load i32, ptr %t15.i.i, align 1, !tbaa !4
+
+stock-wasm-float-wasm-opt.ll
+  %t46.i.i.epil = getelementptr inbounds [4 x i8], ptr %t39.i.i.epil, i32 %s17.012.i.i.epil.init
+  %t47.i.i.epil = load float, ptr %t46.i.i.epil, align 1, !tbaa !4
+  %t48.i.i.epil = fpext float %t47.i.i.epil to double
+  %0 = fmul double %t33.i.i.epil, %t48.i.i.epil
+  %1 = fadd double %sc_l_sum_0.011.i.i.epil.init, %0
+  br label %common.ret.sink.split.i
+
+common.ret.sink.split.i.loopexit5.unr-lcssa:      ; preds = %loop.b17.i.i
+  %lcmp.mod.not = icmp eq i32 %xtraiter, 0
+  br i1 %lcmp.mod.not, label %common.ret.sink.split.i, label %loop.b17.i.i.epil.preheader
+
+fixed-full-arm-opt.ll
+vector.body:                                      ; preds = %vector.main.loop.iter.check, %vector.body
+  %index = phi i64 [ %index.next, %vector.body ], [ 0, %vector.main.loop.iter.check ]
+  %vec.phi = phi <4 x i32> [ %partial.reduce, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi49 = phi <4 x i32> [ %partial.reduce59, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi50 = phi <4 x i32> [ %partial.reduce60, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi51 = phi <4 x i32> [ %partial.reduce61, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %11 = getelementptr inbounds nuw i8, ptr %10, i64 %index
+  %12 = getelementptr inbounds nuw i8, ptr %11, i64 16
+  %13 = getelementptr inbounds nuw i8, ptr %11, i64 32
+  %14 = getelementptr inbounds nuw i8, ptr %11, i64 48
+  %wide.load = load <16 x i8>, ptr %11, align 1, !tbaa !16
+  %wide.load52 = load <16 x i8>, ptr %12, align 1, !tbaa !16
+  %wide.load53 = load <16 x i8>, ptr %13, align 1, !tbaa !16
+  %wide.load54 = load <16 x i8>, ptr %14, align 1, !tbaa !16
+  %15 = getelementptr inbounds nuw i8, ptr %t371.i.i, i64 %index
+
+fixed-full-x86-opt.ll
+vector.body:                                      ; preds = %vector.main.loop.iter.check, %vector.body
+  %index = phi i64 [ %index.next, %vector.body ], [ 0, %vector.main.loop.iter.check ]
+  %vec.phi = phi <8 x i32> [ %38, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi49 = phi <8 x i32> [ %39, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi50 = phi <8 x i32> [ %40, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %vec.phi51 = phi <8 x i32> [ %41, %vector.body ], [ zeroinitializer, %vector.main.loop.iter.check ]
+  %18 = getelementptr inbounds nuw i8, ptr %17, i64 %index
+  %19 = getelementptr inbounds nuw i8, ptr %18, i64 8
+  %20 = getelementptr inbounds nuw i8, ptr %18, i64 16
+  %21 = getelementptr inbounds nuw i8, ptr %18, i64 24
+  %wide.load = load <8 x i8>, ptr %18, align 1, !tbaa !16
+  %wide.load52 = load <8 x i8>, ptr %19, align 1, !tbaa !16
+  %wide.load53 = load <8 x i8>, ptr %20, align 1, !tbaa !16
+  %wide.load54 = load <8 x i8>, ptr %21, align 1, !tbaa !16
+  %22 = sext <8 x i8> %wide.load to <8 x i32>

@@ -1,0 +1,1 @@
+const dimensions=768;export function sum(n:number,_values:number[]):number {const a=new Int32Array(dimensions),b=new Int32Array(dimensions);for(let i=0;i<a.length;i++){a[i]=(i*31%255)-127;b[i]=(i*17%255)-127;}let total=0;for(let row=0;row<n;row++){let sum=0;for(let i=0;i<dimensions;i++)sum=(sum+a[i])|0;total+=sum;}return total;}

@@ -1,0 +1,185 @@
+diff --git a/packages/compiler/src/backend/llvm/counted-global-limits.test.ts b/packages/compiler/src/backend/llvm/counted-global-limits.test.ts
+new file mode 100644
+index 000000000..895c61799
+--- /dev/null
++++ b/packages/compiler/src/backend/llvm/counted-global-limits.test.ts
+@@ -0,0 +1,53 @@
++import { expect, test } from "vitest";
++import { BOOL, F64, type IrExpr, type IrGlobal, type IrLocal, type IrStmt } from "../../ir/ir.js";
++import { matchIntegerCountedForLoop } from "../../ir/integer-loops.js";
++import { countedGlobalLocals } from "./counted-global-limits.js";
++const loc = { file: "globals.ts", start: 0, end: 0 };
++const num = (value: number): IrExpr => ({ kind: "numLit", value, type: F64, loc });
++const ref = (localId: string): IrExpr => ({ kind: "varRef", localId, type: F64, loc });
++const global: IrGlobal = { id: "limit", name: "limit", type: F64, mutable: false };
++const locals = new Map<string, IrLocal>([["i", { id: "i", name: "i", type: F64, mutable: true }]]);
++function loop(
++  body: IrStmt[] = [
++    {
++      kind: "exprStmt",
++      expr: { kind: "libCall", fn: "math.imul", args: [ref("i"), num(1)], type: F64, loc },
++      loc,
++    },
++  ],
++): IrStmt & { kind: "for" } {
++  return {
++    kind: "for",
++    loc,
++    init: { kind: "varDecl", localId: "i", init: num(0), loc },
++    cond: { kind: "bin", op: "<", left: ref("i"), right: ref("limit"), type: BOOL, loc },
++    update: {
++      kind: "assign",
++      localId: "i",
++      value: { kind: "bin", op: "+", left: ref("i"), right: num(1), type: F64, loc },
++      loc,
++    },
++    body,
++  };
++}
++test("a global limit uses a guarded runtime endpoint, never a literal", () => {
++  const s = loop();
++  expect(matchIntegerCountedForLoop(s, locals)).toBeNull();
++  const match = matchIntegerCountedForLoop(s, countedGlobalLocals(s, locals, [global]));
++  expect(match?.limitGuarded).toBe(true);
++  expect(match?.limit).toEqual(ref("limit"));
++});
++test("mutable and initialization-checked globals stay excluded", () => {
++  for (const extra of [{ mutable: true }, { tdz: true as const }, { initFlag: "ready" }])
++    expect(countedGlobalLocals(loop(), locals, [{ ...global, ...extra }]).has("limit")).toBe(false);
++});
++test("calls that could reenter initialization stay excluded", () => {
++  const s = loop([
++    { kind: "exprStmt", expr: { kind: "call", callee: "callback", args: [], type: F64, loc }, loc },
++  ]);
++  expect(countedGlobalLocals(s, locals, [global])).toBe(locals);
++});
++test("a write to the limit cannot become a counted loop", () => {
++  const s = loop([{ kind: "assign", localId: "limit", value: num(0), loc }]);
++  expect(matchIntegerCountedForLoop(s, countedGlobalLocals(s, locals, [global]))).toBeNull();
++});
+diff --git a/packages/compiler/src/backend/llvm/counted-global-limits.ts b/packages/compiler/src/backend/llvm/counted-global-limits.ts
+new file mode 100644
+index 000000000..cd5282c2e
+--- /dev/null
++++ b/packages/compiler/src/backend/llvm/counted-global-limits.ts
+@@ -0,0 +1,46 @@
++import type { IrExpr, IrGlobal, IrLocal, IrStmt } from "../../ir/ir.js";
++import { everyExprChild, everyStmtChild } from "../../ir/traverse.js";
++
++/** Immutable numeric globals remain runtime loads in libraries. Admit them
++ * as counted-loop limits only in arithmetic bodies that cannot reenter the
++ * library initializer. Never substitute their initializer literals. */
++export function countedGlobalLocals(
++  loop: IrStmt & { kind: "for" },
++  locals: ReadonlyMap<string, IrLocal>,
++  globals: readonly IrGlobal[],
++): ReadonlyMap<string, IrLocal> {
++  const expr = (e: IrExpr): boolean => {
++    switch (e.kind) {
++      case "numLit":
++      case "varRef":
++      case "bin":
++      case "unary":
++        break;
++      case "bytesIntrinsic":
++        if (e.method !== "get" && e.method !== "length") return false;
++        break;
++      case "libCall":
++        if (e.fn !== "math.imul") return false;
++        break;
++      default:
++        return false;
++    }
++    return everyExprChild(e, expr, stmt);
++  };
++  const stmt = (s: IrStmt): boolean => {
++    if (s.kind !== "assign" && s.kind !== "varDecl" && s.kind !== "block" && s.kind !== "exprStmt")
++      return false;
++    return everyStmtChild(s, expr, stmt);
++  };
++  if (!loop.body.every(stmt)) return locals;
++  const result = new Map(locals);
++  for (const global of globals)
++    if (
++      !global.mutable &&
++      !global.tdz &&
++      global.initFlag === undefined &&
++      global.type.kind === "f64"
++    )
++      result.set(global.id, global);
++  return result;
++}
+diff --git a/packages/compiler/src/backend/llvm/emit-statements.ts b/packages/compiler/src/backend/llvm/emit-statements.ts
+index fc38691e9..b57fa5eac 100644
+--- a/packages/compiler/src/backend/llvm/emit-statements.ts
++++ b/packages/compiler/src/backend/llvm/emit-statements.ts
+@@ -1,3 +1,4 @@
++import { countedGlobalLocals } from "./counted-global-limits.js";
+ /* LlEmitter's statement emission: the statement switch, try/catch, switch, loop copies, speculative writes and string self-concatenation. */
+ import { emitInlineArrayInit, inlineFieldTail } from "./inline-arrays.js";
+ import { emitLoopBytesHeaders } from "./bytes-headers.js";
+@@ -1032,7 +1033,7 @@ export function emitStmtBody(emitter: LlEmitter, s: IrStmt): void {
+         !integerLoop && LOOPS.of(emitter).countedLoopsEnabled
+           ? matchIntegerCountedForLoop(
+               s,
+-              emitter.numericLocals,
++              countedGlobalLocals(s, emitter.numericLocals, emitter.mod.globals ?? []),
+               emitter.integerRanges,
+               LOOPS.of(emitter).unaliasedArrays,
+             )
+@@ -1139,7 +1140,7 @@ export function emitStmtBody(emitter: LlEmitter, s: IrStmt): void {
+         versionable && !countedLoop && integerLoop && LOOPS.of(emitter).countedLoopsEnabled
+           ? matchIntegerCountedForLoop(
+               s,
+-              emitter.numericLocals,
++              countedGlobalLocals(s, emitter.numericLocals, emitter.mod.globals ?? []),
+               emitter.integerRanges,
+               LOOPS.of(emitter).unaliasedArrays,
+             )
+diff --git a/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/counted-global-limits.ts.json b/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/counted-global-limits.ts.json
+new file mode 100644
+index 000000000..9cff995b3
+--- /dev/null
++++ b/packages/compiler/test/ts7/baselines/order-parity/tests/corpus/counted-global-limits.ts.json
+@@ -0,0 +1,6 @@
++{
++ "order": [
++  "<repo>/tests/corpus/counted-global-limits.ts"
++ ],
++ "diags": []
++}
+diff --git a/tests/corpus/counted-global-limits.ts b/tests/corpus/counted-global-limits.ts
+new file mode 100644
+index 000000000..64c63d63c
+--- /dev/null
++++ b/tests/corpus/counted-global-limits.ts
+@@ -0,0 +1,19 @@
++const dimensions = 17;
++const fractional = 3.5;
++const negative = -2;
++const invalid = NaN;
++function dot(a: Int8Array, b: Int8Array): number {
++  let sum = 0;
++  for (let i = 0; i < dimensions; i++) sum = (sum + Math.imul(a[i], b[i])) | 0;
++  return sum;
++}
++function bounds(): void {
++  let a = 0, b = 0, c = 0;
++  for (let i = 0; i < fractional; i++) a += Math.imul(i, 1);
++  for (let i = 0; i < negative; i++) b += Math.imul(i, 1);
++  for (let i = 0; i < invalid; i++) c += Math.imul(i, 1);
++  console.log(a, b, c);
++}
++console.log(dot(new Int8Array([127, -128, 3]), new Int8Array([127, -128, -4])));
++console.log(dot(new Int8Array(17).fill(-128), new Int8Array(17).fill(127)));
++bounds();
+diff --git a/tests/harness/corpus-costs/counted-global-limits.ts.json b/tests/harness/corpus-costs/counted-global-limits.ts.json
+new file mode 100644
+index 000000000..935b91476
+--- /dev/null
++++ b/tests/harness/corpus-costs/counted-global-limits.ts.json
+@@ -0,0 +1,4 @@
++{
++  "plain": 3694,
++  "san": 8411
++}
