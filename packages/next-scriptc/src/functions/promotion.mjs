@@ -1,7 +1,7 @@
 import {stabilityDefaults,decideLane} from './promotion-policy.mjs';
 import {encodeArguments,decodeResult,canonicalResult} from './promotion-encodings.mjs';
 import { createHash } from 'node:crypto';
-import { serialize } from './json.ts';
+import { serialize } from './json.mjs';
 export function estimateSize(args){let size=0;for(const a of args)size+=typeof a==='string'?a.length:Array.isArray(a)?a.length:1;return Math.floor(Math.log2(Math.max(1,size)));}
 const median=a=>[...a].sort((a,b)=>a-b)[Math.floor(a.length/2)];
 export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, policy:overrides={}, now=()=>performance.now(), log=console.log, jsSamples=20, sampleEvery=20, perMinute=50, maxPending=2, mode='auto', schemas={}, timing=false, onTiming=()=>{}, fallbackWindow=20, fallbackThreshold=0.5}={}){

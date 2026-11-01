@@ -430,3 +430,30 @@ third-party source, or root README change.
 - **Why:** R2's recommendation to keep it opt-in rested on scriptc lowering correctness. That risk is the same for the strict path. The construction path only removes result inspection, which the proof, the adversarial tests and 960k+ fuzzer comparisons cover. Shadow verification still guards native output in both modes. D2's stand-in run passes the amended gate only on this path.
 - **Opt-out:** `NEXT_SCRIPTC_STRICT_RESULTS=1` builds with strict validation. The switch is `constructionResultsDefault` in `promotion-signature.mjs`.
 - **Needs hosted confirmation** at the next Vercel checkpoint.
+
+## 22. Packed installation and local hosted artifact retention (2026-11-01)
+
+A fresh npm tarball install exposed a config-loading failure hidden by workspace
+symlinks. Node cannot strip `json.ts` inside `node_modules`. Node clients now
+use a generated JavaScript copy, with a synchronization test. Construction and
+dependency checks no longer fall back to `examples/demo`, and the builder keeps
+the proof produced with the app's checker. The source resolution audit found no
+other repository-relative optional or peer dependency fallback.
+
+The hosted branch also bypassed the cache publication fix. Both paths now build
+promotion under Next's preserved cache and publish before the output adapter.
+A local fixture exercises the real Next cleanup and adapter hooks without the
+Vercel CLI, credentials, linking, deployment, or API calls. Zig emits a GNU Linux
+x64 ELF addon; all runtime files survive into the traced Node function and the
+simulated final `.vercel/output`. Plain Node and Edge fixtures exclude them.
+
+The packed app uses Next 16.4.3 and its own TypeScript 5.9.3. A JSON loop, ESM
+helper closure, optional-field input, and destructured parameter all compile.
+Each completes three verified native shadows. All 280 HTTP bodies match the
+JS-only build, with no native fallback, demotion, unavailable-addon message,
+or missing crash guard. This is a correctness and packaging result, with no
+performance or hosted execution claim. All 86 adapter tests and both Node 24
+shim tests pass. The external
+app and its dependencies and builds are removed automatically. No scriptc,
+Docker container, or root README change.
+[Findings, retained results, and commands](install-and-vercel-build-checks.md).

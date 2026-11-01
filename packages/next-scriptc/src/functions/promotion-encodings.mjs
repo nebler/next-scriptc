@@ -1,4 +1,4 @@
-import { serialize } from './json.ts';
+import { serialize } from './json.mjs';
 
 // UTF-8 cannot round-trip lone UTF-16 surrogates. Refuse rather than silently
 // replacing them. Dispatcher falls back to JS, preserving observable behavior.

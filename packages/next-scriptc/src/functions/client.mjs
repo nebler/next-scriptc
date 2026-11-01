@@ -1,5 +1,5 @@
 import { request } from "node:http";
-import { serialize } from "./json.ts";
+import { serialize } from "./json.mjs";
 import { sidecar, nativeAgent as agent } from "./sidecar.mjs";
 
 export async function callNative(port, id, args) {

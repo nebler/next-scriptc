@@ -1,0 +1,75 @@
+{
+  "node": "v26.13.0",
+  "next": "16.4.3",
+  "typescript": "5.9.3",
+  "checks": [
+    "packed install, app checker, discovery, ESM closure, construction, retained addon, crash guard, shadow, HTTP byte parity",
+    "offline Vercel lifecycle: Zig linux-x64-gnu ELF retained in function output, plain/edge excluded"
+  ],
+  "functions": [
+    {
+      "id": "32a43a61adc1e6801724",
+      "calls": 70,
+      "native": 0,
+      "fallback": 0,
+      "verified": 3
+    },
+    {
+      "id": "5460055c4ca01542b4ee",
+      "calls": 70,
+      "native": 0,
+      "fallback": 0,
+      "verified": 3
+    },
+    {
+      "id": "c58de95b48cf76867176",
+      "calls": 70,
+      "native": 0,
+      "fallback": 0,
+      "verified": 3
+    },
+    {
+      "id": "cd4bb8dcf98955380879",
+      "calls": 70,
+      "native": 0,
+      "fallback": 0,
+      "verified": 3
+    }
+  ],
+  "construction": [
+    {
+      "name": "loop",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan"
+    },
+    {
+      "name": "imported",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan"
+    },
+    {
+      "name": "optional",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan"
+    },
+    {
+      "name": "destructured",
+      "eligible": false,
+      "reason": "unsupported helper parameter at 1"
+    }
+  ],
+  "linux": {
+    "format": "ELF",
+    "machine": 62,
+    "target": "linux-x64-gnu"
+  },
+  "adapterTests": {
+    "passed": 86,
+    "failed": 0
+  },
+  "shimTests": {
+    "node": "24.22.0",
+    "passed": 2,
+    "failed": 0
+  }
+}

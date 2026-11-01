@@ -13,7 +13,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  if(unsupportedResolver)throw Error('dependency closure: custom application resolver requires explicit integration');
  // Discovery passes the app's TypeScript; standalone callers resolve it from
  // the app (cwd) first, like construction-proof.mjs.
- ts??=require(require.resolve('typescript',{paths:[process.cwd(),new URL('../../../../examples/demo/',import.meta.url).pathname]}));
+ ts??=require(require.resolve('typescript',{paths:[process.cwd()]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
  const modules=new Map(), active=new Set(), chunks=[];
  function resolve(specifier, importer) {
