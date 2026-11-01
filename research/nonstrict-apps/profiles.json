@@ -1,0 +1,1532 @@
+{
+  "node": "v24.22.0",
+  "arch": "arm64",
+  "cpu": "Apple M4 Pro",
+  "load": [
+    17.81005859375,
+    16.095703125,
+    12.57080078125
+  ],
+  "method": "V8 inspector CPU sampling; 3 x >=500ms process CPU; 10 warmups; 500us interval; active unweighted samples",
+  "results": [
+    {
+      "name": "umami-saveEventData-20",
+      "fixture": {
+        "nestedProperties": 20,
+        "leaves": 100,
+        "inputBytes": 2094
+      },
+      "outputBytes": 3,
+      "sha256": null,
+      "rounds": [
+        {
+          "requests": 4800,
+          "cpuUs": 500132,
+          "cpuUsPerRequest": 104.19416666666666,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 621,
+            "activeSamples": 621,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 29,
+              "b:cross-module + Date formatting": 178,
+              "d:already-native crypto dependency": 172,
+              "b:cross-module + any boundary + closure": 153,
+              "b:async sync core extraction": 72,
+              "d:GC": 17
+            },
+            "shares": {
+              "d:other": 4.669887278582931,
+              "b:cross-module + Date formatting": 28.663446054750402,
+              "d:already-native crypto dependency": 27.697262479871174,
+              "b:cross-module + any boundary + closure": 24.63768115942029,
+              "b:async sync core extraction": 11.594202898550725,
+              "d:GC": 2.737520128824477
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                177
+              ],
+              [
+                "flatten file://umami/src/lib/data.ts:15",
+                104
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:388",
+                71
+              ],
+              [
+                "(anonymous) :27",
+                61
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:363",
+                46
+              ],
+              [
+                "run :0",
+                29
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                24
+              ],
+              [
+                "createKeyValue file://umami/src/lib/data.ts:52",
+                18
+              ],
+              [
+                "(garbage collector) :0",
+                17
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                10
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                10
+              ],
+              [
+                "saveEventData file://umami/src/queries/sql/events/saveEventData.ts:17",
+                8
+              ],
+              [
+                "(program) :0",
+                8
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                6
+              ],
+              [
+                "isValidDateValue :26",
+                6
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:75",
+                5
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                4
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                3
+              ],
+              [
+                "RandomBytesJob :0",
+                2
+              ],
+              [
+                "cpuUsage :0",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "getStoredStringValue file://umami/src/lib/data.ts:45",
+                1
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:19",
+                1
+              ],
+              [
+                "runQuery file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:70",
+                1
+              ],
+              [
+                "wrappedFn node:internal/errors:538",
+                1
+              ],
+              [
+                "umami_flatten :3",
+                1
+              ],
+              [
+                "get node:internal/util:638",
+                1
+              ],
+              [
+                "createMany file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:71",
+                1
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:27",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                177
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                86
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                71
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                61
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                46
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                29
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                21
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                18
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                18
+              ],
+              [
+                "(garbage collector) <- (root)",
+                17
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                10
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                10
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                8
+              ],
+              [
+                "(program) <- (root)",
+                8
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                6
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                4
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                2
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "wrappedFn <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                1
+              ],
+              [
+                "umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 4990,
+          "cpuUs": 500188,
+          "cpuUsPerRequest": 100.23807615230461,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 716,
+            "activeSamples": 716,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 38,
+              "b:cross-module + any boundary + closure": 202,
+              "b:async sync core extraction": 105,
+              "d:already-native crypto dependency": 173,
+              "b:cross-module + Date formatting": 189,
+              "d:GC": 9
+            },
+            "shares": {
+              "d:other": 5.307262569832402,
+              "b:cross-module + any boundary + closure": 28.212290502793294,
+              "b:async sync core extraction": 14.664804469273744,
+              "d:already-native crypto dependency": 24.162011173184357,
+              "b:cross-module + Date formatting": 26.39664804469274,
+              "d:GC": 1.2569832402234637
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                189
+              ],
+              [
+                "flatten :15",
+                140
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:27",
+                84
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:388",
+                66
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:363",
+                41
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                28
+              ],
+              [
+                "run :0",
+                26
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                16
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                16
+              ],
+              [
+                "createKeyValue :52",
+                15
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                13
+              ],
+              [
+                "isValidDateValue :26",
+                12
+              ],
+              [
+                "saveEventData :17",
+                11
+              ],
+              [
+                "(program) :0",
+                9
+              ],
+              [
+                "(garbage collector) :0",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                6
+              ],
+              [
+                "createMany file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:71",
+                5
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:0",
+                5
+              ],
+              [
+                "(anonymous) :16",
+                4
+              ],
+              [
+                "cpuUsage :0",
+                4
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                3
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:75",
+                3
+              ],
+              [
+                "RandomBytesJob :0",
+                3
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:19",
+                3
+              ],
+              [
+                "umami_flatten :3",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                189
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                118
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                84
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                66
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                41
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                28
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                26
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                22
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                16
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                16
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                15
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                12
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                11
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                11
+              ],
+              [
+                "(program) <- (root)",
+                9
+              ],
+              [
+                "(garbage collector) <- (root)",
+                9
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "createMany <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                3
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                3
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 4690,
+          "cpuUs": 500446,
+          "cpuUsPerRequest": 106.7049040511727,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 660,
+            "activeSamples": 660,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 34,
+              "b:cross-module + any boundary + closure": 181,
+              "d:already-native crypto dependency": 170,
+              "b:async sync core extraction": 70,
+              "d:GC": 21,
+              "b:cross-module + Date formatting": 184
+            },
+            "shares": {
+              "d:other": 5.151515151515151,
+              "b:cross-module + any boundary + closure": 27.424242424242426,
+              "d:already-native crypto dependency": 25.757575757575758,
+              "b:async sync core extraction": 10.606060606060606,
+              "d:GC": 3.1818181818181817,
+              "b:cross-module + Date formatting": 27.87878787878788
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                182
+              ],
+              [
+                "flatten :15",
+                128
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                54
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:388",
+                50
+              ],
+              [
+                "(anonymous) :27",
+                48
+              ],
+              [
+                "(anonymous) :16",
+                32
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                22
+              ],
+              [
+                "(garbage collector) :0",
+                21
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                20
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:363",
+                14
+              ],
+              [
+                "run :0",
+                11
+              ],
+              [
+                "saveEventData :17",
+                10
+              ],
+              [
+                "isValidDateValue :26",
+                10
+              ],
+              [
+                "createKeyValue :52",
+                10
+              ],
+              [
+                "(program) :0",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                7
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                6
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:19",
+                6
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                5
+              ],
+              [
+                "runQuery file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:70",
+                4
+              ],
+              [
+                "RandomBytesJob :0",
+                3
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:75",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "cpuUsage :0",
+                1
+              ],
+              [
+                "umami_flatten :3",
+                1
+              ],
+              [
+                "getStoredStringValue :45",
+                1
+              ],
+              [
+                "umami_stored :3",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                182
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                107
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                54
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                50
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                48
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                28
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                22
+              ],
+              [
+                "(garbage collector) <- (root)",
+                21
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                21
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                20
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                14
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                11
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                10
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                10
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                10
+              ],
+              [
+                "(program) <- (root)",
+                9
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                5
+              ],
+              [
+                "runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                3
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (root)",
+                1
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "umami-saveEventData-100",
+      "fixture": {
+        "nestedProperties": 100,
+        "leaves": 500,
+        "inputBytes": 10254
+      },
+      "outputBytes": 3,
+      "sha256": null,
+      "rounds": [
+        {
+          "requests": 1030,
+          "cpuUs": 505588,
+          "cpuUsPerRequest": 490.8621359223301,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 747,
+            "activeSamples": 747,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 34,
+              "d:already-native crypto dependency": 197,
+              "b:cross-module + Date formatting": 194,
+              "b:async sync core extraction": 101,
+              "b:cross-module + any boundary + closure": 205,
+              "d:GC": 16
+            },
+            "shares": {
+              "d:other": 4.551539491298527,
+              "d:already-native crypto dependency": 26.37215528781794,
+              "b:cross-module + Date formatting": 25.970548862115127,
+              "b:async sync core extraction": 13.520749665327978,
+              "b:cross-module + any boundary + closure": 27.44310575635877,
+              "d:GC": 2.14190093708166
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                194
+              ],
+              [
+                "flatten file://umami/src/lib/data.ts:15",
+                139
+              ],
+              [
+                "umami_uuid :3",
+                83
+              ],
+              [
+                "(anonymous) :27",
+                73
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                62
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                39
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                25
+              ],
+              [
+                "createKeyValue :52",
+                22
+              ],
+              [
+                "(garbage collector) :0",
+                16
+              ],
+              [
+                "run :0",
+                14
+              ],
+              [
+                "saveEventData file://umami/src/queries/sql/events/saveEventData.ts:17",
+                12
+              ],
+              [
+                "RandomBytesJob :0",
+                11
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                9
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                7
+              ],
+              [
+                "isValidDateValue :26",
+                7
+              ],
+              [
+                "(program) :0",
+                7
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                3
+              ],
+              [
+                "cpuUsage :0",
+                3
+              ],
+              [
+                "createMany file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:71",
+                3
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:0",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) node:inspector:66",
+                1
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:19",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:75",
+                1
+              ],
+              [
+                "(anonymous) :0",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-d4f27fae/research/coverage-baseline/profile.mjs:78",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                194
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                114
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                83
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                73
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                61
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                32
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                25
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                24
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                22
+              ],
+              [
+                "(garbage collector) <- (root)",
+                16
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                14
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                12
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                11
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                9
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                9
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                7
+              ],
+              [
+                "(program) <- (root)",
+                7
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- (root)",
+                5
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "createMany <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "createMany <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                1
+              ],
+              [
+                "v4 <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 1300,
+          "cpuUs": 503064,
+          "cpuUsPerRequest": 386.9723076923077,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 587,
+            "activeSamples": 587,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 11,
+              "b:cross-module + Date formatting": 172,
+              "d:already-native crypto dependency": 149,
+              "b:cross-module + any boundary + closure": 157,
+              "b:async sync core extraction": 84,
+              "d:GC": 14
+            },
+            "shares": {
+              "d:other": 1.8739352640545144,
+              "b:cross-module + Date formatting": 29.3015332197615,
+              "d:already-native crypto dependency": 25.38330494037479,
+              "b:cross-module + any boundary + closure": 26.74616695059625,
+              "b:async sync core extraction": 14.310051107325384,
+              "d:GC": 2.385008517887564
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                172
+              ],
+              [
+                "flatten :15",
+                105
+              ],
+              [
+                "(anonymous) :27",
+                72
+              ],
+              [
+                "umami_uuid :3",
+                70
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                52
+              ],
+              [
+                "(anonymous) :16",
+                25
+              ],
+              [
+                "createKeyValue :52",
+                18
+              ],
+              [
+                "(garbage collector) :0",
+                14
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                12
+              ],
+              [
+                "run :0",
+                10
+              ],
+              [
+                "isValidDateValue :26",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                7
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                5
+              ],
+              [
+                "(program) :0",
+                4
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                3
+              ],
+              [
+                "cpuUsage :0",
+                3
+              ],
+              [
+                "saveEventData :17",
+                2
+              ],
+              [
+                "RandomBytesJob :0",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                172
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                88
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                72
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                70
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                51
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                20
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                18
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                17
+              ],
+              [
+                "(garbage collector) <- (root)",
+                14
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                12
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                10
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                9
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                5
+              ],
+              [
+                "(program) <- (root)",
+                4
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "v4 <- (root)",
+                1
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 1080,
+          "cpuUs": 504149,
+          "cpuUsPerRequest": 466.80462962962963,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 757,
+            "activeSamples": 757,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 17,
+              "d:already-native crypto dependency": 208,
+              "b:cross-module + Date formatting": 212,
+              "b:async sync core extraction": 94,
+              "b:cross-module + any boundary + closure": 211,
+              "d:GC": 15
+            },
+            "shares": {
+              "d:other": 2.2457067371202113,
+              "d:already-native crypto dependency": 27.476882430647294,
+              "b:cross-module + Date formatting": 28.005284015852048,
+              "b:async sync core extraction": 12.417437252311757,
+              "b:cross-module + any boundary + closure": 27.873183619550858,
+              "d:GC": 1.9815059445178336
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                212
+              ],
+              [
+                "flatten :15",
+                155
+              ],
+              [
+                "umami_uuid :3",
+                88
+              ],
+              [
+                "(anonymous) :27",
+                81
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                79
+              ],
+              [
+                "(anonymous) :16",
+                28
+              ],
+              [
+                "createKeyValue :52",
+                16
+              ],
+              [
+                "(garbage collector) :0",
+                15
+              ],
+              [
+                "run :0",
+                14
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                12
+              ],
+              [
+                "isValidDateValue :26",
+                11
+              ],
+              [
+                "(program) :0",
+                8
+              ],
+              [
+                "get node:internal/util:638",
+                7
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:112",
+                6
+              ],
+              [
+                "RandomBytesJob :0",
+                5
+              ],
+              [
+                "saveEventData :17",
+                5
+              ],
+              [
+                "randomUUID node:internal/crypto/random:406",
+                4
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:120",
+                4
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:363",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:19",
+                1
+              ],
+              [
+                "flattenJSON file://umami/src/lib/data.ts:14",
+                1
+              ],
+              [
+                "umami_flatten :3",
+                1
+              ],
+              [
+                "cpuUsage :0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                212
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                130
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                88
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                81
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                78
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                25
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                24
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                16
+              ],
+              [
+                "(garbage collector) <- (root)",
+                15
+              ],
+              [
+                "run <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                14
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                12
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                11
+              ],
+              [
+                "(program) <- (root)",
+                8
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "RandomBytesJob <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                5
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                4
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "v4 <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "flattenJSON <- (root)",
+                1
+              ],
+              [
+                "umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cryptoThisCheck <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "note": "Only Umami was executed in this run. Inherited K1 rows from profile.mjs selected-run merge removed."
+}

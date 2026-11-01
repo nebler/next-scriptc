@@ -4,13 +4,9 @@ import {localConstruction} from './construction-local.mjs';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 export function constructionProof(text, ts) {
- try { ts ??= require(require.resolve('typescript',{paths:[process.cwd(),new URL('../../../../examples/demo/',import.meta.url).pathname]})); }
+ try { ts ??= require(require.resolve('typescript',{paths:[process.cwd()]})); }
  catch { return {eligible:false,reason:'TypeScript checker unavailable',version:1}; }
- const file='/__next_scriptc_construction__.ts';
- const options={strict:true,noUncheckedIndexedAccess:true,target:ts.ScriptTarget.ESNext,types:[]};
- const host=ts.createCompilerHost(options), original=host.getSourceFile.bind(host);
- host.getSourceFile=(name,...args)=>name===file?ts.createSourceFile(file,text,options.target,true):original(name,...args);
- const program=ts.createProgram([file],options,host),source=program.getSourceFile(file),checker=program.getTypeChecker();
+ const {program,source,checker}=strictClosureProgram(text,ts);
  const fail=(node,reason)=>{throw Error(`${reason} at ${source.getLineAndCharacterOfPosition(node.getStart(source)).line+1}`);};
  const bad=new Set(['__proto__','prototype','constructor','toJSON']);
  const functions=new Map(),edges=new Map();
@@ -104,4 +100,14 @@ export function constructionProof(text, ts) {
   const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);
   return {eligible:true,reason:'immutable acyclic JSON construction (experimental; resource/compiler parity unproven)',version:1};
  }catch(e){try {const {shapes,guards}=localConstruction(source,checker,ts);const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);return {eligible:true,reason:'local allocation construction with typed value scan',version:2,shapes,guards};}catch(local){return {eligible:false,reason:local.message,version:2};}}
+}
+
+// Shared by effect proofs and non-strict application boundary discovery.
+export function strictClosureProgram(text,ts) {
+ const file='/__next_scriptc_construction__.ts';
+ const options={strict:true,noUncheckedIndexedAccess:true,target:ts.ScriptTarget.ESNext,types:[]};
+ const host=ts.createCompilerHost(options), original=host.getSourceFile.bind(host);
+ host.getSourceFile=(name,...args)=>name===file?ts.createSourceFile(file,text,options.target,true):original(name,...args);
+ const program=ts.createProgram([file],options,host);
+ return {program,source:program.getSourceFile(file),checker:program.getTypeChecker()};
 }

@@ -1,5 +1,6 @@
 // Permanent native differential corpus, including the existing construction fixtures.
 export const sources=[
+ 'export function bool(b:boolean){return {value:b};}',
  'export function closureRows(x:{n:number;s:string}[]){return x.map(v=>({n:v.n*2,s:field(v.s)}));} function field(s:string){return `quoted:${s}`;}',
  'export function optional(x:{v?:string|null;n:number|undefined}[]){return x.map(v=>({v:v.v??"missing",n:v.n??0}));}',
  'export function optionalParameter(x?:number){return {value:x??7};}',

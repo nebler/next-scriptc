@@ -8,6 +8,7 @@ const c = k => ['string','json','bytes'].includes(k) ? ['const uint8_t *','size_
 export function signature(fn, i, timing = false, constructionResults = constructionResultsDefault, catchFallback = true) {
   if (!fn.boundary) throw Error('Promotion build requires checkFunctionTypes boundary metadata');
   const {params,result} = fn.boundary;
+  if(fn.strictClosure)catchFallback=true;
   if(params.length>64)throw Error('Promotion ABI supports at most 64 arguments');
   const mark = n => timing ? `boundaryStage(${n});` : '';
   const declarations = params.map((k,j)=>`const a${j}=${k==='json'?`JSON.parse(p${j}) as Parameters<typeof f${i}>[${j}]`:k==='null'?'null':`p${j}`};`).join('');
@@ -24,7 +25,7 @@ export function signature(fn, i, timing = false, constructionResults = construct
   const encode = result==='json' ? (screened ? `(constructionResult${i}(value)?JSON.stringify(value):'')` : constructionResults&&fn.constructionProof?.eligible&&fn.constructionProof.version===1 ? 'JSON.stringify(value)' : 'serialize(value,true,()=>JSON.stringify(value))') : result==='null' ? 'false' : 'value';
   // Screened functions are pure, so any native exception (JSON syntax, checked
   // typed reads) can rerun this call in JS instead of poisoning the instance.
-  const guarded=fn.constructionProof?.eligible&&['json','number'].includes(result)&&catchFallback;
+  const guarded=fn.constructionProof?.eligible&&(fn.strictClosure?['json','number','string']:['json','number']).includes(result)&&catchFallback;
   const fallbackValue=result==='number'?'NaN':"''";
   const source = scan + guardSource + `export function run${i}(${params.map((k,j)=>`p${j}:${ts(k)}`).join(',')}):${ts(result)} {${guarded?'try{':''}${guardCalls}${declarations}${mark(1)}const value=f${i}(${params.map((_,j)=>`a${j}`).join(',')});${mark(2)}${numericScreen?'if(!Number.isFinite(value))return NaN;':''}${['number','boolean','string','null'].includes(result)?"serialize(value,true,()=>'');":''}const output=${encode};${mark(3)}return output;${guarded?`}catch(e){return ${fallbackValue};}`:''}}\n`;
   const buffered = ['string','json','bytes'].includes(result);

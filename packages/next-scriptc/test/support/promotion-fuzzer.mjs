@@ -10,7 +10,8 @@ import {checkFunctionTypes} from '../../src/functions/types.mjs';
 import {constructionProof} from '../../src/functions/construction-proof.mjs';
 import {extractFunctions} from '../../src/functions/extract.mjs';
 import {canonicalResult} from '../../src/functions/promotion-encodings.mjs';
-const ts=createRequire(new URL('../../../../examples/demo/package.json',import.meta.url))('typescript');
+const require=createRequire(import.meta.url);
+const ts=require(require.resolve('typescript',{paths:[process.cwd()]}));
 const numbers=[0,-0,1,-1,Number.MAX_VALUE,-Number.MAX_VALUE,Number.MIN_VALUE,-Number.MIN_VALUE,1e-200,1e200,Number.MAX_SAFE_INTEGER];
 const strings=['','a','2026-01-01','2026-01-31','世界','\ue000','\uffff','😀','e\u0301','\0','\ud800','\udfff','__proto__','constructor',',','"','line\nfeed','\r\n','=SUM(1,2)','+formula','-formula','@formula','\tformula'];
 const outcome=fn=>{try{return {value:fn()};}catch(e){return {error:e.constructor.name,message:e.message};}};
@@ -66,6 +67,7 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
    for(const guard of m.proof.guards?.[fn.name]??[]){let value=generate(guard.shape);args[guard.index]=JSON.stringify(value);if(index%13===0&&value&&typeof value==='object'){let deep={};for(let j=0;j<16;j++)deep={next:deep};value=Object.assign(value,{extra:deep});args[guard.index]=JSON.stringify(value);}
     if(index%9===0&&value&&typeof value==='object'&&!Array.isArray(value))args[guard.index]=args[guard.index].replace('{','{"n":999,"__proto__":{"x":1},"constructor":0,');}
    if(fn.name==='revenueCore'){args[0]='';args[1]='\uffff';}
+   if(index%7===0){const j=Math.floor(random()*args.length);if(Array.isArray(args[j])&&args[j][0]&&typeof args[j][0]==='object'){const keys=Object.keys(args[j][0]);if(keys.length)args[j][0][pick(keys)]=pick([null,undefined,false,'wrong',42]);}}
    if(index%5===0){const j=Math.floor(random()*args.length);args[j]=pick([null,true,12,{},[],undefined]);}
    if(index%11===0&&m.proof.guards?.[fn.name]?.length)args[m.proof.guards[fn.name][0].index]=pick(['{','{}','null','[]','{"n":null,"s":3}']);
    return args;}
