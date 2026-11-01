@@ -373,7 +373,7 @@ removed; pinned source checkouts remain outside the repo and are clean.
 Disk began at roughly 18 GiB free and ended at roughly 19 GiB, with unrelated
 host activity affecting the difference. No third-party source is added.
 
-## K2: Optional inputs and cheap discovery widening (2026-11-01)
+## 19. Optional inputs and cheap discovery widening (2026-11-01)
 
 Hypothesis: strict JSON-safe subsets of optional input types and cheap syntax
 lowering recover K1 candidates without changing observable undefined semantics.
