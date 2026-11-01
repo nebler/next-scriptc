@@ -29,3 +29,10 @@ The addon no-op parses the original arguments, looks up a cached typed result, s
 `python3 research/standin/analyze.py` regenerates the committed calibration from final windows 5 and 6 and A2's hosted samples. Python's standard library is sufficient. Change the explicit input window list when performing a new calibration. Keep old windows and document methodological changes. Extend `measure.mjs` with another named workload when adding experiments; keep quota, CPU accounting, hash checks, rotation, and raw evidence.
 
 Use the factors and limits in [the calibration report](../standin-calibration.md). Predicted hosted wall time from local CPU is a proxy, not measured or calibrated Vercel Active CPU. Recalibrate at every hosted checkpoint. Boundary changes and architecture-specific changes require hosted confirmation.
+
+For the P1 real-data argument experiment, first run `node research/phase1/build.mjs`
+with the same `SCRIPTC_COMPILER` and `NODE_HEADERS` overrides as needed. Then use
+`research/standin/run.sh phase1 fresh-window`. It builds ordinary and instrumented
+Linux arm64 addons for old all-JSON and new per-type boundaries. Stage diagnostics
+run separately from the primary timing cells. See
+[the M2 report](../phase1-standin-results.md) for the reconstruction and prediction limits.

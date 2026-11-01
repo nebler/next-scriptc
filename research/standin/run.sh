@@ -4,8 +4,8 @@ cd "$(dirname "$0")/../.."
 workload=${1:-revenue}
 label=${2:-$(date -u +%Y%m%dT%H%M%SZ)}
 [[ "$label" =~ ^[a-zA-Z0-9_-]+$ ]] || exit 2
-case "$workload" in revenue|correctness) ;; *) echo 'Workload must be revenue or correctness' >&2; exit 2;; esac
-if [[ ! -f .checks/standin/arm64/boundary.node || ! -f .checks/standin/arm64/functions || ! -f .checks/standin/x64/revenue.node ]]; then
+case "$workload" in revenue|correctness|phase1) ;; *) echo 'Workload must be revenue, correctness or phase1' >&2; exit 2;; esac
+if [[ "$workload" != phase1 ]] && [[ ! -f .checks/standin/arm64/boundary.node || ! -f .checks/standin/arm64/functions || ! -f .checks/standin/x64/revenue.node ]]; then
   mkdir -p .checks/standin/{arm64,x64}
   for pair in arm64:arm64 x64:x64; do
     arch=${pair%%:*}
@@ -31,7 +31,14 @@ fi
 (while :; do date -u +%FT%TZ; uptime; ps -A -o pcpu=,comm= | sort -rn | head -8; sleep 2; done) > "research/standin/raw/$label-host-load.log" &
 monitor=$!
 trap 'kill "$monitor" 2>/dev/null || true; docker rm -f "$name" >/dev/null 2>&1 || true' EXIT
+if [[ "$workload" == phase1 ]]; then
+  measure=research/phase1/measure.mjs
+  measure_args=("$out")
+else
+  measure=research/standin/measure.mjs
+  measure_args=("$workload" "$out")
+fi
 docker run --name "$name" --platform "$platform" --cpus=1 --cpuset-cpus="${STANDIN_CPU:-0}" --memory=2g --memory-swap=2g \
   --mount "type=bind,source=$PWD,target=/work" --workdir /work "$image" \
-  node research/standin/measure.mjs "$workload" "$out"
+  node "$measure" "${measure_args[@]}"
 docker inspect "$name" --format '{{json .HostConfig}}' > "research/standin/raw/$label-container.json"

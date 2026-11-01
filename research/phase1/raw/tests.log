@@ -1,0 +1,85 @@
+$ pnpm --filter next-scriptc test:unit && pnpm --filter demo test
+$ node --test --test-skip-pattern="grouped build drops prerenders|discovery exports, Next extensions" test/promotion.mjs test/boundary-encodings.mjs test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs
+✔ per-type encoding preserves UTF-8, NUL, empty and large strings without JSON wrapping (3.197792ms)
+✔ strict number rules, shape validation and canonical bytes (1.857125ms)
+✔ Uint8Array snapshots raw bytes including offset views; other views refused (0.240542ms)
+✔ generated signatures are mixed ABI and timing-free unless opted in (0.410334ms)
+✔ mixed raw shadow verification compares canonical result bytes and captures arguments (5.077792ms)
+✔ stage hooks are opt-in and expose all seven stages (0.398791ms)
+✔ compiler override is an absolute file path and default remains installed scriptc (3.149667ms)
+✔ JSON signature checker accepts data types and identifies rejected type paths (264.636584ms)
+✔ discovery checks imported inferred types using extended project tsconfig (928.404708ms)
+✔ checker emits per-type ABI metadata including inferred, union and byte types (107.828834ms)
+✔ sidecar shares eager startup, strips IPC env, restarts once, and fails loudly (447.205584ms)
+✔ extracts only the dependency closure; keeps types and source bodies (12.520875ms)
+✔ file directive selects named exported async declarations and aliases (2.566792ms)
+✔ rejects the old directive without treating strings or comments as directives (1.780458ms)
+✔ rejects unsupported scopes, APIs and exports with the function name (3.227458ms)
+✔ JSON boundary rejects lossy values instead of silently coercing them (1.807625ms)
+✔ discovery supports inline route functions and rejects indirect Next/client imports through aliases (556.027625ms)
+✔ Turbopack conditions target discovered paths literally and preserve user rules (3.406416ms)
+✔ function startup checks build identity and reports missing/non-executable binaries (8.010041ms)
+✔ sidecar warm-up is optional, bounded and does not block concurrent real calls (3357.732292ms)
+✔ discovery screens sync exports, work, opt out, dependencies and purity (20.036209ms)
+✔ promotion and size isolation (3.136583ms)
+✔ mismatch never answers natively; panic demotes all (1.148667ms)
+✔ queue cap and shadow rate cap fall back without awaiting native (0.650125ms)
+✔ slower native settles on js-final (0.827042ms)
+✔ loader preserves JS bodies for multiple candidates (2.887042ms)
+✔ compile refusal is reported and leaves JS available (4.678834ms)
+✔ explicit sync hint bypasses work screen while use js opts out (0.643625ms)
+⚠ Duplicate page detected. pages/route.js and pages/route.ts both resolve to /route.
+✔ native extension preserves Next matching and user extension precedence (231.568375ms)
+✔ discovery rejects legacy directives, non-route native files and conflicting routes (17.931375ms)
+✔ route options validate keys, values, defaults, groups and process membership (0.814958ms)
+✔ literal rewrite segments remain literal in external destination URLs (1.653209ms)
+[next-scriptc] /feed.xml is prerendered by Next; serving the static output (native not needed)
+[next-scriptc] Built 0 native route(s) in 0 process(es).
+✔ build completion leaves prerendered handlers with Next and preserves user rewrites (31.214291ms)
+✔ sidecar packaging preserves shared Node aliases and excludes executable/Edge outputs (104.794792ms)
+✔ native replacement preserves shared Node aliases, variants and prerender files (5.716458ms)
+✔ grouped routes share one Function across nested aliases and preserve independent Functions (7.006542ms)
+✔ native packaging follows traced source paths, chunks and NFT files, including uncertain traces (3.508875ms)
+✔ bootstrap starts one shared child before the launcher and preserves exports and bundling groups (600.300667ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4625.340292
+$ node --test bench/heavy/test.mjs bench/heavy/vector-test.mjs bench/vercel/test.mjs bench/vercel/io-test.mjs test/public-demo.mjs
+✔ CSV quoting and CRLF normalization including empty cells (0.965583ms)
+✔ CSV report paid filter, totals and deterministic tie order (16.961166ms)
+✔ JSON joins discounts, filters refunds and sorts exact integer cents (0.524ms)
+✔ thumbnail averages each channel and floors once per box (0.893917ms)
+✔ vector routes agree with an independent one-coordinate ranking and zero ties (348.137ms)
+✔ query changes affect retrieval, both forms agree; invalid int8 input is rejected (414.024834ms)
+✔ registered arrivals have fixed 7/2/1 mix and three bursts (2.23775ms)
+✔ arrivals continue while requests are outstanding and include dispatch lag (122.019417ms)
+✔ safety-cap rejections remain scheduled errors, outstanding work drains (60.882333ms)
+✔ HTTP transport validates full response bytes/status and enforces attempt budget (10.564875ms)
+✔ failed warmup prevents measurement and preserves drained partial samples (31.582375ms)
+✔ correctness failure cancels future arrivals but retains all scheduled outcomes (20.463ms)
+✔ scheduled latency stops at transport body drain before delayed client validation (81.720458ms)
+node cold: failed
+✔ a failing concurrent warmup drains and retains all outstanding timings without measuring (3.136209ms)
+✔ the shared request budget cannot be exceeded by concurrent workers (0.822041ms)
+✔ response mismatch invalidates the window and retains its error (0.368916ms)
+✔ a failed memory probe preserves measured rows and issued counts (145.975542ms)
+✔ cold-only failure cannot become a complete deployment (1.6995ms)
+✔ a changed response stops the full experiment before further workloads (0.394625ms)
+✔ CPU windows retain instance changes as discarded and reject invalid counters (0.697625ms)
+✔ CPU sampling keeps one pool per workload, repeats only token changes, and checks every digest (23.577333ms)
+✔ public matcher denies every other discovered API and future APIs, without a proxy hop on allowed routes (9.334792ms)
+✔ proxy opt-in returns a plain 404, ordinary dev/test/benchmark builds pass through (2.394167ms)
+✔ public vector observations expose timing and dispatch without benchmark process details (368.519833ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1065.004958
