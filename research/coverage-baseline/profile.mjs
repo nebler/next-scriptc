@@ -18,6 +18,8 @@ function papermark(n){
  const root=path.join(base,'papermark');
  const playback=load(path.join(root,'lib/video-analytics/playback.ts'));
  const types={documentViewDistribution:'a:current',watchTimeSeconds:'b:optional boundary',countablePlaybackEvents:'b:generic + optional boundary',resolveVideoLength:'b:optional boundary'};
+ const promoted=process.env.COVERAGE_ACCEPTED?JSON.parse(fs.readFileSync(process.env.COVERAGE_ACCEPTED)).built:[];
+ for(const name of promoted)if(types[name])types[name]='a:current';
  const wrapped=Object.fromEntries(Object.entries(playback).map(([k,v])=>[k,typeof v==='function'&&types[k]?mark('pm_'+k,types[k],v):v]));
  const encoded=JSON.stringify(Array.from({length:n},(_,i)=>({timestamp:new Date(1761955200000+i*10000).toISOString(),view_id:`v${Math.floor(i/60)}`,event_type:'played',start_time:i%60*10,end_time:i%60*10+10,playback_rate:1,volume:1,is_muted:0,is_focused:1,is_fullscreen:0})));
  const route=load(path.join(root,'pages/api/teams/[teamId]/documents/[id]/video-analytics.ts'),{

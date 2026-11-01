@@ -11,7 +11,7 @@ export function localConstruction(source, checker, ts) {
  function alloc(n,kind){if(!heap.has(n))heap.set(n,{kind,fields:new Map()});return heap.get(n);}
  function field(o,k){if(!o.fields.has(k))o.fields.set(k,new Set());return o.fields.get(k);}
  function bind(n,v){if(!ts.isIdentifier(n))fail(n,'unsupported binding');const s=sym(n);if(!env.has(s))env.set(s,new Set());merge(env.get(s),v);}
- function primitive(n){const t=checker.getTypeAtLocation(n);return !!(t.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null|ts.TypeFlags.Undefined|ts.TypeFlags.Void));}
+ function primitive(n){const scalarType=t=>t.isUnion()?t.types.every(scalarType):!!(t.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null|ts.TypeFlags.Undefined|ts.TypeFlags.Void));return scalarType(checker.getTypeAtLocation(n));}
  function read(v,k,n){let out=new Set();for(const o of v){if(o===arg){if(!primitive(n))out.add(arg);}else if(o===opaque)out.add(opaque);else for(const x of field(o,k))out.add(x);}return out;}
  function local(v,kind,n){if(!v.size||[...v].some(o=>o===arg||o===opaque||kind&&!kind.includes(o.kind)))fail(n,'mutation requires local allocation');}
  function write(v,k,x,n,kind){local(v,kind,n);for(const o of v)merge(field(o,k),x);}

@@ -372,3 +372,22 @@ and added-script syntax checks pass. Task-created dependencies and links are
 removed; pinned source checkouts remain outside the repo and are clean.
 Disk began at roughly 18 GiB free and ended at roughly 19 GiB, with unrelated
 host activity affecting the difference. No third-party source is added.
+
+## K2: Optional inputs and cheap discovery widening (2026-11-01)
+
+Hypothesis: strict JSON-safe subsets of optional input types and cheap syntax
+lowering recover K1 candidates without changing observable undefined semantics.
+Kept: optional input admission with per-call fallback for explicit undefined;
+JSON destructuring and literal defaults; expression arrows; referenced private
+sync bindings; route helpers with HTTP bindings excluded. Undefined-bearing
+results, optional tuples and rest remain rejected. Stock 0.4.6 emits SC1090 for
+the bare undefined result wrapper; the patch ledger records the reproduction.
+
+Actual census acceptances rise from 5 to 23 for held-out Papermark and 9 to 32
+for Dub. Umami stays at zero under its original config (strict counterfactual:
+3 to 15). Papermark's new watch-time and length kernels compile and pass native
+and shadow byte parity at 6k and 60k events. K1 category a shares are 59.5% and
+60.9% in the rerun; Dub and Umami measured paths remain at zero. These are loaded
+host coverage shares, not CPU savings. The full adapter suite, shim parity and
+280,000-input seeded fuzzer pass. No native timing, Vercel, Docker or compiler
+change. Details: [optional-boundaries-and-discovery.md](optional-boundaries-and-discovery.md).

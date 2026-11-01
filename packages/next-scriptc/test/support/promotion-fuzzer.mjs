@@ -45,7 +45,7 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
   checkFunctionTypes(ts,program,[{source:file,functions:[fn]}]);
   const proof=constructionProof(source);assert.equal(proof.eligible,true,`${fn.name}: ${proof.reason}`);
   const checker=program.getTypeChecker();
-  function shape(type,depth=0){assert.ok(depth<32);if(type.isUnion()){const nonnull=type.types.filter(t=>!(t.flags&ts.TypeFlags.Null));if(nonnull.length!==type.types.length)return {kind:'nullable',value:shape(nonnull[0],depth+1)};return shape(type.types[0],depth+1);}
+  function shape(type,depth=0){assert.ok(depth<32);if(type.flags&ts.TypeFlags.Undefined)return {kind:'undefined'};if(type.isUnion()){const defined=type.types.filter(t=>!(t.flags&ts.TypeFlags.Undefined));if(defined.length!==type.types.length)return {kind:'optional',value:shape(checker.getUnionType?checker.getUnionType(defined):defined[0],depth+1)};const nonnull=type.types.filter(t=>!(t.flags&ts.TypeFlags.Null));if(nonnull.length!==type.types.length)return {kind:'nullable',value:shape(nonnull[0],depth+1)};return shape(type.types[0],depth+1);}
    for(const [flag,kind] of [[ts.TypeFlags.NumberLike,'number'],[ts.TypeFlags.StringLike,'string'],[ts.TypeFlags.BooleanLike,'boolean'],[ts.TypeFlags.Null,'null']])if(type.flags&flag)return {kind};
    if(checker.isArrayType(type))return {kind:'array',value:shape(checker.getTypeArguments(type)[0],depth+1)};
    return {kind:'object',fields:checker.getPropertiesOfType(type).map(p=>[p.name,shape(checker.getTypeOfSymbolAtLocation(p,declaration),depth+1)])};
@@ -54,7 +54,7 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
   const js=new Function(stripTypeScriptTypes(source.replaceAll(/export\s+(?=function)/g,'').replaceAll(/export\s*\{[^}]*\};?/g,''))+`;return ${fn.name};`)();
   modules.push({native:source,forced:true,functions:[fn],shapes,proof,js});
  }
- function generate(s,depth=0){switch(s.kind){case 'number':return random()<0.75?pick(numbers):(random()-.5)*1e6;case 'string':return pick(strings);case 'boolean':return random()<.5;case 'null':return null;case 'nullable':return random()<.25?null:generate(s.value,depth+1);case 'array':return Array.from({length:Math.floor(random()*(depth>6?2:6))},()=>generate(s.value,depth+1));case 'object':return Object.fromEntries(s.fields.map(([k,v])=>[k,generate(v,depth+1)]));default:throw Error(s.kind);}}
+ function generate(s,depth=0){switch(s.kind){case 'number':return random()<0.75?pick(numbers):(random()-.5)*1e6;case 'string':return pick(strings);case 'boolean':return random()<.5;case 'undefined':return undefined;case 'optional':return random()<.35?undefined:generate(s.value,depth+1);case 'null':return null;case 'nullable':return random()<.25?null:generate(s.value,depth+1);case 'array':return Array.from({length:Math.floor(random()*(depth>6?2:6))},()=>generate(s.value,depth+1));case 'object':return Object.fromEntries(s.fields.filter(([,v])=>v.kind!=='optional'||random()>.3).map(([k,v])=>[k,generate(v,depth+1)]));default:throw Error(s.kind);}}
  const dispatchers=[];
  for(const constructionResults of [false,true]){
   const output=path.join(dir,String(constructionResults));await buildPromotion(modules,output,{constructionResults,report:()=>{}});
@@ -69,7 +69,7 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
    if(index%5===0){const j=Math.floor(random()*args.length);args[j]=pick([null,true,12,{},[],undefined]);}
    if(index%11===0&&m.proof.guards?.[fn.name]?.length)args[m.proof.guards[fn.name][0].index]=pick(['{','{}','null','[]','{"n":null,"s":3}']);
    return args;}
-  const good=m.shapes.map(s=>s.kind==='number'?2:s.kind==='array'?[]:s.kind==='string'?'ok':generate(s));
+  const good=m.shapes.map(s=>s.kind==='optional'?2:s.kind==='number'?2:s.kind==='array'?[]:s.kind==='string'?'ok':generate(s));
   for(const g of m.proof.guards?.[fn.name]??[])good[g.index]=JSON.stringify(g.shape.kind==='array'?[]:generate(g.shape));
   for(let i=0;i<cases;i++){
    const args=input(i);counts.inputs++;const expected=outcome(()=>m.js(...args));

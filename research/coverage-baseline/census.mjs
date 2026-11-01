@@ -12,7 +12,7 @@ for(const app of Object.keys(pins)){
  const inventory={files:sources.length,routeFiles:0,functions:0,namedExportSyncBlock:0,async:0,expressionBody:0,nonExport:0,clientModules:0};
  const early=[];let preliminary=0;
  for(const file of sources){
-  if(/^route\./.test(path.basename(file))){inventory.routeFiles++;continue;}
+  if(/^route\./.test(path.basename(file))){inventory.routeFiles++;}
   const text=fs.readFileSync(file,'utf8'),ast=ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,/x$/.test(file)?ts.ScriptKind.TSX:ts.ScriptKind.TS);
   if(/^\s*['"]use client['"]/.test(text)){inventory.clientModules++;continue;}
   for(const n of ast.statements){const exported=n.modifiers?.some(m=>m.kind===ts.SyntaxKind.ExportKeyword)&&!n.modifiers?.some(m=>m.kind===ts.SyntaxKind.DefaultKeyword);

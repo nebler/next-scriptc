@@ -56,3 +56,11 @@ test('stage hooks are opt-in and expose all seven stages',()=>{
  const off=createDispatcher({mode:'native',schemas:{f:schema},now:()=>{throw Error('clock on off path');},native:()=> 'ok'});
  assert.equal(off.dispatch('f',()=>'', ['x',1,true,null,{},[]]),'ok');
 });
+test('undefined arguments skip one shadow without demoting later representable calls',async()=>{
+ let calls=0;const d=createDispatcher({schemas:{f:{params:['json'],result:'json'}},jsSamples:1,sampleEvery:1,log:()=>{},nativeAsync:async()=>{calls++;return '{"value":1}';}});
+ const js=x=>({value:x.v??1});
+ assert.deepEqual(d.dispatch('f',js,[{v:undefined}]),{value:1});await tick();
+ assert.equal(calls,0);assert.equal(d.snapshot().f.buckets[0].state,'shadow');
+ d.dispatch('f',js,[{}]);await tick();await tick();
+ assert.equal(calls,1);assert.equal(d.snapshot().f.buckets[0].verified,1);
+});

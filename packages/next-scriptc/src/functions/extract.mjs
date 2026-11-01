@@ -39,12 +39,23 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
       if (client) fail(name, '"use native" is forbidden in a "use client" module');
       if (!topLevel || !declaration || !binding) fail(name, "must be a named module-level function; component-scope closures are unsupported");
       if ((autoName ? p.node.async : !p.node.async) || p.node.generator) fail(name, "must be async and cannot be a generator");
-      if (p.node.body?.type !== "BlockStatement") fail(name, "must have a block body");
+      if (!autoName && p.node.body?.type !== "BlockStatement") fail(name, "must have a block body");
       const id = createHash("sha256").update(`${source}\0${name}`).digest("hex").slice(0, 20);
-      functions.push({ name, id, start: p.node.body.start, end: p.node.body.end, params: p.node.params.map((param) => {
-        if (param.type !== "Identifier") fail(name, "parameters must be identifiers (no defaults, rest or destructuring)");
-        return param.name;
-      }) });
+      const literal = n => ['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral'].includes(n.type) || n.type==='UnaryExpression' && ['+','-'].includes(n.operator) && n.argument.type==='NumericLiteral';
+      function pattern(n) {
+        if(n.type==='Identifier')return true;
+        if(n.type==='AssignmentPattern')return literal(n.right)&&pattern(n.left);
+        if(n.type==='ObjectPattern')return n.properties.every(v=>v.type==='ObjectProperty'&&!v.computed&&pattern(v.value));
+        if(n.type==='ArrayPattern')return n.elements.every(v=>v===null||pattern(v));
+        return false;
+      }
+      if(p.node.params.some(param=>autoName?!pattern(param):param.type!=='Identifier'))fail(name,'parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)');
+      functions.push({ name, id, start:p.node.body.start, end:p.node.body.end,
+        ...(autoName?{expression:p.node.body.type!=='BlockStatement',
+          originalParams:p.node.params.map(v=>text.slice(v.start,v.end)),
+          parameterRanges:p.node.params.map(v=>[v.start,v.end]),
+          defaults:p.node.params.map(v=>v.type==='AssignmentPattern')}:{}),
+        params:p.node.params.map((param,i)=>autoName?`__scriptc_arg_${id}_${i}`:param.name) });
     },
   });
   if (fileLevel && !autoName) {

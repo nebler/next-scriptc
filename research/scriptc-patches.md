@@ -99,3 +99,31 @@ and mutation patterns. Compiler parity, resource limits, and broader constructio
 coverage remain unproven, so the option stays disabled by default. This does not
 resolve the closed-record runtime certificate candidate or its lost-metadata
 reproductions. See [construction-proof.md](construction-proof.md).
+
+## Optional boundary follow-up (stock 0.4.6, adapter only)
+
+2026-11-01. No compiler patch was made. Library mode accepts a checked parse
+of `{v?: string | null}`. The real addon preserves `Object.keys({})` as `[]`,
+`x.v === undefined` as true, and explicit null as null. See the permanent
+`test/optional-discovery.mjs` fixture and the [report](optional-boundaries-and-discovery.md).
+
+Undefined-bearing results remain rejected by the adapter. This minimal wrapper
+produced SC1090 in stock library mode:
+
+```ts
+function f(x: number): null | undefined { return x ? undefined : null; }
+export function run(x: number): string {
+	const value = f(x);
+	return JSON.stringify(value);
+}
+```
+
+Diagnostic: `JSON.stringify of 'null | undefined' values ... are not supported yet`.
+The promotion wrapper's typed encoder callback hits the same diagnostic even
+inside a catch envelope. This is a compiler feature limit, not evidence that
+undefined should become null. `JSON.stringify([undefined])` produces `[null]`;
+`JSON.stringify({v:undefined})` produces `{}`; bare undefined produces no string.
+Those transformations lose caller-visible distinctions. Inputs with explicit
+undefined continue to fall back before native entry. Missing optional fields
+can enter as ordinary JSON. Optional results, optional tuple elements and rest
+parameters remain conservative rejections pending a separately proved encoding.

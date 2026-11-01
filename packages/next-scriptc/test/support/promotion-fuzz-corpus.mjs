@@ -1,5 +1,7 @@
 // Permanent native differential corpus, including the existing construction fixtures.
 export const sources=[
+ 'export function optional(x:{v?:string|null;n:number|undefined}[]){return x.map(v=>({v:v.v??"missing",n:v.n??0}));}',
+ 'export function optionalParameter(x?:number){return {value:x??7};}',
  'export function immutable(x:{n:number;s:string}[]){return {a:x.map(v=>({n:v.n,s:v.s})),input:x};}',
  'export function strings(s:string){return {s:`value=${s}`};}',
  'export function bounded(x:{a:{b:{c:{d:{e:{f:{g:{h:{i:{j:{k:{n:number;s:string}}}}}}}}}}}}){return {n:x.a.b.c.d.e.f.g.h.i.j.k.n,s:x.a.b.c.d.e.f.g.h.i.j.k.s};}',

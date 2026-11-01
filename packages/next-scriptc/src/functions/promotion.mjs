@@ -34,7 +34,7 @@ export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, pol
  function shadow(id,args,result,f,s,jsMs,jsWallMs){
   const time=now();f.shadows=f.shadows.filter(t=>time-t<60000);
   if(pending||f.shadows.length>=perMinute)return;
-  let input,expected,inputMs,inputWallMs;const encodeWallBegin=now(),encodeBegin=serviceNow();try{input=encode(id,args);inputMs=serviceNow()-encodeBegin;inputWallMs=now()-encodeWallBegin;}catch(e){transition(id,s,'demoted',{reason:'invalid JSON'});return;}
+  let input,expected,inputMs,inputWallMs;const encodeWallBegin=now(),encodeBegin=serviceNow();try{input=encode(id,args);inputMs=serviceNow()-encodeBegin;inputWallMs=now()-encodeWallBegin;}catch(e){f.fallback++;return;}
   try{expected=canonicalResult(result,schemas[id]);}catch{f.fallback++;return;}
   f.shadows.push(time);pending++;
   // Start after the synchronous caller receives its JS answer. Capturing bytes

@@ -12,7 +12,13 @@ export default function loader(text) {
   for (const fn of [...module.functions].reverse()) {
     if(fn.promotion || module.promotion){
       const body=text.slice(fn.start,fn.end);
-      text=text.slice(0,fn.start)+`{ return ${name}_auto(${JSON.stringify(promotionFile)}, ${JSON.stringify(fn.id)}, (${fn.params.join(", ")}) => ${body}, [${fn.params.join(", ")}]); }`+text.slice(fn.end);
+      const original=fn.originalParams??fn.params;
+      const callback=`(${original.join(", ")}) => ${fn.expression?`(${body})`:body}`;
+      const replacement=`{ return ${name}_auto(${JSON.stringify(promotionFile)}, ${JSON.stringify(fn.id)}, ${callback}, [${fn.params.join(", ")}]); }`;
+      text=text.slice(0,fn.start)+replacement+text.slice(fn.end);
+      // Replace the outer binding patterns: the original closure performs all
+      // defaults/destructuring exactly once, after dispatch chooses a lane.
+      for(let i=(fn.parameterRanges?.length??0)-1;i>=0;i--){const [start,end]=fn.parameterRanges[i];text=text.slice(0,start)+fn.params[i]+(fn.defaults[i]?' = undefined':'')+text.slice(end);}
       continue;
     }
     text = text.slice(0, fn.start) + `{ return ${name}(${port}, ${JSON.stringify(fn.id)}, [${fn.params.join(", ")}]); }` + text.slice(fn.end);

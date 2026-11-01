@@ -24,15 +24,23 @@ function freshArray(p) {
 // callees. Local helpers/constants are included by the existing extractor.
 export function promotionCandidates(text, source, report = console.log) {
  const ast = parse(text), names=[];let program;
+ const handlers=new Set(['GET','HEAD','POST','PUT','DELETE','PATCH','OPTIONS']);
+ if(/^route\./.test(path.basename(source))){
+  for(const n of ast.program.body)if(n.type==='ExportNamedDeclaration')for(const spec of n.specifiers??[])if(handlers.has(spec.exported.name))handlers.add(spec.local.name);
+  let changed=true;while(changed){changed=false;for(const statement of ast.program.body){const n=statement.type==='ExportNamedDeclaration'?statement.declaration:statement;if(n?.type==='VariableDeclaration')for(const d of n.declarations)if(handlers.has(d.id.name)&&d.init?.type==='Identifier'&&!handlers.has(d.init.name)){handlers.add(d.init.name);changed=true;}}}
+ }
  if(ast.program.directives.some(d=>['use client','use js','use native'].includes(d.value.value)))return [];
  traverse(ast,{Program(p){program=p;},Function(p){
   const decl=p.isFunctionDeclaration()?p:p.parentPath.isVariableDeclarator()?p.parentPath:null;
   const statement=decl?.getStatementParent();
   const name=decl?.node.id?.name;
   const exported=statement?.isExportNamedDeclaration()||statement?.parentPath.isExportNamedDeclaration()||program.scope.getBinding(name)?.referencePaths.some(ref=>ref.parentPath.isExportSpecifier());
-  if(!exported||p.node.async||p.node.generator||p.node.body.type!=='BlockStatement')return;
-  if(p.node.body.directives.some(d=>d.value.value==='use js'))return;
-  names.push({name:name,forced:p.node.body.directives.some(d=>d.value.value==='use native')});
+  const topLevel=statement?.parentPath.isProgram()||statement?.parentPath.isExportNamedDeclaration()&&statement.parentPath.parentPath.isProgram();
+  if(!topLevel||!name||p.node.async||p.node.generator)return;
+  if(/^route\./.test(path.basename(source))&&handlers.has(name))return;
+  if(!exported&&!program.scope.getBinding(name)?.referencePaths.length)return;
+  if((p.node.body.directives??[]).some(d=>d.value.value==='use js'))return;
+  names.push({name:name,forced:(p.node.body.directives??[]).some(d=>d.value.value==='use native')});
  }});
  const candidates=[];
  for(const {name,forced} of names){try{
@@ -67,7 +75,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   if(e.name.startsWith('.')||['node_modules','research','test','tests'].includes(e.name))continue;
   const file=path.join(dir,e.name);if(file===distDir)continue;
   if(e.isDirectory())await visit(file);
-  else if(/\.[cm]?[jt]sx?$/.test(file)&&!/^route\./.test(e.name)){
+  else if(/\.[cm]?[jt]sx?$/.test(file)){
    modules.push(...promotionCandidates(await readFile(file,'utf8'),file,report));
   }
  }}await visit(projectDir);

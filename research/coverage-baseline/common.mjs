@@ -23,4 +23,4 @@ export function declaration(file,name,imports={}){
  return load(file,imports,node.getText(ast))[name];
 }
 export function files(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.name.startsWith('.')||['node_modules','test','tests','research'].includes(e.name)?[]:e.isDirectory()?files(path.join(dir,e.name)):/\.[cm]?[jt]sx?$/.test(e.name)?[path.join(dir,e.name)]:[]);}
-export function write(name,value){fs.writeFileSync(new URL(name,import.meta.url),JSON.stringify(value,null,2)+'\n');}
+export function write(name,value){fs.writeFileSync(new URL(name,process.env.COVERAGE_OUTPUT?new URL(process.env.COVERAGE_OUTPUT+'/',import.meta.url):import.meta.url),JSON.stringify(value,null,2)+'\n');}

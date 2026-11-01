@@ -19,10 +19,11 @@ export function checkFunctionTypes(ts, program, modules) {
       const signature = checker.getSignatureFromDeclaration(declaration);
       const active = new Set();
       const isBytes = type => fn.promotion && type.getSymbol()?.getName()==='Uint8Array' && type.getSymbol().declarations?.some(d=>program.isSourceFileDefaultLibrary(d.getSourceFile()));
-      function check(type, at) {
+      function check(type, at, input = false) {
+        if(input && fn.promotion && type.flags & ts.TypeFlags.Undefined)return;
         if(!at.includes('.') && !at.includes('[') && isBytes(type))return;
         if (type.flags & (ts.TypeFlags.StringLike | ts.TypeFlags.NumberLike | ts.TypeFlags.BooleanLike | ts.TypeFlags.Null)) return;
-        if (type.isUnion()) { for (const member of type.types) check(member, at); return; }
+        if (type.isUnion()) { for (const member of type.types) check(member, at, input); return; }
         if (!(type.flags & ts.TypeFlags.Object) && !type.isIntersection()) fail(at, type, 'expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported');
         if (active.has(type)) return; // Recursive data types are valid; runtime rejects cycles.
         active.add(type);
@@ -34,23 +35,23 @@ export function checkFunctionTypes(ts, program, modules) {
             const flags = type.target.elementFlags;
             for (const [i, element] of checker.getTypeArguments(type).entries()) {
               if (flags[i] & ts.ElementFlags.Optional) fail(`${at}[${i}]`, element, 'optional tuple elements are unsupported; use a required element with | null');
-              check(element, `${at}[${i}]`);
+              check(element, `${at}[${i}]`, input);
             }
             return;
           }
-          if (checker.isArrayType(type)) { check(checker.getTypeArguments(type)[0], `${at}[]`); return; }
+          if (checker.isArrayType(type)) { check(checker.getTypeArguments(type)[0], `${at}[]`, input); return; }
           for (const property of checker.getPropertiesOfType(type)) {
             const location = property.valueDeclaration ?? property.declarations?.[0] ?? declaration;
             const propertyType = checker.getTypeOfSymbolAtLocation(property, location);
             const nested = `${at}.${property.getName()}`;
-            if (property.flags & ts.SymbolFlags.Optional) fail(nested, propertyType, 'optional properties are unsupported; use a required property with | null');
+            if (property.flags & ts.SymbolFlags.Optional && !(input && fn.promotion)) fail(nested, propertyType, 'optional properties are unsupported; use a required property with | null');
             if (property.escapedName.toString().startsWith('__@')) fail(nested, propertyType, 'symbol properties are not JSON data');
             if (property.declarations?.some((d) => ts.isGetAccessorDeclaration(d) || ts.isSetAccessorDeclaration(d))) fail(nested, propertyType, 'accessors are not JSON data');
-            check(propertyType, nested);
+            check(propertyType, nested, input);
           }
           for (const index of checker.getIndexInfosOfType(type)) {
             if (index.keyType.flags & ts.TypeFlags.ESSymbolLike) fail(`${at}[symbol]`, index.type, 'symbol index signatures are not JSON data');
-            check(index.type, `${at}[${checker.typeToString(index.keyType)}]`);
+            check(index.type, `${at}[${checker.typeToString(index.keyType)}]`, input);
           }
         } finally { active.delete(type); }
       }
@@ -69,8 +70,8 @@ export function checkFunctionTypes(ts, program, modules) {
       for (const parameter of declaration.parameters) {
         const type = checker.getTypeAtLocation(parameter);
         const at = `parameter ${parameter.name.getText(source)}`;
-        if (parameter.questionToken) fail(at, type, 'optional parameters are unsupported; use a required parameter with | null');
-        check(type, at);
+        if (parameter.questionToken && !fn.promotion) fail(at, type, 'optional parameters are unsupported; use a required parameter with | null');
+        check(type, at, true);
       }
       const result = checker.getAwaitedType(checker.getReturnTypeOfSignature(signature));
       check(result, 'return');
