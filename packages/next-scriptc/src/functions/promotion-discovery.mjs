@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { extractFunctions } from './extract.mjs';
+import {constructionProof} from './construction-proof.mjs';
 import { checkFunctionTypes } from './types.mjs';
 const require = createRequire(import.meta.url);
 const babel = require('next/dist/compiled/babel/bundle.js');
@@ -77,5 +78,5 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
  const parsed=ts.parseJsonConfigFileContent(loaded.config??{compilerOptions:{strict:true}},ts.sys,projectDir);
  if(!(parsed.options.strictNullChecks??parsed.options.strict)){report('[next-scriptc] auto disabled: strictNullChecks required');return [];}
  const program=ts.createProgram({rootNames:[...new Set([...parsed.fileNames,...modules.map(m=>m.source)])],options:parsed.options});
- return modules.filter(m=>{try{checkFunctionTypes(ts,program,[m]);return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
+ return modules.filter(m=>{try{checkFunctionTypes(ts,program,[m]);for(const fn of m.functions)fn.constructionProof=constructionProof(m.native,ts);return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
 }

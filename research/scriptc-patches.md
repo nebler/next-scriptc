@@ -88,3 +88,14 @@ the next call. A certificate must preserve actual key order and handle extra
 fields through a checked fallback. JSON negative zero stays canonicalized to zero. A certificate must not throw
 inside the native lane to refuse it. A compact layout must define the same guarantees before the
 adapter can safely decode it. The investigation adds only diagnostic fixtures in scriptc; compiler and runtime code are unchanged.
+
+## Adapter construction proof follow-up
+
+2026-11-01. The CR1 follow-up adds an adapter-only immutable construction screen.
+No scriptc source or runtime patch was made. Closed literal and map/filter
+closures can bypass reflective result validation under an explicit build option.
+Revenue and Papermark remain strict because the screen excludes their construction
+and mutation patterns. Compiler parity, resource limits, and broader construction
+coverage remain unproven, so the option stays disabled by default. This does not
+resolve the closed-record runtime certificate candidate or its lost-metadata
+reproductions. See [construction-proof.md](construction-proof.md).

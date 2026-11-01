@@ -101,3 +101,41 @@ Fetched upstream and created isolated scriptc branch `next-scriptc/closed-record
 Both native modes lose null-prototype state, hidden symbols on records and arrays, and accessor identity after accepted typed-to-erased mutations. Hidden string keys, extra enumerable fields, holes, and JSON negative zero match Node in this probe. JSON bytes alone conceal the reflection failures. The runner intentionally exits 1 for failed parity; these are known-gap fixtures outside automatic corpus discovery.
 
 Stop at the requested hypothesis gate. Existing layout metadata cannot supply the proposed sound certificate across these crossings. A persistent native-identity mutation history or a construction proof needs further work. No encoder or adapter wiring was added, and no unsafe path was timed. There are no new A/B numbers or performance claims. Production remains strict, with the existing generated-visit experiment disabled by default. No container operation, Docker stand-in, Vercel call, full gate, push, or root README edit. [Mechanism, per-case evidence, and reproduction](closed-records.md).
+
+## 9. Immutable construction proof (2026-11-01)
+
+Hypothesis: an allowlist over the complete extracted helper closure can prove
+closed JSON construction and remove reflective native result validation.
+
+Keep an adapter-only screen for immutable literals, JSON inputs, allocating
+map/filter operations, and an acyclic local helper graph. It checks extracted
+source with a strict TypeScript program, excludes type escapes and every reference
+mutation, and emits per-function verdicts in `construction-report.json`.
+`constructionResults:true` enables typed JSON.stringify for passing JSON results.
+The default remains strict. The graph argument establishes closure under JS
+semantics, but does not prove compiler parity or bounded resource consumption.
+There is no unconditional native no-panic theorem.
+
+Pinned Papermark `documentViewDistribution`, demo `revenueCore`, and async
+`revenue` all fail the screen and keep strict validation. No Papermark source or
+extracted closure is committed. Arithmetic is excluded because finite inputs can
+produce NaN or Infinity. A silent conversion to null would disagree with the JS
+lane and its strict shadow canonicalization. Negative zero keeps existing JSON
+canonicalization, without throwing inside native code.
+
+Loaded-host alternating strict/screened-expression measurements use literal copies
+of cached revenue outputs. There are 120 rounds per size after 10 warmups, with
+byte comparison on every call. Compute median [p05, p95] elapsed milliseconds:
+1k strict 0.331 [0.305, 0.404], screened 0.008 [0.007, 0.010]; 5k strict 0.324
+[0.308, 0.358], screened 0.008 [0.007, 0.009]. Both arms include literal result
+allocation. These numbers do not measure eligible revenue aggregation, CPU time,
+or a calibrated workload improvement. Boundary gains need hosted confirmation.
+
+The first full adapter run found a report callback ordering regression, fixed by
+retaining verdicts in the JSON build report. Final verification passes 59 adapter tests, 2 shim tests, and 24 demo tests,
+with at most two test jobs. Final review added definite-initialization checks for
+callback captures, followed by a full adapter rerun. Tests cover every exclusion family, native sync and
+async parity, real shadow comparison, shared aliases, large arrays, deep input
+rejection, non-finite input rejection, Unicode, and JSON lone-surrogate strings.
+No scriptc edit, Docker operation, Vercel call, PR, push, or root README edit.
+[Proof, gaps, workload verdicts, and raw measurements](construction-proof.md).
