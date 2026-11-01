@@ -30,15 +30,16 @@ typedef struct {
 #ifdef BOUNDARY_TIMING
   double stages[4], input_ms, copy_ms;
 #endif
+  double sample_ms; int sample;
   int echo,failed; char error[1024];
 #ifdef SERIALIZED_RUNTIME
   int serialized;
 #endif
 } Job;
 typedef struct {uint32_t count; int kinds[64]; int result;} Schema;
-#ifdef BOUNDARY_TIMING
 #include <time.h>
 static double stamp(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec*1000.0+t.tv_nsec/1e6;}
+#ifdef BOUNDARY_TIMING
 static _Thread_local Job *active_job;
 static void stage(void *ctx,double n){(void)ctx;if(active_job&&n>=1&&n<=3)active_job->stages[(int)n]=stamp();}
 extern int32_t rev_callbacks(const char *,void (*)(void),void *);
@@ -117,7 +118,7 @@ static void *worker_main(void *unused){
  return NULL;
 }
 static void start_worker(void){pthread_t t;worker_error=pthread_create(&t,NULL,worker_main,NULL);if(!worker_error)pthread_detach(t);}
-static void execute(napi_env env,void *data){
+static void execute_service(napi_env env,void *data){
  (void)env;Job *j=data;pthread_once(&worker_once,start_worker);
  if(worker_error){j->failed=1;strcpy(j->error,"Cannot create dedicated scriptc thread");return;}
  Queue q={.job=j,.done_cv=PTHREAD_COND_INITIALIZER};
@@ -126,12 +127,16 @@ static void execute(napi_env env,void *data){
  pthread_mutex_unlock(&queue_mu);pthread_cond_destroy(&q.done_cv);
 }
 #else
-static void execute(napi_env env,void *data){execute_raw(env,data);}
+static void execute_service(napi_env env,void *data){execute_raw(env,data);}
 #endif
+// Same owner handoff as run(), excluding only libuv queue/completion delay.
+static void execute(napi_env env,void *data){Job *j=data;double begin=j->sample?stamp():0;execute_service(env,data);if(j->sample)j->sample_ms+=stamp()-begin;}
 static void complete(napi_env env,napi_status status,void *data) {
   Job *j=data;napi_value v;
   if(status!=napi_ok||j->failed){napi_value msg;napi_create_string_utf8(env,j->failed?j->error:"async work cancelled",NAPI_AUTO_LENGTH,&msg);napi_create_error(env,NULL,msg,&v);napi_reject_deferred(env,j->deferred,v);}
-  else {v=result(env,j);napi_resolve_deferred(env,j->deferred,v);}
+  else {double begin=j->sample?stamp():0;v=result(env,j);
+    if(j->sample){napi_value wrapper,n;napi_create_object(env,&wrapper);napi_create_double(env,j->sample_ms+stamp()-begin,&n);napi_set_named_property(env,wrapper,"value",v);napi_set_named_property(env,wrapper,"elapsedMs",n);v=wrapper;}
+    napi_resolve_deferred(env,j->deferred,v);}
   napi_delete_async_work(env,j->work);cleanup(j);
 }
 static napi_value call(napi_env env,napi_callback_info info) {
@@ -143,7 +148,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
   bool array=false;uint32_t length=0;
   if(napi_is_array(env,arg,&array)!=napi_ok||!array||napi_get_array_length(env,arg,&length)!=napi_ok||length!=schemas[index].count){napi_throw_type_error(env,NULL,"Expected encoded argument array");return NULL;}
   Job *j=calloc(1,sizeof *j);if(!j){napi_throw_error(env,NULL,"host allocation failure");return NULL;}
-  j->echo=index;
+  j->echo=index;j->sample=((intptr_t)kind&2)!=0;double sample_begin=j->sample?stamp():0;
 #ifdef BOUNDARY_TIMING
  double begin=stamp();
 #endif
@@ -164,6 +169,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
 #ifdef BOUNDARY_TIMING
  j->input_ms=stamp()-begin;
 #endif
+  if(j->sample)j->sample_ms=stamp()-sample_begin;
   napi_value v;
   if((intptr_t)kind&1){
     napi_value name;napi_create_string_utf8(env,"scriptc",NAPI_AUTO_LENGTH,&name);
@@ -182,6 +188,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
 NAPI_MODULE_INIT(){
  napi_property_descriptor props[]={
  {"run",NULL,call,NULL,NULL,NULL,napi_default,(void *)0},
- {"runAsync",NULL,call,NULL,NULL,NULL,napi_default,(void *)1}};
- napi_define_properties(env,exports,2,props);return exports;
+ {"runAsync",NULL,call,NULL,NULL,NULL,napi_default,(void *)1},
+ {"runShadow",NULL,call,NULL,NULL,NULL,napi_default,(void *)3}};
+ napi_define_properties(env,exports,sizeof props/sizeof *props,props);return exports;
 }

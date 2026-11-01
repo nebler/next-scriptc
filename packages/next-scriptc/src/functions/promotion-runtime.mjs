@@ -12,6 +12,7 @@ export function loadPromotion(file, options={}) {
   const index=id=>{const i=ids.indexOf(id);if(i<0)throw Error('Unknown promotion id');return i;};
   return createDispatcher({...options,schemas:encoding.functions,timing:encoding.timing,
     native:(id,input)=>addon.run(index(id),input),
-    nativeAsync:(id,input)=>addon.runAsync(index(id),input)});
+    nativeAsync:(id,input)=>addon.runAsync(index(id),input),
+    nativeSample:addon.runShadow ? (id,input)=>addon.runShadow(index(id),input) : undefined});
 }
 export const promotionArtifacts=['promotion.node','ids.json','encodings.json'];

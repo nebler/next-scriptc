@@ -17,7 +17,7 @@ const fixed={};for(const mode of ['old','new']){const d=loadPromotion(base+'/'+m
 const native=createRequire(import.meta.url)(base+'/new/promotion.node');
 result.shadowHashes=[];
 const encoding=JSON.parse(readFileSync(base+'/new/encodings.json'));
-const auto=createDispatcher({schemas:encoding.functions,log:s=>result.transitions.push(s),native:(_,input)=>native.run(0,input),nativeAsync:async(_,input)=>{const value=await native.runAsync(0,input);const n=sizes.find(n=>args[n][2].length===input[2].length);setImmediate(()=>{const sha256=hash(JSON.parse(value));assert.equal(sha256,expected[n]);result.shadowHashes.push({n,sha256});});return value;}});
+const auto=createDispatcher({schemas:encoding.functions,log:s=>result.transitions.push(s),native:(_,input)=>native.run(0,input),nativeSample:async(_,input)=>{const sample=await native.runShadow(0,input),value=sample.value;const n=sizes.find(n=>args[n][2].length===input[2].length);setImmediate(()=>{const sha256=hash(JSON.parse(value));assert.equal(sha256,expected[n]);result.shadowHashes.push({n,sha256});});return sample;}});
 const f={js:n=>js(...args[n]),...fixed,auto:n=>auto.dispatch(id('new'),js,args[n])};
 const drain=async()=>{await new Promise(setImmediate);while(auto.pending)await new Promise(setImmediate);await new Promise(setImmediate);};
 function timed(fn,n){const cpu=process.cpuUsage(),t=performance.now(),v=fn(n),ms=performance.now()-t,d=process.cpuUsage(cpu);assert.equal(hash(v),expected[n]);return {ms,cpuMs:(d.user+d.system)/1000,sha256:expected[n]};}
