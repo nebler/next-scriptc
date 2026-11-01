@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {constructionProof} from '../src/functions/construction-proof.mjs';
 import {buildPromotion} from '../src/functions/promotion-build.mjs';
+import {encodeArguments} from '../src/functions/promotion-encodings.mjs';
 import {createDispatcher} from '../src/functions/promotion.mjs';
 const proof=body=>constructionProof(`export function f(x:{n:number}[]){${body}}`);
 test('local mutation tracks aliases, density, cycles, opaque escape and keys',()=>{
@@ -38,6 +39,7 @@ test('local mutation tracks aliases, density, cycles, opaque escape and keys',()
   'const a=x;const m=new Map<string,{n:number}[]>();m.set("x",a);m.get("x")?.push({n:1});return {n:1}',
  ])assert.equal(proof(body).eligible,false,body);
 });
+test('guarded parse cannot hide behind another exported helper',()=>{assert.equal(constructionProof('export function h(x:string){const v=JSON.parse(x) as {n:number};return {n:v.n};} export function f(x:string){return h(x);}').eligible,false);});
 const settle=async d=>{while(d.pending)await new Promise(r=>setTimeout(r,1));};
 test('fallback status skips shadows and answers native calls without demoting other functions',async()=>{
  const schema={params:['number'],result:'json'};
@@ -80,6 +82,7 @@ test('native arithmetic fallback leaves the same instance usable, sync, async an
  }
 });
 test('asserted parse is checked dynamically before typed reads, including undefined',async()=>{
+ let coercions=0;assert.throws(()=>encodeArguments({params:['string'],parseInputs:[0]},[{toString(){coercions++;return '{}';}}]));assert.equal(coercions,0);
  const dir=await mkdtemp(path.join(os.tmpdir(),'construction-parse-'));
  try{
  const source='export function f(x:string){const v=JSON.parse(x) as {n:number; s:string};return {n:v.n,s:v.s};}';

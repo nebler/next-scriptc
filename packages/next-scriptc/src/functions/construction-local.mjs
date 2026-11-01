@@ -35,7 +35,7 @@ export function localConstruction(source, checker, ts) {
   if(ts.isBinaryExpression(n)){const op=n.operatorToken.getText(source);if(['=','+=','-=','*=','/='].includes(op)){const v=expr(n.right);if(op!=='='&&(!primitive(n.left)||!primitive(n.right)))fail(n,'assignment coercion');assign(n.left,v,n);return v;}const a=expr(n.left),b=expr(n.right);if(['&&','||','??'].includes(op))return union(a,b);if(!['===','!==','<','>','<=','>=','+','-','*','/','%'].includes(op))fail(n,'unsupported binary operation');if(!['===','!=='].includes(op)&&(!primitive(n.left)||!primitive(n.right)))fail(n,'binary coercion');return scalar;}
   if(ts.isCallExpression(n)){
    const e=n.expression;
-   if(ts.isIdentifier(e)&&funcs.has(sym(e)))return invoke(funcs.get(sym(e)),n.arguments.map(expr));
+   if(ts.isIdentifier(e)&&funcs.has(sym(e))){const target=funcs.get(sym(e)),result=invoke(target,n.arguments.map(expr));if(guards[target.name.text]?.length)fail(n,'parse guard in called helper');return result;}
    if(!ts.isPropertyAccessExpression(e))fail(n,'opaque call');const name=e.name.text;
    if(ts.isIdentifier(e.expression)&&e.expression.text==='Math'&&['floor','ceil','round','trunc','abs','min','max','sqrt','pow','sign','log','exp','sin','cos','tan'].includes(name)){for(const a of n.arguments){expr(a);if(!primitive(a))fail(a,'Math coercion');}return scalar;}
    if(ts.isIdentifier(e.expression)&&e.expression.text==='Array'&&name==='from'&&n.arguments.length===1){const v=expr(n.arguments[0]);if([...v].some(o=>o.kind!=='iterator'))fail(n,'Array.from requires local iterator');const a=alloc(n,'array');merge(field(a,'element'),read(v,'element',n));return new Set([a]);}

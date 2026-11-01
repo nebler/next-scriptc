@@ -159,7 +159,7 @@ This is not a hill performance win and has no hosted CPU claim. See
 [the rule-by-rule argument and limits](construction-proof-v2.md) and
 [raw measurements](construction-proof-v2-host.json).
 
-Validation: 65 adapter tests and 2 shim tests pass on Node 24.22.0; the final
-focused fallback suite passes all 6 tests. Real revenueCore dispatcher shadows
+Validation: 66 adapter tests and 2 shim tests pass on Node 24.22.0; the final
+focused fallback suite passes all 7 tests. Real revenueCore dispatcher shadows
 verify at 1k and 5k. Temporary dependency symlinks and generated native artifacts
 were removed. No containers, scriptc source, Vercel, or root README were changed.

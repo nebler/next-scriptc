@@ -17,9 +17,11 @@ function primitive(kind, value) {
 }
 export function encodeArguments(schema, args) {
   if (args.length !== schema.params.length) throw Error('Boundary argument count mismatch');
+  const encoded=schema.params.map((kind, i) => kind === 'json' ? serialize(args[i]) : primitive(kind, args[i]));
+  // Validate the primitive before parsing so invalid objects cannot coerce.
   // Screened parse assertions need syntactically valid JSON before native entry.
-  for(const index of schema.parseInputs??[])JSON.parse(args[index]);
-  return schema.params.map((kind, i) => kind === 'json' ? serialize(args[i]) : primitive(kind, args[i]));
+  for(const index of schema.parseInputs??[])JSON.parse(encoded[index]);
+  return encoded;
 }
 export function decodeResult(schema, value) {
   return schema.result === 'json' ? JSON.parse(value) : primitive(schema.result, value);

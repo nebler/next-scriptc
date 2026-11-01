@@ -209,7 +209,7 @@ that version before native execution. Final validation uses the existing Node 24
 binary. No full dependency installation, scriptc change, Docker operation, Vercel
 operation, root README edit, push, or PR is part of this experiment.
 
-Final validation passes 65 adapter tests and both shim tests on Node 24.22.0.
-The final focused rerun passes all six local-construction and fallback tests,
+Final validation passes 66 adapter tests and both shim tests on Node 24.22.0.
+The final focused rerun passes all seven local-construction and fallback tests,
 including preservation of an automatically promoted native bucket after fallback.
 Temporary dependency links and task-created native build output were removed.
