@@ -1,0 +1,198 @@
+[
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "documentViewDistribution",
+    "extraction": "pass",
+    "boundary": "pass",
+    "construction": {
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "documentViewDistribution": {
+          "kind": "array",
+          "value": {
+            "kind": "object",
+            "fields": [
+              [
+                "start_time",
+                {
+                  "kind": "number"
+                }
+              ],
+              [
+                "unique_views",
+                {
+                  "kind": "number"
+                }
+              ],
+              [
+                "total_views",
+                {
+                  "kind": "number"
+                }
+              ]
+            ]
+          }
+        }
+      },
+      "guards": {}
+    }
+  },
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "watchTimeSeconds",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] papermark/lib/video-analytics/playback.ts: function watchTimeSeconds: parameter events[].view_id: optional properties are unsupported; use a required property with | null (type string | undefined)",
+    "construction": {
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "watchTimeSeconds": {
+          "kind": "object",
+          "fields": [
+            [
+              "total",
+              {
+                "kind": "number"
+              }
+            ],
+            [
+              "unique",
+              {
+                "kind": "number"
+              }
+            ]
+          ]
+        }
+      },
+      "guards": {}
+    }
+  },
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "playbackSeconds",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] papermark/lib/video-analytics/playback.ts: function playbackSeconds: parameter event.view_id: optional properties are unsupported; use a required property with | null (type string | undefined)",
+    "construction": {
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "playbackSeconds": {
+          "kind": "array",
+          "value": {
+            "kind": "number"
+          }
+        }
+      },
+      "guards": {}
+    }
+  },
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "countablePlaybackEvents",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] papermark/lib/video-analytics/playback.ts: function countablePlaybackEvents: parameter events: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined)",
+    "construction": {
+      "eligible": false,
+      "reason": "unsafe type escape or reflective syntax at 1",
+      "version": 2
+    }
+  },
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "resolveVideoLength",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] papermark/lib/video-analytics/playback.ts: function resolveVideoLength: parameter stored: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined)",
+    "construction": {
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "resolveVideoLength": {
+          "kind": "number"
+        }
+      },
+      "guards": {}
+    }
+  },
+  {
+    "app": "papermark",
+    "file": "lib/video-analytics/playback.ts",
+    "name": "eventsForView",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] papermark/lib/video-analytics/playback.ts: function eventsForView: parameter events[]: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type T)",
+    "construction": {
+      "eligible": false,
+      "reason": "async/generic helper at 7",
+      "version": 2
+    }
+  },
+  {
+    "app": "dub",
+    "file": "apps/web/lib/analytics/utils/convert-to-csv.ts",
+    "name": "convertToCSV",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] dub/apps/web/lib/analytics/utils/convert-to-csv.ts: function convertToCSV: parameter data[]: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type object)",
+    "construction": {
+      "eligible": false,
+      "reason": "module statement excluded at 1",
+      "version": 2
+    }
+  },
+  {
+    "app": "umami",
+    "file": "src/lib/data.ts",
+    "name": "flattenJSON",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] umami/src/lib/data.ts: function flattenJSON: parameter eventData[string]: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type any)",
+    "construction": {
+      "eligible": false,
+      "reason": "unsafe type escape or reflective syntax at 5",
+      "version": 2
+    }
+  },
+  {
+    "app": "umami",
+    "file": "src/lib/data.ts",
+    "name": "getStoredStringValue",
+    "extraction": "pass",
+    "boundary": "pass",
+    "construction": {
+      "eligible": false,
+      "reason": "module statement excluded at 1",
+      "version": 2
+    }
+  },
+  {
+    "app": "umami",
+    "file": "src/lib/data.ts",
+    "name": "createKeyValue",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] umami/src/lib/data.ts: function createKeyValue: parameter value: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type any)",
+    "construction": {
+      "eligible": false,
+      "reason": "unsafe type escape or reflective syntax at 5",
+      "version": 2
+    }
+  },
+  {
+    "app": "umami",
+    "file": "src/lib/data.ts",
+    "name": "objectToArray",
+    "extraction": "pass",
+    "boundary": "[next-scriptc] umami/src/lib/data.ts: function objectToArray: parameter obj: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type object)",
+    "construction": {
+      "eligible": false,
+      "reason": "mutation requires local allocation at 2",
+      "version": 2
+    }
+  }
+]
