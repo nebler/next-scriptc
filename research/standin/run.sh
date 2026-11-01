@@ -32,7 +32,7 @@ fi
 monitor=$!
 trap 'kill "$monitor" 2>/dev/null || true; docker rm -f "$name" >/dev/null 2>&1 || true' EXIT
 if [[ "$workload" == phase1 ]]; then
-  measure=research/phase1/measure.mjs
+  measure=${PHASE1_MEASURE:-research/phase1/measure.mjs}
   measure_args=("$out")
 else
   measure=research/standin/measure.mjs

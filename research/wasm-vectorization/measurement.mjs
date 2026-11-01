@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
-const root=process.cwd(),scratch=root+'/.checks/wasm-vectorization-measure',out=root+'/research/wasm-vectorization/pending';
+const root=process.cwd(),scratch=root+'/.checks/wasm-vectorization-measure',out=process.env.W2_OUTPUT||root+'/research/wasm-vectorization/pending';
 const fork=process.env.SCRIPTC_FIXED_SOURCE||'/Users/noah/code/scriptc-wt/wasm-counted-globals';
 const stock=process.env.SCRIPTC||'/Users/noah/code/next-scriptc/packages/next-scriptc/node_modules/scriptc/bin/scriptc.exe';
 const mode=process.argv[2];

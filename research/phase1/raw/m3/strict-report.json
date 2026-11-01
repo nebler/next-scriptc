@@ -1,0 +1,127 @@
+[
+  {
+    "id": "3605f89bd5a417b296b8",
+    "name": "revenueCore",
+    "eligible": true,
+    "reason": "local allocation construction with typed value scan",
+    "version": 2,
+    "shapes": {
+      "revenueCore": {
+        "kind": "object",
+        "fields": [
+          [
+            "from",
+            {
+              "kind": "string"
+            }
+          ],
+          [
+            "to",
+            {
+              "kind": "string"
+            }
+          ],
+          [
+            "events",
+            {
+              "kind": "number"
+            }
+          ],
+          [
+            "revenueCents",
+            {
+              "kind": "number"
+            }
+          ],
+          [
+            "daily",
+            {
+              "kind": "array",
+              "value": {
+                "kind": "object",
+                "fields": [
+                  [
+                    "day",
+                    {
+                      "kind": "string"
+                    }
+                  ],
+                  [
+                    "region",
+                    {
+                      "kind": "string"
+                    }
+                  ],
+                  [
+                    "revenueCents",
+                    {
+                      "kind": "number"
+                    }
+                  ],
+                  [
+                    "units",
+                    {
+                      "kind": "number"
+                    }
+                  ],
+                  [
+                    "events",
+                    {
+                      "kind": "number"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          [
+            "timings",
+            {
+              "kind": "null"
+            }
+          ]
+        ]
+      }
+    },
+    "guards": {
+      "revenueCore": [
+        {
+          "index": 2,
+          "shape": {
+            "kind": "array",
+            "value": {
+              "kind": "object",
+              "fields": [
+                [
+                  "day",
+                  {
+                    "kind": "string"
+                  }
+                ],
+                [
+                  "region",
+                  {
+                    "kind": "string"
+                  }
+                ],
+                [
+                  "amountCents",
+                  {
+                    "kind": "number"
+                  }
+                ],
+                [
+                  "quantity",
+                  {
+                    "kind": "number"
+                  }
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "enabled": false
+  }
+]

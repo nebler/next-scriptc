@@ -178,3 +178,71 @@ were removed. No containers, scriptc source, Vercel, or root README were changed
   All values are median milliseconds. 66 adapter tests pass.
 - **Kept.** Needs stand-in confirmation, because the gain comes from boundary costs. Follow-up: demote buckets with high fallback rates. See [construction-proof-v2.md](construction-proof-v2.md).
 
+
+## 12. Bound repeated per-call fallback costs (2026-11-01)
+
+Hypothesis: a screened bucket that repeatedly falls back should stop paying native
+plus JS without disabling unrelated native work. Keep per-bucket disjoint windows
+of 20 actual native attempts, counting synchronous answers and shadows. A fallback
+rate strictly above 50% permanently demotes that bucket. Encoding failures and
+queue skips do not count as native attempts. Occasional fallback retains the lane.
+Counters and a transition reason remain visible in snapshots and logs.
+
+Three added tests cover repeated sync fallback, shadow fallback, exact-threshold
+behavior, window reset, and bucket/function isolation. All 69 adapter tests and
+both shim tests pass on Node 24.22.0. The standard demo suite passes 24 tests.
+An overly broad demo test invocation also selected separate integration scripts;
+its setup failures under temporary dependency links are retained. No compiler
+source change or hosted operation occurred.
+
+## 13. Rerun the Phase 1 gate with D1, E1, and construction results (M3, 2026-11-01)
+
+Hypothesis: stable paired decisions and cheaper screened result encoding let the
+real-argument Phase 1 gate pass. Five paired rotating arms run in the C1 stand-in
+on CPU 11, with 540 training calls per bucket and arm and unchanged shadow caps.
+Construction revenueCore is confirmed screened with catchFallback enabled.
+
+Construction fixed native clears disjoint calibration bands at 5k, 15k and 200k;
+strict fixed native still fails 5k. Both auto arms retain JS at 200k because their
+first epochs miss D1's 19/24 confidence requirement. No flaps are observed, but
+no second decision epoch completes. Neither auto arm beats both fixed modes on
+the actual 70/20/10 mix beyond calibration error. The compound M2 gate FAILS.
+Ordinary JS dispatcher overhead is 0.000038 ms/call, passing the 0.005 ms budget.
+All 9,420 returned byte checks and 220 shadow byte checks pass.
+
+Keep the implementation and evidence, without claiming a performance gate pass.
+Boundary gains **need hosted confirmation**. C1 predicts hosted wall from CPU,
+not hosted Active CPU. Host load 7.10-8.07 exceeds C1's final 2.62-3.64 and
+3.04-3.51 ranges, so absolute values carry extra uncertainty. An initial training
+pilot was stopped to add background recheck CPU to mixed totals; no pilot samples
+enter final tables. [Report](phase1-gate-m3.md) and its raw links retain both runs.
+No Vercel, Papermark timing, or unrelated container operation occurred.
+
+## 14. Time W2 in workerd after M3 (2026-11-01)
+
+Hypothesis: the counted-globals fix plus SIMD makes integer wasm reductions
+competitive with V8 in workerd. Preparation uses the requested fork worktree at
+b46987ce9 and stock ABI-47 WASI runtime objects; no compiler source is edited.
+The original pending artifacts are preserved through a separate W2_OUTPUT.
+
+All 15 verification cases and 3,000 measured/warmup response hashes pass. Fixed
+SIMD median wall speedups over V8 are 2.23x imul, 2.24x natural int8, 2.81x sum,
+and 2.90x search. Process CPU speedups are 2.33x, 2.29x, 2.92x, and 3.13x.
+Strict float remains slightly slower, 0.97x by both metrics. Keep the timing
+result as local evidence. Architecture-specific gains **need hosted confirmation**.
+No app-level or hosted CPU improvement follows from synthetic kernels.
+
+The macOS harness has no affinity option. It runs sequential requests with four
+persistent workerd workers, 30 warmups and 120 measured calls per variant/kernel.
+CPU tails describe six batch averages, while wall tails describe requests. M3
+and W2 timings do not overlap. [Timing report](wasm-vectorization-timing.md)
+links raw samples, CPU counters, build outcomes, hashes and logs. Task-created
+builds and dependency links are removed after recording disk use. No Vercel,
+Papermark timing, fork source edit, or unrelated-container change occurred.
+
+Cleanup: disk free approximately 18 GiB before work, 20.62 GiB after. All task-created build trees and temporary dependency links are removed. Other host activity affects the disk readings.
+
+Setup caveat: the initial Phase1 build overlapped the two-worker adapter suite,
+so the requested two-build ceiling was not guaranteed during that interval.
+Subsequent preparation was sequential. No build or test overlapped either final
+timing run.

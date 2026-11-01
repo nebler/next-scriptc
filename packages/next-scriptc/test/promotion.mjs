@@ -152,3 +152,25 @@ test('promotion artifacts survive Next cleanup in cache and publish at build com
   assert.equal(existsSync(path.join(dir,'scriptc-promotion')),false);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('fallback windows demote only their bucket and function, even in native mode',()=>{
+ let attempts=0;
+ const d=setup({mode:'native',fallbackWindow:4,native:()=>{attempts++;return {fallback:true};}});
+ for(let i=0;i<12;i++)assert.equal(d.dispatch('f',x=>x,[2]),2);
+ assert.equal(attempts,4);assert.equal(d.snapshot().f.buckets[0].state,'demoted');
+ d.dispatch('f',x=>x,['x'.repeat(1000)]);d.dispatch('g',x=>x,[2]);
+ assert.equal(attempts,6);assert.equal(d.snapshot().f.buckets[1].state,'js');
+ assert.equal(d.snapshot().g.buckets[0].state,'js');
+});
+test('shadow fallback attempts count, never verify, and stop after demotion',async()=>{
+ let attempts=0;
+ const d=setup({fallbackWindow:4,nativeAsync:async()=>{attempts++;return {fallback:true};}});
+ for(let i=0;i<12;i++){d.dispatch('f',x=>x,[2]);await tick();await tick();}
+ const s=d.snapshot().f.buckets[0];assert.equal(attempts,4);assert.equal(s.state,'demoted');assert.equal(s.verified,0);assert.equal(s.nativeFallbacks,4);
+});
+test('fallback threshold is strict and windows reset after mixed successes',()=>{
+ let i=0;
+ const d=setup({mode:'native',fallbackWindow:4,native:()=>++i%2?{fallback:true}:'2'});
+ for(let j=0;j<12;j++)assert.equal(d.dispatch('f',x=>x,[2]),2);
+ const s=d.snapshot().f.buckets[0];assert.notEqual(s.state,'demoted');assert.equal(s.nativeAttempts,12);assert.equal(s.nativeFallbacks,6);assert.equal(s.fallbackAttempts,0);
+});
