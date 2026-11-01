@@ -1,6 +1,7 @@
 // All scriptc exports run on the permanent owner thread. No N-API calls in execute().
 #include <node_api.h>
 #include <stdint.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
@@ -31,7 +32,7 @@ typedef struct {
   double stages[4], input_ms, copy_ms;
 #endif
   double sample_ms; int sample;
-  int echo,failed; char error[1024];
+  int echo,failed,fallback; char error[1024];
 #ifdef SERIALIZED_RUNTIME
   int serialized;
 #endif
@@ -58,6 +59,7 @@ static void copy_output(Job *j,const uint8_t *out,size_t len){
 /* TABLE */
 static void cleanup(Job *j){for(int i=0;i<64;i++)free(j->inputs[i].data);free(j->output);free(j);}
 static napi_value result(napi_env env,Job *j){napi_value v;
+ if(j->fallback){napi_value flag;napi_create_object(env,&v);napi_get_boolean(env,true,&flag);napi_set_named_property(env,v,"fallback",flag);return v;}
 #ifdef BOUNDARY_TIMING
  double begin=stamp();
 #endif

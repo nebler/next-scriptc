@@ -22,11 +22,13 @@ const config=withScriptc({}, {nativePromotion:'auto'});
 const reports=[];
 const modules=await discoverPromotions(project,path.join(project,'.next'),config,s=>reports.push(s));
 assert.deepEqual(modules.map(m=>m.functions[0].name),['documentViewDistribution']);
-const accepted=process.env.GATE_VERIFY_ONLY?modules:await buildPromotion(modules,output,{target,report:s=>reports.push(s)});
+const accepted=process.env.GATE_VERIFY_ONLY?modules:await buildPromotion(modules,output,{target,constructionResults:process.env.CONSTRUCTION_RESULTS==='1',report:s=>reports.push(s)});
+if(process.env.CONSTRUCTION_RESULTS==='1')assert.equal(modules[0].functions[0].constructionProof.eligible,true);
+const artifact=process.env.CONSTRUCTION_RESULTS==='1'?'construction-v2-':'';
 const record={commit:'ed19717ec02a1ac79aecf5569159aa9d2d869312',path:'lib/video-analytics/playback.ts',target,sourceSha256:createHash('sha256').update(await readFile(source)).digest('hex'),reports,candidates:modules.map(m=>({name:m.functions[0].name,boundary:m.functions[0].boundary})),compiled:accepted.map(m=>m.functions[0].name)};
 await mkdir(new URL('.',import.meta.url),{recursive:true});
-if(!accepted.length){await writeFile(new URL(`./${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');throw Error('No candidates compiled');}
-if(![`${process.platform}-${process.arch}`,`${process.platform}-${process.arch}-gnu`].includes(target)){await writeFile(new URL(`./${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');process.exit(0);}
+if(!accepted.length){await writeFile(new URL(`./${artifact}${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');throw Error('No candidates compiled');}
+if(![`${process.platform}-${process.arch}`,`${process.platform}-${process.arch}-gnu`].includes(target)){await writeFile(new URL(`./${artifact}${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');process.exit(0);}
 const ts=require(require.resolve('typescript',{paths:[project]}));
 const original=ts.transpileModule(await readFile(source,'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
 await writeFile(path.join(output,'original.mjs'),original);
@@ -64,5 +66,5 @@ assert.equal(bad.snapshot()[fn.id].buckets[0].state,'demoted');assert.equal(nati
 record.mismatch={state:'demoted',nativeAnswers,logs:badLogs};
 // Deliberately omit all sampled durations: this is a correctness gate.
 for(const f of Object.values(record.shadow))for(const b of f.buckets){delete b.js;delete b.times;delete b.pairs;delete b.lastDecision;}
-await writeFile(new URL(`./${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');
+await writeFile(new URL(`./${artifact}${target}.json`,import.meta.url),JSON.stringify(record,null,2)+'\n');
 console.log(JSON.stringify({target,compiled:record.compiled,cases:record.cases.length,mismatch:record.mismatch.state}));

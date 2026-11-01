@@ -2,22 +2,168 @@
   {
     "name": "documentViewDistribution",
     "sourceHash": "9bf4d1fc55df8588be0804d333c2e42e6ade6e4a8404847a2cc380809c60e3e2",
-    "eligible": false,
-    "reason": "non-data/default/rest parameter at 7",
-    "version": 1
+    "eligible": true,
+    "reason": "local allocation construction with typed value scan",
+    "version": 2,
+    "shapes": {
+      "documentViewDistribution": {
+        "kind": "array",
+        "value": {
+          "kind": "object",
+          "fields": [
+            [
+              "start_time",
+              {
+                "kind": "number"
+              }
+            ],
+            [
+              "unique_views",
+              {
+                "kind": "number"
+              }
+            ],
+            [
+              "total_views",
+              {
+                "kind": "number"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    "guards": {}
   },
   {
     "name": "revenueCore",
     "sourceHash": "f7b8db38cc6b5e978ab2d06901eb091a350fa9b1a1561429eba0af0db2d9dda5",
-    "eligible": false,
-    "reason": "unsafe type escape at 4",
-    "version": 1
+    "eligible": true,
+    "reason": "local allocation construction with typed value scan",
+    "version": 2,
+    "shapes": {
+      "revenueCore": {
+        "kind": "object",
+        "fields": [
+          [
+            "from",
+            {
+              "kind": "string"
+            }
+          ],
+          [
+            "to",
+            {
+              "kind": "string"
+            }
+          ],
+          [
+            "events",
+            {
+              "kind": "number"
+            }
+          ],
+          [
+            "revenueCents",
+            {
+              "kind": "number"
+            }
+          ],
+          [
+            "daily",
+            {
+              "kind": "array",
+              "value": {
+                "kind": "object",
+                "fields": [
+                  [
+                    "day",
+                    {
+                      "kind": "string"
+                    }
+                  ],
+                  [
+                    "region",
+                    {
+                      "kind": "string"
+                    }
+                  ],
+                  [
+                    "revenueCents",
+                    {
+                      "kind": "number"
+                    }
+                  ],
+                  [
+                    "units",
+                    {
+                      "kind": "number"
+                    }
+                  ],
+                  [
+                    "events",
+                    {
+                      "kind": "number"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          [
+            "timings",
+            {
+              "kind": "null"
+            }
+          ]
+        ]
+      }
+    },
+    "guards": {
+      "revenueCore": [
+        {
+          "index": 2,
+          "shape": {
+            "kind": "array",
+            "value": {
+              "kind": "object",
+              "fields": [
+                [
+                  "day",
+                  {
+                    "kind": "string"
+                  }
+                ],
+                [
+                  "region",
+                  {
+                    "kind": "string"
+                  }
+                ],
+                [
+                  "amountCents",
+                  {
+                    "kind": "number"
+                  }
+                ],
+                [
+                  "quantity",
+                  {
+                    "kind": "number"
+                  }
+                ]
+              ]
+            }
+          }
+        }
+      ]
+    }
   },
   {
     "name": "revenue",
     "sourceHash": "265080fd3b2e240c266da55296aa9e10dede68354c16fb9f606bf302a8cafd5e",
     "eligible": false,
-    "reason": "unsafe type escape at 8",
-    "version": 1
+    "reason": "unsafe type escape or reflective syntax at 8",
+    "version": 2
   }
 ]

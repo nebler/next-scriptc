@@ -1,5 +1,6 @@
 // An intentionally small immutable language. Unknown syntax fails closed.
 // Run on the extracted closure, never on just the exported function body.
+import {localConstruction} from './construction-local.mjs';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 export function constructionProof(text, ts) {
@@ -102,5 +103,5 @@ export function constructionProof(text, ts) {
   function acyclic(n){if(active.has(n))fail(n,'recursive helper graph');if(done.has(n))return;active.add(n);for(const e of edges.get(n))acyclic(e);active.delete(n);done.add(n);}for(const n of edges.keys())acyclic(n);
   const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);
   return {eligible:true,reason:'immutable acyclic JSON construction (experimental; resource/compiler parity unproven)',version:1};
- }catch(e){return {eligible:false,reason:e.message,version:1};}
+ }catch(e){try {const {shapes,guards}=localConstruction(source,checker,ts);const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);return {eligible:true,reason:'local allocation construction with typed value scan',version:2,shapes,guards};}catch(local){return {eligible:false,reason:local.message,version:2};}}
 }

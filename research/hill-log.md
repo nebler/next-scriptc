@@ -139,3 +139,27 @@ async parity, real shadow comparison, shared aliases, large arrays, deep input
 rejection, non-finite input rejection, Unicode, and JSON lone-surrogate strings.
 No scriptc edit, Docker operation, Vercel call, PR, push, or root README edit.
 [Proof, gaps, workload verdicts, and raw measurements](construction-proof.md).
+
+## 2026-11-01: CR2 local allocation extension and per-call fallback
+
+Hypothesis: local allocation provenance plus a typed finite-value scan can cover
+real aggregation functions without reflective result validation. Implemented an
+addon fallback status, dispatcher sample skipping, a conservative allocation graph,
+and dynamic preflight guards for asserted JSON.parse parameters. Default stays off.
+
+`revenueCore` and pinned Papermark `documentViewDistribution` qualify. The async
+`revenue` wrapper remains strict. Papermark passes all 12 screened byte-identical
+shadows, including 6k and 60k events, without measuring held-out timings.
+
+Loaded-host real revenueCore A/B, 120 interleaved rounds per size, matches JS bytes.
+Median wall milliseconds: 1k strict 0.434, screened 0.341; 5k strict 0.776,
+screened 1.540. Result encoding falls from about 0.32 to 0.01 ms, but parse
+preflight makes 5k slower. Kept as an opt-in safety and coverage experiment.
+This is not a hill performance win and has no hosted CPU claim. See
+[the rule-by-rule argument and limits](construction-proof-v2.md) and
+[raw measurements](construction-proof-v2-host.json).
+
+Validation: 65 adapter tests and 2 shim tests pass on Node 24.22.0; the final
+focused fallback suite passes all 6 tests. Real revenueCore dispatcher shadows
+verify at 1k and 5k. Temporary dependency symlinks and generated native artifacts
+were removed. No containers, scriptc source, Vercel, or root README were changed.

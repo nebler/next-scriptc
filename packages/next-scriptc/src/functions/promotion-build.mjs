@@ -53,6 +53,6 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  const common=['-O2','-DSERIALIZED_RUNTIME',...(timing?['-DBOUNDARY_TIMING']:[]),'-fPIC','-I'+headers,path.join(output,'addon.c'),path.join(output,'functions.lib.a'),'-o',path.join(output,'promotion.node')];
  execFileSync(linux?'zig':'clang',linux?['cc','-target',triple,'-shared',...common,'-lm','-lpthread','-ldl','-Wl,--allow-shlib-undefined']:['-bundle','-undefined','dynamic_lookup',...common],{stdio:'pipe'});
  await writeFile(path.join(output,'ids.json'),JSON.stringify(accepted.map(m=>m.functions[0].id)));
- await writeFile(path.join(output,'encodings.json'),JSON.stringify({timing,functions:Object.fromEntries(accepted.map(m=>[m.functions[0].id,m.functions[0].boundary]))}));
+ await writeFile(path.join(output,'encodings.json'),JSON.stringify({timing,functions:Object.fromEntries(accepted.map(m=>[m.functions[0].id,{...m.functions[0].boundary,...(constructionResults&&m.functions[0].constructionProof?.eligible&&m.functions[0].constructionProof?.guards?.[m.functions[0].name]?.length?{parseInputs:m.functions[0].constructionProof.guards[m.functions[0].name].map(g=>g.index)}:{})}]))}));
  return accepted;
 }

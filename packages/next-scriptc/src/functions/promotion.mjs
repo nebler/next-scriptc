@@ -21,13 +21,15 @@ export function createDispatcher({native, nativeAsync, nativeSample, policy:over
  function shadow(id,args,result,f,s,jsMs){
   const time=now();f.shadows=f.shadows.filter(t=>time-t<60000);
   if(pending||f.shadows.length>=perMinute)return;
-  let input,expected,inputMs;const encodeBegin=now();try{input=encode(id,args);inputMs=now()-encodeBegin;expected=canonicalResult(result,schemas[id]);}catch(e){transition(id,s,'demoted',{reason:'invalid JSON'});return;}
+  let input,expected,inputMs;const encodeBegin=now();try{input=encode(id,args);inputMs=now()-encodeBegin;}catch(e){transition(id,s,'demoted',{reason:'invalid JSON'});return;}
+  try{expected=canonicalResult(result,schemas[id]);}catch{f.fallback++;return;}
   f.shadows.push(time);pending++;
   // Start after the synchronous caller receives its JS answer. Capturing bytes
   // now isolates mutable caller arguments and results from the background job.
   setImmediate(async()=>{const begin=now();try{
    const sample=nativeSample?await nativeSample(id,input):null;
    const output=sample?sample.value:await nativeAsync(id,input);
+   if(output?.fallback===true){f.fallback++;return;}
    const decodeBegin=now(),parsed=unpack(id,output,inputMs);
    const ms=sample?sample.elapsedMs+inputMs+now()-decodeBegin:now()-begin+inputMs;
    if(canonicalResult(parsed,schemas[id])!==expected){transition(id,s,'demoted',{reason:'mismatch',inputHash:createHash('sha256').update(typeof input==='string'?input:serialize(input.map(v=>v instanceof Uint8Array?Array.from(v):v))).digest('hex')});return;}
@@ -48,7 +50,8 @@ export function createDispatcher({native, nativeAsync, nativeSample, policy:over
  function dispatch(id,js,args){const {f,s}=state(id,args);f.calls++;s.calls++;if(f.calls%10000===0)log('next-scriptc '+JSON.stringify({fn:id,calls:f.calls,native:f.native,fallback:f.fallback}));
   const recheck=mode==='auto'&&s.calls%policy.recheckEvery===0;
   if(!poisoned&&(mode==='native'||s.state==='native')&&s.state!=='demoted'&&pending<maxPending&&!recheck){
-   try{const begin=timing?now():0,input=encode(id,args),encodeMs=timing?now()-begin:0;pending++;try{const result=unpack(id,native(id,input),encodeMs);f.native++;return result;}finally{pending--;}}catch(e){panic(e);}
+   const begin=timing?now():0;let input,valid=true;try{input=encode(id,args);}catch{valid=false;f.fallback++;}
+   if(valid)try{const encodeMs=timing?now()-begin:0;pending++;try{const output=native(id,input);if(output?.fallback===true){f.fallback++;}else{const result=unpack(id,output,encodeMs);f.native++;return result;}}finally{pending--;}}catch(e){panic(e);}
   }else if(s.state==='native'&&!recheck)f.fallback++;
   if(mode==='auto'&&s.state==='js'&&s.calls>=jsSamples)transition(id,s,'shadow');
   const learning=s.state==='shadow';
