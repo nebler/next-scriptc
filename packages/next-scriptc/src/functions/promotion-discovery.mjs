@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import {dependencyClosure} from './dependency-closure.mjs';
 import { extractFunctions } from './extract.mjs';
-import {constructionProof} from './construction-proof.mjs';
+import {constructionProof,strictClosureProgram} from './construction-proof.mjs';
 import { checkFunctionTypes } from './types.mjs';
 const require = createRequire(import.meta.url);
 const babel = require('next/dist/compiled/babel/bundle.js');
@@ -87,7 +87,24 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   }
  }}await visit(projectDir);
  if(!modules.length)return [];
- if(!(parsed.options.strictNullChecks??parsed.options.strict)){report('[next-scriptc] auto disabled: strictNullChecks required');return [];}
+ const isolated=!(parsed.options.strictNullChecks??parsed.options.strict);
  const program=ts.createProgram({rootNames:[...new Set([...parsed.fileNames,...modules.map(m=>m.source)])],options:parsed.options});
- return modules.filter(m=>{try{checkFunctionTypes(ts,program,[m]);for(const fn of m.functions)fn.constructionProof=constructionProof(m.native,ts);return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
+ return modules.filter(m=>{try{
+  if(isolated){
+   const strict=strictClosureProgram(m.native,ts);
+   const errors=ts.getPreEmitDiagnostics(strict.program);
+   if(errors.length)throw Error(`strict closure: TS${errors[0].code}: ${ts.flattenDiagnosticMessageText(errors[0].messageText,' ')}`);
+   // Extracted offsets differ from the application. Preserve loader locations
+   // while deriving every boundary field from the self-contained strict check.
+   const functions=m.functions.map(fn=>{
+    let declaration;function find(n){if(ts.isFunctionLike(n)&&n.name?.text===fn.name)declaration=n;else ts.forEachChild(n,find);}find(strict.source);
+    if(!declaration?.body)throw Error(`strict closure: missing ${fn.name}`);
+    return {...fn,start:declaration.body.getStart(strict.source)};
+   });
+   checkFunctionTypes(ts,strict.program,[{source:strict.source.fileName,functions}]);
+   functions.forEach((fn,i)=>{m.functions[i].strictClosure=true;m.functions[i].boundary=fn.boundary;m.functions[i].resultShape=fn.resultShape;});
+  }else checkFunctionTypes(ts,program,[m]);for(const fn of m.functions){
+   fn.constructionProof=constructionProof(m.native,ts);
+   if(isolated&&fn.boundary.params.includes('json')&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
+  }return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
 }

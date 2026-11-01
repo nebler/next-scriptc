@@ -29,6 +29,8 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  }
 
  await writeFile(path.join(output,'package.json'),'{"type":"module"}');
+ // Compile the self-contained closure independently of a non-strict app config.
+ await writeFile(path.join(output,'tsconfig.json'),JSON.stringify({compilerOptions:{strict:true,target:'ESNext',types:[]}}));
  const json=path.join(output,'json.ts');await writeFile(json,await readFile(new URL('./json.ts',import.meta.url)));
  const accepted=[];let last;
  async function compile(list){

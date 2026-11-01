@@ -1,0 +1,1413 @@
+{
+  "adapterCommit": "fd3bce50fc625e22834b952347e241acc13cd3b0",
+  "apps": {
+    "papermark": {
+      "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
+      "scope": [
+        "lib",
+        "pages/api"
+      ],
+      "inventory": {
+        "files": 552,
+        "routeFiles": 0,
+        "functions": 1043,
+        "namedExportSyncBlock": 316,
+        "async": 200,
+        "expressionBody": 13,
+        "nonExport": 514,
+        "clientModules": 2
+      },
+      "preliminary": 38,
+      "actual": {
+        "accepted": [
+          {
+            "file": "lib/api/usage.ts",
+            "name": "routeTemplate",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "mutation requires local allocation at 6",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/dataroom/permissions-tree.ts",
+            "name": "aggregateFolderPermissions",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 18",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/folders/parse-folder-import.ts",
+            "name": "buildColumnIndex",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsafe type escape or reflective syntax at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/folders/parse-folder-import.ts",
+            "name": "hierarchySegments",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/hooks/use-last-visited.ts",
+            "name": "matchesPathPrefix",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/hooks/use-last-visited.ts",
+            "name": "isTrackablePath",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/i18n/locales.ts",
+            "name": "asSupportedLocale",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsafe type escape or reflective syntax at 15",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/signing/agreement-storage.ts",
+            "name": "parseStoredAgreementResponse",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 5",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/trigger/export-visits.ts",
+            "name": "createCsvRow",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "opaque or uninitialized reference at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/trigger/export-visits.ts",
+            "name": "generateCustomFieldHeaders",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "mutation requires local allocation at 5",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils/calculate-hierarchical-indexes.ts",
+            "name": "flattenHierarchy",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "mutation requires local allocation at 24",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils/email-domain.ts",
+            "name": "mergeGroupDomains",
+            "boundary": {
+              "params": [
+                "json",
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils/ssrf-protection.ts",
+            "name": "hasIpv6Prefix",
+            "boundary": {
+              "params": [
+                "json",
+                "json",
+                "number"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported binary operation at 8",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils/ssrf-protection.ts",
+            "name": "getIpv4MappedBytes",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 3",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils/watermark-pdf.ts",
+            "name": "sanitizeWatermarkText",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported binding at 64",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils.ts",
+            "name": "validateList",
+            "boundary": {
+              "params": [
+                "string",
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/utils.ts",
+            "name": "sanitizeList",
+            "boundary": {
+              "params": [
+                "string",
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "lib/video-analytics/playback.ts",
+            "name": "playbackSeconds",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": true,
+              "reason": "local allocation construction with typed value scan",
+              "version": 2,
+              "shapes": {
+                "playbackSeconds": {
+                  "kind": "array",
+                  "value": {
+                    "kind": "number"
+                  }
+                }
+              },
+              "guards": {}
+            }
+          },
+          {
+            "file": "lib/video-analytics/playback.ts",
+            "name": "resolveVideoLength",
+            "boundary": {
+              "params": [
+                "json",
+                "json"
+              ],
+              "result": "number"
+            },
+            "constructionProof": {
+              "eligible": true,
+              "reason": "local allocation construction with typed value scan",
+              "version": 2,
+              "shapes": {
+                "resolveVideoLength": {
+                  "kind": "number"
+                }
+              },
+              "guards": {}
+            }
+          },
+          {
+            "file": "lib/video-analytics/playback.ts",
+            "name": "watchTimeSeconds",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": true,
+              "reason": "local allocation construction with typed value scan",
+              "version": 2,
+              "shapes": {
+                "watchTimeSeconds": {
+                  "kind": "object",
+                  "fields": [
+                    [
+                      "total",
+                      {
+                        "kind": "number"
+                      }
+                    ],
+                    [
+                      "unique",
+                      {
+                        "kind": "number"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "guards": {}
+            }
+          },
+          {
+            "file": "lib/video-analytics/playback.ts",
+            "name": "documentViewDistribution",
+            "boundary": {
+              "params": [
+                "json",
+                "number"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": true,
+              "reason": "local allocation construction with typed value scan",
+              "version": 2,
+              "shapes": {
+                "documentViewDistribution": {
+                  "kind": "array",
+                  "value": {
+                    "kind": "object",
+                    "fields": [
+                      [
+                        "start_time",
+                        {
+                          "kind": "number"
+                        }
+                      ],
+                      [
+                        "unique_views",
+                        {
+                          "kind": "number"
+                        }
+                      ],
+                      [
+                        "total_views",
+                        {
+                          "kind": "number"
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              "guards": {}
+            }
+          },
+          {
+            "file": "lib/video-analytics/playback.ts",
+            "name": "viewPlaybackTimeline",
+            "boundary": {
+              "params": [
+                "json",
+                "number"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": true,
+              "reason": "local allocation construction with typed value scan",
+              "version": 2,
+              "shapes": {
+                "viewPlaybackTimeline": {
+                  "kind": "array",
+                  "value": {
+                    "kind": "object",
+                    "fields": [
+                      [
+                        "start_time",
+                        {
+                          "kind": "number"
+                        }
+                      ],
+                      [
+                        "views",
+                        {
+                          "kind": "number"
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              "guards": {}
+            }
+          },
+          {
+            "file": "lib/year-in-review/get-stats.ts",
+            "name": "calculateTotalDistance",
+            "boundary": {
+              "params": [
+                "json",
+                "json"
+              ],
+              "result": "number"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          }
+        ],
+        "counts": {
+          "other extraction": 93,
+          "unsupported reference/import": 99,
+          "default/rest/destructured parameter": 22,
+          "work screen": 143,
+          "runtime import": 36,
+          "React/framework": 55,
+          "time/randomness/I/O": 12,
+          "mutation": 10,
+          "collection/callable boundary": 2,
+          "undefined/optional": 4,
+          "broad/unresolved boundary": 7,
+          "generic": 2
+        }
+      },
+      "strictCounterfactual": []
+    },
+    "dub": {
+      "commit": "6b463b4bdd9ed2fd9aa416f67b5b77d317b1471e",
+      "scope": [
+        "apps/web/lib",
+        "apps/web/app/api"
+      ],
+      "inventory": {
+        "files": 699,
+        "routeFiles": 133,
+        "functions": 661,
+        "namedExportSyncBlock": 236,
+        "async": 225,
+        "expressionBody": 18,
+        "nonExport": 182,
+        "clientModules": 11
+      },
+      "preliminary": 38,
+      "actual": {
+        "accepted": [
+          {
+            "file": "apps/web/lib/ai/upsert-docs-embedding.ts",
+            "name": "chunkByHeadings",
+            "boundary": {
+              "params": [
+                "string",
+                "string",
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsafe type escape or reflective syntax at 56",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/analytics/verify-installation.ts",
+            "name": "analyzeDubAnalyticsScript",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 6",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/billing/recompute-workspace-usage.ts",
+            "name": "sum",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "number"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "ipv4ToInt",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "ipv4InCidr",
+            "boundary": {
+              "params": [
+                "number",
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "isPrivateIpv4",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "expandIpv6",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "isPrivateIpv6",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/is-private-ip.ts",
+            "name": "isPrivateIp",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/links/utils/check-if-links-have-folders.ts",
+            "name": "checkIfLinksHaveFolders",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/tokens/scopes.ts",
+            "name": "consolidateScopes",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsafe type escape or reflective syntax at 14",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/api/utils/is-non-empty-json.ts",
+            "name": "isNonEmptyJson",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported statement TryStatement at 6",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/domain-connect/discover.ts",
+            "name": "isAllowedSettingsHost",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/domain-connect/discover.ts",
+            "name": "settingsBaseFromTxtRecords",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/email/run-trial-email-cron.ts",
+            "name": "dedupeRecipients",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported binding at 6",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/integrations/google-ads/api.ts",
+            "name": "getLoginCustomerIdCandidates",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/integrations/google-ads/utils.ts",
+            "name": "findDuplicateMappingEventNames",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 5",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/integrations/google-ads/utils.ts",
+            "name": "getGoogleAdsEventMappingsError",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 5",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/middleware/app.ts",
+            "name": "isPublicPath",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/middleware/utils/is-ip-in-range.ts",
+            "name": "isIpInRange",
+            "boundary": {
+              "params": [
+                "string",
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/middleware/utils/is-supported-custom-uri-scheme.ts",
+            "name": "isSupportedCustomURIScheme",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/middleware/utils/is-top-level-settings-redirect.ts",
+            "name": "isTopLevelSettingsRedirect",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/assert-safe-storage-key.ts",
+            "name": "urlPathHasRelativeSegments",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/assert-safe-storage-key.ts",
+            "name": "isSafePathSegment",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 7",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/assert-safe-storage-key.ts",
+            "name": "isDotSegment",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/assert-safe-storage-key.ts",
+            "name": "decodesToTraversal",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/assert-safe-storage-key.ts",
+            "name": "containsTraversal",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/magic-bytes.ts",
+            "name": "isUserUploadKey",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsafe type escape or reflective syntax at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/magic-bytes.ts",
+            "name": "startsWithBytes",
+            "boundary": {
+              "params": [
+                "bytes",
+                "json"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 6",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/storage/magic-bytes.ts",
+            "name": "indexOfBytes",
+            "boundary": {
+              "params": [
+                "bytes",
+                "json"
+              ],
+              "result": "number"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported statement LabeledStatement at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/lib/tinybird/get-workspace-usage.ts",
+            "name": "sum",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "number"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "apps/web/app/api/workspaces/[idOrSlug]/support/slack-invite/route.ts",
+            "name": "dedupeEmails",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          }
+        ],
+        "counts": {
+          "other extraction": 162,
+          "unsupported reference/import": 56,
+          "work screen": 52,
+          "default/rest/destructured parameter": 29,
+          "runtime import": 15,
+          "time/randomness/I/O": 9,
+          "React/framework": 18,
+          "mutation": 3,
+          "broad/unresolved boundary": 3,
+          "generic": 1,
+          "collection/callable boundary": 1,
+          "undefined/optional": 1
+        }
+      },
+      "strictCounterfactual": []
+    },
+    "umami": {
+      "commit": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+      "scope": [
+        "src/lib",
+        "src/queries",
+        "src/app/api"
+      ],
+      "inventory": {
+        "files": 506,
+        "routeFiles": 156,
+        "functions": 888,
+        "namedExportSyncBlock": 197,
+        "async": 390,
+        "expressionBody": 0,
+        "nonExport": 301,
+        "clientModules": 0
+      },
+      "preliminary": 38,
+      "actual": {
+        "accepted": [
+          {
+            "file": "src/lib/api-key.ts",
+            "name": "isApiKeyBlockedPath",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "hex6",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getColor",
+            "boundary": {
+              "params": [
+                "string",
+                "number",
+                "number"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "stringToColor",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 7",
+              "version": 2
+            }
+          }
+        ],
+        "counts": {
+          "time/randomness/I/O": 7,
+          "other extraction": 103,
+          "work screen": 80,
+          "unsupported reference/import": 63,
+          "default/rest/destructured parameter": 39,
+          "runtime import": 7,
+          "mutation": 2,
+          "React/framework": 6,
+          "broad/unresolved boundary": 8
+        }
+      },
+      "strictCounterfactual": {
+        "accepted": [
+          {
+            "file": "src/lib/api-key.ts",
+            "name": "isApiKeyBlockedPath",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/api-url.ts",
+            "name": "isAppRoute",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "boolean"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "module statement excluded at 1",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "hex6",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getColor",
+            "boundary": {
+              "params": [
+                "string",
+                "number",
+                "number"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "stringToColor",
+            "boundary": {
+              "params": [
+                "string"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 7",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/params.ts",
+            "name": "serializePropertyFilters",
+            "boundary": {
+              "params": [
+                "json",
+                "string"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported helper parameter at 12",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/params.ts",
+            "name": "serializeEventPropertyFilters",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "unsupported helper parameter at 12",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/params.ts",
+            "name": "serializeUniversalEventPropertyFilters",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "opaque call at 11",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/lib/params.ts",
+            "name": "serializeSessionPropertyFilters",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "opaque call at 11",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/breakdown/getBreakdown.ts",
+            "name": "parseFieldsByName",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/getChannelExpandedMetrics.ts",
+            "name": "toClickHouseStringArray",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 3",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/getChannelExpandedMetrics.ts",
+            "name": "toPostgresPositionClause",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/getChannelMetrics.ts",
+            "name": "toClickHouseStringArray",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 3",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/getChannelMetrics.ts",
+            "name": "toPostgresLikeClause",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 4",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/heatmap/getHeatmap.ts",
+            "name": "pickSnapshotViewport",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "mutation requires local allocation at 31",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/heatmap/getHeatmap.ts",
+            "name": "pickScrollSnapshotViewport",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "json"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "mutation requires local allocation at 28",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/pageviews/getPageviewExpandedMetrics.ts",
+            "name": "toPostgresLikeClause",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/revenue/getRevenueMetrics.ts",
+            "name": "toClickHouseStringArray",
+            "boundary": {
+              "params": [
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          },
+          {
+            "file": "src/queries/sql/revenue/getRevenueMetrics.ts",
+            "name": "toPostgresLikeClause",
+            "boundary": {
+              "params": [
+                "string",
+                "json"
+              ],
+              "result": "string"
+            },
+            "constructionProof": {
+              "eligible": false,
+              "reason": "call outside local allocation allowlist at 2",
+              "version": 2
+            }
+          }
+        ],
+        "counts": {
+          "time/randomness/I/O": 7,
+          "other extraction": 78,
+          "work screen": 80,
+          "unsupported reference/import": 62,
+          "default/rest/destructured parameter": 39,
+          "runtime import": 7,
+          "mutation": 2,
+          "React/framework": 6,
+          "broad/unresolved boundary": 16,
+          "collection/callable boundary": 3
+        }
+      }
+    }
+  },
+  "note": "Full discovery logs omitted; mutually exclusive first-rejection counts retained. Umami strictCounterfactual is diagnostic only."
+}

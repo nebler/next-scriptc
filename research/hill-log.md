@@ -457,3 +457,37 @@ shim tests pass. The external
 app and its dependencies and builds are removed automatically. No scriptc,
 Docker container, or root README change.
 [Findings, retained results, and commands](install-and-vercel-build-checks.md).
+
+## 23. Strict closures in non-strict apps and dependency format survey (2026-11-01)
+
+2026-11-01, `t3/strict-closure-promotion`. Hypothesis: an independent strict
+closure check plus guarded runtime inputs can replace Umami's application-wide
+strict-null veto. Kept. Reused the construction proof's strict program and
+checked the entire extracted closure before deriving boundary types. Generated
+builds now have their own strict tsconfig. Direct scalar guards reject null,
+undefined, and wrong types before C. JSON inputs additionally require a
+construction proof and a result ABI with per-call catch fallback. Unsupported
+JSON result ABIs remain rejected. Optional TypeScript lookup starts from the
+application/source or cwd, with no example-directory fallback.
+
+Final census: Umami 4, Dub 32, held-out Papermark 23. Umami's four scalar-input
+candidates are outside K1's persistence path. Its accepted profiled CPU remains
+zero; there is no newly accepted profiled function requiring compilation/parity.
+Only Umami was profiled anew; Papermark and Dub received census only. No native
+performance or whole-app saving is claimed.
+
+The published-package survey recommends richer ESM initialization proofs first.
+Most surveyed ESM entry graphs still fail scalar/function-only initialization;
+CJS support alone cannot recover Dub CSV or make effectful service SDKs pure.
+Immediate demonstrated coverage gain from that future project is zero. The
+report separates measured CSV CPU from unmeasured import frequency.
+
+The full adapter suite passes 85 tests; eight final focused checks pass.
+Fuzzer seed 20935 passes 320,000 inputs and 640,000 comparisons across 16
+candidates, including nested null/undefined injection and direct scalar cases.
+[Implementation, soundness argument, package evidence, and reproduction](nonstrict-apps-and-module-survey.md).
+The optional local shim IPC and HTTP parity checks also pass. HTTP parity needed
+one retry for the existing owner/child stdout-order race, without a code change.
+Temporary packages, generated native outputs, and dependency symlinks were
+removed. No scriptc, Vercel service, Docker, third-party source, or root README
+change.
