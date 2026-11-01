@@ -1,0 +1,11 @@
+scriptc coverage /Users/noah/.t3/worktrees/next-scriptc/t3-d611261e/research/real-app-targets/twenty/probe.ts
+
+  statements analyzed   32
+  compile statically    32  (100%)
+    in dynamic tier     13  (operate on values typed only at runtime; --explain-dynamic lists them)
+
+  fully static — all analyzed statements compile to native code.
+
+  untyped and likely hot   1 function that likely runs often uses untyped values, which runs slower than typed code:
+    parseResult (entry.ts:27): `obj` is `any`, in a loop
+    hint: add types to compile these statically; see scriptc coverage --explain-dynamic

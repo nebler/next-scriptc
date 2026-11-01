@@ -1,0 +1,24 @@
+{
+  "profile_format": 1,
+  "name": "dub",
+  "entry": "library.ts",
+  "emission": "llvm",
+  "abi": {
+    "prefix": "dub_",
+    "init_symbol": "dub_init",
+    "sink_register_symbol": "dub_sink",
+    "collect_symbol": "dub_collect",
+    "localize_runtime": true,
+    "instance_per_thread": false
+  },
+  "exports": [
+    {
+      "export": "run",
+      "symbol": "dub_run",
+      "params": [
+        "string"
+      ],
+      "returns": "string"
+    }
+  ]
+}

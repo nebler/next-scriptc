@@ -1,0 +1,42 @@
+scriptc coverage /Users/noah/.t3/worktrees/next-scriptc/t3-d611261e/research/real-app-targets/cal/probe.ts
+
+  statements analyzed   208
+  compile statically    200  (96%)
+    in dynamic tier     133  (operate on values typed only at runtime; --explain-dynamic lists them)
+
+  npm package compilation:
+    dayjs  static
+
+  Node islands   (would-be, report-only: the build is unchanged; --node-islands=auto)
+    object-model  dayjs@1.11.13
+          node_modules/dayjs/dayjs.min.js:1:6853: R2.1 constructor functions: a write of 'O.prototype'
+          +7 more reasons in 1 module
+    hint: scriptc coverage --explain-island=<package> lists every reason
+
+  deferred to runtime   7 sites (JS statements that throw their fence if executed)
+      ×1  SC1043  '-' operations on 'string | undefined' and 'number' values
+          at node_modules/dayjs/dayjs.min.js:1:2369
+          hint: this construct is valid TypeScript outside the compiled subset — rewrite it with a supported equivalent (https://scriptc.dev/limitations)
+      ×1  SC2001  values of type 'void' cannot be compiled yet (supported: number, string, boolean, arrays, Maps, Sets, RegExp, Dates, functions, classes, records, unions of those, and 'unknown')
+          at node_modules/dayjs/dayjs.min.js:1:2
+          hint: restate the value's type inside the compilable set (number, string, boolean, arrays, Maps, Sets, RegExp, functions, classes, records, unions of those, and 'unknown')
+      ×1  SC1090  replacing module.exports outside a top-level statement (a conditional or environment-dependent export object)
+          at node_modules/dayjs/dayjs.min.js:1:69
+          hint: this form is valid TypeScript but does not compile yet — rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)
+      ×1  SC1090  'instanceof' right-hand sides other than classes declared in the program
+          at node_modules/dayjs/dayjs.min.js:1:1557
+          hint: this form is valid TypeScript but does not compile yet — rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)
+      ×1  SC1090  constructing values other than classes declared in the program
+          at node_modules/dayjs/dayjs.min.js:1:1902
+          hint: this form is valid TypeScript but does not compile yet — rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)
+      ×1  SC2003  union conversion has no unambiguous layout mapping: expected 'number', got 'string | undefined' (each source arm needs an identical destination arm, a unique compatible record/array layout, or a shar…
+          at node_modules/dayjs/dayjs.min.js:1:2435
+          hint: narrow the value to a SINGLE arm first (a discriminant check, or '!== undefined'/'!== null' for unit arms); a plain arm value widens into any union that contains it, and a whole union widens into any union whose arms include the source's
+      ×1  SC2020  'array slice start of 'unknown' values' is part of the standard library types but has no scriptc lowering yet
+          at node_modules/dayjs/dayjs.min.js:1:3458
+          hint: the type checker sees the full standard library, but only the supported surface compiles (https://scriptc.dev/limitations)
+
+  blockers:
+      ×1  SC1090  module namespace objects as values (access 'dayjs' members directly)
+          at cal/probe.ts:3:47
+          hint: this form is valid TypeScript but does not compile yet — rewrite it with a supported equivalent of the construct the message names (https://scriptc.dev/limitations lists the boundary)

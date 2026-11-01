@@ -1,0 +1,77 @@
+{
+  "papermark": {
+    "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
+    "files": [
+      {
+        "source": "lib/video-analytics/playback.ts",
+        "slice": "entry.ts",
+        "changed": false
+      },
+      {
+        "source": "pages/api/teams/[teamId]/documents/[id]/video-analytics.ts",
+        "slice": "analytics.ts",
+        "changed": true,
+        "changes": "Keep interface and calculateAnalytics body, export for measurement, replace imports with exact local playback module. Handler is excluded."
+      }
+    ]
+  },
+  "dub": {
+    "commit": "6b463b4bdd9ed2fd9aa416f67b5b77d317b1471e",
+    "files": [
+      {
+        "source": "apps/web/lib/analytics/utils/convert-to-csv.ts",
+        "slice": "entry.ts",
+        "changed": false
+      }
+    ]
+  },
+  "twenty": {
+    "commit": "6a1f828c9f0a202216b398709c79b2228e679921",
+    "files": [
+      {
+        "source": "packages/twenty-server/src/engine/api/graphql/workspace-query-runner/utils/parse-result.util.ts",
+        "slice": "entry.ts",
+        "changed": true,
+        "changes": "Rewrite helper import to local composite.ts only."
+      },
+      {
+        "source": "packages/twenty-server/src/engine/api/graphql/workspace-query-builder/utils/composite-field-metadata.util.ts",
+        "slice": "composite.ts",
+        "changed": false
+      }
+    ]
+  },
+  "umami": {
+    "commit": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+    "files": [
+      {
+        "source": "src/lib/data.ts",
+        "slice": "entry.ts",
+        "changed": true,
+        "changes": "Reachable flattenJSON, isValidDateValue, getDataType, createKeyValue only. Copy DATA_TYPE and DATETIME_REGEX constants verbatim, inline equivalent DynamicDataType numeric union."
+      }
+    ]
+  },
+  "cal": {
+    "commit": "f972feefa1376cf47631177231c671da9a9dd09f",
+    "files": [
+      {
+        "source": "packages/features/schedules/lib/date-ranges.ts",
+        "slice": "entry.ts",
+        "changed": true,
+        "changes": "Only intersect and DateRange type retained. @calcom/dayjs replaced with pinned dayjs. No Cal plugin initialization is reached by intersect.valueOf. Does not test timezone/slot dependency closure."
+      }
+    ]
+  },
+  "formbricks": {
+    "commit": "fa289168d43699043e8e4016c3aa38bc3109f865",
+    "files": [
+      {
+        "source": "apps/web/lib/response/utils.ts",
+        "slice": "entry.ts",
+        "changed": true,
+        "changes": "Keep calculateTtcTotal only. Inline equivalent TResponseTtc = Record<string,number>, from packages/types/responses.ts:52-54."
+      }
+    ]
+  }
+}

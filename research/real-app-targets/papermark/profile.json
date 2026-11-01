@@ -1,0 +1,24 @@
+{
+  "profile_format": 1,
+  "name": "papermark",
+  "entry": "library.ts",
+  "emission": "llvm",
+  "abi": {
+    "prefix": "papermark_",
+    "init_symbol": "papermark_init",
+    "sink_register_symbol": "papermark_sink",
+    "collect_symbol": "papermark_collect",
+    "localize_runtime": true,
+    "instance_per_thread": false
+  },
+  "exports": [
+    {
+      "export": "run",
+      "symbol": "papermark_run",
+      "params": [
+        "string"
+      ],
+      "returns": "string"
+    }
+  ]
+}
