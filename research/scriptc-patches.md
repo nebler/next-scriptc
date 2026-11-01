@@ -10,6 +10,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 
 | Patch | Branch | Status | Last rebased onto upstream |
 | --- | --- | --- | --- |
+| Closed-record certificate investigation | `next-scriptc/closed-records` | local diagnosis only; stopped on metadata loss, no facility or adapter change | 2026-11-01, `f606a3bd8` |
 | Cached record prototype reflection | `next-scriptc/result-reflection` | **local, not pushed**; experimental, focused parity only | 2026-11-01, `a07d5a791` |
 | Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | local, not pushed; focused checks pass, full gate pending; **stacked on the int8 branch** (upstream it needs the int8 PR first or a rebase onto plain upstream) | 2026-11-01, `a07d5a791` |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Committed and pushed to the fork. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) |
@@ -53,6 +54,8 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 
 ## Candidate: checked closed records for result encoding
 
+Investigated 2026-11-01 on local branch `next-scriptc/closed-records`, diagnostic commit `2ff495f8cc9fb79d37cd222e9a68ea7456916cd6`, worktree `/Users/noah/code/scriptc-wt/closed-records`, fetched upstream base `f606a3bd8`. **Stopped at the hypothesis gate.** Static library mode accepts typed-to-erased prototype, symbol, and descriptor mutations. The focused Node/executable/library probe loses a null prototype, hidden record and array symbols, and accessor identity on subsequent crossings. Native layouts and temporary checked views do not provide an authoritative persistent closure certificate. See [closed-records.md](closed-records.md) and [raw parity outputs](closed-records-parity.json). The fork branch retains a diagnostic fixture outside automatic corpus discovery because parity currently fails. No encoder, adapter flag, A/B measurement, full gate, or push. A native-identity mutation certificate remains a separate design task.
+
 Not implemented. Adapter-only generated visits retain reflective container checks
 because TypeScript signatures are structural. The loaded-host experiment in
 [native-result-validation.md](native-result-validation.md) leaves about 0.6 ms
@@ -82,6 +85,6 @@ Other required cases are `Object.setPrototypeOf(value,null)`, a hidden symbol,
 `{n:-0}`, a getter replacing `n`, and `const a:number[]=[]; a.length=1`.
 Neither the declared return type nor successful shadows prove their absence on
 the next call. A certificate must preserve actual key order and handle extra
-fields through a checked fallback. Negative zero needs a lossless representation
-or JS fallback. A compact layout must define the same guarantees before the
-adapter can safely decode it. No scriptc files changed for this candidate.
+fields through a checked fallback. JSON negative zero stays canonicalized to zero. A certificate must not throw
+inside the native lane to refuse it. A compact layout must define the same guarantees before the
+adapter can safely decode it. The investigation adds only diagnostic fixtures in scriptc; compiler and runtime code are unchanged.
