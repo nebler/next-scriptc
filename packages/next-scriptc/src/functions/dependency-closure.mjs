@@ -11,7 +11,9 @@ const digest=s=>createHash('sha256').update(s).digest('hex');
 const declarationFile=f=>/\.d\.[cm]?ts$/.test(f);
 export function dependencyClosure(text, source, name, {ts, options={}, unsupportedResolver=false}={}) {
  if(unsupportedResolver)throw Error('dependency closure: custom application resolver requires explicit integration');
- ts??=require('typescript');
+ // Discovery passes the app's TypeScript; standalone callers resolve it from
+ // the app (cwd) first, like construction-proof.mjs.
+ ts??=require(require.resolve('typescript',{paths:[process.cwd(),new URL('../../../../examples/demo/',import.meta.url).pathname]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
  const modules=new Map(), active=new Set(), chunks=[];
  function resolve(specifier, importer) {

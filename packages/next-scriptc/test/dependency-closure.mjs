@@ -30,7 +30,7 @@ import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {buildPromotion} from '../src/functions/promotion-build.mjs';
 import {loadPromotion} from '../src/functions/promotion-runtime.mjs';
 import {checkFunctionTypes} from '../src/functions/types.mjs';
-const ts=createRequire(import.meta.url)('typescript');
+const ts=createRequire(new URL('../../../examples/demo/package.json',import.meta.url))('typescript');
 test('flattened app closure compiles and forced-native bytes match original JS',async()=>{
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'closure-native-'));
  try{
