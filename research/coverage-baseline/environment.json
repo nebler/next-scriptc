@@ -1,0 +1,64 @@
+{
+  "initialDfAvailable": "18 GiB (df -h rounded)",
+  "beforeCleanupDf": "Filesystem   1024-blocks      Used Available Capacity  iused     ifree %iused  Mounted on\n/dev/disk3s5   482797652 428567704  20223068    96% 15444136 202230680    7%   /System/Volumes/Data\n",
+  "platform": "macOS-26.6.1-arm64-arm-64bit-Mach-O",
+  "checkouts": {
+    "papermark": {
+      "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
+      "sourceSha256": {
+        "lib/video-analytics/playback.ts": "9bf4d1fc55df8588be0804d333c2e42e6ade6e4a8404847a2cc380809c60e3e2",
+        "pages/api/teams/[teamId]/documents/[id]/video-analytics.ts": "b0b47d412a4a82ed9e1046ecc14f2de2f8d23da44f8dc63b2862e2fe46d4d8eb",
+        "tsconfig.json": "11210f3497469f9a8a4662eff9ca4e8e06af6f996aa6d30c5999921e86e1bb53"
+      },
+      "disk": "5.9M\t/Users/noah/code/coverage-apps/papermark"
+    },
+    "dub": {
+      "commit": "6b463b4bdd9ed2fd9aa416f67b5b77d317b1471e",
+      "sourceSha256": {
+        "apps/web/app/api/links/export/route.ts": "dd013f67e74b4b6966ba0f99ff082b4919de9f1df5b6ecf671e69750491e7ea0",
+        "apps/web/lib/analytics/utils/convert-to-csv.ts": "a03f69135d3798cd43166f040ebc269c12b24a8c471cc62c633e3fc1ea0440ff",
+        "apps/web/lib/api/links/format-links-for-export.ts": "90ee5054325fae46db6229e491569daa33b0d5fdcb9ab9aa3be4377321b3fa0c",
+        "apps/web/lib/zod/schemas/links.ts": "25ab7168f121ab737c43005303cf48e55ce471b91a6c1399336edbdbd5858ad1",
+        "apps/web/tsconfig.json": "dec81b401592ce010a2771d668ab43d209784ebb43872744ad032de50ae7f220"
+      },
+      "disk": "6.5M\t/Users/noah/code/coverage-apps/dub"
+    },
+    "umami": {
+      "commit": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+      "sourceSha256": {
+        "src/lib/data.ts": "7daa35a7f649ece8a56ff42ae3ed32c98a08d6fb693ca34e13b20dad792631f4",
+        "src/lib/constants.ts": "d31de3605efb378988843ea5cfc20aff9e4a5e47c2e632044a402757c63d1dae",
+        "src/lib/format.ts": "dd8930e0f4c49702abdebf18a855a5cb451e9a1cc6d992baa5c30dda9e6283c7",
+        "src/lib/crypto.ts": "66543da569e17447de10b5f896c079e0032306e6e200bcc65b223bfd006a3566",
+        "src/queries/sql/events/saveEventData.ts": "40e26f48c468c732ff944f89a0e90155e3a7381f69705dca66c3375e71ee6cdf",
+        "src/app/api/send/route.ts": "63de352bb5fe987544de29bc9c882397594ba370dc14d3f18539390132de4436",
+        "tsconfig.json": "a18d763dbc87dd812ad9432d18b6f29dc33b57f84839c7525c062310ec6cedcb"
+      },
+      "disk": "8.5M\t/Users/noah/code/coverage-apps/umami"
+    }
+  },
+  "measurementCorrections": [
+    "Discarded initial profiles because all instrumentation wrappers appeared as wrap in V8 stacks; fixed names and repeated coverage measurement, without tuning app or adapter.",
+    "Removed ambient Node/React types from temporary root dependency link to avoid construction-proof TS2792 environment errors.",
+    "Replaced initial uuid 11.1.0 setup with pinned Umami uuid 14.0.2; repeated only Umami."
+  ],
+  "validation": [
+    "Six response/row fixture checks passed",
+    "All six profile category totals sum to 100 percent",
+    "Expected actual discovery totals 5/9/0 and Umami counterfactual 3",
+    "Every added mjs passes node --check"
+  ],
+  "cleanupPending": false,
+  "cleanupRemoved": [
+    "repository node_modules/typescript and empty parent",
+    "adapter node_modules symlink",
+    "three external app node_modules directories containing only task links",
+    "coverage-apps/deps/node_modules"
+  ],
+  "afterCleanupDf": "Filesystem   1024-blocks      Used Available Capacity  iused     ifree %iused  Mounted on\n/dev/disk3s5   482797652 428532324  20258448    96% 15438614 202584480    7%   /System/Volumes/Data\n",
+  "checkoutStatus": {
+    "papermark": "",
+    "dub": "",
+    "umami": ""
+  }
+}

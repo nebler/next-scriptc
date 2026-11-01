@@ -1,0 +1,4341 @@
+{
+  "node": "v26.13.0",
+  "arch": "arm64",
+  "cpu": "Apple M4 Pro",
+  "load": [
+    10.89892578125,
+    9.42236328125,
+    8.1025390625
+  ],
+  "method": "V8 inspector CPU sampling; 3 x >=500ms process CPU; 10 warmups; 500us interval; active unweighted samples",
+  "results": [
+    {
+      "name": "papermark-video-6000",
+      "fixture": {
+        "events": 6000,
+        "viewers": 100,
+        "videoSeconds": 600,
+        "inputBytes": 1113401
+      },
+      "outputBytes": 33752,
+      "sha256": "0716f0f58ed82a591d1c6ba77978539bdf71956ca36a765b27187468637fa22a",
+      "rounds": [
+        {
+          "requests": 70,
+          "cpuUs": 561223,
+          "cpuUsPerRequest": 8017.471428571429,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 810,
+            "activeSamples": 810,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 20,
+              "c:serialization": 137,
+              "b:optional boundary": 107,
+              "b:nonexport sync core + Date": 150,
+              "a:current": 373,
+              "b:generic + optional boundary": 9,
+              "d:GC": 14
+            },
+            "shares": {
+              "d:other": 2.4691358024691357,
+              "c:serialization": 16.91358024691358,
+              "b:optional boundary": 13.209876543209877,
+              "b:nonexport sync core + Date": 18.51851851851852,
+              "a:current": 46.04938271604938,
+              "b:generic + optional boundary": 1.1111111111111112,
+              "d:GC": 1.728395061728395
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                211
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                138
+              ],
+              [
+                "mockHttpDecode :3",
+                133
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                123
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                57
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                45
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:84",
+                27
+              ],
+              [
+                "(program) :0",
+                14
+              ],
+              [
+                "(garbage collector) :0",
+                14
+              ],
+              [
+                "playbackSeconds :32",
+                11
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                9
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                6
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                6
+              ],
+              [
+                "responseSerialization :3",
+                4
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                3
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                3
+              ],
+              [
+                "dispatch :0",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:57",
+                1
+              ],
+              [
+                "getServerSession file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:23",
+                1
+              ],
+              [
+                "cpuUsage :0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                211
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                141
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                133
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                123
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                57
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                45
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                27
+              ],
+              [
+                "(program) <- (root)",
+                14
+              ],
+              [
+                "(garbage collector) <- (root)",
+                14
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                9
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                7
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                4
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                4
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "dispatch <- post <- (anonymous) <- post <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "getServerSession <- handle <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 70,
+          "cpuUs": 500532,
+          "cpuUsPerRequest": 7150.457142857143,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 773,
+            "activeSamples": 773,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 14,
+              "c:serialization": 140,
+              "b:optional boundary": 102,
+              "b:nonexport sync core + Date": 162,
+              "a:current": 336,
+              "d:GC": 15,
+              "b:generic + optional boundary": 4
+            },
+            "shares": {
+              "d:other": 1.8111254851228977,
+              "c:serialization": 18.111254851228978,
+              "b:optional boundary": 13.195342820181112,
+              "b:nonexport sync core + Date": 20.95730918499353,
+              "a:current": 43.467011642949544,
+              "d:GC": 1.9404915912031049,
+              "b:generic + optional boundary": 0.517464424320828
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                209
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                139
+              ],
+              [
+                "mockHttpDecode :3",
+                136
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                94
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                49
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                44
+              ],
+              [
+                "(anonymous) :84",
+                21
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                18
+              ],
+              [
+                "(garbage collector) :0",
+                15
+              ],
+              [
+                "playbackSeconds :32",
+                13
+              ],
+              [
+                "(program) :0",
+                9
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                9
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                5
+              ],
+              [
+                "responseSerialization :3",
+                4
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                1
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ],
+              [
+                "handle file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:47",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                209
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                144
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                136
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                94
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                49
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                44
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                21
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                18
+              ],
+              [
+                "(garbage collector) <- (root)",
+                15
+              ],
+              [
+                "(program) <- (root)",
+                9
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                7
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                4
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (root)",
+                3
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "handle <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 70,
+          "cpuUs": 508932,
+          "cpuUsPerRequest": 7270.457142857143,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 769,
+            "activeSamples": 769,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 18,
+              "c:serialization": 141,
+              "b:optional boundary": 95,
+              "b:nonexport sync core + Date": 157,
+              "a:current": 335,
+              "d:GC": 14,
+              "b:generic + optional boundary": 9
+            },
+            "shares": {
+              "d:other": 2.340702210663199,
+              "c:serialization": 18.33550065019506,
+              "b:optional boundary": 12.35370611183355,
+              "b:nonexport sync core + Date": 20.416124837451235,
+              "a:current": 43.5630689206762,
+              "d:GC": 1.8205461638491547,
+              "b:generic + optional boundary": 1.1703511053315996
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                213
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                140
+              ],
+              [
+                "mockHttpDecode :3",
+                137
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                92
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                46
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                37
+              ],
+              [
+                "(anonymous) :84",
+                25
+              ],
+              [
+                "playbackSeconds :32",
+                15
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                14
+              ],
+              [
+                "(garbage collector) :0",
+                14
+              ],
+              [
+                "(program) :0",
+                14
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                5
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                4
+              ],
+              [
+                "responseSerialization :3",
+                4
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                3
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:29",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                213
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                143
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                137
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                92
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                46
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                37
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                25
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                14
+              ],
+              [
+                "(garbage collector) <- (root)",
+                14
+              ],
+              [
+                "(program) <- (root)",
+                14
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                10
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                4
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                4
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "papermark-video-60000",
+      "fixture": {
+        "events": 60000,
+        "viewers": 1000,
+        "videoSeconds": 600,
+        "inputBytes": 11193401
+      },
+      "outputBytes": 34955,
+      "sha256": "546fee9e1df0b5e1c809bad5ff6d9de53b073a1e13039e26f1cd6e97ace3f33c",
+      "rounds": [
+        {
+          "requests": 10,
+          "cpuUs": 1559358,
+          "cpuUsPerRequest": 155935.8,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 1836,
+            "activeSamples": 1836,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 25,
+              "c:serialization": 184,
+              "d:GC": 165,
+              "b:generic + optional boundary": 8,
+              "b:optional boundary": 132,
+              "b:nonexport sync core + Date": 209,
+              "a:current": 1113
+            },
+            "shares": {
+              "d:other": 1.3616557734204793,
+              "c:serialization": 10.021786492374728,
+              "d:GC": 8.986928104575163,
+              "b:generic + optional boundary": 0.4357298474945534,
+              "b:optional boundary": 7.189542483660131,
+              "b:nonexport sync core + Date": 11.383442265795207,
+              "a:current": 60.62091503267974
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution :67",
+                811
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                236
+              ],
+              [
+                "mockHttpDecode :3",
+                184
+              ],
+              [
+                "(garbage collector) :0",
+                165
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                146
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                65
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                62
+              ],
+              [
+                "playbackSeconds :32",
+                51
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                47
+              ],
+              [
+                "(anonymous) :84",
+                24
+              ],
+              [
+                "(program) :0",
+                18
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                13
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                5
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                3
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                3
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                811
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                236
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                184
+              ],
+              [
+                "(garbage collector) <- (root)",
+                165
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                147
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                65
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                62
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                47
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                33
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                24
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                18
+              ],
+              [
+                "(program) <- (root)",
+                18
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                9
+              ],
+              [
+                "(anonymous) <- (root)",
+                6
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 10,
+          "cpuUs": 1545286,
+          "cpuUsPerRequest": 154528.6,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 1880,
+            "activeSamples": 1880,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 33,
+              "c:serialization": 165,
+              "b:optional boundary": 152,
+              "b:nonexport sync core + Date": 208,
+              "d:GC": 156,
+              "a:current": 1159,
+              "b:generic + optional boundary": 7
+            },
+            "shares": {
+              "d:other": 1.7553191489361701,
+              "c:serialization": 8.77659574468085,
+              "b:optional boundary": 8.085106382978724,
+              "b:nonexport sync core + Date": 11.063829787234043,
+              "d:GC": 8.297872340425531,
+              "a:current": 61.648936170212764,
+              "b:generic + optional boundary": 0.3723404255319149
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                871
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                217
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                188
+              ],
+              [
+                "mockHttpDecode :3",
+                165
+              ],
+              [
+                "(garbage collector) :0",
+                156
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                72
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                63
+              ],
+              [
+                "playbackSeconds :32",
+                47
+              ],
+              [
+                "(program) :0",
+                29
+              ],
+              [
+                "(anonymous) :84",
+                25
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                16
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                13
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                4
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                4
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                3
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                3
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                871
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                217
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                192
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                165
+              ],
+              [
+                "(garbage collector) <- (root)",
+                156
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                72
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                63
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                34
+              ],
+              [
+                "(program) <- (root)",
+                29
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                25
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                16
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                13
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                12
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                4
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- (root)",
+                3
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 10,
+          "cpuUs": 1535844,
+          "cpuUsPerRequest": 153584.4,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 1973,
+            "activeSamples": 1973,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 32,
+              "c:serialization": 191,
+              "b:nonexport sync core + Date": 220,
+              "b:generic + optional boundary": 10,
+              "b:optional boundary": 154,
+              "d:GC": 173,
+              "a:current": 1193
+            },
+            "shares": {
+              "d:other": 1.6218955904713634,
+              "c:serialization": 9.68068930562595,
+              "b:nonexport sync core + Date": 11.150532184490624,
+              "b:generic + optional boundary": 0.5068423720223011,
+              "b:optional boundary": 7.805372529143437,
+              "d:GC": 8.768373035985809,
+              "a:current": 60.466294982260514
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                876
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                248
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                193
+              ],
+              [
+                "mockHttpDecode :3",
+                190
+              ],
+              [
+                "(garbage collector) :0",
+                173
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                84
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                59
+              ],
+              [
+                "playbackSeconds :32",
+                44
+              ],
+              [
+                "(program) :0",
+                25
+              ],
+              [
+                "(anonymous) :84",
+                25
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                20
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                12
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                5
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                5
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                5
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                3
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "responseSerialization :3",
+                1
+              ],
+              [
+                "handle file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:47",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                876
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                248
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                200
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                190
+              ],
+              [
+                "(garbage collector) <- (root)",
+                173
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                84
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                59
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                36
+              ],
+              [
+                "(program) <- (root)",
+                25
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                25
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                20
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "playbackSeconds <- watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- (root)",
+                5
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                1
+              ],
+              [
+                "handle <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "dub-links-export-100",
+      "fixture": {
+        "rows": 100,
+        "columns": 9,
+        "foregroundLimit": 1000
+      },
+      "outputBytes": 14025,
+      "sha256": "e23e88cb45e8825800892ddaddb7fda40fea0dceebc44ab6508640599a91d822",
+      "rounds": [
+        {
+          "requests": 1190,
+          "cpuUs": 502146,
+          "cpuUsPerRequest": 421.9714285714286,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 511,
+            "activeSamples": 511,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 34,
+              "c:Response/framework": 20,
+              "b:npm json-2-csv + object boundary": 294,
+              "b:cross-module + broad boundary": 154,
+              "d:GC": 9
+            },
+            "shares": {
+              "d:other": 6.653620352250489,
+              "c:Response/framework": 3.9138943248532287,
+              "b:npm json-2-csv + object boundary": 57.534246575342465,
+              "b:cross-module + broad boundary": 30.136986301369863,
+              "d:GC": 1.761252446183953
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                66
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                61
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                46
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                31
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                30
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                26
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:20",
+                24
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                18
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                17
+              ],
+              [
+                "retrieveRecordFieldData file://deps/node_modules/json-2-csv/lib/json2csv.js:309",
+                15
+              ],
+              [
+                "(program) :0",
+                15
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                14
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                12
+              ],
+              [
+                "(garbage collector) :0",
+                9
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                9
+              ],
+              [
+                "recordFieldValueToString file://deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                8
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                7
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                7
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                6
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                6
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                5
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                5
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                5
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                5
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                5
+              ],
+              [
+                "decode node:internal/encoding:481",
+                4
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                4
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                4
+              ],
+              [
+                "concat node:buffer:684",
+                3
+              ],
+              [
+                "#encode node:internal/encoding:344",
+                3
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                118
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                60
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                31
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                30
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                26
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                25
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                18
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "(program) <- (root)",
+                15
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                12
+              ],
+              [
+                "(garbage collector) <- (root)",
+                9
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                6
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                4
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "concat <- readAllBytes <- (root)",
+                3
+              ],
+              [
+                "#encode <- encode <- pull <- (anonymous) <- readableByteStreamControllerCallPullIfNeeded <- readableByteStreamControllerPullSteps <- (anonymous) <- readableStreamDefaultReaderRead <- read <- readAllBytes <- fullyReadBody <- consumeBody",
+                3
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 1230,
+          "cpuUs": 500660,
+          "cpuUsPerRequest": 407.0406504065041,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 529,
+            "activeSamples": 529,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 28,
+              "b:npm json-2-csv + object boundary": 315,
+              "b:cross-module + broad boundary": 158,
+              "c:Response/framework": 20,
+              "d:GC": 8
+            },
+            "shares": {
+              "d:other": 5.293005671077505,
+              "b:npm json-2-csv + object boundary": 59.54631379962193,
+              "b:cross-module + broad boundary": 29.86767485822306,
+              "c:Response/framework": 3.780718336483932,
+              "d:GC": 1.5122873345935728
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                56
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                49
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                47
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                38
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                33
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                31
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                28
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                27
+              ],
+              [
+                "(anonymous) :20",
+                27
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                20
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                16
+              ],
+              [
+                "(program) :0",
+                15
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                15
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                12
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                10
+              ],
+              [
+                "(garbage collector) :0",
+                8
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                8
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                7
+              ],
+              [
+                "recordFieldValueToString file://deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                6
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                6
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                5
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                5
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                4
+              ],
+              [
+                "(anonymous) :18",
+                4
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                4
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                3
+              ],
+              [
+                "exports.GET.requiredPermissions file://dub/apps/web/app/api/links/export/route.ts:22",
+                3
+              ],
+              [
+                "readableByteStreamControllerCallPullIfNeeded node:internal/webstreams/readablestream:3745",
+                2
+              ],
+              [
+                "concat node:buffer:684",
+                2
+              ],
+              [
+                "(anonymous) node:internal/deps/undici/undici:3799",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                114
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                48
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                38
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                33
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                31
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                28
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                26
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                20
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "(program) <- (root)",
+                15
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(garbage collector) <- (root)",
+                8
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                4
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "readableByteStreamControllerCallPullIfNeeded <- readableByteStreamControllerPullSteps <- (anonymous) <- readableStreamDefaultReaderRead <- read <- readAllBytes <- fullyReadBody <- consumeBody <- text <- run <- (root)",
+                2
+              ],
+              [
+                "concat <- readAllBytes <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- webidl.converters.HeadersInit <- (anonymous) <- Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 1440,
+          "cpuUs": 501496,
+          "cpuUsPerRequest": 348.2611111111111,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 740,
+            "activeSamples": 740,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 36,
+              "b:cross-module + broad boundary": 224,
+              "b:npm json-2-csv + object boundary": 442,
+              "c:Response/framework": 24,
+              "d:GC": 14
+            },
+            "shares": {
+              "d:other": 4.864864864864865,
+              "b:cross-module + broad boundary": 30.27027027027027,
+              "b:npm json-2-csv + object boundary": 59.729729729729726,
+              "c:Response/framework": 3.2432432432432434,
+              "d:GC": 1.8918918918918919
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                79
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                78
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                68
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                59
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                56
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                40
+              ],
+              [
+                "(anonymous) :20",
+                37
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                35
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                31
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                29
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                25
+              ],
+              [
+                "(program) :0",
+                24
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                16
+              ],
+              [
+                "(garbage collector) :0",
+                14
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                11
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                11
+              ],
+              [
+                "recordFieldValueToString file://deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                11
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                10
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                8
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                8
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                8
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                6
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                6
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                5
+              ],
+              [
+                "parseValue :14",
+                4
+              ],
+              [
+                "exports.GET.requiredPermissions file://dub/apps/web/app/api/links/export/route.ts:22",
+                4
+              ],
+              [
+                "cpuUsage :0",
+                3
+              ],
+              [
+                "webidl.converters.HeadersInit node:internal/deps/undici/undici:12767",
+                3
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                3
+              ],
+              [
+                "buildJ2COptions file://deps/node_modules/json-2-csv/lib/utils.js:12",
+                3
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                170
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                67
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                59
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                56
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                40
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                37
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                35
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                31
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                25
+              ],
+              [
+                "(program) <- (root)",
+                24
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "(garbage collector) <- (root)",
+                14
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                6
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "webidl.converters.HeadersInit <- (anonymous) <- Response <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "buildJ2COptions <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "transform <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "wrapHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "dub-links-export-1000",
+      "fixture": {
+        "rows": 1000,
+        "columns": 9,
+        "foregroundLimit": 1000
+      },
+      "outputBytes": 142484,
+      "sha256": "308076aaeaf1e09f0535fbc6ea058f0db1033fea7f48ad970075ff7dc4d28e2a",
+      "rounds": [
+        {
+          "requests": 160,
+          "cpuUs": 522759,
+          "cpuUsPerRequest": 3267.24375,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 787,
+            "activeSamples": 787,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 27,
+              "b:cross-module + broad boundary": 254,
+              "b:npm json-2-csv + object boundary": 482,
+              "c:Response/framework": 13,
+              "d:GC": 11
+            },
+            "shares": {
+              "d:other": 3.4307496823379924,
+              "b:cross-module + broad boundary": 32.27445997458704,
+              "b:npm json-2-csv + object boundary": 61.245235069885645,
+              "c:Response/framework": 1.6518424396442186,
+              "d:GC": 1.3977128335451081
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                95
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                93
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                77
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                62
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                57
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                56
+              ],
+              [
+                "(anonymous) :20",
+                35
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                35
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                28
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                26
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                25
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                18
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                16
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                14
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                13
+              ],
+              [
+                "(program) :0",
+                13
+              ],
+              [
+                "(garbage collector) :0",
+                11
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                10
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                10
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                9
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                8
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                8
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                7
+              ],
+              [
+                "recordFieldValueToString file://deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                7
+              ],
+              [
+                "concat node:buffer:684",
+                5
+              ],
+              [
+                "retrieveRecordFieldData file://deps/node_modules/json-2-csv/lib/json2csv.js:309",
+                4
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                4
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                3
+              ],
+              [
+                "(anonymous) :0",
+                3
+              ],
+              [
+                "parseValue :14",
+                3
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                202
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                77
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                62
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                57
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                56
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                35
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                33
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                26
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                25
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "(program) <- (root)",
+                13
+              ],
+              [
+                "(garbage collector) <- (root)",
+                11
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                9
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "concat <- readAllBytes <- (root)",
+                5
+              ],
+              [
+                "retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- byteLength <- extractBody <- Response <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                3
+              ],
+              [
+                "isUndefined <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 160,
+          "cpuUs": 510997,
+          "cpuUsPerRequest": 3193.73125,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 791,
+            "activeSamples": 791,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 34,
+              "b:cross-module + broad boundary": 240,
+              "b:npm json-2-csv + object boundary": 491,
+              "c:Response/framework": 18,
+              "d:GC": 8
+            },
+            "shares": {
+              "d:other": 4.298356510745891,
+              "b:cross-module + broad boundary": 30.34134007585335,
+              "b:npm json-2-csv + object boundary": 62.07332490518331,
+              "c:Response/framework": 2.275600505689001,
+              "d:GC": 1.011378002528445
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                91
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                91
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                83
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                65
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                61
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                47
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                40
+              ],
+              [
+                "(anonymous) :20",
+                32
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                30
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                26
+              ],
+              [
+                "(program) :0",
+                25
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                21
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                16
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                14
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                13
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                12
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                12
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                11
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                10
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                10
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                9
+              ],
+              [
+                "(garbage collector) :0",
+                8
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                7
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                5
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                4
+              ],
+              [
+                "(anonymous) :18",
+                4
+              ],
+              [
+                "parseValue :14",
+                4
+              ],
+              [
+                "(anonymous) :0",
+                4
+              ],
+              [
+                "encodeUtf8String :0",
+                3
+              ],
+              [
+                "buildKeyName file://deps/node_modules/deeks/lib/deeks.js:122",
+                3
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                194
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                83
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                65
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                61
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                47
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                40
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                32
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                30
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                26
+              ],
+              [
+                "(program) <- (root)",
+                25
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                21
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                12
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                12
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "(garbage collector) <- (root)",
+                8
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- byteLength <- extractBody <- Response <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "encodeUtf8String <- #encode <- encode <- pull <- (anonymous) <- readableByteStreamControllerCallPullIfNeeded <- readableByteStreamControllerPullSteps <- (anonymous) <- readableStreamDefaultReaderRead <- read <- readAllBytes <- fullyReadBody",
+                3
+              ],
+              [
+                "buildKeyName <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                3
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                3
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 160,
+          "cpuUs": 505060,
+          "cpuUsPerRequest": 3156.625,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 775,
+            "activeSamples": 775,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 32,
+              "b:cross-module + broad boundary": 247,
+              "b:npm json-2-csv + object boundary": 472,
+              "d:GC": 12,
+              "c:Response/framework": 12
+            },
+            "shares": {
+              "d:other": 4.129032258064516,
+              "b:cross-module + broad boundary": 31.870967741935484,
+              "b:npm json-2-csv + object boundary": 60.903225806451616,
+              "d:GC": 1.5483870967741935,
+              "c:Response/framework": 1.5483870967741935
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                96
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                82
+              ],
+              [
+                "wrapFieldValueIfNecessary file://deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                82
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                60
+              ],
+              [
+                "escapeNestedDotsIfSpecified file://deps/node_modules/deeks/lib/deeks.js:110",
+                50
+              ],
+              [
+                "state file://deps/node_modules/doc-path/lib/path.js:118",
+                46
+              ],
+              [
+                "generateCsvRowFromRecord file://deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                36
+              ],
+              [
+                "(anonymous) :20",
+                29
+              ],
+              [
+                "findFirstNonEscapedDotIndex file://deps/node_modules/doc-path/lib/path.js:126",
+                27
+              ],
+              [
+                "evaluatePath file://deps/node_modules/doc-path/lib/path.js:13",
+                25
+              ],
+              [
+                "(program) :0",
+                24
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                22
+              ],
+              [
+                "flatten file://deps/node_modules/deeks/lib/utils.js:8",
+                22
+              ],
+              [
+                "flatten file://deps/node_modules/json-2-csv/lib/utils.js:190",
+                19
+              ],
+              [
+                "processRecords file://deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                18
+              ],
+              [
+                "deepKeysFromList file://deps/node_modules/deeks/lib/deeks.js:52",
+                13
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                12
+              ],
+              [
+                "(garbage collector) :0",
+                12
+              ],
+              [
+                "unique file://deps/node_modules/json-2-csv/lib/utils.js:186",
+                11
+              ],
+              [
+                "(anonymous) file://deps/node_modules/deeks/lib/deeks.js:64",
+                11
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                11
+              ],
+              [
+                "generateDeepKeysList file://deps/node_modules/deeks/lib/deeks.js:63",
+                7
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                6
+              ],
+              [
+                "recordFieldValueToString file://deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                6
+              ],
+              [
+                "(anonymous) file://deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                5
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:29",
+                4
+              ],
+              [
+                "buildJ2COptions file://deps/node_modules/json-2-csv/lib/utils.js:12",
+                3
+              ],
+              [
+                "mergeOptions file://deps/node_modules/deeks/lib/deeks.js:128",
+                3
+              ],
+              [
+                "isUndefined file://deps/node_modules/json-2-csv/lib/utils.js:172",
+                3
+              ],
+              [
+                "concat node:buffer:684",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                193
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                82
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                60
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                50
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                46
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                36
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                29
+              ],
+              [
+                "findFirstNonEscapedDotIndex <- state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                27
+              ],
+              [
+                "(program) <- (root)",
+                24
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                23
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                22
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                22
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                19
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "(garbage collector) <- (root)",
+                12
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                11
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "buildJ2COptions <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "isUndefined <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "concat <- readAllBytes <- (root)",
+                2
+              ],
+              [
+                "isDocumentToRecurOn <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                2
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- byteLength <- extractBody <- Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "umami-saveEventData-20",
+      "fixture": {
+        "nestedProperties": 20,
+        "leaves": 100,
+        "inputBytes": 2094
+      },
+      "outputBytes": 3,
+      "sha256": null,
+      "rounds": [
+        {
+          "requests": 12060,
+          "cpuUs": 500328,
+          "cpuUsPerRequest": 41.48656716417911,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 700,
+            "activeSamples": 700,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 21,
+              "d:already-native crypto dependency": 182,
+              "b:cross-module + any boundary + closure": 188,
+              "b:cross-module + Date formatting": 229,
+              "b:async sync core extraction": 66,
+              "d:GC": 14
+            },
+            "shares": {
+              "d:other": 3,
+              "d:already-native crypto dependency": 26,
+              "b:cross-module + any boundary + closure": 26.857142857142858,
+              "b:cross-module + Date formatting": 32.714285714285715,
+              "b:async sync core extraction": 9.428571428571429,
+              "d:GC": 2
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                223
+              ],
+              [
+                "flatten file://umami/src/lib/data.ts:15",
+                137
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:449",
+                89
+              ],
+              [
+                "(anonymous) :27",
+                47
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                43
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                26
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                21
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                15
+              ],
+              [
+                "(garbage collector) :0",
+                14
+              ],
+              [
+                "isValidDateValue :26",
+                14
+              ],
+              [
+                "get node:internal/util:638",
+                12
+              ],
+              [
+                "createKeyValue :52",
+                11
+              ],
+              [
+                "randomFillSync :0",
+                8
+              ],
+              [
+                "(program) :0",
+                8
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                7
+              ],
+              [
+                "truncateString :134",
+                6
+              ],
+              [
+                "saveEventData file://umami/src/queries/sql/events/saveEventData.ts:17",
+                6
+              ],
+              [
+                "getStoredStringValue :45",
+                4
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "randomUUID node:internal/crypto/webcrypto:165",
+                1
+              ],
+              [
+                "isDataView node:internal/util/types:9",
+                1
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:27",
+                1
+              ],
+              [
+                "cpuUsage :0",
+                1
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:166",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                223
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                108
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                89
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                47
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                43
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                29
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                24
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                21
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                15
+              ],
+              [
+                "(garbage collector) <- (root)",
+                14
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                11
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                11
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                11
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                8
+              ],
+              [
+                "(program) <- (root)",
+                8
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "isValidDateValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                3
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "randomUUID <- (root)",
+                1
+              ],
+              [
+                "isDataView <- getByteLength <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery",
+                1
+              ],
+              [
+                "get <- (root)",
+                1
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 13450,
+          "cpuUs": 500014,
+          "cpuUsPerRequest": 37.175762081784384,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 767,
+            "activeSamples": 767,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 29,
+              "b:cross-module + Date formatting": 263,
+              "d:already-native crypto dependency": 175,
+              "b:async sync core extraction": 86,
+              "b:cross-module + any boundary + closure": 203,
+              "d:GC": 11
+            },
+            "shares": {
+              "d:other": 3.7809647979139505,
+              "b:cross-module + Date formatting": 34.289439374185136,
+              "d:already-native crypto dependency": 22.816166883963493,
+              "b:async sync core extraction": 11.21251629726206,
+              "b:cross-module + any boundary + closure": 26.466753585397655,
+              "d:GC": 1.4341590612777053
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                252
+              ],
+              [
+                "flatten :15",
+                151
+              ],
+              [
+                "(anonymous) :27",
+                71
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                68
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                44
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:449",
+                41
+              ],
+              [
+                "createKeyValue :52",
+                23
+              ],
+              [
+                "(program) :0",
+                16
+              ],
+              [
+                "(anonymous) :16",
+                16
+              ],
+              [
+                "isValidDateValue :26",
+                12
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                11
+              ],
+              [
+                "(garbage collector) :0",
+                11
+              ],
+              [
+                "getStoredStringValue :45",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                9
+              ],
+              [
+                "randomFillSync :0",
+                7
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                6
+              ],
+              [
+                "truncateString :134",
+                6
+              ],
+              [
+                "saveEventData :17",
+                4
+              ],
+              [
+                "cpuUsage :0",
+                2
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "cpuUsage node:internal/process/per_thread:127",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:166",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:71",
+                1
+              ],
+              [
+                "getDataType :29",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                252
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                128
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                71
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                68
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                44
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                41
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                23
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                23
+              ],
+              [
+                "(program) <- (root)",
+                16
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                12
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                12
+              ],
+              [
+                "(garbage collector) <- (root)",
+                11
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                10
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                9
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                7
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "get <- (root)",
+                2
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- (root)",
+                1
+              ],
+              [
+                "relationalQuery <- (root)",
+                1
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                1
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                1
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 13700,
+          "cpuUs": 500241,
+          "cpuUsPerRequest": 36.51394160583941,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 755,
+            "activeSamples": 755,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 34,
+              "b:cross-module + Date formatting": 265,
+              "d:already-native crypto dependency": 166,
+              "b:async sync core extraction": 66,
+              "b:cross-module + any boundary + closure": 209,
+              "d:GC": 15
+            },
+            "shares": {
+              "d:other": 4.503311258278146,
+              "b:cross-module + Date formatting": 35.09933774834437,
+              "d:already-native crypto dependency": 21.986754966887418,
+              "b:async sync core extraction": 8.741721854304636,
+              "b:cross-module + any boundary + closure": 27.68211920529801,
+              "d:GC": 1.9867549668874172
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                258
+              ],
+              [
+                "flatten :15",
+                172
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                111
+              ],
+              [
+                "(anonymous) :27",
+                54
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                35
+              ],
+              [
+                "(program) :0",
+                18
+              ],
+              [
+                "(anonymous) :16",
+                16
+              ],
+              [
+                "(garbage collector) :0",
+                15
+              ],
+              [
+                "createKeyValue :52",
+                14
+              ],
+              [
+                "randomFillSync :0",
+                10
+              ],
+              [
+                "truncateString :134",
+                9
+              ],
+              [
+                "get node:internal/util:638",
+                8
+              ],
+              [
+                "saveEventData :17",
+                7
+              ],
+              [
+                "isValidDateValue :26",
+                7
+              ],
+              [
+                "relationalQuery :23",
+                7
+              ],
+              [
+                "getStoredStringValue :45",
+                3
+              ],
+              [
+                "(anonymous) :19",
+                2
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "cpuUsage node:internal/process/per_thread:127",
+                1
+              ],
+              [
+                "cpuUsage :0",
+                1
+              ],
+              [
+                "randomFillSync node:internal/crypto/random:166",
+                1
+              ],
+              [
+                "getHexBytes node:internal/crypto/random:413",
+                1
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                258
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                141
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                111
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                54
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                35
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                31
+              ],
+              [
+                "(program) <- (root)",
+                18
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                16
+              ],
+              [
+                "(garbage collector) <- (root)",
+                15
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                14
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                10
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                5
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                4
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "isValidDateValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                3
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "get <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                1
+              ],
+              [
+                "getHexBytes <- serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                1
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "umami-saveEventData-100",
+      "fixture": {
+        "nestedProperties": 100,
+        "leaves": 500,
+        "inputBytes": 10254
+      },
+      "outputBytes": 3,
+      "sha256": null,
+      "rounds": [
+        {
+          "requests": 2460,
+          "cpuUs": 501122,
+          "cpuUsPerRequest": 203.70813008130082,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 656,
+            "activeSamples": 656,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 12,
+              "d:already-native crypto dependency": 159,
+              "b:cross-module + Date formatting": 233,
+              "d:GC": 19,
+              "b:cross-module + any boundary + closure": 151,
+              "b:async sync core extraction": 82
+            },
+            "shares": {
+              "d:other": 1.829268292682927,
+              "d:already-native crypto dependency": 24.23780487804878,
+              "b:cross-module + Date formatting": 35.51829268292683,
+              "d:GC": 2.8963414634146343,
+              "b:cross-module + any boundary + closure": 23.01829268292683,
+              "b:async sync core extraction": 12.5
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                215
+              ],
+              [
+                "flatten file://umami/src/lib/data.ts:15",
+                85
+              ],
+              [
+                "umami_uuid :3",
+                77
+              ],
+              [
+                "(anonymous) :27",
+                64
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                35
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                28
+              ],
+              [
+                "(garbage collector) :0",
+                19
+              ],
+              [
+                "flatten :15",
+                19
+              ],
+              [
+                "createKeyValue :52",
+                19
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                17
+              ],
+              [
+                "getStoredStringValue :45",
+                14
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                14
+              ],
+              [
+                "get node:internal/util:638",
+                8
+              ],
+              [
+                "isValidDateValue :26",
+                8
+              ],
+              [
+                "truncateString :134",
+                7
+              ],
+              [
+                "(program) :0",
+                7
+              ],
+              [
+                "randomFillSync :0",
+                7
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                4
+              ],
+              [
+                "getDataType :29",
+                3
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "umami_stored :3",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:71",
+                1
+              ],
+              [
+                "saveEventData file://umami/src/queries/sql/events/saveEventData.ts:17",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                215
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                85
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                77
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                64
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                35
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                28
+              ],
+              [
+                "(garbage collector) <- (root)",
+                19
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                19
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                19
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                14
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                14
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                14
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                8
+              ],
+              [
+                "(program) <- (root)",
+                7
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                7
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                7
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                3
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                2
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "isValidDateValue <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 2760,
+          "cpuUs": 500264,
+          "cpuUsPerRequest": 181.25507246376813,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 768,
+            "activeSamples": 768,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 15,
+              "b:cross-module + any boundary + closure": 186,
+              "b:cross-module + Date formatting": 304,
+              "b:async sync core extraction": 87,
+              "d:already-native crypto dependency": 160,
+              "d:GC": 16
+            },
+            "shares": {
+              "d:other": 1.953125,
+              "b:cross-module + any boundary + closure": 24.21875,
+              "b:cross-module + Date formatting": 39.583333333333336,
+              "b:async sync core extraction": 11.328125,
+              "d:already-native crypto dependency": 20.833333333333332,
+              "d:GC": 2.0833333333333335
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                284
+              ],
+              [
+                "flatten :15",
+                138
+              ],
+              [
+                "umami_uuid :3",
+                79
+              ],
+              [
+                "(anonymous) :27",
+                65
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                32
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                18
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                17
+              ],
+              [
+                "(garbage collector) :0",
+                16
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                16
+              ],
+              [
+                "createKeyValue :52",
+                15
+              ],
+              [
+                "getStoredStringValue :45",
+                14
+              ],
+              [
+                "truncateString :134",
+                12
+              ],
+              [
+                "isValidDateValue :26",
+                12
+              ],
+              [
+                "get node:internal/util:638",
+                10
+              ],
+              [
+                "randomFillSync :0",
+                9
+              ],
+              [
+                "(program) :0",
+                7
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                7
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                4
+              ],
+              [
+                "(anonymous) :16",
+                3
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:449",
+                3
+              ],
+              [
+                "cpuUsage :0",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:71",
+                1
+              ],
+              [
+                "getHexBytes node:internal/crypto/random:413",
+                1
+              ],
+              [
+                "getDataType :29",
+                1
+              ],
+              [
+                "(anonymous) :19",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                284
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                124
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                79
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                65
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                32
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                18
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                17
+              ],
+              [
+                "(garbage collector) <- (root)",
+                16
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                16
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                15
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                14
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                14
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                12
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                9
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                9
+              ],
+              [
+                "(program) <- (root)",
+                7
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                7
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "(anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                3
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                2
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "get <- (root)",
+                1
+              ],
+              [
+                "getHexBytes <- serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                1
+              ],
+              [
+                "getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                1
+              ],
+              [
+                "(anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 2710,
+          "cpuUs": 500188,
+          "cpuUsPerRequest": 184.57121771217712,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 775,
+            "activeSamples": 775,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 21,
+              "b:async sync core extraction": 73,
+              "b:cross-module + Date formatting": 281,
+              "b:cross-module + any boundary + closure": 188,
+              "d:already-native crypto dependency": 193,
+              "d:GC": 19
+            },
+            "shares": {
+              "d:other": 2.7096774193548385,
+              "b:async sync core extraction": 9.419354838709678,
+              "b:cross-module + Date formatting": 36.25806451612903,
+              "b:cross-module + any boundary + closure": 24.258064516129032,
+              "d:already-native crypto dependency": 24.903225806451612,
+              "d:GC": 2.4516129032258065
+            },
+            "topFrames": [
+              [
+                "getStringValue :36",
+                259
+              ],
+              [
+                "flatten :15",
+                147
+              ],
+              [
+                "umami_uuid :3",
+                89
+              ],
+              [
+                "(anonymous) file://umami/src/queries/sql/events/saveEventData.ts:27",
+                58
+              ],
+              [
+                "serializeUUID node:internal/crypto/random:424",
+                46
+              ],
+              [
+                "v4 file://deps/node_modules/uuid/dist-node/v4.js:3",
+                31
+              ],
+              [
+                "(garbage collector) :0",
+                19
+              ],
+              [
+                "createKeyValue :52",
+                18
+              ],
+              [
+                "getStoredStringValue :45",
+                17
+              ],
+              [
+                "(anonymous) file://umami/src/lib/data.ts:16",
+                16
+              ],
+              [
+                "randomFillSync :0",
+                12
+              ],
+              [
+                "relationalQuery file://umami/src/queries/sql/events/saveEventData.ts:23",
+                11
+              ],
+              [
+                "(program) :0",
+                9
+              ],
+              [
+                "truncateString :134",
+                7
+              ],
+              [
+                "get node:internal/util:638",
+                6
+              ],
+              [
+                "isValidDateValue :26",
+                5
+              ],
+              [
+                "cryptoThisCheck node:internal/bootstrap/web/exposed-window-or-worker:114",
+                5
+              ],
+              [
+                "saveEventData :17",
+                4
+              ],
+              [
+                "randomUUID node:internal/crypto/random:467",
+                4
+              ],
+              [
+                "cpuUsage :0",
+                3
+              ],
+              [
+                "getBufferedUUID node:internal/crypto/random:449",
+                2
+              ],
+              [
+                "getDataType :29",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-e156d910/research/coverage-baseline/profile.mjs:0",
+                1
+              ],
+              [
+                "umami_stored :3",
+                1
+              ],
+              [
+                "getHexBytes node:internal/crypto/random:413",
+                1
+              ],
+              [
+                "(anonymous) node:internal/validators:229",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "getStringValue <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                259
+              ],
+              [
+                "flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                119
+              ],
+              [
+                "umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                89
+              ],
+              [
+                "(anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                58
+              ],
+              [
+                "serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                46
+              ],
+              [
+                "v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                30
+              ],
+              [
+                "flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                28
+              ],
+              [
+                "(garbage collector) <- (root)",
+                19
+              ],
+              [
+                "createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run",
+                18
+              ],
+              [
+                "getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                17
+              ],
+              [
+                "(anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                16
+              ],
+              [
+                "randomFillSync <- randomFillSync <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                12
+              ],
+              [
+                "relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                11
+              ],
+              [
+                "(program) <- (root)",
+                9
+              ],
+              [
+                "get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                6
+              ],
+              [
+                "isValidDateValue <- getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery",
+                5
+              ],
+              [
+                "saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "truncateString <- getStoredStringValue <- umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                4
+              ],
+              [
+                "truncateString <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "cpuUsage <- cpuUsage <- (anonymous) <- (root)",
+                3
+              ],
+              [
+                "cryptoThisCheck <- (root)",
+                3
+              ],
+              [
+                "cryptoThisCheck <- get <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous)",
+                2
+              ],
+              [
+                "getDataType <- createKeyValue <- (anonymous) <- flatten <- (anonymous) <- flatten <- flattenJSON <- umami_flatten <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "(anonymous) <- (root)",
+                1
+              ],
+              [
+                "umami_stored <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "getHexBytes <- serializeUUID <- getBufferedUUID <- randomUUID <- randomUUID <- v4 <- umami_uuid <- (anonymous) <- relationalQuery <- (anonymous) <- runQuery <- saveEventData",
+                1
+              ],
+              [
+                "v4 <- relationalQuery <- (anonymous) <- runQuery <- saveEventData <- run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

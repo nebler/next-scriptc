@@ -330,3 +330,45 @@ replacement. [Readiness report](default-on-readiness.md) records the equality
 contract, seeds, counts, covered crash windows, reset, limits, and reproduction.
 No scriptc source, Vercel deployment, Docker container, Papermark workload, or root
 README was changed. Dependency symlinks and task-created build output are removed.
+
+## 18. Real-app request CPU coverage baseline (2026-11-01)
+
+Hypothesis: existing sync JSON candidates cover enough real request CPU to justify
+further adapter work, and source candidate counts alone mis-rank the next gaps.
+Measured Papermark plus Dub and Umami with original server code, synthetic
+fixtures, mocked services, and V8 CPU profiles. No adapter/compiler change,
+native speed experiment, app install, Docker operation, or deployment.
+
+Papermark's existing distribution candidate covers 44.4% of the mocked 6k-event
+request and 60.9% at 60k. Optional watch-time/length boundaries hide another
+12.9% and 7.7%. Papermark remains held out: only coverage and correctness were
+measured, with no timing-based tuning. An instrumentation naming failure was
+corrected before retaining final coverage profiles.
+
+Dub's unchanged foreground links export spends 58.9–61.4% in CSV conversion
+and 30.1–31.5% in formatting. Current opaque-import and boundary checks leave
+all of that in JS. Umami's actual tsconfig disables auto discovery through
+strictNullChecks=false. Its isolated persistence path has 70.8–72.0% blocked
+shaping work, with about 23% already-native UUID work. It excludes the full
+HTTP ingestion handler, so it is not an ingest-request CPU result.
+
+Actual adapter discovery scans 1,757 server-directory files: Papermark 5,
+Dub 9, Umami 0 boundary-accepted candidates. A strict-null counterfactual gives
+Umami 3. Only Papermark distribution passes construction proof; failure of that
+proof is metadata for strict result handling, not rejection from discovery.
+No new native compilation was attempted, and no compiler errors were inferred.
+
+Keep the baseline and reproduction scripts. Recommend a Dub development
+project for dependency closure proof plus safe object/JSON specialization,
+and a smaller optional/undefined transport project on independent fixtures.
+At hypothetical boundary-inclusive 2x speed, their measured-region scenarios
+are 29–31% of mocked Dub export CPU and an additional 4–6% of mocked Papermark
+request CPU. These are conditional ceilings, not measured savings or a
+whole-app Vercel X. Production traffic weights and omitted service CPU remain
+unknown. Full report: [coverage-baseline.md](coverage-baseline.md).
+
+All six response/row checks, profile-accounting assertions, census assertions,
+and added-script syntax checks pass. Task-created dependencies and links are
+removed; pinned source checkouts remain outside the repo and are clean.
+Disk began at roughly 18 GiB free and ended at roughly 19 GiB, with unrelated
+host activity affecting the difference. No third-party source is added.
