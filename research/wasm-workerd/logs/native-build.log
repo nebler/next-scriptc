@@ -1,0 +1,7 @@
+{"status":0}
+/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/native-functions
+warning SC6101: 1 function that likely runs often uses untyped values, which runs slower than typed code:
+  check (../../../packages/next-scriptc/src/functions/json.ts:22): `descriptors` is `any`, in a loop
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.

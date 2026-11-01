@@ -1,0 +1,22 @@
+{
+  "profile_format": 1,
+  "name": "regex",
+  "entry": "regex-entry.ts",
+  "emission": "llvm",
+  "abi": {
+    "prefix": "bench_",
+    "init_symbol": "bench_init",
+    "sink_register_symbol": "bench_sink",
+    "collect_symbol": "bench_collect"
+  },
+  "exports": [
+    {
+      "export": "run",
+      "symbol": "bench_run",
+      "params": [
+        "string"
+      ],
+      "returns": "string"
+    }
+  ]
+}

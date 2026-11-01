@@ -1,0 +1,1118 @@
+{
+  "date": "2026-11-01T01:07:56.396Z",
+  "node": "v24.22.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "warmups": 2,
+  "batches": 1,
+  "batchSize": 2,
+  "cases": [
+    {
+      "kind": "revenue",
+      "size": 5000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 10.599999999999994,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 22.97595799999999,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 5.461375000000004,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 3.4343749999999886,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 4.164500000000004,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 2.6974170000000015,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 4.874582999999973,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 4.079999999999984,
+          "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 75979,
+          "before": {
+            "user_ns": 453517,
+            "system_ns": 341296,
+            "rss_bytes": 41369600,
+            "footprint_bytes": 11731544
+          },
+          "after": {
+            "user_ns": 555394,
+            "system_ns": 349654,
+            "rss_bytes": 42434560,
+            "footprint_bytes": 12796504
+          },
+          "elapsedMs": 6.951041000000004,
+          "cpuMs": 0.110235,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 75980,
+          "before": {
+            "user_ns": 2664143,
+            "system_ns": 334603,
+            "rss_bytes": 58097664,
+            "footprint_bytes": 27951848
+          },
+          "after": {
+            "user_ns": 3027162,
+            "system_ns": 347222,
+            "rss_bytes": 58392576,
+            "footprint_bytes": 28148456
+          },
+          "elapsedMs": 9.035333000000037,
+          "cpuMs": 0.375638,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 22544384,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 2
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+      "resultBytes": 21679,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 2.6974170000000015,
+          "p95": 4.164500000000004,
+          "min": 2.6974170000000015,
+          "max": 4.164500000000004,
+          "mean": 3.4309585000000027
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.0551175,
+          "p95": 0.0551175,
+          "min": 0.0551175,
+          "max": 0.0551175,
+          "mean": 0.0551175
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 4.079999999999984,
+          "p95": 4.874582999999973,
+          "min": 4.079999999999984,
+          "max": 4.874582999999973,
+          "mean": 4.477291499999978
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.187819,
+          "p95": 0.187819,
+          "min": 0.187819,
+          "max": 0.187819,
+          "mean": 0.187819
+        }
+      },
+      "cpuSpeedup": 0.29346072548570695
+    },
+    {
+      "kind": "revenue",
+      "size": 15000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 13.050542000000007,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 28.203624999999988,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 6.745249999999999,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 6.681375000000003,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 6.59416699999997,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 5.564208000000008,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 7.189500000000066,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 6.1620419999999285,
+          "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76029,
+          "before": {
+            "user_ns": 741121,
+            "system_ns": 260395,
+            "rss_bytes": 53362688,
+            "footprint_bytes": 19497560
+          },
+          "after": {
+            "user_ns": 984005,
+            "system_ns": 276253,
+            "rss_bytes": 55525376,
+            "footprint_bytes": 21660248
+          },
+          "elapsedMs": 12.236916000000065,
+          "cpuMs": 0.258742,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76031,
+          "before": {
+            "user_ns": 2775220,
+            "system_ns": 245373,
+            "rss_bytes": 60882944,
+            "footprint_bytes": 30655184
+          },
+          "after": {
+            "user_ns": 3325117,
+            "system_ns": 272945,
+            "rss_bytes": 61177856,
+            "footprint_bytes": 30868176
+          },
+          "elapsedMs": 13.449207999999999,
+          "cpuMs": 0.577469,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 30998528,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 2
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61",
+      "resultBytes": 21929,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 5.564208000000008,
+          "p95": 6.59416699999997,
+          "min": 5.564208000000008,
+          "max": 6.59416699999997,
+          "mean": 6.079187499999989
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.129371,
+          "p95": 0.129371,
+          "min": 0.129371,
+          "max": 0.129371,
+          "mean": 0.129371
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 6.1620419999999285,
+          "p95": 7.189500000000066,
+          "min": 6.1620419999999285,
+          "max": 7.189500000000066,
+          "mean": 6.6757709999999975
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.2887345,
+          "p95": 0.2887345,
+          "min": 0.2887345,
+          "max": 0.2887345,
+          "mean": 0.2887345
+        }
+      },
+      "cpuSpeedup": 0.44806214705897635
+    },
+    {
+      "kind": "revenue",
+      "size": 200000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 117.44283299999995,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 132.9189580000001,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 55.57249999999999,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 61.56174999999985,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 65.17958399999998,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 70.69183299999986,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 53.237375000000156,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 48.53495800000019,
+          "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76064,
+          "before": {
+            "user_ns": 4330482,
+            "system_ns": 593379,
+            "rss_bytes": 184172544,
+            "footprint_bytes": 150340304
+          },
+          "after": {
+            "user_ns": 7374196,
+            "system_ns": 767878,
+            "rss_bytes": 222920704,
+            "footprint_bytes": 189121280
+          },
+          "elapsedMs": 135.964833,
+          "cpuMs": 3.218213,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76065,
+          "before": {
+            "user_ns": 6100321,
+            "system_ns": 793596,
+            "rss_bytes": 129122304,
+            "footprint_bytes": 98517832
+          },
+          "after": {
+            "user_ns": 8699789,
+            "system_ns": 850453,
+            "rss_bytes": 129449984,
+            "footprint_bytes": 98763592
+          },
+          "elapsedMs": 101.86970900000006,
+          "cpuMs": 2.656325,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 129236992,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 2
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819",
+      "resultBytes": 22675,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 65.17958399999998,
+          "p95": 70.69183299999986,
+          "min": 65.17958399999998,
+          "max": 70.69183299999986,
+          "mean": 67.93570849999992
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 1.6091065,
+          "p95": 1.6091065,
+          "min": 1.6091065,
+          "max": 1.6091065,
+          "mean": 1.6091065
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 48.53495800000019,
+          "p95": 53.237375000000156,
+          "min": 48.53495800000019,
+          "max": 53.237375000000156,
+          "mean": 50.88616650000017
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 1.3281625,
+          "p95": 1.3281625,
+          "min": 1.3281625,
+          "max": 1.3281625,
+          "mean": 1.3281625
+        }
+      },
+      "cpuSpeedup": 1.2115283333176476
+    },
+    {
+      "kind": "regex",
+      "size": 5000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 11.25366699999995,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 23.341250000000173,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 8.665915999999925,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 5.182833999999957,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 5.59479199999987,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 5.008041999999932,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 8.101958999999852,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 7.472167000000127,
+          "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76098,
+          "before": {
+            "user_ns": 662485,
+            "system_ns": 180183,
+            "rss_bytes": 49152000,
+            "footprint_bytes": 15434328
+          },
+          "after": {
+            "user_ns": 875952,
+            "system_ns": 194388,
+            "rss_bytes": 53280768,
+            "footprint_bytes": 19563096
+          },
+          "elapsedMs": 10.644250000000056,
+          "cpuMs": 0.227672,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76099,
+          "before": {
+            "user_ns": 1789348,
+            "system_ns": 214827,
+            "rss_bytes": 50905088,
+            "footprint_bytes": 20873984
+          },
+          "after": {
+            "user_ns": 2185011,
+            "system_ns": 219888,
+            "rss_bytes": 51118080,
+            "footprint_bytes": 20972288
+          },
+          "elapsedMs": 15.605625000000146,
+          "cpuMs": 0.400724,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 20643840,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 1
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "c936e34d8499ed7a5199b2f06a6f0cdf81f0669e3d77fa4777b334cd259e6f7e",
+      "resultBytes": 99,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 5.008041999999932,
+          "p95": 5.59479199999987,
+          "min": 5.008041999999932,
+          "max": 5.59479199999987,
+          "mean": 5.301416999999901
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.113836,
+          "p95": 0.113836,
+          "min": 0.113836,
+          "max": 0.113836,
+          "mean": 0.113836
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 7.472167000000127,
+          "p95": 8.101958999999852,
+          "min": 7.472167000000127,
+          "max": 8.101958999999852,
+          "mean": 7.787062999999989
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.200362,
+          "p95": 0.200362,
+          "min": 0.200362,
+          "max": 0.200362,
+          "mean": 0.200362
+        }
+      },
+      "cpuSpeedup": 0.5681516455216059
+    },
+    {
+      "kind": "regex",
+      "size": 15000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 24.581458999999995,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 41.81062500000007,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 22.809582999999975,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 14.062249999999949,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 13.608000000000175,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 12.929332999999588,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 22.90887500000008,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 22.310665999999856,
+          "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76132,
+          "before": {
+            "user_ns": 1215617,
+            "system_ns": 219218,
+            "rss_bytes": 66519040,
+            "footprint_bytes": 32670296
+          },
+          "after": {
+            "user_ns": 1796960,
+            "system_ns": 240921,
+            "rss_bytes": 67108864,
+            "footprint_bytes": 33260120
+          },
+          "elapsedMs": 26.58741599999985,
+          "cpuMs": 0.603046,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76133,
+          "before": {
+            "user_ns": 2661780,
+            "system_ns": 239038,
+            "rss_bytes": 54149120,
+            "footprint_bytes": 24052456
+          },
+          "after": {
+            "user_ns": 3697778,
+            "system_ns": 255897,
+            "rss_bytes": 54411264,
+            "footprint_bytes": 24199912
+          },
+          "elapsedMs": 45.26991700000008,
+          "cpuMs": 1.052857,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 24510464,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 1
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "1bff41723195967cb7c5208e2790c31154f6b865bb4ea92c6ae2255383784b5c",
+      "resultBytes": 103,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 12.929332999999588,
+          "p95": 13.608000000000175,
+          "min": 12.929332999999588,
+          "max": 13.608000000000175,
+          "mean": 13.268666499999881
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.301523,
+          "p95": 0.301523,
+          "min": 0.301523,
+          "max": 0.301523,
+          "mean": 0.301523
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 22.310665999999856,
+          "p95": 22.90887500000008,
+          "min": 22.310665999999856,
+          "max": 22.90887500000008,
+          "mean": 22.609770499999968
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 0.5264285,
+          "p95": 0.5264285,
+          "min": 0.5264285,
+          "max": 0.5264285,
+          "mean": 0.5264285
+        }
+      },
+      "cpuSpeedup": 0.5727710410815524
+    },
+    {
+      "kind": "regex",
+      "size": 200000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 274.238875,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 360.76775,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 285.7728339999999,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 163.453125,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 165.49108400000023,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 161.25212499999998,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 284.7225419999995,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 276.9574590000002,
+          "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76166,
+          "before": {
+            "user_ns": 10311349,
+            "system_ns": 688538,
+            "rss_bytes": 209862656,
+            "footprint_bytes": 176112360
+          },
+          "after": {
+            "user_ns": 17911363,
+            "system_ns": 871487,
+            "rss_bytes": 219987968,
+            "footprint_bytes": 186254080
+          },
+          "elapsedMs": 326.7907500000001,
+          "cpuMs": 7.782963,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76167,
+          "before": {
+            "user_ns": 15878392,
+            "system_ns": 1002188,
+            "rss_bytes": 125108224,
+            "footprint_bytes": 95027968
+          },
+          "after": {
+            "user_ns": 29132982,
+            "system_ns": 1185533,
+            "rss_bytes": 125714432,
+            "footprint_bytes": 95060736
+          },
+          "elapsedMs": 561.7299169999997,
+          "cpuMs": 13.437935,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 111214592,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 1
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "79d44e9353a044bf81dc9d9c23e37a89cd75076d54730862931b06db4956944b",
+      "resultBytes": 107,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 161.25212499999998,
+          "p95": 165.49108400000023,
+          "min": 161.25212499999998,
+          "max": 165.49108400000023,
+          "mean": 163.3716045000001
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 3.8914815,
+          "p95": 3.8914815,
+          "min": 3.8914815,
+          "max": 3.8914815,
+          "mean": 3.8914815
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 276.9574590000002,
+          "p95": 284.7225419999995,
+          "min": 276.9574590000002,
+          "max": 284.7225419999995,
+          "mean": 280.84000049999986
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 6.7189675,
+          "p95": 6.7189675,
+          "min": 6.7189675,
+          "max": 6.7189675,
+          "mean": 6.7189675
+        }
+      },
+      "cpuSpeedup": 0.5791784972914366
+    },
+    {
+      "kind": "vector",
+      "size": 100000,
+      "warmup": [
+        {
+          "i": 0,
+          "variant": "js",
+          "ms": 821.9627909999999,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "i": 0,
+          "variant": "wasm",
+          "ms": 1049.8251249999994,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "i": 1,
+          "variant": "wasm",
+          "ms": 567.4700000000003,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "i": 1,
+          "variant": "js",
+          "ms": 68.52674999999999,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        }
+      ],
+      "samples": [
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "js",
+          "ms": 63.19970899999953,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "js",
+          "ms": 61.747833000000355,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "batch": 0,
+          "i": 0,
+          "variant": "wasm",
+          "ms": 566.4328340000002,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        },
+        {
+          "batch": 0,
+          "i": 1,
+          "variant": "wasm",
+          "ms": 567.0017079999998,
+          "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe"
+        }
+      ],
+      "cpuBatches": [
+        {
+          "batch": 0,
+          "variant": "js",
+          "pid": 76217,
+          "before": {
+            "user_ns": 21080310,
+            "system_ns": 670137,
+            "rss_bytes": 120127488,
+            "footprint_bytes": 86147768
+          },
+          "after": {
+            "user_ns": 24001978,
+            "system_ns": 705383,
+            "rss_bytes": 120242176,
+            "footprint_bytes": 86262456
+          },
+          "elapsedMs": 124.99570800000038,
+          "cpuMs": 2.956914,
+          "requests": 2
+        },
+        {
+          "batch": 0,
+          "variant": "wasm",
+          "pid": 76228,
+          "before": {
+            "user_ns": 38569634,
+            "system_ns": 831726,
+            "rss_bytes": 125894656,
+            "footprint_bytes": 93078296
+          },
+          "after": {
+            "user_ns": 65326017,
+            "system_ns": 1231822,
+            "rss_bytes": 126238720,
+            "footprint_bytes": 93405976
+          },
+          "elapsedMs": 1133.4950410000001,
+          "cpuMs": 27.156479,
+          "requests": 2
+        }
+      ],
+      "meta": {
+        "js": {},
+        "wasm": {
+          "memoryBytes": 152240128,
+          "calls": {
+            "environ_sizes_get": 1,
+            "fd_prestat_get": 1,
+            "clock_time_get": 1
+          }
+        }
+      },
+      "failures": [],
+      "sha256": "d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe",
+      "resultBytes": 293,
+      "js": {
+        "wallMs": {
+          "n": 2,
+          "p50": 61.747833000000355,
+          "p95": 63.19970899999953,
+          "min": 61.747833000000355,
+          "max": 63.19970899999953,
+          "mean": 62.47377099999994
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 1.478457,
+          "p95": 1.478457,
+          "min": 1.478457,
+          "max": 1.478457,
+          "mean": 1.478457
+        }
+      },
+      "wasm": {
+        "wallMs": {
+          "n": 2,
+          "p50": 566.4328340000002,
+          "p95": 567.0017079999998,
+          "min": 566.4328340000002,
+          "max": 567.0017079999998,
+          "mean": 566.717271
+        },
+        "cpuMsPerRequest": {
+          "n": 1,
+          "p50": 13.5782395,
+          "p95": 13.5782395,
+          "min": 13.5782395,
+          "max": 13.5782395,
+          "mean": 13.5782395
+        }
+      },
+      "cpuSpeedup": 0.1088842924003513
+    }
+  ],
+  "loadBefore": [
+    "  PID  PPID  %CPU COMM",
+    "  166     1  25.2 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer",
+    " 9696 94261  23.9 /Applications/Zen.app/Contents/MacOS/plugin-container.app/Contents/MacOS/plugin-container",
+    "  295     1  15.9 /usr/libexec/cameracaptured",
+    "94261     1  14.9 /Applications/Zen.app/Contents/MacOS/zen",
+    "89221     1  12.4 /System/Applications/Photo Booth.app/Contents/MacOS/Photo Booth",
+    "75963 83271  10.7 /Users/noah/.local/share/fnm/node-versions/v24.22.0/installation/bin/node",
+    "  184     1   9.7 /usr/sbin/coreaudiod",
+    " 2620     1   7.7 /System/Library/Frameworks/Virtualization.framework/Versions/A/XPCServices/com.apple.Virtualization.VirtualMachine.xpc/Contents/MacOS/com.apple.Virtualization.VirtualMachine",
+    "94398 94261   7.3 /Applications/Zen.app/Contents/MacOS/gpu-helper.app/Contents/MacOS/Zen GPU Helper",
+    "  297     1   5.9 /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/UVCAssistant.systemextension/Contents/MacOS/UVCAssistant",
+    "65363 65362   5.1 /Applications/T3 Code (Nightly).app/Contents/Frameworks/T3 Code (Nightly) Helper.app/Contents/MacOS/T3 Code (Nightly) Helper",
+    "83271 65415   4.7 codex",
+    "65414 65362   3.2 /Applications/T3 Code (Nightly).app/Contents/Frameworks/T3 Code (Nightly) Helper (Renderer).app/Contents/MacOS/T3 Code (Nightly) Helper (Renderer)",
+    "  325     1   2.8 /System/Library/DriverExtensions/com.apple.DriverKit-AppleBCMWLAN.dext/com.apple.DriverKit-AppleBCMWLAN",
+    "31775     1   2.8 /System/Library/Frameworks/VideoToolbox.framework/Versions/A/XPCServices/VTDecoderXPCService.xpc/Contents/MacOS/VTDecoderXPCService"
+  ],
+  "loadAfter": [
+    "  PID  PPID  %CPU COMM",
+    " 9696 94261  27.1 /Applications/Zen.app/Contents/MacOS/plugin-container.app/Contents/MacOS/plugin-container",
+    "  166     1  24.2 /System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer",
+    "94261     1  13.4 /Applications/Zen.app/Contents/MacOS/zen",
+    "  295     1  12.4 /usr/libexec/cameracaptured",
+    " 2620     1  12.0 /System/Library/Frameworks/Virtualization.framework/Versions/A/XPCServices/com.apple.Virtualization.VirtualMachine.xpc/Contents/MacOS/com.apple.Virtualization.VirtualMachine",
+    "89221     1  11.9 /System/Applications/Photo Booth.app/Contents/MacOS/Photo Booth",
+    "  184     1   7.8 /usr/sbin/coreaudiod",
+    "94398 94261   7.1 /Applications/Zen.app/Contents/MacOS/gpu-helper.app/Contents/MacOS/Zen GPU Helper",
+    "  297     1   5.2 /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/UVCAssistant.systemextension/Contents/MacOS/UVCAssistant",
+    "31775     1   2.8 /System/Library/Frameworks/VideoToolbox.framework/Versions/A/XPCServices/VTDecoderXPCService.xpc/Contents/MacOS/VTDecoderXPCService",
+    "67076 94261   2.4 /Applications/Zen.app/Contents/MacOS/plugin-container.app/Contents/MacOS/plugin-container",
+    "94399 94261   2.2 /Applications/Zen.app/Contents/MacOS/plugin-container.app/Contents/MacOS/plugin-container",
+    "  325     1   1.5 /System/Library/DriverExtensions/com.apple.DriverKit-AppleBCMWLAN.dext/com.apple.DriverKit-AppleBCMWLAN",
+    "  159     1   1.5 /usr/sbin/bluetoothd",
+    "55098     1   1.3 /System/Library/Frameworks/VideoToolbox.framework/Versions/A/XPCServices/VTDecoderXPCService.xpc/Contents/MacOS/VTDecoderXPCService"
+  ]
+}

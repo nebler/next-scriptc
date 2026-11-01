@@ -1,0 +1,22 @@
+Retained setup attempts, before any full benchmark:
+- --strip is not accepted for --lib. Removing it still left --node-islands=off,
+  which the stock library CLI also rejects. The final library command has neither.
+- The initial ABI copied callback_register_symbol from the docs example without
+  declaring callbacks. SC4001 correctly refused it. The final profile omits it.
+- The unchanged async revenue export fails SC4004. Its successful adaptation
+  removes only async in a staged copy; original application files are unchanged.
+- The first prepare.mjs wrote worker code over staged revenue-js.ts because of
+  a filename collision; esbuild reported No matching export for revenue.
+  Prefixing generated worker entry filenames with worker- fixed it. Preparation
+  now regenerates revenue-js.ts before bundling. No measured sample used this.
+- The first Cap'n Proto schema import used an absolute file path. Workerd could
+  not resolve it without an import root. A relative schema path fixed it.
+- workerd-smoke.json retains 2 warmups and 2 measured requests per variant/case.
+  Its libproc user_ns/system_ns fields actually contain raw Mach ticks; its CPU
+  summaries are INVALID as milliseconds (multiply by 125/3 on this host).
+  Its external wall times, outputs and hashes are valid. This smoke data has
+  not been erased or mixed into workerd.json. cpu-calibration.json verifies
+  the corrected Mach-timebase conversion used by every full-run CPU batch.
+- A post-measurement build-guard edit missed a closing parenthesis. The final
+  script syntax check caught it; it was fixed before committing. Recorded
+  binaries and benchmark data were built before that guard-only edit.

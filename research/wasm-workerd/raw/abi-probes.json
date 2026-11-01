@@ -1,0 +1,31 @@
+[
+  {
+    "name": "object-abi",
+    "status": 1,
+    "diagnostics": "/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/revenue.ts:7:1 - error SC4003: library export 'revenue': the return has IR type 'record', which does not fit the declared marshalling class 'string'\n\n  6 | \n  7 | export function revenue(from: string, to: string, size: number, profile: boolean) {\n    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  8 |   \"use native\";\n\n  hint: marshalling classes: f64/u8/u32/i32 (TS number; the integer plumbing classes are param-only), i64/u64 (TS number, prove-or-refuse at compile time — params and returns), bool, string, bytes (Uint8Array/Buffer), and a void return; records and unions slot in when the contract-sidecar conversation (asks 2/3) lands — deferral, not permanent unsupport\n\n1 error.\n"
+  },
+  {
+    "name": "reachable-async",
+    "status": 1,
+    "diagnostics": "/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/async-entry.ts:2:65 - error SC1090: JSON.stringify of 'Promise<{ daily: { day: string; events: number; region: string; revenueCents: number; units: number }[]; events: number; from: string; revenueCents: number; timings: null | { aggregateMs: number; parseMs: number }; to: string }>' values (only number, string, boolean, records, arrays, unions of those, and 'unknown' stringify) are not supported yet\n\n  1 | import {revenue} from './async-revenue.ts';\n  2 | export function run(input:string):string {return JSON.stringify(revenue('2026-01-01','2026-01-31',5000,false));}\n    |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  3 | \n\n1 error.\n"
+  },
+  {
+    "name": "no-wasi-imports",
+    "error": "TypeError: WebAssembly.Instance(): Import #0 \"wasi_snapshot_preview1\": module is not an object or function"
+  },
+  {
+    "name": "utf8-json-boundary",
+    "from": "2026-01-01",
+    "exactMatch": true
+  },
+  {
+    "name": "utf8-json-boundary",
+    "from": "😀",
+    "exactMatch": true
+  },
+  {
+    "name": "utf8-json-boundary",
+    "from": "é\u0000漢字",
+    "exactMatch": true
+  }
+]

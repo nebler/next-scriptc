@@ -1,0 +1,11 @@
+{"args":["build","--lib","--profile","/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/object-abi.json","-o","/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/object-abi.wasm"],"status":1}
+/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/revenue.ts:7:1 - error SC4003: library export 'revenue': the return has IR type 'record', which does not fit the declared marshalling class 'string'
+
+  6 | 
+  7 | export function revenue(from: string, to: string, size: number, profile: boolean) {
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  8 |   "use native";
+
+  hint: marshalling classes: f64/u8/u32/i32 (TS number; the integer plumbing classes are param-only), i64/u64 (TS number, prove-or-refuse at compile time — params and returns), bool, string, bytes (Uint8Array/Buffer), and a void return; records and unions slot in when the contract-sidecar conversation (asks 2/3) lands — deferral, not permanent unsupport
+
+1 error.

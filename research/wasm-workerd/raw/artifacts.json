@@ -1,0 +1,503 @@
+{
+  "scriptc": "0.4.6",
+  "date": "2026-11-01T01:16:56.748Z",
+  "baseCommit": "dcb4505663e8f633f63bb33447e80a8584d389ca",
+  "branch": "t3/research-wasm-workerd",
+  "node": "v24.22.0",
+  "v8": "13.6.233.17-node.57",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76\n",
+  "hardware": "machdep.cpu.brand_string: Apple M4 Pro\nhw.memsize: 25769803776\n",
+  "zig": "0.16.0",
+  "workerd": "1.20261031.1",
+  "esbuild": "0.28.2",
+  "wabt": "1.0.39",
+  "runtime": "0.4.6",
+  "artifacts": [
+    {
+      "name": "sync-original-fixture",
+      "rawBytes": 421506,
+      "gzipBytes": 155496,
+      "sha256": "81c33ac8ef2331b1fa57cf2ae4561bee740b69466696f169e26a5c25fdbb641f",
+      "imports": [
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_close",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_sizes_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "clock_time_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_set_flags",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_dir_name",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_read",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_seek",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_write",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "path_open",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "proc_exit",
+          "kind": "function"
+        },
+        {
+          "module": "scriptc",
+          "name": "panic",
+          "kind": "function"
+        }
+      ],
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "_initialize",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_free",
+          "kind": "function"
+        },
+        {
+          "name": "bench_init",
+          "kind": "function"
+        },
+        {
+          "name": "bench_collect",
+          "kind": "function"
+        },
+        {
+          "name": "bench_run",
+          "kind": "function"
+        }
+      ],
+      "simdInstructions": 0,
+      "memory": "  (memory (;0;) 266)",
+      "simdLines": []
+    },
+    {
+      "name": "revenue",
+      "rawBytes": 564549,
+      "gzipBytes": 200052,
+      "sha256": "e419a9242baac52b4b7b7412f07310fd01bb12957014c3d42032a6b223c1bd67",
+      "imports": [
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_close",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_sizes_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "clock_time_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_set_flags",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_dir_name",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_read",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_seek",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_write",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "path_open",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "proc_exit",
+          "kind": "function"
+        },
+        {
+          "module": "scriptc",
+          "name": "panic",
+          "kind": "function"
+        }
+      ],
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "_initialize",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_free",
+          "kind": "function"
+        },
+        {
+          "name": "bench_init",
+          "kind": "function"
+        },
+        {
+          "name": "bench_collect",
+          "kind": "function"
+        },
+        {
+          "name": "bench_run",
+          "kind": "function"
+        }
+      ],
+      "simdInstructions": 0,
+      "memory": "  (memory (;0;) 266)",
+      "simdLines": []
+    },
+    {
+      "name": "regex",
+      "rawBytes": 639072,
+      "gzipBytes": 241860,
+      "sha256": "195ef2af340d71992b5c57cec07cdf056557360dec3d40521a9f7fe8836b8182",
+      "imports": [
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_close",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_sizes_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "clock_time_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_set_flags",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_dir_name",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_read",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_seek",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_write",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "path_open",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "proc_exit",
+          "kind": "function"
+        },
+        {
+          "module": "scriptc",
+          "name": "panic",
+          "kind": "function"
+        }
+      ],
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "_initialize",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_free",
+          "kind": "function"
+        },
+        {
+          "name": "bench_init",
+          "kind": "function"
+        },
+        {
+          "name": "bench_collect",
+          "kind": "function"
+        },
+        {
+          "name": "bench_run",
+          "kind": "function"
+        }
+      ],
+      "simdInstructions": 0,
+      "memory": "  (memory (;0;) 266)",
+      "simdLines": []
+    },
+    {
+      "name": "vector",
+      "rawBytes": 494397,
+      "gzipBytes": 178345,
+      "sha256": "e0f751d9ddeb0b15897110ad3c4622b717905c605407476c0274fa3ddb3be2d1",
+      "imports": [
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_close",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "environ_sizes_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "clock_time_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_fdstat_set_flags",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_get",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_prestat_dir_name",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_read",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_seek",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "fd_write",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "path_open",
+          "kind": "function"
+        },
+        {
+          "module": "wasi_snapshot_preview1",
+          "name": "proc_exit",
+          "kind": "function"
+        },
+        {
+          "module": "scriptc",
+          "name": "panic",
+          "kind": "function"
+        }
+      ],
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "_initialize",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "scriptc_free",
+          "kind": "function"
+        },
+        {
+          "name": "bench_init",
+          "kind": "function"
+        },
+        {
+          "name": "bench_collect",
+          "kind": "function"
+        },
+        {
+          "name": "bench_run",
+          "kind": "function"
+        }
+      ],
+      "simdInstructions": 0,
+      "memory": "  (memory (;0;) 266)",
+      "simdLines": []
+    }
+  ],
+  "sources": [
+    {
+      "file": "examples/demo/lib/revenue.ts",
+      "sha256": "265080fd3b2e240c266da55296aa9e10dede68354c16fb9f606bf302a8cafd5e"
+    },
+    {
+      "file": "examples/demo/lib/revenue-fixtures.ts",
+      "sha256": "97bffab68a8391eb04c0bf0152c4258c4accdaca4c07b3f35f17d4e3c696a4e5"
+    },
+    {
+      "file": "examples/demo/app/api/analytics/revenue/events.ts",
+      "sha256": "a0453e85609582dcc9ad86c0a010e9cfc270cb02c152f78ca847a77474f83b9a"
+    },
+    {
+      "file": "examples/demo/app/api/heavy/vectors/route.native.ts",
+      "sha256": "da8d3251749faf416869f91c1cb144d6521eaa8a2cdc250793c22cc657ad71e1"
+    },
+    {
+      "file": "examples/demo/app/api/heavy/vectors/data.ts",
+      "sha256": "16fd8f668bd6dbbe710bdb83d51166a5aa0d5f19e1583986fe7c89dd25f45a9a"
+    },
+    {
+      "file": "examples/demo/app/api/heavy/vectors/common.ts",
+      "sha256": "0c516491cf1a2a2065291c37550ba443438a905c75c229875ce2efa9d95a96f4"
+    },
+    {
+      "file": "packages/next-scriptc/src/functions/json.ts",
+      "sha256": "9dcd4af5721ec8cec27ba53822e881f4f793418780d3eea16c485ffaab0c9a5e"
+    },
+    {
+      "file": "research/wasm-workerd/src/regex.ts",
+      "sha256": "41f576f4a86486930c118184863c8bfa194292a23f4447ed6a21f43213f84c49"
+    },
+    {
+      "file": "research/wasm-workerd/src/vector.ts",
+      "sha256": "578a076df70d849fa140ef8ef801cbce4811090ba68684860c58a667b9ffdc2d"
+    }
+  ],
+  "native": {
+    "rawBytes": 804912,
+    "sha256": "5fd344c2e1cdecd1cef5d2c88f422e1d0513cd60b6ec0bb01471ded9d818e2d2"
+  }
+}

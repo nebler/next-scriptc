@@ -1,0 +1,9 @@
+{"args":["build","--lib","--profile","/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/reachable-async.json","-o","/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/reachable-async.wasm"],"status":1}
+/Users/noah/.t3/worktrees/next-scriptc/t3-358ce76a/.checks/wasm-workerd/stage/async-entry.ts:2:65 - error SC1090: JSON.stringify of 'Promise<{ daily: { day: string; events: number; region: string; revenueCents: number; units: number }[]; events: number; from: string; revenueCents: number; timings: null | { aggregateMs: number; parseMs: number }; to: string }>' values (only number, string, boolean, records, arrays, unions of those, and 'unknown' stringify) are not supported yet
+
+  1 | import {revenue} from './async-revenue.ts';
+  2 | export function run(input:string):string {return JSON.stringify(revenue('2026-01-01','2026-01-31',5000,false));}
+    |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  3 | 
+
+1 error.
