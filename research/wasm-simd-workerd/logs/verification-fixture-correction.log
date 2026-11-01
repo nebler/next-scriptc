@@ -1,0 +1,3 @@
+An added cross-experiment assertion initially used the production Vercel query's hash f572c0e53ba7a53f6afe4f32bbc80168fbec17853b0add069fd1d230a3c1429a.
+It failed against d380a052417aab5481ca6934dc66beeb1bcdfa6603497c48a080834ded1babbe.
+This experiment uses W1's deterministic query, which differs from the Vercel query. Complete result bytes match research/wasm-workerd/raw/vector-100000-result.json after removal of its file newline. Corrected the assertion to that W1 hash. No measured result was changed or dropped.

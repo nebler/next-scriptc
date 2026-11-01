@@ -1,0 +1,40 @@
+[
+  {
+    name: 'patched-scalar',
+    rawBytes: 492831,
+    gzipBytes: 177906,
+    sha256: 'abe53ff6786a009143db835618131e10da9dc139ae65fd0c8a61f531a1600290',
+    simdInstructions: 0,
+    instructionHistogram: {},
+    memory: '  (memory (;0;) 266)'
+  },
+  {
+    name: 'patched-simd',
+    rawBytes: 494089,
+    gzipBytes: 178363,
+    sha256: '45eb89e30d1fc78d58455d010c95223ee09fc04b7010efd027d971820f7cbd0b',
+    simdInstructions: 110,
+    instructionHistogram: {
+      'v128.load': 8,
+      'v128.store': 7,
+      'i8x16.splat': 3,
+      'i8x16.eq': 4,
+      'v128.any_true': 4,
+      'v128.const': 13,
+      'v128.bitselect': 4,
+      'i8x16.shuffle': 19,
+      'v128.and': 15,
+      'i8x16.min_u': 12,
+      'v128.store8_lane': 3,
+      'i8x16.extract_lane_u': 3,
+      'v128.load64_zero': 1,
+      'i16x8.extend_low_i8x16_s': 1,
+      'i16x8.min_u': 3,
+      'i16x8.extract_lane_u': 1,
+      'i32x4.mul': 6,
+      'i32x4.extract_lane': 2,
+      'i32x4.replace_lane': 1
+    },
+    memory: '  (memory (;0;) 266)'
+  }
+]

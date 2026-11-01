@@ -1,0 +1,200 @@
+{
+  "node": "v26.13.0",
+  "v8": "14.6.202.34-node.40",
+  "versions": {
+    "workerd": "1.20261031.1",
+    "wabt": "1.0.39",
+    "esbuild": "0.28.2",
+    "@scriptc/runtime-wasm32-wasi": "0.4.6"
+  },
+  "artifacts": [
+    {
+      "name": "natural-stock",
+      "rawBytes": 494397,
+      "gzipBytes": 178345,
+      "sha256": "e0f751d9ddeb0b15897110ad3c4622b717905c605407476c0274fa3ddb3be2d1",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "natural-scalar",
+      "rawBytes": 492935,
+      "gzipBytes": 177951,
+      "sha256": "91ce0e6fed9ebb01720fbf927252bc5740a8de9ba34e3e1d0455f9a0f065887b",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "natural-simd",
+      "rawBytes": 494193,
+      "gzipBytes": 178409,
+      "sha256": "c6f058dbc48bf5be490f65b3e6fc0bc1a1b969b4e38e1625c0aa51abdac92364",
+      "simdInstructions": 110,
+      "instructionHistogram": {
+        "v128.load": 8,
+        "v128.store": 7,
+        "i8x16.splat": 3,
+        "i8x16.eq": 4,
+        "v128.any_true": 4,
+        "v128.const": 13,
+        "v128.bitselect": 4,
+        "i8x16.shuffle": 19,
+        "v128.and": 15,
+        "i8x16.min_u": 12,
+        "v128.store8_lane": 3,
+        "i8x16.extract_lane_u": 3,
+        "v128.load64_zero": 1,
+        "i16x8.extend_low_i8x16_s": 1,
+        "i16x8.min_u": 3,
+        "i16x8.extract_lane_u": 1,
+        "i32x4.mul": 6,
+        "i32x4.extract_lane": 2,
+        "i32x4.replace_lane": 1
+      },
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "imul-stock",
+      "rawBytes": 494280,
+      "gzipBytes": 178254,
+      "sha256": "5a4d107cf378c3b95c6e5278eed7b8e923436897fe070f6d651f752276a79407",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "imul-scalar",
+      "rawBytes": 492818,
+      "gzipBytes": 177868,
+      "sha256": "8c9a636e1c585592ee5fe28aa6493c022b16afb27a1016c9647f069de80a7ab4",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "imul-simd",
+      "rawBytes": 494076,
+      "gzipBytes": 178338,
+      "sha256": "c454e82bc09f165fece972e4e3ba342dc2b1f52cbcedee36378fa8bb7cf1c833",
+      "simdInstructions": 110,
+      "instructionHistogram": {
+        "v128.load": 8,
+        "v128.store": 7,
+        "i8x16.splat": 3,
+        "i8x16.eq": 4,
+        "v128.any_true": 4,
+        "v128.const": 13,
+        "v128.bitselect": 4,
+        "i8x16.shuffle": 19,
+        "v128.and": 15,
+        "i8x16.min_u": 12,
+        "v128.store8_lane": 3,
+        "i8x16.extract_lane_u": 3,
+        "v128.load64_zero": 1,
+        "i16x8.extend_low_i8x16_s": 1,
+        "i16x8.min_u": 3,
+        "i16x8.extract_lane_u": 1,
+        "i32x4.mul": 6,
+        "i32x4.extract_lane": 2,
+        "i32x4.replace_lane": 1
+      },
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "float-stock",
+      "rawBytes": 494028,
+      "gzipBytes": 178102,
+      "sha256": "f2f173a72eedba23f0b1e8dc9f456686a4567a523ea2902332254e876727a478",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "float-scalar",
+      "rawBytes": 492568,
+      "gzipBytes": 177724,
+      "sha256": "9af4b6465caecbbfd11ec6cc0670fb73705a9ae3de91243ddf084b28b10099cd",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "float-simd",
+      "rawBytes": 493826,
+      "gzipBytes": 178188,
+      "sha256": "7595b60c81e82d3b983ee47b37f6cbd10bb67e4c5940c5a34e5748a5458b9120",
+      "simdInstructions": 110,
+      "instructionHistogram": {
+        "v128.load": 8,
+        "v128.store": 7,
+        "i8x16.splat": 3,
+        "i8x16.eq": 4,
+        "v128.any_true": 4,
+        "v128.const": 13,
+        "v128.bitselect": 4,
+        "i8x16.shuffle": 19,
+        "v128.and": 15,
+        "i8x16.min_u": 12,
+        "v128.store8_lane": 3,
+        "i8x16.extract_lane_u": 3,
+        "v128.load64_zero": 1,
+        "i16x8.extend_low_i8x16_s": 1,
+        "i16x8.min_u": 3,
+        "i16x8.extract_lane_u": 1,
+        "i32x4.mul": 6,
+        "i32x4.extract_lane": 2,
+        "i32x4.replace_lane": 1
+      },
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "revenue-stock",
+      "rawBytes": 564549,
+      "gzipBytes": 200052,
+      "sha256": "e419a9242baac52b4b7b7412f07310fd01bb12957014c3d42032a6b223c1bd67",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "revenue-scalar",
+      "rawBytes": 562184,
+      "gzipBytes": 199546,
+      "sha256": "93b53f441d8d3bbf9d503827caf8409a98cb9df61e80f1682551e5f387751259",
+      "simdInstructions": 0,
+      "instructionHistogram": {},
+      "memory": "  (memory (;0;) 266)"
+    },
+    {
+      "name": "revenue-simd",
+      "rawBytes": 563415,
+      "gzipBytes": 200032,
+      "sha256": "3bd42fbf3bc20f584733cae2dac6b23ba4808385284e60551c2d8900ecd649c9",
+      "simdInstructions": 122,
+      "instructionHistogram": {
+        "v128.load": 8,
+        "v128.store": 13,
+        "i8x16.splat": 3,
+        "i8x16.eq": 4,
+        "v128.any_true": 4,
+        "v128.const": 19,
+        "v128.bitselect": 4,
+        "i8x16.shuffle": 19,
+        "v128.and": 15,
+        "i8x16.min_u": 12,
+        "v128.store8_lane": 3,
+        "i8x16.extract_lane_u": 3,
+        "v128.load64_zero": 1,
+        "i16x8.extend_low_i8x16_s": 1,
+        "i16x8.min_u": 3,
+        "i16x8.extract_lane_u": 1,
+        "i32x4.mul": 6,
+        "i32x4.extract_lane": 2,
+        "i32x4.replace_lane": 1
+      },
+      "memory": "  (memory (;0;) 266)"
+    }
+  ]
+}

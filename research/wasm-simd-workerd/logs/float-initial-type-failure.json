@@ -1,0 +1,15 @@
+{
+  "cmd": "/Users/noah/code/next-scriptc/packages/next-scriptc/node_modules/scriptc/bin/scriptc.exe",
+  "args": [
+    "build",
+    "--emit-ir",
+    "--lib",
+    "--profile",
+    "/Users/noah/.t3/worktrees/next-scriptc/t3-db1e4de7/.checks/wasm-workerd/stage/float.json",
+    "-o",
+    "/Users/noah/.t3/worktrees/next-scriptc/t3-db1e4de7/.checks/wasm-workerd/float-stock.wasm"
+  ],
+  "status": 1,
+  "stdout": "",
+  "stderr": "/Users/noah/.t3/worktrees/next-scriptc/t3-db1e4de7/.checks/wasm-workerd/stage/float.ts:24:20 - error SC0001: Argument of type 'Int32Array<ArrayBuffer>' is not assignable to parameter of type 'Float64Array<ArrayBufferLike>'.\n  The types returned by 'filter(...)[Symbol.toStringTag]' are incompatible between these types.\n    Type '\"Int32Array\"' is not assignable to type '\"Float64Array\"'.\n\n  23 |     for(let j=0;j<dimensions;j++)sum=sum+corpus[base+j]*embedding[j];\n  24 |     insert(sum,row,scores,ids);\n     |                    ^~~~~~\n  25 |   }\n\n1 error.\n"
+}

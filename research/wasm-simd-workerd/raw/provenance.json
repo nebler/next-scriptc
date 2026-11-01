@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-01T11:21:06.411Z",
+  "base": "24195b48972bb091703b5b1e1295863ae5a69fa7",
+  "branch": "t3/measure-wasm-simd-workerd",
+  "zig": "0.16.0",
+  "compiler": "0.4.6",
+  "hardware": "machdep.cpu.brand_string: Apple M4 Pro\nhw.memsize: 25769803776\n",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76\n",
+  "inputs": [
+    {
+      "file": "node_modules/@scriptc/runtime-wasm32-wasi/runtime-pack.json",
+      "bytes": 312429,
+      "sha256": "b63186488b9d04d43ecc67d8d8f53b8d51c15f3ae35cbc33a4c7a500a2cb87dc"
+    },
+    {
+      "file": "stage/natural.ts",
+      "bytes": 1438,
+      "sha256": "63396e0a403579ab1fbec9a865067452081f4adf96185515e826eac62e64dc5c"
+    },
+    {
+      "file": "stage/natural-entry.ts",
+      "bytes": 249,
+      "sha256": "24d2fe4703793dc4e8c65a0262f349c0cb8c6b56da0a48a340690c880283c19b"
+    },
+    {
+      "file": "natural-entry.lib.ll",
+      "bytes": 269506,
+      "sha256": "11be578ba48ae345df03f2cc036f0a24091185dfa1f9727a49f97812cad43b09"
+    },
+    {
+      "file": "stage/imul.ts",
+      "bytes": 1446,
+      "sha256": "265623b182d265ce89ffd8800be46a8b44baccb0359ae14da86be5b3b13c496b"
+    },
+    {
+      "file": "stage/imul-entry.ts",
+      "bytes": 240,
+      "sha256": "a2f5ff8c91dbd66ca26d327272beea8a6e86cd566649585aafa2003f16832a2f"
+    },
+    {
+      "file": "imul-entry.lib.ll",
+      "bytes": 269562,
+      "sha256": "c4929f44e2bb979a0c718b0414c950696d0ecb48b338d8cc9448c3c17180e1a3"
+    },
+    {
+      "file": "stage/float.ts",
+      "bytes": 1462,
+      "sha256": "58bf13cf3e7724ca5d4ef253b334964fcd1fbba09ce1897fe63c5f68bdb2e450"
+    },
+    {
+      "file": "stage/float-entry.ts",
+      "bytes": 243,
+      "sha256": "c27598744f4092c5d89bc9ac6be2288aea47b9e900bb5ea6102e4e42c3c24b45"
+    },
+    {
+      "file": "float-entry.lib.ll",
+      "bytes": 263393,
+      "sha256": "79385e978d86d0f1c1520182689089e5cbc383990477b62476b642a67ce91fc8"
+    },
+    {
+      "file": "stage/revenue.ts",
+      "bytes": 1454,
+      "sha256": "b7ca3840ffc2293b6c66806472c626705f236af40bb187521b6aeb44bfbe46ad"
+    },
+    {
+      "file": "stage/revenue-entry.ts",
+      "bytes": 272,
+      "sha256": "24b9b888c2bf1e7599fddee57434dcba8a6fecfa2dc31f5f0b95629381d65529"
+    },
+    {
+      "file": "revenue-entry.lib.ll",
+      "bytes": 397039,
+      "sha256": "3b08629b18e5d88e38710b27fd0c73731603ec3e1872bcf505fd985467d270cc"
+    }
+  ],
+  "targetSource": {
+    "sha256": "77e51f139a48f0727d14f820996338ad34321c48f4ad6c9ac8dd477437dd9b62",
+    "fragment": "std::unique_ptr<TargetMachine> createTargetMachine(StringRef TripleName,\n                                                   StringRef OptLevel,\n                                                   std::string &Error,\n                                                   bool RequireAllowed) {\n  initializeTargets();\n  if (RequireAllowed && !supportsTarget(TripleName)) {\n    Error = (Twine(\"target '\") + TripleName + \"' was not compiled into this helper\").str();\n    return nullptr;\n  }\n  Triple TargetTriple(TripleName);\n  const Target *Definition = TargetRegistry::lookupTarget(TargetTriple, Error);\n  if (Definition == nullptr)\n    return nullptr;\n  return std::unique_ptr<TargetMachine>(Definition->createTargetMachine(\n      TargetTriple, \"generic\", \"\", targetOptions(TargetTriple), Reloc::PIC_,\n      CodeModel::Small, codeGenLevel(OptLevel)));\n}\n\n} // namespace scriptc\n"
+  }
+}
