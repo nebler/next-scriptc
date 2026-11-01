@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 export type ScriptcOptions = {
+  nativePromotion?: "auto" | "off";
   routes?: Record<string, { group?: string; optimization?: "release" | "speed" | "dev" }>;
 };
 

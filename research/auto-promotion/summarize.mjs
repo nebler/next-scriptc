@@ -1,0 +1,7 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const read=async p=>JSON.parse(await readFile(import.meta.dirname+'/raw/'+p+'.json','utf8'));
+const median=a=>{const s=[...a].sort((a,b)=>a-b);return (s[Math.floor((s.length-1)/2)]+s[Math.floor(s.length/2)])/2;};
+const p95=a=>[...a].sort((a,b)=>a-b)[Math.ceil(a.length*.95)-1];
+const summarize=r=>({cells:[1000,5000,200000].map(size=>({size,modes:Object.fromEntries(['js','native','auto'].map(mode=>{const a=r.rows.filter(x=>x.size===size&&x.mode===mode).map(x=>x.ms);return [mode,{n:a.length,median:median(a),p95:p95(a),total:a.reduce((a,b)=>a+b,0)}];}))})),mixed:Object.fromEntries(['js','native','auto'].map(mode=>[mode,r.rows.filter(x=>x.mode===mode).reduce((a,b)=>a+b.ms,0)])),overhead:Object.fromEntries(['overhead','initialOverhead'].filter(k=>r[k]).map(k=>[k,{median:median(r[k].rows.map(x=>x.dispatch-x.direct)),p95:p95(r[k].rows.map(x=>x.dispatch-x.direct)),n:r[k].n,rounds:r[k].rounds}])),warmupCount:r.warmups.length,transitions:r.transitions,demotion:r.demotion,shadowTimeLowerBound:Object.values(r.snapshot).flatMap(f=>f.buckets).flatMap(b=>b.times).reduce((a,b)=>a+b,0)});
+const result={first:summarize((await read('measurement')).result),corrected:summarize((await read('corrected/measurement')).result)};
+await writeFile(import.meta.dirname+'/raw/summary.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

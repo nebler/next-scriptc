@@ -72,3 +72,21 @@ test("discovery checks imported inferred types using extended project tsconfig",
     await assert.rejects(discoverFunctions(directory, path.join(directory, ".next"), config), /requires strictNullChecks/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('checker emits per-type ABI metadata including inferred, union and byte types',async()=>{
+ const directory=await mkdtemp(path.join(import.meta.dirname,'.function-types-'));
+ try{
+  const file=path.join(directory,'encoding.ts');
+  await writeFile(file,`type Label='a'|'b';
+  function mixed(s:Label,n:number,b:boolean,z:null,o:{x:number},a:number[],u:string|null,bytes:Uint8Array){return s;}
+  function bytes(a:Uint8Array):Uint8Array{return a;}
+  function wider(a:Uint16Array):number{return a.length;}
+  function nested(a:{x:Uint8Array}):number{return a.x.length;}`);
+  const program=ts.createProgram([file],{strict:true,target:ts.ScriptTarget.ESNext}),source=program.getSourceFile(file);
+  const fn=name=>{const node=source.statements.find(n=>n.name?.text===name);return {name,start:node.body.getStart(source),promotion:true};};
+  const mixed=fn('mixed'),bytes=fn('bytes');checkFunctionTypes(ts,program,[{source:file,functions:[mixed,bytes]}]);
+  assert.deepEqual(mixed.boundary,{params:['string','number','boolean','null','json','json','json','bytes'],result:'string'});
+  assert.deepEqual(bytes.boundary,{params:['bytes'],result:'bytes'});
+  for(const name of ['wider','nested'])assert.throws(()=>checkFunctionTypes(ts,program,[{source:file,functions:[fn(name)]}]));
+ }finally{await rm(directory,{recursive:true,force:true});}
+});

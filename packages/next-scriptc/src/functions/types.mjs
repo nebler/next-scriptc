@@ -18,7 +18,9 @@ export function checkFunctionTypes(ts, program, modules) {
       if (!declaration) throw new Error(`[next-scriptc] ${module.source}: function ${fn.name}: cannot resolve TypeScript signature`);
       const signature = checker.getSignatureFromDeclaration(declaration);
       const active = new Set();
+      const isBytes = type => fn.promotion && type.getSymbol()?.getName()==='Uint8Array' && type.getSymbol().declarations?.some(d=>program.isSourceFileDefaultLibrary(d.getSourceFile()));
       function check(type, at) {
+        if(!at.includes('.') && !at.includes('[') && isBytes(type))return;
         if (type.flags & (ts.TypeFlags.StringLike | ts.TypeFlags.NumberLike | ts.TypeFlags.BooleanLike | ts.TypeFlags.Null)) return;
         if (type.isUnion()) { for (const member of type.types) check(member, at); return; }
         if (!(type.flags & ts.TypeFlags.Object) && !type.isIntersection()) fail(at, type, 'expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported');
@@ -52,13 +54,27 @@ export function checkFunctionTypes(ts, program, modules) {
           }
         } finally { active.delete(type); }
       }
+      function encoding(type) {
+        if(isBytes(type))return 'bytes';
+        if (type.isUnion()) {
+          const kinds = new Set(type.types.map(encoding));
+          return kinds.size === 1 ? [...kinds][0] : 'json';
+        }
+        if (type.flags & ts.TypeFlags.StringLike) return 'string';
+        if (type.flags & ts.TypeFlags.NumberLike) return 'number';
+        if (type.flags & ts.TypeFlags.BooleanLike) return 'boolean';
+        if (type.flags & ts.TypeFlags.Null) return 'null';
+        return 'json';
+      }
       for (const parameter of declaration.parameters) {
         const type = checker.getTypeAtLocation(parameter);
         const at = `parameter ${parameter.name.getText(source)}`;
         if (parameter.questionToken) fail(at, type, 'optional parameters are unsupported; use a required parameter with | null');
         check(type, at);
       }
-      check(checker.getAwaitedType(checker.getReturnTypeOfSignature(signature)), 'return');
+      const result = checker.getAwaitedType(checker.getReturnTypeOfSignature(signature));
+      check(result, 'return');
+      fn.boundary = { params: declaration.parameters.map(p => encoding(checker.getTypeAtLocation(p))), result: encoding(result) };
     }
   }
 }
