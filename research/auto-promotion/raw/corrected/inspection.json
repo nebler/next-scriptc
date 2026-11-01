@@ -1,0 +1,71 @@
+{
+  "id": "dpl_4SL5PUwKJFRwqNd55tspw5gzuduX",
+  "name": "next-scriptc",
+  "url": "next-scriptc-2w517zwhl-noahs-projects-8a075d15.vercel.app",
+  "target": "preview",
+  "readyState": "READY",
+  "createdAt": 1793532244162,
+  "duration": {
+    "startTime": 1793532245072,
+    "timeToReady": 3018
+  },
+  "buildMachine": {
+    "cores": 2,
+    "memory": 8192,
+    "machine": "basic",
+    "selectionType": "fixed",
+    "selectionSource": "plan-default"
+  },
+  "buildCacheSummary": {
+    "save": {
+      "saved": false,
+      "reason": "prebuilt"
+    }
+  },
+  "builds": [
+    {
+      "id": "bld_prgeeredf",
+      "deploymentId": "dpl_4SL5PUwKJFRwqNd55tspw5gzuduX",
+      "entrypoint": ".",
+      "readyState": "READY",
+      "readyStateAt": 1793532244093,
+      "createdAt": 1793532244093,
+      "createdIn": "sfo1",
+      "use": "@vercel/vc-build",
+      "config": {
+        "nodeVersion": "26.x",
+        "projectCreatedAt": 1793395445085,
+        "vercelConfig": {
+          "name": "next-scriptc",
+          "version": 2
+        }
+      },
+      "middleware": [],
+      "output": [
+        {
+          "prerender": null,
+          "type": "lambda",
+          "path": "bench",
+          "digest": "prj_loKFn5UhqXo1q4KesfMY8SZjQzEu/eeea07df8468b90f0bc21c968c79e05f62c2d4fa12f97e7b8f70fa539c65c3fe",
+          "mode": 49590,
+          "size": 342442,
+          "lambda": {
+            "functionName": "team_9rYDB0tDX0ClFOCXmxrMd48y-9d87c7eee8c8eb45dda243a468f5379901",
+            "deployedTo": [
+              "iad1"
+            ],
+            "runtime": "nodejs24.x",
+            "memorySize": 2048,
+            "timeout": 300,
+            "layers": [
+              "arn:aws:lambda:AWS_REGION_PLACEHOLDER:977805900156:layer:vercel-rusty-runtime-nodejs-1_51_16-production-f938d7ce24-AWS_ARCH_PLACEHOLDER:1"
+            ]
+          },
+          "edge": null
+        }
+      ],
+      "fingerprint": null
+    }
+  ],
+  "contextName": "noahs-projects-8a075d15"
+}

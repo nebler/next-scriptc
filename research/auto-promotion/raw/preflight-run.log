@@ -1,0 +1,39 @@
+Vercel CLI 65.8.0
+> Found Project noahs-projects-8a075d15/next-scriptc [607ms]
+
+  General
+
+    ID				prj_loKFn5UhqXo1q4KesfMY8SZjQzEu
+    Name			next-scriptc
+    Owner			Noah's projects
+    Created At			30 October 2026 22:24:05 [2d ago]
+    Root Directory		.
+    Node.js Version		26.x
+
+  Framework Settings
+
+    Framework Preset		Other
+    Build Command		`npm run vercel-build` or `npm run build`
+    Output Directory		`public` if it exists, or `.`
+    Install Command		`yarn install`, `pnpm install`, `npm install`, or `bun install`
+
+  Sandbox
+
+    Region			iad1
+    Failover Regions		None
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(inspection.includes('next-scriptc'))
+
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-23fb6a9e/research/auto-promotion/run.mjs:22:2
+    at ModuleJob.run (node:internal/modules/esm/module_job:569:25)
+    at async node:internal/modules/esm/loader:650:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:105:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

@@ -17,8 +17,8 @@ function marked(node, source) {
 }
 const forbidden = (name) => /^(?:next|react|react-dom)(?:\/|$)/.test(name);
 
-export function extractFunctions(text, source) {
-  if (!text.includes("use native") && !text.includes("use scriptc")) return null;
+export function extractFunctions(text, source, autoName = null, skipSync = false) {
+  if (!autoName && !text.includes("use native") && !text.includes("use scriptc")) return null;
   const ast = parse(text, { sourceType: "module", plugins: ["typescript", "jsx"] });
   const fileLevel = marked(ast.program, source);
   const client = ast.program.directives.some((directive) => directive.value.value === "use client");
@@ -34,10 +34,11 @@ export function extractFunctions(text, source) {
       const name = (declaration?.isVariableDeclarator() ? declaration.node.id.name : p.node.id?.name) ?? "<anonymous>";
       const binding = program.scope.getBinding(name);
       const exported = binding?.referencePaths.some((ref) => ref.parentPath.isExportSpecifier()) || statement?.isExportNamedDeclaration() || statement?.parentPath.isExportNamedDeclaration();
-      if (!marked(p.node.body, source) && !(fileLevel && topLevel && exported)) return;
+      if (autoName ? name !== autoName : !marked(p.node.body, source) && !(fileLevel && topLevel && exported)) return;
+      if (skipSync && !p.node.async) return;
       if (client) fail(name, '"use native" is forbidden in a "use client" module');
       if (!topLevel || !declaration || !binding) fail(name, "must be a named module-level function; component-scope closures are unsupported");
-      if (!p.node.async || p.node.generator) fail(name, "must be async and cannot be a generator");
+      if ((autoName ? p.node.async : !p.node.async) || p.node.generator) fail(name, "must be async and cannot be a generator");
       if (p.node.body?.type !== "BlockStatement") fail(name, "must have a block body");
       const id = createHash("sha256").update(`${source}\0${name}`).digest("hex").slice(0, 20);
       functions.push({ name, id, start: p.node.body.start, end: p.node.body.end, params: p.node.params.map((param) => {
@@ -46,7 +47,7 @@ export function extractFunctions(text, source) {
       }) });
     },
   });
-  if (fileLevel) {
+  if (fileLevel && !autoName) {
     for (const p of program.get("body")) {
       if (p.node.exportKind === "type") continue;
       if (p.isExportDefaultDeclaration() || p.isExportAllDeclaration() || p.isExportNamedDeclaration() && p.node.source) fail("<exports>", "use local named async function exports in a use native file");
@@ -120,7 +121,7 @@ export async function discoverFunctions(projectDir, distDir, config) {
       if (entry.isDirectory()) await visit(source);
       else if (entry.isFile() && /\.(?:[cm]?[jt]s|[jt]sx)$/.test(entry.name) && !/^route\.native\./.test(entry.name)) {
         const text = await readFile(source, "utf8");
-        const module = extractFunctions(text, source);
+        const module = extractFunctions(text, source, null, config?.rewrites?.[Symbol.for("next-scriptc.options")]?.nativePromotion === "auto");
         if (module) modules.push(module);
       }
     }

@@ -1,0 +1,46 @@
+Vercel CLI 65.8.0
+> Found Project noahs-projects-8a075d15/next-scriptc [415ms]
+
+  General
+
+    ID				prj_loKFn5UhqXo1q4KesfMY8SZjQzEu
+    Name			next-scriptc
+    Owner			Noah's projects
+    Created At			30 October 2026 22:24:05 [2d ago]
+    Root Directory		.
+    Node.js Version		26.x
+
+  Framework Settings
+
+    Framework Preset		Other
+    Build Command		`npm run vercel-build` or `npm run build`
+    Output Directory		`public` if it exists, or `.`
+    Install Command		`yarn install`, `pnpm install`, `npm install`, or `bun install`
+
+  Sandbox
+
+    Region			iad1
+    Failover Regions		None
+
+  Inspect         https://vercel.com/noahs-projects-8a075d15/next-scriptc/GokzYRnaYYcMXdoHh8NnE7TSyy4e
+  Preview         https://next-scriptc-7jhrxulj6-noahs-projects-8a075d15.vercel.app
+node:internal/modules/run_main:111
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'200' !== '503'
+
+    at pause (file:///Users/noah/.t3/worktrees/next-scriptc/t3-23fb6a9e/research/auto-promotion/run.mjs:16:154)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-23fb6a9e/research/auto-promotion/run.mjs:31:116
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '200',
+  expected: '503',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v26.13.0

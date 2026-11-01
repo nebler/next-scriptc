@@ -12,8 +12,9 @@ function object(value, label) {
 export function validateOptions(options) {
   object(options, "Options");
   for (const key of Object.keys(options)) {
-    if (key !== "routes") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
+    if (key !== "routes" && key !== "nativePromotion") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
   }
+  if (options.nativePromotion !== undefined && !["auto", "off"].includes(options.nativePromotion)) throw new Error("[next-scriptc] nativePromotion must be auto or off.");
   const routes = options.routes === undefined ? {} : options.routes;
   object(routes, "Options.routes");
   const result = {};
@@ -30,7 +31,7 @@ export function validateOptions(options) {
     }
     Object.defineProperty(result, pattern, { value: { ...value, optimization: value.optimization ?? "release" }, enumerable: true });
   }
-  return { routes: result };
+  return { routes: result, ...(options.nativePromotion === undefined ? {} : { nativePromotion: options.nativePromotion }) };
 }
 
 export function planRoutes(discovered, options = {}) {
