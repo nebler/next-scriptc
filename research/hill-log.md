@@ -61,3 +61,32 @@ Discovery and a full local Next slice build exposed three adapter defects: route
 The pinned R1 playback module remains outside the repo at commit `ed19717ec02a1ac79aecf5569159aa9d2d869312`. Its only accepted dispatch boundary is `documentViewDistribution`; the report records every other export's first rejection. Stock scriptc 0.4.6 builds darwin arm64 and Linux arm64 addons. Both pass 12 real loader/dispatcher shadow cases, including 6k and 60k playback records, and intentional mismatch demotion with zero native answers. The installed Next slice builds, retains the addon, and serves 20 byte-identical HTTP smoke responses. All 48 package unit tests and 24 demo tests pass.
 
 Keep the correctness result. No workload timing, CPU claim, policy tuning, compiler change, or new compiler limitation follows. A checker executable-permission setup failure is retained. Whole-app integration and performance remain unproven. The new `nsc-standin-papermark` container and generated dependencies and builds are removed. Free disk is 8.2 GiB before and 9.4 GiB after, with concurrent work affecting both readings. No Vercel or upstream action occurred. See [papermark-local-gate.md](papermark-local-gate.md).
+
+## 7. Typed result validation (2026-11-01)
+
+Hypothesis: generated typed visits can remove E1's expensive reflective result
+validation while preserving the strict boundary contract.
+
+Implemented bounded return-shape metadata from the application's TypeScript
+checker and generated typed visits with complete container guards and generic
+fallback for extras. The experimental build option is `specializeResults:true`;
+production keeps strict validation. Added adversarial and native-path tests.
+Fixed negative-zero loss in direct number transport; scalar shadow comparison
+distinguishes its sign bit. A JSON-level -0 refusal was reverted in review: it
+threw inside the native lane and poisoned the instance (all functions demoted).
+
+Loaded-host alternating A/B, 120 measured rounds per size after 10 warmups,
+measured strict/generated median (p95) elapsed ms: 1k 0.682 (1.098) / 0.652
+(0.968); 5k 0.597 (0.888) / 0.574 (0.913). Typed encoding without validation is
+0.012–0.013 ms. Paired median differences are -0.027 and -0.023 ms, with wide
+spreads crossing zero. This does not meet the nearly-free goal or exceed C1's
+17.37% error. No calibrated win is claimed.
+
+Keep the experiment disabled by default. Returning UTF-8 bytes or projecting a
+compact layout does not certify the source value; sampled shadows cannot prove
+future results safe. Record a compiler closed-record certificate candidate and
+minimal repro in the patch ledger. The existing boundary also has broader
+observational-equivalence limits, documented in the report rather than hidden
+by a performance claim. No scriptc change, Docker stand-in, Vercel call, or root
+README edit. Node 24 passes 54 adapter, 2 shim, and 24 demo tests with at most two
+test jobs. [Full report and raw A/B rows](native-result-validation.md).

@@ -74,6 +74,33 @@ export function checkFunctionTypes(ts, program, modules) {
       }
       const result = checker.getAwaitedType(checker.getReturnTypeOfSignature(signature));
       check(result, 'return');
+      // Bounded schemas only. Recursive types, dictionaries, tuples and mixed
+      // unions keep the generic validator rather than guessing a closed layout.
+      let shapeBudget = 256;
+      function shape(type, seen = new Set(), depth = 0) {
+        if (--shapeBudget < 0 || depth > 32 || seen.has(type)) return null;
+        if (type.flags & ts.TypeFlags.StringLike) return {kind:'string'};
+        if (type.flags & ts.TypeFlags.NumberLike) return {kind:'number'};
+        if (type.flags & ts.TypeFlags.BooleanLike) return {kind:'boolean'};
+        if (type.flags & ts.TypeFlags.Null) return {kind:'null'};
+        if (type.isUnion()) {
+          const members = type.types.filter(t => !(t.flags & ts.TypeFlags.Null));
+          if (members.length === 1 && members.length < type.types.length) {
+            const value = shape(members[0], seen, depth + 1);
+            return value && {kind:'nullable',value};
+          }
+          return null;
+        }
+        const nested = new Set(seen).add(type);
+        if (checker.isArrayType(type)) {
+          const value = shape(checker.getTypeArguments(type)[0], nested, depth + 1);
+          return value && {kind:'array',value};
+        }
+        if (checker.isTupleType(type) || checker.getIndexInfosOfType(type).length) return null;
+        const fields = checker.getPropertiesOfType(type).map(p => [p.getName(),shape(checker.getTypeOfSymbolAtLocation(p,p.valueDeclaration ?? p.declarations?.[0] ?? declaration),nested,depth + 1)]);
+        return fields.every(([,s])=>s) ? {kind:'object',fields} : null;
+      }
+      if (fn.promotion && encoding(result) === 'json') fn.resultShape = shape(result);
       fn.boundary = { params: declaration.parameters.map(p => encoding(checker.getTypeAtLocation(p))), result: encoding(result) };
     }
   }

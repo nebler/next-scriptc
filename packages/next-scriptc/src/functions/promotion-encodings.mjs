@@ -11,7 +11,7 @@ function primitive(kind, value) {
     if (typeof value !== 'string' || !value.isWellFormed()) throw Error('Expected well-formed UTF-8 string');
   } else if (kind === 'number') {
     if (typeof value !== 'number' || !Number.isFinite(value)) throw Error('Expected finite number');
-    return value === 0 ? 0 : value; // Strict JSON canonicalizes -0 on both lanes.
+    return value; // f64 preserves the sign bit.
   } else if (kind === 'boolean' ? typeof value !== 'boolean' : value !== null) throw Error('Invalid boundary primitive');
   return value;
 }
@@ -22,4 +22,7 @@ export function encodeArguments(schema, args) {
 export function decodeResult(schema, value) {
   return schema.result === 'json' ? JSON.parse(value) : primitive(schema.result, value);
 }
-export function canonicalResult(value, schema) { return serialize(schema?.result==='bytes'?Array.from(primitive('bytes',value)):value, true); }
+export function canonicalResult(value, schema) {
+  // The scalar f64 lane preserves -0; its comparison bytes must distinguish it.
+  if (schema?.result==='number' && Object.is(value,-0)) return '-0';
+  return serialize(schema?.result==='bytes'?Array.from(primitive('bytes',value)):value, true); }

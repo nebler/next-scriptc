@@ -50,3 +50,38 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 - S1-shaped imul reduction now has integer induction, vector loads/multiply/accumulate, and vector reduction: wasm width 4, arm64 width 16, AVX2 width 8. Disabling only this fix on the same source revision restores zero vector PHIs. Strict float wasm reduction remains scalar.
 - Validation: 26 focused backend tests, new corpus in both differential harnesses release/dev and ASan/RC audit, single-fixture TS7 preflight/order plus completeness, compiler typecheck, focused lint/format, and 15 non-timed SHA-256 Wasm checks pass. Full suite and performance are pending. [Evidence and later measurement command](wasm-vectorization.md).
 - Step 3 is an untested `--wasm-simd`/`+simd128` CLI/helper propagation sketch in [the upstream draft](wasm-simd-upstream-draft.md). The native helper was not rebuilt. Evaluation uses retained IR with Zig `-O3 -msimd128` and stock runtime objects.
+
+## Candidate: checked closed records for result encoding
+
+Not implemented. Adapter-only generated visits retain reflective container checks
+because TypeScript signatures are structural. The loaded-host experiment in
+[native-result-validation.md](native-result-validation.md) leaves about 0.6 ms
+of validation versus 0.01 ms for typed JSON encoding.
+
+A compiler facility could certify a closed record at construction and invalidate
+that certificate on changes to keys, descriptors, symbols, prototype, or array
+density. Checked dynamic crossings must verify the certificate or fall back.
+A typed encoder could then check finite numbers and encode without materializing
+a descriptor dictionary per object. This needs an explicit compiler/runtime
+contract, not an adapter assertion that a return type is exact.
+
+Minimal repro against a hypothetical unchecked `{n:number}` encoder:
+
+```ts
+function fake(): {n:number} {
+    const value = {n:1};
+    Object.defineProperty(value, 'hidden', {value:2});
+    return value;
+}
+const value = fake();
+console.log(Object.getOwnPropertyNames(value)); // ['n', 'hidden']
+console.log(JSON.stringify(value));             // {"n":1}
+```
+
+Other required cases are `Object.setPrototypeOf(value,null)`, a hidden symbol,
+`{n:-0}`, a getter replacing `n`, and `const a:number[]=[]; a.length=1`.
+Neither the declared return type nor successful shadows prove their absence on
+the next call. A certificate must preserve actual key order and handle extra
+fields through a checked fallback. Negative zero needs a lossless representation
+or JS fallback. A compact layout must define the same guarantees before the
+adapter can safely decode it. No scriptc files changed for this candidate.

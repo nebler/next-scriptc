@@ -21,6 +21,8 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
   }
   function check(value: unknown): void {
     if (value === null || typeof value === "string" || typeof value === "boolean") return;
+    // JSON transport canonicalizes -0 to 0 (JSON.stringify(-0) === "0"). Throwing
+    // here inside the native lane would panic and poison the instance.
     if (typeof value === "number" && Number.isFinite(value)) return;
     if (typeof value !== "object" || value === null) throw new Error("Expected JSON data (null, finite numbers, strings, booleans, arrays and plain objects)");
     if (seen.has(value)) throw new Error("Cyclic JSON data");
@@ -49,4 +51,29 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
   } catch (error) {
     throw new Error(`[next-scriptc] JSON serialization failed: ${error instanceof Error ? error.message : String(error)}`);
   }
+}
+
+// A closed-shape fast visit still needs a runtime proof: TS is structural.
+// Return false for all unknown shapes, including extras. The generic serializer
+// then accepts valid extras and rejects invalid ones without calling getters.
+export function resultContainer(value: any, array: boolean, fields: string[], seen: Set<unknown>): boolean {
+  if (value === null || typeof value !== 'object' || Array.isArray(value) !== array || seen.has(value)) return false;
+  if (Object.getPrototypeOf(value) !== (array ? Array.prototype : Object.prototype)) return false;
+  const descriptors: any = Object.getOwnPropertyDescriptors(value);
+  if (Object.getOwnPropertySymbols(descriptors).length) return false;
+  const keys = Object.keys(descriptors);
+  if (keys.length !== (array ? value.length + 1 : fields.length)) return false;
+  if (array) {
+    for (let j = 0; j < value.length; j++) {
+      const d = descriptors[String(j)];
+      if (!d || !d.enumerable || d.get || d.set) return false;
+    }
+  } else {
+    for (const key of fields) {
+      const d = descriptors[key];
+      if (!d || !d.enumerable || d.get || d.set) return false;
+    }
+  }
+  seen.add(value);
+  return true;
 }
