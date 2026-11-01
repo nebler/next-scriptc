@@ -68,3 +68,7 @@ node scripts/promotion-js-overhead.mjs
 ```
 
 Use Node 24.22.0 to reproduce the recorded runs. The temporary dependency symlinks point into `/Users/noah/code/next-scriptc` and are removed after validation. All fuzzer and crash-test builds use task-created temp directories and remove them in `finally` blocks.
+
+## Review follow-up: process identity on Linux
+
+Added in review. The guard originally identified processes only through `ps -o lstart=`. The `node:24.22.2-bookworm-slim` image has no `ps`, and Vercel's runtime image may not have one either. Because the guard fails closed, promotion would have been silently disabled there. On Linux, `processBirth` now reads the start-time field of `/proc/<pid>/stat`. It counts fields after the last `)`, because the command name can contain spaces or parentheses. This needs no extra binary and doesn't spawn a process during cold start. In that slim container, the value is stable across reads of the same PID and differs between PIDs. Other platforms keep using `ps`.

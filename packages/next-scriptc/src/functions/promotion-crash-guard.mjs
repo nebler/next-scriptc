@@ -6,6 +6,19 @@ import {createHash, randomUUID} from 'node:crypto';
 
 // Conservative instance lease: covers initialization and every owner-thread job,
 // including async jobs after the caller returns. No filesystem work per call.
+// Linux (including Vercel Functions, whose image may lack `ps`): field 22 of
+// /proc/<pid>/stat is the start time in clock ticks since boot. The comm field
+// can contain spaces and parentheses, so fields are counted after the last ')'.
+export function processBirth(pid) {
+ if (process.platform === 'linux') {
+  const stat = readFileSync(`/proc/${pid}/stat`, 'utf8');
+  const start = stat.slice(stat.lastIndexOf(')') + 2).split(' ')[19];
+  if (!start) throw Error('missing process start time');
+  return 'linux:' + start;
+ }
+ return execFileSync('ps',['-o','lstart=','-p',String(pid)],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+}
+
 export function promotionCrashGuard(file, {directory=process.env.NEXT_SCRIPTC_CRASH_DIR??path.join(tmpdir(),'next-scriptc-crashes'), reset=process.env.NEXT_SCRIPTC_RESET_CRASH==='1'}={}) {
  const hash=createHash('sha256');
  for(const name of ['promotion.node','ids.json','encodings.json'])hash.update(readFileSync(path.join(path.dirname(file),name)));
@@ -13,7 +26,7 @@ export function promotionCrashGuard(file, {directory=process.env.NEXT_SCRIPTC_CR
  mkdirSync(dir,{recursive:true,mode:0o700});
  // PID liveness alone is insufficient after PID reuse. Failure to obtain an
  // identity fails closed through loadPromotion's JS-only error handler.
- const birth=pid=>execFileSync('ps',['-o','lstart=','-p',String(pid)],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+ const birth=processBirth;
  let disabled=false;
  for(const name of readdirSync(dir)){
   if(!name.endsWith('.active'))continue;
