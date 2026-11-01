@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import {assertDependencyHashes} from './dependency-closure.mjs';
 import path from "node:path";
 
 export default function loader(text) {
@@ -8,6 +9,7 @@ export default function loader(text) {
   if (!server && module.promotion) return text;
   if (!server) throw new Error(`[next-scriptc] ${this.resourcePath}: function ${module.functions.map((fn) => fn.name).join(", ")}: native functions cannot be imported into a browser or Edge module. Call them through a Server Action instead.`);
   if (module.hash !== createHash("sha256").update(text).digest("hex")) throw new Error(`[next-scriptc] ${this.resourcePath} changed after discovery. Restart the build.`);
+  assertDependencyHashes(module,file=>this.addDependency?.(file));
   const name = `__scriptc_${module.hash.slice(0, 12)}`;
   for (const fn of [...module.functions].reverse()) {
     if(fn.promotion || module.promotion){

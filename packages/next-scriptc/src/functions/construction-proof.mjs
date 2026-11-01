@@ -7,7 +7,7 @@ export function constructionProof(text, ts) {
  try { ts ??= require(require.resolve('typescript',{paths:[process.cwd(),new URL('../../../../examples/demo/',import.meta.url).pathname]})); }
  catch { return {eligible:false,reason:'TypeScript checker unavailable',version:1}; }
  const file='/__next_scriptc_construction__.ts';
- const options={strict:true,noUncheckedIndexedAccess:true,target:ts.ScriptTarget.ESNext};
+ const options={strict:true,noUncheckedIndexedAccess:true,target:ts.ScriptTarget.ESNext,types:[]};
  const host=ts.createCompilerHost(options), original=host.getSourceFile.bind(host);
  host.getSourceFile=(name,...args)=>name===file?ts.createSourceFile(file,text,options.target,true):original(name,...args);
  const program=ts.createProgram([file],options,host),source=program.getSourceFile(file),checker=program.getTypeChecker();

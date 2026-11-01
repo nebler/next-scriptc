@@ -127,3 +127,37 @@ Those transformations lose caller-visible distinctions. Inputs with explicit
 undefined continue to fall back before native entry. Missing optional fields
 can enter as ordinary JSON. Optional results, optional tuple elements and rest
 parameters remain conservative rejections pending a separately proved encoding.
+
+## Dependency closure follow-up, stock 0.4.6
+
+K1 development, 2026-11-01. Candidates only; no compiler changes. Run each
+reproduction in library mode with a profile exporting `run(string): string`.
+[Probe and diagnostics](dependency-closures/results.json),
+[design and limitations](dependency-closures.md).
+
+SC1010, runtime JavaScript package resolution: install json-2-csv 5.5.0 from
+K1's lockfile, then import its absolute `lib/converter.js` runtime path.
+
+```ts
+import { json2csv } from "/absolute/install/node_modules/json-2-csv/lib/converter.js";
+export function run(x: string): string { return json2csv(JSON.parse(x)); }
+```
+
+Stock reports that the import resolves only to declarations. This blocks the
+original package before deeper closure lowering. It is not evidence that all
+of json-2-csv can compile once resolution is fixed.
+
+SC0001, unbound CommonJS exports in a raw flattened TypeScript input:
+
+```ts
+function twice(n: number): number { return n * 2; }
+exports.twice = twice;
+export function run(x: string): string { return String(twice(Number(x))); }
+```
+
+This is a module-linking requirement, not a request to accept an unbound global.
+A correct linker must preserve export-object mutation and initialization order.
+Getter re-exports need descriptor semantics and an effect proof before promotion.
+
+Isolated dynamic JSON property reads, module-level Set lookup, and callback
+regex replacement compile. No SC failure is claimed for these constructs.

@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
+import {dependencyClosure} from './dependency-closure.mjs';
 import { extractFunctions } from './extract.mjs';
 import {constructionProof} from './construction-proof.mjs';
 import { checkFunctionTypes } from './types.mjs';
@@ -20,9 +21,9 @@ function freshArray(p) {
  return ['map','filter','slice','flat','flatMap','concat'].includes(c.property.name)&&freshArray(p.get('callee.object'));
 }
 
-// Deliberately reject imports and nonlocal mutation rather than trusting opaque
-// callees. Local helpers/constants are included by the existing extractor.
-export function promotionCandidates(text, source, report = console.log) {
+// Runtime imports require a closed module graph and a transitive effect proof.
+// Other callees and nonlocal mutation remain subject to the existing screen.
+export function promotionCandidates(text, source, report = console.log, resolution = {}) {
  const ast = parse(text), names=[];let program;
  const handlers=new Set(['GET','HEAD','POST','PUT','DELETE','PATCH','OPTIONS']);
  if(/^route\./.test(path.basename(source))){
@@ -45,7 +46,9 @@ export function promotionCandidates(text, source, report = console.log) {
  const candidates=[];
  for(const {name,forced} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
-  if(module.imports.some(i=>!i.specifier.startsWith('.') || !/import\s+type\b/.test(module.native)))throw Error('purity: opaque import');
+  if(module.imports.length && parse(module.native).program.body.some(n=>n.type==='ImportDeclaration'&&n.importKind!=='type')) {
+   Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
+  }
   let work=false;
   const native=parse(module.native);
   traverse(native,{
@@ -70,20 +73,20 @@ export function promotionCandidates(text, source, report = console.log) {
 }
 
 export async function discoverPromotions(projectDir, distDir, config, report=console.log){
+ const ts=require(require.resolve('typescript',{paths:[projectDir]}));
+ const file=path.resolve(projectDir,config?.typescript?.tsconfigPath??'tsconfig.json');
+ const loaded=ts.readConfigFile(file,ts.sys.readFile);
+ const parsed=ts.parseJsonConfigFileContent(loaded.config??{compilerOptions:{strict:true}},ts.sys,path.dirname(file),undefined,file);
  const modules=[];
  async function visit(dir){for(const e of await readdir(dir,{withFileTypes:true})){
   if(e.name.startsWith('.')||['node_modules','research','test','tests'].includes(e.name))continue;
   const file=path.join(dir,e.name);if(file===distDir)continue;
   if(e.isDirectory())await visit(file);
   else if(/\.[cm]?[jt]sx?$/.test(file)){
-   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,report));
+   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,report,{ts,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
   }
  }}await visit(projectDir);
  if(!modules.length)return [];
- const ts=require(require.resolve('typescript',{paths:[projectDir]}));
- const file=path.resolve(projectDir,config?.typescript?.tsconfigPath??'tsconfig.json');
- const loaded=ts.readConfigFile(file,ts.sys.readFile);
- const parsed=ts.parseJsonConfigFileContent(loaded.config??{compilerOptions:{strict:true}},ts.sys,projectDir);
  if(!(parsed.options.strictNullChecks??parsed.options.strict)){report('[next-scriptc] auto disabled: strictNullChecks required');return [];}
  const program=ts.createProgram({rootNames:[...new Set([...parsed.fileNames,...modules.map(m=>m.source)])],options:parsed.options});
  return modules.filter(m=>{try{checkFunctionTypes(ts,program,[m]);for(const fn of m.functions)fn.constructionProof=constructionProof(m.native,ts);return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});

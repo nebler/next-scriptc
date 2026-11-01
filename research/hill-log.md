@@ -391,3 +391,35 @@ and shadow byte parity at 6k and 60k events. K1 category a shares are 59.5% and
 host coverage shares, not CPU savings. The full adapter suite, shim parity and
 280,000-input seeded fuzzer pass. No native timing, Vercel, Docker or compiler
 change. Details: [optional-boundaries-and-discovery.md](optional-boundaries-and-discovery.md).
+
+## 20. Runtime dependency closures and the CSV blocker (2026-11-01)
+
+Hypothesis: a closed runtime import graph and a transitive effect proof can
+recover Dub's dominant CSV conversion region without app changes. Kept the
+conservative ESM linker, runtime-file resolution using TS paths and package
+exports/main, scalar constant inlining, dependency content and manifest hashes,
+and build invalidation. Imported closures must pass the construction effect
+proof even when construction result optimization is off. Initialization is
+audited before unused code is removed.
+
+The Dub hypothesis remains unproven. CommonJS module objects, getter re-exports,
+mutable exported defaults, and the formula-prefix Set fail the adapter proof.
+Stock 0.4.6 refuses the actual runtime package import with SC1010. A minimal
+raw CommonJS export input yields SC0001. Dynamic JSON key reads, Set lookup,
+and callback regex replacement compile in isolation. The ledger records this
+observed blocker set without inventing errors for deeper lowering.
+
+No broad object boundary, CSV native parity claim, CSV A/B, or performance gain
+is claimed. The report describes the schema guard and remaining equality proof
+needed before such a boundary can be enabled. Synthetic app closures compile
+and match forced-native bytes. The permanent fuzzer gains a helper closure and
+CSV-sensitive strings; seed 20935 passes 300,000 inputs and 600,000 comparisons.
+
+The final census remains Dub 32 and held-out Papermark 23. Dub accepted CSV
+coverage stays zero; its CSV category is 61.1% at 100 rows and 62.0% at 1,000.
+Papermark is used only for the final census and JS coverage recount, with no
+native timing or tuning. These are loaded-host sampled shares, not CPU savings.
+The full adapter suite passes 84 tests; both Node 24 shim tests pass.
+Temporary installs and symlinks are removed. No compiler, Docker, Vercel,
+third-party source, or root README change.
+[Design, evidence, and validation](dependency-closures.md).

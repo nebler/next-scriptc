@@ -12,7 +12,7 @@ import {extractFunctions} from '../../src/functions/extract.mjs';
 import {canonicalResult} from '../../src/functions/promotion-encodings.mjs';
 const ts=createRequire(new URL('../../../../examples/demo/package.json',import.meta.url))('typescript');
 const numbers=[0,-0,1,-1,Number.MAX_VALUE,-Number.MAX_VALUE,Number.MIN_VALUE,-Number.MIN_VALUE,1e-200,1e200,Number.MAX_SAFE_INTEGER];
-const strings=['','a','2026-01-01','2026-01-31','世界','\ue000','\uffff','😀','e\u0301','\0','\ud800','\udfff','__proto__','constructor'];
+const strings=['','a','2026-01-01','2026-01-31','世界','\ue000','\uffff','😀','e\u0301','\0','\ud800','\udfff','__proto__','constructor',',','"','line\nfeed','\r\n','=SUM(1,2)','+formula','-formula','@formula','\tformula'];
 const outcome=fn=>{try{return {value:fn()};}catch(e){return {error:e.constructor.name,message:e.message};}};
 // The JSON ABI documents -0 -> +0. Preserve every other value (especially NaN,
 // undefined and infinities returned by fallback); JSON round-tripping is unsafe.

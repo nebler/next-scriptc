@@ -1,0 +1,2699 @@
+{
+  "node": "v24.22.0",
+  "arch": "arm64",
+  "cpu": "Apple M4 Pro",
+  "load": [
+    10.39697265625,
+    8.060546875,
+    7.70068359375
+  ],
+  "method": "V8 inspector CPU sampling; 3 x >=500ms process CPU; 10 warmups; 500us interval; active unweighted samples",
+  "results": [
+    {
+      "name": "papermark-video-6000",
+      "fixture": {
+        "events": 6000,
+        "viewers": 100,
+        "videoSeconds": 600,
+        "inputBytes": 1113401
+      },
+      "outputBytes": 33752,
+      "sha256": "0716f0f58ed82a591d1c6ba77978539bdf71956ca36a765b27187468637fa22a",
+      "rounds": [
+        {
+          "requests": 40,
+          "cpuUs": 577944,
+          "cpuUsPerRequest": 14448.6,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 867,
+            "activeSamples": 867,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 25,
+              "c:serialization": 160,
+              "a:current": 534,
+              "b:nonexport sync core + Date": 138,
+              "d:GC": 7,
+              "b:generic + optional boundary": 3
+            },
+            "shares": {
+              "d:other": 2.883506343713956,
+              "c:serialization": 18.45444059976932,
+              "a:current": 61.5916955017301,
+              "b:nonexport sync core + Date": 15.916955017301039,
+              "d:GC": 0.8073817762399077,
+              "b:generic + optional boundary": 0.3460207612456747
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                256
+              ],
+              [
+                "mockHttpDecode :3",
+                159
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                146
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                122
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                61
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                43
+              ],
+              [
+                "(program) :0",
+                19
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:84",
+                19
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                13
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                9
+              ],
+              [
+                "(garbage collector) :0",
+                7
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                4
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file:///Users/noah/.t3/worktrees/next-scriptc/t3-b34c2802/research/coverage-baseline/profile.mjs:0",
+                1
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:95",
+                1
+              ],
+              [
+                "responseSerialization :3",
+                1
+              ],
+              [
+                "handle file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:47",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                256
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                159
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                146
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                125
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                61
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                43
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                20
+              ],
+              [
+                "(program) <- (root)",
+                19
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                13
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "(garbage collector) <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- (root)",
+                4
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                1
+              ],
+              [
+                "handle <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 40,
+          "cpuUs": 652435,
+          "cpuUsPerRequest": 16310.875,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 1002,
+            "activeSamples": 1002,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 18,
+              "c:serialization": 183,
+              "a:current": 621,
+              "b:nonexport sync core + Date": 163,
+              "b:generic + optional boundary": 8,
+              "d:GC": 9
+            },
+            "shares": {
+              "d:other": 1.7964071856287425,
+              "c:serialization": 18.263473053892216,
+              "a:current": 61.97604790419162,
+              "b:nonexport sync core + Date": 16.26746506986028,
+              "b:generic + optional boundary": 0.7984031936127745,
+              "d:GC": 0.8982035928143712
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                375
+              ],
+              [
+                "mockHttpDecode :3",
+                179
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                150
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                102
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                70
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                43
+              ],
+              [
+                "(anonymous) :84",
+                23
+              ],
+              [
+                "(program) :0",
+                14
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                11
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                10
+              ],
+              [
+                "(garbage collector) :0",
+                9
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                5
+              ],
+              [
+                "responseSerialization :3",
+                4
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                3
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "run file:///Users/noah/.t3/worktrees/next-scriptc/t3-b34c2802/research/coverage-baseline/profile.mjs:33",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                375
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                179
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                152
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                102
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                70
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                43
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                23
+              ],
+              [
+                "(program) <- (root)",
+                14
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                11
+              ],
+              [
+                "(garbage collector) <- (root)",
+                9
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                4
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "run <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 30,
+          "cpuUs": 513920,
+          "cpuUsPerRequest": 17130.666666666668,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 793,
+            "activeSamples": 793,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 20,
+              "c:serialization": 144,
+              "a:current": 482,
+              "b:nonexport sync core + Date": 133,
+              "b:generic + optional boundary": 6,
+              "d:GC": 8
+            },
+            "shares": {
+              "d:other": 2.5220680958385877,
+              "c:serialization": 18.15889029003783,
+              "a:current": 60.781841109709966,
+              "b:nonexport sync core + Date": 16.77175283732661,
+              "b:generic + optional boundary": 0.7566204287515763,
+              "d:GC": 1.008827238335435
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                285
+              ],
+              [
+                "mockHttpDecode :3",
+                140
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                115
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                77
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                50
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                43
+              ],
+              [
+                "(anonymous) :84",
+                19
+              ],
+              [
+                "(program) :0",
+                16
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                14
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                10
+              ],
+              [
+                "(garbage collector) :0",
+                8
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                5
+              ],
+              [
+                "responseSerialization :3",
+                4
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                3
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                1
+              ],
+              [
+                "handle file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:47",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                285
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                140
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                119
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                77
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                50
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                43
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                19
+              ],
+              [
+                "(program) <- (root)",
+                16
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                14
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                8
+              ],
+              [
+                "(garbage collector) <- (root)",
+                8
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                5
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "handle <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "papermark-video-60000",
+      "fixture": {
+        "events": 60000,
+        "viewers": 1000,
+        "videoSeconds": 600,
+        "inputBytes": 11193401
+      },
+      "outputBytes": 34955,
+      "sha256": "546fee9e1df0b5e1c809bad5ff6d9de53b073a1e13039e26f1cd6e97ace3f33c",
+      "rounds": [
+        {
+          "requests": 10,
+          "cpuUs": 2347157,
+          "cpuUsPerRequest": 234715.7,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 3233,
+            "activeSamples": 3233,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 73,
+              "c:serialization": 389,
+              "b:nonexport sync core + Date": 373,
+              "b:generic + optional boundary": 17,
+              "a:current": 2190,
+              "d:GC": 191
+            },
+            "shares": {
+              "d:other": 2.257964738632849,
+              "c:serialization": 12.032168264769563,
+              "b:nonexport sync core + Date": 11.53727188369935,
+              "b:generic + optional boundary": 0.5258274048871018,
+              "a:current": 67.73894215898547,
+              "d:GC": 5.907825549025673
+            },
+            "topFrames": [
+              [
+                "pm_documentViewDistribution :3",
+                1322
+              ],
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                539
+              ],
+              [
+                "mockHttpDecode :3",
+                389
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                373
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                258
+              ],
+              [
+                "(garbage collector) :0",
+                191
+              ],
+              [
+                "(program) :0",
+                68
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:84",
+                44
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                28
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                10
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                7
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "getVideoEventsByDocument file:///Users/noah/.t3/worktrees/next-scriptc/t3-b34c2802/research/coverage-baseline/profile.mjs:28",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                1322
+              ],
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                539
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                389
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                373
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                258
+              ],
+              [
+                "(garbage collector) <- (root)",
+                191
+              ],
+              [
+                "(program) <- (root)",
+                68
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                44
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                25
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                10
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- (root)",
+                3
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "getVideoEventsByDocument <- handle <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 10,
+          "cpuUs": 2450074,
+          "cpuUsPerRequest": 245007.4,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 3268,
+            "activeSamples": 3268,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 66,
+              "c:serialization": 404,
+              "b:generic + optional boundary": 17,
+              "b:nonexport sync core + Date": 389,
+              "a:current": 2201,
+              "d:GC": 191
+            },
+            "shares": {
+              "d:other": 2.0195838433292534,
+              "c:serialization": 12.362301101591187,
+              "b:generic + optional boundary": 0.5201958384332925,
+              "b:nonexport sync core + Date": 11.903304773561812,
+              "a:current": 67.3500611995104,
+              "d:GC": 5.844553243574051
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                1201
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                657
+              ],
+              [
+                "mockHttpDecode :3",
+                402
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:26",
+                344
+              ],
+              [
+                "(garbage collector) :0",
+                191
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                172
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                104
+              ],
+              [
+                "(program) :0",
+                63
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:84",
+                45
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                42
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                21
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                14
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                3
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                2
+              ],
+              [
+                "responseSerialization :3",
+                2
+              ],
+              [
+                "playbackSeconds :32",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:24",
+                1
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                1201
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                657
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                402
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                347
+              ],
+              [
+                "(garbage collector) <- (root)",
+                191
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                172
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                104
+              ],
+              [
+                "(program) <- (root)",
+                63
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                45
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                42
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                19
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                14
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                2
+              ],
+              [
+                "playbackSeconds <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 10,
+          "cpuUs": 2259533,
+          "cpuUsPerRequest": 225953.3,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 3036,
+            "activeSamples": 3036,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 69,
+              "c:serialization": 396,
+              "b:nonexport sync core + Date": 370,
+              "b:generic + optional boundary": 18,
+              "a:current": 2051,
+              "d:GC": 132
+            },
+            "shares": {
+              "d:other": 2.272727272727273,
+              "c:serialization": 13.043478260869565,
+              "b:nonexport sync core + Date": 12.187088274044795,
+              "b:generic + optional boundary": 0.5928853754940712,
+              "a:current": 67.55599472990777,
+              "d:GC": 4.3478260869565215
+            },
+            "topFrames": [
+              [
+                "documentViewDistribution file://papermark/lib/video-analytics/playback.ts:67",
+                1451
+              ],
+              [
+                "mockHttpDecode :3",
+                395
+              ],
+              [
+                "calculateAnalytics file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:15",
+                367
+              ],
+              [
+                "pm_documentViewDistribution :3",
+                266
+              ],
+              [
+                "pm_watchTimeSeconds :3",
+                217
+              ],
+              [
+                "(garbage collector) :0",
+                132
+              ],
+              [
+                "(program) :0",
+                59
+              ],
+              [
+                "watchTimeSeconds file://papermark/lib/video-analytics/playback.ts:49",
+                58
+              ],
+              [
+                "(anonymous) :84",
+                43
+              ],
+              [
+                "(anonymous) file://papermark/lib/video-analytics/playback.ts:86",
+                21
+              ],
+              [
+                "countablePlaybackEvents file://papermark/lib/video-analytics/playback.ts:29",
+                14
+              ],
+              [
+                "isCountablePlaybackEvent file://papermark/lib/video-analytics/playback.ts:22",
+                4
+              ],
+              [
+                "(anonymous) file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:22",
+                3
+              ],
+              [
+                "dispatch :0",
+                2
+              ],
+              [
+                "post node:inspector:115",
+                1
+              ],
+              [
+                "responseSerialization :3",
+                1
+              ],
+              [
+                "resolveVideoLength file://papermark/lib/video-analytics/playback.ts:41",
+                1
+              ],
+              [
+                "handle file://papermark/pages/api/teams/[teamId]/documents/[id]/video-analytics.ts:47",
+                1
+              ]
+            ],
+            "topStacks": [
+              [
+                "documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                1451
+              ],
+              [
+                "mockHttpDecode <- getVideoEventsByDocument <- handle <- (root)",
+                395
+              ],
+              [
+                "calculateAnalytics <- handle <- (root)",
+                367
+              ],
+              [
+                "pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                266
+              ],
+              [
+                "pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                217
+              ],
+              [
+                "(garbage collector) <- (root)",
+                132
+              ],
+              [
+                "(program) <- (root)",
+                59
+              ],
+              [
+                "watchTimeSeconds <- pm_watchTimeSeconds <- calculateAnalytics <- handle <- (root)",
+                58
+              ],
+              [
+                "(anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                43
+              ],
+              [
+                "(anonymous) <- (anonymous) <- documentViewDistribution <- pm_documentViewDistribution <- calculateAnalytics <- handle <- (root)",
+                15
+              ],
+              [
+                "countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                14
+              ],
+              [
+                "(anonymous) <- (root)",
+                6
+              ],
+              [
+                "isCountablePlaybackEvent <- countablePlaybackEvents <- pm_countablePlaybackEvents <- calculateAnalytics <- handle <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- calculateAnalytics <- handle <- (root)",
+                3
+              ],
+              [
+                "dispatch <- post <- (anonymous) <- post <- (anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ],
+              [
+                "responseSerialization <- handle <- (root)",
+                1
+              ],
+              [
+                "resolveVideoLength <- pm_resolveVideoLength <- calculateAnalytics <- handle <- (root)",
+                1
+              ],
+              [
+                "handle <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "dub-links-export-100",
+      "fixture": {
+        "rows": 100,
+        "columns": 9,
+        "foregroundLimit": 1000
+      },
+      "outputBytes": 14025,
+      "sha256": "e23e88cb45e8825800892ddaddb7fda40fea0dceebc44ab6508640599a91d822",
+      "rounds": [
+        {
+          "requests": 620,
+          "cpuUs": 502411,
+          "cpuUsPerRequest": 810.3403225806452,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 622,
+            "activeSamples": 622,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 32,
+              "b:npm json-2-csv + object boundary": 374,
+              "b:cross-module + broad boundary": 171,
+              "c:Response/framework": 35,
+              "d:GC": 10
+            },
+            "shares": {
+              "d:other": 5.144694533762058,
+              "b:npm json-2-csv + object boundary": 60.12861736334405,
+              "b:cross-module + broad boundary": 27.491961414790996,
+              "c:Response/framework": 5.627009646302251,
+              "d:GC": 1.607717041800643
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                67
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                60
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                59
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                40
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                32
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                31
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                30
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                27
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                23
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                21
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:20",
+                17
+              ],
+              [
+                "retrieveRecordFieldData file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:309",
+                15
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                14
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                12
+              ],
+              [
+                "(program) :0",
+                12
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                12
+              ],
+              [
+                "(garbage collector) :0",
+                10
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                10
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                9
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                9
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                8
+              ],
+              [
+                "recordFieldValueToString file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                7
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                7
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                6
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:64",
+                6
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:18",
+                6
+              ],
+              [
+                "exports.GET.requiredPermissions file://dub/apps/web/app/api/links/export/route.ts:22",
+                6
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                6
+              ],
+              [
+                "generateDeepKeysList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:63",
+                4
+              ],
+              [
+                "(anonymous) :0",
+                4
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                133
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                60
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                40
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                32
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                30
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                30
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                26
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                23
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                21
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                12
+              ],
+              [
+                "(program) <- (root)",
+                12
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "(garbage collector) <- (root)",
+                10
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "(anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                6
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- (root)",
+                3
+              ],
+              [
+                "convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 850,
+          "cpuUs": 500963,
+          "cpuUsPerRequest": 589.3682352941177,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 749,
+            "activeSamples": 749,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 20,
+              "b:npm json-2-csv + object boundary": 477,
+              "b:cross-module + broad boundary": 230,
+              "c:Response/framework": 18,
+              "d:GC": 4
+            },
+            "shares": {
+              "d:other": 2.67022696929239,
+              "b:npm json-2-csv + object boundary": 63.684913217623496,
+              "b:cross-module + broad boundary": 30.707610146862482,
+              "c:Response/framework": 2.403204272363151,
+              "d:GC": 0.5340453938584779
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                87
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                78
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                76
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                76
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                57
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                35
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                33
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                28
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                28
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                25
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                24
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                21
+              ],
+              [
+                "(anonymous) :20",
+                19
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                17
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                16
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                15
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                13
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                13
+              ],
+              [
+                "(program) :0",
+                12
+              ],
+              [
+                "(anonymous) :18",
+                9
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                9
+              ],
+              [
+                "(anonymous) :0",
+                6
+              ],
+              [
+                "buildJ2COptions file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:12",
+                6
+              ],
+              [
+                "(garbage collector) :0",
+                4
+              ],
+              [
+                "parseValue :14",
+                3
+              ],
+              [
+                "recordFieldValueToString file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                3
+              ],
+              [
+                "encodeUtf8String :0",
+                3
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:71",
+                3
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                3
+              ],
+              [
+                "encode node:internal/encoding:355",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                171
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                76
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                76
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                57
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                35
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                33
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                28
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                25
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                24
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                21
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                20
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "(program) <- (root)",
+                12
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "buildJ2COptions <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "(garbage collector) <- (root)",
+                4
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "encodeUtf8String <- encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 940,
+          "cpuUs": 505479,
+          "cpuUsPerRequest": 537.7436170212766,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 775,
+            "activeSamples": 775,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 33,
+              "b:cross-module + broad boundary": 246,
+              "b:npm json-2-csv + object boundary": 461,
+              "c:Response/framework": 28,
+              "d:GC": 7
+            },
+            "shares": {
+              "d:other": 4.258064516129032,
+              "b:cross-module + broad boundary": 31.741935483870968,
+              "b:npm json-2-csv + object boundary": 59.483870967741936,
+              "c:Response/framework": 3.6129032258064515,
+              "d:GC": 0.9032258064516129
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                98
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                84
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                68
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                65
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                45
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                45
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                40
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                40
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                39
+              ],
+              [
+                "(anonymous) :20",
+                24
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                20
+              ],
+              [
+                "(program) :0",
+                18
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                17
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                16
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                15
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                15
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                10
+              ],
+              [
+                "(anonymous) :18",
+                10
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                9
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                9
+              ],
+              [
+                "encodeUtf8String :0",
+                8
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                8
+              ],
+              [
+                "(garbage collector) :0",
+                7
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                6
+              ],
+              [
+                "recordFieldValueToString file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                6
+              ],
+              [
+                "exports.GET.requiredPermissions file://dub/apps/web/app/api/links/export/route.ts:22",
+                5
+              ],
+              [
+                "encode node:internal/encoding:355",
+                4
+              ],
+              [
+                "(anonymous) :0",
+                4
+              ],
+              [
+                "parseValue :14",
+                4
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:23",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                193
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                68
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                65
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                45
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                44
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                40
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                40
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                39
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                24
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                20
+              ],
+              [
+                "(program) <- (root)",
+                18
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "encodeUtf8String <- encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "(garbage collector) <- (root)",
+                7
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "transform <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "buildJ2COptions <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "decodeUTF8 <- decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                2
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "dub-links-export-1000",
+      "fixture": {
+        "rows": 1000,
+        "columns": 9,
+        "foregroundLimit": 1000
+      },
+      "outputBytes": 142484,
+      "sha256": "308076aaeaf1e09f0535fbc6ea058f0db1033fea7f48ad970075ff7dc4d28e2a",
+      "rounds": [
+        {
+          "requests": 90,
+          "cpuUs": 543641,
+          "cpuUsPerRequest": 6040.455555555555,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 687,
+            "activeSamples": 687,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 20,
+              "b:cross-module + broad boundary": 206,
+              "b:npm json-2-csv + object boundary": 428,
+              "c:Response/framework": 21,
+              "d:GC": 12
+            },
+            "shares": {
+              "d:other": 2.911208151382824,
+              "b:cross-module + broad boundary": 29.985443959243085,
+              "b:npm json-2-csv + object boundary": 62.29985443959243,
+              "c:Response/framework": 3.056768558951965,
+              "d:GC": 1.7467248908296944
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                85
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                69
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                65
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                56
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                44
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                41
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                39
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                29
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                28
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                22
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                21
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                18
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                17
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                16
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                14
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:20",
+                14
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                14
+              ],
+              [
+                "(garbage collector) :0",
+                12
+              ],
+              [
+                "(anonymous) :0",
+                10
+              ],
+              [
+                "(program) :0",
+                10
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                10
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                8
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:18",
+                7
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                6
+              ],
+              [
+                "decode node:internal/encoding:482",
+                5
+              ],
+              [
+                "encodeUtf8String :0",
+                3
+              ],
+              [
+                "parseValue file://dub/apps/web/lib/analytics/utils/convert-to-csv.ts:14",
+                2
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:71",
+                2
+              ],
+              [
+                "(anonymous) node:internal/deps/undici/undici:6933",
+                2
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                167
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                65
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                56
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                44
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                40
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                39
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                29
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                22
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                21
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                14
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "(garbage collector) <- (root)",
+                12
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(program) <- (root)",
+                10
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                6
+              ],
+              [
+                "decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                4
+              ],
+              [
+                "encodeUtf8String <- encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "(anonymous) <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 100,
+          "cpuUs": 556827,
+          "cpuUsPerRequest": 5568.27,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 844,
+            "activeSamples": 844,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 24,
+              "b:cross-module + broad boundary": 268,
+              "b:npm json-2-csv + object boundary": 522,
+              "c:Response/framework": 18,
+              "d:GC": 12
+            },
+            "shares": {
+              "d:other": 2.843601895734597,
+              "b:cross-module + broad boundary": 31.753554502369667,
+              "b:npm json-2-csv + object boundary": 61.84834123222749,
+              "c:Response/framework": 2.132701421800948,
+              "d:GC": 1.4218009478672986
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                104
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                101
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                70
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                64
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                55
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                51
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                49
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                49
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                42
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                26
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                21
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                20
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                18
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                18
+              ],
+              [
+                "parseValue file://dub/apps/web/lib/analytics/utils/convert-to-csv.ts:14",
+                17
+              ],
+              [
+                "(anonymous) :20",
+                16
+              ],
+              [
+                "(program) :0",
+                14
+              ],
+              [
+                "(anonymous) :18",
+                13
+              ],
+              [
+                "(garbage collector) :0",
+                12
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                11
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                10
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                8
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                8
+              ],
+              [
+                "(anonymous) :0",
+                8
+              ],
+              [
+                "encodeUtf8String :0",
+                7
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                7
+              ],
+              [
+                "exports.GET.requiredPermissions file://dub/apps/web/app/api/links/export/route.ts:22",
+                3
+              ],
+              [
+                "recordFieldValueToString file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                3
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                3
+              ],
+              [
+                "(anonymous) file://dub/apps/web/lib/api/links/format-links-for-export.ts:27",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                214
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                69
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                64
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                55
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                49
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                49
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                48
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                42
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                26
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                21
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                20
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                14
+              ],
+              [
+                "(program) <- (root)",
+                14
+              ],
+              [
+                "(garbage collector) <- (root)",
+                12
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                11
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                10
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "encodeUtf8String <- encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                7
+              ],
+              [
+                "exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "transform <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "evaluatePath <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                2
+              ]
+            ]
+          }
+        },
+        {
+          "requests": 90,
+          "cpuUs": 552007,
+          "cpuUsPerRequest": 6133.4111111111115,
+          "profile": {
+            "intervalUs": 500,
+            "samples": 846,
+            "activeSamples": 846,
+            "idleSamples": 0,
+            "counts": {
+              "d:other": 26,
+              "b:cross-module + broad boundary": 259,
+              "b:npm json-2-csv + object boundary": 524,
+              "c:Response/framework": 26,
+              "d:GC": 11
+            },
+            "shares": {
+              "d:other": 3.0732860520094563,
+              "b:cross-module + broad boundary": 30.61465721040189,
+              "b:npm json-2-csv + object boundary": 61.938534278959814,
+              "c:Response/framework": 3.0732860520094563,
+              "d:GC": 1.3002364066193854
+            },
+            "topFrames": [
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:47",
+                100
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:59",
+                95
+              ],
+              [
+                "evaluatePath file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:13",
+                82
+              ],
+              [
+                "wrapFieldValueIfNecessary file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:379",
+                69
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:311",
+                63
+              ],
+              [
+                "escapeNestedDotsIfSpecified file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:110",
+                55
+              ],
+              [
+                "state file:///private/tmp/next-scriptc-k1-deps/node_modules/doc-path/lib/path.js:118",
+                37
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:274",
+                28
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/utils.js:8",
+                27
+              ],
+              [
+                "generateCsvRowFromRecord file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:400",
+                25
+              ],
+              [
+                "formatLinksForExport file://dub/apps/web/lib/api/links/format-links-for-export.ts:13",
+                25
+              ],
+              [
+                "parseValue :14",
+                24
+              ],
+              [
+                "processRecords file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:273",
+                19
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:54",
+                18
+              ],
+              [
+                "deepKeysFromList file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:52",
+                17
+              ],
+              [
+                "(anonymous) :20",
+                17
+              ],
+              [
+                "(program) :0",
+                17
+              ],
+              [
+                "unique file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:186",
+                16
+              ],
+              [
+                "flatten file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/utils.js:190",
+                15
+              ],
+              [
+                "neutralizeCsvFormula :9",
+                13
+              ],
+              [
+                "(anonymous) :18",
+                13
+              ],
+              [
+                "(garbage collector) :0",
+                11
+              ],
+              [
+                "transform file://dub/apps/web/lib/zod/schemas/links.ts:65",
+                9
+              ],
+              [
+                "mergeOptions file:///private/tmp/next-scriptc-k1-deps/node_modules/deeks/lib/deeks.js:128",
+                9
+              ],
+              [
+                "(anonymous) :0",
+                8
+              ],
+              [
+                "encodeUtf8String :0",
+                5
+              ],
+              [
+                "recordFieldValueToString file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:326",
+                4
+              ],
+              [
+                "decode node:internal/encoding:482",
+                4
+              ],
+              [
+                "encode node:internal/encoding:355",
+                3
+              ],
+              [
+                "(anonymous) file:///private/tmp/next-scriptc-k1-deps/node_modules/json-2-csv/lib/json2csv.js:278",
+                2
+              ]
+            ],
+            "topStacks": [
+              [
+                "transform <- (anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                204
+              ],
+              [
+                "evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                78
+              ],
+              [
+                "wrapFieldValueIfNecessary <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                69
+              ],
+              [
+                "(anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                63
+              ],
+              [
+                "escapeNestedDotsIfSpecified <- (anonymous) <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert",
+                55
+              ],
+              [
+                "state <- evaluatePath <- (anonymous) <- retrieveRecordFieldData <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                37
+              ],
+              [
+                "(anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                28
+              ],
+              [
+                "flatten <- generateDeepKeysList <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions",
+                27
+              ],
+              [
+                "generateCsvRowFromRecord <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                25
+              ],
+              [
+                "formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                25
+              ],
+              [
+                "parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                24
+              ],
+              [
+                "processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                19
+              ],
+              [
+                "(anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                18
+              ],
+              [
+                "deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "(anonymous) <- (anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                17
+              ],
+              [
+                "(program) <- (root)",
+                17
+              ],
+              [
+                "unique <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                16
+              ],
+              [
+                "flatten <- processSchemas <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                15
+              ],
+              [
+                "neutralizeCsvFormula <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "(anonymous) <- formatLinksForExport <- dub_format <- exports.GET.requiredPermissions <- (root)",
+                13
+              ],
+              [
+                "(garbage collector) <- (root)",
+                11
+              ],
+              [
+                "mergeOptions <- deepKeys <- (anonymous) <- deepKeysFromList <- getFieldNameList <- retrieveHeaderFields <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                9
+              ],
+              [
+                "(anonymous) <- byteLength <- (anonymous) <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                8
+              ],
+              [
+                "encodeUtf8String <- encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                5
+              ],
+              [
+                "recordFieldValueToString <- parseValue <- (anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                4
+              ],
+              [
+                "decode <- utf8DecodeBytes <- (anonymous) <- readAllBytes <- (root)",
+                4
+              ],
+              [
+                "evaluatePath <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "encode <- (anonymous) <- extractBody <- _Response <- exports.GET.requiredPermissions <- (root)",
+                3
+              ],
+              [
+                "(anonymous) <- (anonymous) <- processRecords <- convert <- json2csv <- convertToCSV <- dub_convert <- exports.GET.requiredPermissions <- (root)",
+                2
+              ],
+              [
+                "post <- (anonymous) <- post <- (anonymous) <- (root)",
+                1
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

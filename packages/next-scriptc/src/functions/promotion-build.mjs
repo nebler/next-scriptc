@@ -1,3 +1,4 @@
+import {assertDependencyHashes} from './dependency-closure.mjs';
 import {constructionProof} from './construction-proof.mjs';
 import { signature, constructionResultsDefault } from './promotion-signature.mjs';
 import { readFile,writeFile,mkdir,rm } from 'node:fs/promises';
@@ -8,11 +9,13 @@ import os from 'node:os';
 import { compilerPath } from '../paths.mjs';
 export async function buildPromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, constructionResults=constructionResultsDefault, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
  if(!modules.length)return [];
+ for(const module of modules)assertDependencyHashes(module);
  const constructionReport=modules.flatMap(m=>{const proof=constructionProof(m.native);return m.functions.map(fn=>{fn.constructionProof=proof;const row={id:fn.id,name:fn.name,...proof,enabled:constructionResults&&proof.eligible&&fn.boundary?.result==='json'};return row;});});
  if(!['linux-arm64-gnu','linux-x64-gnu',`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`].includes(target))throw Error(`Unsupported promotion target: ${target}`);
  const triple=target==='linux-arm64-gnu'?'aarch64-linux-gnu.2.34':'x86_64-linux-gnu.2.34';
  linux=target.startsWith('linux-');
  await mkdir(output,{recursive:true});
+ await writeFile(path.join(output,'dependency-report.json'),JSON.stringify(modules.map(m=>({source:m.source,functions:m.functions.map(f=>f.name),closureHash:m.closureHash??m.hash,dependencies:m.dependencies??[]})),null,2)+'\n');
  await writeFile(path.join(output,'construction-report.json'),JSON.stringify(constructionReport,null,2)+'\n');
  for(const name of ['promotion.node','ids.json','encodings.json'])await rm(path.join(output,name),{force:true});
  if(linux&&!runtime){
