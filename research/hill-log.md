@@ -283,3 +283,15 @@ artifacts are in [dispatcher-cpu-timing.md](dispatcher-cpu-timing.md).
 Cleanup removes task build trees and all three dependency symlinks. Available
 disk increases from 18.49 GiB immediately before cleanup to 19.28 GiB after.
 The final full adapter rerun also passes all 72 tests on Node 24.
+
+## 16. Phase 1 gate under the amended criterion (2026-11-01)
+
+The gate was amended in [hill-plan.md](hill-plan.md) and approved after D2. Applied to D2's stand-in rerun ([dispatcher-cpu-timing.md](dispatcher-cpu-timing.md)), with no new measurement:
+
+- **Construction path: PASS.**
+  - The per-bucket bands pass from 5k up.
+  - Auto picks native in every bucket and is within noise of always-native: mixed caller CPU 2,020 vs 2,118 ms.
+  - On the mix it beats JS beyond the error margin: predicted 3,810 [3,148, 4,472] vs 10,782 [8,909, 12,654].
+- **Strict path: FAIL** (the 5k band overlaps). It is being replaced by the construction path.
+- **Needs hosted confirmation** (boundary-driven). `constructionResults` stays opt-in until the fuzzer and crash safety exist.
+

@@ -78,5 +78,6 @@ On Pro, set a Spend Management cap before the first run.
    - timing per stage;
    - the shared-core and host-packaging split.
 3. **Phase 1 measurement** in the calibrated stand-in, with its gate: with real data passed as arguments, predicted native beats JS from 5k up.
+   - **Gate amendment (2026-11-01, approved by Noah after D2).** M2's original criterion was "auto beats both fixed lanes on the mixed total beyond the calibration error". It cannot be met when one fixed lane is best in every bucket, because auto can then at best match that lane. The amended criterion: auto is within noise of the best fixed lane in every bucket, **and** beats plain JS on the mixed total beyond the calibration error. The per-bucket rule (native upper band below JS lower band from 5k up) is unchanged. M2, M3 and D2 keep their original verdicts in their reports.
 4. **The int8 local test gate,** only when no measurement is running.
 5. **The local Papermark gate.**
