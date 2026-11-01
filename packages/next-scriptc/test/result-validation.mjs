@@ -25,7 +25,7 @@ test('generated validation rejects malformed containers before invoking getters'
  const getter={get n(){calls++;return 1;},s:'x'};
  const cycle={rows:[]};cycle.rows.push(cycle);
  const base=()=>({rows:[{n:1,s:'x'}]});
- const values=[{rows:[getter]},cycle,{rows:[,]}, {rows:[{n:NaN,s:'x'}]}, {rows:[{n:-0,s:'x'}]}, {rows:new Uint8Array([1])}];
+ const values=[{rows:[getter]},cycle,{rows:[,]}, {rows:[{n:NaN,s:'x'}]}, {rows:new Uint8Array([1])}];
  for(const mutate of [v=>Object.defineProperty(v.rows[0],'hidden',{value:1}),v=>Object.defineProperty(v.rows,Symbol(),{value:1}),v=>Object.setPrototypeOf(v.rows[0],null),v=>Object.assign(v,{toJSON(){calls++;return 1;}}),v=>Object.setPrototypeOf(v.rows,null)]){const v=base();mutate(v);values.push(v);}
  for(const v of values)assert.throws(()=>encode(v));
  assert.equal(calls,0);
@@ -36,8 +36,8 @@ test('signed zero and byte results keep caller behavior',()=>{
  const schema={params:['number'],result:'number'};
  assert.ok(Object.is(decodeResult(schema,encodeArguments(schema,[-0])[0]),-0));
  assert.notEqual(canonicalResult(-0,schema),canonicalResult(0,schema));
- assert.throws(()=>canonicalResult({x:-0},{result:'json'}));
- assert.throws(()=>encodeArguments({params:['json']},[{x:-0}]));
+ assert.equal(canonicalResult({x:-0},{result:'json'}),canonicalResult({x:0},{result:'json'}));
+ assert.equal(encodeArguments({params:['json']},[{x:-0}])[0],'{"x":0}');
  const bytes=new Uint8Array([0,255]);
  const output=decodeResult({result:'bytes'},bytes);
  assert.deepEqual(output,bytes);assert.equal(Object.getPrototypeOf(output),Uint8Array.prototype);
@@ -58,7 +58,7 @@ test('application checker emits bounded shapes and retains generic fallback',asy
   }
  }finally{await rm(dir,{recursive:true,force:true});}
 });
-test('native generated validator round trips typed rows and rejects signed zero',async()=>{
+test('native generated validator round trips typed rows and survives signed zero',async()=>{
  const {buildPromotion}=await import('../src/functions/promotion-build.mjs');
  const dir=await mkdtemp(path.join(os.tmpdir(),'result-native-'));
  try{
@@ -69,6 +69,8 @@ test('native generated validator round trips typed rows and rejects signed zero'
    const text=await addon[async?'runAsync':'run'](0,[42,'世界\0']);
    assert.equal(text,JSON.stringify({rows:Array.from({length:10000},()=>({n:42,s:'世界\0'}))}));
   }
-  assert.throws(()=>addon.run(0,[-0,'x']));
+  // A -0 inside a JSON result must not poison the instance.
+  assert.equal(addon.run(0,[-0,'x']),JSON.stringify({rows:Array.from({length:10000},()=>({n:0,s:'x'}))}));
+  assert.equal(JSON.parse(addon.run(0,[1,'y'])).rows.length,10000);
  }finally{await rm(dir,{recursive:true,force:true});}
 });

@@ -94,16 +94,19 @@ retained in the raw artifact.
 
 Direct number arguments and results now retain the f64 negative-zero sign bit.
 Scalar shadow comparison uses distinct bytes for -0 and 0.
-JSON arguments containing negative zero fall back before crossing the boundary.
-JSON result validation refuses negative zero instead of silently returning zero.
-JS shadow preparation also refuses such JSON results. The generic serializer's
-existing callers retain their canonical JSON behavior through a default-off flag.
+Inside JSON arguments and results, -0 is still canonicalized to 0, as in Phase 1.
+The branch first made JSON promotion refuse -0. Review found that the refusal
+throws inside the native lane, which panics and poisons the instance: one -0 in a
+result demoted every promoted function for the process lifetime (reproduced).
+That refusal was reverted before merge. A per-call JS fallback signal from native
+code would be needed to refuse -0 safely; until then the -0 to 0 change inside
+JSON stays a documented fidelity gap (visible only via `Object.is` or `1/x`).
 
 Tests cover hidden symbols and properties, accessors without invocation, polluted
-key names, non-plain prototypes, cycles, sparse arrays, NaN, negative zero, lone
+key names, non-plain prototypes, cycles, sparse arrays, NaN, lone
 surrogates, 20,000-level nesting, large arrays, byte views, and extra-field fallback.
-Native generated-path tests cover sync and async 10,000-row results and signed-zero
-rejection. Native integration also exercises ordinary and instrumented addons.
+Native generated-path tests cover sync and async 10,000-row results, and a -0 JSON result
+that must not poison the instance. Native integration also exercises ordinary and instrumented addons.
 
 This work does not establish full JS observational equivalence for the existing
 promotion system. JSON transport already clones shared identities and loses

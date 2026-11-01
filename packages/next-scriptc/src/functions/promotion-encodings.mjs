@@ -17,7 +17,7 @@ function primitive(kind, value) {
 }
 export function encodeArguments(schema, args) {
   if (args.length !== schema.params.length) throw Error('Boundary argument count mismatch');
-  return schema.params.map((kind, i) => kind === 'json' ? serialize(args[i],false,null,null,true) : primitive(kind, args[i]));
+  return schema.params.map((kind, i) => kind === 'json' ? serialize(args[i]) : primitive(kind, args[i]));
 }
 export function decodeResult(schema, value) {
   return schema.result === 'json' ? JSON.parse(value) : primitive(schema.result, value);
@@ -25,4 +25,4 @@ export function decodeResult(schema, value) {
 export function canonicalResult(value, schema) {
   // The scalar f64 lane preserves -0; its comparison bytes must distinguish it.
   if (schema?.result==='number' && Object.is(value,-0)) return '-0';
-  return serialize(schema?.result==='bytes'?Array.from(primitive('bytes',value)):value, true, null, null, schema?.result==='json'); }
+  return serialize(schema?.result==='bytes'?Array.from(primitive('bytes',value)):value, true); }

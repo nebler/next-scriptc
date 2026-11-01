@@ -13,7 +13,7 @@
 // it only AFTER the complete validation, so accessors/toJSON cannot run first.
 // JSON.stringify on an erased native value repeatedly refreshes typed views;
 // the same builtin at the typed call site uses the native JSON encoder.
-export function serialize(value: unknown, plainArrays = false, encode: (() => string) | null = null, validated: (() => void) | null = null, rejectNegativeZero = false): string {
+export function serialize(value: unknown, plainArrays = false, encode: (() => string) | null = null, validated: (() => void) | null = null): string {
   const seen = new Set<unknown>();
   function data(descriptor: any): void {
     if (!descriptor || !descriptor.enumerable || descriptor.get || descriptor.set) throw new Error("JSON properties must be enumerable data properties");
@@ -21,10 +21,9 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
   }
   function check(value: unknown): void {
     if (value === null || typeof value === "string" || typeof value === "boolean") return;
-    if (typeof value === "number" && Number.isFinite(value)) {
-      if (rejectNegativeZero && Object.is(value, -0)) throw new Error("Negative zero requires the JavaScript lane");
-      return;
-    }
+    // JSON transport canonicalizes -0 to 0 (JSON.stringify(-0) === "0"). Throwing
+    // here inside the native lane would panic and poison the instance.
+    if (typeof value === "number" && Number.isFinite(value)) return;
     if (typeof value !== "object" || value === null) throw new Error("Expected JSON data (null, finite numbers, strings, booleans, arrays and plain objects)");
     if (seen.has(value)) throw new Error("Cyclic JSON data");
     seen.add(value);

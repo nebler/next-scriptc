@@ -61,8 +61,9 @@ Implemented bounded return-shape metadata from the application's TypeScript
 checker and generated typed visits with complete container guards and generic
 fallback for extras. The experimental build option is `specializeResults:true`;
 production keeps strict validation. Added adversarial and native-path tests.
-Fixed negative-zero loss in direct number transport and made JSON promotion
-refuse negative zero. Scalar shadow comparison distinguishes its sign bit.
+Fixed negative-zero loss in direct number transport; scalar shadow comparison
+distinguishes its sign bit. A JSON-level -0 refusal was reverted in review: it
+threw inside the native lane and poisoned the instance (all functions demoted).
 
 Loaded-host alternating A/B, 120 measured rounds per size after 10 warmups,
 measured strict/generated median (p95) elapsed ms: 1k 0.682 (1.098) / 0.652

@@ -10,7 +10,7 @@ export function signature(fn, i, timing = false, specializeResults = false) {
   const mark = n => timing ? `boundaryStage(${n});` : '';
   const declarations = params.map((k,j)=>`const a${j}=${k==='json'?`JSON.parse(p${j}) as Parameters<typeof f${i}>[${j}]`:k==='null'?'null':`p${j}`};`).join('');
   const validator = resultValidator(specializeResults ? fn.resultShape : null, `validateResult${i}`);
-  const encode = result==='json' ? (validator ? `(validateResult${i}(value)?JSON.stringify(value):serialize(value,true,()=>JSON.stringify(value),null,true))` : 'serialize(value,true,()=>JSON.stringify(value),null,true)') : result==='null' ? 'false' : 'value';
+  const encode = result==='json' ? (validator ? `(validateResult${i}(value)?JSON.stringify(value):serialize(value,true,()=>JSON.stringify(value)))` : 'serialize(value,true,()=>JSON.stringify(value))') : result==='null' ? 'false' : 'value';
   const source = validator + `export function run${i}(${params.map((k,j)=>`p${j}:${ts(k)}`).join(',')}):${ts(result)} {${declarations}${mark(1)}const value=f${i}(${params.map((_,j)=>`a${j}`).join(',')});${mark(2)}${['number','boolean','string','null'].includes(result)?"serialize(value,true,()=>'');":''}const output=${encode};${mark(3)}return output;}\n`;
   const buffered = ['string','json','bytes'].includes(result);
   const ret = buffered ? 'void' : result==='number' ? 'double' : 'uint8_t';
