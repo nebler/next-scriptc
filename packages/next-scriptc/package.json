@@ -7,7 +7,8 @@
     ".": {
       "types": "./src/index.d.mts",
       "default": "./src/index.mjs"
-    }
+    },
+    "./promotion": "./src/functions/promotion-runtime.mjs"
   },
   "bin": {
     "next-scriptc": "./src/cli.mjs"
@@ -20,8 +21,9 @@
   },
   "scripts": {
     "test": "node --test test/*.mjs",
+    "test:boundary-native": "node --test test/boundary-native.mjs",
     "test:shim": "node --test shim/test/parity.mjs shim/test/vercel-ipc.mjs",
-    "test:unit": "node --test --test-skip-pattern=\"grouped build drops prerenders|discovery exports, Next extensions\" test/promotion.mjs test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs"
+    "test:unit": "node --test --test-skip-pattern=\"grouped build drops prerenders|discovery exports, Next extensions\" test/promotion.mjs test/boundary-encodings.mjs test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs"
   },
   "files": [
     "src",

@@ -1,3 +1,4 @@
+import {promotionArtifacts} from './functions/promotion-runtime.mjs';
 import { compilerPath } from "./paths.mjs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -189,7 +190,7 @@ export async function buildVercelFunctions({ projectDir, distDir }) {
       // Absolute loader path is retained by Next. Ship at its trace-relative path.
       const target=path.join(owner,'.next/scriptc-promotion');
       await mkdir(target,{recursive:true});
-      for(const file of ['promotion.node','ids.json'])await copyFile(path.join(promotion,file),path.join(target,file));
+      for(const file of promotionArtifacts)await copyFile(path.join(promotion,file),path.join(target,file));
     }
   }catch(e){if(e.code!=='ENOENT')throw e;}
   if (!plan) return;
