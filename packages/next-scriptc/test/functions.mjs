@@ -263,3 +263,10 @@ server.listen(0,'127.0.0.1',()=>console.log('next-scriptc: listening on 127.0.0.
     await rm(temporary, { recursive: true, force: true });
   }
 });
+
+test('Node JSON runtime stays synchronized with the native TypeScript source', async () => {
+  const {stripTypeScriptTypes}=await import('node:module');
+  const source=await readFile(new URL('../src/functions/json.ts',import.meta.url),'utf8');
+  const runtime=await readFile(new URL('../src/functions/json.mjs',import.meta.url),'utf8');
+  assert.equal(runtime.split('\n').slice(1).join('\n'),stripTypeScriptTypes(source));
+});

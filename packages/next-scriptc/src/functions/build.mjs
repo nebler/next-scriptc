@@ -23,7 +23,7 @@ export function takeFunctionPlan(projectDir) {
 
 export async function prepareFunctions(config, projectDir) {
   const distDir = path.resolve(projectDir, config.distDir ?? ".next");
-  const promotionOutput = path.join(distDir, process.env.NEXT_SCRIPTC_VERCEL ? 'scriptc-promotion' : 'cache/scriptc-promotion');
+  const promotionOutput = path.join(distDir, 'cache/scriptc-promotion');
   await rm(promotionOutput, { recursive: true, force: true });
   let promotions=[],promotionFile;
   let modules = await discoverFunctions(projectDir, distDir, config);
@@ -78,7 +78,7 @@ export async function prepareFunctions(config, projectDir) {
   return withFunctions(config, [...modules,...promotions], port, projectDir,promotionFile);
 }
 
-export async function finishFunctions(projectDir, distDir, buildId) {
+export async function publishPromotion(distDir) {
   const promotionOutput = path.join(distDir, 'scriptc-promotion');
   await rm(promotionOutput, { recursive: true, force: true });
   const promotionCache = path.join(distDir, 'cache/scriptc-promotion');
@@ -90,6 +90,10 @@ export async function finishFunctions(projectDir, distDir, buildId) {
     await mkdir(promotionOutput, { recursive: true });
     for (const name of promotionArtifacts) await cp(path.join(promotionCache, name), path.join(promotionOutput, name));
   }
+}
+
+export async function finishFunctions(projectDir, distDir, buildId) {
+  await publishPromotion(distDir);
   const output = path.join(distDir, "scriptc-functions");
   await rm(output, { recursive: true, force: true });
   const plan = plans.get(projectDir);

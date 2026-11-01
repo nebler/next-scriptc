@@ -185,3 +185,36 @@ if(runtime && runtime.startSidecar('./scriptc-functions') !== globalThis[Symbol.
     }
   } finally { await rm(temporary,{recursive:true,force:true}); }
 });
+
+// Reproduce Next deleting everything outside cache, then the hosted output hook.
+test("Vercel completion publishes cached promotion before the output adapter and bundles traced Node functions", async () => {
+  const {default:adapter} = await import('../src/adapter.mjs');
+  const {withScriptc} = await import('../src/index.mjs');
+  const dir=await mkdtemp(path.join(tmpdir(),'scriptc-vercel-promotion-'));
+  const previous={NEXT_SCRIPTC_VERCEL:process.env.NEXT_SCRIPTC_VERCEL,NEXT_ADAPTER_PATH:process.env.NEXT_ADAPTER_PATH};
+  try {
+    const distDir=path.join(dir,'.next');
+    const fixture=path.join(dir,'output-adapter.mjs');
+    await writeFile(fixture,`import {mkdir,readFile,writeFile} from 'node:fs/promises';import path from 'node:path';
+export default {modifyConfig:c=>c,async onBuildComplete({distDir}){
+ await readFile(path.join(distDir,'scriptc-promotion/promotion.node'));
+ for(const [name,runtime,content] of [['native','nodejs24.x','next-scriptc.functions.promotion'],['plain','nodejs24.x','plain'],['edge','edge','next-scriptc.functions.promotion']]){
+ const owner=path.join(distDir,'output/functions',name+'.func');await mkdir(owner,{recursive:true});await writeFile(path.join(owner,'handler.js'),content);await writeFile(path.join(owner,'.vc-config.json'),JSON.stringify({runtime,handler:'handler.js',filePathMap:{'handler.js':'handler.js'}}));}
+}};`);
+    process.env.NEXT_SCRIPTC_VERCEL=path.join(dir,'.vercel/scriptc-build');
+    process.env.NEXT_ADAPTER_PATH=fixture;
+    await adapter.modifyConfig(withScriptc({distDir:'.next'}),{phase:'phase-production-build',projectDir:dir});
+    const artifacts=['promotion.node','ids.json','encodings.json'];
+    const cache=path.join(distDir,'cache/scriptc-promotion');await mkdir(cache,{recursive:true});
+    for(const name of artifacts)await writeFile(path.join(cache,name),`fixture ${name}`);
+    await mkdir(path.join(distDir,'scriptc-promotion'),{recursive:true});
+    await rm(path.join(distDir,'scriptc-promotion'),{recursive:true});
+    await writeFile(path.join(distDir,'required-server-files.json'),JSON.stringify({config:{outputFileTracingRoot:dir}}));
+    await adapter.onBuildComplete({projectDir:dir,distDir,buildId:'fixture',outputs:{appRoutes:[],prerenders:[]}});
+    for(const name of artifacts)assert.equal(await readFile(path.join(distDir,'output/functions/native.func/.next/scriptc-promotion',name),'utf8'),`fixture ${name}`);
+    for(const name of ['plain','edge'])await assert.rejects(lstat(path.join(distDir,`output/functions/${name}.func/.next/scriptc-promotion`)),{code:'ENOENT'});
+  } finally {
+    for(const [name,value] of Object.entries(previous)){if(value===undefined)delete process.env[name];else process.env[name]=value;}
+    await rm(dir,{recursive:true,force:true});
+  }
+});

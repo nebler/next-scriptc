@@ -7,7 +7,7 @@ import { discoverRoutes, processEntrySource, routeRewrite, withRewrites } from "
 import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { prepareNativeSources } from "./native-config.mjs";
-import { prepareFunctions, finishFunctions, startFunctions } from "./functions/build.mjs";
+import { prepareFunctions, finishFunctions, publishPromotion, startFunctions } from "./functions/build.mjs";
 
 const require = createRequire(import.meta.url);
 // Preserve the exact discovery snapshot used to emit rewrites; rediscovery could compile a different route set.
@@ -53,6 +53,7 @@ const adapter = {
     const skipped = plan.routes.filter((route) => prerendered.has(route.pattern));
     if (process.env.NEXT_SCRIPTC_VERCEL) {
       const { vercelAdapter, buildVercelRoutes, buildVercelFunctions } = await import("./vercel.mjs");
+      await publishPromotion(distDir);
       await (await vercelAdapter()).onBuildComplete(context);
       await buildVercelRoutes(context, routes);
       await buildVercelFunctions(context);

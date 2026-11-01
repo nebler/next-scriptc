@@ -7,6 +7,7 @@
   },
   "scripts": {
     "test": "pnpm --filter next-scriptc test:unit && pnpm --filter demo test",
-    "test:native": "pnpm --filter next-scriptc test && pnpm --filter next-scriptc test:shim"
+    "test:native": "pnpm --filter next-scriptc test && pnpm --filter next-scriptc test:shim",
+    "test:packaged-install": "node scripts/packaged-install-check.mjs"
   }
 }
