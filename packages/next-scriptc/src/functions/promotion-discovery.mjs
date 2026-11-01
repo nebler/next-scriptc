@@ -8,6 +8,17 @@ const babel = require('next/dist/compiled/babel/bundle.js');
 const parse = text => babel.parser().parse(text, {sourceType:'module',plugins:['typescript','jsx']});
 const traverse = babel.traverse().default;
 
+// These operations allocate a new array container. Mutating that container
+// (e.g. sorting a mapped result) does not mutate the source collection.
+function freshArray(p) {
+ const n=p.node;
+ if(n.type==='ArrayExpression')return true;
+ if(n.type!=='CallExpression'||n.callee.type!=='MemberExpression'||n.callee.computed)return false;
+ const c=n.callee;
+ if(c.object.type==='Identifier'&&c.object.name==='Array'&&!p.scope.getBinding('Array')&&['from','of'].includes(c.property.name))return true;
+ return ['map','filter','slice','flat','flatMap','concat'].includes(c.property.name)&&freshArray(p.get('callee.object'));
+}
+
 // Deliberately reject imports and nonlocal mutation rather than trusting opaque
 // callees. Local helpers/constants are included by the existing extractor.
 export function promotionCandidates(text, source, report = console.log) {
@@ -39,7 +50,7 @@ export function promotionCandidates(text, source, report = console.log) {
    CallExpression(p){const c=p.node.callee;if(c.name===name||c.type==='MemberExpression'&&(['map','reduce','filter','forEach','sort','some','every','flatMap'].includes(c.property.name)||c.object.name==='JSON'&&c.property.name==='parse'))work=true;
     if(c.type==='MemberExpression'&&['set','add','push','delete','clear','splice','sort','reverse'].includes(c.property.name)){
      let target=c.object;while(target.type==='MemberExpression')target=target.object;const b=p.scope.getBinding(target.name);
-     if(!b||b.scope.path.isProgram()||b.kind==='param')throw Error('purity: nonlocal mutation');
+     if((!b||b.scope.path.isProgram()||b.kind==='param')&&!freshArray(p.get('callee.object')))throw Error('purity: nonlocal mutation');
     }
    }
   });

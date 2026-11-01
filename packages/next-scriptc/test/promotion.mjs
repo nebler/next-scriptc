@@ -124,3 +124,31 @@ test('sample addon ABI works with owner thread, sync/async and stage timing',asy
   }
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('fresh array chains may be sorted; opaque and aliased containers stay rejected',()=>{
+ const source=`
+ export function fresh(a:number[]):number[] {return Array.from(a).map(x=>x+1).sort((a,b)=>a-b);}
+ export function alias(a:number[]):number[] {return a.sort((a,b)=>a-b);}
+ const shared:number[]=[];
+ function opaque(){return shared;}
+ export function unsafe(a:number[]):number[] {for(const x of a){}return opaque().sort();}
+ `;
+ const logs=[];
+ assert.deepEqual(promotionCandidates(source,'/tmp/fresh.ts',s=>logs.push(s)).map(m=>m.functions[0].name),['fresh']);
+ assert.equal(logs.length,2);assert.ok(logs.every(s=>s.includes('nonlocal mutation')));
+ const shadowed='export function f(Array:{from:(a:number[])=>number[]}, a:number[]):number[] {return Array.from(a).sort();}';
+ assert.deepEqual(promotionCandidates(shadowed,'/tmp/shadow.ts',()=>{}),[]);
+});
+
+import {finishFunctions} from '../src/functions/build.mjs';
+test('promotion artifacts survive Next cleanup in cache and publish at build completion',async()=>{
+ const dir=await mkdtemp(path.join(tmpdir(),'promotion-finish-'));
+ try{
+  const cache=path.join(dir,'cache/scriptc-promotion');await (await import('node:fs/promises')).mkdir(cache,{recursive:true});
+  for(const name of ['promotion.node','ids.json','encodings.json'])await writeFile(path.join(cache,name),name);
+  await finishFunctions(dir,dir,'fixture');
+  for(const name of ['promotion.node','ids.json','encodings.json'])assert.equal(await readFile(path.join(dir,'scriptc-promotion',name),'utf8'),name);
+  await rm(cache,{recursive:true});await finishFunctions(dir,dir,'fixture');
+  assert.equal(existsSync(path.join(dir,'scriptc-promotion')),false);
+ }finally{await rm(dir,{recursive:true,force:true});}
+});

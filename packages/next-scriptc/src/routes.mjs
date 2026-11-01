@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
+import { optionsKey } from "./options.mjs";
 
 const require = createRequire(import.meta.url);
 const { findDir } = require("next/dist/lib/find-pages-dir.js");
@@ -114,7 +115,7 @@ export function routeRewrite({ pattern, port }) {
 
 export function withRewrites(config, routes) {
   const original = config.rewrites;
-  return {
+  const result = {
     ...config,
     async rewrites() {
       const user = await original?.call(config) ?? [];
@@ -128,4 +129,8 @@ export function withRewrites(config, routes) {
       };
     },
   };
+  // prepareFunctions reads promotion options after local route rewrites wrap
+  // the callback. Preserve the build-only metadata across that wrapper.
+  if (original?.[optionsKey]) result.rewrites[optionsKey] = original[optionsKey];
+  return result;
 }

@@ -297,3 +297,11 @@ test("build completion leaves prerendered handlers with Next and preserves user 
     assert.deepEqual(manifest.routes, []);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
+
+test('local route rewrites preserve automatic promotion options for function preparation', async()=>{
+ const wrapped=withScriptc({rewrites:async()=>[{source:'/old',destination:'/new'}]},{nativePromotion:'auto'});
+ const configured=withRewrites(wrapped,[]);
+ assert.equal(configured.rewrites[optionsKey].nativePromotion,'auto');
+ assert.equal(configured.rewrites[optionsKey],wrapped.rewrites[optionsKey]);
+ assert.deepEqual((await configured.rewrites()).afterFiles,[{source:'/old',destination:'/new'}]);
+});

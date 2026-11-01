@@ -1,0 +1,206 @@
+{
+  "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
+  "path": "lib/video-analytics/playback.ts",
+  "target": "darwin-arm64",
+  "sourceSha256": "9bf4d1fc55df8588be0804d333c2e42e6ade6e4a8404847a2cc380809c60e3e2",
+  "reports": [
+    "[next-scriptc] not a candidate isCountablePlaybackEvent: work: no loop, recursion, array callback or JSON parse",
+    "[next-scriptc] not a candidate completionRate: work: no loop, recursion, array callback or JSON parse",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function countablePlaybackEvents: parameter events: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined)",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function playbackSeconds: parameter event.view_id: optional properties are unsupported; use a required property with | null (type string | undefined)",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function resolveVideoLength: parameter stored: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined)",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function watchTimeSeconds: parameter events[].view_id: optional properties are unsupported; use a required property with | null (type string | undefined)",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function viewPlaybackTimeline: parameter events[].view_id: optional properties are unsupported; use a required property with | null (type string | undefined)",
+    "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function eventsForView: parameter events[]: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type T)"
+  ],
+  "candidates": [
+    {
+      "name": "documentViewDistribution",
+      "boundary": {
+        "params": [
+          "json",
+          "number"
+        ],
+        "result": "json"
+      }
+    }
+  ],
+  "compiled": [
+    "documentViewDistribution"
+  ],
+  "cases": [
+    {
+      "name": "empty",
+      "events": 0,
+      "bytes": 51,
+      "sha256": "bd072e45f5c50f4fd13c40ed0771672f7ec8428ee1eb230b8ed970a8ae4d7432",
+      "verified": true
+    },
+    {
+      "name": "empty-video",
+      "events": 0,
+      "bytes": 31143,
+      "sha256": "a9bb8eaabfeb02bf9a4ffdbd85ed13171d3b0b0d4b7eafc7bd7e933df55724c9",
+      "verified": true
+    },
+    {
+      "name": "single",
+      "events": 1,
+      "bytes": 101,
+      "sha256": "a592c91c473b42217f266d334d904e8b133d94cb2098e62493362556635a414d",
+      "verified": true
+    },
+    {
+      "name": "unicode",
+      "events": 1,
+      "bytes": 151,
+      "sha256": "459a5ef81eca9d8cfcae3873a3f7a9b74f8826fd5d2eaeb741da0547f47feaeb",
+      "verified": true
+    },
+    {
+      "name": "negative-zero",
+      "events": 1,
+      "bytes": 51,
+      "sha256": "f64ea79b62625b2aba30b1a7238e83635524f7733f84403ee6be98ba9c873550",
+      "verified": true
+    },
+    {
+      "name": "large-number",
+      "events": 1,
+      "bytes": 275,
+      "sha256": "dee2955f4b6f99c11ceb4432257a3f55e82a952de7297965847e4b0a3dec7eea",
+      "verified": true
+    },
+    {
+      "name": "fractional-overlap",
+      "events": 3,
+      "bytes": 303,
+      "sha256": "5bf200201766d20563ddcfc888c7c490592bbbaac3bac8b11e71110344573055",
+      "verified": true
+    },
+    {
+      "name": "reversed",
+      "events": 1,
+      "bytes": 151,
+      "sha256": "1c70529703738c1481126b3449cc6d8c6e6090fba1277890757d72497034f6c4",
+      "verified": true
+    },
+    {
+      "name": "history-60",
+      "events": 60,
+      "bytes": 31143,
+      "sha256": "88db19e3a938ba92da6f5ac16b27a031a695724d55257f18b8bd8e885751cd96",
+      "verified": true
+    },
+    {
+      "name": "history-600",
+      "events": 600,
+      "bytes": 32343,
+      "sha256": "f03b2281a5bde1036f1a4f7e78fb45fb12cdcbeb0ac750f32a4d19a35d29a6d5",
+      "verified": true
+    },
+    {
+      "name": "history-6000",
+      "events": 6000,
+      "bytes": 33543,
+      "sha256": "368663b4f4dd2cc4d2d96a0ca23f7db7ce8f7f58d89e97daf448551723359cf3",
+      "verified": true
+    },
+    {
+      "name": "history-60000",
+      "events": 60000,
+      "bytes": 34743,
+      "sha256": "743e2e4585bae0ae89783bbed529ce2109f43bfa7eb7f40d49fd0188ec9fdefe",
+      "verified": true
+    }
+  ],
+  "shadow": {
+    "77c429d49ead751b2f58": {
+      "calls": 12,
+      "native": 0,
+      "fallback": 0,
+      "buckets": [
+        {
+          "state": "shadow",
+          "bucket": 0,
+          "calls": 2,
+          "verified": 2,
+          "cold": 2,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 1,
+          "calls": 5,
+          "verified": 5,
+          "cold": 5,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 2,
+          "calls": 1,
+          "verified": 1,
+          "cold": 1,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 5,
+          "calls": 1,
+          "verified": 1,
+          "cold": 1,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 9,
+          "calls": 1,
+          "verified": 1,
+          "cold": 1,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 12,
+          "calls": 1,
+          "verified": 1,
+          "cold": 1,
+          "epochs": 0,
+          "atCall": 1
+        },
+        {
+          "state": "shadow",
+          "bucket": 15,
+          "calls": 1,
+          "verified": 1,
+          "cold": 1,
+          "epochs": 0,
+          "atCall": 1
+        }
+      ]
+    }
+  },
+  "logs": [
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":0,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":1,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":2,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":5,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":9,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":12,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+    "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":15,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}"
+  ],
+  "mismatch": {
+    "state": "demoted",
+    "nativeAnswers": 0,
+    "logs": [
+      "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":1,\"state\":\"shadow\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0}",
+      "next-scriptc {\"fn\":\"77c429d49ead751b2f58\",\"bucket\":1,\"state\":\"demoted\",\"calls\":1,\"js\":null,\"native\":null,\"n\":0,\"reason\":\"mismatch\",\"inputHash\":\"58885a22e7292bcd7cf0a0aae60966bf61fa2ed92b705ea66f46206afd14dea7\"}"
+    ]
+  }
+}

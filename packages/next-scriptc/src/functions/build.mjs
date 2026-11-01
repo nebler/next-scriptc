@@ -1,6 +1,7 @@
 import { optionsKey } from "../options.mjs";
 import { discoverPromotions } from "./promotion-discovery.mjs";
 import { buildPromotion } from "./promotion-build.mjs";
+import { promotionArtifacts } from "./promotion-runtime.mjs";
 import { compilerPath } from "../paths.mjs";
 import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -22,15 +23,17 @@ export function takeFunctionPlan(projectDir) {
 
 export async function prepareFunctions(config, projectDir) {
   const distDir = path.resolve(projectDir, config.distDir ?? ".next");
+  const promotionOutput = path.join(distDir, process.env.NEXT_SCRIPTC_VERCEL ? 'scriptc-promotion' : 'cache/scriptc-promotion');
+  await rm(promotionOutput, { recursive: true, force: true });
   let promotions=[],promotionFile;
   let modules = await discoverFunctions(projectDir, distDir, config);
   if(config.rewrites?.[optionsKey]?.nativePromotion === 'auto'){
     const candidates=await discoverPromotions(projectDir,distDir,config);
-    const output=path.join(distDir,'scriptc-promotion');
-    await rm(output,{recursive:true,force:true});
+    // Next cleans distDir after modifyConfig, but preserves its cache.
+    const output=promotionOutput;
     promotions=await buildPromotion(candidates,output,{linux:!!process.env.NEXT_SCRIPTC_VERCEL});
     if(promotions.length&&config.output)throw new Error('[next-scriptc] Auto promotion requires the local Next server (export/standalone unsupported).');
-    promotionFile=path.join(output,'promotion.node');
+    promotionFile=path.join(distDir,'scriptc-promotion/promotion.node');
   }
   if (!modules.length) { plans.delete(projectDir); return withFunctions(config,promotions,0,projectDir,promotionFile); }
   if (config.output) throw new Error("[next-scriptc] Native functions require the local Next server (output: export/standalone is unsupported).");
@@ -76,6 +79,17 @@ export async function prepareFunctions(config, projectDir) {
 }
 
 export async function finishFunctions(projectDir, distDir, buildId) {
+  const promotionOutput = path.join(distDir, 'scriptc-promotion');
+  await rm(promotionOutput, { recursive: true, force: true });
+  const promotionCache = path.join(distDir, 'cache/scriptc-promotion');
+  const hasPromotion = await stat(path.join(promotionCache, 'promotion.node')).then(() => true, error => {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  });
+  if (hasPromotion) {
+    await mkdir(promotionOutput, { recursive: true });
+    for (const name of promotionArtifacts) await cp(path.join(promotionCache, name), path.join(promotionOutput, name));
+  }
   const output = path.join(distDir, "scriptc-functions");
   await rm(output, { recursive: true, force: true });
   const plan = plans.get(projectDir);
