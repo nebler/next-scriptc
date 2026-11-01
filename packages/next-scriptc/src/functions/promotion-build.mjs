@@ -1,12 +1,12 @@
 import {constructionProof} from './construction-proof.mjs';
-import { signature } from './promotion-signature.mjs';
+import { signature, constructionResultsDefault } from './promotion-signature.mjs';
 import { readFile,writeFile,mkdir,rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import {existsSync} from 'node:fs';
 import os from 'node:os';
 import { compilerPath } from '../paths.mjs';
-export async function buildPromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, specializeResults=false, constructionResults=false, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
+export async function buildPromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, constructionResults=constructionResultsDefault, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
  if(!modules.length)return [];
  const constructionReport=modules.flatMap(m=>{const proof=constructionProof(m.native);return m.functions.map(fn=>{fn.constructionProof=proof;const row={id:fn.id,name:fn.name,...proof,enabled:constructionResults&&proof.eligible&&fn.boundary?.result==='json'};return row;});});
  if(!['linux-arm64-gnu','linux-x64-gnu',`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`].includes(target))throw Error(`Unsupported promotion target: ${target}`);
@@ -29,11 +29,11 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  const json=path.join(output,'json.ts');await writeFile(json,await readFile(new URL('./json.ts',import.meta.url)));
  const accepted=[];let last;
  async function compile(list){
-  let entry=`import {serialize,resultContainer} from './json.ts';\n`+(timing?'declare function boundaryStage(stage:number):void;\n':'');
+  let entry=`import {serialize} from './json.ts';\n`+(timing?'declare function boundaryStage(stage:number):void;\n':'');
   const exports=[];
   for(const [i,m] of list.entries()){
    await writeFile(path.join(output,`module-${i}.ts`),m.native);
-   const fn=m.functions[0], sig=signature(fn,i,timing,specializeResults,constructionResults,catchFallback);entry+=`import {${fn.name} as f${i}} from './module-${i}.ts';\n`+sig.source;
+   const fn=m.functions[0], sig=signature(fn,i,timing,constructionResults,catchFallback);entry+=`import {${fn.name} as f${i}} from './module-${i}.ts';\n`+sig.source;
    exports.push(sig.profile);
   }
   const profile={profile_format:1,name:'promotion',entry:'entry.ts',emission:'llvm',abi:{prefix:'rev_',init_symbol:'rev_init',sink_register_symbol:'rev_sink',collect_symbol:'rev_collect',localize_runtime:true,instance_per_thread:false},exports,...(timing?{callbacks:[{name:'boundaryStage',params:['f64'],returns:'void'}],abi:{prefix:'rev_',init_symbol:'rev_init',sink_register_symbol:'rev_sink',collect_symbol:'rev_collect',callback_register_symbol:'rev_callbacks',localize_runtime:true,instance_per_thread:false}}:{})};
@@ -43,11 +43,14 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  }
  // Incremental final-filter probes leave one combined archive, never link
  // multiple copies of the scriptc runtime. Restore the last accepted set after a refusal.
- for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){if(m.forced)throw e;last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${e.stderr??e.message}`);}}
+ try{await compile(modules);accepted.push(...modules);last=true;}
+ catch{
+  for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){if(m.forced)throw e;last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${e.stderr??e.message}`);}}
+ }
  if(!accepted.length)return [];
  if(!last)await compile(accepted);
  let c=await readFile(new URL('./promotion-addon.c',import.meta.url),'utf8');
- const signatures=accepted.map((m,i)=>signature(m.functions[0],i,timing,specializeResults,constructionResults,catchFallback));
+ const signatures=accepted.map((m,i)=>signature(m.functions[0],i,timing,constructionResults,catchFallback));
  c=c.replace('/* TABLE */',signatures.map(s=>s.native).join('\n')+'\nstatic void (*entries[])(Job *)={'+signatures.map((_,i)=>`invoke${i}`).join(',')+'};\nstatic const Schema schemas[]={'+signatures.map(s=>`{${s.kinds.length},{${s.kinds.join(',')}},${s.resultKind}}`).join(',')+'};');
  await writeFile(path.join(output,'addon.c'),c);
  const common=['-O2','-DSERIALIZED_RUNTIME',...(timing?['-DBOUNDARY_TIMING']:[]),'-fPIC','-I'+headers,path.join(output,'addon.c'),path.join(output,'functions.lib.a'),'-o',path.join(output,'promotion.node')];

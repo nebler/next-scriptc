@@ -52,28 +52,3 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
     throw new Error(`[next-scriptc] JSON serialization failed: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
-
-// A closed-shape fast visit still needs a runtime proof: TS is structural.
-// Return false for all unknown shapes, including extras. The generic serializer
-// then accepts valid extras and rejects invalid ones without calling getters.
-export function resultContainer(value: any, array: boolean, fields: string[], seen: Set<unknown>): boolean {
-  if (value === null || typeof value !== 'object' || Array.isArray(value) !== array || seen.has(value)) return false;
-  if (Object.getPrototypeOf(value) !== (array ? Array.prototype : Object.prototype)) return false;
-  const descriptors: any = Object.getOwnPropertyDescriptors(value);
-  if (Object.getOwnPropertySymbols(descriptors).length) return false;
-  const keys = Object.keys(descriptors);
-  if (keys.length !== (array ? value.length + 1 : fields.length)) return false;
-  if (array) {
-    for (let j = 0; j < value.length; j++) {
-      const d = descriptors[String(j)];
-      if (!d || !d.enumerable || d.get || d.set) return false;
-    }
-  } else {
-    for (const key of fields) {
-      const d = descriptors[key];
-      if (!d || !d.enumerable || d.get || d.set) return false;
-    }
-  }
-  seen.add(value);
-  return true;
-}

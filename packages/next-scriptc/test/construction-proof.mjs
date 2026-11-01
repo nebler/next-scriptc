@@ -38,7 +38,7 @@ test('whole closure allowlist rejects adversarial construction and keeps strict 
  for(const body of bodies){
   const proof=constructionProof(`export function f(x:{n:number}){${body}}`);
   assert.equal(proof.eligible,false,body);
-  assert.match(signature({boundary,constructionProof:proof},0,false,false,true).source,/serialize\(value,true/);
+  assert.match(signature({boundary,constructionProof:proof},0,false,true).source,/serialize\(value,true/);
  }
  for(const extra of ['function evil(x:any){return x}','function evil(){return new Date()}','const x={n:1};'])assert.equal(constructionProof(source+extra).eligible,false,extra);
  assert.equal(constructionProof(source).eligible,true);
@@ -47,7 +47,7 @@ test('whole closure allowlist rejects adversarial construction and keeps strict 
  assert.equal(constructionProof('function a(x:number[]):number[]{return x.map(v=>a(x)[0])} export function f(x:number[]){return a(x)}').eligible,false);
  const fn={boundary,constructionProof:constructionProof(source)};
  assert.match(signature(fn,0).source,/serialize\(value,true/);
- assert.doesNotMatch(signature(fn,0,false,false,true).source,/serialize\(value,true/);
+ assert.doesNotMatch(signature(fn,0,false,true).source,/serialize\(value,true/);
 });
 test('screened native results match bytes and survive adversarial boundary data',async()=>{
  const dir=await mkdtemp(path.join(os.tmpdir(),'construction-native-'));

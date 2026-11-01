@@ -20,10 +20,11 @@
     "scriptc": "0.4.6"
   },
   "scripts": {
-    "test": "node --test test/*.mjs",
+    "test": "node --test --test-concurrency=2 test/*.mjs",
     "test:boundary-native": "node --test test/boundary-native.mjs",
     "test:shim": "node --test shim/test/parity.mjs shim/test/vercel-ipc.mjs",
-    "test:unit": "node --test --test-skip-pattern=\"grouped build drops prerenders|discovery exports, Next extensions\" test/promotion.mjs test/boundary-encodings.mjs test/result-encoding.mjs test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs"
+    "test:unit": "node --test --test-concurrency=2 --test-skip-pattern=\"grouped build drops prerenders|discovery exports, Next extensions\" test/promotion-fuzz.mjs test/promotion-crash.mjs test/promotion.mjs test/boundary-encodings.mjs test/result-encoding.mjs test/compiler.mjs test/function-types.mjs test/functions.mjs test/routes.mjs test/vercel.mjs",
+    "test:fuzz": "node ../../scripts/promotion-fuzz.mjs"
   },
   "files": [
     "src",

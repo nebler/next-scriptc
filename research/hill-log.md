@@ -295,3 +295,38 @@ The gate was amended in [hill-plan.md](hill-plan.md) and approved after D2. Appl
 - **Strict path: FAIL** (the 5k band overlaps). It is being replaced by the construction path.
 - **Needs hosted confirmation** (boundary-driven). `constructionResults` stays opt-in until the fuzzer and crash safety exist.
 
+
+## 16. Gate construction defaults with differential tests and crash leases (2026-11-01)
+
+Hypothesis: the construction proof plus catch fallback can survive bounded random
+boundary data without changing caller answers or poisoning the native instance.
+A permanent 12-candidate fuzzer compiles strict and construction builds and uses
+the real addon dispatcher. Two seeds each run 240,000 inputs. All 960,000 total
+differential comparisons and 960,000 follow-up native usability checks pass.
+There are 278,064 fallbacks across both runs. No compiler mismatch was found.
+The final CI-sized fuzzer takes 21.10 seconds, below its 60-second budget.
+
+Keep catch fallback for proof-eligible strict JSON and numeric wrappers as well,
+so invalid input and non-finite result probes cannot poison the strict control.
+Remove the specializeResults build experiment and retain its historical benchmark
+helper under research. A single constructionResultsDefault constant remains false.
+The builder tries the combined archive first and retains incremental refusal
+filtering if that attempt fails.
+
+Replace the path-only marker with build-content-keyed process leases before addon
+loading. A child-process SIGSEGV test confirms that the next process stays on JS,
+explicit reset retries native, and a changed build retries independently. Live
+leases coexist, and process birth identity detects PID reuse. The lease covers
+all native jobs until normal exit, with conservative false positives for other
+fatal process failures. Cached dispatch does no guard filesystem work per call.
+JS-path overhead is 0.00002334 ms per call against the 0.005 ms budget. No other
+performance claim is made on this loaded host.
+
+All 73 adapter tests and both shim tests pass on Node 24.22.0. Keep construction
+opt-in. This corpus supports the screened synchronous subset but does not certify
+every compiler lowering or enumerate all application candidates. The restart
+guard cannot isolate the first native crash or preserve temp files across host
+replacement. [Readiness report](default-on-readiness.md) records the equality
+contract, seeds, counts, covered crash windows, reset, limits, and reproduction.
+No scriptc source, Vercel deployment, Docker container, Papermark workload, or root
+README was changed. Dependency symlinks and task-created build output are removed.
