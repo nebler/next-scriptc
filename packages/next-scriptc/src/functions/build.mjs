@@ -1,3 +1,6 @@
+import { optionsKey } from "../options.mjs";
+import { discoverPromotions } from "./promotion-discovery.mjs";
+import { buildPromotion } from "./promotion-build.mjs";
 import { compilerPath } from "../paths.mjs";
 import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -19,8 +22,17 @@ export function takeFunctionPlan(projectDir) {
 
 export async function prepareFunctions(config, projectDir) {
   const distDir = path.resolve(projectDir, config.distDir ?? ".next");
-  const modules = await discoverFunctions(projectDir, distDir, config);
-  if (!modules.length) { plans.delete(projectDir); return config; }
+  let promotions=[],promotionFile;
+  let modules = await discoverFunctions(projectDir, distDir, config);
+  if(config.rewrites?.[optionsKey]?.nativePromotion === 'auto'){
+    const candidates=await discoverPromotions(projectDir,distDir,config);
+    const output=path.join(distDir,'scriptc-promotion');
+    await rm(output,{recursive:true,force:true});
+    promotions=await buildPromotion(candidates,output,{linux:!!process.env.NEXT_SCRIPTC_VERCEL});
+    if(promotions.length&&config.output)throw new Error('[next-scriptc] Auto promotion requires the local Next server (export/standalone unsupported).');
+    promotionFile=path.join(output,'promotion.node');
+  }
+  if (!modules.length) { plans.delete(projectDir); return withFunctions(config,promotions,0,projectDir,promotionFile); }
   if (config.output) throw new Error("[next-scriptc] Native functions require the local Next server (output: export/standalone is unsupported).");
   const port = 40000 + createHash("sha256").update(projectDir).digest().readUInt16BE(0) % 10000;
   const output = path.join(distDir, "cache/scriptc-functions");
@@ -60,7 +72,7 @@ export async function prepareFunctions(config, projectDir) {
   const processes = [{ binary: "functions", port, routes: ["native functions"] }];
   plans.set(projectDir, { output, processes });
   await startNativeProcesses(projectDir, output, processes);
-  return withFunctions(config, modules, port, projectDir);
+  return withFunctions(config, [...modules,...promotions], port, projectDir,promotionFile);
 }
 
 export async function finishFunctions(projectDir, distDir, buildId) {

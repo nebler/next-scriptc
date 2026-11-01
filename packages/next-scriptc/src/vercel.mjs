@@ -88,7 +88,7 @@ export async function replaceFunctions(functionsDir, replacements) {
 
 // Trace paths are relative to Next's outputFileTracingRoot, not the .func
 // directory. Bundlers may inline the client, so inspect traced chunks too.
-export async function functionUsesNative(owner, config, traceRoot) {
+export async function functionUsesNative(owner, config, traceRoot, { promotion = false } = {}) {
   let files;
   if (config.filePathMap && typeof config.filePathMap === "object" && !Array.isArray(config.filePathMap)) {
     files = Object.entries(config.filePathMap).map(([target, source]) => ({ target, source, root: traceRoot }));
@@ -106,7 +106,7 @@ export async function functionUsesNative(owner, config, traceRoot) {
   let uncertain = false;
   for (const { target, source, root } of files) {
     if (typeof source !== "string") { uncertain = true; continue; }
-    if ([target, source].some((file) => /(?:^|\/)(?:next-scriptc\/src\/functions\/(?:client\.mjs|sidecar\.mjs)|scriptc-functions\/manifest\.json)$/.test(file))) return true;
+    if (!promotion && [target, source].some((file) => /(?:^|\/)(?:next-scriptc\/src\/functions\/(?:client\.mjs|sidecar\.mjs)|scriptc-functions\/manifest\.json)$/.test(file))) return true;
     if (!/\.[cm]?[jt]sx?$/.test(source)) continue;
     let content;
     try { content = await readFile(path.resolve(owner, target), "utf8"); }
@@ -116,7 +116,7 @@ export async function functionUsesNative(owner, config, traceRoot) {
     }
     // Symbol.for's stable process singleton name survives minification and
     // identifies the native client even when its source path is not traced.
-    if (content.includes("next-scriptc.functions.sidecar")) return true;
+    if (content.includes(promotion ? "next-scriptc.functions.promotion" : "next-scriptc.functions.sidecar")) return true;
   }
   return uncertain;
 }
@@ -178,6 +178,20 @@ export async function bundleFunctionSidecar(functionsDir, binary, { traceRoot = 
 
 export async function buildVercelFunctions({ projectDir, distDir }) {
   const plan = takeFunctionPlan(projectDir);
+  const promotion=path.join(distDir,'scriptc-promotion');
+  try{
+    await lstat(path.join(promotion,'promotion.node'));
+    const required=JSON.parse(await readFile(path.join(distDir,'required-server-files.json'),'utf8'));
+    const traceRoot=required.config.outputFileTracingRoot||projectDir;
+    for(const owner of new Set(await Promise.all((await functionDirectories(path.join(distDir,'output/functions'))).map(f=>realpath(f))))){
+      const cfg=JSON.parse(await readFile(path.join(owner,'.vc-config.json'),'utf8'));
+      if(!cfg.runtime?.startsWith('nodejs')||!await functionUsesNative(owner,cfg,traceRoot,{promotion:true}))continue;
+      // Absolute loader path is retained by Next. Ship at its trace-relative path.
+      const target=path.join(owner,'.next/scriptc-promotion');
+      await mkdir(target,{recursive:true});
+      for(const file of ['promotion.node','ids.json'])await copyFile(path.join(promotion,file),path.join(target,file));
+    }
+  }catch(e){if(e.code!=='ENOENT')throw e;}
   if (!plan) return;
   const build = process.env.NEXT_SCRIPTC_VERCEL;
   await mkdir(build, { recursive: true });
