@@ -1,0 +1,13 @@
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+import {createRequire} from 'node:module';
+export const root=path.resolve(import.meta.dirname,'../..');
+export const scratch=root+'/.checks/napi';
+export const raw=import.meta.dirname+'/raw';
+export const addonPath=scratch+'/revenue.node';
+export const sizes=[1000,5000,15000,200000];
+export const args=size=>['2026-01-01','2026-01-31',size,false];
+export const hash=text=>createHash('sha256').update(text).digest('hex');
+export const addon=()=>createRequire(import.meta.url)(addonPath);
+export const stats=a=>{const s=[...a].sort((x,y)=>x-y);return {n:s.length,median:s[Math.floor(s.length/2)],p95:s[Math.ceil(s.length*.95)-1],min:s[0],max:s.at(-1),mean:s.reduce((x,y)=>x+y,0)/s.length};};
+export const save=async(name,data)=>{const{writeFile}=await import('node:fs/promises');await writeFile(raw+'/'+name+'.json',JSON.stringify(data,null,2)+'\n');};

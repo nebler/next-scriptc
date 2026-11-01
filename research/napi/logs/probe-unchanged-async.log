@@ -1,0 +1,11 @@
+{"args":["build","--lib","--profile","/Users/noah/.t3/worktrees/next-scriptc/t3-467c8da0/.checks/napi/stage/probe-unchanged-async.json","-o","/Users/noah/.t3/worktrees/next-scriptc/t3-467c8da0/.checks/napi/probe-unchanged-async.lib.a"],"status":1,"signal":null}
+/Users/noah/.t3/worktrees/next-scriptc/t3-467c8da0/.checks/napi/stage/revenue-js.ts:7:1 - error SC4004: library export 'revenue' is an async function — a profile entry is a synchronous ABI symbol
+
+  6 |
+  7 | export async function revenue(from: string, to: string, size: number, profile: boolean) {
+    | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  8 |   "use native";
+
+  hint: expose a synchronous facade function and map that instead
+
+1 error.

@@ -1,0 +1,32 @@
+{
+  "profile_format": 1,
+  "name": "revenue_napi",
+  "entry": "entry.ts",
+  "emission": "llvm",
+  "abi": {
+    "prefix": "rev_",
+    "init_symbol": "rev_init",
+    "sink_register_symbol": "rev_sink",
+    "collect_symbol": "rev_collect",
+    "localize_runtime": true,
+    "instance_per_thread": true
+  },
+  "exports": [
+    {
+      "export": "run",
+      "symbol": "rev_run",
+      "params": [
+        "string"
+      ],
+      "returns": "string"
+    },
+    {
+      "export": "echo",
+      "symbol": "rev_echo",
+      "params": [
+        "string"
+      ],
+      "returns": "string"
+    }
+  ]
+}

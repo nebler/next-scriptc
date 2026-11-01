@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{color:var(--foreground);font-family:var(--font-sans)}body{margin:0}p{color:var(--muted-foreground);font-size:13px}.row{display:grid;grid-template-columns:155px 1fr 85px;gap:12px;align-items:center;margin:16px 0;font-size:14px}.track{height:18px;background:var(--secondary);border-radius:3px}.bar{height:18px;background:var(--chart-1);border-radius:3px}.winner{background:var(--chart-2)}strong{font-size:20px}small{color:var(--muted-foreground)}@media(max-width:460px){.row{grid-template-columns:110px 1fr 65px;gap:6px;font-size:12px}}
+</style></head><body><strong>5,000 events · local median per call</strong><p>Node 24 · Apple M4 Pro · 300 samples after 50 warmups</p>
+<div class="row"><span>Plain Node</span><div class="track"><div class="bar" style="width:84.3%"></div></div><span>1.856 ms</span></div>
+<div class="row"><span>HTTP sidecar</span><div class="track"><div class="bar" style="width:78.4%"></div></div><span>1.725 ms</span></div>
+<div class="row"><span>TLS addon async</span><div class="track"><div class="bar" style="width:100%"></div></div><span>2.201 ms</span></div>
+<div class="row"><span>Serialized async</span><div class="track"><div class="bar winner" style="width:63.7%"></div></div><span>1.402 ms</span></div>
+<p>Serialized native is 24.5% faster than Node. Its echo boundary is 0.018 ms median / 0.023 ms p95. Full revenue timings include the strict JSON boundary.</p><small>Shared workstation; background system processes remained active. Linux linked but was not executed.</small></body></html>

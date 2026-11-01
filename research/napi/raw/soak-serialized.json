@@ -1,0 +1,1583 @@
+{
+  "node": "v24.22.0",
+  "date": "2026-11-01T10:35:24.345Z",
+  "expected": {
+    "1000": "1f2cc28bb6e3d0bf7460cf02ce2ec26cdceb0feeb889a21f0df64e2ad09e1907",
+    "5000": "58e99230368693d8899627a9c334b197a66005e8504ac2874e55fb6596ef720c",
+    "15000": "840f7945ea97344d82dfbfaacd0e3af6a2621303a84b634e101f2be7c2ef7a61",
+    "200000": "7d29e6b712a858e37b760f58635f403259481c586c30cad9f4e2642cff0d1819"
+  },
+  "diagnostics": {
+    "before": {
+      "SIGINT": "0x102967358",
+      "SIGTERM": "0x102967358",
+      "SIGPIPE": "0x1",
+      "SIGSEGV": "0x1029684e0",
+      "SIGBUS": "0x1029684e0",
+      "SIGABRT": "0x0",
+      "SIGUSR1": "0x102b6a978",
+      "SIGUSR2": "0x0",
+      "threads": 7
+    },
+    "after": {
+      "SIGINT": "0x102967358",
+      "SIGTERM": "0x102967358",
+      "SIGPIPE": "0x1",
+      "SIGSEGV": "0x1029684e0",
+      "SIGBUS": "0x1029684e0",
+      "SIGABRT": "0x0",
+      "SIGUSR1": "0x102b6a978",
+      "SIGUSR2": "0x0",
+      "threads": 12
+    }
+  },
+  "phases": [
+    {
+      "mode": "async",
+      "size": 1000,
+      "count": 100000,
+      "concurrency": 4,
+      "rss": [
+        {
+          "calls": 0,
+          "elapsedMs": 0,
+          "rss": 270565376,
+          "heapTotal": 130482176,
+          "heapUsed": 87733008,
+          "external": 8714755,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 1000,
+          "elapsedMs": 786,
+          "rss": 265748480,
+          "heapTotal": 96272384,
+          "heapUsed": 48478736,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 2000,
+          "elapsedMs": 1555,
+          "rss": 256901120,
+          "heapTotal": 96272384,
+          "heapUsed": 43934800,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 3000,
+          "elapsedMs": 2326,
+          "rss": 256901120,
+          "heapTotal": 96272384,
+          "heapUsed": 39400984,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 4000,
+          "elapsedMs": 3091,
+          "rss": 257015808,
+          "heapTotal": 96272384,
+          "heapUsed": 34722744,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 5000,
+          "elapsedMs": 3848,
+          "rss": 257015808,
+          "heapTotal": 96272384,
+          "heapUsed": 30013552,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 6000,
+          "elapsedMs": 4608,
+          "rss": 257015808,
+          "heapTotal": 96272384,
+          "heapUsed": 53845944,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 7000,
+          "elapsedMs": 5374,
+          "rss": 257015808,
+          "heapTotal": 96272384,
+          "heapUsed": 49135048,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 8000,
+          "elapsedMs": 6128,
+          "rss": 257015808,
+          "heapTotal": 96272384,
+          "heapUsed": 44377416,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 9000,
+          "elapsedMs": 6885,
+          "rss": 257081344,
+          "heapTotal": 96272384,
+          "heapUsed": 39624592,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 10000,
+          "elapsedMs": 7636,
+          "rss": 257081344,
+          "heapTotal": 96272384,
+          "heapUsed": 34866904,
+          "external": 8714795,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 11000,
+          "elapsedMs": 8384,
+          "rss": 257982464,
+          "heapTotal": 96272384,
+          "heapUsed": 30695608,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 12000,
+          "elapsedMs": 9133,
+          "rss": 257982464,
+          "heapTotal": 96272384,
+          "heapUsed": 54528000,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 13000,
+          "elapsedMs": 9904,
+          "rss": 258048000,
+          "heapTotal": 96272384,
+          "heapUsed": 49802096,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 14000,
+          "elapsedMs": 10665,
+          "rss": 223150080,
+          "heapTotal": 96272384,
+          "heapUsed": 44808024,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 15000,
+          "elapsedMs": 11470,
+          "rss": 213237760,
+          "heapTotal": 96272384,
+          "heapUsed": 39857024,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 16000,
+          "elapsedMs": 12260,
+          "rss": 202080256,
+          "heapTotal": 96272384,
+          "heapUsed": 34926400,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 17000,
+          "elapsedMs": 13018,
+          "rss": 202080256,
+          "heapTotal": 96272384,
+          "heapUsed": 29995912,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 18000,
+          "elapsedMs": 13776,
+          "rss": 202080256,
+          "heapTotal": 96272384,
+          "heapUsed": 53828304,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 19000,
+          "elapsedMs": 14533,
+          "rss": 202080256,
+          "heapTotal": 96272384,
+          "heapUsed": 48876584,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 20000,
+          "elapsedMs": 15306,
+          "rss": 202096640,
+          "heapTotal": 96272384,
+          "heapUsed": 43950296,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 21000,
+          "elapsedMs": 16067,
+          "rss": 202113024,
+          "heapTotal": 96272384,
+          "heapUsed": 38977856,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 22000,
+          "elapsedMs": 16823,
+          "rss": 202113024,
+          "heapTotal": 96272384,
+          "heapUsed": 34047440,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 23000,
+          "elapsedMs": 17573,
+          "rss": 202129408,
+          "heapTotal": 96272384,
+          "heapUsed": 29074464,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 24000,
+          "elapsedMs": 18314,
+          "rss": 202129408,
+          "heapTotal": 96272384,
+          "heapUsed": 52906856,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 25000,
+          "elapsedMs": 19065,
+          "rss": 202129408,
+          "heapTotal": 96272384,
+          "heapUsed": 47955136,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 26000,
+          "elapsedMs": 19839,
+          "rss": 202244096,
+          "heapTotal": 96272384,
+          "heapUsed": 42982368,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 27000,
+          "elapsedMs": 20619,
+          "rss": 202244096,
+          "heapTotal": 96272384,
+          "heapUsed": 38055512,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 28000,
+          "elapsedMs": 21376,
+          "rss": 202244096,
+          "heapTotal": 96272384,
+          "heapUsed": 33103792,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 29000,
+          "elapsedMs": 22128,
+          "rss": 202244096,
+          "heapTotal": 96272384,
+          "heapUsed": 28194424,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 30000,
+          "elapsedMs": 22869,
+          "rss": 202244096,
+          "heapTotal": 96272384,
+          "heapUsed": 52005720,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 31000,
+          "elapsedMs": 23610,
+          "rss": 201342976,
+          "heapTotal": 96272384,
+          "heapUsed": 47043752,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 32000,
+          "elapsedMs": 24364,
+          "rss": 201342976,
+          "heapTotal": 96272384,
+          "heapUsed": 42134656,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 33000,
+          "elapsedMs": 25154,
+          "rss": 201326592,
+          "heapTotal": 96272384,
+          "heapUsed": 37161680,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 34000,
+          "elapsedMs": 25938,
+          "rss": 201261056,
+          "heapTotal": 96272384,
+          "heapUsed": 32209960,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 35000,
+          "elapsedMs": 26712,
+          "rss": 201261056,
+          "heapTotal": 96272384,
+          "heapUsed": 27236984,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 36000,
+          "elapsedMs": 27478,
+          "rss": 201261056,
+          "heapTotal": 96272384,
+          "heapUsed": 51069376,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 37000,
+          "elapsedMs": 28254,
+          "rss": 201261056,
+          "heapTotal": 96272384,
+          "heapUsed": 46138912,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 38000,
+          "elapsedMs": 29032,
+          "rss": 201244672,
+          "heapTotal": 96272384,
+          "heapUsed": 41191008,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 39000,
+          "elapsedMs": 29800,
+          "rss": 201244672,
+          "heapTotal": 96272384,
+          "heapUsed": 36239288,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 40000,
+          "elapsedMs": 30544,
+          "rss": 201244672,
+          "heapTotal": 96272384,
+          "heapUsed": 31287568,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 41000,
+          "elapsedMs": 31317,
+          "rss": 201277440,
+          "heapTotal": 96272384,
+          "heapUsed": 55150808,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 42000,
+          "elapsedMs": 32111,
+          "rss": 201277440,
+          "heapTotal": 96272384,
+          "heapUsed": 50156576,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 43000,
+          "elapsedMs": 32927,
+          "rss": 97714176,
+          "heapTotal": 96272384,
+          "heapUsed": 45251288,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 44000,
+          "elapsedMs": 33696,
+          "rss": 114704384,
+          "heapTotal": 96272384,
+          "heapUsed": 40299568,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 45000,
+          "elapsedMs": 34456,
+          "rss": 114769920,
+          "heapTotal": 96272384,
+          "heapUsed": 35327264,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 46000,
+          "elapsedMs": 35235,
+          "rss": 114819072,
+          "heapTotal": 96272384,
+          "heapUsed": 30375544,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 47000,
+          "elapsedMs": 35995,
+          "rss": 114835456,
+          "heapTotal": 96272384,
+          "heapUsed": 54207936,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 48000,
+          "elapsedMs": 36768,
+          "rss": 114851840,
+          "heapTotal": 96272384,
+          "heapUsed": 49256216,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 49000,
+          "elapsedMs": 37544,
+          "rss": 114868224,
+          "heapTotal": 96272384,
+          "heapUsed": 44325800,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 50000,
+          "elapsedMs": 38303,
+          "rss": 114933760,
+          "heapTotal": 96272384,
+          "heapUsed": 39416592,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 51000,
+          "elapsedMs": 39056,
+          "rss": 117719040,
+          "heapTotal": 96272384,
+          "heapUsed": 34573992,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 52000,
+          "elapsedMs": 39806,
+          "rss": 117751808,
+          "heapTotal": 96272384,
+          "heapUsed": 29622488,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 53000,
+          "elapsedMs": 40569,
+          "rss": 117751808,
+          "heapTotal": 96272384,
+          "heapUsed": 53454880,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 54000,
+          "elapsedMs": 41331,
+          "rss": 117768192,
+          "heapTotal": 96272384,
+          "heapUsed": 48457040,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 55000,
+          "elapsedMs": 42110,
+          "rss": 117784576,
+          "heapTotal": 96272384,
+          "heapUsed": 43509136,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 56000,
+          "elapsedMs": 42866,
+          "rss": 117784576,
+          "heapTotal": 96272384,
+          "heapUsed": 38557416,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 57000,
+          "elapsedMs": 43630,
+          "rss": 117784576,
+          "heapTotal": 96272384,
+          "heapUsed": 33605696,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 58000,
+          "elapsedMs": 44378,
+          "rss": 117784576,
+          "heapTotal": 96272384,
+          "heapUsed": 28675072,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 59000,
+          "elapsedMs": 45129,
+          "rss": 117784576,
+          "heapTotal": 96272384,
+          "heapUsed": 52486368,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 60000,
+          "elapsedMs": 45880,
+          "rss": 117800960,
+          "heapTotal": 96272384,
+          "heapUsed": 47555744,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 61000,
+          "elapsedMs": 46624,
+          "rss": 117850112,
+          "heapTotal": 96272384,
+          "heapUsed": 42654888,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 62000,
+          "elapsedMs": 47362,
+          "rss": 117866496,
+          "heapTotal": 96272384,
+          "heapUsed": 37682560,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 63000,
+          "elapsedMs": 48109,
+          "rss": 117882880,
+          "heapTotal": 96272384,
+          "heapUsed": 32734448,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 64000,
+          "elapsedMs": 48849,
+          "rss": 117882880,
+          "heapTotal": 96272384,
+          "heapUsed": 27761472,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 65000,
+          "elapsedMs": 49587,
+          "rss": 117882880,
+          "heapTotal": 96272384,
+          "heapUsed": 51590256,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 66000,
+          "elapsedMs": 50339,
+          "rss": 117899264,
+          "heapTotal": 96272384,
+          "heapUsed": 46642144,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 67000,
+          "elapsedMs": 51114,
+          "rss": 117915648,
+          "heapTotal": 96272384,
+          "heapUsed": 41733144,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 68000,
+          "elapsedMs": 51883,
+          "rss": 117915648,
+          "heapTotal": 96272384,
+          "heapUsed": 36738912,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 69000,
+          "elapsedMs": 52635,
+          "rss": 117932032,
+          "heapTotal": 96272384,
+          "heapUsed": 31787192,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 70000,
+          "elapsedMs": 53391,
+          "rss": 117948416,
+          "heapTotal": 96272384,
+          "heapUsed": 26858752,
+          "external": 8890846,
+          "arrayBuffers": 143635
+        },
+        {
+          "calls": 71000,
+          "elapsedMs": 54159,
+          "rss": 118063104,
+          "heapTotal": 96272384,
+          "heapUsed": 50751712,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 72000,
+          "elapsedMs": 54910,
+          "rss": 118128640,
+          "heapTotal": 96272384,
+          "heapUsed": 45778712,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 73000,
+          "elapsedMs": 55671,
+          "rss": 118128640,
+          "heapTotal": 96272384,
+          "heapUsed": 40806208,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 74000,
+          "elapsedMs": 56424,
+          "rss": 118145024,
+          "heapTotal": 96272384,
+          "heapUsed": 35833232,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 75000,
+          "elapsedMs": 57174,
+          "rss": 118145024,
+          "heapTotal": 96272384,
+          "heapUsed": 30902608,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 76000,
+          "elapsedMs": 57918,
+          "rss": 118145024,
+          "heapTotal": 96272384,
+          "heapUsed": 54713904,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 77000,
+          "elapsedMs": 58665,
+          "rss": 118145024,
+          "heapTotal": 96272384,
+          "heapUsed": 49740928,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 78000,
+          "elapsedMs": 59410,
+          "rss": 118161408,
+          "heapTotal": 96272384,
+          "heapUsed": 44831768,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 79000,
+          "elapsedMs": 60173,
+          "rss": 118161408,
+          "heapTotal": 96272384,
+          "heapUsed": 39880048,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 80000,
+          "elapsedMs": 60925,
+          "rss": 118161408,
+          "heapTotal": 96272384,
+          "heapUsed": 34953192,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 81000,
+          "elapsedMs": 61663,
+          "rss": 118210560,
+          "heapTotal": 96272384,
+          "heapUsed": 30112848,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 82000,
+          "elapsedMs": 62427,
+          "rss": 118210560,
+          "heapTotal": 96272384,
+          "heapUsed": 53945240,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 83000,
+          "elapsedMs": 63202,
+          "rss": 118243328,
+          "heapTotal": 96272384,
+          "heapUsed": 48993968,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 84000,
+          "elapsedMs": 63963,
+          "rss": 118243328,
+          "heapTotal": 96272384,
+          "heapUsed": 43979824,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 85000,
+          "elapsedMs": 64756,
+          "rss": 118276096,
+          "heapTotal": 96272384,
+          "heapUsed": 39006848,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 86000,
+          "elapsedMs": 65509,
+          "rss": 118276096,
+          "heapTotal": 96272384,
+          "heapUsed": 34118736,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 87000,
+          "elapsedMs": 66252,
+          "rss": 118292480,
+          "heapTotal": 96272384,
+          "heapUsed": 29167016,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 88000,
+          "elapsedMs": 67026,
+          "rss": 118292480,
+          "heapTotal": 96272384,
+          "heapUsed": 52999408,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 89000,
+          "elapsedMs": 67801,
+          "rss": 118439936,
+          "heapTotal": 96272384,
+          "heapUsed": 48047688,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 90000,
+          "elapsedMs": 68548,
+          "rss": 123076608,
+          "heapTotal": 96272384,
+          "heapUsed": 43172000,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 91000,
+          "elapsedMs": 69304,
+          "rss": 123191296,
+          "heapTotal": 96272384,
+          "heapUsed": 38450432,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 92000,
+          "elapsedMs": 70066,
+          "rss": 123207680,
+          "heapTotal": 96272384,
+          "heapUsed": 33630664,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 93000,
+          "elapsedMs": 70831,
+          "rss": 123224064,
+          "heapTotal": 96272384,
+          "heapUsed": 28725328,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 94000,
+          "elapsedMs": 71578,
+          "rss": 123240448,
+          "heapTotal": 96272384,
+          "heapUsed": 52557720,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 95000,
+          "elapsedMs": 72359,
+          "rss": 123273216,
+          "heapTotal": 96272384,
+          "heapUsed": 47736672,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 96000,
+          "elapsedMs": 73127,
+          "rss": 123289600,
+          "heapTotal": 96272384,
+          "heapUsed": 42852800,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 97000,
+          "elapsedMs": 73873,
+          "rss": 123305984,
+          "heapTotal": 96272384,
+          "heapUsed": 37985344,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 98000,
+          "elapsedMs": 74664,
+          "rss": 123338752,
+          "heapTotal": 96272384,
+          "heapUsed": 33143776,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 99000,
+          "elapsedMs": 75450,
+          "rss": 123355136,
+          "heapTotal": 96272384,
+          "heapUsed": 28343984,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 100000,
+          "elapsedMs": 76225,
+          "rss": 123355136,
+          "heapTotal": 96272384,
+          "heapUsed": 52176376,
+          "external": 8956382,
+          "arrayBuffers": 209171
+        },
+        {
+          "calls": 100000,
+          "elapsedMs": 76227,
+          "rss": 123518976,
+          "heapTotal": 96272384,
+          "heapUsed": 52257744,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        }
+      ],
+      "start": 1793529324346,
+      "verified": 100000,
+      "elapsedMs": 76227,
+      "rssBytes": {
+        "n": 102,
+        "median": 123240448,
+        "p95": 257081344,
+        "min": 97714176,
+        "max": 270565376,
+        "mean": 161674420.70588234
+      }
+    },
+    {
+      "mode": "async",
+      "size": 200000,
+      "count": 1000,
+      "concurrency": 4,
+      "rss": [
+        {
+          "calls": 0,
+          "elapsedMs": 0,
+          "rss": 123863040,
+          "heapTotal": 96272384,
+          "heapUsed": 52354984,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 20,
+          "elapsedMs": 493,
+          "rss": 164134912,
+          "heapTotal": 96272384,
+          "heapUsed": 52838440,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 40,
+          "elapsedMs": 978,
+          "rss": 164167680,
+          "heapTotal": 96272384,
+          "heapUsed": 53317192,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 60,
+          "elapsedMs": 1465,
+          "rss": 164200448,
+          "heapTotal": 96272384,
+          "heapUsed": 53792320,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 80,
+          "elapsedMs": 1954,
+          "rss": 165806080,
+          "heapTotal": 96272384,
+          "heapUsed": 54271072,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 100,
+          "elapsedMs": 2442,
+          "rss": 165838848,
+          "heapTotal": 96272384,
+          "heapUsed": 54745216,
+          "external": 9021918,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 120,
+          "elapsedMs": 2933,
+          "rss": 165969920,
+          "heapTotal": 96272384,
+          "heapUsed": 55308512,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 140,
+          "elapsedMs": 3425,
+          "rss": 171540480,
+          "heapTotal": 163381248,
+          "heapUsed": 27430368,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 160,
+          "elapsedMs": 3921,
+          "rss": 171573248,
+          "heapTotal": 163381248,
+          "heapUsed": 27909120,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 180,
+          "elapsedMs": 4433,
+          "rss": 171606016,
+          "heapTotal": 163381248,
+          "heapUsed": 28384248,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 200,
+          "elapsedMs": 4928,
+          "rss": 171589632,
+          "heapTotal": 163381248,
+          "heapUsed": 28863000,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 220,
+          "elapsedMs": 5422,
+          "rss": 171556864,
+          "heapTotal": 163381248,
+          "heapUsed": 29433288,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 240,
+          "elapsedMs": 5915,
+          "rss": 171589632,
+          "heapTotal": 163381248,
+          "heapUsed": 29912040,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 260,
+          "elapsedMs": 6411,
+          "rss": 171622400,
+          "heapTotal": 163381248,
+          "heapUsed": 30386184,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 280,
+          "elapsedMs": 6914,
+          "rss": 171638784,
+          "heapTotal": 163381248,
+          "heapUsed": 30864936,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 300,
+          "elapsedMs": 7408,
+          "rss": 171671552,
+          "heapTotal": 163381248,
+          "heapUsed": 31340064,
+          "external": 9087454,
+          "arrayBuffers": 274707
+        },
+        {
+          "calls": 320,
+          "elapsedMs": 7900,
+          "rss": 171687936,
+          "heapTotal": 163381248,
+          "heapUsed": 31913696,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 340,
+          "elapsedMs": 8387,
+          "rss": 171720704,
+          "heapTotal": 163381248,
+          "heapUsed": 32388824,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 360,
+          "elapsedMs": 8879,
+          "rss": 171753472,
+          "heapTotal": 163381248,
+          "heapUsed": 32867576,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 380,
+          "elapsedMs": 9375,
+          "rss": 171786240,
+          "heapTotal": 163381248,
+          "heapUsed": 33342704,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 400,
+          "elapsedMs": 9867,
+          "rss": 171819008,
+          "heapTotal": 163381248,
+          "heapUsed": 33821456,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 420,
+          "elapsedMs": 10360,
+          "rss": 171835392,
+          "heapTotal": 163381248,
+          "heapUsed": 34391496,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 440,
+          "elapsedMs": 10862,
+          "rss": 171868160,
+          "heapTotal": 163381248,
+          "heapUsed": 34870248,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 460,
+          "elapsedMs": 11354,
+          "rss": 171884544,
+          "heapTotal": 163381248,
+          "heapUsed": 35344392,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 480,
+          "elapsedMs": 11853,
+          "rss": 171917312,
+          "heapTotal": 163381248,
+          "heapUsed": 35819520,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 500,
+          "elapsedMs": 12350,
+          "rss": 171950080,
+          "heapTotal": 163381248,
+          "heapUsed": 36298272,
+          "external": 9087454,
+          "arrayBuffers": 340243
+        },
+        {
+          "calls": 520,
+          "elapsedMs": 12850,
+          "rss": 171982848,
+          "heapTotal": 163381248,
+          "heapUsed": 36868208,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 540,
+          "elapsedMs": 13363,
+          "rss": 173588480,
+          "heapTotal": 163381248,
+          "heapUsed": 37346960,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 560,
+          "elapsedMs": 13860,
+          "rss": 173621248,
+          "heapTotal": 163381248,
+          "heapUsed": 37822088,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 580,
+          "elapsedMs": 14375,
+          "rss": 173654016,
+          "heapTotal": 163381248,
+          "heapUsed": 38300840,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 600,
+          "elapsedMs": 14877,
+          "rss": 173670400,
+          "heapTotal": 163381248,
+          "heapUsed": 38774984,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 620,
+          "elapsedMs": 15370,
+          "rss": 173686784,
+          "heapTotal": 163381248,
+          "heapUsed": 39349528,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 640,
+          "elapsedMs": 15866,
+          "rss": 173719552,
+          "heapTotal": 163381248,
+          "heapUsed": 39823672,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 660,
+          "elapsedMs": 16360,
+          "rss": 173735936,
+          "heapTotal": 163381248,
+          "heapUsed": 40302424,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 680,
+          "elapsedMs": 16855,
+          "rss": 173768704,
+          "heapTotal": 163381248,
+          "heapUsed": 40777552,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 700,
+          "elapsedMs": 17348,
+          "rss": 173801472,
+          "heapTotal": 163381248,
+          "heapUsed": 41256304,
+          "external": 9152990,
+          "arrayBuffers": 405779
+        },
+        {
+          "calls": 720,
+          "elapsedMs": 17842,
+          "rss": 173834240,
+          "heapTotal": 163381248,
+          "heapUsed": 41826632,
+          "external": 9186761,
+          "arrayBuffers": 439550
+        },
+        {
+          "calls": 740,
+          "elapsedMs": 18334,
+          "rss": 173867008,
+          "heapTotal": 163381248,
+          "heapUsed": 42305384,
+          "external": 9186761,
+          "arrayBuffers": 439550
+        },
+        {
+          "calls": 760,
+          "elapsedMs": 18828,
+          "rss": 173899776,
+          "heapTotal": 163381248,
+          "heapUsed": 42780512,
+          "external": 9186761,
+          "arrayBuffers": 439550
+        },
+        {
+          "calls": 780,
+          "elapsedMs": 19319,
+          "rss": 173916160,
+          "heapTotal": 163381248,
+          "heapUsed": 43259264,
+          "external": 9186761,
+          "arrayBuffers": 439550
+        },
+        {
+          "calls": 800,
+          "elapsedMs": 19815,
+          "rss": 173932544,
+          "heapTotal": 163381248,
+          "heapUsed": 43733408,
+          "external": 9186761,
+          "arrayBuffers": 439550
+        },
+        {
+          "calls": 820,
+          "elapsedMs": 20311,
+          "rss": 173981696,
+          "heapTotal": 163381248,
+          "heapUsed": 44336664,
+          "external": 9221697,
+          "arrayBuffers": 474486
+        },
+        {
+          "calls": 840,
+          "elapsedMs": 20803,
+          "rss": 174014464,
+          "heapTotal": 163381248,
+          "heapUsed": 44810808,
+          "external": 9221697,
+          "arrayBuffers": 474486
+        },
+        {
+          "calls": 860,
+          "elapsedMs": 21295,
+          "rss": 174030848,
+          "heapTotal": 163381248,
+          "heapUsed": 45289560,
+          "external": 9221697,
+          "arrayBuffers": 474486
+        },
+        {
+          "calls": 880,
+          "elapsedMs": 21789,
+          "rss": 174047232,
+          "heapTotal": 163381248,
+          "heapUsed": 45787440,
+          "external": 9221697,
+          "arrayBuffers": 474486
+        },
+        {
+          "calls": 900,
+          "elapsedMs": 22280,
+          "rss": 174063616,
+          "heapTotal": 163381248,
+          "heapUsed": 46266192,
+          "external": 9221697,
+          "arrayBuffers": 474486
+        },
+        {
+          "calls": 920,
+          "elapsedMs": 22772,
+          "rss": 174145536,
+          "heapTotal": 163381248,
+          "heapUsed": 46836648,
+          "external": 9257798,
+          "arrayBuffers": 510587
+        },
+        {
+          "calls": 940,
+          "elapsedMs": 23285,
+          "rss": 174178304,
+          "heapTotal": 163381248,
+          "heapUsed": 47315400,
+          "external": 9257798,
+          "arrayBuffers": 510587
+        },
+        {
+          "calls": 960,
+          "elapsedMs": 23781,
+          "rss": 174211072,
+          "heapTotal": 163381248,
+          "heapUsed": 47790528,
+          "external": 9257798,
+          "arrayBuffers": 510587
+        },
+        {
+          "calls": 980,
+          "elapsedMs": 24275,
+          "rss": 174227456,
+          "heapTotal": 163381248,
+          "heapUsed": 48269280,
+          "external": 9257798,
+          "arrayBuffers": 510587
+        },
+        {
+          "calls": 1000,
+          "elapsedMs": 24770,
+          "rss": 174243840,
+          "heapTotal": 163381248,
+          "heapUsed": 48743424,
+          "external": 9257798,
+          "arrayBuffers": 510587
+        },
+        {
+          "calls": 1000,
+          "elapsedMs": 24771,
+          "rss": 174276608,
+          "heapTotal": 163381248,
+          "heapUsed": 48838520,
+          "external": 9295066,
+          "arrayBuffers": 547855
+        }
+      ],
+      "start": 1793529400573,
+      "verified": 1000,
+      "elapsedMs": 24771,
+      "rssBytes": {
+        "n": 52,
+        "median": 171982848,
+        "p95": 174227456,
+        "min": 123863040,
+        "max": 174276608,
+        "mean": 171090235.07692307
+      }
+    }
+  ],
+  "mismatches": 0,
+  "mixed": {
+    "calls": 2000,
+    "concurrency": 16,
+    "rounds": 125,
+    "rss": [
+      {
+        "round": 0,
+        "rss": 176029696,
+        "heapTotal": 163381248,
+        "heapUsed": 49357504,
+        "external": 9332782,
+        "arrayBuffers": 585571
+      },
+      {
+        "round": 10,
+        "rss": 176193536,
+        "heapTotal": 163381248,
+        "heapUsed": 53158600,
+        "external": 9332782,
+        "arrayBuffers": 585571
+      },
+      {
+        "round": 20,
+        "rss": 177307648,
+        "heapTotal": 163381248,
+        "heapUsed": 56981000,
+        "external": 9332782,
+        "arrayBuffers": 585571
+      },
+      {
+        "round": 30,
+        "rss": 180846592,
+        "heapTotal": 163381248,
+        "heapUsed": 60782824,
+        "external": 9332782,
+        "arrayBuffers": 585571
+      },
+      {
+        "round": 40,
+        "rss": 121847808,
+        "heapTotal": 32833536,
+        "heapUsed": 28509880,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 50,
+        "rss": 122421248,
+        "heapTotal": 37027840,
+        "heapUsed": 27722072,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 60,
+        "rss": 123994112,
+        "heapTotal": 37027840,
+        "heapUsed": 28531816,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 70,
+        "rss": 125599744,
+        "heapTotal": 37027840,
+        "heapUsed": 29273624,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 80,
+        "rss": 125632512,
+        "heapTotal": 37027840,
+        "heapUsed": 30038440,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 90,
+        "rss": 125681664,
+        "heapTotal": 37027840,
+        "heapUsed": 27752816,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 100,
+        "rss": 125681664,
+        "heapTotal": 37027840,
+        "heapUsed": 28518424,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 110,
+        "rss": 125681664,
+        "heapTotal": 37027840,
+        "heapUsed": 29283032,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      },
+      {
+        "round": 120,
+        "rss": 125681664,
+        "heapTotal": 37027840,
+        "heapUsed": 30070600,
+        "external": 8890846,
+        "arrayBuffers": 143635
+      }
+    ]
+  },
+  "finalDiagnostics": {
+    "SIGINT": "0x102967358",
+    "SIGTERM": "0x102967358",
+    "SIGPIPE": "0x1",
+    "SIGSEGV": "0x1029684e0",
+    "SIGBUS": "0x1029684e0",
+    "SIGABRT": "0x0",
+    "SIGUSR1": "0x102b6a978",
+    "SIGUSR2": "0x0",
+    "threads": 12
+  }
+}

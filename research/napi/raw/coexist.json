@@ -1,0 +1,94 @@
+{
+  "node": "v24.22.0",
+  "before": {
+    "SIGINT": "0x102bff358",
+    "SIGTERM": "0x102bff358",
+    "SIGPIPE": "0x1",
+    "SIGSEGV": "0x102c004e0",
+    "SIGBUS": "0x102c004e0",
+    "SIGABRT": "0x0",
+    "SIGUSR1": "0x102e02978",
+    "SIGUSR2": "0x0",
+    "threads": 7
+  },
+  "afterInit": {
+    "SIGINT": "0x102bff358",
+    "SIGTERM": "0x102bff358",
+    "SIGPIPE": "0x1",
+    "SIGSEGV": "0x102c004e0",
+    "SIGBUS": "0x102c004e0",
+    "SIGABRT": "0x0",
+    "SIGUSR1": "0x102e02978",
+    "SIGUSR2": "0x0",
+    "threads": 7
+  },
+  "beforeAsync": {
+    "SIGINT": "0x102bff358",
+    "SIGTERM": "0x102bff358",
+    "SIGPIPE": "0x1",
+    "SIGSEGV": "0x102c004e0",
+    "SIGBUS": "0x102c004e0",
+    "SIGABRT": "0x0",
+    "SIGUSR1": "0x102e02978",
+    "SIGUSR2": "0x0",
+    "threads": 11
+  },
+  "afterAsync": {
+    "SIGINT": "0x102bff358",
+    "SIGTERM": "0x102bff358",
+    "SIGPIPE": "0x1",
+    "SIGSEGV": "0x102c004e0",
+    "SIGBUS": "0x102c004e0",
+    "SIGABRT": "0x0",
+    "SIGUSR1": "0x102e02978",
+    "SIGUSR2": "0x0",
+    "threads": 11
+  },
+  "timerTicksDuringAsync": 14,
+  "concurrentCalls": 32,
+  "workers": [
+    {
+      "sha256": "1f2cc28bb6e3d0bf7460cf02ce2ec26cdceb0feeb889a21f0df64e2ad09e1907",
+      "calls": 100
+    },
+    {
+      "sha256": "1f2cc28bb6e3d0bf7460cf02ce2ec26cdceb0feeb889a21f0df64e2ad09e1907",
+      "calls": 100
+    },
+    {
+      "sha256": "1f2cc28bb6e3d0bf7460cf02ce2ec26cdceb0feeb889a21f0df64e2ad09e1907",
+      "calls": 100
+    },
+    {
+      "sha256": "1f2cc28bb6e3d0bf7460cf02ce2ec26cdceb0feeb889a21f0df64e2ad09e1907",
+      "calls": 100
+    }
+  ],
+  "unicode": [
+    {
+      "utf8Bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "utf8Bytes": 1,
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+    },
+    {
+      "utf8Bytes": 13,
+      "sha256": "3884d77696967443b4f1afa0e087c9a648c41dcb2268dd87524023075dd303bc"
+    },
+    {
+      "utf8Bytes": 3,
+      "sha256": "83d544ccc223c057d2bf80d3f2a32982c32c3c0db8e2674820da5064783fb097"
+    },
+    {
+      "utf8Bytes": 100000,
+      "sha256": "6d1cf22d7cc09b085dfc25ee1a1f3ae0265804c607bc2074ad253bcc82fd81ee"
+    }
+  ],
+  "poisonTest": {
+    "status": 0,
+    "first": "Error: \u0001Uncaught SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)\n\u001fSC4013\u001frev_run",
+    "second": "Error: scriptc instance is poisoned; restart process"
+  }
+}
