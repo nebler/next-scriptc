@@ -24,4 +24,4 @@ for(const constructionResults of [false,true]){
  }
 }
 const artifacts=[];for(const mode of ['new','construction','new-timing','construction-timing']){const b=await readFile(s+'/'+mode+'/promotion.node');artifacts.push({mode,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex')});}
-await writeFile('research/phase1/raw/m3/artifacts.json',JSON.stringify({artifacts,compiler:process.env.SCRIPTC_COMPILER},null,2));
+await writeFile((process.env.M3_ARTIFACTS??'research/phase1/raw/m3/artifacts.json'),JSON.stringify({artifacts,compiler:process.env.SCRIPTC_COMPILER},null,2));

@@ -119,6 +119,8 @@ test('sample addon ABI works with owner thread, sync/async and stage timing',asy
    const async=await addon.runAsync(0,[4]);assert.equal(timing?async.value:async,5);
    const sample=await addon.runShadow(0,[6]);assert.equal(timing?sample.value.value:sample.value,7);
    assert.ok(Number.isFinite(sample.elapsedMs)&&sample.elapsedMs>=0);
+   assert.ok(Number.isFinite(sample.cpuMs)&&sample.cpuMs>=0);
+   const cpu=addon.threadCpuMs();assert.ok(Number.isFinite(cpu));assert.ok(addon.threadCpuMs()>=cpu);
    if(timing)assert.ok(sample.value.timings);
    assert.throws(()=>addon.runShadow(0,['invalid']));
   }
@@ -173,4 +175,45 @@ test('fallback threshold is strict and windows reset after mixed successes',()=>
  const d=setup({mode:'native',fallbackWindow:4,native:()=>++i%2?{fallback:true}:'2'});
  for(let j=0;j<12;j++)assert.equal(d.dispatch('f',x=>x,[2]),2);
  const s=d.snapshot().f.buckets[0];assert.notEqual(s.state,'demoted');assert.equal(s.nativeAttempts,12);assert.equal(s.nativeFallbacks,6);assert.equal(s.fallbackAttempts,0);
+});
+
+test('thread CPU pairs reject contention bias without changing D1 policy',async()=>{
+ async function model(cpuMetric){
+  let wall=0,cpu=0;
+  const d=createDispatcher({now:()=>wall,cpuNow:cpuMetric?()=>cpu:undefined,log:()=>{},perMinute:1000,
+   nativeSample:async()=>{wall+=85;return {value:'2',elapsedMs:85,cpuMs:30};}});
+  // 15/24 wall pairs clear the margin, reproducing the failed M3 vote.
+  for(let i=1;i<=520;i++){
+   d.dispatch('f',()=>{const cost=i/20%24<15?103:70;wall+=cost;cpu+=60;return 2;},[2]);await tick();
+  }
+  return d.snapshot().f.buckets[0];
+ }
+ const old=await model(false),fixed=await model(true);
+ assert.equal(old.state,'js-final');assert.equal(fixed.state,'native');
+ assert.equal(fixed.lastDecision.metric,'thread-cpu');
+ assert.equal(fixed.lastDecision.native.length,24);
+ assert.ok(fixed.lastDecision.native.every(n=>n===30));
+ assert.ok(fixed.lastDecision.js.every(n=>n===60));
+ assert.ok(fixed.lastDecision.wallPairs.every(p=>p[1]===85));
+});
+
+test('JS calls during a pending shadow never become sample pairs',async()=>{
+ let resolve,clocks=0;
+ const d=setup({jsSamples:1,nativeSample:()=>new Promise(r=>resolve=r),now:()=>++clocks});
+ d.dispatch('f',()=>2,[2]);await tick();const before=clocks;
+ for(let i=0;i<10;i++)d.dispatch('f',()=>2,[2]);
+ assert.equal(clocks,before);assert.equal(d.pending,1);
+ resolve({value:'2',elapsedMs:1});await tick();assert.equal(d.snapshot().f.buckets[0].pairs.length,1);
+});
+
+test('CPU pairs include caller encode/decode costs and skip invalid CPU samples',async()=>{
+ let cpu=0,wall=0,valid=false;
+ const d=setup({cpuNow:()=>++cpu,now:()=>++wall,nativeSample:async()=>({value:'2',cpuMs:valid?30:NaN,elapsedMs:1000})});
+ for(let i=0;i<3;i++){d.dispatch('f',()=>{cpu+=100;return 2;},[2]);await tick();}
+ assert.equal(d.snapshot().f.buckets[0].pairs.length,0);
+ valid=true;
+ for(let i=0;i<2;i++){d.dispatch('f',()=>{cpu+=100;return 2;},[2]);await tick();}
+ const decision=d.snapshot().f.buckets[0].lastDecision;
+ assert.equal(decision.state,'native');assert.ok(decision.native.every(n=>n===32));
+ assert.ok(decision.js.every(n=>n===101));assert.ok(decision.wallPairs.every(p=>p[1]>1000));
 });

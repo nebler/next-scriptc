@@ -21,8 +21,8 @@ for(const mode of ['new','construction']){
  const id=JSON.parse(read(base+'/'+mode+'/ids.json'))[0];
  const fixed=loadPromotion(base+'/'+mode+'/promotion.node',{mode:'native',log:s=>result.transitions.push(s)});f['native-'+mode]=n=>fixed.dispatch(id,js,args[n]);
  const addon=createRequire(import.meta.url)(base+'/'+mode+'/promotion.node');starts[mode]=[];
- const auto=createDispatcher({schemas:JSON.parse(read(base+'/'+mode+'/encodings.json')).functions,log:s=>result.transitions.push({mode,s}),native:(_,input)=>addon.run(0,input),nativeSample:async(_,input)=>{
-  starts[mode].push(performance.now());const sample=await addon.runShadow(0,input);assert(!sample.value?.fallback);const n=sizes.find(n=>args[n][2].length===input[2].length);assert.equal(sample.value,expected[n]);result.shadowHashes.push({mode,n,sha256:result.expected[n]});return sample;
+ const auto=createDispatcher({cpuNow:addon.threadCpuMs,schemas:JSON.parse(read(base+'/'+mode+'/encodings.json')).functions,log:s=>result.transitions.push({mode,s}),native:(_,input)=>addon.run(0,input),nativeSample:async(_,input)=>{
+  starts[mode].push(performance.now());const sample=await addon.runShadow(0,input);assert(!sample.value?.fallback);const n=sizes.find(n=>args[n][2].length===input[2].length);assert.equal(sample.value,expected[n]);result.shadowHashes.push({mode,n,cpuMs:sample.cpuMs,elapsedMs:sample.elapsedMs,sha256:result.expected[n]});return sample;
  }});autos[mode]=auto;f['auto-'+mode]=n=>auto.dispatch(id,js,args[n]);
 }
 const modes=Object.keys(f),rotate=i=>modes.map((_,k)=>modes[(i+k)%modes.length]);

@@ -246,3 +246,40 @@ Setup caveat: the initial Phase1 build overlapped the two-worker adapter suite,
 so the requested two-build ceiling was not guaranteed during that interval.
 Subsequent preparation was sequential. No build or test overlapped either final
 timing run.
+
+## 15. Pair dispatcher decisions on thread CPU (2026-11-01)
+
+Hypothesis: owner-thread contention inflates native shadow wall time and can
+make D1 reject the CPU winner. M3 actually drains shadows before subsequent
+workload calls; its busy `setImmediate` drain itself contends with the owner.
+A targeted CPU-11 probe confirms 200k native CPU near 30 ms with either drain,
+but wall rises from 30.5 ms with timer draining to 59.3 ms with busy draining.
+Concurrent JS also inflates wall time. The 5k effect is smaller in this probe.
+
+Keep addon thread CPU measurements for owner execution and boundary work,
+calling-thread CPU for JS and caller encode/decode, and diagnostic wall pairs.
+Skip JS sampling while shadows are pending. D1 votes, margins, hysteresis,
+cold exclusion, frequency and quota remain unchanged. Fake-clock tests show
+wall contention rejects the faster native lane while CPU pairs promote it.
+
+The same M3 five-arm run selects the best fixed lane in all four buckets for
+both auto arms. Strict uses JS/native/native/native with votes 0/23/24/24;
+construction uses native throughout with votes 23/24/24/24. At 200k native
+decision/steady CPU ratios narrow to 1.31x strict and 1.46x construction,
+compared with original wall ratios 2.87x and 2.53x. Training costs still vary.
+Mixed inclusive CPU totals are JS 6016.333 ms, strict native 2444.495 ms,
+strict auto 2913.559 ms, construction native 2118.950 ms, construction auto
+2043.525 ms. Post-call drain CPU includes all background work and bookkeeping.
+
+The exact M2 gate still FAILS. Strict 5k misses the calibration-band test;
+both auto modes miss the mixed win beyond error. Keep the measurement fix,
+without claiming a performance gate pass. Boundary gains need hosted
+confirmation. Host one-minute load spans 6.14–9.68. All 72 full adapter tests,
+both Node 24 shim tests, and 24 demo tests pass; builds and tests do not overlap
+timing runs, and builds run sequentially. No scriptc edit, Vercel run,
+Papermark timing, or existing-container operation occurs. The report and raw
+artifacts are in [dispatcher-cpu-timing.md](dispatcher-cpu-timing.md).
+
+Cleanup removes task build trees and all three dependency symlinks. Available
+disk increases from 18.49 GiB immediately before cleanup to 19.28 GiB after.
+The final full adapter rerun also passes all 72 tests on Node 24.

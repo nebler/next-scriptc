@@ -31,7 +31,7 @@ typedef struct {
 #ifdef BOUNDARY_TIMING
   double stages[4], input_ms, copy_ms;
 #endif
-  double sample_ms; int sample;
+  double sample_ms, cpu_ms; int sample;
   int echo,failed,fallback; char error[1024];
 #ifdef SERIALIZED_RUNTIME
   int serialized;
@@ -40,6 +40,9 @@ typedef struct {
 typedef struct {uint32_t count; int kinds[64]; int result;} Schema;
 #include <time.h>
 static double stamp(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec*1000.0+t.tv_nsec/1e6;}
+// Calling-thread CPU excludes preemption and work on every other thread.
+static double cpu_stamp(void){struct timespec t;if(clock_gettime(CLOCK_THREAD_CPUTIME_ID,&t))return NAN;return t.tv_sec*1000.0+t.tv_nsec/1e6;}
+static napi_value thread_cpu(napi_env env,napi_callback_info info){(void)info;napi_value v;napi_create_double(env,cpu_stamp(),&v);return v;}
 #ifdef BOUNDARY_TIMING
 static _Thread_local Job *active_job;
 static void stage(void *ctx,double n){(void)ctx;if(active_job&&n>=1&&n<=3)active_job->stages[(int)n]=stamp();}
@@ -114,7 +117,9 @@ static void *worker_main(void *unused){
   while(!head)pthread_cond_wait(&queue_cv,&queue_mu);
   Queue *q=head;head=q->next;if(!head)tail=NULL;
   pthread_mutex_unlock(&queue_mu);
+  double cpu_begin=q->job->sample?cpu_stamp():0;
   execute_raw(NULL,q->job);
+  if(q->job->sample)q->job->cpu_ms+=cpu_stamp()-cpu_begin;
   pthread_mutex_lock(&queue_mu);q->done=1;pthread_cond_signal(&q->done_cv);pthread_mutex_unlock(&queue_mu);
  }
  return NULL;
@@ -132,12 +137,12 @@ static void execute_service(napi_env env,void *data){
 static void execute_service(napi_env env,void *data){execute_raw(env,data);}
 #endif
 // Same owner handoff as run(), excluding only libuv queue/completion delay.
-static void execute(napi_env env,void *data){Job *j=data;double begin=j->sample?stamp():0;execute_service(env,data);if(j->sample)j->sample_ms+=stamp()-begin;}
+static void execute(napi_env env,void *data){Job *j=data;double begin=j->sample?stamp():0,cpu_begin=j->sample?cpu_stamp():0;execute_service(env,data);if(j->sample){j->sample_ms+=stamp()-begin;j->cpu_ms+=cpu_stamp()-cpu_begin;}}
 static void complete(napi_env env,napi_status status,void *data) {
   Job *j=data;napi_value v;
   if(status!=napi_ok||j->failed){napi_value msg;napi_create_string_utf8(env,j->failed?j->error:"async work cancelled",NAPI_AUTO_LENGTH,&msg);napi_create_error(env,NULL,msg,&v);napi_reject_deferred(env,j->deferred,v);}
-  else {double begin=j->sample?stamp():0;v=result(env,j);
-    if(j->sample){napi_value wrapper,n;napi_create_object(env,&wrapper);napi_create_double(env,j->sample_ms+stamp()-begin,&n);napi_set_named_property(env,wrapper,"value",v);napi_set_named_property(env,wrapper,"elapsedMs",n);v=wrapper;}
+  else {double begin=j->sample?stamp():0,cpu_begin=j->sample?cpu_stamp():0;v=result(env,j);
+    if(j->sample){napi_value wrapper,n;napi_create_object(env,&wrapper);napi_create_double(env,j->sample_ms+stamp()-begin,&n);napi_set_named_property(env,wrapper,"value",v);napi_set_named_property(env,wrapper,"elapsedMs",n);napi_create_double(env,j->cpu_ms+cpu_stamp()-cpu_begin,&n);napi_set_named_property(env,wrapper,"cpuMs",n);v=wrapper;}
     napi_resolve_deferred(env,j->deferred,v);}
   napi_delete_async_work(env,j->work);cleanup(j);
 }
@@ -150,7 +155,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
   bool array=false;uint32_t length=0;
   if(napi_is_array(env,arg,&array)!=napi_ok||!array||napi_get_array_length(env,arg,&length)!=napi_ok||length!=schemas[index].count){napi_throw_type_error(env,NULL,"Expected encoded argument array");return NULL;}
   Job *j=calloc(1,sizeof *j);if(!j){napi_throw_error(env,NULL,"host allocation failure");return NULL;}
-  j->echo=index;j->sample=((intptr_t)kind&2)!=0;double sample_begin=j->sample?stamp():0;
+  j->echo=index;j->sample=((intptr_t)kind&2)!=0;double sample_begin=j->sample?stamp():0,cpu_begin=j->sample?cpu_stamp():0;
 #ifdef BOUNDARY_TIMING
  double begin=stamp();
 #endif
@@ -171,7 +176,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
 #ifdef BOUNDARY_TIMING
  j->input_ms=stamp()-begin;
 #endif
-  if(j->sample)j->sample_ms=stamp()-sample_begin;
+  if(j->sample){j->sample_ms=stamp()-sample_begin;j->cpu_ms=cpu_stamp()-cpu_begin;}
   napi_value v;
   if((intptr_t)kind&1){
     napi_value name;napi_create_string_utf8(env,"scriptc",NAPI_AUTO_LENGTH,&name);
@@ -189,6 +194,7 @@ static napi_value call(napi_env env,napi_callback_info info) {
 }
 NAPI_MODULE_INIT(){
  napi_property_descriptor props[]={
+ {"threadCpuMs",NULL,thread_cpu,NULL,NULL,NULL,napi_default,NULL},
  {"run",NULL,call,NULL,NULL,NULL,napi_default,(void *)0},
  {"runAsync",NULL,call,NULL,NULL,NULL,napi_default,(void *)1},
  {"runShadow",NULL,call,NULL,NULL,NULL,napi_default,(void *)3}};
