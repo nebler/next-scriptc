@@ -296,7 +296,7 @@ The gate was amended in [hill-plan.md](hill-plan.md) and approved after D2. Appl
 - **Needs hosted confirmation** (boundary-driven). `constructionResults` stays opt-in until the fuzzer and crash safety exist.
 
 
-## 16. Gate construction defaults with differential tests and crash leases (2026-11-01)
+## 17. Gate construction defaults with differential tests and crash leases (2026-11-01)
 
 Hypothesis: the construction proof plus catch fallback can survive bounded random
 boundary data without changing caller answers or poisoning the native instance.
