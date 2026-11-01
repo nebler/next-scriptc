@@ -25,11 +25,13 @@ export function serialize(value: unknown, plainArrays = false, encode: (() => st
     if (typeof value !== "object" || value === null) throw new Error("Expected JSON data (null, finite numbers, strings, booleans, arrays and plain objects)");
     if (seen.has(value)) throw new Error("Cyclic JSON data");
     seen.add(value);
-    if (Object.getOwnPropertySymbols(value).length) throw new Error("Symbol properties are not JSON data");
     const array = Array.isArray(value);
     if (!array && Object.getPrototypeOf(value) !== Object.prototype) throw new Error("Expected a plain JSON object");
     if (array && plainArrays && Object.getPrototypeOf(value) !== Array.prototype) throw new Error("Expected a plain JSON object or array");
     const descriptors: any = Object.getOwnPropertyDescriptors(value);
+    // Descriptors include symbol keys. Inspect this plain dictionary rather
+    // than asking scriptc to refresh the original native container again.
+    if (Object.getOwnPropertySymbols(descriptors).length) throw new Error("Symbol properties are not JSON data");
     const keys = Object.keys(descriptors);
     if (array) {
       const length = (value as unknown[]).length;
