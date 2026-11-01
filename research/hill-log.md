@@ -51,3 +51,31 @@ Hypothesis: S1's scalar reductions result from loop lowering, beyond the missing
 Keep a local backend change admitting immutable numeric globals to counted-loop matching in arithmetic bodies that cannot invoke user code. Branch `next-scriptc/wasm-counted-globals`, commit `b46987ce9`, upstream base `a07d5a791`, with the existing int8 patch cherry-picked as `0cc542ceb`. No push. The full S1-shaped imul reduction now vectorizes for wasm SIMD, arm64, and AVX2; a same-version toggle restores scalar IR. Strict float wasm reduction remains blocked by ordered arithmetic semantics.
 
 Focused validation passes: 26 backend tests, the new corpus in both differential harnesses release/dev and ASan/RC audit, typecheck, focused lint/format, TS7 baseline completeness, and 15 non-timed JS/Wasm SHA-256 comparisons. Full gate and measurements are pending; no improvement is counted or CPU claim made. The first warning-induced corpus failure and rejected reproduction attempts remain documented. Step 3 is only an untested CLI/target-feature sketch; no C++ helper rebuild. [Report, IR evidence, and pending command](wasm-vectorization.md).
+
+## 6. Typed result validation (2026-11-01)
+
+Hypothesis: generated typed visits can remove E1's expensive reflective result
+validation while preserving the strict boundary contract.
+
+Implemented bounded return-shape metadata from the application's TypeScript
+checker and generated typed visits with complete container guards and generic
+fallback for extras. The experimental build option is `specializeResults:true`;
+production keeps strict validation. Added adversarial and native-path tests.
+Fixed negative-zero loss in direct number transport and made JSON promotion
+refuse negative zero. Scalar shadow comparison distinguishes its sign bit.
+
+Loaded-host alternating A/B, 120 measured rounds per size after 10 warmups,
+measured strict/generated median (p95) elapsed ms: 1k 0.682 (1.098) / 0.652
+(0.968); 5k 0.597 (0.888) / 0.574 (0.913). Typed encoding without validation is
+0.012–0.013 ms. Paired median differences are -0.027 and -0.023 ms, with wide
+spreads crossing zero. This does not meet the nearly-free goal or exceed C1's
+17.37% error. No calibrated win is claimed.
+
+Keep the experiment disabled by default. Returning UTF-8 bytes or projecting a
+compact layout does not certify the source value; sampled shadows cannot prove
+future results safe. Record a compiler closed-record certificate candidate and
+minimal repro in the patch ledger. The existing boundary also has broader
+observational-equivalence limits, documented in the report rather than hidden
+by a performance claim. No scriptc change, Docker stand-in, Vercel call, or root
+README edit. Node 24 passes 54 adapter, 2 shim, and 24 demo tests with at most two
+test jobs. [Full report and raw A/B rows](native-result-validation.md).

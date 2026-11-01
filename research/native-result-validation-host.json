@@ -1,0 +1,7362 @@
+{
+  "at": "2026-11-01T19:31:41.555Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "node": "v26.13.0",
+  "load": [
+    11.658203125,
+    10.8564453125,
+    9.3212890625
+  ],
+  "warmups": 10,
+  "samples": 120,
+  "note": "loaded-host; mode 0 strict baseline, mode 1 generated strict visit, mode 2 unchecked typed-encoding control (never production). 120 alternating rounds after 10 warmups per size. compute contains cached-result validation and encoding; elapsed ms, not CPU.",
+  "summary": [
+    {
+      "size": 1000,
+      "mode": 0,
+      "encode": {
+        "median": 0.6820000410079956,
+        "p95": 1.097999930381775,
+        "p05": 0.5850000381469727
+      },
+      "arenaAndScalarCheck": {
+        "median": 0.0009999275207519531,
+        "p95": 0.001000046730041504
+      },
+      "copyBack": {
+        "median": 0.004000067710876465,
+        "p95": 0.015999913215637207
+      },
+      "combined": {
+        "median": 0.6820000410079956,
+        "p95": 1.0989999771118164
+      }
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "encode": {
+        "median": 0.6520000696182251,
+        "p95": 0.968000054359436,
+        "p05": 0.556999921798706
+      },
+      "arenaAndScalarCheck": {
+        "median": 0.0009999275207519531,
+        "p95": 0.001000046730041504
+      },
+      "copyBack": {
+        "median": 0.004000067710876465,
+        "p95": 0.03900003433227539
+      },
+      "combined": {
+        "median": 0.6520000696182251,
+        "p95": 0.9700000286102295
+      }
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "encode": {
+        "median": 0.013000011444091797,
+        "p95": 0.018000006675720215,
+        "p05": 0.01100003719329834
+      },
+      "arenaAndScalarCheck": {
+        "median": 0.0009999275207519531,
+        "p95": 0.001999974250793457
+      },
+      "copyBack": {
+        "median": 0.003999948501586914,
+        "p95": 0.01900005340576172
+      },
+      "combined": {
+        "median": 0.01399993896484375,
+        "p95": 0.02199995517730713
+      }
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "encode": {
+        "median": 0.597000002861023,
+        "p95": 0.8880000114440918,
+        "p05": 0.5190000534057617
+      },
+      "arenaAndScalarCheck": {
+        "median": 0,
+        "p95": 0.001000046730041504
+      },
+      "copyBack": {
+        "median": 0.003000020980834961,
+        "p95": 0.009999990463256836
+      },
+      "combined": {
+        "median": 0.597000002861023,
+        "p95": 0.8890000581741333
+      }
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "encode": {
+        "median": 0.5740000009536743,
+        "p95": 0.9129999876022339,
+        "p05": 0.5039999485015869
+      },
+      "arenaAndScalarCheck": {
+        "median": 0,
+        "p95": 0.001000046730041504
+      },
+      "copyBack": {
+        "median": 0.003000020980834961,
+        "p95": 0.008999943733215332
+      },
+      "combined": {
+        "median": 0.5740000009536743,
+        "p95": 0.9129999876022339
+      }
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "encode": {
+        "median": 0.011999964714050293,
+        "p95": 0.018000006675720215,
+        "p05": 0.009999990463256836
+      },
+      "arenaAndScalarCheck": {
+        "median": 0.0009999275207519531,
+        "p95": 0.001999974250793457
+      },
+      "copyBack": {
+        "median": 0.003000020980834961,
+        "p95": 0.006000041961669922
+      },
+      "combined": {
+        "median": 0.011999964714050293,
+        "p95": 0.019999980926513672
+      }
+    }
+  ],
+  "rows": [
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 0,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 1.190999984741211,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.03900003433227539
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 0,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.01399993896484375
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 0,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0,
+      "compute": 1.4529999494552612,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.034999966621398926
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 1,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.1919999122619629
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 1,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 1.13100004196167,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0140000581741333
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 1,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.9440000057220459,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.01700007915496826
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 2,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8159999847412109,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.037000060081481934
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 2,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.8250000476837158,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 2,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 3,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 1.149999976158142,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 2.781999945640564
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 3,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.1770000457763672,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.050999999046325684
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 3,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 1.0390000343322754,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.039999961853027344
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 4,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 4,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.8000000715255737,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.013000011444091797
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 4,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 1.2949999570846558,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.01699995994567871
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 5,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7569999694824219,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.015999913215637207
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 5,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.7979999780654907,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.014999985694885254
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 5,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.020000100135803223
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 6,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.6809999942779541,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 6,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 6,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6940000057220459,
+      "nativeEncode": 0,
+      "copyBack": 0.01399993896484375
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 7,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 7,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9609999656677246,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.015000104904174805
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 7,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0,
+      "compute": 0.7280000448226929,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.01600015163421631
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 8,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 1.0339999198913574,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.04100000858306885
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 8,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.8619999885559082,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.05500006675720215
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 8,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.03100001811981201,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.0279998779296875
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 9,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.194000005722046,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.05500006675720215
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 9,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 9,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8739999532699585,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 10,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 10,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7129999399185181,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 10,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7120000123977661,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 11,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6830000877380371,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 11,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6770000457763672,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 11,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.016000032424926758,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 12,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.9270000457763672,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 12,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 12,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6979999542236328,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 13,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.015999913215637207,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 13,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7799999713897705,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 13,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7910000085830688,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 14,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.8240000009536743,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 14,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.847000002861023,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 14,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 15,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6759999990463257,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 15,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 15,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7070000171661377,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 16,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.018000006675720215,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 16,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6899999380111694,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 16,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6629999876022339,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 17,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6899999380111694,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 17,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6599999666213989,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 17,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 18,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6610000133514404,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 18,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 18,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6850000619888306,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 19,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 19,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6890000104904175,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 19,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7770000696182251,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 20,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6859999895095825,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 20,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6549999713897705,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 20,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 21,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6499999761581421,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 21,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 21,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.781000018119812,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.014999985694885254
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.693000078201294,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6970000267028809,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 23,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7610000371932983,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.009999871253967285
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 23,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7409999370574951,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.0140000581741333
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 23,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.009000062942504883
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 24,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6570000648498535,
+      "nativeEncode": 0,
+      "copyBack": 0.010999917984008789
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 24,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.011999964714050293
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 24,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001999974250793457,
+      "compute": 0.7239999771118164,
+      "nativeEncode": 0,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 25,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 25,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8830000162124634,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0280001163482666
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 25,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6699999570846558,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 26,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7139999866485596,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 26,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6690000295639038,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.018000006675720215
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 26,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 27,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6840000152587891,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 27,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 27,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6699999570846558,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 28,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 28,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.0069999694824219,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 28,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6519999504089355,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 29,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6670000553131104,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 29,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6419999599456787,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 29,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 30,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6340000629425049,
+      "nativeEncode": 0,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 30,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 30,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6660000085830688,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 31,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 31,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.784000039100647,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 31,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6959999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 32,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.0260000228881836,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 32,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6330000162124634,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.01700007915496826
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 32,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.012000083923339844
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6380000114440918,
+      "nativeEncode": 0,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.010999917984008789
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6679999828338623,
+      "nativeEncode": 0,
+      "copyBack": 0.009000062942504883
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6649999618530273,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.011999845504760742
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.968000054359436,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.032000064849853516
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 35,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6790000200271606,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.010000109672546387
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 35,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6380000114440918,
+      "nativeEncode": 0,
+      "copyBack": 0.012999892234802246
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 35,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 36,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6360000371932983,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 36,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012999892234802246,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.016000032424926758
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 36,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6660000085830688,
+      "nativeEncode": 0,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 37,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.009000062942504883
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 37,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6659998893737793,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.012000083923339844
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 37,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7079999446868896,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 38,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7769999504089355,
+      "nativeEncode": 0,
+      "copyBack": 0.00800013542175293
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 38,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6380000114440918,
+      "nativeEncode": 0,
+      "copyBack": 0.07999992370605469
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 38,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.1499999761581421,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 39,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.9289999008178711,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 39,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0140000581741333
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 39,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 1.253999948501587,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 40,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 40,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.8420000076293945,
+      "nativeEncode": 0,
+      "copyBack": 0.30299997329711914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 40,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.8539999723434448,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 41,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.7439999580383301,
+      "nativeEncode": 0,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 41,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.7690000534057617,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 41,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.16300010681152344,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 42,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.7919999361038208,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 42,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 42,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 1.1540000438690186,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 43,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.006999850273132324
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 43,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8209999799728394,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 43,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 1.0149999856948853,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 44,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 1.0210000276565552,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 44,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 3.4240000247955322,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.008999943733215332
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 44,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 45,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.753000020980835,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 45,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 45,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.590999960899353,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 46,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 46,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9429999589920044,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 46,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5670000314712524,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6959999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5619999170303345,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 48,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5530000925064087,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 48,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 48,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6269999742507935,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 49,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 49,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8690000772476196,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 49,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6239999532699585,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 50,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.590999960899353,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 50,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5549999475479126,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 50,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012999892234802246,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5540000200271606,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5829999446868896,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 52,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 52,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5770000219345093,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 52,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5539999008178711,
+      "nativeEncode": 0,
+      "copyBack": 0.01100003719329834
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 53,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.028999924659729004,
+      "compute": 1.468000054359436,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 53,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5720000267028809,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 53,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 54,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5640000104904175,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 54,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 54,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5879999399185181,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 55,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 55,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5830000638961792,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 55,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562999963760376,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 56,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6119999885559082,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 56,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6030000448226929,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 56,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.01900005340576172
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 57,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6130000352859497,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 57,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.031999945640563965,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 57,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.9250000715255737,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 58,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01700007915496826,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 58,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6559998989105225,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 58,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5830000638961792,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 59,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5899999141693115,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 59,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6080000400543213,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 59,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.018000006675720215,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 60,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8860000371932983,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 60,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 60,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6120001077651978,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 61,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 61,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6080000400543213,
+      "nativeEncode": 0,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 61,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5910000801086426,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 62,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.718999981880188,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 62,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6929999589920044,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 62,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 63,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8269999027252197,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 63,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 63,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6130000352859497,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 64,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 64,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6680001020431519,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 64,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5780000686645508,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 65,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 65,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5630000829696655,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 65,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 66,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562000036239624,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 66,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 66,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5900000333786011,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 67,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 67,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7229999303817749,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 67,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.9169999361038208,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 68,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6350001096725464,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 68,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7020000219345093,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 68,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 69,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5770000219345093,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 69,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 69,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5980000495910645,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 70,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 70,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6610000133514404,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 70,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5859999656677246,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 71,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.721000075340271,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 71,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7120000123977661,
+      "nativeEncode": 0,
+      "copyBack": 0.18999993801116943
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 71,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.016000032424926758,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 72,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6749999523162842,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 72,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 72,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6810001134872437,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6790000200271606,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7109999656677246,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6719999313354492,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6480000019073486,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 75,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6919999122619629,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 75,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 75,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6820000410079956,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 76,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 76,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7450000047683716,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 76,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.652999997138977,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6719999313354492,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6470000743865967,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 78,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6460000276565552,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 78,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 78,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6729999780654907,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 79,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 79,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6679999828338623,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 79,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6500000953674316,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6669999361038208,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6669999361038208,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 81,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7020000219345093,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 81,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 81,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6990000009536743,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 82,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 82,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6890000104904175,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 82,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6520000696182251,
+      "nativeEncode": 0,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 83,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6809999942779541,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 83,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6469999551773071,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 83,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.011999964714050293
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 84,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6519999504089355,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 84,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 84,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7359999418258667,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6820000410079956,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6499999761581421,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 86,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6780000925064087,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 86,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6499999761581421,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 86,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.16600000858306885
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 87,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.650999903678894,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 87,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 87,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.778999924659729,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 88,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01399993896484375,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 88,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.7349998950958252,
+      "nativeEncode": 0,
+      "copyBack": 0.00800013542175293
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 88,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.7760000228881836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 89,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7289999723434448,
+      "nativeEncode": 0,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 89,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6470000743865967,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 89,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 90,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6840000152587891,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 90,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 90,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7289999723434448,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6889998912811279,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6549999713897705,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 92,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6710000038146973,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 92,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.656999945640564,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 92,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 93,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6510000228881836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 93,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.012999892234802246,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 93,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6669999361038208,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 94,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 94,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6660000085830688,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 94,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 95,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.591999888420105,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 95,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.568000078201294,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 95,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 96,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5590000152587891,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 96,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 96,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5749999284744263,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 97,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 97,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5730000734329224,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 97,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5490000247955322,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 98,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6399999856948853,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 98,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6100000143051147,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 98,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 99,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6140000820159912,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 99,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 99,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6480000019073486,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6209999322891235,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5969998836517334,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 101,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6159999370574951,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 101,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.597000002861023,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 101,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 102,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5920000076293945,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.1669999361038208
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 102,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 102,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 1.1430000066757202,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 103,
+      "nativeInputCopy": 0.013000011444091797,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.0140000581741333,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 103,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8159999847412109,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.009000062942504883
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 103,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.8280000686645508,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 104,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.6600000858306885,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 104,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.8539999723434448,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 104,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 105,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.753000020980835,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 105,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 105,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6299999952316284,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 106,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 106,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.621999979019165,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 106,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5850000381469727,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 107,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6039999723434448,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 107,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5889999866485596,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 107,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 108,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.659000039100647,
+      "nativeEncode": 0,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 108,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.013000011444091797,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 108,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7919999361038208,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 109,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0,
+      "compute": 0.018000006675720215,
+      "nativeEncode": 0.003999948501586914,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 109,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.9919999837875366,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 109,
+      "nativeInputCopy": 0.0140000581741333,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6890000104904175,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 110,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6510000228881836,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 110,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5929999351501465,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 110,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 111,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5820000171661377,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 111,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 111,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6100000143051147,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5679999589920044,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 113,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5850000381469727,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 113,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5579999685287476,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 113,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 114,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.556999921798706,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 114,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 114,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6759999990463257,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 115,
+      "nativeInputCopy": 0.04700005054473877,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.003000020980834961,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 115,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6629999876022339,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 115,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5880000591278076,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 116,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6010000705718994,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 116,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5830000638961792,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 116,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6430000066757202,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.14299988746643066
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6039999723434448,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 118,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 118,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9539999961853027,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 118,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0,
+      "compute": 0.8550000190734863,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 1000,
+      "mode": 0,
+      "i": 119,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.097999930381775,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 1000,
+      "mode": 1,
+      "i": 119,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7009999752044678,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 1000,
+      "mode": 2,
+      "i": 119,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 0,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 0,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 0,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5979999303817749,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 1,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 1,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 1,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.562999963760376,
+      "nativeEncode": 0,
+      "copyBack": 0.11600005626678467
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 2,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593000054359436,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 2,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562000036239624,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 2,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 3,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6019999980926514,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 3,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 3,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 4,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 4,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5830000638961792,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 4,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5989999771118164,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 5,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5880000591278076,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 5,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5659999847412109,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 5,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 6,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8860000371932983,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 6,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 6,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.775999903678894,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 7,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 7,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9539999961853027,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 7,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5690000057220459,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 8,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5889999866485596,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 8,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562999963760376,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 8,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 9,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562000036239624,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 9,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 9,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5870000123977661,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 10,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 10,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.721000075340271,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 10,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.878000020980835,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 11,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6159999370574951,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 11,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0,
+      "compute": 0.5659999847412109,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 11,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 12,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562000036239624,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 12,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.020000100135803223,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 12,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.8370000123977661,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 13,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 13,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8029999732971191,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 13,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 1.6929999589920044,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.014999985694885254
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 14,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.7419999837875366,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 14,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.8569999933242798,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.009000062942504883
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 14,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.02199995517730713,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 15,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6799999475479126,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 15,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 15,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6069999933242798,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 16,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.18599998950958252
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 16,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.8769999742507935,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 16,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5679999589920044,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 17,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5900000333786011,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 17,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.812999963760376,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 17,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.018000006675720215,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.00800013542175293
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 18,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0,
+      "compute": 0.8280000686645508,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 18,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.028999924659729004,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 18,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5959999561309814,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 19,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 19,
+      "nativeInputCopy": 0.02799999713897705,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.2050000429153442,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 19,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7400000095367432,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 20,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8819999694824219,
+      "nativeEncode": 0,
+      "copyBack": 0.008000016212463379
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 20,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.8279999494552612,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 20,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.015000104904174805,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 21,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.7330000400543213,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 21,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 21,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6040000915527344,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 22,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5699999332427979,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 23,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 23,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5699999332427979,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 23,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 24,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5779999494552612,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 24,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 24,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 25,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 25,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5910000801086426,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 25,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5659999847412109,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 26,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5999999046325684,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 26,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5690000057220459,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 26,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 27,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5859999656677246,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 27,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 27,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 28,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 28,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5920000076293945,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 28,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5690000057220459,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 29,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5820000171661377,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 29,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6399999856948853,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 29,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 30,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 2.0399999618530273,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 30,
+      "nativeInputCopy": 0.003000020980834961,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01900005340576172,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.25300002098083496
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 30,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6200000047683716,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 31,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 31,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7339999675750732,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 31,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5729999542236328,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 32,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6000000238418579,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 32,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6019999980926514,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 32,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9129999876022339,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 33,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5859999656677246,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5819998979568481,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 34,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5659999847412109,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 35,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6339999437332153,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 35,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 35,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 36,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.9040000438690186,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 36,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 36,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6029999256134033,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 37,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 37,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6019999980926514,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 37,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 38,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.656000018119812,
+      "nativeEncode": 0,
+      "copyBack": 0.006999969482421875
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 38,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 1.2369999885559082,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 38,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 39,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.656999945640564,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 39,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 39,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9799998998641968,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 40,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 40,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 40,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 41,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5929999351501465,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 41,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 41,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 42,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.568000078201294,
+      "nativeEncode": 0,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 42,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.010000109672546387
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 42,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 1.0730000734329224,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 43,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 43,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.597000002861023,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 43,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 44,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 44,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.1390000581741333
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 44,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 45,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.6089999675750732,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 45,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 45,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 1.2289999723434448,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 46,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 46,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.7969999313354492,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 46,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5929999351501465,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5980000495910645,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 47,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 48,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 48,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 48,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 49,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.029000043869018555,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 49,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7860000133514404,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 49,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5829999446868896,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 50,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.597000002861023,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 50,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5800000429153442,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 50,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5729999542236328,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 51,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.596000075340271,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 52,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 52,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 52,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5740000009536743,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 53,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.656000018119812,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 53,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 53,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 54,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.9170000553131104,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 54,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.016000032424926758,
+      "nativeEncode": 0,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 54,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6610000133514404,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 55,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.01699995994567871,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 55,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.972000002861023,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 55,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7120000123977661,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 56,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6050000190734863,
+      "nativeEncode": 0,
+      "copyBack": 0.011999964714050293
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 56,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5670000314712524,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 56,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 57,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 57,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 57,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5900000333786011,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 58,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 58,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.593999981880188,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 58,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.565000057220459,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 59,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5839999914169312,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 59,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5640000104904175,
+      "nativeEncode": 0,
+      "copyBack": 0.005000114440917969
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 59,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 60,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5980000495910645,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 60,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 60,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6749999523162842,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 61,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 61,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5880000591278076,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 61,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5679999589920044,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 62,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6749999523162842,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 62,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5670000314712524,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 62,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 63,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5800000429153442,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 63,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 63,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7540000677108765,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 64,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 64,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7719999551773071,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 64,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6869999170303345,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 65,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.8880000114440918,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 65,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.9270000457763672,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.21299993991851807
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 65,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.018000006675720215,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 66,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.7020000219345093,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 66,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 66,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6339999437332153,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 67,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 67,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5759999752044678,
+      "nativeEncode": 0,
+      "copyBack": 0.007000088691711426
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 67,
+      "nativeInputCopy": 0.002000093460083008,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.8190000057220459,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 68,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.019999980926513672,
+      "compute": 0.8370000123977661,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 68,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5160000324249268,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 68,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 69,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 1.027999997138977,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.008999943733215332
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 69,
+      "nativeInputCopy": 0.001999974250793457,
+      "nativeDecode": 0,
+      "compute": 0.015999913215637207,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 69,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6329998970031738,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 70,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 70,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5619999170303345,
+      "nativeEncode": 0,
+      "copyBack": 0.012000083923339844
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 70,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5219999551773071,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 71,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5260000228881836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 71,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6320000886917114,
+      "nativeEncode": 0,
+      "copyBack": 0.005999922752380371
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 71,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 72,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6769999265670776,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 72,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 72,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6130000352859497,
+      "nativeEncode": 0,
+      "copyBack": 0.16100001335144043
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.590999960899353,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 73,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5679999589920044,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5879999399185181,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5669999122619629,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 74,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 75,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.562000036239624,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 75,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 75,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5829999446868896,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 76,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 76,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5809999704360962,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 76,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5640000104904175,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6449999809265137,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5770000219345093,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 77,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 78,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5910000801086426,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 78,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 78,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6430000066757202,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 79,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 79,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6119999885559082,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 79,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5889999866485596,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6080000400543213,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5809999704360962,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 80,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.014999985694885254,
+      "nativeEncode": 0.003000020980834961,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 81,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.846000075340271,
+      "nativeEncode": 0,
+      "copyBack": 0.004999876022338867
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 81,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 81,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6349999904632568,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 82,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 82,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6209999322891235,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 82,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5920000076293945,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 83,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6170001029968262,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 83,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.590999960899353,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 83,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 84,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.5850000381469727,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 84,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 84,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6190000772476196,
+      "nativeEncode": 0,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6130000352859497,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 85,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5850000381469727,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 86,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.656000018119812,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 86,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6130000352859497,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 86,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 87,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.6619999408721924,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 87,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.013000011444091797,
+      "nativeEncode": 0,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 87,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.6469999551773071,
+      "nativeEncode": 0,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 88,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.0140000581741333,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.021000027656555176
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 88,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.7950000762939453,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 88,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6629999876022339,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003999829292297363
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 89,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6950000524520874,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 89,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6890000104904175,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 89,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 90,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7039999961853027,
+      "nativeEncode": 0,
+      "copyBack": 0.006000041961669922
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 90,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 90,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.7050000429153442,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.001999974250793457,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6100000143051147,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 91,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5770000219345093,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 92,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.6010000705718994,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 92,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5820000171661377,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 92,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 93,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5809999704360962,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 93,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 93,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.6660000085830688,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.007999897003173828
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 94,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 94,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5979999303817749,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 94,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5679999589920044,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 95,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5859999656677246,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 95,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5609999895095825,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 95,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 96,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.565000057220459,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 96,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.012000083923339844,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 96,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5820000171661377,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 97,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 97,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5849999189376831,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 97,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.559999942779541,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 98,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5520000457763672,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 98,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 98,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 99,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5210000276565552,
+      "nativeEncode": 0,
+      "copyBack": 0.009999990463256836
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 99,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 99,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5190000534057617,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5160000324249268,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 100,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5019999742507935,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 101,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5139999389648438,
+      "nativeEncode": 0,
+      "copyBack": 0.11500000953674316
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 101,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5630000829696655,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 101,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.0009999275207519531,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 102,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5189999341964722,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 102,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 102,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.531000018119812,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 103,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.010000109672546387,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 103,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.534000039100647,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 103,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5149999856948853,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 104,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.531000018119812,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 104,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5080000162124634,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 104,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010000109672546387,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 105,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.5039999485015869,
+      "nativeEncode": 0,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 105,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 105,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.534000039100647,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 106,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 106,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.527999997138977,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 106,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5149999856948853,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001000046730041504
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 107,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5299999713897705,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 107,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5870000123977661,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 107,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 108,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5119999647140503,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 108,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 108,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5329999923706055,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 109,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.011999964714050293,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 109,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.625,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 109,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5159999132156372,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 110,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5950000286102295,
+      "nativeEncode": 0,
+      "copyBack": 0.004999995231628418
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 110,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.531999945640564,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 110,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 111,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5720000267028809,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 111,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.03600001335144043,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 111,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5579999685287476,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5299999713897705,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 112,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5090000629425049,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 113,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5329999923706055,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 113,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5089999437332153,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 113,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 114,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5889999866485596,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 114,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.010999917984008789,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 114,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.527999997138977,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 115,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 115,
+      "nativeInputCopy": 0.0009999275207519531,
+      "nativeDecode": 0.001000046730041504,
+      "compute": 0.5709999799728394,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.09400010108947754
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 115,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5099999904632568,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 116,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5220000743865967,
+      "nativeEncode": 0,
+      "copyBack": 0.00299990177154541
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 116,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.5,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.002000093460083008
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 116,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.4989999532699585,
+      "nativeEncode": 0.001000046730041504,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 117,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5159999132156372,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 118,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.009999990463256836,
+      "nativeEncode": 0.0009999275207519531,
+      "copyBack": 0.001999974250793457
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 118,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5130000114440918,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 118,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.4970000982284546,
+      "nativeEncode": 0,
+      "copyBack": 0.003999948501586914
+    },
+    {
+      "size": 5000,
+      "mode": 0,
+      "i": 119,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5149999856948853,
+      "nativeEncode": 0,
+      "copyBack": 0.003000020980834961
+    },
+    {
+      "size": 5000,
+      "mode": 1,
+      "i": 119,
+      "nativeInputCopy": 0,
+      "nativeDecode": 0,
+      "compute": 0.5390000343322754,
+      "nativeEncode": 0,
+      "copyBack": 0.004000067710876465
+    },
+    {
+      "size": 5000,
+      "mode": 2,
+      "i": 119,
+      "nativeInputCopy": 0.001000046730041504,
+      "nativeDecode": 0,
+      "compute": 0.01100003719329834,
+      "nativeEncode": 0,
+      "copyBack": 0.0030001401901245117
+    }
+  ],
+  "paired": [
+    {
+      "size": 1000,
+      "generatedMinusBaseline": {
+        "p05": -0.36200010776519775,
+        "median": -0.026999950408935547,
+        "p95": 0.21399986743927002
+      }
+    },
+    {
+      "size": 5000,
+      "generatedMinusBaseline": {
+        "p05": -0.32099997997283936,
+        "median": -0.023000001907348633,
+        "p95": 0.2560000419616699
+      }
+    }
+  ]
+}
