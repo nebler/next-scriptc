@@ -10,6 +10,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 
 | Patch | Branch | Status | Last rebased onto upstream |
 | --- | --- | --- | --- |
+| Cached record prototype reflection | `next-scriptc/result-reflection` | **local, not pushed**; experimental, focused parity only | 2026-11-01, `a07d5a791` |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Committed and pushed to the fork. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) |
 
 ## int8 product ranges in wrapping sums
@@ -31,3 +32,12 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 | Loop shape that blocks vectorization in wasm32 | LLVM remarks: uncountable loops, unidentified induction variables, calls in loop ([wasm-simd-workerd.md](wasm-simd-workerd.md)) | Needs a minimal repro loop first |
 | `Map`/`Set` allocation and record copying cost | R1's analysis of real app targets ([real-app-targets.md](real-app-targets.md)) | Prioritize if Hill 2 (Papermark) hits it |
 | `JSON.stringify` on erased values | O1: 1.30 → 0.36 ms with a typed encoder ([function-level.md](function-level.md)) | Issue first |
+
+## Cached record prototype reflection
+
+- **Branch:** `next-scriptc/result-reflection`, commit `505306dee94421c413b83f7658484b7004593e41`. Worktree `/Users/noah/code/scriptc-wt/result-reflection`; upstream base `a07d5a791`.
+- **Status:** **local, not pushed**. Experimental; full and sanitized gates outstanding. Not used by the adapter, which stays on stock 0.4.6.
+- **Change:** `scr_dyn_get_prototype` reuses a native record's existing checked view. Runtime field refreshes preserve that view's prototype, so another field snapshot is unnecessary for this read. Arrays and other capsule types retain their previous path.
+- **Evidence:** M2's result cost is mostly strict reflective validation, not typed JSON encoding. Four short alternating fork windows measured strict serializer median 0.718 → 0.710 ms, an inconclusive gain on a loaded host. Separate windows reversed direction. See [native-result-encoding.md](native-result-encoding.md).
+- **Tests:** new corpus `typed-reflection-prototype-cache.ts` plus its frontend order baseline; direct Node/native release stdout and exit parity for it, `3120-dynamic-property-descriptors.js`, and `prototype-named-data-records.ts`. Only the changed release runtime unit was rebuilt into a private ABI 48 pack. No full suite.
+- **Remaining gaps:** separate typed-to-erased prototype mutation and hidden symbol attachment to a typed array exposed pre-existing parity failures. They are recorded with failed attempts in the report and are not fixed by this patch. Erased stringify remains a candidate for separate work; it is not on the production result-encoding path.
