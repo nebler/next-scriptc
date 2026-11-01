@@ -3,7 +3,7 @@ import {constructionValidator,resultValidator} from './result-validator.mjs';
 const abi = k => ({number:'f64',boolean:'bool',null:'bool',bytes:'bytes',json:'string',string:'string'})[k];
 const ts = k => ({number:'number',boolean:'boolean',null:'boolean',bytes:'Uint8Array',json:'string',string:'string'})[k];
 const c = k => ['string','json','bytes'].includes(k) ? ['const uint8_t *','size_t'] : [k === 'number' ? 'double' : 'uint8_t'];
-export function signature(fn, i, timing = false, specializeResults = false, constructionResults = false) {
+export function signature(fn, i, timing = false, specializeResults = false, constructionResults = false, catchFallback = true) {
   if (!fn.boundary) throw Error('Promotion build requires checkFunctionTypes boundary metadata');
   const {params,result} = fn.boundary;
   if(params.length>64)throw Error('Promotion ABI supports at most 64 arguments');
@@ -14,11 +14,18 @@ export function signature(fn, i, timing = false, specializeResults = false, cons
   const screened=result==='json'&&constructionResults&&fn.constructionProof?.eligible&&!!shape;
   const numericScreen=result==='number'&&constructionResults&&fn.constructionProof?.eligible;
   const scan=screened?constructionValidator(shape,`constructionResult${i}`):'';
-  const guards=screened||numericScreen?(fn.constructionProof?.guards?.[fn.name]??[]):[];
+  // With catchFallback, scriptc's checked typed JSON.parse is the input guard:
+  // any shape mismatch throws inside the try and this call reruns in JS. The
+  // separate dynamic preflight (a second native parse) is only kept without it.
+  const guards=(screened||numericScreen)&&!catchFallback?(fn.constructionProof?.guards?.[fn.name]??[]):[];
   const guardSource=guards.map((g,j)=>constructionValidator(g.shape,`constructionInput${i}_${j}`,true)).join('');
   const guardCalls=guards.map((g,j)=>`if(!constructionInput${i}_${j}(JSON.parse(p${g.index})))return ${numericScreen?'NaN':"''"};`).join('');
   const encode = result==='json' ? (screened ? `(constructionResult${i}(value)?JSON.stringify(value):'')` : constructionResults&&fn.constructionProof?.eligible&&fn.constructionProof.version===1 ? 'JSON.stringify(value)' : validator ? `(validateResult${i}(value)?JSON.stringify(value):serialize(value,true,()=>JSON.stringify(value)))` : 'serialize(value,true,()=>JSON.stringify(value))') : result==='null' ? 'false' : 'value';
-  const source = validator + scan + guardSource + `export function run${i}(${params.map((k,j)=>`p${j}:${ts(k)}`).join(',')}):${ts(result)} {${guardCalls}${declarations}${mark(1)}const value=f${i}(${params.map((_,j)=>`a${j}`).join(',')});${mark(2)}${numericScreen?'if(!Number.isFinite(value))return NaN;':''}${['number','boolean','string','null'].includes(result)?"serialize(value,true,()=>'');":''}const output=${encode};${mark(3)}return output;}\n`;
+  // Screened functions are pure, so any native exception (JSON syntax, checked
+  // typed reads) can rerun this call in JS instead of poisoning the instance.
+  const guarded=(screened||numericScreen)&&catchFallback;
+  const fallbackValue=numericScreen?'NaN':"''";
+  const source = validator + scan + guardSource + `export function run${i}(${params.map((k,j)=>`p${j}:${ts(k)}`).join(',')}):${ts(result)} {${guarded?'try{':''}${guardCalls}${declarations}${mark(1)}const value=f${i}(${params.map((_,j)=>`a${j}`).join(',')});${mark(2)}${numericScreen?'if(!Number.isFinite(value))return NaN;':''}${['number','boolean','string','null'].includes(result)?"serialize(value,true,()=>'');":''}const output=${encode};${mark(3)}return output;${guarded?`}catch(e){return ${fallbackValue};}`:''}}\n`;
   const buffered = ['string','json','bytes'].includes(result);
   const ret = buffered ? 'void' : result==='number' ? 'double' : 'uint8_t';
   const args = params.flatMap((k,j)=>['string','json','bytes'].includes(k)?[`(uint8_t *)j->inputs[${j}].data`,`j->inputs[${j}].len`]:[k==='number'?`j->inputs[${j}].number`:`j->inputs[${j}].boolean`]);

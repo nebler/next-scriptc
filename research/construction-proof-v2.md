@@ -213,3 +213,28 @@ Final validation passes 66 adapter tests and both shim tests on Node 24.22.0.
 The final focused rerun passes all seven local-construction and fallback tests,
 including preservation of an automatically promoted native bucket after fallback.
 Temporary dependency links and task-created native build output were removed.
+
+## Review follow-up: try/catch fallback replaces the parse guards
+
+Added in review on main, after CR3. Measured on the loaded Darwin arm64 host, so these are steering numbers and not stand-in or hosted results.
+
+Two probes on stock scriptc 0.4.6, run through the real promotion builder:
+
+- **Exceptions are catchable inside library mode, and the instance survives.** These include `JSON.parse` syntax errors and the SC4013 checked typed-read errors, the ones CR3's guard was built to prevent. A later call on the same instance succeeds.
+- **scriptc's typed `JSON.parse(p) as T` is a checked guard.** For a record with number, string, boolean, nested object, array and nullable fields, every mismatch tested throws: null, wrong primitive, an array instead of an object, a missing field, and an object instead of an array. Valid extra fields and large finite numbers parse identically to JS.
+
+Change: when `catchFallback` (default `true`) applies to a screened function, the generated wrapper wraps its whole body in `try { ... } catch { return <fallback status> }`. The JS-side syntax preflight (`parseInputs`) and the separate dynamic shape guard, a second native parse, are both dropped. Any native exception now reruns that one call in JS. This is sound because screened functions passed the purity screen and the construction proof: there is no partial side effect to undo, and a JS rerun gives the JS answer, or the JS exception, to the caller. Uncatchable runtime panics still poison the instance, as before. `catchFallback:false` keeps CR3's guard path for comparison. Unscreened functions are unchanged.
+
+The three arms rotate each round, with 120 measured rounds after 10 warmups ([bench](construction-proof-v3-bench.mjs), [raw](construction-proof-v3-host.json)). Wall time is in milliseconds:
+
+| Events | Strict median | CR3 guard median | try/catch median (p05 / p95) |
+| ---: | ---: | ---: | ---: |
+| 1,000 | 0.468 | 0.398 | **0.140** (0.122 / 0.381) |
+| 5,000 | 0.897 | 1.860 | **0.541** (0.496 / 0.949) |
+
+The plain JS `revenueCore` on the same host, measured sequentially rather than interleaved and including result `JSON.stringify`, has a median of 0.272 ms at 1k and 1.187 ms at 5k. On this host native now wins at 1k, where it lost in M2. This **needs stand-in confirmation**, because boundary costs scale about 2.25× in the calibration.
+
+Open gaps:
+- **A bucket whose calls keep falling back pays for native work plus JS.** The dispatcher should demote a bucket whose fallback rate is high.
+- `constructionResults` is still off by default.
+- Async `revenue` is still strict.

@@ -140,7 +140,7 @@ rejection, non-finite input rejection, Unicode, and JSON lone-surrogate strings.
 No scriptc edit, Docker operation, Vercel call, PR, push, or root README edit.
 [Proof, gaps, workload verdicts, and raw measurements](construction-proof.md).
 
-## 2026-11-01: CR2 local allocation extension and per-call fallback
+## 10. CR3: local allocation proof and per-call fallback (2026-11-01)
 
 Hypothesis: local allocation provenance plus a typed finite-value scan can cover
 real aggregation functions without reflective result validation. Implemented an
@@ -163,3 +163,18 @@ Validation: 66 adapter tests and 2 shim tests pass on Node 24.22.0; the final
 focused fallback suite passes all 7 tests. Real revenueCore dispatcher shadows
 verify at 1k and 5k. Temporary dependency symlinks and generated native artifacts
 were removed. No containers, scriptc source, Vercel, or root README were changed.
+
+## 11. try/catch fallback instead of parse guards (2026-11-01)
+
+- **Hypothesis:** CR3's 5k regression comes from its parse guards (a JS syntax preflight plus a second native dynamic parse). Native exceptions are catchable, and scriptc's typed `JSON.parse` already rejects shape mismatches, so a `try/catch` fallback can replace both.
+- **Change:** `catchFallback` (default on, screened functions only) wraps the generated wrapper body in try/catch and returns the per-call fallback status. The guards are dropped.
+- **Result, loaded host, real `revenueCore`, rotating arms:**
+
+  | Events | Strict | CR3 guard | try/catch | JS (sequential) |
+  | ---: | ---: | ---: | ---: | ---: |
+  | 1k | 0.468 | 0.398 | **0.140** | 0.272 |
+  | 5k | 0.897 | 1.860 | **0.541** | 1.187 |
+
+  All values are median milliseconds. 66 adapter tests pass.
+- **Kept.** Needs stand-in confirmation, because the gain comes from boundary costs. Follow-up: demote buckets with high fallback rates. See [construction-proof-v2.md](construction-proof-v2.md).
+
