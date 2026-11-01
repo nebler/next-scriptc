@@ -11,7 +11,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 | Patch | Branch | Status | Last rebased onto upstream |
 | --- | --- | --- | --- |
 | Cached record prototype reflection | `next-scriptc/result-reflection` | **local, not pushed**; experimental, focused parity only | 2026-11-01, `a07d5a791` |
-| Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | local, not pushed; focused checks pass, full gate pending | 2026-11-01, `a07d5a791` |
+| Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | local, not pushed; focused checks pass, full gate pending; **stacked on the int8 branch** (upstream it needs the int8 PR first or a rebase onto plain upstream) | 2026-11-01, `a07d5a791` |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Committed and pushed to the fork. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) |
 
 ## int8 product ranges in wrapping sums
