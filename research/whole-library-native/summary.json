@@ -1,0 +1,228 @@
+{
+  "schema": 1,
+  "compiler": {
+    "version": "0.4.6",
+    "sha256": "5cd0af91a2c127bd3dff1960f521b08dadedf1a516dcc948053ed76a37123fd1",
+    "integrity": "sha512-OGfj/EA1N9yHhEb5SFswhyKrwwABqc/Druv+SfrOqz+C8mGeuU760v5Io6iselTLCTAR74xHQ+nJ9mZAuin5ig=="
+  },
+  "buildAttempts": 35,
+  "checks": [
+    {
+      "file": "check-dayjs-nocheck-banner.json",
+      "library": "dayjs",
+      "variant": "nocheck-banner",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught Error: values of type 'void' cannot be compiled yet (supported: number, string, boolean, arrays, Maps, Sets, RegExp, Dates, functions, classes, records, unions of those, and 'unknown') [SC2001 at <TEMP>/builds/dayjs/nocheck-banner/bundle.js:31]\n\u001fSC4013\u001frev_init"
+          }
+        ]
+      },
+      "timings": []
+    },
+    {
+      "file": "check-dayjs-require-entry.json",
+      "library": "dayjs",
+      "variant": "require-entry",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught Error: 'instanceof' right-hand sides other than classes declared in the program is not supported yet [SC1090 at <TEMP>/builds/dayjs/require-entry/bundle.js:35]\n\u001fSC4013\u001frev_fn_0"
+          }
+        ]
+      },
+      "timings": []
+    },
+    {
+      "file": "check-escape-html-require-entry.json",
+      "library": "escape-html",
+      "variant": "require-entry",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "timings": [
+        {
+          "inputBytes": 169,
+          "samples": 35,
+          "jsMedianMs": 0.0009170000000011669,
+          "nativeMedianMs": 0.009041999999993777
+        },
+        {
+          "inputBytes": 2704,
+          "samples": 35,
+          "jsMedianMs": 0.011499999999998067,
+          "nativeMedianMs": 0.04383299999999224
+        },
+        {
+          "inputBytes": 21632,
+          "samples": 35,
+          "jsMedianMs": 0.07408300000000168,
+          "nativeMedianMs": 0.2724589999999978
+        }
+      ]
+    },
+    {
+      "file": "check-escape-html.json",
+      "library": "escape-html",
+      "variant": "neutral",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught Error: Object.getPrototypeOf on this value is not supported yet\n\u001fSC4013\u001frev_init"
+          }
+        ]
+      },
+      "timings": []
+    },
+    {
+      "file": "check-json-2-csv-nocheck-banner.json",
+      "library": "json-2-csv",
+      "variant": "nocheck-banner",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "emptyInput": {
+        "js": {
+          "value": "\n"
+        },
+        "native": {
+          "value": "\n"
+        },
+        "dispatcher": {
+          "value": "\n"
+        }
+      },
+      "timings": [
+        {
+          "inputBytes": 61,
+          "samples": 35,
+          "jsMedianMs": 0.008333999999990738,
+          "nativeMedianMs": 0.04479199999997263
+        },
+        {
+          "inputBytes": 1163,
+          "samples": 35,
+          "jsMedianMs": 0.049000000000006594,
+          "nativeMedianMs": 0.24412399999999934
+        },
+        {
+          "inputBytes": 9620,
+          "samples": 35,
+          "jsMedianMs": 0.2852919999999983,
+          "nativeMedianMs": 1.5339170000000024
+        }
+      ]
+    },
+    {
+      "file": "check-json-2-csv-require-nocheck.json",
+      "library": "json-2-csv",
+      "variant": "require-nocheck",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "emptyInput": {
+        "js": {
+          "value": "\n"
+        },
+        "native": {
+          "value": "\n"
+        },
+        "dispatcher": {
+          "value": "\n"
+        }
+      },
+      "timings": [
+        {
+          "inputBytes": 61,
+          "samples": 35,
+          "jsMedianMs": 0.009457999999995081,
+          "nativeMedianMs": 0.04687500000002842
+        },
+        {
+          "inputBytes": 1163,
+          "samples": 35,
+          "jsMedianMs": 0.04354200000000219,
+          "nativeMedianMs": 0.22825000000000273
+        },
+        {
+          "inputBytes": 9620,
+          "samples": 35,
+          "jsMedianMs": 0.29616699999999696,
+          "nativeMedianMs": 1.5632510000000082
+        }
+      ]
+    },
+    {
+      "file": "check-markdown-it-minified.json",
+      "library": "markdown-it",
+      "variant": "minified",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught TypeError: expected string at $, got undefined\n\u001fSC4013\u001frev_init"
+          }
+        ]
+      },
+      "timings": []
+    },
+    {
+      "file": "check-markdown-it-require-nocheck.json",
+      "library": "markdown-it",
+      "variant": "require-nocheck",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught TypeError: expected string at $, got undefined\n\u001fSC4013\u001frev_init"
+          }
+        ]
+      },
+      "timings": []
+    },
+    {
+      "file": "check-markdown-it.json",
+      "library": "markdown-it",
+      "variant": "neutral",
+      "parity": {
+        "attempted": 1,
+        "matched": 0,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 0,
+            "message": "Error: \u0001Uncaught TypeError: expected string at $, got undefined\n\u001fSC4013\u001frev_init"
+          }
+        ]
+      },
+      "timings": []
+    }
+  ]
+}
