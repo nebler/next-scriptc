@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-02",
+  "commands": [
+    {
+      "command": "node --test --test-concurrency=1 packages/next-scriptc/test/*.mjs",
+      "exitCode": 0,
+      "tests": 95,
+      "pass": 95,
+      "skip": 0,
+      "log": "next-tests.log"
+    },
+    {
+      "command": "node --test --test-concurrency=1 packages/scriptc-promote/test/*.mjs",
+      "exitCode": 0,
+      "tests": 26,
+      "pass": 24,
+      "skip": 2,
+      "log": "promote-tests.log"
+    },
+    {
+      "command": "node scripts/promotion-fuzz.mjs",
+      "exitCode": 0,
+      "result": {
+        "seed": 20935,
+        "cases": 40,
+        "inputs": 680,
+        "checks": 1360,
+        "native": 2266,
+        "fallback": 534,
+        "candidates": 17,
+        "elapsedMs": 17675.972332999998
+      },
+      "log": "fuzz.log"
+    },
+    {
+      "command": "node research/opaque-handles/validate.mjs",
+      "exitCode": 0,
+      "evidence": "evidence.json"
+    }
+  ],
+  "handleCorpus": {
+    "seed": 20935,
+    "calls": 100,
+    "nativeSuccesses": 100,
+    "referenceIdentity": true,
+    "decodedShadowVerified": true,
+    "deliberateMismatchDemoted": true
+  },
+  "compiler": "stock scriptc 0.4.6",
+  "typescript": "5.9.3 resolved from Formbricks apps/web",
+  "summaryNative": false,
+  "timing": false,
+  "overlap": "Setup npm ci (2s) and Prisma generation (~1s) briefly overlapped a promotion suite. Could exceed two jobs if external library probe was active. Subsequent validation serial. No timing.",
+  "implementationHashes": {
+    "packages/scriptc-promote/src/functions/call-site-specialization.mjs": "aacd065b8c75126bd0bbaf32b16c864c16ef0242736885af7ab23133220fb667",
+    "packages/scriptc-promote/src/functions/construction-local.mjs": "045b7f85f97bd61cc7933388da6a325ef81a25b3b1d5be5e7168f318d5c3a18a",
+    "packages/scriptc-promote/src/functions/construction-proof.mjs": "0304e5643037d963fb9c29455c3bb26d12e045c454ac9762357e7550eae1ef73",
+    "packages/scriptc-promote/src/functions/construction-validator.mjs": "eb45bc0d84358ce104d1a2df5ef3cb111ef221fb9f4b0a3548dbf7383d1e6f9a",
+    "packages/scriptc-promote/src/functions/dependency-closure.mjs": "fb11a760f81fd89ee5bf40b6221615679b80359aff832933ff247a5b737cfbda",
+    "packages/scriptc-promote/src/functions/extract.mjs": "431fe4fd8f0e0d880bbd8c5d5f1ce13b8f7f149a16c341a3d475db520f9acd2b",
+    "packages/scriptc-promote/src/functions/json.mjs": "84cc5013ecb165344eae5aaa945841c6409d5ad7b3a91193cf37e678907ad32b",
+    "packages/scriptc-promote/src/functions/loader.mjs": "d9c1b08895db8e4d0a69c64b9821bc42cab5154651e159e6c22deb9b967b2b29",
+    "packages/scriptc-promote/src/functions/opaque-handles.mjs": "1a689668ba039d41d620e211bc31328ba3f3dfa469365d98051c953bdf2ed1d5",
+    "packages/scriptc-promote/src/functions/promotion-build.mjs": "44a331c228b9dcaa8803828287a1e263319765d7e99a6bd406ba2c781329e173",
+    "packages/scriptc-promote/src/functions/promotion-crash-guard.mjs": "4026aeeabcfa9b5022d3251b3cc95b28f8f2f627c38b99516189be1d687160f4",
+    "packages/scriptc-promote/src/functions/promotion-discovery.mjs": "ca226d14c5bc1b701373db92d53a65e567a2188ab037a3e1ec193fc82e2971e7",
+    "packages/scriptc-promote/src/functions/promotion-encodings.mjs": "7c1ca0be03afcfd9153fc8f6de2f3fdc85a798a044bc969e4f3ad57e0c32dccf",
+    "packages/scriptc-promote/src/functions/promotion-policy.mjs": "956b3ad792dedce0f2207443c92f7f537267e30cd4193bf32c3e7f63e21cb3bb",
+    "packages/scriptc-promote/src/functions/promotion-runtime.mjs": "b32a703ff2a1e30d4c16b3c977abc71ab52dc5581c501c77c845f741727d2057",
+    "packages/scriptc-promote/src/functions/promotion-signature.mjs": "9c90d0b54650f73177c73e4e250a8ace66f0b01d1c4e519f28a5ec5185da443c",
+    "packages/scriptc-promote/src/functions/promotion.mjs": "eb091acd55714e159b47bc7af63385404d31c97a9270b3c70db6179c544cd1fe",
+    "packages/scriptc-promote/src/functions/types.mjs": "5d295f457648cfe1471c93b468493ea7911fb8a38281237b0c7132ad8fec53ff"
+  },
+  "cleanup": {
+    "setupOwnedDependenciesRemoved": true,
+    "prismaOutputRemoved": true,
+    "workspaceLinksRemoved": true,
+    "boundaryBuildOutputRemoved": true
+  },
+  "artifacts": {
+    "compressionCommand": "node scripts/compress-artifacts.mjs",
+    "compressed": 0,
+    "checkExitCode": 0,
+    "allBelow256KiB": true
+  }
+}

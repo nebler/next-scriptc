@@ -1,5 +1,5 @@
 import {stabilityDefaults,decideLane} from './promotion-policy.mjs';
-import {encodeArguments,decodeResult,canonicalResult} from './promotion-encodings.mjs';
+import {encodeArguments,decodeResult,canonicalResult,argumentTable} from './promotion-encodings.mjs';
 import { createHash } from 'node:crypto';
 import { serialize } from './json.mjs';
 export function estimateSize(args){let size=0;for(const a of args)size+=typeof a==='string'?a.length:Array.isArray(a)?a.length:1;return Math.floor(Math.log2(Math.max(1,size)));}
@@ -9,10 +9,10 @@ export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, pol
  const policy={...stabilityDefaults,...overrides};
  if(!Number.isInteger(policy.samples)||policy.samples<1||!Number.isInteger(policy.required)||policy.required<=policy.samples/2||policy.required>policy.samples||!Number.isInteger(policy.coldSamples)||policy.coldSamples<0||!Number.isInteger(policy.recheckEvery)||policy.recheckEvery<1||!(policy.promoteRatio>0&&policy.promoteRatio<1&&policy.demoteRatio>1))throw new Error('Invalid promotion policy');
  function encode(id,args){return schemas[id]?encodeArguments(schemas[id],args):serialize(args);}
- function decode(id,output){return schemas[id]?decodeResult(schemas[id],output):JSON.parse(output);}
- function unpack(id,output,encodeMs){
-  if(!timing)return decode(id,output);
-  const begin=now(),value=decode(id,output.value);
+ function decode(id,output,input){return schemas[id]?decodeResult(schemas[id],output,argumentTable(input)):JSON.parse(output);}
+ function unpack(id,output,encodeMs,input){
+  if(!timing)return decode(id,output,input);
+  const begin=now(),value=decode(id,output.value,input);
   onTiming({id,jsEncode:encodeMs,...output.timings,jsDecode:now()-begin});return value;
  }
  if(!nativeSample)cpuNow=undefined;
@@ -35,7 +35,7 @@ export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, pol
   const time=now();f.shadows=f.shadows.filter(t=>time-t<60000);
   if(pending||f.shadows.length>=perMinute)return;
   let input,expected,inputMs,inputWallMs;const encodeWallBegin=now(),encodeBegin=serviceNow();try{input=encode(id,args);inputMs=serviceNow()-encodeBegin;inputWallMs=now()-encodeWallBegin;}catch(e){f.fallback++;return;}
-  try{expected=canonicalResult(result,schemas[id]);}catch{f.fallback++;return;}
+  try{expected=canonicalResult(result,schemas[id],argumentTable(input));}catch{f.fallback++;return;}
   f.shadows.push(time);pending++;
   // Start after the synchronous caller receives its JS answer. Capturing bytes
   // now isolates mutable caller arguments and results from the background job.
@@ -44,11 +44,11 @@ export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, pol
    const output=sample?sample.value:await nativeAsync(id,input);
    recordFallback(id,s,output?.fallback===true);
    if(output?.fallback===true){f.fallback++;return;}
-   const decodeWallBegin=now(),decodeBegin=serviceNow(),parsed=unpack(id,output,inputMs);
+   const decodeWallBegin=now(),decodeBegin=serviceNow(),parsed=unpack(id,output,inputMs,input);
    const decodeMs=serviceNow()-decodeBegin,decodeWallMs=now()-decodeWallBegin;
    // CPU pairs require both clocks. Never silently compare CPU with wall.
    const ms=sample?(cpuNow?sample.cpuMs:sample.elapsedMs)+inputMs+decodeMs:now()-begin+inputMs;
-   if(canonicalResult(parsed,schemas[id])!==expected){transition(id,s,'demoted',{reason:'mismatch',inputHash:createHash('sha256').update(typeof input==='string'?input:serialize(input.map(v=>v instanceof Uint8Array?Array.from(v):v))).digest('hex')});return;}
+   if(canonicalResult(parsed,schemas[id],argumentTable(input))!==expected){transition(id,s,'demoted',{reason:'mismatch',inputHash:createHash('sha256').update(typeof input==='string'?input:serialize(input.map(v=>v instanceof Uint8Array?Array.from(v):v))).digest('hex')});return;}
    if(poisoned||s.state==='demoted')return;
    s.verified++;
    if(s.cold++<policy.coldSamples)return;
@@ -69,7 +69,7 @@ export function createDispatcher({native, nativeAsync, nativeSample, cpuNow, pol
   const recheck=mode==='auto'&&s.calls%policy.recheckEvery===0;
   if(!poisoned&&(mode==='native'||s.state==='native')&&s.state!=='demoted'&&pending<maxPending&&!recheck){
    const begin=timing?now():0;let input,valid=true;try{input=encode(id,args);}catch{valid=false;f.fallback++;}
-   if(valid)try{const encodeMs=timing?now()-begin:0;pending++;try{const output=native(id,input);recordFallback(id,s,output?.fallback===true);if(output?.fallback===true){f.fallback++;}else{const result=unpack(id,output,encodeMs);f.native++;return result;}}finally{pending--;}}catch(e){panic(e);}
+   if(valid)try{const encodeMs=timing?now()-begin:0;pending++;try{const output=native(id,input);recordFallback(id,s,output?.fallback===true);if(output?.fallback===true){f.fallback++;}else{const result=unpack(id,output,encodeMs,input);f.native++;return result;}}finally{pending--;}}catch(e){panic(e);}
   }else if(s.state==='native'&&!recheck)f.fallback++;
   if(mode==='auto'&&s.state==='js'&&s.calls>=jsSamples)transition(id,s,'shadow');
   const learning=s.state==='shadow';

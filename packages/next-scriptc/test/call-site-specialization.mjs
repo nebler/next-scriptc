@@ -31,7 +31,8 @@ test('private fresh JSON call sites specialize and shape mismatches fall back wi
   for(const args of [good,[[{n:'wrong'}]],[[{}]],[[{n:undefined}]],[[{n:null}]],[[new Date()]],[[Object.create({n:2})]],[[{get n(){return 3;}}]],[[{n:0}]]]){
    const before=d.snapshot()[fn.id]?.fallback??0;
    assert.deepEqual(d.dispatch(fn.id,js[fn.name],args),js[fn.name](...args));
-   if(args!==good&&args[0][0].n!==0)assert.equal(d.snapshot()[fn.id].fallback,before+1);
+   if(fn.boundary.opaque)assert.equal(d.dispatch(fn.id,js[fn.name],args)[0].value,args[0][0]);
+   if(!fn.boundary.opaque&&args!==good&&args[0][0].n!==0)assert.equal(d.snapshot()[fn.id].fallback,before+1);
    const native=d.snapshot()[fn.id].native;d.dispatch(fn.id,js[fn.name],good);assert.equal(d.snapshot()[fn.id].native,native+1);
   }
  }

@@ -894,3 +894,39 @@ passes. The change is committed locally without a merge or push.
 - Only fields the closure actually reads (compares, does arithmetic on, or uses as keys) must be JSON-typed.
 
 The analysis it needs: classify each input path as read versus passthrough-only; reject any identity comparison or mutation of a handle. Then Dates, class instances and original object identity survive exactly, because they never cross the boundary. This is the proposed next adapter feature (H1), with `getElementSummary` as its acceptance target.
+
+## 35. H1 opaque passthrough handles (2026-11-02)
+
+Automatic promotion now lowers proven borrowed input paths to nominal numeric
+handles. Argument encoding retains a per-call table; result decoding restores
+original references. Date values, class instances, and arbitrary unknown borrowed
+fields survive without JSON conversion. A second typed audit catches inspection
+through local containers, and every handle-bearing build requires construction
+proof and per-call fallback. Existing JSON bytes still compare canonically;
+borrowed leaves compare by original-value identity after decoding.
+
+The real addon exercises automatic discovery with imported boundary types,
+100 seeded differential calls, exact Date and arbitrary-value identity, decoded
+shadow verification, and intentional mismatch demotion. The bounded classifier
+supports property paths, constant aliases, for-of and map bindings, and local
+array pushes. Unknown helper uses remain reads. Generic functions, explicit
+result annotations, optional structures, and unsupported shapes retain their
+previous checks. This is conservative H1 coverage, not whole-program inference.
+
+The pinned Formbricks body rejects `opaque handle is also read: 1.[]` for
+`elements[]`: it reads each element's fields and returns that same element.
+The requested read-and-pass exclusion prevents whole-summary acceptance.
+A separate closure using the original response interface passes the former Date
+gate and next rejects Zod's `TResponseData` type query in responses.ts. No scriptc
+blocker is established. No Zod emitter, production outliner, native summary,
+100/1k/10k parity run, or timing is claimed. The fork remains untouched.
+
+Next passes 95 tests. Promotion passes 24 tests, including three new H1 tests,
+with the two existing opt-in skips. The baseline fuzzer passes 680 inputs and
+1,360 comparisons across 17 candidates. Setup briefly overlapped a suite and may
+have exceeded the two-job budget if the other probe was active; subsequent jobs
+ran serially. No timing ran. AGPL source stays outside the repo. Setup output
+and temporary links are cleaned, artifacts are checked for compression, and the
+change is committed locally without merge or push. No containers, hosting,
+Papermark, compiler-fork, or root README work. [Design, limits, evidence, and
+reproduction](opaque-handles.md).
