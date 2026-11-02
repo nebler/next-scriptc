@@ -5,15 +5,16 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
 import os from 'node:os';
-import {extractFunctions} from '../../packages/scriptc-promote/src/functions/extract.mjs';
-const require=createRequire(new URL('../../packages/scriptc-promote/package.json',import.meta.url));
+const repoRoot=process.env.EVAL_REPO_ROOT??path.resolve(path.dirname(new URL(import.meta.url).pathname),'../..');
+const {extractFunctions}=await import(pathToFileURL(path.join(repoRoot,'packages/scriptc-promote/src/functions/extract.mjs')));
+const require=createRequire(path.join(repoRoot,'packages/scriptc-promote/package.json'));
 const ts=require('typescript');
 const [base,casesFile,output,nativeDir]=process.argv.slice(2), cases=JSON.parse(fs.readFileSync(casesFile));
 let sink; const rows=[];
-const nativeBuild=nativeDir?JSON.parse(fs.readFileSync(new URL('./native-build.json',import.meta.url))):null;
+const nativeBuild=nativeDir?JSON.parse(fs.readFileSync(path.join(repoRoot,'research/eval-corpus/native-build.json'))):null;
 const addon=nativeBuild?.compiled.length?require(path.join(nativeDir,'promotion.node')):null;
 const schemas=addon?JSON.parse(fs.readFileSync(path.join(nativeDir,'encodings.json'))).functions:null;
-const encoding=await import('../../packages/scriptc-promote/src/functions/promotion-encodings.mjs');
+const encoding=await import(pathToFileURL(path.join(repoRoot,'packages/scriptc-promote/src/functions/promotion-encodings.mjs')));
 
 function median(xs){return [...xs].sort((a,b)=>a-b)[Math.floor(xs.length/2)];}
 for(const c of cases){try{
