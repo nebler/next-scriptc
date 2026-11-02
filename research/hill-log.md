@@ -1057,3 +1057,15 @@ are removed after validation. No existing container, root README, scriptc fork,
 hosting, publication, merge, or push operation occurs. Validation and reproduction
 are recorded in the [PM1 report](papermark-milestone.md). The work is committed
 locally on its branch.
+
+**Review note on PM1 (2026-11-02): an integration defect, not a scriptc result.** AUTO cost 15.6% more mixed CPU, and the target never promoted. The cause is in the adapter:
+1. **Tiny helper wrapped in a hot loop.** `playbackSeconds` is called twice per event *from inside JS* (107.7M dispatches in PM1). Each call goes through the dispatcher wrapper, even after its bucket chose `js-final`.
+2. **Shadow starvation.** Nested helpers occupy the single shared pending-shadow slot and the same 20/200-call schedules. `documentViewDistribution` therefore collects 0–3 verified shadows instead of the 24 it needs, and never decides.
+
+**Planned fixes (D3), validated only on development workloads:**
+- calls between candidates inside JS bodies go to the original function, with no wrapper;
+- a near-zero-cost fast path once a function or bucket is `js-final`;
+- a per-function shadow slot and fair sampling, so nested candidates cannot starve outer ones;
+- optionally, never wrap candidates whose work screen shows trivially small per-call cost.
+
+Papermark stays held out: it is not used to tune D3, and is remeasured only as the next milestone (PM2).
