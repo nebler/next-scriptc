@@ -1,0 +1,2321 @@
+{
+  "repo": "immich-app/immich",
+  "url": "https://github.com/immich-app/immich",
+  "sha": "2c87a17c87e68f0180d6982722faa0fbb0238cbc",
+  "domain": "image",
+  "frameworkHypothesis": "NestJS/SvelteKit",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "AGPL-3.0"
+    },
+    {
+      "file": "web/src/lib/utils/license-utils.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "server/src/emails/license.email.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "server/src/dtos/license.dto.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "mobile/lib/utils/licenses.dart",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/cli/LICENSE",
+      "declaration": "AGPL-3.0"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "web/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [
+        "@sveltejs/kit",
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [
+        "@nestjs/core",
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "^0.35.3"
+      }
+    },
+    {
+      "file": "docs/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "docusaurus-lunr-search": "^3.3.2"
+      }
+    },
+    {
+      "file": "packages/plugin-sdk/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/cli/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sdk/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/scripts/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/e2e-auth-server/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/plugin-core/package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "e2e/package.json",
+      "license": "GNU Affero General Public License version 3",
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "web/src/lib/managers/timeline-manager/timeline-manager.svelte.ts",
+      "score": 21,
+      "symbols": [
+        {
+          "name": "timelineAsset",
+          "line": 125
+        },
+        {
+          "name": "direction",
+          "line": 200
+        },
+        {
+          "name": "isEarlier",
+          "line": 213
+        },
+        {
+          "name": "windowHeight",
+          "line": 246
+        },
+        {
+          "name": "bottomOfMonth",
+          "line": 247
+        },
+        {
+          "name": "bottomOfMonthInViewport",
+          "line": 248
+        },
+        {
+          "name": "month",
+          "line": 278
+        },
+        {
+          "name": "viewportTopRatioInMonth",
+          "line": 279
+        },
+        {
+          "name": "monthBottomViewportRatio",
+          "line": 280
+        },
+        {
+          "name": "hasDeferred",
+          "line": 292
+        },
+        {
+          "name": "timebuckets",
+          "line": 302
+        },
+        {
+          "name": "date",
+          "line": 308
+        },
+        {
+          "name": "changedWidth",
+          "line": 375
+        },
+        {
+          "name": "cancelable",
+          "line": 406
+        },
+        {
+          "name": "timelineMonth",
+          "line": 407
+        },
+        {
+          "name": "executionStatus",
+          "line": 416
+        },
+        {
+          "name": "notUpdated",
+          "line": 426
+        },
+        {
+          "name": "notExcluded",
+          "line": 427
+        },
+        {
+          "name": "notUpdated",
+          "line": 432
+        },
+        {
+          "name": "insertable",
+          "line": 433
+        },
+        {
+          "name": "response",
+          "line": 448
+        },
+        {
+          "name": "timelineAsset",
+          "line": 455
+        },
+        {
+          "name": "timelineMonthInfo",
+          "line": 475
+        },
+        {
+          "name": "randomAssetIndex",
+          "line": 483
+        },
+        {
+          "name": "result",
+          "line": 525
+        },
+        {
+          "name": "dateTime",
+          "line": 530
+        },
+        {
+          "name": "context",
+          "line": 550
+        },
+        {
+          "name": "monthCount",
+          "line": 551
+        },
+        {
+          "name": "cache",
+          "line": 563
+        },
+        {
+          "name": "idsToUpdate",
+          "line": 565
+        },
+        {
+          "name": "result",
+          "line": 566
+        },
+        {
+          "name": "changedTimelineMonths",
+          "line": 577
+        },
+        {
+          "name": "updated",
+          "line": 581
+        },
+        {
+          "name": "result",
+          "line": 587
+        },
+        {
+          "name": "assetsToAdd",
+          "line": 599
+        }
+      ]
+    },
+    {
+      "file": "packages/cli/src/commands/asset.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "UPLOAD_WATCH_BATCH_SIZE",
+          "line": 27
+        },
+        {
+          "name": "UPLOAD_WATCH_DEBOUNCE_TIME_MS",
+          "line": 28
+        },
+        {
+          "name": "uploadBatch",
+          "line": 69
+        },
+        {
+          "name": "newAssets",
+          "line": 71
+        },
+        {
+          "name": "startWatch",
+          "line": 80
+        },
+        {
+          "name": "extensions",
+          "line": 90
+        },
+        {
+          "name": "pathsBatcher",
+          "line": 96
+        },
+        {
+          "name": "uniquePaths",
+          "line": 100
+        },
+        {
+          "name": "onFile",
+          "line": 105
+        },
+        {
+          "name": "ext",
+          "line": 109
+        },
+        {
+          "name": "fsWatcher",
+          "line": 120
+        },
+        {
+          "name": "upload",
+          "line": 139
+        },
+        {
+          "name": "scanFiles",
+          "line": 143
+        },
+        {
+          "name": "scan",
+          "line": 164
+        },
+        {
+          "name": "files",
+          "line": 168
+        },
+        {
+          "name": "checkForDuplicates",
+          "line": 179
+        },
+        {
+          "name": "statsMap",
+          "line": 187
+        },
+        {
+          "name": "stats",
+          "line": 191
+        },
+        {
+          "name": "hashProgressBar",
+          "line": 220
+        },
+        {
+          "name": "checkProgressBar",
+          "line": 223
+        },
+        {
+          "name": "checkBulkUploadQueue",
+          "line": 230
+        },
+        {
+          "name": "response",
+          "line": 232
+        },
+        {
+          "name": "results",
+          "line": 234
+        },
+        {
+          "name": "requested",
+          "line": 235
+        },
+        {
+          "name": "stats",
+          "line": 254
+        },
+        {
+          "name": "queue",
+          "line": 265
+        },
+        {
+          "name": "stats",
+          "line": 267
+        },
+        {
+          "name": "dto",
+          "line": 271
+        },
+        {
+          "name": "batch",
+          "line": 276
+        },
+        {
+          "name": "failedTasks",
+          "line": 304
+        },
+        {
+          "name": "uploadFiles",
+          "line": 315
+        },
+        {
+          "name": "statsMap",
+          "line": 324
+        },
+        {
+          "name": "stats",
+          "line": 326
+        },
+        {
+          "name": "queue",
+          "line": 358
+        },
+        {
+          "name": "stats",
+          "line": 360
+        }
+      ]
+    },
+    {
+      "file": "packages/plugin-core/src/index.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "matchValueResult",
+          "line": 11
+        },
+        {
+          "name": "searchName",
+          "line": 18
+        },
+        {
+          "name": "searchPattern",
+          "line": 19
+        },
+        {
+          "name": "flags",
+          "line": 35
+        },
+        {
+          "name": "regex",
+          "line": 36
+        },
+        {
+          "name": "methods",
+          "line": 55
+        },
+        {
+          "name": "assetId",
+          "line": 62
+        },
+        {
+          "name": "created",
+          "line": 71
+        },
+        {
+          "name": "target",
+          "line": 101
+        },
+        {
+          "name": "configLat",
+          "line": 123
+        },
+        {
+          "name": "configLon",
+          "line": 124
+        },
+        {
+          "name": "assetLat",
+          "line": 130
+        },
+        {
+          "name": "assetLon",
+          "line": 131
+        },
+        {
+          "name": "earthDiameter",
+          "line": 137
+        },
+        {
+          "name": "deg",
+          "line": 138
+        },
+        {
+          "name": "delta",
+          "line": 139
+        },
+        {
+          "name": "assetDate",
+          "line": 159
+        },
+        {
+          "name": "hasTimeZone",
+          "line": 192
+        },
+        {
+          "name": "needsTimeZone",
+          "line": 193
+        },
+        {
+          "name": "entries",
+          "line": 198
+        },
+        {
+          "name": "texts",
+          "line": 199
+        },
+        {
+          "name": "matched",
+          "line": 200
+        },
+        {
+          "name": "assetTags",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "file": "server/src/utils/misc.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "isStartUpError",
+          "line": 27
+        },
+        {
+          "name": "getKeyByValue",
+          "line": 29
+        },
+        {
+          "name": "getMethodNames",
+          "line": 32
+        },
+        {
+          "name": "ctx",
+          "line": 33
+        },
+        {
+          "name": "descriptor",
+          "line": 36
+        },
+        {
+          "name": "handler",
+          "line": 41
+        },
+        {
+          "name": "getExternalDomain",
+          "line": 52
+        },
+        {
+          "name": "getKeysDeep",
+          "line": 56
+        },
+        {
+          "name": "obj",
+          "line": 61
+        },
+        {
+          "name": "value",
+          "line": 65
+        },
+        {
+          "name": "unsetDeep",
+          "line": 81
+        },
+        {
+          "name": "parts",
+          "line": 82
+        },
+        {
+          "name": "isMachineLearningEnabled",
+          "line": 94
+        },
+        {
+          "name": "isSmartSearchEnabled",
+          "line": 95
+        },
+        {
+          "name": "isOcrEnabled",
+          "line": 97
+        },
+        {
+          "name": "isFacialRecognitionEnabled",
+          "line": 99
+        },
+        {
+          "name": "isDuplicateDetectionEnabled",
+          "line": 101
+        },
+        {
+          "name": "isFaceImportEnabled",
+          "line": 103
+        },
+        {
+          "name": "handlePromiseError",
+          "line": 105
+        },
+        {
+          "name": "hasSomeDefined",
+          "line": 109
+        },
+        {
+          "name": "findOrFail",
+          "line": 111
+        },
+        {
+          "name": "value",
+          "line": 112
+        },
+        {
+          "name": "cleanModelName",
+          "line": 145
+        },
+        {
+          "name": "token",
+          "line": 146
+        },
+        {
+          "name": "getCLIPModelInfo",
+          "line": 154
+        },
+        {
+          "name": "modelInfo",
+          "line": 155
+        },
+        {
+          "name": "keys",
+          "line": 169
+        },
+        {
+          "name": "routeToErrorMessage",
+          "line": 176
+        },
+        {
+          "name": "isSchema",
+          "line": 179
+        },
+        {
+          "name": "patchOpenAPI",
+          "line": 183
+        },
+        {
+          "name": "removeOpenApi30IncompatibleKeys",
+          "line": 184
+        },
+        {
+          "name": "object",
+          "line": 196
+        },
+        {
+          "name": "schemas",
+          "line": 210
+        },
+        {
+          "name": "newKey",
+          "line": 272
+        },
+        {
+          "name": "operations",
+          "line": 278
+        }
+      ]
+    },
+    {
+      "file": "server/src/utils/bytes.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "KiB",
+          "line": 1
+        },
+        {
+          "name": "MiB",
+          "line": 2
+        },
+        {
+          "name": "GiB",
+          "line": 3
+        },
+        {
+          "name": "TiB",
+          "line": 4
+        },
+        {
+          "name": "PiB",
+          "line": 5
+        },
+        {
+          "name": "HumanReadableSize",
+          "line": 7
+        },
+        {
+          "name": "asHumanReadable",
+          "line": 9
+        },
+        {
+          "name": "units",
+          "line": 10
+        },
+        {
+          "name": "hexOrBufferToBase64",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/person.service.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "personKey",
+          "line": 59
+        },
+        {
+          "name": "pagination",
+          "line": 65
+        },
+        {
+          "name": "partnerIds",
+          "line": 69
+        },
+        {
+          "name": "ids",
+          "line": 90
+        },
+        {
+          "name": "person",
+          "line": 98
+        },
+        {
+          "name": "changeFeaturePhoto",
+          "line": 101
+        },
+        {
+          "name": "faces",
+          "line": 103
+        },
+        {
+          "name": "ids",
+          "line": 109
+        },
+        {
+          "name": "face",
+          "line": 140
+        },
+        {
+          "name": "person",
+          "line": 141
+        },
+        {
+          "name": "faces",
+          "line": 156
+        },
+        {
+          "name": "asset",
+          "line": 157
+        },
+        {
+          "name": "assetDimensions",
+          "line": 158
+        },
+        {
+          "name": "assetFace",
+          "line": 170
+        },
+        {
+          "name": "partnerIds",
+          "line": 201
+        },
+        {
+          "name": "personGroup",
+          "line": 214
+        },
+        {
+          "name": "thumbnailPath",
+          "line": 215
+        },
+        {
+          "name": "group",
+          "line": 228
+        },
+        {
+          "name": "person",
+          "line": 229
+        },
+        {
+          "name": "targetOwnerId",
+          "line": 244
+        },
+        {
+          "name": "hasSharedProperties",
+          "line": 245
+        },
+        {
+          "name": "hasPersonalProperties",
+          "line": 246
+        },
+        {
+          "name": "face",
+          "line": 266
+        },
+        {
+          "name": "person",
+          "line": 274
+        },
+        {
+          "name": "ownerId",
+          "line": 323
+        },
+        {
+          "name": "people",
+          "line": 339
+        },
+        {
+          "name": "people",
+          "line": 347
+        },
+        {
+          "name": "personGroups",
+          "line": 350
+        },
+        {
+          "name": "clusterGroups",
+          "line": 351
+        },
+        {
+          "name": "asset",
+          "line": 391
+        },
+        {
+          "name": "previewFile",
+          "line": 392
+        },
+        {
+          "name": "mlFaceIds",
+          "line": 409
+        },
+        {
+          "name": "matches",
+          "line": 418
+        },
+        {
+          "name": "match",
+          "line": 420
+        },
+        {
+          "name": "faceId",
+          "line": 425
+        }
+      ]
+    },
+    {
+      "file": "web/src/lib/managers/timeline-manager/timeline-month.svelte.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "old",
+          "line": 88
+        },
+        {
+          "name": "idsProcessed",
+          "line": 144
+        },
+        {
+          "name": "group",
+          "line": 152
+        },
+        {
+          "name": "addContext",
+          "line": 179
+        },
+        {
+          "name": "dateTime",
+          "line": 243
+        },
+        {
+          "name": "groupTitle",
+          "line": 255
+        },
+        {
+          "name": "viewerAsset",
+          "line": 262
+        },
+        {
+          "name": "timelineManager",
+          "line": 276
+        },
+        {
+          "name": "index",
+          "line": 277
+        },
+        {
+          "name": "heightDelta",
+          "line": 278
+        },
+        {
+          "name": "previousTimelineMonth",
+          "line": 280
+        },
+        {
+          "name": "newTop",
+          "line": 282
+        },
+        {
+          "name": "timelineMonth",
+          "line": 291
+        },
+        {
+          "name": "newTop",
+          "line": 292
+        },
+        {
+          "name": "currentIndex",
+          "line": 301
+        },
+        {
+          "name": "scrollTo",
+          "line": 308
+        },
+        {
+          "name": "_$t",
+          "line": 322
+        },
+        {
+          "name": "viewerAsset",
+          "line": 341
+        },
+        {
+          "name": "direction",
+          "line": 356
+        },
+        {
+          "name": "isEarlier",
+          "line": 358
+        },
+        {
+          "name": "group",
+          "line": 366
+        },
+        {
+          "name": "targetDate",
+          "line": 382
+        },
+        {
+          "name": "currentAssetDate",
+          "line": 386
+        },
+        {
+          "name": "diff",
+          "line": 387
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/sync.service.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "COMPLETE_ID",
+          "line": 30
+        },
+        {
+          "name": "MAX_DAYS",
+          "line": 31
+        },
+        {
+          "name": "MAX_DURATION",
+          "line": 32
+        },
+        {
+          "name": "mapSyncAssetV2",
+          "line": 34
+        },
+        {
+          "name": "isEntityBackfillComplete",
+          "line": 40
+        },
+        {
+          "name": "getStartId",
+          "line": 43
+        },
+        {
+          "name": "send",
+          "line": 46
+        },
+        {
+          "name": "sendEntityBackfillCompleteAck",
+          "line": 60
+        },
+        {
+          "name": "SYNC_TYPES_ORDER",
+          "line": 64
+        },
+        {
+          "name": "throwSessionRequired",
+          "line": 98
+        },
+        {
+          "name": "sessionId",
+          "line": 105
+        },
+        {
+          "name": "sessionId",
+          "line": 114
+        },
+        {
+          "name": "sessionId",
+          "line": 139
+        },
+        {
+          "name": "session",
+          "line": 161
+        },
+        {
+          "name": "isPendingSyncReset",
+          "line": 170
+        },
+        {
+          "name": "checkpoints",
+          "line": 177
+        },
+        {
+          "name": "handler",
+          "line": 232
+        },
+        {
+          "name": "pruneThreshold",
+          "line": 243
+        },
+        {
+          "name": "completeAck",
+          "line": 264
+        },
+        {
+          "name": "milliseconds",
+          "line": 269
+        },
+        {
+          "name": "upsertType",
+          "line": 275
+        },
+        {
+          "name": "upserts",
+          "line": 276
+        },
+        {
+          "name": "upsertType",
+          "line": 287
+        },
+        {
+          "name": "upserts",
+          "line": 288
+        },
+        {
+          "name": "deleteType",
+          "line": 299
+        },
+        {
+          "name": "deletes",
+          "line": 300
+        },
+        {
+          "name": "upsertType",
+          "line": 305
+        },
+        {
+          "name": "upserts",
+          "line": 306
+        },
+        {
+          "name": "deleteType",
+          "line": 317
+        },
+        {
+          "name": "deletes",
+          "line": 318
+        },
+        {
+          "name": "upsertType",
+          "line": 323
+        },
+        {
+          "name": "upserts",
+          "line": 324
+        },
+        {
+          "name": "deleteType",
+          "line": 335
+        },
+        {
+          "name": "deletes",
+          "line": 336
+        },
+        {
+          "name": "upsertType",
+          "line": 341
+        }
+      ]
+    },
+    {
+      "file": "web/src/lib/utils/asset-utils.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "removeTag",
+          "line": 32
+        },
+        {
+          "name": "$t",
+          "line": 46
+        },
+        {
+          "name": "downloadArchive",
+          "line": 53
+        },
+        {
+          "name": "archiveSize",
+          "line": 54
+        },
+        {
+          "name": "dto",
+          "line": 55
+        },
+        {
+          "name": "$t",
+          "line": 58
+        },
+        {
+          "name": "archive",
+          "line": 68
+        },
+        {
+          "name": "suffix",
+          "line": 69
+        },
+        {
+          "name": "archiveName",
+          "line": 70
+        },
+        {
+          "name": "queryParams",
+          "line": 71
+        },
+        {
+          "name": "downloadKey",
+          "line": 73
+        },
+        {
+          "name": "url",
+          "line": 78
+        },
+        {
+          "name": "$t",
+          "line": 85
+        },
+        {
+          "name": "$locale",
+          "line": 86
+        },
+        {
+          "name": "$t",
+          "line": 95
+        },
+        {
+          "name": "getFilenameExtension",
+          "line": 106
+        },
+        {
+          "name": "lastIndex",
+          "line": 107
+        },
+        {
+          "name": "startIndex",
+          "line": 108
+        },
+        {
+          "name": "getAssetFilename",
+          "line": 113
+        },
+        {
+          "name": "fileExtension",
+          "line": 114
+        },
+        {
+          "name": "isRotated90CW",
+          "line": 118
+        },
+        {
+          "name": "isRotated270CW",
+          "line": 122
+        },
+        {
+          "name": "isFlipped",
+          "line": 126
+        },
+        {
+          "name": "value",
+          "line": 127
+        },
+        {
+          "name": "getDimensions",
+          "line": 131
+        },
+        {
+          "name": "getFileSize",
+          "line": 140
+        },
+        {
+          "name": "size",
+          "line": 141
+        },
+        {
+          "name": "getAssetResolution",
+          "line": 145
+        },
+        {
+          "name": "getAssetRatio",
+          "line": 154
+        },
+        {
+          "name": "supportedImageMimeTypes",
+          "line": 159
+        },
+        {
+          "name": "isFirefox",
+          "line": 169
+        },
+        {
+          "name": "addSupportedMimeTypes",
+          "line": 171
+        },
+        {
+          "name": "isSafari",
+          "line": 172
+        },
+        {
+          "name": "match",
+          "line": 174
+        },
+        {
+          "name": "majorVersion",
+          "line": 180
+        }
+      ]
+    },
+    {
+      "file": "web/src/lib/utils/tree-utils.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "root",
+          "line": 25
+        },
+        {
+          "name": "current",
+          "line": 27
+        },
+        {
+          "name": "root",
+          "line": 34
+        },
+        {
+          "name": "current",
+          "line": 36
+        },
+        {
+          "name": "parts",
+          "line": 45
+        },
+        {
+          "name": "next",
+          "line": 51
+        },
+        {
+          "name": "child",
+          "line": 64
+        },
+        {
+          "name": "entries",
+          "line": 68
+        },
+        {
+          "name": "normalizeTreePath",
+          "line": 115
+        },
+        {
+          "name": "getPathParts",
+          "line": 118
+        },
+        {
+          "name": "parts",
+          "line": 119
+        },
+        {
+          "name": "joinPaths",
+          "line": 131
+        },
+        {
+          "name": "getParentPath",
+          "line": 147
+        },
+        {
+          "name": "normalized",
+          "line": 148
+        },
+        {
+          "name": "last",
+          "line": 149
+        }
+      ]
+    },
+    {
+      "file": "server/src/repositories/job.repository.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "WORKER_WATCH_INTERVAL_MS",
+          "line": 22
+        },
+        {
+          "name": "reflector",
+          "line": 41
+        },
+        {
+          "name": "instance",
+          "line": 45
+        },
+        {
+          "name": "handler",
+          "line": 47
+        },
+        {
+          "name": "config",
+          "line": 48
+        },
+        {
+          "name": "label",
+          "line": 54
+        },
+        {
+          "name": "jobKey",
+          "line": 58
+        },
+        {
+          "name": "errorMessage",
+          "line": 59
+        },
+        {
+          "name": "item",
+          "line": 79
+        },
+        {
+          "name": "errorMessage",
+          "line": 81
+        },
+        {
+          "name": "suffix",
+          "line": 118
+        },
+        {
+          "name": "workers",
+          "line": 119
+        },
+        {
+          "name": "item",
+          "line": 138
+        },
+        {
+          "name": "worker",
+          "line": 148
+        },
+        {
+          "name": "queue",
+          "line": 158
+        },
+        {
+          "name": "count",
+          "line": 159
+        },
+        {
+          "name": "promises",
+          "line": 202
+        },
+        {
+          "name": "itemsByQueue",
+          "line": 203
+        },
+        {
+          "name": "queueName",
+          "line": 205
+        },
+        {
+          "name": "job",
+          "line": 206
+        },
+        {
+          "name": "queue",
+          "line": 222
+        },
+        {
+          "name": "getPending",
+          "line": 234
+        },
+        {
+          "name": "results",
+          "line": 235
+        },
+        {
+          "name": "jobs",
+          "line": 249
+        },
+        {
+          "name": "existingJob",
+          "line": 292
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/album.service.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "mapAlbumMetadata",
+          "line": 26
+        },
+        {
+          "name": "albums",
+          "line": 53
+        },
+        {
+          "name": "results",
+          "line": 63
+        },
+        {
+          "name": "album",
+          "line": 79
+        },
+        {
+          "name": "hasSharedUsers",
+          "line": 81
+        },
+        {
+          "name": "hasSharedLink",
+          "line": 82
+        },
+        {
+          "name": "isShared",
+          "line": 83
+        },
+        {
+          "name": "albumUsers",
+          "line": 103
+        },
+        {
+          "name": "exists",
+          "line": 106
+        },
+        {
+          "name": "allowedAssetIdsSet",
+          "line": 113
+        },
+        {
+          "name": "assetIds",
+          "line": 118
+        },
+        {
+          "name": "userMetadata",
+          "line": 120
+        },
+        {
+          "name": "album",
+          "line": 122
+        },
+        {
+          "name": "album",
+          "line": 144
+        },
+        {
+          "name": "results",
+          "line": 147
+        },
+        {
+          "name": "updatedAlbum",
+          "line": 152
+        },
+        {
+          "name": "album",
+          "line": 174
+        },
+        {
+          "name": "results",
+          "line": 177
+        },
+        {
+          "name": "userIds",
+          "line": 195
+        },
+        {
+          "name": "recipientIds",
+          "line": 196
+        },
+        {
+          "name": "allowedAlbumIds",
+          "line": 209
+        },
+        {
+          "name": "allowedAssetIds",
+          "line": 219
+        },
+        {
+          "name": "existingAssetIds",
+          "line": 228
+        },
+        {
+          "name": "notPresentAssetIds",
+          "line": 229
+        },
+        {
+          "name": "album",
+          "line": 233
+        },
+        {
+          "name": "userIds",
+          "line": 249
+        },
+        {
+          "name": "recipientIds",
+          "line": 250
+        },
+        {
+          "name": "album",
+          "line": 265
+        },
+        {
+          "name": "results",
+          "line": 266
+        },
+        {
+          "name": "removedIds",
+          "line": 272
+        },
+        {
+          "name": "album",
+          "line": 291
+        },
+        {
+          "name": "exists",
+          "line": 298
+        },
+        {
+          "name": "user",
+          "line": 303
+        },
+        {
+          "name": "album",
+          "line": 321
+        },
+        {
+          "name": "exists",
+          "line": 323
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/duplicate.service.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "uniqueNonEmptyLines",
+          "line": 34
+        },
+        {
+          "name": "unique",
+          "line": 35
+        },
+        {
+          "name": "trimmed",
+          "line": 42
+        },
+        {
+          "name": "getUniqueCoordinate",
+          "line": 53
+        },
+        {
+          "name": "values",
+          "line": 54
+        },
+        {
+          "name": "unique",
+          "line": 62
+        },
+        {
+          "name": "duplicates",
+          "line": 72
+        },
+        {
+          "name": "mappedAssets",
+          "line": 74
+        },
+        {
+          "name": "duplicateIds",
+          "line": 94
+        },
+        {
+          "name": "duplicateGroup",
+          "line": 115
+        },
+        {
+          "name": "groupAssetIds",
+          "line": 120
+        },
+        {
+          "name": "idsToKeep",
+          "line": 123
+        },
+        {
+          "name": "idsToTrash",
+          "line": 124
+        },
+        {
+          "name": "ids",
+          "line": 147
+        },
+        {
+          "name": "assetAlbumMap",
+          "line": 160
+        },
+        {
+          "name": "allowedAlbumIds",
+          "line": 168
+        },
+        {
+          "name": "allowedShareIds",
+          "line": 174
+        },
+        {
+          "name": "allowedTagIds",
+          "line": 188
+        },
+        {
+          "name": "hasExifUpdate",
+          "line": 203
+        },
+        {
+          "name": "hasTagUpdate",
+          "line": 204
+        },
+        {
+          "name": "isForce",
+          "line": 222
+        },
+        {
+          "name": "visibilityOrder",
+          "line": 250
+        },
+        {
+          "name": "assetRating",
+          "line": 261
+        },
+        {
+          "name": "descriptionLines",
+          "line": 270
+        },
+        {
+          "name": "description",
+          "line": 271
+        },
+        {
+          "name": "latitude",
+          "line": 276
+        },
+        {
+          "name": "longitude",
+          "line": 277
+        },
+        {
+          "name": "albumIdSet",
+          "line": 283
+        },
+        {
+          "name": "allTags",
+          "line": 291
+        },
+        {
+          "name": "tagIds",
+          "line": 292
+        },
+        {
+          "name": "tagValues",
+          "line": 293
+        },
+        {
+          "name": "asset",
+          "line": 326
+        },
+        {
+          "name": "duplicateAssets",
+          "line": 352
+        },
+        {
+          "name": "duplicatesDetectedAt",
+          "line": 371
+        },
+        {
+          "name": "duplicateIds",
+          "line": 382
+        }
+      ]
+    },
+    {
+      "file": "packages/scripts/src/commands/notes.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "findRoot",
+          "line": 8
+        },
+        {
+          "name": "root",
+          "line": 11
+        },
+        {
+          "name": "REPO",
+          "line": 13
+        },
+        {
+          "name": "Files",
+          "line": 15
+        },
+        {
+          "name": "PULL_REQUEST_BATCH",
+          "line": 56
+        },
+        {
+          "name": "SEARCH_BATCH",
+          "line": 57
+        },
+        {
+          "name": "pulls",
+          "line": 85
+        },
+        {
+          "name": "fields",
+          "line": 89
+        },
+        {
+          "name": "query",
+          "line": 96
+        },
+        {
+          "name": "data",
+          "line": 109
+        },
+        {
+          "name": "fields",
+          "line": 139
+        },
+        {
+          "name": "search",
+          "line": 141
+        },
+        {
+          "name": "data",
+          "line": 148
+        },
+        {
+          "name": "response",
+          "line": 171
+        },
+        {
+          "name": "commits",
+          "line": 205
+        },
+        {
+          "name": "pulls",
+          "line": 206
+        },
+        {
+          "name": "changes",
+          "line": 207
+        },
+        {
+          "name": "firstTimers",
+          "line": 208
+        },
+        {
+          "name": "notes",
+          "line": 209
+        },
+        {
+          "name": "match",
+          "line": 216
+        },
+        {
+          "name": "pulls",
+          "line": 227
+        },
+        {
+          "name": "originals",
+          "line": 231
+        },
+        {
+          "name": "match",
+          "line": 243
+        },
+        {
+          "name": "originals",
+          "line": 248
+        },
+        {
+          "name": "published",
+          "line": 254
+        },
+        {
+          "name": "candidates",
+          "line": 263
+        },
+        {
+          "name": "sections",
+          "line": 284
+        },
+        {
+          "name": "matches",
+          "line": 289
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/tag.service.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "tags",
+          "line": 26
+        },
+        {
+          "name": "tag",
+          "line": 32
+        },
+        {
+          "name": "userId",
+          "line": 46
+        },
+        {
+          "name": "value",
+          "line": 47
+        },
+        {
+          "name": "duplicate",
+          "line": 48
+        },
+        {
+          "name": "tag",
+          "line": 54
+        },
+        {
+          "name": "existing",
+          "line": 63
+        },
+        {
+          "name": "parts",
+          "line": 67
+        },
+        {
+          "name": "assetIds",
+          "line": 74
+        },
+        {
+          "name": "tag",
+          "line": 75
+        },
+        {
+          "name": "tags",
+          "line": 81
+        },
+        {
+          "name": "assetIds",
+          "line": 88
+        },
+        {
+          "name": "results",
+          "line": 106
+        },
+        {
+          "name": "results",
+          "line": 118
+        },
+        {
+          "name": "results",
+          "line": 139
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/library.service.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "library",
+          "line": 96
+        },
+        {
+          "name": "matcher",
+          "line": 105
+        },
+        {
+          "name": "ready$",
+          "line": 111
+        },
+        {
+          "name": "handler",
+          "line": 113
+        },
+        {
+          "name": "deletionHandler",
+          "line": 125
+        },
+        {
+          "name": "libraries",
+          "line": 196
+        },
+        {
+          "name": "statistics",
+          "line": 203
+        },
+        {
+          "name": "library",
+          "line": 211
+        },
+        {
+          "name": "libraries",
+          "line": 216
+        },
+        {
+          "name": "pendingDeletions",
+          "line": 223
+        },
+        {
+          "name": "libraryString",
+          "line": 225
+        },
+        {
+          "name": "library",
+          "line": 237
+        },
+        {
+          "name": "library",
+          "line": 257
+        },
+        {
+          "name": "asset",
+          "line": 272
+        },
+        {
+          "name": "assetIds",
+          "line": 280
+        },
+        {
+          "name": "progressMessage",
+          "line": 282
+        },
+        {
+          "name": "validation",
+          "line": 301
+        },
+        {
+          "name": "stat",
+          "line": 316
+        },
+        {
+          "name": "isAccess",
+          "line": 330
+        },
+        {
+          "name": "importPaths",
+          "line": 342
+        },
+        {
+          "name": "validation",
+          "line": 352
+        },
+        {
+          "name": "library",
+          "line": 362
+        },
+        {
+          "name": "libraryId",
+          "line": 382
+        },
+        {
+          "name": "assetPath",
+          "line": 408
+        },
+        {
+          "name": "stat",
+          "line": 409
+        },
+        {
+          "name": "libraries",
+          "line": 461
+        },
+        {
+          "name": "assets",
+          "line": 485
+        },
+        {
+          "name": "isInLibrary",
+          "line": 486
+        },
+        {
+          "name": "stats",
+          "line": 496
+        },
+        {
+          "name": "asset",
+          "line": 501
+        },
+        {
+          "name": "stat",
+          "line": 502
+        },
+        {
+          "name": "action",
+          "line": 503
+        },
+        {
+          "name": "promises",
+          "line": 539
+        },
+        {
+          "name": "remainingCount",
+          "line": 562
+        },
+        {
+          "name": "cumulativePercentage",
+          "line": 563
+        }
+      ]
+    },
+    {
+      "file": "server/src/services/metadata.service.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "POSTGRES_INT_MAX",
+          "line": 40
+        },
+        {
+          "name": "POSTGRES_INT_MIN",
+          "line": 41
+        },
+        {
+          "name": "firstDateTime",
+          "line": 59
+        },
+        {
+          "name": "tagValue",
+          "line": 61
+        },
+        {
+          "name": "exifDateTime",
+          "line": 74
+        },
+        {
+          "name": "validate",
+          "line": 84
+        },
+        {
+          "name": "validateRange",
+          "line": 105
+        },
+        {
+          "name": "val",
+          "line": 107
+        },
+        {
+          "name": "getLensModel",
+          "line": 117
+        },
+        {
+          "name": "lensModel",
+          "line": 118
+        },
+        {
+          "name": "otherType",
+          "line": 183
+        },
+        {
+          "name": "match",
+          "line": 184
+        },
+        {
+          "name": "dates",
+          "line": 246
+        },
+        {
+          "name": "tags",
+          "line": 260
+        },
+        {
+          "name": "audioData",
+          "line": 319
+        },
+        {
+          "name": "videoData",
+          "line": 330
+        },
+        {
+          "name": "keyframeData",
+          "line": 353
+        },
+        {
+          "name": "isSidewards",
+          "line": 366
+        },
+        {
+          "name": "assetWidth",
+          "line": 367
+        },
+        {
+          "name": "assetHeight",
+          "line": 368
+        },
+        {
+          "name": "tasks",
+          "line": 370
+        },
+        {
+          "name": "asset",
+          "line": 433
+        },
+        {
+          "name": "isExists",
+          "line": 440
+        },
+        {
+          "name": "isChanged",
+          "line": 451
+        },
+        {
+          "name": "asset",
+          "line": 485
+        },
+        {
+          "name": "lockedProperties",
+          "line": 490
+        },
+        {
+          "name": "sidecarPath",
+          "line": 493
+        },
+        {
+          "name": "exif",
+          "line": 508
+        },
+        {
+          "name": "assetPath",
+          "line": 544
+        },
+        {
+          "name": "shouldProbe",
+          "line": 574
+        },
+        {
+          "name": "result",
+          "line": 584
+        },
+        {
+          "name": "sidecarDate",
+          "line": 585
+        },
+        {
+          "name": "orientation",
+          "line": 614
+        },
+        {
+          "name": "asset",
+          "line": 658
+        },
+        {
+          "name": "results",
+          "line": 659
+        }
+      ]
+    },
+    {
+      "file": "e2e/src/utils.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "dbUrl",
+          "line": 84
+        },
+        {
+          "name": "baseUrl",
+          "line": 85
+        },
+        {
+          "name": "shareUrl",
+          "line": 86
+        },
+        {
+          "name": "app",
+          "line": 87
+        },
+        {
+          "name": "testAssetDir",
+          "line": 89
+        },
+        {
+          "name": "testAssetDirInternal",
+          "line": 90
+        },
+        {
+          "name": "tempDir",
+          "line": 91
+        },
+        {
+          "name": "asBearerAuth",
+          "line": 92
+        },
+        {
+          "name": "asKeyAuth",
+          "line": 93
+        },
+        {
+          "name": "immichCli",
+          "line": 94
+        },
+        {
+          "name": "dockerExec",
+          "line": 96
+        },
+        {
+          "name": "immichAdmin",
+          "line": 98
+        },
+        {
+          "name": "specialCharStrings",
+          "line": 99
+        },
+        {
+          "name": "TEN_TIMES",
+          "line": 100
+        },
+        {
+          "name": "executeCommand",
+          "line": 102
+        },
+        {
+          "name": "promise",
+          "line": 104
+        },
+        {
+          "name": "child",
+          "line": 105
+        },
+        {
+          "name": "execPromise",
+          "line": 136
+        },
+        {
+          "name": "onEvent",
+          "line": 138
+        },
+        {
+          "name": "set",
+          "line": 140
+        },
+        {
+          "name": "idCallback",
+          "line": 144
+        },
+        {
+          "name": "item",
+          "line": 150
+        },
+        {
+          "name": "utils",
+          "line": 161
+        },
+        {
+          "name": "truncateTables",
+          "line": 202
+        },
+        {
+          "name": "query",
+          "line": 213
+        },
+        {
+          "name": "maxRetries",
+          "line": 214
+        },
+        {
+          "name": "websocket",
+          "line": 238
+        },
+        {
+          "name": "timeout",
+          "line": 280
+        },
+        {
+          "name": "type",
+          "line": 281
+        },
+        {
+          "name": "set",
+          "line": 283
+        },
+        {
+          "name": "onId",
+          "line": 284
+        },
+        {
+          "name": "response",
+          "line": 314
+        },
+        {
+          "name": "_dto",
+          "line": 348
+        },
+        {
+          "name": "assetData",
+          "line": 354
+        },
+        {
+          "name": "filename",
+          "line": 355
+        }
+      ]
+    }
+  ]
+}

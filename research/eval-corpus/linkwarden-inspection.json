@@ -1,0 +1,1950 @@
+{
+  "repo": "linkwarden/linkwarden",
+  "url": "https://github.com/linkwarden/linkwarden",
+  "sha": "eff7c6b735f6b20a4766745dc86c6bdc52bd9840",
+  "domain": "search",
+  "frameworkHypothesis": "Next",
+  "licenses": [
+    {
+      "file": "LICENSE.md",
+      "declaration": "AGPL-3.0"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/types/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/prisma/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/filesystem/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/lib/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "meilisearch": "^0.48.2"
+      }
+    },
+    {
+      "file": "packages/router/package.json",
+      "license": null,
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/extension/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/web/package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {
+        "colorjs.io": "^0.5.2",
+        "fuse.js": "^7.0.0",
+        "react-colorful": "^5.6.1",
+        "sharp": "^0.35.3"
+      }
+    },
+    {
+      "file": "apps/mobile/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "meilisearch": "^0.48.2"
+      }
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "apps/mobile/lib/offlineSync.ts",
+      "score": 17,
+      "symbols": [
+        {
+          "name": "useOfflineSyncStore",
+          "line": 41
+        },
+        {
+          "name": "archiveRoot",
+          "line": 81
+        },
+        {
+          "name": "staleFileGraceMs",
+          "line": 82
+        },
+        {
+          "name": "getLinkFreshnessTime",
+          "line": 117
+        },
+        {
+          "name": "getFileModifiedAt",
+          "line": 120
+        },
+        {
+          "name": "isOnline",
+          "line": 133
+        },
+        {
+          "name": "connectionRetryMs",
+          "line": 138
+        },
+        {
+          "name": "clearConnectionRetry",
+          "line": 142
+        },
+        {
+          "name": "scheduleConnectionRetry",
+          "line": 148
+        },
+        {
+          "name": "pauseForConnection",
+          "line": 159
+        },
+        {
+          "name": "sameArchiveState",
+          "line": 165
+        },
+        {
+          "name": "setCachedLinkQueryData",
+          "line": 174
+        },
+        {
+          "name": "queryKey",
+          "line": 177
+        },
+        {
+          "name": "existing",
+          "line": 178
+        },
+        {
+          "name": "hydrateLinkQueries",
+          "line": 184
+        },
+        {
+          "name": "getLinksFromCache",
+          "line": 202
+        },
+        {
+          "name": "linksById",
+          "line": 203
+        },
+        {
+          "name": "dashboardLinkIds",
+          "line": 204
+        },
+        {
+          "name": "add",
+          "line": 205
+        },
+        {
+          "name": "id",
+          "line": 206
+        },
+        {
+          "name": "existing",
+          "line": 211
+        },
+        {
+          "name": "key",
+          "line": 222
+        },
+        {
+          "name": "data",
+          "line": 223
+        },
+        {
+          "name": "collectionLinks",
+          "line": 233
+        },
+        {
+          "name": "links",
+          "line": 252
+        },
+        {
+          "name": "isDashboardLink",
+          "line": 253
+        },
+        {
+          "name": "getFormatForCacheFile",
+          "line": 265
+        },
+        {
+          "name": "entry",
+          "line": 269
+        },
+        {
+          "name": "parseCacheFile",
+          "line": 275
+        },
+        {
+          "name": "match",
+          "line": 279
+        },
+        {
+          "name": "linkId",
+          "line": 282
+        },
+        {
+          "name": "createEmptyCacheSnapshot",
+          "line": 292
+        },
+        {
+          "name": "addFileToSnapshot",
+          "line": 299
+        },
+        {
+          "name": "files",
+          "line": 308
+        },
+        {
+          "name": "formats",
+          "line": 314
+        }
+      ]
+    },
+    {
+      "file": "apps/worker/lib/preservationScheme/sanitizeHtmlForMonolith.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "SVG_ELEMENTS",
+          "line": 33
+        },
+        {
+          "name": "SVG_HREF_ATTRIBUTES",
+          "line": 34
+        },
+        {
+          "name": "CSS_URL_REGEX",
+          "line": 37
+        },
+        {
+          "name": "CSS_IMPORT_REGEX",
+          "line": 38
+        },
+        {
+          "name": "resolvesToSafeTarget",
+          "line": 46
+        },
+        {
+          "name": "key",
+          "line": 63
+        },
+        {
+          "name": "sanitizeCss",
+          "line": 72
+        },
+        {
+          "name": "sanitizeHtmlForMonolith",
+          "line": 106
+        },
+        {
+          "name": "dom",
+          "line": 110
+        },
+        {
+          "name": "cache",
+          "line": 112
+        },
+        {
+          "name": "value",
+          "line": 116
+        },
+        {
+          "name": "value",
+          "line": 127
+        },
+        {
+          "name": "value",
+          "line": 136
+        },
+        {
+          "name": "url",
+          "line": 141
+        },
+        {
+          "name": "style",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "file": "packages/router/links.tsx",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "PRESERVATION_POLL_INTERVAL",
+          "line": 30
+        },
+        {
+          "name": "useLinks",
+          "line": 32
+        },
+        {
+          "name": "sort",
+          "line": 33
+        },
+        {
+          "name": "queryString",
+          "line": 40
+        },
+        {
+          "name": "query",
+          "line": 56
+        },
+        {
+          "name": "links",
+          "line": 58
+        },
+        {
+          "name": "useFetchLinks",
+          "line": 68
+        },
+        {
+          "name": "session",
+          "line": 72
+        },
+        {
+          "name": "url",
+          "line": 81
+        },
+        {
+          "name": "response",
+          "line": 88
+        },
+        {
+          "name": "data",
+          "line": 98
+        },
+        {
+          "name": "links",
+          "line": 110
+        },
+        {
+          "name": "buildQueryString",
+          "line": 117
+        },
+        {
+          "name": "extractTagsFromQueryData",
+          "line": 129
+        },
+        {
+          "name": "mergeTagsFromQueriesData",
+          "line": 144
+        },
+        {
+          "name": "tagsById",
+          "line": 145
+        },
+        {
+          "name": "upsertLinkInList",
+          "line": 157
+        },
+        {
+          "name": "existingIndex",
+          "line": 162
+        },
+        {
+          "name": "nextLinks",
+          "line": 168
+        },
+        {
+          "name": "upsertLinkInInfiniteData",
+          "line": 173
+        },
+        {
+          "name": "pages",
+          "line": 181
+        },
+        {
+          "name": "links",
+          "line": 182
+        },
+        {
+          "name": "firstPage",
+          "line": 194
+        },
+        {
+          "name": "upsertLinkInDashboardData",
+          "line": 204
+        },
+        {
+          "name": "updatedLinks",
+          "line": 211
+        },
+        {
+          "name": "collectionLinks",
+          "line": 217
+        },
+        {
+          "name": "collectionId",
+          "line": 218
+        },
+        {
+          "name": "removeLinkFromInfiniteData",
+          "line": 235
+        },
+        {
+          "name": "removeLinkFromDashboardData",
+          "line": 247
+        },
+        {
+          "name": "removedLink",
+          "line": 250
+        },
+        {
+          "name": "numberOfPinnedLinks",
+          "line": 253
+        },
+        {
+          "name": "hasCollectionLinks",
+          "line": 257
+        },
+        {
+          "name": "collectionLinks",
+          "line": 258
+        },
+        {
+          "name": "isLinkPinned",
+          "line": 277
+        },
+        {
+          "name": "findLinkInInfiniteData",
+          "line": 281
+        }
+      ]
+    },
+    {
+      "file": "apps/extension/src/@/lib/cache.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "browser",
+          "line": 11
+        },
+        {
+          "name": "BOOKMARKS_METADATA_KEY",
+          "line": 13
+        },
+        {
+          "name": "getBookmarksMetadata",
+          "line": 28
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 29
+        },
+        {
+          "name": "saveBookmarksMetadata",
+          "line": 33
+        },
+        {
+          "name": "clearBookmarksMetadata",
+          "line": 42
+        },
+        {
+          "name": "getBookmarkMetadataById",
+          "line": 46
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 49
+        },
+        {
+          "name": "getBookmarkMetadataByBookmarkId",
+          "line": 55
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 58
+        },
+        {
+          "name": "getBookmarkMetadataByUrl",
+          "line": 64
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 67
+        },
+        {
+          "name": "saveBookmarkMetadata",
+          "line": 73
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 74
+        },
+        {
+          "name": "index",
+          "line": 75
+        },
+        {
+          "name": "deleteBookmarkMetadata",
+          "line": 87
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 88
+        },
+        {
+          "name": "index",
+          "line": 89
+        },
+        {
+          "name": "saveLinksInCache",
+          "line": 99
+        },
+        {
+          "name": "links",
+          "line": 102
+        },
+        {
+          "name": "linksResponse",
+          "line": 103
+        },
+        {
+          "name": "serverBookmarkMap",
+          "line": 106
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 110
+        },
+        {
+          "name": "existingLinkIndex",
+          "line": 114
+        },
+        {
+          "name": "newLocalBookmark",
+          "line": 121
+        },
+        {
+          "name": "bookmarksToRemove",
+          "line": 128
+        },
+        {
+          "name": "indexToRemove",
+          "line": 130
+        },
+        {
+          "name": "createBookmarkInBrowser",
+          "line": 147
+        },
+        {
+          "name": "getCurrentBookmarks",
+          "line": 154
+        },
+        {
+          "name": "syncLocalBookmarks",
+          "line": 159
+        },
+        {
+          "name": "bookmarksMetadata",
+          "line": 169
+        },
+        {
+          "name": "cachedBookmarksMap",
+          "line": 172
+        },
+        {
+          "name": "createPromises",
+          "line": 177
+        },
+        {
+          "name": "updatePromises",
+          "line": 178
+        },
+        {
+          "name": "deletePromises",
+          "line": 179
+        }
+      ]
+    },
+    {
+      "file": "apps/web/scripts/migration/v2.6.1/index.js",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "prisma",
+          "line": 17
+        },
+        {
+          "name": "STORAGE_FOLDER",
+          "line": 19
+        },
+        {
+          "name": "s3Client",
+          "line": 21
+        },
+        {
+          "name": "checkFileExistence",
+          "line": 37
+        },
+        {
+          "name": "bucketParams",
+          "line": 42
+        },
+        {
+          "name": "main",
+          "line": 70
+        },
+        {
+          "name": "linksWithoutName",
+          "line": 73
+        },
+        {
+          "name": "links",
+          "line": 98
+        },
+        {
+          "name": "path",
+          "line": 112
+        },
+        {
+          "name": "res",
+          "line": 114
+        },
+        {
+          "name": "path",
+          "line": 128
+        },
+        {
+          "name": "res",
+          "line": 130
+        },
+        {
+          "name": "path",
+          "line": 144
+        },
+        {
+          "name": "res",
+          "line": 146
+        }
+      ]
+    },
+    {
+      "file": "apps/worker/lib/getLinkBatchFairly.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "TRIAL_PERIOD_DAYS",
+          "line": 9
+        },
+        {
+          "name": "REQUIRE_CC",
+          "line": 10
+        },
+        {
+          "name": "getLinkBatchFairly",
+          "line": 12
+        },
+        {
+          "name": "users",
+          "line": 45
+        },
+        {
+          "name": "linkUserMap",
+          "line": 85
+        },
+        {
+          "name": "userLinks",
+          "line": 88
+        },
+        {
+          "name": "uniqueUsersWithLinks",
+          "line": 98
+        },
+        {
+          "name": "linksPerUser",
+          "line": 103
+        },
+        {
+          "name": "nextOffset",
+          "line": 105
+        },
+        {
+          "name": "picked",
+          "line": 108
+        },
+        {
+          "name": "remaining",
+          "line": 116
+        },
+        {
+          "name": "toTake",
+          "line": 117
+        },
+        {
+          "name": "skip",
+          "line": 120
+        },
+        {
+          "name": "userLinks",
+          "line": 122
+        },
+        {
+          "name": "pickedIds",
+          "line": 149
+        },
+        {
+          "name": "batch",
+          "line": 151
+        },
+        {
+          "name": "now",
+          "line": 159
+        },
+        {
+          "name": "order",
+          "line": 165
+        }
+      ]
+    },
+    {
+      "file": "packages/prisma/seed.js",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "bcrypt",
+          "line": 4
+        },
+        {
+          "name": "prisma",
+          "line": 5
+        },
+        {
+          "name": "main",
+          "line": 7
+        },
+        {
+          "name": "saltRounds",
+          "line": 8
+        },
+        {
+          "name": "defaultPassword",
+          "line": 9
+        },
+        {
+          "name": "hashedPassword",
+          "line": 10
+        },
+        {
+          "name": "currentPeriodStart",
+          "line": 13
+        },
+        {
+          "name": "currentPeriodEnd",
+          "line": 14
+        },
+        {
+          "name": "transaction",
+          "line": 18
+        },
+        {
+          "name": "user1",
+          "line": 20
+        },
+        {
+          "name": "user2",
+          "line": 57
+        },
+        {
+          "name": "user3",
+          "line": 94
+        },
+        {
+          "name": "user4",
+          "line": 131
+        },
+        {
+          "name": "user5",
+          "line": 168
+        },
+        {
+          "name": "collectionsUser1",
+          "line": 206
+        },
+        {
+          "name": "collectionsUser2",
+          "line": 245
+        },
+        {
+          "name": "user1Collections",
+          "line": 253
+        },
+        {
+          "name": "user2Collections",
+          "line": 257
+        },
+        {
+          "name": "projectAlphaLinks",
+          "line": 344
+        },
+        {
+          "name": "linksAndCollections",
+          "line": 440
+        }
+      ]
+    },
+    {
+      "file": "packages/lib/ssrf.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "BLOCKED_HOSTNAMES",
+          "line": 22
+        },
+        {
+          "name": "BLOCKED_HOSTNAME_SUFFIXES",
+          "line": 30
+        },
+        {
+          "name": "IPV4_BLOCKED_CIDRS",
+          "line": 37
+        },
+        {
+          "name": "IPV6_BLOCKED_CIDRS",
+          "line": 54
+        },
+        {
+          "name": "IPV4_BLOCKED_RANGES",
+          "line": 63
+        },
+        {
+          "name": "parsed",
+          "line": 64
+        },
+        {
+          "name": "IPV6_BLOCKED_RANGES",
+          "line": 76
+        },
+        {
+          "name": "parsed",
+          "line": 77
+        },
+        {
+          "name": "ipv4Mask",
+          "line": 89
+        },
+        {
+          "name": "normalizeHostname",
+          "line": 94
+        },
+        {
+          "name": "parseIPv4",
+          "line": 98
+        },
+        {
+          "name": "octets",
+          "line": 99
+        },
+        {
+          "name": "parsed",
+          "line": 108
+        },
+        {
+          "name": "ipv4TailToHexSegments",
+          "line": 117
+        },
+        {
+          "name": "parsed",
+          "line": 118
+        },
+        {
+          "name": "high",
+          "line": 121
+        },
+        {
+          "name": "low",
+          "line": 124
+        },
+        {
+          "name": "parseIPv6",
+          "line": 129
+        },
+        {
+          "name": "normalized",
+          "line": 130
+        },
+        {
+          "name": "hasDoubleColon",
+          "line": 134
+        },
+        {
+          "name": "expandSide",
+          "line": 143
+        },
+        {
+          "name": "converted",
+          "line": 149
+        },
+        {
+          "name": "left",
+          "line": 156
+        },
+        {
+          "name": "right",
+          "line": 157
+        },
+        {
+          "name": "segments",
+          "line": 159
+        },
+        {
+          "name": "zeroCount",
+          "line": 161
+        },
+        {
+          "name": "extractIPv4FromMappedIPv6",
+          "line": 184
+        },
+        {
+          "name": "normalized",
+          "line": 185
+        },
+        {
+          "name": "ipv4Candidate",
+          "line": 189
+        },
+        {
+          "name": "isHostnameBlockedForServerSideFetch",
+          "line": 193
+        },
+        {
+          "name": "normalized",
+          "line": 194
+        },
+        {
+          "name": "isIpAddressBlockedForServerSideFetch",
+          "line": 204
+        },
+        {
+          "name": "ipv4",
+          "line": 205
+        },
+        {
+          "name": "mapped",
+          "line": 207
+        },
+        {
+          "name": "ipv6",
+          "line": 217
+        }
+      ]
+    },
+    {
+      "file": "packages/router/collections.tsx",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "getCollectionSubtreeIds",
+          "line": 10
+        },
+        {
+          "name": "byParent",
+          "line": 11
+        },
+        {
+          "name": "siblings",
+          "line": 15
+        },
+        {
+          "name": "visited",
+          "line": 20
+        },
+        {
+          "name": "stack",
+          "line": 21
+        },
+        {
+          "name": "currentId",
+          "line": 24
+        },
+        {
+          "name": "children",
+          "line": 25
+        },
+        {
+          "name": "removeCollectionsFromDashboard",
+          "line": 37
+        },
+        {
+          "name": "deletedCollectionIds",
+          "line": 43
+        },
+        {
+          "name": "nextLinks",
+          "line": 44
+        },
+        {
+          "name": "nextCollectionLinks",
+          "line": 49
+        },
+        {
+          "name": "useCollections",
+          "line": 76
+        },
+        {
+          "name": "session",
+          "line": 80
+        },
+        {
+          "name": "response",
+          "line": 89
+        },
+        {
+          "name": "data",
+          "line": 99
+        },
+        {
+          "name": "useCreateCollection",
+          "line": 108
+        },
+        {
+          "name": "queryClient",
+          "line": 109
+        },
+        {
+          "name": "response",
+          "line": 113
+        },
+        {
+          "name": "data",
+          "line": 127
+        },
+        {
+          "name": "useUpdateCollection",
+          "line": 141
+        },
+        {
+          "name": "queryClient",
+          "line": 142
+        },
+        {
+          "name": "response",
+          "line": 146
+        },
+        {
+          "name": "data",
+          "line": 154
+        },
+        {
+          "name": "useDeleteCollection",
+          "line": 180
+        },
+        {
+          "name": "queryClient",
+          "line": 191
+        },
+        {
+          "name": "response",
+          "line": 195
+        },
+        {
+          "name": "data",
+          "line": 208
+        },
+        {
+          "name": "previousCollections",
+          "line": 218
+        },
+        {
+          "name": "previousDashboard",
+          "line": 220
+        },
+        {
+          "name": "user",
+          "line": 221
+        },
+        {
+          "name": "targetCollection",
+          "line": 222
+        },
+        {
+          "name": "isOwner",
+          "line": 225
+        },
+        {
+          "name": "collectionIdsToRemove",
+          "line": 230
+        },
+        {
+          "name": "deletedCollectionIds",
+          "line": 233
+        },
+        {
+          "name": "collectionIdsToRemove",
+          "line": 258
+        }
+      ]
+    },
+    {
+      "file": "apps/extension/src/@/lib/screenshot.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "loadImage",
+          "line": 3
+        },
+        {
+          "name": "img",
+          "line": 5
+        },
+        {
+          "name": "drawImagesOnCanvas",
+          "line": 12
+        },
+        {
+          "name": "ctx",
+          "line": 20
+        },
+        {
+          "name": "img",
+          "line": 30
+        },
+        {
+          "name": "remainingHeight",
+          "line": 45
+        },
+        {
+          "name": "lastImage",
+          "line": 47
+        },
+        {
+          "name": "cropTop",
+          "line": 48
+        },
+        {
+          "name": "neededHeight",
+          "line": 49
+        },
+        {
+          "name": "executeScript",
+          "line": 74
+        },
+        {
+          "name": "results",
+          "line": 79
+        },
+        {
+          "name": "results",
+          "line": 87
+        },
+        {
+          "name": "safeExecuteScript",
+          "line": 93
+        },
+        {
+          "name": "dataUrlToBlob",
+          "line": 101
+        },
+        {
+          "name": "mimeType",
+          "line": 103
+        },
+        {
+          "name": "binary",
+          "line": 106
+        },
+        {
+          "name": "bytes",
+          "line": 107
+        },
+        {
+          "name": "captureVisibleTabScreenshot",
+          "line": 117
+        },
+        {
+          "name": "tabs",
+          "line": 118
+        },
+        {
+          "name": "tab",
+          "line": 119
+        },
+        {
+          "name": "dataUrl",
+          "line": 123
+        },
+        {
+          "name": "captureFullPageScreenshot",
+          "line": 129
+        },
+        {
+          "name": "tabs",
+          "line": 130
+        },
+        {
+          "name": "tab",
+          "line": 131
+        },
+        {
+          "name": "addHideScrollbarClass",
+          "line": 136
+        },
+        {
+          "name": "style",
+          "line": 137
+        },
+        {
+          "name": "removeHideScrollbarClass",
+          "line": 153
+        },
+        {
+          "name": "style",
+          "line": 154
+        },
+        {
+          "name": "adjustFixedElements",
+          "line": 160
+        },
+        {
+          "name": "elements",
+          "line": 161
+        },
+        {
+          "name": "originalStyles",
+          "line": 162
+        },
+        {
+          "name": "cs",
+          "line": 164
+        },
+        {
+          "name": "cs",
+          "line": 173
+        },
+        {
+          "name": "restoreFixedElements",
+          "line": 182
+        },
+        {
+          "name": "element",
+          "line": 186
+        }
+      ]
+    },
+    {
+      "file": "apps/web/components/Preservation/ReadableView.tsx",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "caveat",
+          "line": 33
+        },
+        {
+          "name": "bentham",
+          "line": 34
+        },
+        {
+          "name": "ReadableView",
+          "line": 40
+        },
+        {
+          "name": "router",
+          "line": 42
+        },
+        {
+          "name": "isPublicRoute",
+          "line": 43
+        },
+        {
+          "name": "permissions",
+          "line": 44
+        },
+        {
+          "name": "postHighlight",
+          "line": 46
+        },
+        {
+          "name": "deleteHighlight",
+          "line": 48
+        },
+        {
+          "name": "fetchLinkContent",
+          "line": 66
+        },
+        {
+          "name": "response",
+          "line": 68
+        },
+        {
+          "name": "data",
+          "line": 71
+        },
+        {
+          "name": "comment",
+          "line": 83
+        },
+        {
+          "name": "handleMouseUp",
+          "line": 93
+        },
+        {
+          "name": "containerEl",
+          "line": 94
+        },
+        {
+          "name": "containerRect",
+          "line": 97
+        },
+        {
+          "name": "target",
+          "line": 98
+        },
+        {
+          "name": "highlightId",
+          "line": 99
+        },
+        {
+          "name": "selection",
+          "line": 100
+        },
+        {
+          "name": "color",
+          "line": 102
+        },
+        {
+          "name": "info",
+          "line": 104
+        },
+        {
+          "name": "rect",
+          "line": 117
+        },
+        {
+          "name": "relativeX",
+          "line": 118
+        },
+        {
+          "name": "relativeY",
+          "line": 119
+        },
+        {
+          "name": "range",
+          "line": 131
+        },
+        {
+          "name": "rect",
+          "line": 132
+        },
+        {
+          "name": "relativeX",
+          "line": 135
+        },
+        {
+          "name": "relativeY",
+          "line": 136
+        },
+        {
+          "name": "getHighlightedSection",
+          "line": 147
+        },
+        {
+          "name": "selection",
+          "line": 148
+        },
+        {
+          "name": "range",
+          "line": 152
+        },
+        {
+          "name": "container",
+          "line": 155
+        },
+        {
+          "name": "treeWalker",
+          "line": 164
+        },
+        {
+          "name": "node",
+          "line": 169
+        },
+        {
+          "name": "nodeLength",
+          "line": 170
+        },
+        {
+          "name": "getHighlightedHtml",
+          "line": 196
+        }
+      ]
+    },
+    {
+      "file": "apps/web/scripts/migration/migrateToV2.js",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "prisma",
+          "line": 5
+        },
+        {
+          "name": "STORAGE_FOLDER",
+          "line": 7
+        },
+        {
+          "name": "s3Client",
+          "line": 9
+        },
+        {
+          "name": "checkFileExistence",
+          "line": 25
+        },
+        {
+          "name": "bucketParams",
+          "line": 27
+        },
+        {
+          "name": "migrateToV2",
+          "line": 56
+        },
+        {
+          "name": "users",
+          "line": 57
+        },
+        {
+          "name": "path",
+          "line": 60
+        },
+        {
+          "name": "res",
+          "line": 62
+        },
+        {
+          "name": "links",
+          "line": 75
+        },
+        {
+          "name": "path",
+          "line": 79
+        },
+        {
+          "name": "res",
+          "line": 81
+        },
+        {
+          "name": "path",
+          "line": 96
+        },
+        {
+          "name": "res",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "file": "apps/web/lib/api/searchQueryBuilder.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "SEARCH_CONDITIONS",
+          "line": 7
+        },
+        {
+          "name": "parseSearchTokens",
+          "line": 20
+        },
+        {
+          "name": "rawTokens",
+          "line": 22
+        },
+        {
+          "name": "valueAfterNegation",
+          "line": 42
+        },
+        {
+          "name": "SEARCH_FILTER_LIMIT",
+          "line": 74
+        },
+        {
+          "name": "generalTokens",
+          "line": 77
+        },
+        {
+          "name": "otherTokens",
+          "line": 78
+        },
+        {
+          "name": "buildMeiliQuery",
+          "line": 85
+        },
+        {
+          "name": "generalValues",
+          "line": 86
+        },
+        {
+          "name": "buildMeiliFilters",
+          "line": 93
+        },
+        {
+          "name": "creationTimestamp",
+          "line": 172
+        },
+        {
+          "name": "creationTimestamp",
+          "line": 183
+        },
+        {
+          "name": "escapeForMeilisearch",
+          "line": 209
+        }
+      ]
+    },
+    {
+      "file": "apps/web/lib/api/controllers/collections/collectionId/updateCollectionById.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "updateCollection",
+          "line": 8
+        },
+        {
+          "name": "dataValidation",
+          "line": 16
+        },
+        {
+          "name": "data",
+          "line": 27
+        },
+        {
+          "name": "collectionIsAccessible",
+          "line": 29
+        },
+        {
+          "name": "findParentCollection",
+          "line": 39
+        },
+        {
+          "name": "uniqueMembers",
+          "line": 61
+        },
+        {
+          "name": "updatedCollection",
+          "line": 67
+        },
+        {
+          "name": "getAllSubCollections",
+          "line": 69
+        },
+        {
+          "name": "seen",
+          "line": 76
+        },
+        {
+          "name": "children",
+          "line": 79
+        },
+        {
+          "name": "subCollections",
+          "line": 98
+        },
+        {
+          "name": "subMembers",
+          "line": 105
+        },
+        {
+          "name": "linkIds",
+          "line": 190
+        }
+      ]
+    },
+    {
+      "file": "apps/web/lib/api/controllers/migration/importFromHTMLFile.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "importFromHTMLFile",
+          "line": 8
+        },
+        {
+          "name": "importStartMs",
+          "line": 12
+        },
+        {
+          "name": "dom",
+          "line": 14
+        },
+        {
+          "name": "document",
+          "line": 15
+        },
+        {
+          "name": "bookmarks",
+          "line": 22
+        },
+        {
+          "name": "totalImports",
+          "line": 23
+        },
+        {
+          "name": "hasTooManyLinks",
+          "line": 25
+        },
+        {
+          "name": "jsonData",
+          "line": 34
+        },
+        {
+          "name": "processedArray",
+          "line": 36
+        },
+        {
+          "name": "processBookmarks",
+          "line": 47
+        },
+        {
+          "name": "collectionName",
+          "line": 57
+        },
+        {
+          "name": "collectionNameContent",
+          "line": 62
+        },
+        {
+          "name": "rawLinkUrl",
+          "line": 87
+        },
+        {
+          "name": "linkUrl",
+          "line": 91
+        },
+        {
+          "name": "linkName",
+          "line": 93
+        },
+        {
+          "name": "linkTags",
+          "line": 97
+        },
+        {
+          "name": "linkDateValue",
+          "line": 103
+        },
+        {
+          "name": "linkDate",
+          "line": 107
+        },
+        {
+          "name": "collectionId",
+          "line": 132
+        },
+        {
+          "name": "createCollection",
+          "line": 153
+        },
+        {
+          "name": "findCollection",
+          "line": 160
+        },
+        {
+          "name": "collectionId",
+          "line": 172
+        },
+        {
+          "name": "createLink",
+          "line": 200
+        },
+        {
+          "name": "dateString",
+          "line": 221
+        },
+        {
+          "name": "processNodes",
+          "line": 262
+        },
+        {
+          "name": "findAndProcessDL",
+          "line": 263
+        },
+        {
+          "name": "processDLChildren",
+          "line": 275
+        },
+        {
+          "name": "nextSibling",
+          "line": 278
+        },
+        {
+          "name": "aElement",
+          "line": 284
+        },
+        {
+          "name": "decodeEntities",
+          "line": 302
+        },
+        {
+          "name": "sortBookmarksTreeByEffectiveDate",
+          "line": 314
+        },
+        {
+          "name": "dir",
+          "line": 319
+        },
+        {
+          "name": "getAttrCaseInsensitive",
+          "line": 321
+        },
+        {
+          "name": "getAddDateMsFromDT",
+          "line": 325
+        },
+        {
+          "name": "aEl",
+          "line": 327
+        }
+      ]
+    },
+    {
+      "file": "apps/mobile/components/Formats/ReadableFormat.tsx",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "HIGHLIGHT_MENU_KEY",
+          "line": 77
+        },
+        {
+          "name": "COPY_MENU_KEY",
+          "line": 78
+        },
+        {
+          "name": "SEARCH_WEB_MENU_KEY",
+          "line": 79
+        },
+        {
+          "name": "DEFAULT_MENU_ITEMS",
+          "line": 80
+        },
+        {
+          "name": "NON_HIGHLIGHT_MENU_ITEMS",
+          "line": 85
+        },
+        {
+          "name": "normalizeHighlightColor",
+          "line": 89
+        },
+        {
+          "name": "normalizeSelectedText",
+          "line": 94
+        },
+        {
+          "name": "escapeForInlineScript",
+          "line": 98
+        },
+        {
+          "name": "escapeForInjectedScript",
+          "line": 105
+        },
+        {
+          "name": "isSelectionInfo",
+          "line": 112
+        },
+        {
+          "name": "candidate",
+          "line": 115
+        },
+        {
+          "name": "isSelectionContext",
+          "line": 125
+        },
+        {
+          "name": "candidate",
+          "line": 128
+        },
+        {
+          "name": "isHighlight",
+          "line": 133
+        },
+        {
+          "name": "candidate",
+          "line": 136
+        },
+        {
+          "name": "findMatchingHighlight",
+          "line": 148
+        },
+        {
+          "name": "ReadableSkeleton",
+          "line": 159
+        },
+        {
+          "name": "barStyle",
+          "line": 160
+        },
+        {
+          "name": "getReaderStyleConfig",
+          "line": 195
+        },
+        {
+          "name": "ratio",
+          "line": 208
+        },
+        {
+          "name": "ReadableFormat",
+          "line": 230
+        },
+        {
+          "name": "ReadableFormat",
+          "line": 231
+        },
+        {
+          "name": "FORMAT",
+          "line": 232
+        },
+        {
+          "name": "webViewRef",
+          "line": 240
+        },
+        {
+          "name": "latestSelectionRef",
+          "line": 241
+        },
+        {
+          "name": "latestReaderStyleConfigRef",
+          "line": 242
+        },
+        {
+          "name": "pendingSelectionTextRef",
+          "line": 243
+        },
+        {
+          "name": "pendingHighlightScrollIdRef",
+          "line": 244
+        },
+        {
+          "name": "isWebViewReadyRef",
+          "line": 245
+        },
+        {
+          "name": "apiUrl",
+          "line": 256
+        },
+        {
+          "name": "response",
+          "line": 258
+        },
+        {
+          "name": "data",
+          "line": 262
+        },
+        {
+          "name": "title",
+          "line": 279
+        },
+        {
+          "name": "dateStr",
+          "line": 280
+        },
+        {
+          "name": "clearWebSelection",
+          "line": 290
+        }
+      ]
+    },
+    {
+      "file": "apps/worker/workers/linkIndexing.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "takeCount",
+          "line": 7
+        },
+        {
+          "name": "maxBytes",
+          "line": 13
+        },
+        {
+          "name": "itemBytes",
+          "line": 20
+        },
+        {
+          "name": "setupLinksIndexSchema",
+          "line": 44
+        },
+        {
+          "name": "updateFilterableAttributes",
+          "line": 58
+        },
+        {
+          "name": "updateSortableAttributes",
+          "line": 82
+        },
+        {
+          "name": "startIndexing",
+          "line": 98
+        },
+        {
+          "name": "TRIAL_PERIOD_DAYS",
+          "line": 105
+        },
+        {
+          "name": "REQUIRE_CC",
+          "line": 106
+        },
+        {
+          "name": "links",
+          "line": 109
+        },
+        {
+          "name": "docs",
+          "line": 168
+        },
+        {
+          "name": "task",
+          "line": 196
+        },
+        {
+          "name": "result",
+          "line": 197
+        },
+        {
+          "name": "indexesLeft",
+          "line": 222
+        },
+        {
+          "name": "clearIndexes",
+          "line": 242
+        },
+        {
+          "name": "clearedLinks",
+          "line": 245
+        },
+        {
+          "name": "deleteAllDocuments",
+          "line": 256
+        }
+      ]
+    }
+  ]
+}

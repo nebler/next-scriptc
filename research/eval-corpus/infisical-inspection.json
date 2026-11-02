@@ -1,0 +1,2556 @@
+{
+  "repo": "Infisical/infisical",
+  "url": "https://github.com/Infisical/infisical",
+  "sha": "06b035a9ca10fb916aa28fd0703484cee345c89a",
+  "domain": "security",
+  "frameworkHypothesis": "Next/Fastify",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "backend-go/internal/ee/services/license/license_test.go",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend-go/internal/ee/services/license/license.go",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend-go/internal/ee/services/license/keys/license_public_key.pem",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend/e2e-test/license-dal.spec.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend/e2e-test/testUtils/license.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend/src/ee/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "backend/src/ee/routes/v1/license-v2-router.ts",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "ISC",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "frontend/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "diff": "^8.0.3",
+        "react-colorful": "^5.6.1"
+      }
+    },
+    {
+      "file": "sink/oidc-server/package.json",
+      "license": "ISC",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "backend/package.json",
+      "license": "ISC",
+      "frameworks": [
+        "fastify"
+      ],
+      "computeDeps": {
+        "@elastic/elasticsearch": "^9.1.1"
+      }
+    },
+    {
+      "file": "upgrade-impact/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "e2e/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "frontend/src/components/v3/generic/DataGrid/use-data-grid.ts",
+      "score": 35,
+      "symbols": [
+        {
+          "name": "DEFAULT_ROW_HEIGHT",
+          "line": 50
+        },
+        {
+          "name": "OVERSCAN",
+          "line": 51
+        },
+        {
+          "name": "VIEWPORT_OFFSET",
+          "line": 52
+        },
+        {
+          "name": "HORIZONTAL_PAGE_SIZE",
+          "line": 53
+        },
+        {
+          "name": "SCROLL_SYNC_RETRY_COUNT",
+          "line": 54
+        },
+        {
+          "name": "MIN_COLUMN_SIZE",
+          "line": 55
+        },
+        {
+          "name": "MAX_COLUMN_SIZE",
+          "line": 56
+        },
+        {
+          "name": "SEARCH_SHORTCUT_KEY",
+          "line": 57
+        },
+        {
+          "name": "NON_NAVIGABLE_COLUMN_IDS",
+          "line": 58
+        },
+        {
+          "name": "DOMAIN_REGEX",
+          "line": 60
+        },
+        {
+          "name": "TRUTHY_BOOLEANS",
+          "line": 61
+        },
+        {
+          "name": "VALID_BOOLEANS",
+          "line": 62
+        },
+        {
+          "name": "getSnapshot",
+          "line": 91
+        },
+        {
+          "name": "dir",
+          "line": 139
+        },
+        {
+          "name": "dataGridRef",
+          "line": 140
+        },
+        {
+          "name": "tableRef",
+          "line": 141
+        },
+        {
+          "name": "rowVirtualizerRef",
+          "line": 142
+        },
+        {
+          "name": "headerRef",
+          "line": 143
+        },
+        {
+          "name": "rowMapRef",
+          "line": 144
+        },
+        {
+          "name": "cellMapRef",
+          "line": 145
+        },
+        {
+          "name": "footerRef",
+          "line": 146
+        },
+        {
+          "name": "focusGuardRef",
+          "line": 147
+        },
+        {
+          "name": "propsRef",
+          "line": 149
+        },
+        {
+          "name": "listenersRef",
+          "line": 156
+        },
+        {
+          "name": "stateRef",
+          "line": 158
+        },
+        {
+          "name": "store",
+          "line": 190
+        },
+        {
+          "name": "wasPending",
+          "line": 226
+        },
+        {
+          "name": "focusedCell",
+          "line": 242
+        },
+        {
+          "name": "editingCell",
+          "line": 243
+        },
+        {
+          "name": "selectionState",
+          "line": 244
+        },
+        {
+          "name": "searchQuery",
+          "line": 245
+        },
+        {
+          "name": "searchMatches",
+          "line": 246
+        },
+        {
+          "name": "matchIndex",
+          "line": 247
+        },
+        {
+          "name": "searchOpen",
+          "line": 248
+        },
+        {
+          "name": "sorting",
+          "line": 249
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/components/auth/AuthPageBackground.tsx",
+      "score": 20,
+      "symbols": [
+        {
+          "name": "AuthPageBackground",
+          "line": 4
+        },
+        {
+          "name": "angle",
+          "line": 17
+        },
+        {
+          "name": "x",
+          "line": 18
+        },
+        {
+          "name": "y",
+          "line": 19
+        },
+        {
+          "name": "angle",
+          "line": 27
+        },
+        {
+          "name": "innerR",
+          "line": 28
+        },
+        {
+          "name": "x1",
+          "line": 29
+        },
+        {
+          "name": "y1",
+          "line": 30
+        },
+        {
+          "name": "x2",
+          "line": 31
+        },
+        {
+          "name": "y2",
+          "line": 32
+        },
+        {
+          "name": "angle",
+          "line": 50
+        },
+        {
+          "name": "x1",
+          "line": 51
+        },
+        {
+          "name": "y1",
+          "line": 52
+        },
+        {
+          "name": "x2",
+          "line": 53
+        },
+        {
+          "name": "y2",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "file": "backend/src/ee/services/pki-discovery/pki-discovery-fns.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "PUBLIC_DNS_RESOLVERS",
+          "line": 30
+        },
+        {
+          "name": "DNS_RESOLUTION_TIMEOUT",
+          "line": 37
+        },
+        {
+          "name": "DEFAULT_TLS_PORTS",
+          "line": 39
+        },
+        {
+          "name": "MAX_PORTS",
+          "line": 40
+        },
+        {
+          "name": "MAX_IPS",
+          "line": 41
+        },
+        {
+          "name": "MAX_DOMAINS",
+          "line": 42
+        },
+        {
+          "name": "MIN_CIDR_PREFIX",
+          "line": 43
+        },
+        {
+          "name": "TLS_SCAN_TIMEOUT",
+          "line": 45
+        },
+        {
+          "name": "shouldBlockPrivateIps",
+          "line": 47
+        },
+        {
+          "name": "appCfg",
+          "line": 49
+        },
+        {
+          "name": "getPrivateIpRangeError",
+          "line": 54
+        },
+        {
+          "name": "appCfg",
+          "line": 57
+        },
+        {
+          "name": "selfHostedHint",
+          "line": 58
+        },
+        {
+          "name": "validateTargetConfig",
+          "line": 78
+        },
+        {
+          "name": "parsedPorts",
+          "line": 89
+        },
+        {
+          "name": "hasIpRanges",
+          "line": 97
+        },
+        {
+          "name": "hasDomains",
+          "line": 98
+        },
+        {
+          "name": "wildcardDomains",
+          "line": 105
+        },
+        {
+          "name": "invalidRange",
+          "line": 120
+        },
+        {
+          "name": "cidrRanges",
+          "line": 128
+        },
+        {
+          "name": "singleIps",
+          "line": 129
+        },
+        {
+          "name": "privateIpRangeError",
+          "line": 131
+        },
+        {
+          "name": "prefixMatch",
+          "line": 139
+        },
+        {
+          "name": "prefix",
+          "line": 149
+        },
+        {
+          "name": "parsePorts",
+          "line": 172
+        },
+        {
+          "name": "ports",
+          "line": 177
+        },
+        {
+          "name": "parts",
+          "line": 178
+        },
+        {
+          "name": "start",
+          "line": 185
+        },
+        {
+          "name": "end",
+          "line": 186
+        },
+        {
+          "name": "port",
+          "line": 194
+        },
+        {
+          "name": "isIpAddress",
+          "line": 204
+        },
+        {
+          "name": "scanEndpoint",
+          "line": 208
+        },
+        {
+          "name": "socket",
+          "line": 223
+        },
+        {
+          "name": "cert",
+          "line": 234
+        },
+        {
+          "name": "seenFingerprints",
+          "line": 237
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/certificate-policy/certificate-policy-service.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "certificatePolicyServiceFactory",
+          "line": 56
+        },
+        {
+          "name": "consolidateAttributeArray",
+          "line": 60
+        },
+        {
+          "name": "consolidated",
+          "line": 61
+        },
+        {
+          "name": "existing",
+          "line": 64
+        },
+        {
+          "name": "parseTTL",
+          "line": 77
+        },
+        {
+          "name": "regex",
+          "line": 78
+        },
+        {
+          "name": "match",
+          "line": 79
+        },
+        {
+          "name": "value",
+          "line": 84
+        },
+        {
+          "name": "unit",
+          "line": 85
+        },
+        {
+          "name": "validateSubjectAttributePolicy",
+          "line": 101
+        },
+        {
+          "name": "arrays",
+          "line": 113
+        },
+        {
+          "name": "uniqueValues",
+          "line": 121
+        },
+        {
+          "name": "validateSanPolicy",
+          "line": 132
+        },
+        {
+          "name": "arrays",
+          "line": 145
+        },
+        {
+          "name": "uniqueValues",
+          "line": 153
+        },
+        {
+          "name": "validateCustomExtensionPolicy",
+          "line": 164
+        },
+        {
+          "name": "seenOids",
+          "line": 171
+        },
+        {
+          "name": "patterns",
+          "line": 184
+        },
+        {
+          "name": "invalid",
+          "line": 190
+        },
+        {
+          "name": "conflicting",
+          "line": 198
+        },
+        {
+          "name": "preset",
+          "line": 205
+        },
+        {
+          "name": "generateTemplateSlug",
+          "line": 214
+        },
+        {
+          "name": "ensureUniqueSlug",
+          "line": 221
+        },
+        {
+          "name": "existingTemplate",
+          "line": 222
+        },
+        {
+          "name": "alternativeSlug",
+          "line": 226
+        },
+        {
+          "name": "existingAlternative",
+          "line": 227
+        },
+        {
+          "name": "randomSlug",
+          "line": 232
+        },
+        {
+          "name": "mapTemplateSignatureAlgorithmToApi",
+          "line": 236
+        },
+        {
+          "name": "mapTemplateKeyAlgorithmToApi",
+          "line": 248
+        },
+        {
+          "name": "validateKeyUsagePolicy",
+          "line": 260
+        },
+        {
+          "name": "arrays",
+          "line": 269
+        },
+        {
+          "name": "uniqueValues",
+          "line": 277
+        },
+        {
+          "name": "validateExtendedKeyUsagePolicy",
+          "line": 287
+        },
+        {
+          "name": "arrays",
+          "line": 300
+        },
+        {
+          "name": "uniqueValues",
+          "line": 308
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/folder-commit/folder-commit-service.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "pluralizeResource",
+          "line": 196
+        },
+        {
+          "name": "buildDefaultCommitMessage",
+          "line": 198
+        },
+        {
+          "name": "counts",
+          "line": 199
+        },
+        {
+          "name": "summary",
+          "line": 226
+        },
+        {
+          "name": "folderCommitServiceFactory",
+          "line": 232
+        },
+        {
+          "name": "appCfg",
+          "line": 253
+        },
+        {
+          "name": "checkProjectCommitReadPermission",
+          "line": 255
+        },
+        {
+          "name": "getFolderResources",
+          "line": 293
+        },
+        {
+          "name": "resources",
+          "line": 294
+        },
+        {
+          "name": "subFolders",
+          "line": 295
+        },
+        {
+          "name": "subFolderIds",
+          "line": 298
+        },
+        {
+          "name": "folderVersions",
+          "line": 299
+        },
+        {
+          "name": "secretVersions",
+          "line": 308
+        },
+        {
+          "name": "createFolderCheckpoint",
+          "line": 321
+        },
+        {
+          "name": "latestCheckpoint",
+          "line": 333
+        },
+        {
+          "name": "latestCommit",
+          "line": 336
+        },
+        {
+          "name": "commitsSinceLastCheckpoint",
+          "line": 344
+        },
+        {
+          "name": "checkpointResources",
+          "line": 354
+        },
+        {
+          "name": "newCheckpoint",
+          "line": 356
+        },
+        {
+          "name": "batchSize",
+          "line": 362
+        },
+        {
+          "name": "chunks",
+          "line": 363
+        },
+        {
+          "name": "reconstructFolderState",
+          "line": 380
+        },
+        {
+          "name": "targetCommit",
+          "line": 384
+        },
+        {
+          "name": "nearestCheckpoint",
+          "line": 389
+        },
+        {
+          "name": "checkpointResources",
+          "line": 398
+        },
+        {
+          "name": "commitsToRecreate",
+          "line": 423
+        },
+        {
+          "name": "key",
+          "line": 437
+        },
+        {
+          "name": "key",
+          "line": 451
+        },
+        {
+          "name": "compareFolderStates",
+          "line": 473
+        },
+        {
+          "name": "targetCommit",
+          "line": 484
+        },
+        {
+          "name": "project",
+          "line": 489
+        },
+        {
+          "name": "targetState",
+          "line": 497
+        },
+        {
+          "name": "currentState",
+          "line": 530
+        },
+        {
+          "name": "targetState",
+          "line": 531
+        },
+        {
+          "name": "key",
+          "line": 551
+        }
+      ]
+    },
+    {
+      "file": "backend/src/ee/services/audit-log-stream-outbox/audit-log-stream-outbox-service.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "BATCH_SIZE",
+          "line": 38
+        },
+        {
+          "name": "MAX_BATCHES_PER_JOB",
+          "line": 39
+        },
+        {
+          "name": "SINGLE_MODE_SEND_CONCURRENCY",
+          "line": 43
+        },
+        {
+          "name": "BACKOFF_BASE_MS",
+          "line": 47
+        },
+        {
+          "name": "STALE_CLAIM_THRESHOLD_MS",
+          "line": 52
+        },
+        {
+          "name": "STALE_SWEEP_BATCH_SIZE",
+          "line": 53
+        },
+        {
+          "name": "STALE_SWEEP_MAX_BATCHES",
+          "line": 54
+        },
+        {
+          "name": "STALE_CLAIM_DROP_MESSAGE",
+          "line": 56
+        },
+        {
+          "name": "STREAM_CREDENTIALS_DECRYPT_MESSAGE",
+          "line": 57
+        },
+        {
+          "name": "DELIVERED_RETENTION_MS",
+          "line": 67
+        },
+        {
+          "name": "computeBackoffMs",
+          "line": 69
+        },
+        {
+          "name": "exponent",
+          "line": 70
+        },
+        {
+          "name": "base",
+          "line": 71
+        },
+        {
+          "name": "jitter",
+          "line": 72
+        },
+        {
+          "name": "auditLogStreamOutboxServiceFactory",
+          "line": 93
+        },
+        {
+          "name": "debounceAndEnqueueFlush",
+          "line": 106
+        },
+        {
+          "name": "debounceKey",
+          "line": 107
+        },
+        {
+          "name": "acquired",
+          "line": 108
+        },
+        {
+          "name": "enqueueForLogs",
+          "line": 139
+        },
+        {
+          "name": "logsByOrg",
+          "line": 142
+        },
+        {
+          "name": "existing",
+          "line": 145
+        },
+        {
+          "name": "streamsToFlush",
+          "line": 156
+        },
+        {
+          "name": "streams",
+          "line": 160
+        },
+        {
+          "name": "hasProductFilter",
+          "line": 162
+        },
+        {
+          "name": "projectIds",
+          "line": 165
+        },
+        {
+          "name": "projects",
+          "line": 172
+        },
+        {
+          "name": "logs",
+          "line": 178
+        },
+        {
+          "name": "filters",
+          "line": 180
+        },
+        {
+          "name": "streamHasFilter",
+          "line": 181
+        },
+        {
+          "name": "flagStreamFailing",
+          "line": 210
+        },
+        {
+          "name": "boundedError",
+          "line": 223
+        },
+        {
+          "name": "failingSince",
+          "line": 231
+        },
+        {
+          "name": "drainStream",
+          "line": 255
+        },
+        {
+          "name": "stream",
+          "line": 256
+        },
+        {
+          "name": "factory",
+          "line": 262
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/pki-sync/f5-big-ip/f5-big-ip-pki-sync-fns.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "PRESERVED_CERT_KEY_CHAIN_FIELDS",
+          "line": 75
+        },
+        {
+          "name": "F5_DEFAULT_CLIENT_SSL_PARENT",
+          "line": 83
+        },
+        {
+          "name": "F5_DEFAULT_SERVER_SSL_PARENT",
+          "line": 84
+        },
+        {
+          "name": "F5_BIG_IP_DEFAULT_CERT_NAME_PREFIX",
+          "line": 86
+        },
+        {
+          "name": "F5_BIG_IP_CHAIN_SUFFIX",
+          "line": 87
+        },
+        {
+          "name": "certFileName",
+          "line": 89
+        },
+        {
+          "name": "keyFileName",
+          "line": 90
+        },
+        {
+          "name": "chainObjectName",
+          "line": 92
+        },
+        {
+          "name": "buildPartitionedPath",
+          "line": 94
+        },
+        {
+          "name": "buildEncodedObjectId",
+          "line": 96
+        },
+        {
+          "name": "buildManagedCertNamePattern",
+          "line": 98
+        },
+        {
+          "name": "pattern",
+          "line": 106
+        },
+        {
+          "name": "resolveParentProfile",
+          "line": 115
+        },
+        {
+          "name": "getF5BigIpCredentials",
+          "line": 122
+        },
+        {
+          "name": "credentials",
+          "line": 123
+        },
+        {
+          "name": "F5_BIG_IP_MAX_TOKEN_TIMEOUT_SECONDS",
+          "line": 132
+        },
+        {
+          "name": "createF5BigIpSession",
+          "line": 134
+        },
+        {
+          "name": "baseUrl",
+          "line": 140
+        },
+        {
+          "name": "loginData",
+          "line": 142
+        },
+        {
+          "name": "authToken",
+          "line": 153
+        },
+        {
+          "name": "sessionHeaders",
+          "line": 161
+        },
+        {
+          "name": "logoutF5BigIpSession",
+          "line": 188
+        },
+        {
+          "name": "saveF5BigIpConfig",
+          "line": 200
+        },
+        {
+          "name": "F5_BIG_IP_UPLOAD_CHUNK_SIZE_BYTES",
+          "line": 209
+        },
+        {
+          "name": "F5_BIG_IP_UPLOAD_DIR",
+          "line": 211
+        },
+        {
+          "name": "cleanupUploadedSourceFile",
+          "line": 213
+        },
+        {
+          "name": "uploadFileToF5BigIp",
+          "line": 233
+        },
+        {
+          "name": "buffer",
+          "line": 234
+        },
+        {
+          "name": "size",
+          "line": 235
+        },
+        {
+          "name": "uploadUrl",
+          "line": 243
+        },
+        {
+          "name": "end",
+          "line": 247
+        },
+        {
+          "name": "chunk",
+          "line": 248
+        },
+        {
+          "name": "installSslCertObject",
+          "line": 266
+        },
+        {
+          "name": "sourcePath",
+          "line": 272
+        },
+        {
+          "name": "objectId",
+          "line": 273
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/secret-sync/spacelift/spacelift-sync-fns.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "BATCH_SIZE",
+          "line": 21
+        },
+        {
+          "name": "authenticateSpacelift",
+          "line": 23
+        },
+        {
+          "name": "graphqlRequest",
+          "line": 39
+        },
+        {
+          "name": "getContextConfigElements",
+          "line": 58
+        },
+        {
+          "name": "data",
+          "line": 63
+        },
+        {
+          "name": "batchAddContextConfigElements",
+          "line": 80
+        },
+        {
+          "name": "aliases",
+          "line": 86
+        },
+        {
+          "name": "varDefs",
+          "line": 87
+        },
+        {
+          "name": "query",
+          "line": 89
+        },
+        {
+          "name": "batchDeleteContextConfigElements",
+          "line": 104
+        },
+        {
+          "name": "aliases",
+          "line": 110
+        },
+        {
+          "name": "varDefs",
+          "line": 111
+        },
+        {
+          "name": "query",
+          "line": 113
+        },
+        {
+          "name": "chunk",
+          "line": 123
+        },
+        {
+          "name": "addConfigElements",
+          "line": 131
+        },
+        {
+          "name": "deleteConfigElements",
+          "line": 142
+        },
+        {
+          "name": "sanitizeEnvVarName",
+          "line": 148
+        },
+        {
+          "name": "sanitizeSecretMapForEnvVars",
+          "line": 156
+        },
+        {
+          "name": "sanitizedKey",
+          "line": 159
+        },
+        {
+          "name": "toDirectoryPrefix",
+          "line": 167
+        },
+        {
+          "name": "isDirectChild",
+          "line": 173
+        },
+        {
+          "name": "relativePath",
+          "line": 175
+        },
+        {
+          "name": "getRelativeKey",
+          "line": 179
+        },
+        {
+          "name": "secretMapToEnvFileContent",
+          "line": 183
+        },
+        {
+          "name": "envFileContentToSecretMap",
+          "line": 191
+        },
+        {
+          "name": "parsed",
+          "line": 192
+        },
+        {
+          "name": "syncSecretPerFile",
+          "line": 206
+        },
+        {
+          "name": "prefix",
+          "line": 213
+        },
+        {
+          "name": "sanitizedSecretMap",
+          "line": 214
+        },
+        {
+          "name": "existingElements",
+          "line": 226
+        },
+        {
+          "name": "key",
+          "line": 235
+        },
+        {
+          "name": "syncDotEnvFile",
+          "line": 245
+        },
+        {
+          "name": "sanitizedSecretMap",
+          "line": 252
+        },
+        {
+          "name": "hasSecrets",
+          "line": 253
+        },
+        {
+          "name": "envContent",
+          "line": 256
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/integration-auth/integration-sync-secret.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "getSecretKeyValuePair",
+          "line": 70
+        },
+        {
+          "name": "ZGetTenantEnv",
+          "line": 77
+        },
+        {
+          "name": "ZUpdateTenantEnv",
+          "line": 88
+        },
+        {
+          "name": "syncSecretsGCPSecretManager",
+          "line": 100
+        },
+        {
+          "name": "pageSize",
+          "line": 122
+        },
+        {
+          "name": "metadata",
+          "line": 126
+        },
+        {
+          "name": "filterParam",
+          "line": 127
+        },
+        {
+          "name": "params",
+          "line": 132
+        },
+        {
+          "name": "res",
+          "line": 137
+        },
+        {
+          "name": "filteredSecrets",
+          "line": 151
+        },
+        {
+          "name": "arr",
+          "line": 152
+        },
+        {
+          "name": "key",
+          "line": 153
+        },
+        {
+          "name": "arr",
+          "line": 188
+        },
+        {
+          "name": "key",
+          "line": 189
+        },
+        {
+          "name": "syncSecretsAzureAppConfig",
+          "line": 294
+        },
+        {
+          "name": "getCompleteAzureAppConfigValues",
+          "line": 329
+        },
+        {
+          "name": "res",
+          "line": 332
+        },
+        {
+          "name": "metadata",
+          "line": 353
+        },
+        {
+          "name": "azureAppConfigValuesUrl",
+          "line": 355
+        },
+        {
+          "name": "azureAppConfigSecrets",
+          "line": 359
+        },
+        {
+          "name": "syncSecretsAzureKeyVault",
+          "line": 500
+        },
+        {
+          "name": "paginateAzureKeyVaultSecrets",
+          "line": 548
+        },
+        {
+          "name": "res",
+          "line": 551
+        },
+        {
+          "name": "getAzureKeyVaultSecrets",
+          "line": 568
+        },
+        {
+          "name": "enabledAzureKeyVaultSecrets",
+          "line": 570
+        },
+        {
+          "name": "disabledAzureKeyVaultSecretKeys",
+          "line": 573
+        },
+        {
+          "name": "res",
+          "line": 580
+        },
+        {
+          "name": "azureKeyVaultSecret",
+          "line": 587
+        },
+        {
+          "name": "hyphenatedKey",
+          "line": 613
+        },
+        {
+          "name": "underscoredKey",
+          "line": 632
+        },
+        {
+          "name": "secretKeysToRemoveFromDelete",
+          "line": 640
+        },
+        {
+          "name": "metadata",
+          "line": 642
+        },
+        {
+          "name": "underscoredKey",
+          "line": 646
+        },
+        {
+          "name": "toEditSecretIndex",
+          "line": 659
+        },
+        {
+          "name": "setSecretAzureKeyVault",
+          "line": 715
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/pki-sync/kemp-loadmaster/kemp-loadmaster-pki-sync-fns.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "getKempCredentials",
+          "line": 57
+        },
+        {
+          "name": "credentials",
+          "line": 58
+        },
+        {
+          "name": "WHITESPACE_SPLIT",
+          "line": 67
+        },
+        {
+          "name": "extractCertNames",
+          "line": 69
+        },
+        {
+          "name": "names",
+          "line": 70
+        },
+        {
+          "name": "certs",
+          "line": 71
+        },
+        {
+          "name": "list",
+          "line": 73
+        },
+        {
+          "name": "name",
+          "line": 75
+        },
+        {
+          "name": "DASH_GLOBAL",
+          "line": 84
+        },
+        {
+          "name": "CA_NAME_SANITIZE",
+          "line": 85
+        },
+        {
+          "name": "CA_FINGERPRINT_PLACEHOLDER",
+          "line": 86
+        },
+        {
+          "name": "CA_COMMON_NAME_PLACEHOLDER",
+          "line": 87
+        },
+        {
+          "name": "buildIntermediateIdentifier",
+          "line": 91
+        },
+        {
+          "name": "fingerprint",
+          "line": 92
+        },
+        {
+          "name": "cnField",
+          "line": 96
+        },
+        {
+          "name": "cn",
+          "line": 97
+        },
+        {
+          "name": "kempError",
+          "line": 108
+        },
+        {
+          "name": "buildManagedCertNamePattern",
+          "line": 118
+        },
+        {
+          "name": "pattern",
+          "line": 126
+        },
+        {
+          "name": "kempLoadMasterPkiSyncFactory",
+          "line": 135
+        },
+        {
+          "name": "resolveGateway",
+          "line": 141
+        },
+        {
+          "name": "listCertificateIdentifiers",
+          "line": 150
+        },
+        {
+          "name": "payload",
+          "line": 155
+        },
+        {
+          "name": "parsed",
+          "line": 162
+        },
+        {
+          "name": "upsertCertificate",
+          "line": 173
+        },
+        {
+          "name": "replaceParam",
+          "line": 183
+        },
+        {
+          "name": "payload",
+          "line": 184
+        },
+        {
+          "name": "parsed",
+          "line": 192
+        },
+        {
+          "name": "listIntermediateIdentifiers",
+          "line": 198
+        },
+        {
+          "name": "payload",
+          "line": 203
+        },
+        {
+          "name": "parsed",
+          "line": 210
+        },
+        {
+          "name": "addIntermediateCertificate",
+          "line": 216
+        },
+        {
+          "name": "payload",
+          "line": 223
+        },
+        {
+          "name": "parsed",
+          "line": 231
+        },
+        {
+          "name": "deleteCertificate",
+          "line": 238
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/secret-v2-bridge/secret-v2-bridge-service.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "withSecretMetrics",
+          "line": 129
+        },
+        {
+          "name": "startTime",
+          "line": 131
+        },
+        {
+          "name": "result",
+          "line": 135
+        },
+        {
+          "name": "secretV2BridgeServiceFactory",
+          "line": 200
+        },
+        {
+          "name": "$validateSecrets",
+          "line": 225
+        },
+        {
+          "name": "$validateSecretReferences",
+          "line": 254
+        },
+        {
+          "name": "sameProjReferences",
+          "line": 261
+        },
+        {
+          "name": "uniqueReferenceEnvironmentSlugs",
+          "line": 264
+        },
+        {
+          "name": "referencesEnvironments",
+          "line": 265
+        },
+        {
+          "name": "referencesEnvironmentGroupBySlug",
+          "line": 268
+        },
+        {
+          "name": "validEnvironmentReferences",
+          "line": 269
+        },
+        {
+          "name": "referredFolders",
+          "line": 275
+        },
+        {
+          "name": "referencesFolderGroupByPath",
+          "line": 283
+        },
+        {
+          "name": "validReferences",
+          "line": 286
+        },
+        {
+          "name": "folderId",
+          "line": 287
+        },
+        {
+          "name": "referredSecrets",
+          "line": 295
+        },
+        {
+          "name": "folderGroup",
+          "line": 301
+        },
+        {
+          "name": "folderId",
+          "line": 307
+        },
+        {
+          "name": "reference",
+          "line": 340
+        },
+        {
+          "name": "createSecret",
+          "line": 354
+        },
+        {
+          "name": "folder",
+          "line": 383
+        },
+        {
+          "name": "folderId",
+          "line": 389
+        },
+        {
+          "name": "doesSecretExist",
+          "line": 395
+        },
+        {
+          "name": "tags",
+          "line": 414
+        },
+        {
+          "name": "project",
+          "line": 440
+        },
+        {
+          "name": "allSecretReferences",
+          "line": 467
+        },
+        {
+          "name": "blindIndexer",
+          "line": 477
+        },
+        {
+          "name": "blindIndexes",
+          "line": 478
+        },
+        {
+          "name": "secret",
+          "line": 481
+        },
+        {
+          "name": "updateSecret",
+          "line": 578
+        },
+        {
+          "name": "folder",
+          "line": 611
+        },
+        {
+          "name": "folderId",
+          "line": 617
+        },
+        {
+          "name": "sharedSecretForOverride",
+          "line": 630
+        },
+        {
+          "name": "personalSecretToModify",
+          "line": 644
+        },
+        {
+          "name": "sharedSecretToModify",
+          "line": 655
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/secret-v2-bridge/secret-v2-bridge-fns.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "shouldUseSecretV2Bridge",
+          "line": 58
+        },
+        {
+          "name": "BULK_BATCH_SIZE",
+          "line": 60
+        },
+        {
+          "name": "RESERVED_REPLICATION_IMPORT_REGEX",
+          "line": 62
+        },
+        {
+          "name": "fnSecretBulkInsert",
+          "line": 66
+        },
+        {
+          "name": "sanitizedInputSecrets",
+          "line": 83
+        },
+        {
+          "name": "userActorId",
+          "line": 110
+        },
+        {
+          "name": "identityActorId",
+          "line": 111
+        },
+        {
+          "name": "actorType",
+          "line": 112
+        },
+        {
+          "name": "insertData",
+          "line": 114
+        },
+        {
+          "name": "batch",
+          "line": 117
+        },
+        {
+          "name": "batchResult",
+          "line": 119
+        },
+        {
+          "name": "newSecretGroupedByKeyName",
+          "line": 123
+        },
+        {
+          "name": "newSecretTags",
+          "line": 124
+        },
+        {
+          "name": "versionData",
+          "line": 131
+        },
+        {
+          "name": "batch",
+          "line": 151
+        },
+        {
+          "name": "batchResult",
+          "line": 153
+        },
+        {
+          "name": "changes",
+          "line": 157
+        },
+        {
+          "name": "secTags",
+          "line": 210
+        },
+        {
+          "name": "secVersionsGroupBySecId",
+          "line": 211
+        },
+        {
+          "name": "newSecretVersionTags",
+          "line": 213
+        },
+        {
+          "name": "secretsWithTags",
+          "line": 221
+        },
+        {
+          "name": "fnSecretBulkUpdate",
+          "line": 240
+        },
+        {
+          "name": "userActorId",
+          "line": 256
+        },
+        {
+          "name": "identityActorId",
+          "line": 257
+        },
+        {
+          "name": "actorType",
+          "line": 258
+        },
+        {
+          "name": "sanitizedInputSecrets",
+          "line": 260
+        },
+        {
+          "name": "allHaveIds",
+          "line": 285
+        },
+        {
+          "name": "newSecrets",
+          "line": 286
+        },
+        {
+          "name": "versionData",
+          "line": 287
+        },
+        {
+          "name": "batch",
+          "line": 330
+        },
+        {
+          "name": "batchResult",
+          "line": 332
+        },
+        {
+          "name": "secsUpdatedTag",
+          "line": 345
+        },
+        {
+          "name": "newSecretTags",
+          "line": 354
+        },
+        {
+          "name": "secTags",
+          "line": 361
+        },
+        {
+          "name": "secVersionsGroupBySecId",
+          "line": 362
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/external-migration/external-migration-fns/envkey.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "decryptEnvKeyDataFn",
+          "line": 52
+        },
+        {
+          "name": "key",
+          "line": 53
+        },
+        {
+          "name": "nonce",
+          "line": 54
+        },
+        {
+          "name": "encryptedData",
+          "line": 55
+        },
+        {
+          "name": "decrypted",
+          "line": 57
+        },
+        {
+          "name": "decryptedJson",
+          "line": 63
+        },
+        {
+          "name": "parseEnvKeyDataFn",
+          "line": 67
+        },
+        {
+          "name": "envTemplates",
+          "line": 82
+        },
+        {
+          "name": "appId",
+          "line": 94
+        },
+        {
+          "name": "findRootInheritedSecret",
+          "line": 106
+        },
+        {
+          "name": "inheritedEnv",
+          "line": 127
+        },
+        {
+          "name": "targetIdToFolderIdsMap",
+          "line": 132
+        },
+        {
+          "name": "processBranches",
+          "line": 134
+        },
+        {
+          "name": "app",
+          "line": 136
+        },
+        {
+          "name": "block",
+          "line": 137
+        },
+        {
+          "name": "branchEnvironment",
+          "line": 141
+        },
+        {
+          "name": "folderExists",
+          "line": 145
+        },
+        {
+          "name": "appsUsingBlock",
+          "line": 163
+        },
+        {
+          "name": "blockBaseEnv",
+          "line": 167
+        },
+        {
+          "name": "matchingAppEnv",
+          "line": 172
+        },
+        {
+          "name": "folderExists",
+          "line": 179
+        },
+        {
+          "name": "branchSecrets",
+          "line": 197
+        },
+        {
+          "name": "resolvedSecret",
+          "line": 200
+        },
+        {
+          "name": "preExistingSecretIndex",
+          "line": 203
+        },
+        {
+          "name": "preExistingSecret",
+          "line": 208
+        },
+        {
+          "name": "preExistingSecretIndex",
+          "line": 236
+        },
+        {
+          "name": "preExistingSecret",
+          "line": 241
+        },
+        {
+          "name": "processBlocksForApp",
+          "line": 274
+        },
+        {
+          "name": "blocksInApp",
+          "line": 276
+        },
+        {
+          "name": "blockBaseEnvironments",
+          "line": 286
+        },
+        {
+          "name": "matchingEnv",
+          "line": 296
+        },
+        {
+          "name": "blockSecrets",
+          "line": 306
+        },
+        {
+          "name": "selectedSecret",
+          "line": 317
+        },
+        {
+          "name": "resolvedSecret",
+          "line": 320
+        },
+        {
+          "name": "preExistingSecretIndex",
+          "line": 323
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/secret-folder/secret-folder-service.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "secretFolderServiceFactory",
+          "line": 130
+        },
+        {
+          "name": "createFolder",
+          "line": 159
+        },
+        {
+          "name": "env",
+          "line": 184
+        },
+        {
+          "name": "pathWithFolder",
+          "line": 191
+        },
+        {
+          "name": "lock",
+          "line": 193
+        },
+        {
+          "name": "folder",
+          "line": 200
+        },
+        {
+          "name": "parentFolder",
+          "line": 201
+        },
+        {
+          "name": "missingSegments",
+          "line": 221
+        },
+        {
+          "name": "existingSegment",
+          "line": 229
+        },
+        {
+          "name": "newFolder",
+          "line": 243
+        },
+        {
+          "name": "docs",
+          "line": 258
+        },
+        {
+          "name": "folderVersions",
+          "line": 259
+        },
+        {
+          "name": "doc",
+          "line": 289
+        },
+        {
+          "name": "folderVersion",
+          "line": 294
+        },
+        {
+          "name": "updateManyFolders",
+          "line": 350
+        },
+        {
+          "name": "project",
+          "line": 363
+        },
+        {
+          "name": "executeBulkUpdate",
+          "line": 389
+        },
+        {
+          "name": "parentFolder",
+          "line": 394
+        },
+        {
+          "name": "env",
+          "line": 402
+        },
+        {
+          "name": "folder",
+          "line": 411
+        },
+        {
+          "name": "folderToCheck",
+          "line": 426
+        },
+        {
+          "name": "folderVersion",
+          "line": 448
+        },
+        {
+          "name": "result",
+          "line": 514
+        },
+        {
+          "name": "updateFolder",
+          "line": 525
+        },
+        {
+          "name": "parentFolder",
+          "line": 551
+        },
+        {
+          "name": "env",
+          "line": 558
+        },
+        {
+          "name": "folder",
+          "line": 562
+        },
+        {
+          "name": "folderToCheck",
+          "line": 571
+        },
+        {
+          "name": "folderVersion",
+          "line": 601
+        },
+        {
+          "name": "$checkFolderPolicy",
+          "line": 667
+        },
+        {
+          "name": "rootFolder",
+          "line": 713
+        },
+        {
+          "name": "folderPaths",
+          "line": 716
+        },
+        {
+          "name": "normalizeKey",
+          "line": 719
+        },
+        {
+          "name": "folderMap",
+          "line": 720
+        },
+        {
+          "name": "targetFolderWithPath",
+          "line": 729
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/helpers/agentVaultSkills.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "SKILL_NAME_MAX_LENGTH",
+          "line": 7
+        },
+        {
+          "name": "SKILL_DESCRIPTION_MAX_LENGTH",
+          "line": 8
+        },
+        {
+          "name": "SKILL_NAME_RE",
+          "line": 9
+        },
+        {
+          "name": "SKILL_NAME_MESSAGE",
+          "line": 10
+        },
+        {
+          "name": "SKILL_ENTRY_FILE",
+          "line": 13
+        },
+        {
+          "name": "MAX_FILE_BYTES",
+          "line": 17
+        },
+        {
+          "name": "MAX_TOTAL_BYTES",
+          "line": 18
+        },
+        {
+          "name": "MAX_FILES",
+          "line": 19
+        },
+        {
+          "name": "formatLimit",
+          "line": 23
+        },
+        {
+          "name": "formatSkillBytes",
+          "line": 26
+        },
+        {
+          "name": "bytesToBase64",
+          "line": 32
+        },
+        {
+          "name": "base64ToBytes",
+          "line": 40
+        },
+        {
+          "name": "decodeSkillFile",
+          "line": 44
+        },
+        {
+          "name": "normalizeSkillPath",
+          "line": 53
+        },
+        {
+          "name": "isArchiveNoise",
+          "line": 62
+        },
+        {
+          "name": "stripSharedFolder",
+          "line": 65
+        },
+        {
+          "name": "slash",
+          "line": 67
+        },
+        {
+          "name": "prefix",
+          "line": 69
+        },
+        {
+          "name": "decodeZipName",
+          "line": 77
+        },
+        {
+          "name": "bytes",
+          "line": 78
+        },
+        {
+          "name": "code",
+          "line": 80
+        },
+        {
+          "name": "ZIP_END_OF_DIRECTORY",
+          "line": 91
+        },
+        {
+          "name": "ZIP_DIRECTORY_ENTRY",
+          "line": 92
+        },
+        {
+          "name": "ZIP_HOST_UNIX",
+          "line": 93
+        },
+        {
+          "name": "readZipExecutableNames",
+          "line": 97
+        },
+        {
+          "name": "executable",
+          "line": 98
+        },
+        {
+          "name": "view",
+          "line": 99
+        },
+        {
+          "name": "stop",
+          "line": 101
+        },
+        {
+          "name": "count",
+          "line": 105
+        },
+        {
+          "name": "host",
+          "line": 109
+        },
+        {
+          "name": "flags",
+          "line": 110
+        },
+        {
+          "name": "nameLength",
+          "line": 111
+        },
+        {
+          "name": "extraLength",
+          "line": 112
+        },
+        {
+          "name": "commentLength",
+          "line": 113
+        },
+        {
+          "name": "unixMode",
+          "line": 115
+        }
+      ]
+    },
+    {
+      "file": "backend/src/ee/services/pam-web-access/mysql/pam-mysql-data-explorer-fns.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "skipQuoted",
+          "line": 1
+        },
+        {
+          "name": "backslashEscape",
+          "line": 3
+        },
+        {
+          "name": "skipLineComment",
+          "line": 20
+        },
+        {
+          "name": "skipHashComment",
+          "line": 26
+        },
+        {
+          "name": "skipBlockComment",
+          "line": 32
+        },
+        {
+          "name": "isLineComment",
+          "line": 38
+        },
+        {
+          "name": "isBlockComment",
+          "line": 43
+        },
+        {
+          "name": "splitMysqlStatements",
+          "line": 46
+        },
+        {
+          "name": "ch",
+          "line": 52
+        },
+        {
+          "name": "stmt",
+          "line": 63
+        },
+        {
+          "name": "tail",
+          "line": 72
+        },
+        {
+          "name": "extractCommand",
+          "line": 78
+        },
+        {
+          "name": "len",
+          "line": 80
+        },
+        {
+          "name": "start",
+          "line": 104
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/alert/alert-service.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "PREPARED_ALERT",
+          "line": 98
+        },
+        {
+          "name": "getAuditEvent",
+          "line": 101
+        },
+        {
+          "name": "metadata",
+          "line": 119
+        },
+        {
+          "name": "alertServiceFactory",
+          "line": 132
+        },
+        {
+          "name": "$getProvider",
+          "line": 142
+        },
+        {
+          "name": "provider",
+          "line": 143
+        },
+        {
+          "name": "$assertAlertPermission",
+          "line": 150
+        },
+        {
+          "name": "$parseCondition",
+          "line": 164
+        },
+        {
+          "name": "message",
+          "line": 168
+        },
+        {
+          "name": "$assertChannelCount",
+          "line": 173
+        },
+        {
+          "name": "$getResourceNames",
+          "line": 181
+        },
+        {
+          "name": "ids",
+          "line": 186
+        },
+        {
+          "name": "$getResourceName",
+          "line": 191
+        },
+        {
+          "name": "$getLastRuns",
+          "line": 194
+        },
+        {
+          "name": "runs",
+          "line": 199
+        },
+        {
+          "name": "$getFilters",
+          "line": 207
+        },
+        {
+          "name": "$assembleResponse",
+          "line": 219
+        },
+        {
+          "name": "$prepareCreate",
+          "line": 244
+        },
+        {
+          "name": "provider",
+          "line": 245
+        },
+        {
+          "name": "projectId",
+          "line": 252
+        },
+        {
+          "name": "event",
+          "line": 258
+        },
+        {
+          "name": "condition",
+          "line": 259
+        },
+        {
+          "name": "duplicate",
+          "line": 277
+        },
+        {
+          "name": "scope",
+          "line": 299
+        },
+        {
+          "name": "cipher",
+          "line": 300
+        },
+        {
+          "name": "recipientScope",
+          "line": 301
+        },
+        {
+          "name": "prepared",
+          "line": 306
+        },
+        {
+          "name": "$prepareUpdate",
+          "line": 345
+        },
+        {
+          "name": "provider",
+          "line": 346
+        },
+        {
+          "name": "existing",
+          "line": 371
+        },
+        {
+          "name": "existingById",
+          "line": 372
+        },
+        {
+          "name": "existingChannel",
+          "line": 379
+        },
+        {
+          "name": "scope",
+          "line": 390
+        },
+        {
+          "name": "cipher",
+          "line": 391
+        },
+        {
+          "name": "recipientScope",
+          "line": 397
+        }
+      ]
+    },
+    {
+      "file": "backend/src/services/secret/secret-service.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "secretServiceFactory",
+          "line": 154
+        },
+        {
+          "name": "getSecretReference",
+          "line": 181
+        },
+        {
+          "name": "projectBot",
+          "line": 183
+        },
+        {
+          "name": "interalGenSecBlindIndexByName",
+          "line": 202
+        },
+        {
+          "name": "appCfg",
+          "line": 203
+        },
+        {
+          "name": "secretBlindIndexDoc",
+          "line": 205
+        },
+        {
+          "name": "secretBlindIndex",
+          "line": 220
+        },
+        {
+          "name": "createSecret",
+          "line": 236
+        },
+        {
+          "name": "folder",
+          "line": 262
+        },
+        {
+          "name": "folderId",
+          "line": 268
+        },
+        {
+          "name": "blindIndexCfg",
+          "line": 270
+        },
+        {
+          "name": "sharedExist",
+          "line": 300
+        },
+        {
+          "name": "tags",
+          "line": 313
+        },
+        {
+          "name": "references",
+          "line": 318
+        },
+        {
+          "name": "secret",
+          "line": 319
+        },
+        {
+          "name": "updateSecret",
+          "line": 367
+        },
+        {
+          "name": "folder",
+          "line": 397
+        },
+        {
+          "name": "folderId",
+          "line": 403
+        },
+        {
+          "name": "blindIndexCfg",
+          "line": 405
+        },
+        {
+          "name": "tags",
+          "line": 459
+        },
+        {
+          "name": "references",
+          "line": 465
+        },
+        {
+          "name": "updatedSecret",
+          "line": 466
+        },
+        {
+          "name": "secretValueHidden",
+          "line": 520
+        },
+        {
+          "name": "deleteSecret",
+          "line": 538
+        },
+        {
+          "name": "folder",
+          "line": 564
+        },
+        {
+          "name": "folderId",
+          "line": 570
+        },
+        {
+          "name": "blindIndexCfg",
+          "line": 572
+        },
+        {
+          "name": "deletedSecret",
+          "line": 593
+        },
+        {
+          "name": "secrets",
+          "line": 594
+        },
+        {
+          "name": "secretValueHidden",
+          "line": 637
+        },
+        {
+          "name": "getSecrets",
+          "line": 656
+        },
+        {
+          "name": "getPaths",
+          "line": 680
+        },
+        {
+          "name": "deepPaths",
+          "line": 686
+        },
+        {
+          "name": "folder",
+          "line": 712
+        },
+        {
+          "name": "groupedPaths",
+          "line": 723
+        }
+      ]
+    }
+  ]
+}

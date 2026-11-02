@@ -1,0 +1,3083 @@
+{
+  "repo": "teableio/teable",
+  "url": "https://github.com/teableio/teable",
+  "sha": "b6ae0a1ab8a9c7ce8b6eef16b1af27cc770c2cd9",
+  "domain": "spreadsheet",
+  "frameworkHypothesis": "Next/NestJS",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "plugins/LICENSE",
+      "declaration": "AGPL-3.0"
+    },
+    {
+      "file": "packages/common-i18n/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/core/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/db-main-prisma/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/openapi/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/sdk/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/icons/LICENSE",
+      "declaration": "MIT"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common-i18n/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/i18n-keys/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/core/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/formula": "workspace:*",
+        "@types/color": "3.0.6",
+        "color": "4.2.3"
+      }
+    },
+    {
+      "file": "packages/db-main-prisma/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "picocolors": "1.0.0"
+      }
+    },
+    {
+      "file": "packages/db-data-prisma/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/openapi/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/local-attachments/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-db-postgres-pg/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/postgres-schema/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/debug-data/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-csv-parser-papaparse/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-logger-pino/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/di/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/core/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/formula": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/dottea/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-db-postgres-pglite/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/tsdown-config/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/benchmark-node/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "express",
+        "fastify"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/command-explain/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/v2-formula-sql-pg": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/contract-http-fastify/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "fastify"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/field-dependency-core/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/complexity/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/formula": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/v2-formula-sql-pg": "workspace:*",
+        "@teable/formula": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/headless-cli/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/container-node-test/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/utils/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-realtime-broadcastchannel/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/app-bundle/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/contract-http-express/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/container-browser/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-realtime-sharedb/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/devtools/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/v2-formula-sql-pg": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/contract-http-implementation/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-repository-postgres/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-undo-redo-keyv/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/table-query-ops/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/formula-sql-pg/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/formula": "workspace:*"
+      }
+    },
+    {
+      "file": "packages/v2/adapter-logger-console/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/data-query/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-db-postgres-shared/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/contract-http-hono/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/contract-http-client/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/contract-http/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/container-node/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/contract-http-openapi/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-db-postgres-postgresjs/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/e2e/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/import/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/headless-http/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/adapter-table-query-ops-postgres/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/headless-runtime/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/mock-records/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/v2/table-templates/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sdk/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@teable/formula": "workspace:*",
+        "fuse.js": "7.0.0"
+      }
+    },
+    {
+      "file": "packages/icons/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/formula/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/eslint-config-bases/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/ui-lib/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/nestjs-backend/package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [
+        "@nestjs/core",
+        "express",
+        "next"
+      ],
+      "computeDeps": {
+        "sharp": "0.35.5"
+      }
+    },
+    {
+      "file": "apps/nextjs-app/package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [
+        "express",
+        "next"
+      ],
+      "computeDeps": {
+        "decimal.js-light": "2.5.1",
+        "fuse.js": "7.0.0",
+        "picocolors": "1.0.0"
+      }
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/repository/PostgresTableRecordRepository.ts",
+      "score": 108,
+      "symbols": [
+        {
+          "name": "RECORD_ID_COLUMN",
+          "line": 88
+        },
+        {
+          "name": "VERSION_COLUMN",
+          "line": 89
+        },
+        {
+          "name": "SYSTEM_UPDATE_COLUMNS",
+          "line": 90
+        },
+        {
+          "name": "isTrackedLastModifiedField",
+          "line": 129
+        },
+        {
+          "name": "type",
+          "line": 130
+        },
+        {
+          "name": "hasLastModifiedByField",
+          "line": 136
+        },
+        {
+          "name": "buildDistinctUserFieldWhere",
+          "line": 139
+        },
+        {
+          "name": "dbFieldName",
+          "line": 151
+        },
+        {
+          "name": "dbFieldNameValue",
+          "line": 152
+        },
+        {
+          "name": "recordFieldsToMap",
+          "line": 175
+        },
+        {
+          "name": "fieldValues",
+          "line": 176
+        },
+        {
+          "name": "recordFields",
+          "line": 177
+        },
+        {
+          "name": "cellValue",
+          "line": 180
+        },
+        {
+          "name": "rawValue",
+          "line": 181
+        },
+        {
+          "name": "RECORD_TRASH_RESOURCE_TYPE",
+          "line": 194
+        },
+        {
+          "name": "toRecordMutationSnapshotTraceContext",
+          "line": 196
+        },
+        {
+          "name": "withRepositoryTraceSpan",
+          "line": 202
+        },
+        {
+          "name": "tracer",
+          "line": 208
+        },
+        {
+          "name": "span",
+          "line": 209
+        },
+        {
+          "name": "parseTrashedRecordIds",
+          "line": 233
+        },
+        {
+          "name": "parsed",
+          "line": 234
+        },
+        {
+          "name": "asString",
+          "line": 249
+        },
+        {
+          "name": "cleanupRestoredRecordTrash",
+          "line": 253
+        },
+        {
+          "name": "restoredRecordIds",
+          "line": 262
+        },
+        {
+          "name": "tableTrashItems",
+          "line": 269
+        },
+        {
+          "name": "restoredRecordIdSet",
+          "line": 276
+        },
+        {
+          "name": "candidateTrashItems",
+          "line": 277
+        },
+        {
+          "name": "id",
+          "line": 278
+        },
+        {
+          "name": "recordIds",
+          "line": 283
+        },
+        {
+          "name": "candidateRecordIds",
+          "line": 298
+        },
+        {
+          "name": "remainingRecordTrashEntries",
+          "line": 301
+        },
+        {
+          "name": "remainingRecordIdSet",
+          "line": 307
+        },
+        {
+          "name": "staleTrashIds",
+          "line": 312
+        },
+        {
+          "name": "RECORD_TRASH_ID_PREFIX",
+          "line": 324
+        },
+        {
+          "name": "RECORD_TRASH_ID_LENGTH",
+          "line": 325
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/ComputedFieldUpdater.ts",
+      "score": 83,
+      "symbols": [
+        {
+          "name": "DIRTY_TABLE",
+          "line": 114
+        },
+        {
+          "name": "DIRTY_TABLE_ID_COL",
+          "line": 115
+        },
+        {
+          "name": "DIRTY_RECORD_ID_COL",
+          "line": 116
+        },
+        {
+          "name": "DIRTY_GENERATION_COL",
+          "line": 117
+        },
+        {
+          "name": "BEFORE_IMAGE_TABLE",
+          "line": 118
+        },
+        {
+          "name": "BEFORE_IMAGE_SNAPSHOT_COL",
+          "line": 119
+        },
+        {
+          "name": "SAME_TABLE_BATCH_CHUNK_TRIGGER",
+          "line": 120
+        },
+        {
+          "name": "DEFAULT_SEED_ALL_THRESHOLD",
+          "line": 122
+        },
+        {
+          "name": "SAME_TABLE_BATCH_CHUNK_SIZE",
+          "line": 123
+        },
+        {
+          "name": "JSON_SAME_TABLE_BATCH_CHUNK_SIZE",
+          "line": 124
+        },
+        {
+          "name": "COMPUTED_UPDATE_FIELD_CHUNK_SIZE",
+          "line": 125
+        },
+        {
+          "name": "DISTINCT_HOST_KEY_UNCHUNK_MAX_DIRTY_RECORDS",
+          "line": 126
+        },
+        {
+          "name": "DISTINCT_HOST_KEY_UNCHUNK_MAX_KEYS",
+          "line": 127
+        },
+        {
+          "name": "quoteIdentifier",
+          "line": 129
+        },
+        {
+          "name": "chunkArray",
+          "line": 139
+        },
+        {
+          "name": "mergeRecordChanges",
+          "line": 149
+        },
+        {
+          "name": "existing",
+          "line": 154
+        },
+        {
+          "name": "changeNewVersion",
+          "line": 155
+        },
+        {
+          "name": "collapseRecordChangesByRecordId",
+          "line": 175
+        },
+        {
+          "name": "merged",
+          "line": 178
+        },
+        {
+          "name": "byField",
+          "line": 181
+        },
+        {
+          "name": "existing",
+          "line": 183
+        },
+        {
+          "name": "encodeRevertValue",
+          "line": 198
+        },
+        {
+          "name": "stripRejectedFieldChanges",
+          "line": 206
+        },
+        {
+          "name": "rejectedKeys",
+          "line": 210
+        },
+        {
+          "name": "record",
+          "line": 214
+        },
+        {
+          "name": "changes",
+          "line": 216
+        },
+        {
+          "name": "formatComputedCellLimitErrorMessage",
+          "line": 271
+        },
+        {
+          "name": "stepKey",
+          "line": 337
+        },
+        {
+          "name": "optimizeSameTableBatches",
+          "line": 346
+        },
+        {
+          "name": "crossRecordDependentFieldIds",
+          "line": 347
+        },
+        {
+          "name": "collapsibleBatches",
+          "line": 356
+        },
+        {
+          "name": "removeKeys",
+          "line": 364
+        },
+        {
+          "name": "seen",
+          "line": 373
+        },
+        {
+          "name": "orderedSteps",
+          "line": 374
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/complexity/src/ComplexityProfile.ts",
+      "score": 58,
+      "symbols": [
+        {
+          "name": "SCHEMA_COMPLEXITY_PROFILE_VERSION",
+          "line": 19
+        },
+        {
+          "name": "SCHEMA_COMPLEXITY_BASIS",
+          "line": 20
+        },
+        {
+          "name": "compareStrings",
+          "line": 444
+        },
+        {
+          "name": "uniqueSorted",
+          "line": 450
+        },
+        {
+          "name": "unique",
+          "line": 451
+        },
+        {
+          "name": "isString",
+          "line": 456
+        },
+        {
+          "name": "countPropagationModes",
+          "line": 458
+        },
+        {
+          "name": "isOperationKind",
+          "line": 472
+        },
+        {
+          "name": "isBeforeImage",
+          "line": 479
+        },
+        {
+          "name": "isDataPresence",
+          "line": 482
+        },
+        {
+          "name": "isFieldChange",
+          "line": 485
+        },
+        {
+          "name": "isPasteMode",
+          "line": 488
+        },
+        {
+          "name": "isPlannerPathMode",
+          "line": 491
+        },
+        {
+          "name": "isCompleteness",
+          "line": 494
+        },
+        {
+          "name": "isPathOrigin",
+          "line": 497
+        },
+        {
+          "name": "normalizeCompleteness",
+          "line": 500
+        },
+        {
+          "name": "normalizeField",
+          "line": 507
+        },
+        {
+          "name": "prepareFields",
+          "line": 516
+        },
+        {
+          "name": "fieldsById",
+          "line": 523
+        },
+        {
+          "name": "duplicateFieldIds",
+          "line": 524
+        },
+        {
+          "name": "warnings",
+          "line": 525
+        },
+        {
+          "name": "normalizeEdge",
+          "line": 552
+        },
+        {
+          "name": "conditionFieldIds",
+          "line": 553
+        },
+        {
+          "name": "edgeKey",
+          "line": 566
+        },
+        {
+          "name": "classifyEdge",
+          "line": 598
+        },
+        {
+          "name": "fromField",
+          "line": 602
+        },
+        {
+          "name": "toField",
+          "line": 603
+        },
+        {
+          "name": "summarizeEdge",
+          "line": 618
+        },
+        {
+          "name": "arrow",
+          "line": 620
+        },
+        {
+          "name": "prepareEdges",
+          "line": 647
+        },
+        {
+          "name": "seen",
+          "line": 651
+        },
+        {
+          "name": "referencedFieldIds",
+          "line": 653
+        },
+        {
+          "name": "unresolvedFieldIds",
+          "line": 654
+        },
+        {
+          "name": "warnings",
+          "line": 655
+        },
+        {
+          "name": "edge",
+          "line": 664
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/features/record/computed/services/computed-dependency-collector.service.ts",
+      "score": 58,
+      "symbols": [
+        {
+          "name": "ALL_RECORDS",
+          "line": 71
+        },
+        {
+          "name": "MAX_CONDITIONAL_ROLLUP_SAMPLE",
+          "line": 72
+        },
+        {
+          "name": "cache",
+          "line": 90
+        },
+        {
+          "name": "accessor",
+          "line": 138
+        },
+        {
+          "name": "placeholders",
+          "line": 140
+        },
+        {
+          "name": "tableDomain",
+          "line": 145
+        },
+        {
+          "name": "dbTable",
+          "line": 153
+        },
+        {
+          "name": "qb",
+          "line": 155
+        },
+        {
+          "name": "rows",
+          "line": 158
+        },
+        {
+          "name": "parts",
+          "line": 167
+        },
+        {
+          "name": "placeholders",
+          "line": 176
+        },
+        {
+          "name": "quotedColumn",
+          "line": 177
+        },
+        {
+          "name": "obj",
+          "line": 197
+        },
+        {
+          "name": "foreignTableId",
+          "line": 198
+        },
+        {
+          "name": "fkHostTableName",
+          "line": 199
+        },
+        {
+          "name": "selfKeyName",
+          "line": 200
+        },
+        {
+          "name": "foreignKeyName",
+          "line": 201
+        },
+        {
+          "name": "visited",
+          "line": 247
+        },
+        {
+          "name": "tableDomain",
+          "line": 253
+        },
+        {
+          "name": "projection",
+          "line": 254
+        },
+        {
+          "name": "linkFields",
+          "line": 256
+        },
+        {
+          "name": "opts",
+          "line": 259
+        },
+        {
+          "name": "ids",
+          "line": 277
+        },
+        {
+          "name": "domains",
+          "line": 280
+        },
+        {
+          "name": "missing",
+          "line": 282
+        },
+        {
+          "name": "domain",
+          "line": 295
+        },
+        {
+          "name": "normalized",
+          "line": 307
+        },
+        {
+          "name": "tableIds",
+          "line": 339
+        },
+        {
+          "name": "prevSet",
+          "line": 341
+        },
+        {
+          "name": "nextSet",
+          "line": 342
+        },
+        {
+          "name": "domain",
+          "line": 399
+        },
+        {
+          "name": "rows",
+          "line": 421
+        },
+        {
+          "name": "aggregated",
+          "line": 427
+        },
+        {
+          "name": "existing",
+          "line": 447
+        },
+        {
+          "name": "foreignFieldIds",
+          "line": 471
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/ComputedUpdatePlanner.ts",
+      "score": 54,
+      "symbols": [
+        {
+          "name": "allTargetRecordsReasonValues",
+          "line": 117
+        },
+        {
+          "name": "allTargetRecordsReasonSet",
+          "line": 133
+        },
+        {
+          "name": "isAllTargetRecordsReason",
+          "line": 135
+        },
+        {
+          "name": "emptyComputedUpdatePlan",
+          "line": 242
+        },
+        {
+          "name": "withPlannerTraceSpan",
+          "line": 260
+        },
+        {
+          "name": "tracer",
+          "line": 266
+        },
+        {
+          "name": "span",
+          "line": 267
+        },
+        {
+          "name": "plan",
+          "line": 305
+        },
+        {
+          "name": "impactSeedFieldIds",
+          "line": 354
+        },
+        {
+          "name": "graphData",
+          "line": 366
+        },
+        {
+          "name": "impactResult",
+          "line": 373
+        },
+        {
+          "name": "impact",
+          "line": 379
+        },
+        {
+          "name": "beforeImageRecords",
+          "line": 412
+        },
+        {
+          "name": "impactSeedFieldIds",
+          "line": 417
+        },
+        {
+          "name": "planningSeedFieldIds",
+          "line": 421
+        },
+        {
+          "name": "hasComputedTargets",
+          "line": 426
+        },
+        {
+          "name": "graphData",
+          "line": 435
+        },
+        {
+          "name": "impactResult",
+          "line": 442
+        },
+        {
+          "name": "impact",
+          "line": 451
+        },
+        {
+          "name": "valueSeedFieldIds",
+          "line": 453
+        },
+        {
+          "name": "fromFieldIdStr",
+          "line": 476
+        },
+        {
+          "name": "linkSeedFieldIds",
+          "line": 483
+        },
+        {
+          "name": "meta",
+          "line": 498
+        },
+        {
+          "name": "symmetricFieldId",
+          "line": 501
+        },
+        {
+          "name": "foreignTableId",
+          "line": 502
+        },
+        {
+          "name": "symmetricFieldResult",
+          "line": 505
+        },
+        {
+          "name": "foreignTableResult",
+          "line": 507
+        },
+        {
+          "name": "symmetricKey",
+          "line": 510
+        },
+        {
+          "name": "symmetricOptions",
+          "line": 517
+        },
+        {
+          "name": "affectedFieldIds",
+          "line": 547
+        },
+        {
+          "name": "includeSeedsAlways",
+          "line": 551
+        },
+        {
+          "name": "valueEdges",
+          "line": 554
+        },
+        {
+          "name": "linkEdges",
+          "line": 564
+        },
+        {
+          "name": "meta",
+          "line": 578
+        },
+        {
+          "name": "meta",
+          "line": 602
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/core/src/commands/PasteHandler.ts",
+      "score": 53,
+      "symbols": [
+        {
+          "name": "MAX_PASTE_STREAM_BUFFERED_EVENTS",
+          "line": 297
+        },
+        {
+          "name": "handler",
+          "line": 350
+        },
+        {
+          "name": "persistedTable",
+          "line": 354
+        },
+        {
+          "name": "queryScope",
+          "line": 367
+        },
+        {
+          "name": "totalCols",
+          "line": 377
+        },
+        {
+          "name": "view",
+          "line": 379
+        },
+        {
+          "name": "viewDefaults",
+          "line": 380
+        },
+        {
+          "name": "mergedDefaults",
+          "line": 381
+        },
+        {
+          "name": "effectiveFilter",
+          "line": 386
+        },
+        {
+          "name": "effectiveSort",
+          "line": 389
+        },
+        {
+          "name": "actorResolvedFilter",
+          "line": 395
+        },
+        {
+          "name": "viewFilterSpec",
+          "line": 400
+        },
+        {
+          "name": "filterSpec",
+          "line": 404
+        },
+        {
+          "name": "visibleRowSearch",
+          "line": 413
+        },
+        {
+          "name": "limitResult",
+          "line": 419
+        },
+        {
+          "name": "pagination",
+          "line": 421
+        },
+        {
+          "name": "countResult",
+          "line": 422
+        },
+        {
+          "name": "normalizedRanges",
+          "line": 433
+        },
+        {
+          "name": "targetRangeCols",
+          "line": 435
+        },
+        {
+          "name": "targetRangeRows",
+          "line": 436
+        },
+        {
+          "name": "expandedContent",
+          "line": 439
+        },
+        {
+          "name": "expandedColCount",
+          "line": 449
+        },
+        {
+          "name": "numColsToExpand",
+          "line": 450
+        },
+        {
+          "name": "expandResult",
+          "line": 453
+        },
+        {
+          "name": "targetFieldIds",
+          "line": 465
+        },
+        {
+          "name": "fieldResult",
+          "line": 470
+        },
+        {
+          "name": "effectiveGroup",
+          "line": 481
+        },
+        {
+          "name": "groupByOrderBy",
+          "line": 484
+        },
+        {
+          "name": "sortOrderBy",
+          "line": 485
+        },
+        {
+          "name": "orderBy",
+          "line": 486
+        },
+        {
+          "name": "existingRecordsStream",
+          "line": 493
+        },
+        {
+          "name": "operationsStream",
+          "line": 518
+        },
+        {
+          "name": "collectedOperations",
+          "line": 524
+        },
+        {
+          "name": "initialPluginExecution",
+          "line": 525
+        },
+        {
+          "name": "pluginScope",
+          "line": 538
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/features/record/query-builder/field-cte-visitor.ts",
+      "score": 48,
+      "symbols": [
+        {
+          "name": "JUNCTION_ALIAS",
+          "line": 92
+        },
+        {
+          "name": "SUPPORTED_EQUALITY_RESIDUAL_OPERATORS",
+          "line": 94
+        },
+        {
+          "name": "JSON_AGG_FUNCTIONS",
+          "line": 117
+        },
+        {
+          "name": "parseRollupFunctionName",
+          "line": 119
+        },
+        {
+          "name": "match",
+          "line": 120
+        },
+        {
+          "name": "unwrapJsonAggregateForScalar",
+          "line": 127
+        },
+        {
+          "name": "base",
+          "line": 179
+        },
+        {
+          "name": "scopedReadyLinkFieldIds",
+          "line": 205
+        },
+        {
+          "name": "trimmed",
+          "line": 230
+        },
+        {
+          "name": "upper",
+          "line": 234
+        },
+        {
+          "name": "foreignAlias",
+          "line": 258
+        },
+        {
+          "name": "selectionMap",
+          "line": 260
+        },
+        {
+          "name": "fieldMap",
+          "line": 265
+        },
+        {
+          "name": "sub",
+          "line": 273
+        },
+        {
+          "name": "functionName",
+          "line": 300
+        },
+        {
+          "name": "shouldFlattenNestedArray",
+          "line": 301
+        },
+        {
+          "name": "functionName",
+          "line": 322
+        },
+        {
+          "name": "rollupOptions",
+          "line": 333
+        },
+        {
+          "name": "rollupFilter",
+          "line": 334
+        },
+        {
+          "name": "sub",
+          "line": 336
+        },
+        {
+          "name": "filteredExpr",
+          "line": 337
+        },
+        {
+          "name": "linkField",
+          "line": 360
+        },
+        {
+          "name": "options",
+          "line": 361
+        },
+        {
+          "name": "rollupOptions",
+          "line": 362
+        },
+        {
+          "name": "usesJunctionTable",
+          "line": 366
+        },
+        {
+          "name": "hasOrderColumn",
+          "line": 367
+        },
+        {
+          "name": "foreignAlias",
+          "line": 373
+        },
+        {
+          "name": "rowPresenceField",
+          "line": 380
+        },
+        {
+          "name": "rollupFunctionName",
+          "line": 382
+        },
+        {
+          "name": "aggregatesToJson",
+          "line": 383
+        },
+        {
+          "name": "formattingVisitor",
+          "line": 384
+        },
+        {
+          "name": "formattedExpression",
+          "line": 385
+        },
+        {
+          "name": "useFormattedForArrayFunctions",
+          "line": 386
+        },
+        {
+          "name": "aggregationInputExpression",
+          "line": 394
+        },
+        {
+          "name": "buildAggregate",
+          "line": 397
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/outbox/ComputedUpdateOutbox.ts",
+      "score": 41,
+      "symbols": [
+        {
+          "name": "OUTBOX_TABLE",
+          "line": 99
+        },
+        {
+          "name": "OUTBOX_SEED_TABLE",
+          "line": 100
+        },
+        {
+          "name": "DEAD_LETTER_TABLE",
+          "line": 101
+        },
+        {
+          "name": "RUN_HISTORY_TABLE",
+          "line": 102
+        },
+        {
+          "name": "RUN_HISTORY_PRUNE_INTERVAL_MS",
+          "line": 104
+        },
+        {
+          "name": "RUN_HISTORY_PRUNE_BATCH_SIZE",
+          "line": 106
+        },
+        {
+          "name": "RUN_HISTORY_PRUNE_MAX_BATCHES",
+          "line": 108
+        },
+        {
+          "name": "RUN_HISTORY_PRUNE_TIME_BUDGET_MS",
+          "line": 110
+        },
+        {
+          "name": "STAGE_LEDGER_TABLE",
+          "line": 111
+        },
+        {
+          "name": "STAGE_LEDGER_COMPACT_INTERVAL_MS",
+          "line": 113
+        },
+        {
+          "name": "PENDING_SEED_UNIQUE_INDEX",
+          "line": 114
+        },
+        {
+          "name": "SPACE_DATA_DB_BINDING_TABLE",
+          "line": 115
+        },
+        {
+          "name": "buildComputedTaskNotForeignBoundCondition",
+          "line": 124
+        },
+        {
+          "name": "DEFAULT_STATUS",
+          "line": 139
+        },
+        {
+          "name": "PROCESSING_STATUS",
+          "line": 140
+        },
+        {
+          "name": "STALE_LEASE_EXHAUSTED_ERROR",
+          "line": 145
+        },
+        {
+          "name": "OUTBOX_ID_PREFIX",
+          "line": 147
+        },
+        {
+          "name": "OUTBOX_ID_BODY_LENGTH",
+          "line": 148
+        },
+        {
+          "name": "OUTBOX_SEED_ID_PREFIX",
+          "line": 149
+        },
+        {
+          "name": "OUTBOX_SEED_ID_BODY_LENGTH",
+          "line": 150
+        },
+        {
+          "name": "OUTBOX_CLAIM_ID_PREFIX",
+          "line": 151
+        },
+        {
+          "name": "OUTBOX_CLAIM_ID_BODY_LENGTH",
+          "line": 152
+        },
+        {
+          "name": "OUTBOX_CLAIM_ADVISORY_LOCK_KEY",
+          "line": 153
+        },
+        {
+          "name": "FIELD_BACKFILL_CHANGE_TYPE",
+          "line": 156
+        },
+        {
+          "name": "SEED_CHANGE_TYPE",
+          "line": 159
+        },
+        {
+          "name": "createOutboxId",
+          "line": 161
+        },
+        {
+          "name": "createOutboxSeedId",
+          "line": 162
+        },
+        {
+          "name": "createClaimOwner",
+          "line": 164
+        },
+        {
+          "name": "getClaimLockScope",
+          "line": 169
+        },
+        {
+          "name": "dedupeClaimRowsByScope",
+          "line": 172
+        },
+        {
+          "name": "counts",
+          "line": 176
+        },
+        {
+          "name": "scope",
+          "line": 180
+        },
+        {
+          "name": "count",
+          "line": 181
+        },
+        {
+          "name": "DEADLOCK_RETRY_ATTEMPTS",
+          "line": 196
+        },
+        {
+          "name": "DEADLOCK_RETRY_DELAY_MS",
+          "line": 197
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/observability/database-health/database-health.diagnostics.ts",
+      "score": 41,
+      "symbols": [
+        {
+          "name": "DATABASE_HEALTH_DB_ERROR_EVENT",
+          "line": 24
+        },
+        {
+          "name": "DATABASE_HEALTH_WINDOW_MS",
+          "line": 27
+        },
+        {
+          "name": "DATABASE_HEALTH_HOUR_MS",
+          "line": 28
+        },
+        {
+          "name": "DATABASE_HEALTH_MAX_PER_WINDOW",
+          "line": 29
+        },
+        {
+          "name": "DATABASE_HEALTH_MAX_PER_HOUR",
+          "line": 30
+        },
+        {
+          "name": "DATABASE_HEALTH_MAX_WINDOWS",
+          "line": 36
+        },
+        {
+          "name": "DATABASE_ERROR_SUMMARY_LIMIT",
+          "line": 38
+        },
+        {
+          "name": "QUOTED_LITERAL",
+          "line": 120
+        },
+        {
+          "name": "ANY_QUOTED_SPAN",
+          "line": 122
+        },
+        {
+          "name": "UUID_LITERAL",
+          "line": 123
+        },
+        {
+          "name": "HEX_BLOB",
+          "line": 124
+        },
+        {
+          "name": "URL_LITERAL",
+          "line": 126
+        },
+        {
+          "name": "EMAIL_LITERAL",
+          "line": 127
+        },
+        {
+          "name": "NUMBER_LITERAL",
+          "line": 129
+        },
+        {
+          "name": "maskTemplateIdentifiers",
+          "line": 131
+        },
+        {
+          "name": "normalizeDatabaseErrorSummary",
+          "line": 161
+        },
+        {
+          "name": "masked",
+          "line": 166
+        },
+        {
+          "name": "fingerprintDatabaseError",
+          "line": 183
+        },
+        {
+          "name": "readStoreField",
+          "line": 209
+        },
+        {
+          "name": "value",
+          "line": 210
+        },
+        {
+          "name": "dataDb",
+          "line": 245
+        },
+        {
+          "name": "now",
+          "line": 259
+        },
+        {
+          "name": "reservation",
+          "line": 260
+        },
+        {
+          "name": "summary",
+          "line": 268
+        },
+        {
+          "name": "correlation",
+          "line": 269
+        },
+        {
+          "name": "tracked",
+          "line": 307
+        },
+        {
+          "name": "allowed",
+          "line": 323
+        },
+        {
+          "name": "suppressedSinceLastEmit",
+          "line": 333
+        },
+        {
+          "name": "spaceId",
+          "line": 343
+        },
+        {
+          "name": "unlisted",
+          "line": 347
+        },
+        {
+          "name": "dataDbConnectionId",
+          "line": 357
+        },
+        {
+          "name": "store",
+          "line": 371
+        },
+        {
+          "name": "databaseHealthDiagnostics",
+          "line": 391
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/activity/ComputedActivityProjector.ts",
+      "score": 39,
+      "symbols": [
+        {
+          "name": "FIELD_ACTIVITY_TABLE",
+          "line": 54
+        },
+        {
+          "name": "TABLE_ACTIVITY_TABLE",
+          "line": 55
+        },
+        {
+          "name": "TASK_FIELD_REF_TABLE",
+          "line": 56
+        },
+        {
+          "name": "ACTIVITY_WRITE_BATCH_SIZE",
+          "line": 57
+        },
+        {
+          "name": "ACTIVITY_ADVISORY_LOCK_TIMEOUT_MS",
+          "line": 66
+        },
+        {
+          "name": "ACTIVITY_ADVISORY_LOCK_RETRY_INITIAL_DELAY_MS",
+          "line": 71
+        },
+        {
+          "name": "ACTIVITY_ADVISORY_LOCK_RETRY_MAX_DELAY_MS",
+          "line": 72
+        },
+        {
+          "name": "DEFAULT_ACTIVITY_ADVISORY_LOCK_CONTENTION_LOG_THRESHOLD_MS",
+          "line": 76
+        },
+        {
+          "name": "DEFAULT_ACTIVITY_ADVISORY_LOCK_CONTENTION_LOG_INTERVAL_MS",
+          "line": 81
+        },
+        {
+          "name": "ENQUEUE_PROJECTION_GATE_TIMEOUT_MS",
+          "line": 82
+        },
+        {
+          "name": "DEFAULT_ACTIVITY_ASYNC_FLUSH_DEBOUNCE_MS",
+          "line": 89
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_LOCK_TIMEOUT_MS",
+          "line": 92
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_RETRY_INITIAL_DELAY_MS",
+          "line": 93
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_RETRY_MAX_DELAY_MS",
+          "line": 94
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_NOT_READY_DELAY_MS",
+          "line": 100
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_MAX_NOT_READY_RETRIES",
+          "line": 101
+        },
+        {
+          "name": "ACTIVITY_ASYNC_FLUSH_MAX_CONSECUTIVE_FAILURES",
+          "line": 107
+        },
+        {
+          "name": "ACTIVITY_ASYNC_PENDING_EVENTS_MAX",
+          "line": 110
+        },
+        {
+          "name": "sleep",
+          "line": 112
+        },
+        {
+          "name": "waitWithTimeout",
+          "line": 114
+        },
+        {
+          "name": "groupTargetsByTable",
+          "line": 179
+        },
+        {
+          "name": "groups",
+          "line": 182
+        },
+        {
+          "name": "key",
+          "line": 184
+        },
+        {
+          "name": "group",
+          "line": 185
+        },
+        {
+          "name": "resolveFieldErrorTargets",
+          "line": 192
+        },
+        {
+          "name": "targets",
+          "line": 195
+        },
+        {
+          "name": "context",
+          "line": 197
+        },
+        {
+          "name": "target",
+          "line": 200
+        },
+        {
+          "name": "fieldErrorEvents",
+          "line": 210
+        },
+        {
+          "name": "completedFields",
+          "line": 217
+        },
+        {
+          "name": "unregistered",
+          "line": 218
+        },
+        {
+          "name": "fieldIds",
+          "line": 220
+        },
+        {
+          "name": "storedActivityTargets",
+          "line": 238
+        },
+        {
+          "name": "target",
+          "line": 244
+        },
+        {
+          "name": "baseIdResult",
+          "line": 302
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/features/record/open-api/record-open-api-v2.service.ts",
+      "score": 36,
+      "symbols": [
+        {
+          "name": "internalServerError",
+          "line": 170
+        },
+        {
+          "name": "invalidFilterCode",
+          "line": 171
+        },
+        {
+          "name": "dataTxClientKey",
+          "line": 189
+        },
+        {
+          "name": "maxResolveSelectionRecordIdsPageSize",
+          "line": 190
+        },
+        {
+          "name": "resolveSelectionRecordIdsIdsOnlyPageSize",
+          "line": 194
+        },
+        {
+          "name": "defaultMaxGroupPoints",
+          "line": 195
+        },
+        {
+          "name": "configuredMaxGroupPoints",
+          "line": 196
+        },
+        {
+          "name": "maxGroupPoints",
+          "line": 200
+        },
+        {
+          "name": "describeTraceError",
+          "line": 204
+        },
+        {
+          "name": "userId",
+          "line": 271
+        },
+        {
+          "name": "windowId",
+          "line": 272
+        },
+        {
+          "name": "key",
+          "line": 282
+        },
+        {
+          "name": "clearUndoRedoEnginePreference",
+          "line": 294
+        },
+        {
+          "name": "container",
+          "line": 312
+        },
+        {
+          "name": "context",
+          "line": 313
+        },
+        {
+          "name": "table",
+          "line": 314
+        },
+        {
+          "name": "queryScope",
+          "line": 315
+        },
+        {
+          "name": "result",
+          "line": 325
+        },
+        {
+          "name": "enabledFieldIds",
+          "line": 385
+        },
+        {
+          "name": "effectiveQuery",
+          "line": 390
+        },
+        {
+          "name": "requestedFieldKeyType",
+          "line": 396
+        },
+        {
+          "name": "projectionFieldIds",
+          "line": 398
+        },
+        {
+          "name": "filterWithCollapsedGroups",
+          "line": 411
+        },
+        {
+          "name": "normalizedFilter",
+          "line": 412
+        },
+        {
+          "name": "sortWithGroupFallback",
+          "line": 420
+        },
+        {
+          "name": "normalizedSort",
+          "line": 424
+        },
+        {
+          "name": "normalizedGroupBy",
+          "line": 428
+        },
+        {
+          "name": "recordSearchAccessPath",
+          "line": 429
+        },
+        {
+          "name": "shouldExposeGroupMetadata",
+          "line": 434
+        },
+        {
+          "name": "shouldComputeGroupMetadata",
+          "line": 437
+        },
+        {
+          "name": "shouldRequestSearchHitIndex",
+          "line": 446
+        },
+        {
+          "name": "queryBus",
+          "line": 452
+        },
+        {
+          "name": "listInput",
+          "line": 453
+        },
+        {
+          "name": "shouldLoadSearchHitIndex",
+          "line": 532
+        },
+        {
+          "name": "searchHitIndexExtra",
+          "line": 533
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/features/space/space-data-db-migration.service.ts",
+      "score": 35,
+      "symbols": [
+        {
+          "name": "spaceDataDbStatfsToken",
+          "line": 101
+        },
+        {
+          "name": "dataDbUrlRequiredError",
+          "line": 693
+        },
+        {
+          "name": "dataDbMigrationTable",
+          "line": 694
+        },
+        {
+          "name": "deltaLogTable",
+          "line": 695
+        },
+        {
+          "name": "deltaCaptureFunction",
+          "line": 696
+        },
+        {
+          "name": "deltaTriggerNamePrefix",
+          "line": 697
+        },
+        {
+          "name": "sharedTables",
+          "line": 698
+        },
+        {
+          "name": "relationKindsWithRows",
+          "line": 712
+        },
+        {
+          "name": "relationKindsWithColumns",
+          "line": 713
+        },
+        {
+          "name": "relationKindsWithIndexSignatures",
+          "line": 720
+        },
+        {
+          "name": "relationKindsWithTableDependencySignatures",
+          "line": 726
+        },
+        {
+          "name": "validationFailedMessage",
+          "line": 731
+        },
+        {
+          "name": "metaFallbackDataDbCacheKey",
+          "line": 738
+        },
+        {
+          "name": "defaultMigrationCopyTimeoutMs",
+          "line": 739
+        },
+        {
+          "name": "defaultMigrationComputedPauseTtlMs",
+          "line": 740
+        },
+        {
+          "name": "defaultMigrationCopyJobs",
+          "line": 741
+        },
+        {
+          "name": "defaultMigrationCopyMaxJobs",
+          "line": 742
+        },
+        {
+          "name": "defaultComputedDrainTimeoutMs",
+          "line": 743
+        },
+        {
+          "name": "defaultComputedDrainPollMs",
+          "line": 744
+        },
+        {
+          "name": "defaultComputedProcessingLeaseMs",
+          "line": 745
+        },
+        {
+          "name": "defaultSchemaOperationDrainTimeoutMs",
+          "line": 746
+        },
+        {
+          "name": "defaultSchemaOperationDrainPollMs",
+          "line": 747
+        },
+        {
+          "name": "defaultBackgroundWriterDrainTimeoutMs",
+          "line": 748
+        },
+        {
+          "name": "defaultBackgroundWriterDrainPollMs",
+          "line": 749
+        },
+        {
+          "name": "defaultBackgroundWriterDrainProbeTimeoutMs",
+          "line": 750
+        },
+        {
+          "name": "defaultBackgroundWriterQueueScanBatchSize",
+          "line": 751
+        },
+        {
+          "name": "defaultBackgroundWriterQueueScanLimit",
+          "line": 752
+        },
+        {
+          "name": "defaultDrainStaleNonTerminalMs",
+          "line": 753
+        },
+        {
+          "name": "defaultTempDiskMultiplier",
+          "line": 754
+        },
+        {
+          "name": "defaultTempDiskMinFreeBytes",
+          "line": 755
+        },
+        {
+          "name": "defaultTargetDiskMultiplier",
+          "line": 756
+        },
+        {
+          "name": "defaultTargetDiskMinFreeBytes",
+          "line": 757
+        },
+        {
+          "name": "defaultLargeMigrationByteThreshold",
+          "line": 758
+        },
+        {
+          "name": "defaultLargeMigrationRowThreshold",
+          "line": 759
+        },
+        {
+          "name": "defaultPostgresToolCheckTimeoutMs",
+          "line": 760
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/worker/ComputedUpdateWorker.ts",
+      "score": 34,
+      "symbols": [
+        {
+          "name": "MAX_STAGE_DEPTH",
+          "line": 116
+        },
+        {
+          "name": "RUN_TASK_BY_ID_CONTINUATION_BUDGET",
+          "line": 120
+        },
+        {
+          "name": "CONTINUATION_TIME_BUDGET_MS",
+          "line": 122
+        },
+        {
+          "name": "TASK_REQUEUE_STARVATION_WARN_AGE_MS",
+          "line": 127
+        },
+        {
+          "name": "FIELD_BACKFILL_OWNERSHIP_LOST",
+          "line": 128
+        },
+        {
+          "name": "isMissingColumnError",
+          "line": 135
+        },
+        {
+          "name": "maxComputedEventLogItems",
+          "line": 138
+        },
+        {
+          "name": "maxComputedEventLogFieldIds",
+          "line": 139
+        },
+        {
+          "name": "maxComputedEventLogRecordIds",
+          "line": 140
+        },
+        {
+          "name": "ASYNC_COMPUTED_EXECUTE_OPTIONS",
+          "line": 142
+        },
+        {
+          "name": "toComputedFieldErrors",
+          "line": 148
+        },
+        {
+          "name": "byField",
+          "line": 153
+        },
+        {
+          "name": "toRunHistoryPlan",
+          "line": 171
+        },
+        {
+          "name": "payload",
+          "line": 172
+        },
+        {
+          "name": "withoutFailedComputedFields",
+          "line": 177
+        },
+        {
+          "name": "failures",
+          "line": 182
+        },
+        {
+          "name": "dependencies",
+          "line": 183
+        },
+        {
+          "name": "fieldTables",
+          "line": 184
+        },
+        {
+          "name": "targets",
+          "line": 187
+        },
+        {
+          "name": "dependents",
+          "line": 193
+        },
+        {
+          "name": "pending",
+          "line": 201
+        },
+        {
+          "name": "source",
+          "line": 203
+        },
+        {
+          "name": "retainSteps",
+          "line": 222
+        },
+        {
+          "name": "sourceFieldIdsOf",
+          "line": 248
+        },
+        {
+          "name": "buildFailureDiagnostics",
+          "line": 258
+        },
+        {
+          "name": "execution",
+          "line": 263
+        },
+        {
+          "name": "details",
+          "line": 264
+        },
+        {
+          "name": "countSeedRecordDtos",
+          "line": 309
+        },
+        {
+          "name": "splitSeedRecordDtos",
+          "line": 315
+        },
+        {
+          "name": "maxSeedRecordsPerTask",
+          "line": 321
+        },
+        {
+          "name": "totalSeedRecords",
+          "line": 322
+        },
+        {
+          "name": "pushCurrent",
+          "line": 329
+        },
+        {
+          "name": "appendRecords",
+          "line": 336
+        },
+        {
+          "name": "withChunkedPlanHash",
+          "line": 365
+        },
+        {
+          "name": "filterBeforeImageRecords",
+          "line": 368
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/computed/ComputedStagePlanSplitter.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "isComputedStageBudgetEnabled",
+          "line": 37
+        },
+        {
+          "name": "resolveAdaptiveStageBudget",
+          "line": 55
+        },
+        {
+          "name": "threshold",
+          "line": 64
+        },
+        {
+          "name": "multiplier",
+          "line": 65
+        },
+        {
+          "name": "scale",
+          "line": 71
+        },
+        {
+          "name": "MAX_EXPLICIT_INSERT_SEEDS_FOR_MULTI_LEVEL_PROBE",
+          "line": 84
+        },
+        {
+          "name": "shouldClampToOneDependencyLevel",
+          "line": 106
+        },
+        {
+          "name": "explicitSeedCount",
+          "line": 115
+        },
+        {
+          "name": "insertSeedCount",
+          "line": 121
+        },
+        {
+          "name": "estimate",
+          "line": 128
+        },
+        {
+          "name": "budget",
+          "line": 129
+        },
+        {
+          "name": "mergeComputedSeedGroups",
+          "line": 136
+        },
+        {
+          "name": "byTable",
+          "line": 140
+        },
+        {
+          "name": "seenByTable",
+          "line": 141
+        },
+        {
+          "name": "tableKey",
+          "line": 143
+        },
+        {
+          "name": "recordKey",
+          "line": 153
+        },
+        {
+          "name": "stepKeyOf",
+          "line": 162
+        },
+        {
+          "name": "countPlanSeedRecords",
+          "line": 164
+        },
+        {
+          "name": "edgeTargetFieldKeys",
+          "line": 173
+        },
+        {
+          "name": "keys",
+          "line": 175
+        },
+        {
+          "name": "collectStepFieldKeys",
+          "line": 180
+        },
+        {
+          "name": "keys",
+          "line": 181
+        },
+        {
+          "name": "collectRetainedFieldsByStepKey",
+          "line": 191
+        },
+        {
+          "name": "retained",
+          "line": 194
+        },
+        {
+          "name": "key",
+          "line": 196
+        },
+        {
+          "name": "fields",
+          "line": 197
+        },
+        {
+          "name": "splitSameTableBatches",
+          "line": 206
+        },
+        {
+          "name": "retained",
+          "line": 214
+        },
+        {
+          "name": "fieldIds",
+          "line": 216
+        },
+        {
+          "name": "splitComputedPlanForStageBudget",
+          "line": 241
+        },
+        {
+          "name": "orderedSteps",
+          "line": 249
+        },
+        {
+          "name": "edgesByTargetField",
+          "line": 251
+        },
+        {
+          "name": "edgesByTargetTable",
+          "line": 252
+        },
+        {
+          "name": "targetKeys",
+          "line": 254
+        },
+        {
+          "name": "indices",
+          "line": 257
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/data-query/PostgresDataQueryExecutor.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "failure",
+          "line": 63
+        },
+        {
+          "name": "buildBucketExpression",
+          "line": 69
+        },
+        {
+          "name": "nullLabel",
+          "line": 81
+        },
+        {
+          "name": "valueDate",
+          "line": 86
+        },
+        {
+          "name": "anchorDate",
+          "line": 89
+        },
+        {
+          "name": "cases",
+          "line": 100
+        },
+        {
+          "name": "buildArrayDistinctExpression",
+          "line": 113
+        },
+        {
+          "name": "parseTotal",
+          "line": 129
+        },
+        {
+          "name": "parsed",
+          "line": 137
+        },
+        {
+          "name": "timeout",
+          "line": 151
+        },
+        {
+          "name": "db",
+          "line": 184
+        },
+        {
+          "name": "definition",
+          "line": 189
+        },
+        {
+          "name": "binding",
+          "line": 190
+        },
+        {
+          "name": "snapshot",
+          "line": 202
+        },
+        {
+          "name": "tableName",
+          "line": 203
+        },
+        {
+          "name": "fields",
+          "line": 204
+        },
+        {
+          "name": "columns",
+          "line": 205
+        },
+        {
+          "name": "field",
+          "line": 207
+        },
+        {
+          "name": "maskIds",
+          "line": 213
+        },
+        {
+          "name": "masks",
+          "line": 220
+        },
+        {
+          "name": "filter",
+          "line": 225
+        },
+        {
+          "name": "condition",
+          "line": 231
+        },
+        {
+          "name": "where",
+          "line": 232
+        },
+        {
+          "name": "where",
+          "line": 237
+        },
+        {
+          "name": "from",
+          "line": 240
+        },
+        {
+          "name": "where",
+          "line": 243
+        },
+        {
+          "name": "visitor",
+          "line": 244
+        },
+        {
+          "name": "values",
+          "line": 245
+        },
+        {
+          "name": "selected",
+          "line": 247
+        },
+        {
+          "name": "expression",
+          "line": 248
+        },
+        {
+          "name": "mask",
+          "line": 249
+        },
+        {
+          "name": "addOrder",
+          "line": 253
+        },
+        {
+          "name": "nullOrder",
+          "line": 259
+        },
+        {
+          "name": "selections",
+          "line": 281
+        },
+        {
+          "name": "stored",
+          "line": 289
+        }
+      ]
+    },
+    {
+      "file": "apps/nestjs-backend/src/features/field/open-api/field-open-api.service.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "result",
+          "line": 222
+        },
+        {
+          "name": "base",
+          "line": 227
+        },
+        {
+          "name": "filter",
+          "line": 271
+        },
+        {
+          "name": "filterRefs",
+          "line": 274
+        },
+        {
+          "name": "sort",
+          "line": 283
+        },
+        {
+          "name": "group",
+          "line": 288
+        },
+        {
+          "name": "optionFieldIds",
+          "line": 293
+        },
+        {
+          "name": "fieldIds",
+          "line": 302
+        },
+        {
+          "name": "addFieldId",
+          "line": 303
+        },
+        {
+          "name": "options",
+          "line": 307
+        },
+        {
+          "name": "options",
+          "line": 312
+        },
+        {
+          "name": "options",
+          "line": 318
+        },
+        {
+          "name": "options",
+          "line": 323
+        },
+        {
+          "name": "currentTableFields",
+          "line": 372
+        },
+        {
+          "name": "currentTableFieldIds",
+          "line": 377
+        },
+        {
+          "name": "currentTableFieldIdSet",
+          "line": 378
+        },
+        {
+          "name": "sourceFieldIdSet",
+          "line": 379
+        },
+        {
+          "name": "sourceFieldIds",
+          "line": 380
+        },
+        {
+          "name": "references",
+          "line": 404
+        },
+        {
+          "name": "externalCandidateIdSet",
+          "line": 415
+        },
+        {
+          "name": "options",
+          "line": 436
+        },
+        {
+          "name": "externalLinkFields",
+          "line": 452
+        },
+        {
+          "name": "options",
+          "line": 458
+        },
+        {
+          "name": "allDepIds",
+          "line": 478
+        },
+        {
+          "name": "fields",
+          "line": 483
+        },
+        {
+          "name": "tableIds",
+          "line": 488
+        },
+        {
+          "name": "tableSourceMap",
+          "line": 489
+        },
+        {
+          "name": "fieldInfoMap",
+          "line": 490
+        },
+        {
+          "name": "result",
+          "line": 502
+        },
+        {
+          "name": "items",
+          "line": 504
+        },
+        {
+          "name": "context",
+          "line": 517
+        },
+        {
+          "name": "perFieldDepIds",
+          "line": 522
+        },
+        {
+          "name": "addDep",
+          "line": 523
+        },
+        {
+          "name": "externalCandidateIds",
+          "line": 524
+        },
+        {
+          "name": "tables",
+          "line": 535
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/data-query/src/DataQueryBinding.ts",
+      "score": 32,
+      "symbols": [
+        {
+          "name": "describeField",
+          "line": 46
+        },
+        {
+          "name": "link",
+          "line": 55
+        },
+        {
+          "name": "valueType",
+          "line": 83
+        },
+        {
+          "name": "validateLiteralFilterValue",
+          "line": 95
+        },
+        {
+          "name": "values",
+          "line": 110
+        },
+        {
+          "name": "locateFilterLeafError",
+          "line": 128
+        },
+        {
+          "name": "located",
+          "line": 134
+        },
+        {
+          "name": "fieldResult",
+          "line": 141
+        },
+        {
+          "name": "field",
+          "line": 143
+        },
+        {
+          "name": "valueType",
+          "line": 144
+        },
+        {
+          "name": "conditionValue",
+          "line": 149
+        },
+        {
+          "name": "resolution",
+          "line": 152
+        },
+        {
+          "name": "fieldType",
+          "line": 158
+        },
+        {
+          "name": "validateDataQueryFilter",
+          "line": 168
+        },
+        {
+          "name": "spec",
+          "line": 175
+        },
+        {
+          "name": "located",
+          "line": 177
+        },
+        {
+          "name": "validateNode",
+          "line": 183
+        },
+        {
+          "name": "field",
+          "line": 190
+        },
+        {
+          "name": "type",
+          "line": 193
+        },
+        {
+          "name": "referenceId",
+          "line": 198
+        },
+        {
+          "name": "reference",
+          "line": 199
+        },
+        {
+          "name": "referenceType",
+          "line": 202
+        },
+        {
+          "name": "collectFilterUsages",
+          "line": 221
+        },
+        {
+          "name": "queryFieldUsages",
+          "line": 234
+        },
+        {
+          "name": "usages",
+          "line": 237
+        },
+        {
+          "name": "fieldUsages",
+          "line": 239
+        },
+        {
+          "name": "parameterValueMaps",
+          "line": 284
+        },
+        {
+          "name": "representative",
+          "line": 287
+        },
+        {
+          "name": "defaults",
+          "line": 288
+        },
+        {
+          "name": "sample",
+          "line": 290
+        },
+        {
+          "name": "validateFilterAgainstTable",
+          "line": 297
+        },
+        {
+          "name": "representativeFilter",
+          "line": 304
+        },
+        {
+          "name": "defaultFilter",
+          "line": 305
+        },
+        {
+          "name": "validateDefinitionFilters",
+          "line": 311
+        },
+        {
+          "name": "aggregateOutput",
+          "line": 317
+        }
+      ]
+    },
+    {
+      "file": "packages/v2/adapter-table-repository-postgres/src/record/query-builder/computed/SameTableBatchQueryBuilder.ts",
+      "score": 31,
+      "symbols": [
+        {
+          "name": "T",
+          "line": 76
+        },
+        {
+          "name": "resolved",
+          "line": 103
+        },
+        {
+          "name": "budget",
+          "line": 107
+        },
+        {
+          "name": "dbTableNameVO",
+          "line": 112
+        },
+        {
+          "name": "tableName",
+          "line": 113
+        },
+        {
+          "name": "fieldsByLevel",
+          "line": 118
+        },
+        {
+          "name": "expandedFieldsByLevel",
+          "line": 119
+        },
+        {
+          "name": "cteChain",
+          "line": 126
+        },
+        {
+          "name": "targetColumnNames",
+          "line": 129
+        },
+        {
+          "name": "updateQuery",
+          "line": 133
+        },
+        {
+          "name": "options",
+          "line": 162
+        },
+        {
+          "name": "result",
+          "line": 188
+        },
+        {
+          "name": "field",
+          "line": 193
+        },
+        {
+          "name": "formulaFieldsById",
+          "line": 226
+        },
+        {
+          "name": "explicitFormulaFieldIds",
+          "line": 237
+        },
+        {
+          "name": "depthByFieldId",
+          "line": 246
+        },
+        {
+          "name": "visiting",
+          "line": 247
+        },
+        {
+          "name": "inspected",
+          "line": 249
+        },
+        {
+          "name": "inspectSource",
+          "line": 250
+        },
+        {
+          "name": "id",
+          "line": 251
+        },
+        {
+          "name": "resolveDepth",
+          "line": 261
+        },
+        {
+          "name": "frame",
+          "line": 271
+        },
+        {
+          "name": "id",
+          "line": 272
+        },
+        {
+          "name": "cached",
+          "line": 275
+        },
+        {
+          "name": "references",
+          "line": 294
+        },
+        {
+          "name": "preserveErrors",
+          "line": 295
+        },
+        {
+          "name": "dependencyId",
+          "line": 298
+        },
+        {
+          "name": "dependency",
+          "line": 300
+        },
+        {
+          "name": "dependency",
+          "line": 308
+        },
+        {
+          "name": "explicitNonFormulaFieldsByLevel",
+          "line": 326
+        },
+        {
+          "name": "levelFields",
+          "line": 334
+        },
+        {
+          "name": "expanded",
+          "line": 344
+        },
+        {
+          "name": "addField",
+          "line": 345
+        },
+        {
+          "name": "fields",
+          "line": 346
+        },
+        {
+          "name": "field",
+          "line": 357
+        }
+      ]
+    }
+  ]
+}

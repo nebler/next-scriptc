@@ -1,0 +1,2740 @@
+{
+  "repo": "directus/directus",
+  "url": "https://github.com/directus/directus",
+  "sha": "88c5c470b14bdf3501a2a31e429273087f22e937",
+  "domain": "data transforms",
+  "frameworkHypothesis": "Express",
+  "licenses": [
+    {
+      "file": "license",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/license",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/stores/license.test.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/stores/license.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/modules/settings/routes/license/license.vue",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/modules/settings/routes/license/components/license-resolution-dialog.vue",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/modules/settings/routes/license/components/license-addon-purchase-dialog.vue",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "app/src/modules/settings/routes/license/components/license-section.vue",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "app/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "@turf/meta": "catalog:",
+        "@types/chroma-js": "catalog:",
+        "chroma-js": "catalog:",
+        "color": "catalog:",
+        "diff": "catalog:"
+      }
+    },
+    {
+      "file": "sdk/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/extensions-registry/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/create-directus-project/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/release-notes-generator/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/types/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@types/deep-diff": "catalog:"
+      }
+    },
+    {
+      "file": "packages/composables/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/memory/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/specs/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/constants/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/visual-editing/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-azure/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/stores/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/format-title/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/create-directus-extension/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/utils/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/cli/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/extensions/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/pressure/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/env/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/schema/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/ai/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/system-data/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-cloudinary/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/extensions-sdk/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/errors/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-s3/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-local/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/update-check/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/schema-builder/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/themes/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-gcs/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/validation/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/storage-driver-supabase/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "api/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "@langfuse/otel": "catalog:",
+        "deep-diff": "catalog:",
+        "sharp": "catalog:",
+        "@types/deep-diff": "catalog:"
+      }
+    },
+    {
+      "file": "directus/package.json",
+      "license": "SEE LICENSE IN license",
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "api/src/services/payload.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "key",
+          "line": 176
+        },
+        {
+          "name": "key",
+          "line": 191
+        },
+        {
+          "name": "processedPayload",
+          "line": 221
+        },
+        {
+          "name": "fieldsInPayload",
+          "line": 225
+        },
+        {
+          "name": "fieldEntries",
+          "line": 226
+        },
+        {
+          "name": "aliasEntries",
+          "line": 227
+        },
+        {
+          "name": "newValue",
+          "line": 251
+        },
+        {
+          "name": "aggregateKeys",
+          "line": 293
+        },
+        {
+          "name": "fieldEntries",
+          "line": 298
+        },
+        {
+          "name": "aggregateResult",
+          "line": 314
+        },
+        {
+          "name": "newValue",
+          "line": 317
+        },
+        {
+          "name": "fieldSpecials",
+          "line": 343
+        },
+        {
+          "name": "process",
+          "line": 375
+        },
+        {
+          "name": "geometryColumns",
+          "line": 380
+        },
+        {
+          "name": "fn",
+          "line": 402
+        },
+        {
+          "name": "aggregateMapped",
+          "line": 425
+        },
+        {
+          "name": "aliasFields",
+          "line": 432
+        },
+        {
+          "name": "schemaField",
+          "line": 435
+        },
+        {
+          "name": "field",
+          "line": 436
+        },
+        {
+          "name": "dateColumns",
+          "line": 449
+        },
+        {
+          "name": "timeColumns",
+          "line": 451
+        },
+        {
+          "name": "newValue",
+          "line": 474
+        },
+        {
+          "name": "year",
+          "line": 479
+        },
+        {
+          "name": "month",
+          "line": 480
+        },
+        {
+          "name": "day",
+          "line": 481
+        },
+        {
+          "name": "hours",
+          "line": 482
+        },
+        {
+          "name": "minutes",
+          "line": 483
+        },
+        {
+          "name": "seconds",
+          "line": 484
+        },
+        {
+          "name": "newValue",
+          "line": 486
+        },
+        {
+          "name": "year",
+          "line": 491
+        },
+        {
+          "name": "month",
+          "line": 492
+        },
+        {
+          "name": "day",
+          "line": 493
+        },
+        {
+          "name": "newValue",
+          "line": 496
+        },
+        {
+          "name": "parsedDate",
+          "line": 502
+        },
+        {
+          "name": "parsedDate",
+          "line": 512
+        }
+      ]
+    },
+    {
+      "file": "api/src/services/collections.ts",
+      "score": 21,
+      "symbols": [
+        {
+          "name": "attemptConcurrentIndex",
+          "line": 112
+        },
+        {
+          "name": "flagToAdd",
+          "line": 162
+        },
+        {
+          "name": "fieldsService",
+          "line": 171
+        },
+        {
+          "name": "fieldItemsService",
+          "line": 183
+        },
+        {
+          "name": "fieldPayloads",
+          "line": 189
+        },
+        {
+          "name": "fieldsWithGroups",
+          "line": 200
+        },
+        {
+          "name": "collectionsItemsService",
+          "line": 222
+        },
+        {
+          "name": "fieldsService",
+          "line": 245
+        },
+        {
+          "name": "updatedSchema",
+          "line": 268
+        },
+        {
+          "name": "collections",
+          "line": 285
+        },
+        {
+          "name": "service",
+          "line": 286
+        },
+        {
+          "name": "name",
+          "line": 295
+        },
+        {
+          "name": "updatedSchema",
+          "line": 320
+        },
+        {
+          "name": "env",
+          "line": 334
+        },
+        {
+          "name": "collectionsItemsService",
+          "line": 336
+        },
+        {
+          "name": "group",
+          "line": 371
+        },
+        {
+          "name": "exists",
+          "line": 400
+        },
+        {
+          "name": "result",
+          "line": 424
+        },
+        {
+          "name": "collections",
+          "line": 454
+        },
+        {
+          "name": "collectionsItemsService",
+          "line": 469
+        },
+        {
+          "name": "exists",
+          "line": 483
+        },
+        {
+          "name": "updatedSchema",
+          "line": 518
+        },
+        {
+          "name": "collectionKey",
+          "line": 540
+        },
+        {
+          "name": "collectionItemsService",
+          "line": 546
+        },
+        {
+          "name": "updatedSchema",
+          "line": 578
+        },
+        {
+          "name": "service",
+          "line": 602
+        },
+        {
+          "name": "updatedSchema",
+          "line": 629
+        },
+        {
+          "name": "collections",
+          "line": 651
+        },
+        {
+          "name": "collectionToBeDeleted",
+          "line": 653
+        },
+        {
+          "name": "collectionsItemsService",
+          "line": 668
+        },
+        {
+          "name": "fieldsService",
+          "line": 681
+        },
+        {
+          "name": "fieldItemsService",
+          "line": 687
+        },
+        {
+          "name": "revisionsToDelete",
+          "line": 707
+        },
+        {
+          "name": "chunks",
+          "line": 713
+        },
+        {
+          "name": "collectionRelationList",
+          "line": 733
+        }
+      ]
+    },
+    {
+      "file": "api/src/services/import/import.ts",
+      "score": 17,
+      "symbols": [
+        {
+          "name": "env",
+          "line": 58
+        },
+        {
+          "name": "logger",
+          "line": 59
+        },
+        {
+          "name": "store",
+          "line": 61
+        },
+        {
+          "name": "limitReached",
+          "line": 79
+        },
+        {
+          "name": "count",
+          "line": 80
+        },
+        {
+          "name": "count",
+          "line": 98
+        },
+        {
+          "name": "deadline",
+          "line": 157
+        },
+        {
+          "name": "notify",
+          "line": 184
+        },
+        {
+          "name": "notificationsService",
+          "line": 188
+        },
+        {
+          "name": "usersService",
+          "line": 192
+        },
+        {
+          "name": "user",
+          "line": 196
+        },
+        {
+          "name": "extractJSON",
+          "line": 234
+        },
+        {
+          "name": "errorTracker",
+          "line": 236
+        },
+        {
+          "name": "isSingleton",
+          "line": 237
+        },
+        {
+          "name": "teardownStreams",
+          "line": 241
+        },
+        {
+          "name": "service",
+          "line": 246
+        },
+        {
+          "name": "saveQueue",
+          "line": 256
+        },
+        {
+          "name": "duration",
+          "line": 344
+        },
+        {
+          "name": "delay",
+          "line": 345
+        },
+        {
+          "name": "tmpFile",
+          "line": 371
+        },
+        {
+          "name": "duration",
+          "line": 375
+        },
+        {
+          "name": "delay",
+          "line": 376
+        },
+        {
+          "name": "controller",
+          "line": 377
+        },
+        {
+          "name": "timeout",
+          "line": 378
+        },
+        {
+          "name": "deadline",
+          "line": 406
+        },
+        {
+          "name": "tmpFile",
+          "line": 407
+        },
+        {
+          "name": "errorTracker",
+          "line": 417
+        },
+        {
+          "name": "isSingleton",
+          "line": 418
+        },
+        {
+          "name": "removeTmpFile",
+          "line": 425
+        },
+        {
+          "name": "service",
+          "line": 435
+        },
+        {
+          "name": "cleanup",
+          "line": 446
+        },
+        {
+          "name": "saveQueue",
+          "line": 454
+        },
+        {
+          "name": "fileReadStream",
+          "line": 486
+        },
+        {
+          "name": "parseStream",
+          "line": 493
+        },
+        {
+          "name": "parsedJson",
+          "line": 500
+        }
+      ]
+    },
+    {
+      "file": "api/src/utils/build-import-plan.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "buildImportPlan",
+          "line": 47
+        },
+        {
+          "name": "nodes",
+          "line": 48
+        },
+        {
+          "name": "logger",
+          "line": 49
+        },
+        {
+          "name": "fkFields",
+          "line": 65
+        },
+        {
+          "name": "aliasFields",
+          "line": 66
+        },
+        {
+          "name": "relationType",
+          "line": 76
+        },
+        {
+          "name": "nullable",
+          "line": 83
+        },
+        {
+          "name": "targets",
+          "line": 107
+        },
+        {
+          "name": "deferred",
+          "line": 117
+        },
+        {
+          "name": "scc",
+          "line": 121
+        },
+        {
+          "name": "sccSet",
+          "line": 124
+        },
+        {
+          "name": "internalEdges",
+          "line": 125
+        },
+        {
+          "name": "nullableEdges",
+          "line": 127
+        },
+        {
+          "name": "chosen",
+          "line": 138
+        },
+        {
+          "name": "order",
+          "line": 150
+        },
+        {
+          "name": "findCycleComponent",
+          "line": 159
+        },
+        {
+          "name": "adjacency",
+          "line": 160
+        },
+        {
+          "name": "selfLoops",
+          "line": 170
+        },
+        {
+          "name": "index",
+          "line": 172
+        },
+        {
+          "name": "lowlink",
+          "line": 173
+        },
+        {
+          "name": "onStack",
+          "line": 174
+        },
+        {
+          "name": "frame",
+          "line": 186
+        },
+        {
+          "name": "neighbours",
+          "line": 197
+        },
+        {
+          "name": "next",
+          "line": 200
+        },
+        {
+          "name": "parent",
+          "line": 230
+        },
+        {
+          "name": "topologicalSort",
+          "line": 245
+        },
+        {
+          "name": "dependencies",
+          "line": 246
+        },
+        {
+          "name": "dependents",
+          "line": 247
+        },
+        {
+          "name": "ready",
+          "line": 261
+        },
+        {
+          "name": "node",
+          "line": 264
+        },
+        {
+          "name": "deps",
+          "line": 268
+        },
+        {
+          "name": "insertAt",
+          "line": 272
+        }
+      ]
+    },
+    {
+      "file": "packages/cli/src/commands/sync/utils/reconcile.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "keyComponents",
+          "line": 24
+        },
+        {
+          "name": "referenced",
+          "line": 33
+        },
+        {
+          "name": "raw",
+          "line": 34
+        },
+        {
+          "name": "resolved",
+          "line": 46
+        },
+        {
+          "name": "groupTargets",
+          "line": 57
+        },
+        {
+          "name": "byKey",
+          "line": 62
+        },
+        {
+          "name": "targetId",
+          "line": 65
+        },
+        {
+          "name": "components",
+          "line": 69
+        },
+        {
+          "name": "key",
+          "line": 70
+        },
+        {
+          "name": "bucket",
+          "line": 71
+        },
+        {
+          "name": "reconcileOne",
+          "line": 83
+        },
+        {
+          "name": "references",
+          "line": 89
+        },
+        {
+          "name": "collectionProgress",
+          "line": 95
+        },
+        {
+          "name": "collectionClaimed",
+          "line": 96
+        },
+        {
+          "name": "existingBucket",
+          "line": 102
+        },
+        {
+          "name": "targetsByKey",
+          "line": 115
+        },
+        {
+          "name": "sourcesByKey",
+          "line": 117
+        },
+        {
+          "name": "sourceId",
+          "line": 120
+        },
+        {
+          "name": "components",
+          "line": 122
+        },
+        {
+          "name": "key",
+          "line": 131
+        },
+        {
+          "name": "bucket",
+          "line": 132
+        },
+        {
+          "name": "targetIds",
+          "line": 145
+        },
+        {
+          "name": "targetIds",
+          "line": 167
+        },
+        {
+          "name": "targetIdsSorted",
+          "line": 174
+        },
+        {
+          "name": "inDependencyOrder",
+          "line": 199
+        },
+        {
+          "name": "byCollection",
+          "line": 200
+        },
+        {
+          "name": "emitted",
+          "line": 202
+        },
+        {
+          "name": "visiting",
+          "line": 203
+        },
+        {
+          "name": "visit",
+          "line": 205
+        },
+        {
+          "name": "referenced",
+          "line": 217
+        },
+        {
+          "name": "reconcileCollections",
+          "line": 240
+        },
+        {
+          "name": "progress",
+          "line": 244
+        },
+        {
+          "name": "claimed",
+          "line": 245
+        },
+        {
+          "name": "map",
+          "line": 248
+        },
+        {
+          "name": "taken",
+          "line": 249
+        }
+      ]
+    },
+    {
+      "file": "packages/cli/src/commands/sync/utils/data-push.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "reconcileSystem",
+          "line": 37
+        },
+        {
+          "name": "targets",
+          "line": 48
+        },
+        {
+          "name": "targetRecords",
+          "line": 51
+        },
+        {
+          "name": "TARGET_PREFIX",
+          "line": 70
+        },
+        {
+          "name": "matchedEntries",
+          "line": 72
+        },
+        {
+          "name": "resolveMatches",
+          "line": 84
+        },
+        {
+          "name": "seeds",
+          "line": 93
+        },
+        {
+          "name": "ambiguities",
+          "line": 100
+        },
+        {
+          "name": "rendered",
+          "line": 108
+        },
+        {
+          "name": "groupKey",
+          "line": 111
+        },
+        {
+          "name": "dependents",
+          "line": 120
+        },
+        {
+          "name": "held",
+          "line": 122
+        },
+        {
+          "name": "taken",
+          "line": 138
+        },
+        {
+          "name": "claimed",
+          "line": 141
+        },
+        {
+          "name": "input",
+          "line": 142
+        },
+        {
+          "name": "primaryKey",
+          "line": 143
+        },
+        {
+          "name": "source",
+          "line": 144
+        },
+        {
+          "name": "resource",
+          "line": 145
+        },
+        {
+          "name": "singular",
+          "line": 146
+        },
+        {
+          "name": "plural",
+          "line": 147
+        },
+        {
+          "name": "context",
+          "line": 149
+        },
+        {
+          "name": "sourceLink",
+          "line": 155
+        },
+        {
+          "name": "claimedIds",
+          "line": 158
+        },
+        {
+          "name": "targetId",
+          "line": 164
+        },
+        {
+          "name": "ownerId",
+          "line": 165
+        },
+        {
+          "name": "targetRecord",
+          "line": 166
+        },
+        {
+          "name": "owner",
+          "line": 167
+        },
+        {
+          "name": "targetLinks",
+          "line": 184
+        },
+        {
+          "name": "styledLink",
+          "line": 189
+        },
+        {
+          "name": "identity",
+          "line": 195
+        },
+        {
+          "name": "createHint",
+          "line": 197
+        },
+        {
+          "name": "target",
+          "line": 204
+        },
+        {
+          "name": "choice",
+          "line": 219
+        },
+        {
+          "name": "targetId",
+          "line": 228
+        },
+        {
+          "name": "entries",
+          "line": 235
+        }
+      ]
+    },
+    {
+      "file": "api/src/websocket/collab/room.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "uid",
+          "line": 45
+        },
+        {
+          "name": "room",
+          "line": 48
+        },
+        {
+          "name": "store",
+          "line": 82
+        },
+        {
+          "name": "collection",
+          "line": 88
+        },
+        {
+          "name": "item",
+          "line": 89
+        },
+        {
+          "name": "version",
+          "line": 90
+        },
+        {
+          "name": "changes",
+          "line": 91
+        },
+        {
+          "name": "room",
+          "line": 93
+        },
+        {
+          "name": "rooms",
+          "line": 109
+        },
+        {
+          "name": "rooms",
+          "line": 131
+        },
+        {
+          "name": "rooms",
+          "line": 145
+        },
+        {
+          "name": "roomDefaults",
+          "line": 178
+        },
+        {
+          "name": "target",
+          "line": 217
+        },
+        {
+          "name": "schema",
+          "line": 223
+        },
+        {
+          "name": "result",
+          "line": 225
+        },
+        {
+          "name": "service",
+          "line": 227
+        },
+        {
+          "name": "versionData",
+          "line": 228
+        },
+        {
+          "name": "service",
+          "line": 232
+        },
+        {
+          "name": "clients",
+          "line": 236
+        },
+        {
+          "name": "relation",
+          "line": 252
+        },
+        {
+          "name": "pkField",
+          "line": 255
+        },
+        {
+          "name": "isVersionMatch",
+          "line": 287
+        },
+        {
+          "name": "isItemMatch",
+          "line": 291
+        },
+        {
+          "name": "clients",
+          "line": 342
+        },
+        {
+          "name": "focuses",
+          "line": 354
+        },
+        {
+          "name": "clients",
+          "line": 372
+        },
+        {
+          "name": "existingColors",
+          "line": 375
+        },
+        {
+          "name": "colorsAvailable",
+          "line": 376
+        },
+        {
+          "name": "schema",
+          "line": 418
+        },
+        {
+          "name": "knex",
+          "line": 419
+        },
+        {
+          "name": "allowedFields",
+          "line": 421
+        },
+        {
+          "name": "clients",
+          "line": 454
+        },
+        {
+          "name": "focuses",
+          "line": 458
+        },
+        {
+          "name": "existing_changes",
+          "line": 481
+        },
+        {
+          "name": "schema",
+          "line": 490
+        }
+      ]
+    },
+    {
+      "file": "app/src/composables/use-comparison-diff.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "formattingTags",
+          "line": 15
+        },
+        {
+          "name": "isHtmlString",
+          "line": 17
+        },
+        {
+          "name": "sanitizeDropsContent",
+          "line": 23
+        },
+        {
+          "name": "sanitized",
+          "line": 26
+        },
+        {
+          "name": "parse",
+          "line": 31
+        },
+        {
+          "name": "nodeSignature",
+          "line": 36
+        },
+        {
+          "name": "walk",
+          "line": 39
+        },
+        {
+          "name": "isFormattingElement",
+          "line": 51
+        },
+        {
+          "name": "tag",
+          "line": 53
+        },
+        {
+          "name": "hasInlineUnderline",
+          "line": 57
+        },
+        {
+          "name": "decoration",
+          "line": 60
+        },
+        {
+          "name": "getFormattingSignature",
+          "line": 64
+        },
+        {
+          "name": "formatting",
+          "line": 66
+        },
+        {
+          "name": "element",
+          "line": 70
+        },
+        {
+          "name": "getFormattingDiffRanges",
+          "line": 87
+        },
+        {
+          "name": "collectTextNodes",
+          "line": 103
+        },
+        {
+          "name": "traverse",
+          "line": 106
+        },
+        {
+          "name": "text",
+          "line": 108
+        },
+        {
+          "name": "trimmed",
+          "line": 109
+        },
+        {
+          "name": "formattingSignature",
+          "line": 110
+        },
+        {
+          "name": "formatted",
+          "line": 111
+        },
+        {
+          "name": "start",
+          "line": 112
+        },
+        {
+          "name": "end",
+          "line": 113
+        },
+        {
+          "name": "nextOffset",
+          "line": 130
+        },
+        {
+          "name": "incomingTextMap",
+          "line": 140
+        },
+        {
+          "name": "baseTextMap",
+          "line": 148
+        },
+        {
+          "name": "matchingIncoming",
+          "line": 159
+        },
+        {
+          "name": "condition1",
+          "line": 161
+        },
+        {
+          "name": "condition2",
+          "line": 163
+        },
+        {
+          "name": "shouldHighlight",
+          "line": 168
+        },
+        {
+          "name": "matchingBase",
+          "line": 178
+        },
+        {
+          "name": "condition1",
+          "line": 180
+        },
+        {
+          "name": "condition2",
+          "line": 182
+        },
+        {
+          "name": "shouldHighlight",
+          "line": 187
+        },
+        {
+          "name": "matchingBase",
+          "line": 197
+        }
+      ]
+    },
+    {
+      "file": "api/src/services/fields.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "systemFieldRows",
+          "line": 53
+        },
+        {
+          "name": "env",
+          "line": 54
+        },
+        {
+          "name": "systemFieldUpdateSchema",
+          "line": 56
+        },
+        {
+          "name": "schemaCacheIsEnabled",
+          "line": 99
+        },
+        {
+          "name": "nonAuthorizedItemsService",
+          "line": 143
+        },
+        {
+          "name": "columns",
+          "line": 161
+        },
+        {
+          "name": "columnsWithSystem",
+          "line": 169
+        },
+        {
+          "name": "field",
+          "line": 170
+        },
+        {
+          "name": "type",
+          "line": 174
+        },
+        {
+          "name": "data",
+          "line": 176
+        },
+        {
+          "name": "aliasQuery",
+          "line": 187
+        },
+        {
+          "name": "specials",
+          "line": 202
+        },
+        {
+          "name": "aliasFieldsAsField",
+          "line": 211
+        },
+        {
+          "name": "type",
+          "line": 212
+        },
+        {
+          "name": "data",
+          "line": 214
+        },
+        {
+          "name": "knownCollections",
+          "line": 225
+        },
+        {
+          "name": "policies",
+          "line": 233
+        },
+        {
+          "name": "permissions",
+          "line": 235
+        },
+        {
+          "name": "allowedFields",
+          "line": 269
+        },
+        {
+          "name": "policies",
+          "line": 297
+        },
+        {
+          "name": "permissions",
+          "line": 299
+        },
+        {
+          "name": "type",
+          "line": 339
+        },
+        {
+          "name": "columnWithCastDefaultValue",
+          "line": 341
+        },
+        {
+          "name": "data",
+          "line": 348
+        },
+        {
+          "name": "runPostColumnChange",
+          "line": 369
+        },
+        {
+          "name": "exists",
+          "line": 373
+        },
+        {
+          "name": "flagToAdd",
+          "line": 387
+        },
+        {
+          "name": "attemptConcurrentIndex",
+          "line": 394
+        },
+        {
+          "name": "itemsService",
+          "line": 397
+        },
+        {
+          "name": "actionEvent",
+          "line": 452
+        },
+        {
+          "name": "updatedSchema",
+          "line": 493
+        },
+        {
+          "name": "runPostColumnChange",
+          "line": 508
+        },
+        {
+          "name": "existingType",
+          "line": 513
+        },
+        {
+          "name": "hookAdjustedField",
+          "line": 518
+        },
+        {
+          "name": "record",
+          "line": 535
+        }
+      ]
+    },
+    {
+      "file": "app/src/rich-text/validate.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "SLUG",
+          "line": 31
+        },
+        {
+          "name": "getCoreSchema",
+          "line": 43
+        },
+        {
+          "name": "core",
+          "line": 46
+        },
+        {
+          "name": "attributes",
+          "line": 48
+        },
+        {
+          "name": "isObject",
+          "line": 65
+        },
+        {
+          "name": "isTiptapExtension",
+          "line": 67
+        },
+        {
+          "name": "PREDICATES",
+          "line": 72
+        },
+        {
+          "name": "findPredicateError",
+          "line": 74
+        },
+        {
+          "name": "predicate",
+          "line": 75
+        },
+        {
+          "name": "validateKeyed",
+          "line": 80
+        },
+        {
+          "name": "keys",
+          "line": 88
+        },
+        {
+          "name": "key",
+          "line": 92
+        },
+        {
+          "name": "problem",
+          "line": 97
+        },
+        {
+          "name": "validateItem",
+          "line": 104
+        },
+        {
+          "name": "validateButton",
+          "line": 111
+        },
+        {
+          "name": "items",
+          "line": 115
+        },
+        {
+          "name": "itemsError",
+          "line": 121
+        },
+        {
+          "name": "validateBubbleMenu",
+          "line": 130
+        },
+        {
+          "name": "validateOptions",
+          "line": 135
+        },
+        {
+          "name": "fields",
+          "line": 139
+        },
+        {
+          "name": "field",
+          "line": 143
+        },
+        {
+          "name": "PER_FIELD",
+          "line": 156
+        },
+        {
+          "name": "validateShape",
+          "line": 158
+        },
+        {
+          "name": "optionsError",
+          "line": 163
+        },
+        {
+          "name": "value",
+          "line": 167
+        },
+        {
+          "name": "validateExtensionList",
+          "line": 175
+        },
+        {
+          "name": "validateButtons",
+          "line": 181
+        },
+        {
+          "name": "validateBubbleMenus",
+          "line": 184
+        },
+        {
+          "name": "getAttributes",
+          "line": 192
+        },
+        {
+          "name": "findReservedKey",
+          "line": 202
+        },
+        {
+          "name": "resolveGlobalTypes",
+          "line": 205
+        },
+        {
+          "name": "findCoreAttributeClash",
+          "line": 218
+        },
+        {
+          "name": "coreAttributes",
+          "line": 224
+        },
+        {
+          "name": "name",
+          "line": 227
+        },
+        {
+          "name": "validateNames",
+          "line": 234
+        }
+      ]
+    },
+    {
+      "file": "app/src/interfaces/input-rich-text-html/composables/use-paste-warning.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "usePasteWarning",
+          "line": 33
+        },
+        {
+          "name": "pasteNoticeVisible",
+          "line": 37
+        },
+        {
+          "name": "pasteWarningOpen",
+          "line": 38
+        },
+        {
+          "name": "pasteWarningDiff",
+          "line": 39
+        },
+        {
+          "name": "pasteUndoable",
+          "line": 40
+        },
+        {
+          "name": "handlePaste",
+          "line": 79
+        },
+        {
+          "name": "clipboard",
+          "line": 82
+        },
+        {
+          "name": "html",
+          "line": 85
+        },
+        {
+          "name": "normalized",
+          "line": 86
+        },
+        {
+          "name": "diff",
+          "line": 89
+        },
+        {
+          "name": "openPasteWarning",
+          "line": 112
+        },
+        {
+          "name": "keepPaste",
+          "line": 118
+        },
+        {
+          "name": "undoPaste",
+          "line": 122
+        },
+        {
+          "name": "takeRawPaste",
+          "line": 132
+        },
+        {
+          "name": "paste",
+          "line": 133
+        },
+        {
+          "name": "emptyBlock",
+          "line": 142
+        },
+        {
+          "name": "dismissPasteWarning",
+          "line": 151
+        },
+        {
+          "name": "takeUndone",
+          "line": 159
+        },
+        {
+          "name": "paste",
+          "line": 163
+        },
+        {
+          "name": "unwrapGoogleDocs",
+          "line": 192
+        },
+        {
+          "name": "frame",
+          "line": 204
+        },
+        {
+          "name": "clipboardContent",
+          "line": 231
+        },
+        {
+          "name": "body",
+          "line": 235
+        },
+        {
+          "name": "walker",
+          "line": 242
+        }
+      ]
+    },
+    {
+      "file": "app/src/interfaces/translations/use-translation-job.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "MAX_RETRIES",
+          "line": 39
+        },
+        {
+          "name": "useTranslationJob",
+          "line": 48
+        },
+        {
+          "name": "settingsStore",
+          "line": 53
+        },
+        {
+          "name": "jobState",
+          "line": 55
+        },
+        {
+          "name": "langStatuses",
+          "line": 56
+        },
+        {
+          "name": "cancelled",
+          "line": 57
+        },
+        {
+          "name": "abortControllers",
+          "line": 58
+        },
+        {
+          "name": "fieldProgressByLang",
+          "line": 61
+        },
+        {
+          "name": "isTranslating",
+          "line": 65
+        },
+        {
+          "name": "hasErrors",
+          "line": 67
+        },
+        {
+          "name": "completedCount",
+          "line": 69
+        },
+        {
+          "name": "totalCount",
+          "line": 73
+        },
+        {
+          "name": "pendingLanguages",
+          "line": 75
+        },
+        {
+          "name": "pending",
+          "line": 76
+        },
+        {
+          "name": "start",
+          "line": 101
+        },
+        {
+          "name": "fieldsWithContent",
+          "line": 109
+        },
+        {
+          "name": "fieldDefsByName",
+          "line": 110
+        },
+        {
+          "name": "selectedFieldDefinitions",
+          "line": 112
+        },
+        {
+          "name": "langOptionsByCode",
+          "line": 125
+        },
+        {
+          "name": "runId",
+          "line": 142
+        },
+        {
+          "name": "fieldOrder",
+          "line": 143
+        },
+        {
+          "name": "cancel",
+          "line": 161
+        },
+        {
+          "name": "reset",
+          "line": 174
+        },
+        {
+          "name": "retry",
+          "line": 180
+        },
+        {
+          "name": "fieldOrder",
+          "line": 183
+        },
+        {
+          "name": "allDone",
+          "line": 193
+        },
+        {
+          "name": "translateLanguage",
+          "line": 200
+        },
+        {
+          "name": "config",
+          "line": 205
+        },
+        {
+          "name": "langName",
+          "line": 207
+        },
+        {
+          "name": "prompt",
+          "line": 209
+        },
+        {
+          "name": "abortController",
+          "line": 218
+        },
+        {
+          "name": "response",
+          "line": 222
+        },
+        {
+          "name": "statusCode",
+          "line": 236
+        },
+        {
+          "name": "isRetryable",
+          "line": 243
+        },
+        {
+          "name": "delay",
+          "line": 246
+        }
+      ]
+    },
+    {
+      "file": "api/src/websocket/collab/permissions-cache.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "env",
+          "line": 7
+        },
+        {
+          "name": "items",
+          "line": 44
+        },
+        {
+          "name": "affectedKeys",
+          "line": 45
+        },
+        {
+          "name": "tag",
+          "line": 91
+        },
+        {
+          "name": "depTags",
+          "line": 99
+        },
+        {
+          "name": "key",
+          "line": 130
+        },
+        {
+          "name": "key",
+          "line": 146
+        },
+        {
+          "name": "lruKey",
+          "line": 157
+        },
+        {
+          "name": "timer",
+          "line": 167
+        },
+        {
+          "name": "tags",
+          "line": 200
+        },
+        {
+          "name": "keys",
+          "line": 204
+        },
+        {
+          "name": "permissionCache",
+          "line": 270
+        }
+      ]
+    },
+    {
+      "file": "app/src/interfaces/input-rich-text-html/composables/markup-loss.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "findMarkupLoss",
+          "line": 21
+        },
+        {
+          "name": "rules",
+          "line": 22
+        },
+        {
+          "name": "before",
+          "line": 23
+        },
+        {
+          "name": "after",
+          "line": 24
+        },
+        {
+          "name": "survivors",
+          "line": 26
+        },
+        {
+          "name": "survivingTypes",
+          "line": 27
+        },
+        {
+          "name": "el",
+          "line": 31
+        },
+        {
+          "name": "candidates",
+          "line": 45
+        },
+        {
+          "name": "missing",
+          "line": 48
+        },
+        {
+          "name": "NON_CONTENT_TAGS",
+          "line": 77
+        },
+        {
+          "name": "BLOCK_TAGS",
+          "line": 80
+        },
+        {
+          "name": "parseRules",
+          "line": 122
+        },
+        {
+          "name": "styles",
+          "line": 124
+        },
+        {
+          "name": "parseBody",
+          "line": 133
+        },
+        {
+          "name": "body",
+          "line": 134
+        },
+        {
+          "name": "matchType",
+          "line": 140
+        },
+        {
+          "name": "matchStyle",
+          "line": 154
+        },
+        {
+          "name": "describe",
+          "line": 166
+        },
+        {
+          "name": "attrs",
+          "line": 167
+        },
+        {
+          "name": "rest",
+          "line": 179
+        },
+        {
+          "name": "value",
+          "line": 182
+        },
+        {
+          "name": "mark",
+          "line": 186
+        },
+        {
+          "name": "property",
+          "line": 193
+        },
+        {
+          "name": "isSubset",
+          "line": 200
+        },
+        {
+          "name": "openTag",
+          "line": 204
+        },
+        {
+          "name": "plain",
+          "line": 205
+        },
+        {
+          "name": "style",
+          "line": 206
+        },
+        {
+          "name": "parts",
+          "line": 207
+        },
+        {
+          "name": "visibleText",
+          "line": 213
+        },
+        {
+          "name": "walk",
+          "line": 216
+        },
+        {
+          "name": "block",
+          "line": 223
+        }
+      ]
+    },
+    {
+      "file": "api/src/utils/schema/apply-diff.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "logger",
+          "line": 35
+        },
+        {
+          "name": "applyDiff",
+          "line": 37
+        },
+        {
+          "name": "database",
+          "line": 42
+        },
+        {
+          "name": "helpers",
+          "line": 43
+        },
+        {
+          "name": "schema",
+          "line": 44
+        },
+        {
+          "name": "runPostColumnChange",
+          "line": 54
+        },
+        {
+          "name": "collectionsService",
+          "line": 57
+        },
+        {
+          "name": "getNestedCollectionsToCreate",
+          "line": 59
+        },
+        {
+          "name": "createCollections",
+          "line": 64
+        },
+        {
+          "name": "fields",
+          "line": 69
+        },
+        {
+          "name": "deleteCollections",
+          "line": 108
+        },
+        {
+          "name": "relations",
+          "line": 111
+        },
+        {
+          "name": "relationsService",
+          "line": 116
+        },
+        {
+          "name": "filterCollectionsForCreation",
+          "line": 147
+        },
+        {
+          "name": "isNewCollection",
+          "line": 149
+        },
+        {
+          "name": "groupName",
+          "line": 153
+        },
+        {
+          "name": "parentExists",
+          "line": 157
+        },
+        {
+          "name": "parentWillBeCreatedInThisApply",
+          "line": 167
+        },
+        {
+          "name": "collectionsToDelete",
+          "line": 182
+        },
+        {
+          "name": "collectionDiff",
+          "line": 184
+        },
+        {
+          "name": "currentCollection",
+          "line": 192
+        },
+        {
+          "name": "newValues",
+          "line": 198
+        },
+        {
+          "name": "rhs",
+          "line": 220
+        },
+        {
+          "name": "currentField",
+          "line": 236
+        },
+        {
+          "name": "newValues",
+          "line": 242
+        },
+        {
+          "name": "newValues",
+          "line": 283
+        },
+        {
+          "name": "relationsService",
+          "line": 299
+        },
+        {
+          "name": "structure",
+          "line": 305
+        },
+        {
+          "name": "currentRelation",
+          "line": 328
+        },
+        {
+          "name": "newValues",
+          "line": 334
+        },
+        {
+          "name": "updatedSchema",
+          "line": 365
+        },
+        {
+          "name": "isNestedMetaUpdate",
+          "line": 374
+        }
+      ]
+    },
+    {
+      "file": "api/src/ai/tools/search-index.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "indexedToolCache",
+          "line": 29
+        },
+        {
+          "name": "BM25_K1",
+          "line": 31
+        },
+        {
+          "name": "BM25_B",
+          "line": 32
+        },
+        {
+          "name": "FIELD_WEIGHTS",
+          "line": 34
+        },
+        {
+          "name": "createSearchIndex",
+          "line": 42
+        },
+        {
+          "name": "indexedTools",
+          "line": 43
+        },
+        {
+          "name": "availableToolNames",
+          "line": 44
+        },
+        {
+          "name": "queryTokens",
+          "line": 48
+        },
+        {
+          "name": "ranked",
+          "line": 57
+        },
+        {
+          "name": "getIndexedTool",
+          "line": 74
+        },
+        {
+          "name": "indexTool",
+          "line": 85
+        },
+        {
+          "name": "termFrequency",
+          "line": 86
+        },
+        {
+          "name": "fieldWeights",
+          "line": 87
+        },
+        {
+          "name": "rankTools",
+          "line": 108
+        },
+        {
+          "name": "queryTerms",
+          "line": 109
+        },
+        {
+          "name": "documentFrequencies",
+          "line": 110
+        },
+        {
+          "name": "averageDocumentLength",
+          "line": 111
+        },
+        {
+          "name": "normalizedQuery",
+          "line": 112
+        },
+        {
+          "name": "scoreTool",
+          "line": 131
+        },
+        {
+          "name": "termFrequency",
+          "line": 141
+        },
+        {
+          "name": "documentFrequency",
+          "line": 145
+        },
+        {
+          "name": "fieldWeight",
+          "line": 146
+        },
+        {
+          "name": "idf",
+          "line": 147
+        },
+        {
+          "name": "denominator",
+          "line": 148
+        },
+        {
+          "name": "getFieldScore",
+          "line": 154
+        },
+        {
+          "name": "getDocumentFrequencies",
+          "line": 158
+        },
+        {
+          "name": "frequencies",
+          "line": 159
+        },
+        {
+          "name": "getAverageDocumentLength",
+          "line": 171
+        },
+        {
+          "name": "getArgumentTokens",
+          "line": 177
+        },
+        {
+          "name": "schema",
+          "line": 178
+        },
+        {
+          "name": "collectSchemaTokens",
+          "line": 183
+        },
+        {
+          "name": "items",
+          "line": 195
+        },
+        {
+          "name": "addFieldTerms",
+          "line": 217
+        },
+        {
+          "name": "tokenize",
+          "line": 229
+        }
+      ]
+    },
+    {
+      "file": "api/src/services/items.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "Service",
+          "line": 70
+        },
+        {
+          "name": "isItemsService",
+          "line": 74
+        },
+        {
+          "name": "newOptions",
+          "line": 76
+        },
+        {
+          "name": "primaryKeyField",
+          "line": 106
+        },
+        {
+          "name": "readQuery",
+          "line": 107
+        },
+        {
+          "name": "items",
+          "line": 115
+        },
+        {
+          "name": "collectionInfo",
+          "line": 136
+        },
+        {
+          "name": "primaryKeyField",
+          "line": 137
+        },
+        {
+          "name": "fields",
+          "line": 138
+        },
+        {
+          "name": "aliases",
+          "line": 140
+        },
+        {
+          "name": "previousSeatCount",
+          "line": 155
+        },
+        {
+          "name": "payloadAfterHooks",
+          "line": 159
+        },
+        {
+          "name": "payloadWithPresets",
+          "line": 177
+        },
+        {
+          "name": "payloadService",
+          "line": 201
+        },
+        {
+          "name": "payloadWithoutAliases",
+          "line": 223
+        },
+        {
+          "name": "payloadWithTypeCasting",
+          "line": 224
+        },
+        {
+          "name": "pkField",
+          "line": 239
+        },
+        {
+          "name": "result",
+          "line": 259
+        },
+        {
+          "name": "returnedKey",
+          "line": 265
+        },
+        {
+          "name": "dbError",
+          "line": 273
+        },
+        {
+          "name": "result",
+          "line": 291
+        },
+        {
+          "name": "userIntegrityCheckFlags",
+          "line": 312
+        },
+        {
+          "name": "activityService",
+          "line": 335
+        },
+        {
+          "name": "activity",
+          "line": 340
+        },
+        {
+          "name": "revisionsService",
+          "line": 352
+        },
+        {
+          "name": "relationalFields",
+          "line": 357
+        },
+        {
+          "name": "revisionPayload",
+          "line": 359
+        },
+        {
+          "name": "revision",
+          "line": 361
+        },
+        {
+          "name": "childrenRevisions",
+          "line": 370
+        },
+        {
+          "name": "actionEvent",
+          "line": 394
+        },
+        {
+          "name": "previousSeatCount",
+          "line": 447
+        },
+        {
+          "name": "service",
+          "line": 449
+        },
+        {
+          "name": "pkField",
+          "line": 456
+        },
+        {
+          "name": "primaryKey",
+          "line": 467
+        },
+        {
+          "name": "updatedQuery",
+          "line": 522
+        }
+      ]
+    },
+    {
+      "file": "app/src/composables/use-relation-multiple.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "useRelationMultiple",
+          "line": 41
+        },
+        {
+          "name": "loading",
+          "line": 48
+        },
+        {
+          "name": "fetchedItems",
+          "line": 49
+        },
+        {
+          "name": "existingItemCount",
+          "line": 50
+        },
+        {
+          "name": "refreshSignal",
+          "line": 53
+        },
+        {
+          "name": "targetCollectionInactive",
+          "line": 61
+        },
+        {
+          "name": "info",
+          "line": 62
+        },
+        {
+          "name": "targetPKField",
+          "line": 70
+        },
+        {
+          "name": "fetchedItemsPKs",
+          "line": 78
+        },
+        {
+          "name": "_value",
+          "line": 83
+        },
+        {
+          "name": "toChanges",
+          "line": 87
+        },
+        {
+          "name": "emitValue",
+          "line": 99
+        },
+        {
+          "name": "isVersion",
+          "line": 101
+        },
+        {
+          "name": "totalItemCount",
+          "line": 141
+        },
+        {
+          "name": "rowCollection",
+          "line": 150
+        },
+        {
+          "name": "info",
+          "line": 151
+        },
+        {
+          "name": "forDisplay",
+          "line": 164
+        },
+        {
+          "name": "resolved",
+          "line": 167
+        },
+        {
+          "name": "withResolved",
+          "line": 184
+        },
+        {
+          "name": "createdItems",
+          "line": 196
+        },
+        {
+          "name": "info",
+          "line": 197
+        },
+        {
+          "name": "items",
+          "line": 200
+        },
+        {
+          "name": "displayItems",
+          "line": 212
+        },
+        {
+          "name": "displayEdits",
+          "line": 228
+        },
+        {
+          "name": "deleteIndex",
+          "line": 249
+        },
+        {
+          "name": "fullSelectedOnPage",
+          "line": 258
+        },
+        {
+          "name": "fetchedItem",
+          "line": 259
+        },
+        {
+          "name": "itemCollection",
+          "line": 270
+        },
+        {
+          "name": "editCollection",
+          "line": 271
+        },
+        {
+          "name": "itemPkField",
+          "line": 272
+        },
+        {
+          "name": "editPkField",
+          "line": 273
+        },
+        {
+          "name": "displayEdit",
+          "line": 291
+        },
+        {
+          "name": "merged",
+          "line": 295
+        },
+        {
+          "name": "newItems",
+          "line": 302
+        },
+        {
+          "name": "sortField",
+          "line": 306
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3452 @@
+{
+  "repo": "n8n-io/n8n",
+  "url": "https://github.com/n8n-io/n8n",
+  "sha": "18c045bfacb12c8163ff770970b330af9730aaab",
+  "domain": "data transforms",
+  "frameworkHypothesis": "Express",
+  "licenses": [
+    {
+      "file": "LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "LICENSE_EE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "scripts/licenses/license-overrides.json",
+      "declaration": "MIT"
+    },
+    {
+      "file": "scripts/licenses/__fixtures__/license-overrides.json",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/cli/src/license.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/cli/src/metrics/license-metrics.service.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/cli/src/license/license.controller.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/cli/src/license/license.service.ts",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/core/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/editor-ui/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "@codemirror/search": "catalog:",
+        "v-code-diff": "^1.13.1"
+      }
+    },
+    {
+      "file": "packages/frontend/@n8n/frontend-utils/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/eslint-plugin-design-system/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/storybook/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/composables/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/chat/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/frontend-module-sdk/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/frontend-constants/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/frontend-vite-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/stores/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/rest-api-client/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/i18n/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/@n8n/design-system/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "parse-diff": "^0.11.1"
+      }
+    },
+    {
+      "file": "packages/frontend/@n8n/frontend-test-utils/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/efficiency/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/efficiency/scale/benchmark/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/efficiency/microbenchmarks/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/environments/containers/package.json",
+      "license": "ISC",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/testing/test-impact/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/testing/playwright/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/testing/janitor/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/policy/rules-engine/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/quality/policy/code-health/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/cli/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "express",
+        "vite"
+      ],
+      "computeDeps": {
+        "json-diff": "1.0.6",
+        "picocolors": "catalog:",
+        "@types/json-diff": "^1.0.3"
+      }
+    },
+    {
+      "file": "packages/nodes-base/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "rrule": "2.8.1"
+      }
+    },
+    {
+      "file": "packages/workflow/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/backend-test-utils/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/crdt/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/backend-common/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {
+        "picocolors": "catalog:"
+      }
+    },
+    {
+      "file": "packages/@n8n/app-sdk/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/di/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/imap/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/ai-utilities/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/oxlint-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/decorators/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/nodes-langchain/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "@azure/search-documents": "12.1.0",
+        "chromadb": "^3.0.15"
+      }
+    },
+    {
+      "file": "packages/@n8n/node-engine-compatibility/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/codemirror-lang-html/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/constants/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/ai-workflow-builder.ee/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "picocolors": "catalog:"
+      }
+    },
+    {
+      "file": "packages/@n8n/tournament/package.json",
+      "license": "Apache-2.0",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "picocolors": "catalog:"
+      }
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/programmatic/example/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/programmatic/ai/memory-custom/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/programmatic/ai/model-openai-compatible/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/programmatic/ai/model-ai-custom-example/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/programmatic/ai/model-ai-custom/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/declarative/github-issues/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/node-cli/src/template/templates/declarative/custom/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/syslog-client/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/scheduler/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/vitest-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/agents/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/blob-storage/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/scan-community-package/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/json-schema-to-zod/package.json",
+      "license": "ISC",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/codemirror-lang-sql/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/utils/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/module-cli/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/cli/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/permissions/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/eslint-plugin-community-nodes/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/stylelint-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/expression-runtime/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/chat-hub/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/mcp-apps/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/ai-node-sdk/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/eslint-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/task-runner/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/codemirror-lang/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/api-types/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/backend-services/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/mcp-browser/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {
+        "picocolors": "catalog:"
+      }
+    },
+    {
+      "file": "packages/@n8n/client-oauth2/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/db/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "express",
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/typescript-config/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/telemetry/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/create-node/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/errors/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/typeorm/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/workflow-sdk/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/inbound-auth/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/engine/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/extension-sdk/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/backend-network/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/instance-ai/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/@n8n/mcp-browser-extension/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/node-dev/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/insights/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/insights/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/inbox/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/workflow-builder/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/self-healing/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/mcp/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/otel/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/execution-limits/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/instance-registry/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/quick-connect/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/type-availability-policies/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/apps/frontend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/apps/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "express",
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/modules/data-table/backend/package.json",
+      "license": "LicenseRef-n8n-sustainable-use",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/@n8n/workflow-sdk/src/generate-types/generate-types.ts",
+      "score": 111,
+      "symbols": [
+        {
+          "name": "INDENT",
+          "line": 77
+        },
+        {
+          "name": "NODES_BASE_TYPES",
+          "line": 79
+        },
+        {
+          "name": "NODES_LANGCHAIN_TYPES",
+          "line": 83
+        },
+        {
+          "name": "DEV_OUTPUT_PATH",
+          "line": 88
+        },
+        {
+          "name": "NODES_BASE_DIST",
+          "line": 91
+        },
+        {
+          "name": "buildNodeConfigType",
+          "line": 93
+        },
+        {
+          "name": "parts",
+          "line": 101
+        },
+        {
+          "name": "optionalMark",
+          "line": 108
+        },
+        {
+          "name": "ICON_TS_TYPE",
+          "line": 119
+        },
+        {
+          "name": "WORKFLOW_SELECTOR_TS_TYPE",
+          "line": 126
+        },
+        {
+          "name": "ASSIGNMENT_TYPE_JSDOC",
+          "line": 129
+        },
+        {
+          "name": "generateFilterTypeDeclaration",
+          "line": 139
+        },
+        {
+          "name": "prefix",
+          "line": 140
+        },
+        {
+          "name": "generateAssignmentTypeDeclarations",
+          "line": 148
+        },
+        {
+          "name": "prefix",
+          "line": 149
+        },
+        {
+          "name": "generateResourceMapperTypeDeclaration",
+          "line": 155
+        },
+        {
+          "name": "prefix",
+          "line": 156
+        },
+        {
+          "name": "RESERVED_WORDS",
+          "line": 163
+        },
+        {
+          "name": "GENERIC_AUTH_TYPE_VALUES",
+          "line": 207
+        },
+        {
+          "name": "isNodeProperty",
+          "line": 301
+        },
+        {
+          "name": "variationApplies",
+          "line": 371
+        },
+        {
+          "name": "opts",
+          "line": 375
+        },
+        {
+          "name": "value",
+          "line": 385
+        },
+        {
+          "name": "value",
+          "line": 392
+        },
+        {
+          "name": "emitBuilderHint",
+          "line": 400
+        },
+        {
+          "name": "safePropertyHint",
+          "line": 407
+        },
+        {
+          "name": "safe",
+          "line": 418
+        },
+        {
+          "name": "getNodeBuilderHint",
+          "line": 429
+        },
+        {
+          "name": "emitNodeHintForCombo",
+          "line": 439
+        },
+        {
+          "name": "hint",
+          "line": 444
+        },
+        {
+          "name": "schemaCache",
+          "line": 460
+        },
+        {
+          "name": "findNestedSchemaDir",
+          "line": 469
+        },
+        {
+          "name": "targetsLower",
+          "line": 480
+        },
+        {
+          "name": "entryPath",
+          "line": 485
+        },
+        {
+          "name": "schemaPath",
+          "line": 489
+        }
+      ]
+    },
+    {
+      "file": "packages/nodes-base/nodes/Hubspot/V2/HubspotV2.node.ts",
+      "score": 70,
+      "symbols": [
+        {
+          "name": "err",
+          "line": 183
+        },
+        {
+          "name": "properties",
+          "line": 206
+        },
+        {
+          "name": "statusName",
+          "line": 210
+        },
+        {
+          "name": "statusId",
+          "line": 211
+        },
+        {
+          "name": "properties",
+          "line": 226
+        },
+        {
+          "name": "statusName",
+          "line": 230
+        },
+        {
+          "name": "statusId",
+          "line": 231
+        },
+        {
+          "name": "properties",
+          "line": 248
+        },
+        {
+          "name": "stageName",
+          "line": 252
+        },
+        {
+          "name": "stageId",
+          "line": 253
+        },
+        {
+          "name": "properties",
+          "line": 270
+        },
+        {
+          "name": "sourceName",
+          "line": 274
+        },
+        {
+          "name": "sourceId",
+          "line": 275
+        },
+        {
+          "name": "properties",
+          "line": 292
+        },
+        {
+          "name": "languageName",
+          "line": 296
+        },
+        {
+          "name": "languageId",
+          "line": 297
+        },
+        {
+          "name": "properties",
+          "line": 312
+        },
+        {
+          "name": "languageName",
+          "line": 316
+        },
+        {
+          "name": "languageId",
+          "line": 317
+        },
+        {
+          "name": "properties",
+          "line": 332
+        },
+        {
+          "name": "propertyName",
+          "line": 341
+        },
+        {
+          "name": "propertyId",
+          "line": 342
+        },
+        {
+          "name": "properties",
+          "line": 357
+        },
+        {
+          "name": "propertyName",
+          "line": 359
+        },
+        {
+          "name": "propertyId",
+          "line": 360
+        },
+        {
+          "name": "propertyType",
+          "line": 361
+        },
+        {
+          "name": "properties",
+          "line": 377
+        },
+        {
+          "name": "optionName",
+          "line": 381
+        },
+        {
+          "name": "optionId",
+          "line": 382
+        },
+        {
+          "name": "properties",
+          "line": 401
+        },
+        {
+          "name": "industryName",
+          "line": 405
+        },
+        {
+          "name": "industryId",
+          "line": 406
+        },
+        {
+          "name": "properties",
+          "line": 421
+        },
+        {
+          "name": "statusName",
+          "line": 425
+        },
+        {
+          "name": "statusId",
+          "line": 426
+        }
+      ]
+    },
+    {
+      "file": "packages/nodes-base/nodes/Hubspot/V1/HubspotV1.node.ts",
+      "score": 65,
+      "symbols": [
+        {
+          "name": "err",
+          "line": 178
+        },
+        {
+          "name": "properties",
+          "line": 202
+        },
+        {
+          "name": "statusName",
+          "line": 206
+        },
+        {
+          "name": "statusId",
+          "line": 207
+        },
+        {
+          "name": "properties",
+          "line": 222
+        },
+        {
+          "name": "statusName",
+          "line": 226
+        },
+        {
+          "name": "statusId",
+          "line": 227
+        },
+        {
+          "name": "properties",
+          "line": 244
+        },
+        {
+          "name": "stageName",
+          "line": 248
+        },
+        {
+          "name": "stageId",
+          "line": 249
+        },
+        {
+          "name": "properties",
+          "line": 266
+        },
+        {
+          "name": "sourceName",
+          "line": 270
+        },
+        {
+          "name": "sourceId",
+          "line": 271
+        },
+        {
+          "name": "properties",
+          "line": 288
+        },
+        {
+          "name": "languageName",
+          "line": 292
+        },
+        {
+          "name": "languageId",
+          "line": 293
+        },
+        {
+          "name": "properties",
+          "line": 308
+        },
+        {
+          "name": "languageName",
+          "line": 312
+        },
+        {
+          "name": "languageId",
+          "line": 313
+        },
+        {
+          "name": "properties",
+          "line": 328
+        },
+        {
+          "name": "propertyName",
+          "line": 330
+        },
+        {
+          "name": "propertyId",
+          "line": 331
+        },
+        {
+          "name": "properties",
+          "line": 346
+        },
+        {
+          "name": "optionName",
+          "line": 350
+        },
+        {
+          "name": "optionId",
+          "line": 351
+        },
+        {
+          "name": "properties",
+          "line": 370
+        },
+        {
+          "name": "industryName",
+          "line": 374
+        },
+        {
+          "name": "industryId",
+          "line": 375
+        },
+        {
+          "name": "properties",
+          "line": 390
+        },
+        {
+          "name": "statusName",
+          "line": 394
+        },
+        {
+          "name": "statusId",
+          "line": 395
+        },
+        {
+          "name": "properties",
+          "line": 412
+        },
+        {
+          "name": "stageName",
+          "line": 416
+        },
+        {
+          "name": "stageId",
+          "line": 417
+        },
+        {
+          "name": "properties",
+          "line": 432
+        }
+      ]
+    },
+    {
+      "file": "packages/nodes-base/nodes/Salesforce/Salesforce.node.ts",
+      "score": 65,
+      "symbols": [
+        {
+          "name": "USER_SEARCH_PAGE_SIZE",
+          "line": 47
+        },
+        {
+          "name": "searchOwners",
+          "line": 49
+        },
+        {
+          "name": "queueRecords",
+          "line": 60
+        },
+        {
+          "name": "lowerFilter",
+          "line": 70
+        },
+        {
+          "name": "queues",
+          "line": 71
+        },
+        {
+          "name": "locator",
+          "line": 83
+        },
+        {
+          "name": "escapedFilter",
+          "line": 90
+        },
+        {
+          "name": "whereClause",
+          "line": 91
+        },
+        {
+          "name": "userPrefix",
+          "line": 107
+        },
+        {
+          "name": "qs",
+          "line": 272
+        },
+        {
+          "name": "statuses",
+          "line": 275
+        },
+        {
+          "name": "statusName",
+          "line": 284
+        },
+        {
+          "name": "pickValueName",
+          "line": 303
+        },
+        {
+          "name": "pickValueId",
+          "line": 304
+        },
+        {
+          "name": "resource",
+          "line": 319
+        },
+        {
+          "name": "fieldName",
+          "line": 328
+        },
+        {
+          "name": "fieldId",
+          "line": 329
+        },
+        {
+          "name": "escapedResource",
+          "line": 348
+        },
+        {
+          "name": "qs",
+          "line": 350
+        },
+        {
+          "name": "types",
+          "line": 353
+        },
+        {
+          "name": "fieldName",
+          "line": 388
+        },
+        {
+          "name": "fieldId",
+          "line": 389
+        },
+        {
+          "name": "qs",
+          "line": 403
+        },
+        {
+          "name": "campaigns",
+          "line": 406
+        },
+        {
+          "name": "campaignName",
+          "line": 415
+        },
+        {
+          "name": "campaignId",
+          "line": 416
+        },
+        {
+          "name": "pickValueName",
+          "line": 438
+        },
+        {
+          "name": "pickValueId",
+          "line": 439
+        },
+        {
+          "name": "pickValueName",
+          "line": 463
+        },
+        {
+          "name": "pickValueId",
+          "line": 464
+        },
+        {
+          "name": "pickValueName",
+          "line": 488
+        },
+        {
+          "name": "pickValueId",
+          "line": 489
+        },
+        {
+          "name": "pickValueName",
+          "line": 509
+        },
+        {
+          "name": "pickValueId",
+          "line": 510
+        },
+        {
+          "name": "pickValueName",
+          "line": 530
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/workflow-sdk/src/validation/validate-workflow.ts",
+      "score": 58,
+      "symbols": [
+        {
+          "name": "AI_CONNECTION_TYPES",
+          "line": 173
+        },
+        {
+          "name": "AI_ARRAY_TYPES",
+          "line": 205
+        },
+        {
+          "name": "reconstructSubnodesFromConnections",
+          "line": 222
+        },
+        {
+          "name": "nodesByName",
+          "line": 227
+        },
+        {
+          "name": "aiConns",
+          "line": 239
+        },
+        {
+          "name": "subnodeField",
+          "line": 247
+        },
+        {
+          "name": "sourceNode",
+          "line": 250
+        },
+        {
+          "name": "subnodeConfig",
+          "line": 254
+        },
+        {
+          "name": "existing",
+          "line": 262
+        },
+        {
+          "name": "checkDuplicateSingleValueAiConnections",
+          "line": 294
+        },
+        {
+          "name": "firstSourceByInput",
+          "line": 298
+        },
+        {
+          "name": "warnedInputs",
+          "line": 299
+        },
+        {
+          "name": "aiConns",
+          "line": 304
+        },
+        {
+          "name": "key",
+          "line": 310
+        },
+        {
+          "name": "firstSource",
+          "line": 311
+        },
+        {
+          "name": "FALLBACK_MODEL_NODE_TYPES",
+          "line": 336
+        },
+        {
+          "name": "checkFallbackModelFlag",
+          "line": 357
+        },
+        {
+          "name": "nodesWithFallbackModel",
+          "line": 358
+        },
+        {
+          "name": "hasAiConnectionToParent",
+          "line": 392
+        },
+        {
+          "name": "nodeConnections",
+          "line": 393
+        },
+        {
+          "name": "aiConns",
+          "line": 397
+        },
+        {
+          "name": "isToolSubnode",
+          "line": 412
+        },
+        {
+          "name": "nodeConnections",
+          "line": 413
+        },
+        {
+          "name": "toolConns",
+          "line": 416
+        },
+        {
+          "name": "findDisconnectedNodes",
+          "line": 430
+        },
+        {
+          "name": "hasIncoming",
+          "line": 431
+        },
+        {
+          "name": "resolveTypeVersion",
+          "line": 471
+        },
+        {
+          "name": "guardNodeTypesProvider",
+          "line": 484
+        },
+        {
+          "name": "collectUnknownVersionWarnings",
+          "line": 507
+        },
+        {
+          "name": "collectDeprecatedNodeWarnings",
+          "line": 543
+        },
+        {
+          "name": "advice",
+          "line": 561
+        },
+        {
+          "name": "wf",
+          "line": 590
+        },
+        {
+          "name": "result",
+          "line": 591
+        },
+        {
+          "name": "validateWorkflow",
+          "line": 601
+        },
+        {
+          "name": "nodeTypesProvider",
+          "line": 613
+        }
+      ]
+    },
+    {
+      "file": "scripts/instance-seeding/seedInstance.mjs",
+      "score": 45,
+      "symbols": [
+        {
+          "name": "BASE",
+          "line": 17
+        },
+        {
+          "name": "KEY",
+          "line": 18
+        },
+        {
+          "name": "CLEAR",
+          "line": 24
+        },
+        {
+          "name": "PERSONAL_WORKFLOWS",
+          "line": 25
+        },
+        {
+          "name": "SEED_PREFIX",
+          "line": 26
+        },
+        {
+          "name": "SEED_DT_PREFIX",
+          "line": 27
+        },
+        {
+          "name": "SEED_ENV",
+          "line": 31
+        },
+        {
+          "name": "PROFILE",
+          "line": 36
+        },
+        {
+          "name": "SEED",
+          "line": 41
+        },
+        {
+          "name": "CREDS_PER_PROJECT_RANGE",
+          "line": 47
+        },
+        {
+          "name": "DATA_TABLES_PER_PROJECT_PROB",
+          "line": 48
+        },
+        {
+          "name": "SUBWORKFLOW_PROB",
+          "line": 49
+        },
+        {
+          "name": "sampleWorkflowCount",
+          "line": 54
+        },
+        {
+          "name": "r",
+          "line": 55
+        },
+        {
+          "name": "SELF_CONTAINED_PROJECT_PROB",
+          "line": 69
+        },
+        {
+          "name": "SUBWF_PROB_OWN",
+          "line": 74
+        },
+        {
+          "name": "SUBWF_PROB_SIBLING",
+          "line": 75
+        },
+        {
+          "name": "SUBWF_PROB_LYNCHPIN",
+          "line": 76
+        },
+        {
+          "name": "LYNCHPIN_CRED_REF_PROB",
+          "line": 81
+        },
+        {
+          "name": "COMMUNITIES",
+          "line": 85
+        },
+        {
+          "name": "PLATFORM_PROJECT_NAME",
+          "line": 140
+        },
+        {
+          "name": "ORG_UTILITIES_PROJECT_NAME",
+          "line": 141
+        },
+        {
+          "name": "UTILITY_PROJECT_NAMES",
+          "line": 142
+        },
+        {
+          "name": "EXT_WF_REF_BUDGET",
+          "line": 148
+        },
+        {
+          "name": "EXT_CRED_REF_BUDGET",
+          "line": 149
+        },
+        {
+          "name": "DATA_TABLE_PROXY_COUNT",
+          "line": 152
+        },
+        {
+          "name": "DATA_TABLE_PROXY_CONSUMERS",
+          "line": 153
+        },
+        {
+          "name": "UTILITY_REF_PROB",
+          "line": 160
+        },
+        {
+          "name": "CENTRAL_DT_REF_PROB",
+          "line": 164
+        },
+        {
+          "name": "ORG_UTIL_DIRECT_DT_PROB",
+          "line": 168
+        },
+        {
+          "name": "CENTRAL_DATA_TABLE",
+          "line": 169
+        },
+        {
+          "name": "TRENCHCOAT_PROJECTS",
+          "line": 184
+        },
+        {
+          "name": "TRENCHCOAT_GROUPS",
+          "line": 190
+        },
+        {
+          "name": "TRENCHCOAT_WORKFLOW_THEMES",
+          "line": 196
+        },
+        {
+          "name": "UTILITY_WORKFLOW_THEMES",
+          "line": 211
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/workflow-sdk/src/workflow-builder/layout-utils.ts",
+      "score": 45,
+      "symbols": [
+        {
+          "name": "calculateNodePositions",
+          "line": 66
+        },
+        {
+          "name": "positions",
+          "line": 69
+        },
+        {
+          "name": "hasIncoming",
+          "line": 72
+        },
+        {
+          "name": "rootNodes",
+          "line": 83
+        },
+        {
+          "name": "visited",
+          "line": 86
+        },
+        {
+          "name": "node",
+          "line": 103
+        },
+        {
+          "name": "isAiConnectionType",
+          "line": 139
+        },
+        {
+          "name": "getAiParentNames",
+          "line": 143
+        },
+        {
+          "name": "parents",
+          "line": 144
+        },
+        {
+          "name": "getAiConfigNames",
+          "line": 158
+        },
+        {
+          "name": "configs",
+          "line": 159
+        },
+        {
+          "name": "getAllConnectedAiConfigNodes",
+          "line": 171
+        },
+        {
+          "name": "predecessors",
+          "line": 176
+        },
+        {
+          "name": "getMainOutputCount",
+          "line": 186
+        },
+        {
+          "name": "graphNode",
+          "line": 187
+        },
+        {
+          "name": "mainConns",
+          "line": 189
+        },
+        {
+          "name": "getMainInputCount",
+          "line": 194
+        },
+        {
+          "name": "mainConns",
+          "line": 197
+        },
+        {
+          "name": "canvasNodeSize",
+          "line": 211
+        },
+        {
+          "name": "maxVerticalHandles",
+          "line": 212
+        },
+        {
+          "name": "height",
+          "line": 213
+        },
+        {
+          "name": "portCount",
+          "line": 215
+        },
+        {
+          "name": "wiredPorts",
+          "line": 231
+        },
+        {
+          "name": "aiInputTypes",
+          "line": 237
+        },
+        {
+          "name": "resolveNodePorts",
+          "line": 267
+        },
+        {
+          "name": "descriptionOf",
+          "line": 271
+        },
+        {
+          "name": "workflow",
+          "line": 280
+        },
+        {
+          "name": "ports",
+          "line": 302
+        },
+        {
+          "name": "description",
+          "line": 304
+        },
+        {
+          "name": "inputs",
+          "line": 306
+        },
+        {
+          "name": "outputs",
+          "line": 309
+        },
+        {
+          "name": "nonMainInputs",
+          "line": 312
+        },
+        {
+          "name": "declaresOwnWidth",
+          "line": 326
+        },
+        {
+          "name": "declaresOwnHeight",
+          "line": 331
+        },
+        {
+          "name": "declaredStickySize",
+          "line": 339
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/workflow-sdk/src/codegen/code-generator.ts",
+      "score": 42,
+      "symbols": [
+        {
+          "name": "collectNodesWithEmittableId",
+          "line": 109
+        },
+        {
+          "name": "claimedIds",
+          "line": 110
+        },
+        {
+          "name": "nodeNames",
+          "line": 111
+        },
+        {
+          "name": "id",
+          "line": 114
+        },
+        {
+          "name": "appendNodeId",
+          "line": 127
+        },
+        {
+          "name": "getIndent",
+          "line": 136
+        },
+        {
+          "name": "generateSubnodeCall",
+          "line": 144
+        },
+        {
+          "name": "defaultName",
+          "line": 158
+        },
+        {
+          "name": "pos",
+          "line": 171
+        },
+        {
+          "name": "nestedSubnodesConfig",
+          "line": 178
+        },
+        {
+          "name": "generateSubnodesConfigForNode",
+          "line": 195
+        },
+        {
+          "name": "grouped",
+          "line": 201
+        },
+        {
+          "name": "subnodeNode",
+          "line": 207
+        },
+        {
+          "name": "existing",
+          "line": 210
+        },
+        {
+          "name": "configKey",
+          "line": 219
+        },
+        {
+          "name": "builderName",
+          "line": 220
+        },
+        {
+          "name": "calls",
+          "line": 224
+        },
+        {
+          "name": "generateSubnodesConfig",
+          "line": 259
+        },
+        {
+          "name": "appendNodeConfigOptions",
+          "line": 263
+        },
+        {
+          "name": "collectSubnodesAsVariables",
+          "line": 308
+        },
+        {
+          "name": "subnodeNode",
+          "line": 320
+        },
+        {
+          "name": "builderName",
+          "line": 331
+        },
+        {
+          "name": "generateSubnodeCallWithVarRefs",
+          "line": 339
+        },
+        {
+          "name": "defaultName",
+          "line": 353
+        },
+        {
+          "name": "pos",
+          "line": 366
+        },
+        {
+          "name": "nestedSubnodesConfig",
+          "line": 373
+        },
+        {
+          "name": "generateSubnodesConfigWithVarRefs",
+          "line": 390
+        },
+        {
+          "name": "grouped",
+          "line": 399
+        },
+        {
+          "name": "varName",
+          "line": 405
+        },
+        {
+          "name": "existing",
+          "line": 406
+        },
+        {
+          "name": "configKey",
+          "line": 415
+        },
+        {
+          "name": "varNames",
+          "line": 419
+        },
+        {
+          "name": "generateSubnodeVariableDeclarations",
+          "line": 454
+        },
+        {
+          "name": "varName",
+          "line": 458
+        },
+        {
+          "name": "call",
+          "line": 459
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/ai-workflow-builder.ee/src/tools/utils/mermaid.utils.ts",
+      "score": 41,
+      "symbols": [
+        {
+          "name": "CONDITIONAL_NODE_TYPES",
+          "line": 54
+        },
+        {
+          "name": "AGENT_NODE_TYPE",
+          "line": 61
+        },
+        {
+          "name": "STICKY_NOTE_TYPE",
+          "line": 62
+        },
+        {
+          "name": "DEFAULT_NODE_WIDTH",
+          "line": 68
+        },
+        {
+          "name": "DEFAULT_NODE_HEIGHT",
+          "line": 69
+        },
+        {
+          "name": "DEFAULT_STICKY_WIDTH",
+          "line": 72
+        },
+        {
+          "name": "DEFAULT_STICKY_HEIGHT",
+          "line": 73
+        },
+        {
+          "name": "regularNodes",
+          "line": 130
+        },
+        {
+          "name": "stickyNotes",
+          "line": 131
+        },
+        {
+          "name": "nodesInStickySubgraphs",
+          "line": 142
+        },
+        {
+          "name": "map",
+          "line": 190
+        },
+        {
+          "name": "bounds",
+          "line": 205
+        },
+        {
+          "name": "overlappingNodes",
+          "line": 208
+        },
+        {
+          "name": "nodeCenterX",
+          "line": 241
+        },
+        {
+          "name": "nodeCenterY",
+          "line": 242
+        },
+        {
+          "name": "agentNodes",
+          "line": 253
+        },
+        {
+          "name": "reverseConnections",
+          "line": 257
+        },
+        {
+          "name": "incomingConns",
+          "line": 260
+        },
+        {
+          "name": "aiConnectedNodeNames",
+          "line": 262
+        },
+        {
+          "name": "nestedStickySubgraphs",
+          "line": 269
+        },
+        {
+          "name": "allNodesConnectToAgent",
+          "line": 285
+        },
+        {
+          "name": "reverseConnections",
+          "line": 302
+        },
+        {
+          "name": "nodesWithIncoming",
+          "line": 341
+        },
+        {
+          "name": "isConditional",
+          "line": 367
+        },
+        {
+          "name": "escapedName",
+          "line": 369
+        },
+        {
+          "name": "config",
+          "line": 379
+        },
+        {
+          "name": "idPart",
+          "line": 390
+        },
+        {
+          "name": "typePart",
+          "line": 391
+        },
+        {
+          "name": "paramsPart",
+          "line": 392
+        },
+        {
+          "name": "parts",
+          "line": 406
+        },
+        {
+          "name": "lines",
+          "line": 417
+        },
+        {
+          "name": "node",
+          "line": 423
+        },
+        {
+          "name": "id",
+          "line": 424
+        },
+        {
+          "name": "stickyForNode",
+          "line": 430
+        },
+        {
+          "name": "targetId",
+          "line": 447
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/editor-ui/src/app/composables/useCanvasOperations.ts",
+      "score": 40,
+      "symbols": [
+        {
+          "name": "getPlacementNodeWidth",
+          "line": 226
+        },
+        {
+          "name": "hasNonMainInput",
+          "line": 234
+        },
+        {
+          "name": "useCanvasOperations",
+          "line": 245
+        },
+        {
+          "name": "rootStore",
+          "line": 246
+        },
+        {
+          "name": "workflowsStore",
+          "line": 247
+        },
+        {
+          "name": "credentialsStore",
+          "line": 248
+        },
+        {
+          "name": "historyStore",
+          "line": 249
+        },
+        {
+          "name": "uiStore",
+          "line": 250
+        },
+        {
+          "name": "nodeTypesStore",
+          "line": 251
+        },
+        {
+          "name": "canvasStore",
+          "line": 252
+        },
+        {
+          "name": "agentNodeCanvasGeometryStore",
+          "line": 253
+        },
+        {
+          "name": "settingsStore",
+          "line": 254
+        },
+        {
+          "name": "tagsStore",
+          "line": 255
+        },
+        {
+          "name": "nodeCreatorStore",
+          "line": 256
+        },
+        {
+          "name": "executionsStore",
+          "line": 257
+        },
+        {
+          "name": "projectsStore",
+          "line": 258
+        },
+        {
+          "name": "logsStore",
+          "line": 259
+        },
+        {
+          "name": "experimentalNdvStore",
+          "line": 260
+        },
+        {
+          "name": "templatesStore",
+          "line": 261
+        },
+        {
+          "name": "focusPanelStore",
+          "line": 262
+        },
+        {
+          "name": "setupPanelStore",
+          "line": 263
+        },
+        {
+          "name": "emptyCanvasGroupsEnabled",
+          "line": 264
+        },
+        {
+          "name": "workflowDocumentStore",
+          "line": 265
+        },
+        {
+          "name": "ndvStore",
+          "line": 269
+        },
+        {
+          "name": "i18n",
+          "line": 271
+        },
+        {
+          "name": "toast",
+          "line": 272
+        },
+        {
+          "name": "workflowHelpers",
+          "line": 273
+        },
+        {
+          "name": "nodeHelpers",
+          "line": 274
+        },
+        {
+          "name": "aiSimulatedDataGuard",
+          "line": 275
+        },
+        {
+          "name": "telemetry",
+          "line": 283
+        },
+        {
+          "name": "externalHooks",
+          "line": 284
+        },
+        {
+          "name": "clipboard",
+          "line": 285
+        },
+        {
+          "name": "router",
+          "line": 294
+        },
+        {
+          "name": "route",
+          "line": 295
+        },
+        {
+          "name": "lastClickPosition",
+          "line": 297
+        }
+      ]
+    },
+    {
+      "file": "packages/core/src/execution-engine/workflow-execute.ts",
+      "score": 37,
+      "symbols": [
+        {
+          "name": "normalizeUnhandledAxiosError",
+          "line": 111
+        },
+        {
+          "name": "parentNodes",
+          "line": 189
+        },
+        {
+          "name": "originalDestination",
+          "line": 255
+        },
+        {
+          "name": "destinationNodeType",
+          "line": 265
+        },
+        {
+          "name": "toolExecutorNode",
+          "line": 274
+        },
+        {
+          "name": "parentNodes",
+          "line": 291
+        },
+        {
+          "name": "parentNode",
+          "line": 294
+        },
+        {
+          "name": "filteredGraph",
+          "line": 311
+        },
+        {
+          "name": "filteredNodes",
+          "line": 322
+        },
+        {
+          "name": "dirtyNodes",
+          "line": 325
+        },
+        {
+          "name": "metadata",
+          "line": 383
+        },
+        {
+          "name": "runData",
+          "line": 386
+        },
+        {
+          "name": "taskData",
+          "line": 392
+        },
+        {
+          "name": "nodeIncomingData",
+          "line": 429
+        },
+        {
+          "name": "executionData",
+          "line": 452
+        },
+        {
+          "name": "nodeWaiting",
+          "line": 457
+        },
+        {
+          "name": "nodeWaitingSource",
+          "line": 458
+        },
+        {
+          "name": "enqueueFn",
+          "line": 481
+        },
+        {
+          "name": "numberOfInputs",
+          "line": 486
+        },
+        {
+          "name": "executionStackItem",
+          "line": 594
+        },
+        {
+          "name": "checkOutputNodes",
+          "line": 639
+        },
+        {
+          "name": "executionStackNodes",
+          "line": 672
+        },
+        {
+          "name": "parentNodes",
+          "line": 715
+        },
+        {
+          "name": "parentNodesNodeToAdd",
+          "line": 751
+        },
+        {
+          "name": "waitingExecutionSource",
+          "line": 841
+        },
+        {
+          "name": "node",
+          "line": 917
+        },
+        {
+          "name": "nodeType",
+          "line": 929
+        },
+        {
+          "name": "customOperation",
+          "line": 967
+        },
+        {
+          "name": "forceInputNodeExecution",
+          "line": 1017
+        },
+        {
+          "name": "descendants",
+          "line": 1032
+        },
+        {
+          "name": "mainData",
+          "line": 1034
+        },
+        {
+          "name": "previousNode",
+          "line": 1035
+        },
+        {
+          "name": "wrapped",
+          "line": 1079
+        },
+        {
+          "name": "context",
+          "line": 1130
+        },
+        {
+          "name": "evalMockOutput",
+          "line": 1150
+        }
+      ]
+    },
+    {
+      "file": "packages/cli/src/modules/instance-ai/instance-ai.adapter.service.ts",
+      "score": 37,
+      "symbols": [
+        {
+          "name": "resolveDisplayedDefaults",
+          "line": 298
+        },
+        {
+          "name": "resolved",
+          "line": 313
+        },
+        {
+          "name": "isToolNode",
+          "line": 330
+        },
+        {
+          "name": "credentialDocsUrl",
+          "line": 343
+        },
+        {
+          "name": "collectCredentialProperties",
+          "line": 353
+        },
+        {
+          "name": "allTypes",
+          "line": 358
+        },
+        {
+          "name": "seen",
+          "line": 365
+        },
+        {
+          "name": "hasCredentialValue",
+          "line": 385
+        },
+        {
+          "name": "trimmed",
+          "line": 388
+        },
+        {
+          "name": "toTelemetryReason",
+          "line": 398
+        },
+        {
+          "name": "filePath",
+          "line": 468
+        },
+        {
+          "name": "promise",
+          "line": 469
+        },
+        {
+          "name": "builderDelegateAdapter",
+          "line": 631
+        },
+        {
+          "name": "credentialService",
+          "line": 632
+        },
+        {
+          "name": "dataTableService",
+          "line": 639
+        },
+        {
+          "name": "table",
+          "line": 647
+        },
+        {
+          "name": "provider",
+          "line": 751
+        },
+        {
+          "name": "postHog",
+          "line": 821
+        },
+        {
+          "name": "setupPanelVariant",
+          "line": 834
+        },
+        {
+          "name": "instanceContext",
+          "line": 867
+        },
+        {
+          "name": "aiPreferenceService",
+          "line": 891
+        },
+        {
+          "name": "result",
+          "line": 897
+        },
+        {
+          "name": "isAiGatewayOnly",
+          "line": 931
+        },
+        {
+          "name": "toSummaries",
+          "line": 933
+        },
+        {
+          "name": "connected",
+          "line": 951
+        },
+        {
+          "name": "servers",
+          "line": 955
+        },
+        {
+          "name": "connection",
+          "line": 959
+        },
+        {
+          "name": "projectId",
+          "line": 990
+        },
+        {
+          "name": "result",
+          "line": 991
+        },
+        {
+          "name": "connections",
+          "line": 1011
+        },
+        {
+          "name": "operations",
+          "line": 1027
+        },
+        {
+          "name": "minVersion",
+          "line": 1029
+        },
+        {
+          "name": "hiddenProperties",
+          "line": 1031
+        },
+        {
+          "name": "workflowTemplatesService",
+          "line": 1049
+        },
+        {
+          "name": "config",
+          "line": 1084
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/workflow-sdk/src/generate-types/generate-zod-schemas.ts",
+      "score": 37,
+      "symbols": [
+        {
+          "name": "INDENT",
+          "line": 35
+        },
+        {
+          "name": "ICON_ZOD_SCHEMA",
+          "line": 41
+        },
+        {
+          "name": "WORKFLOW_SELECTOR_ZOD_SCHEMA",
+          "line": 50
+        },
+        {
+          "name": "GENERIC_AUTH_TYPE_VALUES",
+          "line": 56
+        },
+        {
+          "name": "RESERVED_WORDS",
+          "line": 71
+        },
+        {
+          "name": "defaultSatisfiesRequired",
+          "line": 195
+        },
+        {
+          "name": "isPropertyOptional",
+          "line": 216
+        },
+        {
+          "name": "minRequired",
+          "line": 220
+        },
+        {
+          "name": "hasRequiredSubnodeFields",
+          "line": 238
+        },
+        {
+          "name": "hasConditionalSubnodeFields",
+          "line": 246
+        },
+        {
+          "name": "hasDisplayOptions",
+          "line": 255
+        },
+        {
+          "name": "stripped",
+          "line": 259
+        },
+        {
+          "name": "toPascalCase",
+          "line": 267
+        },
+        {
+          "name": "toSnakeCase",
+          "line": 280
+        },
+        {
+          "name": "formatZodLiteral",
+          "line": 291
+        },
+        {
+          "name": "escaped",
+          "line": 294
+        },
+        {
+          "name": "quotePropertyName",
+          "line": 311
+        },
+        {
+          "name": "needsQuoting",
+          "line": 312
+        },
+        {
+          "name": "extractDefaultsForDisplayOptions",
+          "line": 328
+        },
+        {
+          "name": "referencedProps",
+          "line": 333
+        },
+        {
+          "name": "baseProp",
+          "line": 341
+        },
+        {
+          "name": "baseProp",
+          "line": 352
+        },
+        {
+          "name": "prop",
+          "line": 360
+        },
+        {
+          "name": "generateResourceLocatorZodSchema",
+          "line": 377
+        },
+        {
+          "name": "modeSchema",
+          "line": 379
+        },
+        {
+          "name": "objectSchema",
+          "line": 383
+        },
+        {
+          "name": "primitiveElement",
+          "line": 397
+        },
+        {
+          "name": "wrapMultipleValues",
+          "line": 409
+        },
+        {
+          "name": "literalUnion",
+          "line": 419
+        },
+        {
+          "name": "parts",
+          "line": 420
+        },
+        {
+          "name": "mapNestedPropertyToZodSchema",
+          "line": 429
+        },
+        {
+          "name": "mapNestedPropertyToZodSchemaInner",
+          "line": 433
+        },
+        {
+          "name": "isMultipleValues",
+          "line": 449
+        },
+        {
+          "name": "literals",
+          "line": 485
+        },
+        {
+          "name": "elementSchema",
+          "line": 488
+        }
+      ]
+    },
+    {
+      "file": "packages/nodes-base/nodes/Jira/Jira.node.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "jiraVersion",
+          "line": 212
+        },
+        {
+          "name": "projectName",
+          "line": 233
+        },
+        {
+          "name": "projectId",
+          "line": 234
+        },
+        {
+          "name": "projectId",
+          "line": 247
+        },
+        {
+          "name": "issueTypeName",
+          "line": 258
+        },
+        {
+          "name": "issueTypeId",
+          "line": 259
+        },
+        {
+          "name": "users",
+          "line": 281
+        },
+        {
+          "name": "priorities",
+          "line": 291
+        },
+        {
+          "name": "priorityName",
+          "line": 294
+        },
+        {
+          "name": "priorityId",
+          "line": 295
+        },
+        {
+          "name": "issueKey",
+          "line": 321
+        },
+        {
+          "name": "transitions",
+          "line": 322
+        },
+        {
+          "name": "operation",
+          "line": 352
+        },
+        {
+          "name": "jiraVersion",
+          "line": 353
+        },
+        {
+          "name": "issueKey",
+          "line": 363
+        },
+        {
+          "name": "res",
+          "line": 364
+        },
+        {
+          "name": "res",
+          "line": 395
+        },
+        {
+          "name": "fields",
+          "line": 401
+        },
+        {
+          "name": "field",
+          "line": 406
+        },
+        {
+          "name": "labels",
+          "line": 423
+        },
+        {
+          "name": "labelName",
+          "line": 426
+        },
+        {
+          "name": "labelId",
+          "line": 427
+        },
+        {
+          "name": "groups",
+          "line": 459
+        },
+        {
+          "name": "groupName",
+          "line": 462
+        },
+        {
+          "name": "groupId",
+          "line": 463
+        },
+        {
+          "name": "project",
+          "line": 489
+        },
+        {
+          "name": "items",
+          "line": 519
+        },
+        {
+          "name": "length",
+          "line": 521
+        },
+        {
+          "name": "resource",
+          "line": 525
+        },
+        {
+          "name": "operation",
+          "line": 526
+        },
+        {
+          "name": "jiraVersion",
+          "line": 527
+        },
+        {
+          "name": "summary",
+          "line": 534
+        },
+        {
+          "name": "projectId",
+          "line": 535
+        },
+        {
+          "name": "issueTypeId",
+          "line": 538
+        },
+        {
+          "name": "additionalFields",
+          "line": 541
+        }
+      ]
+    },
+    {
+      "file": "packages/nodes-base/nodes/Coda/Coda.node.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "qs",
+          "line": 88
+        },
+        {
+          "name": "docs",
+          "line": 89
+        },
+        {
+          "name": "docName",
+          "line": 91
+        },
+        {
+          "name": "docId",
+          "line": 92
+        },
+        {
+          "name": "docId",
+          "line": 105
+        },
+        {
+          "name": "tables",
+          "line": 107
+        },
+        {
+          "name": "tableName",
+          "line": 115
+        },
+        {
+          "name": "tableId",
+          "line": 116
+        },
+        {
+          "name": "docId",
+          "line": 129
+        },
+        {
+          "name": "tableId",
+          "line": 130
+        },
+        {
+          "name": "columns",
+          "line": 132
+        },
+        {
+          "name": "columnName",
+          "line": 140
+        },
+        {
+          "name": "columnId",
+          "line": 141
+        },
+        {
+          "name": "docId",
+          "line": 153
+        },
+        {
+          "name": "views",
+          "line": 154
+        },
+        {
+          "name": "viewName",
+          "line": 162
+        },
+        {
+          "name": "viewId",
+          "line": 163
+        },
+        {
+          "name": "docId",
+          "line": 175
+        },
+        {
+          "name": "formulas",
+          "line": 176
+        },
+        {
+          "name": "formulaName",
+          "line": 184
+        },
+        {
+          "name": "formulaId",
+          "line": 185
+        },
+        {
+          "name": "docId",
+          "line": 197
+        },
+        {
+          "name": "viewId",
+          "line": 198
+        },
+        {
+          "name": "viewRows",
+          "line": 199
+        },
+        {
+          "name": "viewRowName",
+          "line": 207
+        },
+        {
+          "name": "viewRowId",
+          "line": 208
+        },
+        {
+          "name": "docId",
+          "line": 221
+        },
+        {
+          "name": "viewId",
+          "line": 222
+        },
+        {
+          "name": "viewColumns",
+          "line": 224
+        },
+        {
+          "name": "viewColumnName",
+          "line": 232
+        },
+        {
+          "name": "viewColumnId",
+          "line": 233
+        },
+        {
+          "name": "nodeVersion",
+          "line": 245
+        },
+        {
+          "name": "items",
+          "line": 247
+        },
+        {
+          "name": "resource",
+          "line": 249
+        },
+        {
+          "name": "operation",
+          "line": 251
+        }
+      ]
+    },
+    {
+      "file": "packages/workflow/src/node-helpers.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "isSubNodeType",
+          "line": 258
+        },
+        {
+          "name": "outputTypes",
+          "line": 264
+        },
+        {
+          "name": "evaluateFeature",
+          "line": 276
+        },
+        {
+          "name": "getNodeFeatures",
+          "line": 286
+        },
+        {
+          "name": "getPropertyValues",
+          "line": 301
+        },
+        {
+          "name": "features",
+          "line": 321
+        },
+        {
+          "name": "checkConditions",
+          "line": 341
+        },
+        {
+          "name": "displayParameter",
+          "line": 419
+        },
+        {
+          "name": "values",
+          "line": 438
+        },
+        {
+          "name": "values",
+          "line": 459
+        },
+        {
+          "name": "displayParameterPath",
+          "line": 485
+        },
+        {
+          "name": "getActiveCredentialTypes",
+          "line": 529
+        },
+        {
+          "name": "resolved",
+          "line": 544
+        },
+        {
+          "name": "declaredNames",
+          "line": 553
+        },
+        {
+          "name": "activeTypes",
+          "line": 559
+        },
+        {
+          "name": "paramValue",
+          "line": 569
+        },
+        {
+          "name": "paramDescription",
+          "line": 580
+        },
+        {
+          "name": "getContext",
+          "line": 614
+        },
+        {
+          "name": "getParameterDependencies",
+          "line": 651
+        },
+        {
+          "name": "getParameterResolveOrder",
+          "line": 690
+        },
+        {
+          "name": "indexToResolve",
+          "line": 695
+        },
+        {
+          "name": "getNodeParameters",
+          "line": 773
+        },
+        {
+          "name": "parameterIterationOrderIndex",
+          "line": 827
+        },
+        {
+          "name": "nodeProperties",
+          "line": 833
+        },
+        {
+          "name": "defaultOptions",
+          "line": 901
+        },
+        {
+          "name": "filter",
+          "line": 907
+        },
+        {
+          "name": "value",
+          "line": 931
+        },
+        {
+          "name": "tempNodeParameters",
+          "line": 972
+        },
+        {
+          "name": "nodePropertyOptions",
+          "line": 1079
+        },
+        {
+          "name": "itemNodeValues",
+          "line": 1085
+        },
+        {
+          "name": "hasNonDefaultValues",
+          "line": 1110
+        },
+        {
+          "name": "field",
+          "line": 1113
+        },
+        {
+          "name": "returnValue",
+          "line": 1160
+        },
+        {
+          "name": "getNodeWebhookPath",
+          "line": 1191
+        },
+        {
+          "name": "nodeName",
+          "line": 1205
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/editor-ui/src/features/agents/composables/useAgentChatStream.ts",
+      "score": 31,
+      "symbols": [
+        {
+          "name": "STOP_ACCEPTANCE_TIMEOUT_MS",
+          "line": 118
+        },
+        {
+          "name": "MAX_WAITING_STREAMS",
+          "line": 119
+        },
+        {
+          "name": "MAX_START_VALIDATION_ATTEMPTS",
+          "line": 120
+        },
+        {
+          "name": "getApprovalDecision",
+          "line": 122
+        },
+        {
+          "name": "warningKey",
+          "line": 127
+        },
+        {
+          "name": "useAgentChatStream",
+          "line": 131
+        },
+        {
+          "name": "rootStore",
+          "line": 132
+        },
+        {
+          "name": "extensions",
+          "line": 133
+        },
+        {
+          "name": "locale",
+          "line": 134
+        },
+        {
+          "name": "channel",
+          "line": 136
+        },
+        {
+          "name": "capabilities",
+          "line": 142
+        },
+        {
+          "name": "messages",
+          "line": 148
+        },
+        {
+          "name": "isStreamOpen",
+          "line": 149
+        },
+        {
+          "name": "isSubmitting",
+          "line": 150
+        },
+        {
+          "name": "queuedMessages",
+          "line": 151
+        },
+        {
+          "name": "removingQueueIds",
+          "line": 152
+        },
+        {
+          "name": "steeringQueueIds",
+          "line": 153
+        },
+        {
+          "name": "isReorderingQueue",
+          "line": 154
+        },
+        {
+          "name": "consumedQueueIds",
+          "line": 155
+        },
+        {
+          "name": "steerableExecutionId",
+          "line": 156
+        },
+        {
+          "name": "streams",
+          "line": 157
+        },
+        {
+          "name": "pendingBudgetNotices",
+          "line": 166
+        },
+        {
+          "name": "activeExecutionId",
+          "line": 172
+        },
+        {
+          "name": "acceptedSessionId",
+          "line": 173
+        },
+        {
+          "name": "isRecovering",
+          "line": 174
+        },
+        {
+          "name": "isStreaming",
+          "line": 175
+        },
+        {
+          "name": "isCancelling",
+          "line": 178
+        },
+        {
+          "name": "canSteer",
+          "line": 179
+        },
+        {
+          "name": "abortController",
+          "line": 188
+        },
+        {
+          "name": "streamSettlements",
+          "line": 189
+        },
+        {
+          "name": "historyLoaded",
+          "line": 190
+        },
+        {
+          "name": "isLoadingHistory",
+          "line": 191
+        },
+        {
+          "name": "pushStore",
+          "line": 192
+        },
+        {
+          "name": "visibility",
+          "line": 193
+        },
+        {
+          "name": "targetKey",
+          "line": 203
+        }
+      ]
+    },
+    {
+      "file": "packages/@n8n/typeorm/src/schema-builder/RdbmsSchemaBuilder.ts",
+      "score": 31,
+      "symbols": [
+        {
+          "name": "isUsingTransactions",
+          "line": 67
+        },
+        {
+          "name": "tablePaths",
+          "line": 78
+        },
+        {
+          "name": "viewPaths",
+          "line": 79
+        },
+        {
+          "name": "tablePaths",
+          "line": 126
+        },
+        {
+          "name": "viewPaths",
+          "line": 127
+        },
+        {
+          "name": "parsed",
+          "line": 217
+        },
+        {
+          "name": "table",
+          "line": 231
+        },
+        {
+          "name": "tableForeignKeysToDrop",
+          "line": 237
+        },
+        {
+          "name": "metadataFK",
+          "line": 238
+        },
+        {
+          "name": "table",
+          "line": 268
+        },
+        {
+          "name": "table",
+          "line": 279
+        },
+        {
+          "name": "renamedMetadataColumns",
+          "line": 286
+        },
+        {
+          "name": "renamedTableColumns",
+          "line": 301
+        },
+        {
+          "name": "renamedColumn",
+          "line": 315
+        },
+        {
+          "name": "table",
+          "line": 327
+        },
+        {
+          "name": "dropQueries",
+          "line": 332
+        },
+        {
+          "name": "indexMetadata",
+          "line": 334
+        },
+        {
+          "name": "view",
+          "line": 369
+        },
+        {
+          "name": "dropQueries",
+          "line": 374
+        },
+        {
+          "name": "indexMetadata",
+          "line": 376
+        },
+        {
+          "name": "table",
+          "line": 413
+        },
+        {
+          "name": "oldChecks",
+          "line": 418
+        },
+        {
+          "name": "table",
+          "line": 435
+        },
+        {
+          "name": "compositeUniques",
+          "line": 440
+        },
+        {
+          "name": "table",
+          "line": 463
+        },
+        {
+          "name": "oldExclusions",
+          "line": 468
+        },
+        {
+          "name": "table",
+          "line": 490
+        },
+        {
+          "name": "newComment",
+          "line": 496
+        },
+        {
+          "name": "existTable",
+          "line": 510
+        },
+        {
+          "name": "table",
+          "line": 518
+        },
+        {
+          "name": "existView",
+          "line": 527
+        },
+        {
+          "name": "viewExpression",
+          "line": 528
+        },
+        {
+          "name": "metadataExpression",
+          "line": 532
+        },
+        {
+          "name": "view",
+          "line": 546
+        },
+        {
+          "name": "viewEntityToSyncMetadatas",
+          "line": 554
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2681 @@
+{
+  "repo": "evidence-dev/evidence",
+  "url": "https://github.com/evidence-dev/evidence",
+  "sha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "domain": "analytics",
+  "frameworkHypothesis": "SvelteKit",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "cli/static/fonts/noto-color-emoji/LICENSE.txt",
+      "declaration": "MIT"
+    },
+    {
+      "file": "cli/static/fonts/geist-mono/LICENSE.txt",
+      "declaration": "MIT"
+    },
+    {
+      "file": "cli/static/fonts/geist/LICENSE.txt",
+      "declaration": "MIT"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "core/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "chroma-js": "^3.1.2",
+        "@types/chroma-js": "^3.1.1"
+      }
+    },
+    {
+      "file": "cli/package.json",
+      "license": null,
+      "frameworks": [
+        "@sveltejs/kit",
+        "vite"
+      ],
+      "computeDeps": {
+        "picocolors": "^1.1.1"
+      }
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "core/src/user-components/common/pivot-utils.ts",
+      "score": 37,
+      "symbols": [
+        {
+          "name": "createColumnMetaFromUnified",
+          "line": 142
+        },
+        {
+          "name": "generateSimpleTable",
+          "line": 173
+        },
+        {
+          "name": "columnTypesSize",
+          "line": 177
+        },
+        {
+          "name": "availableColumns",
+          "line": 211
+        },
+        {
+          "name": "hasSubtotalEvidenceColumns",
+          "line": 214
+        },
+        {
+          "name": "ROW_COLOR_COLUMN",
+          "line": 255
+        },
+        {
+          "name": "columns",
+          "line": 256
+        },
+        {
+          "name": "type",
+          "line": 262
+        },
+        {
+          "name": "hasRowColorColumn",
+          "line": 287
+        },
+        {
+          "name": "rows",
+          "line": 291
+        },
+        {
+          "name": "result",
+          "line": 315
+        },
+        {
+          "name": "generateSelectedColumnTable",
+          "line": 349
+        },
+        {
+          "name": "selectedColumnsHash",
+          "line": 357
+        },
+        {
+          "name": "allColumns",
+          "line": 401
+        },
+        {
+          "name": "unifiedCol",
+          "line": 409
+        },
+        {
+          "name": "columns",
+          "line": 420
+        },
+        {
+          "name": "type",
+          "line": 424
+        },
+        {
+          "name": "unifiedCol",
+          "line": 425
+        },
+        {
+          "name": "colMeta",
+          "line": 453
+        },
+        {
+          "name": "columnGroupHeader",
+          "line": 473
+        },
+        {
+          "name": "rows",
+          "line": 481
+        },
+        {
+          "name": "result",
+          "line": 502
+        },
+        {
+          "name": "replaceKeyPartAtPosition",
+          "line": 543
+        },
+        {
+          "name": "getPivotedFragmentColumnName",
+          "line": 560
+        },
+        {
+          "name": "fragmentKeyParts",
+          "line": 572
+        },
+        {
+          "name": "GROUPED_DIM_MARKER",
+          "line": 576
+        },
+        {
+          "name": "getRedundantSubtotalLevels",
+          "line": 589
+        },
+        {
+          "name": "levelsToHide",
+          "line": 590
+        },
+        {
+          "name": "subtotalRows",
+          "line": 592
+        },
+        {
+          "name": "detailRows",
+          "line": 598
+        },
+        {
+          "name": "detailCountByPrefix",
+          "line": 605
+        },
+        {
+          "name": "parts",
+          "line": 607
+        },
+        {
+          "name": "prefix",
+          "line": 609
+        },
+        {
+          "name": "subtotalsByLevel",
+          "line": 616
+        },
+        {
+          "name": "parts",
+          "line": 618
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/Renderer/MarkdocProcessor/process-markdoc.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "tokenizer",
+          "line": 37
+        },
+        {
+          "name": "documentSources",
+          "line": 41
+        },
+        {
+          "name": "parsePartial",
+          "line": 46
+        },
+        {
+          "name": "preprocessed",
+          "line": 52
+        },
+        {
+          "name": "tokens",
+          "line": 53
+        },
+        {
+          "name": "ast",
+          "line": 54
+        },
+        {
+          "name": "filterErrorsInsideOpaqueBodies",
+          "line": 71
+        },
+        {
+          "name": "collect",
+          "line": 77
+        },
+        {
+          "name": "starts",
+          "line": 79
+        },
+        {
+          "name": "ends",
+          "line": 80
+        },
+        {
+          "name": "line",
+          "line": 96
+        },
+        {
+          "name": "file",
+          "line": 98
+        },
+        {
+          "name": "buildEvidenceSources",
+          "line": 109
+        },
+        {
+          "name": "parsePartials",
+          "line": 121
+        },
+        {
+          "name": "parseComponentBodies",
+          "line": 143
+        },
+        {
+          "name": "localNames",
+          "line": 158
+        },
+        {
+          "name": "rewritten",
+          "line": 160
+        },
+        {
+          "name": "reservedTagNames",
+          "line": 176
+        },
+        {
+          "name": "registryCache",
+          "line": 189
+        },
+        {
+          "name": "getCustomComponentRegistry",
+          "line": 194
+        },
+        {
+          "name": "cached",
+          "line": 197
+        },
+        {
+          "name": "built",
+          "line": 199
+        },
+        {
+          "name": "buildConfig",
+          "line": 211
+        },
+        {
+          "name": "isQueryRefAttribute",
+          "line": 241
+        },
+        {
+          "name": "schema",
+          "line": 242
+        },
+        {
+          "name": "attr",
+          "line": 244
+        },
+        {
+          "name": "dialect",
+          "line": 249
+        },
+        {
+          "name": "partialNodes",
+          "line": 256
+        },
+        {
+          "name": "customComponentNodes",
+          "line": 257
+        },
+        {
+          "name": "config",
+          "line": 272
+        },
+        {
+          "name": "enrichUndefinedTagError",
+          "line": 315
+        },
+        {
+          "name": "name",
+          "line": 317
+        },
+        {
+          "name": "hint",
+          "line": 318
+        },
+        {
+          "name": "removeObjectStringFromTree",
+          "line": 331
+        },
+        {
+          "name": "process",
+          "line": 361
+        }
+      ]
+    },
+    {
+      "file": "cli/cli/migrate/transform.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "CORE_TAGS",
+          "line": 12
+        },
+        {
+          "name": "rewriteSourceRefs",
+          "line": 128
+        },
+        {
+          "name": "pattern",
+          "line": 135
+        },
+        {
+          "name": "next",
+          "line": 136
+        },
+        {
+          "name": "INPUT_RENAMES",
+          "line": 166
+        },
+        {
+          "name": "chartTransform",
+          "line": 215
+        },
+        {
+          "name": "axisProp",
+          "line": 241
+        },
+        {
+          "name": "labelProp",
+          "line": 242
+        },
+        {
+          "name": "key",
+          "line": 280
+        },
+        {
+          "name": "kind",
+          "line": 300
+        },
+        {
+          "name": "step",
+          "line": 322
+        },
+        {
+          "name": "warnMissingAxes",
+          "line": 369
+        },
+        {
+          "name": "has",
+          "line": 370
+        },
+        {
+          "name": "missing",
+          "line": 372
+        },
+        {
+          "name": "swapAxes",
+          "line": 384
+        },
+        {
+          "name": "withOssMissingDefault",
+          "line": 410
+        },
+        {
+          "name": "hasExplicit",
+          "line": 418
+        },
+        {
+          "name": "multiSeries",
+          "line": 420
+        },
+        {
+          "name": "value",
+          "line": 423
+        },
+        {
+          "name": "bare",
+          "line": 432
+        },
+        {
+          "name": "inner",
+          "line": 434
+        },
+        {
+          "name": "buildObjectAttr",
+          "line": 445
+        },
+        {
+          "name": "nested",
+          "line": 447
+        },
+        {
+          "name": "dot",
+          "line": 449
+        },
+        {
+          "name": "head",
+          "line": 452
+        },
+        {
+          "name": "foldObjectAttrs",
+          "line": 466
+        },
+        {
+          "name": "collected",
+          "line": 467
+        },
+        {
+          "name": "target",
+          "line": 470
+        },
+        {
+          "name": "coerce",
+          "line": 475
+        },
+        {
+          "name": "path",
+          "line": 476
+        },
+        {
+          "name": "dot",
+          "line": 477
+        },
+        {
+          "name": "head",
+          "line": 478
+        },
+        {
+          "name": "sub",
+          "line": 479
+        },
+        {
+          "name": "value",
+          "line": 481
+        },
+        {
+          "name": "named",
+          "line": 486
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/common/sql-expression-utils.ts",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "hasAlias",
+          "line": 15
+        },
+        {
+          "name": "char",
+          "line": 25
+        },
+        {
+          "name": "extractBaseExpression",
+          "line": 45
+        },
+        {
+          "name": "char",
+          "line": 55
+        },
+        {
+          "name": "asIndex",
+          "line": 69
+        },
+        {
+          "name": "generateStructuredAlias",
+          "line": 80
+        },
+        {
+          "name": "hasAgg",
+          "line": 105
+        },
+        {
+          "name": "expressionWithoutAlias",
+          "line": 111
+        },
+        {
+          "name": "aggFunctions",
+          "line": 113
+        },
+        {
+          "name": "aggPattern",
+          "line": 117
+        },
+        {
+          "name": "FALLBACK_AGG_FUNCTIONS",
+          "line": 123
+        },
+        {
+          "name": "applyAggregateFilter",
+          "line": 197
+        },
+        {
+          "name": "aggNames",
+          "line": 202
+        },
+        {
+          "name": "ch",
+          "line": 208
+        },
+        {
+          "name": "end",
+          "line": 212
+        },
+        {
+          "name": "name",
+          "line": 222
+        },
+        {
+          "name": "isCall",
+          "line": 226
+        },
+        {
+          "name": "isAgg",
+          "line": 227
+        },
+        {
+          "name": "prev",
+          "line": 232
+        },
+        {
+          "name": "prevIsIdent",
+          "line": 233
+        },
+        {
+          "name": "end",
+          "line": 236
+        },
+        {
+          "name": "args",
+          "line": 237
+        },
+        {
+          "name": "foldsPredicate",
+          "line": 238
+        },
+        {
+          "name": "parts",
+          "line": 243
+        },
+        {
+          "name": "last",
+          "line": 244
+        },
+        {
+          "name": "inner",
+          "line": 250
+        },
+        {
+          "name": "rewrittenInner",
+          "line": 251
+        },
+        {
+          "name": "rewriteAggArgs",
+          "line": 277
+        },
+        {
+          "name": "trimmed",
+          "line": 278
+        },
+        {
+          "name": "quantifierMatch",
+          "line": 291
+        },
+        {
+          "name": "parts",
+          "line": 298
+        },
+        {
+          "name": "wrapped",
+          "line": 299
+        },
+        {
+          "name": "t",
+          "line": 300
+        },
+        {
+          "name": "splitTopLevelCommas",
+          "line": 311
+        },
+        {
+          "name": "ch",
+          "line": 316
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/Renderer/MarkdocProcessor/register-filters.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "registerFiltersFromAST",
+          "line": 33
+        },
+        {
+          "name": "expectedFilterIds",
+          "line": 64
+        },
+        {
+          "name": "workflowPeriod",
+          "line": 70
+        },
+        {
+          "name": "expectedStaticExternals",
+          "line": 80
+        },
+        {
+          "name": "partialTagNodes",
+          "line": 84
+        },
+        {
+          "name": "partialAst",
+          "line": 95
+        },
+        {
+          "name": "componentTagNodes",
+          "line": 115
+        },
+        {
+          "name": "body",
+          "line": 120
+        },
+        {
+          "name": "placedWorkflowPeriod",
+          "line": 136
+        },
+        {
+          "name": "skipWorkflowPeriodSelector",
+          "line": 143
+        },
+        {
+          "name": "currentFilterIds",
+          "line": 154
+        },
+        {
+          "name": "outgoingWorkflowPeriod",
+          "line": 169
+        },
+        {
+          "name": "partialAst",
+          "line": 180
+        },
+        {
+          "name": "scopedConfig",
+          "line": 184
+        },
+        {
+          "name": "body",
+          "line": 199
+        },
+        {
+          "name": "meta",
+          "line": 200
+        },
+        {
+          "name": "scopedConfig",
+          "line": 202
+        },
+        {
+          "name": "incoming",
+          "line": 207
+        },
+        {
+          "name": "registerWorkflowPeriodFilter",
+          "line": 230
+        },
+        {
+          "name": "attributes",
+          "line": 235
+        },
+        {
+          "name": "existing",
+          "line": 240
+        },
+        {
+          "name": "created",
+          "line": 253
+        },
+        {
+          "name": "collectComponentTagNodes",
+          "line": 261
+        },
+        {
+          "name": "collectNestedComponentTagNodes",
+          "line": 287
+        },
+        {
+          "name": "processed",
+          "line": 292
+        },
+        {
+          "name": "body",
+          "line": 301
+        },
+        {
+          "name": "createComponentScopedConfig",
+          "line": 316
+        },
+        {
+          "name": "bodyNode",
+          "line": 322
+        },
+        {
+          "name": "collectPartialTagNodes",
+          "line": 347
+        },
+        {
+          "name": "key",
+          "line": 355
+        },
+        {
+          "name": "collectNestedPartials",
+          "line": 370
+        },
+        {
+          "name": "collectStaticExternalFilters",
+          "line": 400
+        },
+        {
+          "name": "body",
+          "line": 407
+        },
+        {
+          "name": "body",
+          "line": 416
+        },
+        {
+          "name": "readHtmlBody",
+          "line": 440
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/validators/validateSqlExpression.ts",
+      "score": 17,
+      "symbols": [
+        {
+          "name": "preprocessFilterVariablesForValidation",
+          "line": 56
+        },
+        {
+          "name": "filterVariablePattern",
+          "line": 57
+        },
+        {
+          "name": "processedSql",
+          "line": 59
+        },
+        {
+          "name": "trimmed",
+          "line": 63
+        },
+        {
+          "name": "pipeIndex",
+          "line": 66
+        },
+        {
+          "name": "filterPart",
+          "line": 67
+        },
+        {
+          "name": "fallbackPart",
+          "line": 68
+        },
+        {
+          "name": "validateSqlExpression",
+          "line": 95
+        },
+        {
+          "name": "path",
+          "line": 110
+        },
+        {
+          "name": "sqlValue",
+          "line": 111
+        },
+        {
+          "name": "table",
+          "line": 142
+        },
+        {
+          "name": "errors",
+          "line": 145
+        },
+        {
+          "name": "sql",
+          "line": 150
+        },
+        {
+          "name": "sqlForValidation",
+          "line": 154
+        },
+        {
+          "name": "syntaxErrors",
+          "line": 161
+        },
+        {
+          "name": "parsed",
+          "line": 173
+        },
+        {
+          "name": "column",
+          "line": 180
+        },
+        {
+          "name": "invalidFunctions",
+          "line": 193
+        },
+        {
+          "name": "typeIncompatibilities",
+          "line": 212
+        },
+        {
+          "name": "clauseSpecificErrors",
+          "line": 233
+        },
+        {
+          "name": "trailingOperatorErrors",
+          "line": 244
+        },
+        {
+          "name": "entry",
+          "line": 256
+        },
+        {
+          "name": "attributeName",
+          "line": 269
+        },
+        {
+          "name": "sqlForValidation",
+          "line": 272
+        },
+        {
+          "name": "syntaxErrors",
+          "line": 279
+        },
+        {
+          "name": "parsed",
+          "line": 291
+        },
+        {
+          "name": "column",
+          "line": 297
+        },
+        {
+          "name": "invalidFunctions",
+          "line": 310
+        },
+        {
+          "name": "typeIncompatibilities",
+          "line": 329
+        },
+        {
+          "name": "clauseSpecificErrors",
+          "line": 350
+        },
+        {
+          "name": "trailingOperatorErrors",
+          "line": 361
+        },
+        {
+          "name": "validateSqlSyntax",
+          "line": 380
+        },
+        {
+          "name": "errors",
+          "line": 381
+        },
+        {
+          "name": "openParens",
+          "line": 386
+        },
+        {
+          "name": "closeParens",
+          "line": 387
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/custom-components/build-custom-tags.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "bodyValidationStack",
+          "line": 32
+        },
+        {
+          "name": "MAX_PROPAGATED_BODY_ERRORS",
+          "line": 39
+        },
+        {
+          "name": "componentBodyErrorsAtCallSite",
+          "line": 66
+        },
+        {
+          "name": "body",
+          "line": 72
+        },
+        {
+          "name": "bodyErrors",
+          "line": 77
+        },
+        {
+          "name": "ownScopedNames",
+          "line": 78
+        },
+        {
+          "name": "ctx",
+          "line": 88
+        },
+        {
+          "name": "processor",
+          "line": 90
+        },
+        {
+          "name": "seen",
+          "line": 91
+        },
+        {
+          "name": "walkFences",
+          "line": 92
+        },
+        {
+          "name": "neutralized",
+          "line": 94
+        },
+        {
+          "name": "token",
+          "line": 97
+        },
+        {
+          "name": "line",
+          "line": 102
+        },
+        {
+          "name": "key",
+          "line": 103
+        },
+        {
+          "name": "propagated",
+          "line": 119
+        },
+        {
+          "name": "line",
+          "line": 143
+        },
+        {
+          "name": "remaining",
+          "line": 151
+        },
+        {
+          "name": "tagNameForComponentPath",
+          "line": 175
+        },
+        {
+          "name": "slash",
+          "line": 176
+        },
+        {
+          "name": "basename",
+          "line": 177
+        },
+        {
+          "name": "attributeFromDeclaration",
+          "line": 191
+        },
+        {
+          "name": "detectSlots",
+          "line": 225
+        },
+        {
+          "name": "nameMatch",
+          "line": 229
+        },
+        {
+          "name": "parseCustomComponentMeta",
+          "line": 243
+        },
+        {
+          "name": "tagName",
+          "line": 244
+        },
+        {
+          "name": "fmMatch",
+          "line": 250
+        },
+        {
+          "name": "rawFrontmatter",
+          "line": 251
+        },
+        {
+          "name": "description",
+          "line": 257
+        },
+        {
+          "name": "buildCustomComponentTag",
+          "line": 300
+        },
+        {
+          "name": "slotName",
+          "line": 341
+        },
+        {
+          "name": "known",
+          "line": 343
+        },
+        {
+          "name": "extendedConfig",
+          "line": 370
+        },
+        {
+          "name": "partials",
+          "line": 381
+        },
+        {
+          "name": "bodyNode",
+          "line": 385
+        },
+        {
+          "name": "transformChild",
+          "line": 416
+        }
+      ]
+    },
+    {
+      "file": "cli/cli/lineage.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "STUDIO_HOST",
+          "line": 9
+        },
+        {
+          "name": "fetchLineage",
+          "line": 26
+        },
+        {
+          "name": "credentials",
+          "line": 27
+        },
+        {
+          "name": "response",
+          "line": 35
+        },
+        {
+          "name": "text",
+          "line": 47
+        },
+        {
+          "name": "data",
+          "line": 51
+        },
+        {
+          "name": "formatRefDetail",
+          "line": 55
+        },
+        {
+          "name": "line",
+          "line": 56
+        },
+        {
+          "name": "bucketRefCount",
+          "line": 69
+        },
+        {
+          "name": "printProjectBucket",
+          "line": 77
+        },
+        {
+          "name": "count",
+          "line": 78
+        },
+        {
+          "name": "inner",
+          "line": 81
+        },
+        {
+          "name": "leaf",
+          "line": 82
+        },
+        {
+          "name": "n",
+          "line": 92
+        },
+        {
+          "name": "n",
+          "line": 103
+        },
+        {
+          "name": "groupByProject",
+          "line": 114
+        },
+        {
+          "name": "byProject",
+          "line": 115
+        },
+        {
+          "name": "key",
+          "line": 117
+        },
+        {
+          "name": "isPartial",
+          "line": 126
+        },
+        {
+          "name": "fileMap",
+          "line": 127
+        },
+        {
+          "name": "fileKey",
+          "line": 128
+        },
+        {
+          "name": "group",
+          "line": 129
+        },
+        {
+          "name": "printFullLineage",
+          "line": 137
+        },
+        {
+          "name": "byConnection",
+          "line": 145
+        },
+        {
+          "name": "unconnected",
+          "line": 146
+        },
+        {
+          "name": "tableName",
+          "line": 149
+        },
+        {
+          "name": "connKey",
+          "line": 150
+        },
+        {
+          "name": "tableMap",
+          "line": 151
+        },
+        {
+          "name": "connType",
+          "line": 172
+        },
+        {
+          "name": "total",
+          "line": 179
+        },
+        {
+          "name": "byProject",
+          "line": 190
+        },
+        {
+          "name": "totalProjectRefs",
+          "line": 191
+        },
+        {
+          "name": "total",
+          "line": 207
+        },
+        {
+          "name": "byProject",
+          "line": 216
+        },
+        {
+          "name": "printTableLineage",
+          "line": 226
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/tags/map/area_layer/label-points.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "getLabelPoint",
+          "line": 31
+        },
+        {
+          "name": "area",
+          "line": 40
+        },
+        {
+          "name": "ringArea",
+          "line": 52
+        },
+        {
+          "name": "makeCell",
+          "line": 70
+        },
+        {
+          "name": "distance",
+          "line": 71
+        },
+        {
+          "name": "poleOfInaccessibility",
+          "line": 76
+        },
+        {
+          "name": "width",
+          "line": 88
+        },
+        {
+          "name": "height",
+          "line": 89
+        },
+        {
+          "name": "shortSide",
+          "line": 90
+        },
+        {
+          "name": "longSide",
+          "line": 91
+        },
+        {
+          "name": "cellSize",
+          "line": 95
+        },
+        {
+          "name": "precision",
+          "line": 96
+        },
+        {
+          "name": "interiorPrecision",
+          "line": 98
+        },
+        {
+          "name": "queue",
+          "line": 100
+        },
+        {
+          "name": "half",
+          "line": 101
+        },
+        {
+          "name": "bboxCell",
+          "line": 110
+        },
+        {
+          "name": "cell",
+          "line": 114
+        },
+        {
+          "name": "h",
+          "line": 119
+        },
+        {
+          "name": "cells",
+          "line": 138
+        },
+        {
+          "name": "parent",
+          "line": 142
+        },
+        {
+          "name": "cells",
+          "line": 151
+        },
+        {
+          "name": "top",
+          "line": 152
+        },
+        {
+          "name": "last",
+          "line": 153
+        },
+        {
+          "name": "left",
+          "line": 157
+        },
+        {
+          "name": "right",
+          "line": 159
+        },
+        {
+          "name": "child",
+          "line": 160
+        },
+        {
+          "name": "makeCentroidCell",
+          "line": 171
+        },
+        {
+          "name": "ring",
+          "line": 172
+        },
+        {
+          "name": "f",
+          "line": 179
+        },
+        {
+          "name": "pointToPolygonDistance",
+          "line": 188
+        },
+        {
+          "name": "a",
+          "line": 194
+        },
+        {
+          "name": "b",
+          "line": 195
+        },
+        {
+          "name": "segmentDistanceSq",
+          "line": 206
+        },
+        {
+          "name": "t",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "file": "core/src/metadata/Metadata.svelte.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "DEFAULT_CATALOG_QUERY_TIMEOUT_MS",
+          "line": 47
+        },
+        {
+          "name": "CATALOG_QUERY_RETRIES",
+          "line": 48
+        },
+        {
+          "name": "CATALOG_REVALIDATE_DELAYS_MS",
+          "line": 54
+        },
+        {
+          "name": "exact",
+          "line": 174
+        },
+        {
+          "name": "upper",
+          "line": 182
+        },
+        {
+          "name": "generation",
+          "line": 206
+        },
+        {
+          "name": "lastKnown",
+          "line": 214
+        },
+        {
+          "name": "delay",
+          "line": 234
+        },
+        {
+          "name": "timer",
+          "line": 236
+        },
+        {
+          "name": "provider",
+          "line": 249
+        },
+        {
+          "name": "viewNamesArray",
+          "line": 349
+        },
+        {
+          "name": "viewNamesSet",
+          "line": 352
+        },
+        {
+          "name": "modelsNamesArray",
+          "line": 354
+        },
+        {
+          "name": "modelsNamesSet",
+          "line": 357
+        },
+        {
+          "name": "columnsByTable",
+          "line": 359
+        },
+        {
+          "name": "timeoutMs",
+          "line": 395
+        },
+        {
+          "name": "controller",
+          "line": 399
+        },
+        {
+          "name": "timer",
+          "line": 400
+        },
+        {
+          "name": "result",
+          "line": 402
+        },
+        {
+          "name": "timedOut",
+          "line": 409
+        },
+        {
+          "name": "schemaFilter",
+          "line": 453
+        },
+        {
+          "name": "viewNames",
+          "line": 483
+        },
+        {
+          "name": "columnsByTable",
+          "line": 485
+        },
+        {
+          "name": "schemaFilter",
+          "line": 521
+        },
+        {
+          "name": "viewNames",
+          "line": 551
+        },
+        {
+          "name": "columnsByTable",
+          "line": 553
+        },
+        {
+          "name": "schemaFilter",
+          "line": 590
+        },
+        {
+          "name": "viewNames",
+          "line": 620
+        },
+        {
+          "name": "columnsByTable",
+          "line": 622
+        },
+        {
+          "name": "schemaFilter",
+          "line": 658
+        },
+        {
+          "name": "viewNames",
+          "line": 688
+        },
+        {
+          "name": "columnsByTable",
+          "line": 690
+        },
+        {
+          "name": "schemaFilter",
+          "line": 727
+        },
+        {
+          "name": "columnsResult",
+          "line": 732
+        },
+        {
+          "name": "modelNames",
+          "line": 758
+        }
+      ]
+    },
+    {
+      "file": "cli/src/lib/markdown/files.server.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "parsePageFrontmatter",
+          "line": 30
+        },
+        {
+          "name": "endIndex",
+          "line": 32
+        },
+        {
+          "name": "result",
+          "line": 35
+        },
+        {
+          "name": "parsePageSettings",
+          "line": 46
+        },
+        {
+          "name": "fm",
+          "line": 47
+        },
+        {
+          "name": "pageDisplayTitle",
+          "line": 63
+        },
+        {
+          "name": "resolvePageSettings",
+          "line": 87
+        },
+        {
+          "name": "getMarkdownType",
+          "line": 98
+        },
+        {
+          "name": "PARTIALS_DIR",
+          "line": 102
+        },
+        {
+          "name": "COMPONENTS_DIR",
+          "line": 103
+        },
+        {
+          "name": "kindOf",
+          "line": 106
+        },
+        {
+          "name": "resolvePagesDir",
+          "line": 116
+        },
+        {
+          "name": "cfg",
+          "line": 118
+        },
+        {
+          "name": "discoverMarkdownFiles",
+          "line": 148
+        },
+        {
+          "name": "pagesDir",
+          "line": 149
+        },
+        {
+          "name": "walk",
+          "line": 152
+        },
+        {
+          "name": "entries",
+          "line": 153
+        },
+        {
+          "name": "fullPath",
+          "line": 156
+        },
+        {
+          "name": "content",
+          "line": 163
+        },
+        {
+          "name": "relativePath",
+          "line": 164
+        },
+        {
+          "name": "parsed",
+          "line": 165
+        },
+        {
+          "name": "slug",
+          "line": 166
+        },
+        {
+          "name": "discoverPartials",
+          "line": 188
+        },
+        {
+          "name": "files",
+          "line": 189
+        },
+        {
+          "name": "getMarkdownFile",
+          "line": 203
+        },
+        {
+          "name": "pagesDir",
+          "line": 206
+        },
+        {
+          "name": "candidates",
+          "line": 209
+        },
+        {
+          "name": "stats",
+          "line": 213
+        },
+        {
+          "name": "content",
+          "line": 216
+        },
+        {
+          "name": "parsed",
+          "line": 217
+        },
+        {
+          "name": "getHomeFile",
+          "line": 236
+        },
+        {
+          "name": "candidates",
+          "line": 237
+        },
+        {
+          "name": "file",
+          "line": 240
+        },
+        {
+          "name": "navDisplayName",
+          "line": 263
+        },
+        {
+          "name": "getNavItems",
+          "line": 272
+        }
+      ]
+    },
+    {
+      "file": "core/src/interpolate-query-strings.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "missingPropertyMessage",
+          "line": 6
+        },
+        {
+          "name": "bestMatch",
+          "line": 7
+        },
+        {
+          "name": "suggestion",
+          "line": 8
+        },
+        {
+          "name": "ZERO_WIDTH_CHARS",
+          "line": 42
+        },
+        {
+          "name": "stripZeroWidthChars",
+          "line": 50
+        },
+        {
+          "name": "cleaned",
+          "line": 51
+        },
+        {
+          "name": "stripped",
+          "line": 53
+        },
+        {
+          "name": "maskSqlComments",
+          "line": 79
+        },
+        {
+          "name": "n",
+          "line": 83
+        },
+        {
+          "name": "pushComment",
+          "line": 85
+        },
+        {
+          "name": "token",
+          "line": 86
+        },
+        {
+          "name": "c",
+          "line": 92
+        },
+        {
+          "name": "quote",
+          "line": 96
+        },
+        {
+          "name": "restoreSqlComments",
+          "line": 142
+        },
+        {
+          "name": "extractFilterIds",
+          "line": 164
+        },
+        {
+          "name": "cleanedQuery",
+          "line": 167
+        },
+        {
+          "name": "templateRegex",
+          "line": 168
+        },
+        {
+          "name": "templateContent",
+          "line": 173
+        },
+        {
+          "name": "pipeIndex",
+          "line": 174
+        },
+        {
+          "name": "templatePart",
+          "line": 175
+        },
+        {
+          "name": "dotIndex",
+          "line": 182
+        },
+        {
+          "name": "filterId",
+          "line": 183
+        },
+        {
+          "name": "hasTemplating",
+          "line": 196
+        },
+        {
+          "name": "cleanedQuery",
+          "line": 199
+        },
+        {
+          "name": "interpolateQueryStrings",
+          "line": 217
+        },
+        {
+          "name": "uniqueErrors",
+          "line": 286
+        },
+        {
+          "name": "areBracketsBalanced",
+          "line": 294
+        },
+        {
+          "name": "processConditionalBlocks",
+          "line": 317
+        },
+        {
+          "name": "blockRegex",
+          "line": 332
+        },
+        {
+          "name": "fullMatch",
+          "line": 336
+        },
+        {
+          "name": "blockContent",
+          "line": 337
+        },
+        {
+          "name": "shouldInclude",
+          "line": 340
+        },
+        {
+          "name": "replacement",
+          "line": 351
+        },
+        {
+          "name": "shouldIncludeConditionalBlock",
+          "line": 364
+        },
+        {
+          "name": "templateRegex",
+          "line": 374
+        }
+      ]
+    },
+    {
+      "file": "core/src/metrics/metric-schema.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "METRIC_REF_SOURCE",
+          "line": 67
+        },
+        {
+          "name": "CROSS_VIEW_REF_SOURCE",
+          "line": 75
+        },
+        {
+          "name": "metricRefRegex",
+          "line": 78
+        },
+        {
+          "name": "crossViewRefRegex",
+          "line": 82
+        },
+        {
+          "name": "extractMetricRefs",
+          "line": 87
+        },
+        {
+          "name": "extractCrossViewRefs",
+          "line": 92
+        },
+        {
+          "name": "isCalculatedMetric",
+          "line": 97
+        },
+        {
+          "name": "findAllMetricCycles",
+          "line": 106
+        },
+        {
+          "name": "state",
+          "line": 107
+        },
+        {
+          "name": "seenCycleKeys",
+          "line": 110
+        },
+        {
+          "name": "visit",
+          "line": 111
+        },
+        {
+          "name": "cycle",
+          "line": 116
+        },
+        {
+          "name": "rotated",
+          "line": 119
+        },
+        {
+          "name": "key",
+          "line": 120
+        },
+        {
+          "name": "findCommentGotcha",
+          "line": 145
+        },
+        {
+          "name": "lines",
+          "line": 150
+        },
+        {
+          "name": "keyPattern",
+          "line": 154
+        },
+        {
+          "name": "start",
+          "line": 155
+        },
+        {
+          "name": "fieldPattern",
+          "line": 157
+        },
+        {
+          "name": "m",
+          "line": 159
+        },
+        {
+          "name": "canonicalCycle",
+          "line": 166
+        },
+        {
+          "name": "body",
+          "line": 169
+        },
+        {
+          "name": "minIdx",
+          "line": 170
+        },
+        {
+          "name": "metricSchema",
+          "line": 174
+        },
+        {
+          "name": "metricsViewSchema",
+          "line": 214
+        },
+        {
+          "name": "metricsViewSchemaStrict",
+          "line": 244
+        },
+        {
+          "name": "parseMetricsView",
+          "line": 256
+        },
+        {
+          "name": "result",
+          "line": 264
+        },
+        {
+          "name": "path",
+          "line": 271
+        },
+        {
+          "name": "data",
+          "line": 276
+        },
+        {
+          "name": "hasBase",
+          "line": 279
+        },
+        {
+          "name": "hasBaseSql",
+          "line": 280
+        },
+        {
+          "name": "rawMetricEntries",
+          "line": 287
+        },
+        {
+          "name": "badMetrics",
+          "line": 298
+        },
+        {
+          "name": "flagMetric",
+          "line": 299
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/common/fill-gaps.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "DEFAULT_MAX_FILL_POINTS",
+          "line": 65
+        },
+        {
+          "name": "GRAIN_TOLERANCE",
+          "line": 84
+        },
+        {
+          "name": "fillGaps",
+          "line": 112
+        },
+        {
+          "name": "shouldGenerateNewXValues",
+          "line": 167
+        },
+        {
+          "name": "generated",
+          "line": 175
+        },
+        {
+          "name": "expectedSize",
+          "line": 189
+        },
+        {
+          "name": "fillValue",
+          "line": 197
+        },
+        {
+          "name": "buildDataStructures",
+          "line": 227
+        },
+        {
+          "name": "xKeyToValue",
+          "line": 237
+        },
+        {
+          "name": "seriesSet",
+          "line": 238
+        },
+        {
+          "name": "dataMap",
+          "line": 239
+        },
+        {
+          "name": "xVal",
+          "line": 243
+        },
+        {
+          "name": "seriesVal",
+          "line": 244
+        },
+        {
+          "name": "xKey",
+          "line": 247
+        },
+        {
+          "name": "key",
+          "line": 255
+        },
+        {
+          "name": "normalizeToKey",
+          "line": 271
+        },
+        {
+          "name": "createLookupKey",
+          "line": 282
+        },
+        {
+          "name": "xKey",
+          "line": 283
+        },
+        {
+          "name": "generateExpectedXValues",
+          "line": 305
+        },
+        {
+          "name": "extractDatePart",
+          "line": 349
+        },
+        {
+          "name": "parseDateString",
+          "line": 356
+        },
+        {
+          "name": "datePart",
+          "line": 357
+        },
+        {
+          "name": "formatDateComponents",
+          "line": 369
+        },
+        {
+          "name": "getDaysInMonth",
+          "line": 378
+        },
+        {
+          "name": "addToDateComponents",
+          "line": 386
+        },
+        {
+          "name": "maxDay",
+          "line": 435
+        },
+        {
+          "name": "compareDateComponents",
+          "line": 446
+        },
+        {
+          "name": "generateExpectedDates",
+          "line": 462
+        },
+        {
+          "name": "inputIsStrings",
+          "line": 468
+        },
+        {
+          "name": "year",
+          "line": 474
+        },
+        {
+          "name": "month",
+          "line": 475
+        },
+        {
+          "name": "day",
+          "line": 476
+        },
+        {
+          "name": "sorted",
+          "line": 483
+        },
+        {
+          "name": "minDateStr",
+          "line": 484
+        },
+        {
+          "name": "maxDateStr",
+          "line": 485
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/common/build-comparisons.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "da",
+          "line": 10
+        },
+        {
+          "name": "ds",
+          "line": 18
+        },
+        {
+          "name": "augmentBenchmarkWithTemporalDimensions",
+          "line": 63
+        },
+        {
+          "name": "temporalDims",
+          "line": 68
+        },
+        {
+          "name": "existingWithin",
+          "line": 76
+        },
+        {
+          "name": "newWithin",
+          "line": 79
+        },
+        {
+          "name": "groupBenchmarkComparisons",
+          "line": 102
+        },
+        {
+          "name": "groups",
+          "line": 106
+        },
+        {
+          "name": "benchmark",
+          "line": 109
+        },
+        {
+          "name": "signature",
+          "line": 113
+        },
+        {
+          "name": "mapAggFunction",
+          "line": 141
+        },
+        {
+          "name": "buildAggExpression",
+          "line": 156
+        },
+        {
+          "name": "buildBenchmarkCTE",
+          "line": 173
+        },
+        {
+          "name": "q",
+          "line": 179
+        },
+        {
+          "name": "firstComparison",
+          "line": 180
+        },
+        {
+          "name": "benchmark",
+          "line": 181
+        },
+        {
+          "name": "benchmarkSubject",
+          "line": 184
+        },
+        {
+          "name": "benchmarkWithin",
+          "line": 186
+        },
+        {
+          "name": "excludeSelf",
+          "line": 189
+        },
+        {
+          "name": "whereClause",
+          "line": 190
+        },
+        {
+          "name": "tableDimensionSelects",
+          "line": 196
+        },
+        {
+          "name": "tableDimensionAliases",
+          "line": 199
+        },
+        {
+          "name": "additionalWithinDimensions",
+          "line": 202
+        },
+        {
+          "name": "withinDimensionSelects",
+          "line": 205
+        },
+        {
+          "name": "allDimensionNames",
+          "line": 209
+        },
+        {
+          "name": "subjectSelect",
+          "line": 210
+        },
+        {
+          "name": "allDimensionSelects",
+          "line": 215
+        },
+        {
+          "name": "measureSelects",
+          "line": 220
+        },
+        {
+          "name": "valueExpr",
+          "line": 222
+        },
+        {
+          "name": "whereSQL",
+          "line": 235
+        },
+        {
+          "name": "subjectColumn",
+          "line": 238
+        },
+        {
+          "name": "allGroupByColumns",
+          "line": 240
+        },
+        {
+          "name": "groupBySQL",
+          "line": 245
+        },
+        {
+          "name": "subjectTotalsCTE",
+          "line": 247
+        },
+        {
+          "name": "inlineSubjectTotals",
+          "line": 257
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/Renderer/MarkdocProcessor/MarkdocProcessor.svelte.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "reservedTagNames",
+          "line": 27
+        },
+        {
+          "name": "PARTIAL_STANDALONE_SUPPRESSED_ERROR_IDS",
+          "line": 72
+        },
+        {
+          "name": "COMPONENT_STANDALONE_SUPPRESSED_ERROR_IDS",
+          "line": 88
+        },
+        {
+          "name": "base",
+          "line": 223
+        },
+        {
+          "name": "fmString",
+          "line": 225
+        },
+        {
+          "name": "attrs",
+          "line": 228
+        },
+        {
+          "name": "preview",
+          "line": 229
+        },
+        {
+          "name": "value",
+          "line": 233
+        },
+        {
+          "name": "base",
+          "line": 242
+        },
+        {
+          "name": "fmString",
+          "line": 253
+        },
+        {
+          "name": "attrs",
+          "line": 256
+        },
+        {
+          "name": "props",
+          "line": 259
+        },
+        {
+          "name": "fmString",
+          "line": 319
+        },
+        {
+          "name": "attrs",
+          "line": 322
+        },
+        {
+          "name": "preview",
+          "line": 330
+        },
+        {
+          "name": "value",
+          "line": 334
+        },
+        {
+          "name": "fmString",
+          "line": 347
+        },
+        {
+          "name": "attrs",
+          "line": 350
+        },
+        {
+          "name": "raw",
+          "line": 360
+        },
+        {
+          "name": "suppressed",
+          "line": 377
+        },
+        {
+          "name": "basePath",
+          "line": 390
+        },
+        {
+          "name": "message",
+          "line": 396
+        },
+        {
+          "name": "attrs",
+          "line": 448
+        },
+        {
+          "name": "preview",
+          "line": 449
+        },
+        {
+          "name": "collect",
+          "line": 454
+        },
+        {
+          "name": "used",
+          "line": 463
+        },
+        {
+          "name": "ownTagName",
+          "line": 478
+        },
+        {
+          "name": "fmString",
+          "line": 505
+        },
+        {
+          "name": "fmString",
+          "line": 537
+        },
+        {
+          "name": "escaped",
+          "line": 539
+        },
+        {
+          "name": "re",
+          "line": 540
+        },
+        {
+          "name": "fmLines",
+          "line": 541
+        },
+        {
+          "name": "idx",
+          "line": 542
+        },
+        {
+          "name": "inlineQueries",
+          "line": 609
+        },
+        {
+          "name": "filtersChanged",
+          "line": 631
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/common/sql-options.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "normalizeWhitespace",
+          "line": 21
+        },
+        {
+          "name": "beforeLiteral",
+          "line": 29
+        },
+        {
+          "name": "stringLiteral",
+          "line": 48
+        },
+        {
+          "name": "remaining",
+          "line": 59
+        },
+        {
+          "name": "buildFragmentQuery",
+          "line": 168
+        },
+        {
+          "name": "q",
+          "line": 176
+        },
+        {
+          "name": "ctes",
+          "line": 182
+        },
+        {
+          "name": "joins",
+          "line": 189
+        },
+        {
+          "name": "regularColumns",
+          "line": 207
+        },
+        {
+          "name": "helperColumnSelects",
+          "line": 227
+        },
+        {
+          "name": "inlineColumnSelects",
+          "line": 238
+        },
+        {
+          "name": "asMatch",
+          "line": 242
+        },
+        {
+          "name": "alias",
+          "line": 244
+        },
+        {
+          "name": "quoted",
+          "line": 245
+        },
+        {
+          "name": "mainQuerySelect",
+          "line": 254
+        },
+        {
+          "name": "inlined",
+          "line": 272
+        },
+        {
+          "name": "inlineFragmentJoins",
+          "line": 300
+        },
+        {
+          "name": "prefix",
+          "line": 303
+        },
+        {
+          "name": "join",
+          "line": 304
+        },
+        {
+          "name": "quoteUntrustedIdentifier",
+          "line": 344
+        },
+        {
+          "name": "escaped",
+          "line": 349
+        },
+        {
+          "name": "isQuotedIdentifier",
+          "line": 355
+        },
+        {
+          "name": "quote",
+          "line": 356
+        },
+        {
+          "name": "backslashEscapes",
+          "line": 358
+        },
+        {
+          "name": "char",
+          "line": 360
+        },
+        {
+          "name": "quoteUntrustedIdentifierPath",
+          "line": 368
+        },
+        {
+          "name": "backslashEscapes",
+          "line": 375
+        },
+        {
+          "name": "char",
+          "line": 377
+        },
+        {
+          "name": "identifier",
+          "line": 395
+        },
+        {
+          "name": "resolveTableExpressionName",
+          "line": 402
+        },
+        {
+          "name": "interpolated",
+          "line": 408
+        },
+        {
+          "name": "generateSearchSql",
+          "line": 421
+        },
+        {
+          "name": "escapedTerm",
+          "line": 443
+        },
+        {
+          "name": "searchConditions",
+          "line": 445
+        },
+        {
+          "name": "quotedCol",
+          "line": 446
+        }
+      ]
+    },
+    {
+      "file": "core/src/user-components/tags/waterfall_chart/waterfall-data.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "isTotalMarker",
+          "line": 29
+        },
+        {
+          "name": "toFiniteNumber",
+          "line": 50
+        },
+        {
+          "name": "n",
+          "line": 52
+        },
+        {
+          "name": "position",
+          "line": 63
+        },
+        {
+          "name": "rank",
+          "line": 64
+        },
+        {
+          "name": "pos",
+          "line": 66
+        },
+        {
+          "name": "buildWaterfallSteps",
+          "line": 85
+        },
+        {
+          "name": "formatName",
+          "line": 89
+        },
+        {
+          "name": "totalLabels",
+          "line": 90
+        },
+        {
+          "name": "labelsFor",
+          "line": 92
+        },
+        {
+          "name": "raw",
+          "line": 93
+        },
+        {
+          "name": "formatted",
+          "line": 94
+        },
+        {
+          "name": "rawString",
+          "line": 95
+        },
+        {
+          "name": "ordered",
+          "line": 99
+        },
+        {
+          "name": "labels",
+          "line": 105
+        },
+        {
+          "name": "name",
+          "line": 106
+        },
+        {
+          "name": "markedByColumn",
+          "line": 107
+        },
+        {
+          "name": "markedByList",
+          "line": 109
+        },
+        {
+          "name": "rawValue",
+          "line": 110
+        },
+        {
+          "name": "extras",
+          "line": 111
+        },
+        {
+          "name": "value",
+          "line": 114
+        },
+        {
+          "name": "delta",
+          "line": 128
+        },
+        {
+          "name": "start",
+          "line": 129
+        },
+        {
+          "name": "lastStep",
+          "line": 143
+        },
+        {
+          "name": "findUnmatchedTotals",
+          "line": 162
+        },
+        {
+          "name": "formatName",
+          "line": 167
+        },
+        {
+          "name": "seen",
+          "line": 168
+        },
+        {
+          "name": "raw",
+          "line": 170
+        },
+        {
+          "name": "DEFAULT_BREAKDOWN_OTHER_LABEL",
+          "line": 177
+        },
+        {
+          "name": "periodKey",
+          "line": 193
+        },
+        {
+          "name": "aUp",
+          "line": 205
+        },
+        {
+          "name": "bUp",
+          "line": 206
+        },
+        {
+          "name": "buildBreakdownSteps",
+          "line": 221
+        },
+        {
+          "name": "formatName",
+          "line": 225
+        },
+        {
+          "name": "formatBreakdownName",
+          "line": 226
+        }
+      ]
+    }
+  ]
+}

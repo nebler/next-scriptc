@@ -1382,3 +1382,78 @@ module effects. See [design, output, reproduction, and limits](coverage-report.m
 No root README, main checkout, compiler fork, hosting service, Docker, push, or
 public write is involved. Dependencies and native builds stay in the worktree or
 in task-owned temporary directories. The change is committed locally.
+
+## 45. Real-app evaluation corpus baseline (2026-11-02)
+
+The corpus attempts 34 repositories and inspects source in 33. An interrupted
+PostHog checkout is explicitly excluded from the inspected count. Breadth includes
+analytics, finance, scheduling, spreadsheets, games, geometry, image, search and
+text applications, plus unsupported-stack and source-available controls. Pins,
+license evidence, framework hypotheses, scope failures and function links are in
+[the manifest](eval-corpus/manifest.json). This is targeted source triage, not a
+representative sample or a complete dependency-installed evaluation.
+
+The generalized census uses the shared discoverPromotions API on arbitrary source
+scopes. Fourteen primary scans complete, eleven have scope errors, and nine fail
+or time out, including the incomplete checkout. Retained scans report thirty
+accepted helpers, not thirty server promotions. Missing app dependencies partly
+explain unresolved imports. Unsupported references/types, runtime imports and
+the work screen dominate retained messages. Async exclusions are often silent;
+diagnostic counts cannot supply a function denominator.
+
+Sixteen function targets in four repositories have 48 final JS measurement cells,
+with three realistic synthetic sizes each. Five pass the baseline's 100 us and
+100 ns/input-byte screen, but none establishes a dense, discovery-accepted server
+function. Four are overlapping Rybbit beta/projection targets with browser callers
+only observed. GrowthBook's exact category split is dense near its real fifteen-
+category cap, but discovery rejects the mutation proof and the observed server
+caller is enterprise-licensed. Actual's pure forecast is cheap and its HTTP path
+is unproven. These targets are not sixteen independent workloads.
+
+Three accepted Umami prefix/hash/color controls compile with stock scriptc 0.4.6.
+Nine native size cells verify exact parity across sixty retained calls each. Every
+boundary-inclusive elapsed ratio loses to JS. Coarse stage clocks and quantized
+CPU samples limit these tiny controls. No native timing is inferred for rejected
+functions. No endpoint CPU delta or successful install-and-go CPU saving is
+measured. Full results, limitations and reproduction are in
+[the report](eval-corpus.md).
+
+Commit e002d480caee9f8b2474fb0db273c877c3195e70 freezes seventeen DEV and seventeen
+HELD_OUT repositories before any optimization. Papermark remains additionally
+held out at its existing pin and is not executed. A final named baseline milestone
+runs the unchanged bodies and inputs from /tmp after that freeze; there is no
+intervening adapter, compiler or policy change. Earlier VM and worktree probes
+remain labeled separately. The protocol fixes coverage reporting, correctness,
+boundary-inclusive CPU gates and endpoint CPU gates for future milestones.
+
+JSON and artifact-size checks pass. Syntax checks pass for census, benchmark and
+native-build harnesses. The final external benchmark has no failed cells. No
+third-party source is committed. Task clones, installs, dependency links and
+native artifacts are removed. The root README, main checkout and compiler fork
+are untouched. No application lifecycle script, database, Docker resource,
+deployment, login, push, PR, issue or public post is used.
+
+## 46. Review note on EV1 and EV2 (2026-11-02)
+
+EV2 gives every app a per-route coverage report and an opt-in measured prediction
+using the dispatcher's unchanged decision rule. Our own demo shows the familiar
+shape: 334 top-level callables, 11 accepted.
+
+EV1 is the first broad real-app eval: 34 repos, 33 inspected, 16 functions
+measured, split 17 DEV / 17 HELD_OUT (plus Papermark) frozen in commit e002d48
+before any optimization. Result: compute-dense JS exists (Rybbit beta statistics up
+to ~10 µs per input byte; GrowthBook exhaustive split search 226 µs at 15
+categories), but none of it is simultaneously (a) on a demonstrated server request
+path, (b) OSS-licensed on that path, and (c) accepted by discovery. The only
+accepted functions are tiny helpers that lose after the boundary.
+
+The census is incomplete: 8 scans failed and 11 were partial (timeouts, parse
+errors, no installed deps), so 4,269 "unsupported reference/type" and 1,586
+"runtime import" diagnostics partly reflect missing dependencies. The 0% figure is
+a lower bound, not a publishable claim.
+
+Two DEV candidates are concrete: GrowthBook split search (blocked by a
+conservative transitive argument-mutation proof and a mutable quadrature cache) and
+Actual's forecast solver (pure numeric but cheap and HTTP use unproven). Next work:
+complete dependency-installed censuses on DEV so the blocker histogram is real, then
+attack the top real blockers using DEV only, then measure HELD_OUT once.

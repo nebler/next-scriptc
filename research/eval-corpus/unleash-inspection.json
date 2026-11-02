@@ -1,0 +1,1878 @@
+{
+  "repo": "Unleash/unleash",
+  "url": "https://github.com/Unleash/unleash",
+  "sha": "4563ecc12ffc64ed79c4fb02f88bfc33ab73c60c",
+  "domain": "experimentation",
+  "frameworkHypothesis": "Express",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "AGPL-3.0"
+    },
+    {
+      "file": "frontend/src/component/admin/license/LicenseForm.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/component/admin/license/License.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/component/admin/users/UsersHeader/LicensedUsersSidebar.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/component/admin/users/UsersHeader/LicensedUsersBox.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/component/admin/users/UsersHeader/LicensedUsersChart.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/component/banners/internalBanners/LicenseBanner.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "frontend/src/openapi/models/licenseCheckSchema.ts",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "AGPL-3.0-or-later",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "deep-object-diff": "^1.1.9",
+        "json-diff": "^1.0.6"
+      }
+    },
+    {
+      "file": "frontend/package.json",
+      "license": null,
+      "frameworks": [
+        "react-router",
+        "vite"
+      ],
+      "computeDeps": {
+        "@fern-api/search-widget": "0.6.0",
+        "json-diff-react": "^1.0.1",
+        "@types/deep-diff": "1.0.5",
+        "deep-diff": "1.0.2"
+      }
+    },
+    {
+      "file": "src/migrations/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "src/lib/features/metrics/impact/metrics-translator.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "regex",
+          "line": 40
+        },
+        {
+          "name": "existingLabelNames",
+          "line": 49
+        },
+        {
+          "name": "existingBoundaries",
+          "line": 60
+        },
+        {
+          "name": "sanitized",
+          "line": 85
+        },
+        {
+          "name": "existing",
+          "line": 99
+        },
+        {
+          "name": "existing",
+          "line": 121
+        },
+        {
+          "name": "existing",
+          "line": 144
+        },
+        {
+          "name": "firstSample",
+          "line": 147
+        },
+        {
+          "name": "needsRecreation",
+          "line": 148
+        },
+        {
+          "name": "allPlain",
+          "line": 168
+        },
+        {
+          "name": "sanitizedName",
+          "line": 186
+        },
+        {
+          "name": "validName",
+          "line": 187
+        },
+        {
+          "name": "labelNames",
+          "line": 188
+        },
+        {
+          "name": "counter",
+          "line": 195
+        },
+        {
+          "name": "gauge",
+          "line": 209
+        },
+        {
+          "name": "histogram",
+          "line": 224
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/component/onboarding/intro/introModel.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "FIRST_NAMES",
+          "line": 82
+        },
+        {
+          "name": "generateIntroUsers",
+          "line": 115
+        },
+        {
+          "name": "country",
+          "line": 117
+        },
+        {
+          "name": "name",
+          "line": 118
+        },
+        {
+          "name": "computeEvaluations",
+          "line": 142
+        },
+        {
+          "name": "n",
+          "line": 146
+        },
+        {
+          "name": "keyed",
+          "line": 155
+        },
+        {
+          "name": "groups",
+          "line": 160
+        },
+        {
+          "name": "group",
+          "line": 162
+        },
+        {
+          "name": "countryCodes",
+          "line": 169
+        },
+        {
+          "name": "code",
+          "line": 173
+        },
+        {
+          "name": "group",
+          "line": 174
+        },
+        {
+          "name": "base",
+          "line": 185
+        },
+        {
+          "name": "inRollout",
+          "line": 186
+        },
+        {
+          "name": "matchesCountry",
+          "line": 189
+        },
+        {
+          "name": "matchesPlan",
+          "line": 192
+        },
+        {
+          "name": "matchesConstraints",
+          "line": 195
+        },
+        {
+          "name": "enabled",
+          "line": 196
+        },
+        {
+          "name": "variantByUserId",
+          "line": 211
+        },
+        {
+          "name": "totalWeight",
+          "line": 212
+        },
+        {
+          "name": "ranked",
+          "line": 214
+        },
+        {
+          "name": "position",
+          "line": 222
+        },
+        {
+          "name": "summarize",
+          "line": 252
+        },
+        {
+          "name": "enabled",
+          "line": 256
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/client-feature-toggles/delta/client-feature-toggle-delta.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "UPDATE_DELTA",
+          "line": 51
+        },
+        {
+          "name": "filterEventsByQuery",
+          "line": 53
+        },
+        {
+          "name": "targetedEvents",
+          "line": 60
+        },
+        {
+          "name": "allProjects",
+          "line": 63
+        },
+        {
+          "name": "startsWithPrefix",
+          "line": 64
+        },
+        {
+          "name": "isInProject",
+          "line": 73
+        },
+        {
+          "name": "filterHydrationEventByQuery",
+          "line": 93
+        },
+        {
+          "name": "allProjects",
+          "line": 98
+        },
+        {
+          "name": "sortEventsByRevision",
+          "line": 114
+        },
+        {
+          "name": "materializeReferencedSegments",
+          "line": 118
+        },
+        {
+          "name": "segmentMap",
+          "line": 122
+        },
+        {
+          "name": "emittedSegmentIds",
+          "line": 123
+        },
+        {
+          "name": "syntheticNewSegmentEvents",
+          "line": 134
+        },
+        {
+          "name": "deltaRevisionIdMetric",
+          "line": 151
+        },
+        {
+          "name": "setMaxRevision",
+          "line": 157
+        },
+        {
+          "name": "currentRevisionId",
+          "line": 158
+        },
+        {
+          "name": "projects",
+          "line": 240
+        },
+        {
+          "name": "environment",
+          "line": 242
+        },
+        {
+          "name": "namePrefix",
+          "line": 243
+        },
+        {
+          "name": "hasRequestedRevision",
+          "line": 244
+        },
+        {
+          "name": "requestedRevisionId",
+          "line": 245
+        },
+        {
+          "name": "delta",
+          "line": 251
+        },
+        {
+          "name": "hydrationEvent",
+          "line": 252
+        },
+        {
+          "name": "filteredHydrationEvent",
+          "line": 253
+        },
+        {
+          "name": "referencedSegmentIds",
+          "line": 258
+        },
+        {
+          "name": "visibleRevision",
+          "line": 261
+        },
+        {
+          "name": "returnedHydrationEventId",
+          "line": 278
+        },
+        {
+          "name": "environmentEvents",
+          "line": 289
+        },
+        {
+          "name": "filteredEvents",
+          "line": 290
+        },
+        {
+          "name": "events",
+          "line": 297
+        },
+        {
+          "name": "segmentsUpdated",
+          "line": 348
+        },
+        {
+          "name": "segmentsRemoved",
+          "line": 349
+        },
+        {
+          "name": "globallyUpdatedFeatures",
+          "line": 350
+        },
+        {
+          "name": "environmentUpdatedFeatures",
+          "line": 351
+        },
+        {
+          "name": "segmentId",
+          "line": 383
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/events/event-store.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "EVENT_COLUMNS",
+          "line": 52
+        },
+        {
+          "name": "TABLE",
+          "line": 127
+        },
+        {
+          "name": "transaction",
+          "line": 154
+        },
+        {
+          "name": "stopTimer",
+          "line": 167
+        },
+        {
+          "name": "stopTimer",
+          "line": 184
+        },
+        {
+          "name": "count",
+          "line": 185
+        },
+        {
+          "name": "stopTimer",
+          "line": 203
+        },
+        {
+          "name": "searchQuery",
+          "line": 204
+        },
+        {
+          "name": "count",
+          "line": 205
+        },
+        {
+          "name": "stopTimer",
+          "line": 242
+        },
+        {
+          "name": "rows",
+          "line": 244
+        },
+        {
+          "name": "stopTimer",
+          "line": 299
+        },
+        {
+          "name": "row",
+          "line": 300
+        },
+        {
+          "name": "stopTimer",
+          "line": 315
+        },
+        {
+          "name": "perType",
+          "line": 317
+        },
+        {
+          "name": "row",
+          "line": 329
+        },
+        {
+          "name": "rows",
+          "line": 345
+        },
+        {
+          "name": "stopTimer",
+          "line": 362
+        },
+        {
+          "name": "query",
+          "line": 363
+        },
+        {
+          "name": "rows",
+          "line": 375
+        },
+        {
+          "name": "stopTimer",
+          "line": 384
+        },
+        {
+          "name": "shouldFilterEnvironment",
+          "line": 385
+        },
+        {
+          "name": "applyEnvironmentFilter",
+          "line": 386
+        },
+        {
+          "name": "projectRevisions",
+          "line": 431
+        },
+        {
+          "name": "segmentRevisions",
+          "line": 432
+        },
+        {
+          "name": "revisionId",
+          "line": 439
+        },
+        {
+          "name": "currentRevision",
+          "line": 440
+        },
+        {
+          "name": "segmentId",
+          "line": 448
+        },
+        {
+          "name": "result",
+          "line": 491
+        },
+        {
+          "name": "stopTimer",
+          "line": 500
+        },
+        {
+          "name": "rows",
+          "line": 522
+        },
+        {
+          "name": "stopTimer",
+          "line": 532
+        },
+        {
+          "name": "queryResult",
+          "line": 554
+        },
+        {
+          "name": "row",
+          "line": 605
+        },
+        {
+          "name": "stopTimer",
+          "line": 614
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/component/impact-views/views/computeFlagImpacts.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "SMALL_CHANGE_THRESHOLD_PCT",
+          "line": 11
+        },
+        {
+          "name": "computeFlagImpacts",
+          "line": 48
+        },
+        {
+          "name": "flips",
+          "line": 59
+        },
+        {
+          "name": "measuredFlips",
+          "line": 61
+        },
+        {
+          "name": "hasDataPoints",
+          "line": 77
+        },
+        {
+          "name": "hasFiniteBounds",
+          "line": 81
+        },
+        {
+          "name": "chronologicalFlagFlips",
+          "line": 94
+        },
+        {
+          "name": "measureGoalDeltaAroundFlip",
+          "line": 122
+        },
+        {
+          "name": "halfWindowSec",
+          "line": 126
+        },
+        {
+          "name": "preSeries",
+          "line": 132
+        },
+        {
+          "name": "postSeries",
+          "line": 137
+        },
+        {
+          "name": "before",
+          "line": 142
+        },
+        {
+          "name": "after",
+          "line": 143
+        },
+        {
+          "name": "halfWindowAround",
+          "line": 167
+        },
+        {
+          "name": "requested",
+          "line": 171
+        },
+        {
+          "name": "halfGapToPreviousFlip",
+          "line": 172
+        },
+        {
+          "name": "halfGapToNextFlip",
+          "line": 175
+        },
+        {
+          "name": "roomBeforeChartStart",
+          "line": 178
+        },
+        {
+          "name": "roomAfterChartEnd",
+          "line": 179
+        },
+        {
+          "name": "goalPointsBetween",
+          "line": 197
+        },
+        {
+          "name": "aggregateGoalPoints",
+          "line": 207
+        },
+        {
+          "name": "sum",
+          "line": 212
+        },
+        {
+          "name": "isMeasured",
+          "line": 216
+        },
+        {
+          "name": "mostSignificantFlipPerFlag",
+          "line": 221
+        },
+        {
+          "name": "bestByFlag",
+          "line": 222
+        },
+        {
+          "name": "best",
+          "line": 224
+        },
+        {
+          "name": "rankBySignificance",
+          "line": 235
+        },
+        {
+          "name": "toneOf",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/component/admin/network/NetworkTrafficUsage/chart-functions.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "toTrafficUsageChartData",
+          "line": 18
+        },
+        {
+          "name": "datasets",
+          "line": 23
+        },
+        {
+          "name": "record",
+          "line": 31
+        },
+        {
+          "name": "epInfo",
+          "line": 36
+        },
+        {
+          "name": "toConnectionChartData",
+          "line": 49
+        },
+        {
+          "name": "datasets",
+          "line": 53
+        },
+        {
+          "name": "record",
+          "line": 54
+        },
+        {
+          "name": "requestCount",
+          "line": 56
+        },
+        {
+          "name": "epInfo",
+          "line": 60
+        },
+        {
+          "name": "toRequestChartData",
+          "line": 77
+        },
+        {
+          "name": "datasets",
+          "line": 81
+        },
+        {
+          "name": "record",
+          "line": 82
+        },
+        {
+          "name": "requestCount",
+          "line": 84
+        },
+        {
+          "name": "epInfo",
+          "line": 88
+        },
+        {
+          "name": "getLabelsAndRecords",
+          "line": 105
+        },
+        {
+          "name": "from",
+          "line": 112
+        },
+        {
+          "name": "to",
+          "line": 113
+        },
+        {
+          "name": "numMonths",
+          "line": 114
+        },
+        {
+          "name": "labels",
+          "line": 120
+        },
+        {
+          "name": "from",
+          "line": 127
+        },
+        {
+          "name": "to",
+          "line": 128
+        },
+        {
+          "name": "numDays",
+          "line": 129
+        },
+        {
+          "name": "labels",
+          "line": 137
+        },
+        {
+          "name": "requestTypes",
+          "line": 148
+        },
+        {
+          "name": "getChartLabel",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "file": "src/lib/metrics.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "DISTINCT_HLL_REGISTERS_EXPONENT",
+          "line": 48
+        },
+        {
+          "name": "registerPrometheusPostgresMetrics",
+          "line": 50
+        },
+        {
+          "name": "dbPoolMin",
+          "line": 56
+        },
+        {
+          "name": "dbPoolMax",
+          "line": 61
+        },
+        {
+          "name": "dbPoolFree",
+          "line": 66
+        },
+        {
+          "name": "dbPoolUsed",
+          "line": 70
+        },
+        {
+          "name": "dbPoolPendingCreates",
+          "line": 74
+        },
+        {
+          "name": "dbPoolPendingAcquires",
+          "line": 78
+        },
+        {
+          "name": "database_version",
+          "line": 90
+        },
+        {
+          "name": "registerPrometheusMetrics",
+          "line": 99
+        },
+        {
+          "name": "resolveEnvironmentType",
+          "line": 106
+        },
+        {
+          "name": "environments",
+          "line": 110
+        },
+        {
+          "name": "env",
+          "line": 111
+        },
+        {
+          "name": "dbMetrics",
+          "line": 122
+        },
+        {
+          "name": "featureLabel",
+          "line": 123
+        },
+        {
+          "name": "requestDuration",
+          "line": 136
+        },
+        {
+          "name": "sdkRequestDuration",
+          "line": 144
+        },
+        {
+          "name": "baseUriPath",
+          "line": 150
+        },
+        {
+          "name": "schedulerDuration",
+          "line": 151
+        },
+        {
+          "name": "dbDuration",
+          "line": 159
+        },
+        {
+          "name": "functionDuration",
+          "line": 167
+        },
+        {
+          "name": "featureFlagUpdateTotal",
+          "line": 175
+        },
+        {
+          "name": "featureFlagUsageTotal",
+          "line": 186
+        },
+        {
+          "name": "clientRegistrationTotal",
+          "line": 191
+        },
+        {
+          "name": "result",
+          "line": 268
+        },
+        {
+          "name": "result",
+          "line": 284
+        },
+        {
+          "name": "featureTogglesArchivedTotal",
+          "line": 331
+        },
+        {
+          "name": "trafficTotal",
+          "line": 341
+        },
+        {
+          "name": "serviceAccounts",
+          "line": 345
+        },
+        {
+          "name": "apiTokens",
+          "line": 349
+        },
+        {
+          "name": "enabledMetricsBucketsPreviousDay",
+          "line": 354
+        },
+        {
+          "name": "variantMetricsBucketsPreviousDay",
+          "line": 358
+        },
+        {
+          "name": "usersActive7days",
+          "line": 362
+        },
+        {
+          "name": "usersActive30days",
+          "line": 366
+        },
+        {
+          "name": "usersActive60days",
+          "line": 370
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/metrics/unknown-flags/fake-unknown-flags-store.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "byName",
+          "line": 23
+        },
+        {
+          "name": "apps",
+          "line": 26
+        },
+        {
+          "name": "envs",
+          "line": 28
+        },
+        {
+          "name": "prev",
+          "line": 29
+        },
+        {
+          "name": "reports",
+          "line": 40
+        },
+        {
+          "name": "environments",
+          "line": 42
+        },
+        {
+          "name": "flat",
+          "line": 63
+        },
+        {
+          "name": "flags",
+          "line": 64
+        },
+        {
+          "name": "cutoff",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/feature-toggle/feature-toggle-service.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "features",
+          "line": 265
+        },
+        {
+          "name": "invalidProjects",
+          "line": 268
+        },
+        {
+          "name": "id",
+          "line": 286
+        },
+        {
+          "name": "toggle",
+          "line": 303
+        },
+        {
+          "name": "children",
+          "line": 313
+        },
+        {
+          "name": "parents",
+          "line": 325
+        },
+        {
+          "name": "mismatchedSegments",
+          "line": 371
+        },
+        {
+          "name": "existingCount",
+          "line": 391
+        },
+        {
+          "name": "isSameLength",
+          "line": 425
+        },
+        {
+          "name": "constraintOverLimit",
+          "line": 427
+        },
+        {
+          "name": "updatedCount",
+          "line": 429
+        },
+        {
+          "name": "existingCount",
+          "line": 430
+        },
+        {
+          "name": "isOverLimit",
+          "line": 433
+        },
+        {
+          "name": "allowAnyway",
+          "line": 436
+        },
+        {
+          "name": "exists",
+          "line": 456
+        },
+        {
+          "name": "featureToggle",
+          "line": 471
+        },
+        {
+          "name": "updated",
+          "line": 483
+        },
+        {
+          "name": "existingOrder",
+          "line": 548
+        },
+        {
+          "name": "allSortOrdersAreAlreadyKnown",
+          "line": 559
+        },
+        {
+          "name": "newOrder",
+          "line": 572
+        },
+        {
+          "name": "event",
+          "line": 584
+        },
+        {
+          "name": "stickiness",
+          "line": 620
+        },
+        {
+          "name": "fixedVariants",
+          "line": 672
+        },
+        {
+          "name": "standardizedConfig",
+          "line": 700
+        },
+        {
+          "name": "newFeatureStrategy",
+          "line": 713
+        },
+        {
+          "name": "segments",
+          "line": 735
+        },
+        {
+          "name": "strategy",
+          "line": 739
+        },
+        {
+          "name": "strategies",
+          "line": 803
+        },
+        {
+          "name": "hasOnlyDisabledStrategies",
+          "line": 809
+        },
+        {
+          "name": "existingStrategy",
+          "line": 832
+        },
+        {
+          "name": "existingSegments",
+          "line": 842
+        },
+        {
+          "name": "standardizedUpdates",
+          "line": 845
+        },
+        {
+          "name": "strategy",
+          "line": 851
+        },
+        {
+          "name": "segments",
+          "line": 863
+        },
+        {
+          "name": "data",
+          "line": 868
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/client-feature-toggles/delta/visible-revision.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "getReferencedSegmentIds",
+          "line": 5
+        },
+        {
+          "name": "allProjects",
+          "line": 10
+        },
+        {
+          "name": "referencedSegmentIds",
+          "line": 12
+        },
+        {
+          "name": "getVisibleRevision",
+          "line": 33
+        },
+        {
+          "name": "projectList",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "file": "frontend/src/component/onboarding/intro/IntroUserGrid.tsx",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "GRID_COL_GAP",
+          "line": 31
+        },
+        {
+          "name": "GRID_ROW_GAP",
+          "line": 32
+        },
+        {
+          "name": "gridFit",
+          "line": 43
+        },
+        {
+          "name": "PAD",
+          "line": 44
+        },
+        {
+          "name": "tileW",
+          "line": 47
+        },
+        {
+          "name": "rows",
+          "line": 49
+        },
+        {
+          "name": "budget",
+          "line": 50
+        },
+        {
+          "name": "modes",
+          "line": 52
+        },
+        {
+          "name": "cellH",
+          "line": 58
+        },
+        {
+          "name": "avatar",
+          "line": 59
+        },
+        {
+          "name": "orphans",
+          "line": 65
+        },
+        {
+          "name": "score",
+          "line": 66
+        },
+        {
+          "name": "cols",
+          "line": 80
+        },
+        {
+          "name": "rows",
+          "line": 84
+        },
+        {
+          "name": "budget",
+          "line": 85
+        },
+        {
+          "name": "tileW",
+          "line": 86
+        },
+        {
+          "name": "StyledGrid",
+          "line": 98
+        },
+        {
+          "name": "StyledPerson",
+          "line": 107
+        },
+        {
+          "name": "ringPulse",
+          "line": 117
+        },
+        {
+          "name": "ring",
+          "line": 121
+        },
+        {
+          "name": "StyledAvatarWrap",
+          "line": 171
+        },
+        {
+          "name": "StyledAvatarImg",
+          "line": 177
+        },
+        {
+          "name": "StyledStatusBadge",
+          "line": 201
+        },
+        {
+          "name": "palette",
+          "line": 204
+        },
+        {
+          "name": "StyledName",
+          "line": 239
+        },
+        {
+          "name": "StyledMeta",
+          "line": 248
+        },
+        {
+          "name": "slideInPanel",
+          "line": 257
+        },
+        {
+          "name": "StyledContentRow",
+          "line": 262
+        },
+        {
+          "name": "StyledGridWrap",
+          "line": 269
+        },
+        {
+          "name": "StyledPreviewPanel",
+          "line": 277
+        },
+        {
+          "name": "StyledPanelHeader",
+          "line": 305
+        },
+        {
+          "name": "StyledPanelHeaderRow",
+          "line": 312
+        },
+        {
+          "name": "StyledPanelAvatar",
+          "line": 318
+        },
+        {
+          "name": "StyledPopoverBody",
+          "line": 332
+        },
+        {
+          "name": "StyledPopoverTitle",
+          "line": 342
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/metrics/client-metrics/metrics-service-v2.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "limit",
+          "line": 106
+        },
+        {
+          "name": "totalHourlyCount",
+          "line": 112
+        },
+        {
+          "name": "totalDailyCount",
+          "line": 113
+        },
+        {
+          "name": "previousDayDailyCountCalculated",
+          "line": 114
+        },
+        {
+          "name": "existingFlags",
+          "line": 134
+        },
+        {
+          "name": "existingNames",
+          "line": 135
+        },
+        {
+          "name": "validatedToggleNames",
+          "line": 148
+        },
+        {
+          "name": "badNames",
+          "line": 160
+        },
+        {
+          "name": "justNames",
+          "line": 171
+        },
+        {
+          "name": "metricsByToggle",
+          "line": 185
+        },
+        {
+          "name": "toggleNames",
+          "line": 197
+        },
+        {
+          "name": "validatedSet",
+          "line": 202
+        },
+        {
+          "name": "unknownSet",
+          "line": 203
+        },
+        {
+          "name": "invalidCount",
+          "line": 205
+        },
+        {
+          "name": "sample",
+          "line": 224
+        },
+        {
+          "name": "siftedMetrics",
+          "line": 244
+        },
+        {
+          "name": "value",
+          "line": 260
+        },
+        {
+          "name": "value",
+          "line": 274
+        },
+        {
+          "name": "recordSdkFlavorMetrics",
+          "line": 278
+        },
+        {
+          "name": "copy",
+          "line": 328
+        },
+        {
+          "name": "metrics",
+          "line": 339
+        },
+        {
+          "name": "seenApplications",
+          "line": 344
+        },
+        {
+          "name": "totalUsage",
+          "line": 348
+        },
+        {
+          "name": "groupedMetrics",
+          "line": 353
+        },
+        {
+          "name": "normalizedHoursBack",
+          "line": 384
+        },
+        {
+          "name": "environments",
+          "line": 404
+        },
+        {
+          "name": "applications",
+          "line": 406
+        },
+        {
+          "name": "result",
+          "line": 411
+        },
+        {
+          "name": "environmentMetrics",
+          "line": 412
+        },
+        {
+          "name": "applicationMetrics",
+          "line": 416
+        },
+        {
+          "name": "metric",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/export-import-toggles/export-import-service.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "errors",
+          "line": 252
+        },
+        {
+          "name": "warnings",
+          "line": 263
+        },
+        {
+          "name": "permissions",
+          "line": 268
+        },
+        {
+          "name": "cleanedDto",
+          "line": 322
+        },
+        {
+          "name": "content",
+          "line": 332
+        },
+        {
+          "name": "data",
+          "line": 333
+        },
+        {
+          "name": "dto",
+          "line": 334
+        },
+        {
+          "name": "cleanedDto",
+          "line": 339
+        },
+        {
+          "name": "links",
+          "line": 378
+        },
+        {
+          "name": "feature",
+          "line": 401
+        },
+        {
+          "name": "hasFeatureName",
+          "line": 446
+        },
+        {
+          "name": "strategies",
+          "line": 473
+        },
+        {
+          "name": "featureTags",
+          "line": 497
+        },
+        {
+          "name": "newContextFields",
+          "line": 516
+        },
+        {
+          "name": "newTagTypes",
+          "line": 537
+        },
+        {
+          "name": "featureEnvsWithVariants",
+          "line": 551
+        },
+        {
+          "name": "existingFeatures",
+          "line": 576
+        },
+        {
+          "name": "supportedSegments",
+          "line": 602
+        },
+        {
+          "name": "targetProject",
+          "line": 603
+        },
+        {
+          "name": "dependentFeatures",
+          "line": 625
+        },
+        {
+          "name": "importedFeatures",
+          "line": 629
+        },
+        {
+          "name": "missingFromImported",
+          "line": 631
+        },
+        {
+          "name": "featuresFromStore",
+          "line": 638
+        },
+        {
+          "name": "unsupportedSegments",
+          "line": 649
+        },
+        {
+          "name": "unsupportedDependencies",
+          "line": 658
+        },
+        {
+          "name": "unsupportedContextFields",
+          "line": 669
+        },
+        {
+          "name": "description",
+          "line": 674
+        },
+        {
+          "name": "otherProjectFeatures",
+          "line": 690
+        },
+        {
+          "name": "removedFeaturesDto",
+          "line": 701
+        },
+        {
+          "name": "existingSegments",
+          "line": 706
+        },
+        {
+          "name": "segmentMapping",
+          "line": 708
+        },
+        {
+          "name": "archivedFeatures",
+          "line": 736
+        },
+        {
+          "name": "featureTags",
+          "line": 737
+        },
+        {
+          "name": "unsupportedStrategies",
+          "line": 769
+        },
+        {
+          "name": "description",
+          "line": 773
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/events/event-service.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "totalEvents",
+          "line": 61
+        },
+        {
+          "name": "events",
+          "line": 62
+        },
+        {
+          "name": "projectAccess",
+          "line": 73
+        },
+        {
+          "name": "queryParams",
+          "line": 81
+        },
+        {
+          "name": "projectFilter",
+          "line": 82
+        },
+        {
+          "name": "totalEvents",
+          "line": 85
+        },
+        {
+          "name": "events",
+          "line": 89
+        },
+        {
+          "name": "featureNamesSet",
+          "line": 123
+        },
+        {
+          "name": "allTagsInFeatures",
+          "line": 131
+        },
+        {
+          "name": "featureTags",
+          "line": 136
+        },
+        {
+          "name": "enhancedEvents",
+          "line": 159
+        },
+        {
+          "name": "enhancedEvents",
+          "line": 171
+        },
+        {
+          "name": "updated",
+          "line": 196
+        },
+        {
+          "name": "parsed",
+          "line": 208
+        },
+        {
+          "name": "parsed",
+          "line": 219
+        },
+        {
+          "name": "values",
+          "line": 221
+        },
+        {
+          "name": "parsed",
+          "line": 237
+        },
+        {
+          "name": "parsed",
+          "line": 245
+        },
+        {
+          "name": "parsed",
+          "line": 253
+        },
+        {
+          "name": "parsed",
+          "line": 259
+        },
+        {
+          "name": "isRootAdmin",
+          "line": 272
+        },
+        {
+          "name": "filterAccessibleProjects",
+          "line": 280
+        },
+        {
+          "name": "allowedProjects",
+          "line": 285
+        },
+        {
+          "name": "searchProjectList",
+          "line": 290
+        },
+        {
+          "name": "filteredProjects",
+          "line": 291
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/metrics/impact/batch-histogram.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "labelKey",
+          "line": 49
+        },
+        {
+          "name": "current",
+          "line": 65
+        },
+        {
+          "name": "sortedKeys",
+          "line": 72
+        },
+        {
+          "name": "parsedLabels",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/feature-toggle/fakes/fake-feature-toggle-store.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "feature",
+          "line": 22
+        },
+        {
+          "name": "features",
+          "line": 33
+        },
+        {
+          "name": "features",
+          "line": 47
+        },
+        {
+          "name": "deletedFeatures",
+          "line": 57
+        },
+        {
+          "name": "features",
+          "line": 67
+        },
+        {
+          "name": "feature",
+          "line": 147
+        },
+        {
+          "name": "revive",
+          "line": 171
+        },
+        {
+          "name": "exists",
+          "line": 198
+        },
+        {
+          "name": "id",
+          "line": 200
+        },
+        {
+          "name": "old",
+          "line": 201
+        },
+        {
+          "name": "featureDate",
+          "line": 241
+        },
+        {
+          "name": "feature",
+          "line": 263
+        },
+        {
+          "name": "typeCounts",
+          "line": 275
+        }
+      ]
+    },
+    {
+      "file": "src/lib/features/apitokensv2/api-token-v2-service.ts",
+      "score": 3,
+      "symbols": [
+        {
+          "name": "SYSTEM_TOKEN_LIFETIME_AFTER_LAST_SEEN_IN_MINUTES",
+          "line": 71
+        },
+        {
+          "name": "TOKEN_CACHE_WARMUP_SEEN_WITHIN_HOURS",
+          "line": 72
+        },
+        {
+          "name": "TOKEN_CACHE_NAME",
+          "line": 73
+        },
+        {
+          "name": "resolveTokenPermissions",
+          "line": 75
+        },
+        {
+          "name": "createApiTokenV2Service",
+          "line": 88
+        },
+        {
+          "name": "createFakeApiTokenV2Service",
+          "line": 120
+        },
+        {
+          "name": "apiTokenV2Store",
+          "line": 125
+        },
+        {
+          "name": "environmentStore",
+          "line": 127
+        },
+        {
+          "name": "fakeEventStore",
+          "line": 129
+        },
+        {
+          "name": "featureTagStore",
+          "line": 130
+        },
+        {
+          "name": "eventService",
+          "line": 132
+        },
+        {
+          "name": "resourceLimitsService",
+          "line": 138
+        },
+        {
+          "name": "recentTime",
+          "line": 255
+        },
+        {
+          "name": "recentlySeenTokens",
+          "line": 259
+        },
+        {
+          "name": "tokens",
+          "line": 261
+        },
+        {
+          "name": "revision",
+          "line": 271
+        },
+        {
+          "name": "events",
+          "line": 278
+        },
+        {
+          "name": "payload",
+          "line": 283
+        },
+        {
+          "name": "newToken",
+          "line": 327
+        },
+        {
+          "name": "credential",
+          "line": 368
+        },
+        {
+          "name": "created",
+          "line": 375
+        },
+        {
+          "name": "project",
+          "line": 390
+        },
+        {
+          "name": "currentTokenCount",
+          "line": 415
+        },
+        {
+          "name": "exists",
+          "line": 430
+        },
+        {
+          "name": "token",
+          "line": 439
+        },
+        {
+          "name": "verified",
+          "line": 451
+        },
+        {
+          "name": "token",
+          "line": 469
+        },
+        {
+          "name": "stopTimer",
+          "line": 489
+        },
+        {
+          "name": "token",
+          "line": 491
+        },
+        {
+          "name": "tokens",
+          "line": 506
+        },
+        {
+          "name": "previous",
+          "line": 515
+        },
+        {
+          "name": "updatedStoreToken",
+          "line": 519
+        },
+        {
+          "name": "updated",
+          "line": 527
+        },
+        {
+          "name": "token",
+          "line": 542
+        },
+        {
+          "name": "deleted",
+          "line": 560
+        }
+      ]
+    }
+  ]
+}

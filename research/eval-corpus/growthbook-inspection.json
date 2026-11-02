@@ -1,0 +1,2741 @@
+{
+  "repo": "growthbook/growthbook",
+  "url": "https://github.com/growthbook/growthbook",
+  "sha": "b73ffdb3e8189fd918d721155ce69742fdc6fbfd",
+  "domain": "statistics",
+  "frameworkHypothesis": "Next/Express",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/shared/src/enterprise/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/shared/src/enterprise/license-consts.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/remote-saved-groups-csv-parser/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/front-end/enterprise/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/front-end/components/Settings/UpgradeModal/LicenseSuccessModal.tsx",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/stats/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/back-end/src/init/license.ts",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "Mixed",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/stats-ts/package.json",
+      "license": "Mixed",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sdk-js/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sdk-js/plugins/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/dbt/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/shared/package.json",
+      "license": "Mixed",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/remote-saved-groups-csv-parser/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/front-end/package.json",
+      "license": "Mixed",
+      "frameworks": [
+        "next",
+        "vite"
+      ],
+      "computeDeps": {
+        "@jukben/emoji-search": "^2.0.1",
+        "@radix-ui/colors": "^3.0.0",
+        "decimal.js": "^10.5.0",
+        "diff": "^8.0.3",
+        "diff2html": "^3.4.56",
+        "minisearch": "^7.2.0",
+        "react-colorful": "^5.3.0",
+        "react-diff-viewer-continued": "^3.4.0"
+      }
+    },
+    {
+      "file": "packages/stats/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sdk-react/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/back-end/package.json",
+      "license": "Mixed",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/shared/src/power/power.ts",
+      "score": 179,
+      "symbols": [
+        {
+          "name": "checkConfig",
+          "line": 112
+        },
+        {
+          "name": "config",
+          "line": 114
+        },
+        {
+          "name": "validEntry",
+          "line": 217
+        },
+        {
+          "name": "c",
+          "line": 223
+        },
+        {
+          "name": "isValidPowerCalculationParams",
+          "line": 238
+        },
+        {
+          "name": "params",
+          "line": 244
+        },
+        {
+          "name": "commonParams",
+          "line": 247
+        },
+        {
+          "name": "bayesianEngineParams",
+          "line": 248
+        },
+        {
+          "name": "binomialParams",
+          "line": 256
+        },
+        {
+          "name": "meanParams",
+          "line": 257
+        },
+        {
+          "name": "ensureAndReturnPowerCalculationParams",
+          "line": 275
+        },
+        {
+          "name": "frequentistVariance",
+          "line": 337
+        },
+        {
+          "name": "getMetricMean",
+          "line": 356
+        },
+        {
+          "name": "getMetricPriorParams",
+          "line": 366
+        },
+        {
+          "name": "getMetricVariance",
+          "line": 381
+        },
+        {
+          "name": "powerStandardError",
+          "line": 387
+        },
+        {
+          "name": "metricMean",
+          "line": 392
+        },
+        {
+          "name": "metricVariance",
+          "line": 393
+        },
+        {
+          "name": "sequentialRho",
+          "line": 407
+        },
+        {
+          "name": "sequentialDiscriminant",
+          "line": 417
+        },
+        {
+          "name": "sequentialPowerSequentialVariance",
+          "line": 430
+        },
+        {
+          "name": "standardErrorSampleMean",
+          "line": 436
+        },
+        {
+          "name": "rho",
+          "line": 437
+        },
+        {
+          "name": "partUnderRadical",
+          "line": 438
+        },
+        {
+          "name": "zSequential",
+          "line": 439
+        },
+        {
+          "name": "zStar",
+          "line": 440
+        },
+        {
+          "name": "standardErrorSequential",
+          "line": 441
+        },
+        {
+          "name": "vSequential",
+          "line": 443
+        },
+        {
+          "name": "sequentialPowerStandardError",
+          "line": 447
+        },
+        {
+          "name": "metricMean",
+          "line": 455
+        },
+        {
+          "name": "metricVariance",
+          "line": 456
+        },
+        {
+          "name": "v_rel",
+          "line": 457
+        },
+        {
+          "name": "getSequentialTuningParameter",
+          "line": 476
+        },
+        {
+          "name": "powerEstFrequentist",
+          "line": 498
+        },
+        {
+          "name": "sequentialTuningParameter",
+          "line": 507
+        }
+      ]
+    },
+    {
+      "file": "packages/stats-ts/src/contextualBanditWeights.ts",
+      "score": 86,
+      "symbols": [
+        {
+          "name": "COMBINED_CONTEXT_ATTRIBUTE_VALUE",
+          "line": 19
+        },
+        {
+          "name": "canonicalizeBinaryLabels",
+          "line": 25
+        },
+        {
+          "name": "MAX_EXHAUSTIVE_CATEGORIES",
+          "line": 37
+        },
+        {
+          "name": "MAX_ATTRIBUTES",
+          "line": 43
+        },
+        {
+          "name": "emptyArm",
+          "line": 110
+        },
+        {
+          "name": "addArms",
+          "line": 124
+        },
+        {
+          "name": "assertSupportedContextualBanditMetric",
+          "line": 144
+        },
+        {
+          "name": "supportedMetricType",
+          "line": 147
+        },
+        {
+          "name": "armMomentStatForBandit",
+          "line": 163
+        },
+        {
+          "name": "n",
+          "line": 168
+        },
+        {
+          "name": "computeLeafWeights",
+          "line": 192
+        },
+        {
+          "name": "stats",
+          "line": 198
+        },
+        {
+          "name": "contextViews",
+          "line": 222
+        },
+        {
+          "name": "value",
+          "line": 229
+        },
+        {
+          "name": "partitionByContext",
+          "line": 240
+        },
+        {
+          "name": "byKey",
+          "line": 245
+        },
+        {
+          "name": "key",
+          "line": 249
+        },
+        {
+          "name": "sumOfSquaredErrorsPerVariationFromArms",
+          "line": 269
+        },
+        {
+          "name": "sse",
+          "line": 274
+        },
+        {
+          "name": "arm",
+          "line": 280
+        },
+        {
+          "name": "stat",
+          "line": 285
+        },
+        {
+          "name": "CAT_N",
+          "line": 303
+        },
+        {
+          "name": "CAT_SUM",
+          "line": 304
+        },
+        {
+          "name": "CAT_SUM_SQUARES",
+          "line": 305
+        },
+        {
+          "name": "trailingZeros",
+          "line": 308
+        },
+        {
+          "name": "armSseDirect",
+          "line": 316
+        },
+        {
+          "name": "compactGroupSsePerVariation",
+          "line": 326
+        },
+        {
+          "name": "sse",
+          "line": 330
+        },
+        {
+          "name": "base",
+          "line": 332
+        },
+        {
+          "name": "compactGroupSse",
+          "line": 347
+        },
+        {
+          "name": "bestExhaustiveBinarySplit",
+          "line": 373
+        },
+        {
+          "name": "numCat",
+          "line": 377
+        },
+        {
+          "name": "totalN",
+          "line": 389
+        },
+        {
+          "name": "totalSum",
+          "line": 390
+        },
+        {
+          "name": "totalSq",
+          "line": 391
+        }
+      ]
+    },
+    {
+      "file": "packages/shared/src/util/features.ts",
+      "score": 66,
+      "symbols": [
+        {
+          "name": "DRAFT_REVISION_STATUSES",
+          "line": 69
+        },
+        {
+          "name": "getValidation",
+          "line": 76
+        },
+        {
+          "name": "schemaString",
+          "line": 87
+        },
+        {
+          "name": "jsonSchema",
+          "line": 92
+        },
+        {
+          "name": "validationEnabled",
+          "line": 93
+        },
+        {
+          "name": "schemaDateUpdated",
+          "line": 94
+        },
+        {
+          "name": "envSettings",
+          "line": 132
+        },
+        {
+          "name": "legacyRules",
+          "line": 140
+        },
+        {
+          "name": "flat",
+          "line": 149
+        },
+        {
+          "name": "mergeRevision",
+          "line": 170
+        },
+        {
+          "name": "newFeature",
+          "line": 175
+        },
+        {
+          "name": "envSettings",
+          "line": 185
+        },
+        {
+          "name": "m",
+          "line": 208
+        },
+        {
+          "name": "getJSONValidator",
+          "line": 229
+        },
+        {
+          "name": "compiledValidators",
+          "line": 237
+        },
+        {
+          "name": "MAX_COMPILED_VALIDATORS",
+          "line": 238
+        },
+        {
+          "name": "getCompiledValidator",
+          "line": 239
+        },
+        {
+          "name": "cached",
+          "line": 240
+        },
+        {
+          "name": "validate",
+          "line": 242
+        },
+        {
+          "name": "validateJSONFeatureValue",
+          "line": 250
+        },
+        {
+          "name": "validate",
+          "line": 262
+        },
+        {
+          "name": "matched",
+          "line": 294
+        },
+        {
+          "name": "stringifyFeatureValue",
+          "line": 320
+        },
+        {
+          "name": "validateFeatureValue",
+          "line": 324
+        },
+        {
+          "name": "type",
+          "line": 329
+        },
+        {
+          "name": "prefix",
+          "line": 330
+        },
+        {
+          "name": "parseLooseJSON",
+          "line": 395
+        },
+        {
+          "name": "parsePlainJSONObject",
+          "line": 402
+        },
+        {
+          "name": "parsed",
+          "line": 406
+        },
+        {
+          "name": "resolveSparseJSONValue",
+          "line": 433
+        },
+        {
+          "name": "sparse",
+          "line": 438
+        },
+        {
+          "name": "getExtendsRefs",
+          "line": 451
+        },
+        {
+          "name": "list",
+          "line": 452
+        },
+        {
+          "name": "getExtendsEntries",
+          "line": 459
+        },
+        {
+          "name": "list",
+          "line": 460
+        }
+      ]
+    },
+    {
+      "file": "packages/shared/src/enterprise/power.ts",
+      "score": 62,
+      "symbols": [
+        {
+          "name": "MetricVariationPowerResultValidator",
+          "line": 47
+        },
+        {
+          "name": "MidExperimentPowerCalculationFailureValidator",
+          "line": 60
+        },
+        {
+          "name": "MidExperimentPowerCalculationSuccessValidator",
+          "line": 69
+        },
+        {
+          "name": "MidExperimentPowerCalculationResultValidator",
+          "line": 80
+        },
+        {
+          "name": "sequentialIntervalHalfwidth",
+          "line": 97
+        },
+        {
+          "name": "rho",
+          "line": 103
+        },
+        {
+          "name": "disc",
+          "line": 104
+        },
+        {
+          "name": "calculateMidExperimentPowerSingleError",
+          "line": 108
+        },
+        {
+          "name": "calculateMidExperimentPowerSingle",
+          "line": 128
+        },
+        {
+          "name": "response",
+          "line": 140
+        },
+        {
+          "name": "lowPowerThreshold",
+          "line": 197
+        },
+        {
+          "name": "numTests",
+          "line": 198
+        },
+        {
+          "name": "firstPeriodPairwiseSampleSize",
+          "line": 199
+        },
+        {
+          "name": "secondPeriodSampleSize",
+          "line": 200
+        },
+        {
+          "name": "scalingFactorLowPowerWarning",
+          "line": 201
+        },
+        {
+          "name": "targetMDE",
+          "line": 203
+        },
+        {
+          "name": "sigmahat2Delta",
+          "line": 204
+        },
+        {
+          "name": "nTPrime",
+          "line": 207
+        },
+        {
+          "name": "adjustedVariance",
+          "line": 209
+        },
+        {
+          "name": "s2",
+          "line": 232
+        },
+        {
+          "name": "nTotal",
+          "line": 233
+        },
+        {
+          "name": "additionalUsersNeeded",
+          "line": 253
+        },
+        {
+          "name": "calculateMidExperimentPowerBayes",
+          "line": 290
+        },
+        {
+          "name": "multiplier",
+          "line": 299
+        },
+        {
+          "name": "posterior_precision",
+          "line": 300
+        },
+        {
+          "name": "num1",
+          "line": 301
+        },
+        {
+          "name": "num2",
+          "line": 302
+        },
+        {
+          "name": "num3",
+          "line": 303
+        },
+        {
+          "name": "den",
+          "line": 304
+        },
+        {
+          "name": "powerPos",
+          "line": 305
+        },
+        {
+          "name": "powerNeg",
+          "line": 306
+        },
+        {
+          "name": "calculateMidExperimentPowerFreq",
+          "line": 310
+        },
+        {
+          "name": "powerPos",
+          "line": 315
+        },
+        {
+          "name": "powerNeg",
+          "line": 317
+        },
+        {
+          "name": "calculateMultiplier",
+          "line": 325
+        }
+      ]
+    },
+    {
+      "file": "packages/stats-ts/src/banditWeights.ts",
+      "score": 61,
+      "symbols": [
+        {
+          "name": "BANDIT_PRIOR_MEAN",
+          "line": 4
+        },
+        {
+          "name": "BANDIT_PRIOR_VARIANCE",
+          "line": 5
+        },
+        {
+          "name": "BANDIT_PRIOR_PRECISION",
+          "line": 6
+        },
+        {
+          "name": "MIN_VARIATION_WEIGHT",
+          "line": 7
+        },
+        {
+          "name": "BANDIT_MIN_VARIANCE",
+          "line": 9
+        },
+        {
+          "name": "logProdOtherCdfs",
+          "line": 25
+        },
+        {
+          "name": "cdf",
+          "line": 34
+        },
+        {
+          "name": "GAUSS_HERMITE_ORDER",
+          "line": 41
+        },
+        {
+          "name": "symmetricTridiagonalQL",
+          "line": 50
+        },
+        {
+          "name": "n",
+          "line": 51
+        },
+        {
+          "name": "sign",
+          "line": 52
+        },
+        {
+          "name": "dd",
+          "line": 60
+        },
+        {
+          "name": "b",
+          "line": 76
+        },
+        {
+          "name": "getGaussHermiteRule",
+          "line": 104
+        },
+        {
+          "name": "d",
+          "line": 109
+        },
+        {
+          "name": "e",
+          "line": 110
+        },
+        {
+          "name": "z",
+          "line": 115
+        },
+        {
+          "name": "mu0",
+          "line": 120
+        },
+        {
+          "name": "probKthArmIsBiggestGaussHermite",
+          "line": 128
+        },
+        {
+          "name": "scale",
+          "line": 134
+        },
+        {
+          "name": "x",
+          "line": 137
+        },
+        {
+          "name": "bestArmProbabilitiesGaussHermite",
+          "line": 144
+        },
+        {
+          "name": "adjMeans",
+          "line": 149
+        },
+        {
+          "name": "thompsonSampler",
+          "line": 156
+        },
+        {
+          "name": "K",
+          "line": 166
+        },
+        {
+          "name": "wins",
+          "line": 167
+        },
+        {
+          "name": "nSamples",
+          "line": 168
+        },
+        {
+          "name": "sample",
+          "line": 175
+        },
+        {
+          "name": "thompsonWeightsForSubset",
+          "line": 198
+        },
+        {
+          "name": "subset",
+          "line": 204
+        },
+        {
+          "name": "dataPrecision",
+          "line": 206
+        },
+        {
+          "name": "n0",
+          "line": 214
+        },
+        {
+          "name": "shrinkage",
+          "line": 215
+        },
+        {
+          "name": "poolPrecision",
+          "line": 216
+        },
+        {
+          "name": "w",
+          "line": 223
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/controllers/features.ts",
+      "score": 59,
+      "symbols": [
+        {
+          "name": "normalizeRampStepAction",
+          "line": 356
+        },
+        {
+          "name": "normalizeRuleModalRampValues",
+          "line": 372
+        },
+        {
+          "name": "stagedRevision",
+          "line": 393
+        },
+        {
+          "name": "validateRuleModalRampPatches",
+          "line": 410
+        },
+        {
+          "name": "createOrUpdateDraftWithChanges",
+          "line": 441
+        },
+        {
+          "name": "environments",
+          "line": 461
+        },
+        {
+          "name": "updatedDraft",
+          "line": 502
+        },
+        {
+          "name": "newRevision",
+          "line": 518
+        },
+        {
+          "name": "getPayloadParamsFromApiKey",
+          "line": 561
+        },
+        {
+          "name": "connection",
+          "line": 569
+        },
+        {
+          "name": "cacheKey",
+          "line": 646
+        },
+        {
+          "name": "getFeatureDefinitionsWithCache",
+          "line": 668
+        },
+        {
+          "name": "storageLocation",
+          "line": 676
+        },
+        {
+          "name": "cached",
+          "line": 680
+        },
+        {
+          "name": "capabilities",
+          "line": 695
+        },
+        {
+          "name": "environmentDoc",
+          "line": 705
+        },
+        {
+          "name": "filteredProjects",
+          "line": 708
+        },
+        {
+          "name": "rawStack",
+          "line": 740
+        },
+        {
+          "name": "stackTrace",
+          "line": 741
+        },
+        {
+          "name": "getFeaturesPublic",
+          "line": 760
+        },
+        {
+          "name": "params",
+          "line": 768
+        },
+        {
+          "name": "context",
+          "line": 774
+        },
+        {
+          "name": "defs",
+          "line": 782
+        },
+        {
+          "name": "surrogateKeys",
+          "line": 796
+        },
+        {
+          "name": "getEvaluatedFeaturesPublic",
+          "line": 829
+        },
+        {
+          "name": "params",
+          "line": 837
+        },
+        {
+          "name": "context",
+          "line": 843
+        },
+        {
+          "name": "url",
+          "line": 860
+        },
+        {
+          "name": "defs",
+          "line": 862
+        },
+        {
+          "name": "payload",
+          "line": 871
+        },
+        {
+          "name": "error",
+          "line": 889
+        },
+        {
+          "name": "postFeatures",
+          "line": 898
+        },
+        {
+          "name": "context",
+          "line": 905
+        },
+        {
+          "name": "feature",
+          "line": 906
+        },
+        {
+          "name": "postFeatureRebase",
+          "line": 914
+        }
+      ]
+    },
+    {
+      "file": "packages/shared/src/util/index.ts",
+      "score": 47,
+      "symbols": [
+        {
+          "name": "DEFAULT_ENVIRONMENT_IDS",
+          "line": 75
+        },
+        {
+          "name": "getLinkedChangeEnvs",
+          "line": 79
+        },
+        {
+          "name": "getAffectedEnvsForExperiment",
+          "line": 83
+        },
+        {
+          "name": "envs",
+          "line": 110
+        },
+        {
+          "name": "orgEnvIds",
+          "line": 111
+        },
+        {
+          "name": "collect",
+          "line": 112
+        },
+        {
+          "name": "feature",
+          "line": 117
+        },
+        {
+          "name": "matches",
+          "line": 134
+        },
+        {
+          "name": "env",
+          "line": 147
+        },
+        {
+          "name": "getSnapshotAnalysis",
+          "line": 160
+        },
+        {
+          "name": "getSnapshotCutoffDate",
+          "line": 176
+        },
+        {
+          "name": "findAnalysisComputeFailure",
+          "line": 184
+        },
+        {
+          "name": "getSafeRolloutSnapshotAnalysis",
+          "line": 201
+        },
+        {
+          "name": "putBaselineVariationFirst",
+          "line": 211
+        },
+        {
+          "name": "isAnalysisAllowed",
+          "line": 223
+        },
+        {
+          "name": "snapshotDimIds",
+          "line": 228
+        },
+        {
+          "name": "generateVariationId",
+          "line": 247
+        },
+        {
+          "name": "experimentHasLinkedChanges",
+          "line": 253
+        },
+        {
+          "name": "hasPendingScheduledStart",
+          "line": 265
+        },
+        {
+          "name": "isScheduledToStart",
+          "line": 271
+        },
+        {
+          "name": "startBypassCovers",
+          "line": 281
+        },
+        {
+          "name": "staged",
+          "line": 296
+        },
+        {
+          "name": "canEditDeliveryInPlace",
+          "line": 310
+        },
+        {
+          "name": "linkedFeatureEnvStates",
+          "line": 320
+        },
+        {
+          "name": "pendingDraftApproved",
+          "line": 339
+        },
+        {
+          "name": "linkedDraftApproved",
+          "line": 345
+        },
+        {
+          "name": "experimentHasLiveLinkedChanges",
+          "line": 354
+        },
+        {
+          "name": "includeExperimentInPayload",
+          "line": 368
+        },
+        {
+          "name": "hasFeaturesWithPublishedRules",
+          "line": 405
+        },
+        {
+          "name": "rules",
+          "line": 407
+        },
+        {
+          "name": "isValidEnvironment",
+          "line": 427
+        },
+        {
+          "name": "visualChangeHasContent",
+          "line": 434
+        },
+        {
+          "name": "hasVisualChanges",
+          "line": 438
+        },
+        {
+          "name": "changesetOwnerRef",
+          "line": 445
+        },
+        {
+          "name": "getMatchingRules",
+          "line": 475
+        }
+      ]
+    },
+    {
+      "file": "packages/shared/src/util/configs.ts",
+      "score": 44,
+      "symbols": [
+        {
+          "name": "getConfigParentKey",
+          "line": 24
+        },
+        {
+          "name": "isConfigLocked",
+          "line": 32
+        },
+        {
+          "name": "isScopedConfig",
+          "line": 44
+        },
+        {
+          "name": "scopedOverridesFootprint",
+          "line": 65
+        },
+        {
+          "name": "entries",
+          "line": 74
+        },
+        {
+          "name": "envs",
+          "line": 77
+        },
+        {
+          "name": "configPublishEnvironments",
+          "line": 83
+        },
+        {
+          "name": "constantPublishEnvironments",
+          "line": 92
+        },
+        {
+          "name": "getConfigBaseKeys",
+          "line": 105
+        },
+        {
+          "name": "seen",
+          "line": 110
+        },
+        {
+          "name": "push",
+          "line": 111
+        },
+        {
+          "name": "stripExtends",
+          "line": 123
+        },
+        {
+          "name": "obj",
+          "line": 125
+        },
+        {
+          "name": "rest",
+          "line": 127
+        },
+        {
+          "name": "stripConfigExtends",
+          "line": 136
+        },
+        {
+          "name": "obj",
+          "line": 140
+        },
+        {
+          "name": "list",
+          "line": 142
+        },
+        {
+          "name": "rest",
+          "line": 147
+        },
+        {
+          "name": "kept",
+          "line": 148
+        },
+        {
+          "name": "withConfigExtends",
+          "line": 162
+        },
+        {
+          "name": "obj",
+          "line": 166
+        },
+        {
+          "name": "prior",
+          "line": 167
+        },
+        {
+          "name": "constantRefs",
+          "line": 168
+        },
+        {
+          "name": "rest",
+          "line": 173
+        },
+        {
+          "name": "list",
+          "line": 175
+        },
+        {
+          "name": "getConfigBackingKey",
+          "line": 188
+        },
+        {
+          "name": "list",
+          "line": 189
+        },
+        {
+          "name": "m",
+          "line": 191
+        },
+        {
+          "name": "getConfigBackingPatch",
+          "line": 200
+        },
+        {
+          "name": "valueHasConfigExtends",
+          "line": 207
+        },
+        {
+          "name": "list",
+          "line": 208
+        },
+        {
+          "name": "getFeatureBaseConfigKey",
+          "line": 220
+        },
+        {
+          "name": "setConfigBacking",
+          "line": 234
+        },
+        {
+          "name": "obj",
+          "line": 238
+        },
+        {
+          "name": "prior",
+          "line": 243
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/services/rampSchedule.ts",
+      "score": 44,
+      "symbols": [
+        {
+          "name": "LOCKDOWN_ACTIVE_STATUSES",
+          "line": 87
+        },
+        {
+          "name": "assertScheduleExistsAfterFailedAcquire",
+          "line": 91
+        },
+        {
+          "name": "exists",
+          "line": 95
+        },
+        {
+          "name": "stillHeld",
+          "line": 111
+        },
+        {
+          "name": "token",
+          "line": 161
+        },
+        {
+          "name": "acquired",
+          "line": 163
+        },
+        {
+          "name": "fresh",
+          "line": 197
+        },
+        {
+          "name": "MAX_EVENT_HISTORY",
+          "line": 231
+        },
+        {
+          "name": "MONITORING_NO_TRAFFIC_GRACE_PERIOD_MS",
+          "line": 232
+        },
+        {
+          "name": "getFirstMonitoredStepIndex",
+          "line": 235
+        },
+        {
+          "name": "shouldResetMonitoringStartDate",
+          "line": 241
+        },
+        {
+          "name": "firstMonitoredStepIndex",
+          "line": 245
+        },
+        {
+          "name": "getRampMonitoringMode",
+          "line": 249
+        },
+        {
+          "name": "getRampAutoUpdatePreference",
+          "line": 259
+        },
+        {
+          "name": "getEffectiveRampAutoUpdateState",
+          "line": 268
+        },
+        {
+          "name": "monitoringMode",
+          "line": 278
+        },
+        {
+          "name": "step",
+          "line": 300
+        },
+        {
+          "name": "syncLinkedSafeRolloutForRampState",
+          "line": 311
+        },
+        {
+          "name": "sr",
+          "line": 317
+        },
+        {
+          "name": "effective",
+          "line": 320
+        },
+        {
+          "name": "currentStepMonitored",
+          "line": 321
+        },
+        {
+          "name": "status",
+          "line": 325
+        },
+        {
+          "name": "appendRampEvent",
+          "line": 370
+        },
+        {
+          "name": "history",
+          "line": 396
+        },
+        {
+          "name": "assertFeatureNotLockedByRamp",
+          "line": 410
+        },
+        {
+          "name": "schedules",
+          "line": 414
+        },
+        {
+          "name": "forceMatchesValueType",
+          "line": 444
+        },
+        {
+          "name": "t",
+          "line": 449
+        },
+        {
+          "name": "remapTemplateActions",
+          "line": 467
+        },
+        {
+          "name": "patch",
+          "line": 475
+        },
+        {
+          "name": "computeEffectivePatch",
+          "line": 488
+        },
+        {
+          "name": "byTarget",
+          "line": 501
+        },
+        {
+          "name": "merge",
+          "line": 503
+        },
+        {
+          "name": "existing",
+          "line": 506
+        },
+        {
+          "name": "lastStepIdx",
+          "line": 537
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/services/constants.ts",
+      "score": 38,
+      "symbols": [
+        {
+          "name": "resolvableValueChanged",
+          "line": 47
+        },
+        {
+          "name": "context",
+          "line": 53
+        },
+        {
+          "name": "features",
+          "line": 59
+        },
+        {
+          "name": "payloadKeys",
+          "line": 64
+        },
+        {
+          "name": "resolvableDependencyClosure",
+          "line": 103
+        },
+        {
+          "name": "referencedBy",
+          "line": 109
+        },
+        {
+          "name": "addEdge",
+          "line": 110
+        },
+        {
+          "name": "list",
+          "line": 112
+        },
+        {
+          "name": "seed",
+          "line": 134
+        },
+        {
+          "name": "affected",
+          "line": 135
+        },
+        {
+          "name": "queue",
+          "line": 136
+        },
+        {
+          "name": "token",
+          "line": 138
+        },
+        {
+          "name": "depToken",
+          "line": 140
+        },
+        {
+          "name": "featuresAffectedByResolvable",
+          "line": 157
+        },
+        {
+          "name": "affected",
+          "line": 163
+        },
+        {
+          "name": "getFeaturesAffectedByResolvable",
+          "line": 174
+        },
+        {
+          "name": "assertNoReferenceCycle",
+          "line": 191
+        },
+        {
+          "name": "all",
+          "line": 198
+        },
+        {
+          "name": "cyclic",
+          "line": 201
+        },
+        {
+          "name": "prefix",
+          "line": 209
+        },
+        {
+          "name": "assertKeyAvailable",
+          "line": 223
+        },
+        {
+          "name": "existing",
+          "line": 228
+        },
+        {
+          "name": "featureRuleValueStrings",
+          "line": 262
+        },
+        {
+          "name": "collect",
+          "line": 264
+        },
+        {
+          "name": "envSettings",
+          "line": 274
+        },
+        {
+          "name": "featureValueStrings",
+          "line": 288
+        },
+        {
+          "name": "refToken",
+          "line": 300
+        },
+        {
+          "name": "featureReferenceTokens",
+          "line": 305
+        },
+        {
+          "name": "tokens",
+          "line": 306
+        },
+        {
+          "name": "baseConfigKey",
+          "line": 312
+        },
+        {
+          "name": "experimentRefsReferencingConstant",
+          "line": 331
+        },
+        {
+          "name": "experimentIds",
+          "line": 335
+        },
+        {
+          "name": "banditIds",
+          "line": 336
+        },
+        {
+          "name": "referencesConstant",
+          "line": 338
+        },
+        {
+          "name": "scan",
+          "line": 355
+        }
+      ]
+    },
+    {
+      "file": "packages/front-end/components/MetricDrilldown/helpers.ts",
+      "score": 37,
+      "symbols": [
+        {
+          "name": "filterRowsForMetricDrilldown",
+          "line": 22
+        },
+        {
+          "name": "mainRow",
+          "line": 31
+        },
+        {
+          "name": "sliceRows",
+          "line": 33
+        },
+        {
+          "name": "term",
+          "line": 39
+        },
+        {
+          "name": "sliceName",
+          "line": 41
+        },
+        {
+          "name": "buildFunnelStepSliceRows",
+          "line": 55
+        },
+        {
+          "name": "stepSliceId",
+          "line": 67
+        },
+        {
+          "name": "MODERATE_EFFECT_THRESHOLD",
+          "line": 131
+        },
+        {
+          "name": "LARGE_EFFECT_THRESHOLD",
+          "line": 132
+        },
+        {
+          "name": "isMoreSevere",
+          "line": 151
+        },
+        {
+          "name": "classifyPair",
+          "line": 161
+        },
+        {
+          "name": "significanceChanged",
+          "line": 174
+        },
+        {
+          "name": "denominator",
+          "line": 177
+        },
+        {
+          "name": "relativeChange",
+          "line": 178
+        },
+        {
+          "name": "signFlipped",
+          "line": 180
+        },
+        {
+          "name": "computeSupplementalAdjustedPValues",
+          "line": 201
+        },
+        {
+          "name": "metricIds",
+          "line": 212
+        },
+        {
+          "name": "variationCount",
+          "line": 213
+        },
+        {
+          "name": "stats",
+          "line": 228
+        },
+        {
+          "name": "supplementalPValue",
+          "line": 230
+        },
+        {
+          "name": "map",
+          "line": 255
+        },
+        {
+          "name": "adjusted",
+          "line": 258
+        },
+        {
+          "name": "classifyAdjustmentImpact",
+          "line": 273
+        },
+        {
+          "name": "baseline",
+          "line": 301
+        },
+        {
+          "name": "altAdjustedPValues",
+          "line": 304
+        },
+        {
+          "name": "supplemental",
+          "line": 319
+        },
+        {
+          "name": "baselineSupplemental",
+          "line": 328
+        },
+        {
+          "name": "commonArgs",
+          "line": 333
+        },
+        {
+          "name": "altAdjusted",
+          "line": 343
+        },
+        {
+          "name": "primaryIsCorrected",
+          "line": 347
+        },
+        {
+          "name": "classification",
+          "line": 380
+        },
+        {
+          "name": "getAdjustmentImpactSummary",
+          "line": 400
+        },
+        {
+          "name": "classification",
+          "line": 416
+        }
+      ]
+    },
+    {
+      "file": "packages/shared/src/snapshot-analysis-chunks.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "INDEX_COLUMNS",
+          "line": 14
+        },
+        {
+          "name": "buildAnalysisKey",
+          "line": 17
+        },
+        {
+          "name": "encodeSnapshotAnalysisChunks",
+          "line": 64
+        },
+        {
+          "name": "seenKeys",
+          "line": 71
+        },
+        {
+          "name": "allMetricIds",
+          "line": 94
+        },
+        {
+          "name": "orderSet",
+          "line": 106
+        },
+        {
+          "name": "metricChunks",
+          "line": 116
+        },
+        {
+          "name": "perAnalysis",
+          "line": 123
+        },
+        {
+          "name": "encodePerAnalysis",
+          "line": 143
+        },
+        {
+          "name": "valueColumns",
+          "line": 149
+        },
+        {
+          "name": "metric",
+          "line": 154
+        },
+        {
+          "name": "decodeSnapshotAnalysisChunks",
+          "line": 229
+        },
+        {
+          "name": "analysisMap",
+          "line": 243
+        },
+        {
+          "name": "dims",
+          "line": 248
+        },
+        {
+          "name": "variations",
+          "line": 250
+        },
+        {
+          "name": "valueColumns",
+          "line": 273
+        },
+        {
+          "name": "dims",
+          "line": 280
+        },
+        {
+          "name": "dimName",
+          "line": 283
+        },
+        {
+          "name": "vi",
+          "line": 284
+        },
+        {
+          "name": "colValues",
+          "line": 290
+        },
+        {
+          "name": "val",
+          "line": 292
+        },
+        {
+          "name": "dim",
+          "line": 300
+        },
+        {
+          "name": "dims",
+          "line": 312
+        },
+        {
+          "name": "maxVi",
+          "line": 317
+        },
+        {
+          "name": "varData",
+          "line": 320
+        },
+        {
+          "name": "migrateLegacySnapshotAnalysisChunkData",
+          "line": 378
+        },
+        {
+          "name": "data",
+          "line": 381
+        },
+        {
+          "name": "topLevelNumRows",
+          "line": 382
+        },
+        {
+          "name": "dataHasFlatColumns",
+          "line": 384
+        },
+        {
+          "name": "numRows",
+          "line": 393
+        },
+        {
+          "name": "aColumn",
+          "line": 394
+        },
+        {
+          "name": "rowsByPosition",
+          "line": 402
+        },
+        {
+          "name": "position",
+          "line": 404
+        },
+        {
+          "name": "POSITION_KEY_PATTERN",
+          "line": 463
+        },
+        {
+          "name": "analysisKey",
+          "line": 487
+        }
+      ]
+    },
+    {
+      "file": "packages/front-end/components/HomePage/ExperimentImpact/index.tsx",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "NoExperimentsForImpactBanner",
+          "line": 33
+        },
+        {
+          "name": "formatImpact",
+          "line": 44
+        },
+        {
+          "name": "scaleImpactAndSetMissingExperiments",
+          "line": 100
+        },
+        {
+          "name": "exps",
+          "line": 128
+        },
+        {
+          "name": "experimentEndDate",
+          "line": 131
+        },
+        {
+          "name": "filterStartDate",
+          "line": 134
+        },
+        {
+          "name": "filterEndDate",
+          "line": 135
+        },
+        {
+          "name": "endedAfterStart",
+          "line": 137
+        },
+        {
+          "name": "endedBeforeEnd",
+          "line": 138
+        },
+        {
+          "name": "isRunningAndEndInFuture",
+          "line": 139
+        },
+        {
+          "name": "fitsDateFilter",
+          "line": 143
+        },
+        {
+          "name": "hasMetric",
+          "line": 148
+        },
+        {
+          "name": "inSelectedProject",
+          "line": 153
+        },
+        {
+          "name": "experimentImpacts",
+          "line": 170
+        },
+        {
+          "name": "s",
+          "line": 180
+        },
+        {
+          "name": "summary",
+          "line": 182
+        },
+        {
+          "name": "defaultAnalysis",
+          "line": 196
+        },
+        {
+          "name": "defaultSettings",
+          "line": 197
+        },
+        {
+          "name": "scaledAnalysis",
+          "line": 198
+        },
+        {
+          "name": "res",
+          "line": 210
+        },
+        {
+          "name": "se",
+          "line": 213
+        },
+        {
+          "name": "impact",
+          "line": 214
+        },
+        {
+          "name": "totalUnits",
+          "line": 223
+        },
+        {
+          "name": "overallSE",
+          "line": 244
+        },
+        {
+          "name": "adjustment",
+          "line": 245
+        },
+        {
+          "name": "applyAdjustment",
+          "line": 247
+        },
+        {
+          "name": "adjustedImpact",
+          "line": 271
+        },
+        {
+          "name": "ExperimentImpact",
+          "line": 333
+        },
+        {
+          "name": "experiments",
+          "line": 338
+        },
+        {
+          "name": "settings",
+          "line": 342
+        },
+        {
+          "name": "displayCurrency",
+          "line": 343
+        },
+        {
+          "name": "experimentIds",
+          "line": 350
+        },
+        {
+          "name": "now",
+          "line": 352
+        },
+        {
+          "name": "defaultStartDate",
+          "line": 353
+        },
+        {
+          "name": "form",
+          "line": 357
+        }
+      ]
+    },
+    {
+      "file": "packages/front-end/services/rule-conflicts.tsx",
+      "score": 31,
+      "symbols": [
+        {
+          "name": "hardConflictKey",
+          "line": 95
+        },
+        {
+          "name": "parseAttrConstraint",
+          "line": 124
+        },
+        {
+          "name": "ops",
+          "line": 132
+        },
+        {
+          "name": "keys",
+          "line": 133
+        },
+        {
+          "name": "has",
+          "line": 135
+        },
+        {
+          "name": "insensitive",
+          "line": 143
+        },
+        {
+          "name": "values",
+          "line": 144
+        },
+        {
+          "name": "str",
+          "line": 148
+        },
+        {
+          "name": "insensitive",
+          "line": 156
+        },
+        {
+          "name": "values",
+          "line": 157
+        },
+        {
+          "name": "str",
+          "line": 160
+        },
+        {
+          "name": "str",
+          "line": 164
+        },
+        {
+          "name": "lo",
+          "line": 176
+        },
+        {
+          "name": "hi",
+          "line": 181
+        },
+        {
+          "name": "opaque",
+          "line": 232
+        },
+        {
+          "name": "and",
+          "line": 233
+        },
+        {
+          "name": "or",
+          "line": 234
+        },
+        {
+          "name": "not",
+          "line": 235
+        },
+        {
+          "name": "negateAtom",
+          "line": 239
+        },
+        {
+          "name": "simplify",
+          "line": 269
+        },
+        {
+          "name": "kids",
+          "line": 272
+        },
+        {
+          "name": "kids",
+          "line": 278
+        },
+        {
+          "name": "c",
+          "line": 284
+        },
+        {
+          "name": "negated",
+          "line": 286
+        },
+        {
+          "name": "collectAttrs",
+          "line": 300
+        },
+        {
+          "name": "groupOperatorExpr",
+          "line": 321
+        },
+        {
+          "name": "group",
+          "line": 327
+        },
+        {
+          "name": "attrToExpr",
+          "line": 341
+        },
+        {
+          "name": "ops",
+          "line": 347
+        },
+        {
+          "name": "keys",
+          "line": 348
+        },
+        {
+          "name": "atom",
+          "line": 361
+        },
+        {
+          "name": "conditionToExpr",
+          "line": 366
+        },
+        {
+          "name": "savedGroupToExpr",
+          "line": 394
+        },
+        {
+          "name": "savedGroupTargetingToExpr",
+          "line": 430
+        },
+        {
+          "name": "exprs",
+          "line": 434
+        }
+      ]
+    },
+    {
+      "file": "packages/front-end/components/PowerCalculation/power-calculation-utils.ts",
+      "score": 28,
+      "symbols": [
+        {
+          "name": "setMetricDataFromExperiment",
+          "line": 13
+        },
+        {
+          "name": "phase",
+          "line": 28
+        },
+        {
+          "name": "metrics",
+          "line": 51
+        },
+        {
+          "name": "metricIds",
+          "line": 52
+        },
+        {
+          "name": "analysis",
+          "line": 54
+        },
+        {
+          "name": "units",
+          "line": 57
+        },
+        {
+          "name": "experimentPhase",
+          "line": 63
+        },
+        {
+          "name": "phaseLength",
+          "line": 64
+        },
+        {
+          "name": "lengthWeeks",
+          "line": 68
+        },
+        {
+          "name": "mean",
+          "line": 76
+        },
+        {
+          "name": "standardDeviation",
+          "line": 77
+        },
+        {
+          "name": "usersPerWeek",
+          "line": 94
+        },
+        {
+          "name": "setMetricDataFromPopulationData",
+          "line": 108
+        },
+        {
+          "name": "metrics",
+          "line": 115
+        },
+        {
+          "name": "queryMetric",
+          "line": 119
+        },
+        {
+          "name": "mdata",
+          "line": 130
+        },
+        {
+          "name": "isRatioMetric",
+          "line": 132
+        },
+        {
+          "name": "mean",
+          "line": 138
+        },
+        {
+          "name": "variance",
+          "line": 139
+        },
+        {
+          "name": "standardDeviation",
+          "line": 148
+        },
+        {
+          "name": "mean",
+          "line": 158
+        },
+        {
+          "name": "mean",
+          "line": 166
+        },
+        {
+          "name": "variance",
+          "line": 167
+        },
+        {
+          "name": "standardDeviation",
+          "line": 172
+        },
+        {
+          "name": "lookbackWeeks",
+          "line": 179
+        },
+        {
+          "name": "usersPerWeek",
+          "line": 181
+        },
+        {
+          "name": "postPopulationData",
+          "line": 195
+        },
+        {
+          "name": "metricValuesData",
+          "line": 204
+        },
+        {
+          "name": "sourceType",
+          "line": 205
+        },
+        {
+          "name": "metricIds",
+          "line": 206
+        },
+        {
+          "name": "userIdType",
+          "line": 207
+        },
+        {
+          "name": "datasourceId",
+          "line": 208
+        },
+        {
+          "name": "sourceId",
+          "line": 209
+        },
+        {
+          "name": "res",
+          "line": 210
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/models/FeatureModel.ts",
+      "score": 28,
+      "symbols": [
+        {
+          "name": "featureSchema",
+          "line": 214
+        },
+        {
+          "name": "withKeptMonitoringIdentifier",
+          "line": 264
+        },
+        {
+          "name": "FeatureModel",
+          "line": 277
+        },
+        {
+          "name": "migrateRawFeatureToV2",
+          "line": 290
+        },
+        {
+          "name": "orgEnvs",
+          "line": 296
+        },
+        {
+          "name": "hasEnvSettings",
+          "line": 299
+        },
+        {
+          "name": "legacyRevisionVersion",
+          "line": 320
+        },
+        {
+          "name": "envSettings",
+          "line": 330
+        },
+        {
+          "name": "topLevelRules",
+          "line": 348
+        },
+        {
+          "name": "topLevelRulesAreV2Shaped",
+          "line": 350
+        },
+        {
+          "name": "shouldBackfillRulesFromTopLevel",
+          "line": 363
+        },
+        {
+          "name": "shouldBackfillEnabled",
+          "line": 365
+        },
+        {
+          "name": "existing",
+          "line": 369
+        },
+        {
+          "name": "settings",
+          "line": 377
+        },
+        {
+          "name": "inheritedSettings",
+          "line": 408
+        },
+        {
+          "name": "upgraded",
+          "line": 414
+        },
+        {
+          "name": "applicableEnvs",
+          "line": 427
+        },
+        {
+          "name": "v2",
+          "line": 428
+        },
+        {
+          "name": "v2",
+          "line": 448
+        },
+        {
+          "name": "originalEnvSettings",
+          "line": 449
+        },
+        {
+          "name": "inheritedEnvSettings",
+          "line": 450
+        },
+        {
+          "name": "childrenByAncestor",
+          "line": 454
+        },
+        {
+          "name": "upgraded",
+          "line": 459
+        },
+        {
+          "name": "toInterface",
+          "line": 490
+        },
+        {
+          "name": "raw",
+          "line": 494
+        },
+        {
+          "name": "inputRules",
+          "line": 535
+        },
+        {
+          "name": "filtered",
+          "line": 536
+        },
+        {
+          "name": "normalized",
+          "line": 539
+        },
+        {
+          "name": "changed",
+          "line": 548
+        },
+        {
+          "name": "getAllFeatures",
+          "line": 557
+        },
+        {
+          "name": "getAllFeatureIds",
+          "line": 608
+        },
+        {
+          "name": "docs",
+          "line": 632
+        },
+        {
+          "name": "getAllFeaturesWithoutEditorFields",
+          "line": 661
+        },
+        {
+          "name": "getAllFeaturesForGraph",
+          "line": 672
+        },
+        {
+          "name": "getFeaturesWithPrerequisitesOn",
+          "line": 684
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/revisions/bulkPublish/bulkPublish.ts",
+      "score": 27,
+      "symbols": [
+        {
+          "name": "MAX_BULK_PUBLISH_ITEMS",
+          "line": 43
+        },
+        {
+          "name": "tag",
+          "line": 45
+        },
+        {
+          "name": "displayId",
+          "line": 54
+        },
+        {
+          "name": "staleConflictError",
+          "line": 58
+        },
+        {
+          "name": "itemGate",
+          "line": 64
+        },
+        {
+          "name": "planBulkPublish",
+          "line": 78
+        },
+        {
+          "name": "seen",
+          "line": 91
+        },
+        {
+          "name": "key",
+          "line": 93
+        },
+        {
+          "name": "blockLoad",
+          "line": 106
+        },
+        {
+          "name": "adapter",
+          "line": 123
+        },
+        {
+          "name": "entity",
+          "line": 124
+        },
+        {
+          "name": "revision",
+          "line": 135
+        },
+        {
+          "name": "overlayContext",
+          "line": 218
+        },
+        {
+          "name": "applyOverlaysExcluding",
+          "line": 221
+        },
+        {
+          "name": "others",
+          "line": 222
+        },
+        {
+          "name": "orgWideBypass",
+          "line": 237
+        },
+        {
+          "name": "gates",
+          "line": 243
+        },
+        {
+          "name": "bypassPermission",
+          "line": 262
+        },
+        {
+          "name": "disposition",
+          "line": 281
+        },
+        {
+          "name": "restoreOrder",
+          "line": 321
+        },
+        {
+          "name": "byEntity",
+          "line": 324
+        },
+        {
+          "name": "cascadeParents",
+          "line": 325
+        },
+        {
+          "name": "target",
+          "line": 328
+        },
+        {
+          "name": "parents",
+          "line": 330
+        },
+        {
+          "name": "done",
+          "line": 338
+        },
+        {
+          "name": "visiting",
+          "line": 339
+        },
+        {
+          "name": "visit",
+          "line": 340
+        },
+        {
+          "name": "commitBulkPublish",
+          "line": 354
+        },
+        {
+          "name": "bulkPublishId",
+          "line": 366
+        },
+        {
+          "name": "abort",
+          "line": 387
+        },
+        {
+          "name": "releaseFailed",
+          "line": 388
+        },
+        {
+          "name": "adapter",
+          "line": 410
+        },
+        {
+          "name": "current",
+          "line": 411
+        },
+        {
+          "name": "currentDate",
+          "line": 412
+        },
+        {
+          "name": "adapter",
+          "line": 431
+        }
+      ]
+    },
+    {
+      "file": "packages/back-end/src/services/features.ts",
+      "score": 27,
+      "symbols": [
+        {
+          "name": "generateFeaturesPayload",
+          "line": 241
+        },
+        {
+          "name": "newFeatures",
+          "line": 304
+        },
+        {
+          "name": "constantMap",
+          "line": 314
+        },
+        {
+          "name": "reportedCycles",
+          "line": 322
+        },
+        {
+          "name": "def",
+          "line": 323
+        },
+        {
+          "name": "buildHoldoutsMapForProjects",
+          "line": 373
+        },
+        {
+          "name": "result",
+          "line": 383
+        },
+        {
+          "name": "allowed",
+          "line": 389
+        },
+        {
+          "name": "generateHoldoutsPayload",
+          "line": 399
+        },
+        {
+          "name": "savedGroupStrategy",
+          "line": 418
+        },
+        {
+          "name": "exp",
+          "line": 427
+        },
+        {
+          "name": "holdout",
+          "line": 428
+        },
+        {
+          "name": "mainPhase",
+          "line": 431
+        },
+        {
+          "name": "condition",
+          "line": 447
+        },
+        {
+          "name": "generateInterleavingsPayload",
+          "line": 468
+        },
+        {
+          "name": "id",
+          "line": 513
+        },
+        {
+          "name": "condition",
+          "line": 523
+        },
+        {
+          "name": "metadata",
+          "line": 548
+        },
+        {
+          "name": "generateAutoExperimentsPayload",
+          "line": 574
+        },
+        {
+          "name": "savedGroupStrategy",
+          "line": 613
+        },
+        {
+          "name": "savedGroups",
+          "line": 621
+        },
+        {
+          "name": "isValidSDKExperiment",
+          "line": 622
+        },
+        {
+          "name": "newVisualExperiments",
+          "line": 626
+        },
+        {
+          "name": "newURLRedirectExperiments",
+          "line": 634
+        },
+        {
+          "name": "sortedAutoExperiments",
+          "line": 642
+        },
+        {
+          "name": "variations",
+          "line": 654
+        },
+        {
+          "name": "hasForcedVariation",
+          "line": 656
+        },
+        {
+          "name": "forcedVariation",
+          "line": 659
+        },
+        {
+          "name": "condition",
+          "line": 663
+        },
+        {
+          "name": "prerequisites",
+          "line": 669
+        },
+        {
+          "name": "condition",
+          "line": 671
+        },
+        {
+          "name": "implementationId",
+          "line": 692
+        },
+        {
+          "name": "match",
+          "line": 706
+        },
+        {
+          "name": "match",
+          "line": 714
+        },
+        {
+          "name": "cbSdkExperiments",
+          "line": 792
+        }
+      ]
+    }
+  ]
+}

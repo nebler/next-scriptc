@@ -1,0 +1,2911 @@
+{
+  "repo": "calcom/cal.com",
+  "url": "https://github.com/calcom/cal.com",
+  "sha": "81ce067c1d0e16b21c39c2de98b9a43a92562cd1",
+  "domain": "scheduling",
+  "frameworkHypothesis": "Next",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/app-store/stripepayment/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/app-store/hitpay/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/embeds/embed-snippet/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/embeds/embed-react/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/embeds/embed-core/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "apps/api/v2/src/platform/LICENSE",
+      "declaration": "MIT"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "jest-diff": "29.7.0"
+      }
+    },
+    {
+      "file": "example-apps/credential-sync/package.json",
+      "license": null,
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/ui/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "react-colorful": "5.6.1"
+      }
+    },
+    {
+      "file": "packages/types/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store-cli/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/config/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/trpc/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/tsconfig/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/emails/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "rrule": "2.7.1"
+      }
+    },
+    {
+      "file": "packages/platform/atoms/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/types/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/constants/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/enums/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/libraries/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/utils/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/platform/examples/base/package.json",
+      "license": null,
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/debugging/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/features/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/features/auth/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/prisma/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/coss-ui/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/attio/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/googlevideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/mock-payment-app/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/weather_in_your_calendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/riverside/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/zohocalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/caldavcalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/ping/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/demodesk/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/exchange2016calendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/databuddy/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/discord/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/basecamp3/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/plausible/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/zoomvideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/btcpayserver/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/umami/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/feishucalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/sirius_video/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/sendgrid/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/shimmervideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/twipla/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/exchangecalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/zapier/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/huddle01video/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/jitsivideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/stripepayment/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/vital/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/famulor/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/office365video/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/linear/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/office365calendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/sylapsvideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/roam/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/salesroom/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/intercom/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/jelly/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/giphy/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/tandemvideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/alby/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/horizon-workrooms/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/dub/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/hubspot/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/metapixel/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/ga4/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/mirotalk/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/zoho-bigin/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/campfire/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/webex/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/pipedrive-crm/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/make/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/paypal/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/telegram/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/closecom/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/fathom/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/facetime/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/whereby/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/templates/booking-pages-tag/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/templates/basic/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/templates/event-type-location-video-static/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/templates/general-app-settings/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/templates/event-type-app-card/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/eightxeight/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/salesforce/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/dialpad/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/posthog/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/googlecalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/larkcalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/dailyvideo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/skype/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/gtm/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/wipemycalother/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/applecalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/qr_code/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/nextcloudtalk/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/exchange2013calendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/signal/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/lyra/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/hitpay/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/whatsapp/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/insihts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/matomo/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/ics-feedcalendar/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/zohocrm/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/app-store/element-call/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/testing/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/lib/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "rrule": "2.7.1",
+        "sharp": "0.33.5"
+      }
+    },
+    {
+      "file": "packages/dayjs/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/kysely/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/embeds/embed-snippet/package.json",
+      "license": "SEE LICENSE IN LICENSE",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/embeds/embed-react/package.json",
+      "license": "SEE LICENSE IN LICENSE",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/embeds/embed-core/package.json",
+      "license": "SEE LICENSE IN LICENSE",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/i18n/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/web/package.json",
+      "license": null,
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {
+        "rrule": "2.7.1",
+        "sharp": "0.33.5"
+      }
+    },
+    {
+      "file": "apps/docs/package.json",
+      "license": null,
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/api/package.json",
+      "license": "ISC",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/api/v2/package.json",
+      "license": "UNLICENSED",
+      "frameworks": [
+        "@nestjs/core"
+      ],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/trpc/server/routers/viewer/slots/util.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "log",
+          "line": 78
+        },
+        {
+          "name": "DEFAULT_SLOTS_CACHE_TTL",
+          "line": 79
+        },
+        {
+          "name": "withSlotsCache",
+          "line": 104
+        },
+        {
+          "name": "cacheKey",
+          "line": 109
+        },
+        {
+          "name": "startTime",
+          "line": 112
+        },
+        {
+          "name": "endTime",
+          "line": 118
+        },
+        {
+          "name": "result",
+          "line": 133
+        },
+        {
+          "name": "ttl",
+          "line": 134
+        },
+        {
+          "name": "currentTimeInUtc",
+          "line": 155
+        },
+        {
+          "name": "slotsRepo",
+          "line": 156
+        },
+        {
+          "name": "unexpiredSelectedSlots",
+          "line": 158
+        },
+        {
+          "name": "slotsSelectedByOtherUsers",
+          "line": 164
+        },
+        {
+          "name": "reservedSlots",
+          "line": 168
+        },
+        {
+          "name": "_cleanupExpiredSlots",
+          "line": 172
+        },
+        {
+          "name": "dynamicEventType",
+          "line": 187
+        },
+        {
+          "name": "userRepo",
+          "line": 189
+        },
+        {
+          "name": "usersForDynamicEventType",
+          "line": 190
+        },
+        {
+          "name": "usersWithOldSelectedCalendars",
+          "line": 199
+        },
+        {
+          "name": "isDynamicAllowed",
+          "line": 201
+        },
+        {
+          "name": "occupiedSeatsMap",
+          "line": 218
+        },
+        {
+          "name": "dateKey",
+          "line": 221
+        },
+        {
+          "name": "eventTypeId",
+          "line": 245
+        },
+        {
+          "name": "eventTypeRepo",
+          "line": 258
+        },
+        {
+          "name": "inputStartTime",
+          "line": 290
+        },
+        {
+          "name": "inputEndTime",
+          "line": 291
+        },
+        {
+          "name": "formatter",
+          "line": 294
+        },
+        {
+          "name": "allowedDates",
+          "line": 301
+        },
+        {
+          "name": "filtered",
+          "line": 306
+        },
+        {
+          "name": "availableDatesSet",
+          "line": 320
+        },
+        {
+          "name": "firstDate",
+          "line": 321
+        },
+        {
+          "name": "lastDate",
+          "line": 322
+        },
+        {
+          "name": "userRepo",
+          "line": 347
+        },
+        {
+          "name": "userId",
+          "line": 367
+        },
+        {
+          "name": "eventTypeRepo",
+          "line": 371
+        },
+        {
+          "name": "eventType",
+          "line": 372
+        }
+      ]
+    },
+    {
+      "file": "packages/emails/email-manager.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "sendEmail",
+          "line": 50
+        },
+        {
+          "name": "email",
+          "line": 53
+        },
+        {
+          "name": "fetchOrganizationEmailSettings",
+          "line": 62
+        },
+        {
+          "name": "shouldSkipAttendeeEmailWithSettings",
+          "line": 67
+        },
+        {
+          "name": "eventTypeDisableHostEmail",
+          "line": 75
+        },
+        {
+          "name": "_sendScheduledEmailsAndSMS",
+          "line": 79
+        },
+        {
+          "name": "formattedCalEvent",
+          "line": 86
+        },
+        {
+          "name": "organizationSettings",
+          "line": 88
+        },
+        {
+          "name": "successfullyScheduledSms",
+          "line": 126
+        },
+        {
+          "name": "sendScheduledEmailsAndSMS",
+          "line": 130
+        },
+        {
+          "name": "sendReassignedScheduledEmailsAndSMS",
+          "line": 137
+        },
+        {
+          "name": "formattedCalEvent",
+          "line": 149
+        },
+        {
+          "name": "eventScheduledSMS",
+          "line": 151
+        },
+        {
+          "name": "sendRoundRobinRescheduledEmailsAndSMS",
+          "line": 165
+        },
+        {
+          "name": "calendarEvent",
+          "line": 170
+        },
+        {
+          "name": "successfullyReScheduledSMS",
+          "line": 172
+        },
+        {
+          "name": "organizationSettings",
+          "line": 173
+        },
+        {
+          "name": "isAttendee",
+          "line": 176
+        },
+        {
+          "name": "isTeamMember",
+          "line": 177
+        },
+        {
+          "name": "sendReassignedUpdatedEmailsAndSMS",
+          "line": 212
+        },
+        {
+          "name": "organizationSettings",
+          "line": 221
+        },
+        {
+          "name": "emailsToSend",
+          "line": 225
+        },
+        {
+          "name": "sendRoundRobinCancelledEmailsAndSMS",
+          "line": 232
+        },
+        {
+          "name": "calendarEvent",
+          "line": 239
+        },
+        {
+          "name": "successfullyReScheduledSMS",
+          "line": 241
+        },
+        {
+          "name": "sendReassignedEmailsAndSMS",
+          "line": 257
+        },
+        {
+          "name": "calendarEvent",
+          "line": 265
+        },
+        {
+          "name": "successfullyReScheduledSMS",
+          "line": 267
+        },
+        {
+          "name": "_sendRescheduledEmailsAndSMS",
+          "line": 283
+        },
+        {
+          "name": "calendarEvent",
+          "line": 287
+        },
+        {
+          "name": "organizationSettings",
+          "line": 289
+        },
+        {
+          "name": "successfullyReScheduledSms",
+          "line": 321
+        },
+        {
+          "name": "sendRescheduledEmailsAndSMS",
+          "line": 324
+        },
+        {
+          "name": "sendRescheduledSeatEmailAndSMS",
+          "line": 329
+        },
+        {
+          "name": "calendarEvent",
+          "line": 334
+        }
+      ]
+    },
+    {
+      "file": "packages/app-store/dailyvideo/lib/scripts/deleteRecordings.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "getAllRecordingsOlderThan6Months",
+          "line": 29
+        },
+        {
+          "name": "apiKey",
+          "line": 30
+        },
+        {
+          "name": "baseUrl",
+          "line": 37
+        },
+        {
+          "name": "limit",
+          "line": 39
+        },
+        {
+          "name": "cutoffDate",
+          "line": 42
+        },
+        {
+          "name": "cutoffTimestamp",
+          "line": 45
+        },
+        {
+          "name": "startTime",
+          "line": 55
+        },
+        {
+          "name": "elapsedTime",
+          "line": 60
+        },
+        {
+          "name": "expectedMinTime",
+          "line": 61
+        },
+        {
+          "name": "delayTime",
+          "line": 64
+        },
+        {
+          "name": "url",
+          "line": 69
+        },
+        {
+          "name": "maxRetries",
+          "line": 77
+        },
+        {
+          "name": "backoffDelay",
+          "line": 101
+        },
+        {
+          "name": "backoffDelay",
+          "line": 118
+        },
+        {
+          "name": "data",
+          "line": 134
+        },
+        {
+          "name": "filteredRecordings",
+          "line": 142
+        },
+        {
+          "name": "saveRecordingsToJson",
+          "line": 172
+        },
+        {
+          "name": "fs",
+          "line": 173
+        },
+        {
+          "name": "path",
+          "line": 174
+        },
+        {
+          "name": "simplifiedRecordings",
+          "line": 176
+        },
+        {
+          "name": "outputPath",
+          "line": 190
+        },
+        {
+          "name": "main",
+          "line": 200
+        },
+        {
+          "name": "recordings",
+          "line": 203
+        },
+        {
+          "name": "totalDurationSeconds",
+          "line": 205
+        },
+        {
+          "name": "totalHours",
+          "line": 210
+        },
+        {
+          "name": "remainingMinutes",
+          "line": 211
+        },
+        {
+          "name": "remainingSeconds",
+          "line": 212
+        },
+        {
+          "name": "lastTen",
+          "line": 223
+        },
+        {
+          "name": "startTime",
+          "line": 225
+        },
+        {
+          "name": "durationMinutes",
+          "line": 226
+        },
+        {
+          "name": "durationSeconds",
+          "line": 227
+        },
+        {
+          "name": "deleteRecording",
+          "line": 243
+        },
+        {
+          "name": "url",
+          "line": 244
+        },
+        {
+          "name": "maxRetries",
+          "line": 245
+        },
+        {
+          "name": "response",
+          "line": 250
+        }
+      ]
+    },
+    {
+      "file": "scripts/seed.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "hashAPIKey",
+          "line": 22
+        },
+        {
+          "name": "createTeamAndAddUsers",
+          "line": 26
+        },
+        {
+          "name": "checkUnpublishedTeam",
+          "line": 30
+        },
+        {
+          "name": "createTeam",
+          "line": 40
+        },
+        {
+          "name": "requestedSlug",
+          "line": 42
+        },
+        {
+          "name": "unpublishedTeam",
+          "line": 44
+        },
+        {
+          "name": "team",
+          "line": 66
+        },
+        {
+          "name": "isCollective",
+          "line": 91
+        },
+        {
+          "name": "createOrganizationAndAddMembersAndTeams",
+          "line": 113
+        },
+        {
+          "name": "existingTeam",
+          "line": 143
+        },
+        {
+          "name": "batchSize",
+          "line": 168
+        },
+        {
+          "name": "batch",
+          "line": 170
+        },
+        {
+          "name": "batchResults",
+          "line": 172
+        },
+        {
+          "name": "newUser",
+          "line": 175
+        },
+        {
+          "name": "existingUser",
+          "line": 230
+        },
+        {
+          "name": "orgInDb",
+          "line": 277
+        },
+        {
+          "name": "profileBatchSize",
+          "line": 296
+        },
+        {
+          "name": "batch",
+          "line": 298
+        },
+        {
+          "name": "membershipBatchSize",
+          "line": 319
+        },
+        {
+          "name": "batch",
+          "line": 321
+        },
+        {
+          "name": "createdProfiles",
+          "line": 333
+        },
+        {
+          "name": "orgMembersInDBWithProfileId",
+          "line": 344
+        },
+        {
+          "name": "team",
+          "line": 398
+        },
+        {
+          "name": "ownerForEvent",
+          "line": 439
+        },
+        {
+          "name": "team",
+          "line": 480
+        },
+        {
+          "name": "seedApiKey",
+          "line": 497
+        },
+        {
+          "name": "hashedKey",
+          "line": 498
+        },
+        {
+          "name": "existingKey",
+          "line": 500
+        },
+        {
+          "name": "apiKeyPrefix",
+          "line": 518
+        },
+        {
+          "name": "ensureAcmeOwnerHasApiKeySeeded",
+          "line": 522
+        },
+        {
+          "name": "owner1AcmeUser",
+          "line": 523
+        },
+        {
+          "name": "seedPerHostLocationsInAcmeOrg",
+          "line": 531
+        },
+        {
+          "name": "acmeOrg",
+          "line": 532
+        },
+        {
+          "name": "acmeTeam",
+          "line": 541
+        },
+        {
+          "name": "existingEvent",
+          "line": 550
+        }
+      ]
+    },
+    {
+      "file": "packages/features/schedules/lib/date-ranges.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "getAdjustedTimezone",
+          "line": 16
+        },
+        {
+          "name": "processWorkingHours",
+          "line": 32
+        },
+        {
+          "name": "utcDateTo",
+          "line": 48
+        },
+        {
+          "name": "fromOffset",
+          "line": 52
+        },
+        {
+          "name": "adjustedTimezone",
+          "line": 54
+        },
+        {
+          "name": "offset",
+          "line": 56
+        },
+        {
+          "name": "dateInTz",
+          "line": 59
+        },
+        {
+          "name": "offsetBeginningOfDay",
+          "line": 70
+        },
+        {
+          "name": "offsetDiff",
+          "line": 71
+        },
+        {
+          "name": "startResult",
+          "line": 76
+        },
+        {
+          "name": "endTimeKey",
+          "line": 90
+        },
+        {
+          "name": "endTime",
+          "line": 96
+        },
+        {
+          "name": "keysWithSameEndTime",
+          "line": 105
+        },
+        {
+          "name": "existingRange",
+          "line": 109
+        },
+        {
+          "name": "oldKey",
+          "line": 130
+        },
+        {
+          "name": "newKey",
+          "line": 131
+        },
+        {
+          "name": "oldEndTime",
+          "line": 139
+        },
+        {
+          "name": "oldKeys",
+          "line": 140
+        },
+        {
+          "name": "filteredKeys",
+          "line": 141
+        },
+        {
+          "name": "newKey",
+          "line": 158
+        },
+        {
+          "name": "processDateOverride",
+          "line": 175
+        },
+        {
+          "name": "overrideDate",
+          "line": 186
+        },
+        {
+          "name": "adjustedTimezone",
+          "line": 188
+        },
+        {
+          "name": "itemDateStartOfDay",
+          "line": 190
+        },
+        {
+          "name": "startDate",
+          "line": 191
+        },
+        {
+          "name": "endTimeHours",
+          "line": 198
+        },
+        {
+          "name": "endTimeMinutes",
+          "line": 199
+        },
+        {
+          "name": "processOOO",
+          "line": 218
+        },
+        {
+          "name": "OOOdate",
+          "line": 219
+        },
+        {
+          "name": "buildDateRanges",
+          "line": 226
+        },
+        {
+          "name": "dateFromOrganizerTZ",
+          "line": 241
+        },
+        {
+          "name": "groupedWorkingHours",
+          "line": 243
+        },
+        {
+          "name": "groupedOOO",
+          "line": 263
+        },
+        {
+          "name": "groupedDateOverrides",
+          "line": 269
+        },
+        {
+          "name": "itemDateAsUtc",
+          "line": 276
+        }
+      ]
+    },
+    {
+      "file": "scripts/seed-utils.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "createUserAndEventType",
+          "line": 12
+        },
+        {
+          "name": "userData",
+          "line": 41
+        },
+        {
+          "name": "theUser",
+          "line": 61
+        },
+        {
+          "name": "eventType",
+          "line": 110
+        },
+        {
+          "name": "createOAuthClientForUser",
+          "line": 199
+        },
+        {
+          "name": "createTeamAndAddUsers",
+          "line": 211
+        },
+        {
+          "name": "checkUnpublishedTeam",
+          "line": 215
+        },
+        {
+          "name": "createTeam",
+          "line": 225
+        },
+        {
+          "name": "requestedSlug",
+          "line": 227
+        },
+        {
+          "name": "unpublishedTeam",
+          "line": 229
+        },
+        {
+          "name": "team",
+          "line": 251
+        },
+        {
+          "name": "seedAttributes",
+          "line": 290
+        },
+        {
+          "name": "mockAttributes",
+          "line": 291
+        },
+        {
+          "name": "existingAttributes",
+          "line": 317
+        },
+        {
+          "name": "memberships",
+          "line": 332
+        },
+        {
+          "name": "attribute",
+          "line": 347
+        },
+        {
+          "name": "mockText",
+          "line": 381
+        },
+        {
+          "name": "mockNumber",
+          "line": 399
+        },
+        {
+          "name": "randomOption",
+          "line": 417
+        },
+        {
+          "name": "numOptions",
+          "line": 426
+        },
+        {
+          "name": "shuffledOptions",
+          "line": 427
+        },
+        {
+          "name": "selectedOptions",
+          "line": 428
+        }
+      ]
+    },
+    {
+      "file": "packages/features/bookings/lib/service/RegularBookingService.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "translator",
+          "line": 117
+        },
+        {
+          "name": "getICalSequence",
+          "line": 129
+        },
+        {
+          "name": "buildDryRunBooking",
+          "line": 148
+        },
+        {
+          "name": "sanitizedOrganizerUser",
+          "line": 177
+        },
+        {
+          "name": "booking",
+          "line": 186
+        },
+        {
+          "name": "troubleshooterData",
+          "line": 237
+        },
+        {
+          "name": "buildDryRunEventManager",
+          "line": 252
+        },
+        {
+          "name": "computeTeamData",
+          "line": 269
+        },
+        {
+          "name": "fixedUsers",
+          "line": 288
+        },
+        {
+          "name": "nonFixedUsers",
+          "line": 289
+        },
+        {
+          "name": "filteredUsers",
+          "line": 290
+        },
+        {
+          "name": "teamMemberPromises",
+          "line": 294
+        },
+        {
+          "name": "teamMembers",
+          "line": 318
+        },
+        {
+          "name": "buildTroubleshooterData",
+          "line": 322
+        },
+        {
+          "name": "formatAvailabilitySnapshot",
+          "line": 364
+        },
+        {
+          "name": "buildBookingCreatedPayload",
+          "line": 381
+        },
+        {
+          "name": "validateRescheduleRestrictions",
+          "line": 435
+        },
+        {
+          "name": "bookingSeat",
+          "line": 448
+        },
+        {
+          "name": "actualRescheduleUid",
+          "line": 449
+        },
+        {
+          "name": "originalRescheduledBooking",
+          "line": 456
+        },
+        {
+          "name": "isUserOrganizer",
+          "line": 462
+        },
+        {
+          "name": "handler",
+          "line": 486
+        },
+        {
+          "name": "traceContext",
+          "line": 511
+        },
+        {
+          "name": "tracingLogger",
+          "line": 515
+        },
+        {
+          "name": "isPlatformBooking",
+          "line": 521
+        },
+        {
+          "name": "eventType",
+          "line": 523
+        },
+        {
+          "name": "bookingDataSchema",
+          "line": 540
+        },
+        {
+          "name": "bookingData",
+          "line": 545
+        },
+        {
+          "name": "emailsAndSmsHandler",
+          "line": 578
+        },
+        {
+          "name": "spamCheckService",
+          "line": 594
+        },
+        {
+          "name": "eventTypeOrganizationId",
+          "line": 596
+        },
+        {
+          "name": "verificationCode",
+          "line": 613
+        },
+        {
+          "name": "fullName",
+          "line": 635
+        },
+        {
+          "name": "tGuests",
+          "line": 637
+        },
+        {
+          "name": "dynamicUserList",
+          "line": 639
+        }
+      ]
+    },
+    {
+      "file": "packages/app-store/exchange2016calendar/lib/CalendarService.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "decryptedCredential",
+          "line": 50
+        },
+        {
+          "name": "username",
+          "line": 53
+        },
+        {
+          "name": "url",
+          "line": 54
+        },
+        {
+          "name": "password",
+          "line": 55
+        },
+        {
+          "name": "appointment",
+          "line": 68
+        },
+        {
+          "name": "appointment",
+          "line": 104
+        },
+        {
+          "name": "appointment",
+          "line": 134
+        },
+        {
+          "name": "externalCalendars",
+          "line": 150
+        },
+        {
+          "name": "calendarsToGetAppointmentsFrom",
+          "line": 151
+        },
+        {
+          "name": "finaleRet",
+          "line": 161
+        },
+        {
+          "name": "calendarFolderId",
+          "line": 163
+        },
+        {
+          "name": "localReturn",
+          "line": 164
+        },
+        {
+          "name": "f",
+          "line": 200
+        },
+        {
+          "name": "exch1",
+          "line": 234
+        },
+        {
+          "name": "BuildCalendarService",
+          "line": 246
+        }
+      ]
+    },
+    {
+      "file": "packages/app-store/salesforce/lib/CrmService.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "sfApiErrors",
+          "line": 66
+        },
+        {
+          "name": "salesforceTokenSchema",
+          "line": 103
+        },
+        {
+          "name": "credentialKey",
+          "line": 144
+        },
+        {
+          "name": "response",
+          "line": 169
+        },
+        {
+          "name": "message",
+          "line": 183
+        },
+        {
+          "name": "accessTokenJson",
+          "line": 187
+        },
+        {
+          "name": "accessTokenParsed",
+          "line": 188
+        },
+        {
+          "name": "updatedKey",
+          "line": 200
+        },
+        {
+          "name": "credentialKey",
+          "line": 221
+        },
+        {
+          "name": "refreshToken",
+          "line": 226
+        },
+        {
+          "name": "BUFFER_MS",
+          "line": 230
+        },
+        {
+          "name": "issuedAt",
+          "line": 231
+        },
+        {
+          "name": "tokenLifetimeMs",
+          "line": 232
+        },
+        {
+          "name": "expiryTime",
+          "line": 233
+        },
+        {
+          "name": "isTokenValid",
+          "line": 234
+        },
+        {
+          "name": "result",
+          "line": 238
+        },
+        {
+          "name": "result",
+          "line": 273
+        },
+        {
+          "name": "conn",
+          "line": 290
+        },
+        {
+          "name": "query",
+          "line": 291
+        },
+        {
+          "name": "conn",
+          "line": 300
+        },
+        {
+          "name": "conn",
+          "line": 317
+        },
+        {
+          "name": "log",
+          "line": 339
+        },
+        {
+          "name": "appOptions",
+          "line": 341
+        },
+        {
+          "name": "writeToEventRecord",
+          "line": 343
+        },
+        {
+          "name": "eventWhoIds",
+          "line": 364
+        },
+        {
+          "name": "createdEvent",
+          "line": 376
+        },
+        {
+          "name": "conn",
+          "line": 430
+        },
+        {
+          "name": "appOptions",
+          "line": 451
+        },
+        {
+          "name": "conn",
+          "line": 452
+        },
+        {
+          "name": "fieldsToWriteTo",
+          "line": 455
+        },
+        {
+          "name": "sfEvent",
+          "line": 475
+        },
+        {
+          "name": "skipEventCreation",
+          "line": 494
+        },
+        {
+          "name": "sfEvent",
+          "line": 497
+        },
+        {
+          "name": "updatedEvent",
+          "line": 513
+        },
+        {
+          "name": "log",
+          "line": 548
+        }
+      ]
+    },
+    {
+      "file": "packages/app-store/exchange2013calendar/lib/CalendarService.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "decryptedCredential",
+          "line": 49
+        },
+        {
+          "name": "username",
+          "line": 52
+        },
+        {
+          "name": "url",
+          "line": 53
+        },
+        {
+          "name": "password",
+          "line": 54
+        },
+        {
+          "name": "appointment",
+          "line": 67
+        },
+        {
+          "name": "appointment",
+          "line": 103
+        },
+        {
+          "name": "appointment",
+          "line": 133
+        },
+        {
+          "name": "calendarsToGetAppointmentsFrom",
+          "line": 150
+        },
+        {
+          "name": "finaleRet",
+          "line": 160
+        },
+        {
+          "name": "calendarFolderId",
+          "line": 162
+        },
+        {
+          "name": "localReturn",
+          "line": 163
+        },
+        {
+          "name": "f",
+          "line": 199
+        },
+        {
+          "name": "exch1",
+          "line": 233
+        },
+        {
+          "name": "BuildCalendarService",
+          "line": 245
+        }
+      ]
+    },
+    {
+      "file": "apps/web/playwright/booking-limits.e2e.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "EVENT_LENGTH",
+          "line": 28
+        },
+        {
+          "name": "BOOKING_LIMITS_SINGLE",
+          "line": 31
+        },
+        {
+          "name": "BOOKING_LIMITS_MULTIPLE",
+          "line": 39
+        },
+        {
+          "name": "firstDayInBookingMonth",
+          "line": 48
+        },
+        {
+          "name": "firstMondayInBookingMonth",
+          "line": 52
+        },
+        {
+          "name": "incrementDate",
+          "line": 57
+        },
+        {
+          "name": "targetDay",
+          "line": 62
+        },
+        {
+          "name": "startOfNextMonth",
+          "line": 63
+        },
+        {
+          "name": "firstDayOfMonth",
+          "line": 64
+        },
+        {
+          "name": "getLastEventUrlWithMonth",
+          "line": 70
+        },
+        {
+          "name": "limitUnit",
+          "line": 76
+        },
+        {
+          "name": "slug",
+          "line": 80
+        },
+        {
+          "name": "singleLimit",
+          "line": 81
+        },
+        {
+          "name": "user",
+          "line": 83
+        },
+        {
+          "name": "monthUrl",
+          "line": 92
+        },
+        {
+          "name": "availableDays",
+          "line": 95
+        },
+        {
+          "name": "bookingDay",
+          "line": 96
+        },
+        {
+          "name": "availableDaysBefore",
+          "line": 102
+        },
+        {
+          "name": "expectedAvailableDays",
+          "line": 123
+        },
+        {
+          "name": "availableDaysAfter",
+          "line": 137
+        },
+        {
+          "name": "bookingId",
+          "line": 150
+        },
+        {
+          "name": "rescheduledBooking",
+          "line": 151
+        },
+        {
+          "name": "year",
+          "line": 153
+        },
+        {
+          "name": "month",
+          "line": 154
+        },
+        {
+          "name": "day",
+          "line": 155
+        },
+        {
+          "name": "formerDay",
+          "line": 163
+        },
+        {
+          "name": "formerTimeElement",
+          "line": 168
+        },
+        {
+          "name": "newBooking",
+          "line": 180
+        },
+        {
+          "name": "updatedRescheduledBooking",
+          "line": 183
+        },
+        {
+          "name": "slug",
+          "line": 211
+        },
+        {
+          "name": "user",
+          "line": 213
+        },
+        {
+          "name": "bookingDate",
+          "line": 220
+        },
+        {
+          "name": "limitValue",
+          "line": 221
+        },
+        {
+          "name": "monthUrl",
+          "line": 223
+        },
+        {
+          "name": "availableDays",
+          "line": 226
+        }
+      ]
+    },
+    {
+      "file": "apps/web/playwright/duration-limits.e2e.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "EVENT_LENGTH",
+          "line": 22
+        },
+        {
+          "name": "BOOKING_LIMITS_SINGLE",
+          "line": 25
+        },
+        {
+          "name": "BOOKING_LIMITS_MULTIPLE",
+          "line": 33
+        },
+        {
+          "name": "firstDayInBookingMonth",
+          "line": 42
+        },
+        {
+          "name": "firstMondayInBookingMonth",
+          "line": 46
+        },
+        {
+          "name": "incrementDate",
+          "line": 51
+        },
+        {
+          "name": "targetDay",
+          "line": 56
+        },
+        {
+          "name": "startOfNextMonth",
+          "line": 57
+        },
+        {
+          "name": "firstDayOfMonth",
+          "line": 58
+        },
+        {
+          "name": "getLastEventUrlWithMonth",
+          "line": 64
+        },
+        {
+          "name": "limitUnit",
+          "line": 70
+        },
+        {
+          "name": "slug",
+          "line": 74
+        },
+        {
+          "name": "singleLimit",
+          "line": 75
+        },
+        {
+          "name": "user",
+          "line": 77
+        },
+        {
+          "name": "monthUrl",
+          "line": 86
+        },
+        {
+          "name": "availableDays",
+          "line": 89
+        },
+        {
+          "name": "bookingDay",
+          "line": 90
+        },
+        {
+          "name": "availableDaysBefore",
+          "line": 96
+        },
+        {
+          "name": "expectedAvailableDays",
+          "line": 113
+        },
+        {
+          "name": "availableDaysAfter",
+          "line": 127
+        },
+        {
+          "name": "slug",
+          "line": 153
+        },
+        {
+          "name": "durationLimits",
+          "line": 155
+        },
+        {
+          "name": "user",
+          "line": 165
+        },
+        {
+          "name": "bookingDate",
+          "line": 172
+        },
+        {
+          "name": "limitValue",
+          "line": 173
+        },
+        {
+          "name": "monthUrl",
+          "line": 175
+        },
+        {
+          "name": "availableDays",
+          "line": 178
+        },
+        {
+          "name": "bookingDay",
+          "line": 179
+        },
+        {
+          "name": "availableDaysBefore",
+          "line": 183
+        },
+        {
+          "name": "availableDaysAfter",
+          "line": 209
+        },
+        {
+          "name": "slug",
+          "line": 222
+        },
+        {
+          "name": "durationLimits",
+          "line": 224
+        },
+        {
+          "name": "user",
+          "line": 234
+        },
+        {
+          "name": "baseBookingDate",
+          "line": 241
+        },
+        {
+          "name": "eventTypeId",
+          "line": 242
+        }
+      ]
+    },
+    {
+      "file": "packages/features/bookings/lib/EventManager.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "log",
+          "line": 40
+        },
+        {
+          "name": "CALENDSO_ENCRYPTION_KEY",
+          "line": 41
+        },
+        {
+          "name": "CALDAV_CALENDAR_TYPE",
+          "line": 42
+        },
+        {
+          "name": "isDedicatedIntegration",
+          "line": 43
+        },
+        {
+          "name": "latestCredentialFirst",
+          "line": 51
+        },
+        {
+          "name": "delegatedCredentialFirst",
+          "line": 55
+        },
+        {
+          "name": "delegatedCredentialLast",
+          "line": 59
+        },
+        {
+          "name": "getLocationRequestFromIntegration",
+          "line": 63
+        },
+        {
+          "name": "eventLocationType",
+          "line": 64
+        },
+        {
+          "name": "requestId",
+          "line": 66
+        },
+        {
+          "name": "getCredential",
+          "line": 81
+        },
+        {
+          "name": "processLocation",
+          "line": 96
+        },
+        {
+          "name": "maybeLocationRequestObject",
+          "line": 103
+        },
+        {
+          "name": "getCredentialPayload",
+          "line": 114
+        },
+        {
+          "name": "appCredentials",
+          "line": 145
+        },
+        {
+          "name": "decryptedData",
+          "line": 181
+        },
+        {
+          "name": "url",
+          "line": 187
+        },
+        {
+          "name": "url",
+          "line": 204
+        },
+        {
+          "name": "credentialServerUrl",
+          "line": 224
+        },
+        {
+          "name": "destinationServerUrl",
+          "line": 225
+        },
+        {
+          "name": "matches",
+          "line": 237
+        },
+        {
+          "name": "office365CalendarWithTeams",
+          "line": 255
+        },
+        {
+          "name": "evt",
+          "line": 293
+        },
+        {
+          "name": "calVideo",
+          "line": 298
+        },
+        {
+          "name": "calVideoKeys",
+          "line": 308
+        },
+        {
+          "name": "isDedicated",
+          "line": 333
+        },
+        {
+          "name": "isMSTeamsWithOutlookCalendar",
+          "line": 334
+        },
+        {
+          "name": "result",
+          "line": 343
+        },
+        {
+          "name": "clonedCalEvent",
+          "line": 365
+        },
+        {
+          "name": "isCalendarResult",
+          "line": 377
+        },
+        {
+          "name": "createdCRMEvents",
+          "line": 383
+        },
+        {
+          "name": "referencesToCreate",
+          "line": 388
+        },
+        {
+          "name": "isCalendarType",
+          "line": 394
+        },
+        {
+          "name": "evt",
+          "line": 419
+        },
+        {
+          "name": "isDedicated",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "file": "packages/features/booking-audit/lib/service/EnrichmentDataStore.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "store",
+          "line": 90
+        },
+        {
+          "name": "user",
+          "line": 92
+        }
+      ]
+    },
+    {
+      "file": "packages/features/busyTimes/lib/getBusyTimesFromLimits.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "_getBusyTimesFromLimits",
+          "line": 17
+        },
+        {
+          "name": "limitManager",
+          "line": 31
+        },
+        {
+          "name": "_getBusyTimesFromBookingLimits",
+          "line": 74
+        },
+        {
+          "name": "limit",
+          "line": 102
+        },
+        {
+          "name": "unit",
+          "line": 105
+        },
+        {
+          "name": "periodStartDates",
+          "line": 106
+        },
+        {
+          "name": "checkBookingLimitsService",
+          "line": 118
+        },
+        {
+          "name": "periodEnd",
+          "line": 144
+        },
+        {
+          "name": "_getBusyTimesFromDurationLimits",
+          "line": 166
+        },
+        {
+          "name": "limit",
+          "line": 178
+        },
+        {
+          "name": "unit",
+          "line": 181
+        },
+        {
+          "name": "periodStartDates",
+          "line": 182
+        },
+        {
+          "name": "selectedDuration",
+          "line": 187
+        },
+        {
+          "name": "bookingRepo",
+          "line": 203
+        },
+        {
+          "name": "totalYearlyDuration",
+          "line": 204
+        },
+        {
+          "name": "periodEnd",
+          "line": 224
+        },
+        {
+          "name": "getBusyTimesFromDurationLimits",
+          "line": 247
+        },
+        {
+          "name": "_getBusyTimesFromTeamLimits",
+          "line": 252
+        },
+        {
+          "name": "busyTimesService",
+          "line": 262
+        },
+        {
+          "name": "bookingRepo",
+          "line": 269
+        },
+        {
+          "name": "bookings",
+          "line": 270
+        },
+        {
+          "name": "busyTimes",
+          "line": 279
+        },
+        {
+          "name": "limitManager",
+          "line": 287
+        },
+        {
+          "name": "getBusyTimesFromLimits",
+          "line": 305
+        },
+        {
+          "name": "getBusyTimesFromBookingLimits",
+          "line": 307
+        },
+        {
+          "name": "getBusyTimesFromTeamLimits",
+          "line": 312
+        }
+      ]
+    },
+    {
+      "file": "packages/lib/CalendarService.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "TIMEZONE_FORMAT",
+          "line": 38
+        },
+        {
+          "name": "DEFAULT_CALENDAR_TYPE",
+          "line": 39
+        },
+        {
+          "name": "CALENDSO_ENCRYPTION_KEY",
+          "line": 41
+        },
+        {
+          "name": "hasFileExtension",
+          "line": 50
+        },
+        {
+          "name": "fileName",
+          "line": 52
+        },
+        {
+          "name": "getFileExtension",
+          "line": 57
+        },
+        {
+          "name": "fileName",
+          "line": 61
+        },
+        {
+          "name": "getTravelDurationInSeconds",
+          "line": 67
+        },
+        {
+          "name": "travelSeconds",
+          "line": 73
+        },
+        {
+          "name": "applyTravelDuration",
+          "line": 83
+        },
+        {
+          "name": "convertDate",
+          "line": 90
+        },
+        {
+          "name": "getDuration",
+          "line": 97
+        },
+        {
+          "name": "foldLine",
+          "line": 102
+        },
+        {
+          "name": "encoder",
+          "line": 103
+        },
+        {
+          "name": "charBytes",
+          "line": 111
+        },
+        {
+          "name": "limit",
+          "line": 112
+        },
+        {
+          "name": "findValueColon",
+          "line": 128
+        },
+        {
+          "name": "hasScheduleAgent",
+          "line": 138
+        },
+        {
+          "name": "injectScheduleAgent",
+          "line": 145
+        },
+        {
+          "name": "unfolded",
+          "line": 153
+        },
+        {
+          "name": "valueMatch",
+          "line": 156
+        },
+        {
+          "name": "colonIndex",
+          "line": 157
+        },
+        {
+          "name": "params",
+          "line": 161
+        },
+        {
+          "name": "value",
+          "line": 162
+        },
+        {
+          "name": "findDSTTransition",
+          "line": 179
+        },
+        {
+          "name": "lowOffset",
+          "line": 187
+        },
+        {
+          "name": "highOffset",
+          "line": 188
+        },
+        {
+          "name": "mid",
+          "line": 193
+        },
+        {
+          "name": "midOffset",
+          "line": 194
+        },
+        {
+          "name": "preTransitionOffsetMs",
+          "line": 205
+        },
+        {
+          "name": "formatTransitionDtstart",
+          "line": 210
+        },
+        {
+          "name": "year",
+          "line": 211
+        },
+        {
+          "name": "month",
+          "line": 212
+        },
+        {
+          "name": "day",
+          "line": 213
+        },
+        {
+          "name": "hour",
+          "line": 214
+        }
+      ]
+    },
+    {
+      "file": "packages/dayjs/plugins/business-days-plugin.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "defaultWorkingWeekdays",
+          "line": 16
+        },
+        {
+          "name": "workingWeekdays",
+          "line": 60
+        },
+        {
+          "name": "numericDirection",
+          "line": 87
+        },
+        {
+          "name": "day1",
+          "line": 111
+        },
+        {
+          "name": "day2",
+          "line": 112
+        },
+        {
+          "name": "isPositiveDiff",
+          "line": 114
+        },
+        {
+          "name": "end",
+          "line": 116
+        },
+        {
+          "name": "searchLimit",
+          "line": 136
+        },
+        {
+          "name": "searchLimit",
+          "line": 153
+        },
+        {
+          "name": "monthEnd",
+          "line": 175
+        },
+        {
+          "name": "businessDays",
+          "line": 195
+        },
+        {
+          "name": "lastBusinessDay",
+          "line": 196
+        },
+        {
+          "name": "monthEnd",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "file": "packages/ui/components/file-uploader/FileUploader.tsx",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "zAcceptedFileTypes",
+          "line": 31
+        },
+        {
+          "name": "documentTypes",
+          "line": 34
+        },
+        {
+          "name": "formatFileSize",
+          "line": 64
+        },
+        {
+          "name": "k",
+          "line": 66
+        },
+        {
+          "name": "sizes",
+          "line": 67
+        },
+        {
+          "name": "i",
+          "line": 68
+        },
+        {
+          "name": "FileUploader",
+          "line": 72
+        },
+        {
+          "name": "generateFileId",
+          "line": 87
+        },
+        {
+          "name": "readFileAsDataURL",
+          "line": 89
+        },
+        {
+          "name": "reader",
+          "line": 91
+        },
+        {
+          "name": "defaultT",
+          "line": 98
+        },
+        {
+          "name": "allowedTypes",
+          "line": 107
+        },
+        {
+          "name": "allowedExtensions",
+          "line": 108
+        },
+        {
+          "name": "validateFile",
+          "line": 110
+        },
+        {
+          "name": "extensionsString",
+          "line": 120
+        },
+        {
+          "name": "handleFileSelect",
+          "line": 129
+        },
+        {
+          "name": "maxFileText",
+          "line": 135
+        },
+        {
+          "name": "file",
+          "line": 141
+        },
+        {
+          "name": "validationError",
+          "line": 142
+        },
+        {
+          "name": "dataUrl",
+          "line": 150
+        },
+        {
+          "name": "updatedFiles",
+          "line": 166
+        },
+        {
+          "name": "handleFileRemove",
+          "line": 174
+        },
+        {
+          "name": "updatedFiles",
+          "line": 176
+        },
+        {
+          "name": "getFileIcon",
+          "line": 183
+        },
+        {
+          "name": "extensionsString",
+          "line": 189
+        },
+        {
+          "name": "fileInstructionsText",
+          "line": 191
+        },
+        {
+          "name": "buttonText",
+          "line": 197
+        }
+      ]
+    }
+  ]
+}

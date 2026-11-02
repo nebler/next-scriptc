@@ -1,0 +1,2490 @@
+{
+  "repo": "outline/outline",
+  "url": "https://github.com/outline/outline",
+  "sha": "7ba3335d9f19b3c5d29630fc679647b1d1b782f1",
+  "domain": "text",
+  "frameworkHypothesis": "Koa",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "Apache-2.0"
+    },
+    {
+      "file": "server/utils/requestFilteringAgent/LICENSE.md",
+      "declaration": "MIT"
+    },
+    {
+      "file": "shared/editor/lib/prosemirror-recreate-transform/LICENSE",
+      "declaration": "Apache-2.0"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "Business Source License 1.1",
+      "frameworks": [
+        "koa",
+        "vite"
+      ],
+      "computeDeps": {
+        "diff": "^5.2.2",
+        "fast-myers-diff": "^3.2.0",
+        "fuse.js": "^7.5.0",
+        "fuzzy-search": "^3.2.1",
+        "react-colorful": "^5.8.0",
+        "@types/diff": "^5.0.9",
+        "@types/fuzzy-search": "^2.1.5"
+      }
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "server/models/helpers/ProsemirrorHelper.tsx",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "pluginsWithSafeDecorations",
+          "line": 99
+        },
+        {
+          "name": "katexStylesheetUrl",
+          "line": 117
+        },
+        {
+          "name": "isDecorationSource",
+          "line": 120
+        },
+        {
+          "name": "node",
+          "line": 151
+        },
+        {
+          "name": "tr",
+          "line": 194
+        },
+        {
+          "name": "previousMentions",
+          "line": 213
+        },
+        {
+          "name": "transform",
+          "line": 221
+        },
+        {
+          "name": "previous",
+          "line": 228
+        },
+        {
+          "name": "retained",
+          "line": 229
+        },
+        {
+          "name": "mentionActorId",
+          "line": 233
+        },
+        {
+          "name": "seenIds",
+          "line": 258
+        },
+        {
+          "name": "seen",
+          "line": 290
+        },
+        {
+          "name": "slug",
+          "line": 307
+        },
+        {
+          "name": "json",
+          "line": 343
+        },
+        {
+          "name": "replaceHref",
+          "line": 345
+        },
+        {
+          "name": "url",
+          "line": 351
+        },
+        {
+          "name": "match",
+          "line": 362
+        },
+        {
+          "name": "slug",
+          "line": 368
+        },
+        {
+          "name": "replacement",
+          "line": 369
+        },
+        {
+          "name": "replaceDocumentReferencesInner",
+          "line": 375
+        },
+        {
+          "name": "replacement",
+          "line": 382
+        },
+        {
+          "name": "href",
+          "line": 390
+        },
+        {
+          "name": "json",
+          "line": 423
+        },
+        {
+          "name": "replaceUrl",
+          "line": 429
+        },
+        {
+          "name": "replaceInternalUrlsInner",
+          "line": 437
+        },
+        {
+          "name": "json",
+          "line": 471
+        },
+        {
+          "name": "attachmentIds",
+          "line": 472
+        },
+        {
+          "name": "attachments",
+          "line": 477
+        },
+        {
+          "name": "mapping",
+          "line": 487
+        },
+        {
+          "name": "signedUrl",
+          "line": 491
+        },
+        {
+          "name": "regex",
+          "line": 499
+        },
+        {
+          "name": "toRelativeHref",
+          "line": 501
+        },
+        {
+          "name": "url",
+          "line": 503
+        },
+        {
+          "name": "getMapping",
+          "line": 510
+        },
+        {
+          "name": "signedUrl",
+          "line": 511
+        }
+      ]
+    },
+    {
+      "file": "shared/utils/rfc6902/diff.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "isDestructive",
+          "line": 65
+        },
+        {
+          "name": "subtract",
+          "line": 96
+        },
+        {
+          "name": "intersection",
+          "line": 127
+        },
+        {
+          "name": "length",
+          "line": 130
+        },
+        {
+          "name": "object",
+          "line": 135
+        },
+        {
+          "name": "isArrayAdd",
+          "line": 171
+        },
+        {
+          "name": "isArrayRemove",
+          "line": 176
+        },
+        {
+          "name": "buildOperations",
+          "line": 194
+        },
+        {
+          "name": "input_length",
+          "line": 247
+        },
+        {
+          "name": "output_length",
+          "line": 249
+        },
+        {
+          "name": "subInput",
+          "line": 275
+        },
+        {
+          "name": "subOutput",
+          "line": 276
+        },
+        {
+          "name": "inputIdx",
+          "line": 294
+        },
+        {
+          "name": "outputIdx",
+          "line": 295
+        },
+        {
+          "name": "remove_prev",
+          "line": 315
+        },
+        {
+          "name": "add_prev",
+          "line": 316
+        },
+        {
+          "name": "replace_prev",
+          "line": 317
+        },
+        {
+          "name": "min_cost",
+          "line": 318
+        },
+        {
+          "name": "array_operations",
+          "line": 359
+        },
+        {
+          "name": "padded_index",
+          "line": 363
+        },
+        {
+          "name": "index_token",
+          "line": 364
+        },
+        {
+          "name": "operation",
+          "line": 366
+        },
+        {
+          "name": "operation",
+          "line": 374
+        },
+        {
+          "name": "replace_ptr",
+          "line": 382
+        },
+        {
+          "name": "replace_operations",
+          "line": 383
+        },
+        {
+          "name": "diffObjects",
+          "line": 396
+        },
+        {
+          "name": "diffAny",
+          "line": 445
+        },
+        {
+          "name": "input_type",
+          "line": 455
+        },
+        {
+          "name": "output_type",
+          "line": 456
+        }
+      ]
+    },
+    {
+      "file": "server/policies/cancan.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "ability",
+          "line": 81
+        },
+        {
+          "name": "actionMap",
+          "line": 87
+        },
+        {
+          "name": "scope",
+          "line": 115
+        },
+        {
+          "name": "byAction",
+          "line": 125
+        },
+        {
+          "name": "cached",
+          "line": 126
+        },
+        {
+          "name": "value",
+          "line": 130
+        },
+        {
+          "name": "performerClass",
+          "line": 152
+        },
+        {
+          "name": "targetClass",
+          "line": 153
+        },
+        {
+          "name": "key",
+          "line": 268
+        },
+        {
+          "name": "matchingAbilities",
+          "line": 283
+        },
+        {
+          "name": "collect",
+          "line": 293
+        },
+        {
+          "name": "specificAbilities",
+          "line": 340
+        },
+        {
+          "name": "manageAbilities",
+          "line": 354
+        },
+        {
+          "name": "cancan",
+          "line": 408
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/commands/table.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "restoreColumnSelection",
+          "line": 59
+        },
+        {
+          "name": "table",
+          "line": 64
+        },
+        {
+          "name": "$pos",
+          "line": 66
+        },
+        {
+          "name": "setCursorInCell",
+          "line": 82
+        },
+        {
+          "name": "table",
+          "line": 88
+        },
+        {
+          "name": "map",
+          "line": 92
+        },
+        {
+          "name": "pos",
+          "line": 96
+        },
+        {
+          "name": "$pos",
+          "line": 97
+        },
+        {
+          "name": "createTable",
+          "line": 103
+        },
+        {
+          "name": "offset",
+          "line": 117
+        },
+        {
+          "name": "block",
+          "line": 121
+        },
+        {
+          "name": "width",
+          "line": 122
+        },
+        {
+          "name": "nodes",
+          "line": 126
+        },
+        {
+          "name": "tr",
+          "line": 127
+        },
+        {
+          "name": "resolvedPos",
+          "line": 128
+        },
+        {
+          "name": "createTableInner",
+          "line": 136
+        },
+        {
+          "name": "types",
+          "line": 144
+        },
+        {
+          "name": "createCell",
+          "line": 149
+        },
+        {
+          "name": "attrs",
+          "line": 155
+        },
+        {
+          "name": "cell",
+          "line": 163
+        },
+        {
+          "name": "headerCell",
+          "line": 170
+        },
+        {
+          "name": "exportTable",
+          "line": 190
+        },
+        {
+          "name": "rect",
+          "line": 202
+        },
+        {
+          "name": "cells",
+          "line": 206
+        },
+        {
+          "name": "cell",
+          "line": 208
+        },
+        {
+          "name": "csv",
+          "line": 218
+        },
+        {
+          "name": "blob",
+          "line": 238
+        },
+        {
+          "name": "url",
+          "line": 239
+        },
+        {
+          "name": "a",
+          "line": 240
+        },
+        {
+          "name": "distributeColumns",
+          "line": 257
+        },
+        {
+          "name": "rect",
+          "line": 263
+        },
+        {
+          "name": "selectedColumns",
+          "line": 266
+        },
+        {
+          "name": "hasNullWidth",
+          "line": 271
+        },
+        {
+          "name": "totalWidth",
+          "line": 277
+        },
+        {
+          "name": "evenWidth",
+          "line": 285
+        }
+      ]
+    },
+    {
+      "file": "shared/utils/LineDiffHelper.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "a",
+          "line": 28
+        },
+        {
+          "name": "b",
+          "line": 29
+        },
+        {
+          "name": "changes",
+          "line": 30
+        },
+        {
+          "name": "lines",
+          "line": 60
+        },
+        {
+          "name": "removed",
+          "line": 80
+        },
+        {
+          "name": "added",
+          "line": 81
+        },
+        {
+          "name": "ids",
+          "line": 95
+        },
+        {
+          "name": "toIds",
+          "line": 96
+        },
+        {
+          "name": "line",
+          "line": 98
+        },
+        {
+          "name": "aIds",
+          "line": 106
+        },
+        {
+          "name": "bIds",
+          "line": 107
+        },
+        {
+          "name": "inA",
+          "line": 109
+        },
+        {
+          "name": "inB",
+          "line": 110
+        },
+        {
+          "name": "x",
+          "line": 131
+        },
+        {
+          "name": "y",
+          "line": 132
+        },
+        {
+          "name": "equals",
+          "line": 136
+        },
+        {
+          "name": "length",
+          "line": 181
+        },
+        {
+          "name": "ops",
+          "line": 182
+        },
+        {
+          "name": "aCounts",
+          "line": 183
+        },
+        {
+          "name": "bCounts",
+          "line": 184
+        },
+        {
+          "name": "range",
+          "line": 208
+        },
+        {
+          "name": "lines",
+          "line": 209
+        },
+        {
+          "name": "toLine",
+          "line": 212
+        },
+        {
+          "name": "start",
+          "line": 241
+        },
+        {
+          "name": "end",
+          "line": 242
+        },
+        {
+          "name": "Unchanged",
+          "line": 257
+        },
+        {
+          "name": "Removed",
+          "line": 258
+        },
+        {
+          "name": "Added",
+          "line": 259
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/utils.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "textblockAt",
+          "line": 15
+        },
+        {
+          "name": "joinMaybeClear",
+          "line": 31
+        },
+        {
+          "name": "before",
+          "line": 35
+        },
+        {
+          "name": "deleteBarrier",
+          "line": 53
+        },
+        {
+          "name": "before",
+          "line": 58
+        },
+        {
+          "name": "isolated",
+          "line": 61
+        },
+        {
+          "name": "joinMaybeTr",
+          "line": 63
+        },
+        {
+          "name": "canDelAfter",
+          "line": 69
+        },
+        {
+          "name": "end",
+          "line": 78
+        },
+        {
+          "name": "$joinAt",
+          "line": 96
+        },
+        {
+          "name": "selAfter",
+          "line": 107
+        },
+        {
+          "name": "range",
+          "line": 111
+        },
+        {
+          "name": "wrap",
+          "line": 123
+        },
+        {
+          "name": "findCutAfter",
+          "line": 167
+        },
+        {
+          "name": "parent",
+          "line": 170
+        },
+        {
+          "name": "atBlockEnd",
+          "line": 188
+        },
+        {
+          "name": "deleteSelectionTr",
+          "line": 202
+        },
+        {
+          "name": "joinForwardTr",
+          "line": 215
+        },
+        {
+          "name": "$cursor",
+          "line": 216
+        },
+        {
+          "name": "$cut",
+          "line": 221
+        },
+        {
+          "name": "after",
+          "line": 227
+        },
+        {
+          "name": "delBarrierTr",
+          "line": 229
+        },
+        {
+          "name": "delStep",
+          "line": 240
+        },
+        {
+          "name": "selectNodeForwardTr",
+          "line": 275
+        },
+        {
+          "name": "node",
+          "line": 287
+        },
+        {
+          "name": "wrapNodeAt",
+          "line": 305
+        },
+        {
+          "name": "$from",
+          "line": 311
+        },
+        {
+          "name": "$to",
+          "line": 312
+        },
+        {
+          "name": "range",
+          "line": 313
+        },
+        {
+          "name": "findCutBefore",
+          "line": 327
+        },
+        {
+          "name": "selectNodeBackwardTr",
+          "line": 347
+        },
+        {
+          "name": "node",
+          "line": 360
+        },
+        {
+          "name": "atBlockStart",
+          "line": 375
+        },
+        {
+          "name": "joinBackwardTr",
+          "line": 389
+        },
+        {
+          "name": "$cursor",
+          "line": 390
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/queries/table.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "isColSelection",
+          "line": 23
+        },
+        {
+          "name": "isRowSelection",
+          "line": 35
+        },
+        {
+          "name": "getColumnIndex",
+          "line": 50
+        },
+        {
+          "name": "getRowIndex",
+          "line": 67
+        },
+        {
+          "name": "getRowsInTable",
+          "line": 85
+        },
+        {
+          "name": "rect",
+          "line": 90
+        },
+        {
+          "name": "seenCells",
+          "line": 92
+        },
+        {
+          "name": "cellPos",
+          "line": 97
+        },
+        {
+          "name": "getCellsInColumn",
+          "line": 110
+        },
+        {
+          "name": "rect",
+          "line": 116
+        },
+        {
+          "name": "cells",
+          "line": 117
+        },
+        {
+          "name": "cell",
+          "line": 121
+        },
+        {
+          "name": "getCellsInRow",
+          "line": 136
+        },
+        {
+          "name": "rect",
+          "line": 142
+        },
+        {
+          "name": "cells",
+          "line": 143
+        },
+        {
+          "name": "cell",
+          "line": 147
+        },
+        {
+          "name": "isColumnSelected",
+          "line": 169
+        },
+        {
+          "name": "isHeaderEnabled",
+          "line": 185
+        },
+        {
+          "name": "cellPositions",
+          "line": 191
+        },
+        {
+          "name": "cell",
+          "line": 199
+        },
+        {
+          "name": "isRowSelected",
+          "line": 215
+        },
+        {
+          "name": "isTableSelected",
+          "line": 228
+        },
+        {
+          "name": "rect",
+          "line": 230
+        },
+        {
+          "name": "isMultipleCellSelection",
+          "line": 250
+        },
+        {
+          "name": "canMergeCells",
+          "line": 269
+        },
+        {
+          "name": "isMergedCellSelection",
+          "line": 303
+        },
+        {
+          "name": "tableHasRowspan",
+          "line": 334
+        },
+        {
+          "name": "rect",
+          "line": 339
+        },
+        {
+          "name": "seen",
+          "line": 340
+        },
+        {
+          "name": "pos",
+          "line": 343
+        },
+        {
+          "name": "cell",
+          "line": 351
+        },
+        {
+          "name": "indexRange",
+          "line": 363
+        },
+        {
+          "name": "getAllSelectedColumns",
+          "line": 378
+        },
+        {
+          "name": "rect",
+          "line": 387
+        },
+        {
+          "name": "getAllSelectedRows",
+          "line": 403
+        }
+      ]
+    },
+    {
+      "file": "server/queues/tasks/MarkdownAPIImportTask.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "rewriteAttachmentPaths",
+          "line": 70
+        },
+        {
+          "name": "encodedPath",
+          "line": 77
+        },
+        {
+          "name": "attachmentFileName",
+          "line": 78
+        },
+        {
+          "name": "reference",
+          "line": 79
+        },
+        {
+          "name": "normalizedAttachmentPath",
+          "line": 81
+        },
+        {
+          "name": "attachmentDir",
+          "line": 85
+        },
+        {
+          "name": "genericNormalizedPath",
+          "line": 86
+        },
+        {
+          "name": "segments",
+          "line": 95
+        },
+        {
+          "name": "attachmentsIdx",
+          "line": 96
+        },
+        {
+          "name": "relFromAttachments",
+          "line": 100
+        },
+        {
+          "name": "rewriteInternalLinks",
+          "line": 136
+        },
+        {
+          "name": "basePath",
+          "line": 142
+        },
+        {
+          "name": "normalizedDocPath",
+          "line": 147
+        },
+        {
+          "name": "scratch",
+          "line": 191
+        },
+        {
+          "name": "handle",
+          "line": 196
+        },
+        {
+          "name": "createdBy",
+          "line": 199
+        },
+        {
+          "name": "manifestByPath",
+          "line": 200
+        },
+        {
+          "name": "maxAttachmentSize",
+          "line": 203
+        },
+        {
+          "name": "seen",
+          "line": 206
+        },
+        {
+          "name": "normalized",
+          "line": 214
+        },
+        {
+          "name": "item",
+          "line": 215
+        },
+        {
+          "name": "buffer",
+          "line": 220
+        },
+        {
+          "name": "storageKey",
+          "line": 264
+        },
+        {
+          "name": "handle",
+          "line": 269
+        },
+        {
+          "name": "markdownByNode",
+          "line": 275
+        },
+        {
+          "name": "tree",
+          "line": 277
+        },
+        {
+          "name": "ext",
+          "line": 280
+        },
+        {
+          "name": "buffer",
+          "line": 282
+        },
+        {
+          "name": "rootNodes",
+          "line": 290
+        },
+        {
+          "name": "ext",
+          "line": 304
+        },
+        {
+          "name": "collectDocMap",
+          "line": 360
+        },
+        {
+          "name": "associatedImport",
+          "line": 375
+        },
+        {
+          "name": "placeholder",
+          "line": 376
+        },
+        {
+          "name": "docMap",
+          "line": 461
+        },
+        {
+          "name": "items",
+          "line": 463
+        }
+      ]
+    },
+    {
+      "file": "app/utils/autotrack.js",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "nativeMatches",
+          "line": 22
+        },
+        {
+          "name": "matchesSelector",
+          "line": 25
+        },
+        {
+          "name": "nodes",
+          "line": 32
+        },
+        {
+          "name": "matches",
+          "line": 41
+        },
+        {
+          "name": "parents",
+          "line": 60
+        },
+        {
+          "name": "list",
+          "line": 61
+        },
+        {
+          "name": "closest",
+          "line": 73
+        },
+        {
+          "name": "parentElements",
+          "line": 77
+        },
+        {
+          "name": "delegate",
+          "line": 91
+        },
+        {
+          "name": "listener",
+          "line": 92
+        },
+        {
+          "name": "composedPath",
+          "line": 96
+        },
+        {
+          "name": "HTTP_PORT",
+          "line": 124
+        },
+        {
+          "name": "HTTPS_PORT",
+          "line": 125
+        },
+        {
+          "name": "DEFAULT_PORT",
+          "line": 126
+        },
+        {
+          "name": "anchor",
+          "line": 128
+        },
+        {
+          "name": "urlCache",
+          "line": 129
+        },
+        {
+          "name": "parseUrl",
+          "line": 131
+        },
+        {
+          "name": "host",
+          "line": 148
+        },
+        {
+          "name": "origin",
+          "line": 149
+        },
+        {
+          "name": "pathname",
+          "line": 150
+        },
+        {
+          "name": "getAttributes",
+          "line": 170
+        },
+        {
+          "name": "attrs",
+          "line": 171
+        },
+        {
+          "name": "map",
+          "line": 175
+        },
+        {
+          "name": "camelCase",
+          "line": 189
+        },
+        {
+          "name": "capitalize",
+          "line": 195
+        },
+        {
+          "name": "createFieldsObj",
+          "line": 199
+        },
+        {
+          "name": "originalBuildHitTask",
+          "line": 208
+        },
+        {
+          "name": "getAttributeFields",
+          "line": 222
+        },
+        {
+          "name": "attributes",
+          "line": 223
+        },
+        {
+          "name": "attributeFields",
+          "line": 224
+        },
+        {
+          "name": "field",
+          "line": 235
+        },
+        {
+          "name": "withTimeout",
+          "line": 243
+        },
+        {
+          "name": "fn",
+          "line": 245
+        },
+        {
+          "name": "methodChainInstances",
+          "line": 259
+        },
+        {
+          "name": "getOrCreateMethodChain",
+          "line": 261
+        }
+      ]
+    },
+    {
+      "file": "server/queues/processors/WebsocketsProcessor.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "template",
+          "line": 49
+        },
+        {
+          "name": "channels",
+          "line": 56
+        },
+        {
+          "name": "document",
+          "line": 80
+        },
+        {
+          "name": "document",
+          "line": 126
+        },
+        {
+          "name": "collectionId",
+          "line": 141
+        },
+        {
+          "name": "srcCollectionId",
+          "line": 160
+        },
+        {
+          "name": "collectionChannels",
+          "line": 180
+        },
+        {
+          "name": "channels",
+          "line": 185
+        },
+        {
+          "name": "document",
+          "line": 226
+        },
+        {
+          "name": "documents",
+          "line": 240
+        },
+        {
+          "name": "documentChannels",
+          "line": 250
+        },
+        {
+          "name": "moveCollections",
+          "line": 269
+        },
+        {
+          "name": "channels",
+          "line": 296
+        },
+        {
+          "name": "document",
+          "line": 302
+        },
+        {
+          "name": "channels",
+          "line": 307
+        },
+        {
+          "name": "channels",
+          "line": 325
+        },
+        {
+          "name": "channels",
+          "line": 341
+        },
+        {
+          "name": "collection",
+          "line": 351
+        },
+        {
+          "name": "rooms",
+          "line": 360
+        },
+        {
+          "name": "collection",
+          "line": 372
+        },
+        {
+          "name": "rooms",
+          "line": 403
+        },
+        {
+          "name": "collection",
+          "line": 428
+        },
+        {
+          "name": "collection",
+          "line": 444
+        },
+        {
+          "name": "archivedAt",
+          "line": 449
+        },
+        {
+          "name": "membership",
+          "line": 472
+        },
+        {
+          "name": "membership",
+          "line": 499
+        },
+        {
+          "name": "membership",
+          "line": 520
+        },
+        {
+          "name": "fileOperation",
+          "line": 580
+        },
+        {
+          "name": "importModel",
+          "line": 591
+        },
+        {
+          "name": "pin",
+          "line": 603
+        },
+        {
+          "name": "share",
+          "line": 630
+        },
+        {
+          "name": "operator",
+          "line": 635
+        },
+        {
+          "name": "share",
+          "line": 640
+        },
+        {
+          "name": "operator",
+          "line": 645
+        },
+        {
+          "name": "comment",
+          "line": 651
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/lib/table.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "ALLOWED_ALIGNMENTS",
+          "line": 21
+        },
+        {
+          "name": "isValidCellAlignment",
+          "line": 29
+        },
+        {
+          "name": "isValidCellSpan",
+          "line": 42
+        },
+        {
+          "name": "isValidCellMarks",
+          "line": 57
+        },
+        {
+          "name": "marks",
+          "line": 67
+        },
+        {
+          "name": "type",
+          "line": 72
+        },
+        {
+          "name": "attrs",
+          "line": 79
+        },
+        {
+          "name": "getCellBackground",
+          "line": 97
+        },
+        {
+          "name": "background",
+          "line": 98
+        },
+        {
+          "name": "getCellAttrs",
+          "line": 111
+        },
+        {
+          "name": "widthAttr",
+          "line": 116
+        },
+        {
+          "name": "widths",
+          "line": 117
+        },
+        {
+          "name": "colspanAttr",
+          "line": 121
+        },
+        {
+          "name": "colspan",
+          "line": 122
+        },
+        {
+          "name": "rowspanAttr",
+          "line": 123
+        },
+        {
+          "name": "bgColor",
+          "line": 125
+        },
+        {
+          "name": "setCellAttrs",
+          "line": 157
+        },
+        {
+          "name": "backgroundMark",
+          "line": 178
+        },
+        {
+          "name": "color",
+          "line": 185
+        },
+        {
+          "name": "setSpanPosition",
+          "line": 205
+        },
+        {
+          "name": "total",
+          "line": 214
+        },
+        {
+          "name": "start",
+          "line": 215
+        },
+        {
+          "name": "end",
+          "line": 216
+        },
+        {
+          "name": "getCellSpan",
+          "line": 233
+        },
+        {
+          "name": "pos",
+          "line": 239
+        },
+        {
+          "name": "at",
+          "line": 240
+        },
+        {
+          "name": "length",
+          "line": 244
+        },
+        {
+          "name": "getCellsStartingInRow",
+          "line": 265
+        },
+        {
+          "name": "getCellsStartingInColumn",
+          "line": 284
+        },
+        {
+          "name": "trackSpanPosition",
+          "line": 306
+        },
+        {
+          "name": "observer",
+          "line": 317
+        },
+        {
+          "name": "pos",
+          "line": 318
+        },
+        {
+          "name": "sizes",
+          "line": 319
+        },
+        {
+          "name": "frame",
+          "line": 327
+        },
+        {
+          "name": "cell",
+          "line": 328
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/lib/markdown/serializer.ts",
+      "score": 8,
+      "symbols": [
+        {
+          "name": "state",
+          "line": 66
+        },
+        {
+          "name": "state",
+          "line": 78
+        },
+        {
+          "name": "trim",
+          "line": 175
+        },
+        {
+          "name": "old",
+          "line": 193
+        },
+        {
+          "name": "lines",
+          "line": 237
+        },
+        {
+          "name": "startOfLine",
+          "line": 240
+        },
+        {
+          "name": "trackingMap",
+          "line": 267
+        },
+        {
+          "name": "mdFrom",
+          "line": 268
+        },
+        {
+          "name": "active",
+          "line": 291
+        },
+        {
+          "name": "progress",
+          "line": 293
+        },
+        {
+          "name": "next",
+          "line": 306
+        },
+        {
+          "name": "info",
+          "line": 321
+        },
+        {
+          "name": "inner",
+          "line": 336
+        },
+        {
+          "name": "len",
+          "line": 338
+        },
+        {
+          "name": "mark",
+          "line": 345
+        },
+        {
+          "name": "other",
+          "line": 350
+        },
+        {
+          "name": "add",
+          "line": 395
+        },
+        {
+          "name": "text",
+          "line": 403
+        },
+        {
+          "name": "isTight",
+          "line": 447
+        },
+        {
+          "name": "prevTight",
+          "line": 451
+        },
+        {
+          "name": "prevList",
+          "line": 452
+        },
+        {
+          "name": "prevTable",
+          "line": 475
+        },
+        {
+          "name": "headerRow",
+          "line": 480
+        },
+        {
+          "name": "cellState",
+          "line": 498
+        },
+        {
+          "name": "content",
+          "line": 524
+        },
+        {
+          "name": "padding",
+          "line": 530
+        },
+        {
+          "name": "width",
+          "line": 540
+        },
+        {
+          "name": "wrap",
+          "line": 582
+        },
+        {
+          "name": "info",
+          "line": 600
+        },
+        {
+          "name": "value",
+          "line": 601
+        }
+      ]
+    },
+    {
+      "file": "app/editor/components/SuggestionsMenu.tsx",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "useSuggestionsMenuAria",
+          "line": 81
+        },
+        {
+          "name": "instanceIdRef",
+          "line": 92
+        },
+        {
+          "name": "listboxId",
+          "line": 96
+        },
+        {
+          "name": "submenuListboxId",
+          "line": 97
+        },
+        {
+          "name": "optionId",
+          "line": 98
+        },
+        {
+          "name": "submenuOptionId",
+          "line": 102
+        },
+        {
+          "name": "dom",
+          "line": 112
+        },
+        {
+          "name": "removeOwnedAttributes",
+          "line": 113
+        },
+        {
+          "name": "owns",
+          "line": 114
+        },
+        {
+          "name": "owns",
+          "line": 139
+        },
+        {
+          "name": "measureCaretRect",
+          "line": 186
+        },
+        {
+          "name": "fromPos",
+          "line": 189
+        },
+        {
+          "name": "toPos",
+          "line": 190
+        },
+        {
+          "name": "top",
+          "line": 191
+        },
+        {
+          "name": "bottom",
+          "line": 192
+        },
+        {
+          "name": "left",
+          "line": 193
+        },
+        {
+          "name": "right",
+          "line": 194
+        },
+        {
+          "name": "isMobile",
+          "line": 205
+        },
+        {
+          "name": "pointerRef",
+          "line": 206
+        },
+        {
+          "name": "inputRef",
+          "line": 210
+        },
+        {
+          "name": "selectionRef",
+          "line": 211
+        },
+        {
+          "name": "itemRefs",
+          "line": 217
+        },
+        {
+          "name": "submenuContentRef",
+          "line": 218
+        },
+        {
+          "name": "hoverTimerRef",
+          "line": 219
+        },
+        {
+          "name": "caretRectRef",
+          "line": 224
+        },
+        {
+          "name": "caretRect",
+          "line": 234
+        },
+        {
+          "name": "frame",
+          "line": 253
+        },
+        {
+          "name": "rect",
+          "line": 254
+        },
+        {
+          "name": "resolveChildren",
+          "line": 264
+        },
+        {
+          "name": "handleClearSearch",
+          "line": 302
+        },
+        {
+          "name": "selection",
+          "line": 304
+        },
+        {
+          "name": "triggers",
+          "line": 306
+        },
+        {
+          "name": "triggerLength",
+          "line": 309
+        },
+        {
+          "name": "poss",
+          "line": 310
+        },
+        {
+          "name": "trimTrigger",
+          "line": 314
+        }
+      ]
+    },
+    {
+      "file": "server/emails/snippets.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "maxSnippetChars",
+          "line": 17
+        },
+        {
+          "name": "maxLeadingBlocks",
+          "line": 22
+        },
+        {
+          "name": "maxContainerChildren",
+          "line": 27
+        },
+        {
+          "name": "mentionSnippet",
+          "line": 40
+        },
+        {
+          "name": "$pos",
+          "line": 59
+        },
+        {
+          "name": "listTypes",
+          "line": 65
+        },
+        {
+          "name": "container",
+          "line": 67
+        },
+        {
+          "name": "name",
+          "line": 68
+        },
+        {
+          "name": "index",
+          "line": 71
+        },
+        {
+          "name": "start",
+          "line": 72
+        },
+        {
+          "name": "end",
+          "line": 73
+        },
+        {
+          "name": "attrs",
+          "line": 80
+        },
+        {
+          "name": "trimmed",
+          "line": 87
+        },
+        {
+          "name": "row",
+          "line": 96
+        },
+        {
+          "name": "ancestor",
+          "line": 109
+        },
+        {
+          "name": "length",
+          "line": 112
+        },
+        {
+          "name": "leadingSnippet",
+          "line": 133
+        },
+        {
+          "name": "child",
+          "line": 142
+        },
+        {
+          "name": "remaining",
+          "line": 148
+        },
+        {
+          "name": "block",
+          "line": 149
+        },
+        {
+          "name": "blockLength",
+          "line": 150
+        },
+        {
+          "name": "diffSnippet",
+          "line": 177
+        },
+        {
+          "name": "renderDiffSnippet",
+          "line": 182
+        },
+        {
+          "name": "beforeJSON",
+          "line": 197
+        },
+        {
+          "name": "afterJSON",
+          "line": 198
+        },
+        {
+          "name": "changeset",
+          "line": 199
+        },
+        {
+          "name": "html",
+          "line": 207
+        },
+        {
+          "name": "dom",
+          "line": 213
+        },
+        {
+          "name": "trimContainer",
+          "line": 233
+        },
+        {
+          "name": "trimmableTypes",
+          "line": 234
+        },
+        {
+          "name": "child",
+          "line": 248
+        },
+        {
+          "name": "textLength",
+          "line": 266
+        },
+        {
+          "name": "clipDiff",
+          "line": 278
+        },
+        {
+          "name": "diffSelector",
+          "line": 279
+        },
+        {
+          "name": "results",
+          "line": 292
+        }
+      ]
+    },
+    {
+      "file": "server/queues/tasks/JSONAPIImportTask.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "REDIRECT_URL_REGEX",
+          "line": 40
+        },
+        {
+          "name": "ATTACHMENT_NODE_TYPES",
+          "line": 41
+        },
+        {
+          "name": "rewriteAttachmentReferences",
+          "line": 65
+        },
+        {
+          "name": "rewriteUrl",
+          "line": 69
+        },
+        {
+          "name": "newId",
+          "line": 74
+        },
+        {
+          "name": "transformAttachmentNode",
+          "line": 79
+        },
+        {
+          "name": "json",
+          "line": 80
+        },
+        {
+          "name": "attrs",
+          "line": 81
+        },
+        {
+          "name": "href",
+          "line": 84
+        },
+        {
+          "name": "match",
+          "line": 93
+        },
+        {
+          "name": "transformFragment",
+          "line": 108
+        },
+        {
+          "name": "doc",
+          "line": 120
+        },
+        {
+          "name": "scratch",
+          "line": 136
+        },
+        {
+          "name": "handle",
+          "line": 141
+        },
+        {
+          "name": "createdBy",
+          "line": 144
+        },
+        {
+          "name": "manifestByPath",
+          "line": 145
+        },
+        {
+          "name": "maxAttachmentSize",
+          "line": 148
+        },
+        {
+          "name": "seen",
+          "line": 151
+        },
+        {
+          "name": "normalized",
+          "line": 159
+        },
+        {
+          "name": "item",
+          "line": 163
+        },
+        {
+          "name": "buffer",
+          "line": 168
+        },
+        {
+          "name": "storageKey",
+          "line": 212
+        },
+        {
+          "name": "handle",
+          "line": 217
+        },
+        {
+          "name": "jsonByPath",
+          "line": 223
+        },
+        {
+          "name": "maxJSONSize",
+          "line": 224
+        },
+        {
+          "name": "tree",
+          "line": 228
+        },
+        {
+          "name": "buffer",
+          "line": 234
+        },
+        {
+          "name": "metadata",
+          "line": 249
+        },
+        {
+          "name": "parsed",
+          "line": 274
+        },
+        {
+          "name": "collectionExternalId",
+          "line": 281
+        },
+        {
+          "name": "collections",
+          "line": 295
+        },
+        {
+          "name": "associatedImport",
+          "line": 302
+        },
+        {
+          "name": "placeholder",
+          "line": 303
+        },
+        {
+          "name": "items",
+          "line": 364
+        },
+        {
+          "name": "transformed",
+          "line": 366
+        }
+      ]
+    },
+    {
+      "file": "server/queues/processors/ImportsProcessor.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "PagePerImportTask",
+          "line": 47
+        },
+        {
+          "name": "importModel",
+          "line": 68
+        },
+        {
+          "name": "importModel",
+          "line": 100
+        },
+        {
+          "name": "importModel",
+          "line": 129
+        },
+        {
+          "name": "tasksInput",
+          "line": 155
+        },
+        {
+          "name": "phase",
+          "line": 156
+        },
+        {
+          "name": "importTasks",
+          "line": 158
+        },
+        {
+          "name": "attrs",
+          "line": 161
+        },
+        {
+          "name": "storageKey",
+          "line": 232
+        },
+        {
+          "name": "user",
+          "line": 287
+        },
+        {
+          "name": "collections",
+          "line": 293
+        },
+        {
+          "name": "now",
+          "line": 326
+        },
+        {
+          "name": "userIdCache",
+          "line": 332
+        },
+        {
+          "name": "importInput",
+          "line": 335
+        },
+        {
+          "name": "ctx",
+          "line": 339
+        },
+        {
+          "name": "firstCollection",
+          "line": 341
+        },
+        {
+          "name": "isCollection",
+          "line": 374
+        },
+        {
+          "name": "allocated",
+          "line": 375
+        },
+        {
+          "name": "outputMap",
+          "line": 399
+        },
+        {
+          "name": "externalId",
+          "line": 402
+        },
+        {
+          "name": "internalId",
+          "line": 403
+        },
+        {
+          "name": "parentExternalId",
+          "line": 404
+        },
+        {
+          "name": "parentInternalId",
+          "line": 405
+        },
+        {
+          "name": "collectionExternalId",
+          "line": 409
+        },
+        {
+          "name": "collectionInternalId",
+          "line": 410
+        },
+        {
+          "name": "output",
+          "line": 414
+        },
+        {
+          "name": "collectionItem",
+          "line": 425
+        },
+        {
+          "name": "attachments",
+          "line": 427
+        },
+        {
+          "name": "transformedContent",
+          "line": 433
+        },
+        {
+          "name": "resolvedCreatedById",
+          "line": 443
+        },
+        {
+          "name": "description",
+          "line": 455
+        },
+        {
+          "name": "urlId",
+          "line": 469
+        },
+        {
+          "name": "collection",
+          "line": 473
+        },
+        {
+          "name": "isRootDocument",
+          "line": 516
+        },
+        {
+          "name": "urlId",
+          "line": 519
+        }
+      ]
+    },
+    {
+      "file": "shared/utils/files.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "bytesToHumanReadable",
+          "line": 11
+        },
+        {
+          "name": "useMacUnits",
+          "line": 17
+        },
+        {
+          "name": "base",
+          "line": 18
+        },
+        {
+          "name": "threshold",
+          "line": 19
+        },
+        {
+          "name": "units",
+          "line": 25
+        },
+        {
+          "name": "exponent",
+          "line": 26
+        },
+        {
+          "name": "value",
+          "line": 27
+        },
+        {
+          "name": "formatted",
+          "line": 30
+        },
+        {
+          "name": "getDataTransferImage",
+          "line": 41
+        },
+        {
+          "name": "dt",
+          "line": 44
+        },
+        {
+          "name": "untrustedHTML",
+          "line": 46
+        },
+        {
+          "name": "src",
+          "line": 49
+        },
+        {
+          "name": "getDataTransferFiles",
+          "line": 90
+        },
+        {
+          "name": "dt",
+          "line": 93
+        },
+        {
+          "name": "getEventFiles",
+          "line": 121
+        },
+        {
+          "name": "getFileNameFromUrl",
+          "line": 135
+        },
+        {
+          "name": "urlObj",
+          "line": 137
+        },
+        {
+          "name": "pathname",
+          "line": 138
+        },
+        {
+          "name": "filename",
+          "line": 139
+        },
+        {
+          "name": "dataUrlToBlob",
+          "line": 159
+        },
+        {
+          "name": "parts",
+          "line": 160
+        },
+        {
+          "name": "match",
+          "line": 161
+        },
+        {
+          "name": "mime",
+          "line": 162
+        },
+        {
+          "name": "blobBin",
+          "line": 163
+        },
+        {
+          "name": "array",
+          "line": 164
+        },
+        {
+          "name": "dataUrlToFile",
+          "line": 182
+        },
+        {
+          "name": "match",
+          "line": 183
+        },
+        {
+          "name": "mime",
+          "line": 184
+        },
+        {
+          "name": "blob",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "file": "shared/editor/lib/ChangesetHelper.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "MAX_UNCHANGED_GAP",
+          "line": 31
+        },
+        {
+          "name": "current",
+          "line": 61
+        },
+        {
+          "name": "prev",
+          "line": 67
+        },
+        {
+          "name": "next",
+          "line": 68
+        },
+        {
+          "name": "gapA",
+          "line": 72
+        },
+        {
+          "name": "gapB",
+          "line": 73
+        },
+        {
+          "name": "gap",
+          "line": 81
+        },
+        {
+          "name": "lastChange",
+          "line": 122
+        },
+        {
+          "name": "MAX_CHANGESET_COMPLEXITY",
+          "line": 167
+        },
+        {
+          "name": "IGNORED_MARKS",
+          "line": 172
+        },
+        {
+          "name": "removeIgnoredMarks",
+          "line": 181
+        },
+        {
+          "name": "marks",
+          "line": 182
+        },
+        {
+          "name": "nodeName",
+          "line": 229
+        },
+        {
+          "name": "marks",
+          "line": 230
+        },
+        {
+          "name": "extensionManager",
+          "line": 300
+        },
+        {
+          "name": "schema",
+          "line": 303
+        },
+        {
+          "name": "original",
+          "line": 309
+        },
+        {
+          "name": "docOld",
+          "line": 314
+        },
+        {
+          "name": "docNew",
+          "line": 317
+        },
+        {
+          "name": "tr",
+          "line": 321
+        },
+        {
+          "name": "changeset",
+          "line": 331
+        },
+        {
+          "name": "changes",
+          "line": 347
+        },
+        {
+          "name": "matchedDeletionIndices",
+          "line": 355
+        },
+        {
+          "name": "matchedInsertionIndices",
+          "line": 356
+        },
+        {
+          "name": "deletion",
+          "line": 361
+        },
+        {
+          "name": "oldSlice",
+          "line": 369
+        },
+        {
+          "name": "newSlice",
+          "line": 370
+        },
+        {
+          "name": "oldNode",
+          "line": 385
+        },
+        {
+          "name": "newNode",
+          "line": 386
+        },
+        {
+          "name": "isSameType",
+          "line": 391
+        },
+        {
+          "name": "getSemanticGroups",
+          "line": 394
+        },
+        {
+          "name": "groups",
+          "line": 395
+        },
+        {
+          "name": "oldGroups",
+          "line": 401
+        },
+        {
+          "name": "newGroups",
+          "line": 402
+        },
+        {
+          "name": "hasSharedGroup",
+          "line": 403
+        }
+      ]
+    }
+  ]
+}
