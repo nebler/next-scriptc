@@ -18,7 +18,7 @@ function track(p){owned.push(p);fs.writeFileSync(stateFile,JSON.stringify(owned,
 function dir(p){if(!fs.existsSync(p)){fs.mkdirSync(p,{recursive:true});track(p);}}
 function link(target,p){if(!fs.existsSync(p)){fs.symlinkSync(target,p);track(p);}}
 const apps={papermark:['mfts/papermark','ed19717ec02a1ac79aecf5569159aa9d2d869312',['lib','pages/api']],dub:['dubinc/dub','6b463b4bdd9ed2fd9aa416f67b5b77d317b1471e',['apps/web/lib','apps/web/app/api','packages/utils','packages/tsconfig']],umami:['umami-software/umami','559e3c607c23d2c72d9bd4f6481bda428255323c',['src']]};
-for(const [name,[remote,pin,sparse]] of Object.entries(apps)){
+for(const [name,[remote,pin,sparse]] of Object.entries(apps).filter(([name])=>!process.env.RUN_APPS||process.env.RUN_APPS.split(',').includes(name))){
  const p=path.join(base,name);
  if(!fs.existsSync(p)){
   execFileSync('git',['clone','--no-checkout','--depth','1','--filter=blob:none',`https://github.com/${remote}.git`,p],{stdio:'inherit'});
