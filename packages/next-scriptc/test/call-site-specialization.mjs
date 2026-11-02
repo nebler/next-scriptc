@@ -78,3 +78,15 @@ test('an exported specialization falls back for unseen callers with other shapes
  }
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+test('imported call sites in other modules choose the specialization',async()=>{
+ const dir=await mkdtemp(path.join(os.tmpdir(),'specialization-imported-'));
+ try{
+ await mkdir(dir+'/node_modules');await symlink(path.dirname(require.resolve('typescript/package.json',{paths:[process.cwd()]})),dir+'/node_modules/typescript');
+ await writeFile(dir+'/tsconfig.json','{"compilerOptions":{"strict":true,"module":"esnext","moduleResolution":"bundler"}}');
+ await writeFile(dir+'/f.ts','export function f<T>(x:T[]){return x.map(v=>({v}));}');
+ await writeFile(dir+'/caller.ts','import {f as g} from "./f"; export function caller(xs:{n:number}[]){return g(xs);}');
+ const logs=[],found=await discoverPromotions(dir,dir+'/dist',{},s=>logs.push(s));
+ const m=found.find(m=>m.functions[0].name==='f');
+ assert.ok(m,logs.join('\n'));assert.deepEqual(m.functions[0].specialization.params,['{ n: number; }[]']);
+ }finally{await rm(dir,{recursive:true,force:true});}
+});

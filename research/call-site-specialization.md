@@ -140,3 +140,34 @@ specialization category and accepted metadata. At most two jobs ran together.
 No Docker, Vercel calls, network posting, third-party source, root README change,
 merge or push. Task-created dependencies, links and boundary outputs were cleaned
 up after validation.
+
+## Review follow-up: runtime guards, imported callers, and why it still unlocks nothing
+
+2026-11-02, in review before merge. The closed-call-set and literal-provenance rules were stricter than soundness requires. A probe on main confirmed that extra input fields survive the native path, so a specialized type that is narrower than the caller's value does not drop data. The same runtime checks already cover every caller, seen or unseen:
+- host serialization rejects Dates, getters, custom prototypes, class instances, Maps, `toJSON` objects, cycles, holes and present undefined;
+- the checked typed parse rejects shape mismatches;
+- each rejection falls back to JS for that call.
+
+Visible call sites therefore only *choose* the type. They no longer prove where values come from.
+
+Changes:
+- Exported functions and non-literal callers can now specialize. The rule still rejects spreads, arity mismatches, disagreeing instantiations and functions with no visible direct calls.
+- Imported call sites in other modules were missed: they resolve to an alias symbol. They are now followed to the declaration. This bug made almost every exported function report "no visible direct calls".
+- Disagreement messages now print both type vectors.
+- New tests cover exported specializations with unseen callers of ten other shapes (canonical JSON equality, then native still usable) and imported callers.
+
+All 91 adapter tests pass. Fuzz seed 4242: 34,000 inputs and 68,000 comparisons pass.
+
+The census is still unchanged (Umami 4, Dub 32, Papermark 23). The refusals now show the real reason:
+
+| App | No visible direct calls | Instantiations disagree | Arity / parameter form |
+| --- | ---: | ---: | ---: |
+| Papermark | 2 | 2 | 0 |
+| Dub | 3 | 0 | 2 |
+| Umami | 0 | 5 | 1 |
+
+The disagreements are almost all *concrete vs `any`*. For example Umami `chunkArray` sees `number[]` at one call and `any[]` at another, and the replay helpers see union literals at some calls but `any` or `null` at others. The concrete instantiations come mostly from test fixtures with literal data. Production callers pass `any`, because their values come from the database, ClickHouse or `JSON.parse`. **For real request data, static types at call sites do not carry the shape.**
+
+Choosing the type from the concrete subset would stay sound because of the runtime fallback. But it would compile the lane for test-fixture shapes, and production values would mostly fall back. That is not a coverage gain.
+
+**Implication:** shapes for real request data must come from observed values, not declarations. That means shape profiles recorded by the dispatcher in JS or shadow state and fed into the next build: profile-guided specialization. This is recorded as a future hill and not started. The current priority is framework reach (a Vite plugin) and provider integration (Cloudflare).

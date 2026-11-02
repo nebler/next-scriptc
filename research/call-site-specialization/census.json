@@ -1,5 +1,5 @@
 {
-  "adapterCommit": "12ac6cfcf4975d9d5f6c650b2eebb8e574a83551",
+  "adapterCommit": "c6f4c45384a2947c958e8165a44efa1f8e905a89",
   "apps": {
     "papermark": {
       "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
@@ -465,8 +465,8 @@
           }
         ],
         "counts": {
-          "other extraction": 93,
-          "unsupported reference/import": 99,
+          "other extraction": 94,
+          "unsupported reference/import": 100,
           "default/rest/destructured parameter": 22,
           "work screen": 143,
           "runtime import": 36,
@@ -475,47 +475,24 @@
           "mutation": 10,
           "collection/callable boundary": 2,
           "undefined/optional": 3,
-          "call-site specialization": 10
+          "broad/unresolved boundary": 4,
+          "call-site specialization": 4
         },
         "specializationRejections": [
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/notion/utils.ts: function extractPageReferencesFromRichText: call-site specialization: caller lacks fresh JSON provenance or exact arity",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils/csv-parse.ts: function parseCsvList: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils/csv-parse.ts: function parseCsvList: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils/csv-parse.ts: function stringifyCsv: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils/csv-parse.ts: function stringifyCsv: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/video-analytics/playback.ts: function countablePlaybackEvents: call-site specialization: instantiations disagree: [\"any\"] vs [\"{ timestamp: string; view_id: string; event_type: string; start_time: number; end_time: number; playback_rate: number; volume: number; is_muted: number; is_focused: number; is_fullscreen: number; }[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils.ts: function safeTemplateReplace: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/utils.ts: function serializeFileSize: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/video-analytics/playback.ts: function countablePlaybackEvents: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/video-analytics/playback.ts: function eventsForView: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/pages/api/links/[id]/index.ts: function normalizeUploadFolderIds: call-site specialization: caller lacks fresh JSON provenance or exact arity",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/pages/api/links/index.ts: function normalizeUploadFolderIds: call-site specialization: caller lacks fresh JSON provenance or exact arity",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/pages/api/teams/[teamId]/datarooms/[id]/groups/[groupId]/members/index.ts: function isStringArray: call-site specialization: caller lacks fresh JSON provenance or exact arity",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/papermark/lib/video-analytics/playback.ts: function eventsForView: call-site specialization: instantiations disagree: [\"{}\",\"any\"] vs [\"VideoPlaybackEvent[]\",\"any\"]",
             "category": "call-site specialization"
           }
         ]
@@ -1053,23 +1030,23 @@
         },
         "specializationRejections": [
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/api/domains/is-domain-registration-invoice.ts: function parseRegisteredDomainSlugs: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/api/domains/is-domain-registration-invoice.ts: function parseRegisteredDomainSlugs: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/api-logs/mask-sensitive-fields.ts: function maskSensitiveFields: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/api-logs/mask-sensitive-fields.ts: function maskSensitiveFields: call-site specialization: specialized parameters must be required identifiers",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/webhook/schemas.ts: function coerceJsonString: call-site specialization: binding escapes or has a dynamic reference",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/webhook/schemas.ts: function coerceJsonString: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/zod/schemas/images.ts: function preprocessLinkPreviewImage: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/lib/zod/schemas/images.ts: function preprocessLinkPreviewImage: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/app/api/ai/support-chat/route.ts: function buildSlackAiReplyText: call-site specialization: caller lacks fresh JSON provenance or exact arity",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/dub/apps/web/app/api/ai/support-chat/route.ts: function buildSlackAiReplyText: call-site specialization: specialized parameters must be required identifiers",
             "category": "call-site specialization"
           }
         ]
@@ -1178,46 +1155,39 @@
         ],
         "counts": {
           "time/randomness/I/O": 7,
-          "other extraction": 103,
+          "other extraction": 104,
           "work screen": 80,
           "unsupported reference/import": 63,
           "default/rest/destructured parameter": 39,
           "runtime import": 7,
           "mutation": 2,
           "React/framework": 6,
-          "call-site specialization": 8
+          "call-site specialization": 6,
+          "broad/unresolved boundary": 1
         },
         "specializationRejections": [
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function getReplayEventCount: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function getReplayEventCount: call-site specialization: instantiations disagree: [\"({ type: number; data?: undefined; } | { type: string; data: { id: string; index: number; total: number; value: string; }; })[]\"] vs [\"any\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function restoreReplayEventFragments: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function restoreReplayEventFragments: call-site specialization: instantiations disagree: [\"({ type: number; timestamp: number; data?: undefined; } | { type: string; timestamp: number; data: { id: string; index: number; total: number; value: string; }; })[]\"] vs [\"any[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayFullSnapshot: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayFullSnapshot: call-site specialization: instantiations disagree: [\"{ type: number; }[]\"] vs [\"null\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayableFullSnapshot: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayableFullSnapshot: call-site specialization: instantiations disagree: [\"any[]\"] vs [\"({ type: number; timestamp: number; data: { node: { type: number; id: number; childNodes: { type: number; id: number; tagName: string; attributes: {}; childNodes: any[]; }[]; }; initialOffset: { left: number; top: number; }; }; } | { type: number; })[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayMeta: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/utils.ts: function chunkArray: call-site specialization: instantiations disagree: [\"number[]\",\"number\"] vs [\"any[]\",\"number\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/utils.ts: function chunkArray: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/journeys/getJourney.ts: function combineSequentialDuplicates: call-site specialization: caller lacks fresh JSON provenance or exact arity",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toPostgresGroupedReferrer: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toPostgresGroupedReferrer: call-site specialization: caller lacks exact arity",
             "category": "call-site specialization"
           }
         ]
@@ -1519,79 +1489,72 @@
         ],
         "counts": {
           "time/randomness/I/O": 7,
-          "other extraction": 78,
+          "other extraction": 79,
           "work screen": 80,
           "unsupported reference/import": 62,
           "default/rest/destructured parameter": 39,
           "runtime import": 7,
           "mutation": 2,
           "React/framework": 6,
-          "call-site specialization": 16,
-          "collection/callable boundary": 3
+          "call-site specialization": 14,
+          "collection/callable boundary": 3,
+          "broad/unresolved boundary": 1
         },
         "specializationRejections": [
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/boards.ts: function getFirstBoardComponentEntity: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/boards.ts: function getFirstBoardComponentEntity: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/boards.ts: function getBoardEntityIds: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/boards.ts: function getBoardEntityIds: call-site specialization: instantiations disagree: [\"{ type: string | undefined; parameters: BoardParameters; }\"] vs [\"{ type: any; parameters: BoardParameters; }\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/data.ts: function objectToArray: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/data.ts: function objectToArray: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/filters.ts: function percentFilter: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/filters.ts: function percentFilter: call-site specialization: instantiations disagree: [\"any[]\"] vs [\"{ x: string; y: number; }[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/prisma.ts: function getSearchParameters: call-site specialization: binding escapes or has a dynamic reference",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/prisma.ts: function getSearchParameters: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function getReplayEventCount: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function getReplayEventCount: call-site specialization: instantiations disagree: [\"({ type: number; data?: undefined; } | { type: string; data: { id: string; index: number; total: number; value: string; }; })[]\"] vs [\"any\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function restoreReplayEventFragments: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function restoreReplayEventFragments: call-site specialization: instantiations disagree: [\"({ type: number; timestamp: number; data?: undefined; } | { type: string; timestamp: number; data: { id: string; index: number; total: number; value: string; }; })[]\"] vs [\"any[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayFullSnapshot: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayFullSnapshot: call-site specialization: instantiations disagree: [\"{ type: number; }[]\"] vs [\"null\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayableFullSnapshot: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayableFullSnapshot: call-site specialization: instantiations disagree: [\"any[]\"] vs [\"({ type: number; timestamp: number; data: { node: { type: number; id: number; childNodes: { type: number; id: number; tagName: string; attributes: {}; childNodes: never[]; }[]; }; initialOffset: { left: number; top: number; }; }; } | { type: number; })[]\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/replay.ts: function hasReplayMeta: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/utils.ts: function chunkArray: call-site specialization: instantiations disagree: [\"number[]\",\"number\"] vs [\"never[]\",\"number\"]",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/lib/utils.ts: function chunkArray: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/getWeeklyTraffic.ts: function formatResults: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/getWeeklyTraffic.ts: function formatResults: call-site specialization: binding escapes or has a dynamic reference",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/journeys/getJourney.ts: function parseResult: call-site specialization: no visible direct calls",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/journeys/getJourney.ts: function combineSequentialDuplicates: call-site specialization: caller lacks fresh JSON provenance or exact arity",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toClickHouseGroupedReferrer: call-site specialization: caller lacks exact arity",
             "category": "call-site specialization"
           },
           {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/journeys/getJourney.ts: function parseResult: call-site specialization: binding escapes or has a dynamic reference",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toClickHouseGroupedReferrer: call-site specialization: exported binding has unseen callers",
-            "category": "call-site specialization"
-          },
-          {
-            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toPostgresGroupedReferrer: call-site specialization: exported binding has unseen callers",
+            "message": "[next-scriptc] not a candidate: /Users/noah/code/coverage-apps/umami/src/queries/sql/pageviews/getPageviewExpandedMetrics.ts: function toPostgresGroupedReferrer: call-site specialization: caller lacks exact arity",
             "category": "call-site specialization"
           }
         ]

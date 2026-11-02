@@ -524,3 +524,9 @@ final full-suite pass. Temporary dependencies and outputs were removed. At most
 two jobs ran together. No Docker, Vercel, network posting, third-party source,
 root README change, merge or push.
 [Design, limits, census and reproduction](call-site-specialization.md).
+
+**Review follow-up (2026-11-02).**
+- Relaxed K4 to rely on the runtime guards. Exported functions and non-literal callers can now specialize; unseen callers fall back.
+- Fixed missed imported call sites (alias symbols).
+- 91/91 tests pass; fuzz passes.
+- The census is still unchanged. Disagreements are almost all concrete test-fixture types vs `any` in production callers. Static call-site types don't carry real data shapes, so the next lever here is profile-guided specialization from observed shapes (deferred).

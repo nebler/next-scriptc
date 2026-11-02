@@ -11,9 +11,11 @@ export function specializeCallSites(ts, program, module) {
  const binding=declaration.parent&&ts.isVariableDeclaration(declaration.parent)?declaration.parent:declaration;
  const symbol=checker.getSymbolAtLocation(binding.name);
  if(!symbol)fail('missing binding');
+ // Imported call sites see an alias symbol; follow it to the declaration.
+ const resolve=s=>s&&s.flags&ts.SymbolFlags.Alias?checker.getAliasedSymbol(s):s;
  const calls=[];
  function refs(n){
-  if(ts.isIdentifier(n)&&(n.parent&&ts.isShorthandPropertyAssignment(n.parent)?checker.getShorthandAssignmentValueSymbol(n.parent):checker.getSymbolAtLocation(n))===symbol&&n!==binding.name){
+  if(ts.isIdentifier(n)&&n!==binding.name&&resolve(n.parent&&ts.isShorthandPropertyAssignment(n.parent)?checker.getShorthandAssignmentValueSymbol(n.parent):checker.getSymbolAtLocation(n))===symbol){
    if(n.parent&&ts.isCallExpression(n.parent)&&n.parent.expression===n)calls.push(n.parent);
   }
   ts.forEachChild(n,refs);
@@ -26,7 +28,7 @@ export function specializeCallSites(ts, program, module) {
   if(call.arguments.length!==declaration.parameters.length||call.arguments.some(a=>ts.isSpreadElement(a)))fail('caller lacks exact arity');
   if(!checker.getResolvedSignature(call))fail('unresolved call');
   const current=call.arguments.map(a=>checker.typeToString(checker.getWidenedType(checker.getBaseTypeOfLiteralType(checker.getTypeAtLocation(a))),undefined,ts.TypeFormatFlags.NoTruncation|ts.TypeFormatFlags.InTypeAlias));
-  if(types&&JSON.stringify(types)!==JSON.stringify(current))fail('instantiations disagree');
+  if(types&&JSON.stringify(types)!==JSON.stringify(current))fail(`instantiations disagree: ${JSON.stringify(types)} vs ${JSON.stringify(current)}`);
   types=current;
  }
  const native=ts.createSourceFile('specialized.ts',module.native,ts.ScriptTarget.Latest,true,ts.ScriptKind.TS);
