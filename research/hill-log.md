@@ -894,3 +894,54 @@ passes. The change is committed locally without a merge or push.
 - Only fields the closure actually reads (compares, does arithmetic on, or uses as keys) must be JSON-typed.
 
 The analysis it needs: classify each input path as read versus passthrough-only; reject any identity comparison or mutation of a handle. Then Dates, class instances and original object identity survive exactly, because they never cross the boundary. This is the proposed next adapter feature (H1), with `getElementSummary` as its acceptance target.
+
+## 33. L2 typed-source whole-library builds (2026-11-02)
+
+Research probe using stock scriptc 0.4.6 and the L1 addon/dispatcher. Fetched
+json-2-csv 5.5.0, deeks 3.1.0, and doc-path 4.1.0 at their matching tags, plus
+fastest-levenshtein 1.0.16 at its registry gitHead. All four are MIT and written
+in TypeScript. Source stayed in an external temp directory. Compiled project TS
+modules directly, preserving types rather than stripping them with esbuild.
+Only package-import resolution changed in the unmodified TS variant.
+
+Typed CSV fails five SC1090 support checks: inferred number[] versus string[],
+concat spreads at two sites, toLocaleString, and reading array.flat as a value.
+An annotation-only patch, verified to erase to identical JS, removes the array
+inference error but leaves four unsupported operations. No successful typed CSV
+archive or CPU result is claimed. Initial package-shaped source attempts also
+report SC4020; complete diagnostics and the failed annotation patch are retained.
+The untyped CSV bundle is byte-identical to a fresh unchanged L1 probe build,
+passes L1's exact 240-input corpus, forced dispatch and automatic shadow checks,
+and remains 5.22–5.81× slower than V8 through a new 315 KB payload.
+
+Typed fastest-levenshtein compiles unchanged and passes 240 paired-string inputs,
+240 forced native dispatches without fallback, and 240 shadow verifications.
+Its untyped dist bundle builds but fails native input 1 with SC1090 non-number
+indexing, wrapped SC4013. It supplies no successful untyped CPU comparison.
+Typed native/V8 ratios are 2.12, 1.75, 1.13, and 0.96 for 47, 527, 4,111, and
+131,119-byte payloads in the repeat session. The first session's large-case
+ratio is 0.94. The large case compares 30 versus 122,880 code units, so the
+4.3–6.2% local saving does not identify a general size crossover.
+
+Same-payload sink, echo, and JSON-parse-plus-echo controls use the same archive,
+ABI, owner handoff, and thread-CPU sampling. These are transport proxies, not an
+exact decomposition. Echo consumes about 1.7% of large CSV native CPU and 4.0%
+of large typed-distance CPU. Parse-plus-echo consumes about 6% for both. Transport
+dominates the smallest distance case, but cannot explain large CSV's deficit.
+Types help acceptance here and permit one narrow V8 win; they do not establish
+that nocheck caused L1's slowdown or that typed-source adapters generally win.
+
+Local indicative on Apple M4 Pro, Node 26.13.0; needs stand-in confirmation.
+Five warm-up and 35 measured pairs per size, sequential timing with no overlapping
+work from this agent. No hosting calls, Docker, publication, fork edits, held-out
+Papermark work, root README edits, merge, or push. Temp sources and native outputs
+were removed. All artifacts are below 256 KB. Adapter guidance requires verified
+source provenance and type-preserving graph assembly, with per-entry correctness
+and CPU gates. [Report, JSON, patch, chart, and scripts](typed-library-native.md).
+
+**Review note on L1/L2 together (2026-11-02).** Transport is not the bottleneck:
+- The parse-plus-echo proxy is about 6% of native CPU at large CSV sizes.
+- The generic object/string-heavy library code itself runs about 5× slower natively in stock scriptc 0.4.6.
+- Native wins only on tight, typed loops: Papermark's numeric distribution (3–4×) and Levenshtein at 131 KB (marginally).
+
+This bounds every coverage feature. Unlocking more functions helps CPU only where scriptc's code generation beats V8, and for typical library code it currently does not. The dispatcher keeps such code in JS, so there is no harm but also no gain. Broad "X% less CPU" claims therefore depend on scriptc code-generation work for objects, strings and generics (fork/upstream), not only on adapter coverage.
