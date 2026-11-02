@@ -1,0 +1,60 @@
+(node:39307) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/arm64/revenue.lib.a
+warning SC6101: 1 function that likely runs often uses untyped values, which runs slower than typed code:
+  check (../../../packages/next-scriptc/src/functions/json.ts:22): `descriptors` is `any`, in a loop
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/arm64/functions
+/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/stage/echo-sidecar.ts:1:30 - error SC0001: Cannot find module './serve.ts' or its corresponding type declarations.
+
+  1 | import {serveFunctions} from './serve.ts';
+    |                              ^~~~~~~~~~~~
+  2 | import {revenue} from './revenue-js.ts';
+
+1 error.
+node:internal/errors:999
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /Users/noah/code/next-scriptc/packages/next-scriptc/node_modules/scriptc/bin/scriptc.exe build /Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/stage/echo-sidecar.ts -o /Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/arm64/echo-functions --optimization release --strip --no-keep-llvm --node-islands=off
+/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/stage/echo-sidecar.ts:1:30 - error SC0001: Cannot find module './serve.ts' or its corresponding type declarations.
+
+  1 | import {serveFunctions} from './serve.ts';
+    |                              ^~~~~~~~~~~~
+  2 | import {revenue} from './revenue-js.ts';
+
+1 error.
+
+    at genericNodeError (node:internal/errors:999:15)
+    at wrappedFn (node:internal/errors:544:14)
+    at checkExecSyncError (node:child_process:990:11)
+    at execFileSync (node:child_process:1026:15)
+    at run (file:///Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/research/standin/build.mjs:32:35)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/research/standin/build.mjs:36:20 {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    '',
+    "/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/stage/echo-sidecar.ts:1:30 - error SC0001: Cannot find module './serve.ts' or its corresponding type declarations.\n" +
+      '\n' +
+      "  1 | import {serveFunctions} from './serve.ts';\n" +
+      '    |                              ^~~~~~~~~~~~\n' +
+      "  2 | import {revenue} from './revenue-js.ts';\n" +
+      '\n' +
+      '1 error.\n'
+  ],
+  pid: 39654,
+  stdout: '',
+  stderr: "/Users/noah/.t3/worktrees/next-scriptc/t3-3e320ffe/.checks/standin/stage/echo-sidecar.ts:1:30 - error SC0001: Cannot find module './serve.ts' or its corresponding type declarations.\n" +
+    '\n' +
+    "  1 | import {serveFunctions} from './serve.ts';\n" +
+    '    |                              ^~~~~~~~~~~~\n' +
+    "  2 | import {revenue} from './revenue-js.ts';\n" +
+    '\n' +
+    '1 error.\n'
+}
+
+Node.js v26.13.0

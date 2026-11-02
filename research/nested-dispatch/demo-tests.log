@@ -1,0 +1,33 @@
+✔ CSV quoting and CRLF normalization including empty cells (1.026166ms)
+✔ CSV report paid filter, totals and deterministic tie order (16.90025ms)
+✔ JSON joins discounts, filters refunds and sorts exact integer cents (0.517792ms)
+✔ thumbnail averages each channel and floors once per box (0.477458ms)
+✔ vector routes agree with an independent one-coordinate ranking and zero ties (345.969958ms)
+✔ query changes affect retrieval, both forms agree; invalid int8 input is rejected (408.266542ms)
+✔ registered arrivals have fixed 7/2/1 mix and three bursts (1.21925ms)
+✔ arrivals continue while requests are outstanding and include dispatch lag (122.625834ms)
+✔ safety-cap rejections remain scheduled errors, outstanding work drains (60.23ms)
+✔ HTTP transport validates full response bytes/status and enforces attempt budget (13.543708ms)
+✔ failed warmup prevents measurement and preserves drained partial samples (32.346667ms)
+✔ correctness failure cancels future arrivals but retains all scheduled outcomes (20.909ms)
+✔ scheduled latency stops at transport body drain before delayed client validation (81.749666ms)
+node cold: failed
+✔ a failing concurrent warmup drains and retains all outstanding timings without measuring (2.1275ms)
+✔ the shared request budget cannot be exceeded by concurrent workers (4.592959ms)
+✔ response mismatch invalidates the window and retains its error (1.05275ms)
+✔ a failed memory probe preserves measured rows and issued counts (146.296042ms)
+✔ cold-only failure cannot become a complete deployment (1.400209ms)
+✔ a changed response stops the full experiment before further workloads (0.3885ms)
+✔ CPU windows retain instance changes as discarded and reject invalid counters (0.82025ms)
+✔ CPU sampling keeps one pool per workload, repeats only token changes, and checks every digest (20.468959ms)
+✔ public matcher denies every other discovered API and future APIs, without a proxy hop on allowed routes (20.093458ms)
+✔ proxy opt-in returns a plain 404, ordinary dev/test/benchmark builds pass through (2.064333ms)
+✔ public vector observations expose timing and dispatch without benchmark process details (383.376ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1062.569458

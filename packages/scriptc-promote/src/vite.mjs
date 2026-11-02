@@ -55,8 +55,7 @@ export function promote(_file,id,js,args){
    if(!server(this)||(options?.ssr!==true&&this.environment?.config?.consumer!=='server')||id.includes('?'))return null;
    const matches=modules.filter(module=>module.source===id);
    if(!matches.length)return null;
-   const module={...matches[0],functions:matches.flatMap(m=>m.functions).sort((a,b)=>a.start-b.start)};
-   const code=loader.call({resourcePath:id,getOptions:()=>({modules:{[id]:module},server:true,promotionClient:'scriptc-promote:runtime',promotionFile:''}),addDependency:file=>this.addWatchFile(file)},text);
+   const code=loader.call({resourcePath:id,getOptions:()=>({modules:Object.fromEntries([...Map.groupBy(modules,m=>m.source)].map(([source,group])=>[source,{...group[0],functions:group.flatMap(m=>m.functions).sort((a,b)=>a.start-b.start)}])),server:true,promotionClient:'scriptc-promote:runtime',promotionFile:''}),addDependency:file=>this.addWatchFile(file)},text);
    return {code,map:null};
   }
  };

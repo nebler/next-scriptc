@@ -71,7 +71,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
    }
   });
   if(!work&&!forced)throw Error('work: no loop, recursion, array callback or JSON parse');
-  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,opaqueInputs:module.opaqueInputs,requiresFallback:module.requiresFallback})),promotion:true,forced});
+  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,rawLinks:module.rawLinks,opaqueInputs:module.opaqueInputs,requiresFallback:module.requiresFallback})),promotion:true,forced});
  }catch(e){if(forced)throw e;report(`[next-scriptc] not a candidate ${name}: ${e.message}`);}}
  return candidates;
 }

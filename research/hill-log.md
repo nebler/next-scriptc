@@ -1069,3 +1069,51 @@ locally on its branch.
 - optionally, never wrap candidates whose work screen shows trivially small per-call cost.
 
 Papermark stays held out: it is not used to tune D3, and is remeasured only as the next milestone (PM2).
+
+## 38. D3 internal JS calls and fair shadow admission (2026-11-02)
+
+Candidate JS bodies call raw companions for accepted local and linked candidates.
+Application entries keep wrappers, including exported helpers. The shared loader
+preserves lexical bindings, private helpers, arrows, parameter patterns, and
+recursive function expressions. Dependency resolution records linked targets;
+canonical paths handle symlinks. Native closures are unchanged.
+
+Settled JS checks its bucket and recheck deadline before sampling, logging, or
+encoding. Single-scalar size lookup avoids the loop and logarithm. The final
+thread-CPU microbenchmark measures about 32 ns of dispatcher overhead and 60 ns
+of full-wrapper overhead. The wrapper is slower than the baseline in this probe;
+internal calls bypass it entirely. The first, slower dispatcher probe is retained.
+
+Shadow slots are per bucket. A dispatcher-wide rolling 50/minute cap admits
+least-served active buckets and expires dormant participation after a minute.
+Learning and recheck deadlines are staggered without increasing their frequency.
+D1's 24 pairs, 19 votes, two cold exclusions, and 0.90/1.05 ratios remain unchanged.
+D2 CPU pairs still require both CPU clocks. Legacy wall pairs retain the global
+pending exclusion. There is no new static tiny-function cost heuristic.
+
+The development nested aggregation compiles both its scalar helper and outer
+function. At 600/6,000/60,000 records, D3 verifies 26 shadows and settles on JS.
+The old wrapper-inflated JS reference instead promotes. This fixture does not
+reproduce PM1's persistent starvation at its exact call counts. A separate
+nested-load regression proves that the outer can collect 24 winning pairs and
+promote under the global quota. No held-out Papermark execution or tuning occurs.
+
+The Linux arm64 stand-in uses only nsc-standin-d3, CPU 11, one CPU, 2 GiB,
+and no network. Before/after thread CPU and inclusive process CPU are retained.
+The D2/M3 rerun passes the amended gate in strict and opt-in construction modes:
+AUTO selects the best fixed lane in every bucket, stays within 1.5% of its median,
+and beats JS on the mixed total beyond C1's calibration band. Strict mixed
+inclusive CPU is 2,867 ms AUTO versus 5,732 ms JS; construction AUTO is 2,137 ms.
+C1 remains a hosted-wall proxy, not calibrated Active CPU. The original revenue
+benchmark also passes parity at all four sizes. No task build or test overlaps
+timing. Host background load remains a limitation.
+
+Next passes 98 tests, promotion passes 26 with two existing skips, and the demo
+passes 24. Differential fuzz passes 680 inputs and 1,360 comparisons across 17
+candidates. Final focused checks cover the scalar shortcut and expanded raw-call
+cases. Initial linked-path and revenue-stage setup failures are retained. An
+accidental broad demo test glob is stopped outside timing windows before the
+intended suite passes. Task containers, build outputs, and dependency links are
+removed. Artifacts above 256 KiB are compressed. The root README and compiler
+fork are untouched. Nothing is hosted, published, merged, or pushed. The change
+is committed locally. [Policy, measurements, limits, and reproduction](nested-dispatch.md).

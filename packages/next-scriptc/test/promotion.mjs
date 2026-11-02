@@ -87,8 +87,9 @@ test('ordinary JS routing has zero clock and encoding work; shadow caps remain b
  const d=createDispatcher({now:()=>{clocks++;return clock;},log:()=>{},nativeSample:async()=>{samples++;return {value:'2',elapsedMs:2};}});
  for(let i=0;i<19;i++)d.dispatch('f',()=>2,[2]);
  assert.equal(clocks,0);
- for(let i=19;i<6000;i++){d.dispatch('f',()=>{clock+=0.01;return 2;},[2]);await tick();}
+ for(let i=19;i<12000;i++){d.dispatch('f',()=>{clock+=0.01;return 2;},[2]);await tick();}
  assert.equal(samples,50);
+ while(d.snapshot().f.buckets[0].calls+1>=d.snapshot().f.buckets[0].nextRecheck){d.dispatch('f',()=>2,[2]);await tick();}
  const before=clocks;d.dispatch('f',()=>2,[2]);assert.equal(clocks,before);
  clock+=60000;
  for(let i=0;i<200;i++){d.dispatch('f',()=>{clock+=0.01;return 2;},[2]);await tick();}
@@ -183,8 +184,9 @@ test('thread CPU pairs reject contention bias without changing D1 policy',async(
   const d=createDispatcher({now:()=>wall,cpuNow:cpuMetric?()=>cpu:undefined,log:()=>{},perMinute:1000,
    nativeSample:async()=>{wall+=85;return {value:'2',elapsedMs:85,cpuMs:30};}});
   // 15/24 wall pairs clear the margin, reproducing the failed M3 vote.
-  for(let i=1;i<=520;i++){
+  for(let i=1;i<=700;i++){
    d.dispatch('f',()=>{const cost=i/20%24<15?103:70;wall+=cost;cpu+=60;return 2;},[2]);await tick();
+   if(d.snapshot().f.buckets[0].lastDecision)break;
   }
   return d.snapshot().f.buckets[0];
  }

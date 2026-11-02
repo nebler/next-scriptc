@@ -1,3 +1,7 @@
+// Scheduling (D3): per-bucket in-flight slots; dispatcher-wide rolling 50/min
+// admission by least-served active bucket, with one-minute dormant expiry.
+// Learning gaps are >=20 calls, recheck gaps >=200, deterministically staggered.
+// Scheduling changes neither the paired metric nor these statistical thresholds.
 // A non-overlapping paired sign test: under a median effect at the threshold,
 // P(Binomial(24, .5) >= 19) = .003305. No repeated looks within an epoch.
 export const stabilityDefaults = Object.freeze({samples:24, required:19, coldSamples:2, promoteRatio:0.9, demoteRatio:1.05, recheckEvery:200});
