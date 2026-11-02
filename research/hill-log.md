@@ -842,3 +842,8 @@ from every graph. Installs, bundles and native outputs remain external and are
 removed after checks. No containers, fork edits, held-out app work, root README
 edit, hosting calls, publication, merge or push. Builds run sequentially beside
 the other research job. [Report, JSON, scripts, hashes, and reproduction](whole-library-native.md).
+
+**Review note on L1 (2026-11-02).** The 4–10× native slowdown is most likely structural, not overhead:
+- The bundles compile only with `// @ts-nocheck`, so scriptc sees untyped JS. Every value goes through its dynamic representation, which V8's JIT handles better.
+- scriptc's advantage comes from static types, and shipped `dist/*.js` has discarded them.
+- **Next probe (L2):** compile libraries written in TypeScript (json-2-csv is one) from their TS sources, with types intact, and compare against the untyped bundle. If typed sources win, the whole-library path should compile from source where a package publishes it, and not from dist JS.
