@@ -847,3 +847,43 @@ the other research job. [Report, JSON, scripts, hashes, and reproduction](whole-
 - The bundles compile only with `// @ts-nocheck`, so scriptc sees untyped JS. Every value goes through its dynamic representation, which V8's JIT handles better.
 - scriptc's advantage comes from static types, and shipped `dist/*.js` has discarded them.
 - **Next probe (L2):** compile libraries written in TypeScript (json-2-csv is one) from their TS sources, with types intact, and compare against the untyped bundle. If typed sources win, the whole-library path should compile from source where a package publishes it, and not from dist JS.
+
+## 34. F1 summary boundary counterexample (2026-11-02)
+
+F1 remains blocked before adapter implementation. At the pinned Formbricks
+revision, `getElementSummary` observes `response.updatedAt` and returns the Date
+in its samples. Its OpenText result also retains the original element, contact,
+and contactAttributes references. The region has six timestamp read sites and
+16 sites that store the whole element in a summary. Those input sub-objects
+escape, violating the requested projection condition.
+
+An executable counterexample reads the pinned source outside the repository,
+checks it against the pinned Git blob, and runs its unchanged statement prefix
+through the element loop. Dropping createdAt preserves bytes, but dropping
+updatedAt changes bytes. Dropping an extra element field also changes bytes,
+although the loop never reads that field explicitly. The production argument
+encoder and result canonicalizer reject the retained Date. Converting the Date
+to a string preserves JSON bytes for this fixture but changes its JavaScript
+value and reference identity. A malformed response preserves the loop's TypeError.
+The existing closure checker still rejects the actual local response interface
+on `Identifier Date`.
+
+This is evidence against the specified whole-region JSON projection, not a
+scriptc compiler failure. No adapter gates were weakened, and no projection,
+Zod emitter, async outliner, native summary, verified summary shadows, or CPU
+comparison is claimed. A smaller count-only region with JS result assembly, or
+a new reference-preserving transport contract, needs a separate design. The
+fork stays on hold.
+
+The reproduction is a scoped source-prefix check, not a complete application
+module import or the requested end-to-end harness. AGPL source and transpiled
+code are never saved in the repository. There is no summary timing to overlap
+the other library probe. No container, hosting, held-out app, fork, or root README
+operation is performed. [Evidence, limitations, validation, and reproduction](formbricks-summary.md).
+
+All 95 Next tests and 21 promotion tests pass, with two existing promotion skips.
+The real-addon differential fuzzer passes seed 20935 across 17 candidates,
+680 inputs, and 1,360 comparisons. These validate the existing adapter corpus,
+not a promoted summary. Temporary task-owned links are removed after validation.
+No setup installation was created or removed. The artifact compression check
+passes. The change is committed locally without a merge or push.
