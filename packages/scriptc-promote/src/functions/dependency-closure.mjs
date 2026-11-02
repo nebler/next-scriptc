@@ -223,7 +223,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  const lowered=lowerOpaqueHandles(extracted.native,name,ts);
  const proof=constructionProof(lowered.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo}))],closureHash:digest(combined)};
+ return {referenceNative:extracted.native,rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo}))],closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

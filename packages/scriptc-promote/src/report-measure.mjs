@@ -1,0 +1,70 @@
+// Runs only for explicit --measure. Isolate addon failures from static reporting.
+import {createRequire,stripTypeScriptTypes} from 'node:module';
+import {readFile,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {buildPromotion} from './functions/promotion-build.mjs';
+import {encodeArguments,decodeResult,canonicalResult,argumentTable} from './functions/promotion-encodings.mjs';
+import {stabilityDefaults,decideLane} from './functions/promotion-policy.mjs';
+import {strictClosureProgram} from './functions/construction-proof.mjs';
+import {estimateSize} from './functions/promotion.mjs';
+const require=createRequire(import.meta.url),temp=process.argv[2];
+const {modules,inputs,root}=JSON.parse(await readFile(path.join(temp,'request.json'),'utf8'));
+const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:s[Math.floor(s.length*.1)],median:s[Math.floor(s.length*.5)],p90:s[Math.floor(s.length*.9)],max:s.at(-1)};};
+function synthesize(module,fn){
+ const ts=require('typescript'),strict=strictClosureProgram(module.referenceNative??module.native,ts),checker=strict.program.getTypeChecker();
+ let declaration;function find(n){if(ts.isFunctionDeclaration(n)&&n.name?.text===fn.name)declaration=n;else if(ts.isVariableDeclaration(n)&&n.name?.text===fn.name)declaration=n.initializer;else ts.forEachChild(n,find);}find(strict.source);
+ if(!declaration?.parameters)throw Error('Cannot synthesize this signature; supply --inputs');
+ let budget=256;
+ function value(type,seen=new Set()){
+  if(--budget<0||seen.has(type))throw Error('Recursive or large input type; supply --inputs');
+  if(type.isLiteral())return type.value;
+  if(type.flags&ts.TypeFlags.Number)return 32;
+  if(type.flags&ts.TypeFlags.String)return 'synthetic';
+  if(type.flags&ts.TypeFlags.BooleanLike)return type.intrinsicName!=='false';
+  if(type.flags&ts.TypeFlags.Null)return null;
+  if(type.isUnion()){const member=type.types.find(t=>!(t.flags&(ts.TypeFlags.Undefined|ts.TypeFlags.Null)));if(member)return value(member,seen);}
+  const next=new Set(seen).add(type);
+  if(checker.isArrayType(type)){const item=value(checker.getTypeArguments(type)[0],next);return Array.from({length:16},()=>structuredClone(item));}
+  if(checker.isTupleType(type))return checker.getTypeArguments(type).map(t=>value(t,next));
+  if(type.flags&ts.TypeFlags.Object&&!checker.getIndexInfosOfType(type).length&&!type.getCallSignatures().length&&!type.getConstructSignatures().length)return Object.fromEntries(checker.getPropertiesOfType(type).map(p=>[p.name,value(checker.getTypeOfSymbolAtLocation(p,p.valueDeclaration??declaration),next)]));
+  throw Error('No bounded JSON input type; supply --inputs');
+ }
+ return declaration.parameters.map(p=>value(checker.getTypeAtLocation(p)));
+}
+const results=[],logs=[];
+const validIds=new Set(modules.flatMap(m=>[m.functions[0].id,path.relative(root,m.source).split(path.sep).join('/')+'#'+m.functions[0].name]));
+for(const id of Object.keys(inputs))if(!validIds.has(id))throw Error('Unknown function input ID: '+id);
+let built=[];
+try{built=await buildPromotion(modules,path.join(temp,'plain'),{report:m=>logs.push(m)});}catch(e){logs.push(e.stderr?.toString()??e.message);}
+let stages=[];
+if(built.length)try{stages=await buildPromotion(built,path.join(temp,'stages'),{timing:true,report:m=>logs.push(m)});}catch{}
+const addon=built.length?require(path.join(temp,'plain/promotion.node')):null;
+const timingAddon=stages.length?require(path.join(temp,'stages/promotion.node')):null;
+for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,index=built.indexOf(m);
+ if(index<0){results.push({id,status:'compile-rejected',reason:logs.join('\n')||'Stock compiler rejected function'});continue;}
+ try{
+  let tuples=inputs[id]??inputs[fn.id],inputSource='user-provided';
+  if(tuples===undefined){inputSource='synthetic';tuples=[synthesize(m,fn)];}
+  if(!Array.isArray(tuples)||!tuples.length||tuples.some(t=>!Array.isArray(t)))throw Error('Expected a nonempty array of argument tuples');
+  const reference=path.join(temp,`reference-${index}.mjs`);await writeFile(reference,stripTypeScriptTypes(m.referenceNative??m.native));const js=(await import(pathToFileURL(reference).href))[fn.name];
+  // Report each tuple separately: never blend dispatcher size buckets or distributions.
+  for(const [inputIndex,args] of tuples.entries()){
+   const schema=fn.boundary,encoded=encodeArguments(schema,args),table=argumentTable(encoded),expected=canonicalResult(js(...args),schema,table);
+   const invoke=()=>{const input=encodeArguments(schema,args),out=addon.run(index,input);if(out?.fallback)throw Error('Native fallback; no realizable saving');return decodeResult(schema,out,argumentTable(input));};
+   if(canonicalResult(invoke(),schema,table)!==expected)throw Error('Native/JS mismatch');
+   for(let i=0;i<20;i++){js(...args);invoke();}
+   const pairs=[],jsNs=[],nativeNs=[];
+   const cpu=!!addon.runShadow&&!!addon.threadCpuMs,now=cpu?addon.threadCpuMs:()=>performance.now();
+   async function pair(){let j,n;const runJS=()=>{const begin=now();js(...args);j=(now()-begin)*1e6;};const runNative=async()=>{const begin=now(),input=encodeArguments(schema,args),encode=now()-begin;const out=cpu?await addon.runShadow(index,input):{value:addon.run(index,input)};if(out.value?.fallback)throw Error('Native fallback');const decodeBegin=now(),value=decodeResult(schema,out.value,argumentTable(input));n=(cpu?out.cpuMs+encode+now()-decodeBegin:now()-begin)*1e6;if(canonicalResult(value,schema,argumentTable(input))!==expected)throw Error('Native/JS mismatch');};if(pairs.length%2){await runNative();runJS();}else{runJS();await runNative();}return [j,n];}
+   for(let i=0;i<stabilityDefaults.coldSamples;i++)await pair();
+   for(let i=0;i<stabilityDefaults.samples;i++){const [j,n]=await pair();jsNs.push(j);nativeNs.push(n);pairs.push([j,n]);}
+   let boundaryShare=null,boundaryStages=null;
+   const stageIndex=stages.indexOf(m);
+   if(stageIndex>=0){const totals=[],computes=[];for(let i=0;i<10;i++){const begin=performance.now(),input=encodeArguments(schema,args),out=timingAddon.run(stageIndex,input);if(out?.fallback)throw Error('Instrumented native fallback');decodeResult(schema,out.value,argumentTable(input));totals.push((performance.now()-begin)*1e6);computes.push(out.timings.compute*1e6);}const total=stats(totals).median,compute=stats(computes).median;boundaryShare=Math.max(0,Math.min(1,1-compute/total));boundaryStages={n:10,totalWallNs:total,computeWallNs:compute};}
+   const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs,'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
+   results.push({id,status:'ok',inputIndex,inputSource,bucket:estimateSize(args),metric:cpu?'thread-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
+  }
+ }catch(e){results.push({id,status:'unmeasured',reason:e.message});}
+}
+await writeFile(path.join(temp,'result.json'),JSON.stringify(results));

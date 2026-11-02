@@ -44,6 +44,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(/^route\./.test(path.basename(source))&&handlers.has(name))return;
   if(!exported&&!program.scope.getBinding(name)?.referencePaths.length)return;
   if((p.node.body.directives??[]).some(d=>d.value.value==='use js'))return;
+  resolution.onConsidered?.({source,name});
   names.push({name:name,forced:(p.node.body.directives??[]).some(d=>d.value.value==='use native')});
  }});
  const candidates=[];
@@ -52,6 +53,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(module.imports.length) {
    Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
   }
+  module.referenceNative??=module.native;
   if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.opaqueInputs=lowered.inputs;}
   let work=false;
   const native=parse(module.native);
@@ -77,7 +79,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
 }
 
 export async function discoverPromotions(projectDir, distDir, config, report=console.log){
- const ts=require(require.resolve('typescript',{paths:[projectDir]}));
+ const ts=config?.typescript?.implementation??require(require.resolve('typescript',{paths:[projectDir]}));
  const file=path.resolve(projectDir,config?.typescript?.tsconfigPath??'tsconfig.json');
  const loaded=ts.readConfigFile(file,ts.sys.readFile);
  const parsed=ts.parseJsonConfigFileContent(loaded.config??{compilerOptions:{strict:true}},ts.sys,path.dirname(file),undefined,file);
@@ -87,7 +89,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   const file=path.join(dir,e.name);if(file===distDir)continue;
   if(e.isDirectory())await visit(file);
   else if(/\.[cm]?[jt]sx?$/.test(file)){
-   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,report,{ts,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
+   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
   }
  }}await visit(config?.promotionSourceDir ? path.resolve(projectDir,config.promotionSourceDir) : projectDir);
  if(!modules.length)return [];
@@ -121,5 +123,5 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   for(const fn of m.functions){
    fn.constructionProof=constructionProof(m.native,ts);
    if((!!m.opaqueInputs||specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
-  }return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
+  }return true;}catch(e){if(m.forced)throw e;const message=`[next-scriptc] not a candidate: ${e.message}`;report(message);config?.onDiagnostic?.({source:m.source,name:m.functions[0].name,message});return false;}});
 }

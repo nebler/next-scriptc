@@ -1,0 +1,1 @@
+import {sum} from "../../compute"; declare function defineEventHandler(fn: () => unknown): unknown; export default defineEventHandler(() => sum([1,2,3]));
