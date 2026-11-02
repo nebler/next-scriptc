@@ -1,3 +1,4 @@
+import {auditOpaqueUses} from './opaque-handles.mjs';
 // An intentionally small immutable language. Unknown syntax fails closed.
 // Run on the extracted closure, never on just the exported function body.
 import {localConstruction} from './construction-local.mjs';
@@ -7,12 +8,14 @@ export function constructionProof(text, ts) {
  try { ts ??= require(require.resolve('typescript',{paths:[process.cwd()]})); }
  catch { return {eligible:false,reason:'TypeScript checker unavailable',version:1}; }
  const {program,source,checker}=strictClosureProgram(text,ts);
+ try{auditOpaqueUses(source,checker,ts);}catch(e){return {eligible:false,reason:e.message,version:2};}
  const fail=(node,reason)=>{throw Error(`${reason} at ${source.getLineAndCharacterOfPosition(node.getStart(source)).line+1}`);};
  const bad=new Set(['__proto__','prototype','constructor','toJSON']);
  const functions=new Map(),edges=new Map();
  let initialized=new Set();
  const symbol=n=>ts.isShorthandPropertyAssignment(n.parent)&&n.parent.name===n ? checker.getShorthandAssignmentValueSymbol(n.parent) : checker.getSymbolAtLocation(n);
  function data(type,seen=new Set(),depth=0){
+  if(type.getProperty('__scriptcOpaqueHandle'))return true;
   if(depth>32||seen.has(type))return false;
   if(type.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null))return true;
   if(type.isUnion())return type.types.every(t=>data(t,seen,depth+1));

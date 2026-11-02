@@ -13,6 +13,7 @@ export function signature(fn, i, timing = false, constructionResults = construct
   if (!fn.boundary) throw Error('Promotion build requires checkFunctionTypes boundary metadata');
   const {params,result} = fn.boundary;
   if(fn.requiresFallback){if(!fn.constructionProof?.eligible||!['json','number','string'].includes(result))throw Error('Throw fallback requires proved replay and fallback result ABI');catchFallback=true;}
+  if(fn.boundary.opaque){if(!fn.constructionProof?.eligible||!['json','number','string'].includes(result))throw Error('Opaque handles require proved construction and fallback ABI');catchFallback=true;}
   if(fn.strictClosure)catchFallback=true;
   if(params.length>64)throw Error('Promotion ABI supports at most 64 arguments');
   const mark = n => timing ? `boundaryStage(${n});` : '';

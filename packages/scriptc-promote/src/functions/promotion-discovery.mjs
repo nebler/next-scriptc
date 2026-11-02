@@ -1,3 +1,4 @@
+import {lowerOpaqueHandles} from './opaque-handles.mjs';
 import {babelModules} from '../babel.mjs';
 import { createRequire } from 'node:module';
 import { readFile, readdir } from 'node:fs/promises';
@@ -51,6 +52,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(module.imports.length) {
    Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
   }
+  if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.opaqueInputs=lowered.inputs;}
   let work=false;
   const native=parse(module.native);
   traverse(native,{
@@ -69,7 +71,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
    }
   });
   if(!work&&!forced)throw Error('work: no loop, recursion, array callback or JSON parse');
-  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,requiresFallback:module.requiresFallback})),promotion:true,forced});
+  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,opaqueInputs:module.opaqueInputs,requiresFallback:module.requiresFallback})),promotion:true,forced});
  }catch(e){if(forced)throw e;report(`[next-scriptc] not a candidate ${name}: ${e.message}`);}}
  return candidates;
 }
@@ -107,7 +109,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
    checkFunctionTypes(ts,strict.program,[{source:strict.source.fileName,functions}]);
    functions.forEach((fn,i)=>{m.functions[i].strictClosure=true;m.functions[i].boundary=fn.boundary;m.functions[i].resultShape=fn.resultShape;});
   }
-  try { boundaries(isolated); }
+  try { boundaries(isolated||!!m.opaqueInputs); }
   catch(original) {
    if(!/any, unknown|expected JSON data/.test(original.message))throw original;
    const specialization=specializeCallSites(ts,program,m);
@@ -118,6 +120,6 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   }
   for(const fn of m.functions){
    fn.constructionProof=constructionProof(m.native,ts);
-   if((specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
+   if((!!m.opaqueInputs||specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
   }return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
 }

@@ -20,6 +20,7 @@ export function checkFunctionTypes(ts, program, modules) {
       const active = new Set();
       const isBytes = type => fn.promotion && type.getSymbol()?.getName()==='Uint8Array' && type.getSymbol().declarations?.some(d=>program.isSourceFileDefaultLibrary(d.getSourceFile()));
       function check(type, at, input = false) {
+        if(type.getProperty('__scriptcOpaqueHandle'))return;
         if(input && fn.promotion && type.flags & ts.TypeFlags.Undefined)return;
         if(!at.includes('.') && !at.includes('[') && isBytes(type))return;
         if (type.flags & (ts.TypeFlags.StringLike | ts.TypeFlags.NumberLike | ts.TypeFlags.BooleanLike | ts.TypeFlags.Null)) return;
@@ -56,6 +57,7 @@ export function checkFunctionTypes(ts, program, modules) {
         } finally { active.delete(type); }
       }
       function encoding(type) {
+        if(type.getProperty('__scriptcOpaqueHandle'))return 'json';
         if(isBytes(type))return 'bytes';
         if (type.isUnion()) {
           const kinds = new Set(type.types.map(encoding));
@@ -79,6 +81,7 @@ export function checkFunctionTypes(ts, program, modules) {
       // unions keep the generic validator rather than guessing a closed layout.
       let shapeBudget = 256;
       function shape(type, seen = new Set(), depth = 0) {
+        if(type.getProperty('__scriptcOpaqueHandle'))return {kind:'handle'};
         if (--shapeBudget < 0 || depth > 32 || seen.has(type)) return null;
         if (type.flags & ts.TypeFlags.StringLike) return {kind:'string'};
         if (type.flags & ts.TypeFlags.NumberLike) return {kind:'number'};
@@ -102,7 +105,8 @@ export function checkFunctionTypes(ts, program, modules) {
         return fields.every(([,s])=>s) ? {kind:'object',fields} : null;
       }
       if (fn.promotion && encoding(result) === 'json') fn.resultShape = shape(result);
-      fn.boundary = { params: declaration.parameters.map(p => encoding(checker.getTypeAtLocation(p))), result: encoding(result) };
+      fn.boundary = { params: declaration.parameters.map(p => encoding(checker.getTypeAtLocation(p))), result: encoding(result),...(fn.opaqueInputs?{opaque:{inputs:fn.opaqueInputs,result:shape(result)}}:{}) };
+      if(fn.opaqueInputs&&!fn.boundary.opaque.result)throw Error('opaque result needs a bounded layout');
     }
   }
 }

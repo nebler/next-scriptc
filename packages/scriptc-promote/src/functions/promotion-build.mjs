@@ -10,7 +10,7 @@ import { compilerPath } from '../paths.mjs';
 export async function buildPromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, constructionResults=constructionResultsDefault, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
  if(!modules.length)return [];
  for(const module of modules)assertDependencyHashes(module);
- const constructionReport=modules.flatMap(m=>{const proof=m.functions[0]?.constructionProof??constructionProof(m.native);return m.functions.map(fn=>{fn.constructionProof=proof;const row={id:fn.id,name:fn.name,...proof,enabled:constructionResults&&proof.eligible&&fn.boundary?.result==='json'};return row;});});
+ const constructionReport=modules.flatMap(m=>{const proof=m.functions[0]?.constructionProof??constructionProof(m.native);return m.functions.map(fn=>{fn.constructionProof=proof;if(fn.boundary?.opaque&&!proof.eligible)throw Error('Opaque handles require a construction proof: '+proof.reason);const row={id:fn.id,name:fn.name,...proof,enabled:constructionResults&&proof.eligible&&fn.boundary?.result==='json'};return row;});});
  if(!['linux-arm64-gnu','linux-x64-gnu',`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`].includes(target))throw Error(`Unsupported promotion target: ${target}`);
  const triple=target==='linux-arm64-gnu'?'aarch64-linux-gnu.2.34':'x86_64-linux-gnu.2.34';
  linux=target.startsWith('linux-');

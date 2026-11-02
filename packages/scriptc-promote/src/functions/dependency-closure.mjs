@@ -1,3 +1,4 @@
+import {lowerOpaqueHandles} from './opaque-handles.mjs';
 import {babelModules} from '../babel.mjs';
 // Closed, conservative runtime-module subset. Never execute a dependency at build time.
 import fs from 'node:fs';
@@ -113,7 +114,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
   }
   if(declaration.isTSTypeAliasDeclaration()||declaration.isTSInterfaceDeclaration()){
    if(declaration.node.typeParameters?.params.some(p=>types.has(p.name)||program.scope.getBinding(p.name)))fail('type parameter shadows a module binding; scoped type linking required');
-   declaration.traverse({enter(p){if(['TSAnyKeyword','TSUnknownKeyword','TSUndefinedKeyword','TSVoidKeyword','TSNeverKeyword','TSFunctionType','TSConstructorType','TSMethodSignature','TSMappedType','TSConditionalType','TSInferType','TSTypeQuery','TSImportType'].includes(p.node.type)||p.node.type==='Identifier'&&['Date','Map','Set','Promise','Function','Object','symbol','bigint'].includes(p.node.name))fail(`type ${local} is not bounded JSON data: ${p.node.type} ${p.node.name??''}`);}});
+   declaration.traverse({enter(p){if(['TSMappedType','TSConditionalType','TSInferType','TSTypeQuery','TSImportType'].includes(p.node.type))fail(`type ${local} is not bounded JSON data: ${p.node.type} ${p.node.name??''}`);}});
   }
   if(declaration.isVariableDeclarator()&&declaration.node.init?.type==='TSAsExpression'&&declaration.node.init.typeAnnotation.type==='TSTypeReference'&&declaration.node.init.typeAnnotation.typeName.name==='const'){
    if(record.reflective)fail('constant graph lexical eval');
@@ -179,7 +180,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
    Identifier(p){if(p.node.name.startsWith('__dep_'))fail('reserved generated binding');},
    'ImportExpression|ThisExpression|NewExpression|ObjectMethod|ClassDeclaration|ClassExpression'(p){fail(`unsupported ${p.node.type}`);},
    MemberExpression(p){if(p.node.computed||['prototype','constructor','__proto__'].includes(p.node.property.name))fail('computed or prototype member');},
-   ReferencedIdentifier(p){if(['eval','Function','require','module','exports','globalThis','process','Date','crypto','console','fetch','performance'].includes(p.node.name))fail(`unsupported ${p.node.name}`);},
+   ReferencedIdentifier(p){if(p.findParent(q=>q.isTSType()))return;if(['eval','Function','require','module','exports','globalThis','process','Date','crypto','console','fetch','performance'].includes(p.node.name))fail(`unsupported ${p.node.name}`);},
   });
   // Keep import bindings in the original scope until all references are renamed.
   for(const local of needed){
@@ -205,9 +206,10 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
   }
  }});
  const extracted=extractFunctions(generate(flat).code,source,name);
- const proof=constructionProof(extracted.native,ts);
+ const lowered=lowerOpaqueHandles(extracted.native,name,ts);
+ const proof=constructionProof(lowered.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {native:extracted.native,requiresFallback,dependencies:[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),closureHash:digest(combined)};
+ return {native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

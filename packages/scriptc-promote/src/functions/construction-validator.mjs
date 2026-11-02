@@ -3,9 +3,10 @@
 export function constructionValidator(shape, name, dynamic = false) {
  if (!shape) return '';
  let next=0; const out=[];
- const type=s=>s.kind==='array'?`Array<${type(s.value)}>`:s.kind==='nullable'?`${type(s.value)}|null`:s.kind==='object'?`{${s.fields.map(([k,v])=>`${JSON.stringify(k)}:${type(v)}`).join(';')}}`:s.kind;
+ const type=s=>s.kind==='handle'?'number':s.kind==='array'?`Array<${type(s.value)}>`:s.kind==='nullable'?`${type(s.value)}|null`:s.kind==='object'?`{${s.fields.map(([k,v])=>`${JSON.stringify(k)}:${type(v)}`).join(';')}}`:s.kind;
  function visit(s){const id=`${name}_${next++}`;let body;
- if(s.kind==='number')body='return typeof v==="number"&&Number.isFinite(v);';
+ if(s.kind==='handle')body='return typeof v==="number"&&Number.isInteger(v)&&v>=0;';
+ else if(s.kind==='number')body='return typeof v==="number"&&Number.isFinite(v);';
  else if(['string','boolean'].includes(s.kind))body=`return typeof v===${JSON.stringify(s.kind)};`;
  else if(s.kind==='null')body='return v===null;';
  else if(s.kind==='nullable')body=`return v===null||${visit(s.value)}(v);`;
