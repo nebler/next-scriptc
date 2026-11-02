@@ -1,0 +1,20 @@
+$ node --test shim/test/parity.mjs shim/test/vercel-ipc.mjs
+Streaming port 59819: first 0.7ms, end 222.6ms
+Streaming port 59818: first 0.8ms, end 222.4ms
+Streaming port 59845: first 5.2ms, end 226.8ms
+Streaming port 59844: first 2.5ms, end 222.8ms
+Streaming port 59845: first 1.3ms, end 222.3ms
+Streaming port 59844: first 1.4ms, end 222.5ms
+Parent death during active stream (Node): 995.6ms
+Parent death during active stream (native): 1003.3ms
+Compared 113 requests: identical status, statusText, headers (except date/runtime marker), and body.
+✔ shim HTTP parity: Node 24 and scriptc native (10400.266583ms)
+✔ Vercel executable IPC: startup, concurrency, streams, errors, aborts and ping (3358.261084ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10449.675042

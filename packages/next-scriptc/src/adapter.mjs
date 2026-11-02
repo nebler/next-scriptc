@@ -18,6 +18,14 @@ const adapter = {
   name: "next-scriptc",
   async modifyConfig(config, context) {
     const { phase, projectDir } = context;
+    if (config.rewrites?.[optionsKey]?.target === "cloudflare") {
+      if (phase === "phase-production-build") {
+        const { prepareCloudflare } = await import("./cloudflare/build.mjs");
+        await prepareCloudflare(projectDir, config.rewrites[optionsKey].cloudflare);
+        buildPlans.set(projectDir, { cloudflare: true });
+      }
+      return config;
+    }
     if (process.platform === "win32") throw new Error("[next-scriptc] Windows is unsupported; use macOS or Linux.");
     if (phase === "phase-production-build") {
       const routes = planRoutes(await discoverRoutes(projectDir, config.pageExtensions), config.rewrites?.[optionsKey]);
@@ -41,6 +49,7 @@ const adapter = {
     const { projectDir, distDir, buildId, outputs } = context;
     const plan = buildPlans.get(projectDir);
     if (!plan) throw new Error("[next-scriptc] Missing build plan from modifyConfig.");
+    if (plan.cloudflare) { buildPlans.delete(projectDir); return; }
     const { config } = plan;
     const appRoutes = new Set(outputs.appRoutes.map((route) => route.pathname));
     for (const route of plan.routes) {

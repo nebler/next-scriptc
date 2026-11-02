@@ -1,0 +1,101 @@
+
+┌─────────────────────────────┐
+│ OpenNext — Cloudflare build │
+└─────────────────────────────┘
+
+Monorepo detected at /Users/noah/.t3/worktrees/next-scriptc/t3-d842f2d5
+App directory: /Users/noah/.t3/worktrees/next-scriptc/t3-d842f2d5/examples/demo
+Next.js version : 16.4.3
+@opennextjs/cloudflare version: 1.20.15
+@opennextjs/aws version: 4.1.14
+workerd compatibility_date: 2026-10-30
+
+┌─────────────────────────────────┐
+│ OpenNext — Building Next.js app │
+└─────────────────────────────────┘
+
+$ next build
+▲ Next.js 16.4.3 (Turbopack)
+  Applying modifyConfig from next-scriptc
+/Users/noah/.t3/worktrees/next-scriptc/t3-d842f2d5/examples/demo/.scriptc/cloudflare/compute.wasm
+✓ Running next.config.ts took 1384ms
+- Cache Components enabled
+- Partial Prefetching enabled
+- Experiments (use with caution):
+  · cpus: 2
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 607ms
+  Running TypeScript ...
+  Finished TypeScript in 1707ms ...
+  Collecting page data using 2 workers ...
+  Generating static pages using 2 workers (0/35) ...
+  Generating static pages using 2 workers (8/35)
+  Generating static pages using 2 workers (17/35)
+  Generating static pages using 2 workers (26/35)
+✓ Generating static pages using 2 workers (35/35) in 107ms
+  Finalizing page optimization ...
+  Running onBuildComplete from next-scriptc
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/analytics/revenue
+├ ƒ /api/app/diagnostics/process
+├ ƒ /api/app/diagnostics/redis
+├ ƒ /api/app/orders
+├ ƒ /api/app/webhooks/payment
+├ ƒ /api/cf1
+├ ƒ /api/diagnostics/memory
+├ ƒ /api/export.json.gz
+├ ƒ /api/feed.xml
+├ ƒ /api/function-example
+├ ƒ /api/heavy/bcrypt
+├ ƒ /api/heavy/csv
+├ ƒ /api/heavy/diagnostics
+├ ƒ /api/heavy/json
+├ ƒ /api/heavy/thumbnail
+├ ƒ /api/heavy/vectors
+├ ƒ /api/heavy/vectors-imul
+├ ƒ /api/hello
+├ ƒ /api/images/histogram
+├ ƒ /api/items/[id]
+├ ○ /api/items/new
+├ ƒ /api/login
+├ ƒ /api/login-scrypt
+├ ƒ /api/posts/[slug]
+├ ƒ /api/primes
+├ ƒ /api/report
+├ ƒ /api/search
+├ ○ /api/static-fixture
+├ ƒ /api/stores/nearby
+├ ƒ /api/uploads/verify
+├ ƒ /api/url-echo
+├ ƒ /api/verify
+└ ◐ /reports
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)             prerendered as static content
+◐  (Partial Prerender)  prerendered as static HTML with dynamic server-streamed content
+ƒ  (Dynamic)            server-rendered on demand
+
+WARN Node.js middleware support is experimental in cloudflare, and not officially maintained by OpenNext maintainers. Use at your own risk.
+
+┌──────────────────────────────┐
+│ OpenNext — Generating bundle │
+└──────────────────────────────┘
+
+Bundling middleware function...
+Bundling Node.js middleware...
+Bundling static assets...
+Bundling cache assets...
+Building server function: default...
+Applying code patches: 1.798s
+# copyPackageTemplateFiles
+[35m⚙️ Bundling the OpenNext server...
+[0m
+[35mWorker saved in `.open-next/worker.js` 🚀
+[0m
+OpenNext build complete.

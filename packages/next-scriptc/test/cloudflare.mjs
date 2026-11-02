@@ -1,0 +1,50 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { validateOptions } from '../src/options.mjs';
+import { dispatchCloudflare, installCloudflare } from '../src/cloudflare/runtime.mjs';
+import adapter from '../src/adapter.mjs';
+import { withScriptc } from '../src/index.mjs';
+test('Cloudflare target preserves JS Next configuration and skips Node startup', async () => {
+  const config = withScriptc({ output: 'standalone' }, { target: 'cloudflare' });
+  assert.equal(await adapter.modifyConfig(config, { phase: 'phase-production-server', projectDir: '/unused' }), config);
+  assert.throws(() => validateOptions({ target: 'cloudflare', nativePromotion: 'auto' }), /CPU timers/);
+  assert.throws(() => validateOptions({ target: 'cloudflare', cloudflare: { entry: '' } }), /entry/);
+  assert.throws(() => validateOptions({ cloudflare: { entry: 'x.ts' } }), /requires target/);
+});
+test('static lane keeps byte verification and permanently falls back on mismatch or trap', () => {
+  let calls = 0;
+  const js = () => '{"x":1}';
+  installCloudflare({ run() { calls++; return '{"x":1}'; } });
+  assert.equal(dispatchCloudflare('[]', js), js());
+  assert.equal(calls, 0);
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), js());
+  assert.equal(calls, 1);
+  installCloudflare({ run() { calls++; return '{ "x":1}'; } });
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), js());
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), js());
+  assert.equal(calls, 2);
+  installCloudflare({ run() { throw Error('trap'); } });
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), js());
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), js());
+});
+test('each input byte bucket verifies three calls and periodically rechecks', () => {
+  let jsCalls = 0, corrupt = false;
+  const js = () => { jsCalls++; return '1'; };
+  installCloudflare({ run: () => corrupt ? '2' : '1' });
+  for (let i = 0; i < 32; i++) assert.equal(dispatchCloudflare('[]', js, 'wasm'), '1');
+  assert.equal(jsCalls, 3);
+  corrupt = true;
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), '1');
+  assert.equal(jsCalls, 4);
+  assert.equal(dispatchCloudflare('[]', js, 'wasm'), '1');
+  assert.equal(jsCalls, 5);
+});
+test('new input size buckets must pass their own shadows', () => {
+  let jsCalls = 0;
+  const js = () => { jsCalls++; return '1'; };
+  installCloudflare({ run: () => '1' });
+  for (let i = 0; i < 4; i++) dispatchCloudflare('[]', js, 'wasm');
+  assert.equal(jsCalls, 3);
+  for (let i = 0; i < 4; i++) dispatchCloudflare('[1000000]', js, 'wasm');
+  assert.equal(jsCalls, 6);
+});

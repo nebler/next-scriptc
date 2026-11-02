@@ -3,6 +3,7 @@ import { withScriptc } from "next-scriptc";
 
 const publicDemo = process.env.NODE_ENV === "production" && process.env.NEXT_SCRIPTC_PUBLIC_DEMO === "1";
 const nextConfig: NextConfig = {
+  ...(process.env.NEXT_SCRIPTC_CLOUDFLARE === "1" ? { experimental: { cpus: 2 } } : {}),
   // Inline the opt-in into Next's output; runtime env changes cannot open the proxy.
   env: { NEXT_SCRIPTC_PUBLIC_DEMO: publicDemo ? "1" : "0" },
   // Timing previews need response headers from the complete dynamic render.
@@ -38,6 +39,7 @@ const vercelRoutes = [...lightRoutes, ...heavyRoutes, "/api/diagnostics/memory",
 export default process.env.NEXT_SCRIPTC_BASELINE === "node"
   ? { ...nextConfig, pageExtensions: ["tsx", "ts", "jsx", "js", "native.ts"], distDir: process.env.NEXT_SCRIPTC_VERCEL ? ".next" : ".next-node" }
   : withScriptc({ ...nextConfig, ...(grouped && !process.env.NEXT_SCRIPTC_VERCEL ? { distDir: ".next-grouped" } : {}) }, {
+    ...(process.env.NEXT_SCRIPTC_CLOUDFLARE === "1" ? { target: "cloudflare" as const, cloudflare: { entry: "cloudflare/revenue.ts" } } : {}),
     routes: vercelGrouped
       ? Object.fromEntries(vercelRoutes.map((pattern) => [pattern, { group: "vercel" }]))
       : grouped ? Object.fromEntries(lightRoutes.map((pattern) => [pattern, { group: "light" }])) : {},
