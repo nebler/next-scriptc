@@ -669,3 +669,46 @@ also pass. Temporary framework dependencies and output are removed after checks.
 No Docker/container changes, compiler/fork changes, Papermark work, root README
 edit, deployment, hosting call, merge, or push.
 [Integration, limits, census, retained counters, and reproduction](framework-integrations-nitro-tanstack.md).
+
+## 29. A0 async region outlining census (2026-11-02)
+
+Research only. No transform was built. The finder scans all async functions in
+K1's Umami and Dub server directories, plus a sparse pinned Formbricks response
+and summary analysis scope. It records suspension-free statement runs, live
+inputs and outputs with application checker types, return and jump exclusions,
+throws, and this/arguments use. Hypothetical sync functions exist only in memory.
+The real work, extraction, dependency, initialization, purity, boundary, strict
+closure, and construction checks determine acceptance. Independent boundary
+probes expose later data blockers. No native code was compiled or timed.
+
+Umami: 598 async functions, 1,283 regions, zero accepted. Dub: 607 async
+functions, 1,534 regions, zero accepted. Formbricks at
+`76b05fb98dd870000d820ad8a27527e483dcfbb0`: 28 async functions, 83 regions,
+one accepted. Its concrete Prisma row-to-deletion-ID map passes construction
+proof. It is outside summary aggregation and has no CPU attribution. Generating
+Formbricks' real Prisma client and JSON types changed this result from zero to
+one, demonstrating why missing generated types cannot be treated as real any.
+The summary mapper instead fails an independent boundary probe on nested Dates;
+module initialization is still its first rejection.
+
+Concrete input witnesses recover two Umami team-ID maps and one Dub tag map.
+The optimistic additional bounds are 9 and 30 respectively, with remaining
+construction and typing failures unproved. No witness is on a K1-profiled path.
+New accepted coverage on those measured fixtures is zero. Historical Umami map
+CPU of 9.8–11.1% remains a multi-gate ceiling, not an async-only coverage estimate.
+Recommend observed-shape collection research before a production async outliner.
+Confidence is moderate in that ordering and low for whole-app extrapolation.
+
+The census has 2,900 regions in total. Later lexical references conservatively
+approximate liveness; early-return protocols and loops containing awaits remain
+excluded. Umami and Dub retain minimal dependency types, with unresolved types
+reported separately. Formbricks uses its pinned Zod, Prisma, JSON generator, and
+actual workspace source paths. Liveness fixtures and syntax checks pass. A fresh
+dependency setup and both Prisma generators were checked independently.
+
+Temporary dependencies and generated Prisma files were removed. Source checkouts
+stay outside the repo; no AGPL source is committed. No Docker/container action,
+Papermark use, hosting call, compiler/fork modification, root README edit, merge,
+or push. [Report, full JSON census, counterfactual bounds, and reproduction](async-region-census.md).
+
+**Review note (2026-11-02).** The census data points somewhere other than its recommendation. `any`/unknown is a small *first* rejection (9 / 27 / 0). The largest first rejection is closure/module-init (309 Umami, 424 Dub, 62 Formbricks of 83), followed by closure/import. The largest real compute region found, Formbricks `getElementSummary` (lines 329–1021, a synchronous aggregation loop), is rejected because of `export const getSurveySummary = reactCache(...)` at line 1024. That declaration is not in the region's dependency closure. `dependency-closure.mjs` checks the initialization of *every* top-level statement in each visited module, and its effect scan (Date, `new`, `this`, etc.) also covers the whole file. Next step: restrict those checks to the bindings reachable from the candidate (M1). Observed shapes are deferred.
