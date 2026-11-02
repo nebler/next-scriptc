@@ -1,0 +1,47 @@
+{
+  "repository": "n8n-io/n8n",
+  "sha": "18c045bfacb12c8163ff770970b330af9730aaab",
+  "packages": [
+    {
+      "path": "package.json",
+      "name": "n8n-monorepo",
+      "typescript": {
+        "typescript": "6.0.2"
+      }
+    },
+    {
+      "path": "packages/core/package.json",
+      "name": "n8n-core",
+      "typescript": {
+        "@n8n/typescript-config": "workspace:*",
+        "typescript": "catalog:typescript"
+      }
+    },
+    {
+      "path": "packages/workflow/package.json",
+      "name": "n8n-workflow",
+      "typescript": {
+        "@n8n/typescript-config": "workspace:*",
+        "typescript": "catalog:typescript"
+      }
+    }
+  ],
+  "workspaceCatalogDeclarations": [
+    {
+      "line": 290,
+      "declaration": "typescript: 6.0.2"
+    },
+    {
+      "line": 366,
+      "declaration": "typescript:"
+    },
+    {
+      "line": 368,
+      "declaration": "typescript: 7.0.2"
+    },
+    {
+      "line": 375,
+      "declaration": "typescript: 'npm:@typescript/typescript6@6.0.2'"
+    }
+  ]
+}

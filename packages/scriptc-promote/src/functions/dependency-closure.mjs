@@ -37,7 +37,9 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  // Never cache a completed closure by filename: a diamond can request new exports.
  function load(file, input) {
   if(modules.has(file))return modules.get(file);
-  const code=input??fs.readFileSync(file,'utf8'), ast=babel.parser().parse(code,{sourceType:'module',plugins:['typescript','jsx']});
+  const code=input??fs.readFileSync(file,'utf8');let ast;
+  try{ast=babel.parser().parse(code,{sourceType:'module',plugins:['typescript','jsx']});}
+  catch(error){error.message=`${file}: ${error.message}`;throw error;}
   const fail=reason=>{throw Error(`dependency closure: ${file}: ${reason}`);};
   if(/\.cjs$/.test(file))fail('CommonJS mutable module exports require a module-object proof');
   if(ast.program.directives.some(d=>['use client','use js'].includes(d.value.value)))fail('module directive');

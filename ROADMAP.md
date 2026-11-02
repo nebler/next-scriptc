@@ -95,10 +95,10 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 
 | # | Item | Hill | Subsystem | Status |
 |---|---|---|---|---|
-| EV3 | Dependency-installed DEV census | eval | census | running |
+| EV3 | Dependency-installed DEV census | eval | census | done: 15,638 considered / 441 accepted; real blockers = module-init proofs, export conditions, .d.ts graph, decorators |
 | C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | done: RC/boxing ~26%, layout probes ~14%; key-array fix −13.6% on enumeration, CSV unchanged |
 | C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | bounded step done: leaf teardown eligible for inlining; generic −12.6%, spread −16.1%; CSV inconclusive; full escape/SSA work open |
-| B1 | Cheap discovery blockers | 2 | discovery | after EV3 |
+| B1 | Cheap discovery blockers | 2 | discovery | running |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |

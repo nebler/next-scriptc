@@ -1557,3 +1557,74 @@ Fixed a default Turbopack build failure by making function loader metadata survi
 With ar removed from PATH, Nitro reports SC3004 spawnSync ar ENOENT, builds with zero compiled candidates, and serves the expected result in JS. Permission errors on independent scriptc installs require the documented pnpm rebuild repair. Map, Date, in, and optional-helper probes compile in the explicit async path; a parameter-property class fails with an unlocated unsupported-reference message. Indexed-read errors identify generated files. Dev runs JS and updates after an edit. One production build/rebuild pair takes 8.90s/4.41s on this shared machine; these are observations, not a performance benchmark.
 
 Required Node 24 package suites pass: next-scriptc 98/98; scriptc-promote 34 passed and two existing skips. An initial run under an unintended Node 23 executable failed a React Router dependency preparation; the Node 24 rerun passes without a product change. Temporary consumers and task-owned processes are cleaned. Root README, main checkout, compiler source, and compiler fork are untouched. No Docker, deploy, push, PR, issue, or public post. Full fixtures, verbatim output, limitations, and ten prioritized follow-ups are in [the friction log](friction-log.md).
+
+## 52. Dependency-installed DEV blocker census (2026-11-03)
+
+All seventeen frozen DEV entries are accounted for: fifteen JavaScript/TypeScript
+server repositories install dependencies with lifecycle scripts disabled, and
+Fider/Maybe remain unexecuted non-Node controls. PostHog's pinned clone retry
+succeeds. No HELD_OUT repository or Papermark is cloned, inspected, scanned, or
+measured. The main checkout, its node_modules, compiler fork, and root README
+remain untouched. No push, PR, public write, database, Docker, deployment, or
+hosting-account call occurs.
+
+Completed server scopes visit 10,376 files and consider 15,638 unique functions:
+15,197 are diagnosed and 441 are discovery-accepted. Per-function first refusals
+classify as 8,002 real and 7,195 environment-affected under the documented static
+resolution checks. The leading real categories are the work screen (2,404),
+module initialization/effect proof (2,023), unsupported references/types (1,095),
+package-export/resolver policy (423), and declaration/type-only graph handling
+(387). These counts are not a complete function denominator or a causal measure
+of dependency installation: 1,957 parser-failed files remain outside considered
+functions, classes/async exclusions remain silent, and 32 GrowthBook validator
+files still exhaust the analyzer heap after scoped 6/12 GiB retries. No zero
+coverage is inferred for those files.
+
+N8n core/workflow require the app's compatible root TypeScript 6 Node API;
+Unleash requires the protocol TypeScript 5.9.3 host instead of its TypeScript 7
+package. These harness-only overrides and canonical failures are retained.
+Offline Prisma attempts deny network access and leave missing engines/generated
+types explicit. Static import contamination is conservative and can attribute
+unrelated missing imports to a function. Declaration handling is separated from
+executable initialization, and filenames cannot masquerade as mutation blockers.
+
+A small parser-isolation fix retains healthy files, preserves forced-native
+fail-fast behavior, records exact source errors, and warns that skipped coverage
+is unknown. Dependency parse errors retain filenames. No eligibility, compiler,
+shadow, or profitability policy is changed. Nineteen targeted regression checks
+pass; 143 completed EV1/EV2 scope pairs agree on acceptance. Pins, unique IDs,
+diagnostic partitions, artifact sizes, deterministic gzip headers, and secret
+patterns are checked. Earlier lost EV1 fatal stderr is labeled; output retention
+is fixed rather than reconstructing errors.
+
+GrowthBook split search remains blocked by mutation/closure proofs, including the
+previous quadrature-cache issue; its observed server caller is enterprise-licensed.
+BIC and context helpers are discovery-accepted, with no native measurements.
+Actual's forecast remains cheap, with strict indexed-access refusals and unproven
+HTTP use. PostHog HogVM is an unmeasured server-import lead with unresolved imports
+and state/callable-boundary questions. No native build, CPU win, or endpoint saving
+is inferred. Resolve the validator resource gap before claiming complete coverage,
+and profile request compute before prioritizing compiler support by these counts.
+
+Task-owned clones, temporary installs, and dependency links are removed. Location
+rule exceptions are documented: the initial tool install used its configured npm
+cache, initial Yarn created a home cache later moved/removed, and initial tests
+used and removed default macOS temporary fixtures. Existing user npm caches are
+not erased. [Methods, per-repo results, examples, and limits](eval-dev-census.md)
+and [audited artifact index](eval-corpus/dev-census/index.json).
+
+## 53. Review note on EV3 (2026-11-03)
+
+With dependencies installed and scans scoped to server code, the DEV census is
+15,638 considered, 15,197 diagnosed, 441 accepted. 8,002 refusals are real gaps
+and 7,195 still reflect the environment (unresolved imports, generated types).
+The work screen (2,404) is an intentional economics gate. The real, fixable
+blockers are mostly about how discovery reads the dependency graph, not compiler
+features: module-initialization proofs (2,023), package export conditions (423),
+and declaration/type-only graph handling (387). Parser syntax (decorators)
+blocks whole files in AFFiNE, n8n, NocoDB and PostHog. These define B1.
+
+Accepted functions are not yet measured, and EV1 suggests most are small helpers.
+M1 (`report --measure` over DEV accepted functions) is the decisive next eval step.
+The parser-isolation fix also matters for users: one unparseable file no longer
+aborts discovery for the whole app.

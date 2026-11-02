@@ -12,6 +12,7 @@ const require = createRequire(import.meta.url);
 const babel = babelModules;
 const parse = text => babel.parser().parse(text, {sourceType:'module',plugins:['typescript','jsx']});
 const traverse = babel.traverse().default;
+const sourceParseFailure=Symbol('sourceParseFailure');
 
 // These operations allocate a new array container. Mutating that container
 // (e.g. sorting a mapped result) does not mutate the source collection.
@@ -27,7 +28,8 @@ function freshArray(p) {
 // Runtime imports require a closed module graph and a transitive effect proof.
 // Other callees and nonlocal mutation remain subject to the existing screen.
 export function promotionCandidates(text, source, report = console.log, resolution = {}) {
- const ast = parse(text), names=[];let program;
+ let ast;try{ast=parse(text);}catch(error){error[sourceParseFailure]=true;throw error;}
+ const names=[];let program;
  const handlers=new Set(['GET','HEAD','POST','PUT','DELETE','PATCH','OPTIONS']);
  if(/^route\./.test(path.basename(source))){
   for(const n of ast.program.body)if(n.type==='ExportNamedDeclaration')for(const spec of n.specifiers??[])if(handlers.has(spec.exported.name))handlers.add(spec.local.name);
@@ -89,7 +91,15 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   const file=path.join(dir,e.name);if(file===distDir)continue;
   if(e.isDirectory())await visit(file);
   else if(/\.[cm]?[jt]sx?$/.test(file)){
+   try {
    modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
+   } catch(error) {
+    // A malformed/unsupported source file must not discard other files' results.
+    // Forced annotations and non-parser failures retain their fail-fast behavior.
+    if(!error[sourceParseFailure]||!(error instanceof SyntaxError)||!error.code?.startsWith('BABEL_PARSER'))throw error;
+    const message=`[next-scriptc] parse failure ${file}: ${error.message}`;
+    report(message);config?.onFileError?.({source:file,message:error.message,code:error.code});
+   }
   }
  }}await visit(config?.promotionSourceDir ? path.resolve(projectDir,config.promotionSourceDir) : projectDir);
  if(!modules.length)return [];
