@@ -1,0 +1,34 @@
+{
+  "sha": "67f385bae3cb684085681b2d66d15b5320e4dd69",
+  "scopes": [
+    "src"
+  ],
+  "files": 52,
+  "accepted": [
+    {
+      "file": "src/hooks.server.ts",
+      "name": "isAuthUrl",
+      "line": 6,
+      "boundary": {
+        "params": [
+          "string"
+        ],
+        "result": "boolean"
+      }
+    }
+  ],
+  "counts": {
+    "unsupported reference/type": 4,
+    "mutation": 2
+  },
+  "logs": [
+    "[next-scriptc] not a candidate GenerateToken: [next-scriptc] <app>/src/lib/jwt.ts: function GenerateToken: unsupported reference process",
+    "[next-scriptc] not a candidate VerifyToken: [next-scriptc] <app>/src/lib/jwt.ts: function VerifyToken: unsupported reference process",
+    "[next-scriptc] not a candidate cn: [next-scriptc] <app>/src/lib/utils.ts: function cn: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)",
+    "[next-scriptc] not a candidate flyAndScale: [next-scriptc] <app>/src/lib/utils.ts: function flyAndScale: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)",
+    "[next-scriptc] not a candidate randomString: purity: nonlocal mutation",
+    "[next-scriptc] not a candidate createProjectKey: purity: nonlocal mutation"
+  ],
+  "errors": [],
+  "mode": "source-only; no application dependencies installed"
+}

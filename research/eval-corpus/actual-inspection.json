@@ -1,0 +1,2658 @@
+{
+  "repo": "actualbudget/actual",
+  "url": "https://github.com/actualbudget/actual",
+  "sha": "741d1615b7a818784f7859269430a003753a40dd",
+  "domain": "finance",
+  "frameworkHypothesis": "Node sync server/React",
+  "licenses": [
+    {
+      "file": "LICENSE.txt",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/sync-server/LICENSE",
+      "declaration": "MIT"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/desktop-electron/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/crdt/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/loot-core/package.json",
+      "license": "ISC",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "hyperformula": "^3.5.0",
+        "jest-diff": "^30.5.2"
+      }
+    },
+    {
+      "file": "packages/vite-plugin-peggy/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/docs/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "@easyops-cn/docusaurus-search-local": "^0.55.3"
+      }
+    },
+    {
+      "file": "packages/cli/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/component-library/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "@chromatic-com/storybook": "^5.5.1"
+      }
+    },
+    {
+      "file": "packages/plugins-service/package.json",
+      "license": "ISC",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/eslint-plugin-actual/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/api/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/ci-actions/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/mobile-client/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/desktop-client/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "react-router",
+        "vite"
+      ],
+      "computeDeps": {
+        "hyperformula": "^3.5.0"
+      }
+    },
+    {
+      "file": "packages/sync-server/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "express",
+        "vite"
+      ],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/desktop-client/src/components/reports/reports/monte-carlo/monteCarloSimulation.ts",
+      "score": 67,
+      "symbols": [
+        {
+          "name": "getPotAssetWeights",
+          "line": 62
+        },
+        {
+          "name": "sanitize",
+          "line": 75
+        },
+        {
+          "name": "stocks",
+          "line": 77
+        },
+        {
+          "name": "bonds",
+          "line": 78
+        },
+        {
+          "name": "cash",
+          "line": 79
+        },
+        {
+          "name": "total",
+          "line": 80
+        },
+        {
+          "name": "historicalPresetStatsCache",
+          "line": 92
+        },
+        {
+          "name": "getHistoricalMixStats",
+          "line": 103
+        },
+        {
+          "name": "blended",
+          "line": 107
+        },
+        {
+          "name": "mean",
+          "line": 113
+        },
+        {
+          "name": "variance",
+          "line": 114
+        },
+        {
+          "name": "getHistoricalPresetStats",
+          "line": 126
+        },
+        {
+          "name": "isDefaultHistory",
+          "line": 130
+        },
+        {
+          "name": "cached",
+          "line": 132
+        },
+        {
+          "name": "stats",
+          "line": 138
+        },
+        {
+          "name": "getMixShareTotal",
+          "line": 149
+        },
+        {
+          "name": "sanitize",
+          "line": 155
+        },
+        {
+          "name": "isMixIncomplete",
+          "line": 165
+        },
+        {
+          "name": "getAllocationChange",
+          "line": 186
+        },
+        {
+          "name": "presetWeights",
+          "line": 194
+        },
+        {
+          "name": "getInvestment",
+          "line": 225
+        },
+        {
+          "name": "lerp",
+          "line": 238
+        },
+        {
+          "name": "lerpInvestment",
+          "line": 245
+        },
+        {
+          "name": "resolveInvestmentPhases",
+          "line": 272
+        },
+        {
+          "name": "getPotInvestmentAtAge",
+          "line": 292
+        },
+        {
+          "name": "reached",
+          "line": 297
+        },
+        {
+          "name": "phases",
+          "line": 304
+        },
+        {
+          "name": "active",
+          "line": 314
+        },
+        {
+          "name": "activeStart",
+          "line": 315
+        },
+        {
+          "name": "next",
+          "line": 317
+        },
+        {
+          "name": "fraction",
+          "line": 325
+        },
+        {
+          "name": "MAX_AMOUNT",
+          "line": 338
+        },
+        {
+          "name": "MAX_FORMATTABLE_AMOUNT",
+          "line": 345
+        },
+        {
+          "name": "MIN_SIMULATION_COUNT",
+          "line": 347
+        },
+        {
+          "name": "MAX_SIMULATION_COUNT",
+          "line": 348
+        }
+      ]
+    },
+    {
+      "file": "packages/desktop-client/src/components/reports/spreadsheets/sankey-spreadsheet.ts",
+      "score": 34,
+      "symbols": [
+        {
+          "name": "SpecialNodeKeys",
+          "line": 123
+        },
+        {
+          "name": "GraphLayers",
+          "line": 135
+        },
+        {
+          "name": "GRAPH_LAYER_ORDER",
+          "line": 145
+        },
+        {
+          "name": "isGraphLayer",
+          "line": 154
+        },
+        {
+          "name": "createBaseGraphSpreadsheet",
+          "line": 161
+        },
+        {
+          "name": "baseGraph",
+          "line": 175
+        },
+        {
+          "name": "createBaseGraph",
+          "line": 190
+        },
+        {
+          "name": "res",
+          "line": 212
+        },
+        {
+          "name": "buildSankeyData",
+          "line": 230
+        },
+        {
+          "name": "graph",
+          "line": 238
+        },
+        {
+          "name": "toolTipInfoMap",
+          "line": 240
+        },
+        {
+          "name": "sortedGraph",
+          "line": 245
+        },
+        {
+          "name": "createBudgetSpreadsheet",
+          "line": 255
+        },
+        {
+          "name": "months",
+          "line": 262
+        },
+        {
+          "name": "monthResponses",
+          "line": 265
+        },
+        {
+          "name": "accumulate_months",
+          "line": 274
+        },
+        {
+          "name": "existingGroup",
+          "line": 285
+        },
+        {
+          "name": "existingCat",
+          "line": 295
+        },
+        {
+          "name": "categoryGroups",
+          "line": 322
+        },
+        {
+          "name": "filteredCategoryGroups",
+          "line": 326
+        },
+        {
+          "name": "rawValue",
+          "line": 335
+        },
+        {
+          "name": "nextMonthResponse",
+          "line": 351
+        },
+        {
+          "name": "createTransactionsSpreadsheet",
+          "line": 370
+        },
+        {
+          "name": "conditionsOpKey",
+          "line": 384
+        },
+        {
+          "name": "categoryData",
+          "line": 386
+        },
+        {
+          "name": "cloneGraph",
+          "line": 409
+        },
+        {
+          "name": "filterCategoryGroups",
+          "line": 427
+        },
+        {
+          "name": "categoryConditions",
+          "line": 432
+        },
+        {
+          "name": "categoryGroupConditions",
+          "line": 435
+        },
+        {
+          "name": "matchesStringCondition",
+          "line": 443
+        },
+        {
+          "name": "value",
+          "line": 448
+        },
+        {
+          "name": "op",
+          "line": 452
+        },
+        {
+          "name": "regex",
+          "line": 473
+        },
+        {
+          "name": "categoryMatchesConditions",
+          "line": 485
+        },
+        {
+          "name": "matchesCat",
+          "line": 491
+        }
+      ]
+    },
+    {
+      "file": "packages/desktop-client/src/components/formula/formulaCatalog.ts",
+      "score": 22,
+      "symbols": [
+        {
+          "name": "budgetQueryDimensions",
+          "line": 22
+        },
+        {
+          "name": "getFormulaFunctionCategoryConfig",
+          "line": 42
+        },
+        {
+          "name": "getVariableCompletionSection",
+          "line": 80
+        },
+        {
+          "name": "getFunctionSignatureCompletionSection",
+          "line": 84
+        },
+        {
+          "name": "getBudgetDimensionCompletionSection",
+          "line": 88
+        },
+        {
+          "name": "getBudgetCategoryCompletionSection",
+          "line": 92
+        },
+        {
+          "name": "getRuleFieldCompletionSection",
+          "line": 96
+        },
+        {
+          "name": "getFormulaCompletionSectionOrder",
+          "line": 100
+        },
+        {
+          "name": "categoryConfig",
+          "line": 101
+        },
+        {
+          "name": "getFormulaFunctionCatalog",
+          "line": 118
+        },
+        {
+          "name": "getCompletionSectionName",
+          "line": 1239
+        },
+        {
+          "name": "getFormulaFunctionCategoryByName",
+          "line": 1249
+        },
+        {
+          "name": "getFormulaFunctionsByMode",
+          "line": 1263
+        },
+        {
+          "name": "getFormulaFunctionsForMode",
+          "line": 1278
+        },
+        {
+          "name": "catalog",
+          "line": 1281
+        },
+        {
+          "name": "getFormulaFunctionByName",
+          "line": 1288
+        },
+        {
+          "name": "upperName",
+          "line": 1292
+        },
+        {
+          "name": "func",
+          "line": 1293
+        },
+        {
+          "name": "getFormulaCategoryForName",
+          "line": 1302
+        },
+        {
+          "name": "getFunctionCompletions",
+          "line": 1308
+        },
+        {
+          "name": "categoryConfig",
+          "line": 1309
+        },
+        {
+          "name": "getRuleFieldCompletions",
+          "line": 1329
+        },
+        {
+          "name": "ruleFieldSection",
+          "line": 1330
+        },
+        {
+          "name": "getDynamicReportQueryCompletions",
+          "line": 1498
+        },
+        {
+          "name": "queryFunctionSection",
+          "line": 1505
+        },
+        {
+          "name": "getNamedVariableCompletions",
+          "line": 1575
+        },
+        {
+          "name": "variableSection",
+          "line": 1582
+        },
+        {
+          "name": "sortFormulaCompletions",
+          "line": 1595
+        },
+        {
+          "name": "sectionOrder",
+          "line": 1598
+        },
+        {
+          "name": "sectionA",
+          "line": 1601
+        },
+        {
+          "name": "sectionB",
+          "line": 1602
+        },
+        {
+          "name": "orderA",
+          "line": 1603
+        },
+        {
+          "name": "orderB",
+          "line": 1604
+        },
+        {
+          "name": "boostA",
+          "line": 1610
+        },
+        {
+          "name": "boostB",
+          "line": 1611
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/mocks/budget.ts",
+      "score": 17,
+      "symbols": [
+        {
+          "name": "DEMO_TAGS",
+          "line": 27
+        },
+        {
+          "name": "getTagNotes",
+          "line": 79
+        },
+        {
+          "name": "getChildTagNotes",
+          "line": 122
+        },
+        {
+          "name": "insertDemoTags",
+          "line": 142
+        },
+        {
+          "name": "number",
+          "line": 152
+        },
+        {
+          "name": "integer",
+          "line": 156
+        },
+        {
+          "name": "getStartingBalanceCat",
+          "line": 170
+        },
+        {
+          "name": "extractCommonThings",
+          "line": 174
+        },
+        {
+          "name": "incomePayee",
+          "line": 178
+        },
+        {
+          "name": "expensePayees",
+          "line": 179
+        },
+        {
+          "name": "expenseGroup",
+          "line": 182
+        },
+        {
+          "name": "incomeGroup",
+          "line": 183
+        },
+        {
+          "name": "categories",
+          "line": 184
+        },
+        {
+          "name": "fillPrimaryChecking",
+          "line": 207
+        },
+        {
+          "name": "numTransactions",
+          "line": 221
+        },
+        {
+          "name": "transactions",
+          "line": 223
+        },
+        {
+          "name": "currentDate",
+          "line": 246
+        },
+        {
+          "name": "a",
+          "line": 263
+        },
+        {
+          "name": "pickCat",
+          "line": 264
+        },
+        {
+          "name": "childCategories",
+          "line": 268
+        },
+        {
+          "name": "earliestMonth",
+          "line": 310
+        },
+        {
+          "name": "months",
+          "line": 313
+        },
+        {
+          "name": "currentDay",
+          "line": 317
+        },
+        {
+          "name": "fillChecking",
+          "line": 401
+        },
+        {
+          "name": "numTransactions",
+          "line": 404
+        },
+        {
+          "name": "transactions",
+          "line": 406
+        },
+        {
+          "name": "amount",
+          "line": 422
+        },
+        {
+          "name": "fillInvestment",
+          "line": 450
+        },
+        {
+          "name": "numTransactions",
+          "line": 453
+        },
+        {
+          "name": "transactions",
+          "line": 455
+        },
+        {
+          "name": "payee",
+          "line": 457
+        },
+        {
+          "name": "category",
+          "line": 458
+        },
+        {
+          "name": "amount",
+          "line": 460
+        },
+        {
+          "name": "fillSavings",
+          "line": 487
+        },
+        {
+          "name": "numTransactions",
+          "line": 491
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/transactions/transaction-rules.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "resetState",
+          "line": 65
+        },
+        {
+          "name": "invert",
+          "line": 76
+        },
+        {
+          "name": "internalFields",
+          "line": 84
+        },
+        {
+          "name": "publicFields",
+          "line": 85
+        },
+        {
+          "name": "parseArray",
+          "line": 101
+        },
+        {
+          "name": "parseConditionsOrActions",
+          "line": 115
+        },
+        {
+          "name": "serializeConditionsOrActions",
+          "line": 119
+        },
+        {
+          "name": "ruleModel",
+          "line": 123
+        },
+        {
+          "name": "makeRule",
+          "line": 170
+        },
+        {
+          "name": "loadRules",
+          "line": 190
+        },
+        {
+          "name": "rules",
+          "line": 193
+        },
+        {
+          "name": "desc",
+          "line": 199
+        },
+        {
+          "name": "rule",
+          "line": 205
+        },
+        {
+          "name": "getRules",
+          "line": 219
+        },
+        {
+          "name": "insertRule",
+          "line": 224
+        },
+        {
+          "name": "updateRule",
+          "line": 231
+        },
+        {
+          "name": "deleteRule",
+          "line": 236
+        },
+        {
+          "name": "schedule",
+          "line": 237
+        },
+        {
+          "name": "onApplySync",
+          "line": 252
+        },
+        {
+          "name": "oldRule",
+          "line": 256
+        },
+        {
+          "name": "rule",
+          "line": 260
+        },
+        {
+          "name": "rule",
+          "line": 268
+        },
+        {
+          "name": "tables",
+          "line": 285
+        },
+        {
+          "name": "getRuleIdFromScheduleId",
+          "line": 293
+        },
+        {
+          "name": "row",
+          "line": 296
+        },
+        {
+          "name": "getAllRuleIdsFromSchedules",
+          "line": 304
+        },
+        {
+          "name": "rows",
+          "line": 307
+        },
+        {
+          "name": "ruleIds",
+          "line": 312
+        },
+        {
+          "name": "NULLABLE_RULE_FIELDS",
+          "line": 321
+        },
+        {
+          "name": "runRules",
+          "line": 323
+        },
+        {
+          "name": "rules",
+          "line": 338
+        },
+        {
+          "name": "missingNullableFields",
+          "line": 350
+        },
+        {
+          "name": "normalizedTrans",
+          "line": 353
+        },
+        {
+          "name": "ensureBalanceFor",
+          "line": 370
+        },
+        {
+          "name": "ruleId",
+          "line": 383
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/budget/schedule-template.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "createScheduleList",
+          "line": 41
+        },
+        {
+          "name": "accounts",
+          "line": 47
+        },
+        {
+          "name": "accountsMap",
+          "line": 48
+        },
+        {
+          "name": "storedNextDate",
+          "line": 75
+        },
+        {
+          "name": "rule",
+          "line": 79
+        },
+        {
+          "name": "conditions",
+          "line": 80
+        },
+        {
+          "name": "adjustmentFactor",
+          "line": 92
+        },
+        {
+          "name": "sign",
+          "line": 97
+        },
+        {
+          "name": "next_date_string",
+          "line": 109
+        },
+        {
+          "name": "formulaStrings",
+          "line": 118
+        },
+        {
+          "name": "balanceOfPrefetched",
+          "line": 135
+        },
+        {
+          "name": "categorySubtransactions",
+          "line": 145
+        },
+        {
+          "name": "sign",
+          "line": 150
+        },
+        {
+          "name": "target",
+          "line": 151
+        },
+        {
+          "name": "target_interval",
+          "line": 157
+        },
+        {
+          "name": "target_frequency",
+          "line": 160
+        },
+        {
+          "name": "isRepeating",
+          "line": 161
+        },
+        {
+          "name": "num_months",
+          "line": 164
+        },
+        {
+          "name": "displayName",
+          "line": 168
+        },
+        {
+          "name": "isPastDue",
+          "line": 169
+        },
+        {
+          "name": "nextMonth",
+          "line": 190
+        },
+        {
+          "name": "currentDate",
+          "line": 209
+        },
+        {
+          "name": "oneDayLater",
+          "line": 210
+        },
+        {
+          "name": "diffDays",
+          "line": 224
+        },
+        {
+          "name": "FORECAST_MONTHS",
+          "line": 239
+        },
+        {
+          "name": "LINKED_PAYMENT_SEARCH_MONTHS",
+          "line": 251
+        },
+        {
+          "name": "linkedSearchStart",
+          "line": 253
+        },
+        {
+          "name": "linkedSearchEnd",
+          "line": 257
+        },
+        {
+          "name": "firstIndexFrom",
+          "line": 262
+        },
+        {
+          "name": "mid",
+          "line": 266
+        },
+        {
+          "name": "monthsBetween",
+          "line": 276
+        },
+        {
+          "name": "occurrenceLookup",
+          "line": 291
+        },
+        {
+          "name": "dates",
+          "line": 301
+        },
+        {
+          "name": "settledOccurrences",
+          "line": 323
+        },
+        {
+          "name": "settled",
+          "line": 330
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/shared/location-utils.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "metersToFeet",
+          "line": 6
+        },
+        {
+          "name": "calculateDistance",
+          "line": 19
+        },
+        {
+          "name": "R",
+          "line": 23
+        },
+        {
+          "name": "phi1",
+          "line": 24
+        },
+        {
+          "name": "phi2",
+          "line": 25
+        },
+        {
+          "name": "deltaPhi",
+          "line": 26
+        },
+        {
+          "name": "deltaLambda",
+          "line": 27
+        },
+        {
+          "name": "a",
+          "line": 29
+        },
+        {
+          "name": "c",
+          "line": 35
+        },
+        {
+          "name": "formatDistance",
+          "line": 45
+        },
+        {
+          "name": "distanceImperial",
+          "line": 46
+        },
+        {
+          "name": "distanceMetric",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "file": "packages/eslint-plugin-actual/lib/rules/prefer-const.js",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "getScope",
+          "line": 34
+        },
+        {
+          "name": "getVariableName",
+          "line": 47
+        },
+        {
+          "name": "markAsReassigned",
+          "line": 59
+        },
+        {
+          "name": "scope",
+          "line": 60
+        },
+        {
+          "name": "variable",
+          "line": 76
+        },
+        {
+          "name": "variable",
+          "line": 95
+        },
+        {
+          "name": "isReassignedInScope",
+          "line": 117
+        },
+        {
+          "name": "reassigned",
+          "line": 118
+        },
+        {
+          "name": "extractVariableNames",
+          "line": 127
+        },
+        {
+          "name": "names",
+          "line": 128
+        },
+        {
+          "name": "makeFixer",
+          "line": 172
+        },
+        {
+          "name": "letToken",
+          "line": 174
+        },
+        {
+          "name": "name",
+          "line": 197
+        },
+        {
+          "name": "patternNames",
+          "line": 202
+        },
+        {
+          "name": "name",
+          "line": 211
+        },
+        {
+          "name": "name",
+          "line": 221
+        },
+        {
+          "name": "name",
+          "line": 228
+        },
+        {
+          "name": "name",
+          "line": 238
+        },
+        {
+          "name": "name",
+          "line": 249
+        },
+        {
+          "name": "nodeScope",
+          "line": 267
+        },
+        {
+          "name": "allVariablesInDeclaration",
+          "line": 272
+        },
+        {
+          "name": "variableNames",
+          "line": 274
+        },
+        {
+          "name": "variable",
+          "line": 279
+        },
+        {
+          "name": "foundVar",
+          "line": 287
+        },
+        {
+          "name": "allCanBeConst",
+          "line": 302
+        },
+        {
+          "name": "variableNames",
+          "line": 308
+        },
+        {
+          "name": "variableScope",
+          "line": 312
+        },
+        {
+          "name": "findIdentifier",
+          "line": 324
+        },
+        {
+          "name": "found",
+          "line": 331
+        },
+        {
+          "name": "found",
+          "line": 334
+        },
+        {
+          "name": "found",
+          "line": 342
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/platform/client/browser-server/coordinator.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "createCoordinator",
+          "line": 37
+        },
+        {
+          "name": "pendingPongs",
+          "line": 45
+        },
+        {
+          "name": "budgetGroups",
+          "line": 47
+        },
+        {
+          "name": "portToBudget",
+          "line": 48
+        },
+        {
+          "name": "unassignedPorts",
+          "line": 49
+        },
+        {
+          "name": "_originalConsole",
+          "line": 59
+        },
+        {
+          "name": "forwardConsole",
+          "line": 66
+        },
+        {
+          "name": "serialized",
+          "line": 68
+        },
+        {
+          "name": "createBudgetGroup",
+          "line": 97
+        },
+        {
+          "name": "broadcastConnect",
+          "line": 110
+        },
+        {
+          "name": "connectMsg",
+          "line": 112
+        },
+        {
+          "name": "logState",
+          "line": 119
+        },
+        {
+          "name": "isTrackedPort",
+          "line": 129
+        },
+        {
+          "name": "ensureTrackedPort",
+          "line": 133
+        },
+        {
+          "name": "hasConnectedBackend",
+          "line": 139
+        },
+        {
+          "name": "isGroupMember",
+          "line": 148
+        },
+        {
+          "name": "movePortToUnassigned",
+          "line": 152
+        },
+        {
+          "name": "prevBudget",
+          "line": 153
+        },
+        {
+          "name": "restoreUnassignedPort",
+          "line": 162
+        },
+        {
+          "name": "resumePort",
+          "line": 171
+        },
+        {
+          "name": "normalizedBudgetId",
+          "line": 172
+        },
+        {
+          "name": "wasTracked",
+          "line": 173
+        },
+        {
+          "name": "currentBudget",
+          "line": 174
+        },
+        {
+          "name": "currentGroup",
+          "line": 175
+        },
+        {
+          "name": "alreadyUnassigned",
+          "line": 176
+        },
+        {
+          "name": "role",
+          "line": 195
+        },
+        {
+          "name": "existingGroup",
+          "line": 226
+        },
+        {
+          "name": "broadcastToGroup",
+          "line": 237
+        },
+        {
+          "name": "group",
+          "line": 242
+        },
+        {
+          "name": "broadcastToAllInGroup",
+          "line": 254
+        },
+        {
+          "name": "heartbeatId",
+          "line": 260
+        },
+        {
+          "name": "removePort",
+          "line": 273
+        },
+        {
+          "name": "idx",
+          "line": 274
+        },
+        {
+          "name": "budgetId",
+          "line": 278
+        },
+        {
+          "name": "electLeader",
+          "line": 287
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/importers/ynab5.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "MAX_RETRY",
+          "line": 23
+        },
+        {
+          "name": "normalizeError",
+          "line": 25
+        },
+        {
+          "name": "equalsIgnoreCase",
+          "line": 51
+        },
+        {
+          "name": "amountFromYnab",
+          "line": 73
+        },
+        {
+          "name": "getDayOfMonth",
+          "line": 79
+        },
+        {
+          "name": "getYnabMonthlyPatterns",
+          "line": 83
+        },
+        {
+          "name": "getYnabTwiceMonthlyPatterns",
+          "line": 99
+        },
+        {
+          "name": "firstDay",
+          "line": 100
+        },
+        {
+          "name": "secondDay",
+          "line": 102
+        },
+        {
+          "name": "mapYnabFrequency",
+          "line": 110
+        },
+        {
+          "name": "getScheduleDateValue",
+          "line": 172
+        },
+        {
+          "name": "dateFirst",
+          "line": 175
+        },
+        {
+          "name": "frequency",
+          "line": 176
+        },
+        {
+          "name": "mapped",
+          "line": 182
+        },
+        {
+          "name": "getFlaggedTransactions",
+          "line": 194
+        },
+        {
+          "name": "getFlagTag",
+          "line": 198
+        },
+        {
+          "name": "tagName",
+          "line": 202
+        },
+        {
+          "name": "colorKey",
+          "line": 203
+        },
+        {
+          "name": "getFlagNameConflicts",
+          "line": 216
+        },
+        {
+          "name": "colorsByName",
+          "line": 217
+        },
+        {
+          "name": "flaggedTransactions",
+          "line": 218
+        },
+        {
+          "name": "tagName",
+          "line": 225
+        },
+        {
+          "name": "colorKey",
+          "line": 226
+        },
+        {
+          "name": "conflicts",
+          "line": 239
+        },
+        {
+          "name": "buildTransactionNotes",
+          "line": 249
+        },
+        {
+          "name": "normalizedMemo",
+          "line": 253
+        },
+        {
+          "name": "tagText",
+          "line": 254
+        },
+        {
+          "name": "notes",
+          "line": 255
+        },
+        {
+          "name": "buildRuleUpdate",
+          "line": 259
+        },
+        {
+          "name": "importAccounts",
+          "line": 272
+        },
+        {
+          "name": "id",
+          "line": 280
+        },
+        {
+          "name": "importCategories",
+          "line": 294
+        },
+        {
+          "name": "categories",
+          "line": 302
+        },
+        {
+          "name": "incomeCatId",
+          "line": 303
+        },
+        {
+          "name": "ynabIncomeCategories",
+          "line": 304
+        }
+      ]
+    },
+    {
+      "file": "packages/ci-actions/bin/bundle-stats-comment.mjs",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "REQUIRED_ARGS",
+          "line": 12
+        },
+        {
+          "name": "parseRawArgs",
+          "line": 17
+        },
+        {
+          "name": "args",
+          "line": 18
+        },
+        {
+          "name": "key",
+          "line": 21
+        },
+        {
+          "name": "values",
+          "line": 29
+        },
+        {
+          "name": "keyName",
+          "line": 40
+        },
+        {
+          "name": "getSingleValue",
+          "line": 52
+        },
+        {
+          "name": "values",
+          "line": 53
+        },
+        {
+          "name": "parseMapping",
+          "line": 63
+        },
+        {
+          "name": "trimmed",
+          "line": 70
+        },
+        {
+          "name": "parsed",
+          "line": 74
+        },
+        {
+          "name": "message",
+          "line": 91
+        },
+        {
+          "name": "entries",
+          "line": 100
+        },
+        {
+          "name": "name",
+          "line": 111
+        },
+        {
+          "name": "pathValue",
+          "line": 112
+        },
+        {
+          "name": "parseArgs",
+          "line": 134
+        },
+        {
+          "name": "args",
+          "line": 135
+        },
+        {
+          "name": "baseMap",
+          "line": 137
+        },
+        {
+          "name": "headMap",
+          "line": 142
+        },
+        {
+          "name": "sections",
+          "line": 148
+        },
+        {
+          "name": "headPath",
+          "line": 151
+        },
+        {
+          "name": "loadStats",
+          "line": 181
+        },
+        {
+          "name": "absolutePath",
+          "line": 183
+        },
+        {
+          "name": "fileContents",
+          "line": 184
+        },
+        {
+          "name": "parsed",
+          "line": 185
+        },
+        {
+          "name": "message",
+          "line": 194
+        },
+        {
+          "name": "findAllChildren",
+          "line": 203
+        },
+        {
+          "name": "trimPath",
+          "line": 210
+        },
+        {
+          "name": "assetNameToSizeMap",
+          "line": 217
+        },
+        {
+          "name": "children",
+          "line": 218
+        },
+        {
+          "name": "descendants",
+          "line": 226
+        },
+        {
+          "name": "nodePart",
+          "line": 231
+        },
+        {
+          "name": "chunkModuleNameToSizeMap",
+          "line": 249
+        },
+        {
+          "name": "modInfo",
+          "line": 256
+        },
+        {
+          "name": "meta",
+          "line": 257
+        }
+      ]
+    },
+    {
+      "file": "packages/desktop-client/src/hooks/useFormulaExecution.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "createFormulaQueryContext",
+          "line": 47
+        },
+        {
+          "name": "isHyperFormulaError",
+          "line": 67
+        },
+        {
+          "name": "evaluateFormulaWithContext",
+          "line": 75
+        },
+        {
+          "name": "sheetName",
+          "line": 101
+        },
+        {
+          "name": "sheetId",
+          "line": 102
+        },
+        {
+          "name": "cellValue",
+          "line": 119
+        },
+        {
+          "name": "useFormulaExecution",
+          "line": 138
+        },
+        {
+          "name": "locale",
+          "line": 145
+        },
+        {
+          "name": "queriesKey",
+          "line": 157
+        },
+        {
+          "name": "namedExpressionsKey",
+          "line": 158
+        },
+        {
+          "name": "accountsKey",
+          "line": 159
+        },
+        {
+          "name": "queriesRef",
+          "line": 161
+        },
+        {
+          "name": "namedExpressionsRef",
+          "line": 163
+        },
+        {
+          "name": "accountsRef",
+          "line": 165
+        },
+        {
+          "name": "executeFormula",
+          "line": 171
+        },
+        {
+          "name": "currentQueries",
+          "line": 179
+        },
+        {
+          "name": "currentNamedExpressions",
+          "line": 180
+        },
+        {
+          "name": "currentAccounts",
+          "line": 181
+        },
+        {
+          "name": "browserLocale",
+          "line": 187
+        },
+        {
+          "name": "formulaLocale",
+          "line": 189
+        },
+        {
+          "name": "formulaQueryContext",
+          "line": 202
+        },
+        {
+          "name": "cellValue",
+          "line": 229
+        },
+        {
+          "name": "prefetchFormulaQueries",
+          "line": 270
+        },
+        {
+          "name": "queryConfig",
+          "line": 275
+        },
+        {
+          "name": "data",
+          "line": 283
+        },
+        {
+          "name": "queryConfig",
+          "line": 291
+        },
+        {
+          "name": "prefetchAccountBalances",
+          "line": 327
+        },
+        {
+          "name": "account",
+          "line": 332
+        },
+        {
+          "name": "fetchAccountBalance",
+          "line": 348
+        },
+        {
+          "name": "balanceQuery",
+          "line": 350
+        },
+        {
+          "name": "prefetchBudgetQueries",
+          "line": 361
+        },
+        {
+          "name": "key",
+          "line": 365
+        },
+        {
+          "name": "buildFilteredTransactionsQuery",
+          "line": 389
+        },
+        {
+          "name": "conditions",
+          "line": 392
+        },
+        {
+          "name": "conditionsOp",
+          "line": 393
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/budget/category-template-context.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "lastMonthSheet",
+          "line": 59
+        },
+        {
+          "name": "carryover",
+          "line": 66
+        },
+        {
+          "name": "hideDecimal",
+          "line": 84
+        },
+        {
+          "name": "prioritiesSorted",
+          "line": 126
+        },
+        {
+          "name": "p",
+          "line": 130
+        },
+        {
+          "name": "t",
+          "line": 146
+        },
+        {
+          "name": "perTemplateLocal",
+          "line": 151
+        },
+        {
+          "name": "ret",
+          "line": 191
+        },
+        {
+          "name": "budgeted",
+          "line": 202
+        },
+        {
+          "name": "ret",
+          "line": 203
+        },
+        {
+          "name": "monthly",
+          "line": 253
+        },
+        {
+          "name": "orig",
+          "line": 264
+        },
+        {
+          "name": "preRound",
+          "line": 277
+        },
+        {
+          "name": "adjusted",
+          "line": 290
+        },
+        {
+          "name": "perRowScale",
+          "line": 306
+        },
+        {
+          "name": "items",
+          "line": 307
+        },
+        {
+          "name": "isLast",
+          "line": 310
+        },
+        {
+          "name": "share",
+          "line": 311
+        },
+        {
+          "name": "existing",
+          "line": 314
+        },
+        {
+          "name": "template",
+          "line": 350
+        },
+        {
+          "name": "isLast",
+          "line": 351
+        },
+        {
+          "name": "share",
+          "line": 352
+        },
+        {
+          "name": "allocated",
+          "line": 355
+        },
+        {
+          "name": "existing",
+          "line": 356
+        },
+        {
+          "name": "interval",
+          "line": 455
+        },
+        {
+          "name": "activeSchedules",
+          "line": 475
+        },
+        {
+          "name": "scheduleIds",
+          "line": 476
+        },
+        {
+          "name": "scheduleNames",
+          "line": 477
+        },
+        {
+          "name": "lowestPriority",
+          "line": 498
+        },
+        {
+          "name": "range",
+          "line": 518
+        },
+        {
+          "name": "pt",
+          "line": 531
+        },
+        {
+          "name": "availCategories",
+          "line": 534
+        },
+        {
+          "name": "incomeCategories",
+          "line": 535
+        },
+        {
+          "name": "availNames",
+          "line": 536
+        },
+        {
+          "name": "availIds",
+          "line": 539
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/shared/util.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "keys",
+          "line": 13
+        },
+        {
+          "name": "key",
+          "line": 23
+        },
+        {
+          "name": "field",
+          "line": 41
+        },
+        {
+          "name": "idx",
+          "line": 70
+        },
+        {
+          "name": "idx",
+          "line": 80
+        },
+        {
+          "name": "res",
+          "line": 91
+        },
+        {
+          "name": "item",
+          "line": 93
+        },
+        {
+          "name": "key",
+          "line": 94
+        },
+        {
+          "name": "items",
+          "line": 96
+        },
+        {
+          "name": "res",
+          "line": 105
+        },
+        {
+          "name": "item",
+          "line": 107
+        },
+        {
+          "name": "key",
+          "line": 108
+        },
+        {
+          "name": "existing",
+          "line": 109
+        },
+        {
+          "name": "res",
+          "line": 120
+        },
+        {
+          "name": "item",
+          "line": 122
+        },
+        {
+          "name": "grouped",
+          "line": 132
+        },
+        {
+          "name": "newGrouped",
+          "line": 133
+        },
+        {
+          "name": "item",
+          "line": 142
+        },
+        {
+          "name": "changes",
+          "line": 146
+        },
+        {
+          "name": "item",
+          "line": 164
+        },
+        {
+          "name": "setIn",
+          "line": 170
+        },
+        {
+          "name": "key",
+          "line": 176
+        },
+        {
+          "name": "getIn",
+          "line": 190
+        },
+        {
+          "name": "finalSet",
+          "line": 203
+        },
+        {
+          "name": "iter",
+          "line": 204
+        },
+        {
+          "name": "titleFirst",
+          "line": 213
+        },
+        {
+          "name": "reapplyThousandSeparators",
+          "line": 220
+        },
+        {
+          "name": "stripThousands",
+          "line": 229
+        },
+        {
+          "name": "numericValue",
+          "line": 233
+        },
+        {
+          "name": "integerPart",
+          "line": 238
+        },
+        {
+          "name": "appendDecimals",
+          "line": 246
+        },
+        {
+          "name": "NUMBER_FORMATS",
+          "line": 264
+        },
+        {
+          "name": "isNumberFormat",
+          "line": 275
+        },
+        {
+          "name": "parseNumberFormat",
+          "line": 303
+        },
+        {
+          "name": "setNumberFormat",
+          "line": 316
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/sync/index.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "FULL_SYNC_DELAY",
+          "line": 48
+        },
+        {
+          "name": "setSyncingMode",
+          "line": 52
+        },
+        {
+          "name": "prevMode",
+          "line": 53
+        },
+        {
+          "name": "checkSyncingMode",
+          "line": 73
+        },
+        {
+          "name": "deferMessage",
+          "line": 93
+        },
+        {
+          "name": "apply",
+          "line": 120
+        },
+        {
+          "name": "fetchAll",
+          "line": 177
+        },
+        {
+          "name": "batchSize",
+          "line": 181
+        },
+        {
+          "name": "partIds",
+          "line": 184
+        },
+        {
+          "name": "rows",
+          "line": 207
+        },
+        {
+          "name": "fetchData",
+          "line": 231
+        },
+        {
+          "name": "rows",
+          "line": 235
+        },
+        {
+          "name": "row",
+          "line": 238
+        },
+        {
+          "name": "addSyncListener",
+          "line": 248
+        },
+        {
+          "name": "COMPARE_CHUNK_SIZES",
+          "line": 260
+        },
+        {
+          "name": "compareMessagesSqlByTermCount",
+          "line": 261
+        },
+        {
+          "name": "compareMessagesSql",
+          "line": 263
+        },
+        {
+          "name": "term",
+          "line": 266
+        },
+        {
+          "name": "cellKey",
+          "line": 282
+        },
+        {
+          "name": "compareMessages",
+          "line": 294
+        },
+        {
+          "name": "cells",
+          "line": 301
+        },
+        {
+          "name": "timestampStr",
+          "line": 304
+        },
+        {
+          "name": "key",
+          "line": 305
+        },
+        {
+          "name": "existing",
+          "line": 306
+        },
+        {
+          "name": "loggedTimestamps",
+          "line": 312
+        },
+        {
+          "name": "cellList",
+          "line": 313
+        },
+        {
+          "name": "largestChunk",
+          "line": 314
+        },
+        {
+          "name": "chunk",
+          "line": 316
+        },
+        {
+          "name": "chunkSize",
+          "line": 317
+        },
+        {
+          "name": "params",
+          "line": 323
+        },
+        {
+          "name": "rows",
+          "line": 329
+        },
+        {
+          "name": "key",
+          "line": 334
+        },
+        {
+          "name": "timestamps",
+          "line": 335
+        },
+        {
+          "name": "timestampStr",
+          "line": 346
+        },
+        {
+          "name": "logged",
+          "line": 347
+        }
+      ]
+    },
+    {
+      "file": "packages/desktop-client/src/style/customThemes.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "BASE_THEME_OPTIONS",
+          "line": 5
+        },
+        {
+          "name": "isBaseTheme",
+          "line": 8
+        },
+        {
+          "name": "extractRepoOwner",
+          "line": 31
+        },
+        {
+          "name": "parts",
+          "line": 35
+        },
+        {
+          "name": "owner",
+          "line": 36
+        },
+        {
+          "name": "normalizeGitHubRepo",
+          "line": 46
+        },
+        {
+          "name": "trimmed",
+          "line": 47
+        },
+        {
+          "name": "parts",
+          "line": 52
+        },
+        {
+          "name": "owner",
+          "line": 53
+        },
+        {
+          "name": "repoName",
+          "line": 54
+        },
+        {
+          "name": "fetchThemeCss",
+          "line": 66
+        },
+        {
+          "name": "url",
+          "line": 67
+        },
+        {
+          "name": "fetchDirectCss",
+          "line": 78
+        },
+        {
+          "name": "response",
+          "line": 79
+        },
+        {
+          "name": "stripQuotes",
+          "line": 89
+        },
+        {
+          "name": "t",
+          "line": 90
+        },
+        {
+          "name": "validateFontFamilyValue",
+          "line": 116
+        },
+        {
+          "name": "trimmed",
+          "line": 117
+        },
+        {
+          "name": "families",
+          "line": 125
+        },
+        {
+          "name": "name",
+          "line": 128
+        },
+        {
+          "name": "call",
+          "line": 136
+        },
+        {
+          "name": "VAR_ONLY_PATTERN",
+          "line": 146
+        },
+        {
+          "name": "isValidSimpleVarValue",
+          "line": 148
+        },
+        {
+          "name": "m",
+          "line": 149
+        },
+        {
+          "name": "name",
+          "line": 151
+        },
+        {
+          "name": "validatePropertyValue",
+          "line": 160
+        },
+        {
+          "name": "calls",
+          "line": 162
+        },
+        {
+          "name": "trimmedValue",
+          "line": 171
+        },
+        {
+          "name": "hexColorPattern",
+          "line": 179
+        },
+        {
+          "name": "rgbRgbaPattern",
+          "line": 182
+        },
+        {
+          "name": "hslHslaPattern",
+          "line": 186
+        },
+        {
+          "name": "lengthPattern",
+          "line": 190
+        },
+        {
+          "name": "numberPattern",
+          "line": 194
+        },
+        {
+          "name": "keywordPattern",
+          "line": 197
+        },
+        {
+          "name": "MAX_FONT_FILE_SIZE",
+          "line": 221
+        }
+      ]
+    },
+    {
+      "file": "packages/loot-core/src/server/accounts/sync.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "BankSyncError",
+          "line": 41
+        },
+        {
+          "name": "makeSplitTransaction",
+          "line": 45
+        },
+        {
+          "name": "getAccountBalance",
+          "line": 60
+        },
+        {
+          "name": "updateAccountBalance",
+          "line": 71
+        },
+        {
+          "name": "getAccountOldestTransaction",
+          "line": 75
+        },
+        {
+          "name": "getAccountSyncStartDate",
+          "line": 90
+        },
+        {
+          "name": "dates",
+          "line": 94
+        },
+        {
+          "name": "oldestTransaction",
+          "line": 96
+        },
+        {
+          "name": "getGoCardlessAccounts",
+          "line": 105
+        },
+        {
+          "name": "userToken",
+          "line": 106
+        },
+        {
+          "name": "res",
+          "line": 109
+        },
+        {
+          "name": "downloadGoCardlessTransactions",
+          "line": 130
+        },
+        {
+          "name": "userToken",
+          "line": 138
+        },
+        {
+          "name": "res",
+          "line": 143
+        },
+        {
+          "name": "errorDetails",
+          "line": 159
+        },
+        {
+          "name": "downloadSimpleFinTransactions",
+          "line": 189
+        },
+        {
+          "name": "userToken",
+          "line": 194
+        },
+        {
+          "name": "batchSync",
+          "line": 197
+        },
+        {
+          "name": "batchErrors",
+          "line": 230
+        },
+        {
+          "name": "data",
+          "line": 234
+        },
+        {
+          "name": "error",
+          "line": 235
+        },
+        {
+          "name": "error",
+          "line": 257
+        },
+        {
+          "name": "downloadPluggyAiTransactions",
+          "line": 280
+        },
+        {
+          "name": "userToken",
+          "line": 285
+        },
+        {
+          "name": "res",
+          "line": 290
+        },
+        {
+          "name": "singleRes",
+          "line": 310
+        },
+        {
+          "name": "downloadAkahuTransactions",
+          "line": 321
+        },
+        {
+          "name": "userToken",
+          "line": 325
+        },
+        {
+          "name": "res",
+          "line": 330
+        },
+        {
+          "name": "singleRes",
+          "line": 349
+        },
+        {
+          "name": "downloadEnableBankingTransactions",
+          "line": 360
+        },
+        {
+          "name": "userToken",
+          "line": 365
+        },
+        {
+          "name": "res",
+          "line": 370
+        },
+        {
+          "name": "resolvePayee",
+          "line": 400
+        },
+        {
+          "name": "newPayee",
+          "line": 411
+        }
+      ]
+    },
+    {
+      "file": "packages/desktop-client/src/components/reports/spreadsheets/crossover-spreadsheet.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "calculateMedian",
+          "line": 12
+        },
+        {
+          "name": "sorted",
+          "line": 16
+        },
+        {
+          "name": "mid",
+          "line": 17
+        },
+        {
+          "name": "calculateMean",
+          "line": 23
+        },
+        {
+          "name": "sum",
+          "line": 25
+        },
+        {
+          "name": "calculateMAD",
+          "line": 29
+        },
+        {
+          "name": "deviations",
+          "line": 30
+        },
+        {
+          "name": "calculateHampelFilteredMedian",
+          "line": 34
+        },
+        {
+          "name": "median",
+          "line": 38
+        },
+        {
+          "name": "mad",
+          "line": 39
+        },
+        {
+          "name": "threshold",
+          "line": 40
+        },
+        {
+          "name": "filteredExpenses",
+          "line": 42
+        },
+        {
+          "name": "lowerBound",
+          "line": 43
+        },
+        {
+          "name": "upperBound",
+          "line": 44
+        },
+        {
+          "name": "createCrossoverSpreadsheet",
+          "line": 87
+        },
+        {
+          "name": "expensesPromise",
+          "line": 122
+        },
+        {
+          "name": "query",
+          "line": 129
+        },
+        {
+          "name": "historicalBalancesPromise",
+          "line": 148
+        },
+        {
+          "name": "startingBalance",
+          "line": 151
+        },
+        {
+          "name": "balances",
+          "line": 162
+        },
+        {
+          "name": "filteredBalances",
+          "line": 179
+        },
+        {
+          "name": "recalculate",
+          "line": 214
+        },
+        {
+          "name": "months",
+          "line": 234
+        },
+        {
+          "name": "expenseMap",
+          "line": 237
+        },
+        {
+          "name": "byMonth",
+          "line": 252
+        },
+        {
+          "name": "month",
+          "line": 254
+        },
+        {
+          "name": "delta",
+          "line": 255
+        },
+        {
+          "name": "monthlySWR",
+          "line": 265
+        },
+        {
+          "name": "adjustmentFactor",
+          "line": 280
+        },
+        {
+          "name": "balance",
+          "line": 283
+        },
+        {
+          "name": "monthlyIncome",
+          "line": 284
+        },
+        {
+          "name": "spend",
+          "line": 285
+        },
+        {
+          "name": "annualReturn",
+          "line": 304
+        },
+        {
+          "name": "finalBalance",
+          "line": 314
+        },
+        {
+          "name": "n",
+          "line": 315
+        }
+      ]
+    }
+  ]
+}

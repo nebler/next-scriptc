@@ -1,0 +1,2524 @@
+{
+  "repo": "gristlabs/grist-core",
+  "url": "https://github.com/gristlabs/grist-core",
+  "sha": "1c2c7c88252e21e17ac87b00e898794821ef3326",
+  "domain": "spreadsheet",
+  "frameworkHypothesis": "Express/Python",
+  "licenses": [
+    {
+      "file": "LICENSE.txt",
+      "declaration": "Apache-2.0"
+    },
+    {
+      "file": "static/icons/locales/LICENSE",
+      "declaration": "MIT"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "Apache-2.0",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "color-convert": "2.0.1",
+        "colord": "2.9.4",
+        "diff-match-patch": "1.0.5",
+        "randomcolor": "0.5.3",
+        "@types/color-convert": "2.0.4",
+        "@types/diff-match-patch": "1.0.32"
+      }
+    },
+    {
+      "file": "sandbox/pyodide/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "sandbox/pyodide/worker/package.json",
+      "license": "Apache-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "app/server/lib/GranularAccess.ts",
+      "score": 56,
+      "symbols": [
+        {
+          "name": "GRIST_ATTACHMENTS_THRESHOLD_MB",
+          "line": 72
+        },
+        {
+          "name": "isAclTable",
+          "line": 79
+        },
+        {
+          "name": "ADD_OR_UPDATE_RECORD_ACTIONS",
+          "line": 83
+        },
+        {
+          "name": "COLUMN_GRANULAR_UPDATE_ACTIONS",
+          "line": 86
+        },
+        {
+          "name": "isAddOrUpdateRecordAction",
+          "line": 90
+        },
+        {
+          "name": "isAttachmentRenameAction",
+          "line": 98
+        },
+        {
+          "name": "colIds",
+          "line": 100
+        },
+        {
+          "name": "STRUCTURAL_TABLES",
+          "line": 108
+        },
+        {
+          "name": "SPECIAL_ACTIONS",
+          "line": 115
+        },
+        {
+          "name": "SURPRISING_ACTIONS",
+          "line": 129
+        },
+        {
+          "name": "OK_ACTIONS",
+          "line": 135
+        },
+        {
+          "name": "OTHER_RECOGNIZED_ACTIONS",
+          "line": 142
+        },
+        {
+          "name": "UPLOADED_ATTACHMENT_OWNERSHIP_PERIOD",
+          "line": 199
+        },
+        {
+          "name": "HISTORICAL_ATTACHMENT_OWNERSHIP_PERIOD",
+          "line": 205
+        },
+        {
+          "name": "TRANSFORM_COLUMN_PREFIXES",
+          "line": 209
+        },
+        {
+          "name": "isTransformColumn",
+          "line": 214
+        },
+        {
+          "name": "linkParameters",
+          "line": 354
+        },
+        {
+          "name": "attrs",
+          "line": 357
+        },
+        {
+          "name": "linkId",
+          "line": 360
+        },
+        {
+          "name": "rowIds",
+          "line": 363
+        },
+        {
+          "name": "override",
+          "line": 386
+        },
+        {
+          "name": "user",
+          "line": 398
+        },
+        {
+          "name": "isAnonymous",
+          "line": 401
+        },
+        {
+          "name": "noCase",
+          "line": 437
+        },
+        {
+          "name": "access",
+          "line": 458
+        },
+        {
+          "name": "pset",
+          "line": 478
+        },
+        {
+          "name": "fail",
+          "line": 502
+        },
+        {
+          "name": "hasExceptionalAccess",
+          "line": 505
+        },
+        {
+          "name": "record",
+          "line": 509
+        },
+        {
+          "name": "rec",
+          "line": 522
+        },
+        {
+          "name": "rowPermInfo",
+          "line": 525
+        },
+        {
+          "name": "rowAccess",
+          "line": 526
+        },
+        {
+          "name": "colAccess",
+          "line": 529
+        },
+        {
+          "name": "colValues",
+          "line": 532
+        },
+        {
+          "name": "value",
+          "line": 543
+        }
+      ]
+    },
+    {
+      "file": "app/common/ActionSummarizer.ts",
+      "score": 42,
+      "symbols": [
+        {
+          "name": "MAXIMUM_INLINE_ROWS",
+          "line": 59
+        },
+        {
+          "name": "maxInlineRowsOf",
+          "line": 62
+        },
+        {
+          "name": "maxRows",
+          "line": 63
+        },
+        {
+          "name": "tableId",
+          "line": 113
+        },
+        {
+          "name": "td",
+          "line": 128
+        },
+        {
+          "name": "td",
+          "line": 132
+        },
+        {
+          "name": "td",
+          "line": 136
+        },
+        {
+          "name": "td",
+          "line": 140
+        },
+        {
+          "name": "td",
+          "line": 144
+        },
+        {
+          "name": "tableId",
+          "line": 157
+        },
+        {
+          "name": "td",
+          "line": 164
+        },
+        {
+          "name": "td",
+          "line": 168
+        },
+        {
+          "name": "td",
+          "line": 172
+        },
+        {
+          "name": "td",
+          "line": 176
+        },
+        {
+          "name": "td",
+          "line": 184
+        },
+        {
+          "name": "tableId",
+          "line": 203
+        },
+        {
+          "name": "td",
+          "line": 210
+        },
+        {
+          "name": "rec",
+          "line": 212
+        },
+        {
+          "name": "td",
+          "line": 217
+        },
+        {
+          "name": "rec",
+          "line": 220
+        },
+        {
+          "name": "tableDelta",
+          "line": 231
+        },
+        {
+          "name": "row",
+          "line": 233
+        },
+        {
+          "name": "cell",
+          "line": 238
+        },
+        {
+          "name": "nestedCell",
+          "line": 239
+        },
+        {
+          "name": "cd",
+          "line": 255
+        },
+        {
+          "name": "cell",
+          "line": 266
+        },
+        {
+          "name": "alwaysPreserveColIds",
+          "line": 283
+        },
+        {
+          "name": "addCellToSummary",
+          "line": 285
+        },
+        {
+          "name": "cell",
+          "line": 286
+        },
+        {
+          "name": "summarizeAction",
+          "line": 312
+        },
+        {
+          "name": "summarizeStoredAndUndo",
+          "line": 346
+        },
+        {
+          "name": "useOwners",
+          "line": 350
+        },
+        {
+          "name": "summaries",
+          "line": 356
+        },
+        {
+          "name": "summarizeChunkWalked",
+          "line": 361
+        },
+        {
+          "name": "summarizer",
+          "line": 363
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/DocStorage.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "debuglog",
+          "line": 39
+        },
+        {
+          "name": "maxSQLiteVariables",
+          "line": 41
+        },
+        {
+          "name": "PENDING_VALUE",
+          "line": 43
+        },
+        {
+          "name": "Deps",
+          "line": 45
+        },
+        {
+          "name": "ATTACHMENTS_EXPIRY_DAYS",
+          "line": 68
+        },
+        {
+          "name": "REMOVE_UNUSED_ATTACHMENTS_DELAY",
+          "line": 71
+        },
+        {
+          "name": "getSqliteMode",
+          "line": 76
+        },
+        {
+          "name": "migrationLabel",
+          "line": 172
+        },
+        {
+          "name": "oldMaxPosDefault",
+          "line": 173
+        },
+        {
+          "name": "_upgradeTable",
+          "line": 175
+        },
+        {
+          "name": "colListSql",
+          "line": 180
+        },
+        {
+          "name": "colSpecSql",
+          "line": 181
+        },
+        {
+          "name": "tmpTableId",
+          "line": 182
+        },
+        {
+          "name": "_sqlColSpec",
+          "line": 193
+        },
+        {
+          "name": "dfltValue",
+          "line": 196
+        },
+        {
+          "name": "tblRows",
+          "line": 227
+        },
+        {
+          "name": "actions",
+          "line": 257
+        },
+        {
+          "name": "steps",
+          "line": 258
+        },
+        {
+          "name": "history",
+          "line": 261
+        },
+        {
+          "name": "step",
+          "line": 264
+        },
+        {
+          "name": "migrationLabel",
+          "line": 319
+        },
+        {
+          "name": "docSchema",
+          "line": 323
+        },
+        {
+          "name": "_fixTable",
+          "line": 329
+        },
+        {
+          "name": "origColSpecSql",
+          "line": 333
+        },
+        {
+          "name": "fixes",
+          "line": 337
+        },
+        {
+          "name": "newColSpecSql",
+          "line": 338
+        },
+        {
+          "name": "valuesSql",
+          "line": 339
+        },
+        {
+          "name": "tmpTableId",
+          "line": 346
+        },
+        {
+          "name": "_getInfoAndValuesSql",
+          "line": 358
+        },
+        {
+          "name": "qColId",
+          "line": 359
+        },
+        {
+          "name": "gristType",
+          "line": 360
+        },
+        {
+          "name": "dflt",
+          "line": 362
+        },
+        {
+          "name": "_sqlColSpec",
+          "line": 370
+        },
+        {
+          "name": "tblRows",
+          "line": 376
+        },
+        {
+          "name": "tableColRows",
+          "line": 393
+        }
+      ]
+    },
+    {
+      "file": "app/common/ActionLayout.ts",
+      "score": 29,
+      "symbols": [
+        {
+          "name": "actKey",
+          "line": 83
+        },
+        {
+          "name": "infoOf",
+          "line": 97
+        },
+        {
+          "name": "data",
+          "line": 101
+        },
+        {
+          "name": "rows",
+          "line": 102
+        },
+        {
+          "name": "cols",
+          "line": 103
+        },
+        {
+          "name": "name",
+          "line": 104
+        },
+        {
+          "name": "name2",
+          "line": 105
+        },
+        {
+          "name": "rowsSubset",
+          "line": 114
+        },
+        {
+          "name": "rowsSame",
+          "line": 120
+        },
+        {
+          "name": "colsSame",
+          "line": 124
+        },
+        {
+          "name": "recordKind",
+          "line": 131
+        },
+        {
+          "name": "compareScore",
+          "line": 160
+        },
+        {
+          "name": "req",
+          "line": 176
+        },
+        {
+          "name": "zero",
+          "line": 177
+        },
+        {
+          "name": "routed",
+          "line": 178
+        },
+        {
+          "name": "expectedInverses",
+          "line": 189
+        },
+        {
+          "name": "k",
+          "line": 190
+        },
+        {
+          "name": "t",
+          "line": 191
+        },
+        {
+          "name": "analyzeStored",
+          "line": 244
+        },
+        {
+          "name": "N",
+          "line": 245
+        },
+        {
+          "name": "removeColIdx",
+          "line": 247
+        },
+        {
+          "name": "addColIdx",
+          "line": 248
+        },
+        {
+          "name": "removeTblIdx",
+          "line": 249
+        },
+        {
+          "name": "addTblIdx",
+          "line": 250
+        },
+        {
+          "name": "removeRowIdx",
+          "line": 251
+        },
+        {
+          "name": "addRowIdx",
+          "line": 252
+        },
+        {
+          "name": "liveCols",
+          "line": 253
+        },
+        {
+          "name": "touchedTables",
+          "line": 254
+        },
+        {
+          "name": "renamedTables",
+          "line": 260
+        },
+        {
+          "name": "renamedCols",
+          "line": 261
+        },
+        {
+          "name": "setFirst",
+          "line": 270
+        },
+        {
+          "name": "s",
+          "line": 272
+        },
+        {
+          "name": "t",
+          "line": 273
+        },
+        {
+          "name": "isDefunct",
+          "line": 296
+        },
+        {
+          "name": "isColDefunct",
+          "line": 298
+        }
+      ]
+    },
+    {
+      "file": "app/gen-server/lib/homedb/HomeDBManager.ts",
+      "score": 29,
+      "symbols": [
+        {
+          "name": "Deps",
+          "line": 141
+        },
+        {
+          "name": "EXAMPLE_WORKSPACE_NAME",
+          "line": 168
+        },
+        {
+          "name": "listPublicSites",
+          "line": 172
+        },
+        {
+          "name": "DOC_AUTH_CACHE_TTL",
+          "line": 179
+        },
+        {
+          "name": "stringifyDocAuthKey",
+          "line": 266
+        },
+        {
+          "name": "stringifyUrlIdOrg",
+          "line": 270
+        },
+        {
+          "name": "supportWorkspaces",
+          "line": 404
+        },
+        {
+          "name": "exampleWorkspace",
+          "line": 409
+        },
+        {
+          "name": "org",
+          "line": 434
+        },
+        {
+          "name": "ws",
+          "line": 436
+        },
+        {
+          "name": "doc",
+          "line": 438
+        },
+        {
+          "name": "user",
+          "line": 440
+        },
+        {
+          "name": "product",
+          "line": 442
+        },
+        {
+          "name": "user",
+          "line": 451
+        },
+        {
+          "name": "results",
+          "line": 600
+        },
+        {
+          "name": "limit",
+          "line": 644
+        },
+        {
+          "name": "count",
+          "line": 649
+        },
+        {
+          "name": "billingAccount",
+          "line": 667
+        },
+        {
+          "name": "userLimit",
+          "line": 672
+        },
+        {
+          "name": "org",
+          "line": 794
+        },
+        {
+          "name": "results",
+          "line": 830
+        },
+        {
+          "name": "resources",
+          "line": 831
+        },
+        {
+          "name": "query",
+          "line": 844
+        },
+        {
+          "name": "query",
+          "line": 856
+        },
+        {
+          "name": "emptyAllowed",
+          "line": 859
+        },
+        {
+          "name": "effectiveUserId",
+          "line": 892
+        },
+        {
+          "name": "markPermissions",
+          "line": 936
+        },
+        {
+          "name": "orgQueryResult",
+          "line": 942
+        },
+        {
+          "name": "productFeatures",
+          "line": 944
+        },
+        {
+          "name": "docsQueryResult",
+          "line": 956
+        },
+        {
+          "name": "summary",
+          "line": 960
+        },
+        {
+          "name": "dataLimitStatus",
+          "line": 963
+        },
+        {
+          "name": "maxAttachmentsBytesPerOrg",
+          "line": 967
+        },
+        {
+          "name": "result",
+          "line": 1001
+        },
+        {
+          "name": "role",
+          "line": 1008
+        }
+      ]
+    },
+    {
+      "file": "app/client/aclui/AccessRules.ts",
+      "score": 26,
+      "symbols": [
+        {
+          "name": "t",
+          "line": 83
+        },
+        {
+          "name": "defRuleSet",
+          "line": 188
+        },
+        {
+          "name": "tableRules",
+          "line": 189
+        },
+        {
+          "name": "specialRulesWithDefault",
+          "line": 190
+        },
+        {
+          "name": "specialRulesSeparate",
+          "line": 191
+        },
+        {
+          "name": "specialRulesTemplates",
+          "line": 192
+        },
+        {
+          "name": "userAttr",
+          "line": 193
+        },
+        {
+          "name": "tableId",
+          "line": 238
+        },
+        {
+          "name": "name",
+          "line": 239
+        },
+        {
+          "name": "tableData",
+          "line": 251
+        },
+        {
+          "name": "table",
+          "line": 264
+        },
+        {
+          "name": "rules",
+          "line": 275
+        },
+        {
+          "name": "docData",
+          "line": 338
+        },
+        {
+          "name": "resourcesTable",
+          "line": 339
+        },
+        {
+          "name": "rulesTable",
+          "line": 340
+        },
+        {
+          "name": "resourceSync",
+          "line": 356
+        },
+        {
+          "name": "defaultResourceRowId",
+          "line": 358
+        },
+        {
+          "name": "resourceKey",
+          "line": 377
+        },
+        {
+          "name": "rule",
+          "line": 395
+        },
+        {
+          "name": "pos",
+          "line": 416
+        },
+        {
+          "name": "step",
+          "line": 418
+        },
+        {
+          "name": "rulesSync",
+          "line": 431
+        },
+        {
+          "name": "s",
+          "line": 473
+        },
+        {
+          "name": "ruleProblems",
+          "line": 514
+        },
+        {
+          "name": "names",
+          "line": 589
+        },
+        {
+          "name": "tableColIds",
+          "line": 628
+        },
+        {
+          "name": "validColIds",
+          "line": 631
+        },
+        {
+          "name": "invalidColIds",
+          "line": 632
+        },
+        {
+          "name": "sampleRecord",
+          "line": 653
+        },
+        {
+          "name": "tableRules",
+          "line": 759
+        },
+        {
+          "name": "title",
+          "line": 787
+        },
+        {
+          "name": "button",
+          "line": 788
+        },
+        {
+          "name": "removeColRules",
+          "line": 800
+        },
+        {
+          "name": "ruleColIds",
+          "line": 802
+        },
+        {
+          "name": "title",
+          "line": 813
+        }
+      ]
+    },
+    {
+      "file": "app/common/ACLRuleCollection.ts",
+      "score": 24,
+      "symbols": [
+        {
+          "name": "SPECIAL_RULES_TABLE_ID",
+          "line": 23
+        },
+        {
+          "name": "isSchemaEditResource",
+          "line": 49
+        },
+        {
+          "name": "editorsCanEditStructure",
+          "line": 215
+        },
+        {
+          "name": "rulesDenyData",
+          "line": 226
+        },
+        {
+          "name": "permissions",
+          "line": 229
+        },
+        {
+          "name": "getAclFacts",
+          "line": 238
+        },
+        {
+          "name": "summarize",
+          "line": 239
+        },
+        {
+          "name": "schemaEditParts",
+          "line": 244
+        },
+        {
+          "name": "dataRuleSets",
+          "line": 245
+        },
+        {
+          "name": "userAttributeMap",
+          "line": 352
+        },
+        {
+          "name": "colRuleSets",
+          "line": 358
+        },
+        {
+          "name": "tableColMap",
+          "line": 359
+        },
+        {
+          "name": "tableRuleSets",
+          "line": 360
+        },
+        {
+          "name": "tableIds",
+          "line": 361
+        },
+        {
+          "name": "specialRuleSets",
+          "line": 365
+        },
+        {
+          "name": "specialType",
+          "line": 368
+        },
+        {
+          "name": "specialDefault",
+          "line": 369
+        },
+        {
+          "name": "schemaParts",
+          "line": 382
+        },
+        {
+          "name": "specialType",
+          "line": 385
+        },
+        {
+          "name": "specialDefault",
+          "line": 386
+        },
+        {
+          "name": "body",
+          "line": 407
+        },
+        {
+          "name": "problems",
+          "line": 450
+        },
+        {
+          "name": "tablesTable",
+          "line": 464
+        },
+        {
+          "name": "columnsTable",
+          "line": 465
+        },
+        {
+          "name": "validTableIds",
+          "line": 468
+        },
+        {
+          "name": "invalidTables",
+          "line": 469
+        },
+        {
+          "name": "validColumns",
+          "line": 480
+        },
+        {
+          "name": "colTableRefs",
+          "line": 481
+        },
+        {
+          "name": "tableRef",
+          "line": 489
+        },
+        {
+          "name": "validTableCols",
+          "line": 490
+        },
+        {
+          "name": "invalidColIds",
+          "line": 493
+        },
+        {
+          "name": "tableRef",
+          "line": 511
+        },
+        {
+          "name": "colRef",
+          "line": 512
+        },
+        {
+          "name": "shadowed",
+          "line": 544
+        },
+        {
+          "name": "seen",
+          "line": 557
+        }
+      ]
+    },
+    {
+      "file": "app/common/gutil.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "UP_TRIANGLE",
+          "line": 23
+        },
+        {
+          "name": "DOWN_TRIANGLE",
+          "line": 24
+        },
+        {
+          "name": "EMAIL_RE",
+          "line": 26
+        },
+        {
+          "name": "startsWith",
+          "line": 31
+        },
+        {
+          "name": "endsWith",
+          "line": 36
+        },
+        {
+          "name": "removePrefix",
+          "line": 41
+        },
+        {
+          "name": "removeSuffix",
+          "line": 46
+        },
+        {
+          "name": "removeTrailingSlash",
+          "line": 50
+        },
+        {
+          "name": "result",
+          "line": 51
+        },
+        {
+          "name": "capitalize",
+          "line": 56
+        },
+        {
+          "name": "capitalizeFirstWord",
+          "line": 61
+        },
+        {
+          "name": "replaceLiteral",
+          "line": 67
+        },
+        {
+          "name": "replaceLiterals",
+          "line": 74
+        },
+        {
+          "name": "markers",
+          "line": 75
+        },
+        {
+          "name": "re",
+          "line": 79
+        },
+        {
+          "name": "isNumber",
+          "line": 85
+        },
+        {
+          "name": "clamp",
+          "line": 97
+        },
+        {
+          "name": "between",
+          "line": 108
+        },
+        {
+          "name": "lower",
+          "line": 109
+        },
+        {
+          "name": "upper",
+          "line": 110
+        },
+        {
+          "name": "mod",
+          "line": 117
+        },
+        {
+          "name": "roundDownToMultiple",
+          "line": 125
+        },
+        {
+          "name": "maybeNumber",
+          "line": 186
+        },
+        {
+          "name": "safeJsonParse",
+          "line": 196
+        },
+        {
+          "name": "encodeQueryParam",
+          "line": 208
+        },
+        {
+          "name": "encodeQueryParams",
+          "line": 216
+        },
+        {
+          "name": "maxsplit",
+          "line": 229
+        },
+        {
+          "name": "arraysEqual",
+          "line": 245
+        },
+        {
+          "name": "c",
+          "line": 264
+        },
+        {
+          "name": "index",
+          "line": 281
+        },
+        {
+          "name": "index",
+          "line": 293
+        },
+        {
+          "name": "end",
+          "line": 319
+        },
+        {
+          "name": "xend",
+          "line": 320
+        },
+        {
+          "name": "xStart",
+          "line": 345
+        },
+        {
+          "name": "len",
+          "line": 370
+        }
+      ]
+    },
+    {
+      "file": "app/client/models/rowset.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "toRemove",
+          "line": 205
+        },
+        {
+          "name": "outputRows",
+          "line": 241
+        },
+        {
+          "name": "outputRows",
+          "line": 256
+        },
+        {
+          "name": "changes",
+          "line": 269
+        },
+        {
+          "name": "outputRows",
+          "line": 279
+        },
+        {
+          "name": "changes",
+          "line": 351
+        },
+        {
+          "name": "groupedRows",
+          "line": 448
+        },
+        {
+          "name": "newValue",
+          "line": 450
+        },
+        {
+          "name": "group",
+          "line": 456
+        },
+        {
+          "name": "groupedRows",
+          "line": 463
+        },
+        {
+          "name": "group",
+          "line": 473
+        },
+        {
+          "name": "oldValue",
+          "line": 482
+        },
+        {
+          "name": "newValue",
+          "line": 483
+        },
+        {
+          "name": "group",
+          "line": 494
+        },
+        {
+          "name": "group",
+          "line": 501
+        },
+        {
+          "name": "group",
+          "line": 507
+        },
+        {
+          "name": "groupedRows",
+          "line": 520
+        },
+        {
+          "name": "group",
+          "line": 526
+        },
+        {
+          "name": "insertIndex",
+          "line": 594
+        },
+        {
+          "name": "index",
+          "line": 611
+        },
+        {
+          "name": "sortedRows",
+          "line": 633
+        },
+        {
+          "name": "keeping",
+          "line": 660
+        },
+        {
+          "name": "edge",
+          "line": 666
+        },
+        {
+          "name": "n",
+          "line": 669
+        },
+        {
+          "name": "skipRowId",
+          "line": 702
+        },
+        {
+          "name": "isSmallChange",
+          "line": 744
+        },
+        {
+          "name": "r",
+          "line": 752
+        },
+        {
+          "name": "index",
+          "line": 767
+        },
+        {
+          "name": "newRows",
+          "line": 791
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/ActiveDoc.ts",
+      "score": 20,
+      "symbols": [
+        {
+          "name": "MAX_RECENT_ACTIONS",
+          "line": 207
+        },
+        {
+          "name": "DEFAULT_TIMEZONE",
+          "line": 209
+        },
+        {
+          "name": "DEFAULT_LOCALE",
+          "line": 210
+        },
+        {
+          "name": "ACTIVEDOC_TIMEOUT",
+          "line": 215
+        },
+        {
+          "name": "MEMORY_MEASUREMENT_THROTTLE_WAIT_MS",
+          "line": 221
+        },
+        {
+          "name": "UPDATE_CURRENT_TIME_DELAY",
+          "line": 224
+        },
+        {
+          "name": "UPDATE_DATA_SIZE_DELAY",
+          "line": 227
+        },
+        {
+          "name": "LOG_DOCUMENT_METRICS_DELAY",
+          "line": 230
+        },
+        {
+          "name": "SHUTDOWN_ITEM_TIMEOUT_MS",
+          "line": 233
+        },
+        {
+          "name": "MAX_INTERNAL_ATTACHMENTS_BYTES",
+          "line": 235
+        },
+        {
+          "name": "KEEP_DOC_OPEN_TIMEOUT_MS",
+          "line": 244
+        },
+        {
+          "name": "Deps",
+          "line": 247
+        },
+        {
+          "name": "origFunc",
+          "line": 285
+        },
+        {
+          "name": "result",
+          "line": 287
+        },
+        {
+          "name": "billingAccount",
+          "line": 439
+        },
+        {
+          "name": "actionRoute",
+          "line": 483
+        },
+        {
+          "name": "notifier",
+          "line": 520
+        },
+        {
+          "name": "groups",
+          "line": 662
+        },
+        {
+          "name": "dbManager",
+          "line": 716
+        },
+        {
+          "name": "userId",
+          "line": 717
+        },
+        {
+          "name": "assistant",
+          "line": 725
+        },
+        {
+          "name": "limit",
+          "line": 739
+        },
+        {
+          "name": "initBundle",
+          "line": 806
+        },
+        {
+          "name": "docData",
+          "line": 814
+        },
+        {
+          "name": "startTime",
+          "line": 851
+        },
+        {
+          "name": "metaTableData",
+          "line": 873
+        },
+        {
+          "name": "docData",
+          "line": 874
+        },
+        {
+          "name": "level",
+          "line": 890
+        },
+        {
+          "name": "newDocSession",
+          "line": 966
+        },
+        {
+          "name": "urlId",
+          "line": 1030
+        },
+        {
+          "name": "proposal",
+          "line": 1031
+        },
+        {
+          "name": "origDetails",
+          "line": 1036
+        },
+        {
+          "name": "states",
+          "line": 1044
+        },
+        {
+          "name": "hash",
+          "line": 1045
+        },
+        {
+          "name": "changes",
+          "line": 1048
+        }
+      ]
+    },
+    {
+      "file": "app/common/TableData.ts",
+      "score": 20,
+      "symbols": [
+        {
+          "name": "type",
+          "line": 74
+        },
+        {
+          "name": "defl",
+          "line": 75
+        },
+        {
+          "name": "values",
+          "line": 117
+        },
+        {
+          "name": "colData",
+          "line": 167
+        },
+        {
+          "name": "index",
+          "line": 168
+        },
+        {
+          "name": "colData",
+          "line": 189
+        },
+        {
+          "name": "values",
+          "line": 191
+        },
+        {
+          "name": "rowMap",
+          "line": 192
+        },
+        {
+          "name": "colData",
+          "line": 241
+        },
+        {
+          "name": "valColumn",
+          "line": 250
+        },
+        {
+          "name": "colIdSet",
+          "line": 263
+        },
+        {
+          "name": "rowIds",
+          "line": 264
+        },
+        {
+          "name": "colArray",
+          "line": 266
+        },
+        {
+          "name": "len",
+          "line": 268
+        },
+        {
+          "name": "index",
+          "line": 272
+        },
+        {
+          "name": "value",
+          "line": 274
+        },
+        {
+          "name": "tableData",
+          "line": 291
+        },
+        {
+          "name": "colData",
+          "line": 301
+        },
+        {
+          "name": "index",
+          "line": 309
+        },
+        {
+          "name": "colData",
+          "line": 356
+        },
+        {
+          "name": "index",
+          "line": 360
+        },
+        {
+          "name": "searchColData",
+          "line": 369
+        },
+        {
+          "name": "index",
+          "line": 371
+        },
+        {
+          "name": "props",
+          "line": 385
+        },
+        {
+          "name": "srcIndex",
+          "line": 426
+        },
+        {
+          "name": "colData",
+          "line": 433
+        },
+        {
+          "name": "index",
+          "line": 453
+        },
+        {
+          "name": "index",
+          "line": 467
+        },
+        {
+          "name": "colData",
+          "line": 471
+        },
+        {
+          "name": "index",
+          "line": 482
+        },
+        {
+          "name": "colData",
+          "line": 486
+        },
+        {
+          "name": "type",
+          "line": 502
+        },
+        {
+          "name": "defl",
+          "line": 503
+        },
+        {
+          "name": "colData",
+          "line": 510
+        },
+        {
+          "name": "colData",
+          "line": 517
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/CellDataAccess.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "applyAndCheckActionsForCells",
+          "line": 40
+        },
+        {
+          "name": "cellsActions",
+          "line": 50
+        },
+        {
+          "name": "fail",
+          "line": 54
+        },
+        {
+          "name": "cellData",
+          "line": 66
+        },
+        {
+          "name": "zipped",
+          "line": 74
+        },
+        {
+          "name": "id",
+          "line": 82
+        },
+        {
+          "name": "cell",
+          "line": 87
+        },
+        {
+          "name": "haveRecord",
+          "line": 90
+        },
+        {
+          "name": "cell",
+          "line": 102
+        },
+        {
+          "name": "record",
+          "line": 106
+        },
+        {
+          "name": "before",
+          "line": 136
+        },
+        {
+          "name": "after",
+          "line": 139
+        },
+        {
+          "name": "isOwnerResolvingRoot",
+          "line": 158
+        },
+        {
+          "name": "cell",
+          "line": 176
+        },
+        {
+          "name": "isCellDataAction",
+          "line": 189
+        },
+        {
+          "name": "commentRow",
+          "line": 229
+        },
+        {
+          "name": "id",
+          "line": 234
+        },
+        {
+          "name": "result",
+          "line": 250
+        },
+        {
+          "name": "read",
+          "line": 251
+        },
+        {
+          "name": "cell",
+          "line": 255
+        },
+        {
+          "name": "tableId",
+          "line": 258
+        },
+        {
+          "name": "colId",
+          "line": 259
+        },
+        {
+          "name": "rowId",
+          "line": 260
+        },
+        {
+          "name": "key",
+          "line": 261
+        },
+        {
+          "name": "participants",
+          "line": 268
+        },
+        {
+          "name": "parsed",
+          "line": 270
+        },
+        {
+          "name": "row",
+          "line": 286
+        },
+        {
+          "name": "row",
+          "line": 291
+        },
+        {
+          "name": "removedCells",
+          "line": 301
+        },
+        {
+          "name": "addedCells",
+          "line": 302
+        },
+        {
+          "name": "updatedCells",
+          "line": 303
+        },
+        {
+          "name": "applyCellAction",
+          "line": 304
+        },
+        {
+          "name": "updatedRows",
+          "line": 337
+        },
+        {
+          "name": "insert",
+          "line": 375
+        },
+        {
+          "name": "update",
+          "line": 376
+        }
+      ]
+    },
+    {
+      "file": "app/client/lib/koDomScrolly.js",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "ScrollyPane",
+          "line": 30
+        },
+        {
+          "name": "Scrolly",
+          "line": 154
+        },
+        {
+          "name": "getInstance",
+          "line": 255
+        },
+        {
+          "name": "begin",
+          "line": 624
+        },
+        {
+          "name": "scrolly",
+          "line": 649
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/ActiveDocImport.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "IMPORT_TRANSFORM_COLUMN_PREFIX",
+          "line": 28
+        },
+        {
+          "name": "accessId",
+          "line": 73
+        },
+        {
+          "name": "accessId",
+          "line": 87
+        },
+        {
+          "name": "importResult",
+          "line": 89
+        },
+        {
+          "name": "srcToDestColIds",
+          "line": 143
+        },
+        {
+          "name": "comparisonResult",
+          "line": 144
+        },
+        {
+          "name": "srcColIds",
+          "line": 149
+        },
+        {
+          "name": "merge",
+          "line": 155
+        },
+        {
+          "name": "skippedColumnIds",
+          "line": 158
+        },
+        {
+          "name": "numResultRows",
+          "line": 162
+        },
+        {
+          "name": "srcRowId",
+          "line": 164
+        },
+        {
+          "name": "matchingDestColId",
+          "line": 174
+        },
+        {
+          "name": "srcVal",
+          "line": 175
+        },
+        {
+          "name": "destVal",
+          "line": 176
+        },
+        {
+          "name": "shouldSkip",
+          "line": 181
+        },
+        {
+          "name": "options",
+          "line": 238
+        },
+        {
+          "name": "parsedTables",
+          "line": 240
+        },
+        {
+          "name": "references",
+          "line": 241
+        },
+        {
+          "name": "ext",
+          "line": 247
+        },
+        {
+          "name": "basename",
+          "line": 248
+        },
+        {
+          "name": "hiddenTableName",
+          "line": 249
+        },
+        {
+          "name": "origTableName",
+          "line": 250
+        },
+        {
+          "name": "transformRule",
+          "line": 251
+        },
+        {
+          "name": "columnMetadata",
+          "line": 253
+        },
+        {
+          "name": "hiddenTableId",
+          "line": 257
+        },
+        {
+          "name": "hiddenTableColIds",
+          "line": 258
+        },
+        {
+          "name": "dataLength",
+          "line": 263
+        },
+        {
+          "name": "rowIdColumn",
+          "line": 266
+        },
+        {
+          "name": "columnValues",
+          "line": 267
+        },
+        {
+          "name": "destTableId",
+          "line": 268
+        },
+        {
+          "name": "ruleCanBeApplied",
+          "line": 269
+        },
+        {
+          "name": "mergeOptions",
+          "line": 296
+        },
+        {
+          "name": "destTable",
+          "line": 298
+        },
+        {
+          "name": "limit",
+          "line": 327
+        },
+        {
+          "name": "totalSize",
+          "line": 328
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/Triggers.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "docSession",
+          "line": 40
+        },
+        {
+          "name": "allowedEventTypes",
+          "line": 55
+        },
+        {
+          "name": "docData",
+          "line": 121
+        },
+        {
+          "name": "triggersTable",
+          "line": 126
+        },
+        {
+          "name": "getTableId",
+          "line": 127
+        },
+        {
+          "name": "triggersByTableRef",
+          "line": 129
+        },
+        {
+          "name": "opts",
+          "line": 133
+        },
+        {
+          "name": "triggers",
+          "line": 144
+        },
+        {
+          "name": "tableId",
+          "line": 145
+        },
+        {
+          "name": "colId",
+          "line": 149
+        },
+        {
+          "name": "summary",
+          "line": 160
+        },
+        {
+          "name": "tableDelta",
+          "line": 175
+        },
+        {
+          "name": "recordDeltas",
+          "line": 179
+        },
+        {
+          "name": "filters",
+          "line": 180
+        },
+        {
+          "name": "tableDataAction",
+          "line": 184
+        },
+        {
+          "name": "docData",
+          "line": 214
+        },
+        {
+          "name": "docData",
+          "line": 223
+        },
+        {
+          "name": "docData",
+          "line": 233
+        },
+        {
+          "name": "colId",
+          "line": 238
+        },
+        {
+          "name": "recordDeltas",
+          "line": 254
+        },
+        {
+          "name": "bulkColValues",
+          "line": 273
+        },
+        {
+          "name": "meta",
+          "line": 275
+        },
+        {
+          "name": "makePayload",
+          "line": 278
+        },
+        {
+          "name": "actions",
+          "line": 284
+        },
+        {
+          "name": "triggerOptions",
+          "line": 285
+        },
+        {
+          "name": "isMonitorEnabled",
+          "line": 286
+        },
+        {
+          "name": "colId",
+          "line": 304
+        },
+        {
+          "name": "tableId",
+          "line": 305
+        },
+        {
+          "name": "error",
+          "line": 306
+        },
+        {
+          "name": "colId",
+          "line": 318
+        },
+        {
+          "name": "tableId",
+          "line": 319
+        },
+        {
+          "name": "error",
+          "line": 320
+        },
+        {
+          "name": "rowId",
+          "line": 332
+        },
+        {
+          "name": "monitorRows",
+          "line": 341
+        },
+        {
+          "name": "triggerEnabled",
+          "line": 345
+        }
+      ]
+    },
+    {
+      "file": "app/client/models/ViewFieldConfig.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "owner",
+          "line": 32
+        },
+        {
+          "name": "list",
+          "line": 37
+        },
+        {
+          "name": "listFields",
+          "line": 50
+        },
+        {
+          "name": "list",
+          "line": 59
+        },
+        {
+          "name": "widgets",
+          "line": 64
+        },
+        {
+          "name": "values",
+          "line": 80
+        },
+        {
+          "name": "previous",
+          "line": 91
+        },
+        {
+          "name": "commonOptions",
+          "line": 108
+        },
+        {
+          "name": "fields",
+          "line": 109
+        },
+        {
+          "name": "widget",
+          "line": 115
+        },
+        {
+          "name": "widgetOptions",
+          "line": 116
+        },
+        {
+          "name": "newOptions",
+          "line": 120
+        },
+        {
+          "name": "options",
+          "line": 133
+        },
+        {
+          "name": "optionList",
+          "line": 142
+        },
+        {
+          "name": "common",
+          "line": 144
+        },
+        {
+          "name": "previous",
+          "line": 171
+        },
+        {
+          "name": "fields",
+          "line": 205
+        },
+        {
+          "name": "multiSelect",
+          "line": 206
+        },
+        {
+          "name": "savableOptions",
+          "line": 207
+        },
+        {
+          "name": "optionList",
+          "line": 216
+        },
+        {
+          "name": "previous",
+          "line": 245
+        },
+        {
+          "name": "state",
+          "line": 254
+        },
+        {
+          "name": "fields",
+          "line": 267
+        },
+        {
+          "name": "multiSelect",
+          "line": 268
+        },
+        {
+          "name": "savableOptions",
+          "line": 269
+        },
+        {
+          "name": "optionList",
+          "line": 278
+        },
+        {
+          "name": "previous",
+          "line": 307
+        },
+        {
+          "name": "state",
+          "line": 316
+        },
+        {
+          "name": "hasRenames",
+          "line": 332
+        },
+        {
+          "name": "tableId",
+          "line": 333
+        },
+        {
+          "name": "colIds",
+          "line": 336
+        },
+        {
+          "name": "column",
+          "line": 344
+        },
+        {
+          "name": "actionOptions",
+          "line": 347
+        },
+        {
+          "name": "allSame",
+          "line": 362
+        },
+        {
+          "name": "first",
+          "line": 364
+        }
+      ]
+    },
+    {
+      "file": "app/client/lib/ACIndex.ts",
+      "score": 13,
+      "symbols": [
+        {
+          "name": "normalizeText",
+          "line": 25
+        },
+        {
+          "name": "wordSepRegexp",
+          "line": 33
+        },
+        {
+          "name": "item",
+          "line": 109
+        },
+        {
+          "name": "words",
+          "line": 110
+        },
+        {
+          "name": "cleanedSearchText",
+          "line": 123
+        },
+        {
+          "name": "searchWords",
+          "line": 124
+        },
+        {
+          "name": "myMatches",
+          "line": 127
+        },
+        {
+          "name": "searchWord",
+          "line": 132
+        },
+        {
+          "name": "sortedMatches",
+          "line": 147
+        },
+        {
+          "name": "items",
+          "line": 165
+        },
+        {
+          "name": "highlightFunc",
+          "line": 172
+        },
+        {
+          "name": "insertIndex",
+          "line": 196
+        },
+        {
+          "name": "scored",
+          "line": 200
+        },
+        {
+          "name": "wordEntry",
+          "line": 208
+        },
+        {
+          "name": "baseScore",
+          "line": 215
+        },
+        {
+          "name": "fullWordBonus",
+          "line": 218
+        },
+        {
+          "name": "positionBonus",
+          "line": 225
+        },
+        {
+          "name": "itemScore",
+          "line": 227
+        },
+        {
+          "name": "buildHighlightedDom",
+          "line": 246
+        },
+        {
+          "name": "parts",
+          "line": 250
+        },
+        {
+          "name": "wordSepRegexpParen",
+          "line": 255
+        },
+        {
+          "name": "highlightMatches",
+          "line": 261
+        },
+        {
+          "name": "textParts",
+          "line": 262
+        },
+        {
+          "name": "outputs",
+          "line": 263
+        },
+        {
+          "name": "word",
+          "line": 265
+        },
+        {
+          "name": "separator",
+          "line": 266
+        },
+        {
+          "name": "prefixLen",
+          "line": 268
+        },
+        {
+          "name": "chars",
+          "line": 273
+        },
+        {
+          "name": "findLongestPrefixLen",
+          "line": 283
+        },
+        {
+          "name": "findCommonPrefixLength",
+          "line": 287
+        },
+        {
+          "name": "startsWithText",
+          "line": 297
+        },
+        {
+          "name": "regexp",
+          "line": 300
+        },
+        {
+          "name": "cleanText",
+          "line": 301
+        }
+      ]
+    },
+    {
+      "file": "app/server/lib/WebhookQueue.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "MAX_QUEUE_SIZE",
+          "line": 50
+        },
+        {
+          "name": "WEBHOOK_CACHE_TTL",
+          "line": 53
+        },
+        {
+          "name": "WEBHOOK_STATS_CACHE_TTL",
+          "line": 55
+        },
+        {
+          "name": "TRIGGER_WAIT_DELAY",
+          "line": 58
+        },
+        {
+          "name": "TRIGGER_MAX_ATTEMPTS",
+          "line": 61
+        },
+        {
+          "name": "extractHost",
+          "line": 64
+        },
+        {
+          "name": "eventsByType",
+          "line": 101
+        },
+        {
+          "name": "queue",
+          "line": 104
+        },
+        {
+          "name": "redisUrl",
+          "line": 152
+        },
+        {
+          "name": "sendNotificationPromise",
+          "line": 168
+        },
+        {
+          "name": "delayPromise",
+          "line": 169
+        },
+        {
+          "name": "docData",
+          "line": 189
+        },
+        {
+          "name": "triggersTable",
+          "line": 190
+        },
+        {
+          "name": "getTableId",
+          "line": 191
+        },
+        {
+          "name": "getColId",
+          "line": 192
+        },
+        {
+          "name": "getUrl",
+          "line": 193
+        },
+        {
+          "name": "getAuthorization",
+          "line": 194
+        },
+        {
+          "name": "getUnsubscribeKey",
+          "line": 195
+        },
+        {
+          "name": "actions",
+          "line": 201
+        },
+        {
+          "name": "webhookActions",
+          "line": 203
+        },
+        {
+          "name": "url",
+          "line": 206
+        },
+        {
+          "name": "authorization",
+          "line": 207
+        },
+        {
+          "name": "unsubscribeKey",
+          "line": 209
+        },
+        {
+          "name": "decodedWatchedColRefList",
+          "line": 214
+        },
+        {
+          "name": "removed",
+          "line": 254
+        },
+        {
+          "name": "lengthBefore",
+          "line": 274
+        },
+        {
+          "name": "removed",
+          "line": 276
+        },
+        {
+          "name": "multi",
+          "line": 284
+        },
+        {
+          "name": "strings",
+          "line": 289
+        },
+        {
+          "name": "urlCache",
+          "line": 303
+        },
+        {
+          "name": "usageCache",
+          "line": 304
+        },
+        {
+          "name": "url",
+          "line": 308
+        },
+        {
+          "name": "usage",
+          "line": 314
+        },
+        {
+          "name": "docData",
+          "line": 342
+        },
+        {
+          "name": "triggersTable",
+          "line": 344
+        }
+      ]
+    }
+  ]
+}

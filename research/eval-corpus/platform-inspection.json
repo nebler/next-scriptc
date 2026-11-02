@@ -1,0 +1,5801 @@
+{
+  "repo": "hcengineering/platform",
+  "url": "https://github.com/hcengineering/platform",
+  "sha": "6eeec00427f55b5113ea6aee46a92f22d1eec307",
+  "domain": "search",
+  "frameworkHypothesis": "Node",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/net/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/core/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/stream/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/server/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/utils/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "foundations/hulypulse/LICENSE",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "plugins/test-management-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/uploader-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/uploader/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/global-profile/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/document-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/huly-mail-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/global-profile-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/task-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/task-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/questions-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/diffview-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0",
+        "diff2html": "~3.4.35"
+      }
+    },
+    {
+      "file": "plugins/recruit/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-preferences/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/card-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/view-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/love-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/drive-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/export-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/contact/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/process-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/love-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/support-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/calendar-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/controlled-documents-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/presence-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inbox-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-downloads-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/workbench-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/rating/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/calendar/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/achievement/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/products/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/card/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inbox/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/notification-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/mail-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/ai-bot-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/request-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/attachment-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/recruit-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/devmodel/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/document-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/analytics-collector/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/billing-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tags-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chat/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chunter-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/converter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/global-profile-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/communication-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/love/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/board/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/achievement-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/export-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/emoji-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/bitrix-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/notification/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/activity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/mail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/controlled-documents/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/test-management/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-preferences-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/attachment/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-downloads-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/media-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/training/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/notification-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/diffview-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0"
+      }
+    },
+    {
+      "file": "plugins/print-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/questions-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/products-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chat-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/activity-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/survey-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/emoji/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/setting-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/ai-assistant-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/test-management-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/hr-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/print-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/guest-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/text-editor-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tracker/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/calendar-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/document/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/time-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/text-editor/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@types/diff": "~5.0.2"
+      }
+    },
+    {
+      "file": "plugins/gmail-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/bitrix-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tracker-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tags-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chat-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/onboard/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/setting-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/print/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/ai-assistant-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/time/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tags/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/controlled-documents-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/preference/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/rating-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/login-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/uploader-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/presence/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/onboard-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/lead/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/gmail-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inventory-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/preference-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/support/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/templates-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/workbench/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/support-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chunter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inventory/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/analytics-collector-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/telegram/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/guest/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/task/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/analytics-collector-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inventory-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/hr/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/emoji-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/contact-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/view/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/media-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/communication-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/lead-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/board-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/recorder/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/ai-assistant/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/onboard-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/request-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/templates/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/recorder-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/achievement-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/hr-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/card-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/request/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/inbox-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/recorder-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/ai-bot/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/login-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/recruit-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/diffview/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/products-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/board-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/attachment-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/bitrix/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/tracker-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/templates-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/telegram-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/huly-mail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/communication/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/client-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-downloads/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/view-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/workbench-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/export/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/training-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/setting/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/survey/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/drive/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/survey-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/chunter-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/huly-mail-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/drive-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/sign/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/guest-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/billing-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/image-cropper/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/time-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/telegram-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/login/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/gmail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/devmodel-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/process-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/converter-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/billing/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/lead-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/rating-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/desktop-preferences-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/openai/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/image-cropper-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/process/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/questions/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/contact-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/activity-assets/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/text-editor-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "diff": "^5.1.0",
+        "@types/diff": "~5.0.2"
+      }
+    },
+    {
+      "file": "plugins/media/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "plugins/training-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "desktop/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0",
+        "@hcengineering/diffview-assets": "workspace:^0.7.0",
+        "@hcengineering/diffview-resources": "workspace:^0.7.0"
+      }
+    },
+    {
+      "file": "server/backup-service/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/account-service/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/server-pipeline/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/workspace-service/package.json",
+      "license": null,
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/account/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/collaborator/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/backup/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/front/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "server/indexer/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server/tool/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-view/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/uploader/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/recruit/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-setting/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/desktop-preferences/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-notification/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/contact/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-task/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/rating/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/calendar/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/achievement/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/products/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/card/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/inbox/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-lead/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/analytics-collector/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-time/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-telegram/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-tags/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/chat/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/converter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/love/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/board/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-process/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-attachment/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/notification/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/activity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/mail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/controlled-documents/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/test-management/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/attachment/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/training/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/emoji/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/all/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-chunter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/tracker/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-ai-bot/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/document/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/text-editor/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-request/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/print/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/time/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/tags/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-guest/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/preference/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-love/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/presence/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-card/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/lead/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/support/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/workbench/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/chunter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/inventory/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/telegram/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/guest/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-tracker/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/task/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/hr/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-controlled-documents/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/view/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-collaboration/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/recorder/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/ai-assistant/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/templates/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/request/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-calendar/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-products/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/ai-bot/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-gmail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/bitrix/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-recruit/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/huly-mail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/communication/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-templates/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/desktop-downloads/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/export/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/setting/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-inventory/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-training/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-contact/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/survey/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/drive/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-activity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/presentation/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-document/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/gmail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-drive/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/billing/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/process/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/server-hr/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/questions/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "models/media/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/pods/network-pod/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/pods/network-tool/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/examples/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/packages/backrpc/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/packages/core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/packages/server/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/net/packages/client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/hulylake-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/token/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/text-html/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/storage-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/retry/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/account-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/text-core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/platform/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/text-markdown/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/storage/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/api-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/analytics-service/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/collaborator-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/measurements-otlp/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/model/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/text/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/client-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/postgres-base/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/rpc/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/query/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/rank/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/measurements/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/text-ydoc/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/core/packages/analytics/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/middleware/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/collaboration/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/s3/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/hulylake/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/core/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/elastic/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@elastic/elasticsearch": "^7.17.14"
+      }
+    },
+    {
+      "file": "foundations/server/packages/server/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/datalake/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/minio/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/postgres/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/kafka/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/server-storage/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/mongo/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/server/packages/client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/utils/common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/utils/packages/ui-test/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/utils/packages/platform-rig/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/client-query/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/types/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/rest-client/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/sdk-types/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/server/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/shared/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/cockroach/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "foundations/communication/packages/query/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "desktop-package/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/document-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/task-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/recruit/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/collaboration/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/love-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/contact/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/process-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/rating/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/calendar/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/card/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/notification-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/ai-bot-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/request-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/analytics-collector/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/love/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/notification/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/activity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/controlled-documents/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/attachment/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/training/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/activity-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/setting-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/guest-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/tracker/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/calendar-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/document/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/time-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/gmail-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/tracker-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/tags-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/collaboration-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/time/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/tags/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/controlled-documents-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/preference/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/lead/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/inventory-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/chunter/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/inventory/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/analytics-collector-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/telegram/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/guest/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/task/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/hr/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/view/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/lead-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/templates/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/hr-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/card-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/request/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/ai-bot/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/recruit-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/attachment-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/view-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/setting/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/drive/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/chunter-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/drive-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/telegram-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/gmail/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/process/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/contact-resources/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "server-plugins/training-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "common/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "qms-desktop-package/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/workspace/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/server/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/fulltext/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/preview/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "pods/authProviders/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/external/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/account/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/collaborator/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/backup/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/link-preview/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/front/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "pods/stats/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "pods/media/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "qms-tests/sanity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/ui/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/kvs-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/analytics-providers/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/importer/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/integration-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/panel/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/billing-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/highlight/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/rekoni/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/gantt/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/theme/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/hls/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/kanban/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/payment-client/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/hulypulse-client/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/presentation/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0"
+      }
+    },
+    {
+      "file": "ws-tests/sanity/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "ws-tests/api-tests/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/ui/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/platform/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/default/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/webpack/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/cloud/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/model/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/node/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/package/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "dev/prod/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0",
+        "@hcengineering/diffview-assets": "workspace:^0.7.0",
+        "@hcengineering/diffview-resources": "workspace:^0.7.0"
+      }
+    },
+    {
+      "file": "dev/storybook/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "dev/import-tool/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "dev/doc-import-tool/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "dev/tool/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {
+        "@elastic/elasticsearch": "^7.17.14"
+      }
+    },
+    {
+      "file": "services/rating/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [
+        "koa"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/calendar/pod-calendar/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/calendar/pod-calendar-mailer/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/analytics-collector/pod-analytics-collector/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/telegram-bot/pod-telegram-bot/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/love/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/translate/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/notification/pod-events-processor/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/notification/pod-notification/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/mail/pod-mail/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/mail/mail-common/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/mail/pod-mail-worker/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/payment/pod-payment/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/datalake/pod-datalake/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/rekoni/package.json",
+      "license": "UNLICENSED",
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "services/print/pod-print/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/server-github-model/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/server-github/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/model-github/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/server-github-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/github/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/github-assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/pod-github/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/github/github-resources/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "@hcengineering/diffview": "workspace:^0.7.0"
+      }
+    },
+    {
+      "file": "services/telegram/pod-telegram/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/ai-bot/love-agent/package.json",
+      "license": "EPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/ai-bot/pod-ai-bot/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/export/pod-export/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/backup/backup-api-pod/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {
+        "sharp": "~0.34.3"
+      }
+    },
+    {
+      "file": "services/sign/pod-sign/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/gmail/pod-gmail/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/billing/pod-billing/package.json",
+      "license": null,
+      "frameworks": [
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "services/process/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "dev/tool/src/clean.ts",
+      "score": 56,
+      "symbols": [
+        {
+          "name": "cleanWorkspace",
+          "line": 80
+        },
+        {
+          "name": "connection",
+          "line": 88
+        },
+        {
+          "name": "ops",
+          "line": 93
+        },
+        {
+          "name": "hierarchy",
+          "line": 95
+        },
+        {
+          "name": "contacts",
+          "line": 98
+        },
+        {
+          "name": "filter",
+          "line": 100
+        },
+        {
+          "name": "part",
+          "line": 103
+        },
+        {
+          "name": "op",
+          "line": 104
+        },
+        {
+          "name": "t",
+          "line": 108
+        },
+        {
+          "name": "issues",
+          "line": 116
+        },
+        {
+          "name": "part",
+          "line": 120
+        },
+        {
+          "name": "op",
+          "line": 121
+        },
+        {
+          "name": "t",
+          "line": 125
+        },
+        {
+          "name": "client",
+          "line": 131
+        },
+        {
+          "name": "_client",
+          "line": 133
+        },
+        {
+          "name": "db",
+          "line": 134
+        },
+        {
+          "name": "iterator",
+          "line": 138
+        },
+        {
+          "name": "doc",
+          "line": 142
+        },
+        {
+          "name": "fixMinioBW",
+          "line": 173
+        },
+        {
+          "name": "from",
+          "line": 179
+        },
+        {
+          "name": "list",
+          "line": 180
+        },
+        {
+          "name": "objs",
+          "line": 184
+        },
+        {
+          "name": "cleanRemovedTransactions",
+          "line": 205
+        },
+        {
+          "name": "connection",
+          "line": 206
+        },
+        {
+          "name": "removedDocs",
+          "line": 212
+        },
+        {
+          "name": "toRemove",
+          "line": 217
+        },
+        {
+          "name": "optimizeModel",
+          "line": 237
+        },
+        {
+          "name": "connection",
+          "line": 238
+        },
+        {
+          "name": "model",
+          "line": 245
+        },
+        {
+          "name": "updateTransactions",
+          "line": 247
+        },
+        {
+          "name": "doc",
+          "line": 261
+        },
+        {
+          "name": "adoc",
+          "line": 269
+        },
+        {
+          "name": "cleanArchivedSpaces",
+          "line": 308
+        },
+        {
+          "name": "connection",
+          "line": 309
+        },
+        {
+          "name": "count",
+          "line": 313
+        }
+      ]
+    },
+    {
+      "file": "server/backup/src/utils.ts",
+      "score": 55,
+      "symbols": [
+        {
+          "name": "dataBlobSize",
+          "line": 60
+        },
+        {
+          "name": "defaultLevel",
+          "line": 62
+        },
+        {
+          "name": "backupList",
+          "line": 67
+        },
+        {
+          "name": "infoFile",
+          "line": 68
+        },
+        {
+          "name": "backupRemoveLast",
+          "line": 83
+        },
+        {
+          "name": "infoFile",
+          "line": 84
+        },
+        {
+          "name": "old",
+          "line": 91
+        },
+        {
+          "name": "backupSize",
+          "line": 103
+        },
+        {
+          "name": "infoFile",
+          "line": 104
+        },
+        {
+          "name": "addFileSize",
+          "line": 113
+        },
+        {
+          "name": "fileSize",
+          "line": 116
+        },
+        {
+          "name": "backupDownload",
+          "line": 145
+        },
+        {
+          "name": "infoFile",
+          "line": 146
+        },
+        {
+          "name": "sizeFile",
+          "line": 147
+        },
+        {
+          "name": "downloadFile",
+          "line": 164
+        },
+        {
+          "name": "target",
+          "line": 167
+        },
+        {
+          "name": "dir",
+          "line": 168
+        },
+        {
+          "name": "readStream",
+          "line": 185
+        },
+        {
+          "name": "outp",
+          "line": 186
+        },
+        {
+          "name": "backupFind",
+          "line": 239
+        },
+        {
+          "name": "infoFile",
+          "line": 245
+        },
+        {
+          "name": "toolCtx",
+          "line": 253
+        },
+        {
+          "name": "snapshots",
+          "line": 255
+        },
+        {
+          "name": "rnapshots",
+          "line": 256
+        },
+        {
+          "name": "domains",
+          "line": 259
+        },
+        {
+          "name": "sDigest",
+          "line": 269
+        },
+        {
+          "name": "ssDigest",
+          "line": 274
+        },
+        {
+          "name": "d",
+          "line": 278
+        },
+        {
+          "name": "readStream",
+          "line": 287
+        },
+        {
+          "name": "ex",
+          "line": 288
+        },
+        {
+          "name": "bf",
+          "line": 298
+        },
+        {
+          "name": "endPromise",
+          "line": 312
+        },
+        {
+          "name": "unzip",
+          "line": 317
+        },
+        {
+          "name": "extendZero",
+          "line": 332
+        },
+        {
+          "name": "compactBackup",
+          "line": 344
+        }
+      ]
+    },
+    {
+      "file": "foundations/core/packages/query/src/index.ts",
+      "score": 51,
+      "symbols": [
+        {
+          "name": "CACHE_SIZE",
+          "line": 74
+        },
+        {
+          "name": "mixinClass",
+          "line": 172
+        },
+        {
+          "name": "query",
+          "line": 177
+        },
+        {
+          "name": "value",
+          "line": 181
+        },
+        {
+          "name": "result",
+          "line": 182
+        },
+        {
+          "name": "q",
+          "line": 195
+        },
+        {
+          "name": "opt",
+          "line": 211
+        },
+        {
+          "name": "d",
+          "line": 222
+        },
+        {
+          "name": "q",
+          "line": 227
+        },
+        {
+          "name": "d",
+          "line": 272
+        },
+        {
+          "name": "q",
+          "line": 277
+        },
+        {
+          "name": "queries",
+          "line": 306
+        },
+        {
+          "name": "removed",
+          "line": 317
+        },
+        {
+          "name": "current",
+          "line": 357
+        },
+        {
+          "name": "localResult",
+          "line": 382
+        },
+        {
+          "name": "result",
+          "line": 383
+        },
+        {
+          "name": "used",
+          "line": 416
+        },
+        {
+          "name": "targetSize",
+          "line": 419
+        },
+        {
+          "name": "toRemove",
+          "line": 420
+        },
+        {
+          "name": "q",
+          "line": 422
+        },
+        {
+          "name": "queries",
+          "line": 429
+        },
+        {
+          "name": "removed",
+          "line": 430
+        },
+        {
+          "name": "callbackId",
+          "line": 453
+        },
+        {
+          "name": "q",
+          "line": 454
+        },
+        {
+          "name": "current",
+          "line": 486
+        },
+        {
+          "name": "q",
+          "line": 488
+        },
+        {
+          "name": "match",
+          "line": 506
+        },
+        {
+          "name": "doc",
+          "line": 515
+        },
+        {
+          "name": "doc",
+          "line": 524
+        },
+        {
+          "name": "showArchived",
+          "line": 548
+        },
+        {
+          "name": "docIdKey",
+          "line": 551
+        },
+        {
+          "name": "current",
+          "line": 553
+        },
+        {
+          "name": "pos",
+          "line": 580
+        },
+        {
+          "name": "ops",
+          "line": 605
+        },
+        {
+          "name": "hierarchy",
+          "line": 633
+        }
+      ]
+    },
+    {
+      "file": "foundations/server/packages/postgres/src/storage.ts",
+      "score": 45,
+      "symbols": [
+        {
+          "name": "cursor",
+          "line": 121
+        },
+        {
+          "name": "vkey",
+          "line": 150
+        },
+        {
+          "name": "v",
+          "line": 151
+        },
+        {
+          "name": "idx",
+          "line": 156
+        },
+        {
+          "name": "vals",
+          "line": 177
+        },
+        {
+          "name": "escQuote",
+          "line": 185
+        },
+        {
+          "name": "schema",
+          "line": 244
+        },
+        {
+          "name": "client",
+          "line": 245
+        },
+        {
+          "name": "tdomain",
+          "line": 247
+        },
+        {
+          "name": "vars",
+          "line": 249
+        },
+        {
+          "name": "rawClient",
+          "line": 260
+        },
+        {
+          "name": "result",
+          "line": 265
+        },
+        {
+          "name": "domain",
+          "line": 297
+        },
+        {
+          "name": "vars",
+          "line": 298
+        },
+        {
+          "name": "select",
+          "line": 299
+        },
+        {
+          "name": "val",
+          "line": 318
+        },
+        {
+          "name": "value",
+          "line": 344
+        },
+        {
+          "name": "tkey",
+          "line": 345
+        },
+        {
+          "name": "translated",
+          "line": 346
+        },
+        {
+          "name": "vars",
+          "line": 359
+        },
+        {
+          "name": "translatedQuery",
+          "line": 360
+        },
+        {
+          "name": "isOps",
+          "line": 364
+        },
+        {
+          "name": "schemaFields",
+          "line": 368
+        },
+        {
+          "name": "res",
+          "line": 371
+        },
+        {
+          "name": "docs",
+          "line": 375
+        },
+        {
+          "name": "prevAttachedTo",
+          "line": 378
+        },
+        {
+          "name": "converted",
+          "line": 381
+        },
+        {
+          "name": "params",
+          "line": 382
+        },
+        {
+          "name": "newAttachedTo",
+          "line": 385
+        },
+        {
+          "name": "val",
+          "line": 388
+        },
+        {
+          "name": "vars",
+          "line": 419
+        },
+        {
+          "name": "translatedQuery",
+          "line": 420
+        },
+        {
+          "name": "val",
+          "line": 431
+        },
+        {
+          "name": "vars",
+          "line": 447
+        },
+        {
+          "name": "translatedQuery",
+          "line": 448
+        }
+      ]
+    },
+    {
+      "file": "services/github/pod-github/src/worker.ts",
+      "score": 43,
+      "symbols": [
+        {
+          "name": "current",
+          "line": 172
+        },
+        {
+          "name": "markupText",
+          "line": 183
+        },
+        {
+          "name": "markdown",
+          "line": 184
+        },
+        {
+          "name": "markdownCompatible",
+          "line": 185
+        },
+        {
+          "name": "markup",
+          "line": 198
+        },
+        {
+          "name": "markdown",
+          "line": 199
+        },
+        {
+          "name": "compatible",
+          "line": 200
+        },
+        {
+          "name": "frontUrl",
+          "line": 228
+        },
+        {
+          "name": "refUrl",
+          "line": 229
+        },
+        {
+          "name": "imageUrl",
+          "line": 231
+        },
+        {
+          "name": "guestUrl",
+          "line": 232
+        },
+        {
+          "name": "json",
+          "line": 233
+        },
+        {
+          "name": "project",
+          "line": 255
+        },
+        {
+          "name": "info",
+          "line": 302
+        },
+        {
+          "name": "p",
+          "line": 305
+        },
+        {
+          "name": "p",
+          "line": 311
+        },
+        {
+          "name": "userName",
+          "line": 331
+        },
+        {
+          "name": "normalizedLogin",
+          "line": 337
+        },
+        {
+          "name": "infos",
+          "line": 338
+        },
+        {
+          "name": "existingSocialId",
+          "line": 347
+        },
+        {
+          "name": "token",
+          "line": 400
+        },
+        {
+          "name": "personAccount",
+          "line": 471
+        },
+        {
+          "name": "personRef",
+          "line": 519
+        },
+        {
+          "name": "accounts",
+          "line": 523
+        },
+        {
+          "name": "info",
+          "line": 530
+        },
+        {
+          "name": "infoData",
+          "line": 549
+        },
+        {
+          "name": "accounts",
+          "line": 567
+        },
+        {
+          "name": "userAuths",
+          "line": 572
+        },
+        {
+          "name": "persons",
+          "line": 575
+        },
+        {
+          "name": "userAuth",
+          "line": 581
+        },
+        {
+          "name": "person",
+          "line": 582
+        },
+        {
+          "name": "record",
+          "line": 586
+        },
+        {
+          "name": "ops",
+          "line": 593
+        },
+        {
+          "name": "accountRef",
+          "line": 625
+        },
+        {
+          "name": "accounts",
+          "line": 629
+        }
+      ]
+    },
+    {
+      "file": "dev/tool/src/db.ts",
+      "score": 41,
+      "symbols": [
+        {
+          "name": "moveFromMongoToPG",
+          "line": 70
+        },
+        {
+          "name": "client",
+          "line": 80
+        },
+        {
+          "name": "mongo",
+          "line": 81
+        },
+        {
+          "name": "pg",
+          "line": 82
+        },
+        {
+          "name": "pgClient",
+          "line": 83
+        },
+        {
+          "name": "ws",
+          "line": 86
+        },
+        {
+          "name": "moveWorkspace",
+          "line": 99
+        },
+        {
+          "name": "wsId",
+          "line": 110
+        },
+        {
+          "name": "mongoDB",
+          "line": 112
+        },
+        {
+          "name": "collections",
+          "line": 113
+        },
+        {
+          "name": "token",
+          "line": 120
+        },
+        {
+          "name": "endpoint",
+          "line": 121
+        },
+        {
+          "name": "connection",
+          "line": 122
+        },
+        {
+          "name": "domain",
+          "line": 126
+        },
+        {
+          "name": "cursor",
+          "line": 130
+        },
+        {
+          "name": "current",
+          "line": 131
+        },
+        {
+          "name": "currentIds",
+          "line": 132
+        },
+        {
+          "name": "fields",
+          "line": 135
+        },
+        {
+          "name": "filedsWithData",
+          "line": 136
+        },
+        {
+          "name": "doc",
+          "line": 144
+        },
+        {
+          "name": "part",
+          "line": 156
+        },
+        {
+          "name": "part",
+          "line": 165
+        },
+        {
+          "name": "doc",
+          "line": 168
+        },
+        {
+          "name": "d",
+          "line": 169
+        },
+        {
+          "name": "moveWorkspaceFromMongoToPG",
+          "line": 192
+        },
+        {
+          "name": "client",
+          "line": 204
+        },
+        {
+          "name": "mongo",
+          "line": 205
+        },
+        {
+          "name": "pg",
+          "line": 206
+        },
+        {
+          "name": "pgClient",
+          "line": 207
+        },
+        {
+          "name": "moveAccountDbFromMongoToPG",
+          "line": 214
+        },
+        {
+          "name": "mdb",
+          "line": 219
+        },
+        {
+          "name": "BATCH_SIZE",
+          "line": 220
+        },
+        {
+          "name": "WS_BATCH_SIZE",
+          "line": 221
+        },
+        {
+          "name": "personsCursor",
+          "line": 224
+        },
+        {
+          "name": "person",
+          "line": 230
+        }
+      ]
+    },
+    {
+      "file": "server-plugins/card-resources/src/index.ts",
+      "score": 40,
+      "symbols": [
+        {
+          "name": "getViewletConfigKey",
+          "line": 73
+        },
+        {
+          "name": "getAttributeKey",
+          "line": 77
+        },
+        {
+          "name": "dotIndex",
+          "line": 81
+        },
+        {
+          "name": "isSourceAttribute",
+          "line": 85
+        },
+        {
+          "name": "syncViewletConfigOrder",
+          "line": 89
+        },
+        {
+          "name": "sourceKeys",
+          "line": 96
+        },
+        {
+          "name": "previousSourceKeys",
+          "line": 97
+        },
+        {
+          "name": "targetByKey",
+          "line": 98
+        },
+        {
+          "name": "key",
+          "line": 100
+        },
+        {
+          "name": "items",
+          "line": 101
+        },
+        {
+          "name": "usedIndexes",
+          "line": 107
+        },
+        {
+          "name": "key",
+          "line": 109
+        },
+        {
+          "name": "targetItem",
+          "line": 110
+        },
+        {
+          "name": "item",
+          "line": 111
+        },
+        {
+          "name": "synced",
+          "line": 118
+        },
+        {
+          "name": "key",
+          "line": 122
+        },
+        {
+          "name": "isConfigOrderChanged",
+          "line": 133
+        },
+        {
+          "name": "OnAttribute",
+          "line": 137
+        },
+        {
+          "name": "attr",
+          "line": 138
+        },
+        {
+          "name": "desc",
+          "line": 140
+        },
+        {
+          "name": "viewlets",
+          "line": 143
+        },
+        {
+          "name": "updatedConfig",
+          "line": 145
+        },
+        {
+          "name": "index",
+          "line": 149
+        },
+        {
+          "name": "prefs",
+          "line": 164
+        },
+        {
+          "name": "updatedPrefConfig",
+          "line": 166
+        },
+        {
+          "name": "index",
+          "line": 168
+        },
+        {
+          "name": "OnAttributeRemove",
+          "line": 190
+        },
+        {
+          "name": "attr",
+          "line": 191
+        },
+        {
+          "name": "desc",
+          "line": 194
+        },
+        {
+          "name": "forbidden",
+          "line": 195
+        },
+        {
+          "name": "viewlets",
+          "line": 199
+        },
+        {
+          "name": "filteredConfig",
+          "line": 201
+        },
+        {
+          "name": "key",
+          "line": 202
+        },
+        {
+          "name": "prefs",
+          "line": 213
+        },
+        {
+          "name": "filteredPrefConfig",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "file": "foundations/server/packages/mongo/src/storage.ts",
+      "score": 38,
+      "symbols": [
+        {
+          "name": "translateDoc",
+          "line": 93
+        },
+        {
+          "name": "d",
+          "line": 125
+        },
+        {
+          "name": "batch",
+          "line": 130
+        },
+        {
+          "name": "order",
+          "line": 181
+        },
+        {
+          "name": "d",
+          "line": 192
+        },
+        {
+          "name": "value",
+          "line": 212
+        },
+        {
+          "name": "keys",
+          "line": 214
+        },
+        {
+          "name": "pattern",
+          "line": 216
+        },
+        {
+          "name": "order",
+          "line": 238
+        },
+        {
+          "name": "mixins",
+          "line": 302
+        },
+        {
+          "name": "value",
+          "line": 304
+        },
+        {
+          "name": "tkey",
+          "line": 306
+        },
+        {
+          "name": "translated",
+          "line": 308
+        },
+        {
+          "name": "keys",
+          "line": 310
+        },
+        {
+          "name": "baseClass",
+          "line": 325
+        },
+        {
+          "name": "classes",
+          "line": 327
+        },
+        {
+          "name": "classesIds",
+          "line": 342
+        },
+        {
+          "name": "excludedClassesIds",
+          "line": 347
+        },
+        {
+          "name": "desc",
+          "line": 351
+        },
+        {
+          "name": "value",
+          "line": 387
+        },
+        {
+          "name": "tkey",
+          "line": 390
+        },
+        {
+          "name": "fullKey",
+          "line": 391
+        },
+        {
+          "name": "domain",
+          "line": 392
+        },
+        {
+          "name": "_class",
+          "line": 403
+        },
+        {
+          "name": "tkey",
+          "line": 404
+        },
+        {
+          "name": "fullKey",
+          "line": 405
+        },
+        {
+          "name": "domain",
+          "line": 406
+        },
+        {
+          "name": "fullKey",
+          "line": 420
+        },
+        {
+          "name": "lid",
+          "line": 421
+        },
+        {
+          "name": "as",
+          "line": 423
+        },
+        {
+          "name": "value",
+          "line": 424
+        },
+        {
+          "name": "domain",
+          "line": 435
+        },
+        {
+          "name": "desc",
+          "line": 436
+        },
+        {
+          "name": "asVal",
+          "line": 440
+        },
+        {
+          "name": "_id",
+          "line": 473
+        }
+      ]
+    },
+    {
+      "file": "server-plugins/process-resources/src/index.ts",
+      "score": 35,
+      "symbols": [
+        {
+          "name": "putEventToQueue",
+          "line": 146
+        },
+        {
+          "name": "producer",
+          "line": 148
+        },
+        {
+          "name": "OnProcessToDoClose",
+          "line": 162
+        },
+        {
+          "name": "updateTx",
+          "line": 166
+        },
+        {
+          "name": "todo",
+          "line": 169
+        },
+        {
+          "name": "request",
+          "line": 175
+        },
+        {
+          "name": "request",
+          "line": 195
+        },
+        {
+          "name": "toRemove",
+          "line": 198
+        },
+        {
+          "name": "OnCustomEvent",
+          "line": 211
+        },
+        {
+          "name": "createTx",
+          "line": 214
+        },
+        {
+          "name": "customEvent",
+          "line": 216
+        },
+        {
+          "name": "card",
+          "line": 217
+        },
+        {
+          "name": "OnExecutionCreate",
+          "line": 237
+        },
+        {
+          "name": "createTx",
+          "line": 240
+        },
+        {
+          "name": "execution",
+          "line": 242
+        },
+        {
+          "name": "OnProcessToDoRemove",
+          "line": 257
+        },
+        {
+          "name": "removeTx",
+          "line": 260
+        },
+        {
+          "name": "removedTodo",
+          "line": 263
+        },
+        {
+          "name": "OnExecutionContinue",
+          "line": 281
+        },
+        {
+          "name": "updateTx",
+          "line": 285
+        },
+        {
+          "name": "execution",
+          "line": 287
+        },
+        {
+          "name": "error",
+          "line": 291
+        },
+        {
+          "name": "transition",
+          "line": 293
+        },
+        {
+          "name": "OnExecutionDone",
+          "line": 309
+        },
+        {
+          "name": "updateTx",
+          "line": 314
+        },
+        {
+          "name": "todos",
+          "line": 318
+        },
+        {
+          "name": "workslots",
+          "line": 324
+        },
+        {
+          "name": "todosWithWorkslots",
+          "line": 327
+        },
+        {
+          "name": "OnProcessRemove",
+          "line": 337
+        },
+        {
+          "name": "removeTx",
+          "line": 341
+        },
+        {
+          "name": "transition",
+          "line": 343
+        },
+        {
+          "name": "states",
+          "line": 347
+        },
+        {
+          "name": "OnStateRemove",
+          "line": 355
+        },
+        {
+          "name": "removeTx",
+          "line": 359
+        },
+        {
+          "name": "transitions",
+          "line": 361
+        }
+      ]
+    },
+    {
+      "file": "plugins/view-resources/src/utils.ts",
+      "score": 33,
+      "symbols": [
+        {
+          "name": "first",
+          "line": 170
+        },
+        {
+          "name": "mgr",
+          "line": 203
+        },
+        {
+          "name": "c",
+          "line": 205
+        },
+        {
+          "name": "getObjectPresenter",
+          "line": 219
+        },
+        {
+          "name": "hierarchy",
+          "line": 226
+        },
+        {
+          "name": "mixin",
+          "line": 227
+        },
+        {
+          "name": "clazz",
+          "line": 228
+        },
+        {
+          "name": "presenterMixin",
+          "line": 230
+        },
+        {
+          "name": "presenter",
+          "line": 241
+        },
+        {
+          "name": "key",
+          "line": 242
+        },
+        {
+          "name": "sortingKey",
+          "line": 243
+        },
+        {
+          "name": "getListItemPresenter",
+          "line": 266
+        },
+        {
+          "name": "clazz",
+          "line": 267
+        },
+        {
+          "name": "presenterMixin",
+          "line": 268
+        },
+        {
+          "name": "getObjectPreview",
+          "line": 280
+        },
+        {
+          "name": "hierarchy",
+          "line": 281
+        },
+        {
+          "name": "presenterMixin",
+          "line": 282
+        },
+        {
+          "name": "getAttrTypePresenter",
+          "line": 286
+        },
+        {
+          "name": "actualMixinClass",
+          "line": 287
+        },
+        {
+          "name": "isCollectionAttr",
+          "line": 291
+        },
+        {
+          "name": "mixin",
+          "line": 292
+        },
+        {
+          "name": "attributePresenter",
+          "line": 299
+        },
+        {
+          "name": "typeAny",
+          "line": 305
+        },
+        {
+          "name": "findAttributePresenter",
+          "line": 310
+        },
+        {
+          "name": "model",
+          "line": 317
+        },
+        {
+          "name": "hierarchy",
+          "line": 318
+        },
+        {
+          "name": "attribute",
+          "line": 320
+        },
+        {
+          "name": "isCollectionAttr",
+          "line": 335
+        },
+        {
+          "name": "mixin",
+          "line": 336
+        },
+        {
+          "name": "attributePresenter",
+          "line": 347
+        },
+        {
+          "name": "typeAny",
+          "line": 353
+        },
+        {
+          "name": "getAttributePresenter",
+          "line": 358
+        },
+        {
+          "name": "actualMixinClass",
+          "line": 366
+        },
+        {
+          "name": "hierarchy",
+          "line": 367
+        },
+        {
+          "name": "attribute",
+          "line": 368
+        }
+      ]
+    },
+    {
+      "file": "plugins/process-resources/src/exporter.ts",
+      "score": 32,
+      "symbols": [
+        {
+          "name": "normalizeId",
+          "line": 36
+        },
+        {
+          "name": "isSystemId",
+          "line": 39
+        },
+        {
+          "name": "attributeToSlot",
+          "line": 52
+        },
+        {
+          "name": "classToSlot",
+          "line": 63
+        },
+        {
+          "name": "associationToSlot",
+          "line": 72
+        },
+        {
+          "name": "processToSlot",
+          "line": 85
+        },
+        {
+          "name": "unknownToSlot",
+          "line": 95
+        },
+        {
+          "name": "processType",
+          "line": 108
+        },
+        {
+          "name": "enumRef",
+          "line": 110
+        },
+        {
+          "name": "enumDoc",
+          "line": 111
+        },
+        {
+          "name": "to",
+          "line": 117
+        },
+        {
+          "name": "processParams",
+          "line": 128
+        },
+        {
+          "name": "val",
+          "line": 139
+        },
+        {
+          "name": "attr",
+          "line": 151
+        },
+        {
+          "name": "val",
+          "line": 156
+        },
+        {
+          "name": "scanDSL",
+          "line": 164
+        },
+        {
+          "name": "attr",
+          "line": 174
+        },
+        {
+          "name": "obj",
+          "line": 179
+        },
+        {
+          "name": "exportProcesses",
+          "line": 189
+        },
+        {
+          "name": "client",
+          "line": 192
+        },
+        {
+          "name": "m",
+          "line": 193
+        },
+        {
+          "name": "processes",
+          "line": 194
+        },
+        {
+          "name": "res",
+          "line": 196
+        },
+        {
+          "name": "exportProcess",
+          "line": 212
+        },
+        {
+          "name": "client",
+          "line": 215
+        },
+        {
+          "name": "m",
+          "line": 216
+        },
+        {
+          "name": "h",
+          "line": 217
+        },
+        {
+          "name": "transitions",
+          "line": 221
+        },
+        {
+          "name": "ctx",
+          "line": 240
+        },
+        {
+          "name": "clonedProc",
+          "line": 258
+        },
+        {
+          "name": "docIndex",
+          "line": 259
+        },
+        {
+          "name": "slot",
+          "line": 264
+        },
+        {
+          "name": "docIndex",
+          "line": 275
+        },
+        {
+          "name": "getRequiredSlots",
+          "line": 288
+        },
+        {
+          "name": "data",
+          "line": 290
+        }
+      ]
+    },
+    {
+      "file": "plugins/controlled-documents/src/utils.ts",
+      "score": 30,
+      "symbols": [
+        {
+          "name": "genRanks",
+          "line": 58
+        },
+        {
+          "name": "sys",
+          "line": 60
+        },
+        {
+          "name": "base",
+          "line": 61
+        },
+        {
+          "name": "max",
+          "line": 62
+        },
+        {
+          "name": "gap",
+          "line": 63
+        },
+        {
+          "name": "calcRank",
+          "line": 75
+        },
+        {
+          "name": "a",
+          "line": 76
+        },
+        {
+          "name": "b",
+          "line": 77
+        },
+        {
+          "name": "createChangeControl",
+          "line": 85
+        },
+        {
+          "name": "getDocumentId",
+          "line": 97
+        },
+        {
+          "name": "documentIdRegExp",
+          "line": 102
+        },
+        {
+          "name": "matchDocumentId",
+          "line": 105
+        },
+        {
+          "name": "match",
+          "line": 106
+        },
+        {
+          "name": "isControlledDocument",
+          "line": 119
+        },
+        {
+          "name": "deleteProjectDrafts",
+          "line": 131
+        },
+        {
+          "name": "projectDocs",
+          "line": 132
+        },
+        {
+          "name": "toDelete",
+          "line": 134
+        },
+        {
+          "name": "isCollaborator",
+          "line": 144
+        },
+        {
+          "name": "isFolder",
+          "line": 153
+        },
+        {
+          "name": "getDocumentSortSequence",
+          "line": 157
+        },
+        {
+          "name": "compareDocumentVersions",
+          "line": 161
+        },
+        {
+          "name": "s0",
+          "line": 165
+        },
+        {
+          "name": "s1",
+          "line": 166
+        },
+        {
+          "name": "extractPresentableStateFromDocumentBundle",
+          "line": 170
+        },
+        {
+          "name": "person",
+          "line": 173
+        },
+        {
+          "name": "documentById",
+          "line": 174
+        },
+        {
+          "name": "prjdoc",
+          "line": 176
+        },
+        {
+          "name": "doc",
+          "line": 179
+        },
+        {
+          "name": "isPublicState",
+          "line": 180
+        },
+        {
+          "name": "doc",
+          "line": 189
+        },
+        {
+          "name": "keepRemoved",
+          "line": 216
+        },
+        {
+          "name": "rankA",
+          "line": 219
+        },
+        {
+          "name": "rankB",
+          "line": 220
+        },
+        {
+          "name": "titleA",
+          "line": 224
+        },
+        {
+          "name": "titleB",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "file": "packages/importer/src/importer/importer.ts",
+      "score": 29,
+      "symbols": [
+        {
+          "name": "projectTypeId",
+          "line": 302
+        },
+        {
+          "name": "taskTypeId",
+          "line": 340
+        },
+        {
+          "name": "statuses",
+          "line": 341
+        },
+        {
+          "name": "projectData",
+          "line": 369
+        },
+        {
+          "name": "teamspaceId",
+          "line": 383
+        },
+        {
+          "name": "documentId",
+          "line": 397
+        },
+        {
+          "name": "teamspaceId",
+          "line": 406
+        },
+        {
+          "name": "codePoint",
+          "line": 407
+        },
+        {
+          "name": "data",
+          "line": 408
+        },
+        {
+          "name": "id",
+          "line": 430
+        },
+        {
+          "name": "content",
+          "line": 431
+        },
+        {
+          "name": "collabId",
+          "line": 432
+        },
+        {
+          "name": "contentId",
+          "line": 433
+        },
+        {
+          "name": "lastRank",
+          "line": 435
+        },
+        {
+          "name": "rank",
+          "line": 436
+        },
+        {
+          "name": "projectDoc",
+          "line": 467
+        },
+        {
+          "name": "componentIds",
+          "line": 475
+        },
+        {
+          "name": "milestoneIds",
+          "line": 476
+        },
+        {
+          "name": "id",
+          "line": 479
+        },
+        {
+          "name": "id",
+          "line": 497
+        },
+        {
+          "name": "issueIdByTitle",
+          "line": 518
+        },
+        {
+          "name": "issueIdByIdentifier",
+          "line": 519
+        },
+        {
+          "name": "collectAllIssues",
+          "line": 536
+        },
+        {
+          "name": "allIssues",
+          "line": 543
+        },
+        {
+          "name": "targetId",
+          "line": 546
+        },
+        {
+          "name": "fromId",
+          "line": 552
+        },
+        {
+          "name": "issueResult",
+          "line": 582
+        },
+        {
+          "name": "parentsInfoEx",
+          "line": 595
+        },
+        {
+          "name": "base",
+          "line": 637
+        },
+        {
+          "name": "cid",
+          "line": 643
+        },
+        {
+          "name": "mid",
+          "line": 648
+        },
+        {
+          "name": "issueResult",
+          "line": 666
+        },
+        {
+          "name": "parentsInfoEx",
+          "line": 670
+        },
+        {
+          "name": "oldProject",
+          "line": 689
+        },
+        {
+          "name": "maxIssueNumber",
+          "line": 693
+        }
+      ]
+    },
+    {
+      "file": "models/core/src/migration.ts",
+      "score": 28,
+      "symbols": [
+        {
+          "name": "migrateStatusesToModel",
+          "line": 69
+        },
+        {
+          "name": "allStatuses",
+          "line": 74
+        },
+        {
+          "name": "isSystem",
+          "line": 80
+        },
+        {
+          "name": "modifiedBy",
+          "line": 81
+        },
+        {
+          "name": "migrateAllSpaceToTyped",
+          "line": 112
+        },
+        {
+          "name": "migrateSpacesOwner",
+          "line": 126
+        },
+        {
+          "name": "targetClasses",
+          "line": 127
+        },
+        {
+          "name": "targetSpaces",
+          "line": 128
+        },
+        {
+          "name": "migrateStatusTransactions",
+          "line": 146
+        },
+        {
+          "name": "migrateCollaborativeContentToStorage",
+          "line": 169
+        },
+        {
+          "name": "storageAdapter",
+          "line": 170
+        },
+        {
+          "name": "hierarchy",
+          "line": 172
+        },
+        {
+          "name": "classes",
+          "line": 173
+        },
+        {
+          "name": "domain",
+          "line": 175
+        },
+        {
+          "name": "allAttributes",
+          "line": 178
+        },
+        {
+          "name": "attributes",
+          "line": 179
+        },
+        {
+          "name": "query",
+          "line": 186
+        },
+        {
+          "name": "iterator",
+          "line": 188
+        },
+        {
+          "name": "processMigrateContentFor",
+          "line": 198
+        },
+        {
+          "name": "hierarchy",
+          "line": 205
+        },
+        {
+          "name": "rateLimiter",
+          "line": 207
+        },
+        {
+          "name": "docs",
+          "line": 212
+        },
+        {
+          "name": "value",
+          "line": 224
+        },
+        {
+          "name": "attributeName",
+          "line": 228
+        },
+        {
+          "name": "collabId",
+          "line": 232
+        },
+        {
+          "name": "blobId",
+          "line": 233
+        },
+        {
+          "name": "buffer",
+          "line": 237
+        },
+        {
+          "name": "migrateBackupMixins",
+          "line": 271
+        },
+        {
+          "name": "hierarchy",
+          "line": 273
+        },
+        {
+          "name": "curHash",
+          "line": 274
+        },
+        {
+          "name": "txIterator",
+          "line": 276
+        },
+        {
+          "name": "mixinOps",
+          "line": 280
+        },
+        {
+          "name": "_classes",
+          "line": 282
+        },
+        {
+          "name": "domain",
+          "line": 285
+        },
+        {
+          "name": "mops",
+          "line": 291
+        }
+      ]
+    },
+    {
+      "file": "server-plugins/notification-resources/src/index.ts",
+      "score": 27,
+      "symbols": [
+        {
+          "name": "getCommonNotificationTxes",
+          "line": 96
+        },
+        {
+          "name": "notifyContexts",
+          "line": 116
+        },
+        {
+          "name": "notificationTx",
+          "line": 118
+        },
+        {
+          "name": "getTextPart",
+          "line": 146
+        },
+        {
+          "name": "TextPresenter",
+          "line": 147
+        },
+        {
+          "name": "getHtmlPart",
+          "line": 155
+        },
+        {
+          "name": "HTMLPresenter",
+          "line": 156
+        },
+        {
+          "name": "fillTemplate",
+          "line": 160
+        },
+        {
+          "name": "getContentByTemplate",
+          "line": 180
+        },
+        {
+          "name": "notificationType",
+          "line": 190
+        },
+        {
+          "name": "messageContent",
+          "line": 213
+        },
+        {
+          "name": "text",
+          "line": 214
+        },
+        {
+          "name": "markup",
+          "line": 220
+        },
+        {
+          "name": "link",
+          "line": 226
+        },
+        {
+          "name": "app",
+          "line": 227
+        },
+        {
+          "name": "linkText",
+          "line": 228
+        },
+        {
+          "name": "text",
+          "line": 232
+        },
+        {
+          "name": "htmlPart",
+          "line": 233
+        },
+        {
+          "name": "html",
+          "line": 234
+        },
+        {
+          "name": "subject",
+          "line": 235
+        },
+        {
+          "name": "getValueCollaborators",
+          "line": 246
+        },
+        {
+          "name": "hierarchy",
+          "line": 247
+        },
+        {
+          "name": "to",
+          "line": 249
+        },
+        {
+          "name": "employee",
+          "line": 252
+        },
+        {
+          "name": "acc",
+          "line": 267
+        },
+        {
+          "name": "arrOf",
+          "line": 270
+        },
+        {
+          "name": "to",
+          "line": 273
+        },
+        {
+          "name": "employees",
+          "line": 284
+        },
+        {
+          "name": "socialIds",
+          "line": 294
+        },
+        {
+          "name": "personsBySocialIds",
+          "line": 295
+        },
+        {
+          "name": "getKeyCollaborators",
+          "line": 305
+        },
+        {
+          "name": "attr",
+          "line": 312
+        },
+        {
+          "name": "val",
+          "line": 314
+        },
+        {
+          "name": "getDocCollaborators",
+          "line": 323
+        },
+        {
+          "name": "collaborators",
+          "line": 329
+        }
+      ]
+    },
+    {
+      "file": "models/notification/src/migration.ts",
+      "score": 25,
+      "symbols": [
+        {
+          "name": "removeNotifications",
+          "line": 60
+        },
+        {
+          "name": "contexts",
+          "line": 65
+        },
+        {
+          "name": "ids",
+          "line": 78
+        },
+        {
+          "name": "migrateNotificationsSpace",
+          "line": 102
+        },
+        {
+          "name": "personSpaces",
+          "line": 103
+        },
+        {
+          "name": "contexts",
+          "line": 164
+        },
+        {
+          "name": "classesOfSpace",
+          "line": 177
+        },
+        {
+          "name": "_class",
+          "line": 180
+        },
+        {
+          "name": "migrateDuplicateContexts",
+          "line": 211
+        },
+        {
+          "name": "personSpaces",
+          "line": 212
+        },
+        {
+          "name": "contexts",
+          "line": 215
+        },
+        {
+          "name": "toRemove",
+          "line": 220
+        },
+        {
+          "name": "contextByUser",
+          "line": 221
+        },
+        {
+          "name": "key",
+          "line": 224
+        },
+        {
+          "name": "existContext",
+          "line": 225
+        },
+        {
+          "name": "existLastViewedTimestamp",
+          "line": 228
+        },
+        {
+          "name": "newLastViewedTimestamp",
+          "line": 229
+        },
+        {
+          "name": "migrateCollaborators",
+          "line": 247
+        },
+        {
+          "name": "hierarchy",
+          "line": 248
+        },
+        {
+          "name": "iterator",
+          "line": 254
+        },
+        {
+          "name": "docs",
+          "line": 258
+        },
+        {
+          "name": "mixin",
+          "line": 268
+        },
+        {
+          "name": "oldCollaborators",
+          "line": 269
+        },
+        {
+          "name": "migrateReactionNotifications",
+          "line": 314
+        },
+        {
+          "name": "migrateAccounts",
+          "line": 328
+        },
+        {
+          "name": "hierarchy",
+          "line": 329
+        },
+        {
+          "name": "socialKeyByAccount",
+          "line": 330
+        },
+        {
+          "name": "socialIdBySocialKey",
+          "line": 331
+        },
+        {
+          "name": "socialIdByOldAccount",
+          "line": 332
+        },
+        {
+          "name": "accountUuidByOldAccount",
+          "line": 333
+        },
+        {
+          "name": "iterator",
+          "line": 340
+        },
+        {
+          "name": "docs",
+          "line": 344
+        },
+        {
+          "name": "mixin",
+          "line": 354
+        },
+        {
+          "name": "oldCollaborators",
+          "line": 355
+        },
+        {
+          "name": "newCollaborators",
+          "line": 359
+        }
+      ]
+    },
+    {
+      "file": "plugins/process-resources/src/utils.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "isTypeEqual",
+          "line": 67
+        },
+        {
+          "name": "check",
+          "line": 69
+        },
+        {
+          "name": "slotId",
+          "line": 74
+        },
+        {
+          "name": "slotId",
+          "line": 80
+        },
+        {
+          "name": "generateContextId",
+          "line": 95
+        },
+        {
+          "name": "getContextMasterTag",
+          "line": 99
+        },
+        {
+          "name": "h",
+          "line": 105
+        },
+        {
+          "name": "model",
+          "line": 106
+        },
+        {
+          "name": "attr",
+          "line": 108
+        },
+        {
+          "name": "parentType",
+          "line": 110
+        },
+        {
+          "name": "attr",
+          "line": 114
+        },
+        {
+          "name": "parentType",
+          "line": 116
+        },
+        {
+          "name": "targetClass",
+          "line": 117
+        },
+        {
+          "name": "nested",
+          "line": 118
+        },
+        {
+          "name": "assoc",
+          "line": 122
+        },
+        {
+          "name": "targetClass",
+          "line": 124
+        },
+        {
+          "name": "nested",
+          "line": 126
+        },
+        {
+          "name": "execContext",
+          "line": 130
+        },
+        {
+          "name": "pickTransition",
+          "line": 136
+        },
+        {
+          "name": "trigger",
+          "line": 143
+        },
+        {
+          "name": "filled",
+          "line": 146
+        },
+        {
+          "name": "checkFunc",
+          "line": 147
+        },
+        {
+          "name": "res",
+          "line": 149
+        },
+        {
+          "name": "fillParams",
+          "line": 154
+        },
+        {
+          "name": "value",
+          "line": 157
+        },
+        {
+          "name": "context",
+          "line": 158
+        },
+        {
+          "name": "client",
+          "line": 171
+        },
+        {
+          "name": "method",
+          "line": 172
+        },
+        {
+          "name": "getContext",
+          "line": 193
+        },
+        {
+          "name": "functions",
+          "line": 206
+        },
+        {
+          "name": "refs",
+          "line": 211
+        },
+        {
+          "name": "refAttributes",
+          "line": 213
+        },
+        {
+          "name": "arrs",
+          "line": 221
+        },
+        {
+          "name": "arrOf",
+          "line": 223
+        },
+        {
+          "name": "to",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "file": "server/indexer/src/indexer/indexer.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "printThresholdMs",
+          "line": 103
+        },
+        {
+          "name": "textLimit",
+          "line": 105
+        },
+        {
+          "name": "globalIndexer",
+          "line": 124
+        },
+        {
+          "name": "extractValues",
+          "line": 131
+        },
+        {
+          "name": "o",
+          "line": 134
+        },
+        {
+          "name": "oo",
+          "line": 136
+        },
+        {
+          "name": "docs",
+          "line": 176
+        },
+        {
+          "name": "allClasses",
+          "line": 250
+        },
+        {
+          "name": "contexts",
+          "line": 251
+        },
+        {
+          "name": "allIndexed",
+          "line": 252
+        },
+        {
+          "name": "byDomain",
+          "line": 262
+        },
+        {
+          "name": "ap",
+          "line": 269
+        },
+        {
+          "name": "bp",
+          "line": 270
+        },
+        {
+          "name": "allDocs",
+          "line": 294
+        },
+        {
+          "name": "pushQueue",
+          "line": 297
+        },
+        {
+          "name": "docs",
+          "line": 300
+        },
+        {
+          "name": "byClass",
+          "line": 304
+        },
+        {
+          "name": "now",
+          "line": 337
+        },
+        {
+          "name": "toSend",
+          "line": 388
+        },
+        {
+          "name": "groups",
+          "line": 399
+        },
+        {
+          "name": "pids",
+          "line": 401
+        },
+        {
+          "name": "gdocs",
+          "line": 403
+        },
+        {
+          "name": "updateSpaces",
+          "line": 437
+        },
+        {
+          "name": "searchPresenter",
+          "line": 456
+        },
+        {
+          "name": "rateLimit",
+          "line": 460
+        },
+        {
+          "name": "indexedDoc",
+          "line": 470
+        },
+        {
+          "name": "attributes",
+          "line": 479
+        },
+        {
+          "name": "content",
+          "line": 480
+        },
+        {
+          "name": "dKey",
+          "line": 513
+        },
+        {
+          "name": "parentDoc",
+          "line": 538
+        },
+        {
+          "name": "spaceDoc",
+          "line": 542
+        },
+        {
+          "name": "rateLimit",
+          "line": 580
+        },
+        {
+          "name": "messages",
+          "line": 601
+        },
+        {
+          "name": "now",
+          "line": 612
+        },
+        {
+          "name": "contextData",
+          "line": 640
+        }
+      ]
+    }
+  ]
+}

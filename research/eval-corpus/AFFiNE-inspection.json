@@ -1,0 +1,2872 @@
+{
+  "repo": "toeverything/AFFiNE",
+  "url": "https://github.com/toeverything/AFFiNE",
+  "sha": "91ac3ca384b791ffd1a87de352a82e766f11ae08",
+  "domain": "text",
+  "frameworkHypothesis": "Next/NestJS",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "LICENSE-MIT",
+      "declaration": "MIT"
+    },
+    {
+      "file": "blocksuite/framework/global/src/gfx/perfect-freehand/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface/src/utils/path-data-parser/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface/src/utils/rough/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface/src/utils/points-on-curve/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface/src/utils/points-on-path/LICENSE",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/frontend/apps/ios/App/Packages/AffineGraphQL/Sources/Fragments/LicenseBody.graphql.swift",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/@types/build-config/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/@types/env/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/@types/assets/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/copilot-result/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/commitlint/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/changelog/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/doc-diff/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/utils/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/cli/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/revert-update/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "tools/playstore-auto-bump/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/docs-site/package.json",
+      "license": "MPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/playground/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/framework/std/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/framework/sync/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/framework/global/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/framework/store/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/integration-test/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/docs/package.json",
+      "license": "MPL-2.0",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/note/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/database/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/bookmark/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/embed/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/paragraph/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/latex/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/attachment/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/code/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/frame/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/image/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/callout/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/edgeless-text/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/table/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/surface-ref/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/list/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/divider/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/embed-doc/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/data-view/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/blocks/root/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/fragments/doc-title/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/fragments/outline/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/fragments/adapter-panel/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/fragments/frame-panel/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/all/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/foundation/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/shared/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/preset/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {
+        "@ctrl/tinycolor": "^4.1.0"
+      }
+    },
+    {
+      "file": "blocksuite/affine/inlines/comment/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/latex/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/link/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/mention/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/footnote/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/inlines/reference/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/components/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/model/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/data-view/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/rich-text/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/ext-loader/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/note/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/shape/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/group/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/template/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/link/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/connector/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/brush/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/mindmap/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/text/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/pointer/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/gfx/turbo-renderer/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/remote-selection/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/viewport-overlay/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/edgeless-auto-connect/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/note-slicer/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/edgeless-dragging-area/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/toolbar/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/slash-menu/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/scroll-anchoring/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/edgeless-selected-rect/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/linked-doc/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/page-dragging-area/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/edgeless-zoom-toolbar/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/keyboard-toolbar/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/edgeless-toolbar/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/drag-handle/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "blocksuite/affine/widgets/frame-title/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "docs/reference/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/track/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/core/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {
+        "fuse.js": "^7.0.0"
+      }
+    },
+    {
+      "file": "packages/frontend/native/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/admin/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/component/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/templates/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/i18n/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/electron-api/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/electron-renderer/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/web/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/ios/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/mobile-shared/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/mobile/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/android/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/apps/electron/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {
+        "@electron-forge/plugin-fuses": "^7.11.1"
+      }
+    },
+    {
+      "file": "packages/frontend/apps/electron/scripts/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/frontend/routes/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/backend/native/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/backend/server/package.json",
+      "license": null,
+      "frameworks": [
+        "@nestjs/core",
+        "express"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/reader/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/infra/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/auth/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/env/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/realtime/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/graphql/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/s3-compat/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/error/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/debug/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/common/nbstore/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/common/nbstore/src/impls/idb/indexer/inverted-index.ts",
+      "score": 22,
+      "symbols": [
+        {
+          "name": "objs",
+          "line": 30
+        },
+        {
+          "name": "match",
+          "line": 37
+        },
+        {
+          "name": "objs",
+          "line": 45
+        },
+        {
+          "name": "set",
+          "line": 58
+        },
+        {
+          "name": "match",
+          "line": 63
+        },
+        {
+          "name": "uniqueTerms",
+          "line": 71
+        },
+        {
+          "name": "objs",
+          "line": 91
+        },
+        {
+          "name": "match",
+          "line": 98
+        },
+        {
+          "name": "objs",
+          "line": 107
+        },
+        {
+          "name": "set",
+          "line": 120
+        },
+        {
+          "name": "match",
+          "line": 125
+        },
+        {
+          "name": "uniqueTerms",
+          "line": 133
+        },
+        {
+          "name": "objs",
+          "line": 154
+        },
+        {
+          "name": "set",
+          "line": 167
+        },
+        {
+          "name": "match",
+          "line": 172
+        },
+        {
+          "name": "objs",
+          "line": 180
+        },
+        {
+          "name": "match",
+          "line": 187
+        },
+        {
+          "name": "uniqueTerms",
+          "line": 195
+        },
+        {
+          "name": "queryTokens",
+          "line": 218
+        },
+        {
+          "name": "matched",
+          "line": 219
+        },
+        {
+          "name": "avgFieldLength",
+          "line": 229
+        },
+        {
+          "name": "key",
+          "line": 236
+        },
+        {
+          "name": "objs",
+          "line": 237
+        },
+        {
+          "name": "key",
+          "line": 269
+        },
+        {
+          "name": "originTokenTerm",
+          "line": 270
+        },
+        {
+          "name": "matchLength",
+          "line": 271
+        },
+        {
+          "name": "termFreq",
+          "line": 285
+        },
+        {
+          "name": "totalCount",
+          "line": 286
+        },
+        {
+          "name": "fieldLength",
+          "line": 287
+        },
+        {
+          "name": "score",
+          "line": 288
+        },
+        {
+          "name": "maxScore",
+          "line": 306
+        },
+        {
+          "name": "minScore",
+          "line": 307
+        },
+        {
+          "name": "normalizedScore",
+          "line": 309
+        },
+        {
+          "name": "match",
+          "line": 313
+        },
+        {
+          "name": "item",
+          "line": 322
+        }
+      ]
+    },
+    {
+      "file": "packages/backend/server/scripts/docker-clean.mjs",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "SCRIPT_DIR",
+          "line": 7
+        },
+        {
+          "name": "DEFAULT_APP_ROOT",
+          "line": 8
+        },
+        {
+          "name": "APP_ROOT",
+          "line": 9
+        },
+        {
+          "name": "TARGETARCH",
+          "line": 10
+        },
+        {
+          "name": "TARGETVARIANT",
+          "line": 11
+        },
+        {
+          "name": "ALLOW_RUN",
+          "line": 12
+        },
+        {
+          "name": "VERBOSE",
+          "line": 13
+        },
+        {
+          "name": "log",
+          "line": 15
+        },
+        {
+          "name": "debug",
+          "line": 19
+        },
+        {
+          "name": "exists",
+          "line": 25
+        },
+        {
+          "name": "safeReadDir",
+          "line": 34
+        },
+        {
+          "name": "rmrf",
+          "line": 42
+        },
+        {
+          "name": "fileSize",
+          "line": 46
+        },
+        {
+          "name": "stat",
+          "line": 47
+        },
+        {
+          "name": "walkFiles",
+          "line": 51
+        },
+        {
+          "name": "files",
+          "line": 56
+        },
+        {
+          "name": "stack",
+          "line": 57
+        },
+        {
+          "name": "current",
+          "line": 60
+        },
+        {
+          "name": "fullPath",
+          "line": 72
+        },
+        {
+          "name": "sha256",
+          "line": 85
+        },
+        {
+          "name": "hash",
+          "line": 86
+        },
+        {
+          "name": "handle",
+          "line": 87
+        },
+        {
+          "name": "hardlinkDuplicate",
+          "line": 98
+        },
+        {
+          "name": "tempPath",
+          "line": 99
+        },
+        {
+          "name": "hasCompatibleHardlinkMetadata",
+          "line": 121
+        },
+        {
+          "name": "hardlinkDuplicateFiles",
+          "line": 129
+        },
+        {
+          "name": "files",
+          "line": 130
+        },
+        {
+          "name": "bySize",
+          "line": 131
+        },
+        {
+          "name": "size",
+          "line": 134
+        },
+        {
+          "name": "sizedFiles",
+          "line": 138
+        },
+        {
+          "name": "byHash",
+          "line": 154
+        },
+        {
+          "name": "canonicalPath",
+          "line": 164
+        },
+        {
+          "name": "deleteFilesByExtension",
+          "line": 200
+        },
+        {
+          "name": "stack",
+          "line": 206
+        },
+        {
+          "name": "current",
+          "line": 209
+        }
+      ]
+    },
+    {
+      "file": "packages/common/reader/src/reader.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "blocksuiteSchema",
+          "line": 31
+        },
+        {
+          "name": "bookmarkFlavours",
+          "line": 53
+        },
+        {
+          "name": "collectInlineReferences",
+          "line": 61
+        },
+        {
+          "name": "getTextDeltasFromCellValue",
+          "line": 84
+        },
+        {
+          "name": "maybeText",
+          "line": 96
+        },
+        {
+          "name": "marker",
+          "line": 103
+        },
+        {
+          "name": "delta",
+          "line": 104
+        },
+        {
+          "name": "delta",
+          "line": 124
+        },
+        {
+          "name": "generateMarkdownPreviewBuilder",
+          "line": 136
+        },
+        {
+          "name": "yblockToDraftModal",
+          "line": 141
+        },
+        {
+          "name": "flavour",
+          "line": 142
+        },
+        {
+          "name": "blockSchema",
+          "line": 143
+        },
+        {
+          "name": "keys",
+          "line": 147
+        },
+        {
+          "name": "props",
+          "line": 151
+        },
+        {
+          "name": "pages",
+          "line": 169
+        },
+        {
+          "name": "baseUrl",
+          "line": 181
+        },
+        {
+          "name": "getDocLink",
+          "line": 183
+        },
+        {
+          "name": "searchParams",
+          "line": 184
+        },
+        {
+          "name": "container",
+          "line": 195
+        },
+        {
+          "name": "provider",
+          "line": 202
+        },
+        {
+          "name": "markdownAdapter",
+          "line": 203
+        },
+        {
+          "name": "markdownPreviewCache",
+          "line": 224
+        },
+        {
+          "name": "trimCodeBlock",
+          "line": 226
+        },
+        {
+          "name": "lines",
+          "line": 227
+        },
+        {
+          "name": "trimParagraph",
+          "line": 234
+        },
+        {
+          "name": "lines",
+          "line": 235
+        },
+        {
+          "name": "getListDepth",
+          "line": 244
+        },
+        {
+          "name": "indentMarkdown",
+          "line": 262
+        },
+        {
+          "name": "generateDatabaseMarkdownPreview",
+          "line": 275
+        },
+        {
+          "name": "isDatabaseBlock",
+          "line": 276
+        },
+        {
+          "name": "model",
+          "line": 280
+        },
+        {
+          "name": "parentBlock",
+          "line": 291
+        },
+        {
+          "name": "url",
+          "line": 302
+        },
+        {
+          "name": "title",
+          "line": 303
+        },
+        {
+          "name": "generateImageMarkdownPreview",
+          "line": 308
+        }
+      ]
+    },
+    {
+      "file": "packages/backend/server/src/core/sync/gateway.ts",
+      "score": 17,
+      "symbols": [
+        {
+          "name": "SubscribeMessage",
+          "line": 60
+        },
+        {
+          "name": "Room",
+          "line": 77
+        },
+        {
+          "name": "MIN_BATCH_WS_CLIENT_VERSION",
+          "line": 84
+        },
+        {
+          "name": "MAX_SPACE_JOIN_BATCH_SIZE",
+          "line": 87
+        },
+        {
+          "name": "SOCKET_PRESENCE_USER_ID_KEY",
+          "line": 89
+        },
+        {
+          "name": "normalizeWsClientVersion",
+          "line": 91
+        },
+        {
+          "name": "canaryCheck",
+          "line": 92
+        },
+        {
+          "name": "isBatchWsClientVersion",
+          "line": 104
+        },
+        {
+          "name": "normalized",
+          "line": 105
+        },
+        {
+          "name": "isRecord",
+          "line": 224
+        },
+        {
+          "name": "canonicalDocId",
+          "line": 228
+        },
+        {
+          "name": "parseJoinSpaceBatchMessage",
+          "line": 236
+        },
+        {
+          "name": "entries",
+          "line": 254
+        },
+        {
+          "name": "first",
+          "line": 278
+        },
+        {
+          "name": "duplicateKeys",
+          "line": 279
+        },
+        {
+          "name": "key",
+          "line": 290
+        },
+        {
+          "name": "parseLeaveSpaceBatchMessage",
+          "line": 304
+        },
+        {
+          "name": "encodedUpdates",
+          "line": 402
+        },
+        {
+          "name": "merged",
+          "line": 416
+        },
+        {
+          "name": "key",
+          "line": 495
+        },
+        {
+          "name": "key",
+          "line": 529
+        },
+        {
+          "name": "sockets",
+          "line": 530
+        },
+        {
+          "name": "docs",
+          "line": 536
+        },
+        {
+          "name": "authorized",
+          "line": 541
+        },
+        {
+          "name": "generations",
+          "line": 546
+        },
+        {
+          "name": "docs",
+          "line": 554
+        },
+        {
+          "name": "sockets",
+          "line": 560
+        },
+        {
+          "name": "prefix",
+          "line": 576
+        },
+        {
+          "name": "sockets",
+          "line": 630
+        },
+        {
+          "name": "activeBroadcastPayload",
+          "line": 637
+        },
+        {
+          "name": "sockets",
+          "line": 655
+        },
+        {
+          "name": "sockets",
+          "line": 676
+        },
+        {
+          "name": "userId",
+          "line": 699
+        },
+        {
+          "name": "request",
+          "line": 716
+        },
+        {
+          "name": "userId",
+          "line": 717
+        }
+      ]
+    },
+    {
+      "file": "packages/common/nbstore/src/impls/idb/indexer/data-struct.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "tableInvertedIndex",
+          "line": 45
+        },
+        {
+          "name": "existsNid",
+          "line": 89
+        },
+        {
+          "name": "exists",
+          "line": 94
+        },
+        {
+          "name": "dataMap",
+          "line": 106
+        },
+        {
+          "name": "nid",
+          "line": 107
+        },
+        {
+          "name": "type",
+          "line": 112
+        },
+        {
+          "name": "typeInfo",
+          "line": 119
+        },
+        {
+          "name": "iidx",
+          "line": 122
+        },
+        {
+          "name": "existsNid",
+          "line": 138
+        },
+        {
+          "name": "dataMap",
+          "line": 148
+        },
+        {
+          "name": "nid",
+          "line": 150
+        },
+        {
+          "name": "type",
+          "line": 155
+        },
+        {
+          "name": "typeInfo",
+          "line": 162
+        },
+        {
+          "name": "iidx",
+          "line": 165
+        },
+        {
+          "name": "indexIds",
+          "line": 178
+        },
+        {
+          "name": "nid",
+          "line": 194
+        },
+        {
+          "name": "match",
+          "line": 212
+        },
+        {
+          "name": "allNids",
+          "line": 246
+        },
+        {
+          "name": "match",
+          "line": 250
+        },
+        {
+          "name": "cached",
+          "line": 264
+        },
+        {
+          "name": "result",
+          "line": 269
+        },
+        {
+          "name": "iidx",
+          "line": 272
+        },
+        {
+          "name": "weights",
+          "line": 278
+        },
+        {
+          "name": "total",
+          "line": 285
+        },
+        {
+          "name": "iidx",
+          "line": 297
+        },
+        {
+          "name": "pagination",
+          "line": 323
+        },
+        {
+          "name": "match",
+          "line": 328
+        },
+        {
+          "name": "nids",
+          "line": 330
+        },
+        {
+          "name": "nodes",
+          "line": 334
+        },
+        {
+          "name": "record",
+          "line": 336
+        },
+        {
+          "name": "pagination",
+          "line": 361
+        },
+        {
+          "name": "hitPagination",
+          "line": 366
+        },
+        {
+          "name": "match",
+          "line": 373
+        },
+        {
+          "name": "nids",
+          "line": 375
+        },
+        {
+          "name": "record",
+          "line": 384
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/core/src/desktop/dialogs/import/commit-service.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "EMOJI_ICON_TYPE",
+          "line": 33
+        },
+        {
+          "name": "copyToArrayBuffer",
+          "line": 35
+        },
+        {
+          "name": "copy",
+          "line": 36
+        },
+        {
+          "name": "errorMessage",
+          "line": 41
+        },
+        {
+          "name": "warnings",
+          "line": 54
+        },
+        {
+          "name": "bytes",
+          "line": 56
+        },
+        {
+          "name": "transformer",
+          "line": 65
+        },
+        {
+          "name": "tags",
+          "line": 82
+        },
+        {
+          "name": "docIds",
+          "line": 113
+        },
+        {
+          "name": "docIds",
+          "line": 127
+        },
+        {
+          "name": "rootFolderId",
+          "line": 132
+        },
+        {
+          "name": "pending",
+          "line": 172
+        },
+        {
+          "name": "childParentPaths",
+          "line": 173
+        },
+        {
+          "name": "needsContainer",
+          "line": 179
+        },
+        {
+          "name": "parent",
+          "line": 182
+        },
+        {
+          "name": "existing",
+          "line": 193
+        },
+        {
+          "name": "folderId",
+          "line": 198
+        },
+        {
+          "name": "parentFolderId",
+          "line": 248
+        },
+        {
+          "name": "parent",
+          "line": 250
+        },
+        {
+          "name": "exists",
+          "line": 252
+        },
+        {
+          "name": "iconData",
+          "line": 271
+        },
+        {
+          "name": "existingTagMap",
+          "line": 285
+        },
+        {
+          "name": "rootTagDocMap",
+          "line": 290
+        },
+        {
+          "name": "originalRoot",
+          "line": 295
+        },
+        {
+          "name": "key",
+          "line": 296
+        },
+        {
+          "name": "newTag",
+          "line": 310
+        },
+        {
+          "name": "doc",
+          "line": 319
+        },
+        {
+          "name": "currentTags",
+          "line": 320
+        },
+        {
+          "name": "toIconData",
+          "line": 334
+        }
+      ]
+    },
+    {
+      "file": "packages/common/nbstore/src/sync/doc/peer.ts",
+      "score": 12,
+      "symbols": [
+        {
+          "name": "wrapped",
+          "line": 84
+        },
+        {
+          "name": "isRemotePermissionError",
+          "line": 100
+        },
+        {
+          "name": "name",
+          "line": 104
+        },
+        {
+          "name": "isDocScopedError",
+          "line": 108
+        },
+        {
+          "name": "isEqualUint8Arrays",
+          "line": 117
+        },
+        {
+          "name": "docDiffUpdate",
+          "line": 140
+        },
+        {
+          "name": "localDiff",
+          "line": 152
+        },
+        {
+          "name": "local",
+          "line": 204
+        },
+        {
+          "name": "local",
+          "line": 214
+        },
+        {
+          "name": "root",
+          "line": 215
+        },
+        {
+          "name": "next",
+          "line": 232
+        },
+        {
+          "name": "syncing",
+          "line": 251
+        },
+        {
+          "name": "dispose",
+          "line": 262
+        },
+        {
+          "name": "next",
+          "line": 276
+        },
+        {
+          "name": "docErrorMessage",
+          "line": 277
+        },
+        {
+          "name": "pushedClock",
+          "line": 310
+        },
+        {
+          "name": "clock",
+          "line": 313
+        },
+        {
+          "name": "remoteClock",
+          "line": 314
+        },
+        {
+          "name": "pulled",
+          "line": 326
+        },
+        {
+          "name": "hasRemoteClock",
+          "line": 329
+        },
+        {
+          "name": "hasPulled",
+          "line": 330
+        },
+        {
+          "name": "maxClock",
+          "line": 351
+        },
+        {
+          "name": "merged",
+          "line": 356
+        },
+        {
+          "name": "localDocRecord",
+          "line": 383
+        },
+        {
+          "name": "stateVector",
+          "line": 385
+        },
+        {
+          "name": "remoteDocRecord",
+          "line": 389
+        },
+        {
+          "name": "diff",
+          "line": 411
+        },
+        {
+          "name": "docRecord",
+          "line": 473
+        },
+        {
+          "name": "stateVector",
+          "line": 475
+        },
+        {
+          "name": "serverDoc",
+          "line": 479
+        },
+        {
+          "name": "remoteClock",
+          "line": 510
+        },
+        {
+          "name": "data",
+          "line": 515
+        },
+        {
+          "name": "update",
+          "line": 520
+        },
+        {
+          "name": "abort",
+          "line": 711
+        },
+        {
+          "name": "localDocs",
+          "line": 794
+        }
+      ]
+    },
+    {
+      "file": "tools/doc-diff/src/table.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "DELETE_FLAG_KEY",
+          "line": 7
+        },
+        {
+          "name": "getRecordKey",
+          "line": 14
+        },
+        {
+          "name": "keyRaw",
+          "line": 15
+        },
+        {
+          "name": "isDeletedRecord",
+          "line": 25
+        },
+        {
+          "name": "extractYjsTable",
+          "line": 29
+        },
+        {
+          "name": "recordsByKey",
+          "line": 30
+        },
+        {
+          "name": "key",
+          "line": 45
+        },
+        {
+          "name": "recordPlain",
+          "line": 58
+        },
+        {
+          "name": "folderLabel",
+          "line": 71
+        },
+        {
+          "name": "type",
+          "line": 72
+        },
+        {
+          "name": "data",
+          "line": 73
+        },
+        {
+          "name": "name",
+          "line": 75
+        },
+        {
+          "name": "favoriteLabel",
+          "line": 84
+        },
+        {
+          "name": "printFolderPairDiff",
+          "line": 88
+        },
+        {
+          "name": "diff",
+          "line": 94
+        },
+        {
+          "name": "parentId",
+          "line": 118
+        },
+        {
+          "name": "index",
+          "line": 119
+        },
+        {
+          "name": "parentId",
+          "line": 129
+        },
+        {
+          "name": "index",
+          "line": 130
+        },
+        {
+          "name": "fromName",
+          "line": 140
+        },
+        {
+          "name": "toName",
+          "line": 142
+        },
+        {
+          "name": "printFavoritePairDiff",
+          "line": 167
+        },
+        {
+          "name": "diff",
+          "line": 173
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/i18n/build.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "isDev",
+          "line": 10
+        },
+        {
+          "name": "shouldCleanup",
+          "line": 11
+        },
+        {
+          "name": "i18nPkg",
+          "line": 13
+        },
+        {
+          "name": "resourcesDir",
+          "line": 14
+        },
+        {
+          "name": "readResource",
+          "line": 16
+        },
+        {
+          "name": "filePath",
+          "line": 17
+        },
+        {
+          "name": "fileContent",
+          "line": 18
+        },
+        {
+          "name": "writeResource",
+          "line": 22
+        },
+        {
+          "name": "filePath",
+          "line": 23
+        },
+        {
+          "name": "cleanupResources",
+          "line": 27
+        },
+        {
+          "name": "escapeRegExp",
+          "line": 28
+        },
+        {
+          "name": "files",
+          "line": 31
+        },
+        {
+          "name": "filesWithContent",
+          "line": 43
+        },
+        {
+          "name": "dynamicPrefixes",
+          "line": 50
+        },
+        {
+          "name": "templatePrefixRegex",
+          "line": 51
+        },
+        {
+          "name": "concatPrefixRegex",
+          "line": 52
+        },
+        {
+          "name": "addDynamicPrefix",
+          "line": 53
+        },
+        {
+          "name": "lastDot",
+          "line": 56
+        },
+        {
+          "name": "resources",
+          "line": 77
+        },
+        {
+          "name": "lang",
+          "line": 81
+        },
+        {
+          "name": "candidateKeys",
+          "line": 88
+        },
+        {
+          "name": "unusedKeys",
+          "line": 98
+        },
+        {
+          "name": "regex1",
+          "line": 99
+        },
+        {
+          "name": "lastDot",
+          "line": 100
+        },
+        {
+          "name": "keyPrefix",
+          "line": 101
+        },
+        {
+          "name": "match",
+          "line": 106
+        },
+        {
+          "name": "unusedKeySet",
+          "line": 118
+        },
+        {
+          "name": "calcCompletenesses",
+          "line": 134
+        },
+        {
+          "name": "langs",
+          "line": 135
+        },
+        {
+          "name": "lang",
+          "line": 139
+        },
+        {
+          "name": "base",
+          "line": 146
+        },
+        {
+          "name": "completenesses",
+          "line": 148
+        },
+        {
+          "name": "completeness",
+          "line": 153
+        },
+        {
+          "name": "i18nnext",
+          "line": 169
+        },
+        {
+          "name": "appendErrorI18n",
+          "line": 184
+        }
+      ]
+    },
+    {
+      "file": "packages/common/reader/src/doc-parser/delta-to-md/delta-to-md.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "deltaToMd",
+          "line": 5
+        },
+        {
+          "name": "convert",
+          "line": 9
+        },
+        {
+          "name": "newLine",
+          "line": 13
+        },
+        {
+          "name": "applyInlineAttributes",
+          "line": 91
+        },
+        {
+          "name": "apply",
+          "line": 128
+        },
+        {
+          "name": "hasBlockLevelAttribute",
+          "line": 140
+        }
+      ]
+    },
+    {
+      "file": "packages/common/infra/src/orm/core/adapters/yjs/table.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "key",
+          "line": 63
+        },
+        {
+          "name": "record",
+          "line": 64
+        },
+        {
+          "name": "results",
+          "line": 112
+        },
+        {
+          "name": "ob",
+          "line": 124
+        },
+        {
+          "name": "record",
+          "line": 127
+        },
+        {
+          "name": "key",
+          "line": 128
+        },
+        {
+          "name": "isMatch",
+          "line": 129
+        },
+        {
+          "name": "prevMatch",
+          "line": 132
+        },
+        {
+          "name": "isPrevMatched",
+          "line": 133
+        },
+        {
+          "name": "newValue",
+          "line": 136
+        },
+        {
+          "name": "record",
+          "line": 203
+        },
+        {
+          "name": "field",
+          "line": 240
+        },
+        {
+          "name": "condition",
+          "line": 241
+        },
+        {
+          "name": "val",
+          "line": 270
+        }
+      ]
+    },
+    {
+      "file": "packages/common/nbstore/src/sync/indexer/index.ts",
+      "score": 9,
+      "symbols": [
+        {
+          "name": "abort",
+          "line": 203
+        },
+        {
+          "name": "indexVersion",
+          "line": 291
+        },
+        {
+          "name": "unsubscribe",
+          "line": 294
+        },
+        {
+          "name": "allDocs",
+          "line": 301
+        },
+        {
+          "name": "existingDoc",
+          "line": 304
+        },
+        {
+          "name": "docId",
+          "line": 325
+        },
+        {
+          "name": "existingDoc",
+          "line": 326
+        },
+        {
+          "name": "rootDocBin",
+          "line": 334
+        },
+        {
+          "name": "allDocs",
+          "line": 341
+        },
+        {
+          "name": "allIndexedDocs",
+          "line": 352
+        },
+        {
+          "name": "docId",
+          "line": 359
+        },
+        {
+          "name": "existingDoc",
+          "line": 365
+        },
+        {
+          "name": "existingDoc",
+          "line": 415
+        },
+        {
+          "name": "docClock",
+          "line": 421
+        },
+        {
+          "name": "docIndexedClock",
+          "line": 427
+        },
+        {
+          "name": "nativeResult",
+          "line": 445
+        },
+        {
+          "name": "docBin",
+          "line": 450
+        },
+        {
+          "name": "docYDoc",
+          "line": 455
+        },
+        {
+          "name": "result",
+          "line": 459
+        },
+        {
+          "name": "recommendRefreshInterval",
+          "line": 525
+        },
+        {
+          "name": "needRefresh",
+          "line": 526
+        },
+        {
+          "name": "forceRefresh",
+          "line": 529
+        },
+        {
+          "name": "clocks",
+          "line": 543
+        },
+        {
+          "name": "result",
+          "line": 559
+        },
+        {
+          "name": "docs",
+          "line": 588
+        },
+        {
+          "name": "title",
+          "line": 603
+        },
+        {
+          "name": "summary",
+          "line": 604
+        },
+        {
+          "name": "remote",
+          "line": 621
+        },
+        {
+          "name": "remote",
+          "line": 644
+        },
+        {
+          "name": "storage",
+          "line": 675
+        },
+        {
+          "name": "storage",
+          "line": 699
+        },
+        {
+          "name": "next",
+          "line": 734
+        },
+        {
+          "name": "dispose",
+          "line": 759
+        },
+        {
+          "name": "next",
+          "line": 773
+        },
+        {
+          "name": "indexing",
+          "line": 780
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/core/src/utils/opus-encoding.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "logger",
+          "line": 29
+        },
+        {
+          "name": "LOCAL_FILE_ASSET_URL",
+          "line": 30
+        },
+        {
+          "name": "DEFAULT_BITRATE",
+          "line": 33
+        },
+        {
+          "name": "MAX_SLICE_DURATION_SECONDS",
+          "line": 34
+        },
+        {
+          "name": "MIN_SLICE_DURATION_SECONDS",
+          "line": 35
+        },
+        {
+          "name": "AUDIO_LEVEL_THRESHOLD",
+          "line": 36
+        },
+        {
+          "name": "SLICE_FILE_EXT",
+          "line": 37
+        },
+        {
+          "name": "SLICE_MIME_TYPE",
+          "line": 38
+        },
+        {
+          "name": "getSliceName",
+          "line": 40
+        },
+        {
+          "name": "blobToArrayBuffer",
+          "line": 47
+        },
+        {
+          "name": "getRecordingFileUrl",
+          "line": 58
+        },
+        {
+          "name": "base",
+          "line": 59
+        },
+        {
+          "name": "fileUrl",
+          "line": 67
+        },
+        {
+          "name": "readRecordingFileBuffer",
+          "line": 80
+        },
+        {
+          "name": "buffer",
+          "line": 83
+        },
+        {
+          "name": "response",
+          "line": 90
+        },
+        {
+          "name": "extractAudioData",
+          "line": 103
+        },
+        {
+          "name": "numberOfChannels",
+          "line": 108
+        },
+        {
+          "name": "sampleCount",
+          "line": 109
+        },
+        {
+          "name": "audioData",
+          "line": 114
+        },
+        {
+          "name": "channelData",
+          "line": 117
+        },
+        {
+          "name": "createOpusEncoder",
+          "line": 129
+        },
+        {
+          "name": "encoder",
+          "line": 138
+        },
+        {
+          "name": "encodeAudioFrames",
+          "line": 160
+        },
+        {
+          "name": "CHUNK_SIZE",
+          "line": 171
+        },
+        {
+          "name": "chunkSize",
+          "line": 176
+        },
+        {
+          "name": "chunk",
+          "line": 177
+        },
+        {
+          "name": "frame",
+          "line": 179
+        },
+        {
+          "name": "muxToMp4",
+          "line": 202
+        },
+        {
+          "name": "target",
+          "line": 206
+        },
+        {
+          "name": "muxer",
+          "line": 207
+        },
+        {
+          "name": "encodeAudioBufferToOpus",
+          "line": 228
+        },
+        {
+          "name": "audioData",
+          "line": 239
+        },
+        {
+          "name": "encodeRawBufferToOpus",
+          "line": 254
+        },
+        {
+          "name": "rawBuffer",
+          "line": 270
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/core/src/modules/integration/entities/calendar.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "eventsByDateMap",
+          "line": 43
+        },
+        {
+          "name": "dates",
+          "line": 44
+        },
+        {
+          "name": "accountCalendars",
+          "line": 54
+        },
+        {
+          "name": "workspaceCalendars",
+          "line": 55
+        },
+        {
+          "name": "subscriptionInfo",
+          "line": 56
+        },
+        {
+          "name": "existing",
+          "line": 75
+        },
+        {
+          "name": "dateKey",
+          "line": 87
+        },
+        {
+          "name": "subscriptionInfoById",
+          "line": 89
+        },
+        {
+          "name": "eventsByDateMap",
+          "line": 90
+        },
+        {
+          "name": "events",
+          "line": 91
+        },
+        {
+          "name": "subscriptionInfo",
+          "line": 95
+        },
+        {
+          "name": "accounts",
+          "line": 123
+        },
+        {
+          "name": "calendarsByAccount",
+          "line": 126
+        },
+        {
+          "name": "calendars",
+          "line": 144
+        },
+        {
+          "name": "updated",
+          "line": 150
+        },
+        {
+          "name": "next",
+          "line": 151
+        },
+        {
+          "name": "index",
+          "line": 152
+        },
+        {
+          "name": "start",
+          "line": 167
+        },
+        {
+          "name": "end",
+          "line": 168
+        },
+        {
+          "name": "workspaceCalendarId",
+          "line": 169
+        },
+        {
+          "name": "next",
+          "line": 170
+        },
+        {
+          "name": "events",
+          "line": 181
+        },
+        {
+          "name": "startAt",
+          "line": 188
+        },
+        {
+          "name": "endAt",
+          "line": 189
+        },
+        {
+          "name": "rangeEndDay",
+          "line": 191
+        },
+        {
+          "name": "dateKey",
+          "line": 204
+        },
+        {
+          "name": "list",
+          "line": 205
+        }
+      ]
+    },
+    {
+      "file": "packages/frontend/apps/electron/src/main/shared-storage/json-file.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "subs",
+          "line": 45
+        },
+        {
+          "name": "sub",
+          "line": 48
+        },
+        {
+          "name": "sub",
+          "line": 57
+        },
+        {
+          "name": "subs",
+          "line": 67
+        },
+        {
+          "name": "subs",
+          "line": 81
+        },
+        {
+          "name": "oldData",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "file": "packages/backend/server/src/core/config/service.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "isConfigured",
+          "line": 24
+        },
+        {
+          "name": "userCount",
+          "line": 95
+        },
+        {
+          "name": "visible",
+          "line": 117
+        },
+        {
+          "name": "visible",
+          "line": 125
+        },
+        {
+          "name": "nativeKeys",
+          "line": 126
+        },
+        {
+          "name": "file",
+          "line": 127
+        },
+        {
+          "name": "descriptor",
+          "line": 131
+        },
+        {
+          "name": "redisUrl",
+          "line": 139
+        },
+        {
+          "name": "redis",
+          "line": 141
+        },
+        {
+          "name": "config",
+          "line": 164
+        },
+        {
+          "name": "database",
+          "line": 165
+        },
+        {
+          "name": "staticKeys",
+          "line": 171
+        },
+        {
+          "name": "key",
+          "line": 177
+        },
+        {
+          "name": "redisEnv",
+          "line": 178
+        },
+        {
+          "name": "cryptoEnv",
+          "line": 183
+        },
+        {
+          "name": "source",
+          "line": 187
+        },
+        {
+          "name": "configured",
+          "line": 198
+        },
+        {
+          "name": "errors",
+          "line": 229
+        },
+        {
+          "name": "staticKeys",
+          "line": 230
+        },
+        {
+          "name": "providerType",
+          "line": 255
+        },
+        {
+          "name": "errors",
+          "line": 269
+        },
+        {
+          "name": "nativeKeys",
+          "line": 283
+        },
+        {
+          "name": "keys",
+          "line": 284
+        },
+        {
+          "name": "saved",
+          "line": 299
+        },
+        {
+          "name": "key",
+          "line": 308
+        },
+        {
+          "name": "effective",
+          "line": 326
+        },
+        {
+          "name": "keys",
+          "line": 339
+        },
+        {
+          "name": "configs",
+          "line": 348
+        },
+        {
+          "name": "key",
+          "line": 359
+        },
+        {
+          "name": "overrides",
+          "line": 378
+        },
+        {
+          "name": "updates",
+          "line": 379
+        },
+        {
+          "name": "overrides",
+          "line": 384
+        },
+        {
+          "name": "configs",
+          "line": 393
+        },
+        {
+          "name": "flags",
+          "line": 406
+        }
+      ]
+    },
+    {
+      "file": "packages/backend/server/src/plugins/calendar/providers/caldav.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "XML_PARSER",
+          "line": 29
+        },
+        {
+          "name": "DEFAULT_REQUEST_TIMEOUT_MS",
+          "line": 36
+        },
+        {
+          "name": "DEFAULT_MAX_REDIRECTS",
+          "line": 37
+        },
+        {
+          "name": "DEFAULT_MAX_RESPONSE_BYTES",
+          "line": 38
+        },
+        {
+          "name": "CALDAV_SAFE_FETCH_HEADERS",
+          "line": 39
+        },
+        {
+          "name": "toArray",
+          "line": 62
+        },
+        {
+          "name": "readText",
+          "line": 69
+        },
+        {
+          "name": "parseStatusCode",
+          "line": 79
+        },
+        {
+          "name": "text",
+          "line": 80
+        },
+        {
+          "name": "match",
+          "line": 84
+        },
+        {
+          "name": "resolveHref",
+          "line": 88
+        },
+        {
+          "name": "formatUtcForIcal",
+          "line": 96
+        },
+        {
+          "name": "date",
+          "line": 97
+        },
+        {
+          "name": "pad",
+          "line": 98
+        },
+        {
+          "name": "splitHeaderTokens",
+          "line": 111
+        },
+        {
+          "name": "parseDigestChallenge",
+          "line": 117
+        },
+        {
+          "name": "digestMatch",
+          "line": 123
+        },
+        {
+          "name": "rawValue",
+          "line": 133
+        },
+        {
+          "name": "value",
+          "line": 134
+        },
+        {
+          "name": "hashString",
+          "line": 146
+        },
+        {
+          "name": "buildDigestAuthHeader",
+          "line": 149
+        },
+        {
+          "name": "realm",
+          "line": 157
+        },
+        {
+          "name": "nonce",
+          "line": 158
+        },
+        {
+          "name": "algorithmRaw",
+          "line": 159
+        },
+        {
+          "name": "isSess",
+          "line": 160
+        },
+        {
+          "name": "algorithm",
+          "line": 161
+        },
+        {
+          "name": "qopValues",
+          "line": 162
+        },
+        {
+          "name": "qop",
+          "line": 165
+        },
+        {
+          "name": "cnonce",
+          "line": 166
+        },
+        {
+          "name": "nc",
+          "line": 167
+        },
+        {
+          "name": "ha1Raw",
+          "line": 169
+        },
+        {
+          "name": "ha1",
+          "line": 170
+        },
+        {
+          "name": "ha2",
+          "line": 176
+        },
+        {
+          "name": "response",
+          "line": 178
+        },
+        {
+          "name": "parts",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "file": "packages/backend/server/src/base/config/factory.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "OVERRIDE_CONFIG_TOKEN",
+          "line": 8
+        },
+        {
+          "name": "visible",
+          "line": 42
+        },
+        {
+          "name": "visible",
+          "line": 50
+        },
+        {
+          "name": "redacted",
+          "line": 58
+        },
+        {
+          "name": "value",
+          "line": 72
+        },
+        {
+          "name": "previous",
+          "line": 83
+        },
+        {
+          "name": "changed",
+          "line": 84
+        },
+        {
+          "name": "path",
+          "line": 89
+        },
+        {
+          "name": "path",
+          "line": 98
+        },
+        {
+          "name": "value",
+          "line": 99
+        },
+        {
+          "name": "descriptor",
+          "line": 122
+        },
+        {
+          "name": "config",
+          "line": 167
+        }
+      ]
+    }
+  ]
+}

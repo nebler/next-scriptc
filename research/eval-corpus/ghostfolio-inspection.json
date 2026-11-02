@@ -1,0 +1,1625 @@
+{
+  "repo": "ghostfolio/ghostfolio",
+  "url": "https://github.com/ghostfolio/ghostfolio",
+  "sha": "fb8b12aa7eb2a9f28dc92ec18d7c951743782746",
+  "domain": "finance",
+  "frameworkHypothesis": "NestJS",
+  "licenses": [
+    {
+      "file": "LICENSE",
+      "declaration": "AGPL-3.0"
+    },
+    {
+      "file": "apps/client/src/app/pages/about/license/license-page.scss",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "apps/client/src/app/pages/about/license/license-page.html",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "apps/client/src/app/pages/about/license/license-page.component.ts",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "apps/client/src/app/pages/about/license/license-page.routes.ts",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": "AGPL-3.0",
+      "frameworks": [
+        "@nestjs/core",
+        "express"
+      ],
+      "computeDeps": {
+        "big.js": "7.0.1",
+        "color": "5.0.3",
+        "fuse.js": "7.5.0",
+        "open-color": "1.9.1",
+        "yahoo-finance2": "4.0.5",
+        "@types/big.js": "7.0.0"
+      }
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "apps/api/src/app/portfolio/calculator/portfolio-calculator.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "latestHoldingBalances",
+          "line": 250
+        },
+        {
+          "name": "holdingBalancesByDate",
+          "line": 252
+        },
+        {
+          "name": "cashAssetProfileIdentifiers",
+          "line": 279
+        },
+        {
+          "name": "exchangeRatesByCurrency",
+          "line": 311
+        },
+        {
+          "name": "date",
+          "line": 340
+        },
+        {
+          "name": "endDateString",
+          "line": 352
+        },
+        {
+          "name": "daysInMarket",
+          "line": 354
+        },
+        {
+          "name": "chartDateMap",
+          "line": 356
+        },
+        {
+          "name": "chartDates",
+          "line": 372
+        },
+        {
+          "name": "parsedChartDates",
+          "line": 378
+        },
+        {
+          "name": "daysUntilNextChartDate",
+          "line": 382
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 414
+        },
+        {
+          "name": "marketPriceInBaseCurrency",
+          "line": 416
+        },
+        {
+          "name": "valueInBaseCurrency",
+          "line": 425
+        },
+        {
+          "name": "isCashInBaseCurrency",
+          "line": 427
+        },
+        {
+          "name": "assetProfileIdentifiers",
+          "line": 585
+        },
+        {
+          "name": "assetProfileValues",
+          "line": 589
+        },
+        {
+          "name": "currentValue",
+          "line": 592
+        },
+        {
+          "name": "currentValueWithCurrencyEffect",
+          "line": 595
+        },
+        {
+          "name": "dividendValueWithCurrencyEffect",
+          "line": 599
+        },
+        {
+          "name": "investmentValueAccumulated",
+          "line": 603
+        },
+        {
+          "name": "investmentValueAccumulatedWithCurrencyEffect",
+          "line": 607
+        },
+        {
+          "name": "investmentValueWithCurrencyEffect",
+          "line": 612
+        },
+        {
+          "name": "netPerformanceValue",
+          "line": 616
+        },
+        {
+          "name": "netPerformanceValueWithCurrencyEffect",
+          "line": 619
+        },
+        {
+          "name": "netWorthValueWithCurrencyEffect",
+          "line": 624
+        },
+        {
+          "name": "averageInvestmentValue",
+          "line": 628
+        },
+        {
+          "name": "averageInvestmentValueWithCurrencyEffect",
+          "line": 632
+        },
+        {
+          "name": "positionsIncludedInHoldings",
+          "line": 693
+        },
+        {
+          "name": "performancePercentagesByDate",
+          "line": 702
+        },
+        {
+          "name": "overall",
+          "line": 741
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 783
+        },
+        {
+          "name": "dateStringOfFirstActivity",
+          "line": 784
+        },
+        {
+          "name": "activitiesWithMarketPrices",
+          "line": 788
+        },
+        {
+          "name": "marketPriceDates",
+          "line": 831
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/portfolio/portfolio.service.ts",
+      "score": 21,
+      "symbols": [
+        {
+          "name": "Fuse",
+          "line": 116
+        },
+        {
+          "name": "asiaPacificMarkets",
+          "line": 118
+        },
+        {
+          "name": "developedMarkets",
+          "line": 119
+        },
+        {
+          "name": "emergingMarkets",
+          "line": 120
+        },
+        {
+          "name": "europeMarkets",
+          "line": 121
+        },
+        {
+          "name": "whereAssetClassConditions",
+          "line": 176
+        },
+        {
+          "name": "filtersWithoutSearchQueryFilter",
+          "line": 268
+        },
+        {
+          "name": "userCurrency",
+          "line": 303
+        },
+        {
+          "name": "quantityOfHolding",
+          "line": 348
+        },
+        {
+          "name": "valueInBaseCurrency",
+          "line": 352
+        },
+        {
+          "name": "result",
+          "line": 355
+        },
+        {
+          "name": "fuse",
+          "line": 407
+        },
+        {
+          "name": "filtersWithoutSearchQueryFilter",
+          "line": 495
+        },
+        {
+          "name": "fuse",
+          "line": 507
+        },
+        {
+          "name": "user",
+          "line": 531
+        },
+        {
+          "name": "userCurrency",
+          "line": 532
+        },
+        {
+          "name": "savingsRate",
+          "line": 533
+        },
+        {
+          "name": "portfolioCalculator",
+          "line": 552
+        },
+        {
+          "name": "items",
+          "line": 563
+        },
+        {
+          "name": "date",
+          "line": 564
+        },
+        {
+          "name": "user",
+          "line": 626
+        },
+        {
+          "name": "userCurrency",
+          "line": 628
+        },
+        {
+          "name": "emergencyFund",
+          "line": 630
+        },
+        {
+          "name": "portfolioSnapshotFilters",
+          "line": 634
+        },
+        {
+          "name": "portfolioCalculator",
+          "line": 645
+        },
+        {
+          "name": "cashDetails",
+          "line": 657
+        },
+        {
+          "name": "isFilteredByClosedHoldings",
+          "line": 672
+        },
+        {
+          "name": "assetProfileIdentifiers",
+          "line": 676
+        },
+        {
+          "name": "symbolProfiles",
+          "line": 683
+        },
+        {
+          "name": "cashSymbolProfiles",
+          "line": 687
+        },
+        {
+          "name": "assetProfile",
+          "line": 743
+        },
+        {
+          "name": "emergencyFundCashPositions",
+          "line": 827
+        },
+        {
+          "name": "emergencyFundInCash",
+          "line": 833
+        },
+        {
+          "name": "emergencyFundCashHolding",
+          "line": 850
+        },
+        {
+          "name": "emergencyFundCashHoldingAssetProfileIdentifier",
+          "line": 856
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/exchange-rate-data/exchange-rate-data.service.ts",
+      "score": 16,
+      "symbols": [
+        {
+          "name": "dateStrings",
+          "line": 86
+        },
+        {
+          "name": "lastDateString",
+          "line": 89
+        },
+        {
+          "name": "dateString",
+          "line": 105
+        },
+        {
+          "name": "startOfUtcDateOfYesterday",
+          "line": 168
+        },
+        {
+          "name": "dateStringOfYesterday",
+          "line": 170
+        },
+        {
+          "name": "historicalData",
+          "line": 176
+        },
+        {
+          "name": "quotes",
+          "line": 182
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 194
+        },
+        {
+          "name": "quote",
+          "line": 203
+        },
+        {
+          "name": "resultExtended",
+          "line": 214
+        },
+        {
+          "name": "factor1",
+          "line": 269
+        },
+        {
+          "name": "factor2",
+          "line": 271
+        },
+        {
+          "name": "derivedCurrencyFactor",
+          "line": 303
+        },
+        {
+          "name": "dataSource",
+          "line": 312
+        },
+        {
+          "name": "symbol",
+          "line": 314
+        },
+        {
+          "name": "marketData",
+          "line": 316
+        },
+        {
+          "name": "dates",
+          "line": 390
+        },
+        {
+          "name": "derivedCurrencyFactor",
+          "line": 401
+        },
+        {
+          "name": "dataSource",
+          "line": 412
+        },
+        {
+          "name": "symbol",
+          "line": 413
+        },
+        {
+          "name": "marketData",
+          "line": 415
+        },
+        {
+          "name": "marketData",
+          "line": 445
+        },
+        {
+          "name": "marketData",
+          "line": 468
+        },
+        {
+          "name": "factor",
+          "line": 490
+        },
+        {
+          "name": "customCurrencies",
+          "line": 546
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/data-provider/data-provider.service.ts",
+      "score": 15,
+      "symbols": [
+        {
+          "name": "dataProvider",
+          "line": 74
+        },
+        {
+          "name": "symbol",
+          "line": 75
+        },
+        {
+          "name": "quotes",
+          "line": 77
+        },
+        {
+          "name": "itemsGroupedByDataSource",
+          "line": 104
+        },
+        {
+          "name": "symbols",
+          "line": 113
+        },
+        {
+          "name": "promise",
+          "line": 118
+        },
+        {
+          "name": "mappedDataProviderInterface",
+          "line": 165
+        },
+        {
+          "name": "dataProviderInterface",
+          "line": 178
+        },
+        {
+          "name": "dataSources",
+          "line": 247
+        },
+        {
+          "name": "ghostfolioDataSources",
+          "line": 248
+        },
+        {
+          "name": "activityPath",
+          "line": 256
+        },
+        {
+          "name": "maskedDataSource",
+          "line": 258
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 278
+        },
+        {
+          "name": "assetProfileOfUser",
+          "line": 288
+        },
+        {
+          "name": "assetProfileInImport",
+          "line": 304
+        },
+        {
+          "name": "assetProfileIdentifierTuples",
+          "line": 410
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 431
+        },
+        {
+          "name": "dataProvider",
+          "line": 510
+        },
+        {
+          "name": "allData",
+          "line": 549
+        },
+        {
+          "name": "currency",
+          "line": 552
+        },
+        {
+          "name": "dataProvider",
+          "line": 586
+        },
+        {
+          "name": "startTimeTotal",
+          "line": 615
+        },
+        {
+          "name": "quoteString",
+          "line": 641
+        },
+        {
+          "name": "cachedDataProviderResponse",
+          "line": 647
+        },
+        {
+          "name": "numberOfItemsInCache",
+          "line": 662
+        },
+        {
+          "name": "itemsGroupedByDataSource",
+          "line": 674
+        },
+        {
+          "name": "dataProvider",
+          "line": 683
+        },
+        {
+          "name": "symbols",
+          "line": 685
+        },
+        {
+          "name": "maximumNumberOfSymbolsPerRequest",
+          "line": 705
+        },
+        {
+          "name": "startTimeDataSource",
+          "line": 714
+        },
+        {
+          "name": "symbolsChunk",
+          "line": 716
+        },
+        {
+          "name": "promise",
+          "line": 721
+        },
+        {
+          "name": "quote",
+          "line": 749
+        },
+        {
+          "name": "derivedQuote",
+          "line": 786
+        },
+        {
+          "name": "dataSources",
+          "line": 909
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/import/import.service.ts",
+      "score": 14,
+      "symbols": [
+        {
+          "name": "holding",
+          "line": 86
+        },
+        {
+          "name": "filters",
+          "line": 96
+        },
+        {
+          "name": "account",
+          "line": 133
+        },
+        {
+          "name": "date",
+          "line": 137
+        },
+        {
+          "name": "quantity",
+          "line": 139
+        },
+        {
+          "name": "value",
+          "line": 144
+        },
+        {
+          "name": "isDuplicate",
+          "line": 146
+        },
+        {
+          "name": "ghostfolioDataSources",
+          "line": 223
+        },
+        {
+          "name": "maxActivitiesToImport",
+          "line": 226
+        },
+        {
+          "name": "userCurrency",
+          "line": 229
+        },
+        {
+          "name": "maskedDataSource",
+          "line": 248
+        },
+        {
+          "name": "hasDataSource",
+          "line": 263
+        },
+        {
+          "name": "maskedDataSource",
+          "line": 285
+        },
+        {
+          "name": "resolvedAssetProfileIdentifiers",
+          "line": 309
+        },
+        {
+          "name": "assetProfile",
+          "line": 312
+        },
+        {
+          "name": "canCreatePlatform",
+          "line": 350
+        },
+        {
+          "name": "existingPlatforms",
+          "line": 355
+        },
+        {
+          "name": "existingPlatform",
+          "line": 360
+        },
+        {
+          "name": "existingTagsOfUser",
+          "line": 387
+        },
+        {
+          "name": "canCreateOwnTag",
+          "line": 393
+        },
+        {
+          "name": "existingTagOfUser",
+          "line": 399
+        },
+        {
+          "name": "existingTag",
+          "line": 411
+        },
+        {
+          "name": "newTag",
+          "line": 424
+        },
+        {
+          "name": "existingTagIds",
+          "line": 467
+        },
+        {
+          "name": "accountToReuse",
+          "line": 486
+        },
+        {
+          "name": "accountWithSameIdOfOtherUser",
+          "line": 513
+        },
+        {
+          "name": "account",
+          "line": 519
+        },
+        {
+          "name": "platformId",
+          "line": 527
+        },
+        {
+          "name": "tagIds",
+          "line": 537
+        },
+        {
+          "name": "newAccount",
+          "line": 574
+        },
+        {
+          "name": "customAssetProfileNames",
+          "line": 591
+        },
+        {
+          "name": "existingAssetProfile",
+          "line": 617
+        },
+        {
+          "name": "existingCustomAssetProfileOfUser",
+          "line": 634
+        },
+        {
+          "name": "isSymbolOfAssetProfileToCreate",
+          "line": 658
+        },
+        {
+          "name": "marketDataObjects",
+          "line": 693
+        }
+      ]
+    },
+    {
+      "file": "apps/client/src/app/services/import-activities.service.ts",
+      "score": 11,
+      "symbols": [
+        {
+          "name": "lineCount",
+          "line": 49
+        },
+        {
+          "name": "content",
+          "line": 68
+        },
+        {
+          "name": "assetProfileSymbolMapping",
+          "line": 76
+        },
+        {
+          "name": "currency",
+          "line": 79
+        },
+        {
+          "name": "type",
+          "line": 80
+        },
+        {
+          "name": "name",
+          "line": 91
+        },
+        {
+          "name": "isExistingAssetProfile",
+          "line": 99
+        },
+        {
+          "name": "result",
+          "line": 143
+        },
+        {
+          "name": "importData",
+          "line": 197
+        },
+        {
+          "name": "value",
+          "line": 261
+        },
+        {
+          "name": "value",
+          "line": 279
+        },
+        {
+          "name": "value",
+          "line": 301
+        },
+        {
+          "name": "value",
+          "line": 318
+        },
+        {
+          "name": "value",
+          "line": 340
+        },
+        {
+          "name": "parsedDate",
+          "line": 344
+        },
+        {
+          "name": "value",
+          "line": 371
+        },
+        {
+          "name": "value",
+          "line": 396
+        },
+        {
+          "name": "value",
+          "line": 421
+        },
+        {
+          "name": "value",
+          "line": 446
+        },
+        {
+          "name": "value",
+          "line": 486
+        }
+      ]
+    },
+    {
+      "file": "libs/ui/src/lib/services/data.service.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "params",
+          "line": 212
+        },
+        {
+          "name": "dateOfFirstActivity",
+          "line": 541
+        },
+        {
+          "name": "info",
+          "line": 554
+        },
+        {
+          "name": "utmSource",
+          "line": 555
+        },
+        {
+          "name": "params",
+          "line": 787
+        },
+        {
+          "name": "formData",
+          "line": 901
+        },
+        {
+          "name": "url",
+          "line": 924
+        },
+        {
+          "name": "utmSource",
+          "line": 1030
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/endpoints/data-providers/ghostfolio/ghostfolio.service.ts",
+      "score": 10,
+      "symbols": [
+        {
+          "name": "assetProfile",
+          "line": 74
+        },
+        {
+          "name": "dataSourceOrigin",
+          "line": 81
+        },
+        {
+          "name": "marketDataOfMarkets",
+          "line": 217
+        },
+        {
+          "name": "maximumNumberOfSymbolsPerRequest",
+          "line": 245
+        },
+        {
+          "name": "symbolsChunk",
+          "line": 254
+        },
+        {
+          "name": "promise",
+          "line": 259
+        },
+        {
+          "name": "dailyRequestsMax",
+          "line": 318
+        },
+        {
+          "name": "maxDailyRequests",
+          "line": 351
+        },
+        {
+          "name": "searchResults",
+          "line": 393
+        },
+        {
+          "name": "filteredItems",
+          "line": 401
+        },
+        {
+          "name": "ghostfolioDataProviderService",
+          "line": 427
+        },
+        {
+          "name": "subscribedAt",
+          "line": 458
+        }
+      ]
+    },
+    {
+      "file": "apps/client/src/app/pages/portfolio/allocations/allocations-page.component.ts",
+      "score": 7,
+      "symbols": [
+        {
+          "name": "accountId",
+          "line": 209
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 395
+        },
+        {
+          "name": "value",
+          "line": 427
+        },
+        {
+          "name": "continentData",
+          "line": 429
+        },
+        {
+          "name": "countryData",
+          "line": 440
+        },
+        {
+          "name": "value",
+          "line": 452
+        },
+        {
+          "name": "continentData",
+          "line": 454
+        },
+        {
+          "name": "countryData",
+          "line": 460
+        },
+        {
+          "name": "normalizedAssetName",
+          "line": 475
+        },
+        {
+          "name": "value",
+          "line": 476
+        },
+        {
+          "name": "holdingData",
+          "line": 480
+        },
+        {
+          "name": "value",
+          "line": 496
+        },
+        {
+          "name": "sectorData",
+          "line": 498
+        },
+        {
+          "name": "value",
+          "line": 510
+        },
+        {
+          "name": "sectorData",
+          "line": 512
+        },
+        {
+          "name": "symbol",
+          "line": 520
+        },
+        {
+          "name": "value",
+          "line": 522
+        },
+        {
+          "name": "symbolData",
+          "line": 524
+        },
+        {
+          "name": "currentParentHolding",
+          "line": 600
+        },
+        {
+          "name": "dialogRef",
+          "line": 654
+        }
+      ]
+    },
+    {
+      "file": "libs/ui/src/lib/fire-calculator/fire-calculator.service.ts",
+      "score": 6,
+      "symbols": [
+        {
+          "name": "principal",
+          "line": 20
+        },
+        {
+          "name": "compoundInterestForPrincipal",
+          "line": 24
+        },
+        {
+          "name": "compoundInterest",
+          "line": 27
+        },
+        {
+          "name": "contributionInterest",
+          "line": 28
+        },
+        {
+          "name": "periodInterest",
+          "line": 60
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/portfolio/calculator/roi/portfolio-calculator.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "investedCapitalByDate",
+          "line": 67
+        },
+        {
+          "name": "investmentChange",
+          "line": 102
+        },
+        {
+          "name": "investmentChangeWithCurrencyEffect",
+          "line": 110
+        },
+        {
+          "name": "item",
+          "line": 176
+        },
+        {
+          "name": "itemDates",
+          "line": 206
+        },
+        {
+          "name": "buyAmountUntilEndDateWithCurrencyEffect",
+          "line": 213
+        },
+        {
+          "name": "buyAmountUntilStartDateWithCurrencyEffect",
+          "line": 218
+        },
+        {
+          "name": "investmentChange",
+          "line": 271
+        },
+        {
+          "name": "investmentChangeWithCurrencyEffect",
+          "line": 279
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/portfolio/calculator/roai/portfolio-calculator.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "positionsIncludedInPerformance",
+          "line": 30
+        },
+        {
+          "name": "parsedDates",
+          "line": 81
+        },
+        {
+          "name": "daysUntilNextItem",
+          "line": 85
+        },
+        {
+          "name": "weightedInvestments",
+          "line": 92
+        },
+        {
+          "name": "weightedInvestmentsWithCurrencyEffect",
+          "line": 104
+        },
+        {
+          "name": "item",
+          "line": 194
+        },
+        {
+          "name": "activityDate",
+          "line": 216
+        },
+        {
+          "name": "previousActivityDate",
+          "line": 217
+        },
+        {
+          "name": "averageInvestmentBetweenStartAndEndDate",
+          "line": 273
+        },
+        {
+          "name": "averageInvestmentBetweenStartAndEndDateWithCurrencyEffect",
+          "line": 278
+        },
+        {
+          "name": "currentValuesAtDateRangeStartWithCurrencyEffect",
+          "line": 290
+        },
+        {
+          "name": "investmentValuesAccumulatedAtStartDateWithCurrencyEffect",
+          "line": 293
+        },
+        {
+          "name": "grossPerformanceAtDateRangeStartWithCurrencyEffect",
+          "line": 297
+        },
+        {
+          "name": "date",
+          "line": 309
+        },
+        {
+          "name": "weightedInvestment",
+          "line": 322
+        },
+        {
+          "name": "holdingPerformanceWithAverageInvestment",
+          "line": 333
+        },
+        {
+          "name": "feesPerUnit",
+          "line": 373
+        },
+        {
+          "name": "feesPerUnitWithCurrencyEffect",
+          "line": 377
+        },
+        {
+          "name": "previousItem",
+          "line": 470
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/data-provider/financial-modeling-prep/financial-modeling-prep.service.ts",
+      "score": 5,
+      "symbols": [
+        {
+          "name": "queryParams",
+          "line": 108
+        },
+        {
+          "name": "assetProfile",
+          "line": 135
+        },
+        {
+          "name": "indexProfile",
+          "line": 138
+        },
+        {
+          "name": "queryParams",
+          "line": 162
+        },
+        {
+          "name": "etfCountryWeightings",
+          "line": 167
+        },
+        {
+          "name": "etfHoldings",
+          "line": 191
+        },
+        {
+          "name": "sortedTopHoldings",
+          "line": 200
+        },
+        {
+          "name": "etfSectorWeightings",
+          "line": 225
+        },
+        {
+          "name": "queryParams",
+          "line": 304
+        },
+        {
+          "name": "dividends",
+          "line": 313
+        },
+        {
+          "name": "MAX_YEARS_PER_REQUEST",
+          "line": 357
+        },
+        {
+          "name": "currentTo",
+          "line": 366
+        },
+        {
+          "name": "queryParams",
+          "line": 373
+        },
+        {
+          "name": "historical",
+          "line": 380
+        },
+        {
+          "name": "queryParams",
+          "line": 438
+        },
+        {
+          "name": "json",
+          "line": 458
+        },
+        {
+          "name": "resolvedSymbols",
+          "line": 471
+        },
+        {
+          "name": "symbolsToFetch",
+          "line": 477
+        },
+        {
+          "name": "assetProfile",
+          "line": 488
+        },
+        {
+          "name": "queryParams",
+          "line": 557
+        },
+        {
+          "name": "result",
+          "line": 562
+        },
+        {
+          "name": "result",
+          "line": 616
+        },
+        {
+          "name": "isIndex",
+          "line": 625
+        },
+        {
+          "name": "results",
+          "line": 683
+        },
+        {
+          "name": "index",
+          "line": 689
+        },
+        {
+          "name": "queryParams",
+          "line": 710
+        },
+        {
+          "name": "queryParams",
+          "line": 736
+        },
+        {
+          "name": "baseUrl",
+          "line": 752
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/endpoints/ai/ai.service.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "openRouterApiKey",
+          "line": 84
+        },
+        {
+          "name": "openRouterModel",
+          "line": 88
+        },
+        {
+          "name": "openRouterService",
+          "line": 92
+        },
+        {
+          "name": "accountHintIdByAccountName",
+          "line": 163
+        },
+        {
+          "name": "accountName",
+          "line": 167
+        },
+        {
+          "name": "assetIdByKey",
+          "line": 185
+        },
+        {
+          "name": "assetKey",
+          "line": 189
+        },
+        {
+          "name": "rowMatches",
+          "line": 204
+        },
+        {
+          "name": "accountIdByAccountHintId",
+          "line": 214
+        },
+        {
+          "name": "assetMatchById",
+          "line": 220
+        },
+        {
+          "name": "fee",
+          "line": 228
+        },
+        {
+          "name": "quantity",
+          "line": 229
+        },
+        {
+          "name": "unitPrice",
+          "line": 230
+        },
+        {
+          "name": "account",
+          "line": 232
+        },
+        {
+          "name": "assetMatch",
+          "line": 241
+        },
+        {
+          "name": "activity",
+          "line": 244
+        },
+        {
+          "name": "startTime",
+          "line": 307
+        },
+        {
+          "name": "result",
+          "line": 318
+        },
+        {
+          "name": "holdingsSection",
+          "line": 392
+        },
+        {
+          "name": "activitiesWithCustomAssetProfiles",
+          "line": 486
+        },
+        {
+          "name": "openRouterService",
+          "line": 577
+        },
+        {
+          "name": "startTime",
+          "line": 637
+        },
+        {
+          "name": "assetProfilesOfSearches",
+          "line": 668
+        },
+        {
+          "name": "assetMatches",
+          "line": 707
+        },
+        {
+          "name": "assetProfileIdentifier",
+          "line": 708
+        },
+        {
+          "name": "accountMatchCount",
+          "line": 731
+        },
+        {
+          "name": "leftOutAssetMatchCount",
+          "line": 735
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/app/portfolio/current-rate.service.mock.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "mockGetValue",
+          "line": 16
+        },
+        {
+          "name": "CurrentRateServiceMock",
+          "line": 131
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/activities/activities.service.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "isFilteredByAssetClassOtherThanLiquidity",
+          "line": 93
+        },
+        {
+          "name": "isFilteredByAssetProfile",
+          "line": 96
+        },
+        {
+          "name": "isFilteredByTag",
+          "line": 97
+        },
+        {
+          "name": "isFilteredByUnsupportedType",
+          "line": 99
+        },
+        {
+          "name": "activities",
+          "line": 130
+        },
+        {
+          "name": "tagsToAssign",
+          "line": 141
+        },
+        {
+          "name": "tagsToSet",
+          "line": 149
+        },
+        {
+          "name": "tags",
+          "line": 183
+        },
+        {
+          "name": "accountId",
+          "line": 206
+        },
+        {
+          "name": "updateAccountBalance",
+          "line": 207
+        },
+        {
+          "name": "userId",
+          "line": 208
+        },
+        {
+          "name": "assetClass",
+          "line": 215
+        },
+        {
+          "name": "assetSubClass",
+          "line": 216
+        },
+        {
+          "name": "requestedSymbol",
+          "line": 219
+        },
+        {
+          "name": "existingAssetProfile",
+          "line": 224
+        },
+        {
+          "name": "assetProfile",
+          "line": 288
+        },
+        {
+          "name": "assetProfileCurrency",
+          "line": 293
+        },
+        {
+          "name": "tagsToConnect",
+          "line": 308
+        },
+        {
+          "name": "activity",
+          "line": 315
+        },
+        {
+          "name": "activity",
+          "line": 366
+        },
+        {
+          "name": "benchmarkAssetProfiles",
+          "line": 375
+        },
+        {
+          "name": "isBenchmark",
+          "line": 378
+        },
+        {
+          "name": "where",
+          "line": 421
+        },
+        {
+          "name": "activities",
+          "line": 431
+        },
+        {
+          "name": "isBenchmark",
+          "line": 455
+        },
+        {
+          "name": "startOfUtcDateOfTomorrow",
+          "line": 512
+        },
+        {
+          "name": "where",
+          "line": 657
+        },
+        {
+          "name": "assetProfileIdentifiers",
+          "line": 708
+        },
+        {
+          "name": "assetProfiles",
+          "line": 723
+        },
+        {
+          "name": "activities",
+          "line": 727
+        },
+        {
+          "name": "assetProfile",
+          "line": 729
+        },
+        {
+          "name": "value",
+          "line": 736
+        },
+        {
+          "name": "splitsBySymbolProfileId",
+          "line": 819
+        },
+        {
+          "name": "cashDetails",
+          "line": 830
+        },
+        {
+          "name": "cashActivities",
+          "line": 836
+        }
+      ]
+    },
+    {
+      "file": "apps/api/src/services/data-provider/yahoo-finance/yahoo-finance.service.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "historicalResult",
+          "line": 86
+        },
+        {
+          "name": "message",
+          "line": 114
+        },
+        {
+          "name": "chartResult",
+          "line": 147
+        },
+        {
+          "name": "historicalResult",
+          "line": 161
+        },
+        {
+          "name": "marketPrice",
+          "line": 171
+        },
+        {
+          "name": "yahooFinanceSymbols",
+          "line": 216
+        },
+        {
+          "name": "symbol",
+          "line": 235
+        },
+        {
+          "name": "quoteTypes",
+          "line": 271
+        },
+        {
+          "name": "searchResult",
+          "line": 277
+        },
+        {
+          "name": "quotes",
+          "line": 279
+        },
+        {
+          "name": "quoteSummaryPromises",
+          "line": 386
+        },
+        {
+          "name": "settledResults",
+          "line": 390
+        }
+      ]
+    },
+    {
+      "file": "apps/client/src/app/pages/public/public-page.component.ts",
+      "score": 4,
+      "symbols": [
+        {
+          "name": "assetProfileIdentifier",
+          "line": 185
+        },
+        {
+          "name": "value",
+          "line": 201
+        },
+        {
+          "name": "symbol",
+          "line": 251
+        },
+        {
+          "name": "value",
+          "line": 253
+        },
+        {
+          "name": "symbolData",
+          "line": 255
+        }
+      ]
+    }
+  ]
+}

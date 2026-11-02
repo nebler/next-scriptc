@@ -1,0 +1,2941 @@
+{
+  "repo": "tldraw/tldraw",
+  "url": "https://github.com/tldraw/tldraw",
+  "sha": "bfe77e74fb6bdd5614a86e7d49b543bf66bdb09e",
+  "domain": "geometry",
+  "frameworkHypothesis": "React/Workers",
+  "licenses": [
+    {
+      "file": "LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "internal/config/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "internal/scripts/license-report.ts",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/collaboration/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/validate/LICENSE.md",
+      "declaration": "MIT"
+    },
+    {
+      "file": "packages/driver/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/sync-collaboration/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    },
+    {
+      "file": "packages/tldraw/LICENSE.md",
+      "declaration": "source-available/custom; review pinned file"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "internal/apps-script/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "internal/config/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "internal/scripts/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {
+        "diff": "^9.0.0",
+        "@types/diff": "^7.0.1"
+      }
+    },
+    {
+      "file": "internal/health-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/collaboration/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/validate/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/driver/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sync-collaboration/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/tldraw/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {
+        "jest-diff": "^30.4.1"
+      }
+    },
+    {
+      "file": "packages/mentions/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/utils/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/create-tldraw/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {
+        "picocolors": "^1.1.1"
+      }
+    },
+    {
+      "file": "packages/state/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/dotcom-shared/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/worker-shared/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/namespaced-tldraw/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/tlschema/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/mermaid/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/state-react/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sync/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/sync-core/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/commenting/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/collections/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/assets/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/editor/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "packages/store/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/image-pipeline/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/chat/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/socketio-server-example/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "express",
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/vue/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/agent/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/vite/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/workflow/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/nextjs/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/shader/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/sync-cloudflare/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/branching-chat/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "templates/simple-server-example/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "fastify",
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/mcp-app/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/bemo-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/zero-cache/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/tldrawusercontent-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/sync-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/image-resize-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/asset-upload-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/dotcom/client/package.json",
+      "license": null,
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/analytics-worker/package.json",
+      "license": null,
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/docs/package.json",
+      "license": "MIT",
+      "frameworks": [
+        "next"
+      ],
+      "computeDeps": {
+        "algoliasearch": "^4.24.0",
+        "instantsearch.js": "^4.77.1",
+        "react-instantsearch": "^7.15.1",
+        "sharp": "^0.35.3"
+      }
+    },
+    {
+      "file": "apps/examples/package.json",
+      "license": "SEE LICENSE IN LICENSE.md",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/vscode/extension/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/vscode/editor/package.json",
+      "license": "MIT",
+      "frameworks": [],
+      "computeDeps": {}
+    },
+    {
+      "file": "apps/analytics/package.json",
+      "license": "",
+      "frameworks": [
+        "vite"
+      ],
+      "computeDeps": {}
+    }
+  ],
+  "hotFiles": [
+    {
+      "file": "packages/editor/src/lib/editor/Editor.ts",
+      "score": 120,
+      "symbols": [
+        {
+          "name": "RENDERING_SHAPES_SORT_CACHE_THRESHOLD",
+          "line": 349
+        },
+        {
+          "name": "AXIS",
+          "line": 351
+        },
+        {
+          "name": "options",
+          "line": 391
+        },
+        {
+          "name": "allShapeUtils",
+          "line": 458
+        },
+        {
+          "name": "_shapeUtils",
+          "line": 460
+        },
+        {
+          "name": "_styleProps",
+          "line": 461
+        },
+        {
+          "name": "allStylesById",
+          "line": 462
+        },
+        {
+          "name": "util",
+          "line": 465
+        },
+        {
+          "name": "propKeysByStyle",
+          "line": 468
+        },
+        {
+          "name": "_shapeUtilsByAssetType",
+          "line": 485
+        },
+        {
+          "name": "assetTypes",
+          "line": 487
+        },
+        {
+          "name": "allBindingUtils",
+          "line": 496
+        },
+        {
+          "name": "_bindingUtils",
+          "line": 497
+        },
+        {
+          "name": "util",
+          "line": 499
+        },
+        {
+          "name": "allAssetUtils",
+          "line": 506
+        },
+        {
+          "name": "_assetUtils",
+          "line": 507
+        },
+        {
+          "name": "util",
+          "line": 509
+        },
+        {
+          "name": "util",
+          "line": 532
+        },
+        {
+          "name": "cleanupInstancePageState",
+          "line": 539
+        },
+        {
+          "name": "selectedShapeIds",
+          "line": 545
+        },
+        {
+          "name": "erasingShapeIds",
+          "line": 553
+        },
+        {
+          "name": "hintingShapeIds",
+          "line": 579
+        },
+        {
+          "name": "deletedShapeIds",
+          "line": 597
+        },
+        {
+          "name": "invalidParents",
+          "line": 598
+        },
+        {
+          "name": "createdShapes",
+          "line": 599
+        },
+        {
+          "name": "deletedIds",
+          "line": 606
+        },
+        {
+          "name": "updates",
+          "line": 610
+        },
+        {
+          "name": "justCreatedShapeIds",
+          "line": 621
+        },
+        {
+          "name": "parent",
+          "line": 627
+        },
+        {
+          "name": "util",
+          "line": 630
+        },
+        {
+          "name": "changes",
+          "line": 631
+        },
+        {
+          "name": "t",
+          "line": 639
+        },
+        {
+          "name": "util",
+          "line": 642
+        },
+        {
+          "name": "t",
+          "line": 648
+        },
+        {
+          "name": "notifyBindingAncestryChange",
+          "line": 691
+        }
+      ]
+    },
+    {
+      "file": "packages/tldraw/src/lib/shapes/shared/PathBuilder.tsx",
+      "score": 42,
+      "symbols": [
+        {
+          "name": "path",
+          "line": 158
+        },
+        {
+          "name": "isLast",
+          "line": 161
+        },
+        {
+          "name": "path",
+          "line": 171
+        },
+        {
+          "name": "len",
+          "line": 172
+        },
+        {
+          "name": "last",
+          "line": 173
+        },
+        {
+          "name": "k",
+          "line": 174
+        },
+        {
+          "name": "p0",
+          "line": 179
+        },
+        {
+          "name": "p1",
+          "line": 180
+        },
+        {
+          "name": "p2",
+          "line": 181
+        },
+        {
+          "name": "p3",
+          "line": 182
+        },
+        {
+          "name": "x1",
+          "line": 260
+        },
+        {
+          "name": "y1",
+          "line": 261
+        },
+        {
+          "name": "phi",
+          "line": 274
+        },
+        {
+          "name": "sinPhi",
+          "line": 275
+        },
+        {
+          "name": "cosPhi",
+          "line": 276
+        },
+        {
+          "name": "dx",
+          "line": 283
+        },
+        {
+          "name": "dy",
+          "line": 284
+        },
+        {
+          "name": "x1p",
+          "line": 285
+        },
+        {
+          "name": "y1p",
+          "line": 286
+        },
+        {
+          "name": "lambda",
+          "line": 289
+        },
+        {
+          "name": "sqrtLambda",
+          "line": 291
+        },
+        {
+          "name": "sign",
+          "line": 297
+        },
+        {
+          "name": "term",
+          "line": 299
+        },
+        {
+          "name": "numerator",
+          "line": 300
+        },
+        {
+          "name": "coef",
+          "line": 305
+        },
+        {
+          "name": "cxp",
+          "line": 307
+        },
+        {
+          "name": "cyp",
+          "line": 308
+        },
+        {
+          "name": "cx",
+          "line": 311
+        },
+        {
+          "name": "cy",
+          "line": 312
+        },
+        {
+          "name": "ux",
+          "line": 315
+        },
+        {
+          "name": "uy",
+          "line": 316
+        },
+        {
+          "name": "vx",
+          "line": 317
+        },
+        {
+          "name": "vy",
+          "line": 318
+        },
+        {
+          "name": "startAngle",
+          "line": 320
+        },
+        {
+          "name": "sweepAngle",
+          "line": 331
+        }
+      ]
+    },
+    {
+      "file": "apps/dotcom/sync-worker/src/TLFileDurableObject.ts",
+      "score": 42,
+      "symbols": [
+        {
+          "name": "MAX_CONNECTIONS",
+          "line": 159
+        },
+        {
+          "name": "MAX_CONCURRENT_R2_OPERATIONS",
+          "line": 170
+        },
+        {
+          "name": "R2_QUEUE_DEPTH_METRIC_THRESHOLD",
+          "line": 176
+        },
+        {
+          "name": "R2_QUEUE_DEPTH_ALERT_THRESHOLD",
+          "line": 180
+        },
+        {
+          "name": "VERSION_CHAIN_STORAGE_KEY",
+          "line": 193
+        },
+        {
+          "name": "CURRENT_DOCUMENT_INFO_VERSION",
+          "line": 196
+        },
+        {
+          "name": "getMcpTokenUser",
+          "line": 226
+        },
+        {
+          "name": "result",
+          "line": 231
+        },
+        {
+          "name": "canAccessTestProductionFile",
+          "line": 235
+        },
+        {
+          "name": "pruneUnusedAssetsForTldr",
+          "line": 247
+        },
+        {
+          "name": "usedAssets",
+          "line": 248
+        },
+        {
+          "name": "MB",
+          "line": 257
+        },
+        {
+          "name": "fileSyncSchema",
+          "line": 263
+        },
+        {
+          "name": "OBJECT_TYPES",
+          "line": 270
+        },
+        {
+          "name": "isCommentRecordId",
+          "line": 278
+        },
+        {
+          "name": "sql",
+          "line": 289
+        },
+        {
+          "name": "result",
+          "line": 299
+        },
+        {
+          "name": "storage",
+          "line": 303
+        },
+        {
+          "name": "promise",
+          "line": 322
+        },
+        {
+          "name": "rollout",
+          "line": 342
+        },
+        {
+          "name": "promise",
+          "line": 396
+        },
+        {
+          "name": "room",
+          "line": 399
+        },
+        {
+          "name": "ws",
+          "line": 411
+        },
+        {
+          "name": "attachment",
+          "line": 413
+        },
+        {
+          "name": "pending",
+          "line": 460
+        },
+        {
+          "name": "echo",
+          "line": 464
+        },
+        {
+          "name": "attachment",
+          "line": 496
+        },
+        {
+          "name": "existingDocumentInfo",
+          "line": 608
+        },
+        {
+          "name": "slug",
+          "line": 668
+        },
+        {
+          "name": "isApp",
+          "line": 672
+        },
+        {
+          "name": "sentry",
+          "line": 683
+        },
+        {
+          "name": "attachment",
+          "line": 714
+        },
+        {
+          "name": "room",
+          "line": 718
+        },
+        {
+          "name": "attachment",
+          "line": 754
+        },
+        {
+          "name": "room",
+          "line": 766
+        }
+      ]
+    },
+    {
+      "file": "skills/simplify-trace/scripts/simplify-trace.mjs",
+      "score": 29,
+      "symbols": [
+        {
+          "name": "SECTIONS",
+          "line": 16
+        },
+        {
+          "name": "DEFAULT_SECTIONS",
+          "line": 27
+        },
+        {
+          "name": "ALL_SECTIONS",
+          "line": 28
+        },
+        {
+          "name": "parseList",
+          "line": 30
+        },
+        {
+          "name": "parseArgs",
+          "line": 34
+        },
+        {
+          "name": "opts",
+          "line": 35
+        },
+        {
+          "name": "a",
+          "line": 37
+        },
+        {
+          "name": "ARTIFACT_NAMES",
+          "line": 59
+        },
+        {
+          "name": "opts",
+          "line": 61
+        },
+        {
+          "name": "def",
+          "line": 66
+        },
+        {
+          "name": "unknown",
+          "line": 81
+        },
+        {
+          "name": "selected",
+          "line": 87
+        },
+        {
+          "name": "matchLc",
+          "line": 88
+        },
+        {
+          "name": "matches",
+          "line": 89
+        },
+        {
+          "name": "ms",
+          "line": 91
+        },
+        {
+          "name": "pct",
+          "line": 92
+        },
+        {
+          "name": "raw",
+          "line": 94
+        },
+        {
+          "name": "events",
+          "line": 95
+        },
+        {
+          "name": "threadNames",
+          "line": 98
+        },
+        {
+          "name": "procNames",
+          "line": 99
+        },
+        {
+          "name": "end",
+          "line": 114
+        },
+        {
+          "name": "traceDur",
+          "line": 117
+        },
+        {
+          "name": "winLo",
+          "line": 123
+        },
+        {
+          "name": "winHi",
+          "line": 124
+        },
+        {
+          "name": "inWin",
+          "line": 125
+        },
+        {
+          "name": "byThread",
+          "line": 131
+        },
+        {
+          "name": "key",
+          "line": 136
+        },
+        {
+          "name": "agg",
+          "line": 141
+        },
+        {
+          "name": "topLevelTasks",
+          "line": 142
+        },
+        {
+          "name": "selfByCat",
+          "line": 143
+        },
+        {
+          "name": "bump",
+          "line": 145
+        },
+        {
+          "name": "stack",
+          "line": 152
+        },
+        {
+          "name": "depth",
+          "line": 157
+        },
+        {
+          "name": "self",
+          "line": 171
+        },
+        {
+          "name": "cat",
+          "line": 181
+        }
+      ]
+    },
+    {
+      "file": "apps/mcp-app/scripts/extract-editor-api.ts",
+      "score": 29,
+      "symbols": [
+        {
+          "name": "NoTruncation",
+          "line": 59
+        },
+        {
+          "name": "WriteArrowStyleSignature",
+          "line": 60
+        },
+        {
+          "name": "InTypeAlias",
+          "line": 61
+        },
+        {
+          "name": "scriptPath",
+          "line": 63
+        },
+        {
+          "name": "__dirname",
+          "line": 64
+        },
+        {
+          "name": "distDir",
+          "line": 65
+        },
+        {
+          "name": "outPath",
+          "line": 66
+        },
+        {
+          "name": "methodMapOutPath",
+          "line": 67
+        },
+        {
+          "name": "formatTsPath",
+          "line": 68
+        },
+        {
+          "name": "execHelpersPath",
+          "line": 69
+        },
+        {
+          "name": "repoRoot",
+          "line": 72
+        },
+        {
+          "name": "editorDtsPath",
+          "line": 73
+        },
+        {
+          "name": "storeDtsPath",
+          "line": 82
+        },
+        {
+          "name": "tlschemaDtsPath",
+          "line": 83
+        },
+        {
+          "name": "categorize",
+          "line": 194
+        },
+        {
+          "name": "extractJsDoc",
+          "line": 235
+        },
+        {
+          "name": "empty",
+          "line": 239
+        },
+        {
+          "name": "ranges",
+          "line": 241
+        },
+        {
+          "name": "jsdocRanges",
+          "line": 244
+        },
+        {
+          "name": "jsdocRange",
+          "line": 245
+        },
+        {
+          "name": "raw",
+          "line": 248
+        },
+        {
+          "name": "lines",
+          "line": 254
+        },
+        {
+          "name": "tagMatch",
+          "line": 264
+        },
+        {
+          "name": "description",
+          "line": 274
+        },
+        {
+          "name": "params",
+          "line": 275
+        },
+        {
+          "name": "m",
+          "line": 278
+        },
+        {
+          "name": "examples",
+          "line": 283
+        },
+        {
+          "name": "getPropertyName",
+          "line": 296
+        },
+        {
+          "name": "hasModifier",
+          "line": 304
+        },
+        {
+          "name": "hasQuestionToken",
+          "line": 308
+        },
+        {
+          "name": "isExcludedComment",
+          "line": 312
+        },
+        {
+          "name": "ranges",
+          "line": 313
+        },
+        {
+          "name": "lastRange",
+          "line": 315
+        },
+        {
+          "name": "virtualFiles",
+          "line": 325
+        },
+        {
+          "name": "projectCompilerOptions",
+          "line": 327
+        }
+      ]
+    },
+    {
+      "file": "packages/editor/src/lib/primitives/Vec.ts",
+      "score": 28,
+      "symbols": [
+        {
+          "name": "clamp",
+          "line": 6
+        },
+        {
+          "name": "toFixed",
+          "line": 10
+        },
+        {
+          "name": "s",
+          "line": 47
+        },
+        {
+          "name": "c",
+          "line": 48
+        },
+        {
+          "name": "x",
+          "line": 56
+        },
+        {
+          "name": "y",
+          "line": 57
+        },
+        {
+          "name": "s",
+          "line": 58
+        },
+        {
+          "name": "c",
+          "line": 59
+        },
+        {
+          "name": "tan",
+          "line": 155
+        },
+        {
+          "name": "l",
+          "line": 201
+        },
+        {
+          "name": "l",
+          "line": 386
+        },
+        {
+          "name": "s",
+          "line": 411
+        },
+        {
+          "name": "c",
+          "line": 412
+        },
+        {
+          "name": "x",
+          "line": 417
+        },
+        {
+          "name": "y",
+          "line": 418
+        },
+        {
+          "name": "s",
+          "line": 419
+        },
+        {
+          "name": "c",
+          "line": 420
+        },
+        {
+          "name": "t",
+          "line": 437
+        },
+        {
+          "name": "dx",
+          "line": 444
+        },
+        {
+          "name": "dy",
+          "line": 445
+        },
+        {
+          "name": "d2",
+          "line": 446
+        },
+        {
+          "name": "dx",
+          "line": 463
+        },
+        {
+          "name": "dy",
+          "line": 464
+        },
+        {
+          "name": "dx",
+          "line": 472
+        },
+        {
+          "name": "dy",
+          "line": 473
+        },
+        {
+          "name": "d2",
+          "line": 474
+        },
+        {
+          "name": "nx",
+          "line": 485
+        },
+        {
+          "name": "ny",
+          "line": 486
+        },
+        {
+          "name": "p",
+          "line": 525
+        },
+        {
+          "name": "n",
+          "line": 526
+        },
+        {
+          "name": "sign",
+          "line": 527
+        },
+        {
+          "name": "l",
+          "line": 560
+        },
+        {
+          "name": "len",
+          "line": 613
+        },
+        {
+          "name": "avg",
+          "line": 614
+        },
+        {
+          "name": "t",
+          "line": 644
+        }
+      ]
+    },
+    {
+      "file": "internal/scripts/refresh-assets.ts",
+      "score": 25,
+      "symbols": [
+        {
+          "name": "PUBLIC_FOLDER_PATHS",
+          "line": 18
+        },
+        {
+          "name": "ASSETS_FOLDER_PATH",
+          "line": 39
+        },
+        {
+          "name": "DOTCOM_FOLDER_PATH",
+          "line": 40
+        },
+        {
+          "name": "mergedIconFooter",
+          "line": 52
+        },
+        {
+          "name": "shouldSkipRefreshAssets",
+          "line": 54
+        },
+        {
+          "name": "onlyIfNecessary",
+          "line": 55
+        },
+        {
+          "name": "changedFiles",
+          "line": 61
+        },
+        {
+          "name": "optimizeAndMergeSvgs",
+          "line": 83
+        },
+        {
+          "name": "optimizedSvgs",
+          "line": 90
+        },
+        {
+          "name": "iconPath",
+          "line": 91
+        },
+        {
+          "name": "content",
+          "line": 92
+        },
+        {
+          "name": "svg",
+          "line": 93
+        },
+        {
+          "name": "mergedSvgParts",
+          "line": 98
+        },
+        {
+          "name": "id",
+          "line": 114
+        },
+        {
+          "name": "svgContent",
+          "line": 115
+        },
+        {
+          "name": "mergedSvg",
+          "line": 119
+        },
+        {
+          "name": "copyIcons",
+          "line": 125
+        },
+        {
+          "name": "sourceFolderPath",
+          "line": 126
+        },
+        {
+          "name": "mergedIconName",
+          "line": 127
+        },
+        {
+          "name": "mergedIconHeader",
+          "line": 131
+        },
+        {
+          "name": "icons",
+          "line": 135
+        },
+        {
+          "name": "iconNames",
+          "line": 137
+        },
+        {
+          "name": "optimizedSvgs",
+          "line": 139
+        },
+        {
+          "name": "publicIconsRootFolderPath",
+          "line": 148
+        },
+        {
+          "name": "publicIconsFolderPath",
+          "line": 149
+        },
+        {
+          "name": "iconTypeFile",
+          "line": 169
+        },
+        {
+          "name": "iconTypes",
+          "line": 175
+        },
+        {
+          "name": "name",
+          "line": 188
+        },
+        {
+          "name": "optimizeAndMergeDotcomIcons",
+          "line": 196
+        },
+        {
+          "name": "sourceFolderPath",
+          "line": 197
+        },
+        {
+          "name": "mergedIconName",
+          "line": 198
+        },
+        {
+          "name": "mergedIconHeader",
+          "line": 202
+        },
+        {
+          "name": "icons",
+          "line": 206
+        },
+        {
+          "name": "optimizedSvgs",
+          "line": 208
+        },
+        {
+          "name": "mergedIconPath",
+          "line": 215
+        }
+      ]
+    },
+    {
+      "file": "packages/tlschema/src/misc/b64Vecs.ts",
+      "score": 25,
+      "symbols": [
+        {
+          "name": "_POINT_B64_LENGTH",
+          "line": 4
+        },
+        {
+          "name": "FIRST_POINT_B64_LENGTH",
+          "line": 7
+        },
+        {
+          "name": "FIRST_POINT_2D_B64_LENGTH",
+          "line": 10
+        },
+        {
+          "name": "DEFAULT_PRESSURE",
+          "line": 13
+        },
+        {
+          "name": "DIM_2D",
+          "line": 16
+        },
+        {
+          "name": "DIM_3D",
+          "line": 18
+        },
+        {
+          "name": "BASE64_CHARS",
+          "line": 21
+        },
+        {
+          "name": "B64_LOOKUP",
+          "line": 22
+        },
+        {
+          "name": "SIX_BIT_MASK",
+          "line": 28
+        },
+        {
+          "name": "PADDING_CHAR_CODE",
+          "line": 30
+        },
+        {
+          "name": "POW2",
+          "line": 33
+        },
+        {
+          "name": "POW2_SUBNORMAL",
+          "line": 37
+        },
+        {
+          "name": "MANTISSA",
+          "line": 41
+        },
+        {
+          "name": "nativeGetFloat16",
+          "line": 46
+        },
+        {
+          "name": "fallbackGetFloat16",
+          "line": 49
+        },
+        {
+          "name": "getFloat16",
+          "line": 53
+        },
+        {
+          "name": "nativeSetFloat16",
+          "line": 58
+        },
+        {
+          "name": "fallbackSetFloat16",
+          "line": 61
+        },
+        {
+          "name": "setFloat16",
+          "line": 65
+        },
+        {
+          "name": "nativeBase64ToUint8Array",
+          "line": 70
+        },
+        {
+          "name": "fallbackBase64ToUint8Array",
+          "line": 75
+        },
+        {
+          "name": "paddedLength",
+          "line": 79
+        },
+        {
+          "name": "numBytes",
+          "line": 87
+        },
+        {
+          "name": "bytes",
+          "line": 88
+        },
+        {
+          "name": "fullGroups",
+          "line": 93
+        },
+        {
+          "name": "c0",
+          "line": 95
+        },
+        {
+          "name": "c1",
+          "line": 96
+        },
+        {
+          "name": "c2",
+          "line": 97
+        },
+        {
+          "name": "c3",
+          "line": 98
+        },
+        {
+          "name": "bitmap",
+          "line": 100
+        },
+        {
+          "name": "c0",
+          "line": 109
+        },
+        {
+          "name": "c1",
+          "line": 110
+        },
+        {
+          "name": "c2",
+          "line": 111
+        },
+        {
+          "name": "bitmap",
+          "line": 112
+        },
+        {
+          "name": "c0",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "file": "packages/mermaid/src/sequenceDiagram.ts",
+      "score": 25,
+      "symbols": [
+        {
+          "name": "LINETYPE",
+          "line": 45
+        },
+        {
+          "name": "PLACEMENT",
+          "line": 99
+        },
+        {
+          "name": "SIGNAL_TYPES",
+          "line": 105
+        },
+        {
+          "name": "DOTTED_TYPES",
+          "line": 118
+        },
+        {
+          "name": "ARROWHEAD_BY_TYPE",
+          "line": 126
+        },
+        {
+          "name": "FRAGMENT_START_KEYWORDS",
+          "line": 133
+        },
+        {
+          "name": "FRAGMENT_END_TYPES",
+          "line": 144
+        },
+        {
+          "name": "FRAGMENT_SEPARATOR_KEYWORDS",
+          "line": 154
+        },
+        {
+          "name": "isSignalMessage",
+          "line": 160
+        },
+        {
+          "name": "isRenderableEvent",
+          "line": 165
+        },
+        {
+          "name": "mapLineTypeToArrowProps",
+          "line": 172
+        },
+        {
+          "name": "isBidirectional",
+          "line": 182
+        },
+        {
+          "name": "TARGET_ACTOR_SPACING",
+          "line": 186
+        },
+        {
+          "name": "MIN_VERTICAL_GAP",
+          "line": 187
+        },
+        {
+          "name": "FALLBACK_ACTOR_WIDTH",
+          "line": 188
+        },
+        {
+          "name": "FALLBACK_ACTOR_HEIGHT",
+          "line": 189
+        },
+        {
+          "name": "FALLBACK_ACTOR_SPACING",
+          "line": 190
+        },
+        {
+          "name": "FALLBACK_EVENT_SPACING",
+          "line": 191
+        },
+        {
+          "name": "FALLBACK_NOTE_WIDTH",
+          "line": 192
+        },
+        {
+          "name": "FALLBACK_NOTE_HEIGHT",
+          "line": 193
+        },
+        {
+          "name": "NOTE_PADDING",
+          "line": 194
+        },
+        {
+          "name": "FRAGMENT_PADDING_X",
+          "line": 195
+        },
+        {
+          "name": "FRAGMENT_PADDING_TOP",
+          "line": 196
+        },
+        {
+          "name": "FRAGMENT_PADDING_BOTTOM",
+          "line": 197
+        },
+        {
+          "name": "ACTOR_PADDING_WIDTH",
+          "line": 198
+        },
+        {
+          "name": "ACTOR_PADDING_HEIGHT",
+          "line": 199
+        },
+        {
+          "name": "SELF_MSG_Y_OFFSET",
+          "line": 200
+        },
+        {
+          "name": "SELF_MSG_BEND",
+          "line": 201
+        },
+        {
+          "name": "SELF_MSG_SVG_LOOP_HEIGHT",
+          "line": 203
+        },
+        {
+          "name": "MESSAGE_ROW_LABEL_SHARE",
+          "line": 207
+        },
+        {
+          "name": "MIN_LIFELINE_HEIGHT",
+          "line": 208
+        },
+        {
+          "name": "ACTIVATION_BOX_WIDTH",
+          "line": 209
+        },
+        {
+          "name": "ACTIVATION_NEST_OFFSET",
+          "line": 210
+        },
+        {
+          "name": "ACTIVATION_PAD_RATIO",
+          "line": 211
+        },
+        {
+          "name": "FRAGMENT_SECTION_LABEL_HEIGHT",
+          "line": 212
+        }
+      ]
+    },
+    {
+      "file": "packages/dotcom-shared/src/shapeClusters.ts",
+      "score": 23,
+      "symbols": [
+        {
+          "name": "MAX_CLUSTERING_ATOMS",
+          "line": 35
+        },
+        {
+          "name": "getShapeClusters",
+          "line": 48
+        },
+        {
+          "name": "byId",
+          "line": 53
+        },
+        {
+          "name": "atomsByRoot",
+          "line": 54
+        },
+        {
+          "name": "parent",
+          "line": 60
+        },
+        {
+          "name": "members",
+          "line": 65
+        },
+        {
+          "name": "atoms",
+          "line": 70
+        },
+        {
+          "name": "clusters",
+          "line": 71
+        },
+        {
+          "name": "keys",
+          "line": 75
+        },
+        {
+          "name": "ids",
+          "line": 76
+        },
+        {
+          "name": "collisions",
+          "line": 77
+        },
+        {
+          "name": "byKey",
+          "line": 78
+        },
+        {
+          "name": "base",
+          "line": 82
+        },
+        {
+          "name": "collision",
+          "line": 83
+        },
+        {
+          "name": "labels",
+          "line": 90
+        },
+        {
+          "name": "STOPWORDS",
+          "line": 111
+        },
+        {
+          "name": "MAX_KEYWORDS",
+          "line": 122
+        },
+        {
+          "name": "FRAME_NAME_WEIGHT",
+          "line": 124
+        },
+        {
+          "name": "BIGRAM_WEIGHT",
+          "line": 126
+        },
+        {
+          "name": "tokenize",
+          "line": 128
+        },
+        {
+          "name": "addTokens",
+          "line": 136
+        },
+        {
+          "name": "bigram",
+          "line": 141
+        },
+        {
+          "name": "getShapeText",
+          "line": 153
+        },
+        {
+          "name": "props",
+          "line": 158
+        },
+        {
+          "name": "richText",
+          "line": 161
+        },
+        {
+          "name": "walk",
+          "line": 164
+        },
+        {
+          "name": "record",
+          "line": 166
+        },
+        {
+          "name": "getFrameName",
+          "line": 178
+        },
+        {
+          "name": "name",
+          "line": 180
+        },
+        {
+          "name": "labelClusters",
+          "line": 194
+        },
+        {
+          "name": "bags",
+          "line": 195
+        },
+        {
+          "name": "tokens",
+          "line": 196
+        },
+        {
+          "name": "frameName",
+          "line": 199
+        },
+        {
+          "name": "text",
+          "line": 205
+        },
+        {
+          "name": "documentFrequency",
+          "line": 213
+        }
+      ]
+    },
+    {
+      "file": "packages/tldraw/src/lib/shapes/shared/freehand/getStrokeOutlinePoints.ts",
+      "score": 22,
+      "symbols": [
+        {
+          "name": "FIXED_PI",
+          "line": 20
+        },
+        {
+          "name": "TRACK_TOLERANCE_RATIO",
+          "line": 25
+        },
+        {
+          "name": "SIMPLIFY_WINDOW",
+          "line": 28
+        },
+        {
+          "name": "MIN_ROUNDED_CORNER_STEPS",
+          "line": 31
+        },
+        {
+          "name": "MAX_ROUNDED_CORNER_STEPS",
+          "line": 32
+        },
+        {
+          "name": "MIN_CAP_STEPS",
+          "line": 35
+        },
+        {
+          "name": "MAX_CAP_STEPS",
+          "line": 36
+        },
+        {
+          "name": "HARD_CORNER_DPR",
+          "line": 39
+        },
+        {
+          "name": "growTracks",
+          "line": 57
+        },
+        {
+          "name": "nlx",
+          "line": 59
+        },
+        {
+          "name": "nly",
+          "line": 62
+        },
+        {
+          "name": "nrx",
+          "line": 65
+        },
+        {
+          "name": "nry",
+          "line": 68
+        },
+        {
+          "name": "simplifyTrack",
+          "line": 86
+        },
+        {
+          "name": "tol2",
+          "line": 88
+        },
+        {
+          "name": "lastIdx",
+          "line": 91
+        },
+        {
+          "name": "maxJ",
+          "line": 94
+        },
+        {
+          "name": "ax",
+          "line": 95
+        },
+        {
+          "name": "ay",
+          "line": 96
+        },
+        {
+          "name": "acx",
+          "line": 98
+        },
+        {
+          "name": "acy",
+          "line": 99
+        },
+        {
+          "name": "l2",
+          "line": 100
+        },
+        {
+          "name": "ex",
+          "line": 104
+        },
+        {
+          "name": "ey",
+          "line": 105
+        },
+        {
+          "name": "buildTracks",
+          "line": 132
+        },
+        {
+          "name": "n",
+          "line": 145
+        },
+        {
+          "name": "sx",
+          "line": 152
+        },
+        {
+          "name": "sy",
+          "line": 153
+        },
+        {
+          "name": "six",
+          "line": 154
+        },
+        {
+          "name": "siy",
+          "line": 155
+        },
+        {
+          "name": "sr",
+          "line": 156
+        },
+        {
+          "name": "srl",
+          "line": 157
+        },
+        {
+          "name": "scap",
+          "line": 158
+        },
+        {
+          "name": "totalLength",
+          "line": 165
+        },
+        {
+          "name": "minDistance",
+          "line": 168
+        }
+      ]
+    },
+    {
+      "file": "packages/editor/src/lib/primitives/geometry/Group2d.ts",
+      "score": 22,
+      "symbols": [
+        {
+          "name": "addChildren",
+          "line": 24
+        },
+        {
+          "name": "childVertices",
+          "line": 46
+        },
+        {
+          "name": "distance",
+          "line": 83
+        },
+        {
+          "name": "hits",
+          "line": 121
+        },
+        {
+          "name": "hits",
+          "line": 133
+        },
+        {
+          "name": "childVertices",
+          "line": 145
+        },
+        {
+          "name": "hits",
+          "line": 157
+        },
+        {
+          "name": "hits",
+          "line": 169
+        },
+        {
+          "name": "totalLength",
+          "line": 178
+        },
+        {
+          "name": "distanceToTravel",
+          "line": 180
+        },
+        {
+          "name": "childLength",
+          "line": 184
+        },
+        {
+          "name": "newDistanceTraveled",
+          "line": 185
+        },
+        {
+          "name": "totalLength",
+          "line": 199
+        },
+        {
+          "name": "childLength",
+          "line": 207
+        },
+        {
+          "name": "newDistanceTraveled",
+          "line": 208
+        },
+        {
+          "name": "distance",
+          "line": 210
+        },
+        {
+          "name": "normalizedDistanceInChild",
+          "line": 225
+        },
+        {
+          "name": "childTLength",
+          "line": 226
+        },
+        {
+          "name": "corners",
+          "line": 260
+        },
+        {
+          "name": "corner",
+          "line": 264
+        },
+        {
+          "name": "prevCorner",
+          "line": 265
+        },
+        {
+          "name": "prevDist",
+          "line": 266
+        },
+        {
+          "name": "nextCorner",
+          "line": 267
+        },
+        {
+          "name": "nextDist",
+          "line": 268
+        },
+        {
+          "name": "A",
+          "line": 270
+        },
+        {
+          "name": "B",
+          "line": 271
+        },
+        {
+          "name": "C",
+          "line": 272
+        }
+      ]
+    },
+    {
+      "file": "packages/editor/src/lib/primitives/intersect.ts",
+      "score": 21,
+      "symbols": [
+        {
+          "name": "intersectLineSegmentLineSegment",
+          "line": 16
+        },
+        {
+          "name": "ABx",
+          "line": 23
+        },
+        {
+          "name": "ABy",
+          "line": 24
+        },
+        {
+          "name": "BVx",
+          "line": 25
+        },
+        {
+          "name": "BVy",
+          "line": 26
+        },
+        {
+          "name": "AVx",
+          "line": 27
+        },
+        {
+          "name": "AVy",
+          "line": 28
+        },
+        {
+          "name": "ua_t",
+          "line": 29
+        },
+        {
+          "name": "ub_t",
+          "line": 30
+        },
+        {
+          "name": "u_b",
+          "line": 31
+        },
+        {
+          "name": "ua",
+          "line": 39
+        },
+        {
+          "name": "ub",
+          "line": 40
+        },
+        {
+          "name": "intersectLineSegmentCircle",
+          "line": 59
+        },
+        {
+          "name": "dx",
+          "line": 62
+        },
+        {
+          "name": "dy",
+          "line": 63
+        },
+        {
+          "name": "ocx",
+          "line": 64
+        },
+        {
+          "name": "ocy",
+          "line": 65
+        },
+        {
+          "name": "a",
+          "line": 67
+        },
+        {
+          "name": "b",
+          "line": 68
+        },
+        {
+          "name": "cc",
+          "line": 69
+        },
+        {
+          "name": "deter",
+          "line": 70
+        },
+        {
+          "name": "e",
+          "line": 74
+        },
+        {
+          "name": "u1",
+          "line": 75
+        },
+        {
+          "name": "u2",
+          "line": 76
+        },
+        {
+          "name": "intersectLineSegmentPolyline",
+          "line": 101
+        },
+        {
+          "name": "intersectLineSegmentPolygon",
+          "line": 123
+        },
+        {
+          "name": "intersectCircleCircle",
+          "line": 152
+        },
+        {
+          "name": "d",
+          "line": 155
+        },
+        {
+          "name": "intersectCirclePolygon",
+          "line": 174
+        },
+        {
+          "name": "intersectCirclePolyline",
+          "line": 198
+        },
+        {
+          "name": "intersectPolygonBounds",
+          "line": 219
+        },
+        {
+          "name": "ccw",
+          "line": 233
+        },
+        {
+          "name": "linesIntersect",
+          "line": 238
+        },
+        {
+          "name": "intersectPolygonPolygon",
+          "line": 249
+        },
+        {
+          "name": "id",
+          "line": 261
+        }
+      ]
+    },
+    {
+      "file": "packages/commenting/src/clustering/runtime.ts",
+      "score": 20,
+      "symbols": [
+        {
+          "name": "createClusterRuntime",
+          "line": 47
+        },
+        {
+          "name": "ownerByMember",
+          "line": 97
+        },
+        {
+          "name": "events",
+          "line": 107
+        },
+        {
+          "name": "event",
+          "line": 116
+        },
+        {
+          "name": "leafById",
+          "line": 171
+        },
+        {
+          "name": "resolved",
+          "line": 194
+        },
+        {
+          "name": "leafById",
+          "line": 214
+        },
+        {
+          "name": "patch",
+          "line": 218
+        },
+        {
+          "name": "members",
+          "line": 219
+        },
+        {
+          "name": "leaf",
+          "line": 229
+        },
+        {
+          "name": "wasMergedTogether",
+          "line": 256
+        },
+        {
+          "name": "owner",
+          "line": 260
+        },
+        {
+          "name": "seedCount",
+          "line": 268
+        },
+        {
+          "name": "mid",
+          "line": 272
+        },
+        {
+          "name": "seedThreshold",
+          "line": 282
+        },
+        {
+          "name": "applyEvent",
+          "line": 286
+        },
+        {
+          "name": "unapplyEvent",
+          "line": 293
+        },
+        {
+          "name": "validateZoom",
+          "line": 300
+        }
+      ]
+    },
+    {
+      "file": "internal/scripts/oxlint/tldraw-plugin.mjs",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "__filename",
+          "line": 13
+        },
+        {
+          "name": "__dirname",
+          "line": 14
+        },
+        {
+          "name": "REPO_ROOT",
+          "line": 15
+        },
+        {
+          "name": "TIPTAP_IMPORT_PREFIX",
+          "line": 17
+        },
+        {
+          "name": "CLAUDE_AGENT_ROOTS",
+          "line": 18
+        },
+        {
+          "name": "CLAUDE_FILE_NAME",
+          "line": 19
+        },
+        {
+          "name": "AGENTS_FILE_NAME",
+          "line": 20
+        },
+        {
+          "name": "CLAUDE_AGENT_REFERENCE",
+          "line": 21
+        },
+        {
+          "name": "SKIPPED_DIR_NAMES",
+          "line": 22
+        },
+        {
+          "name": "NODE_BUILTINS",
+          "line": 35
+        },
+        {
+          "name": "packageJsonCache",
+          "line": 37
+        },
+        {
+          "name": "normalizePath",
+          "line": 46
+        },
+        {
+          "name": "shouldSkipDirectory",
+          "line": 50
+        },
+        {
+          "name": "findOwningPackage",
+          "line": 58
+        },
+        {
+          "name": "root",
+          "line": 60
+        },
+        {
+          "name": "cached",
+          "line": 64
+        },
+        {
+          "name": "packageJsonPath",
+          "line": 67
+        },
+        {
+          "name": "packageJson",
+          "line": 71
+        },
+        {
+          "name": "parent",
+          "line": 91
+        },
+        {
+          "name": "getImportedPackageName",
+          "line": 100
+        },
+        {
+          "name": "parts",
+          "line": 108
+        },
+        {
+          "name": "collectClaudeAgentViolations",
+          "line": 112
+        },
+        {
+          "name": "violations",
+          "line": 113
+        },
+        {
+          "name": "collectClaudeAgentViolationsInDirectory",
+          "line": 122
+        },
+        {
+          "name": "fullPath",
+          "line": 126
+        },
+        {
+          "name": "relativeClaudePath",
+          "line": 138
+        },
+        {
+          "name": "claudeContents",
+          "line": 139
+        },
+        {
+          "name": "agentsPath",
+          "line": 140
+        },
+        {
+          "name": "getClaudeAgentViolations",
+          "line": 158
+        },
+        {
+          "name": "extractParamNames",
+          "line": 166
+        },
+        {
+          "name": "params",
+          "line": 167
+        },
+        {
+          "name": "regex",
+          "line": 168
+        },
+        {
+          "name": "getParamName",
+          "line": 176
+        },
+        {
+          "name": "isComponentName",
+          "line": 191
+        },
+        {
+          "name": "findTopLevelParent",
+          "line": 195
+        }
+      ]
+    },
+    {
+      "file": "packages/store/src/lib/StoreSchema.ts",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "handleSchema",
+          "line": 111
+        },
+        {
+          "name": "isPlainRecord",
+          "line": 126
+        },
+        {
+          "name": "v1Schema",
+          "line": 141
+        },
+        {
+          "name": "result",
+          "line": 150
+        },
+        {
+          "name": "upgradeSchema",
+          "line": 159
+        },
+        {
+          "name": "schema",
+          "line": 200
+        },
+        {
+          "name": "Book",
+          "line": 268
+        },
+        {
+          "name": "Author",
+          "line": 269
+        },
+        {
+          "name": "schema",
+          "line": 272
+        },
+        {
+          "name": "store",
+          "line": 284
+        },
+        {
+          "name": "Book",
+          "line": 302
+        },
+        {
+          "name": "Author",
+          "line": 303
+        },
+        {
+          "name": "schema",
+          "line": 305
+        },
+        {
+          "name": "allMigrations",
+          "line": 344
+        },
+        {
+          "name": "depMigration",
+          "line": 350
+        },
+        {
+          "name": "validatedBook",
+          "line": 372
+        },
+        {
+          "name": "recordType",
+          "line": 392
+        },
+        {
+          "name": "persistedSchema",
+          "line": 426
+        },
+        {
+          "name": "migrationsResult",
+          "line": 431
+        },
+        {
+          "name": "cached",
+          "line": 447
+        },
+        {
+          "name": "result",
+          "line": 452
+        },
+        {
+          "name": "upgradeResult",
+          "line": 458
+        },
+        {
+          "name": "schema",
+          "line": 462
+        },
+        {
+          "name": "sequenceIdsToInclude",
+          "line": 463
+        },
+        {
+          "name": "allMigrationsToInclude",
+          "line": 482
+        },
+        {
+          "name": "theirVersion",
+          "line": 484
+        },
+        {
+          "name": "theirVersionId",
+          "line": 499
+        },
+        {
+          "name": "idx",
+          "line": 500
+        },
+        {
+          "name": "oldRecord",
+          "line": 528
+        },
+        {
+          "name": "oldSchema",
+          "line": 529
+        },
+        {
+          "name": "result",
+          "line": 531
+        },
+        {
+          "name": "migrations",
+          "line": 547
+        },
+        {
+          "name": "shouldApply",
+          "line": 583
+        },
+        {
+          "name": "result",
+          "line": 585
+        },
+        {
+          "name": "schema",
+          "line": 599
+        }
+      ]
+    },
+    {
+      "file": "templates/shader/src/fluid/fluid.ts",
+      "score": 19,
+      "symbols": [
+        {
+          "name": "createPointer",
+          "line": 110
+        },
+        {
+          "name": "compileShader",
+          "line": 127
+        },
+        {
+          "name": "shader",
+          "line": 130
+        },
+        {
+          "name": "addKeywords",
+          "line": 141
+        },
+        {
+          "name": "createProgram",
+          "line": 150
+        },
+        {
+          "name": "getUniforms",
+          "line": 163
+        },
+        {
+          "name": "webglContext",
+          "line": 225
+        },
+        {
+          "name": "params",
+          "line": 245
+        },
+        {
+          "name": "isWebGL2",
+          "line": 254
+        },
+        {
+          "name": "halfFloatTexType",
+          "line": 276
+        },
+        {
+          "name": "baseVertexShader",
+          "line": 349
+        },
+        {
+          "name": "blurVertexShader",
+          "line": 374
+        },
+        {
+          "name": "copyShader",
+          "line": 396
+        },
+        {
+          "name": "colorShader",
+          "line": 412
+        },
+        {
+          "name": "splatShader",
+          "line": 426
+        },
+        {
+          "name": "blurShader",
+          "line": 450
+        },
+        {
+          "name": "bloomPrefilterShader",
+          "line": 471
+        },
+        {
+          "name": "bloomBlurShader",
+          "line": 494
+        },
+        {
+          "name": "bloomFinalShader",
+          "line": 519
+        },
+        {
+          "name": "sunraysMaskShader",
+          "line": 545
+        },
+        {
+          "name": "sunraysShader",
+          "line": 564
+        },
+        {
+          "name": "clearShader",
+          "line": 603
+        },
+        {
+          "name": "advectionShader",
+          "line": 619
+        },
+        {
+          "name": "divergenceShader",
+          "line": 653
+        },
+        {
+          "name": "curlShader",
+          "line": 684
+        },
+        {
+          "name": "vorticityShader",
+          "line": 708
+        },
+        {
+          "name": "pressureShader",
+          "line": 744
+        },
+        {
+          "name": "gradientSubtractShader",
+          "line": 771
+        },
+        {
+          "name": "program",
+          "line": 905
+        },
+        {
+          "name": "texType",
+          "line": 949
+        },
+        {
+          "name": "rgba",
+          "line": 950
+        },
+        {
+          "name": "rg",
+          "line": 951
+        },
+        {
+          "name": "r",
+          "line": 952
+        },
+        {
+          "name": "filtering",
+          "line": 953
+        },
+        {
+          "name": "texType",
+          "line": 1010
+        }
+      ]
+    },
+    {
+      "file": "packages/validate/src/lib/validation.ts",
+      "score": 18,
+      "symbols": [
+        {
+          "name": "IS_DEV",
+          "line": 13
+        },
+        {
+          "name": "formatPath",
+          "line": 100
+        },
+        {
+          "name": "formattedPath",
+          "line": 160
+        },
+        {
+          "name": "indentedMessage",
+          "line": 161
+        },
+        {
+          "name": "rethrowPrefixed",
+          "line": 172
+        },
+        {
+          "name": "typeToString",
+          "line": 179
+        },
+        {
+          "name": "type",
+          "line": 182
+        },
+        {
+          "name": "userValidator",
+          "line": 206
+        },
+        {
+          "name": "numberValidator",
+          "line": 219
+        },
+        {
+          "name": "result",
+          "line": 226
+        },
+        {
+          "name": "name",
+          "line": 256
+        },
+        {
+          "name": "title",
+          "line": 257
+        },
+        {
+          "name": "validated",
+          "line": 266
+        },
+        {
+          "name": "userValidator",
+          "line": 285
+        },
+        {
+          "name": "user",
+          "line": 290
+        },
+        {
+          "name": "newData",
+          "line": 293
+        },
+        {
+          "name": "updated",
+          "line": 294
+        },
+        {
+          "name": "processUserInput",
+          "line": 319
+        },
+        {
+          "name": "assetValidator",
+          "line": 349
+        },
+        {
+          "name": "asset",
+          "line": 356
+        },
+        {
+          "name": "shapeConfigValidator",
+          "line": 376
+        },
+        {
+          "name": "shape1",
+          "line": 385
+        },
+        {
+          "name": "shape2",
+          "line": 386
+        },
+        {
+          "name": "prefixedIdValidator",
+          "line": 407
+        },
+        {
+          "name": "id1",
+          "line": 411
+        },
+        {
+          "name": "id2",
+          "line": 412
+        },
+        {
+          "name": "jsonValidator",
+          "line": 415
+        },
+        {
+          "name": "validated",
+          "line": 431
+        },
+        {
+          "name": "evenNumber",
+          "line": 454
+        },
+        {
+          "name": "shapePositionValidator",
+          "line": 461
+        },
+        {
+          "name": "stringArray",
+          "line": 513
+        },
+        {
+          "name": "numbers",
+          "line": 514
+        },
+        {
+          "name": "userArray",
+          "line": 516
+        },
+        {
+          "name": "arr",
+          "line": 529
+        },
+        {
+          "name": "arr",
+          "line": 546
+        }
+      ]
+    }
+  ]
+}
