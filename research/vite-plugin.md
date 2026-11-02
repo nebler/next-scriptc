@@ -23,7 +23,7 @@ export default {plugins: [scriptcPromote(), frameworkPlugin()]};
 
 The plugin defaults to `sourceDir: 'src'` and `tsconfig: 'tsconfig.json'`. JavaScript apps can select `tsconfig: 'jsconfig.json'`. `report` receives census and refusal messages. `build` forwards the core's target, headers, runtime pack, encoding, and construction-result options. Compilation requires the existing scriptc toolchain and Node headers.
 
-The plugin applies only during builds. It requires `build.ssr` and rejects `ssr.target: 'webworker'`. Each transform additionally requires `options.ssr === true` and rejects a client environment. Client builds neither discover nor compile candidates. A shared source file can receive a wrapper in the SSR graph while its client copy remains ordinary JS.
+The plugin applies only during builds. It accepts `build.ssr` or a server environment consumer and rejects `ssr.target: 'webworker'`. Each transform requires `options.ssr === true` or a server environment consumer and rejects a client environment. Client builds neither discover nor compile candidates. A shared source file can receive a wrapper in the SSR graph while its client copy remains ordinary JS.
 
 Discovery scans JS/TS source files under the selected directory. This is a static census, not a reachability census: it can compile eligible functions that the server never imports. Svelte and Vue component bodies are not scanned. Wrappers are inserted only into modules visited by the server build. Source hashes and closure hashes reject stale discovery results. Functions from the same file are grouped before rewriting, preserving their original offsets and parameter semantics.
 
@@ -52,12 +52,12 @@ For inspection, `globalThis[Symbol.for('scriptc-promote.dispatchers')]` maps loa
 | Framework | Current evidence and remaining integration |
 | --- | --- |
 | SvelteKit | Real production build and `node build` tested with adapter-node and the adapter wrapper. Inline `.svelte` functions, non-Node adapters, and custom adapter layouts remain unsupported. |
-| Nuxt / Nitro | A Node Vite SSR graph can use the plugin. Nitro separately builds API handlers and packages its output; those handlers need a Nitro discovery/transform and artifact-copy hook. Full Nuxt server promotion is unvalidated. |
+| Nuxt / Nitro | V2: Nitro 2 module discovers and transforms server/API sources and emits artifacts into node-server output. Nuxt 4.6.3 production HTTP parity and verified shadows pass. Component-inline functions and non-Node presets remain unsupported. [Evidence](framework-integrations-nitro-tanstack.md). |
 | Astro | Node SSR modules can use the plugin. Inline `.astro` code and adapter artifact publication need integration. Static builds have no runtime promotion. Unvalidated. |
 | React Router | Traditional Node `build.ssr` builds fit the plugin contract. Framework output packaging and route graph selection need end-to-end validation. |
-| TanStack Start | Builds that use only the new multi-environment builder without `build.ssr` are skipped. Per-environment state, server-function graph selection, and final output publication need integration. |
+| TanStack Start | V2: Vite environment state is isolated, including builds without `build.ssr`. The TanStack wrapper publishes artifacts after Nitro 3 packages the server. Production route plus server-function parity and verified shadows pass on Vite 8. Separate RSC provider environments remain unvalidated. [Evidence](framework-integrations-nitro-tanstack.md). |
 
-V1 uses the classic Vite SSR build contract. Concurrent builds across multiple environments in one plugin instance are outside its supported contract. Native addons require a Node host and a matching OS/architecture; wasm and edge hosts are separate work.
+V1 used the classic Vite SSR build contract. V2 also accepts server consumers in the builder API and gives each environment its own compilation and asset references. Native addons require a Node host and a matching OS/architecture; wasm and edge hosts are separate work.
 
 The Vite SSR transform signal is documented in [Vite's SSR guide](https://vite.dev/guide/ssr), and the broader environment distinction is documented in [Vite's per-environment API changes](https://vite.dev/changes/per-environment-apis).
 
