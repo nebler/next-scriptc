@@ -887,3 +887,10 @@ The real-addon differential fuzzer passes seed 20935 across 17 candidates,
 not a promoted summary. Temporary task-owned links are removed after validation.
 No setup installation was created or removed. The artifact compression check
 passes. The change is committed locally without a merge or push.
+
+**Review note on F1 (2026-11-02): opaque handles.** Field projection is the wrong tool for this region. The aggregation *passes through* input objects (elements, contacts, `updatedAt` Dates) into its result without computing on them. A transport that keeps identity would cover that pattern:
+- Values the closure only moves are sent to native code as opaque handles: indices into the call's argument graph.
+- Native returns those handles in its result, and JS rebuilds the result with the original references.
+- Only fields the closure actually reads (compares, does arithmetic on, or uses as keys) must be JSON-typed.
+
+The analysis it needs: classify each input path as read versus passthrough-only; reject any identity comparison or mutation of a handle. Then Dates, class instances and original object identity survive exactly, because they never cross the boundary. This is the proposed next adapter feature (H1), with `getElementSummary` as its acceptance target.
