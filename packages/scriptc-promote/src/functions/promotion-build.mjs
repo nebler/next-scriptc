@@ -1,3 +1,4 @@
+import { infrastructureFailure, translateDiagnostics } from './diagnostics.mjs';
 import {assertDependencyHashes} from './dependency-closure.mjs';
 import {constructionProof} from './construction-proof.mjs';
 import { signature, constructionResultsDefault } from './promotion-signature.mjs';
@@ -7,7 +8,7 @@ import path from 'node:path';
 import {existsSync} from 'node:fs';
 import os from 'node:os';
 import { compilerPath } from '../paths.mjs';
-export async function buildPromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, constructionResults=constructionResultsDefault, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
+async function compilePromotion(modules, output, {linux=false, target=linux?'linux-x64-gnu':`${process.platform}-${process.arch}${process.platform==='linux'?'-gnu':''}`, timing=false, constructionResults=constructionResultsDefault, catchFallback=true, runtime=process.env.LINUX_PACK, headers=process.env.NODE_HEADERS??path.join(os.homedir(),process.platform==='darwin'?'Library/Caches/node-gyp':' .cache/node-gyp'.trim(),'24.22.1/include/node'), report=console.log}={}){
  if(!modules.length)return [];
  for(const module of modules)assertDependencyHashes(module);
  const constructionReport=modules.flatMap(m=>{const proof=m.functions[0]?.constructionProof??constructionProof(m.native);return m.functions.map(fn=>{fn.constructionProof=proof;if(fn.boundary?.opaque&&!proof.eligible)throw Error('Opaque handles require a construction proof: '+proof.reason);const row={id:fn.id,name:fn.name,...proof,enabled:constructionResults&&proof.eligible&&fn.boundary?.result==='json'};return row;});});
@@ -49,8 +50,9 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  // Incremental final-filter probes leave one combined archive, never link
  // multiple copies of the scriptc runtime. Restore the last accepted set after a refusal.
  try{await compile(modules);accepted.push(...modules);last=true;}
- catch{
-  for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){if(m.forced)throw e;last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${e.stderr??e.message}`);}}
+ catch(error){
+  const infrastructure=infrastructureFailure(error);if(infrastructure){report(infrastructure);return [];}
+  for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){const infrastructure=infrastructureFailure(e);if(infrastructure){report(infrastructure);return [];} const message=translateDiagnostics(e.stderr??e.message,[...accepted,m].map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})));if(m.forced)throw Error(message);last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${message}`);}}
  }
  if(!accepted.length)return [];
  if(!last)await compile(accepted);
@@ -59,8 +61,13 @@ export async function buildPromotion(modules, output, {linux=false, target=linux
  c=c.replace('/* TABLE */',signatures.map(s=>s.native).join('\n')+'\nstatic void (*entries[])(Job *)={'+signatures.map((_,i)=>`invoke${i}`).join(',')+'};\nstatic const Schema schemas[]={'+signatures.map(s=>`{${s.kinds.length},{${s.kinds.join(',')}},${s.resultKind}}`).join(',')+'};');
  await writeFile(path.join(output,'addon.c'),c);
  const common=['-O2','-DSERIALIZED_RUNTIME',...(timing?['-DBOUNDARY_TIMING']:[]),'-fPIC','-I'+headers,path.join(output,'addon.c'),path.join(output,'functions.lib.a'),'-o',path.join(output,'promotion.node')];
- execFileSync(linux?'zig':'clang',linux?['cc','-target',triple,'-shared',...common,'-lm','-lpthread','-ldl','-Wl,--allow-shlib-undefined']:['-bundle','-undefined','dynamic_lookup',...common],{stdio:'pipe'});
+ try { execFileSync(linux?'zig':'clang',linux?['cc','-target',triple,'-shared',...common,'-lm','-lpthread','-ldl','-Wl,--allow-shlib-undefined']:['-bundle','-undefined','dynamic_lookup',...common],{stdio:'pipe'}); } catch(error) {const infrastructure=infrastructureFailure(error);if(!infrastructure)throw error;report(infrastructure);return [];}
  await writeFile(path.join(output,'ids.json'),JSON.stringify(accepted.map(m=>m.functions[0].id)));
  await writeFile(path.join(output,'encodings.json'),JSON.stringify({timing,functions:Object.fromEntries(accepted.map(m=>[m.functions[0].id,{...m.functions[0].boundary,...(constructionResults&&!catchFallback&&m.functions[0].constructionProof?.eligible&&m.functions[0].constructionProof?.guards?.[m.functions[0].name]?.length?{parseInputs:m.functions[0].constructionProof.guards[m.functions[0].name].map(g=>g.index)}:{})}]))}));
  return accepted;
+}
+
+export async function buildPromotion(modules, output, options={}) {
+ try {return await compilePromotion(modules,output,options);}
+ catch(error){const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
 }

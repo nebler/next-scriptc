@@ -100,18 +100,19 @@ experimental and depends on scriptc and evolving adapter/runtime contracts.
 
 ## Automatic promotion and local testing
 
-The current Next adapter requires an explicit option for automatic promotion:
+Automatic promotion is enabled by default for Node production builds. To disable it:
 
 ```ts
 // next.config.ts
 import { withScriptc } from "next-scriptc";
-export default withScriptc({}, { nativePromotion: "auto" });
+export default withScriptc({}, { nativePromotion: "off" });
 ```
 
-Without this option, unmarked functions stay in JS. This is a current limitation
-relative to the planned automatic default. `"use js"` excludes a function from
+Omit the option or set `nativePromotion: "auto"` to discover unmarked helpers.
+Cloudflare retains static verified dispatch and defaults to `"off"`. `"use js"` excludes a function from
 automatic discovery. Explicit `"use native"` functions use the async form shown
-above and fail the build if extraction or compilation fails.
+above and fail the build on code refusals. Missing build tools leave the app in JS
+and print a repair command.
 
 Development runs the original TypeScript, including functions marked `"use native"`.
 To test native execution locally, run `pnpm exec next build`, then
@@ -119,16 +120,27 @@ To test native execution locally, run `pnpm exec next build`, then
 after edits. Development requests do not verify native compatibility.
 
 A coverage report describes static eligibility, not an observed runtime decision.
-The build's native route count does not count native functions. Automatic
+Build summaries print native function and module counts separately from native routes. Automatic
 promotion compiles candidates and shadow-checks them before deciding whether to
 use native for a workload. An accepted report row alone does not show that a
 request ran native. Compiler failures in automatic promotion retain the JS path;
-explicit native functions require a working compiler and linker.
+toolchain failures name the unavailable tool and preserve JS execution.
+For helper permission or SC3004 failures, run `pnpm approve-builds` and
+`pnpm rebuild scriptc`. For missing `ar` or Clang on macOS, run
+`xcode-select --install`; on Debian/Ubuntu, run `sudo apt-get install build-essential`.
+Code diagnostics retain compiler codes, point to original source positions, and
+include repair hints. Extractor/discovery diagnostics use stable `NSC1000`–`NSC1005`
+codes; infrastructure failures use `NSC2001`.
 
 ## Coverage report
 
 Run `pnpm exec next-scriptc report . --json coverage.json --md coverage.md` to inspect
-accepted functions, exact discovery blockers, silent exclusions, and route reachability.
+accepted functions, explicit `"use native"` functions including async ones,
+exact discovery blockers, silent exclusions, and route reachability. Explicit rows
+show extraction status. Async explicit rows check the default `.next` manifest
+build ID, source hash, function name, and artifact presence for build status.
+Custom output directories and automatic explicit functions have uninspected build
+status. A present artifact does not verify native execution.
 The command delegates to the framework-independent `scriptc-promote report`.
 Add `--measure --inputs inputs.json` for opt-in stock native compilation and paired
 JS/native measurements. See the [coverage report reference](../scriptc-promote/README.md#inspect-promotion-coverage)

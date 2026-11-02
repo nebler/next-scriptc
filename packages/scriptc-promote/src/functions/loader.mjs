@@ -60,7 +60,7 @@ export default function loader(text) {
     }
     text = text.slice(0, fn.start) + `{ return ${name}(${port}, ${JSON.stringify(fn.id)}, [${fn.params.join(", ")}]); }` + text.slice(fn.end);
   }
-  if(module.functions.some(fn=>fn.promotion)||module.promotion)text=`import { promote as ${name}_auto } from ${JSON.stringify(promotionClient)};\n${text}`;
+  if(module.functions.some(fn=>fn.promotion)||module.promotion)text=`import { promote as ${name}_auto } from ${JSON.stringify(path.isAbsolute(promotionClient) ? "./" + path.relative(path.dirname(this.resourcePath), promotionClient).split(path.sep).join("/") : promotionClient)};\n${text}`;
   text+='\n'+[...imports.values(),...companions].join('\n');
   if(module.promotion)return text;
   return `import { callNative as ${name} } from ${JSON.stringify("./" + path.relative(path.dirname(this.resourcePath), client).split(path.sep).join("/"))};\n${text}`;

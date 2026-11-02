@@ -18,7 +18,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  // the app (cwd) first, like construction-proof.mjs.
  ts??=require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
- const modules=new Map(), chunks=[];
+ const modules=new Map(), chunks=[], sourceNodes=[];
  let typeProgram;
  function resolveQuery(record,local){
   if(!typeProgram){const host=ts.createCompilerHost({...options,strict:true});const read=host.readFile;host.readFile=f=>path.resolve(f)===path.resolve(source)?text:read(f);typeProgram=ts.createProgram([source],{...options,strict:true,moduleResolution:options.moduleResolution??ts.ModuleResolutionKind.Bundler,module:ts.ModuleKind.ESNext},host);}
@@ -37,7 +37,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  // Never cache a completed closure by filename: a diamond can request new exports.
  function load(file, input) {
   if(modules.has(file))return modules.get(file);
-  const code=input??fs.readFileSync(file,'utf8'), ast=babel.parser().parse(code,{sourceType:'module',plugins:['typescript','jsx']});
+  const code=input??fs.readFileSync(file,'utf8'), ast=babel.parser().parse(code,{sourceType:'module',sourceFilename:file,plugins:['typescript','jsx']});
   const fail=reason=>{throw Error(`dependency closure: ${file}: ${reason}`);};
   if(/\.cjs$/.test(file))fail('CommonJS mutable module exports require a module-object proof');
   if(ast.program.directives.some(d=>['use client','use js'].includes(d.value.value)))fail('module directive');
@@ -203,6 +203,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
    traverse(ast,{Identifier(p){if(p.node.name===local&&(p.isReferencedIdentifier()&&p.findParent(q=>q.isTSType())||p.parentPath.isTSTypeAliasDeclaration()&&p.key==='id'||p.parentPath.isTSInterfaceDeclaration()&&p.key==='id'))p.node.name=targetName(record,local);}});
   }
   chunks.push(generate(ast).code);
+  sourceNodes.push(...ast.program.body);
  }
  const requiresFallback=[...modules.values()].some(r=>r.requiresFallback);
  if(requiresFallback)for(const record of modules.values())traverse(record.ast,{TryStatement(){record.fail('throw fallback excludes local catch/finally');}});
@@ -210,6 +211,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  // Scalar const reads have no identity or initialization effects. Inline them
  // before the allocation proof, which otherwise rejects all module variables.
  const flat=babel.parser().parse(combined,{sourceType:'module',plugins:['typescript']});
+ flat.program.body=[...sourceNodes,flat.program.body.at(-1)];
  traverse(flat,{Program(p){
   for(const binding of Object.values(p.scope.bindings)){
    const d=binding.path.node,n=d.init;
@@ -219,11 +221,12 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
    binding.path.remove();
   }
  }});
- const extracted=extractFunctions(generate(flat).code,source,name);
+ const generated=generate(flat,{sourceMaps:true});
+ const extracted=extractFunctions(generated.code,source,name);
  const lowered=lowerOpaqueHandles(extracted.native,name,ts);
  const proof=constructionProof(lowered.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {referenceNative:extracted.native,rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo}))],closureHash:digest(combined)};
+ return {loweringMap:lowered.loweringMap,compilerSourceMap:{text:generated.code,segments:extracted.sourceMap,mappings:generated.rawMappings},referenceNative:extracted.native,rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo}))],closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

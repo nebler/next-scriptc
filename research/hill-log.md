@@ -1557,3 +1557,37 @@ Fixed a default Turbopack build failure by making function loader metadata survi
 With ar removed from PATH, Nitro reports SC3004 spawnSync ar ENOENT, builds with zero compiled candidates, and serves the expected result in JS. Permission errors on independent scriptc installs require the documented pnpm rebuild repair. Map, Date, in, and optional-helper probes compile in the explicit async path; a parameter-property class fails with an unlocated unsupported-reference message. Indexed-read errors identify generated files. Dev runs JS and updates after an edit. One production build/rebuild pair takes 8.90s/4.41s on this shared machine; these are observations, not a performance benchmark.
 
 Required Node 24 package suites pass: next-scriptc 98/98; scriptc-promote 34 passed and two existing skips. An initial run under an unintended Node 23 executable failed a React Router dependency preparation; the Node 24 rerun passes without a product change. Temporary consumers and task-owned processes are cleaned. Root README, main checkout, compiler source, and compiler fork are untouched. No Docker, deploy, push, PR, issue, or public post. Full fixtures, verbatim output, limitations, and ten prioritized follow-ups are in [the friction log](friction-log.md).
+
+## 52. P1b automatic default and actionable diagnostics (2026-11-03)
+
+Next Node production builds now default to automatic promotion. Explicit auto/off
+choices are preserved, Cloudflare retains static dispatch, and the other adapters
+already had automatic discovery enabled. No dispatcher threshold, discovery
+acceptance rule, or shadow policy changes. Extracted source offsets, flattened
+helper locations, and opaque type-edit offsets translate compiler diagnostics to
+original files. Stable NSC refusal codes and repair hints retain existing reason
+substrings. Infrastructure failures name the unavailable tool and preserve JS.
+
+Explicit native report rows include async functions, extraction status, and Next
+async artifact status checked against build ID and source hash in default .next
+output. Artifact presence does not establish runtime execution. Build summaries
+count functions/modules separately from routes/processes. Dev prints a one-time
+production-testing notice. Both package READMEs document the behavior.
+
+A fresh Next 16.4.3 consumer installs both worktree tarballs in /tmp/nsc-p1b.
+Default build compiles one scoring function in one module and zero native routes.
+A broken explicit indexed read fails at original rank.ts:5:10 with a guard/tuple
+hint. A nonexistent compiler build succeeds, announces JS fallback, and its
+production POST returns [545,0]. Initial scriptc helper permissions required the
+existing pnpm rebuild repair. The first automatic native build also exposed a
+packed absolute runtime import; a relative import fixes Turbopack resolution.
+No native runtime convergence or application speedup is claimed.
+
+Node 24 suites pass: Next 101/101; core 41 passed and two existing skips. Tests
+cover missing compiler/ar, helper permissions, original source positions,
+explicit report status/freshness, defaults, dev notice, and separate counts.
+F4 runtime visibility, F9 upstream helper packaging, other adapter setup recipes,
+and custom-directory artifact reporting remain open. Temporary consumers and
+servers are cleaned. Root README, main checkout, protected compiler sources,
+and external services are untouched. No Docker, deploy, push, PR, issue, public
+post, or secret. [Verbatim evidence and limits](friction-fixes.md).

@@ -7,11 +7,12 @@ import { discoverRoutes, processEntrySource, routeRewrite, withRewrites } from "
 import { optionsKey, planRoutes, planProcesses } from "./options.mjs";
 import { startNativeRoutes } from "./runtime.mjs";
 import { prepareNativeSources } from "./native-config.mjs";
-import { prepareFunctions, finishFunctions, publishPromotion, startFunctions } from "./functions/build.mjs";
+import { functionCounts, prepareFunctions, finishFunctions, publishPromotion, startFunctions } from "./functions/build.mjs";
 
 const require = createRequire(import.meta.url);
 // Preserve the exact discovery snapshot used to emit rewrites; rediscovery could compile a different route set.
 const buildPlans = new Map();
+const devNotices = new Set();
 
 /** @type {import("next").NextAdapter} */
 const adapter = {
@@ -38,6 +39,10 @@ const adapter = {
         return (await vercelAdapter()).modifyConfig(await prepareFunctions(config, projectDir), context);
       }
       return prepareFunctions(withRewrites(config, routes), projectDir);
+    }
+    if (phase === "phase-development-server" && !devNotices.has(projectDir)) {
+      devNotices.add(projectDir);
+      console.log('[next-scriptc] Promotion runs in production builds. Dev serves JS. Test native locally: pnpm build && pnpm start (see next-scriptc README).');
     }
     if (phase === "phase-production-server") {
       await startNativeRoutes(projectDir, path.resolve(projectDir, config.distDir));
@@ -116,6 +121,8 @@ const adapter = {
     await writeFile(path.join(output, "manifest.json"), JSON.stringify({ version: 2, buildId, routes, processes }, null, 2) + "\n");
     await finishFunctions(projectDir, distDir, buildId);
     buildPlans.delete(projectDir);
+    const functions=functionCounts(projectDir);
+    console.log(`[next-scriptc] Built ${functions.functions} native function(s) in ${functions.modules} module(s).`);
     console.log(`[next-scriptc] Built ${routes.length} native route(s) in ${processes.length} process(es).`);
   },
 };

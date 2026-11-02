@@ -1,3 +1,4 @@
+import {sourceDiagnostic} from './diagnostics.mjs';
 import {lowerOpaqueHandles} from './opaque-handles.mjs';
 import {babelModules} from '../babel.mjs';
 import { createRequire } from 'node:module';
@@ -45,16 +46,16 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(!exported&&!program.scope.getBinding(name)?.referencePaths.length)return;
   if((p.node.body.directives??[]).some(d=>d.value.value==='use js'))return;
   resolution.onConsidered?.({source,name});
-  names.push({name:name,forced:(p.node.body.directives??[]).some(d=>d.value.value==='use native')});
+  names.push({name:name,offset:p.node.start,forced:(p.node.body.directives??[]).some(d=>d.value.value==='use native')});
  }});
  const candidates=[];
- for(const {name,forced} of names){try{
+ for(const {name,forced,offset} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
   if(module.imports.length) {
    Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
   }
   module.referenceNative??=module.native;
-  if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.opaqueInputs=lowered.inputs;}
+  if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.loweringMap=lowered.loweringMap;module.opaqueInputs=lowered.inputs;}
   let work=false;
   const native=parse(module.native);
   traverse(native,{
@@ -74,7 +75,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   });
   if(!work&&!forced)throw Error('work: no loop, recursion, array callback or JSON parse');
   candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,rawLinks:module.rawLinks,opaqueInputs:module.opaqueInputs,requiresFallback:module.requiresFallback})),promotion:true,forced});
- }catch(e){if(forced)throw e;report(`[next-scriptc] not a candidate ${name}: ${e.message}`);}}
+ }catch(e){if(forced&&!resolution.reportOnly)throw Error(sourceDiagnostic(text,source,offset,e.message));report(`[next-scriptc] not a candidate ${name}: ${sourceDiagnostic(text,source,offset,e.message)}`);}}
  return candidates;
 }
 
@@ -89,7 +90,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   const file=path.join(dir,e.name);if(file===distDir)continue;
   if(e.isDirectory())await visit(file);
   else if(/\.[cm]?[jt]sx?$/.test(file)){
-   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
+   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,reportOnly:config?.reportOnly,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
   }
  }}await visit(config?.promotionSourceDir ? path.resolve(projectDir,config.promotionSourceDir) : projectDir);
  if(!modules.length)return [];
@@ -123,5 +124,5 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   for(const fn of m.functions){
    fn.constructionProof=constructionProof(m.native,ts);
    if((!!m.opaqueInputs||specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
-  }return true;}catch(e){if(m.forced)throw e;const message=`[next-scriptc] not a candidate: ${e.message}`;report(message);config?.onDiagnostic?.({source:m.source,name:m.functions[0].name,message});return false;}});
+  }return true;}catch(e){if(m.forced&&!config?.reportOnly)throw Error(sourceDiagnostic(m.originalText??'',m.source,m.functions[0].start,e.message));const message=`[next-scriptc] not a candidate: ${sourceDiagnostic(m.originalText??'',m.source,m.functions[0].start,e.message)}`;report(message);config?.onDiagnostic?.({source:m.source,name:m.functions[0].name,message});return false;}});
 }

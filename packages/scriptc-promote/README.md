@@ -112,3 +112,28 @@ traffic, size buckets, shadow quotas, startup, fallback, and periodic rechecks
 still determine runtime behavior. The dispatcher exposes process-local
 `snapshot()` state; importing observations from running apps is a follow-up.
 See [coverage report design and limits](../../research/coverage-report.md).
+
+## Defaults and diagnostics
+
+Vite, SvelteKit, Astro, React Router, Nitro, and TanStack adapters already enable
+automatic discovery for supported production Node server builds when installed.
+Their defaults are unchanged. Next now also enables it by default; set
+`nativePromotion: "off"` in `withScriptc` to disable discovery. `"use js"` opts a
+function out. Development serves JS. Test native locally with a production build
+and start command. Dispatcher thresholds, acceptance rules, and shadow policy
+are unchanged.
+
+Extractor and discovery diagnostics include source positions, stable `NSC1000`
+through `NSC1005` codes, and repair hints. Compiler SC codes remain intact.
+`NSC2001` means a toolchain failure, names the unavailable tool, and confirms
+that the app continues in JS. For helper permission failures or SC3004, run
+`pnpm approve-builds` followed by `pnpm rebuild scriptc`. Missing `ar` or Clang
+requires `xcode-select --install` on macOS or
+`sudo apt-get install build-essential` on Debian/Ubuntu.
+
+Report rows marked `explicit` include async `"use native"` functions and show
+extraction status. For Next async explicit functions using the default `.next`
+directory, build status checks the manifest build ID, source hash, function name,
+and artifact presence. Changed source or a missing artifact is reported as not
+built. Other paths are explicitly uninspected. This command does not compile
+explicit functions or verify execution.

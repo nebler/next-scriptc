@@ -1,3 +1,4 @@
+import { sourceDiagnostic } from './diagnostics.mjs';
 import {babelModules} from '../babel.mjs';
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
@@ -25,7 +26,7 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
   const client = ast.program.directives.some((directive) => directive.value.value === "use client");
   const functions = [];
   let program;
-  function fail(name, reason) { throw new Error(`[next-scriptc] ${source}: function ${name}: ${reason}`); }
+  function fail(name, reason, node) { const binding = program?.scope.getBinding(name); throw new Error(sourceDiagnostic(text, source, node?.start ?? binding?.identifier.start ?? 0, `function ${name}: ${reason}`)); }
   traverse(ast, {
     Program(p) { program = p; },
     Function(p) {
@@ -94,7 +95,7 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
       if (!dependency) {
         // Unbound type names (ReadonlyArray, Record, utility types, type
         // parameters) belong to TypeScript, not the runtime-global allowlist.
-        if (!globals.has(p.node.name) && !p.findParent((parent) => parent.isTSType())) fail(owner, `unsupported reference ${p.node.name}`);
+        if (!globals.has(p.node.name) && !p.findParent((parent) => parent.isTSType())) fail(owner, `unsupported reference ${p.node.name}`, p.node);
       } else if (dependency.scope === program.scope || types.has(p.node.name)) include(dependency, owner);
     };
     // Automatic promotion retains individual bindings in a multi-declarator statement.
@@ -112,6 +113,7 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
   for (const p of program.get("body")) {
     if (!p.isDeclaration() && !p.isImportDeclaration() && !p.isExportDeclaration() && !p.isEmptyStatement()) fail(functions[0].name, `unsupported module initialization ${p.node.type}; move setup into a declaration initializer`);
   }
+  const sourceMap = []; let generatedOffset = 0;
   const native = [...statements].sort((a, b) => a.node.start - b.node.start).map((p) => {
     const node = p.isExportNamedDeclaration() ? p.node.declaration : p.node;
     if (!node) return "";
@@ -124,9 +126,11 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
       const specifier = p.node.source;
       code = code.slice(0, specifier.start - node.start) + JSON.stringify(path.resolve(path.dirname(source), specifier.value)) + code.slice(specifier.end - node.start);
     }
+    sourceMap.push({generatedOffset, originalOffset:node.start, length:code.length});
+    generatedOffset += code.length + 1;
     return code;
   }).join("\n") + `\nexport { ${functions.map((fn) => fn.name).join(", ")} };\n`;
-  return { source, functions, native, imports, hash: createHash("sha256").update(text).digest("hex") };
+  return { source, sourceMap, originalText:text, functions, native, imports, hash: createHash("sha256").update(text).digest("hex") };
 }
 
 export async function discoverFunctions(projectDir, distDir, config) {
@@ -160,7 +164,7 @@ export async function discoverFunctions(projectDir, distDir, config) {
       for (const dependency of module.imports) {
         const visited = new Set();
         async function check(specifier, importer) {
-          const fail = (reason) => { throw new Error(`[next-scriptc] ${module.source}: function ${dependency.owner}: reference ${dependency.reference}: ${reason} (via ${importer})`); };
+          const fail = (reason) => { throw new Error(sourceDiagnostic(module.originalText,module.source,module.functions.find(fn=>fn.name===dependency.owner)?.start??0,`function ${dependency.owner}: reference ${dependency.reference}: ${reason} (via ${importer})`)); };
           if (forbidden(specifier)) fail(`unsupported import ${specifier}`);
           const resolved = ts.resolveModuleName(specifier, importer, options, ts.sys, cache).resolvedModule;
           if (!resolved || resolved.isExternalLibraryImport || resolved.resolvedFileName.endsWith(".d.ts") || visited.has(resolved.resolvedFileName)) return;
