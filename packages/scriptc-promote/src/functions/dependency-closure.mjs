@@ -1,3 +1,4 @@
+import {structuralType} from './structural-types.mjs';
 import {lowerOpaqueHandles} from './opaque-handles.mjs';
 import {babelModules} from '../babel.mjs';
 // Closed, conservative runtime-module subset. Never execute a dependency at build time.
@@ -18,6 +19,14 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  ts??=require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
  const modules=new Map(), chunks=[];
+ let typeProgram;
+ function resolveQuery(record,local){
+  if(!typeProgram){const host=ts.createCompilerHost({...options,strict:true});const read=host.readFile;host.readFile=f=>path.resolve(f)===path.resolve(source)?text:read(f);typeProgram=ts.createProgram([source],{...options,strict:true,moduleResolution:options.moduleResolution??ts.ModuleResolutionKind.Bundler,module:ts.ModuleKind.ESNext},host);}
+  const sf=typeProgram.getSourceFile(record.file)??typeProgram.getSourceFiles().find(sf=>fs.existsSync(sf.fileName)&&fs.realpathSync(sf.fileName)===record.file),checker=typeProgram.getTypeChecker();
+  const node=sf?.statements.find(n=>ts.isTypeAliasDeclaration(n)&&n.name.text===local);
+  if(!node)record.fail('unresolved type query '+local);
+  return structuralType(checker.getTypeAtLocation(node),checker,ts,node);
+ }
  function resolve(specifier, importer, typeOnly=false) {
   if(/^(?:node:|next(?:\/|$)|react(?:\/|$))/.test(specifier))throw Error(`dependency closure: unsupported runtime import ${specifier}`);
   const result=ts.resolveModuleName(specifier,importer,{...options,allowJs:true,moduleResolution:options.moduleResolution??ts.ModuleResolutionKind.Bundler},typeOnly?ts.sys:host,undefined,undefined,ts.ModuleKind.ESNext).resolvedModule;
@@ -114,6 +123,11 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
   }
   if(declaration.isTSTypeAliasDeclaration()||declaration.isTSInterfaceDeclaration()){
    if(declaration.node.typeParameters?.params.some(p=>types.has(p.name)||program.scope.getBinding(p.name)))fail('type parameter shadows a module binding; scoped type linking required');
+   let query=false;declaration.traverse({TSTypeQuery(){query=true;}});
+   if(query){
+    if(declaration.node.typeParameters)fail('generic type query unsupported');
+    declaration.node.typeAnnotation=babel.parser().parse('type Resolved='+resolveQuery(record,local),{plugins:['typescript']}).program.body[0].typeAnnotation;
+   }
    declaration.traverse({enter(p){if(['TSMappedType','TSConditionalType','TSInferType','TSTypeQuery','TSImportType'].includes(p.node.type))fail(`type ${local} is not bounded JSON data: ${p.node.type} ${p.node.name??''}`);}});
   }
   if(declaration.isVariableDeclarator()&&declaration.node.init?.type==='TSAsExpression'&&declaration.node.init.typeAnnotation.type==='TSTypeReference'&&declaration.node.init.typeAnnotation.typeName.name==='const'){
@@ -179,7 +193,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
   traverse(ast,{
    Identifier(p){if(p.node.name.startsWith('__dep_'))fail('reserved generated binding');},
    'ImportExpression|ThisExpression|NewExpression|ObjectMethod|ClassDeclaration|ClassExpression'(p){fail(`unsupported ${p.node.type}`);},
-   MemberExpression(p){if(p.node.computed||['prototype','constructor','__proto__'].includes(p.node.property.name))fail('computed or prototype member');},
+   MemberExpression(p){if(p.node.computed||['prototype','constructor','__proto__'].includes(p.node.property.name))fail(`computed or prototype member at line ${p.node.loc?.start.line??'unknown'}`);},
    ReferencedIdentifier(p){if(p.findParent(q=>q.isTSType()))return;if(['eval','Function','require','module','exports','globalThis','process','Date','crypto','console','fetch','performance'].includes(p.node.name))fail(`unsupported ${p.node.name}`);},
   });
   // Keep import bindings in the original scope until all references are renamed.
@@ -209,7 +223,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  const lowered=lowerOpaqueHandles(extracted.native,name,ts);
  const proof=constructionProof(lowered.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),closureHash:digest(combined)};
+ return {native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo}))],closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

@@ -58,3 +58,27 @@ test('writes, shadowing, schema calls and noncanonical array keys fail closed',(
  ]){write('helper.ts',helper);assert.throws(()=>close(text,file));}
  write('helper.ts','const t={a:2} as const;function read(t:{a:number}){return t.a;}export function value(n:number){return read({a:n})+t.a;}');assert.deepEqual(evaluate(close(text,file).native)([1]),[3]);
 }));
+test('checker resolves real Zod infer and type queries without copying schema values',()=>fixture((write,dir)=>{
+ const appRequire=createRequire(new URL('../../../examples/demo/package.json',import.meta.url));
+ fs.mkdirSync(path.join(dir,'node_modules'));
+ fs.symlinkSync(path.dirname(appRequire.resolve('zod/package.json')),path.join(dir,'node_modules/zod'));
+ fs.symlinkSync(path.dirname(appRequire.resolve('typescript/package.json')),path.join(dir,'node_modules/typescript'));
+ const appTs=createRequire(path.join(dir,'package.json'))('typescript');
+ const text="import type {Rows} from './helper';export function rows(x:Rows[]){return x.map(v=>v.n+1);}",file=write('entry.ts',text);
+ write('helper.ts',"import {z} from 'zod';const schema=z.object({n:z.number()});export type Rows=z.infer<typeof schema>;");
+ const result=dependencyClosure(text,file,'rows',{ts:appTs});
+ assert.doesNotMatch(result.native,/schema|zod|typeof|infer/);assert.deepEqual(evaluate(result.native)([{n:2}]),[3]);
+ assert.ok(result.dependencies.some(d=>d.file.endsWith('helper.ts')));
+ write('helper.ts',"import {z} from 'zod';const schema=z.object({n:z.number(),date:z.date(),fn:z.function()});export type Rows=z.infer<typeof schema>;");
+ const passText="import type {Rows} from './helper';export function rows(x:Rows[]){return x.map(v=>({n:v.n+1,date:v.date,original:v}));}";
+ write('entry.ts',passText);const pass=dependencyClosure(passText,file,'rows',{ts:appTs});
+ assert.ok(pass.opaqueInputs);assert.doesNotMatch(pass.native,/unknown|schema|zod|typeof|infer/);
+ write('entry.ts',text);
+
+ write('helper.ts','const value={n:2};export type Rows=typeof value;');assert.deepEqual(evaluate(dependencyClosure(text,file,'rows',{ts:appTs}).native)([{n:2}]),[3]);
+ for(const schema of ['z.object({n:z.function()})','z.object({n:z.symbol()})','z.object({n:z.string().brand<"B">()})']){
+  write('helper.ts',`import {z} from 'zod';const schema=${schema};export type Rows=z.infer<typeof schema>;`);
+  assert.throws(()=>dependencyClosure(text,file,'rows',{ts:appTs}));
+ }
+ write('helper.ts','interface Recursive {n:Recursive};declare const value:Recursive;export type Rows=typeof value;');assert.throws(()=>dependencyClosure(text,file,'rows',{ts:appTs}));
+}));

@@ -4,7 +4,7 @@ const brand='type __ScriptcOpaqueHandle = number & {readonly __scriptcOpaqueHand
 // Deliberately intraprocedural. Helper calls, computed keys, destructuring and
 // aliases with writes are inspection, never evidence for borrowing.
 export function lowerOpaqueHandles(text, name, ts) {
- if(text.includes('__scriptcOpaqueHandle')||text.includes('__ScriptcOpaqueHandle'))throw Error('reserved opaque handle type');
+ if(text.includes('__scriptcOpaqueHandle')||text.includes('__ScriptcOpaqueHandle')||text.includes('__scriptcOriginal'))throw Error('reserved opaque handle type');
  const {source,checker}=strictClosureProgram(text,ts);
  const target=source.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);
  if(!target||target.type||target.typeParameters?.length)return {native:text};
@@ -38,20 +38,22 @@ export function lowerOpaqueHandles(text, name, ts) {
    const push=ts.isCallExpression(p)&&p.arguments.includes(n)&&ts.isPropertyAccessExpression(p.expression)&&p.expression.name.text==='push';
    const pass=push||ts.isReturnStatement(p)||ts.isArrowFunction(p)&&p.body===n||ts.isPropertyAssignment(p)&&p.initializer===n||ts.isShorthandPropertyAssignment(p)||ts.isArrayLiteralExpression(p);
    const t=checker.getTypeAtLocation(n),scalar=!!(t.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null));
-   uses.push({path:o,kind:pass&&!scalar?'passthrough-only':'read'});return;
+   uses.push({path:o,kind:pass&&!scalar?'passthrough-only':'read',unsafe:!scalar||ts.isBinaryExpression(p)&&p.left===n&&p.operatorToken.kind>=ts.SyntaxKind.FirstAssignment&&p.operatorToken.kind<=ts.SyntaxKind.LastAssignment||ts.isDeleteExpression(p)||ts.isPostfixUnaryExpression(p)||ts.isPrefixUnaryExpression(p),node:n});return;
   }
   ts.forEachChild(n,use);
  }use(target.body);
  const prefix=(a,b)=>a.length<=b.length&&a.every((x,i)=>x===b[i]);
  const handles=uses.filter(u=>u.kind==='passthrough-only').map(u=>u.path).sort((a,b)=>a.length-b.length);
- if(handles.some(p=>p.length===1&&checker.getTypeAtLocation(target.parameters[Number(p[0])]).flags&(ts.TypeFlags.Any|ts.TypeFlags.Unknown)))return {native:text,classification:uses};
- for(const h of handles)if(uses.some(u=>u.kind==='read'&&(prefix(h,u.path)||prefix(u.path,h))))throw Error(`opaque handle is also read: ${h.join('.')}`);
- if(!handles.length)return {native:text,classification:uses};
+ if(handles.some(p=>p.length===1&&checker.getTypeAtLocation(target.parameters[Number(p[0])]).flags&(ts.TypeFlags.Any|ts.TypeFlags.Unknown)))return {native:text,classification:uses.map(({node,unsafe,...u})=>u)};
+ for(const h of handles){const conflict=uses.find(u=>u.kind==='read'&&(prefix(u.path,h)||u.unsafe&&prefix(h,u.path)));if(conflict)throw Error(`opaque handle is also read: ${h.join('.')} (read ${conflict.path.join('.')}, ${ts.SyntaxKind[conflict.node.parent.kind]})`);}
+ if(!handles.length)return {native:text,classification:uses.map(({node,unsafe,...u})=>u)};
  const atHandle=p=>handles.some(h=>h.length===p.length&&prefix(h,p));
+ const dual=p=>atHandle(p)&&uses.some(u=>u.kind==='read'&&prefix(p,u.path));
+ for(const u of uses)if(u.kind==='passthrough-only'&&dual(u.path)){const n=u.node;const value=n.getText(source)+'.__scriptcOriginal';edits.push([n.getStart(source),n.end,ts.isShorthandPropertyAssignment(n.parent)?n.getText(source)+':'+value:value]);}
  let budget=256;
  function type(t,p,seen=new Set()){
   if(--budget<0||seen.has(t))throw Error('opaque boundary is unbounded');
-  if(atHandle(p))return {text:'__ScriptcOpaqueHandle',shape:{kind:'handle'}};
+  if(atHandle(p)&&!dual(p))return {text:'__ScriptcOpaqueHandle',shape:{kind:'handle'}};
   if(t.flags&ts.TypeFlags.StringLike)return {text:'string',shape:{kind:'string'}};
   if(t.flags&ts.TypeFlags.NumberLike)return {text:'number',shape:{kind:'number'}};
   if(t.flags&ts.TypeFlags.BooleanLike)return {text:'boolean',shape:{kind:'boolean'}};
@@ -59,14 +61,14 @@ export function lowerOpaqueHandles(text, name, ts) {
   const next=new Set(seen).add(t);
   if(checker.isArrayType(t)){const v=type(checker.getTypeArguments(t)[0],[...p,'[]'],next);return {text:`Array<${v.text}>`,shape:{kind:'array',value:v.shape}};}
   if(!(t.flags&ts.TypeFlags.Object)||t.isUnion()||checker.getIndexInfosOfType(t).length||checker.getSignaturesOfType(t,ts.SignatureKind.Call).length||t.getSymbol()?.declarations?.some(d=>ts.isClassDeclaration(d)))throw Error(`read path is not bounded JSON: ${p.join('.')}`);
-  const fields=[];for(const prop of checker.getPropertiesOfType(t)){
-   const q=[...p,prop.name];if(!uses.some(u=>prefix(q,u.path)||prefix(u.path,q)))continue;
+  const fields=dual(p)?[['__scriptcOriginal',{text:'__ScriptcOpaqueHandle',shape:{kind:'handle'}}]]:[];for(const prop of checker.getPropertiesOfType(t)){
+   const q=[...p,prop.name];if(!uses.some(u=>prefix(q,u.path)||u.kind==='read'&&prefix(u.path,q)))continue;
    if(prop.flags&ts.SymbolFlags.Optional)throw Error('optional opaque boundary field');
    const v=type(checker.getTypeOfSymbolAtLocation(prop,prop.valueDeclaration??prop.declarations?.[0]??target),q,next);fields.push([prop.name,v]);
   }
-  return {text:`{${fields.map(([k,v])=>`${JSON.stringify(k)}:${v.text}`).join(';')}}`,shape:{kind:'object',fields:fields.map(([k,v])=>[k,v.shape])}};
+  return {text:`{${fields.map(([k,v])=>`${JSON.stringify(k)}:${v.text}`).join(';')}}`,shape:{kind:'object',...(dual(p)?{original:true}:{}),fields:fields.map(([k,v])=>[k,v.shape])}};
  }
- let inputs;try{inputs=target.parameters.map((p,i)=>{if(!p.type||!ts.isIdentifier(p.name))throw Error('opaque boundary needs explicit simple parameters');const v=type(checker.getTypeAtLocation(p),[String(i)]);edits.push([p.type.getStart(source),p.type.end,v.text]);return v.shape;});}catch(e){if(/read path is not bounded JSON|unbounded|optional opaque boundary field|explicit simple parameters/.test(e.message))return {native:text,classification:uses};throw e;}
+ let inputs;try{inputs=target.parameters.map((p,i)=>{if(!p.type||!ts.isIdentifier(p.name))throw Error('opaque boundary needs explicit simple parameters');const v=type(checker.getTypeAtLocation(p),[String(i)]);edits.push([p.type.getStart(source),p.type.end,v.text]);return v.shape;});}catch(e){if(/read path is not bounded JSON|unbounded|optional opaque boundary field|explicit simple parameters/.test(e.message))return {native:text,classification:uses.map(({node,unsafe,...u})=>u)};throw e;}
 
  // Parameter specialization can make an original type unreachable. Remove only
  // such declarations, leaving helper and local annotations for the usual proof.
@@ -78,7 +80,7 @@ export function lowerOpaqueHandles(text, name, ts) {
  for(const n of rewritten.statements)if(!declarations.has(n.name?.text))names(n);
  const expanded=new Set();for(const name of needed){if(declarations.has(name)&&!expanded.has(name)){expanded.add(name);names(declarations.get(name));}}
  for(const n of [...declarations.values()].filter(n=>!needed.has(n.name.text)).sort((a,b)=>b.getStart(rewritten)-a.getStart(rewritten)))native=native.slice(0,n.getStart(rewritten))+native.slice(n.end);
- return {native:brand+native,inputs,classification:uses};
+ return {native:brand+native,inputs,classification:uses.map(({node,unsafe,...u})=>u)};
 }
 
 // Check the lowered closure too: a borrowed value may flow through a local

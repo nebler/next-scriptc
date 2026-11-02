@@ -31,7 +31,7 @@ function walkOpaque(shape,value,handle,exact=false,reads){
   if(value===null||typeof value!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw Error('Expected plain JSON object');
   if(exact&&(Object.getOwnPropertySymbols(value).length||Object.getOwnPropertyNames(value).length!==shape.fields.length))throw Error('Unexpected result fields');
   const out={};
-  for(const [key,child] of shape.fields){if(['__proto__','constructor','prototype','toJSON'].includes(key))throw Error('Reserved boundary field');const d=Object.getOwnPropertyDescriptor(value,key);if(!d||!('value' in d))throw Error('Expected own data field');out[key]=walkOpaque(child,d.value,handle,exact,reads);}return out;
+  for(const [key,child] of shape.fields){if(['__proto__','constructor','prototype','toJSON'].includes(key))throw Error('Reserved boundary field');if(shape.original&&key==='__scriptcOriginal'){out[key]=handle(value);continue;}const d=Object.getOwnPropertyDescriptor(value,key);if(!d||!('value' in d))throw Error('Expected own data field');out[key]=walkOpaque(child,d.value,handle,exact,reads);}return out;
  }
  return primitive(shape.kind,value);
 }
@@ -44,7 +44,7 @@ export function encodeArguments(schema, args) {
     const value=schema.opaque?walkOpaque(schema.opaque.inputs[i],args[i],capture,false,reads):args[i];
     return kind==='json'?serialize(value):primitive(kind,value);
   });
-  if(schema.opaque){if(table.some(v=>reads.has(v)))throw Error('Borrowed value aliases a read container');tables.set(encoded,table);}
+  if(schema.opaque){tables.set(encoded,table);}
   // Validate the primitive before parsing so invalid objects cannot coerce.
   // Screened parse assertions need syntactically valid JSON before native entry.
   for(const index of schema.parseInputs??[])JSON.parse(encoded[index]);

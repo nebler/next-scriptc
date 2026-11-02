@@ -981,3 +981,39 @@ and temporary links are cleaned, artifacts are checked for compression, and the
 change is committed locally without merge or push. No containers, hosting,
 Papermark, compiler-fork, or root README work. [Design, limits, evidence, and
 reproduction](opaque-handles.md).
+
+## 36. H2 read-and-pass handles and Zod type queries (2026-11-02)
+
+Read-and-pass plain objects now carry selected typed fields and a generated
+original-value handle at the same input position. Passthrough expressions copy
+that field; decoding restores the original reference. Own data descriptors
+validate reads without evaluating getters. Input immutability and synchronous
+execution make the projection agree with the returned original, including
+aliases between read containers and passed values. Whole-object inspection,
+mutation, unproved helpers, and descendant object identity comparisons still
+reject. Construction proof and the second typed handle audit remain required.
+
+The application checker resolves type-query aliases, including real Zod infer,
+to structural declarations without copying or executing schemas. Unsupported
+nested types remain unknown until specialization, which must remove them or
+make them handles. Function, symbol, brand, and recursive read shapes reject.
+Checker-read dependencies join hash verification. The actual Formbricks response
+interface now passes the former TResponseData query gate.
+
+The full typed summary closure next hits the adapter's computed-member gate in
+checkForI18n at surveySummary.ts line 255. That helper also uses `in` on an input
+element at line 252, explicitly outside H2's contract. A pure-reader designation
+alone cannot admit it. No scriptc blocker is established, and the fork remains
+on hold. The full region has not cleared; no production async outliner, native
+summary, 100/1k/10k parity run, summary shadow, or CPU measurement is claimed.
+
+Next passes 95 tests; promotion passes 26 with two existing skips. The real addon
+checks 100 seeded read-and-pass calls, original row and Date identity, decoded
+shadows, and mismatch demotion. The baseline fuzzer passes 680 inputs and 1,360
+comparisons across 17 candidates. An early short probe briefly overlapped both
+suites and exceeded the two-job limit; later validation uses at most two heavy
+jobs. No timing ran. AGPL source stays outside the repository. Setup output and
+temporary links are cleaned, artifacts are checked for compression, and the
+change is committed locally without merge or push. No container, hosting,
+Papermark, fork, or root README work. [Design, next blockers, evidence, and
+reproduction](read-and-pass-handles.md).
