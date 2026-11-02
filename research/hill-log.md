@@ -1166,3 +1166,7 @@ over 256 KiB are compressed. The root README, main checkout, scriptc fork, and
 /Users/noah/scriptc are untouched. No existing container is altered. PM2 is kept
 as measurement evidence and committed locally without merge or push.
 [Report, comparisons, diagnostics, and reproduction](papermark-milestone-2.md).
+
+**Review note on PM2 (2026-11-02): the input encoder is the bottleneck.** D3 removed the overhead: the mixed result is −0.53% (CI −6.4% to +4.3%), against PM1's −15.6%. The target now collects its shadows, and JS still correctly wins every pair. PM2's stage probe at 60k events: native compute is 36 ms against 111 ms for JS (3× faster), but **JS-side argument encoding takes 126 ms on its own**, and native JSON decode another 27 ms.
+
+The encoder (`walkOpaque` in promotion-encodings.mjs) walks every field generically, with `getOwnPropertyDescriptor`, prototype checks and `Array.from` closures. That is a general adapter cost for every object-array input, not something specific to Papermark. Next is E1: schema-specialized generated encoders (and decoders), with the same checks (plain prototypes, own data properties, dense arrays, reserved keys), measured on development workloads only. The read-field projection the encoder already does also shrinks the payload. Papermark is remeasured only at the next milestone (PM3).
