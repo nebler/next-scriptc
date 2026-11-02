@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {promotionCandidates} from '../packages/next-scriptc/src/functions/promotion-discovery.mjs';
 import {checkFunctionTypes} from '../packages/next-scriptc/src/functions/types.mjs';
 import {buildPromotion} from '../packages/next-scriptc/src/functions/promotion-build.mjs';
-const require=createRequire(import.meta.url),ts=require('../examples/demo/node_modules/typescript');
+const require=createRequire(import.meta.url),ts=require(require.resolve('typescript',{paths:[process.cwd()]}));
 export const scratch=fileURLToPath(new URL('../.checks/boundary/',import.meta.url));
 export const fixture=`export function mixed(s:string,n:number,b:boolean,z:null,o:{x:number},a:number[]):string {"use native";return s+":"+String(n)+":"+String(b)+":"+String(z)+":"+String(o.x+a[0]);}
 export function bytes(a:Uint8Array):Uint8Array {"use native";return a;}

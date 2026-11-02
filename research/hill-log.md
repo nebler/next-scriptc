@@ -491,3 +491,36 @@ one retry for the existing owner/child stdout-order race, without a code change.
 Temporary packages, generated native outputs, and dependency symlinks were
 removed. No scriptc, Vercel service, Docker, third-party source, or root README
 change.
+
+## 24. Private call-site specialization (2026-11-02)
+
+Hypothesis: concrete call sites can recover generic, object and any boundaries
+without treating structural types as proof of JSON origins. Kept a conservative
+path for module-private bindings whose references are direct calls with fresh
+JSON literals and one agreeing concrete type vector. Exports, aliases, shorthand
+escapes, dynamic evaluation, unknown origins, non-JSON construction and
+disagreement reject. Specialized native copies pass strict checking, the existing
+construction proof and a per-call fallback ABI gate. All purity, closure,
+dependency and module-init gates remain intact.
+
+Demo generic, object[], any-array and scalar fixtures compile. Shape mismatches
+return empty output or NaN and rerun JS; follow-up native calls remain usable.
+Missing/undefined fidelity, prototype/getter rejection and signed-zero transport
+policy are unchanged. Strict and construction-result paths receive fuzz coverage.
+
+Honest negative: Umami stays at 4, Dub at 32 and held-out Papermark at 23, with
+identical accepted identities and zero newly specialized real-app functions.
+Dub CSV still fails module initialization and retains its separate CommonJS
+blocker. Umami flatten/store still fail dependency NewExpression. Papermark's
+expected generic functions reject exports with unseen callers. Papermark received
+one final census only. No newly accepted function is on a profiled path, so no
+K1 coverage rerun was required. No native benchmark, coverage gain or speedup.
+
+All 89 adapter tests pass. Seed 20935 passes 85,000 inputs and 170,000 differential
+comparisons across 17 candidates, with explicit shape-mismatch fallback and
+native-usability checks. The initial suite exposed a fixture-only TypeScript
+path and overly narrow primitive specialization; both were fixed before the
+final full-suite pass. Temporary dependencies and outputs were removed. At most
+two jobs ran together. No Docker, Vercel, network posting, third-party source,
+root README change, merge or push.
+[Design, limits, census and reproduction](call-site-specialization.md).

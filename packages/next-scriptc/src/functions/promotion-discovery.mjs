@@ -4,6 +4,7 @@ import path from 'node:path';
 import {dependencyClosure} from './dependency-closure.mjs';
 import { extractFunctions } from './extract.mjs';
 import {constructionProof,strictClosureProgram} from './construction-proof.mjs';
+import {specializeCallSites} from './call-site-specialization.mjs';
 import { checkFunctionTypes } from './types.mjs';
 const require = createRequire(import.meta.url);
 const babel = require('next/dist/compiled/babel/bundle.js');
@@ -90,12 +91,13 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
  const isolated=!(parsed.options.strictNullChecks??parsed.options.strict);
  const program=ts.createProgram({rootNames:[...new Set([...parsed.fileNames,...modules.map(m=>m.source)])],options:parsed.options});
  return modules.filter(m=>{try{
-  if(isolated){
+  let specialized=false;
+  function boundaries(strictRequired){
+   if(!strictRequired){checkFunctionTypes(ts,program,[m]);return;}
    const strict=strictClosureProgram(m.native,ts);
    const errors=ts.getPreEmitDiagnostics(strict.program);
    if(errors.length)throw Error(`strict closure: TS${errors[0].code}: ${ts.flattenDiagnosticMessageText(errors[0].messageText,' ')}`);
-   // Extracted offsets differ from the application. Preserve loader locations
-   // while deriving every boundary field from the self-contained strict check.
+   // Extracted offsets differ from the app. Keep the loader's original offsets.
    const functions=m.functions.map(fn=>{
     let declaration;function find(n){if(ts.isFunctionLike(n)&&n.name?.text===fn.name)declaration=n;else ts.forEachChild(n,find);}find(strict.source);
     if(!declaration?.body)throw Error(`strict closure: missing ${fn.name}`);
@@ -103,8 +105,18 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
    });
    checkFunctionTypes(ts,strict.program,[{source:strict.source.fileName,functions}]);
    functions.forEach((fn,i)=>{m.functions[i].strictClosure=true;m.functions[i].boundary=fn.boundary;m.functions[i].resultShape=fn.resultShape;});
-  }else checkFunctionTypes(ts,program,[m]);for(const fn of m.functions){
+  }
+  try { boundaries(isolated); }
+  catch(original) {
+   if(!/any, unknown|expected JSON data/.test(original.message))throw original;
+   const specialization=specializeCallSites(ts,program,m);
+   m.native=specialization.native;
+   m.functions[0].specialization=specialization.metadata;
+   specialized=true;
+   boundaries(true);
+  }
+  for(const fn of m.functions){
    fn.constructionProof=constructionProof(m.native,ts);
-   if(isolated&&fn.boundary.params.includes('json')&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
+   if((specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
   }return true;}catch(e){if(m.forced)throw e;report(`[next-scriptc] not a candidate: ${e.message}`);return false;}});
 }

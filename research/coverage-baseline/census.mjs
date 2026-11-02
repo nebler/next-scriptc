@@ -4,8 +4,8 @@ import {execFileSync} from 'node:child_process';
 import {base,repo,ts,pins,roots,files,write} from './common.mjs';
 import {promotionCandidates,discoverPromotions} from '../../packages/next-scriptc/src/functions/promotion-discovery.mjs';
 const result={adapterCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),apps:{}};
-const categorize=s=>/auto disabled: strictNullChecks/.test(s)?'app strictNullChecks gate':/functions and constructors are not JSON/.test(s)?'collection/callable boundary':/opaque import|runtime import/.test(s)?'runtime import':/optional properties|optional parameters|optional tuple|\(type undefined\)/.test(s)?'undefined/optional':/\(type T\)|unresolved generic function/.test(s)?'generic':/class instances/.test(s)?'class boundary':/parameters must/.test(s)?'default/rest/destructured parameter':/any, unknown|JSON data/.test(s)?'broad/unresolved boundary':/no loop/.test(s)?'work screen':/mutation|reassigned/.test(s)?'mutation':/React|JSX|unsupported next|unsupported react/.test(s)?'React/framework':/reference|imports unsupported/.test(s)?'unsupported reference/import':/time|randomness|I\/O/.test(s)?'time/randomness/I/O':'other extraction';
-for(const app of Object.keys(pins)){
+const categorize=s=>/call-site specialization:/.test(s)?'call-site specialization':/auto disabled: strictNullChecks/.test(s)?'app strictNullChecks gate':/functions and constructors are not JSON/.test(s)?'collection/callable boundary':/opaque import|runtime import/.test(s)?'runtime import':/optional properties|optional parameters|optional tuple|\(type undefined\)/.test(s)?'undefined/optional':/\(type T\)|unresolved generic function/.test(s)?'generic':/class instances/.test(s)?'class boundary':/parameters must/.test(s)?'default/rest/destructured parameter':/any, unknown|JSON data/.test(s)?'broad/unresolved boundary':/no loop/.test(s)?'work screen':/mutation|reassigned/.test(s)?'mutation':/React|JSX|unsupported next|unsupported react/.test(s)?'React/framework':/reference|imports unsupported/.test(s)?'unsupported reference/import':/time|randomness|I\/O/.test(s)?'time/randomness/I/O':'other extraction';
+for(const app of Object.keys(pins).filter(app=>!process.env.RUN_APPS||process.env.RUN_APPS.split(',').includes(app))){
  const project=path.join(base,app),appRoot=app==='dub'?path.join(project,'apps/web'):project;
  if(execFileSync('git',['-C',project,'rev-parse','HEAD'],{encoding:'utf8'}).trim()!==pins[app])throw Error('pin mismatch');
  const sources=roots[app].flatMap(r=>files(path.join(project,r)));
@@ -35,7 +35,7 @@ for(const app of Object.keys(pins)){
    const dir=path.join(project,root);
    accepted.push(...await discoverPromotions(dir,path.join(base,'absent-dist'),{typescript:{tsconfigPath:config}},s=>logs.push({message:s,category:categorize(s)})));
   }
-  const rows=accepted.flatMap(m=>m.functions.map(f=>({file:path.relative(project,m.source),name:f.name,boundary:f.boundary,constructionProof:f.constructionProof})));
+  const rows=accepted.flatMap(m=>m.functions.map(f=>({file:path.relative(project,m.source),name:f.name,boundary:f.boundary,...(f.specialization?{specialization:f.specialization}:{}),constructionProof:f.constructionProof})));
   output[strict?'strictCounterfactual':'actual']={accepted:rows,logs,counts:Object.fromEntries([...new Set(logs.map(x=>x.category))].map(k=>[k,logs.filter(x=>x.category===k).length]))};
  }
  result.apps[app]=output;write('census.json',result);console.log(app,inventory,output.actual.accepted.length);

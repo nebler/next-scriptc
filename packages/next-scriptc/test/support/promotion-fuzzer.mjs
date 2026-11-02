@@ -3,6 +3,7 @@ import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {mkdtemp,writeFile,readFile,rm} from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
+import {specializeCallSites} from '../../src/functions/call-site-specialization.mjs';
 import {sources} from './promotion-fuzz-corpus.mjs';
 import {buildPromotion} from '../../src/functions/promotion-build.mjs';
 import {loadPromotion} from '../../src/functions/promotion-runtime.mjs';
@@ -37,12 +38,19 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
  try{
  const revenueFile=new URL('../../../../examples/demo/lib/revenue-core.ts',import.meta.url).pathname;
  const revenue=extractFunctions(await readFile(revenueFile,'utf8'),revenueFile,'revenueCore').native;
+ const genericFile=path.join(dir,'generic-input.ts');
+ const genericSource=await readFile(new URL('../../../../examples/demo/lib/call-site-specialization.ts',import.meta.url),'utf8');
+ await writeFile(genericFile,genericSource);
+ const genericProgram=ts.createProgram([genericFile],{strict:true,target:ts.ScriptTarget.ESNext});
+ const genericModule=extractFunctions(genericSource,genericFile,'generic');
+ const specialized=specializeCallSites(ts,genericProgram,genericModule).native;
  const modules=[];
- for(const [i,source] of [...sources,revenue].entries()){
+ for(const [i,source] of [...sources,revenue,specialized].entries()){
   const file=path.join(dir,`source-${i}.ts`);await writeFile(file,source);
   const program=ts.createProgram([file],{strict:true,target:ts.ScriptTarget.ESNext,module:ts.ModuleKind.NodeNext,moduleResolution:ts.ModuleResolutionKind.NodeNext,allowImportingTsExtensions:true});
   const declaration=program.getSourceFile(file).statements.find(n=>ts.isFunctionDeclaration(n));
   const fn={name:declaration.name.text,id:declaration.name.text,promotion:true,start:declaration.body.getStart(program.getSourceFile(file))};
+  if(fn.name==='generic')fn.strictClosure=true;
   checkFunctionTypes(ts,program,[{source:file,functions:[fn]}]);
   const proof=constructionProof(source);assert.equal(proof.eligible,true,`${fn.name}: ${proof.reason}`);
   const checker=program.getTypeChecker();
@@ -80,6 +88,11 @@ export async function fuzzPromotion({seed=Number(process.env.PROMOTION_FUZZ_SEED
     try{equivalent(expected,outcome(()=>d.dispatch(fn.id,m.js,args)),schema);}catch(error){
      let minimal=args;for(let round=0;round<30;round++){let changed=false;for(const smaller of shrink(minimal)){if(JSON.stringify(smaller)===JSON.stringify(minimal))continue;try{check(smaller);}catch{minimal=smaller;changed=true;break;}}if(!changed)break;}
      throw Error(`seed=${seed} candidate=${fn.name} case=${i} minimized=${JSON.stringify(minimal)}\n${error.stack}`);
+    }
+    if(fn.name==='generic'){
+     const before=d.snapshot()[fn.id].fallback;
+     check([[{n:'wrong'}]]);
+     assert.equal(d.snapshot()[fn.id].fallback,before+1,'specialized shape mismatch must fall back');
     }
     counts.checks++;
     const before=d.snapshot()[fn.id].native;
