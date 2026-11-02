@@ -22,7 +22,14 @@ async function serve(root,framework,mode){
  try{
   let ready=false;for(let i=0;i<200;i++){try{const response=await fetch(url+'/compute?n=1');if(response.ok){ready=true;break;}}catch{}if(child.exitCode!==null)throw Error(output);await new Promise(r=>setTimeout(r,50));}assert.ok(ready,output);
   const bodies=[];for(let i=0;i<120;i++){const response=await fetch(url+'/compute?n='+[0,1,10,100,1000,10000][i%6],{method:framework==='react-router'&&i%2?'POST':'GET'});assert.equal(response.status,200,output);bodies.push(await response.text());await new Promise(r=>setTimeout(r,3));}
-  const page=await fetch(url+(framework==='astro'?'/':'/page'));assert.equal(page.status,200,output);const html=await page.text();
+  // Offset helper samples from the nested page loader's samples. Otherwise
+  // the shared shadow queue can always select the inner function first.
+  const extra=await fetch(url+'/compute?n=1');assert.equal(extra.status,200,output);bodies.push(await extra.text());
+  await new Promise(r=>setTimeout(r,3));
+  // Reachability also admits React Router's page loader beside its JSX component.
+  // Exercise it enough to verify its own shadow bucket.
+  let html;
+  for(let i=0;i<120;i++){const page=await fetch(url+(framework==='astro'?'/':'/page'));assert.equal(page.status,200,output);html=await page.text();await new Promise(r=>setTimeout(r,3));}
   await new Promise(r=>setTimeout(r,100));const states=await new Promise(r=>{child.once('message',r);child.send('snapshot');});
   assert.doesNotMatch(output,/promotion unavailable/);
   return {bodies,html,states,transitions:output.split('\n').filter(l=>l.startsWith('next-scriptc '))};
@@ -45,7 +52,7 @@ for(const framework of ['astro','react-router'])test(`${framework}: production N
   const functions=enabled.states.flatMap(s=>Object.values(s));assert.ok(functions.length>0);
   for(const fn of functions){assert.equal(fn.fallback,0);for(const bucket of fn.buckets){assert.equal(bucket.nativeFallbacks,0);assert.equal(bucket.fallbackCount,0);}assert.ok(fn.buckets.some(b=>b.state==='shadow'&&b.verified>0),JSON.stringify(fn));}
   const states=enabled.states.map(instance=>Object.fromEntries(Object.entries(instance).map(([id,fn])=>[id,{calls:fn.calls,native:fn.native,fallback:fn.fallback,buckets:fn.buckets.map(b=>({bucket:b.bucket,state:b.state,verified:b.verified,nativeFallbacks:b.nativeFallbacks,fallbackCount:b.fallbackCount}))}])));
-  const result={framework,requests:enabled.bodies.length,byteIdentical:true,states,transitions:enabled.transitions};
+  const result={framework,requests:enabled.bodies.length+120,byteIdentical:true,states,transitions:enabled.transitions};
   console.log(JSON.stringify(result));
   if(process.env.SCRIPTC_FRAMEWORK_EVIDENCE)await writeFile(path.join(repo,'research',`framework-${framework}-parity.json`),JSON.stringify(result,null,2)+'\n');
  }finally{await rm(root,{recursive:true,force:true});}

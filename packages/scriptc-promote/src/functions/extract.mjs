@@ -97,7 +97,9 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
         if (!globals.has(p.node.name) && !p.findParent((parent) => parent.isTSType())) fail(owner, `unsupported reference ${p.node.name}`);
       } else if (dependency.scope === program.scope || types.has(p.node.name)) include(dependency, owner);
     };
-    statement.traverse({
+    // Automatic promotion retains individual bindings in a multi-declarator statement.
+    const references = autoName && binding.path.isVariableDeclarator() ? binding.path : statement;
+    references.traverse({
       Identifier: check,
       ThisExpression() { fail(owner, "unsupported reference this"); },
       ImportExpression() { fail(owner, "dynamic import is unsupported"); },
@@ -114,6 +116,10 @@ export function extractFunctions(text, source, autoName = null, skipSync = false
     const node = p.isExportNamedDeclaration() ? p.node.declaration : p.node;
     if (!node) return "";
     let code = text.slice(node.start, node.end);
+    if (autoName && node.type === "VariableDeclaration") {
+      const declarations = node.declarations.filter(d => [...visiting].some(b => b.path.node === d));
+      code = node.kind + " " + declarations.map(d => text.slice(d.start, d.end)).join(", ") + ";";
+    }
     if (p.isImportDeclaration() && p.node.source.value.startsWith(".")) {
       const specifier = p.node.source;
       code = code.slice(0, specifier.start - node.start) + JSON.stringify(path.resolve(path.dirname(source), specifier.value)) + code.slice(specifier.end - node.start);

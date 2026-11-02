@@ -712,3 +712,42 @@ Papermark use, hosting call, compiler/fork modification, root README edit, merge
 or push. [Report, full JSON census, counterfactual bounds, and reproduction](async-region-census.md).
 
 **Review note (2026-11-02).** The census data points somewhere other than its recommendation. `any`/unknown is a small *first* rejection (9 / 27 / 0). The largest first rejection is closure/module-init (309 Umami, 424 Dub, 62 Formbricks of 83), followed by closure/import. The largest real compute region found, Formbricks `getElementSummary` (lines 329–1021, a synchronous aggregation loop), is rejected because of `export const getSurveySummary = reactCache(...)` at line 1024. That declaration is not in the region's dependency closure. `dependency-closure.mjs` checks the initialization of *every* top-level statement in each visited module, and its effect scan (Date, `new`, `this`, etc.) also covers the whole file. Next step: restrict those checks to the bindings reachable from the candidate (M1). Observed shapes are deferred.
+
+## 30. M1 reachable module initialization (2026-11-02)
+
+Implemented binding reachability for automatic native dependency closures. Source
+candidates seed local bindings; imported references request only their specific
+exports. A per-file union accumulates all requests before emission, including
+requests through diamonds and export aliases. Unused declarations and sibling
+variable declarators disappear. Reachable initializers and effects retain their
+existing restrictions. Reachable module cycles still reject. Bare top-level
+statements and side-effect-only imports reject across visited files.
+
+Unreachable call initializers are accepted under the existing pure-closure and
+unmodified-builtins assumptions. The original JS module still initializes.
+Excluded initialization can nevertheless mutate prototypes, globals, or function
+objects observed by the closure. Shadow comparison catches sampled divergence;
+it is not a universal proof against later shared-state mutation. The report states
+this boundary and the conservative rules that remain.
+
+Pinned before/after K1/K4 censuses accept Umami 4 and Dub 32 sync functions in both
+runs. A0 accepts 0 / 0 / 1 regions in Umami / Dub / Formbricks in both runs. No new
+function or region lies on K1 paths, so no coverage-share rerun is required and
+additional accepted measured coverage is zero. Module-init first rejections fall
+309 to 94 in Umami and 424 to 271 in Dub; later closure checks absorb the difference.
+Formbricks remains at 62. Its `getElementSummary` region now first rejects the
+explicit `import "server-only"`, rather than the unrelated reactCache initializer.
+The single final held-out Papermark census accepts 23, with no execution or timing.
+
+All 95 Next tests pass. The promotion suite passes 15 tests with two opt-in skips,
+including eight new reachability regressions. Real-addon differential fuzz passes
+680 inputs and 1,360 comparisons across 17 candidates at seed 20935. A0 liveness
+fixtures pass. M1 additionally admits the React Router demo's page loader beside
+JSX; the HTTP fixture now exercises its shadow verification as well as checksum.
+Astro and React Router each pass 241 requests per mode with zero fallbacks.
+
+Task-created dependencies, workspace links, and generated Prisma output are
+removed. App sources remain outside the repo. No native timing, Docker/container
+operation, hosting call, compiler/fork edit, root README change, publication,
+merge, or push. At most two jobs ran together. [Design, soundness boundary,
+histograms, snapshots, and reproduction](reachable-module-init.md).

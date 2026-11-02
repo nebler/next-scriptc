@@ -16,65 +16,46 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  // the app (cwd) first, like construction-proof.mjs.
  ts??=require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
- const modules=new Map(), active=new Set(), chunks=[];
+ const modules=new Map(), chunks=[];
  function resolve(specifier, importer) {
   if(/^(?:node:|next(?:\/|$)|react(?:\/|$))/.test(specifier))throw Error(`dependency closure: unsupported runtime import ${specifier}`);
   const result=ts.resolveModuleName(specifier,importer,{...options,allowJs:true,moduleResolution:options.moduleResolution??ts.ModuleResolutionKind.Bundler},host,undefined,undefined,ts.ModuleKind.ESNext).resolvedModule;
   if(!result||declarationFile(result.resolvedFileName))throw Error(`dependency closure: unresolved runtime import ${specifier}`);
   return fs.realpathSync(result.resolvedFileName);
  }
- function visit(file, input) {
-  if(active.has(file))throw Error('dependency closure: module cycle');
+ // Parse once, then accumulate a union of requested bindings before emitting.
+ // Never cache a completed closure by filename: a diamond can request new exports.
+ function load(file, input) {
   if(modules.has(file))return modules.get(file);
-  active.add(file);
   const code=input??fs.readFileSync(file,'utf8'), ast=babel.parser().parse(code,{sourceType:'module',plugins:['typescript','jsx']});
-  traverse(ast,{Identifier(p){if(p.node.name.startsWith('__dep_'))throw Error('dependency closure: reserved generated binding');}});
   const fail=reason=>{throw Error(`dependency closure: ${file}: ${reason}`);};
   if(/\.cjs$/.test(file))fail('CommonJS mutable module exports require a module-object proof');
   if(ast.program.directives.some(d=>['use client','use js'].includes(d.value.value)))fail('module directive');
-  // Whole-module initialization matters, including unused imports and initializers.
-  // Only literal immutable scalars and function creation can run here.
-  const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
-  for(const statement of ast.program.body){
-   const n=statement.type==='ExportNamedDeclaration'?statement.declaration:statement;
-   if(!n&&statement.type==='ExportNamedDeclaration'&&!statement.source)continue;
-   if(n?.type==='ImportDeclaration'||['TSInterfaceDeclaration','TSTypeAliasDeclaration','FunctionDeclaration','EmptyStatement'].includes(n?.type))continue;
-   if(n?.type==='VariableDeclaration'&&n.kind==='const'&&n.declarations.every(d=>d.id.type==='Identifier'&&(scalar(d.init)||['ArrowFunctionExpression','FunctionExpression'].includes(d.init?.type))))continue;
-   fail(`unproved module initialization ${n?.type??statement.type}`);
-  }
-  traverse(ast,{
-   'ImportExpression|ThisExpression|NewExpression|ObjectMethod|ClassDeclaration|ClassExpression'(p){fail(`unsupported ${p.node.type}`);},
-   MemberExpression(p){if(p.node.computed||['prototype','constructor','__proto__'].includes(p.node.property.name))fail('computed or prototype member');},
-   ReferencedIdentifier(p){if(['eval','Function','require','module','exports','globalThis','process','Date','crypto','console','fetch','performance'].includes(p.node.name))fail(`unsupported ${p.node.name}`);},
-  });
   let program;traverse(ast,{Program(p){program=p;}});
-  const exports=new Map(), prefix='__dep_'+digest(file).slice(0,12)+'_';
-  for(const binding of Object.values(program.scope.bindings))if(binding.constantViolations.length)fail('module binding reassignment');
-  const bindings=Object.keys(program.scope.bindings);
-  for(const local of bindings)if(file!==source||local!==name)program.scope.rename(local,prefix+local);
-  for(const statement of ast.program.body){
-   if(statement.type!=='ImportDeclaration')continue;
-   if(statement.importKind==='type')fail('imported types require separate type linking');
-   const child=visit(resolve(statement.source.value,file));
-   for(const spec of statement.specifiers){
-    if(spec.type==='ImportNamespaceSpecifier')fail('namespace import requires module-object proof');
-    if(spec.importKind==='type')fail('imported types require separate type linking');
-    const exported=spec.type==='ImportDefaultSpecifier'?'default':spec.imported.name;
-    const target=child.exports.get(exported);if(!target)fail(`unresolved export ${exported}`);
-    program.scope.rename(spec.local.name,target);
+  const exports=new Map(), types=new Map(), prefix='__dep_'+digest(file).slice(0,12)+'_';
+  for(const statement of program.get('body')){
+   const n=statement.isExportNamedDeclaration()?statement.get('declaration'):statement;
+   // Explicit statements execute independently of bindings. Keep this guard
+   // across the whole visited file, even when their values are never read.
+   if(statement.isImportDeclaration()){
+    if(!statement.node.specifiers.length)fail('unproved module initialization side-effect import');
+    continue;
+   }
+   if(statement.isExportDefaultDeclaration()){
+    if(!babel.types().isDeclaration(statement.node.declaration))fail('unproved module initialization default expression');
+    continue;
+   }
+   if(statement.isExportAllDeclaration()||statement.isExportNamedDeclaration()&&!n.node)continue;
+   if(!n.isDeclaration()&&!n.isEmptyStatement())fail(`unproved module initialization ${n.node.type}`);
+   if(n.isTSTypeAliasDeclaration()||n.isTSInterfaceDeclaration())types.set(n.node.id.name,n);
+   if(statement.isExportNamedDeclaration()){
+    if(n.node.id)exports.set(n.node.id.name,n.node.id.name);
+    for(const d of n.node.declarations??[])for(const local of Object.keys(babel.types().getBindingIdentifiers(d.id)))exports.set(local,local);
    }
   }
-  const exportNames=new Set();
-  for(const statement of ast.program.body)if(statement.type==='ExportNamedDeclaration')for(const spec of statement.specifiers??[]){if(exportNames.has(spec.exported.name))fail('duplicate export assignment');exportNames.add(spec.exported.name);}
-  for(const statement of ast.program.body){
-   if(statement.type==='ExportNamedDeclaration'){
-    const d=statement.declaration;
-    if(d?.id)exports.set(file===source&&d.id.name===name?name:d.id.name.slice(prefix.length),d.id.name);
-    for(const v of d?.declarations??[])exports.set(v.id.name.slice(prefix.length),v.id.name);
-    for(const s of statement.specifiers??[])exports.set(s.exported.name,s.local.name);
-   }
+  for(const statement of ast.program.body)if(statement.type==='ExportNamedDeclaration'&&!statement.source){
+   for(const spec of statement.specifiers??[])exports.set(spec.exported.name,spec.local.name);
   }
-  ast.program.body=ast.program.body.flatMap(n=>n.type==='ImportDeclaration'?[]:n.type==='ExportNamedDeclaration'?(n.declaration?[n.declaration]:[]):[n]);
   let packageInfo=null;
   for(let dir=path.dirname(file);;dir=path.dirname(dir)){
    const manifest=path.join(dir,'package.json');
@@ -83,9 +64,65 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
     conditions(p.exports);packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:digest(fs.readFileSync(manifest))};break;}
    if(path.dirname(dir)===dir)break;
   }
-  const record={exports,file,hash:digest(code),package:packageInfo};modules.set(file,record);active.delete(file);chunks.push(generate(ast).code);return record;
+  const record={exports,file,hash:digest(code),package:packageInfo,ast,program,types,prefix,fail,needed:new Set(),imports:new Map()};
+  modules.set(file,record);return record;
  }
- visit(source,text);
+ const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
+ function include(record, local, chain) {
+  const {program,types,needed,fail}=record;
+  if(needed.has(local))return; // local recursion is handled by the later proofs
+  const binding=program.scope.getBinding(local), declaration=binding?.path??types.get(local);
+  if(!declaration)fail(`unresolved export or binding ${local}`);
+  needed.add(local);
+  if(binding?.constantViolations.length)fail('module binding reassignment');
+  if(declaration.isImportSpecifier()||declaration.isImportDefaultSpecifier()||declaration.isImportNamespaceSpecifier()){
+   const statement=declaration.parentPath;
+   if(statement.node.importKind==='type'||declaration.node.importKind==='type')fail('imported types require separate type linking');
+   if(declaration.isImportNamespaceSpecifier())fail('namespace import requires module-object proof');
+   const file=resolve(statement.node.source.value,record.file);
+   if(chain.includes(file))fail('module cycle');
+   const child=load(file), exported=declaration.isImportDefaultSpecifier()?'default':declaration.node.imported.name;
+   const target=child.exports.get(exported);if(!target)fail(`unresolved export ${exported}`);
+   include(child,target,[...chain,file]);record.imports.set(local,{child,target});return;
+  }
+  if(declaration.isVariableDeclarator()){
+   if(declaration.parent.kind!=='const'||declaration.node.id.type!=='Identifier'||!(scalar(declaration.node.init)||['ArrowFunctionExpression','FunctionExpression'].includes(declaration.node.init?.type)))fail('unproved module initialization VariableDeclaration');
+  }else if(!declaration.isFunctionDeclaration()&&!declaration.isTSTypeAliasDeclaration()&&!declaration.isTSInterfaceDeclaration())fail(`unproved module initialization ${declaration.node.type}`);
+  declaration.traverse({ReferencedIdentifier(p){
+   const top=program.scope.getBinding(p.node.name);
+   if(top&&top===p.scope.getBinding(p.node.name)||!p.scope.getBinding(p.node.name)&&types.has(p.node.name))include(record,p.node.name,chain);
+  }});
+ }
+ const root=load(source,text);include(root,name,[source]);
+ function targetName(record, local) {
+  const imported=record.imports.get(local);
+  return imported?targetName(imported.child,imported.target):record===root&&local===name?name:record.prefix+local;
+ }
+ // Prune individual declarators (not entire statements), then run exactly the
+ // existing initialization/effect restrictions on the retained program.
+ for(const record of modules.values()){
+  const {ast,needed,program,fail,prefix}=record;
+  ast.program.body=ast.program.body.flatMap(statement=>{
+   const n=statement.type==='ExportNamedDeclaration'?statement.declaration:statement;
+   if(!n||n.type==='ImportDeclaration')return [];
+   if(n.type==='VariableDeclaration'){
+    n.declarations=n.declarations.filter(d=>Object.keys(babel.types().getBindingIdentifiers(d.id)).some(k=>needed.has(k)));
+    return n.declarations.length?[n]:[];
+   }
+   return n.id&&needed.has(n.id.name)?[n]:[];
+  });
+  traverse(ast,{
+   Identifier(p){if(p.node.name.startsWith('__dep_'))fail('reserved generated binding');},
+   'ImportExpression|ThisExpression|NewExpression|ObjectMethod|ClassDeclaration|ClassExpression'(p){fail(`unsupported ${p.node.type}`);},
+   MemberExpression(p){if(p.node.computed||['prototype','constructor','__proto__'].includes(p.node.property.name))fail('computed or prototype member');},
+   ReferencedIdentifier(p){if(['eval','Function','require','module','exports','globalThis','process','Date','crypto','console','fetch','performance'].includes(p.node.name))fail(`unsupported ${p.node.name}`);},
+  });
+  // Keep import bindings in the original scope until all references are renamed.
+  for(const local of needed){
+   program.scope.rename(local,targetName(record,local));
+  }
+  chunks.push(generate(ast).code);
+ }
  const combined=chunks.join('\n')+`\nexport {${name}};`;
  // Scalar const reads have no identity or initialization effects. Inline them
  // before the allocation proof, which otherwise rejects all module variables.
@@ -102,7 +139,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
  const extracted=extractFunctions(generate(flat).code,source,name);
  const proof=constructionProof(extracted.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {native:extracted.native,dependencies:[...modules.values()].map(({exports,...row})=>row),closureHash:digest(combined)};
+ return {native:extracted.native,dependencies:[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

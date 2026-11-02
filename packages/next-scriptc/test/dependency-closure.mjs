@@ -22,9 +22,9 @@ test('package exports and main resolve runtime JavaScript instead of declaration
  write('node_modules/tiny/package.json',JSON.stringify({name:'tiny',version:'1.2.3',type:'module',exports:{node:'./index.js',default:'./index.js'}}));
  assert.throws(()=>dependencyClosure(text,file,'rows'),/unsupported package export condition node/);
 }));
-test('unused initialization, state, dynamic access and cycles fail closed',()=>fixture((dir,write)=>{
+test('reachable initialization, state, dynamic access and cycles fail closed',()=>fixture((dir,write)=>{
  const entry='import {twice} from "./helper";export function rows(x:number[]){return x.map(v=>twice(v));}',file=write('entry.ts',entry);
- for(const code of ['const unused=console.log("effect");export function twice(n:number){return n*2;}', 'const cache=new Map();export function twice(n:number){return n*2;}', 'const {fn}=require("dynamic");export function twice(n:number){return fn(n);}', 'let cache=0;export function twice(n:number){return ++cache+n;}', 'export function twice(n:number){return Function("return 2")()*n;}', 'export function twice(n:number){return ({get x(){return n}}).x;}', 'import "./entry";export function twice(n:number){return n*2;}']){write('helper.ts',code);assert.throws(()=>dependencyClosure(entry,file,'rows'),/dependency closure/);}
+ for(const code of ['const {fn}=require("dynamic");export function twice(n:number){return fn(n);}', 'let cache=0;export function twice(n:number){return ++cache+n;}', 'export function twice(n:number){return Function("return 2")()*n;}', 'export function twice(n:number){return ({get x(){return n}}).x;}', 'import "./entry";export function twice(n:number){return n*2;}']){write('helper.ts',code);assert.throws(()=>dependencyClosure(entry,file,'rows'),/dependency closure/);}
 }));
 import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {buildPromotion} from '../src/functions/promotion-build.mjs';
