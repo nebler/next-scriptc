@@ -1,0 +1,44 @@
+{
+  "name": "nsc-co1",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-30",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "containers": [
+    {
+      "class_name": "AppContainer",
+      "image": "./Dockerfile",
+      "max_instances": 2,
+      "instance_type": "standard-2",
+      "image_build_context": "../../.."
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "APP",
+        "class_name": "AppContainer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "AppContainer"
+      ]
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "local-co1",
+      "remote": false
+    }
+  ],
+  "send_metrics": false,
+  "site": {
+    "bucket": ".output/public"
+  }
+}

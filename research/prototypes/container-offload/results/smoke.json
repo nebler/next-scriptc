@@ -1,0 +1,37 @@
+[
+  {
+    "url": "/numeric?n=1000&lane=worker",
+    "status": 200,
+    "path": "worker",
+    "compute": null,
+    "text": "{\"value\":-813555367}"
+  },
+  {
+    "url": "/numeric?n=1000&lane=worker&compute=wasm",
+    "status": 200,
+    "path": "worker",
+    "compute": "wasm",
+    "text": "{\"value\":-813555367}"
+  },
+  {
+    "url": "/trivial",
+    "status": 200,
+    "path": "worker-fallback",
+    "compute": null,
+    "text": "{\"ok\":true}"
+  },
+  {
+    "url": "/binding",
+    "status": 200,
+    "path": "worker-fallback",
+    "compute": null,
+    "text": "{\"value\":null}"
+  },
+  {
+    "url": "/wasm-state",
+    "status": 200,
+    "path": "worker",
+    "compute": null,
+    "text": "{\"calls\":1,\"disabled\":false}"
+  }
+]

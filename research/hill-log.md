@@ -1271,3 +1271,71 @@ source, root README, main checkout or scriptc fork is changed. Details and limit
 [Candidate census](container-offload-candidates.md) and
 [binding proxy](binding-proxy.md). Continue a small application-level offload proof,
 then gate broader work on a measured heavy promotable JS route.
+
+## 42. CO1 Nitro route offload to Containers feasibility (2026-11-02)
+
+A small Nitro app builds the same numeric, trivial and KV-dependent routes for
+Workers and Node, with `scriptc-promote/nitro` on Node. A route allowlist and GET-only
+forwarder preserve Worker fallback on unavailability, timeout or upstream 5xx.
+The Container class/DO entry bundles; its cold-state branch warms in the background
+and serves the cold request locally. The supplied Linux amd64 Dockerfile is unbuilt.
+
+Docker Desktop's daemon socket is missing in both local contexts. Wrangler
+Containers fails before building an image. Plain Docker is blocked too. No task
+container or image is created, and no existing Docker resource is touched.
+Container cold start and all actual container performance remain unavailable.
+The measured third alternative is Wrangler to host macOS Node over localhost HTTP.
+
+At n=100k/300k, N=60 per cell, median wall milliseconds are Worker JS 73.85/213.71,
+Worker wasm 44.35/129.74, host Node JS 62.67/187.31, promoted Node 16.03/47.17,
+and forwarded promoted Node 18.09/49.79. Byte parity holds. AUTO promotes after
+26 verified shadows at call 609 and retains zero native fallbacks. The typed loop
+has a scalar boundary and benefits from wasm locally, unlike CF1's revenue case.
+
+The approximate HTTP hop is 1.44 ms on the trivial control and 2.06–2.62 ms on
+numeric requests. An equal-framework warm compute model gives about 2–4 ms
+break-even, with no positive crossover observed in the actual local route paths.
+This excludes DO hops, placement, CPU quotas and container startup. Production
+break-even is unknown. Worker and Container CPU overage rates are equal per CPU
+second. A 4x native acceleration cuts compute cost by 75%; an illustrative fully utilized standard-2
+instance saves about one-third overall before forwarding CPU. Provisioned memory,
+disk, DO usage and idle tails can erase that saving. Sparse traffic loses badly.
+
+Current Cloudflare docs support virtual-host outbound HTTP handlers that call
+Worker bindings. Containers do not inherit live binding objects. Direct Node KV
+returns 503; the forwarder serves the local Worker KV result instead. A narrow
+binding protocol, replay rules, lifecycle policy and bounded instance pool would
+be needed for an opt-in adapter. No package API is added.
+
+Two focused forwarding tests, final Worker/wasm/fallback smoke checks and the
+Container entry bundling pass. Raw wall samples, process CPU batch counters,
+spread, errors, version pins and limitations are retained. Task servers,
+dependencies and generated artifacts are removed. The root README, main checkout
+and compiler fork are untouched. No deployment, login, account call, push or PR
+occurs. [Report and reproduction](container-offload.md).
+
+## 43. Review note on CO1 and CO2 (2026-11-02)
+
+CO1 measured the forwarding premise but not Containers. The Docker daemon was down, so
+the "container" lane is host macOS Node behind a local Wrangler Worker. Cold start,
+DO RPC, placement and VM CPU remain unmeasured. The useful numbers: on a scalar-boundary
+typed-array loop, Worker → Node native beats Worker JS about 4.3× at n=300k (49.8 vs
+213.7 ms) with a ~1.4–2.6 ms local hop, giving a warm break-even near 2–4 Worker CPU
+ms. Real hops will be larger. The `C > H / (1 - 1/S)` formula is the planning tool.
+
+A side result matters independently: on this compute-dense, scalar-boundary workload,
+the in-Worker wasm reactor is 1.66× **faster** than Worker JS. CF1's 6–11% loss was a
+JSON-heavy revenue workload. So the Cloudflare wasm path is not dead; it follows the
+same compute-intensity constraint as native (entry 40), only with a lower ceiling.
+
+CO2 is the demand side. The heavy, binding-separable Workers routes it found are image
+codecs and Argon2, already compiled Rust/Wasm. Source discovery found no heavy
+promotable JS core. One app already forwards to a Rust Container. Cloudflare's
+outbound handlers make binding access a supported channel, so a general binding proxy
+is unnecessary.
+
+Conclusion: route offload is a viable opt-in escape hatch, but scriptc adds value
+only where a route has a compute-dense JS core, and none has been found in real
+Workers apps. Next gates, in order: (1) build and run the CO1 Dockerfile locally to
+measure container cold start and Linux native speed; (2) find one real compute-dense
+JS route. Until (2), do not build a package adapter.

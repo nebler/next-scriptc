@@ -1,0 +1,59 @@
+/Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/.build/compute.wasm
+
+[nitro]  WARN  Please add compatibilityDate: '2026-11-02' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[nitro] ✔ Generated public .output/public
+[nitro] ℹ Building Nitro Server (preset: node-server, compatibility date: ``)
+
+[nitro]  ERROR  Error: ENOTDIR: not a directory, scandir '/Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/compute.ts'
+
+
+undefined
+
+Error: ENOTDIR: not a directory, scandir '/Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/compute.ts'
+    at async readdir (node:internal/fs/promises:950:18)
+    at async visit (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/scriptc-promote/src/functions/promotion-discovery.mjs:85:43)
+    at async discoverPromotions (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/scriptc-promote/src/functions/promotion-discovery.mjs:92:4)
+    at async Object.buildStart (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/scriptc-promote/src/vite.mjs:23:21)
+    at async Promise.all (index 0)
+    at async PluginDriver.hookParallel (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/rollup/dist/es/shared/node-entry.js:23936:9)
+    at async file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/rollup/dist/es/shared/node-entry.js:24911:13
+    at async catchUnfinishedHookActions (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/rollup/dist/es/shared/node-entry.js:24380:16)
+    at async rollupInternal (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/rollup/dist/es/shared/node-entry.js:24908:5)
+    at async buildProduction (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/nitropack/dist/core/index.mjs:1645:19)
+    at async Object.run (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/nitropack/dist/cli/build.mjs:46:5)
+    at async runCommand (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/citty/dist/index.mjs:228:47)
+    at async runCommand (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/citty/dist/index.mjs:217:5)
+    at async runMain (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/node_modules/citty/dist/index.mjs:394:10) {
+  errno: -20,
+  code: 'PLUGIN_ERROR',
+  syscall: 'scandir',
+  path: '/Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/compute.ts',
+  pluginCode: 'ENOTDIR',
+  plugin: 'scriptc-promote',
+  hook: 'buildStart'
+}
+
+node:internal/errors:983
+  const err = new Error(message);
+              ^
+
+Error: Command failed: node node_modules/nitropack/dist/cli/index.mjs build
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:882:11)
+    at execFileSync (node:child_process:918:15)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/build.mjs:11:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:98:5) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 56419,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v23.10.0
