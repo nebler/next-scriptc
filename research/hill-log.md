@@ -1221,3 +1221,16 @@ No other agent runs. Temporary dependencies and native outputs are removed.
 Artifacts over 256 KiB are compressed. The root README, main checkout, scriptc
 fork, and /Users/noah/scriptc are untouched. The work is committed locally with
 no merge or push. [Report, limits, tables, and reproduction](boundary-encoders.md).
+
+**Review note on E1 (2026-11-02): what it means for Papermark.** E1's development fixture does almost no compute (0.17 ms of JS at 60k records), so "selects JS" says nothing about compute-heavy targets.
+- **What E1 does show:** encoding fell about 2× (stand-in, 60k records: 120.7 → 57.8 ms).
+- **Projection onto PM2's stage profile:** about 58 ms encode + 27 ms native decode + 36 ms compute + about 4 ms other ≈ 125 ms, against 111 ms for JS. Still a small loss. This is an estimate, not a measurement.
+
+**The general constraint is compute intensity.** Papermark's distribution costs about 1.9 µs of JS per event, and the JSON round trip costs about 1.5 µs per event even after E1. Native wins only when compute per input byte clearly exceeds boundary cost per byte.
+
+**Remaining levers:**
+1. Native typed-JSON decode speed (27 ms; compiler side).
+2. The descriptor check per read field. There is no sound hidden-class shortcut in standard JS.
+3. Avoiding re-serialization entirely when the input was just parsed from JSON text: source-text passthrough.
+
+PM3 is deferred until one of these moves the estimate clearly below JS.
