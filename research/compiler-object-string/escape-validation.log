@@ -1,0 +1,249 @@
+=== install (tail) ===
++ @scriptc/experimental 0.4.7 <- packages/experimental
++ @scriptc/node 0.4.7 <- packages/node
++ @scriptc/threads 0.4.7 <- packages/threads
++ @scriptc/types 0.4.7 <- packages/types
++ @types/node 24.13.3
++ effect 3.22.2
++ js-yaml 4.3.2
++ oxfmt 0.71.0
++ oxlint 1.86.0
++ rollup 4.62.2
++ smol-toml 1.7.1
++ three 0.186.1
++ tsx 4.23.0
++ typescript 5.9.3
++ vercel 58.1.0
++ vitest 3.2.7
+
+Done in 3.8s using pnpm v10.27.0
+
+=== build (tail) ===
+packages/cli-darwin-x64 build$ node -e ""
+packages/cli-darwin-arm64 build$ node -e ""
+packages/cli-linux-arm64-gnu build$ node -e ""
+packages/cli-linux-arm64-musl build$ node -e ""
+packages/cli-darwin-arm64 build: Done
+packages/cli-darwin-x64 build: Done
+packages/cli-linux-x64-gnu build$ node -e ""
+packages/cli-linux-x64-musl build$ node -e ""
+packages/cli-linux-arm64-musl build: Done
+packages/cli-win32-x64-msvc build$ node -e ""
+packages/cli-linux-arm64-gnu build: Done
+packages/compiler build$ node node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli-linux-x64-gnu build: Done
+packages/cli-win32-x64-msvc build: Done
+packages/cli-linux-x64-musl build: Done
+packages/compiler build: Done
+packages/cli build$ node ../../node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli build: Done
+
+=== runtime (tail) ===
+packages/cli-linux-arm64-musl            |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["musl"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/cli-linux-x64-gnu               |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["glibc"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/cli-linux-x64-musl              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["musl"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/cli-win32-x64-msvc              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["win32"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/libnode-darwin-x64              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["darwin"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/libnode-linux-arm64-gnu         |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["glibc"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/libnode-linux-x64-gnu           |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["glibc"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-darwin-x64                 |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["darwin"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-arm64-gnu            |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-arm64-musl           |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-x64-gnu              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-x64-musl             |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-win32-x64-msvc             |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["win32"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+
+> @scriptc/runtime-darwin-arm64@0.4.7 build:native /Users/noah/code/scriptc-wt/c1b-escape/packages/runtime-darwin-arm64
+> node scripts/build.mjs
+
+built @scriptc/runtime-darwin-arm64@0.4.7: 7 flavors, 6 vendor archives
+
+=== baseline (tail) ===
+warning SC6101: 1 function that likely runs often uses untyped values, which runs slower than typed code:
+  run (workloads.ts:3): `rows` holds an untyped `JSON.parse` result, in a loop
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/Users/noah/code/scriptc-wt/c1b-escape/.c1b/baseline-suite
+warning SC6101: 14 functions that likely run often use untyped values, which runs slower than typed code:
+  splitLines (csv.mjs:851): untyped JavaScript file, in a loop
+  __copyProps (csv.mjs:11): untyped JavaScript file, in a loop
+  js.%fn.5c710f536391 (csv.mjs:11): untyped JavaScript file, in a loop
+  anonymous function (csv.mjs:622): untyped JavaScript file, in a loop
+  anonymous function (csv.mjs:545): untyped JavaScript file, in a loop
+  and 9 more
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/Users/noah/code/scriptc-wt/c1b-escape/.c1b/baseline-csv
+
+=== final-build (tail) ===
+packages/cli-darwin-arm64 build$ node -e ""
+packages/cli-linux-arm64-gnu build$ node -e ""
+packages/cli-darwin-x64 build$ node -e ""
+packages/cli-linux-arm64-musl build$ node -e ""
+packages/cli-linux-arm64-gnu build: Done
+packages/cli-darwin-x64 build: Done
+packages/cli-linux-x64-gnu build$ node -e ""
+packages/cli-linux-x64-musl build$ node -e ""
+packages/cli-darwin-arm64 build: Done
+packages/cli-win32-x64-msvc build$ node -e ""
+packages/cli-linux-arm64-musl build: Done
+packages/compiler build$ node node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli-linux-x64-musl build: Done
+packages/cli-win32-x64-msvc build: Done
+packages/cli-linux-x64-gnu build: Done
+packages/compiler build: Done
+packages/cli build$ node ../../node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli build: Done
+
+=== final-compile (tail) ===
+warning SC6101: 1 function that likely runs often uses untyped values, which runs slower than typed code:
+  run (workloads.ts:3): `rows` holds an untyped `JSON.parse` result, in a loop
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/Users/noah/code/scriptc-wt/c1b-escape/.c1b/patched-suite
+warning SC6101: 14 functions that likely run often use untyped values, which runs slower than typed code:
+  splitLines (csv.mjs:851): untyped JavaScript file, in a loop
+  __copyProps (csv.mjs:11): untyped JavaScript file, in a loop
+  js.%fn.5c710f536391 (csv.mjs:11): untyped JavaScript file, in a loop
+  anonymous function (csv.mjs:622): untyped JavaScript file, in a loop
+  anonymous function (csv.mjs:545): untyped JavaScript file, in a loop
+  and 9 more
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/Users/noah/code/scriptc-wt/c1b-escape/.c1b/patched-csv
+
+=== final-backend (tail) ===
+ ✓ packages/compiler/src/backend/llvm/string-construction.test.ts (5 tests) 43ms
+ ✓ packages/compiler/src/backend/llvm/string-key-hash.test.ts (14 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/string-lifetimes.test.ts (43 tests) 137ms
+ ✓ packages/compiler/src/backend/llvm/string-slices.test.ts (22 tests) 9ms
+ ✓ packages/compiler/src/backend/llvm/stack-objects.test.ts (12 tests) 1608ms
+ ✓ packages/compiler/src/backend/llvm/switch-dispatch.test.ts (7 tests) 57ms
+ ✓ packages/compiler/src/backend/llvm/thread-slots.test.ts (3 tests) 42ms
+ ✓ packages/compiler/src/backend/llvm/string-unit-versions.test.ts (2 tests) 354ms
+ ✓ packages/compiler/src/backend/llvm/union-retype.test.ts (7 tests) 668ms
+ ✓ packages/compiler/src/backend/llvm/unwind-abi.test.ts (10 tests) 776ms
+   ✓ directly called functions raise, and their callers invoke them without a pending check  306ms
+ ✓ packages/compiler/src/backend/llvm/walk-borrows.test.ts (6 tests) 3ms
+
+ Test Files  75 passed (75)
+      Tests  719 passed (719)
+   Start at  00:16:09
+   Duration  30.75s (transform 6.08s, setup 0ms, collect 32.72s, tests 17.31s, environment 7ms, prepare 2.64s)
+
+
+=== final-focused (tail) ===
+ ↓ packages/compiler/src/backend/llvm/periodic-guards.test.ts (4 tests | 4 skipped)
+ ↓ packages/compiler/src/backend/llvm/speculative-integers.test.ts (14 tests | 14 skipped)
+ ↓ packages/compiler/src/backend/llvm/local-extents.test.ts (4 tests | 4 skipped)
+ ↓ packages/compiler/src/backend/llvm/constant-choices.test.ts (3 tests | 3 skipped)
+ ↓ packages/compiler/src/backend/llvm/running-extrema.test.ts (8 tests | 8 skipped)
+ ↓ packages/compiler/src/backend/llvm/loop-callees.test.ts (2 tests | 2 skipped)
+ ↓ packages/compiler/src/backend/llvm/string-key-hash.test.ts (14 tests | 14 skipped)
+ ↓ packages/compiler/src/backend/llvm/integer-views.test.ts (2 tests | 2 skipped)
+ ↓ packages/compiler/src/backend/llvm/nullable-fields.test.ts (1 test | 1 skipped)
+ ↓ packages/compiler/src/backend/llvm/rebound-parameters.test.ts (2 tests | 2 skipped)
+ ↓ packages/compiler/src/backend/llvm/common.test.ts (1 test | 1 skipped)
+ ↓ packages/compiler/src/backend/llvm/counted-loops.test.ts (1 test | 1 skipped)
+
+ Test Files  4 passed | 73 skipped (77)
+      Tests  15 passed | 10708 skipped (10723)
+   Start at  00:14:19
+   Duration  34.42s (transform 8.24s, setup 0ms, collect 39.37s, tests 18.39s, environment 7ms, prepare 2.75s)
+
+
+=== final-san (tail) ===
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1b-escape
+> vitest run tests/harness/differential.test.ts tests/harness/llvm-differential.test.ts -t '(record-leaf-release|4591-weak-keys-union-records)'
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1b-escape
+
+ ✓ tests/harness/differential.test.ts (5002 tests | 5000 skipped) 4981ms
+   ✓ differential corpus (5002 programs, sanitized) > 4591-weak-keys-union-records.ts  3292ms
+   ✓ differential corpus (5002 programs, sanitized) > record-leaf-release.ts  1678ms
+ ✓ tests/harness/llvm-differential.test.ts (5002 tests | 5000 skipped) 6711ms
+   ✓ llvm differential corpus (5002 programs, release+dev, sanitized) > 4591-weak-keys-union-records.ts  4275ms
+   ✓ llvm differential corpus (5002 programs, release+dev, sanitized) > record-leaf-release.ts  2427ms
+
+ Test Files  2 passed (2)
+      Tests  4 passed | 10000 skipped (10004)
+   Start at  00:14:20
+   Duration  16.95s (transform 6.84s, setup 0ms, collect 19.79s, tests 11.69s, environment 0ms, prepare 81ms)
+
+
+=== final-lint (tail) ===
+
+> scriptc-monorepo@ lint /Users/noah/code/scriptc-wt/c1b-escape
+> node docs/scripts/limitations-partials.mjs check && oxlint --deny-warnings packages scripts internal/compatibility/src tests/harness vitest.config.ts
+
+
+=== final-format (tail) ===
+
+> scriptc-monorepo@ format:check /Users/noah/code/scriptc-wt/c1b-escape
+> oxfmt --check "{packages,scripts,internal/compatibility/src,tests/harness}/**/*.{js,mjs,cjs,ts,mts,cts,tsx}" vitest.config.ts .oxlintrc.jsonc .oxfmtrc.jsonc
+
+Checking formatting...
+
+All matched files use the correct format.
+Finished in 489ms on 1872 files using 12 threads.
+
+=== completeness (tail) ===
+
+> scriptc-monorepo@ test:ts7 /Users/noah/code/scriptc-wt/c1b-escape
+> node scripts/test-ts7.mjs --baselines-only
+
+Every TypeScript preflight/order fixture has a recorded baseline.
+
+=== order (tail) ===
+single-fixture preflight/order parity passed
+
+=== measure-canceled (tail) ===
+0 events 1000 0.08737500000000864 0.03099999576807022 0.032999999821186066
+0 events 10000 0.7882919999999842 0.30300000309944153 0.30300000309944153
+0 events 50000 3.626792000000023 1.4940000027418137 1.4479999989271164
+0 strings 1000 0.05345799999999912 0.03400000184774399 0.031000003218650818
+0 strings 10000 0.47170900000000415 0.31599999964237213 0.33399999886751175
+0 strings 50000 2.690167000000031 1.6770000010728836 1.7209999933838844
+0 maps 1000 0.11170799999999304 0.06700000166893005 0.0689999982714653
+0 maps 10000 0.9066249999999911 0.4139999970793724 0.41200000047683716
+0 maps 50000 4.4147499999999695 1.9850000068545341 1.964999996125698
+0 copy 1000 0.012832999999993433 0.00299999862909317 0.00299999862909317
+0 copy 10000 0.16141700000000014 0.03800000250339508 0.03099999576807022
+0 copy 50000 0.8289169999999899 0.16200000047683716 0.14300000667572021
+0 generic 1000 0.003292000000001849 0.00299999862909317 0.0020000040531158447
+0 generic 10000 0.006999999999997897 0.023000001907348633 0.023000001907348633
+0 generic 50000 0.030166000000008353 0.13499999791383743 0.11100000143051147
+0 json 1000 0.22591699999999548 0.21799999475479126 0.2239999994635582
+0 json 10000 1.9762920000000008 2.221000000834465 2.1950000002980232
+
+=== earlier backend failure excerpt ===
+ FAIL  packages/compiler/src/backend/llvm/classes.test.ts > leaf layouts keep direct teardown while recursive layouts share the depth budget
+AssertionError: sc_rrelease_leaf_slow: expected undefined to be defined
+ ❯ packages/compiler/src/backend/llvm/classes.test.ts:74:26
+     72|         llvm,
+     73|       )?.[0];
+     74|       expect(body, name).toBeDefined();
+       |                          ^
+
+=== earlier affected failure excerpt ===
+     → 4591-weak-keys-union-records.ts (release): SC3004: LLVM native helper failed (invalid_ir): scriptc-llvm-codegen: /Users/noah/code/scriptc-wt/c1b-escape/node_modules/.cache/scriptc-tests/640a001fe86bfaef/.scriptc-native-input-17064-idzcvtolvfd:5343:13: error: use of undefined value '@sc_rrelease_r29362d86b762_slow'
+  call void @sc_rrelease_r29362d86b762_slow(ptr %o)
+            ^
+
+   ↓ llvm differential corpus (5002 programs, release+dev) > 4592-cycle-const-from-import/main.ts
+   ↓ llvm differential corpus (5002 programs, release+dev) > 4593-weak-keys-empty-objects.ts
+   ↓ llvm differential corpus (5002 programs, release+dev) > 4594-union-class-field-mixed-types.ts
+
+=== earlier classes failure excerpt ===
+ FAIL  packages/compiler/src/backend/llvm/classes.test.ts > leaf layouts keep direct teardown while recursive layouts share the depth budget
+AssertionError: sc_rrelease_leaf_slow: expected undefined to be defined
+ ❯ packages/compiler/src/backend/llvm/classes.test.ts:74:26
+     72|         llvm,
+     73|       )?.[0];
+     74|       expect(body, name).toBeDefined();
+       |                          ^
