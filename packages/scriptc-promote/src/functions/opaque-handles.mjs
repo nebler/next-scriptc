@@ -72,15 +72,17 @@ export function lowerOpaqueHandles(text, name, ts) {
 
  // Parameter specialization can make an original type unreachable. Remove only
  // such declarations, leaving helper and local annotations for the usual proof.
- let native=text;for(const [start,end,value] of edits.sort((a,b)=>b[0]-a[0]))native=native.slice(0,start)+value+native.slice(end);
+ const positions=Array.from({length:text.length},(_,i)=>i);
+ let native=text;for(const [start,end,value] of edits.sort((a,b)=>b[0]-a[0])){native=native.slice(0,start)+value+native.slice(end);positions.splice(start,end-start,...Array(value.length).fill(start));}
  const rewritten=ts.createSourceFile('opaque.ts',native,ts.ScriptTarget.Latest,true);
  const declarations=new Map(rewritten.statements.filter(n=>ts.isTypeAliasDeclaration(n)||ts.isInterfaceDeclaration(n)).map(n=>[n.name.text,n]));
  const needed=new Set();
  function names(n){if(ts.isIdentifier(n))needed.add(n.text);ts.forEachChild(n,names);}
  for(const n of rewritten.statements)if(!declarations.has(n.name?.text))names(n);
  const expanded=new Set();for(const name of needed){if(declarations.has(name)&&!expanded.has(name)){expanded.add(name);names(declarations.get(name));}}
- for(const n of [...declarations.values()].filter(n=>!needed.has(n.name.text)).sort((a,b)=>b.getStart(rewritten)-a.getStart(rewritten)))native=native.slice(0,n.getStart(rewritten))+native.slice(n.end);
- return {native:brand+native,inputs,classification:uses.map(({node,unsafe,...u})=>u)};
+ for(const n of [...declarations.values()].filter(n=>!needed.has(n.name.text)).sort((a,b)=>b.getStart(rewritten)-a.getStart(rewritten))){native=native.slice(0,n.getStart(rewritten))+native.slice(n.end);positions.splice(n.getStart(rewritten),n.end-n.getStart(rewritten));}
+ const loweringMap=[];for(let i=0;i<positions.length;i++){const previous=loweringMap.at(-1);if(previous&&previous.originalOffset+previous.length===positions[i])previous.length++;else loweringMap.push({generatedOffset:brand.length+i,originalOffset:positions[i],length:1});}
+ return {native:brand+native,loweringMap,inputs,classification:uses.map(({node,unsafe,...u})=>u)};
 }
 
 // Check the lowered closure too: a borrowed value may flow through a local

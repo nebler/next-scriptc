@@ -1,3 +1,4 @@
+import {sourceDiagnostic} from './diagnostics.mjs';
 // Boundary types come from the application's checker, including imported aliases,
 // inferred returns, tsconfig paths/extends and the configured standard libraries.
 export function checkFunctionTypes(ts, program, modules) {
@@ -7,7 +8,7 @@ export function checkFunctionTypes(ts, program, modules) {
     for (const fn of module.functions) {
       const fail = (at, type, reason) => {
         const printed = checker.typeToString(type, undefined, ts.TypeFormatFlags.NoTruncation);
-        throw new Error(`[next-scriptc] ${module.source}: function ${fn.name}: ${at}: ${reason} (type ${printed})`);
+        throw new Error(sourceDiagnostic(source.text,module.source,fn.start,`function ${fn.name}: ${at}: ${reason} (type ${printed})`));
       };
       let declaration;
       function find(node) {

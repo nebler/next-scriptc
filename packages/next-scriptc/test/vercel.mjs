@@ -203,7 +203,7 @@ export default {modifyConfig:c=>c,async onBuildComplete({distDir}){
 }};`);
     process.env.NEXT_SCRIPTC_VERCEL=path.join(dir,'.vercel/scriptc-build');
     process.env.NEXT_ADAPTER_PATH=fixture;
-    await adapter.modifyConfig(withScriptc({distDir:'.next'}),{phase:'phase-production-build',projectDir:dir});
+    await adapter.modifyConfig(withScriptc({distDir:'.next'},{nativePromotion:'off'}),{phase:'phase-production-build',projectDir:dir});
     const artifacts=['promotion.node','ids.json','encodings.json'];
     const cache=path.join(distDir,'cache/scriptc-promotion');await mkdir(cache,{recursive:true});
     for(const name of artifacts)await writeFile(path.join(cache,name),`fixture ${name}`);

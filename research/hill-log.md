@@ -1628,3 +1628,37 @@ Accepted functions are not yet measured, and EV1 suggests most are small helpers
 M1 (`report --measure` over DEV accepted functions) is the decisive next eval step.
 The parser-isolation fix also matters for users: one unparseable file no longer
 aborts discovery for the whole app.
+
+## 54. P1b automatic default and actionable diagnostics (2026-11-03)
+
+Next Node production builds now default to automatic promotion. Explicit auto/off
+choices are preserved, Cloudflare retains static dispatch, and the other adapters
+already had automatic discovery enabled. No dispatcher threshold, discovery
+acceptance rule, or shadow policy changes. Extracted source offsets, flattened
+helper locations, and opaque type-edit offsets translate compiler diagnostics to
+original files. Stable NSC refusal codes and repair hints retain existing reason
+substrings. Infrastructure failures name the unavailable tool and preserve JS.
+
+Explicit native report rows include async functions, extraction status, and Next
+async artifact status checked against build ID and source hash in default .next
+output. Artifact presence does not establish runtime execution. Build summaries
+count functions/modules separately from routes/processes. Dev prints a one-time
+production-testing notice. Both package READMEs document the behavior.
+
+A fresh Next 16.4.3 consumer installs both worktree tarballs in /tmp/nsc-p1b.
+Default build compiles one scoring function in one module and zero native routes.
+A broken explicit indexed read fails at original rank.ts:5:10 with a guard/tuple
+hint. A nonexistent compiler build succeeds, announces JS fallback, and its
+production POST returns [545,0]. Initial scriptc helper permissions required the
+existing pnpm rebuild repair. The first automatic native build also exposed a
+packed absolute runtime import; a relative import fixes Turbopack resolution.
+No native runtime convergence or application speedup is claimed.
+
+Node 24 suites pass: Next 101/101; core 41 passed and two existing skips. Tests
+cover missing compiler/ar, helper permissions, original source positions,
+explicit report status/freshness, defaults, dev notice, and separate counts.
+F4 runtime visibility, F9 upstream helper packaging, other adapter setup recipes,
+and custom-directory artifact reporting remain open. Temporary consumers and
+servers are cleaned. Root README, main checkout, protected compiler sources,
+and external services are untouched. No Docker, deploy, push, PR, issue, public
+post, or secret. [Verbatim evidence and limits](friction-fixes.md).

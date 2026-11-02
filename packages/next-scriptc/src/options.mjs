@@ -39,7 +39,7 @@ export function validateOptions(options) {
     }
     Object.defineProperty(result, pattern, { value: { ...value, optimization: value.optimization ?? "release" }, enumerable: true });
   }
-  return { routes: result, ...(options.target ? { target: options.target } : {}), ...(options.cloudflare ? { cloudflare: { ...options.cloudflare } } : {}), ...(options.nativePromotion === undefined ? {} : { nativePromotion: options.nativePromotion }) };
+  return { routes: result, ...(options.target ? { target: options.target } : {}), ...(options.cloudflare ? { cloudflare: { ...options.cloudflare } } : {}), nativePromotion: options.nativePromotion ?? (options.target === "cloudflare" ? "off" : "auto") };
 }
 
 export function planRoutes(discovered, options = {}) {

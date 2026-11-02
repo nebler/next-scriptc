@@ -1,3 +1,4 @@
+import {translateDiagnostics,infrastructureFailure} from 'scriptc-promote/functions/diagnostics.mjs';
 import { optionsKey } from "../options.mjs";
 import { discoverPromotions } from "./promotion-discovery.mjs";
 import { buildPromotion } from "./promotion-build.mjs";
@@ -14,6 +15,8 @@ import { discoverFunctions } from "./extract.mjs";
 import { withFunctions } from "./config.mjs";
 
 const plans = new Map();
+const counts = new Map();
+export function functionCounts(projectDir) { const result=counts.get(projectDir)??{functions:0,modules:0};counts.delete(projectDir);return result; }
 
 export function takeFunctionPlan(projectDir) {
   const plan = plans.get(projectDir);
@@ -35,6 +38,7 @@ export async function prepareFunctions(config, projectDir) {
     if(promotions.length&&config.output)throw new Error('[next-scriptc] Auto promotion requires the local Next server (export/standalone unsupported).');
     promotionFile=path.join(distDir,'scriptc-promotion/promotion.node');
   }
+  counts.set(projectDir,{functions:[...modules,...promotions].reduce((n,m)=>n+m.functions.length,0),modules:new Set([...modules,...promotions].map(m=>m.source)).size});
   if (!modules.length) { plans.delete(projectDir); return withFunctions(config,promotions,0,projectDir,promotionFile); }
   if (config.output) throw new Error("[next-scriptc] Native functions require the local Next server (output: export/standalone is unsupported).");
   const port = 40000 + createHash("sha256").update(projectDir).digest().readUInt16BE(0) % 10000;
@@ -67,13 +71,21 @@ export async function prepareFunctions(config, projectDir) {
   await writeFile(file, entry);
   const compiler = compilerPath();
   console.log(`[next-scriptc] Compiling ${index} native function(s)`);
-  await new Promise((resolve, reject) => {
-    const child = spawn(compiler, ["build", file, "-o", path.join(output, "functions"), "--optimization", "release", "--strip", "--no-keep-llvm", "--node-islands=off"], { cwd: projectDir, stdio: "inherit" });
+  let compilerOutput="";
+  try { await new Promise((resolve, reject) => {
+    const child = spawn(compiler, ["build", file, "-o", path.join(output, "functions"), "--optimization", "release", "--strip", "--no-keep-llvm", "--node-islands=off"], { cwd: projectDir, stdio: ["ignore","pipe","pipe"] });
+    child.stdout.on("data",data=>compilerOutput+=data);
+    child.stderr.on("data",data=>compilerOutput+=data);
     child.once("error", reject);
     child.once("exit", (code, signal) => code === 0 ? resolve() : reject(new Error(`[next-scriptc] Function compilation failed (${signal ?? `exit ${code}`}). See scriptc diagnostics above.`)));
-  });
+  }); } catch(error) {
+    const infrastructure=infrastructureFailure({message:error.message,stderr:compilerOutput,code:error.code,path:error.path});
+    if(infrastructure){plans.delete(projectDir);console.log(infrastructure);counts.set(projectDir,{functions:promotions.reduce((n,m)=>n+m.functions.length,0),modules:new Set(promotions.map(m=>m.source)).size});return withFunctions(config,promotions,0,projectDir,promotionFile);}
+    throw Error(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})))+"\n"+error.message);
+  }
+  if(compilerOutput)console.log(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module}))));
   const processes = [{ binary: "functions", port, routes: ["native functions"] }];
-  plans.set(projectDir, { output, processes });
+  plans.set(projectDir, { output, processes, functions:modules.map(m=>({source:m.source,hash:m.hash,names:m.functions.map(f=>f.name)})) });
   await startNativeProcesses(projectDir, output, processes);
   return withFunctions(config, [...modules,...promotions], port, projectDir,promotionFile);
 }
@@ -100,7 +112,7 @@ export async function finishFunctions(projectDir, distDir, buildId) {
   if (!plan) return;
   await mkdir(output, { recursive: true });
   await cp(path.join(plan.output, "functions"), path.join(output, "functions"));
-  await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId, processes: plan.processes }) + "\n");
+  await writeFile(path.join(output, "manifest.json"), JSON.stringify({ buildId, functions:plan.functions, processes: plan.processes }) + "\n");
   plans.delete(projectDir);
 }
 
