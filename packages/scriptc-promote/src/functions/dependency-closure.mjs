@@ -38,7 +38,10 @@ export function dependencyClosure(text, source, name, {ts, options={}, unsupport
    // Explicit statements execute independently of bindings. Keep this guard
    // across the whole visited file, even when their values are never read.
    if(statement.isImportDeclaration()){
-    if(!statement.node.specifiers.length)fail('unproved module initialization side-effect import');
+    // `server-only` is an empty module on the server and throws in client
+    // bundles, so a running server has already executed it as a no-op. No other
+    // side-effect import is admitted.
+    if(!statement.node.specifiers.length&&statement.node.source.value!=='server-only')fail('unproved module initialization side-effect import');
     continue;
    }
    if(statement.isExportDefaultDeclaration()){

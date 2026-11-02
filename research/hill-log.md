@@ -751,3 +751,16 @@ removed. App sources remain outside the repo. No native timing, Docker/container
 operation, hosting call, compiler/fork edit, root README change, publication,
 merge, or push. At most two jobs ran together. [Design, soundness boundary,
 histograms, snapshots, and reproduction](reachable-module-init.md).
+
+**Review follow-up (2026-11-02): `server-only` marker.** Every side-effect import that blocked a region after M1 was `import "server-only"`: 174 Dub regions (`lib/api/errors.ts`, `assert-role-plan.ts`) and about 60 Formbricks regions, including `getElementSummary`. Next resolves that package to an empty module on the server, and it throws in client bundles. A running server has therefore executed it as a no-op, and the native copy does not need it. The closure check now admits exactly that specifier. `client-only`, polyfills and lookalike names still reject; a test covers them.
+
+A0 rerun on Dub and Formbricks with the change (artifact not replaced):
+- **Regions accepted:** still 0 and 1.
+- **Dub:**
+  - closure/module-init falls from 271 to 252;
+  - the next blockers are `errors.ts` `ClassDeclaration` (158; regions that throw the app's error classes reach them), unresolved `@prisma/client`/`@dub/utils` in the minimal type setup (119), and namespace imports (21).
+- **Formbricks:**
+  - closure/module-init falls from 62 to 28;
+  - `getElementSummary` now stops at `unresolved export TSurveyElementTypeEnum`, an enum value imported from `@formbricks/types`.
+
+The remaining blockers are now specific constructs: app error classes on throw paths, imported enums and constant objects, and type-only imports that need type linking. Each is a bounded adapter feature.

@@ -73,3 +73,13 @@ test('imported bindings exported under aliases link to the final defining module
  const file=write('entry.ts',entry),result=closure(entry,file);
  const js=new Function(stripTypeScriptTypes(result.native.replace(/export\s*\{[^}]*\};?/g,''))+';return rows;')();assert.deepEqual(js([2,3]),[4,6]);
 }));
+test('the server-only marker is admitted; other side-effect imports still reject',()=>fixture(write=>{
+ write('helper.ts','import "server-only";'+helper);
+ let text='import "server-only";'+entry,file=write('entry.ts',text);
+ const result=closure(text,file);assert.doesNotMatch(result.native,/server-only/);
+ for(const other of ['import "./polyfill";','import "client-only";','import "server-only-extra";']){
+  write('polyfill.ts','export {};');write('helper.ts',helper);
+  text=other+entry;file=write('entry.ts',text);assert.throws(()=>closure(text,file),/side-effect import/);
+  write('helper.ts',other+helper);file=write('entry.ts',entry);assert.throws(()=>closure(entry,file),/side-effect import/);
+ }
+}));
