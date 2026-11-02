@@ -1,0 +1,117 @@
+# Roadmap
+
+2026-11-02. Where next-scriptc / scriptc-promote is going, and the order we climb it.
+Evidence behind each item lives in [research/hill-log.md](research/hill-log.md).
+
+## The product
+
+One engine, two modes, one report.
+
+- **Automatic (default).** Install it. Discovery finds sync, pure, JSON-boundary
+  functions; the dispatcher shadow-verifies native against JS and promotes only what
+  measures faster. Everything else is left alone (~60 ns wrapper cost).
+- **`"use native"` (explicit).** Mark a function you know is hot. It is compiled or the
+  build fails with an actionable reason. Same verification and fallback.
+- **`report`.** Per route: what is promoted, what is blocked and why, nearest misses,
+  measured native/JS ratio. The bridge between the two modes.
+
+### Why TypeScript instead of SQL or Rust
+
+1. **One function everywhere.** The same source runs as JS in the browser, native on
+   Node, wasm or JS on Workers, JS on Bun/Deno. Shared client/server logic stays shared.
+2. **Free differential testing.** JS is the reference implementation; the dispatcher
+   keeps checking native against it in production and falls back on mismatch. A Rust
+   port or a SQL duplicate drifts silently.
+3. **Never breaks the app.** No native artifact, unsupported platform or stale build
+   means JS. No per-platform prebuilt-binary failures.
+4. **Per-call economics.** Small inputs stay in JS, large ones go native. A Rust addon
+   pays FFI on every call.
+5. **Types are the interface.** Boundary encoders are generated from TS (including Zod)
+   types; no hand-written bindings; the function keeps using the app's helpers.
+6. **Scales out, tests easily.** Compute stays in cheap serverless CPU, not the
+   database; plain unit tests; `"use js"` returns to normal debugging.
+
+Where the alternatives win: SQL when the data is huge and already in the database;
+Rust on raw speed, especially object/string-heavy code today.
+
+### What we know (honest status)
+
+- Mechanism works: numeric code 3–4× native, verified, correct lane selection.
+- Real-app automatic wins: none proven yet. Papermark (held out) is even. EV1 found
+  dense JS only in browser code, enterprise-licensed paths, or behind proof blockers.
+  Mature apps have already moved heavy compute to SQL, native libs, Rust or Python.
+- Native only wins when compute per input byte beats the boundary (~1.5 µs/event).
+- Stock scriptc is ~5× slower than V8 on object/string-heavy code.
+
+## The hills
+
+### 1. Engine ceiling: how much code can win
+| Hill | Why | Depends on |
+|---|---|---|
+| Compiler speed on object/string code | Native is ~5× slower than V8 on most real code; the biggest lever | scriptc fork |
+| Native JSON decode speed | Decides small wins like Papermark | scriptc fork |
+| Native-resident data across calls | Chained promoted functions keep data native instead of round-tripping JSON | adapter + compiler |
+| Source-text passthrough | Hand native the original JSON text when input was just parsed; removes most encoding | adapter |
+
+### 2. Language coverage: how much code qualifies
+| Hill | Why |
+|---|---|
+| Cheap discovery blockers | `.d.ts` module-init proofs, package export conditions, decorators parsing, possibly-undefined indexed reads, local mutation (EV3) |
+| Async outlining | Largest silent exclusion: run the pure sync core native, keep awaits in JS |
+| Classes and methods | NestJS-style backends |
+| Map/Set, Date subsets, callbacks, `in`, computed keys | Recurring census blockers |
+| Whole npm libraries native | Promote heavy dependencies, not just app code |
+
+### 3. Product: something people adopt
+| Hill | Why |
+|---|---|
+| Friction log → actionable errors, setup, docs, naming | Developers using `"use native"` hit every rough edge |
+| Visibility | Dispatcher state per function: lane, reason, shadow counts, fallbacks; runtime report section; CI report |
+| Profile-guided promotion | Pick candidates from production CPU profiles, not static guesses |
+| Zero-setup install | Prebuilt toolchain or one-step setup, JS fallback when missing |
+| Editor integration | "would be native" / "blocked: guard this index" squiggles |
+| Browser wasm | Same function faster on the client too |
+
+### 4. Trust: stronger and cheaper safety
+| Hill | Why |
+|---|---|
+| Type-driven build-time fuzzing | Catch mismatches before deploy, not only in production |
+| Equivalence proofs for simple functions | Less shadowing, cheaper verification |
+| Explicit numeric/edge semantics | −0, NaN, integer overflow pinned across JS, native, wasm |
+
+### 5. Platforms
+Cloudflare (wasm wins on compute-dense scalar-boundary code; better wasm codegen/SIMD;
+Containers offload for heavy routes), Vercel hosted checkpoint (after Pro or
+2026-12-01), Bun/Deno.
+
+### 6. Proof and story
+Held-out eval (EV1 frozen split + Papermark), browser+server demo, public write-up
+(only after review), scriptc upstream collaboration and Next.js pitch (parked).
+
+## Execution queue
+
+At most two agents at once. Items touching the same subsystem run sequentially.
+Held-out repos and Papermark are measured only at milestones, never tuned against.
+
+| # | Item | Hill | Subsystem | Status |
+|---|---|---|---|---|
+| EV3 | Dependency-installed DEV census | eval | census | running |
+| C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | queued |
+| B1 | Cheap discovery blockers | 2 | discovery | after EV3 |
+| P1 | Friction log, then actionable errors | 3 | DX | after C1 or B1 |
+| M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
+| E2 | Source-text passthrough | 1 | boundary | queued |
+| C2 | Native JSON decode speed | 1 | scriptc fork | after C1 |
+| A1 | Async outlining | 2 | discovery | after B1 |
+| E3 | Native-resident data across calls | 1 | dispatcher/boundary | after E2 |
+| T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | queued |
+| P2 | Visibility: runtime report + CI report | 3 | report | after P1 |
+| L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
+| P3 | Profile-guided promotion | 3 | report/build | after P2 |
+| P4 | Zero-setup install, naming, docs | 3 | packaging | after P1 |
+| — | Editor integration, browser wasm, equivalence proofs, whole-library native | 3/4 | — | later |
+| HO | Held-out milestone eval | 6 | eval | after B1+A1+E2 land |
+
+Standing rules: no public posts, upstream issues/PRs or production deploys without
+explicit approval; fork work on local branches under `/Users/noah/code/scriptc-wt/`;
+never commit third-party source.
