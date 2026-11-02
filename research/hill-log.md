@@ -1170,3 +1170,54 @@ as measurement evidence and committed locally without merge or push.
 **Review note on PM2 (2026-11-02): the input encoder is the bottleneck.** D3 removed the overhead: the mixed result is −0.53% (CI −6.4% to +4.3%), against PM1's −15.6%. The target now collects its shadows, and JS still correctly wins every pair. PM2's stage probe at 60k events: native compute is 36 ms against 111 ms for JS (3× faster), but **JS-side argument encoding takes 126 ms on its own**, and native JSON decode another 27 ms.
 
 The encoder (`walkOpaque` in promotion-encodings.mjs) walks every field generically, with `getOwnPropertyDescriptor`, prototype checks and `Array.from` closures. That is a general adapter cost for every object-array input, not something specific to Papermark. Next is E1: schema-specialized generated encoders (and decoders), with the same checks (plain prototypes, own data properties, dense arrays, reserved keys), measured on development workloads only. The read-field projection the encoder already does also shrinks the payload. Papermark is remeasured only at the next milestone (PM3).
+
+## 40. E1 generated projected argument encoders (2026-11-02)
+
+Bounded projected input schemas now generate direct JSON writers once per loaded
+schema. Writers retain per-value descriptor checks, exact array prototypes and
+density checks, typed scalars, reserved-key rejection, JSON negative-zero
+canonicalization, string escaping, and H1/H2 call handle identity. Getter checks
+cannot safely be cached by prototype or key list. A no-eval CSP and unsupported
+schemas retain the checked walker. Unshaped JSON boundaries retain strict generic
+serialization because a type alone cannot authorize dropping extra fields.
+
+The development fixture has eight scalar fields per record, reads three, takes a
+scalar argument, and returns aggregates plus one original record. Papermark is
+held out. At 600/6,000/60,000 records, the generated encoder is faster than the old
+walker in local and Linux stand-in measurements. At 60k, local encoding falls
+from 89.19 to 31.40 ms and stand-in encoding from 120.66 to 57.77 ms. Inclusive
+native process CPU falls from 103.91 to 52.39 ms locally and 125.63 to 63.09 ms in
+the stand-in. JS needs only about 0.2 ms on this cheap aggregation. All three
+buckets correctly choose JS after 26 verified shadows. E1 does not establish an
+application CPU saving or successful promotion on this fixture.
+
+The validated-projection plus JSON.stringify control also removes much of the
+old cost. The generated writer has lower central times in the final cells, but
+no confidence interval establishes a universal winner. Initial rope-writer
+samples remain alongside the final array-join samples. Sessions are not paired,
+and background load and GC limit conclusions about the join change.
+
+Column JSON reduces the 60k native decode stage from about 4.0 to 1.35 ms in the
+stand-in. Its payload is prebuilt and omits returned identity. This is a decode
+lower bound, not an end-to-end production wire-format win. The byte-compatible
+record ABI stays in production. JS result decode and canonicalization cost about
+0.031 and 0.022 ms and remain unchanged.
+
+The unchanged amended revenue gate passes in strict and construction modes.
+Mixed inclusive CPU is 5,829.921 ms JS, 2,695.269 ms strict AUTO, and 1,957.860 ms
+construction AUTO. Lane choices match D3. C1 remains a hosted-wall proxy rather
+than calibrated Active CPU. No hosting calls occur.
+
+Validation includes 2,000 randomized old/new byte comparisons, rejection cases,
+integer-key handle order, present undefined, H1/H2, and no-eval fallback. Next
+passes 98 tests including the 680-input, 1,360-comparison real-addon fuzzer across
+17 candidates. Promotion passes 29 tests with two existing skips, and the demo
+passes 24 tests. Final package logs use workspace links pointing into this
+worktree. Harness setup failures and both measured writer variants are retained.
+
+Only task-owned nsc-standin-e1 containers are created and removed, with one CPU,
+CPU 11, 2 GiB, and no network. No task build, test, or analysis overlaps timing.
+No other agent runs. Temporary dependencies and native outputs are removed.
+Artifacts over 256 KiB are compressed. The root README, main checkout, scriptc
+fork, and /Users/noah/scriptc are untouched. The work is committed locally with
+no merge or push. [Report, limits, tables, and reproduction](boundary-encoders.md).

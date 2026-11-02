@@ -1,4 +1,6 @@
 import { serialize } from './json.mjs';
+import { generateInputEncoder } from './promotion-input-encoder.mjs';
+const inputEncoders = new WeakMap();
 
 // UTF-8 cannot round-trip lone UTF-16 surrogates. Refuse rather than silently
 // replacing them. Dispatcher falls back to JS, preserving observable behavior.
@@ -41,6 +43,11 @@ export function encodeArguments(schema, args) {
   const table=schema.opaque?[]:null,index=table?new Map():null,reads=table?new Set():null;if(table)indexes.set(table,index);
   const capture=value=>{let i=indexOf(table,value);if(i<0){i=table.length;table.push(value);index.set(identityKey(value),i);}return i;};
   const encoded=schema.params.map((kind, i) => {
+    if(schema.opaque&&kind==='json'){
+      let encoders=inputEncoders.get(schema);
+      if(!encoders){encoders=schema.opaque.inputs.map(generateInputEncoder);inputEncoders.set(schema,encoders);}
+      if(encoders[i])return encoders[i](args[i],capture);
+    }
     const value=schema.opaque?walkOpaque(schema.opaque.inputs[i],args[i],capture,false,reads):args[i];
     return kind==='json'?serialize(value):primitive(kind,value);
   });
