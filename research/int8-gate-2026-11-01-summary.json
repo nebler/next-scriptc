@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "provenance": {
+    "linux": "Transcribed from observed tool results; original temporary raw logs disappeared during interruption and are unavailable.",
+    "host": "Surviving logs and JSON at /Users/noah/code/scriptc-validation-logs/int8-gate-2026-11-01"
+  },
+  "requestedCommit": "d4900748300e27fbdd3278ba8649230c03e1b95d",
+  "upstream": "0a7dd5650abbd1a7947558b7b5404f5b06e666ca",
+  "localFixCommit": "2a3ce4ba62cac4932873b6df9d95b2a553c02f20",
+  "gateMet": false,
+  "environment": {
+    "linux": "Ubuntu24.04.5 arm64, Linux6.10.14-linuxkit",
+    "node": "24.22.1",
+    "pnpm": "11.1.3",
+    "llvm": "22.1.8",
+    "zig": "0.16.0",
+    "container": "scriptc-int8-validation",
+    "cpuSet": "0-5",
+    "dockerConfiguredGiB": 16,
+    "dockerMemoryBytes": 16748728320,
+    "sanitizedCacheMaxMiB": 1024,
+    "sanitizersSuppressed": false
+  },
+  "originalSteps": [
+    {
+      "command": "pnpm install",
+      "exit": 0,
+      "seconds": 16.120897
+    },
+    {
+      "command": "pnpm -r build",
+      "exit": 0,
+      "seconds": 25.511131
+    },
+    {
+      "command": "pnpm lint",
+      "exit": 0,
+      "seconds": 0.737325
+    },
+    {
+      "command": "pnpm format:check",
+      "exit": 0,
+      "seconds": 0.815519
+    },
+    {
+      "command": "SCRIPTC_TEST_WORKERS=4 pnpm test",
+      "exit": 1,
+      "seconds": 26609.865569
+    },
+    {
+      "command": "SCRIPTC_SAN=1 SCRIPTC_TEST_WORKERS=4 pnpm test",
+      "exit": 1,
+      "seconds": 25835.336698
+    }
+  ],
+  "plain": {
+    "complete": true,
+    "passed": 17309,
+    "failed": 254,
+    "skipped": 415,
+    "total": 17978,
+    "files": {
+      "passed": 734,
+      "failed": 18,
+      "skipped": 33
+    }
+  },
+  "sanitized": {
+    "complete": false,
+    "finalCounts": null,
+    "observed": {
+      "passed": 8713,
+      "failed": 74,
+      "skipped": 127
+    },
+    "completedFiles": 26,
+    "collectedFiles": 30,
+    "failedSetupHooks": 3,
+    "hookSkippedTests": 30,
+    "oomKills": 12,
+    "terminalError": "ERR_IPC_CHANNEL_CLOSED"
+  },
+  "focusOnD490": {
+    "plainBackend": 2,
+    "plainCorpusHarnesses": 2,
+    "sanitizedBackend": 2,
+    "sanitizedCorpusHarnesses": 2,
+    "llvmModes": [
+      "release",
+      "dev"
+    ]
+  },
+  "importantControls": [
+    {
+      "case": "plain full bootstrap",
+      "base": "pass 3003.116s",
+      "candidate": "pass 2205.694s"
+    },
+    {
+      "case": "plain native three nodes",
+      "base": "pass 564.709s",
+      "candidate": "pass 546.677s"
+    },
+    {
+      "case": "sanitized stack warnings",
+      "base": "fail3",
+      "candidate": "fail3"
+    },
+    {
+      "case": "sanitized Effect3 resource fixtures",
+      "base": "pass2 262.879s",
+      "candidate": "pass2 210.706s"
+    },
+    {
+      "case": "sanitized self-hosting timeout fixtures",
+      "base": "pass4 862.789s",
+      "candidate": "pass4 558.096s"
+    },
+    {
+      "case": "sanitized LLVM emitter",
+      "base": "pass2 1039.406s",
+      "candidate": "pass2 830.548s"
+    },
+    {
+      "case": "sanitized frontend checks CPU0,1",
+      "base": "pass18 717.735s",
+      "candidate": "OOM twice: 350.865s and349.804s;18 skipped each"
+    }
+  ],
+  "upstreamSanCommonSelection": {
+    "failed": 12,
+    "passed": 0,
+    "seconds": 165.72,
+    "oomKills": 0
+  },
+  "fix": {
+    "defect": "Repeated strict recursive proof made one range query quadratic on a sum chain.",
+    "lengths": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "originalQueries": [
+      528,
+      2080,
+      8256,
+      32896
+    ],
+    "upstreamAndFixedQueries": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "regressionBefore": {
+      "failed": 1,
+      "filtered": 2,
+      "actualQueries": 33153,
+      "budget": 1024
+    },
+    "nativeValidationOnFix": false,
+    "fullGateOnFixRun": false
+  },
+  "hostChecks": [
+    {
+      "label": "typed-regression-before",
+      "command": [
+        "pnpm",
+        "test",
+        "packages/compiler/src/backend/llvm/wrapping-sums.test.ts",
+        "-t",
+        "linear range inference",
+        "--reporter=default",
+        "--reporter=json",
+        "--outputFile.json=/Users/noah/code/scriptc-validation-logs/int8-gate-2026-11-01/typed-regression-before.json"
+      ],
+      "seconds": 13.133823871612549,
+      "exit": 1,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-install",
+      "command": [
+        "pnpm",
+        "install"
+      ],
+      "seconds": 0.29337501525878906,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-build",
+      "command": [
+        "pnpm",
+        "-r",
+        "build"
+      ],
+      "seconds": 14.427174806594849,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-lint",
+      "command": [
+        "pnpm",
+        "lint"
+      ],
+      "seconds": 1.2507319450378418,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-format",
+      "command": [
+        "pnpm",
+        "format:check"
+      ],
+      "seconds": 1.108104944229126,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-unit-plain",
+      "command": [
+        "pnpm",
+        "test",
+        "packages/compiler/src/backend/llvm/wrapping-sums.test.ts",
+        "--reporter=default",
+        "--reporter=json",
+        "--outputFile.json=/Users/noah/code/scriptc-validation-logs/int8-gate-2026-11-01/fixed-unit-plain.json"
+      ],
+      "seconds": 0.9735140800476074,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    },
+    {
+      "label": "fixed-unit-san",
+      "command": [
+        "pnpm",
+        "test",
+        "packages/compiler/src/backend/llvm/wrapping-sums.test.ts",
+        "--reporter=default",
+        "--reporter=json",
+        "--outputFile.json=/Users/noah/code/scriptc-validation-logs/int8-gate-2026-11-01/fixed-unit-san.json"
+      ],
+      "seconds": 0.9236207008361816,
+      "exit": 0,
+      "node": "24.22.1",
+      "platform": "darwin-arm64"
+    }
+  ],
+  "diskGuard": {
+    "thresholdGiB": 5.5,
+    "postStopFreeBytes": 5147537408,
+    "laterObservedFreeMiB": 116
+  },
+  "remainingGaps": [
+    "Original Linux raw evidence unavailable",
+    "Sanitized full suite incomplete",
+    "Differential frontend OOM behavior unresolved",
+    "Fix lacks Linux native/full-gate validation",
+    "Container cleanup blocked by unavailable Docker daemon"
+  ],
+  "hostLogSha256": {
+    "typed-regression-before.json": "a8a02f490c153e011688abc2d0f09ee6734752883fda936e280b8589ef999f39",
+    "fixed-unit-plain.log": "c45ac680e50ae5b01abfc19225c118be3a86ed79a8d9ea5dce68afc6cf8252c8",
+    "fixed-unit-san.log": "e12c68079e100425c6c793ff6269bb7199554807ccc3fc22467d57008c61cbfe",
+    "fixed-unit-san.json": "140e6da2b6d651de698b42a3f2e3f17a67891506a466edb341f405c0a65b8c19",
+    "fixed-unit-plain.json": "c1cba44fb912b88d33314491e4cace9eb12226013039811d1d9423e9967a4009",
+    "host-install.log": "ca265edd86916c0fe17e37539ac85a887f04ba6ff079ed4302d34be7190f9e0b",
+    "fixed-lint.log": "afe7e277ed28ee7ed240c96458a77a29498420f18325b4e693e5beb344a90db0",
+    "fixed-format.log": "0d587b84e4dcaef67eeafacffd4b7f011481b1d4bfc43e9cac187a9982fa1190",
+    "fork-commit-audit.json": "eb2600c66a5347a1c110c92da0784a153ce751c2cc3975600bbb47d86967400a",
+    "typed-regression-before.log": "ba2164729f18cfc79375bddea92d39ca90856dea4e4f0b62a285f622b7330ca7",
+    "fixed-install.log": "c5fecfe66e5813c768e72e3ee1a86005b6d28152ed82d6ca8508043393cfc415",
+    "host-checks.ndjson": "f37fe6a1143f81755f4737a9a6db03b8edb3efd6962baa55d8421d8d3b4dd22e",
+    "fixed-build.log": "864ef19eedb3fe60ae1295dc8b186cd4839efbb3ad2faf3bb17c711ff58d6936"
+  },
+  "cleanup": {
+    "hostWorktreeRemoved": true,
+    "forkBranchKept": "2a3ce4ba62cac4932873b6df9d95b2a553c02f20",
+    "pushed": false,
+    "freeBytes": 22105006080,
+    "containerCleanup": "Blocked: Docker daemon unavailable. Last known owned container state stopped. Never operated on other containers.",
+    "originalLinuxLogs": "Unavailable after interruption",
+    "hostEvidenceArchive": "/Users/noah/code/scriptc-validation-logs/int8-gate-2026-11-01/surviving-host-evidence.tar.gz",
+    "sha256": "2d5dbfedcdc94c789bbe1ab5bb4284567eff7a86d97e01d077acc14a95552688"
+  }
+}

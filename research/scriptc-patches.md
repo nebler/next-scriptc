@@ -8,22 +8,23 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 - Commit and PR prose follows scriptc's `technical-writer` skill (required by their CONTRIBUTING for AI-written text).
 - Upstream filing happens only with the maintainer's (Noah's) explicit go.
 
-| Patch | Branch | Status | Last rebased onto upstream |
-| --- | --- | --- | --- |
-| Closed-record certificate investigation | `next-scriptc/closed-records` | local diagnosis only; stopped on metadata loss, no facility or adapter change | 2026-11-01, `f606a3bd8` |
-| Cached record prototype reflection | `next-scriptc/result-reflection` | **local, not pushed**; experimental, focused parity only | 2026-11-01, `a07d5a791` |
-| Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | local, not pushed; focused checks pass, full gate pending; **stacked on the int8 branch** (upstream it needs the int8 PR first or a rebase onto plain upstream) | 2026-11-01, `a07d5a791` |
-| int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Committed and pushed to the fork. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) |
+| Patch | Branch | Status | Last rebased onto upstream | Last validated |
+| --- | --- | --- | --- | --- |
+| Closed-record certificate investigation | `next-scriptc/closed-records` | local diagnosis only; stopped on metadata loss, no facility or adapter change. Pushed to the fork 2026-11-02. | 2026-11-01, `f606a3bd8` | — |
+| Cached record prototype reflection | `next-scriptc/result-reflection` | experimental, focused parity only. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
+| Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | focused checks pass, full gate pending; **stacked on the int8 branch**. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
+| int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Pushed `d49007483`; local fix `2a3ce4ba6` (quadratic range walk) is unpushed. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) | 2026-11-01–02: `d49007483` plain failed, sanitized incomplete; fix has focused checks only ([report](int8-gate-2026-11-01.md)) |
 
 ## int8 product ranges in wrapping sums
 
-- **Branch:** [`next-scriptc/int8-range-analysis`](https://github.com/nebler/scriptc/tree/next-scriptc/int8-range-analysis), commit `d49007483`.
-- **Change:** `wrappingRange` in `packages/compiler/src/backend/llvm/wrapping-sums.ts` derives integer ranges through nested exact `+`, `-` and `*`. A natural `(sum + a[i] * b[i]) | 0` over `Int8Array` therefore takes the same int32 path as the `Math.imul` form. Production change: +25 / −2 lines.
+- **Branch:** [`next-scriptc/int8-range-analysis`](https://github.com/nebler/scriptc/tree/next-scriptc/int8-range-analysis), local head `2a3ce4ba6` (unpushed), following `d49007483`.
+- **Change:** `wrappingRange` in `packages/compiler/src/backend/llvm/wrapping-sums.ts` derives integer ranges through nested exact `+`, `-` and `*`. A natural `(sum + a[i] * b[i]) | 0` over `Int8Array` therefore takes the same int32 path as the `Math.imul` form. The local follow-up also removes repeated recursive range walks.
 - **Tests added:** `wrapping-sums.test.ts` (backend), corpus program `tests/corpus/signed-products-wrapping-sums.ts` with its order-parity baseline and corpus-cost entry.
 - **Evidence:** Vercel vector route, server compute p50 409 → 10.0 ms ([vector-vercel.md](vector-vercel.md)). Linux causal measurement 403.7 → 23.4 ms ([scriptc-int8-range-analysis.md](scriptc-int8-range-analysis.md)). In WebAssembly, 113 → 28 ms in workerd at 20k rows ([wasm-simd-workerd.md](wasm-simd-workerd.md)).
 - **Validation:**
   - Before the rebase: partial local validation, plain lane only ([scriptc-int8-range-analysis.md](scriptc-int8-range-analysis.md)).
-  - Not yet re-run after the 2026-11-01 rebase.
+  - Rebased `d49007483`: install/build/lint/format passed. Full plain: 17,309 passed, 254 failed, 415 skipped. Sanitized command failed with OOM-correlated IPC closure before completion; observed 8,713 passed, 74 failed, 127 skipped. See the [gate report](int8-gate-2026-11-01.md) for classifications, evidence loss, and remaining validation gaps.
+  - Local fix `2a3ce4ba6` addresses a proven quadratic range-query regression. Pinned-Node host quality checks and all three backend unit tests pass with plain and sanitized environment settings; full/native validation on that head is outstanding.
   - The full gate is still outstanding. The `pnpm test:sandbox` budget is exhausted, so use the local fallback from CONTRIBUTING: `SCRIPTC_TEST_WORKERS=4 pnpm test`, then the same with `SCRIPTC_SAN=1`.
 
 ## Candidate patches (not started)
