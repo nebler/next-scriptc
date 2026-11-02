@@ -1,0 +1,48 @@
+{
+  "name": "scriptc-promote",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "Apache-2.0",
+  "exports": {
+    "./functions/*": "./src/functions/*",
+    "./test/support/*": "./test/support/*",
+    "./vite": "./src/vite.mjs",
+    "./sveltekit": "./src/sveltekit.mjs",
+    ".": "./src/index.mjs",
+    "./paths": "./src/paths.mjs"
+  },
+  "files": [
+    "src",
+    "test/support"
+  ],
+  "dependencies": {
+    "@babel/generator": "^7.28.0",
+    "@babel/parser": "^7.28.0",
+    "@babel/traverse": "^7.28.0",
+    "@babel/types": "^7.28.0",
+    "scriptc": "0.4.6"
+  },
+  "peerDependencies": {
+    "typescript": ">=5",
+    "vite": "^6.0.0 || ^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/*.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "^7.3.7",
+    "vite6": "npm:vite@^6.4.5"
+  }
+}

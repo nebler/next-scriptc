@@ -562,3 +562,40 @@ builds and local Wrangler state are removed after validation. No deploy, login,
 Vercel call, Docker change, Papermark use, compiler source modification or root
 README edit. [Report, prototype limits and reproduction](cloudflare-provider.md)
 include current official docs, raw counters, hashes and retained validation logs.
+
+## 26. Shared promotion core and Vite Node SSR integration (2026-11-02)
+
+Hypothesis: the existing promotion proofs and dispatcher can serve a Vite Node
+SSR build without framework-specific changes to their semantics. Kept for the
+validated Node SSR path. Moved the machinery and fuzz support into
+`scriptc-promote`, with compatibility exports at Next's old paths. Replaced
+Next's compiled Babel dependency with declared Babel packages. Next retains its
+host hooks, publication, and explicit native route/sidecar integration.
+
+The Vite plugin skips dev, client builds and webworker targets. It groups module
+rewrites, builds the library addon, and emits the three runtime artifacts.
+Vite's suppressed SSR assets and adapter-node's second bundling step each exposed
+packaging failures during validation. Enabled SSR asset emission and added an
+adapter-node wrapper that copies artifacts after adaptation. Runtime resolution
+survives output relocation and adapter chunk layout changes.
+
+RealWorld is pinned to `df796708040f5200ec572b28ab7f88ecee5794dd`, with source
+outside the repo. Its upstream census scans 16 JS/TS files and accepts zero
+functions. A labeled local checksum probe adds one eligible, compiled function.
+Production `node build` servers return identical bodies with promotion enabled
+and disabled across 120 requests. The enabled dispatcher reaches shadow with
+six verified samples and zero fallbacks. It serves no native foreground calls
+in this run. This proves integration with an added workload, not coverage of an
+existing upstream compute path. No speed or timing claim.
+
+All 91 existing Next tests and three plugin tests pass. Actual Vite versions are
+6.4.5 and 7.3.7. Fuzzer seed 20935 passes 85,000 inputs and 170,000 comparisons
+across 17 candidates. The small SvelteKit example completes a production build.
+Both workspace packages pack successfully; the full packed-install check was
+not rerun. Dev, Nitro handler graphs, component-inline discovery, non-Node
+adapters and new multi-environment builders have explicit gaps in the report.
+
+Validation ran serially. No Docker/container changes, compiler/fork changes,
+Papermark work, Vercel or Cloudflare calls, third-party source commits, root
+README edits, merge or push. Temporary dependency installations were removed.
+[Design, evidence and reproduction](vite-plugin.md).

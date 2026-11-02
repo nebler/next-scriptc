@@ -25,9 +25,12 @@ const write=async(file,text)=>{await mkdir(path.dirname(file),{recursive:true});
 const app=path.join(temporary,'app');
 const report={node:process.version,checks:[]};
 try{
- await run('npm',['pack',path.join(repo,'packages/next-scriptc'),'--pack-destination',temporary,'--silent']);
- const tarball=(await readdir(temporary)).find(f=>f.endsWith('.tgz'));
- await write(path.join(app,'package.json'),JSON.stringify({private:true,type:'module',allowScripts:{scriptc:true},dependencies:{'next-scriptc':`file:../${tarball}`,next:'16.4.3',react:'19.3.0','react-dom':'19.3.0',typescript:'5.9.3','@types/node':'24.10.0','@types/react':'19.2.2'}}));
+ await run('pnpm',['pack','--pack-destination',temporary],path.join(repo,'packages/scriptc-promote'));
+ await run('pnpm',['pack','--pack-destination',temporary],path.join(repo,'packages/next-scriptc'));
+ const tarballs=await readdir(temporary);
+ const tarball=tarballs.find(f=>f.startsWith('next-scriptc-')&&f.endsWith('.tgz'));
+ const coreTarball=tarballs.find(f=>f.startsWith('scriptc-promote-')&&f.endsWith('.tgz'));
+ await write(path.join(app,'package.json'),JSON.stringify({private:true,type:'module',allowScripts:{scriptc:true},dependencies:{'next-scriptc':`file:../${tarball}`,'scriptc-promote':`file:../${coreTarball}`,next:'16.4.3',react:'19.3.0','react-dom':'19.3.0',typescript:'5.9.3','@types/node':'24.10.0','@types/react':'19.2.2'}}));
  await run('npm',['install','--no-audit','--no-fund','--foreground-scripts'],app);
  const require=createRequire(path.join(app,'package.json'));
  const adapter=path.dirname(require.resolve('next-scriptc'));
