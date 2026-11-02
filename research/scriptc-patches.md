@@ -13,6 +13,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 | Closed-record certificate investigation | `next-scriptc/closed-records` | local diagnosis only; stopped on metadata loss, no facility or adapter change. Pushed to the fork 2026-11-02. | 2026-11-01, `f606a3bd8` | — |
 | Cached record prototype reflection | `next-scriptc/result-reflection` | experimental, focused parity only. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
 | Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | focused checks pass, full gate pending; **stacked on the int8 branch**. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
+| Dense native object key arrays | `next-scriptc/object-key-array-construction` | Local commit `0f66b43c5`; not pushed; focused validation only | 2026-11-02, `38cc546e0` | ASan/UBSan runtime tests, release/dev corpus + sanitized RC audit, 3 affected cases, lint/format; full gate pending |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Pushed `d49007483`; local fix `2a3ce4ba6` (quadratic range walk) is unpushed. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) | 2026-11-01–02: `d49007483` plain failed, sanitized incomplete; fix has focused checks only ([report](int8-gate-2026-11-01.md)) |
 
 ## int8 product ranges in wrapping sums
@@ -162,3 +163,11 @@ Getter re-exports need descriptor semantics and an effect proof before promotion
 
 Isolated dynamic JSON property reads, module-level Set lookup, and callback
 regex replacement compile. No SC failure is claimed for these constructs.
+
+## Dense native object key arrays
+
+- Branch `next-scriptc/object-key-array-construction`, commit `0f66b43c5ba7fc11e6d2d930c25566f03bca6527`, worktree `/Users/noah/code/scriptc-wt/c1-object-string`, freshly fetched upstream base `38cc546e0`. Local only, not pushed.
+- `scr_dyn_own_key_strs` constructs fresh inline arrays and fills owned dense slots directly instead of general indexed pushes. Ordering, optional presence, enumerability, and observable snapshot ownership are preserved.
+- Four alternating windows over 50k key snapshots improve 11–15%; pooled median 8.0265 → 6.9325 ms. Whole JSON walk improves only 10.364 → 10.186 ms in one final session. Large CSV does not improve (42.570 → 43.365 ms); no CSV benefit claimed.
+- New C ownership assertions and corpus `object-keys-owned-dense-array.ts`; both C ASan/UBSan modes, corpus release/dev and sanitized RC audit, three affected descriptor/order programs, single-fixture preflight/order, baseline completeness, lint and format pass. Full gate and other runtime variants remain outstanding.
+- [C1 report, raw measurements, profiles, design notes, and reproduction](compiler-object-string.md).

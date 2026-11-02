@@ -1,0 +1,178 @@
+Analysis of sampling nsc-c1-stock-suite (pid 84756) every 1 millisecond
+Process:         nsc-c1-stock-suite [84756]
+Path:            /private/tmp/nsc-c1-stock-suite
+Load Address:    0x104210000
+Identifier:      nsc-c1-stock-suite
+Version:         ???
+Code Type:       ARM64
+Parent Process:  node [84692]
+Target Type:     live task
+
+Date/Time:       2026-11-02 23:45:19.855 +0100
+Launch Time:     2026-11-02 23:45:19.802 +0100
+OS Version:      macOS 26.6.1 (25G76)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         6929K
+Physical footprint (peak):  6929K
+Idle exit:                  untracked
+----
+
+Call graph:
+    202 Thread_1524896: Main Thread
+    + 194 _dyld_start  (in dyld) + 0  [0x1043909c0]
+    + 4 start  (in dyld) + 6904  [0x18ed9848c]
+    + ! 4 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x18ed98b30]
+    + !   3 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 3996  [0x18ed99ae8]
+    + !   : 3 dyld4::RuntimeState::notifyDebuggerLoad(std::span<dyld4::Loader const*, 18446744073709551615ul> const&)  (in dyld) + 528  [0x18eda8c8c]
+    + !   :   3 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 1084  [0x18edb3c80]
+    + !   :     3 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x18edb3524]
+    + !   :       3 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x18edf9c90]
+    + !   :         3 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x18edf9904]
+    + !   :           3 mach_msg_overwrite  (in dyld) + 244  [0x18ee1318c]
+    + !   :             3 mach_msg2_internal  (in dyld) + 76  [0x18ee12fe4]
+    + !   :               3 mach_msg2_trap  (in dyld) + 8  [0x18ed7972c]
+    + !   1 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 4184  [0x18ed99ba4]
+    + !     1 dyld4::APIs::runAllInitializersForMain()  (in dyld) + 100  [0x18ed8c870]
+    + !       1 dyld4::PrebuiltLoader::runInitializers(dyld4::RuntimeState&) const  (in dyld) + 44  [0x18edebd44]
+    + !         1 dyld4::Loader::findAndRunAllInitializers(dyld4::RuntimeState&) const  (in dyld) + 528  [0x18edc1394]
+    + !           1 dyld3::MachOAnalyzer::forEachInitializer(Diagnostics&, dyld3::MachOAnalyzer::VMAddrConverter const&, void (unsigned int) block_pointer, void const*) const  (in dyld) + 516  [0x18edd1580]
+    + !             1 mach_o::UnsafeHeader::forEachSection(void (mach_o::UnsafeHeader::SectionInfo const&, bool&) block_pointer) const  (in dyld) + 124  [0x18ee1024c]
+    + !               1 mach_o::UnsafeHeader::forEachLoadCommand(void (load_command const*, bool&) block_pointer) const  (in dyld) + 208  [0x18ee0e9a4]
+    + !                 1 invocation function for block in mach_o::UnsafeHeader::forEachSection(void (mach_o::UnsafeHeader::SectionInfo const&, bool&) block_pointer) const  (in dyld) + 312  [0x18ee11fac]
+    + !                   1 invocation function for block in dyld3::MachOAnalyzer::forEachInitializer(Diagnostics&, dyld3::MachOAnalyzer::VMAddrConverter const&, void (unsigned int) block_pointer, void const*) const  (in dyld) + 320  [0x18edd1a8c]
+    + !                     1 invocation function for block in dyld4::Loader::findAndRunAllInitializers(dyld4::RuntimeState&) const::$_0::operator()() const  (in dyld) + 180  [0x18edc6a28]
+    + !                       1 libSystem_initializer  (in libSystem.B.dylib) + 136  [0x19efbf2e4]
+    + !                         1 __pthread_init  (in libsystem_pthread.dylib) + 1092  [0x18f15ddd4]
+    + !                           1 _simple_getenv  (in libsystem_platform.dylib) + 56  [0x18f16cfb8]
+    + !                             1 _platform_strlen  (in libsystem_platform.dylib) + 48  [0x18f16aaf0]
+    + 2 start  (in dyld) + 6008  [0x1043ac10c]
+    + ! 2 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x1043c6c54]
+    + !   2 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x1043c7524]
+    + !     2 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x10440dc90]
+    + !       2 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x10440d904]
+    + !         2 mach_msg_overwrite  (in dyld) + 244  [0x10442718c]
+    + !           2 mach_msg2_internal  (in dyld) + 76  [0x104426fe4]
+    + !             2 mach_msg2_trap  (in dyld) + 8  [0x10438d72c]
+    + 1 start  (in dyld) + 4700  [0x1043abbf0]
+    + ! 1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x1043c6c54]
+    + !   1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x1043c7524]
+    + !     1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x10440dc90]
+    + !       1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x10440d904]
+    + !         1 mach_msg_overwrite  (in dyld) + 244  [0x10442718c]
+    + !           1 mach_msg2_internal  (in dyld) + 76  [0x104426fe4]
+    + !             1 mach_msg2_trap  (in dyld) + 8  [0x10438d72c]
+    + 1 start  (in dyld) + 4028  [0x18ed97950]
+    +   1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 2116  [0x18edb2c54]
+    +     1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 296  [0x18edb3524]
+    +       1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x18edf9c90]
+    +         1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x18edf9904]
+    +           1 mach_msg_overwrite  (in dyld) + 244  [0x18ee1318c]
+    +             1 mach_msg2_internal  (in dyld) + 76  [0x18ee12fe4]
+    +               1 mach_msg2_trap  (in dyld) + 8  [0x18ed7972c]
+    1968 Thread_1524896   DispatchQueue_1: com.apple.main-thread  (serial)
+      957 sc_bf_run  (in nsc-c1-stock-suite) + 540  [0x10424e394]
+      ! 837 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 40  [0x104214f30]
+      ! : 611 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 728,184,...  [0x104214af4,0x1042148d4,...]
+      ! : 185 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 176  [0x1042148cc]
+      ! : | 185 scr_f64_to_str  (in nsc-c1-stock-suite) + 204,48,...  [0x1042114cc,0x104211430,...]
+      ! : 24 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 580  [0x104214a60]
+      ! : | 24 _platform_memmove  (in libsystem_platform.dylib) + 88,104  [0x18f16d3b8,0x18f16d3c8]
+      ! : 16 scr_f64_to_str  (in nsc-c1-stock-suite) + 1552  [0x104211a10]
+      ! : 1 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 476  [0x1042149f8]
+      ! :   1 scr_str_alloc  (in nsc-c1-stock-suite) + 172  [0x104213b4c]
+      ! :     1 _xzm_malloc_large_huge  (in libsystem_malloc.dylib) + 464  [0x18ef7f458]
+      ! :       1 xzm_segment_group_alloc_chunk  (in libsystem_malloc.dylib) + 504  [0x18ef685f4]
+      ! :         1 _xzm_segment_group_find_and_allocate_chunk  (in libsystem_malloc.dylib) + 528  [0x18ef68c30]
+      ! :           1 _xzm_segment_group_span_mark_smaller  (in libsystem_malloc.dylib) + 364  [0x18ef6a1c4]
+      ! :             1 xzm_reclaim_mark_free_locked  (in libsystem_malloc.dylib) + 116  [0x18ef67968]
+      ! :               1 mach_vm_reclaim_try_enter  (in libsystem_kernel.dylib) + 296  [0x18f13317c]
+      ! :                 1 mach_absolute_time  (in libsystem_kernel.dylib) + 112  [0x18f120110]
+      ! 47 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 52  [0x104214f3c]
+      ! : 44 scr_str_release  (in nsc-c1-stock-suite) + 16,4,...  [0x104213db4,0x104213da8,...]
+      ! : 2 xzm_segment_group_free_chunk  (in libsystem_malloc.dylib) + 636  [0x18ef693bc]
+      ! : | 2 _xzm_segment_group_segment_span_free_coalesce  (in libsystem_malloc.dylib) + 432  [0x18ef69a7c]
+      ! : |   2 _xzm_segment_group_span_mark_used  (in libsystem_malloc.dylib) + 148  [0x18ef6b3b0]
+      ! : |     2 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 124  [0x18ef67fac]
+      ! : |       2 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x18ef6aa9c]
+      ! : |         1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18f1332f8]
+      ! : |         + 1 mach_absolute_time  (in libsystem_kernel.dylib) + 16  [0x18f1200b0]
+      ! : |         1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 124  [0x18f133270]
+      ! : 1 _xzm_free  (in libsystem_malloc.dylib) + 1048  [0x18ef80530]
+      ! :   1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18f12010c]
+      ! 28 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 24,40  [0x104214f20,0x104214f30]
+      ! 25 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 1028,1012  [0x104214c20,0x104214c10]
+      ! 20 scr_str_release  (in nsc-c1-stock-suite) + 48,44  [0x104213dd4,0x104213dd0]
+      757 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+      ! 260 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 152  [0x10421681c]
+      ! : 234 _platform_memchr  (in libsystem_platform.dylib) + 120,84,...  [0x18f16ae78,0x18f16ae54,...]
+      ! : 26 DYLD-STUB$$memchr  (in nsc-c1-stock-suite) + 4,0  [0x104253074,0x104253070]
+      ! 209 scr_str_split_piece  (in nsc-c1-stock-suite) + 560  [0x104216760]
+      ! : 176 _platform_memmove  (in libsystem_platform.dylib) + 428,460,...  [0x18f16d50c,0x18f16d52c,...]
+      ! : 33 DYLD-STUB$$memcpy  (in nsc-c1-stock-suite) + 4,8  [0x10425308c,0x104253090]
+      ! 146 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 224,32,...  [0x104216864,0x1042167a4,...]
+      ! 142 scr_str_split_piece  (in nsc-c1-stock-suite) + 280,16,...  [0x104216648,0x104216540,...]
+      54 start  (in dyld) + 6992  [0x18ed984e4]
+      ! 52 main  (in nsc-c1-stock-suite) + 1100  [0x104251278]
+      ! : 44 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+      ! : | 40 sc_bf_run  (in nsc-c1-stock-suite) + 1332,1268,...  [0x10424e6ac,0x10424e66c,...]
+      ! : | 4 scr_str_split_piece  (in nsc-c1-stock-suite) + 0  [0x104216530]
+      ! : 7 sc_bf_run  (in nsc-c1-stock-suite) + 540  [0x10424e394]
+      ! : | 7 sc_bf_run  (in nsc-c1-stock-suite) + 508,540,...  [0x10424e374,0x10424e394,...]
+      ! : 1 sc_bf_run  (in nsc-c1-stock-suite) + 1380  [0x10424e6dc]
+      ! :   1 xzm_malloc_zone_try_free_default  (in libsystem_malloc.dylib) + 0  [0x18ef8b170]
+      ! 2 main  (in nsc-c1-stock-suite) + 964  [0x1042511f0]
+      !   1 sc_bf_run  (in nsc-c1-stock-suite) + 540  [0x10424e394]
+      !   | 1 sc_bf_run  (in nsc-c1-stock-suite) + 532  [0x10424e38c]
+      !   1 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+      !     1 sc_bf_run  (in nsc-c1-stock-suite) + 1268  [0x10424e66c]
+      48 ???  (in <unknown binary>)  [0x7080000000]
+      ! 27 sc_bf_run  (in nsc-c1-stock-suite) + 540  [0x10424e394]
+      ! : 27 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 4  [0x104214f0c]
+      ! 21 sc_bf_run  (in nsc-c1-stock-suite) + 1312  [0x10424e698]
+      !   21 scr_str_release  (in nsc-c1-stock-suite) + 4  [0x104213da8]
+      37 sc_bf_run  (in nsc-c1-stock-suite) + 1312  [0x10424e698]
+      ! 37 scr_str_release  (in nsc-c1-stock-suite) + 32,16  [0x104213dc4,0x104213db4]
+      35 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104213dd0]
+      28 scr_str_split_piece  (in nsc-c1-stock-suite) + 320,324  [0x104216670,0x104216674]
+      25 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 312,332,...  [0x1042168bc,0x1042168d0,...]
+      20 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 60  [0x104214f44]
+      4 main  (in nsc-c1-stock-suite) + 1436  [0x1042513c8]
+      ! 2 scr_console_write  (in nsc-c1-stock-suite) + 1204  [0x104228310]
+      ! : 1 scr_fd_writev_all  (in nsc-c1-stock-suite) + 144  [0x1042284ac]
+      ! : | 1 write  (in libsystem_kernel.dylib) + 8  [0x18f123834]
+      ! : 1 scr_fd_writev_all  (in nsc-c1-stock-suite) + 144  [0x1042284ac]
+      ! 2 scr_console_write  (in nsc-c1-stock-suite) + 1076,1140  [0x104228290,0x1042282d0]
+      1 ???  (in <unknown binary>)  [0xffffb8fae1480000]
+      ! 1 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+      !   1 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 20  [0x104216798]
+      1 ???  (in <unknown binary>)  [0xffffcda76c8b4000]
+      ! 1 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+      !   1 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 20  [0x104216798]
+      1 ???  (in <unknown binary>)  [0xffffe072b0210000]
+        1 sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+          1 scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 20  [0x104216798]
+
+Total number in stack (recursive counted multiple, when >=5):
+        6       sc_bf_run  (in nsc-c1-stock-suite) + 1332  [0x10424e6ac]
+        5       scr_str_release  (in nsc-c1-stock-suite) + 0  [0x104213da4]
+        5       scr_str_split_cursor_next  (in nsc-c1-stock-suite) + 0  [0x104216784]
+
+Sort by top of stack, same collapsed (when >= 5):
+        scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite)        636
+        _platform_memchr  (in libsystem_platform.dylib)        234
+        scr_f64_to_str  (in nsc-c1-stock-suite)        201
+        _platform_memmove  (in libsystem_platform.dylib)        200
+        _dyld_start  (in dyld)        194
+        scr_str_split_cursor_next  (in nsc-c1-stock-suite)        174
+        scr_str_split_piece  (in nsc-c1-stock-suite)        174
+        scr_str_release  (in nsc-c1-stock-suite)        157
+        scr_str_concat_mixed_move  (in nsc-c1-stock-suite)        75
+        sc_bf_run  (in nsc-c1-stock-suite)        49
+        DYLD-STUB$$memcpy  (in nsc-c1-stock-suite)        33
+        DYLD-STUB$$memchr  (in nsc-c1-stock-suite)        26
+        mach_msg2_trap  (in dyld)        7
+
+Binary images description not available
+

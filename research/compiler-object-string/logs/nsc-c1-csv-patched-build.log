@@ -1,0 +1,11 @@
+warning SC6101: 14 functions that likely run often use untyped values, which runs slower than typed code:
+  splitLines (nsc-c1-csv.mjs:851): untyped JavaScript file, in a loop
+  __copyProps (nsc-c1-csv.mjs:11): untyped JavaScript file, in a loop
+  js.%fn.eb07ae55409b (nsc-c1-csv.mjs:11): untyped JavaScript file, in a loop
+  anonymous function (nsc-c1-csv.mjs:622): untyped JavaScript file, in a loop
+  anonymous function (nsc-c1-csv.mjs:545): untyped JavaScript file, in a loop
+  and 9 more
+  hint: add types to compile these statically; see scriptc coverage --explain-dynamic
+
+The program compiled. Adding types to these functions lets scriptc compile them to faster code.
+/tmp/nsc-c1-csv-patched
