@@ -1,0 +1,94 @@
+{
+  "og-link": {
+    "repository": "https://github.com/skorfmann/og-link.git",
+    "commit": "553e714c923757e13022bc1fc8199202a1b8b5a3",
+    "source": "src",
+    "sourceFiles": 2,
+    "accepted": [],
+    "logs": [
+      "[next-scriptc] not a candidate decodeBase64Url: [next-scriptc] <app>/src/worker.ts: function decodeBase64Url: unsupported reference atob"
+    ]
+  },
+  "cloudflare-worker-image-cdn": {
+    "repository": "https://github.com/FrancescoCiannavei/cloudflare-worker-image-cdn.git",
+    "commit": "cb3b1404d03160e0600860b7627a22628ae82de0",
+    "source": "src",
+    "sourceFiles": 8,
+    "accepted": [
+      {
+        "file": "src/util/steps.ts",
+        "name": "snapToStep",
+        "boundary": {
+          "params": [
+            "number",
+            "json"
+          ],
+          "result": "number"
+        }
+      }
+    ],
+    "logs": [
+      "[next-scriptc] not a candidate buildCacheKey: dependency closure: transitive effect proof: opaque or uninitialized reference at 8",
+      "[next-scriptc] not a candidate canEncodeAvif: work: no loop, recursion, array callback or JSON parse",
+      "[next-scriptc] not a candidate canEncode: work: no loop, recursion, array callback or JSON parse",
+      "[next-scriptc] not a candidate getBestFormat: work: no loop, recursion, array callback or JSON parse",
+      "[next-scriptc] not a candidate getContentType: work: no loop, recursion, array callback or JSON parse",
+      "[next-scriptc] not a candidate downscale: dependency closure: unresolved runtime import @cf-wasm/photon",
+      "[next-scriptc] not a candidate passthrough: [next-scriptc] <app>/src/util/proxy.ts: function passthrough: unsupported reference Response",
+      "[next-scriptc] not a candidate computeDimensions: work: no loop, recursion, array callback or JSON parse",
+      "[next-scriptc] not a candidate parseSteps: purity: nonlocal mutation",
+      "[next-scriptc] not a candidate: [next-scriptc] <app>/src/util/dimensions.ts: function getImageDimensions: parameter buffer.slice: functions and constructors are not JSON data (type (begin?: number | undefined, end?: number | undefined) => ArrayBuffer)"
+    ]
+  },
+  "protomap-worker": {
+    "repository": "https://github.com/Ventairy/protomap-worker.git",
+    "commit": "9f9b2be1855468bdb943e3eca820b13154450f7d",
+    "source": "src",
+    "sourceFiles": 61,
+    "accepted": [
+      {
+        "file": "src/auth/auth.utils.ts",
+        "name": "timingSafeEqual",
+        "boundary": {
+          "params": [
+            "bytes",
+            "bytes"
+          ],
+          "result": "boolean"
+        }
+      },
+      {
+        "file": "src/index.ts",
+        "name": "_resolveAllowedOrigin",
+        "boundary": {
+          "params": [
+            "string",
+            "json"
+          ],
+          "result": "string"
+        }
+      },
+      {
+        "file": "src/shared/bytes.utils.ts",
+        "name": "hexToBytes",
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "json"
+        }
+      }
+    ],
+    "logs": [
+      "[next-scriptc] not a candidate toHex: [next-scriptc] <app>/src/auth/v1-auth-handler.test.ts: function toHex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+      "[next-scriptc] not a candidate createMockBucket: [next-scriptc] <app>/src/glyphs/glyph-serving.test.ts: function createMockBucket: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+      "[next-scriptc] not a candidate createMockObject: [next-scriptc] <app>/src/glyphs/glyph-serving.test.ts: function createMockObject: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+      "[next-scriptc] not a candidate toHex: [next-scriptc] <app>/src/index.test.ts: function toHex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+      "[next-scriptc] not a candidate _getCachedResponse: [next-scriptc] <app>/src/index.ts: function _getCachedResponse: unsupported reference Headers",
+      "[next-scriptc] not a candidate createMockPmtiles: [next-scriptc] <app>/src/pmtiles/tile-serving.test.ts: function createMockPmtiles: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+      "[next-scriptc] not a candidate parseRoute: dependency closure: /private<app>/src/shared/map-tile.utils.ts: constant graph exported reference can escape",
+      "[next-scriptc] not a candidate _validateGlyphPath: dependency closure: /private<app>/src/error/index.ts: unresolved export GlyphPathInvalidError",
+      "[next-scriptc] not a candidate tilePath: work: no loop, recursion, array callback or JSON parse"
+    ]
+  }
+}

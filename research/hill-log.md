@@ -1234,3 +1234,40 @@ no merge or push. [Report, limits, tables, and reproduction](boundary-encoders.m
 3. Avoiding re-serialization entirely when the input was just parsed from JSON text: source-text passthrough.
 
 PM3 is deferred until one of these moves the estimate clearly below JS.
+
+## 41. Container route candidates and local binding proxy (2026-11-02)
+
+Shallow source census covers 12 Workers-targeting projects: 11 with OSS license
+declarations and one source-available search system excluded from that denominator.
+Five are strong source-level offload candidates, four OG workloads remain conditional,
+and two OSS projects fail the numeric CPU screen. None has request CPU measured here.
+The positives are image codecs and Argon2, predominantly Rust/Wasm already. One
+image app already forwards Worker requests to a native Rust Cloudflare Container.
+This supports explicit route offload, but does not establish an automatic scriptc
+market. Source discovery on three clones accepts four small helpers and no
+identified heavy JS compute core. App dependencies were not installed, so unresolved
+imports are qualified rather than presented as definitive compiler failures.
+
+A separate Node process calls a Miniflare Worker owning ephemeral local KV through
+an authenticated HTTP shim. Final 300-sample sequential medians are 0.438 ms for
+no-op, 0.570 ms for 64-byte get, and 0.949 ms for 64-byte put. At 64 KiB, get is
+0.815 ms and put is 1.315 ms. These are complete loopback elapsed round trips,
+including serialization and local storage, not hosted latency or isolated transport
+surcharges. Three retained runs include raw samples; auth, scope, value limit,
+missing-key, Unicode and readback assertions pass.
+
+Current Cloudflare documentation already offers Container outbound handlers with
+Worker bindings through virtual hostnames. Use that supported channel for a future
+hosted version. Text KV shims are practical; R2 streams and metadata, D1 batches
+and sessions, DO stub ordering, replay and cancellation need explicit contracts.
+A general transparent env clone is not justified. Fetch at the Worker edge, run
+compute in the container, and return once wherever possible.
+
+No deploy, login, account API, Docker, push, or public write occurred. Miniflare's
+default startup fetched public Request.cf metadata in preliminary runs; final code
+sets cf:false and does not recreate its removed cache. All binding traffic stays
+local. All task-owned clones, dependencies and symlinks are removed. No third-party
+source, root README, main checkout or scriptc fork is changed. Details and limits:
+[Candidate census](container-offload-candidates.md) and
+[binding proxy](binding-proxy.md). Continue a small application-level offload proof,
+then gate broader work on a measured heavy promotable JS route.
