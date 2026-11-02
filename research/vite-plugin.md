@@ -53,8 +53,8 @@ For inspection, `globalThis[Symbol.for('scriptc-promote.dispatchers')]` maps loa
 | --- | --- |
 | SvelteKit | Real production build and `node build` tested with adapter-node and the adapter wrapper. Inline `.svelte` functions, non-Node adapters, and custom adapter layouts remain unsupported. |
 | Nuxt / Nitro | A Node Vite SSR graph can use the plugin. Nitro separately builds API handlers and packages its output; those handlers need a Nitro discovery/transform and artifact-copy hook. Full Nuxt server promotion is unvalidated. |
-| Astro | Node SSR modules can use the plugin. Inline `.astro` code and adapter artifact publication need integration. Static builds have no runtime promotion. Unvalidated. |
-| React Router | Traditional Node `build.ssr` builds fit the plugin contract. Framework output packaging and route graph selection need end-to-end validation. |
+| Astro | `scriptc-promote/astro` installs promotion in Astro 5 server builds with `@astrojs/node`. Production standalone server, endpoint and page-imported helper, client isolation, relocated artifacts, and verified shadows pass. Inline `.astro` frontmatter, static builds, non-Node adapters, and Astro 6+ remain unsupported or unvalidated. |
+| React Router | `scriptc-promote/react-router` scans `app` in v7 classic framework Node builds. Production resource loader/action and page-loader helper pass with relocated server artifacts and isolated client output. Custom `appDirectory` needs `sourceDir`; experimental environment builds and non-Node targets remain unvalidated. |
 | TanStack Start | Builds that use only the new multi-environment builder without `build.ssr` are skipped. Per-environment state, server-function graph selection, and final output publication need integration. |
 
 V1 uses the classic Vite SSR build contract. Concurrent builds across multiple environments in one plugin instance are outside its supported contract. Native addons require a Node host and a matching OS/architecture; wasm and edge hosts are separate work.
@@ -95,3 +95,5 @@ node scripts/vite-real-app-check.mjs /absolute/path/to/realworld
 ```
 
 The runner checks the commit, records the upstream census before adding the probe, builds production output, starts two local Node servers, compares bytes, and records verification state. It leaves the external probe and build available for inspection. Remove the external app's `node_modules` after validation to reclaim disk space. `examples/vite-demo` provides the same small checksum workload without third-party source.
+
+Astro and React Router configuration, pinned external censuses, production parity evidence, and reproduction are in [framework integrations](framework-integrations-astro-react-router.md).

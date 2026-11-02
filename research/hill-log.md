@@ -599,3 +599,37 @@ Validation ran serially. No Docker/container changes, compiler/fork changes,
 Papermark work, Vercel or Cloudflare calls, third-party source commits, root
 README edits, merge or push. Temporary dependency installations were removed.
 [Design, evidence and reproduction](vite-plugin.md).
+
+## 27b. Astro and React Router Node framework integration (2026-11-02)
+
+Hypothesis: Astro 5's server build hook and React Router v7's classic framework
+Vite build can reuse promotion without changing the proof or dispatcher core.
+Kept framework-specific entrypoints. Astro installs a fresh plugin only for its
+Node server build and uses the resolved source directory. React Router defaults
+to `app`. Both frameworks preserve all three runtime artifacts in their final
+server output, so neither needs an extra artifact copy step.
+
+The two small examples build production output and start local Node servers
+after output relocation. Each returns 120 byte-identical compute responses with
+promotion enabled versus disabled. React Router exercises GET loaders and POST
+actions. Astro page imports and shared browser imports, plus React Router page
+loaders and components, exercise server/client graph isolation. Each dispatcher
+reaches shadow with six verified samples and zero fallbacks. No native foreground
+serving or timing gain is claimed. Inline Astro frontmatter remains unsupported;
+Astro 6+, experimental environment builds, non-Node adapters, and server bundle
+splitting remain unvalidated.
+
+Pinned external MIT apps stay outside the repository. AstroPaper v5.5.1 at
+25d25437cf85b5df77c26b094ccc7035c6adddad accepts zero functions in 19 source
+files. It is a static blog, so this is discovery evidence only. React Router
+RealWorld at 59cf71947386f4ffac13f95b5f0ef47237e36c4a accepts zero in 52 files.
+No external probe or third-party source is committed. Temporary installs run
+serially and are removed. Disk exhaustion interrupted an initial AstroPaper
+install; the retained census uses the Astro 5 tag after space was reclaimed.
+No compiler source, Docker container, hosting provider, Papermark, or root README
+was touched. [Report, evidence, limits, and reproduction](framework-integrations-astro-react-router.md).
+
+Final package validation passes 95 Next tests and five promotion tests, with no
+skips. The latter include both framework production checks and existing Vite
+6.4.5/7.3.7 checks. The temporary dependency symlink and framework fixture installs
+are removed before commit. Shared Vite implementation remains unchanged.
