@@ -1,0 +1,71 @@
+{
+  "repository": "evidence-dev/evidence",
+  "sha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "split": "DEV",
+  "adapterSha": "4f8754ac0bbb035a74b2104fe98425440eae48aa",
+  "status": "installed; scans partial/missing",
+  "scopes": [],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/nsc-dev-census/evidence"
+    ],
+    "exit": 0,
+    "seconds": 0.01,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/evidence-dev/evidence.git",
+      "590143b9ecd2993b0907d4ba85ec5920c097776f"
+    ],
+    "exit": 0,
+    "seconds": 2.8,
+    "output": "From https://github.com/evidence-dev/evidence\n * branch            590143b9ecd2993b0907d4ba85ec5920c097776f -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.25,
+    "output": ""
+  },
+  "verifiedSha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "packageInventory": [
+    "package.json",
+    "core/package.json",
+    "cli/package.json"
+  ],
+  "missingPlannedScopes": [
+    "packages/evidence/src/lib/server",
+    "packages/core-connection/src"
+  ],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 51196149760,
+  "packageManager": "pnpm@9.15.0",
+  "install": {
+    "command": [
+      "corepack",
+      "pnpm@9.15.0",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--store-dir",
+      "/tmp/nsc-dev-census/store"
+    ],
+    "exit": 0,
+    "seconds": 22.97,
+    "output": "Scope: all 3 workspace projects\n(node:1210) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)\nLockfile is up to date, resolution step is skipped\nProgress: resolved 1, reused 0, downloaded 0, added 0\nPackages: +956\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 956, reused 0, downloaded 91, added 77\nProgress: resolved 956, reused 0, downloaded 141, added 133\nProgress: resolved 956, reused 0, downloaded 285, added 283\nProgress: resolved 956, reused 0, downloaded 353, added 343\nProgress: resolved 956, reused 0, downloaded 388, added 378\nProgress: resolved 956, reused 0, downloaded 466, added 460\nProgress: resolved 956, reused 0, downloaded 558, added 555\nProgress: resolved 956, reused 0, downloaded 619, added 619\nProgress: resolved 956, reused 0, downloaded 666, added 668\nProgress: resolved 956, reused 0, downloaded 728, added 730\nProgress: resolved 956, reused 0, downloaded 766, added 767\nProgress: resolved 956, reused 0, downloaded 783, added 778\nProgress: resolved 956, reused 0, downloaded 791, added 782\nProgress: resolved 956, reused 0, downloaded 798, added 788\nProgress: resolved 956, reused 0, downloaded 811, added 794\nProgress: resolved 956, reused 0, downloaded 815, added 801\nProgress: resolved 956, reused 0, downloaded 849, added 845\nProgress: resolved 956, reused 0, downloaded 913, added 909\nProgress: resolved 956, reused 0, downloaded 948, added 945\nProgress: resolved 956, reused 0, downloaded 951, added 954\nProgress: resolved 956, reused 0, downloaded 952, added 956, done\n\ndevDependencies:\n+ @vitest/coverage-v8 4.1.2\n+ vitest 4.1.2\n\nDone in 21.6s\n"
+  },
+  "generators": [],
+  "scans": []
+}

@@ -1,0 +1,3365 @@
+{
+  "repository": "lissy93/dashy",
+  "sha": "85eb4f858db4d068f96b2aeb27a87521c4d51536",
+  "split": "DEV",
+  "adapterSha": "4f8754ac0bbb035a74b2104fe98425440eae48aa",
+  "status": "installed; scans complete",
+  "scopes": [
+    "services"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/nsc-dev-census/dashy"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/lissy93/dashy.git",
+      "85eb4f858db4d068f96b2aeb27a87521c4d51536"
+    ],
+    "exit": 0,
+    "seconds": 7.66,
+    "output": "From https://github.com/lissy93/dashy\n * branch            85eb4f858db4d068f96b2aeb27a87521c4d51536 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.25,
+    "output": ""
+  },
+  "verifiedSha": "85eb4f858db4d068f96b2aeb27a87521c4d51536",
+  "packageInventory": [
+    "package.json"
+  ],
+  "missingPlannedScopes": [],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 42678165504,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--non-interactive"
+    ],
+    "exit": 0,
+    "seconds": 22.66,
+    "output": "yarn install v1.22.22\n[1/5] Validating package.json...\n[2/5] Resolving packages...\n(node:3240) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n[3/5] Fetching packages...\n[4/5] Linking dependencies...\nwarning \" > @vue/test-utils@2.5.1\" has unmet peer dependency \"@vue/compiler-dom@3.x\".\nwarning \" > vite-plugin-pwa@2.0.0\" has unmet peer dependency \"workbox-build@^7.4.1\".\nwarning \" > vite-plugin-pwa@2.0.0\" has unmet peer dependency \"workbox-window@^7.4.1\".\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\n[5/5] Building fresh packages...\nwarning Ignored scripts due to flag.\nDone in 22.52s.\n"
+  },
+  "generators": [],
+  "scans": [
+    {
+      "scope": "services",
+      "scanRoot": ".",
+      "reportProcess": {
+        "command": [
+          "node",
+          "--max-old-space-size=6144",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-b004417b/packages/scriptc-promote/src/cli.mjs",
+          "report",
+          "/tmp/nsc-dev-census/dashy",
+          "--source-dir",
+          "services",
+          "--json",
+          "/tmp/nsc-dev-census/dashy-report.json"
+        ],
+        "exit": 0,
+        "seconds": 0.95,
+        "output": "scriptc-promote coverage \u2014 vite\n25 files; 73 top-level callable bindings (0 exported)\n64 considered; 64 diagnosed; 0 accepted; 9 silently excluded\nDiagnostics are not a complete denominator; acceptance is not a speedup.\nrejected             services/app.js#printWarning \u2014 [next-scriptc] not a candidate printWarning: [next-scriptc] <tmp>/dashy/services/app.js: function printWarning: unsupported reference console\nrejected             services/app.js#safeEnd \u2014 [next-scriptc] not a candidate safeEnd: [next-scriptc] <tmp>/dashy/services/app.js: function safeEnd: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/app.js#errBody \u2014 [next-scriptc] not a candidate errBody: [next-scriptc] <tmp>/dashy/services/app.js: function errBody: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/app.js#loadAuthConfig \u2014 [next-scriptc] not a candidate loadAuthConfig: [next-scriptc] <tmp>/dashy/services/app.js: function loadAuthConfig: unsupported reference require\nrejected             services/app.js#loadUserConfig \u2014 [next-scriptc] not a candidate loadUserConfig: [next-scriptc] <tmp>/dashy/services/app.js: function loadUserConfig: unsupported reference require\nrejected             services/app.js#customAuthorizer \u2014 [next-scriptc] not a candidate customAuthorizer: [next-scriptc] <tmp>/dashy/services/app.js: function customAuthorizer: unsupported reference require\nrejected             services/app.js#getAuthMiddleware \u2014 [next-scriptc] not a candidate getAuthMiddleware: [next-scriptc] <tmp>/dashy/services/app.js: function getAuthMiddleware: unsupported reference process\nrejected             services/app.js#requireAuth \u2014 [next-scriptc] not a candidate requireAuth: [next-scriptc] <tmp>/dashy/services/app.js: function requireAuth: unsupported reference require\nrejected             services/app.js#requireAdmin \u2014 [next-scriptc] not a candidate requireAdmin: [next-scriptc] <tmp>/dashy/services/app.js: function requireAdmin: unsupported reference require\nrejected             services/app.js#method \u2014 [next-scriptc] not a candidate method: [next-scriptc] <tmp>/dashy/services/app.js: function method: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/app.js#proxyEndpointsGate \u2014 [next-scriptc] not a candidate proxyEndpointsGate: [next-scriptc] <tmp>/dashy/services/app.js: function proxyEndpointsGate: unsupported reference process\nexcluded             services/app.js#app\nrejected             services/endpoints/alias-target.js#isUnrestricted \u2014 [next-scriptc] not a candidate isUnrestricted: [next-scriptc] <tmp>/dashy/services/endpoints/alias-target.js: function isUnrestricted: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/alias-target.js#isSafeTarget \u2014 [next-scriptc] not a candidate isSafeTarget: [next-scriptc] <tmp>/dashy/services/endpoints/alias-target.js: function isSafeTarget: unsupported reference URL\nrejected             services/endpoints/api/config-files.js#userDataDir \u2014 [next-scriptc] not a candidate userDataDir: [next-scriptc] <tmp>/dashy/services/endpoints/api/config-files.js: function userDataDir: unsupported reference require\nrejected             services/endpoints/api/config-files.js#safeFilename \u2014 [next-scriptc] not a candidate safeFilename: [next-scriptc] <tmp>/dashy/services/endpoints/api/config-files.js: function safeFilename: unsupported reference require\nexcluded             services/endpoints/api/config-files.js#listConfigFiles\nexcluded             services/endpoints/api/config-files.js#readConfig\nexcluded             services/endpoints/api/config-files.js#writeConfig\nrejected             services/endpoints/api/config-files.js#resolveIndex \u2014 [next-scriptc] not a candidate resolveIndex: [next-scriptc] <tmp>/dashy/services/endpoints/api/config-files.js: function resolveIndex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/api/index.js#tokensMatch \u2014 [next-scriptc] not a candidate tokensMatch: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function tokensMatch: unsupported reference Buffer\nrejected             services/endpoints/api/index.js#apiErrorHandler \u2014 [next-scriptc] not a candidate apiErrorHandler: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function apiErrorHandler: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/api/index.js#apiEnabledGate \u2014 [next-scriptc] not a candidate apiEnabledGate: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function apiEnabledGate: unsupported reference process\nrejected             services/endpoints/api/index.js#requireObjectBody \u2014 [next-scriptc] not a candidate requireObjectBody: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function requireObjectBody: unsupported reference require\nrejected             services/endpoints/api/index.js#checkKey \u2014 [next-scriptc] not a candidate checkKey: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function checkKey: unsupported reference require\nrejected             services/endpoints/api/index.js#getArray \u2014 [next-scriptc] not a candidate getArray: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function getArray: unsupported reference require\nrejected             services/endpoints/api/index.js#findSection \u2014 [next-scriptc] not a candidate findSection: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function findSection: unsupported reference require\nrejected             services/endpoints/api/index.js#findItem \u2014 [next-scriptc] not a candidate findItem: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function findItem: unsupported reference require\nrejected             services/endpoints/api/index.js#createApiRouter \u2014 [next-scriptc] not a candidate createApiRouter: [next-scriptc] <tmp>/dashy/services/endpoints/api/index.js: function createApiRouter: unsupported reference require\nrejected             services/endpoints/cors-proxy.js#resolvePlaceholder \u2014 [next-scriptc] not a candidate resolvePlaceholder: [next-scriptc] <tmp>/dashy/services/endpoints/cors-proxy.js: function resolvePlaceholder: unsupported reference process\nrejected             services/endpoints/cors-proxy.js#substituteEnv \u2014 [next-scriptc] not a candidate substituteEnv: [next-scriptc] <tmp>/dashy/services/endpoints/cors-proxy.js: function substituteEnv: unsupported reference process\nrejected             services/endpoints/cors-proxy.js#handler \u2014 [next-scriptc] not a candidate handler: [next-scriptc] <tmp>/dashy/services/endpoints/cors-proxy.js: function handler: unsupported reference process\nrejected             services/endpoints/opensearch.js#xmlEscape \u2014 [next-scriptc] not a candidate xmlEscape: [next-scriptc] <tmp>/dashy/services/endpoints/opensearch.js: function xmlEscape: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/ping-check.js#boundedParam \u2014 [next-scriptc] not a candidate boundedParam: [next-scriptc] <tmp>/dashy/services/endpoints/ping-check.js: function boundedParam: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/ping-check.js#immediateError \u2014 [next-scriptc] not a candidate immediateError: [next-scriptc] <tmp>/dashy/services/endpoints/ping-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/save-config.js#withModeline \u2014 [next-scriptc] not a candidate withModeline: [next-scriptc] <tmp>/dashy/services/endpoints/save-config.js: function withModeline: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/serve-config.js#yamlFilename \u2014 [next-scriptc] not a candidate yamlFilename: [next-scriptc] <tmp>/dashy/services/endpoints/serve-config.js: function yamlFilename: unsupported reference require\nrejected             services/endpoints/status-check.js#getResponseType \u2014 [next-scriptc] not a candidate getResponseType: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function getResponseType: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/status-check.js#makeMessageText \u2014 [next-scriptc] not a candidate makeMessageText: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function makeMessageText: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/status-check.js#makeErrorMessage \u2014 [next-scriptc] not a candidate makeErrorMessage: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function makeErrorMessage: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/status-check.js#makeErrorMessage2 \u2014 [next-scriptc] not a candidate makeErrorMessage2: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function makeErrorMessage2: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/status-check.js#makeRequest \u2014 [next-scriptc] not a candidate makeRequest: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function makeRequest: unsupported reference require\nrejected             services/endpoints/status-check.js#decodeHeaders \u2014 [next-scriptc] not a candidate decodeHeaders: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function decodeHeaders: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/endpoints/status-check.js#immediateError \u2014 [next-scriptc] not a candidate immediateError: [next-scriptc] <tmp>/dashy/services/endpoints/status-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nexcluded             services/healthcheck.js#healthCheck\nrejected             services/utils/auth-oidc.js#loadOidcSettings \u2014 [next-scriptc] not a candidate loadOidcSettings: [next-scriptc] <tmp>/dashy/services/utils/auth-oidc.js: function loadOidcSettings: unsupported reference console\nexcluded             services/utils/auth-oidc.js#fetchDiscovery\nexcluded             services/utils/auth-oidc.js#getIssuerContext\nrejected             services/utils/auth-oidc.js#deriveIsAdmin \u2014 [next-scriptc] not a candidate deriveIsAdmin: [next-scriptc] <tmp>/dashy/services/utils/auth-oidc.js: function deriveIsAdmin: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/utils/auth-oidc.js#createOidcMiddleware \u2014 [next-scriptc] not a candidate createOidcMiddleware: [next-scriptc] <tmp>/dashy/services/utils/auth-oidc.js: function createOidcMiddleware: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)\nrejected             services/utils/auth-oidc.js#maybeBootstrapConfig \u2014 [next-scriptc] not a candidate maybeBootstrapConfig: [next-scriptc] <tmp>/dashy/services/utils/auth-oidc.js: function maybeBootstrapConfig: unsupported reference require\nrejected             services/utils/config-validator.js#successMsg \u2014 [next-scriptc] not a candidate successMsg: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function successMsg: unsupported module initialization TryStatement; move setup into a declaration initializer\nrejected             services/utils/config-validator.js#logToConsole \u2014 [next-scriptc] not a candidate logToConsole: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function logToConsole: unsupported reference console\nrejected             services/utils/config-validator.js#errorMsg \u2014 [next-scriptc] not a candidate errorMsg: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function errorMsg: unsupported module initialization TryStatement; move setup into a declaration initializer\nrejected             services/utils/config-validator.js#setIsValidVariable \u2014 [next-scriptc] not a candidate setIsValidVariable: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function setIsValidVariable: unsupported reference process\nrejected             services/utils/config-validator.js#validate \u2014 [next-scriptc] not a candidate validate: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function validate: unsupported reference console\nrejected             services/utils/config-validator.js#bigError \u2014 [next-scriptc] not a candidate bigError: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function bigError: unsupported module initialization TryStatement; move setup into a declaration initializer\nrejected             services/utils/config-validator.js#printFileReadError \u2014 [next-scriptc] not a candidate printFileReadError: [next-scriptc] <tmp>/dashy/services/utils/config-validator.js: function printFileReadError: unsupported reference console\nrejected             services/utils/request-origin.js#firstHeader \u2014 [next-scriptc] not a candidate firstHeader: [next-scriptc] <tmp>/dashy/services/utils/request-origin.js: function firstHeader: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/utils/request-origin.js#hostFromRequest \u2014 [next-scriptc] not a candidate hostFromRequest: [next-scriptc] <tmp>/dashy/services/utils/request-origin.js: function hostFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/utils/request-origin.js#originFromRequest \u2014 [next-scriptc] not a candidate originFromRequest: [next-scriptc] <tmp>/dashy/services/utils/request-origin.js: function originFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer\nrejected             services/utils/request.js#validateTargetUrl \u2014 [next-scriptc] not a candidate validateTargetUrl: [next-scriptc] <tmp>/dashy/services/utils/request.js: function validateTargetUrl: unsupported reference process\nrejected             services/utils/request.js#request \u2014 [next-scriptc] not a candidate request: [next-scriptc] <tmp>/dashy/services/utils/request.js: function request: unsupported reference require\nrejected             services/utils/ssl-server.js#printNotSoGood \u2014 [next-scriptc] not a candidate printNotSoGood: [next-scriptc] <tmp>/dashy/services/utils/ssl-server.js: function printNotSoGood: unsupported reference console\nrejected             services/utils/ssl-server.js#printSuccess \u2014 [next-scriptc] not a candidate printSuccess: [next-scriptc] <tmp>/dashy/services/utils/ssl-server.js: function printSuccess: unsupported reference console\nexcluded             services/utils/ssl-server.js#checkCertificateFiles\nrejected             services/utils/ssl-server.js#startSSLServer \u2014 [next-scriptc] not a candidate startSSLServer: [next-scriptc] <tmp>/dashy/services/utils/ssl-server.js: function startSSLServer: unsupported reference require\nrejected             services/utils/ssl-server.js#middleware \u2014 [next-scriptc] not a candidate middleware: [next-scriptc] <tmp>/dashy/services/utils/ssl-server.js: function middleware: reference enableSSL is reassigned outside its declaration\nrejected             services/utils/update-checker.js#logToConsole \u2014 [next-scriptc] not a candidate logToConsole: [next-scriptc] <tmp>/dashy/services/utils/update-checker.js: function logToConsole: unsupported reference console\nrejected             services/utils/update-checker.js#compareVersions \u2014 [next-scriptc] not a candidate compareVersions: [next-scriptc] <tmp>/dashy/services/utils/update-checker.js: function compareVersions: unsupported module initialization IfStatement; move setup into a declaration initializer\nrejected             services/utils/update-checker.js#makeMsg \u2014 [next-scriptc] not a candidate makeMsg: [next-scriptc] <tmp>/dashy/services/utils/update-checker.js: function makeMsg: unsupported reference require\nexcluded             services/utils/update-checker.js#runCheck\nrejected             services/utils/yaml.js#load \u2014 [next-scriptc] not a candidate load: [next-scriptc] <tmp>/dashy/services/utils/yaml.js: function load: unsupported reference require\nTop blockers:\n  20 \u00d7 unsupported module initialization ExpressionStatement; move setup into a declaration initializer\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  20 \u00d7 unsupported reference require\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  8 \u00d7 unsupported reference console\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  8 \u00d7 unsupported reference process\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  3 \u00d7 unsupported module initialization TryStatement; move setup into a declaration initializer\n    The existing extractor could not close and validate this function; see the exact diagnostic.\nNearest misses (one emitted diagnostic, further blockers may exist): services/app.js#printWarning, services/app.js#safeEnd, services/app.js#errBody, services/app.js#loadAuthConfig, services/app.js#loadUserConfig, services/app.js#customAuthorizer, services/app.js#getAuthMiddleware, services/app.js#requireAuth, services/app.js#requireAdmin, services/app.js#method, services/app.js#proxyEndpointsGate, services/endpoints/alias-target.js#isUnrestricted, services/endpoints/alias-target.js#isSafeTarget, services/endpoints/api/config-files.js#userDataDir, services/endpoints/api/config-files.js#safeFilename, services/endpoints/api/config-files.js#resolveIndex, services/endpoints/api/index.js#tokensMatch, services/endpoints/api/index.js#apiErrorHandler, services/endpoints/api/index.js#apiEnabledGate, services/endpoints/api/index.js#requireObjectBody, services/endpoints/api/index.js#checkKey, services/endpoints/api/index.js#getArray, services/endpoints/api/index.js#findSection, services/endpoints/api/index.js#findItem, services/endpoints/api/index.js#createApiRouter, services/endpoints/cors-proxy.js#resolvePlaceholder, services/endpoints/cors-proxy.js#substituteEnv, services/endpoints/cors-proxy.js#handler, services/endpoints/opensearch.js#xmlEscape, services/endpoints/ping-check.js#boundedParam, services/endpoints/ping-check.js#immediateError, services/endpoints/save-config.js#withModeline, services/endpoints/serve-config.js#yamlFilename, services/endpoints/status-check.js#getResponseType, services/endpoints/status-check.js#makeMessageText, services/endpoints/status-check.js#makeErrorMessage, services/endpoints/status-check.js#makeErrorMessage2, services/endpoints/status-check.js#makeRequest, services/endpoints/status-check.js#decodeHeaders, services/endpoints/status-check.js#immediateError, services/utils/auth-oidc.js#loadOidcSettings, services/utils/auth-oidc.js#deriveIsAdmin, services/utils/auth-oidc.js#createOidcMiddleware, services/utils/auth-oidc.js#maybeBootstrapConfig, services/utils/config-validator.js#successMsg, services/utils/config-validator.js#logToConsole, services/utils/config-validator.js#errorMsg, services/utils/config-validator.js#setIsValidVariable, services/utils/config-validator.js#validate, services/utils/config-validator.js#bigError, services/utils/config-validator.js#printFileReadError, services/utils/request-origin.js#firstHeader, services/utils/request-origin.js#hostFromRequest, services/utils/request-origin.js#originFromRequest, services/utils/request.js#validateTargetUrl, services/utils/request.js#request, services/utils/ssl-server.js#printNotSoGood, services/utils/ssl-server.js#printSuccess, services/utils/ssl-server.js#startSSLServer, services/utils/ssl-server.js#middleware, services/utils/update-checker.js#logToConsole, services/utils/update-checker.js#compareVersions, services/utils/update-checker.js#makeMsg, services/utils/yaml.js#load\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "report": {
+        "version": 1,
+        "root": "/tmp/nsc-dev-census/dashy",
+        "sourceDir": "/tmp/nsc-dev-census/dashy/services",
+        "framework": "vite",
+        "fileErrors": [],
+        "counts": {
+          "files": 25,
+          "totalTopLevelFunctions": 73,
+          "exportedFunctions": 0,
+          "considered": 64,
+          "diagnosed": 64,
+          "accepted": 0,
+          "silentExclusions": 9
+        },
+        "files": [
+          {
+            "file": "services/app.js",
+            "functions": [
+              {
+                "id": "services/app.js#printWarning",
+                "file": "services/app.js",
+                "name": "printWarning",
+                "line": 69,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate printWarning: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function printWarning: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#safeEnd",
+                "file": "services/app.js",
+                "name": "safeEnd",
+                "line": 74,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate safeEnd: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function safeEnd: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#errBody",
+                "file": "services/app.js",
+                "name": "errBody",
+                "line": 83,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate errBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function errBody: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#loadAuthConfig",
+                "file": "services/app.js",
+                "name": "loadAuthConfig",
+                "line": 94,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate loadAuthConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadAuthConfig: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#loadUserConfig",
+                "file": "services/app.js",
+                "name": "loadUserConfig",
+                "line": 105,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate loadUserConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadUserConfig: unsupported reference require"
+                ],
+                "calls": [
+                  "services/app.js#loadAuthConfig"
+                ]
+              },
+              {
+                "id": "services/app.js#customAuthorizer",
+                "file": "services/app.js",
+                "name": "customAuthorizer",
+                "line": 110,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate customAuthorizer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function customAuthorizer: unsupported reference require"
+                ],
+                "calls": [
+                  "services/app.js#loadUserConfig"
+                ]
+              },
+              {
+                "id": "services/app.js#getAuthMiddleware",
+                "file": "services/app.js",
+                "name": "getAuthMiddleware",
+                "line": 136,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getAuthMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function getAuthMiddleware: unsupported reference process"
+                ],
+                "calls": [
+                  "services/app.js#customAuthorizer",
+                  "services/app.js#printWarning",
+                  "services/utils/auth-oidc.js#createOidcMiddleware"
+                ]
+              },
+              {
+                "id": "services/app.js#requireAuth",
+                "file": "services/app.js",
+                "name": "requireAuth",
+                "line": 207,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate requireAuth: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAuth: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#requireAdmin",
+                "file": "services/app.js",
+                "name": "requireAdmin",
+                "line": 215,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate requireAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAdmin: unsupported reference require"
+                ],
+                "calls": [
+                  "services/app.js#loadUserConfig"
+                ]
+              },
+              {
+                "id": "services/app.js#method",
+                "file": "services/app.js",
+                "name": "method",
+                "line": 232,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate method: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function method: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#proxyEndpointsGate",
+                "file": "services/app.js",
+                "name": "proxyEndpointsGate",
+                "line": 235,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate proxyEndpointsGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function proxyEndpointsGate: unsupported reference process"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/app.js#app",
+                "file": "services/app.js",
+                "name": "app",
+                "line": 240,
+                "exported": false,
+                "async": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/app.js#errBody",
+                  "services/app.js#method",
+                  "services/app.js#printWarning",
+                  "services/app.js#proxyEndpointsGate",
+                  "services/app.js#requireAdmin",
+                  "services/app.js#requireAuth",
+                  "services/app.js#safeEnd",
+                  "services/endpoints/api/index.js#apiEnabledGate",
+                  "services/endpoints/api/index.js#apiErrorHandler",
+                  "services/endpoints/api/index.js#createApiRouter",
+                  "services/endpoints/cors-proxy.js#handler",
+                  "services/utils/ssl-server.js#middleware"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/alias-target.js",
+            "functions": [
+              {
+                "id": "services/endpoints/alias-target.js#isUnrestricted",
+                "file": "services/endpoints/alias-target.js",
+                "name": "isUnrestricted",
+                "line": 14,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate isUnrestricted: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isUnrestricted: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/alias-target.js#isSafeTarget",
+                "file": "services/endpoints/alias-target.js",
+                "name": "isSafeTarget",
+                "line": 17,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate isSafeTarget: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isSafeTarget: unsupported reference URL"
+                ],
+                "calls": [
+                  "services/utils/request-origin.js#hostFromRequest"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/api/config-files.js",
+            "functions": [
+              {
+                "id": "services/endpoints/api/config-files.js#userDataDir",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "userDataDir",
+                "line": 29,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate userDataDir: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function userDataDir: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/config-files.js#safeFilename",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "safeFilename",
+                "line": 32,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate safeFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function safeFilename: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/config-files.js#listConfigFiles",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "listConfigFiles",
+                "line": 41,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/endpoints/api/config-files.js#userDataDir"
+                ]
+              },
+              {
+                "id": "services/endpoints/api/config-files.js#readConfig",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "readConfig",
+                "line": 50,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/endpoints/api/config-files.js#safeFilename",
+                  "services/endpoints/api/config-files.js#userDataDir"
+                ]
+              },
+              {
+                "id": "services/endpoints/api/config-files.js#writeConfig",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "writeConfig",
+                "line": 74,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/endpoints/api/config-files.js#safeFilename"
+                ]
+              },
+              {
+                "id": "services/endpoints/api/config-files.js#resolveIndex",
+                "file": "services/endpoints/api/config-files.js",
+                "name": "resolveIndex",
+                "line": 92,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate resolveIndex: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function resolveIndex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "functions": [
+              {
+                "id": "services/endpoints/api/index.js#tokensMatch",
+                "file": "services/endpoints/api/index.js",
+                "name": "tokensMatch",
+                "line": 17,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate tokensMatch: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function tokensMatch: unsupported reference Buffer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#apiErrorHandler",
+                "file": "services/endpoints/api/index.js",
+                "name": "apiErrorHandler",
+                "line": 24,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate apiErrorHandler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiErrorHandler: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#apiEnabledGate",
+                "file": "services/endpoints/api/index.js",
+                "name": "apiEnabledGate",
+                "line": 30,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate apiEnabledGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiEnabledGate: unsupported reference process"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#requireObjectBody",
+                "file": "services/endpoints/api/index.js",
+                "name": "requireObjectBody",
+                "line": 39,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate requireObjectBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function requireObjectBody: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#checkKey",
+                "file": "services/endpoints/api/index.js",
+                "name": "checkKey",
+                "line": 46,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate checkKey: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function checkKey: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#getArray",
+                "file": "services/endpoints/api/index.js",
+                "name": "getArray",
+                "line": 53,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getArray: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function getArray: unsupported reference require"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/api/index.js#findSection",
+                "file": "services/endpoints/api/index.js",
+                "name": "findSection",
+                "line": 61,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findSection: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findSection: unsupported reference require"
+                ],
+                "calls": [
+                  "services/endpoints/api/config-files.js#resolveIndex",
+                  "services/endpoints/api/index.js#getArray"
+                ]
+              },
+              {
+                "id": "services/endpoints/api/index.js#findItem",
+                "file": "services/endpoints/api/index.js",
+                "name": "findItem",
+                "line": 69,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findItem: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findItem: unsupported reference require"
+                ],
+                "calls": [
+                  "services/endpoints/api/config-files.js#resolveIndex",
+                  "services/endpoints/api/index.js#getArray"
+                ]
+              },
+              {
+                "id": "services/endpoints/api/index.js#createApiRouter",
+                "file": "services/endpoints/api/index.js",
+                "name": "createApiRouter",
+                "line": 76,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate createApiRouter: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function createApiRouter: unsupported reference require"
+                ],
+                "calls": [
+                  "services/endpoints/api/config-files.js#listConfigFiles",
+                  "services/endpoints/api/config-files.js#readConfig",
+                  "services/endpoints/api/config-files.js#safeFilename",
+                  "services/endpoints/api/config-files.js#writeConfig",
+                  "services/endpoints/api/index.js#checkKey",
+                  "services/endpoints/api/index.js#findItem",
+                  "services/endpoints/api/index.js#findSection",
+                  "services/endpoints/api/index.js#getArray",
+                  "services/endpoints/api/index.js#requireObjectBody",
+                  "services/endpoints/api/index.js#tokensMatch"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/cors-proxy.js",
+            "functions": [
+              {
+                "id": "services/endpoints/cors-proxy.js#resolvePlaceholder",
+                "file": "services/endpoints/cors-proxy.js",
+                "name": "resolvePlaceholder",
+                "line": 13,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate resolvePlaceholder: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function resolvePlaceholder: unsupported reference process"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/cors-proxy.js#substituteEnv",
+                "file": "services/endpoints/cors-proxy.js",
+                "name": "substituteEnv",
+                "line": 23,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate substituteEnv: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function substituteEnv: unsupported reference process"
+                ],
+                "calls": [
+                  "services/endpoints/cors-proxy.js#resolvePlaceholder"
+                ]
+              },
+              {
+                "id": "services/endpoints/cors-proxy.js#handler",
+                "file": "services/endpoints/cors-proxy.js",
+                "name": "handler",
+                "line": 34,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate handler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function handler: unsupported reference process"
+                ],
+                "calls": [
+                  "services/endpoints/cors-proxy.js#substituteEnv",
+                  "services/utils/request.js#request"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/get-user.js",
+            "functions": []
+          },
+          {
+            "file": "services/endpoints/opensearch.js",
+            "functions": [
+              {
+                "id": "services/endpoints/opensearch.js#xmlEscape",
+                "file": "services/endpoints/opensearch.js",
+                "name": "xmlEscape",
+                "line": 12,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate xmlEscape: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/opensearch.js: function xmlEscape: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/ping-check.js",
+            "functions": [
+              {
+                "id": "services/endpoints/ping-check.js#boundedParam",
+                "file": "services/endpoints/ping-check.js",
+                "name": "boundedParam",
+                "line": 13,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate boundedParam: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function boundedParam: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/ping-check.js#immediateError",
+                "file": "services/endpoints/ping-check.js",
+                "name": "immediateError",
+                "line": 20,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/save-config.js",
+            "functions": [
+              {
+                "id": "services/endpoints/save-config.js#withModeline",
+                "file": "services/endpoints/save-config.js",
+                "name": "withModeline",
+                "line": 17,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate withModeline: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/save-config.js: function withModeline: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/serve-config.js",
+            "functions": [
+              {
+                "id": "services/endpoints/serve-config.js#yamlFilename",
+                "file": "services/endpoints/serve-config.js",
+                "name": "yamlFilename",
+                "line": 10,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate yamlFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/serve-config.js: function yamlFilename: unsupported reference require"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "functions": [
+              {
+                "id": "services/endpoints/status-check.js#getResponseType",
+                "file": "services/endpoints/status-check.js",
+                "name": "getResponseType",
+                "line": 11,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getResponseType: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function getResponseType: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/status-check.js#makeMessageText",
+                "file": "services/endpoints/status-check.js",
+                "name": "makeMessageText",
+                "line": 19,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makeMessageText: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeMessageText: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/status-check.js#makeErrorMessage",
+                "file": "services/endpoints/status-check.js",
+                "name": "makeErrorMessage",
+                "line": 25,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makeErrorMessage: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/status-check.js#makeErrorMessage2",
+                "file": "services/endpoints/status-check.js",
+                "name": "makeErrorMessage2",
+                "line": 28,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makeErrorMessage2: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage2: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/status-check.js#makeRequest",
+                "file": "services/endpoints/status-check.js",
+                "name": "makeRequest",
+                "line": 32,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makeRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeRequest: unsupported reference require"
+                ],
+                "calls": [
+                  "services/endpoints/status-check.js#getResponseType",
+                  "services/endpoints/status-check.js#makeErrorMessage",
+                  "services/endpoints/status-check.js#makeErrorMessage2",
+                  "services/endpoints/status-check.js#makeMessageText",
+                  "services/utils/request.js#request"
+                ]
+              },
+              {
+                "id": "services/endpoints/status-check.js#decodeHeaders",
+                "file": "services/endpoints/status-check.js",
+                "name": "decodeHeaders",
+                "line": 84,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate decodeHeaders: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function decodeHeaders: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/endpoints/status-check.js#immediateError",
+                "file": "services/endpoints/status-check.js",
+                "name": "immediateError",
+                "line": 94,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/endpoints/system-info.js",
+            "functions": []
+          },
+          {
+            "file": "services/healthcheck.js",
+            "functions": [
+              {
+                "id": "services/healthcheck.js#healthCheck",
+                "file": "services/healthcheck.js",
+                "name": "healthCheck",
+                "line": 43,
+                "exported": false,
+                "async": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/serverless-functions/cloud-status-check.js",
+            "functions": []
+          },
+          {
+            "file": "services/serverless-functions/netlify-cors.js",
+            "functions": []
+          },
+          {
+            "file": "services/serverless-functions/not-supported.js",
+            "functions": []
+          },
+          {
+            "file": "services/utils/auth-oidc.js",
+            "functions": [
+              {
+                "id": "services/utils/auth-oidc.js#loadOidcSettings",
+                "file": "services/utils/auth-oidc.js",
+                "name": "loadOidcSettings",
+                "line": 21,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate loadOidcSettings: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function loadOidcSettings: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/auth-oidc.js#fetchDiscovery",
+                "file": "services/utils/auth-oidc.js",
+                "name": "fetchDiscovery",
+                "line": 67,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "services/utils/auth-oidc.js#getIssuerContext",
+                "file": "services/utils/auth-oidc.js",
+                "name": "getIssuerContext",
+                "line": 75,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/utils/auth-oidc.js#fetchDiscovery"
+                ]
+              },
+              {
+                "id": "services/utils/auth-oidc.js#deriveIsAdmin",
+                "file": "services/utils/auth-oidc.js",
+                "name": "deriveIsAdmin",
+                "line": 93,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate deriveIsAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function deriveIsAdmin: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/auth-oidc.js#createOidcMiddleware",
+                "file": "services/utils/auth-oidc.js",
+                "name": "createOidcMiddleware",
+                "line": 116,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate createOidcMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function createOidcMiddleware: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)"
+                ],
+                "calls": [
+                  "services/utils/auth-oidc.js#deriveIsAdmin",
+                  "services/utils/auth-oidc.js#getIssuerContext"
+                ]
+              },
+              {
+                "id": "services/utils/auth-oidc.js#maybeBootstrapConfig",
+                "file": "services/utils/auth-oidc.js",
+                "name": "maybeBootstrapConfig",
+                "line": 157,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate maybeBootstrapConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function maybeBootstrapConfig: unsupported reference require"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "functions": [
+              {
+                "id": "services/utils/config-validator.js#successMsg",
+                "file": "services/utils/config-validator.js",
+                "name": "successMsg",
+                "line": 24,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate successMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function successMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/config-validator.js#logToConsole",
+                "file": "services/utils/config-validator.js",
+                "name": "logToConsole",
+                "line": 27,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function logToConsole: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/config-validator.js#errorMsg",
+                "file": "services/utils/config-validator.js",
+                "name": "errorMsg",
+                "line": 30,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate errorMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function errorMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/config-validator.js#setIsValidVariable",
+                "file": "services/utils/config-validator.js",
+                "name": "setIsValidVariable",
+                "line": 47,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate setIsValidVariable: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function setIsValidVariable: unsupported reference process"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/config-validator.js#validate",
+                "file": "services/utils/config-validator.js",
+                "name": "validate",
+                "line": 52,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate validate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function validate: unsupported reference console"
+                ],
+                "calls": [
+                  "services/utils/config-validator.js#errorMsg",
+                  "services/utils/config-validator.js#logToConsole",
+                  "services/utils/config-validator.js#setIsValidVariable",
+                  "services/utils/config-validator.js#successMsg"
+                ]
+              },
+              {
+                "id": "services/utils/config-validator.js#bigError",
+                "file": "services/utils/config-validator.js",
+                "name": "bigError",
+                "line": 65,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate bigError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function bigError: unsupported module initialization TryStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/config-validator.js#printFileReadError",
+                "file": "services/utils/config-validator.js",
+                "name": "printFileReadError",
+                "line": 73,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate printFileReadError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function printFileReadError: unsupported reference console"
+                ],
+                "calls": [
+                  "services/utils/config-validator.js#logToConsole"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/utils/print-message.js",
+            "functions": []
+          },
+          {
+            "file": "services/utils/request-origin.js",
+            "functions": [
+              {
+                "id": "services/utils/request-origin.js#firstHeader",
+                "file": "services/utils/request-origin.js",
+                "name": "firstHeader",
+                "line": 7,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate firstHeader: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function firstHeader: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/request-origin.js#hostFromRequest",
+                "file": "services/utils/request-origin.js",
+                "name": "hostFromRequest",
+                "line": 10,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate hostFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function hostFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": [
+                  "services/utils/request-origin.js#firstHeader"
+                ]
+              },
+              {
+                "id": "services/utils/request-origin.js#originFromRequest",
+                "file": "services/utils/request-origin.js",
+                "name": "originFromRequest",
+                "line": 14,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate originFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function originFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+                ],
+                "calls": [
+                  "services/utils/request-origin.js#firstHeader",
+                  "services/utils/request-origin.js#hostFromRequest"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/utils/request.js",
+            "functions": [
+              {
+                "id": "services/utils/request.js#validateTargetUrl",
+                "file": "services/utils/request.js",
+                "name": "validateTargetUrl",
+                "line": 31,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate validateTargetUrl: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function validateTargetUrl: unsupported reference process"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/request.js#request",
+                "file": "services/utils/request.js",
+                "name": "request",
+                "line": 93,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate request: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function request: unsupported reference require"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/utils/ssl-server.js",
+            "functions": [
+              {
+                "id": "services/utils/ssl-server.js#printNotSoGood",
+                "file": "services/utils/ssl-server.js",
+                "name": "printNotSoGood",
+                "line": 19,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate printNotSoGood: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printNotSoGood: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/ssl-server.js#printSuccess",
+                "file": "services/utils/ssl-server.js",
+                "name": "printSuccess",
+                "line": 23,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate printSuccess: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printSuccess: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/ssl-server.js#checkCertificateFiles",
+                "file": "services/utils/ssl-server.js",
+                "name": "checkCertificateFiles",
+                "line": 29,
+                "exported": false,
+                "async": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/utils/ssl-server.js#printNotSoGood"
+                ]
+              },
+              {
+                "id": "services/utils/ssl-server.js#startSSLServer",
+                "file": "services/utils/ssl-server.js",
+                "name": "startSSLServer",
+                "line": 35,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate startSSLServer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function startSSLServer: unsupported reference require"
+                ],
+                "calls": [
+                  "services/utils/ssl-server.js#checkCertificateFiles",
+                  "services/utils/ssl-server.js#printSuccess"
+                ]
+              },
+              {
+                "id": "services/utils/ssl-server.js#middleware",
+                "file": "services/utils/ssl-server.js",
+                "name": "middleware",
+                "line": 48,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate middleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function middleware: reference enableSSL is reassigned outside its declaration"
+                ],
+                "calls": []
+              }
+            ]
+          },
+          {
+            "file": "services/utils/trusted-proxy.js",
+            "functions": []
+          },
+          {
+            "file": "services/utils/update-checker.js",
+            "functions": [
+              {
+                "id": "services/utils/update-checker.js#logToConsole",
+                "file": "services/utils/update-checker.js",
+                "name": "logToConsole",
+                "line": 7,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function logToConsole: unsupported reference console"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/update-checker.js#compareVersions",
+                "file": "services/utils/update-checker.js",
+                "name": "compareVersions",
+                "line": 13,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate compareVersions: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function compareVersions: unsupported module initialization IfStatement; move setup into a declaration initializer"
+                ],
+                "calls": []
+              },
+              {
+                "id": "services/utils/update-checker.js#makeMsg",
+                "file": "services/utils/update-checker.js",
+                "name": "makeMsg",
+                "line": 24,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makeMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function makeMsg: unsupported reference require"
+                ],
+                "calls": [
+                  "services/utils/update-checker.js#compareVersions"
+                ]
+              },
+              {
+                "id": "services/utils/update-checker.js#runCheck",
+                "file": "services/utils/update-checker.js",
+                "name": "runCheck",
+                "line": 34,
+                "exported": false,
+                "async": true,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "services/utils/request.js#request",
+                  "services/utils/update-checker.js#logToConsole",
+                  "services/utils/update-checker.js#makeMsg"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "services/utils/yaml.js",
+            "functions": [
+              {
+                "id": "services/utils/yaml.js#load",
+                "file": "services/utils/yaml.js",
+                "name": "load",
+                "line": 10,
+                "exported": false,
+                "async": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate load: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/yaml.js: function load: unsupported reference require"
+                ],
+                "calls": []
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+            "count": 20,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported reference require",
+            "count": 20,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported reference console",
+            "count": 8,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported reference process",
+            "count": 8,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported module initialization TryStatement; move setup into a declaration initializer",
+            "count": 3,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported reference URL",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported reference Buffer",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "reference enableSSL is reassigned outside its declaration",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "unsupported module initialization IfStatement; move setup into a declaration initializer",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "services/app.js#printWarning",
+            "diagnostic": "[next-scriptc] not a candidate printWarning: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function printWarning: unsupported reference console"
+          },
+          {
+            "id": "services/app.js#safeEnd",
+            "diagnostic": "[next-scriptc] not a candidate safeEnd: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function safeEnd: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/app.js#errBody",
+            "diagnostic": "[next-scriptc] not a candidate errBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function errBody: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/app.js#loadAuthConfig",
+            "diagnostic": "[next-scriptc] not a candidate loadAuthConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadAuthConfig: unsupported reference require"
+          },
+          {
+            "id": "services/app.js#loadUserConfig",
+            "diagnostic": "[next-scriptc] not a candidate loadUserConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadUserConfig: unsupported reference require"
+          },
+          {
+            "id": "services/app.js#customAuthorizer",
+            "diagnostic": "[next-scriptc] not a candidate customAuthorizer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function customAuthorizer: unsupported reference require"
+          },
+          {
+            "id": "services/app.js#getAuthMiddleware",
+            "diagnostic": "[next-scriptc] not a candidate getAuthMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function getAuthMiddleware: unsupported reference process"
+          },
+          {
+            "id": "services/app.js#requireAuth",
+            "diagnostic": "[next-scriptc] not a candidate requireAuth: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAuth: unsupported reference require"
+          },
+          {
+            "id": "services/app.js#requireAdmin",
+            "diagnostic": "[next-scriptc] not a candidate requireAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAdmin: unsupported reference require"
+          },
+          {
+            "id": "services/app.js#method",
+            "diagnostic": "[next-scriptc] not a candidate method: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function method: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/app.js#proxyEndpointsGate",
+            "diagnostic": "[next-scriptc] not a candidate proxyEndpointsGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function proxyEndpointsGate: unsupported reference process"
+          },
+          {
+            "id": "services/endpoints/alias-target.js#isUnrestricted",
+            "diagnostic": "[next-scriptc] not a candidate isUnrestricted: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isUnrestricted: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/alias-target.js#isSafeTarget",
+            "diagnostic": "[next-scriptc] not a candidate isSafeTarget: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isSafeTarget: unsupported reference URL"
+          },
+          {
+            "id": "services/endpoints/api/config-files.js#userDataDir",
+            "diagnostic": "[next-scriptc] not a candidate userDataDir: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function userDataDir: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/config-files.js#safeFilename",
+            "diagnostic": "[next-scriptc] not a candidate safeFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function safeFilename: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/config-files.js#resolveIndex",
+            "diagnostic": "[next-scriptc] not a candidate resolveIndex: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function resolveIndex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/api/index.js#tokensMatch",
+            "diagnostic": "[next-scriptc] not a candidate tokensMatch: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function tokensMatch: unsupported reference Buffer"
+          },
+          {
+            "id": "services/endpoints/api/index.js#apiErrorHandler",
+            "diagnostic": "[next-scriptc] not a candidate apiErrorHandler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiErrorHandler: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/api/index.js#apiEnabledGate",
+            "diagnostic": "[next-scriptc] not a candidate apiEnabledGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiEnabledGate: unsupported reference process"
+          },
+          {
+            "id": "services/endpoints/api/index.js#requireObjectBody",
+            "diagnostic": "[next-scriptc] not a candidate requireObjectBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function requireObjectBody: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/index.js#checkKey",
+            "diagnostic": "[next-scriptc] not a candidate checkKey: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function checkKey: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/index.js#getArray",
+            "diagnostic": "[next-scriptc] not a candidate getArray: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function getArray: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/index.js#findSection",
+            "diagnostic": "[next-scriptc] not a candidate findSection: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findSection: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/index.js#findItem",
+            "diagnostic": "[next-scriptc] not a candidate findItem: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findItem: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/api/index.js#createApiRouter",
+            "diagnostic": "[next-scriptc] not a candidate createApiRouter: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function createApiRouter: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/cors-proxy.js#resolvePlaceholder",
+            "diagnostic": "[next-scriptc] not a candidate resolvePlaceholder: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function resolvePlaceholder: unsupported reference process"
+          },
+          {
+            "id": "services/endpoints/cors-proxy.js#substituteEnv",
+            "diagnostic": "[next-scriptc] not a candidate substituteEnv: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function substituteEnv: unsupported reference process"
+          },
+          {
+            "id": "services/endpoints/cors-proxy.js#handler",
+            "diagnostic": "[next-scriptc] not a candidate handler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function handler: unsupported reference process"
+          },
+          {
+            "id": "services/endpoints/opensearch.js#xmlEscape",
+            "diagnostic": "[next-scriptc] not a candidate xmlEscape: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/opensearch.js: function xmlEscape: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/ping-check.js#boundedParam",
+            "diagnostic": "[next-scriptc] not a candidate boundedParam: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function boundedParam: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/ping-check.js#immediateError",
+            "diagnostic": "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/save-config.js#withModeline",
+            "diagnostic": "[next-scriptc] not a candidate withModeline: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/save-config.js: function withModeline: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/serve-config.js#yamlFilename",
+            "diagnostic": "[next-scriptc] not a candidate yamlFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/serve-config.js: function yamlFilename: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/status-check.js#getResponseType",
+            "diagnostic": "[next-scriptc] not a candidate getResponseType: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function getResponseType: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/status-check.js#makeMessageText",
+            "diagnostic": "[next-scriptc] not a candidate makeMessageText: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeMessageText: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/status-check.js#makeErrorMessage",
+            "diagnostic": "[next-scriptc] not a candidate makeErrorMessage: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/status-check.js#makeErrorMessage2",
+            "diagnostic": "[next-scriptc] not a candidate makeErrorMessage2: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage2: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/status-check.js#makeRequest",
+            "diagnostic": "[next-scriptc] not a candidate makeRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeRequest: unsupported reference require"
+          },
+          {
+            "id": "services/endpoints/status-check.js#decodeHeaders",
+            "diagnostic": "[next-scriptc] not a candidate decodeHeaders: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function decodeHeaders: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/endpoints/status-check.js#immediateError",
+            "diagnostic": "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/auth-oidc.js#loadOidcSettings",
+            "diagnostic": "[next-scriptc] not a candidate loadOidcSettings: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function loadOidcSettings: unsupported reference console"
+          },
+          {
+            "id": "services/utils/auth-oidc.js#deriveIsAdmin",
+            "diagnostic": "[next-scriptc] not a candidate deriveIsAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function deriveIsAdmin: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/auth-oidc.js#createOidcMiddleware",
+            "diagnostic": "[next-scriptc] not a candidate createOidcMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function createOidcMiddleware: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)"
+          },
+          {
+            "id": "services/utils/auth-oidc.js#maybeBootstrapConfig",
+            "diagnostic": "[next-scriptc] not a candidate maybeBootstrapConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function maybeBootstrapConfig: unsupported reference require"
+          },
+          {
+            "id": "services/utils/config-validator.js#successMsg",
+            "diagnostic": "[next-scriptc] not a candidate successMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function successMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/config-validator.js#logToConsole",
+            "diagnostic": "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function logToConsole: unsupported reference console"
+          },
+          {
+            "id": "services/utils/config-validator.js#errorMsg",
+            "diagnostic": "[next-scriptc] not a candidate errorMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function errorMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/config-validator.js#setIsValidVariable",
+            "diagnostic": "[next-scriptc] not a candidate setIsValidVariable: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function setIsValidVariable: unsupported reference process"
+          },
+          {
+            "id": "services/utils/config-validator.js#validate",
+            "diagnostic": "[next-scriptc] not a candidate validate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function validate: unsupported reference console"
+          },
+          {
+            "id": "services/utils/config-validator.js#bigError",
+            "diagnostic": "[next-scriptc] not a candidate bigError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function bigError: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/config-validator.js#printFileReadError",
+            "diagnostic": "[next-scriptc] not a candidate printFileReadError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function printFileReadError: unsupported reference console"
+          },
+          {
+            "id": "services/utils/request-origin.js#firstHeader",
+            "diagnostic": "[next-scriptc] not a candidate firstHeader: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function firstHeader: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/request-origin.js#hostFromRequest",
+            "diagnostic": "[next-scriptc] not a candidate hostFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function hostFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/request-origin.js#originFromRequest",
+            "diagnostic": "[next-scriptc] not a candidate originFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function originFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/request.js#validateTargetUrl",
+            "diagnostic": "[next-scriptc] not a candidate validateTargetUrl: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function validateTargetUrl: unsupported reference process"
+          },
+          {
+            "id": "services/utils/request.js#request",
+            "diagnostic": "[next-scriptc] not a candidate request: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function request: unsupported reference require"
+          },
+          {
+            "id": "services/utils/ssl-server.js#printNotSoGood",
+            "diagnostic": "[next-scriptc] not a candidate printNotSoGood: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printNotSoGood: unsupported reference console"
+          },
+          {
+            "id": "services/utils/ssl-server.js#printSuccess",
+            "diagnostic": "[next-scriptc] not a candidate printSuccess: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printSuccess: unsupported reference console"
+          },
+          {
+            "id": "services/utils/ssl-server.js#startSSLServer",
+            "diagnostic": "[next-scriptc] not a candidate startSSLServer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function startSSLServer: unsupported reference require"
+          },
+          {
+            "id": "services/utils/ssl-server.js#middleware",
+            "diagnostic": "[next-scriptc] not a candidate middleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function middleware: reference enableSSL is reassigned outside its declaration"
+          },
+          {
+            "id": "services/utils/update-checker.js#logToConsole",
+            "diagnostic": "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function logToConsole: unsupported reference console"
+          },
+          {
+            "id": "services/utils/update-checker.js#compareVersions",
+            "diagnostic": "[next-scriptc] not a candidate compareVersions: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function compareVersions: unsupported module initialization IfStatement; move setup into a declaration initializer"
+          },
+          {
+            "id": "services/utils/update-checker.js#makeMsg",
+            "diagnostic": "[next-scriptc] not a candidate makeMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function makeMsg: unsupported reference require"
+          },
+          {
+            "id": "services/utils/yaml.js#load",
+            "diagnostic": "[next-scriptc] not a candidate load: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/yaml.js: function load: unsupported reference require"
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "services/app.js",
+            "name": "printWarning",
+            "message": "[next-scriptc] not a candidate printWarning: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function printWarning: unsupported reference console"
+          },
+          {
+            "file": "services/app.js",
+            "name": "safeEnd",
+            "message": "[next-scriptc] not a candidate safeEnd: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function safeEnd: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/app.js",
+            "name": "errBody",
+            "message": "[next-scriptc] not a candidate errBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function errBody: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/app.js",
+            "name": "loadAuthConfig",
+            "message": "[next-scriptc] not a candidate loadAuthConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadAuthConfig: unsupported reference require"
+          },
+          {
+            "file": "services/app.js",
+            "name": "loadUserConfig",
+            "message": "[next-scriptc] not a candidate loadUserConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function loadUserConfig: unsupported reference require"
+          },
+          {
+            "file": "services/app.js",
+            "name": "customAuthorizer",
+            "message": "[next-scriptc] not a candidate customAuthorizer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function customAuthorizer: unsupported reference require"
+          },
+          {
+            "file": "services/app.js",
+            "name": "getAuthMiddleware",
+            "message": "[next-scriptc] not a candidate getAuthMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function getAuthMiddleware: unsupported reference process"
+          },
+          {
+            "file": "services/app.js",
+            "name": "requireAuth",
+            "message": "[next-scriptc] not a candidate requireAuth: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAuth: unsupported reference require"
+          },
+          {
+            "file": "services/app.js",
+            "name": "requireAdmin",
+            "message": "[next-scriptc] not a candidate requireAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function requireAdmin: unsupported reference require"
+          },
+          {
+            "file": "services/app.js",
+            "name": "method",
+            "message": "[next-scriptc] not a candidate method: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function method: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/app.js",
+            "name": "proxyEndpointsGate",
+            "message": "[next-scriptc] not a candidate proxyEndpointsGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/app.js: function proxyEndpointsGate: unsupported reference process"
+          },
+          {
+            "file": "services/endpoints/alias-target.js",
+            "name": "isUnrestricted",
+            "message": "[next-scriptc] not a candidate isUnrestricted: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isUnrestricted: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/alias-target.js",
+            "name": "isSafeTarget",
+            "message": "[next-scriptc] not a candidate isSafeTarget: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/alias-target.js: function isSafeTarget: unsupported reference URL"
+          },
+          {
+            "file": "services/endpoints/api/config-files.js",
+            "name": "userDataDir",
+            "message": "[next-scriptc] not a candidate userDataDir: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function userDataDir: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/config-files.js",
+            "name": "safeFilename",
+            "message": "[next-scriptc] not a candidate safeFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function safeFilename: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/config-files.js",
+            "name": "resolveIndex",
+            "message": "[next-scriptc] not a candidate resolveIndex: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/config-files.js: function resolveIndex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "tokensMatch",
+            "message": "[next-scriptc] not a candidate tokensMatch: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function tokensMatch: unsupported reference Buffer"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "apiErrorHandler",
+            "message": "[next-scriptc] not a candidate apiErrorHandler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiErrorHandler: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "apiEnabledGate",
+            "message": "[next-scriptc] not a candidate apiEnabledGate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function apiEnabledGate: unsupported reference process"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "requireObjectBody",
+            "message": "[next-scriptc] not a candidate requireObjectBody: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function requireObjectBody: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "checkKey",
+            "message": "[next-scriptc] not a candidate checkKey: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function checkKey: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "getArray",
+            "message": "[next-scriptc] not a candidate getArray: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function getArray: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "findSection",
+            "message": "[next-scriptc] not a candidate findSection: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findSection: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "findItem",
+            "message": "[next-scriptc] not a candidate findItem: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function findItem: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/api/index.js",
+            "name": "createApiRouter",
+            "message": "[next-scriptc] not a candidate createApiRouter: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/api/index.js: function createApiRouter: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/cors-proxy.js",
+            "name": "resolvePlaceholder",
+            "message": "[next-scriptc] not a candidate resolvePlaceholder: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function resolvePlaceholder: unsupported reference process"
+          },
+          {
+            "file": "services/endpoints/cors-proxy.js",
+            "name": "substituteEnv",
+            "message": "[next-scriptc] not a candidate substituteEnv: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function substituteEnv: unsupported reference process"
+          },
+          {
+            "file": "services/endpoints/cors-proxy.js",
+            "name": "handler",
+            "message": "[next-scriptc] not a candidate handler: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/cors-proxy.js: function handler: unsupported reference process"
+          },
+          {
+            "file": "services/endpoints/opensearch.js",
+            "name": "xmlEscape",
+            "message": "[next-scriptc] not a candidate xmlEscape: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/opensearch.js: function xmlEscape: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/ping-check.js",
+            "name": "boundedParam",
+            "message": "[next-scriptc] not a candidate boundedParam: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function boundedParam: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/ping-check.js",
+            "name": "immediateError",
+            "message": "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/ping-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/save-config.js",
+            "name": "withModeline",
+            "message": "[next-scriptc] not a candidate withModeline: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/save-config.js: function withModeline: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/serve-config.js",
+            "name": "yamlFilename",
+            "message": "[next-scriptc] not a candidate yamlFilename: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/serve-config.js: function yamlFilename: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "getResponseType",
+            "message": "[next-scriptc] not a candidate getResponseType: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function getResponseType: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "makeMessageText",
+            "message": "[next-scriptc] not a candidate makeMessageText: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeMessageText: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "makeErrorMessage",
+            "message": "[next-scriptc] not a candidate makeErrorMessage: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "makeErrorMessage2",
+            "message": "[next-scriptc] not a candidate makeErrorMessage2: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeErrorMessage2: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "makeRequest",
+            "message": "[next-scriptc] not a candidate makeRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function makeRequest: unsupported reference require"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "decodeHeaders",
+            "message": "[next-scriptc] not a candidate decodeHeaders: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function decodeHeaders: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/endpoints/status-check.js",
+            "name": "immediateError",
+            "message": "[next-scriptc] not a candidate immediateError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/endpoints/status-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/auth-oidc.js",
+            "name": "loadOidcSettings",
+            "message": "[next-scriptc] not a candidate loadOidcSettings: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function loadOidcSettings: unsupported reference console"
+          },
+          {
+            "file": "services/utils/auth-oidc.js",
+            "name": "deriveIsAdmin",
+            "message": "[next-scriptc] not a candidate deriveIsAdmin: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function deriveIsAdmin: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/auth-oidc.js",
+            "name": "createOidcMiddleware",
+            "message": "[next-scriptc] not a candidate createOidcMiddleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function createOidcMiddleware: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)"
+          },
+          {
+            "file": "services/utils/auth-oidc.js",
+            "name": "maybeBootstrapConfig",
+            "message": "[next-scriptc] not a candidate maybeBootstrapConfig: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/auth-oidc.js: function maybeBootstrapConfig: unsupported reference require"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "successMsg",
+            "message": "[next-scriptc] not a candidate successMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function successMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "logToConsole",
+            "message": "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function logToConsole: unsupported reference console"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "errorMsg",
+            "message": "[next-scriptc] not a candidate errorMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function errorMsg: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "setIsValidVariable",
+            "message": "[next-scriptc] not a candidate setIsValidVariable: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function setIsValidVariable: unsupported reference process"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "validate",
+            "message": "[next-scriptc] not a candidate validate: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function validate: unsupported reference console"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "bigError",
+            "message": "[next-scriptc] not a candidate bigError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function bigError: unsupported module initialization TryStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/config-validator.js",
+            "name": "printFileReadError",
+            "message": "[next-scriptc] not a candidate printFileReadError: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/config-validator.js: function printFileReadError: unsupported reference console"
+          },
+          {
+            "file": "services/utils/request-origin.js",
+            "name": "firstHeader",
+            "message": "[next-scriptc] not a candidate firstHeader: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function firstHeader: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/request-origin.js",
+            "name": "hostFromRequest",
+            "message": "[next-scriptc] not a candidate hostFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function hostFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/request-origin.js",
+            "name": "originFromRequest",
+            "message": "[next-scriptc] not a candidate originFromRequest: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request-origin.js: function originFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/request.js",
+            "name": "validateTargetUrl",
+            "message": "[next-scriptc] not a candidate validateTargetUrl: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function validateTargetUrl: unsupported reference process"
+          },
+          {
+            "file": "services/utils/request.js",
+            "name": "request",
+            "message": "[next-scriptc] not a candidate request: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/request.js: function request: unsupported reference require"
+          },
+          {
+            "file": "services/utils/ssl-server.js",
+            "name": "printNotSoGood",
+            "message": "[next-scriptc] not a candidate printNotSoGood: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printNotSoGood: unsupported reference console"
+          },
+          {
+            "file": "services/utils/ssl-server.js",
+            "name": "printSuccess",
+            "message": "[next-scriptc] not a candidate printSuccess: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function printSuccess: unsupported reference console"
+          },
+          {
+            "file": "services/utils/ssl-server.js",
+            "name": "startSSLServer",
+            "message": "[next-scriptc] not a candidate startSSLServer: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function startSSLServer: unsupported reference require"
+          },
+          {
+            "file": "services/utils/ssl-server.js",
+            "name": "middleware",
+            "message": "[next-scriptc] not a candidate middleware: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/ssl-server.js: function middleware: reference enableSSL is reassigned outside its declaration"
+          },
+          {
+            "file": "services/utils/update-checker.js",
+            "name": "logToConsole",
+            "message": "[next-scriptc] not a candidate logToConsole: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function logToConsole: unsupported reference console"
+          },
+          {
+            "file": "services/utils/update-checker.js",
+            "name": "compareVersions",
+            "message": "[next-scriptc] not a candidate compareVersions: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function compareVersions: unsupported module initialization IfStatement; move setup into a declaration initializer"
+          },
+          {
+            "file": "services/utils/update-checker.js",
+            "name": "makeMsg",
+            "message": "[next-scriptc] not a candidate makeMsg: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/update-checker.js: function makeMsg: unsupported reference require"
+          },
+          {
+            "file": "services/utils/yaml.js",
+            "name": "load",
+            "message": "[next-scriptc] not a candidate load: [next-scriptc] /tmp/nsc-dev-census/dashy/services/utils/yaml.js: function load: unsupported reference require"
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ]
+      },
+      "ev1Process": {
+        "command": [
+          "node",
+          "--max-old-space-size=6144",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-b004417b/research/eval-corpus/census.mjs",
+          "/tmp/nsc-dev-census/dashy",
+          "services"
+        ],
+        "exit": 0,
+        "seconds": 0.44
+      },
+      "ev1": {
+        "sha": "85eb4f858db4d068f96b2aeb27a87521c4d51536",
+        "scopes": [
+          "services"
+        ],
+        "files": 25,
+        "accepted": [],
+        "counts": {
+          "unsupported reference/type": 64
+        },
+        "logs": [
+          "[next-scriptc] not a candidate printWarning: [next-scriptc] <app>/services/app.js: function printWarning: unsupported reference console",
+          "[next-scriptc] not a candidate safeEnd: [next-scriptc] <app>/services/app.js: function safeEnd: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate errBody: [next-scriptc] <app>/services/app.js: function errBody: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate loadAuthConfig: [next-scriptc] <app>/services/app.js: function loadAuthConfig: unsupported reference require",
+          "[next-scriptc] not a candidate loadUserConfig: [next-scriptc] <app>/services/app.js: function loadUserConfig: unsupported reference require",
+          "[next-scriptc] not a candidate customAuthorizer: [next-scriptc] <app>/services/app.js: function customAuthorizer: unsupported reference require",
+          "[next-scriptc] not a candidate getAuthMiddleware: [next-scriptc] <app>/services/app.js: function getAuthMiddleware: unsupported reference process",
+          "[next-scriptc] not a candidate requireAuth: [next-scriptc] <app>/services/app.js: function requireAuth: unsupported reference require",
+          "[next-scriptc] not a candidate requireAdmin: [next-scriptc] <app>/services/app.js: function requireAdmin: unsupported reference require",
+          "[next-scriptc] not a candidate method: [next-scriptc] <app>/services/app.js: function method: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate proxyEndpointsGate: [next-scriptc] <app>/services/app.js: function proxyEndpointsGate: unsupported reference process",
+          "[next-scriptc] not a candidate isUnrestricted: [next-scriptc] <app>/services/endpoints/alias-target.js: function isUnrestricted: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate isSafeTarget: [next-scriptc] <app>/services/endpoints/alias-target.js: function isSafeTarget: unsupported reference URL",
+          "[next-scriptc] not a candidate userDataDir: [next-scriptc] <app>/services/endpoints/api/config-files.js: function userDataDir: unsupported reference require",
+          "[next-scriptc] not a candidate safeFilename: [next-scriptc] <app>/services/endpoints/api/config-files.js: function safeFilename: unsupported reference require",
+          "[next-scriptc] not a candidate resolveIndex: [next-scriptc] <app>/services/endpoints/api/config-files.js: function resolveIndex: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate tokensMatch: [next-scriptc] <app>/services/endpoints/api/index.js: function tokensMatch: unsupported reference Buffer",
+          "[next-scriptc] not a candidate apiErrorHandler: [next-scriptc] <app>/services/endpoints/api/index.js: function apiErrorHandler: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate apiEnabledGate: [next-scriptc] <app>/services/endpoints/api/index.js: function apiEnabledGate: unsupported reference process",
+          "[next-scriptc] not a candidate requireObjectBody: [next-scriptc] <app>/services/endpoints/api/index.js: function requireObjectBody: unsupported reference require",
+          "[next-scriptc] not a candidate checkKey: [next-scriptc] <app>/services/endpoints/api/index.js: function checkKey: unsupported reference require",
+          "[next-scriptc] not a candidate getArray: [next-scriptc] <app>/services/endpoints/api/index.js: function getArray: unsupported reference require",
+          "[next-scriptc] not a candidate findSection: [next-scriptc] <app>/services/endpoints/api/index.js: function findSection: unsupported reference require",
+          "[next-scriptc] not a candidate findItem: [next-scriptc] <app>/services/endpoints/api/index.js: function findItem: unsupported reference require",
+          "[next-scriptc] not a candidate createApiRouter: [next-scriptc] <app>/services/endpoints/api/index.js: function createApiRouter: unsupported reference require",
+          "[next-scriptc] not a candidate resolvePlaceholder: [next-scriptc] <app>/services/endpoints/cors-proxy.js: function resolvePlaceholder: unsupported reference process",
+          "[next-scriptc] not a candidate substituteEnv: [next-scriptc] <app>/services/endpoints/cors-proxy.js: function substituteEnv: unsupported reference process",
+          "[next-scriptc] not a candidate handler: [next-scriptc] <app>/services/endpoints/cors-proxy.js: function handler: unsupported reference process",
+          "[next-scriptc] not a candidate xmlEscape: [next-scriptc] <app>/services/endpoints/opensearch.js: function xmlEscape: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate boundedParam: [next-scriptc] <app>/services/endpoints/ping-check.js: function boundedParam: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate immediateError: [next-scriptc] <app>/services/endpoints/ping-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate withModeline: [next-scriptc] <app>/services/endpoints/save-config.js: function withModeline: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate yamlFilename: [next-scriptc] <app>/services/endpoints/serve-config.js: function yamlFilename: unsupported reference require",
+          "[next-scriptc] not a candidate getResponseType: [next-scriptc] <app>/services/endpoints/status-check.js: function getResponseType: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate makeMessageText: [next-scriptc] <app>/services/endpoints/status-check.js: function makeMessageText: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate makeErrorMessage: [next-scriptc] <app>/services/endpoints/status-check.js: function makeErrorMessage: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate makeErrorMessage2: [next-scriptc] <app>/services/endpoints/status-check.js: function makeErrorMessage2: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate makeRequest: [next-scriptc] <app>/services/endpoints/status-check.js: function makeRequest: unsupported reference require",
+          "[next-scriptc] not a candidate decodeHeaders: [next-scriptc] <app>/services/endpoints/status-check.js: function decodeHeaders: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate immediateError: [next-scriptc] <app>/services/endpoints/status-check.js: function immediateError: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate loadOidcSettings: [next-scriptc] <app>/services/utils/auth-oidc.js: function loadOidcSettings: unsupported reference console",
+          "[next-scriptc] not a candidate deriveIsAdmin: [next-scriptc] <app>/services/utils/auth-oidc.js: function deriveIsAdmin: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate createOidcMiddleware: [next-scriptc] <app>/services/utils/auth-oidc.js: function createOidcMiddleware: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported)",
+          "[next-scriptc] not a candidate maybeBootstrapConfig: [next-scriptc] <app>/services/utils/auth-oidc.js: function maybeBootstrapConfig: unsupported reference require",
+          "[next-scriptc] not a candidate successMsg: [next-scriptc] <app>/services/utils/config-validator.js: function successMsg: unsupported module initialization TryStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate logToConsole: [next-scriptc] <app>/services/utils/config-validator.js: function logToConsole: unsupported reference console",
+          "[next-scriptc] not a candidate errorMsg: [next-scriptc] <app>/services/utils/config-validator.js: function errorMsg: unsupported module initialization TryStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate setIsValidVariable: [next-scriptc] <app>/services/utils/config-validator.js: function setIsValidVariable: unsupported reference process",
+          "[next-scriptc] not a candidate validate: [next-scriptc] <app>/services/utils/config-validator.js: function validate: unsupported reference console",
+          "[next-scriptc] not a candidate bigError: [next-scriptc] <app>/services/utils/config-validator.js: function bigError: unsupported module initialization TryStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate printFileReadError: [next-scriptc] <app>/services/utils/config-validator.js: function printFileReadError: unsupported reference console",
+          "[next-scriptc] not a candidate firstHeader: [next-scriptc] <app>/services/utils/request-origin.js: function firstHeader: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate hostFromRequest: [next-scriptc] <app>/services/utils/request-origin.js: function hostFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate originFromRequest: [next-scriptc] <app>/services/utils/request-origin.js: function originFromRequest: unsupported module initialization ExpressionStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate validateTargetUrl: [next-scriptc] <app>/services/utils/request.js: function validateTargetUrl: unsupported reference process",
+          "[next-scriptc] not a candidate request: [next-scriptc] <app>/services/utils/request.js: function request: unsupported reference require",
+          "[next-scriptc] not a candidate printNotSoGood: [next-scriptc] <app>/services/utils/ssl-server.js: function printNotSoGood: unsupported reference console",
+          "[next-scriptc] not a candidate printSuccess: [next-scriptc] <app>/services/utils/ssl-server.js: function printSuccess: unsupported reference console",
+          "[next-scriptc] not a candidate startSSLServer: [next-scriptc] <app>/services/utils/ssl-server.js: function startSSLServer: unsupported reference require",
+          "[next-scriptc] not a candidate middleware: [next-scriptc] <app>/services/utils/ssl-server.js: function middleware: reference enableSSL is reassigned outside its declaration",
+          "[next-scriptc] not a candidate logToConsole: [next-scriptc] <app>/services/utils/update-checker.js: function logToConsole: unsupported reference console",
+          "[next-scriptc] not a candidate compareVersions: [next-scriptc] <app>/services/utils/update-checker.js: function compareVersions: unsupported module initialization IfStatement; move setup into a declaration initializer",
+          "[next-scriptc] not a candidate makeMsg: [next-scriptc] <app>/services/utils/update-checker.js: function makeMsg: unsupported reference require",
+          "[next-scriptc] not a candidate load: [next-scriptc] <app>/services/utils/yaml.js: function load: unsupported reference require"
+        ],
+        "errors": [],
+        "environment": {
+          "includesDeclarationImports": true,
+          "typescript": "6.0.3",
+          "configErrors": [],
+          "files": [
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/express-basic-auth/express-basic-auth.d.ts",
+              "imports": [
+                {
+                  "specifier": "express",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/express/index.js",
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/scope.d.ts",
+              "imports": [
+                {
+                  "specifier": "./code",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/code.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "./scope",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/scope.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./code",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/code.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./scope",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/scope.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./code",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/code.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./scope",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/scope.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/util.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": ".",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/subschema.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "..",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../util",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/util.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/errors.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "..",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./subschema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/subschema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../errors",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/errors.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/dataType.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "..",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/additionalItems.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../../compile/validate",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/items2020.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/contains.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/dependencies.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../../compile/validate",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/propertyNames.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/not.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/anyOf.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/oneOf.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/if.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./additionalItems",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/additionalItems.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./items2020",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/items2020.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./contains",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/contains.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./dependencies",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/dependencies.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./propertyNames",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/propertyNames.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./additionalProperties",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./not",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/not.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./anyOf",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/anyOf.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./oneOf",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/oneOf.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./if",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/if.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/limitNumber.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/multipleOf.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/pattern.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/required.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/uniqueItems.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/const.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/enum.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./limitNumber",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/limitNumber.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./multipleOf",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/multipleOf.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./pattern",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/pattern.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./required",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/required.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./uniqueItems",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/uniqueItems.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./const",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/const.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./enum",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/enum.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/format/format.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/unevaluated/unevaluatedProperties.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/unevaluated/unevaluatedItems.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/dependentRequired.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../applicator/dependencies",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/dependencies.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/discriminator/types.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/discriminator/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../discriminator/types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/discriminator/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/errors.d.ts",
+              "imports": [
+                {
+                  "specifier": "../compile/validate/dataType",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/dataType.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./applicator",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/applicator/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./validation",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./format/format",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/format/format.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./unevaluated/unevaluatedProperties",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/unevaluated/unevaluatedProperties.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./unevaluated/unevaluatedItems",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/unevaluated/unevaluatedItems.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./validation/dependentRequired",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/validation/dependentRequired.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./discriminator",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/discriminator/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/runtime/validation_error.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/ref_error.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+              "imports": [
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/validate",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./vocabularies/errors",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/errors.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types/json-schema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/json-schema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types/jtd-schema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/jtd-schema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types/json-schema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/json-schema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types/jtd-schema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/jtd-schema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./runtime/validation_error",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/runtime/validation_error.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/ref_error",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/ref_error.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/resolve.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../ajv",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/ajv.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "fast-uri",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/fast-uri/types/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../core",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../core",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./resolve",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/resolve.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "fast-uri",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/fast-uri/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../compile/codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../compile",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../compile/rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../compile/validate",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "../core",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/ajv/dist/ajv.d.ts",
+              "imports": [
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./core",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./core",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/core.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/validate",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/validate/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./vocabularies/errors",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/vocabularies/errors.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/rules",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/rules.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types/json-schema",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/types/json-schema.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/codegen",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/codegen/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./runtime/validation_error",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/runtime/validation_error.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./compile/ref_error",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/ajv/dist/compile/ref_error.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/pingman/dist/src/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/pingman/dist/src/types.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/pingman/dist/src/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/compact/decrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/flattened/decrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/decrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/encrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/compact/verify.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/flattened/verify.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/verify.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/verify.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/decrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/compact/encrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/flattened/encrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/compact/sign.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/flattened/sign.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/sign.d.ts",
+              "imports": [
+                {
+                  "specifier": "../../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/sign.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/encrypt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwk/thumbprint.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwk/embedded.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/local.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/remote.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/unsecured.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/export.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/import.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/decode_protected_header.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/decode_jwt.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/errors.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_key_pair.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_secret.d.ts",
+              "imports": [
+                {
+                  "specifier": "../types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private<tmp>/dashy/node_modules/jose/dist/types/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "./jwe/compact/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/compact/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/compact/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/compact/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/flattened/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/flattened/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/flattened/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/flattened/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/general/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/general/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/general/encrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/encrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/general/encrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/general/encrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/compact/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/compact/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/compact/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/compact/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/flattened/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/flattened/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/flattened/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/flattened/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/general/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/general/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/verify.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/verify.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/decrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/decrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/compact/encrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/compact/encrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwe/flattened/encrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwe/flattened/encrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/compact/sign.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/compact/sign.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/flattened/sign.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/flattened/sign.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/general/sign.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/sign.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jws/general/sign.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jws/general/sign.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/sign.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/sign.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/encrypt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/encrypt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwk/thumbprint.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwk/thumbprint.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwk/embedded.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwk/embedded.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwks/local.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/local.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwks/local.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/local.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwks/remote.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/remote.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwks/remote.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwks/remote.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/unsecured.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/unsecured.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./jwt/unsecured.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/jwt/unsecured.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/export.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/export.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/import.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/import.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/import.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/import.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./util/decode_protected_header.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/decode_protected_header.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./util/decode_jwt.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/decode_jwt.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./util/decode_protected_header.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/decode_protected_header.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./util/errors.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/errors.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/generate_key_pair.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_key_pair.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/generate_key_pair.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_key_pair.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/generate_secret.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_secret.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./key/generate_secret.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/key/generate_secret.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./util/base64url.js",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/util/base64url.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./types.d.ts",
+                  "resolved": "../../../private<tmp>/dashy/node_modules/jose/dist/types/types.d.ts",
+                  "declaration": true
+                }
+              ]
+            }
+          ]
+        },
+        "mode": "dependency-install attempted; see install status"
+      }
+    }
+  ]
+}
