@@ -10,7 +10,8 @@ const client = fileURLToPath(new URL("./client.mjs", import.meta.url));
 export function withFunctions(config, modules, port, projectDir, promotionFile) {
   if (!modules.length) return config;
   modules = [...Map.groupBy(modules, m => m.source).values()].map(group=>({...group[0],promotion:group.every(m=>m.promotion),dependencies:group.flatMap(m=>m.dependencies??[]),functions:group.flatMap(m=>m.functions).sort((a,b)=>a.start-b.start)}));
-  const options = { modules: Object.fromEntries(modules.map(({ source, hash, functions, promotion, dependencies }) => [source, { hash, functions, promotion, dependencies }])), port, client, promotionFile, promotionClient: fileURLToPath(new URL("./promotion-client.mjs", import.meta.url)) };
+  // Turbopack requires an exact JSON round trip, including absent optional fields.
+  const options = JSON.parse(JSON.stringify({ modules: Object.fromEntries(modules.map(({ source, hash, functions, promotion, dependencies }) => [source, { hash, functions, promotion, dependencies }])), port, client, promotionFile, promotionClient: fileURLToPath(new URL("./promotion-client.mjs", import.meta.url)) }));
   const rules = { ...config.turbopack?.rules };
   const root = config.turbopack?.root ?? findRootDirAndLockFiles(projectDir).rootDir;
   // Regex conditions avoid treating route segments such as [id] as glob syntax.

@@ -6,13 +6,60 @@ stock scriptc native addons, and shadow-check results before dispatching to nati
 Adapters include Vite, SvelteKit, Nitro, Astro, React Router, and TanStack Start.
 `next-scriptc` supplies the Next.js wrapper. Requires Node 24 or later.
 
+## Install and enable Nitro
+
+The package is version `0.0.0` and is not published on npm. In a Nitro 2 app,
+install the repository package with pnpm 11.1.3:
+
+```sh
+pnpm add "github:nebler/next-scriptc#path:/packages/scriptc-promote"
+pnpm add -D typescript
+pnpm approve-builds scriptc
+pnpm rebuild scriptc
+```
+
+Keep optional dependencies enabled. Native compilation requires a linker, such
+as Xcode Command Line Tools on macOS or Clang and development libraries on Linux.
+If compilation reports `SC3004: TypeScript server startup: Permission denied`,
+run `pnpm rebuild scriptc` in the app and rebuild.
+
+```ts
+// nitro.config.ts
+import { defineNitroConfig } from "nitropack/config";
+import { scriptcNitro } from "scriptc-promote/nitro";
+
+export default defineNitroConfig({
+	preset: "node-server",
+	modules: [scriptcNitro()],
+});
+```
+
+Keep compute helpers in ordinary TypeScript modules and import them from server
+handlers. Automatic discovery selects supported synchronous functions. `"use js"`
+opts a function out. The Nitro adapter requires the `node-server` preset and
+skips promotion in development. Explicit native directives documented by the
+Next wrapper are not a Nitro setup recipe.
+
+```sh
+pnpm exec nitro dev
+pnpm exec nitro build
+node .output/server/index.mjs
+pnpm exec scriptc-promote report .
+```
+
+A production build prints a census of eligible and compiled functions. Compilation
+failure leaves automatic candidates in JS and prints the compiler diagnostic.
+Compiled candidates still need runtime shadow verification and measurements;
+compilation alone does not establish faster requests. Development runs JS.
+Rebuild and start production output to exercise native candidates locally.
+
 ## Inspect promotion coverage
 
 Run a static report without building or starting your app:
 
 ```sh
-scriptc-promote report ./my-app --json coverage.json --md coverage.md
-next-scriptc report ./my-next-app
+pnpm exec scriptc-promote report ./my-app --json coverage.json --md coverage.md
+pnpm exec next-scriptc report ./my-next-app
 ```
 
 The report detects the framework from package dependencies or config filenames.
@@ -31,7 +78,7 @@ includes async handlers and other functions silently excluded by discovery.
 To compile and measure accepted functions, opt in explicitly:
 
 ```sh
-scriptc-promote report ./my-app --measure --inputs inputs.json --json measured.json
+pnpm exec scriptc-promote report ./my-app --measure --inputs inputs.json --json measured.json
 ```
 
 Use IDs from the static report. Each value contains argument tuples:
