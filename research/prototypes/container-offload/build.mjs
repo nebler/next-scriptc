@@ -1,0 +1,15 @@
+import {execFileSync} from 'node:child_process';
+import {mkdirSync,writeFileSync,cpSync,rmSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+const require=createRequire(import.meta.url);
+mkdirSync('.build',{recursive:true});
+const profile={profile_format:1,name:'co1',entry:path.resolve('wasm-entry.ts'),emission:'llvm',abi:{prefix:'bench_',init_symbol:'bench_init',sink_register_symbol:'bench_sink',collect_symbol:'bench_collect'},exports:[{export:'run',symbol:'bench_run',params:['string'],returns:'string'}]};
+writeFileSync('.build/profile.json',JSON.stringify(profile));
+const compiler=path.resolve(path.dirname(require.resolve('scriptc/package.json')),require('scriptc/package.json').bin.scriptc);
+execFileSync(compiler,['build','--lib','--profile','.build/profile.json','-o','.build/compute.wasm'],{env:{...process.env,SCRIPTC_TARGET:'wasm32-wasi',SCRIPTC_RUNTIME_PACK:path.dirname(require.resolve('@scriptc/runtime-wasm32-wasi/package.json')),SCRIPTC_CHECKER_SERVER:'0'},stdio:'inherit'});
+execFileSync('node',['node_modules/nitropack/dist/cli/index.mjs','build'],{stdio:'inherit'});
+cpSync('.output/server','.build/node',{recursive:true});
+execFileSync('node',['node_modules/nitropack/dist/cli/index.mjs','build'],{env:{...process.env,CO1_PRESET:'cloudflare_module'},stdio:'inherit'});
+cpSync('.output/server','.output/worker',{recursive:true});
+cpSync('.build/node','.output/server',{recursive:true});

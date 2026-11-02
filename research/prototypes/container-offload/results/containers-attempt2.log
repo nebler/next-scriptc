@@ -1,0 +1,43 @@
+
+ ⛅️ wrangler 4.156.0 (update available 4.156.2)
+───────────────────────────────────────────────
+Your Worker has access to the following bindings:
+Binding                     Resource            Mode
+env.APP (AppContainer)      Durable Object      local
+env.KV (local-co1)          KV Namespace        local
+
+The following containers are available:
+- nsc-co1-appcontainer (/Users/noah/.t3/worktrees/next-scriptc/t3-d97bc2e5/research/prototypes/container-offload/Dockerfile)
+
+⎔ Preparing container image(s)...
+Wrangler detected this dev session is running in an AI agent.
+The Local Explorer API is available at http://localhost:18994/cdn-cgi/local/explorer/api
+Useful routes:
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/local/workers - local Workers and bindings
+  POST http://localhost:18994/cdn-cgi/local/explorer/api/local/scheduled?worker=<name> - invoke a Worker's scheduled handler; cron is required (see the OpenAPI schema for the full request)
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/storage/kv/namespaces - KV namespaces
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/d1/database - D1 databases
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/r2/buckets - R2 buckets
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/workers/durable_objects/namespaces - Durable Object namespaces
+  GET http://localhost:18994/cdn-cgi/local/explorer/api/workflows - Workflows
+  POST http://localhost:18994/cdn-cgi/local/explorer/api/local/observability/query - run a read-only SQL query (SELECT/WITH only) over captured request traces and console logs. Tables: spans, logs (read attributes via json(attributes)). Example:
+    curl -X POST http://localhost:18994/cdn-cgi/local/explorer/api/local/observability/query -H 'Content-Type: application/json' -d '{"sql":"SELECT service, name, outcome, duration_ms FROM spans WHERE parent_id IS NULL LIMIT 20"}'
+  POST http://localhost:18994/cdn-cgi/local/explorer/api/local/observability/clear - clear all captured traces and logs
+If the routes above don't cover what you need, fetch the full OpenAPI schema (large - use only as a last resort):
+  GET http://localhost:18994/cdn-cgi/local/explorer/api - OpenAPI schema
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe Docker CLI is needed to build the configured image before running dev but could not be launched.[0m
+
+  To fix this, try the following:
+    - If Docker is not installed, download it from [4mhttps://docs.docker.com/get-started/get-docker/[0m
+    - If Docker is installed but the daemon is not running,
+      open the Docker Desktop app or run `open -a Docker`.
+    - If you use an alternative Docker-compatible CLI (e.g. Podman),
+      set the WRANGLER_DOCKER_BIN environment variable to its path and DOCKER_HOST to its socket.
+
+  Note: Other container tooling that is compatible with the Docker CLI and engine may work, but is not yet guaranteed to do so.
+
+  To suppress this error if you do not intend on triggering any container instances, set dev.enable_containers to false in your wrangler.json or pass --enable-containers=false.
+
+
+🪵  Logs were written to "/Users/noah/Library/Preferences/.wrangler/logs/wrangler-2026-11-02_17-48-01_816.log"
