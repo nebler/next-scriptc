@@ -1,8 +1,9 @@
+import { readArtifact } from '../research/lib/artifact.mjs';
 // Offline only: recompute every published vector cell from retained samples.
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { writeFileSync, existsSync } from "node:fs";
 import { quantile } from "../examples/demo/bench/heavy/client.mjs";
 const dir = new URL("../research/benchmarks/", import.meta.url);
-const read = (name) => JSON.parse(readFileSync(new URL(name + ".json", dir)));
+const read = (name) => JSON.parse(readArtifact(new URL(name + ".json", dir)));
 const fmt = (n) => Number.isFinite(n) ? n.toFixed(3) : "unavailable";
 const mac = read("vector-scout-mac"), linux = read("vector-scout-linux");
 const audit = { scout: [], routes: [], controllers: [] };
@@ -37,7 +38,7 @@ const lines = [];
 for (const n of [100000, 20000]) for (const kind of ["int8", "float"]) {
   lines.push(`### ${kind}, ${n.toLocaleString("en-US")} × ${n === 100000 ? 768 : 384}`, "", "| Variant | Mac p50 / p95 ms | Linux p50 / p95 ms |", "| --- | ---: | ---: |", ...scoutRows(kind, n), "");
 }
-for (const [experiment, title] of [["vector-route-before", "Initial async-loop HTTP implementation (stock 0.4.6)"], ["vector-route-sync-before", "Final synchronous-kernel HTTP implementation (stock 0.4.6)"]]) if (existsSync(new URL(experiment + ".json", dir))) {
+for (const [experiment, title] of [["vector-route-before", "Initial async-loop HTTP implementation (stock 0.4.6)"], ["vector-route-sync-before", "Final synchronous-kernel HTTP implementation (stock 0.4.6)"]]) if (existsSync(new URL(experiment + ".json", dir)) || existsSync(new URL(experiment + ".json.gz", dir))) {
   const before = read(experiment);
   lines.push(`### ${title}`, "", "| Variant / route | C=1 p50 / p95 ms | C=16 req/s | CPU ms/request | Tree RSS MiB |", "| --- | ---: | ---: | ---: | ---: |");
   const reference = before.variants[0]?.parity?.rows;

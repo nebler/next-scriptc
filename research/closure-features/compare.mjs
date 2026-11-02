@@ -1,6 +1,7 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-const read=name=>JSON.parse(fs.readFileSync(new URL(name,import.meta.url)));
+const read=name=>JSON.parse(readArtifact(new URL(name,import.meta.url)));
 const result={};
 for(const kind of ['sync','async']){
  const before=read(kind==='sync'?'sync-before/census.json':'async-before.json'),after=read(kind==='sync'?'sync-after/census.json':'async-after.json');result[kind]={};

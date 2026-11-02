@@ -1,6 +1,7 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-const read=n=>JSON.parse(fs.readFileSync(new URL(n,import.meta.url)));
+const read=n=>JSON.parse(readArtifact(new URL(n,import.meta.url)));
 const p=read('profiles.json'),s=read('summary.json'),c=read('census.json');
 assert.equal(p.results.length,6);assert.equal(s.length,6);
 for(const r of p.results){assert.equal(r.rounds.length,3);for(const t of r.rounds){assert.ok(t.cpuUs>=500000);assert.equal(Object.values(t.profile.counts).reduce((a,b)=>a+b,0),t.profile.activeSamples);assert.ok(Math.abs(Object.values(t.profile.shares).reduce((a,b)=>a+b,0)-100)<1e-8);}}

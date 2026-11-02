@@ -1,14 +1,15 @@
-import {readFile,writeFile} from 'node:fs/promises';
+import { readArtifact } from '../lib/artifact.mjs';
+import {writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {stats} from './cases.mjs';
-const read=async file=>JSON.parse(await readFile(import.meta.dirname+'/raw/'+file,'utf8'));
+const read=async file=>JSON.parse(readArtifact(import.meta.dirname+'/raw/'+file,'utf8'));
 const w=await read('workerd.json'),n=await read('node.json'),a=await read('artifacts.json'),native=await read('native.json'),abi=await read('abi-probes.json');
 const report={workerdCases:[],nodeCases:[],artifacts:a.artifacts.map(({name,rawBytes,gzipBytes,simdInstructions})=>({name,rawBytes,gzipBytes,simdInstructions})),failures:[]};
 for(const c of w.cases) {
  assert.equal(c.failures.length,0);
  assert.equal(c.warmup.length,w.warmups*2);assert.equal(c.samples.length,w.batches*w.batchSize*2);assert.equal(c.cpuBatches.length,w.batches*2);
- const expected=(await readFile(import.meta.dirname+'/raw/'+c.kind+'-'+c.size+'-result.json','utf8')).trimEnd();
+ const expected=(readArtifact(import.meta.dirname+'/raw/'+c.kind+'-'+c.size+'-result.json','utf8')).trimEnd();
  assert.equal(createHash('sha256').update(expected).digest('hex'),c.sha256);
  for(const row of [...c.warmup,...c.samples])assert.equal(row.sha256,c.sha256);
  for(const b of c.cpuBatches){assert.ok(b.after.user_ns>=b.before.user_ns);assert.ok(b.cpuMs>0);assert.ok(b.before.timebase_numer>0&&b.before.timebase_denom>0);assert.equal(b.before.user_ns,b.before.user_ticks*b.before.timebase_numer/b.before.timebase_denom);}

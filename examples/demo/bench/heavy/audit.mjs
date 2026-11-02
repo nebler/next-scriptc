@@ -1,10 +1,11 @@
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
 // Read-only arithmetic/coverage audit. Never supplies replacement measurements.
 import assert from "node:assert/strict";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { quantile } from "./client.mjs";
 const read = async (p) => {
   try {
-    return JSON.parse(await readFile("research/benchmarks/" + p));
+    return JSON.parse(readArtifact("research/benchmarks/" + p));
   } catch {
     return null;
   }

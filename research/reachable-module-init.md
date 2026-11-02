@@ -183,7 +183,7 @@ root README, merges, pushes, or publications are involved.
 The single completed final census accepts 23 functions at the unchanged pin
 `ed19717ec02a1ac79aecf5569159aa9d2d869312`. This agrees with the previously published
 K4 count; no new before measurement is taken on the held-out app. The retained
-[Papermark census](reachable-module-init/papermark.json) lists every identity.
+[Papermark census](reachable-module-init/papermark.json.gz) lists every identity.
 Papermark source is neither executed nor committed, and no profile or timing is run.
 Two startup attempts failed before scanning because cleanup removed temporary
 workspace dependency links. Restoring those links allowed the one completed scan.

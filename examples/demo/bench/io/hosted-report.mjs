@@ -1,4 +1,5 @@
-import { readFile, access } from 'node:fs/promises';
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { quantile } from '../vercel/io-client.mjs';
 const f=(v)=>Number.isFinite(v)?v.toFixed(3):'unavailable';
@@ -6,8 +7,8 @@ const ratio=(a,b)=>Number.isFinite(a)&&Number.isFinite(b)&&b>0?`${f(a/b)}×`:'un
 const triple=(r)=>r?['p50Ms','p95Ms','p99Ms'].map(k=>f(r[k])).join(' / '):'unavailable';
 const stats=(xs)=>({p50Ms:quantile(xs,.5),p95Ms:quantile(xs,.95),p99Ms:quantile(xs,.99)});
 export async function mergeHostedReport(content,root) {
- const read=async(file)=>JSON.parse(await readFile(path.join(root,'research/benchmarks',file),'utf8'));
- try {await access(path.join(root,'research/benchmarks/realistic-io-hosted-pair-3.json'));}catch{return content;}
+ const read=async(file)=>JSON.parse(readArtifact(path.join(root,'research/benchmarks',file),'utf8'));
+ try {await read('realistic-io-hosted-pair-3.json');}catch(error){if(error.code==='ENOENT')return content;throw error;}
  const pairs=await Promise.all([1,2,3].map(i=>read(`realistic-io-hosted-pair-${i}.json`)));
  const full=pairs[2], node=full.deployments.find(d=>d.variant==='node'), native=full.deployments.find(d=>d.variant==='native');
  const provenance=await read('realistic-io-hosted-provenance.json'),cost=await read('realistic-io-cost.json'),sandboxes=await read('realistic-io-sandbox-status.json');
@@ -48,7 +49,7 @@ export async function mergeHostedReport(content,root) {
  content+='\nFour measurement-only previews were deleted by exact ID. The final pair is retained for review; the isolated Redis namespace was reset to its 100 seed orders. No adapter/shim behavior, hosted project settings, production domains, main branch or remote Git refs changed.\n';
  for(const d of provenance.deployments.filter(d=>d.pair===3))content+=`- Retained ${d.variant}: [preview](${d.url}) (\`${d.id}\`).\n`;
  content+='\n## Hosted artifact index\n\n';
- for(let i=1;i<=3;i++)content+=`- Pair ${i}: [measurements](benchmarks/realistic-io-hosted-pair-${i}.json), [Node deployment](benchmarks/realistic-io-hosted-pair-${i}-node-deployment.json), [native deployment](benchmarks/realistic-io-hosted-pair-${i}-native-deployment.json), [Node sizes](benchmarks/realistic-io-hosted-pair-${i}-node-sizes.json), [native sizes](benchmarks/realistic-io-hosted-pair-${i}-native-sizes.json), [Node runtime](benchmarks/realistic-io-hosted-pair-${i}-node-runtime.jsonl), [native runtime](benchmarks/realistic-io-hosted-pair-${i}-native-runtime.jsonl).\n`;
+ for(let i=1;i<=3;i++)content+=`- Pair ${i}: [measurements](benchmarks/realistic-io-hosted-pair-${i}.json${i===3?'.gz':''}), [Node deployment](benchmarks/realistic-io-hosted-pair-${i}-node-deployment.json), [native deployment](benchmarks/realistic-io-hosted-pair-${i}-native-deployment.json), [Node sizes](benchmarks/realistic-io-hosted-pair-${i}-node-sizes.json), [native sizes](benchmarks/realistic-io-hosted-pair-${i}-native-sizes.json), [Node runtime](benchmarks/realistic-io-hosted-pair-${i}-node-runtime.jsonl), [native runtime](benchmarks/realistic-io-hosted-pair-${i}-native-runtime.jsonl).\n`;
  content+='- [Provenance](benchmarks/realistic-io-hosted-provenance.json), [Linux IPC/TLS/RSS validation](benchmarks/realistic-io-hosted-linux.json), [cost ledger](benchmarks/realistic-io-cost.json), [Sandbox status](benchmarks/realistic-io-sandbox-status.json), [hosted parity](benchmarks/realistic-io-hosted-parity.txt), [verification audit](benchmarks/realistic-io-verification.json), [cleanup](benchmarks/realistic-io-cleanup.json).\n';
  return content;
 }

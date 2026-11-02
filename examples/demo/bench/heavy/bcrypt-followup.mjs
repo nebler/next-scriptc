@@ -1,3 +1,4 @@
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
 // Last, previously unmeasured hosted native C1 row. CPU shares its three C1 samples.
 import { readFile, writeFile, access } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
@@ -11,13 +12,13 @@ try {
   if (e.code !== "ENOENT") throw e;
 }
 const primary = JSON.parse(
-  await readFile("research/benchmarks/heavy-vercel.json"),
+  readArtifact("research/benchmarks/heavy-vercel.json"),
 );
 if (primary.rows.some((r) => r.variant === "native" && r.id === "bcrypt"))
   throw new Error("Native bcrypt was already measured");
 const controls = await Promise.all(
   ["heavy-vercel-controller.json", "heavy-vercel-go-controller.json"].map(
-    async (f) => JSON.parse(await readFile("research/benchmarks/" + f)),
+    async (f) => JSON.parse(readArtifact("research/benchmarks/" + f)),
   ),
 );
 if (controls[1].status !== "complete")

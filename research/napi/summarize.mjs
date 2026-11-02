@@ -1,7 +1,8 @@
-import {readFile,writeFile} from 'node:fs/promises';
+import { readArtifact } from '../lib/artifact.mjs';
+import {writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {stats,save} from './common.mjs';
-const read=async name=>JSON.parse(await readFile(import.meta.dirname+'/raw/'+name+'.json'));
+const read=async name=>JSON.parse(readArtifact(import.meta.dirname+'/raw/'+name+'.json'));
 const measure=await read('measure'),boundary=await read('boundary'),cold=await read('cold');
 for(const c of measure.cases)for(const m of Object.values(c.modes)){
  assert.equal(m.samples.length,300);assert.equal(m.warmup.length,50);

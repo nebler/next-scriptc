@@ -1,3 +1,4 @@
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
 // Complete only previously unmeasured Go rows. Keep the failed full run unchanged.
 import { Sandbox } from "@vercel/sandbox";
 import { readFile, writeFile, access } from "node:fs/promises";
@@ -11,7 +12,7 @@ try {
   if (e.code !== "ENOENT") throw e;
 }
 const prior = JSON.parse(
-  await readFile("research/benchmarks/heavy-vercel.json"),
+  readArtifact("research/benchmarks/heavy-vercel.json"),
 );
 const control = JSON.parse(
   await readFile("research/benchmarks/heavy-vercel-controller.json"),

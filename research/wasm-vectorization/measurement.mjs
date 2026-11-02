@@ -48,6 +48,7 @@ if(mode==='prepare'){
  }
  await writeFile(out+'/raw/builds.json',JSON.stringify(builds,null,2));await writeFile(out+'/raw/artifacts.json',JSON.stringify(artifacts,null,2));
  let engine=await readFile(root+'/research/wasm-simd-workerd/measure.mjs','utf8');engine=engine.replace("root+'/.checks/wasm-workerd'",JSON.stringify(scratch)).replace("root+'/research/wasm-simd-workerd'",JSON.stringify(out)).replace("'js,stock,scalar,simd'","'js,scalar,fixed,simd'").replace("'natural,imul,float,revenue'","'imul,natural,float,sum,search'").replace("(kind==='revenue'?[5000]:[20000,100000])","[20000]");
+ engine=engine.replaceAll("'../lib/", "'"+root+"/research/lib/");
  engine=engine.replaceAll("'../wasm-workerd/", "'"+root+"/research/wasm-workerd/");await writeFile(scratch+'/measure.mjs',engine);
  console.log('Prepared. Run verify before measure. No timings collected.');
 }else if(mode==='verify'){

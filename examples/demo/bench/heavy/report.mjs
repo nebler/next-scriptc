@@ -1,12 +1,13 @@
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
 // Mechanical numeric tables from retained evidence; prose lives in research/go-territory.md.
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { quantile } from "./client.mjs";
 const selfFile =
   process.argv[2] ?? "research/benchmarks/heavy-self-path-recovery.json";
 const hostedFile = process.argv[3] ?? "research/benchmarks/heavy-vercel.json";
 const read = async (file) => {
   try {
-    return JSON.parse(await readFile(file));
+    return JSON.parse(readArtifact(file));
   } catch {
     return null;
   }

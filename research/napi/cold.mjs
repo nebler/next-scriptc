@@ -1,8 +1,8 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import {spawnSync} from 'node:child_process';
 import assert from 'node:assert/strict';
 import {sizes,raw,stats,save} from './common.mjs';
-import {readFile} from 'node:fs/promises';
-const warm=JSON.parse(await readFile(raw+'/measure.json'));
+const warm=JSON.parse(readArtifact(raw+'/measure.json'));
 const result={node:process.version,date:new Date().toISOString(),samples:10,cases:[],note:'Fresh child process per call; filesystem caches warm; parent spawn wall time includes Node startup and child exit'};
 for(const size of sizes)for(const mode of ['node','sidecar','sync','async','serialSync','serialAsync']){
  const c={size,mode,samples:[]};result.cases.push(c);

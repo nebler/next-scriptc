@@ -1,5 +1,6 @@
-import {readFileSync,writeFileSync} from 'node:fs';
-const load=n=>JSON.parse(readFileSync(`research/vector-vercel/${n}.json`));
+import { readArtifact } from '../lib/artifact.mjs';
+import {writeFileSync} from 'node:fs';
+const load=n=>JSON.parse(readArtifact(`research/vector-vercel/${n}.json`));
 const s=load('summary'),m=load('measurements'),rows=s.rows;
 const find=n=>rows.find(r=>r.variant===n),p=find('patched-natural'),g=find('go-simd'),n=find('node'),plain=find('go-plain'),stock=find('stock-natural');
 const f=x=>x.toFixed(3),pct=(a,b)=>((1-a/b)*100).toFixed(1);
@@ -153,7 +154,7 @@ node research/vector-vercel/report.mjs
 
 Local checks: 10/10 existing vector/harness tests and 21/21 adapter tests pass; Go vector correctness tests pass. The only standalone local vector search was a correctness reference/hash smoke, with no retained timing. Hosted main measurement status is **${m.status}**, **${m.requestsIssued}** client requests including 18 post-C=1 diagnostics, plus **${deploys.reduce((a,d)=>a+d.first.length+d.diagnostics.length,0)}** deployment-first/diagnostic requests. Total hosted attempts are ${m.requestsIssued+deploys.reduce((a,d)=>a+d.first.length+d.diagnostics.length,0)} across nine previews, with zero failed application responses and zero Sandboxes. Main client elapsed ${f(m.elapsedMs/1000)} s; its own CPU/wall ratio ${f(m.generatorCpuCores)} cores. Concurrency-window client CPU is in raw JSON. The Mac's background load and WAN restrict end-to-end and throughput interpretation; they do not enter the server's monotonic compute interval directly.
 
-Raw artifacts are compact JSON in [vector-vercel/](vector-vercel/): complete samples in [measurements.json](vector-vercel/measurements.json), derived [summary.json](vector-vercel/summary.json), per-preview first requests/diagnostics/deployment identities, compiler/runtime [provenance](vector-vercel/provenance.json), [reference](vector-vercel/reference.json), [assembly](vector-vercel/vector-assembly.json), binary audit/sizes, tests and [prospective protocol](vector-vercel/method.md). No screenshots or response/error bodies containing protection credentials are retained.
+Raw artifacts are compact JSON in [vector-vercel/](vector-vercel/): complete samples in [measurements.json](vector-vercel/measurements.json.gz), derived [summary.json](vector-vercel/summary.json), per-preview first requests/diagnostics/deployment identities, compiler/runtime [provenance](vector-vercel/provenance.json), [reference](vector-vercel/reference.json), [assembly](vector-vercel/vector-assembly.json), binary audit/sizes, tests and [prospective protocol](vector-vercel/method.md). No screenshots or response/error bodies containing protection credentials are retained.
 `;
 writeFileSync('research/vector-vercel.md',doc);
 console.log(table);

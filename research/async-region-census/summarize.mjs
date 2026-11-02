@@ -1,6 +1,7 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import fs from 'node:fs';
-const census=JSON.parse(fs.readFileSync(new URL('census.json',import.meta.url)));
-const historical=JSON.parse(fs.readFileSync(new URL('../coverage-baseline/summary.json',import.meta.url))).filter(r=>/^(umami|dub)-/.test(r.name));
+const census=JSON.parse(readArtifact(new URL('census.json',import.meta.url)));
+const historical=JSON.parse(readArtifact(new URL('../coverage-baseline/summary.json',import.meta.url))).filter(r=>/^(umami|dub)-/.test(r.name));
 const output={method:'Static A0 census; historical K1 JavaScript profiles only. No region timing or native compilation.',apps:{},historicalK1:historical};
 for(const [app,a] of Object.entries(census.apps)){
  const path=r=>app==='umami'?r.file==='src/queries/sql/events/saveEventData.ts':app==='dub'?r.file==='apps/web/app/api/links/export/route.ts':false;

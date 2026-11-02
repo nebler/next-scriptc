@@ -233,9 +233,9 @@ Thus the imul control suggests a useful compiler improvement, not a win over
 all optimized Go. A patched compiler has not been measured by this task.
 
 HTTP raw evidence:
-[initial implementation](benchmarks/vector-route-before.json),
+[initial implementation](benchmarks/vector-route-before.json.gz),
 [initial controller](benchmarks/vector-route-before-controller.json),
-[final implementation](benchmarks/vector-route-sync-before.json),
+[final implementation](benchmarks/vector-route-sync-before.json.gz),
 [final controller](benchmarks/vector-route-sync-before-controller.json).
 Both are successful measurements, including all regressions.
 

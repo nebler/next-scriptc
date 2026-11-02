@@ -1,6 +1,7 @@
+import { readArtifact } from '../lib/artifact.mjs';
 // Read-only consistency audit of retained hosted diagnostics, no new requests.
-import {readFileSync,writeFileSync} from 'node:fs';
-const load=n=>JSON.parse(readFileSync(`research/vector-vercel/${n}.json`));
+import {writeFileSync} from 'node:fs';
+const load=n=>JSON.parse(readArtifact(`research/vector-vercel/${n}.json`));
 const observations=[];
 for(let i=1;i<=3;i++)for(const k of ['node','stock','patched'])for(const d of load(`${k}-${i}`).diagnostics) observations.push({where:`${k}-${i}-deploy-${d.variant}`,body:d.body});
 for(const r of load('measurements').rounds)for(const v of r.rows)if(v.afterSequential)observations.push({where:`set-${r.round}-${v.variant}-after-C1`,body:v.afterSequential.body});

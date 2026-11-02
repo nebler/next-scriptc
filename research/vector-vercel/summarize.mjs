@@ -1,7 +1,8 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import assert from 'node:assert/strict';
-import {readFileSync,writeFileSync} from 'node:fs';
+import {writeFileSync} from 'node:fs';
 import {quantile} from '../../examples/demo/bench/heavy/client.mjs';
-const load=n=>JSON.parse(readFileSync(`research/vector-vercel/${n}.json`));
+const load=n=>JSON.parse(readArtifact(`research/vector-vercel/${n}.json`));
 const m=load('measurements');assert.equal(m.status,'complete');assert.equal(m.rounds.length,3);
 const order=['patched-natural','stock-natural','stock-imul','go-simd','go-plain','node'];
 const rows=order.map(variant=>{

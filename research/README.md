@@ -34,3 +34,19 @@ in frozen provenance resolve through the
 [Vercel archive](../examples/demo/bench/vercel/archive/README.md); the original
 source bytes also remain in the recorded Git commit. Report generators remain
 alongside the active benchmark clients.
+
+## Store large artifacts
+
+Keep writers producing plain JSON, JSONL, NDJSON, text, or logs. After a run,
+explicitly stage new or regenerated artifacts so Git tracks them, then run
+`node scripts/compress-artifacts.mjs`. The script replaces tracked files larger
+than 256 KiB with deterministic level-9 gzip files and stages removal of the
+originals. Explicitly stage the resulting `.gz` files and update Markdown links.
+Run `node scripts/compress-artifacts.mjs --check` to detect large uncompressed
+tracked artifacts, and `node scripts/check-research-links.mjs` to check links.
+
+Readers can use `readArtifact(path)` or `readJsonArtifact(path)` from
+[lib/artifact.mjs](lib/artifact.mjs). Both accept file paths and file URLs,
+prefer the requested path when it exists, and fall back to its plain or `.gz`
+counterpart. `readArtifact` returns a Buffer by default, or text when given an
+encoding. Existing readers can keep requesting plain paths after compression.

@@ -1,10 +1,10 @@
 // Deterministic empirical resampling only. Does not invoke any workload/addon.
-import {readFileSync} from 'node:fs';
+import {readArtifact} from './lib/artifact.mjs';
 import {fileURLToPath} from 'node:url';
 import {decideLane,stabilityDefaults as policy} from '../packages/next-scriptc/src/functions/promotion-policy.mjs';
 const median=a=>[...a].sort((a,b)=>a-b)[Math.floor(a.length/2)];
 export function simulate(trials=1000){
- const windows=[1,2,3].map(w=>JSON.parse(readFileSync(new URL(`./standin/raw/m2-window${w}-phase1.json`,import.meta.url))));
+ const windows=[1,2,3].map(w=>JSON.parse(readArtifact(new URL(`./standin/raw/m2-window${w}-phase1.json`,import.meta.url))));
  const report=[];
  for(const [index,size] of [1000,5000,15000,200000].entries()){
   let oldWrong=0,newWrong=0,stressWrong=0,firstEpochWrong=0;

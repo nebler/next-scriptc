@@ -98,6 +98,6 @@ All 72 full adapter tests pass with one test worker, including the actual compil
 
 Use the installed stock scriptc 0.4.6 compiler with `SCRIPTC_COMPILER=... M3_ARTIFACTS=research/phase1/raw/cpu-timing/artifacts.json node research/phase1/build-m3.mjs`. Builds run sequentially. Run `STANDIN_CPU=11 PHASE1_MEASURE=research/phase1/probe-cpu-timing.mjs research/standin/run.sh phase1 cpu-contention-probe`, finish the tests, then run `STANDIN_CPU=11 PHASE1_MEASURE=research/phase1/measure-m3.mjs research/standin/run.sh phase1 m3-cpu-timing`. Regenerate this report with `python3 research/phase1/analyze-cpu-timing.py`.
 
-Raw artifacts: [probe](standin/raw/cpu-contention-probe-phase1.json), [M3 rerun](standin/raw/m3-cpu-timing-phase1.json), [host load](standin/raw/m3-cpu-timing-host-load.log), [container settings](standin/raw/m3-cpu-timing-container.json), and [build and test records](phase1/raw/cpu-timing/). The historical M3 artifact and report remain unchanged.
+Raw artifacts: [probe](standin/raw/cpu-contention-probe-phase1.json), [M3 rerun](standin/raw/m3-cpu-timing-phase1.json.gz), [host load](standin/raw/m3-cpu-timing-host-load.log), [container settings](standin/raw/m3-cpu-timing-container.json), and [build and test records](phase1/raw/cpu-timing/). The historical M3 artifact and report remain unchanged.
 
 Disk free before work was about 19 GiB; before cleanup 18.49 GiB and after cleanup 19.28 GiB. Task build output and all three dependency symlinks were removed. Other host work can affect free space.

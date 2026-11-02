@@ -1,5 +1,6 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import fs from 'node:fs';
-const read=name=>JSON.parse(fs.readFileSync(new URL(name,import.meta.url)));
+const read=name=>JSON.parse(readArtifact(new URL(name,import.meta.url)));
 const result={};
 for(const kind of ['sync','async']){
  const before=read(kind+'-before.json'),after=read(kind+'-after.json');result[kind]={};

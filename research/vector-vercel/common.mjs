@@ -1,14 +1,15 @@
+import { readArtifact } from '../lib/artifact.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { parseEnv } from 'node:util';
 import { createClient, quantile } from '../../examples/demo/bench/heavy/client.mjs';
 import { spec } from '../../examples/demo/bench/heavy/fixtures.mjs';
 export const secret = parseEnv(readFileSync('.env.local','utf8')).VERCEL_AUTOMATION_BYPASS_SECRET;
 if (!secret) throw new Error('Missing private protection bypass');
-export const reference = JSON.parse(readFileSync('research/vector-vercel/reference.json'));
+export const reference = JSON.parse(readArtifact('research/vector-vercel/reference.json'));
 export const client = createClient({secret,budget:1800,deadlineMs:30000});
 export const fixture = {...spec('vectors',100000),expected:reference.responseSha256};
 export const save = (name,data) => writeFileSync(`research/vector-vercel/${name}.json`,JSON.stringify(data)+'\n');
-export const load = name => JSON.parse(readFileSync(`research/vector-vercel/${name}.json`));
+export const load = name => JSON.parse(readArtifact(`research/vector-vercel/${name}.json`));
 export function sample(r) {
  const computeMs=Number(/^compute;dur=([\d.]+)$/.exec(r.headers['server-timing'])?.[1]);
  const cpuMs=Number(r.headers['x-vector-cpu-us'])/1000, rss=Number(r.headers['x-vector-rss']);

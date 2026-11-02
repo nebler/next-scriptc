@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { readArtifact } from '../../../../research/lib/artifact.mjs';
+import { writeFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
 const number = (n) => typeof n === "number" ? n.toFixed(3) : "unavailable";
@@ -48,6 +49,6 @@ function diagnosticReport(data) {
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
   const file = process.argv[2];
-  if (!file?.endsWith(".json")) throw new Error("Usage: node report.mjs research/benchmarks/vercel-<stamp>.json");
-  await writeFile(file.replace(/\.json$/, ".md"), report(JSON.parse(await readFile(file))));
+  if (!/\.json(?:\.gz)?$/.test(file ?? "")) throw new Error("Usage: node report.mjs research/benchmarks/vercel-<stamp>.json");
+  await writeFile(file.replace(/\.json(?:\.gz)?$/, ".md"), report(JSON.parse(readArtifact(file))));
 }

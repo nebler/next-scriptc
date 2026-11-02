@@ -7,7 +7,7 @@ current gates accept one small Formbricks ID projection and zero regions in Umam
 or Dub. Concrete input schemas recover a few small regions in a counterfactual, but none lies on K1's measured paths.
 A production outliner has no demonstrated CPU coverage gain from this experiment.
 
-The [complete census](async-region-census/census.json) retains identities, source
+The [complete census](async-region-census/census.json.gz) retains identities, source
 line ranges, live values and checker types, control flags, first rejections,
 independent boundary probes, construction proofs when reached, and tested concrete
 schema witnesses. The [summary](async-region-census/summary.json) includes historical
