@@ -1,0 +1,100 @@
+define internal ptr @sc_bf_generic_x25_faa5fdd31052(ptr %p_sc_l_value_0) #0 { ; generic%faa5fdd31052
+entry:
+  %sc_l_value_0 = alloca ptr ; value
+  store ptr %p_sc_l_value_0, ptr %sc_l_value_0
+  %t0 = load ptr, ptr %sc_l_value_0
+  ret ptr %t0
+}
+define internal ptr @sc_f_generic_x25_faa5fdd31052(ptr %p0) #0 {
+entry:
+  %s0 = alloca ptr
+  %result = call ptr @sc_bf_generic_x25_faa5fdd31052(ptr %p0)
+  store ptr null, ptr %s0
+  %t1 = icmp ne ptr %result, null
+  br i1 %t1, label %result.own0, label %result.done1
+result.own0:
+  %t2 = call ptr @sc_rretain_rdc053446757e(ptr %result)
+  store ptr %t2, ptr %s0
+  br label %result.done1
+result.done1:
+  %t3 = load ptr, ptr %s0
+  call void @sc_rrelease_rdc053446757e(ptr %p0)
+  ret ptr %t3
+}
+
+; scriptc-group 0
+define internal ptr @sc_bf_generic_x25_e5e130051956(ptr %p_sc_l_value_0) #0 { ; generic%e5e130051956
+entry:
+  %sc_l_value_0 = alloca ptr ; value
+  store ptr %p_sc_l_value_0, ptr %sc_l_value_0
+  %t0 = load ptr, ptr %sc_l_value_0
+  ret ptr %t0
+}
+define internal ptr @sc_f_generic_x25_e5e130051956(ptr %p0) #0 {
+entry:
+  %s0 = alloca ptr
+  %result = call ptr @sc_bf_generic_x25_e5e130051956(ptr %p0)
+  store ptr null, ptr %s0
+  %t1 = icmp ne ptr %result, null
+  br i1 %t1, label %result.own0, label %result.done1
+result.own0:
+  %t2 = call ptr @sc_rc_retain_str(ptr %result)
+  store ptr %t2, ptr %s0
+  br label %result.done1
+result.done1:
+  %t3 = load ptr, ptr %s0
+  call void @sc_rc_release_str(ptr %p0)
+  ret ptr %t3
+}
+
+; scriptc-group 0
+define internal ptr @sc_bf__x25_arr_idxOr_f2736eecbb50.i32(ptr %p_sc_l_a_0, i32 %p_sc_l_i_0.i32) inlinehint #0 { ; %arr.idxOr.f2736eecbb50
+entry:
+  %sc_l_a_0 = alloca ptr ; a
+  %sc_l_i_0 = alloca i32 ; i
+  %s26 = alloca ptr
+  %p_sc_l_i_0 = sitofp i32 %p_sc_l_i_0.i32 to double
+  store ptr %p_sc_l_a_0, ptr %sc_l_
+
+; Full run body contains dynamic iteration and key snapshots; selected calls:
+  %t2 = call ptr @scr_arr_new_ops_small(ptr @sc_arrops.sc_rretain_r26a0b0884c59.sc_rrelease_r26a0b0884c59.null)
+  %t10 = call ptr @sc_rnew_r26a0b0884c59()
+  %t67 = call ptr @sc_rnew_r26a0b0884c59()
+  %t397 = call ptr @sc_rnew_r58ee7043d101()
+  call void @sc_rrelease_r58ee7043d101(ptr %t431)
+  %t467 = call ptr @sc_rnew_r58ee7043d101()
+  call void @sc_rrelease_r58ee7043d101(ptr %t502)
+  %t511 = call ptr @sc_rnew_rdc053446757e()
+  %t515 = call ptr @sc_bf_generic_x25_faa5fdd31052(ptr %t511) alwaysinline
+  call void @sc_rrelease_rdc053446757e(ptr %t511)
+  %t519 = call ptr @sc_bf_generic_x25_faa5fdd31052(ptr %t518) alwaysinline ; borrowed result
+  %t525 = call ptr @sc_bf_generic_x25_e5e130051956(ptr %t524) alwaysinline ; borrowed result
+  call void @sc_rrelease_rdc053446757e(ptr %t530)
+  %t606 = call ptr @scr_dyn_iterator(ptr %t605, ptr @sc_lit_4054724937826800)
+  %t610 = call ptr @scr_dyn_iterator_result(ptr %t606)
+  %t629 = call zeroext i1 @scr_dyn_iterator_can_step(ptr %t627, ptr %t628)
+  %t633 = call ptr @scr_dyn_iterator_step(ptr %t632)
+  %t638 = call zeroext i1 @scr_dyn_iterator_step_done(ptr %t637)
+  call void @scr_dyn_this_push_dyn(ptr %t643)
+  %t644 = call ptr @scr_dyn_call(ptr %t642, ptr null, i64 0, ptr @sc_cs_492580727902764)
+  call void @scr_dyn_this_pop()
+  %t648 = call ptr @scr_dyn_iterator_result(ptr %t644)
+  %t748 = call zeroext i1 @scr_dyn_truthy(ptr %t747)
+  %t752 = call ptr @scr_dyn_undefined()
+  %t751 = call ptr @scr_dyn_retain_v(ptr %t752)
+  %t857 = call ptr @scr_dyn_obj_key_strs(ptr %t856)
+  call void @scr_dyn_this_push_dyn(ptr %t1067)
+  %t1068 = call ptr @scr_dyn_call(ptr %t1066, ptr null, i64 0, ptr @sc_cs_492580727902764)
+  call void @scr_dyn_this_pop()
+  %t1072 = call ptr @scr_dyn_iterator_result(ptr %t1068)
+  call void @scr_dyn_this_push_dyn(ptr %t1102)
+  %t1103 = call ptr @scr_dyn_call(ptr %t1101, ptr null, i64 0, ptr @sc_cs_492580727902764)
+  call void @scr_dyn_this_pop()
+  %t1107 = call ptr @scr_dyn_iterator_result(ptr %t1103)
+  call void @scr_dyn_this_push_dyn(ptr %t1137)
+  %t1138 = call ptr @scr_dyn_call(ptr %t1136, ptr null, i64 0, ptr @sc_cs_492580727902764)
+  call void @scr_dyn_this_pop()
+  %t1142 = call ptr @scr_dyn_iterator_result(ptr %t1138)
+  %t68 = call ptr @sc_rnew_r9d1a90587726()
+  call void @sc_rrelease_r9d1a90587726(ptr %t68)
+  call void @sc_rrelease_r9d1a90587726(ptr %t68)

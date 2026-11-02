@@ -1457,3 +1457,14 @@ conservative transitive argument-mutation proof and a mutable quadrature cache) 
 Actual's forecast solver (pure numeric but cheap and HTTP use unproven). Next work:
 complete dependency-installed censuses on DEV so the blocker histogram is real, then
 attack the top real blockers using DEV only, then measure HELD_OUT once.
+
+
+## 47. C1 compiler object/string attribution and dense key snapshots (2026-11-02)
+
+Own-code development benchmarks cover typed record aggregation, strings, Map/Set, spread, generics, erased JSON, and pinned json-2-csv 5.5.0. All final numeric outputs and CSV bytes match Node. CSV reproduces the deficit: 4,096 rows take 7.171 ms in Node, 42.438 ms with stock 0.4.6, and 42.570 ms with fetched upstream. Typed aggregation and strings beat Node in these fixtures, so a general 5× object/string penalty is unsupported.
+
+Sample profiles rank erased ownership/boxing, dynamic property/layout probes and dispatch, then string/path work. Named exclusive stock CSV shares are at least 17.8% ownership, 7.8% allocation/boxing, 14.4% lookup, and 5.9% dynamic calls; inlining and unclassified generated code prevent a full partition. Generic identity helpers inline but retain record allocation/release, with 62.3% sampled in record-release code. JSON parsing and key enumeration matter in the erased tree fixture; neither explains the full CSV loss.
+
+One sound local fix fills fresh native key arrays directly in inline dense storage. Four alternating windows improve 11–15%, pooled median 8.0265 → 6.9325 ms. Full JSON walk improves only 1.7% in the final session; large CSV regresses 1.9%, so no CSV acceleration is claimed. Escape analysis and guarded erased primitive/shape specialization remain precise designs, not implemented gains.
+
+Fork branch `next-scriptc/object-key-array-construction` is committed at `0f66b43c5ba7fc11e6d2d930c25566f03bca6527` from upstream `38cc546e0`. Two ASan/UBSan runtime tests, new release/dev corpus and sanitized RC audit, three affected descriptor/key-order cases, single-fixture preflight/order, completeness, lint and format pass. Full gate remains outstanding; a broad order-canary command was terminated without a verdict. All final timings run after builds/tests. No held-out app, root README, original checkout, Docker, push, PR, issue, or public write is involved. [Report and retained evidence](compiler-object-string.md).

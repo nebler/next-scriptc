@@ -1,0 +1,17 @@
+
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1-object-string
+> vitest run tests/harness/llvm-differential.test.ts -t 'object-keys-owned-dense-array|7614-key-order-copies|3120-dynamic-property-descriptors|prototype-named-data-records'
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1-object-string
+
+ ✓ tests/harness/llvm-differential.test.ts (5000 tests | 4996 skipped) 5736ms
+   ✓ llvm differential corpus (5000 programs, release+dev) > 3120-dynamic-property-descriptors.js  1816ms
+   ✓ llvm differential corpus (5000 programs, release+dev) > 7614-key-order-copies.ts  2146ms
+   ✓ llvm differential corpus (5000 programs, release+dev) > prototype-named-data-records.ts  1526ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 4996 skipped (5000)
+   Start at  23:44:26
+   Duration  13.74s (transform 5.44s, setup 0ms, collect 7.75s, tests 5.74s, environment 0ms, prepare 49ms)
+

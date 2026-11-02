@@ -1,0 +1,433 @@
+Analysis of sampling nsc-c1-stock-suite (pid 85070) every 1 millisecond
+Process:         nsc-c1-stock-suite [85070]
+Path:            /private/tmp/nsc-c1-stock-suite
+Load Address:    0x104c14000
+Identifier:      nsc-c1-stock-suite
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  node [84692]
+Target Type:     live task
+
+Date/Time:       2026-11-02 23:45:26.128 +0100
+Launch Time:     2026-11-02 23:45:26.093 +0100
+OS Version:      macOS 26.6.1 (25G76)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         42.0M
+Physical footprint (peak):  42.0M
+Idle exit:                  untracked
+----
+
+Call graph:
+    2251 Thread_1525440   DispatchQueue_1: com.apple.main-thread  (serial)
+      711 sc_bf_run  (in nsc-c1-stock-suite) + 3440  [0x104c52ee8]
+      + 711 scr_json_parse  (in nsc-c1-stock-suite) + 172  [0x104c4320c]
+      +   663 scr_json_value  (in nsc-c1-stock-suite) + 2384  [0x104c43ce0]
+      +   ! 400 scr_json_value  (in nsc-c1-stock-suite) + 1660  [0x104c43a0c]
+      +   ! : 159 scr_json_value  (in nsc-c1-stock-suite) + 1660  [0x104c43a0c]
+      +   ! : | 114 scr_json_value  (in nsc-c1-stock-suite) + 676  [0x104c43634]
+      +   ! : | + 46 scr_str_alloc  (in nsc-c1-stock-suite) + 192  [0x104c17b60]
+      +   ! : | + 27 scr_str_new  (in nsc-c1-stock-suite) + 48  [0x104c1763c]
+      +   ! : | + ! 27 scr_str_alloc  (in nsc-c1-stock-suite) + 176,20,...  [0x104c17b50,0x104c17ab4,...]
+      +   ! : | + 26 scr_json_string_scr  (in nsc-c1-stock-suite) + 52  [0x104c4c628]
+      +   ! : | + ! 26 scr_json_plain_bytes  (in nsc-c1-stock-suite) + 28,80,...  [0x104c2e350,0x104c2e384,...]
+      +   ! : | + 9 scr_str_new  (in nsc-c1-stock-suite) + 204,372,...  [0x104c176d8,0x104c17780,...]
+      +   ! : | + 6 scr_json_string_scr  (in nsc-c1-stock-suite) + 52,24,...  [0x104c4c628,0x104c4c60c,...]
+      +   ! : | 30 scr_json_value  (in nsc-c1-stock-suite) + 60,276,...  [0x104c433cc,0x104c434a4,...]
+      +   ! : | 14 scr_str_new  (in nsc-c1-stock-suite) + 1160,1152  [0x104c17a94,0x104c17a8c]
+      +   ! : | 1 scr_json_string_scr  (in nsc-c1-stock-suite) + 144  [0x104c4c684]
+      +   ! : 153 scr_json_value  (in nsc-c1-stock-suite) + 276,16,...  [0x104c434a4,0x104c433a0,...]
+      +   ! : 54 scr_json_value  (in nsc-c1-stock-suite) + 372  [0x104c43504]
+      +   ! : | 54 scr_json_number_value  (in nsc-c1-stock-suite) + 200,24,...  [0x104c4d26c,0x104c4d1bc,...]
+      +   ! : 12 scr_json_value  (in nsc-c1-stock-suite) + 568  [0x104c435c8]
+      +   ! : | 12 scr_dyn_alloc  (in nsc-c1-stock-suite) + 52,104,...  [0x104c31f98,0x104c31fcc,...]
+      +   ! : 7 scr_json_value  (in nsc-c1-stock-suite) + 2020  [0x104c43b74]
+      +   ! : | 7 scr_str_release  (in nsc-c1-stock-suite) + 4  [0x104c17da8]
+      +   ! : 6 scr_dyn_alloc  (in nsc-c1-stock-suite) + 460  [0x104c32130]
+      +   ! : 5 scr_json_number_value  (in nsc-c1-stock-suite) + 700  [0x104c4d460]
+      +   ! : 4 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      +   ! 215 scr_json_value  (in nsc-c1-stock-suite) + 1388,276,...  [0x104c438fc,0x104c434a4,...]
+      +   ! 19 scr_json_value  (in nsc-c1-stock-suite) + 2020  [0x104c43b74]
+      +   ! : 19 scr_str_release  (in nsc-c1-stock-suite) + 4,0  [0x104c17da8,0x104c17da4]
+      +   ! 17 scr_json_value  (in nsc-c1-stock-suite) + 568  [0x104c435c8]
+      +   ! : 17 scr_dyn_alloc  (in nsc-c1-stock-suite) + 52,104,...  [0x104c31f98,0x104c31fcc,...]
+      +   ! 8 scr_dyn_alloc  (in nsc-c1-stock-suite) + 460  [0x104c32130]
+      +   ! 4 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      +   26 scr_json_value  (in nsc-c1-stock-suite) + 312,2288,...  [0x104c434c8,0x104c43c80,...]
+      +   16 scr_json_value  (in nsc-c1-stock-suite) + 2284  [0x104c43c7c]
+      +   ! 16 scr_dyn_arr_push  (in nsc-c1-stock-suite) + 24,64,...  [0x104c2f950,0x104c2f978,...]
+      +   6 scr_dyn_arr_push  (in nsc-c1-stock-suite) + 256  [0x104c2fa38]
+      383 sc_bf_run  (in nsc-c1-stock-suite) + 6452  [0x104c53aac]
+      + 383 scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+      +   367 scr_dyn_dispose  (in nsc-c1-stock-suite) + 560  [0x104c47e84]
+      +   ! 323 scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+      +   ! : 227 scr_dyn_dispose  (in nsc-c1-stock-suite) + 964  [0x104c48018]
+      +   ! : | 176 scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+      +   ! : | + 94 scr_dyn_dispose  (in nsc-c1-stock-suite) + 964  [0x104c48018]
+      +   ! : | + ! 59 scr_dyn_release  (in nsc-c1-stock-suite) + 576  [0x104c2dc9c]
+      +   ! : | + ! : 59 scr_str_release  (in nsc-c1-stock-suite) + 40,240,...  [0x104c17dcc,0x104c17e94,...]
+      +   ! : | + ! 22 scr_dyn_release  (in nsc-c1-stock-suite) + 4,36,...  [0x104c2da60,0x104c2da80,...]
+      +   ! : | + ! 13 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      +   ! : | + 72 scr_dyn_dispose  (in nsc-c1-stock-suite) + 928,248,...  [0x104c47ff4,0x104c47d4c,...]
+      +   ! : | + 4 scr_dyn_obj_drop_keys  (in nsc-c1-stock-suite) + 272,268  [0x104c48428,0x104c48424]
+      +   ! : | + 4 scr_dyn_release  (in nsc-c1-stock-suite) + 480  [0x104c2dc3c]
+      +   ! : | + 2 scr_dyn_dispose  (in nsc-c1-stock-suite) + 1040  [0x104c48064]
+      +   ! : | +   2 scr_dyn_obj_drop_keys  (in nsc-c1-stock-suite) + 20,260  [0x104c4832c,0x104c4841c]
+      +   ! : | 26 scr_dyn_release  (in nsc-c1-stock-suite) + 4,156,...  [0x104c2da60,0x104c2daf8,...]
+      +   ! : | 16 scr_rc_destroy  (in nsc-c1-stock-suite) + 28,152,...  [0x104c4de30,0x104c4deac,...]
+      +   ! : | 9 scr_dyn_dispose  (in nsc-c1-stock-suite) + 1396,1392  [0x104c481c8,0x104c481c4]
+      +   ! : 75 scr_dyn_dispose  (in nsc-c1-stock-suite) + 940,260,...  [0x104c48000,0x104c47d58,...]
+      +   ! : 10 scr_dyn_obj_drop_keys  (in nsc-c1-stock-suite) + 268,272  [0x104c48424,0x104c48428]
+      +   ! : 4 scr_dyn_release  (in nsc-c1-stock-suite) + 480  [0x104c2dc3c]
+      +   ! : 4 scr_rc_destroy  (in nsc-c1-stock-suite) + 304  [0x104c4df44]
+      +   ! : 3 scr_dyn_dispose  (in nsc-c1-stock-suite) + 1040  [0x104c48064]
+      +   ! :   3 scr_dyn_obj_drop_keys  (in nsc-c1-stock-suite) + 260  [0x104c4841c]
+      +   ! 22 scr_dyn_release  (in nsc-c1-stock-suite) + 4,36,...  [0x104c2da60,0x104c2da80,...]
+      +   ! 16 scr_rc_destroy  (in nsc-c1-stock-suite) + 28,152,...  [0x104c4de30,0x104c4deac,...]
+      +   ! 6 scr_dyn_dispose  (in nsc-c1-stock-suite) + 1396,1392  [0x104c481c8,0x104c481c4]
+      +   9 scr_dyn_dispose  (in nsc-c1-stock-suite) + 560,532,...  [0x104c47e84,0x104c47e68,...]
+      +   7 scr_rc_destroy  (in nsc-c1-stock-suite) + 304  [0x104c4df44]
+      296 sc_bf_run  (in nsc-c1-stock-suite) + 4932  [0x104c534bc]
+      + 284 scr_dyn_obj_key_strs  (in nsc-c1-stock-suite) + 84  [0x104c46e34]
+      + ! 82 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 148  [0x104c46c18]
+      + ! : 34 scr_arr_push_ref  (in nsc-c1-stock-suite) + 32,124,...  [0x104c1f694,0x104c1f6f0,...]
+      + ! : 33 scr_arr_push_ref  (in nsc-c1-stock-suite) + 64  [0x104c1f6b4]
+      + ! : | 33 scr_arr_store_state_owned  (in nsc-c1-stock-suite) + 44,828,...  [0x104c20b74,0x104c20e84,...]
+      + ! : 15 scr_arr_store_state_owned  (in nsc-c1-stock-suite) + 1704,1708,...  [0x104c211f0,0x104c211f4,...]
+      + ! 62 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 136  [0x104c46c0c]
+      + ! : 29 scr_str_new  (in nsc-c1-stock-suite) + 48,20,...  [0x104c1763c,0x104c17620,...]
+      + ! : 26 scr_str_new  (in nsc-c1-stock-suite) + 48  [0x104c1763c]
+      + ! : | 26 scr_str_alloc  (in nsc-c1-stock-suite) + 4,28,...  [0x104c17aa4,0x104c17abc,...]
+      + ! : 7 scr_str_alloc  (in nsc-c1-stock-suite) + 192  [0x104c17b60]
+      + ! 44 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 76  [0x104c46bd0]
+      + ! : 44 scr_dyn_obj_key_order  (in nsc-c1-stock-suite) + 136,100,...  [0x104c4517c,0x104c45158,...]
+      + ! 35 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 92  [0x104c46be0]
+      + ! : 35 scr_arr_new  (in nsc-c1-stock-suite) + 36,140,...  [0x104c1e884,0x104c1e8ec,...]
+      + ! 19 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 176,24,...  [0x104c46c34,0x104c46b9c,...]
+      + ! 15 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 220  [0x104c46c60]
+      + ! : 10 _free  (in libsystem_malloc.dylib) + 0,124  [0x18ef8fcd0,0x18ef8fd4c]
+      + ! : 5 DYLD-STUB$$free  (in nsc-c1-stock-suite) + 4,0  [0x104c57038,0x104c57034]
+      + ! 11 scr_str_new  (in nsc-c1-stock-suite) + 1160,1148,...  [0x104c17a94,0x104c17a88,...]
+      + ! 9 scr_arr_push_ref  (in nsc-c1-stock-suite) + 144  [0x104c1f704]
+      + ! 4 scr_dyn_obj_key_order  (in nsc-c1-stock-suite) + 324  [0x104c45238]
+      + ! 3 scr_arr_new  (in nsc-c1-stock-suite) + 372  [0x104c1e9d4]
+      + 9 scr_dyn_own_key_strs  (in nsc-c1-stock-suite) + 236  [0x104c46c70]
+      + 3 scr_dyn_obj_key_strs  (in nsc-c1-stock-suite) + 28,44  [0x104c46dfc,0x104c46e0c]
+      218 start  (in dyld) + 6992  [0x18ed984e4]
+      + 179 main  (in nsc-c1-stock-suite) + 1100  [0x104c55278]
+      + ! 32 sc_bf_run  (in nsc-c1-stock-suite) + 5980  [0x104c538d4]
+      + ! : 16 sc_dc_1  (in nsc-c1-stock-suite) + 32  [0x104c51d84]
+      + ! : | 12 scr_dyn_typed_ref_is  (in nsc-c1-stock-suite) + 0,64  [0x104c37be0,0x104c37c20]
+      + ! : | 4 sc_dc_1  (in nsc-c1-stock-suite) + 32  [0x104c51d84]
+      + ! : 9 scr_str_retain_v  (in nsc-c1-stock-suite) + 0,16  [0x104c2a73c,0x104c2a74c]
+      + ! : 7 sc_bf_run  (in nsc-c1-stock-suite) + 6080,5980,...  [0x104c53938,0x104c538d4,...]
+      + ! 28 sc_bf_run  (in nsc-c1-stock-suite) + 5216  [0x104c535d8]
+      + ! : 16 sc_bf_run  (in nsc-c1-stock-suite) + 5476,5912,...  [0x104c536dc,0x104c53890,...]
+      + ! : 8 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 144  [0x104c53e4c]
+      + ! : | 8 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 12,20,...  [0x104c2f604,0x104c2f60c,...]
+      + ! : 2 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      + ! : | 2 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      + ! : |   2 scr_dyn_obj_read  (in nsc-c1-stock-suite) + 4  [0x104c3f064]
+      + ! : 2 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 0  [0x104c53dbc]
+      + ! 24 sc_bf_run  (in nsc-c1-stock-suite) + 5172  [0x104c535ac]
+      + ! : 11 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 144  [0x104c53e4c]
+      + ! : | 11 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 36,20,...  [0x104c2f61c,0x104c2f60c,...]
+      + ! : 11 sc_bf_run  (in nsc-c1-stock-suite) + 5376,5396,...  [0x104c53678,0x104c5368c,...]
+      + ! : 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      + ! : | 1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 0  [0x104c315b8]
+      + ! : 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 0  [0x104c53dbc]
+      + ! 20 sc_bf_run  (in nsc-c1-stock-suite) + 5012  [0x104c5350c]
+      + ! : 12 sc_bf_run  (in nsc-c1-stock-suite) + 5072,5132,...  [0x104c53548,0x104c53584,...]
+      + ! : 8 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 36,16,...  [0x104c2f61c,0x104c2f608,...]
+      + ! 18 sc_bf_run  (in nsc-c1-stock-suite) + 4892  [0x104c53494]
+      + ! : 9 sc_bf_run  (in nsc-c1-stock-suite) + 4892,4904  [0x104c53494,0x104c534a0]
+      + ! : 9 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 0,12,...  [0x104c2f5f8,0x104c2f604,...]
+      + ! 12 sc_bf_run  (in nsc-c1-stock-suite) + 6096  [0x104c53948]
+      + ! : 9 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 36,112,...  [0x104c2f61c,0x104c2f668,...]
+      + ! : 3 sc_bf_run  (in nsc-c1-stock-suite) + 6112,6124  [0x104c53958,0x104c53964]
+      + ! 12 sc_bf_run  (in nsc-c1-stock-suite) + 6348  [0x104c53a44]
+      + ! : 10 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 104,0,...  [0x104c2f660,0x104c2f5f8,...]
+      + ! : 2 sc_bf_run  (in nsc-c1-stock-suite) + 3628  [0x104c52fa4]
+      + ! 9 sc_bf_run  (in nsc-c1-stock-suite) + 3664  [0x104c52fc8]
+      + ! : 7 sc_bf_run  (in nsc-c1-stock-suite) + 3664,3696,...  [0x104c52fc8,0x104c52fe8,...]
+      + ! : 2 scr_dyn_iterator_step_done  (in nsc-c1-stock-suite) + 4  [0x104c3fe7c]
+      + ! 9 sc_bf_run  (in nsc-c1-stock-suite) + 5056  [0x104c53538]
+      + ! : 9 sc_bf_run  (in nsc-c1-stock-suite) + 5116,5060,...  [0x104c53574,0x104c5353c,...]
+      + ! 6 sc_bf_run  (in nsc-c1-stock-suite) + 6276  [0x104c539fc]
+      + ! : 5 sc_bf_run  (in nsc-c1-stock-suite) + 6316,6292,...  [0x104c53a24,0x104c53a0c,...]
+      + ! : 1 scr_arr_release  (in nsc-c1-stock-suite) + 0  [0x104c1f80c]
+      + ! 5 sc_bf_run  (in nsc-c1-stock-suite) + 4932  [0x104c534bc]
+      + ! : 5 sc_bf_run  (in nsc-c1-stock-suite) + 4968,4980,...  [0x104c534e0,0x104c534ec,...]
+      + ! 2 sc_bf_run  (in nsc-c1-stock-suite) + 3144  [0x104c52dc0]
+      + ! : 2 sc_bf_run  (in nsc-c1-stock-suite) + 3144,3152  [0x104c52dc0,0x104c52dc8]
+      + ! 2 sc_bf_run  (in nsc-c1-stock-suite) + 3644  [0x104c52fb4]
+      + !   2 sc_bf_run  (in nsc-c1-stock-suite) + 3644  [0x104c52fb4]
+      + 39 main  (in nsc-c1-stock-suite) + 964  [0x104c551f0]
+      +   9 sc_bf_run  (in nsc-c1-stock-suite) + 5980  [0x104c538d4]
+      +   : 7 sc_dc_1  (in nsc-c1-stock-suite) + 32  [0x104c51d84]
+      +   : | 4 sc_dc_1  (in nsc-c1-stock-suite) + 32  [0x104c51d84]
+      +   : | 3 scr_dyn_typed_ref_is  (in nsc-c1-stock-suite) + 0,64  [0x104c37be0,0x104c37c20]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 5980  [0x104c538d4]
+      +   : 1 scr_str_retain_v  (in nsc-c1-stock-suite) + 0  [0x104c2a73c]
+      +   8 sc_bf_run  (in nsc-c1-stock-suite) + 5172  [0x104c535ac]
+      +   : 5 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 144  [0x104c53e4c]
+      +   : | 5 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 0,4,...  [0x104c2f5f8,0x104c2f5fc,...]
+      +   : 3 sc_bf_run  (in nsc-c1-stock-suite) + 5172,5388,...  [0x104c535ac,0x104c53684,...]
+      +   6 sc_bf_run  (in nsc-c1-stock-suite) + 4892  [0x104c53494]
+      +   : 3 sc_bf_run  (in nsc-c1-stock-suite) + 4892,4904  [0x104c53494,0x104c534a0]
+      +   : 3 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 0,20,...  [0x104c2f5f8,0x104c2f60c,...]
+      +   4 sc_bf_run  (in nsc-c1-stock-suite) + 5012  [0x104c5350c]
+      +   : 3 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 12,36,...  [0x104c2f604,0x104c2f61c,...]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 5012  [0x104c5350c]
+      +   3 sc_bf_run  (in nsc-c1-stock-suite) + 5216  [0x104c535d8]
+      +   : 2 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 144  [0x104c53e4c]
+      +   : | 2 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 20,112  [0x104c2f60c,0x104c2f668]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 5252  [0x104c535fc]
+      +   2 sc_bf_run  (in nsc-c1-stock-suite) + 3664  [0x104c52fc8]
+      +   : 2 sc_bf_run  (in nsc-c1-stock-suite) + 3704,3716  [0x104c52ff0,0x104c52ffc]
+      +   2 sc_bf_run  (in nsc-c1-stock-suite) + 4932  [0x104c534bc]
+      +   : 2 sc_bf_run  (in nsc-c1-stock-suite) + 4996  [0x104c534fc]
+      +   2 sc_bf_run  (in nsc-c1-stock-suite) + 6096  [0x104c53948]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 6136  [0x104c53970]
+      +   : 1 scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 20  [0x104c2f60c]
+      +   1 sc_bf_run  (in nsc-c1-stock-suite) + 3144  [0x104c52dc0]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 3152  [0x104c52dc8]
+      +   1 sc_bf_run  (in nsc-c1-stock-suite) + 3644  [0x104c52fb4]
+      +   : 1 sc_bf_run  (in nsc-c1-stock-suite) + 3644  [0x104c52fb4]
+      +   1 sc_bf_run  (in nsc-c1-stock-suite) + 5056  [0x104c53538]
+      +     1 sc_bf_run  (in nsc-c1-stock-suite) + 5096  [0x104c53560]
+      189 sc_bf_run  (in nsc-c1-stock-suite) + 3144  [0x104c52dc0]
+      + 169 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 40  [0x104c18f30]
+      + ! 91 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 184,772,...  [0x104c188d4,0x104c18b20,...]
+      + ! 34 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 728  [0x104c18af4]
+      + ! : 29 _platform_memmove  (in libsystem_platform.dylib) + 428,452,...  [0x18f16d50c,0x18f16d524,...]
+      + ! : 5 DYLD-STUB$$memcpy  (in nsc-c1-stock-suite) + 4,0  [0x104c5708c,0x104c57088]
+      + ! 22 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 176  [0x104c188cc]
+      + ! : 22 scr_f64_to_str  (in nsc-c1-stock-suite) + 140,1528,...  [0x104c1548c,0x104c159f8,...]
+      + ! 19 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 580  [0x104c18a60]
+      + ! : 19 _platform_memmove  (in libsystem_platform.dylib) + 88,180  [0x18f16d3b8,0x18f16d414]
+      + ! 3 scr_f64_to_str  (in nsc-c1-stock-suite) + 1552  [0x104c15a10]
+      + 8 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 52  [0x104c18f3c]
+      + ! 7 scr_str_release  (in nsc-c1-stock-suite) + 4,16,...  [0x104c17da8,0x104c17db4,...]
+      + ! 1 xzm_segment_group_free_chunk  (in libsystem_malloc.dylib) + 636  [0x18ef693bc]
+      + !   1 _xzm_segment_group_segment_span_free_coalesce  (in libsystem_malloc.dylib) + 432  [0x18ef69a7c]
+      + !     1 _xzm_segment_group_span_mark_used  (in libsystem_malloc.dylib) + 148  [0x18ef6b3b0]
+      + !       1 _xzm_reclaim_mark_used  (in libsystem_malloc.dylib) + 124  [0x18ef67fac]
+      + !         1 _xzm_reclaim_mark_used_locked  (in libsystem_malloc.dylib) + 60  [0x18ef6aa9c]
+      + !           1 mach_vm_reclaim_try_cancel  (in libsystem_kernel.dylib) + 260  [0x18f1332f8]
+      + !             1 mach_absolute_time  (in libsystem_kernel.dylib) + 108  [0x18f12010c]
+      + 7 scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite) + 1028  [0x104c18c20]
+      + 4 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      + 1 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 40  [0x104c18f30]
+      132 sc_bf_run  (in nsc-c1-stock-suite) + 6276  [0x104c539fc]
+      + 101 scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+      + ! 89 scr_arr_destroy  (in nsc-c1-stock-suite) + 20  [0x104c20034]
+      + ! : 46 scr_arr_release_contents  (in nsc-c1-stock-suite) + 24,512,...  [0x104c1f9f0,0x104c1fbd8,...]
+      + ! : 27 scr_arr_release_contents  (in nsc-c1-stock-suite) + 544  [0x104c1fbf8]
+      + ! : | 27 scr_str_release  (in nsc-c1-stock-suite) + 240,32,...  [0x104c17e94,0x104c17dc4,...]
+      + ! : 16 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      + ! 8 scr_arr_destroy  (in nsc-c1-stock-suite) + 64,0,...  [0x104c20060,0x104c20020,...]
+      + ! 4 scr_arr_release_contents  (in nsc-c1-stock-suite) + 1308  [0x104c1fef4]
+      + 15 scr_rc_destroy  (in nsc-c1-stock-suite) + 16,168,...  [0x104c4de24,0x104c4debc,...]
+      + 13 scr_arr_release  (in nsc-c1-stock-suite) + 180,16,...  [0x104c1f8c0,0x104c1f81c,...]
+      + 3 scr_arr_destroy  (in nsc-c1-stock-suite) + 216  [0x104c200f8]
+      88 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      + 40 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 152  [0x104c31650]
+      + ! 40 scr_layout_find  (in nsc-c1-stock-suite) + 108,132,...  [0x104c2e4fc,0x104c2e514,...]
+      + 26 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 736,44,...  [0x104c31898,0x104c315e4,...]
+      + 11 scr_dyn_obj_read  (in nsc-c1-stock-suite) + 16  [0x104c3f070]
+      + 11 scr_layout_find  (in nsc-c1-stock-suite) + 812,796,...  [0x104c2e7bc,0x104c2e7ac,...]
+      56 sc_bf_run  (in nsc-c1-stock-suite) + 3112  [0x104c52da0]
+      + 42 scr_str_concat_move  (in nsc-c1-stock-suite) + 20  [0x104c18ca4]
+      + ! 42 scr_str_concat  (in nsc-c1-stock-suite) + 20,272,...  [0x104c17f08,0x104c18004,...]
+      + 9 scr_str_concat_move  (in nsc-c1-stock-suite) + 32  [0x104c18cb0]
+      + ! 9 scr_str_release  (in nsc-c1-stock-suite) + 32,4  [0x104c17dc4,0x104c17da8]
+      + 4 scr_str_concat  (in nsc-c1-stock-suite) + 948  [0x104c182a8]
+      + 1 scr_str_release  (in nsc-c1-stock-suite) + 44  [0x104c17dd0]
+      39 sc_bf_run  (in nsc-c1-stock-suite) + 3644  [0x104c52fb4]
+      + 32 scr_dyn_iterator_step  (in nsc-c1-stock-suite) + 36  [0x104c3f830]
+      + ! 32 scr_native_iterator_value  (in nsc-c1-stock-suite) + 56,1556,...  [0x104c3f880,0x104c3fe5c,...]
+      + 7 scr_native_iterator_value  (in nsc-c1-stock-suite) + 1028,1024,...  [0x104c3fc4c,0x104c3fc48,...]
+      28 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 152,60,...  [0x104c53e54,0x104c53df8,...]
+      26 ???  (in <unknown binary>)  [0x7080000000]
+      + 8 sc_bf_run  (in nsc-c1-stock-suite) + 3144  [0x104c52dc0]
+      + ! 8 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 4,8  [0x104c18f0c,0x104c18f10]
+      + 6 sc_bf_run  (in nsc-c1-stock-suite) + 5056  [0x104c53538]
+      + ! 6 scr_str_release  (in nsc-c1-stock-suite) + 4  [0x104c17da8]
+      + 5 sc_bf_run  (in nsc-c1-stock-suite) + 5172  [0x104c535ac]
+      + ! 5 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 24  [0x104c53dd4]
+      + 3 sc_bf_run  (in nsc-c1-stock-suite) + 5044  [0x104c5352c]
+      + ! 3 scr_str_release  (in nsc-c1-stock-suite) + 4  [0x104c17da8]
+      + 2 sc_bf_run  (in nsc-c1-stock-suite) + 5216  [0x104c535d8]
+      + ! 2 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 24  [0x104c53dd4]
+      + 2 sc_bf_run  (in nsc-c1-stock-suite) + 6276  [0x104c539fc]
+      +   2 scr_arr_release  (in nsc-c1-stock-suite) + 4  [0x104c1f810]
+      13 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 780,784,...  [0x104c318c4,0x104c318c8,...]
+      12 sc_bf_run  (in nsc-c1-stock-suite) + 5056  [0x104c53538]
+      + 12 scr_str_release  (in nsc-c1-stock-suite) + 32,4,...  [0x104c17dc4,0x104c17da8,...]
+      8 scr_dyn_obj_key_strs  (in nsc-c1-stock-suite) + 252  [0x104c46edc]
+      7 sc_bf_run  (in nsc-c1-stock-suite) + 5044  [0x104c5352c]
+      + 7 scr_str_release  (in nsc-c1-stock-suite) + 32,4  [0x104c17dc4,0x104c17da8]
+      7 scr_rc_destroy  (in nsc-c1-stock-suite) + 304  [0x104c4df44]
+      6 sc_dyn_key_get  (in nsc-c1-stock-suite) + 40,64  [0x104c51e78,0x104c51e90]
+      4 scr_str_concat_move  (in nsc-c1-stock-suite) + 40  [0x104c18cb8]
+      4 scr_str_release  (in nsc-c1-stock-suite) + 44,48  [0x104c17dd0,0x104c17dd4]
+      3 sc_dc_1  (in nsc-c1-stock-suite) + 56  [0x104c51d9c]
+      3 scr_dyn_iterator_step  (in nsc-c1-stock-suite) + 48  [0x104c3f83c]
+      1 ???  (in <unknown binary>)  [0x73c0083208]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c0209208]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c05eab08]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c06e3808]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c071ae88]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 28  [0x104c315d4]
+      1 ???  (in <unknown binary>)  [0x73c07add08]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 28  [0x104c315d4]
+      1 ???  (in <unknown binary>)  [0x73c090f508]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 sc_dyn_key_get  (in nsc-c1-stock-suite) + 16  [0x104c51e60]
+      1 ???  (in <unknown binary>)  [0x73c0c65c88]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c0d44708]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 20  [0x104c315cc]
+      1 ???  (in <unknown binary>)  [0x73c0e40e08]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 sc_dyn_key_get  (in nsc-c1-stock-suite) + 16  [0x104c51e60]
+      1 ???  (in <unknown binary>)  [0x73c0edc708]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 28  [0x104c315d4]
+      1 ???  (in <unknown binary>)  [0x73c105b788]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 sc_dyn_key_get  (in nsc-c1-stock-suite) + 16  [0x104c51e60]
+      1 ???  (in <unknown binary>)  [0x73c10daa08]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+      +   1 scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 28  [0x104c315d4]
+      1 main  (in nsc-c1-stock-suite) + 1436  [0x104c553c8]
+      + 1 scr_console_write  (in nsc-c1-stock-suite) + 1204  [0x104c2c310]
+      +   1 scr_fd_writev_all  (in nsc-c1-stock-suite) + 144  [0x104c2c4ac]
+      +     1 write  (in libsystem_kernel.dylib) + 8  [0x18f123834]
+      1 sc_bf_run  (in nsc-c1-stock-suite) + 5172  [0x104c535ac]
+      + 1 sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 4  [0x104c53dc0]
+      1 sc_bf_run  (in nsc-c1-stock-suite) + 6428  [0x104c53a94]
+      + 1 scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+      +   1 scr_dyn_dispose  (in nsc-c1-stock-suite) + 388  [0x104c47dd8]
+      1 scr_arr_conversions  (in nsc-c1-stock-suite) + 8  [0x104d2b668]
+      + 1 sc_bf_run  (in nsc-c1-stock-suite) + 4932  [0x104c534bc]
+      +   1 scr_dyn_obj_key_strs  (in nsc-c1-stock-suite) + 8  [0x104c46de8]
+      1 scr_str_concat_mixed_move  (in nsc-c1-stock-suite) + 60  [0x104c18f44]
+
+Total number in stack (recursive counted multiple, when >=5):
+        24       sc_bf_run  (in nsc-c1-stock-suite) + 0  [0x104c52178]
+        17       sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 52  [0x104c53df0]
+        17       scr_str_release  (in nsc-c1-stock-suite) + 0  [0x104c17da4]
+        13       scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite) + 0  [0x104c315b8]
+        11       scr_dyn_release_survivor  (in nsc-c1-stock-suite) + 0  [0x104c2f5f8]
+        6       sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite) + 0  [0x104c53dbc]
+        6       scr_dyn_dispose  (in nsc-c1-stock-suite) + 0  [0x104c47c54]
+        6       scr_rc_destroy  (in nsc-c1-stock-suite) + 0  [0x104c4de14]
+        5       scr_dyn_release  (in nsc-c1-stock-suite) + 0  [0x104c2da5c]
+        5       scr_rc_destroy  (in nsc-c1-stock-suite) + 160  [0x104c4deb4]
+
+Sort by top of stack, same collapsed (when >= 5):
+        scr_json_value  (in nsc-c1-stock-suite)        424
+        scr_str_release  (in nsc-c1-stock-suite)        202
+        scr_dyn_dispose  (in nsc-c1-stock-suite)        172
+        sc_bf_run  (in nsc-c1-stock-suite)        107
+        scr_str_alloc  (in nsc-c1-stock-suite)        106
+        scr_str_concat_mixed_bytes  (in nsc-c1-stock-suite)        98
+        scr_dyn_release  (in nsc-c1-stock-suite)        78
+        scr_dyn_release_survivor  (in nsc-c1-stock-suite)        69
+        scr_rc_destroy  (in nsc-c1-stock-suite)        65
+        scr_str_new  (in nsc-c1-stock-suite)        63
+        scr_json_number_value  (in nsc-c1-stock-suite)        59
+        scr_layout_find  (in nsc-c1-stock-suite)        51
+        scr_arr_release_contents  (in nsc-c1-stock-suite)        50
+        scr_dyn_obj_read_receiver  (in nsc-c1-stock-suite)        50
+        _platform_memmove  (in libsystem_platform.dylib)        48
+        scr_arr_store_state_owned  (in nsc-c1-stock-suite)        48
+        scr_dyn_obj_key_order  (in nsc-c1-stock-suite)        48
+        scr_str_concat  (in nsc-c1-stock-suite)        46
+        scr_arr_push_ref  (in nsc-c1-stock-suite)        43
+        scr_dyn_alloc  (in nsc-c1-stock-suite)        43
+        sc_bf__x25_dyn_class_computed_0  (in nsc-c1-stock-suite)        39
+        scr_native_iterator_value  (in nsc-c1-stock-suite)        39
+        scr_arr_new  (in nsc-c1-stock-suite)        38
+        scr_dyn_own_key_strs  (in nsc-c1-stock-suite)        28
+        scr_json_plain_bytes  (in nsc-c1-stock-suite)        26
+        scr_f64_to_str  (in nsc-c1-stock-suite)        25
+        scr_dyn_arr_push  (in nsc-c1-stock-suite)        22
+        scr_dyn_obj_drop_keys  (in nsc-c1-stock-suite)        19
+        scr_arr_release  (in nsc-c1-stock-suite)        16
+        scr_dyn_typed_ref_is  (in nsc-c1-stock-suite)        15
+        scr_dyn_obj_read  (in nsc-c1-stock-suite)        13
+        scr_dyn_obj_key_strs  (in nsc-c1-stock-suite)        12
+        sc_dc_1  (in nsc-c1-stock-suite)        11
+        scr_arr_destroy  (in nsc-c1-stock-suite)        11
+        _free  (in libsystem_malloc.dylib)        10
+        scr_str_concat_mixed_move  (in nsc-c1-stock-suite)        10
+        scr_str_retain_v  (in nsc-c1-stock-suite)        10
+        sc_dyn_key_get  (in nsc-c1-stock-suite)        9
+        scr_json_string_scr  (in nsc-c1-stock-suite)        7
+        DYLD-STUB$$free  (in nsc-c1-stock-suite)        5
+        DYLD-STUB$$memcpy  (in nsc-c1-stock-suite)        5
+
+Binary Images:
+       0x104c14000 -        0x104c5fcff +nsc-c1-stock-suite (0) <CB376E02-D250-32B4-8BCA-B226656558F1> /tmp/nsc-c1-stock-suite
+       0x18ecf0000 -        0x18ed42b4b  libobjc.A.dylib (951.7) <40277974-D20C-3EC8-B25C-43AE30D8CC60> /usr/lib/libobjc.A.dylib
+       0x18ed43000 -        0x18ed77d58  libdyld.dylib (1387) <634959D0-592E-349C-B549-B91F2FF09858> /usr/lib/system/libdyld.dylib
+       0x18ed78000 -        0x18ee2b4ff  dyld (1.0.0 - 1387) <DF42DD9D-AD11-33A7-8849-9AD5DF30A274> /usr/lib/dyld
+       0x18ee2c000 -        0x18ee2f228  libsystem_blocks.dylib (96) <A712B95E-BCEE-3F12-9F9B-58E6C2060E53> /usr/lib/system/libsystem_blocks.dylib
+       0x18ee30000 -        0x18ee8455f  libxpc.dylib (3102.160.5) <40BBE226-77D4-332E-9DA8-F0B5BACFB86D> /usr/lib/system/libxpc.dylib
+       0x18ee85000 -        0x18eea59ff  libsystem_trace.dylib (1861.160.4) <E043667E-AD01-3228-837F-A381F32F2B30> /usr/lib/system/libsystem_trace.dylib
+       0x18eea6000 -        0x18ef545f7  libcorecrypto.dylib (1922.160.10) <D54389FC-4078-370D-A863-9FEF16E00DFD> /usr/lib/system/libcorecrypto.dylib
+       0x18ef55000 -        0x18efa5257  libsystem_malloc.dylib (812.160.5) <971CDCFE-4D20-300E-A1D6-EC8672FDD258> /usr/lib/system/libsystem_malloc.dylib
+       0x18efa6000 -        0x18efed23f  libdispatch.dylib (1542.160.2) <243E06A0-7BFF-3C3F-8A9B-D7732729B361> /usr/lib/system/libdispatch.dylib
+       0x18efee000 -        0x18eff0ffb  libsystem_featureflags.dylib (103) <5E7CDBD5-44AB-34C0-A0F5-FC72F6116CDC> /usr/lib/system/libsystem_featureflags.dylib
+       0x18eff1000 -        0x18f0721e7  libsystem_c.dylib (1752.160.4) <FDC4E366-5C14-3A1E-BC35-D933D28CDCF3> /usr/lib/system/libsystem_c.dylib
+       0x18f073000 -        0x18f103ae7  libc++.1.dylib (2100.43) <C6DC2145-7B94-3E01-ADE5-96A6C2D078BC> /usr/lib/libc++.1.dylib
+       0x18f104000 -        0x18f11e75f  libc++abi.dylib (2100.43) <DDE77B06-5E25-380B-85B7-BA1A27D09021> /usr/lib/libc++abi.dylib
+       0x18f11f000 -        0x18f15c2e7  libsystem_kernel.dylib (12377.161.13) <7CFB3A10-ADB2-32C4-99B5-922A111B3224> /usr/lib/system/libsystem_kernel.dylib
+       0x18f15d000 -        0x18f169b3b  libsystem_pthread.dylib (539.100.4) <12342372-0084-37A5-9EA6-2E4DC940C685> /usr/lib/system/libsystem_pthread.dylib
+       0x18f16a000 -        0x18f172963  libsystem_platform.dylib (375.120.2) <4C6BD0FE-25F2-38D8-BE5C-24DAC1DEDCFB> /usr/lib/system/libsystem_platform.dylib
+       0x18f173000 -        0x18f1a26eb  libsystem_info.dylib (600) <7402662E-F235-3F48-BB65-F64C8CF0F2BB> /usr/lib/system/libsystem_info.dylib
+       0x193140000 -        0x193149e5f  libsystem_darwin.dylib (1752.160.4) <A095E4FE-0EE1-34DF-B00A-7D349FBC55E0> /usr/lib/system/libsystem_darwin.dylib
+       0x1935ab000 -        0x1935bd1b6  libsystem_notify.dylib (348.160.3) <F9B1BAFF-4D09-3A1F-839B-189C21EB5FBB> /usr/lib/system/libsystem_notify.dylib
+       0x19587c000 -        0x195896f7b  libsystem_networkextension.dylib (2226.160.6) <01D14A9E-16DC-372C-8AA8-CC7AD39E797F> /usr/lib/system/libsystem_networkextension.dylib
+       0x195919000 -        0x195930fdf  libsystem_asl.dylib (406) <FF57F6FA-F3A1-343D-815D-57B769D31445> /usr/lib/system/libsystem_asl.dylib
+       0x1974d2000 -        0x1974da387  libsystem_symptoms.dylib (2169.160.3) <CE07A0DF-31B6-3528-B7CE-91CAD89AA519> /usr/lib/system/libsystem_symptoms.dylib
+       0x19b777000 -        0x19b7af5b7  libsystem_containermanager.dylib (725.160.3) <2E14025A-52C2-361D-8A8F-5DD45825A2C9> /usr/lib/system/libsystem_containermanager.dylib
+       0x19cb89000 -        0x19cb8d5d7  libsystem_configuration.dylib (1405.160.3) <A14ED142-2F56-33A6-A23C-EEB8417DC90E> /usr/lib/system/libsystem_configuration.dylib
+       0x19cb8e000 -        0x19cb9499f  libsystem_sandbox.dylib (2680.160.6) <6592D3CE-38C6-3C08-9EA5-75D64F37993F> /usr/lib/system/libsystem_sandbox.dylib
+       0x19e1e9000 -        0x19e1ec1fb  libquarantine.dylib (196.160.2) <78C5B827-8152-358D-90E9-B02F02A68B17> /usr/lib/system/libquarantine.dylib
+       0x19e988000 -        0x19e98ed03  libsystem_coreservices.dylib (191.5.1) <F335DA14-69E8-336E-85A3-11EE239255F0> /usr/lib/system/libsystem_coreservices.dylib
+       0x19ef17000 -        0x19ef54a77  libsystem_m.dylib (3312.100.1) <3739A40F-2C17-3503-92D6-098141E56E89> /usr/lib/system/libsystem_m.dylib
+       0x19ef56000 -        0x19ef59527  libmacho.dylib (1387) <3E43AF47-AD89-3BB4-82B9-A9533F4334DF> /usr/lib/system/libmacho.dylib
+       0x19ef73000 -        0x19ef803a7  libcommonCrypto.dylib (600035) <72D94140-1281-3886-971B-37C810403C03> /usr/lib/system/libcommonCrypto.dylib
+       0x19ef81000 -        0x19ef8aca3  libunwind.dylib (2100.2) <B21A1015-83D4-31D8-BA41-88688962D9A6> /usr/lib/system/libunwind.dylib
+       0x19ef93000 -        0x19ef9dbef  libcopyfile.dylib (240.160.2.0.1) <58F425CF-7D4F-34FD-9620-706A2A7F8BDC> /usr/lib/system/libcopyfile.dylib
+       0x19ef9e000 -        0x19efa1987  libcompiler_rt.dylib (103.3) <D60A9B54-A909-3FD5-93B9-3F38BE0A2BE8> /usr/lib/system/libcompiler_rt.dylib
+       0x19efa2000 -        0x19efa678b  libsystem_collections.dylib (1752.160.4) <BDA28F78-F479-3C22-B9C7-4ABCB6801592> /usr/lib/system/libsystem_collections.dylib
+       0x19efa7000 -        0x19efaa4cf  libsystem_secinit.dylib (168.100.7) <C85AF062-AA9B-35BB-904C-C055B2C21602> /usr/lib/system/libsystem_secinit.dylib
+       0x19efab000 -        0x19efadbf7  libremovefile.dylib (85.100.6) <DA9C2B48-7A9C-32EA-888D-6C7AEB5250E6> /usr/lib/system/libremovefile.dylib
+       0x19efae000 -        0x19efaef27  libkeymgr.dylib (31) <18EFA1CE-C535-3EAC-BC2C-7955593B7382> /usr/lib/system/libkeymgr.dylib
+       0x19efaf000 -        0x19efb7e37  libsystem_dnssd.dylib (2881.160.4) <2C4C3043-008E-3BD8-BC29-AB9AD235DBA9> /usr/lib/system/libsystem_dnssd.dylib
+       0x19efb8000 -        0x19efbd09b  libcache.dylib (95) <EA7C2E0B-52BF-3D45-9A33-38F54A535452> /usr/lib/system/libcache.dylib
+       0x19efbe000 -        0x19efbfce3  libSystem.B.dylib (1356) <4CC4CAD6-45A6-361E-9343-DE636A0B5C02> /usr/lib/libSystem.B.dylib
+       0x292f67000 -        0x292f6e349  libRosetta.dylib (367.9) <F41D814B-FE1F-311A-A778-5F0699628188> /usr/lib/libRosetta.dylib
+       0x294b7a000 -        0x294b7da4b  libsystem_darwindirectory.dylib (122) <6C03D78B-BFAB-3C7A-B713-50881791EE08> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x294b7e000 -        0x294b8839b  libsystem_eligibility.dylib (319.160.17) <A279E124-8499-3FFC-A788-655070028F97> /usr/lib/system/libsystem_eligibility.dylib
+       0x294b89000 -        0x294b9088b  libsystem_sanitizers.dylib (26.1) <C92FAEE5-DAED-3340-96B3-0C42B005ADF9> /usr/lib/system/libsystem_sanitizers.dylib
+       0x294b91000 -        0x294b91bb7  libsystem_trial.dylib (474.2.18.2) <2FF186A6-F448-38CD-9A30-8B5B1AEFCA10> /usr/lib/system/libsystem_trial.dylib
