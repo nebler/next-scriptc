@@ -1,0 +1,185 @@
+{
+  "head": "7a19a40fce9ba1762bfece0061682c61eb854486",
+  "diagnostics": [
+    {
+      "name": "resolveVideoLength",
+      "bucket": 9,
+      "calls": 1160,
+      "verified": 25,
+      "validPairs": 23,
+      "state": "shadow",
+      "decisionCall": null,
+      "jsMedian": 0.001125000000001819,
+      "nativeMedian": 1.4506249999999454,
+      "medianPairRatio": 1278.2012928464667,
+      "promotionVotes": 0,
+      "epochs": 0
+    },
+    {
+      "name": "resolveVideoLength",
+      "bucket": 12,
+      "calls": 860,
+      "verified": 25,
+      "validPairs": 23,
+      "state": "shadow",
+      "decisionCall": null,
+      "jsMedian": 0.010583999974187464,
+      "nativeMedian": 14.46375200006878,
+      "medianPairRatio": 1377.1078046153925,
+      "promotionVotes": 0,
+      "epochs": 0
+    },
+    {
+      "name": "resolveVideoLength",
+      "bucket": 15,
+      "calls": 800,
+      "verified": 25,
+      "validPairs": 23,
+      "state": "shadow",
+      "decisionCall": null,
+      "jsMedian": 0.13295799999468727,
+      "nativeMedian": 158.39258700000937,
+      "medianPairRatio": 1196.0740010032634,
+      "promotionVotes": 0,
+      "epochs": 0
+    },
+    {
+      "name": "watchTimeSeconds",
+      "bucket": 9,
+      "calls": 1160,
+      "verified": 26,
+      "validPairs": 24,
+      "state": "js-final",
+      "decisionCall": 1064,
+      "jsMedian": 0.108333000000016,
+      "nativeMedian": 1.5187494999746605,
+      "medianPairRatio": 14.1523651405779,
+      "promotionVotes": 0,
+      "epochs": 1
+    },
+    {
+      "name": "watchTimeSeconds",
+      "bucket": 12,
+      "calls": 860,
+      "verified": 26,
+      "validPairs": 24,
+      "state": "js-final",
+      "decisionCall": 841,
+      "jsMedian": 1.4052290000004177,
+      "nativeMedian": 14.897936500000242,
+      "medianPairRatio": 10.835188667261605,
+      "promotionVotes": 0,
+      "epochs": 1
+    },
+    {
+      "name": "watchTimeSeconds",
+      "bucket": 15,
+      "calls": 800,
+      "verified": 25,
+      "validPairs": 23,
+      "state": "shadow",
+      "decisionCall": null,
+      "jsMedian": 15.409748000005493,
+      "nativeMedian": 157.31549400000222,
+      "medianPairRatio": 10.16986250445272,
+      "promotionVotes": 0,
+      "epochs": 0
+    },
+    {
+      "name": "documentViewDistribution",
+      "bucket": 9,
+      "calls": 1160,
+      "verified": 26,
+      "validPairs": 24,
+      "state": "js-final",
+      "decisionCall": 1160,
+      "jsMedian": 0.5649374999920838,
+      "nativeMedian": 1.9938945000000672,
+      "medianPairRatio": 3.5255912904542432,
+      "promotionVotes": 0,
+      "epochs": 1
+    },
+    {
+      "name": "documentViewDistribution",
+      "bucket": 12,
+      "calls": 860,
+      "verified": 25,
+      "validPairs": 23,
+      "state": "shadow",
+      "decisionCall": null,
+      "jsMedian": 5.634875000000648,
+      "nativeMedian": 17.897750000000087,
+      "medianPairRatio": 3.1648101348296107,
+      "promotionVotes": 0,
+      "epochs": 0
+    },
+    {
+      "name": "documentViewDistribution",
+      "bucket": 15,
+      "calls": 800,
+      "verified": 26,
+      "validPairs": 24,
+      "state": "js-final",
+      "decisionCall": 799,
+      "jsMedian": 111.1912930000035,
+      "nativeMedian": 196.8237675000055,
+      "medianPairRatio": 1.7187476534585528,
+      "promotionVotes": 0,
+      "epochs": 1
+    }
+  ],
+  "stageMedians": {
+    "600": {
+      "jsEncode": 1.0797495000006165,
+      "nativeInputCopy": 0.014874999411404133,
+      "nativeDecode": 0.2589789992198348,
+      "compute": 0.35647950042039156,
+      "nativeEncode": 0.05172900017350912,
+      "copyBack": 0.004333001561462879,
+      "jsDecode": 0.07627099999808706
+    },
+    "6000": {
+      "jsEncode": 11.157375000009779,
+      "nativeInputCopy": 0.16389549989253283,
+      "nativeDecode": 2.658853999339044,
+      "compute": 3.228083500638604,
+      "nativeEncode": 0.33793750032782555,
+      "copyBack": 0.005771000869572163,
+      "jsDecode": 0.08416699996450916
+    },
+    "60000": {
+      "jsEncode": 126.4887705000292,
+      "nativeInputCopy": 1.6334379995241761,
+      "nativeDecode": 26.96408350020647,
+      "compute": 36.31787499971688,
+      "nativeEncode": 4.1049170000478625,
+      "copyBack": 0.009667499922215939,
+      "jsDecode": 0.10218700001132675
+    }
+  },
+  "allScheduleTotals": {
+    "PM1": {
+      "off": 179300.266,
+      "auto": 209535.837
+    },
+    "PM2": {
+      "off": 175871.486,
+      "auto": 194137.134
+    }
+  },
+  "correctness": {
+    "responseChecks": 5640,
+    "hashesMatchPM1": true,
+    "mismatchDemotions": 0,
+    "nativeFallbacks": 0,
+    "nativeAnswers": 0,
+    "stageProbeParityChecks": 210
+  },
+  "candidateDispatches": {
+    "playbackSeconds": 0,
+    "resolveVideoLength": 2820,
+    "watchTimeSeconds": 2820,
+    "documentViewDistribution": 2820,
+    "viewPlaybackTimeline": 0
+  }
+}

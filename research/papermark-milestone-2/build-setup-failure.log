@@ -1,0 +1,20 @@
+node:internal/modules/cjs/loader:1603
+  const err = new Error(message);
+              ^
+
+Error: Cannot find module 'typescript'
+Require stack:
+- /Users/noah/.t3/worktrees/next-scriptc/t3-d1582b09/packages/scriptc-promote/src/functions/promotion-discovery.mjs
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1603:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1145:27)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1196:12)
+    at require.resolve (node:internal/modules/helpers:336:31)
+    at discoverPromotions (file:///Users/noah/.t3/worktrees/next-scriptc/t3-d1582b09/packages/scriptc-promote/src/functions/promotion-discovery.mjs:80:27)
+    at file:///Users/noah/.t3/worktrees/next-scriptc/t3-d1582b09/research/papermark-milestone-2/build.mjs:11:32 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/noah/.t3/worktrees/next-scriptc/t3-d1582b09/packages/scriptc-promote/src/functions/promotion-discovery.mjs'
+  ]
+}
+
+Node.js v26.13.0

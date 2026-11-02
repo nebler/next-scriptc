@@ -1117,3 +1117,52 @@ intended suite passes. Task containers, build outputs, and dependency links are
 removed. Artifacts above 256 KiB are compressed. The root README and compiler
 fork are untouched. Nothing is hosted, published, merged, or pushed. The change
 is committed locally. [Policy, measurements, limits, and reproduction](nested-dispatch.md).
+
+## 39. PM2 held-out Papermark milestone with D3 (2026-11-02)
+
+Hypothesis: D3 removes PM1's internal helper dispatch overhead and allows the
+held-out target to collect shadows under the same request schedule. The adapter
+is unchanged at 7a19a40. PM2 copies PM1's exact harness, Papermark pin, K1 mocks,
+fixtures, counts, arm rotation, quota pauses, inclusive drain accounting, and
+Linux arm64 Node 24 configuration. Only dedicated container and output paths
+change. No held-out tuning occurs.
+
+Mixed inclusive process CPU is 14,787.509 ms OFF and 14,865.309 ms AUTO, a 0.53%
+increase, versus PM1's 15.63% increase. The paired-block 95% saving CI is -6.37%
+to +4.34%. All 5,640 timed responses are byte-identical, their hashes match PM1,
+and there are zero mismatch demotions or native fallbacks. No candidate promotes,
+so no post-promotion steady state exists. The end goal remains unmet.
+
+playbackSeconds dispatcher calls fall from 107,712,000 to zero. The handler's
+external resolveVideoLength and watchTimeSeconds entries remain at 2,820 each,
+as expected. documentViewDistribution collects 26/25/26 verified shadows at
+600/6,000/60,000 events, compared with PM1's 3/0/0. The small and large buckets
+complete epochs and choose JS at calls 1,160 and 799. The middle bucket ends one
+valid pair short. Every collected target pair loses the promotion threshold.
+Native boundary-inclusive median CPU is about 3.5/3.2/1.7 times its paired JS
+reference. The separate stage probe identifies full-event JS encoding as its
+largest stage. Fair admission restores service, but the unchanged schedule does
+not complete all epochs under D3's shared quota. These are diagnoses only.
+
+C1's exact 1.792 compute and 2.260 boundary factors predict 1.18% more mixed CPU
+proxy cost. Opposing ±17.37% bands span -43.71% to +28.77% saving. This remains a
+CPU-input hosted-wall proxy, not calibrated Vercel Active CPU. Mocked services
+make any positive saving an optimistic endpoint upper bound. No hosting calls
+or published performance claims occur.
+
+All ten windows retain pre-window ps and load snapshots. This is the only agent
+running the task, and no build, test, or analysis overlaps timing. Background
+services and unrelated containers remain active; host load spans 3.37–7.63.
+The fully idle host condition is not established. PM1's mixed large-pair order
+bias remains. No measured rows are filtered or rerun.
+
+Next passes 98 tests, including 680 seeded real-addon inputs and 1,360 comparisons
+across 17 candidates. Promotion passes 26 with two existing skips. Setup failures
+before timing and a later missing-Zod-link test failure are retained; only
+task-owned dependency links resolve them. The dedicated nsc-standin-pm2 container,
+external build tree, restored sparse-checkout handler, test outputs, and temporary
+links are removed. Main's recorded dependency links remain unchanged. Artifacts
+over 256 KiB are compressed. The root README, main checkout, scriptc fork, and
+/Users/noah/scriptc are untouched. No existing container is altered. PM2 is kept
+as measurement evidence and committed locally without merge or push.
+[Report, comparisons, diagnostics, and reproduction](papermark-milestone-2.md).
