@@ -1,0 +1,237 @@
+{
+  "timingLabel": "Local indicative, Apple M4 Pro; needs stand-in confirmation",
+  "results": [
+    {
+      "file": "check-json-2-csv-untyped.json",
+      "library": "json-2-csv",
+      "variant": "untyped",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "host": {
+        "node": "v26.13.0",
+        "platform": "darwin",
+        "arch": "arm64"
+      },
+      "timings": [
+        {
+          "inputBytes": 61,
+          "outputBytes": 45,
+          "jsMs": 0.00766699999999787,
+          "nativeMs": 0.040248999999988655,
+          "nativeOverJs": 5.24964131994259,
+          "sinkMs": 0.005707999999998492,
+          "echoMs": 0.00566499999999337,
+          "parseOnlyMs": 0.006457999999980757,
+          "sinkShare": 0.14181718800467344,
+          "echoShare": 0.1407488384803341,
+          "parseOnlyShare": 0.16045119133351332
+        },
+        {
+          "inputBytes": 1163,
+          "outputBytes": 667,
+          "jsMs": 0.04229200000000333,
+          "nativeMs": 0.22083299999999895,
+          "nativeOverJs": 5.221625839401815,
+          "sinkMs": 0.007835000000000036,
+          "echoMs": 0.009500000000002728,
+          "parseOnlyMs": 0.015289999999993142,
+          "sinkShare": 0.035479298836677824,
+          "echoShare": 0.04301893285877914,
+          "parseOnlyShare": 0.0692378403589736
+        },
+        {
+          "inputBytes": 9620,
+          "outputBytes": 5517,
+          "jsMs": 0.29545799999999645,
+          "nativeMs": 1.5536249999999825,
+          "nativeOverJs": 5.25836159454136,
+          "sinkMs": 0.02225000000001387,
+          "echoMs": 0.03658299999997894,
+          "parseOnlyMs": 0.07279099999999517,
+          "sinkShare": 0.01432134524097779,
+          "echoShare": 0.0235468662000028,
+          "parseOnlyShare": 0.04685236141282226
+        },
+        {
+          "inputBytes": 315275,
+          "outputBytes": 183539,
+          "jsMs": 8.88695800000005,
+          "nativeMs": 51.61124999999993,
+          "nativeOverJs": 5.807527165088396,
+          "sinkMs": 0.4949579999998832,
+          "echoMs": 0.8950420000001031,
+          "parseOnlyMs": 3.01712399999991,
+          "sinkShare": 0.009590118433478824,
+          "echoShare": 0.017341994235754887,
+          "parseOnlyShare": 0.05845865000363127
+        }
+      ]
+    },
+    {
+      "file": "check-fastest-levenshtein-untyped.json",
+      "library": "fastest-levenshtein",
+      "variant": "untyped",
+      "parity": {
+        "attempted": 2,
+        "matched": 1,
+        "mismatches": [],
+        "errors": [
+          {
+            "index": 1,
+            "message": "Error: \u0001Uncaught Error: indexing with non-number keys are not supported yet [SC1090 at <TEMP>/builds/fastest-levenshtein/untyped/bundle.js:14]\n\u001fSC4013\u001frev_fn_0"
+          }
+        ]
+      },
+      "host": {
+        "node": "v26.13.0",
+        "platform": "darwin",
+        "arch": "arm64"
+      },
+      "timings": []
+    },
+    {
+      "file": "check-fastest-levenshtein-typed.json",
+      "library": "fastest-levenshtein",
+      "variant": "typed",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "host": {
+        "node": "v26.13.0",
+        "platform": "darwin",
+        "arch": "arm64"
+      },
+      "timings": [
+        {
+          "inputBytes": 47,
+          "outputBytes": 1,
+          "jsMs": 0.0027919999999994616,
+          "nativeMs": 0.005916999999996619,
+          "nativeOverJs": 2.11926934097341,
+          "sinkMs": 0.005375000000000796,
+          "echoMs": 0.005499999999983629,
+          "parseOnlyMs": 0.005915999999984933,
+          "sinkShare": 0.9083995267878767,
+          "echoShare": 0.9295250971753881,
+          "parseOnlyShare": 0.9998309954349017
+        },
+        {
+          "inputBytes": 527,
+          "outputBytes": 2,
+          "jsMs": 0.011375000000001023,
+          "nativeMs": 0.01995900000000006,
+          "nativeOverJs": 1.75463736263721,
+          "sinkMs": 0.005789999999990414,
+          "echoMs": 0.005624999999994884,
+          "parseOnlyMs": 0.006083000000003835,
+          "sinkShare": 0.2900946941224709,
+          "echoShare": 0.2818277468808491,
+          "parseOnlyShare": 0.30477478831623916
+        },
+        {
+          "inputBytes": 4111,
+          "outputBytes": 3,
+          "jsMs": 0.609334000000004,
+          "nativeMs": 0.6874579999999924,
+          "nativeOverJs": 1.1282121135534662,
+          "sinkMs": 0.00812299999999766,
+          "echoMs": 0.00850100000000964,
+          "parseOnlyMs": 0.009917000000001508,
+          "sinkShare": 0.011815994577119984,
+          "echoShare": 0.012365846349900261,
+          "parseOnlyShare": 0.014425608546269907
+        },
+        {
+          "inputBytes": 131119,
+          "outputBytes": 6,
+          "jsMs": 0.9629579999999862,
+          "nativeMs": 0.921541000000019,
+          "nativeOverJs": 0.9569898167937047,
+          "sinkMs": 0.0191250000000025,
+          "echoMs": 0.03695899999999597,
+          "parseOnlyMs": 0.05270899999999301,
+          "sinkShare": 0.020753281731363125,
+          "echoShare": 0.04010564912466749,
+          "parseOnlyShare": 0.057196587021078736
+        }
+      ]
+    },
+    {
+      "file": "check-fastest-levenshtein-typed-session1.json",
+      "library": "fastest-levenshtein",
+      "variant": "typed",
+      "parity": {
+        "attempted": 240,
+        "matched": 240,
+        "mismatches": [],
+        "errors": []
+      },
+      "host": {
+        "node": "v26.13.0",
+        "platform": "darwin",
+        "arch": "arm64"
+      },
+      "timings": [
+        {
+          "inputBytes": 47,
+          "outputBytes": 1,
+          "jsMs": 0.00462500000000432,
+          "nativeMs": 0.009624000000002297,
+          "nativeOverJs": 2.080864864863418,
+          "sinkMs": 0.008042000000017424,
+          "echoMs": 0.008458999999987782,
+          "parseOnlyMs": 0.00874999999996362,
+          "sinkShare": 0.835619285122143,
+          "echoShare": 0.8789484621764092,
+          "parseOnlyShare": 0.9091853699045648
+        },
+        {
+          "inputBytes": 527,
+          "outputBytes": 2,
+          "jsMs": 0.016458000000000084,
+          "nativeMs": 0.02841599999999289,
+          "nativeOverJs": 1.7265767407943096,
+          "sinkMs": 0.00808399999999665,
+          "echoMs": 0.008250000000003865,
+          "parseOnlyMs": 0.0091669999999624,
+          "sinkShare": 0.2844876126125659,
+          "echoShare": 0.29032939189210055,
+          "parseOnlyShare": 0.3225999436924512
+        },
+        {
+          "inputBytes": 4111,
+          "outputBytes": 3,
+          "jsMs": 0.6162910000000181,
+          "nativeMs": 0.6931670000000167,
+          "nativeOverJs": 1.124739773905503,
+          "sinkMs": 0.007750999999984742,
+          "echoMs": 0.008292000000011512,
+          "parseOnlyMs": 0.009832999999986214,
+          "sinkShare": 0.011182009530148659,
+          "echoShare": 0.01196248523084814,
+          "parseOnlyShare": 0.01418561472197317
+        },
+        {
+          "inputBytes": 131119,
+          "outputBytes": 6,
+          "jsMs": 0.9843329999999924,
+          "nativeMs": 0.92349999999999,
+          "nativeOverJs": 0.9381987599724861,
+          "sinkMs": 0.019249999999999545,
+          "echoMs": 0.03662500000001501,
+          "parseOnlyMs": 0.056081999999975096,
+          "sinkShare": 0.020844612885760425,
+          "echoShare": 0.039658906334613324,
+          "parseOnlyShare": 0.060727666486167516
+        }
+      ]
+    }
+  ]
+}
