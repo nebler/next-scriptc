@@ -1468,3 +1468,71 @@ Sample profiles rank erased ownership/boxing, dynamic property/layout probes and
 One sound local fix fills fresh native key arrays directly in inline dense storage. Four alternating windows improve 11–15%, pooled median 8.0265 → 6.9325 ms. Full JSON walk improves only 1.7% in the final session; large CSV regresses 1.9%, so no CSV acceleration is claimed. Escape analysis and guarded erased primitive/shape specialization remain precise designs, not implemented gains.
 
 Fork branch `next-scriptc/object-key-array-construction` is committed at `0f66b43c5ba7fc11e6d2d930c25566f03bca6527` from upstream `38cc546e0`. Two ASan/UBSan runtime tests, new release/dev corpus and sanitized RC audit, three affected descriptor/key-order cases, single-fixture preflight/order, completeness, lint and format pass. Full gate remains outstanding; a broad order-canary command was terminated without a verdict. All final timings run after builds/tests. No held-out app, root README, original checkout, Docker, push, PR, issue, or public write is involved. [Report and retained evidence](compiler-object-string.md).
+
+## 48. E2 checked source-text provenance experiment (2026-11-03)
+
+Opt-in build rewriting captures unshadowed, single-argument JSON.parse calls in
+promotion-bearing modules. A WeakMap retains the text and a complete descriptor,
+identity, prototype, and extensibility snapshot. Every native call checks that
+snapshot, including unread fields. Mutations invalidate provenance; unchanged
+aliases and repeated calls remain valid. No application object is frozen, no
+global parser is patched, and JS receives its parsed object. Dispatcher policy,
+shadow verification, and fallback behavior are unchanged.
+
+Only a conservative native-compatible lexical subset qualifies. Duplicate keys,
+reserved or numeric object keys, escapes, Unicode, fractional or large numbers,
+negative zero, excessive nesting, and actual opaque handle values retain the
+encoder path. Response.json and callers outside transformed modules are not
+captured. The existing checked native parser skips full-text extra fields, with
+native differential coverage. There is no compiler change.
+
+This version loses on the handle-free integer variant of E1's own-code DEV
+fixture. At 600/6,000/60,000 rows, encoder total wall medians are
+0.182/1.696/22.513 ms; text totals are 0.667/6.468/74.886 ms. At 60k, the
+39.302 ms mutation check replaces 19.485 ms encoding. Full-text native parse/skip
+costs 23.013 ms versus 2.330 ms for projected input. Source size rises from
+2.47 MB to 8.03 MB. Native process CPU is 78.815 ms text versus 32.514 ms encoder,
+while JS wall is about 0.118 ms. Capture takes 190.696 ms versus 16.713 ms plain
+parsing, outside the per-call intervals. Every path and size selects js-final
+after 26 verified shadows, with no mismatches or native fallbacks.
+
+Sixty retained paired-order samples follow ten warmups per path and size on
+macOS arm64, Node 26.13.0, stock scriptc 0.4.6. No Docker or stand-in is used.
+Final timings overlap no task builds or tests. Initial values-only snapshots and
+final descriptor-aware snapshots remain separate raw sessions. Background load,
+GC, and a single host limit inference. This is not a successful application
+promotion. The ideal 67 ms PM2 text-path arithmetic excludes provenance,
+acquisition, and extra-field skip costs. These results do not justify projecting
+a held-out native win. No Papermark or HELD_OUT repository is inspected or run.
+
+Next passes 98 tests. Core passes 38 with two existing skips, including with
+capture enabled. Focused tests cover mutation through aliases, descriptors,
+prototype and extensibility, reassignment, revivers, try blocks, multiple calls,
+parser receiver and evaluation order, semantic fallback, native skip, and shadow
+isolation. Build capture stays behind SCRIPTC_SOURCE_TEXT=1. Static provenance
+for immediate parse arguments is the next way to remove the runtime check;
+handle-token overlays and broader JSON semantics remain unimplemented.
+
+The worktree owns all dependencies and build artifacts. Root README, main
+checkout, compiler fork, and /Users/noah/scriptc are untouched. No Docker,
+hosting, deploy, push, PR, issue, or public write occurs. Details, raw samples,
+reproduction, and limits are in [the E2 report](source-text-passthrough.md).
+
+## 49. Review note on E2 (2026-11-03)
+
+E2 is a clean negative, and the reason is structural. Without static proof, showing
+that a value still equals `JSON.parse(text)` means walking the whole tree, which is
+the same O(n) JS work as encoding, only more of it (39 vs 19 ms at 60k). Capturing
+snapshots at parse time adds ~10× to `JSON.parse` itself. Separately, sending the
+full text makes native parse every field: 23 ms vs 2.3 ms for the projected encoder
+input. Projection is worth more than skipping serialization.
+
+Decision: the research is merged; the implementation stays on branch
+`t3/source-text-passthrough` (b2ab416) and is not merged, because it is opt-in,
+always slower, and adds a lookup to the `encodeArguments` hot path. The measure
+scripts here need that branch to run.
+
+What remains of this lever is static provenance only (an immediate `JSON.parse`
+argument, or a binding proven unmutated and unescaped), with a native-side
+projected skip-parser. That is a narrower, compiler-assisted design; deprioritized
+below C1b and E3. PM3 stays deferred.

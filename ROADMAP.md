@@ -101,17 +101,17 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | B1 | Cheap discovery blockers | 2 | discovery | after EV3 |
 | P1 | Friction log, then actionable errors | 3 | DX | after C1 or B1 |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
-| E2 | Source-text passthrough | 1 | boundary | running |
+| E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |
 | C2 | Native JSON decode speed | 1 | scriptc fork | after C1 |
 | A1 | Async outlining | 2 | discovery | after B1 |
-| E3 | Native-resident data across calls | 1 | dispatcher/boundary | after E2 |
+| E3 | Native-resident data across calls | 1 | dispatcher/boundary | queued |
 | T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | queued |
 | P2 | Visibility: runtime report + CI report | 3 | report | after P1 |
 | L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
 | P3 | Profile-guided promotion | 3 | report/build | after P2 |
 | P4 | Zero-setup install, naming, docs | 3 | packaging | after P1 |
 | — | Editor integration, browser wasm, equivalence proofs, whole-library native | 3/4 | — | later |
-| HO | Held-out milestone eval | 6 | eval | after B1+A1+E2 land |
+| HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without
 explicit approval; fork work on local branches under `/Users/noah/code/scriptc-wt/`;
