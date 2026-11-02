@@ -491,3 +491,35 @@ one retry for the existing owner/child stdout-order race, without a code change.
 Temporary packages, generated native outputs, and dependency symlinks were
 removed. No scriptc, Vercel service, Docker, third-party source, or root README
 change.
+
+## 25. Cloudflare provider feasibility, stock wasm (2026-11-02)
+
+CF1 establishes a local OpenNext integration, with no stock wasm promotion win.
+`withScriptc` gains an explicit opt-in Cloudflare branch that preserves JS routes,
+skips Node sidecars and addons, emits a stock 0.4.6 WASI library reactor before
+Next builds, and generates a Worker wrapper with a static wasm import. The app
+resolves its optional runtime pack. OpenNext 1.20.15 builds the complete demo;
+Wrangler 4.156.0 serves the synchronous demo revenueCore facade through that
+OpenNext Worker. This prototype has one explicit facade, not automatic discovery.
+
+Three initial byte-identical shadows per input-byte bucket and periodic rechecks
+gate the static wasm lane. Mismatch or trap disables it for the isolate. JS is
+the default. Local workerd timers advance during synchronous compute, unlike
+Cloudflare's documented deployed restriction, so they cannot validate Node's
+CPU-timed promotion on Workers. Recommend content-keyed static calibration plus
+shadow correctness gating; these measurements choose JS in every bucket.
+
+All 960 final warmed/measured responses match byte for byte. At 5k and 15k events,
+stock wasm consumes 7.811 and 14.993 ms total workerd CPU/request against JS
+7.355 and 13.528 ms: 6.2% and 10.8% worse. Application-process CPU and external
+HTTP wall time also lose. The empty control loses too. The retained libproc batch
+run samples both Wrangler workerd processes; an initial front-process-only window
+was discarded. No build/test work overlaps timing. Existing shared-host work
+continues, and all numbers **need hosted confirmation**. No fork/SIMD gain is
+claimed. Final linear memory is 33.31 MiB, without hosted memory certification.
+
+The full adapter suite and both shim checks pass. Task-created installations,
+builds and local Wrangler state are removed after validation. No deploy, login,
+Vercel call, Docker change, Papermark use, compiler source modification or root
+README edit. [Report, prototype limits and reproduction](cloudflare-provider.md)
+include current official docs, raw counters, hashes and retained validation logs.

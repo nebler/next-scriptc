@@ -12,9 +12,17 @@ function object(value, label) {
 export function validateOptions(options) {
   object(options, "Options");
   for (const key of Object.keys(options)) {
-    if (key !== "routes" && key !== "nativePromotion") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
+    if (key !== "routes" && key !== "nativePromotion" && key !== "target" && key !== "cloudflare") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
   }
   if (options.nativePromotion !== undefined && !["auto", "off"].includes(options.nativePromotion)) throw new Error("[next-scriptc] nativePromotion must be auto or off.");
+  if (options.target !== undefined && !["node", "cloudflare"].includes(options.target)) throw new Error("[next-scriptc] target must be node or cloudflare.");
+  if (options.cloudflare !== undefined) {
+    object(options.cloudflare, "Options.cloudflare");
+    if (options.target !== "cloudflare") throw new Error("[next-scriptc] cloudflare requires target: cloudflare.");
+    for (const key of Object.keys(options.cloudflare)) if (key !== "entry") throw new Error(`[next-scriptc] Unsupported cloudflare option ${key}.`);
+    if (typeof options.cloudflare.entry !== "string" || !options.cloudflare.entry) throw new Error("[next-scriptc] cloudflare.entry must name a synchronous JSON string facade.");
+  }
+  if (options.target === "cloudflare" && options.nativePromotion === "auto") throw new Error("[next-scriptc] Cloudflare requires static verified dispatch; nativePromotion auto uses Node CPU timers.");
   const routes = options.routes === undefined ? {} : options.routes;
   object(routes, "Options.routes");
   const result = {};
@@ -31,7 +39,7 @@ export function validateOptions(options) {
     }
     Object.defineProperty(result, pattern, { value: { ...value, optimization: value.optimization ?? "release" }, enumerable: true });
   }
-  return { routes: result, ...(options.nativePromotion === undefined ? {} : { nativePromotion: options.nativePromotion }) };
+  return { routes: result, ...(options.target ? { target: options.target } : {}), ...(options.cloudflare ? { cloudflare: { ...options.cloudflare } } : {}), ...(options.nativePromotion === undefined ? {} : { nativePromotion: options.nativePromotion }) };
 }
 
 export function planRoutes(discovered, options = {}) {

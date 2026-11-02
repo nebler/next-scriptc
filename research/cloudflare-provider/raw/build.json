@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-02T07:41:04.873Z",
+  "node": "v24.22.0",
+  "scriptc": "0.4.6",
+  "runtime": "0.4.6",
+  "opennext": "1.20.15",
+  "wrangler": "4.156.0",
+  "wasmBytes": 548518,
+  "sha256": "4bb44525801b9ccb24d55f0ec349b54870827e73e976de97136e78f0cd8791d5",
+  "imports": [
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_close",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "environ_get",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "environ_sizes_get",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "clock_time_get",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_fdstat_get",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_fdstat_set_flags",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_prestat_get",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_prestat_dir_name",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_read",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_seek",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "fd_write",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "path_open",
+      "kind": "function"
+    },
+    {
+      "module": "wasi_snapshot_preview1",
+      "name": "proc_exit",
+      "kind": "function"
+    },
+    {
+      "module": "scriptc",
+      "name": "panic",
+      "kind": "function"
+    }
+  ],
+  "exports": [
+    {
+      "name": "memory",
+      "kind": "memory"
+    },
+    {
+      "name": "_initialize",
+      "kind": "function"
+    },
+    {
+      "name": "scriptc_alloc",
+      "kind": "function"
+    },
+    {
+      "name": "scriptc_free",
+      "kind": "function"
+    },
+    {
+      "name": "bench_init",
+      "kind": "function"
+    },
+    {
+      "name": "bench_collect",
+      "kind": "function"
+    },
+    {
+      "name": "bench_run",
+      "kind": "function"
+    }
+  ],
+  "profile": {
+    "profile_format": 1,
+    "name": "cloudflare",
+    "entry": "/Users/noah/.t3/worktrees/next-scriptc/t3-d842f2d5/examples/demo/cloudflare/revenue.ts",
+    "emission": "llvm",
+    "abi": {
+      "prefix": "bench_",
+      "init_symbol": "bench_init",
+      "sink_register_symbol": "bench_sink",
+      "collect_symbol": "bench_collect"
+    },
+    "exports": [
+      {
+        "export": "run",
+        "symbol": "bench_run",
+        "params": [
+          "string"
+        ],
+        "returns": "string"
+      }
+    ]
+  },
+  "hardware": "machdep.cpu.brand_string: Apple M4 Pro\nhw.memsize: 25769803776\n",
+  "gzipBytes": 196124,
+  "workerd": "1.20261023.1",
+  "compatibilityDate": "2026-10-30"
+}
