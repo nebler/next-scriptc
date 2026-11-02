@@ -182,6 +182,11 @@ test("Turbopack conditions target discovered paths literally and preserve user r
   assert.ok(!condition.test("other/app/items/[id]/page.tsx"));
   assert.ok(!condition.test("app/page.tsx"));
   assert.deepEqual(config.turbopack.rules["*.svg"], { as: "*.js" });
+  for (const rule of config.turbopack.rules["*"].slice(1)) {
+    assert.deepEqual(rule.loaders, JSON.parse(JSON.stringify(rule.loaders)));
+    assert.equal(rule.loaders[0].options.modules[modules[0].source].hash, "hash");
+    assert.equal(rule.loaders[0].options.port, 41000);
+  }
 });
 
 test("function startup checks build identity and reports missing/non-executable binaries", async () => {

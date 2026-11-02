@@ -98,9 +98,36 @@ library refusals, the Go comparison and development commands, and the
 [shim contract](shim/README.md) for supported request/response APIs. This is
 experimental and depends on scriptc and evolving adapter/runtime contracts.
 
+## Automatic promotion and local testing
+
+The current Next adapter requires an explicit option for automatic promotion:
+
+```ts
+// next.config.ts
+import { withScriptc } from "next-scriptc";
+export default withScriptc({}, { nativePromotion: "auto" });
+```
+
+Without this option, unmarked functions stay in JS. This is a current limitation
+relative to the planned automatic default. `"use js"` excludes a function from
+automatic discovery. Explicit `"use native"` functions use the async form shown
+above and fail the build if extraction or compilation fails.
+
+Development runs the original TypeScript, including functions marked `"use native"`.
+To test native execution locally, run `pnpm exec next build`, then
+`pnpm exec next start`, and call the same endpoint. Rebuild production output
+after edits. Development requests do not verify native compatibility.
+
+A coverage report describes static eligibility, not an observed runtime decision.
+The build's native route count does not count native functions. Automatic
+promotion compiles candidates and shadow-checks them before deciding whether to
+use native for a workload. An accepted report row alone does not show that a
+request ran native. Compiler failures in automatic promotion retain the JS path;
+explicit native functions require a working compiler and linker.
+
 ## Coverage report
 
-Run `next-scriptc report . --json coverage.json --md coverage.md` to inspect
+Run `pnpm exec next-scriptc report . --json coverage.json --md coverage.md` to inspect
 accepted functions, exact discovery blockers, silent exclusions, and route reachability.
 The command delegates to the framework-independent `scriptc-promote report`.
 Add `--measure --inputs inputs.json` for opt-in stock native compilation and paired
