@@ -1,0 +1,114 @@
+(node:38517) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ imported interfaces and aliases link transitively with collision renaming (1429.535041ms)
+✔ literal enums follow named reexports and reject computed members and writes (1007.813542ms)
+✔ private literal graphs admit scalar lookups and reject mutation and escape (328.478667ms)
+✔ throw-only classes compile with mandatory fallback and preserve original JS errors (3028.892875ms)
+✔ writes, shadowing, schema calls and noncanonical array keys fail closed (435.169625ms)
+(node:38609) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unreachable calls, allocation, classes and clocks disappear in source and dependency (2000.3705ms)
+✔ reachable equivalents retain initialization and effect rejection (7.066625ms)
+✔ bare statements reject in source and every visited dependency (5.875416ms)
+✔ diamond requests accumulate exports and transitively renamed helpers once (339.123084ms)
+✔ reachable import cycles reject, unreachable import cycles are dropped (371.798083ms)
+✔ shadow rejects divergence from an excluded initializer that patches a prototype (331.05325ms)
+✔ automatic extraction prunes sibling declarators before traversing references (360.160791ms)
+✔ imported bindings exported under aliases link to the final defining module (377.842084ms)
+✔ the server-only marker is admitted; other side-effect imports still reject (340.830208ms)
+
+> build
+> astro build
+
+12:31:26 [@astrojs/node] Enabling sessions with filesystem storage
+12:31:26 [content] Syncing content
+12:31:26 [content] Synced content
+12:31:26 [types] Generated 346ms
+12:31:26 [build] output: "server"
+12:31:26 [build] mode: "server"
+12:31:26 [build] directory: /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-astro-aQtice/dist/
+12:31:26 [build] adapter: @astrojs/node
+12:31:26 [build] Collecting build info...
+12:31:26 [build] ✓ Completed in 365ms.
+12:31:26 [build] Building server entrypoints...
+[next-scriptc] not a candidate GET: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-astro-aQtice/src/pages/compute.ts: function GET: unsupported reference Response
+[scriptc-promote] census: 1 eligible, 1 compiled
+12:31:29 [vite] ✓ built in 2.60s
+12:31:29 [build] ✓ Completed in 2.62s.
+
+ building client (vite)
+12:31:29 [vite] transforming...
+12:31:29 [vite] ✓ 2 modules transformed.
+12:31:29 [vite] rendering chunks...
+12:31:29 [vite] ✓ built in 9ms
+
+ prerendering static routes
+12:31:29 ✓ Completed in 5ms.
+
+12:31:29 [build] Rearranging server assets...
+12:31:29 [build] Server built in 3.01s
+12:31:29 [build] Complete!
+
+{"framework":"astro","requests":241,"byteIdentical":true,"states":[{"5b766a48b8a281b022d8":{"calls":242,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":12,"nativeFallbacks":0,"fallbackCount":0}]}}],"transitions":["next-scriptc {\"fn\":\"5b766a48b8a281b022d8\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}"]}
+✔ astro: production Node HTTP parity, client isolation and verified shadow (12602.255959ms)
+
+> build
+> react-router build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+Generated an empty chunk: "compute".
+rendering chunks...
+computing gzip size...
+build/client/.vite/manifest.json                1.18 kB │ gzip:  0.32 kB
+build/client/assets/compute-l0sNRNKZ.js         0.00 kB │ gzip:  0.02 kB
+build/client/assets/page-YYTYIIBT.js            0.19 kB │ gzip:  0.17 kB
+build/client/assets/root-C4jJQWXJ.js            0.20 kB │ gzip:  0.17 kB
+build/client/assets/jsx-runtime-BzhkY8dN.js   113.72 kB │ gzip: 38.55 kB
+build/client/assets/entry.client-C_ycP6hM.js  190.32 kB │ gzip: 60.00 kB
+✓ built in 632ms
+vite v7.3.7 building ssr environment for production...
+[next-scriptc] not a candidate Root: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-MUxG5x/app/root.tsx: function Root: React/JSX is unsupported
+[next-scriptc] not a candidate loader: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-MUxG5x/app/routes/compute.ts: function loader: unsupported reference Response
+[next-scriptc] not a candidate Page: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-MUxG5x/app/routes/page.tsx: function Page: React/JSX is unsupported
+[scriptc-promote] census: 2 eligible, 2 compiled
+transforming...
+✓ 14 modules transformed.
+rendering chunks...
+build/server/scriptc-promotion/ids.json            0.05 kB
+build/server/scriptc-promotion/encodings.json      0.15 kB
+build/server/.vite/manifest.json                   0.17 kB
+build/server/scriptc-promotion/promotion.node  1,333.84 kB
+build/server/index.js                             23.61 kB
+✓ built in 3.72s
+
+{"framework":"react-router","requests":241,"byteIdentical":true,"states":[{"a8330819d0633e2c9755":{"calls":362,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":18,"nativeFallbacks":0,"fallbackCount":0}]},"147cdd7e202f94c0eb2e":{"calls":120,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":6,"nativeFallbacks":0,"fallbackCount":0}]}}],"transitions":["next-scriptc {\"fn\":\"a8330819d0633e2c9755\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}","next-scriptc {\"fn\":\"147cdd7e202f94c0eb2e\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}"]}
+✔ react-router: production Node HTTP parity, client isolation and verified shadow (12453.627708ms)
+﹣ nuxt: production Node HTTP parity and verified shadow (0.5055ms) # SKIP
+﹣ tanstack: production Node HTTP parity and verified shadow (0.087167ms) # SKIP
+✔ Nitro skips dev and rejects non-Node output (0.646958ms)
+[scriptc-promote] census: 1 eligible, 1 compiled
+[scriptc-promote] census: 1 eligible, 1 compiled
+✔ builder API isolates client and two server compilations without build.ssr (2960.333ms)
+[next-scriptc] not a candidate answer: dependency closure: transitive effect proof: module statement excluded at 6
+[scriptc-promote] census: 2 eligible, 2 compiled
+next-scriptc {"fn":"1825b05f2a8901333a93","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+next-scriptc {"fn":"22e31ec38c5069af8810","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+validated Vite 6.4.5
+✔ vite6: client isolation, native SSR, grouped rewrites and relocated artifacts (3745.478917ms)
+[next-scriptc] not a candidate answer: dependency closure: transitive effect proof: module statement excluded at 6
+[scriptc-promote] census: 2 eligible, 2 compiled
+next-scriptc {"fn":"ec3f2193ae6b7418663a","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+next-scriptc {"fn":"cd17ee2b123bca0fcdcf","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+validated Vite 7.3.7
+✔ vite: client isolation, native SSR, grouped rewrites and relocated artifacts (2854.690292ms)
+✔ dev and webworker targets disable all promotion hooks (0.263208ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 45961.722583

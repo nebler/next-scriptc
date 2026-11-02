@@ -48,7 +48,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
  const candidates=[];
  for(const {name,forced} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
-  if(module.imports.length && parse(module.native).program.body.some(n=>n.type==='ImportDeclaration'&&n.importKind!=='type')) {
+  if(module.imports.length) {
    Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
   }
   let work=false;
@@ -69,7 +69,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
    }
   });
   if(!work&&!forced)throw Error('work: no loop, recursion, array callback or JSON parse');
-  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true})),promotion:true,forced});
+  candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,requiresFallback:module.requiresFallback})),promotion:true,forced});
  }catch(e){if(forced)throw e;report(`[next-scriptc] not a candidate ${name}: ${e.message}`);}}
  return candidates;
 }

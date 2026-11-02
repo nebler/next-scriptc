@@ -764,3 +764,46 @@ A0 rerun on Dub and Formbricks with the change (artifact not replaced):
   - `getElementSummary` now stops at `unresolved export TSurveyElementTypeEnum`, an enum value imported from `@formbricks/types`.
 
 The remaining blockers are now specific constructs: app error classes on throw paths, imported enums and constant objects, and type-only imports that need type linking. Each is a bounded adapter feature.
+
+
+## 31. M2 bounded dependency closure features (2026-11-02)
+
+Implemented transitive imported interface and alias linking with collision-safe
+renaming, app-local TypeScript resolution, declaration-file support for types,
+and strict standalone closure checking. Named source re-exports now link. Literal
+string and numeric enums, including const enums and numeric auto-increment, lower
+to literal reads and literal-union annotations. Computed members and unsafe uses
+reject. Formbricks' TSurveyElementTypeEnum is a genuine TS string enum in
+surveys/constants.ts, re-exported by elements.ts, rather than a Zod initializer.
+
+Private as-const object and array graphs admit literal-key scalar reads after an
+all-reference mutation and escape audit. Exported objects remain rejected because
+as const is erased and another importer can mutate the object. Whole-application
+reference analysis or an explicit runtime immutability contract is needed for
+that extension. Zod and all call initializers remain excluded.
+
+Reachable classes used solely as direct throw-new constructors become a native
+fallback throw. Retained try statements and other class uses reject. Construction
+proofs establish replay purity; the builder forces catchFallback for a supported
+result ABI even when disabled by its caller. A real addon verifies enum and table
+reads, then replays JS exactly once per throw and preserves the actual source
+module's error constructor identity, name, and message. The report gives the
+soundness argument and retains M1's module and builtin assumptions.
+
+Pinned K1/K4 sync acceptance remains Umami 4 and Dub 32. A0 acceptance remains
+0 / 0 / 1 for Umami / Dub / Formbricks. No newly accepted functions or regions
+reach K1 paths, so additional accepted measured coverage is zero and coverage
+shares need no rerun. A0 module-init first rejections move 94 to 85, 252 to 91,
+and 28 to 21. Later gates absorb the difference. getElementSummary, lines 329–1021,
+now first rejects the Date in local TSurveySummaryResponse.updatedAt, before its
+enum read. The single final held-out Papermark census accepts 23. No app execution
+or timing was performed for Papermark.
+
+All 95 Next tests pass. Promotion passes 21 tests, adding five to the prior 16,
+with two existing opt-in skips. Stock-addon differential fuzz passes 680 inputs
+and 1,360 comparisons across 17 candidates at seed 20935. A0 liveness fixtures
+pass. Setup cleanup modes remove owned dependencies and generated Prisma output;
+temporary workspace links are removed after final validation. At most two jobs
+run together. No native timing, Docker/container work, hosting call, fork edit,
+root README change, publication, merge, or push. AGPL sources stay outside the
+repo. [Design, exclusions, full histograms, validation and reproduction](closure-features.md).

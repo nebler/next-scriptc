@@ -1,0 +1,167 @@
+{
+  "sync": {
+    "dub": {
+      "before": 32,
+      "after": 32,
+      "newlyAccepted": [],
+      "rejectionsBefore": {
+        "runtime import": 85,
+        "unsupported reference/import": 56,
+        "other extraction": 92,
+        "work screen": 53,
+        "default/rest/destructured parameter": 29,
+        "time/randomness/I/O": 8,
+        "React/framework": 18,
+        "mutation": 3,
+        "call-site specialization": 5,
+        "collection/callable boundary": 1
+      },
+      "rejectionsAfter": {
+        "runtime import": 83,
+        "unsupported reference/import": 58,
+        "other extraction": 47,
+        "broad/unresolved boundary": 45,
+        "work screen": 55,
+        "default/rest/destructured parameter": 29,
+        "time/randomness/I/O": 6,
+        "React/framework": 18,
+        "mutation": 3,
+        "call-site specialization": 5,
+        "collection/callable boundary": 1
+      }
+    },
+    "umami": {
+      "before": 4,
+      "after": 4,
+      "newlyAccepted": [],
+      "rejectionsBefore": {
+        "time/randomness/I/O": 7,
+        "runtime import": 32,
+        "other extraction": 76,
+        "work screen": 80,
+        "unsupported reference/import": 66,
+        "default/rest/destructured parameter": 39,
+        "mutation": 2,
+        "React/framework": 6,
+        "call-site specialization": 6,
+        "broad/unresolved boundary": 1
+      },
+      "rejectionsAfter": {
+        "time/randomness/I/O": 7,
+        "runtime import": 36,
+        "other extraction": 48,
+        "work screen": 72,
+        "unsupported reference/import": 72,
+        "default/rest/destructured parameter": 39,
+        "broad/unresolved boundary": 28,
+        "React/framework": 6,
+        "call-site specialization": 6,
+        "mutation": 1
+      }
+    }
+  },
+  "async": {
+    "umami": {
+      "before": 0,
+      "after": 0,
+      "newlyAccepted": [],
+      "rejectionsBefore": {
+        "control flow": 331,
+        "work screen": 134,
+        "closure/import": 703,
+        "closure/module-init": 94,
+        "any/unknown boundary": 9,
+        "purity": 6,
+        "construction proof": 6
+      },
+      "rejectionsAfter": {
+        "control flow": 331,
+        "work screen": 128,
+        "closure/import": 720,
+        "closure/module-init": 85,
+        "any/unknown boundary": 8,
+        "purity": 5,
+        "construction proof": 6
+      }
+    },
+    "dub": {
+      "before": 0,
+      "after": 0,
+      "newlyAccepted": [],
+      "rejectionsBefore": {
+        "closure/import": 419,
+        "work screen": 328,
+        "any/unknown boundary": 27,
+        "purity": 14,
+        "closure/module-init": 252,
+        "control flow": 303,
+        "construction proof": 2,
+        "framework import": 182,
+        "other boundary": 6,
+        "other extraction": 1
+      },
+      "rejectionsAfter": {
+        "closure/import": 574,
+        "work screen": 336,
+        "any/unknown boundary": 27,
+        "purity": 13,
+        "closure/module-init": 91,
+        "control flow": 303,
+        "construction proof": 2,
+        "framework import": 182,
+        "other boundary": 5,
+        "other extraction": 1
+      }
+    },
+    "formbricks": {
+      "before": 1,
+      "after": 1,
+      "newlyAccepted": [],
+      "rejectionsBefore": {
+        "control flow": 10,
+        "closure/import": 35,
+        "work screen": 5,
+        "purity": 4,
+        "closure/module-init": 28
+      },
+      "rejectionsAfter": {
+        "control flow": 10,
+        "closure/import": 42,
+        "work screen": 5,
+        "purity": 4,
+        "closure/module-init": 21
+      }
+    }
+  },
+  "getElementSummary": [
+    {
+      "id": "__a0_region_71",
+      "file": "apps/web/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/surveySummary.ts",
+      "function": "getElementSummary",
+      "line": 329,
+      "endLine": 1021,
+      "thisUse": false,
+      "argumentsUse": false,
+      "returns": 1,
+      "earlyReturn": false,
+      "throws": 0,
+      "externalJump": false,
+      "anyUnknown": false,
+      "unresolvedType": false,
+      "control": false,
+      "screenAccepted": false,
+      "boundaryProbe": "[next-scriptc] <app>/apps/web/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/surveySummary.ts: function __a0_region_71: parameter __a0_in_0[].validation.rules[].params[string]: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type never)",
+      "accepted": false,
+      "rejection": "dependency closure: <app>/apps/web/app/(app)/workspaces/[workspaceId]/surveys/[surveyId]/(analysis)/summary/lib/surveySummary.ts: type TSurveySummaryResponse is not bounded JSON data: Identifier Date",
+      "category": "closure/import",
+      "anyTypingUpperBound": false
+    }
+  ],
+  "implementationHashes": {
+    "dependency-closure": "bd381f94c9bc9230fc4957bcfa918307719f5e66020de1e12ec193e66c66d9b4",
+    "construction-proof": "a89ddb0574ce84a5e69be3d8e690b321f4c577736e5219a958c322f80912b3a5",
+    "construction-local": "24ac5d0633588e2f81b8186518bbfd4025c89d5f6d3703d190cdeae7f8c36f0d",
+    "promotion-discovery": "18317ec05f16c2e773197ceb0d4b38c98138d99abd57cb3cd9a7f5c94e4835c1",
+    "promotion-signature": "fd8cb8c99f04703b97e123ab2132d569ac82977ce4940be949d9e56ea33a1e64"
+  }
+}

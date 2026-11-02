@@ -77,6 +77,7 @@ export function constructionProof(text, ts) {
   initialized=outer;
  }
  function stmt(n,owner){
+  if(ts.isThrowStatement(n)&&ts.isStringLiteral(n.expression)&&n.expression.text==='__scriptc_throw_fallback__')return ;
   if(ts.isReturnStatement(n)){expr(n.expression,owner);return;}
   if(ts.isBlock(n)){for(const s of n.statements)stmt(s,owner);return;}
   if(ts.isIfStatement(n)){expr(n.expression,owner);stmt(n.thenStatement,owner);if(n.elseStatement)stmt(n.elseStatement,owner);return;}

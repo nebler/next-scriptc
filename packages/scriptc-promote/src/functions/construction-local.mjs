@@ -56,6 +56,7 @@ export function localConstruction(source, checker, ts) {
  function declarations(n){for(const d of n.declarations){if(!d.initializer)fail(d,'initialized bindings required');bind(d.name,expr(d.initializer));}}
  function block(n){let out=new Set();for(const s of n.statements)for(const x of stmt(s))out.add(x);return out;}
  function stmt(n){
+  if(ts.isThrowStatement(n)&&ts.isStringLiteral(n.expression)&&n.expression.text==='__scriptc_throw_fallback__')return scalar;
   if(ts.isBlock(n))return block(n);
   if(ts.isReturnStatement(n))return expr(n.expression);
   if(ts.isVariableStatement(n)){declarations(n.declarationList);return scalar;}

@@ -1,0 +1,40 @@
+{
+  "next": {
+    "command": "node --test --test-concurrency=1 packages/next-scriptc/test/*.mjs",
+    "passed": 95,
+    "failed": 0,
+    "skipped": 0
+  },
+  "promote": {
+    "command": "node --test --test-concurrency=1 packages/scriptc-promote/test/*.mjs",
+    "passed": 21,
+    "failed": 0,
+    "skipped": 2,
+    "newFeatureTests": 5
+  },
+  "fuzz": {
+    "seed": 20935,
+    "cases": 40,
+    "inputs": 680,
+    "checks": 1360,
+    "native": 2266,
+    "fallback": 534,
+    "candidates": 17
+  },
+  "regions": "A0 liveness, shorthand, mutation, control, await-loop and expression-arrow fixtures pass",
+  "cleanup": {
+    "asyncSetup": true,
+    "coverageSetup": true,
+    "temporaryWorkspaceLinksRemoved": true
+  },
+  "notes": [
+    "No new accepted K1 functions or A0 regions; no coverage-share profiling required.",
+    "Papermark setup created TypeScript link then rejected existing task-owned deps; only one subsequent census ran.",
+    "A repeated promotion-suite run overlapped dependency cleanup and failed to resolve removed packages. Restored workspace links and reran the complete suite successfully before final link removal."
+  ],
+  "finalTypeScopeRegression": {
+    "passed": 5,
+    "failed": 0,
+    "command": "node --test --test-concurrency=1 packages/scriptc-promote/test/closure-features.mjs"
+  }
+}
