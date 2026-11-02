@@ -807,3 +807,38 @@ temporary workspace links are removed after final validation. At most two jobs
 run together. No native timing, Docker/container work, hosting call, fork edit,
 root README change, publication, merge, or push. AGPL sources stay outside the
 repo. [Design, exclusions, full histograms, validation and reproduction](closure-features.md).
+
+## 32. L1 whole-library native builds through esbuild (2026-11-02)
+
+Research probe, stock registry scriptc 0.4.6, esbuild 0.25.12. Bundling the
+selected entry's complete dependency graph, including initialization, works for
+json-2-csv 5.5.0 and escape-html 1.0.3. Both pass 240 generated inputs byte for
+byte against JS through the production addon, 240 forced native dispatches with
+zero fallbacks, and 240 automatic shadow verifications. Empty CSV arrays also
+match. This bypasses discovery and construction proofs to test compiler/runtime
+feasibility; it is not a production adapter eligibility change.
+
+CSV's initial SC0001 diagnostics on TS-emitted feature checks disappear with a
+bundle `// @ts-nocheck` banner. tsconfig noCheck did not suppress them. Escape-html
+needs a bundled require entry to avoid esbuild __toESM calling Object.getPrototypeOf
+on a function, which panics with SC4013. Markdown-it 14.1.0 builds but fails in
+rev_init with SC4013, expected string at $ but got undefined, across three runtime
+variants. Its responsible expression is not localized. Day.js 1.11.13 builds
+after syntax/UMD adjustments but hits SC1090 on function-constructor instanceof,
+wrapped in SC4013. A nocheck-only alternative instead hits SC2001 on a void value
+in the UMD initializer. These are upstream compiler/runtime asks, with pinned
+reproduction and hashes. Bundling removes the raw CJS barrier, not all JS gaps.
+
+Thread-CPU measurements at three sizes show both passing libraries slower than
+JS. Results are local indicative, needs stand-in/hosted confirmation. No hosted
+work, request coverage, or CPU saving is claimed. The design note retains boundary,
+purity, replay, and initialization-effect obligations. Separate JS/native state
+requires an immutable-configuration contract or library-wide invalidation;
+sampled shadow checks cannot prevent every stale promoted response.
+
+All selected libraries are MIT; the compiled dependency graphs use MIT/BSD only.
+Markdown-it's Python-licensed argparse CLI dependency is installed but excluded
+from every graph. Installs, bundles and native outputs remain external and are
+removed after checks. No containers, fork edits, held-out app work, root README
+edit, hosting calls, publication, merge or push. Builds run sequentially beside
+the other research job. [Report, JSON, scripts, hashes, and reproduction](whole-library-native.md).
