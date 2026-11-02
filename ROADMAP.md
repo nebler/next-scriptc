@@ -96,11 +96,12 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | # | Item | Hill | Subsystem | Status |
 |---|---|---|---|---|
 | EV3 | Dependency-installed DEV census | eval | census | running |
-| C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | queued |
+| C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | done: RC/boxing ~26%, layout probes ~14%; key-array fix −13.6% on enumeration, CSV unchanged |
+| C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | after E2 or B1 |
 | B1 | Cheap discovery blockers | 2 | discovery | after EV3 |
 | P1 | Friction log, then actionable errors | 3 | DX | after C1 or B1 |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
-| E2 | Source-text passthrough | 1 | boundary | queued |
+| E2 | Source-text passthrough | 1 | boundary | running |
 | C2 | Native JSON decode speed | 1 | scriptc fork | after C1 |
 | A1 | Async outlining | 2 | discovery | after B1 |
 | E3 | Native-resident data across calls | 1 | dispatcher/boundary | after E2 |
