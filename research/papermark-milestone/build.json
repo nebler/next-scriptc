@@ -1,0 +1,152 @@
+{
+  "reports": [
+    "[next-scriptc] not a candidate isCountablePlaybackEvent: work: no loop, recursion, array callback or JSON parse",
+    "[next-scriptc] not a candidate completionRate: work: no loop, recursion, array callback or JSON parse",
+    "[next-scriptc] not a candidate handler: dependency closure: /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: unsupported NewExpression",
+    "[next-scriptc] not a candidate: /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function countablePlaybackEvents: call-site specialization: no visible direct calls",
+    "[next-scriptc] not a candidate: /Users/noah/code/papermark-gate-slice/lib/video-analytics/playback.ts: function eventsForView: call-site specialization: no visible direct calls"
+  ],
+  "sourceSha256": "9bf4d1fc55df8588be0804d333c2e42e6ade6e4a8404847a2cc380809c60e3e2",
+  "construction": [
+    {
+      "id": "9869c9c1ce653b4d4e05",
+      "name": "playbackSeconds",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "playbackSeconds": {
+          "kind": "array",
+          "value": {
+            "kind": "number"
+          }
+        }
+      },
+      "guards": {},
+      "enabled": true
+    },
+    {
+      "id": "242f5cde5e9d1d3e1d48",
+      "name": "resolveVideoLength",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "resolveVideoLength": {
+          "kind": "number"
+        }
+      },
+      "guards": {},
+      "enabled": false
+    },
+    {
+      "id": "c2f61d6172f6abab5c5b",
+      "name": "watchTimeSeconds",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "watchTimeSeconds": {
+          "kind": "object",
+          "fields": [
+            [
+              "total",
+              {
+                "kind": "number"
+              }
+            ],
+            [
+              "unique",
+              {
+                "kind": "number"
+              }
+            ]
+          ]
+        }
+      },
+      "guards": {},
+      "enabled": true
+    },
+    {
+      "id": "77c429d49ead751b2f58",
+      "name": "documentViewDistribution",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "documentViewDistribution": {
+          "kind": "array",
+          "value": {
+            "kind": "object",
+            "fields": [
+              [
+                "start_time",
+                {
+                  "kind": "number"
+                }
+              ],
+              [
+                "unique_views",
+                {
+                  "kind": "number"
+                }
+              ],
+              [
+                "total_views",
+                {
+                  "kind": "number"
+                }
+              ]
+            ]
+          }
+        }
+      },
+      "guards": {},
+      "enabled": true
+    },
+    {
+      "id": "d15d2e84958d993c8550",
+      "name": "viewPlaybackTimeline",
+      "eligible": true,
+      "reason": "local allocation construction with typed value scan",
+      "version": 2,
+      "shapes": {
+        "viewPlaybackTimeline": {
+          "kind": "array",
+          "value": {
+            "kind": "object",
+            "fields": [
+              [
+                "start_time",
+                {
+                  "kind": "number"
+                }
+              ],
+              [
+                "views",
+                {
+                  "kind": "number"
+                }
+              ]
+            ]
+          }
+        }
+      },
+      "guards": {},
+      "enabled": true
+    }
+  ],
+  "commit": "ed19717ec02a1ac79aecf5569159aa9d2d869312",
+  "handlerSha256": "b0b47d412a4a82ed9e1046ecc14f2de2f8d23da44f8dc63b2862e2fe46d4d8eb",
+  "constructionResultsDefault": true,
+  "addons": {
+    "normal": {
+      "sha256": "bf39cc50f09addb6f993f151c8095dbf9438b0815a7e584eac7260dd4322aa6a",
+      "bytes": 673152
+    },
+    "timing": {
+      "sha256": "3ebb3933ab03df7cd70cff4ca7b63ce9ed20cc6a03745bff80d5721bd13e7db3",
+      "bytes": 680296
+    }
+  }
+}

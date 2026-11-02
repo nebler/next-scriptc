@@ -1017,3 +1017,43 @@ temporary links are cleaned, artifacts are checked for compression, and the
 change is committed locally without merge or push. No container, hosting,
 Papermark, fork, or root README work. [Design, next blockers, evidence, and
 reproduction](read-and-pass-handles.md).
+
+## 37. PM1 held-out Papermark request CPU milestone (2026-11-02)
+
+PM1 does not meet the end goal. The unchanged pinned video-analytics request,
+with K1's service mocks and fresh JSON-decoded events, uses 15.63% more inclusive
+process CPU in AUTO on the 600-request 70/20/10 mix. The paired block 95% CI is
+10.23% to 21.52% more CPU. OFF totals 14,971.168 ms and AUTO 17,311.622 ms.
+All 5,640 timed responses are byte-identical. There are zero mismatch demotions.
+No post-promotion steady-state result exists.
+
+Current default discovery compiles five playback exports, compared with one in
+the earlier local gate. Nested playbackSeconds wrappers execute twice per event.
+Earlier helper shadows occupy the dispatcher's pending slot before the target
+can sample. documentViewDistribution ends in shadow at all three sizes, with
+3/0/0 verified shadows after 1,160/860/800 requests. Its inability to promote in
+this observation is recorded without changing policy, candidate selection,
+construction defaults, adapter, or compiler. This is a milestone failure, not
+a tuning step.
+
+The calibrated Linux arm64 stand-in runs one Node 24 session on CPU 11, capped
+at one CPU and 2 GiB, with networking disabled. Process CPU includes background
+shadow drains. Per-request thread CPU, p95, bootstrap CIs, full response hashes,
+transitions, and native stage diagnostics are retained. C1's exact 1.792/2.260
+factors predict a 16.43% proxy increase. Its conservative ±17.37% error comparison
+spans -65.37% to +18.03% saving. This is a CPU-input hosted-wall proxy, not a
+calibrated Vercel Active CPU result. The omitted real auth, Prisma, and Tinybird
+client CPU would make a positive saving an optimistic endpoint upper bound.
+
+Host ps and load are captured immediately before every timing window. No other
+agent, compiler, or test job from this task overlaps timing, but desktop and
+macOS background CPU remain visible. The fully quiet host condition is not
+established. Mixed large pairs are always AUTO-first under the fixed five-call
+rotation, another limitation. No rows are filtered or rerun to improve the result.
+
+The dedicated nsc-standin-pm1 container is removed. Papermark source and all native
+outputs remain outside the repository, and temporary outputs and dependency links
+are removed after validation. No existing container, root README, scriptc fork,
+hosting, publication, merge, or push operation occurs. Validation and reproduction
+are recorded in the [PM1 report](papermark-milestone.md). The work is committed
+locally on its branch.
