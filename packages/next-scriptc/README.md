@@ -98,6 +98,15 @@ library refusals, the Go comparison and development commands, and the
 [shim contract](shim/README.md) for supported request/response APIs. This is
 experimental and depends on scriptc and evolving adapter/runtime contracts.
 
+## Coverage report
+
+Run `next-scriptc report . --json coverage.json --md coverage.md` to inspect
+accepted functions, exact discovery blockers, silent exclusions, and route reachability.
+The command delegates to the framework-independent `scriptc-promote report`.
+Add `--measure --inputs inputs.json` for opt-in stock native compilation and paired
+JS/native measurements. See the [coverage report reference](../scriptc-promote/README.md#inspect-promotion-coverage)
+for input format, synthetic inputs, and prediction limits.
+
 ## License
 
 Apache-2.0, copyright next-scriptc contributors. See the

@@ -1,0 +1,1 @@
+import {sum} from "../../compute"; export async function GET() { return Response.json(sum([1,2,3])); }

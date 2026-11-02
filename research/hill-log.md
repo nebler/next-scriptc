@@ -1339,3 +1339,46 @@ only where a route has a compute-dense JS core, and none has been found in real
 Workers apps. Next gates, in order: (1) build and run the CO1 Dockerfile locally to
 measure container cold start and Linux native speed; (2) find one real compute-dense
 JS route. Until (2), do not build a package adapter.
+
+
+## 44. App coverage report and opt-in measurement (2026-11-02)
+
+`scriptc-promote report [dir]` now reports per-file discovery acceptance, exact
+blockers, one-diagnostic nearest misses, and conservative route reachability.
+`next-scriptc report` delegates to the same implementation. Framework detection
+reads dependencies and config filenames; overrides and source scope are explicit.
+Terminal output, JSON, and Markdown share one report model.
+
+The inventory counts JavaScript independently of app allowJs and includes async
+handlers and other silent exclusions. The examples collection has 473 top-level
+callable bindings, 234 considered functions, 218 diagnosed functions, and 16
+accepted functions. The collection root detects as generic. Individual app roots
+provide framework attribution. Discovery diagnostics remain an incomplete
+denominator, and one diagnostic does not prove there is only one blocker.
+
+Opt-in measurement uses stock buildPromotion, existing boundary encoders, and
+raw original extracted JS closures. Separate tuples retain their own size buckets.
+Twenty warm calls precede two discarded pairs and 24 retained pairs. Decisions
+reuse the dispatcher's 19-vote, 0.90 promotion threshold. A separate instrumented
+build estimates wall boundary share. Reports retain spread, N, raw pairs, JSON
+bytes, JS ns per byte as compute intensity, and synthetic input provenance.
+Native fallback, mismatch, unavailable tooling, and compiler refusal remain visible.
+Offline predictions claim neither observed promotion nor application savings.
+Dispatcher behavior and thresholds are unchanged.
+
+Own-code Next, Nitro, and SvelteKit fixtures cover route attribution, accepted
+functions, blockers, and nearest misses. The measurement regression predicts
+native for the typed-array numeric fixture and JS for cheap object aggregation;
+a third function checks bounded TypeScript input synthesis. A simple sqrt loop
+lost during development and was not presented as evidence of a native win.
+The full Next suite passes 98 tests. The full core suite passes 34 tests with two
+existing environment-gated skips. Worktree-local scriptc helper execute permissions
+required repair after installation; initial prerequisite failures were rerun.
+
+Runtime observations remain a follow-up: snapshot() exposes state only inside the
+app process. Route graphs omit dynamic and framework-injected paths. Synthetic
+inputs are illustrative, and extracted references cannot reproduce unrelated
+module effects. See [design, output, reproduction, and limits](coverage-report.md).
+No root README, main checkout, compiler fork, hosting service, Docker, push, or
+public write is involved. Dependencies and native builds stay in the worktree or
+in task-owned temporary directories. The change is committed locally.
