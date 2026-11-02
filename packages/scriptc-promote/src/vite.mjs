@@ -10,13 +10,13 @@ import {promotionArtifacts} from './functions/promotion-runtime.mjs';
 const internalAliases=[/^\/?@vite\/env/,/^\/?@vite\/client/].map(String);
 const virtual = '\0scriptc-promote:runtime';
 /** Production Node SSR only. Dev and client transforms always return null. */
-export function scriptcPromote({sourceDir='src', tsconfig='tsconfig.json', build={}, report=console.log}={}) {
+function promotionPlugin({sourceDir='src', tsconfig='tsconfig.json', build={}, report=console.log}={}) {
  let config, modules=[], references, active=false;
  const server = context => active && context.environment?.config?.consumer !== 'client';
  return {
   name:'scriptc-promote', enforce:'pre', apply:'build',
   config() {return {build:{ssrEmitAssets:true}};},
-  configResolved(resolved) {config=resolved;active=resolved.command==='build' && !!resolved.build.ssr && resolved.ssr?.target!=='webworker';},
+  configResolved(resolved) {config=resolved;active=resolved.command==='build' && (!!resolved.build.ssr || resolved.consumer==='server') && resolved.ssr?.target!=='webworker';},
   async buildStart() {
    modules=[]; references=undefined;
    if(!server(this))return;
@@ -39,7 +39,8 @@ import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {loadPromotion} from ${JSON.stringify(fileURLToPath(new URL('./functions/promotion-runtime.mjs',import.meta.url)))};
 let file=fileURLToPath(import.meta.ROLLUP_FILE_URL_${references['promotion.node']});
-if(!existsSync(file)){let directory=path.dirname(fileURLToPath(import.meta.url));for(let i=0;i<8;i++){const candidate=path.join(directory,'scriptc-promotion/promotion.node');if(existsSync(candidate)){file=candidate;break;}const parent=path.dirname(directory);if(parent===directory)break;directory=parent;}}
+const complete=file=>['promotion.node','ids.json','encodings.json'].every(name=>existsSync(path.join(path.dirname(file),name)));
+if(!complete(file)){let directory=path.dirname(fileURLToPath(import.meta.url));for(let i=0;i<8;i++){const candidate=path.join(directory,'scriptc-promotion/promotion.node');if(complete(candidate)){file=candidate;break;}const parent=path.dirname(directory);if(parent===directory)break;directory=parent;}}
 let dispatcher;
 export function promote(_file,id,js,args){
  if(process.env.SCRIPTC_PROMOTE==='0')return js(...args);
@@ -51,7 +52,7 @@ export function promote(_file,id,js,args){
    if(references&&Object.values(references).includes(referenceId))return `new URL(${JSON.stringify(relativePath)},import.meta.url).href`;
   },
   transform(text,id,options) {
-   if(!server(this)||options?.ssr!==true||id.includes('?'))return null;
+   if(!server(this)||(options?.ssr!==true&&this.environment?.config?.consumer!=='server')||id.includes('?'))return null;
    const matches=modules.filter(module=>module.source===id);
    if(!matches.length)return null;
    const module={...matches[0],functions:matches.flatMap(m=>m.functions).sort((a,b)=>a.start-b.start)};
@@ -59,5 +60,27 @@ export function promote(_file,id,js,args){
    return {code,map:null};
   }
  };
+}
+/** Each builder environment owns its compilation and Rollup asset references. */
+export function scriptcPromote(options={}) {
+ const classic=promotionPlugin(options), environments=new WeakMap();
+ let resolved;
+ const instance=context=>{
+  if(!context.environment)return classic;
+  let plugin=environments.get(context.environment);
+  if(!plugin){
+   plugin=promotionPlugin(options);
+   const environment=context.environment.config;
+   plugin.configResolved({...resolved,...environment,root:resolved.root,command:resolved.command,
+    resolve:environment.resolve??resolved.resolve,build:environment.build??resolved.build,
+    ssr:environment.ssr??resolved.ssr});
+   environments.set(context.environment,plugin);
+  }
+  return plugin;
+ };
+ const result={...classic,configEnvironment(_name,config){if(config.consumer==='server')return {build:{emitAssets:true}};},configResolved(config){resolved=config;classic.configResolved(config);}};
+ for(const hook of ['buildStart','resolveId','load','resolveFileUrl','transform'])
+  result[hook]=function(...args){return instance(this)[hook].apply(this,args);};
+ return result;
 }
 export default scriptcPromote;

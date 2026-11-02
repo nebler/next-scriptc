@@ -600,7 +600,7 @@ Papermark work, Vercel or Cloudflare calls, third-party source commits, root
 README edits, merge or push. Temporary dependency installations were removed.
 [Design, evidence and reproduction](vite-plugin.md).
 
-## 27b. Astro and React Router Node framework integration (2026-11-02)
+## 27. Astro and React Router Node framework integration (2026-11-02)
 
 Hypothesis: Astro 5's server build hook and React Router v7's classic framework
 Vite build can reuse promotion without changing the proof or dispatcher core.
@@ -633,3 +633,39 @@ Final package validation passes 95 Next tests and five promotion tests, with no
 skips. The latter include both framework production checks and existing Vite
 6.4.5/7.3.7 checks. The temporary dependency symlink and framework fixture installs
 are removed before commit. Shared Vite implementation remains unchanged.
+
+## 28. Nitro and TanStack Start production Node integration (2026-11-02)
+
+Hypothesis: the existing promotion core can serve Nuxt's separate Nitro handler
+build and TanStack Start's Vite environment builder without changing its proofs
+or dispatch policy. Kept for the validated Node paths. Added a Nitro 2 module,
+per-environment Vite compilation state, and a TanStack wrapper that publishes
+SSR artifacts after Nitro 3's final bundle. Runtime resolution now requires the
+addon and both manifests together, because Nitro can copy a hashed addon without
+its metadata.
+
+Nuxt 4.6.3 and TanStack React Start 1.169.4 each complete a production build.
+The latter uses Nitro 3.0.261029-rc and Vite 8.3.5. Its endpoint calls a
+`createServerFn` handler and a pure helper. After relocating the server output,
+150 HTTP responses per framework match `SCRIPTC_PROMOTE=0` byte for byte across
+six inputs. Both dispatchers reach shadow with seven verified samples and zero
+fallbacks. Client bundles contain no promotion machinery. No native foreground
+calls or timing benefit is claimed.
+
+External shallow checkouts stay outside the repository. Nuxt RealWorld at
+`88148ef6339be2ee7b396176a4f2eb50047cd563` accepts zero functions across 11 JS/TS
+files. The LiveStore TanStack auth app at
+`b2629833e4f2d5aa0beb204886052d02fff6a48a` accepts zero across 21 source files.
+These are conservative source censuses with framework aliases disabled for
+imported closures and application-local TypeScript only. No probe or native
+coverage claim is attached to either upstream app. Component-inline functions
+and separate RSC provider environments remain gaps.
+
+All 95 Next tests pass. The promotion suite passes five tests, with two opt-in
+production cases skipped by default and passed separately through serial
+framework runners. A real Vite builder test checks two server environments
+without `build.ssr`, with a client build between them. Classic Vite 6 and 7 tests
+also pass. Temporary framework dependencies and output are removed after checks.
+No Docker/container changes, compiler/fork changes, Papermark work, root README
+edit, deployment, hosting call, merge, or push.
+[Integration, limits, census, retained counters, and reproduction](framework-integrations-nitro-tanstack.md).
