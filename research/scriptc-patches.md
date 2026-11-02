@@ -171,3 +171,12 @@ regex replacement compile. No SC failure is claimed for these constructs.
 - Four alternating windows over 50k key snapshots improve 11–15%; pooled median 8.0265 → 6.9325 ms. Whole JSON walk improves only 10.364 → 10.186 ms in one final session. Large CSV does not improve (42.570 → 43.365 ms); no CSV benefit claimed.
 - New C ownership assertions and corpus `object-keys-owned-dense-array.ts`; both C ASan/UBSan modes, corpus release/dev and sanitized RC audit, three affected descriptor/order programs, single-fixture preflight/order, baseline completeness, lint and format pass. Full gate and other runtime variants remain outstanding.
 - [C1 report, raw measurements, profiles, design notes, and reproduction](compiler-object-string.md).
+
+
+## Leaf record teardown visibility (C1b)
+
+- Branch `next-scriptc/record-release-fast-path`, local commit `c37e2154abd3144f3115d5f778087fbb19d4c8d6`, worktree `/Users/noah/code/scriptc-wt/c1b-escape`, fetched upstream base `862a372300651dbfafe68e61aea9228f15a9f8e0`. Not pushed.
+- Scalar/native-string record releases expose their existing final-reference teardown to LLVM. Frozen/view/traced/recursive shapes keep the old path. Shape-union `_slow` entry points remain available. Allocation, identity, RC operations, weak/source hooks, and cleanup ordering remain unchanged. General escape analysis and scalar replacement are not implemented.
+- Four alternating windows, 50 warmups and 35 samples per process: at 50k, generic pooled median 0.119 → 0.104 ms (−12.6%); spread 0.1705 → 0.143 ms (−16.1%). Both improve in every window. Large CSV 41.457 → 41.1485 ms has mixed directions across windows, so no CSV gain is established. Every suite checksum and full CSV output matches Node.
+- Final validation: 719 LLVM backend tests; six selected corpus programs through both harnesses, including release/dev; new fixture and weak-key union program under ASan/RC audit; build, lint, formatting, single-fixture preflight/order, and baseline completeness pass. Two implementation mistakes were found and fixed, including a missing shape-union slow entry. Full gates and other platforms remain outstanding. Node 26.12.0 differs from the repository pin.
+- [Design, ownership proof, full results, failures, exact commands, and remaining work](compiler-escape-analysis.md), [raw measurements](compiler-object-string/escape-results.json).

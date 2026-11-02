@@ -97,7 +97,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 |---|---|---|---|---|
 | EV3 | Dependency-installed DEV census | eval | census | running |
 | C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | done: RC/boxing ~26%, layout probes ~14%; key-array fix −13.6% on enumeration, CSV unchanged |
-| C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | after E2 or B1 |
+| C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | bounded step done: leaf teardown eligible for inlining; generic −12.6%, spread −16.1%; CSV inconclusive; full escape/SSA work open |
 | B1 | Cheap discovery blockers | 2 | discovery | after EV3 |
 | P1 | Friction log, then actionable errors | 3 | DX | after C1 or B1 |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |

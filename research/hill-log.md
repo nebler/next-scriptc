@@ -1536,3 +1536,14 @@ What remains of this lever is static provenance only (an immediate `JSON.parse`
 argument, or a binding proven unmutated and unescaped), with a native-side
 projected skip-parser. That is a narrower, compiler-assisted design; deprioritized
 below C1b and E3. PM3 stays deferred.
+
+
+## 50. C1b leaf record teardown and remaining escape analysis (2026-11-03)
+
+This round lands C1b's bounded fallback. Direct releases of nontraced scalar/native-string records expose their existing final-reference body to LLVM. Frozen records, checked views, and recursive owned graphs keep the old path. Shape-union dispatch retains its slow entry. No identity, allocation, RC operation, observer hook, or exception cleanup order changes. General record escape analysis and scalar replacement remain open; fresh upstream already provides projection-based frame records, owned-field cleanup, and helper lifetime summaries that the next implementation should extend.
+
+Four alternating baseline/patch windows run C1's complete six-workload suite and CSV with Node reference, 50 warmups and 35 timed calls per process. Every checksum and CSV byte matches. At 50k, generic pooled median falls 0.119 → 0.104 ms (12.6%) and spread 0.1705 → 0.143 ms (16.1%), with improvements in every window. Generic remains about 3.4× Node. Large CSV moves 41.457 → 41.1485 ms, but its direction reverses across windows. No CSV acceleration is established; native remains about 5.9× Node. Small JSON/string movements are not established gains.
+
+Fork branch `next-scriptc/record-release-fast-path`, commit `c37e2154abd3144f3115d5f778087fbb19d4c8d6`, starts at fetched upstream `862a37230`. All 719 LLVM backend tests pass. Six affected corpus programs pass both differential harnesses; the LLVM harness covers release/dev. The new fixture and weak-key union program also pass native ASan/RC audit in both harnesses. Build, lint, formatting, fixture preflight/order, and baseline completeness pass. The tests caught an omitted shape-union `_slow` entry, which is fixed. Full gates and non-Darwin end-to-end validation remain open. Final Node 26.12.0 differs from the repository pin.
+
+Both worktrees retain local commits only. Native outputs and dependencies are cleaned after evidence collection. The original checkouts and root README are untouched. No Docker, push, issue, PR, or public post occurs. [Design, exact measurements, failures, validation, and next implementation](compiler-escape-analysis.md).
