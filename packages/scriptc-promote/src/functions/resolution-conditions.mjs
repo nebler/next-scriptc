@@ -1,4 +1,9 @@
 export const nodeRuntimeConditions=['node','module-sync','node-addons'];
+// Framework resolver settings do not model custom flags on the Node process.
+// Refuse these spellings conservatively, including quoted NODE_OPTIONS values.
+export function hasNodeConditionFlags() {
+ return process.execArgv.some(arg=>arg==='--conditions'||arg.startsWith('--conditions=')||arg.startsWith('-C'))||/--conditions|(?:^|[\s"'])-C/.test(process.env.NODE_OPTIONS??'');
+}
 // These are possible build contexts, not an ordered list of fallback conditions.
 // A closure must select the same implementation in every possible context.
 export function viteRuntimeConditionSets(config) {

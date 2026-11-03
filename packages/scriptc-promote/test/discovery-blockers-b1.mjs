@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {execFileSync} from 'node:child_process';
 import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {dependencyClosure} from '../src/functions/dependency-closure.mjs';
 import {promotionCandidates} from '../src/functions/promotion-discovery.mjs';
@@ -10,6 +11,17 @@ const ts=createRequire(import.meta.url)('typescript');
 function fixture(run){const dir=fs.mkdtempSync('/tmp/b1-proof-');const write=(name,text)=>{const file=path.join(dir,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,text);return file;};try{run(write,dir);}finally{fs.rmSync(dir,{recursive:true,force:true});}}
 const close=(text,file)=>dependencyClosure(text,file,'rows',{ts});
 const evaluate=text=>new Function(stripTypeScriptTypes(text.replace(/export\s*\{[^}]*\};?/g,''))+';return rows;')();
+test('Node condition flags reject unmodeled runtime branches without vetoing erased types',()=>fixture((write,dir)=>{
+ write('node_modules/conditional/package.json',JSON.stringify({name:'conditional',type:'module',exports:{'b1-custom':'./custom.mjs',node:'./node.mjs'}}));
+ write('node_modules/conditional/custom.mjs','export function factor(){return 3;}');write('node_modules/conditional/node.mjs','export function factor(){return 2;}');
+ const text="import {factor} from 'conditional';export function rows(x:number[]){return x.map(v=>v*factor());}",file=write('entry.ts',text);
+ const script=`import fs from 'node:fs';import {pathToFileURL} from 'node:url';import {dependencyClosure} from ${JSON.stringify(new URL('../src/functions/dependency-closure.mjs',import.meta.url).href)};const file=${JSON.stringify(file)};const js=(await import(pathToFileURL(file))).rows([1]);let refusal='accepted';try{dependencyClosure(fs.readFileSync(file,'utf8'),file,'rows');}catch(error){refusal=error.message;}console.log(JSON.stringify({js,refusal}));`;
+ for(const flags of [['--conditions=b1-custom'],['-C','b1-custom']]){const result=JSON.parse(execFileSync(process.execPath,[...flags,'--input-type=module','-e',script],{encoding:'utf8'}));assert.deepEqual(result.js,[3]);assert.match(result.refusal,/unknown active package export conditions from Node flags/);}
+ const previous=process.env.NODE_OPTIONS;try{
+  process.env.NODE_OPTIONS='--conditions="b1-custom"';assert.throws(()=>close(text,file),/unknown active package export conditions from Node flags/);
+  write('types.d.ts','export interface Row{n:number}');const types="import type {Row} from './types';export function rows(x:Row[]){return x.map(v=>v.n);}";assert.ok(close(types,write('types-entry.ts',types)).native);
+ }finally{if(previous===undefined)delete process.env.NODE_OPTIONS;else process.env.NODE_OPTIONS=previous;}
+}));
 test('declaration metadata never runs module initialization proofs',()=>fixture(write=>{
  for(const ext of ['ts','cts','mts'])for(const kind of ['type ','']){
   write(`shape.d.${ext}`,'declare function unused():void; export = unused; export interface Row {n:number}');

@@ -1,7 +1,7 @@
 import {normalizeModuleFunctions} from './module-functions.mjs';
 import {inertDefaultExpression} from './module-initialization.mjs';
 import {assertRuntimeExportTarget} from './runtime-export-target.mjs';
-import {nodeRuntimeConditions} from './resolution-conditions.mjs';
+import {nodeRuntimeConditions,hasNodeConditionFlags} from './resolution-conditions.mjs';
 import {lowerCheckedIndexes} from './checked-index.mjs';
 import {parserOptions} from './parser-options.mjs';
 import {structuralType} from './structural-types.mjs';
@@ -37,6 +37,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, runtimeCo
  function resolve(specifier, importer, typeOnly=false) {
   if(/^(?:node:|next(?:\/|$)|react(?:\/|$))/.test(specifier))throw Error(`dependency closure: unsupported runtime import ${specifier}`);
   if(!typeOnly){
+   if(hasNodeConditionFlags())throw Error('dependency closure: unknown active package export conditions from Node flags require explicit resolver integration');
    if(unsupportedResolver)throw Error('dependency closure: custom application resolver requires explicit integration');
    for(const condition of options.customConditions??[])if(!['node','import','default',...contexts.flatMap(c=>c.conditions)].includes(condition))throw Error(`dependency closure: unsupported active package export condition ${condition}`);
   }
