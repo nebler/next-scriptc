@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import pathlib,os,json,gzip,subprocess,time,collections,sys
+import pathlib,os,json,gzip,subprocess,time,collections,sys,hashlib
 R=pathlib.Path.cwd();slug=sys.argv[1];O=R/'research/eval-corpus/dev-measure/results';P=pathlib.Path('/tmp/m1-dev-clones')/slug
 
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
@@ -28,7 +28,7 @@ for root,files in groups.items():
   try:
    p=subprocess.run(cmd,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=400);result={'exit':p.returncode,'seconds':time.time()-start,'output':p.stdout.decode(errors='replace')[-6000:]}
   except subprocess.TimeoutExpired:result={'exit':'timeout','seconds':time.time()-start}
-  item={'scanRoot':root,'file':file,'process':result}
+  item={'scanRoot':root,'file':file,'process':result,'workerSha256':hashlib.sha256((R/'research/eval-corpus/dev-measure/worker.mjs').read_bytes()).hexdigest()}
   if target.exists():item['report']=read(target);target.unlink()
   # Record test locations without retaining third-party fixture contents.
   names=[c['function']['name'] for c in cohort if c['scanRoot']==root and c['function']['file']==file]
