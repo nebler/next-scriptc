@@ -138,7 +138,7 @@ test('fresh array chains may be sorted; opaque and aliased containers stay rejec
  `;
  const logs=[];
  assert.deepEqual(promotionCandidates(source,'/tmp/fresh.ts',s=>logs.push(s)).map(m=>m.functions[0].name),['fresh']);
- assert.equal(logs.length,3);assert.equal(logs.filter(s=>s.includes('nonlocal mutation')).length,2);assert.ok(logs.some(s=>s.includes('not a candidate opaque:') && s.includes('work:')));
+ assert.equal(logs.length,3);assert.ok(logs.some(s=>s.includes('not a candidate alias:')&&s.includes('nonlocal mutation')));for(const name of ['opaque','unsafe'])assert.ok(logs.some(s=>s.includes('not a candidate '+name+':')&&s.includes('constant graph mutation or escaping reference')));
  const shadowed='export function f(Array:{from:(a:number[])=>number[]}, a:number[]):number[] {return Array.from(a).sort();}';
  assert.deepEqual(promotionCandidates(shadowed,'/tmp/shadow.ts',()=>{}),[]);
 });

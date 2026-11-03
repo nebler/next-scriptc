@@ -11,5 +11,5 @@ export function parserOptions(source, options) {
    if(config){const read=ts.readConfigFile(config,ts.sys.readFile);options=ts.parseJsonConfigFileContent(read.config,ts.sys,path.dirname(config)).options;}
   }catch{/* No project configuration: use standard decorators. */}
  }
- return {sourceType:'module',plugins:['typescript','jsx',options?.experimentalDecorators?'decorators-legacy':'decorators']};
+ return {sourceType:'module',sourceFilename:source,plugins:['typescript','jsx',options?.experimentalDecorators?'decorators-legacy':'decorators']};
 }
