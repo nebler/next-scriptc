@@ -1,5 +1,74 @@
 [
   {
+    "name": "tdzArithmetic",
+    "text": "const early=rows([1]);const bias=2*3;export function rows(x:number[]){return x.map(v=>v+bias);}",
+    "accepted": true,
+    "messages": [],
+    "native": "const bias=2*3;\nfunction rows(x:number[]){return x.map(v=>v+bias);}\nexport { rows };\n"
+  },
+  {
+    "name": "tdzTable",
+    "text": "const early=rows([1]);const table=[1,2];export function rows(x:number[]){return x.map(v=>table.some(n=>n===v));}",
+    "accepted": true,
+    "messages": [],
+    "native": "const table=[1,2];\nfunction rows(x:number[]){return x.map(v=>table.some(n=>n===v));}\nexport { rows };\n"
+  },
+  {
+    "name": "tdzReverse",
+    "text": "const early=rows([1]);const bias=2;export function rows(x:number[]){const a=x.map(v=>v+bias);a.reverse();return a;}",
+    "accepted": true,
+    "messages": [],
+    "native": "const bias=2;\nfunction rows(x:number[]){const a=x.map(v=>v+bias);a.reverse();return a;}\nexport { rows };\n"
+  },
+  {
+    "name": "earlyLocal",
+    "text": "const early=rows([1]);export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(v+1));return out;}",
+    "accepted": true,
+    "messages": [],
+    "native": "function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(v+1));return out;}\nexport { rows };\n"
+  },
+  {
+    "name": "lexicalHelper",
+    "text": "function value(n:number){return n+1;}export function mutate(){eval(\"value=(n)=>n+9\");}export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(value(v)));return out;}",
+    "accepted": true,
+    "messages": [
+      "[next-scriptc] not a candidate value: [next-scriptc] /tmp/b1c-fixtures/lexicalHelper.ts:1:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/lexicalHelper.ts:1:63 - NSC1001: function mutate: unsupported reference eval Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+    ],
+    "native": "function value(n:number){return n+1;}\nfunction rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(value(v)));return out;}\nexport { rows };\n"
+  },
+  {
+    "name": "tdzDefault",
+    "text": "class Marker{static value=rows([1]);}export default Marker;const bias=2;export function rows(x:number[]){return x.map(v=>v+bias);}",
+    "accepted": true,
+    "messages": [],
+    "native": "const bias=2;\nfunction rows(x:number[]){return x.map(v=>v+bias);}\nexport { rows };\n"
+  },
+  {
+    "name": "functionMetadata",
+    "text": "function helper(){return 2;}export function mutate(){Object.defineProperty(helper,\"name\",{value:\"changed\"});}class Marker{}export default Marker;export function rows(x:string[]){return x.map(v=>v+helper.name);}",
+    "accepted": true,
+    "messages": [
+      "[next-scriptc] not a candidate helper: [next-scriptc] /tmp/b1c-fixtures/functionMetadata.ts:1:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/functionMetadata.ts:1:36 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    ],
+    "native": "function helper(){return 2;}\nfunction rows(x:string[]){return x.map(v=>v+helper.name);}\nexport { rows };\n"
+  },
+  {
+    "name": "callbackPush",
+    "text": "export function rows(x:{n:number}[]){const out:number[]=[];x.forEach(v=>out.push(v.n));return out;}",
+    "accepted": true,
+    "messages": [],
+    "native": "function rows(x:{n:number}[]){const out:number[]=[];x.forEach(v=>out.push(v.n));return out;}\nexport { rows };\n"
+  },
+  {
+    "name": "freshIndex",
+    "text": "export function rows(x:number[]){const a=[0,0];for(let i=0;i<2;i++)a[i]=i+1;return x.map(v=>v+a[0]);}",
+    "accepted": true,
+    "messages": [],
+    "native": "function rows(x:number[]){const a=[0,0];for(let i=0;i<2;i++)a[i]=i+1;return x.map(v=>v+a[0]);}\nexport { rows };\n"
+  },
+  {
     "name": "defaultEffect",
     "text": "const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}",
     "accepted": true,
@@ -91,10 +160,10 @@
   },
   {
     "name": "unresolved",
-    "text": "const table=[1,2];export function rows(x:number[]){return x.map(v=>table.includes(v)?1:0);}",
+    "text": "const table=[1,2];export function rows(x:number[]){return x.map(v=>table.some(n=>n===v));}",
     "accepted": true,
     "messages": [],
-    "native": "const table=[1,2];\nfunction rows(x:number[]){return x.map(v=>table.includes(v)?1:0);}\nexport { rows };\n"
+    "native": "const table=[1,2];\nfunction rows(x:number[]){return x.map(v=>table.some(n=>n===v));}\nexport { rows };\n"
   },
   {
     "name": "dynamic",
@@ -112,17 +181,19 @@
   },
   {
     "name": "escape",
-    "text": "const table={n:2};function mutate(){table.n=4;}export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "text": "const table={n:2};export function mutate(){table.n=4;}export function rows(x:number[]){return x.map(v=>v+table.n);}",
     "accepted": true,
-    "messages": [],
+    "messages": [
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/escape.ts:1:26 - NSC1004: purity: module state mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ],
     "native": "const table={n:2};\nfunction rows(x:number[]){return x.map(v=>v+table.n);}\nexport { rows };\n"
   },
   {
     "name": "property",
-    "text": "const table={get n(){return 2;}};export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "text": "const base={n:2};const table={...base,m:3};export function rows(x:number[]){return x.map(v=>v+table.n);}",
     "accepted": true,
     "messages": [],
-    "native": "const table={get n(){return 2;}};\nfunction rows(x:number[]){return x.map(v=>v+table.n);}\nexport { rows };\n"
+    "native": "const base={n:2};\nconst table={...base,m:3};\nfunction rows(x:number[]){return x.map(v=>v+table.n);}\nexport { rows };\n"
   },
   {
     "name": "default",

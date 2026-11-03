@@ -115,5 +115,5 @@ test('private scalar object snapshots fold only literal, nonescaping data',()=>{
  assert.equal(discover('const base={n:2};const early=rows([1]);const table={...base};export function rows(x:number[]){return x.map(v=>v+table.n);}'),undefined);
 });
 test('a destructured graph binding cannot be folded as the whole initializer',()=>{
- assert.equal(discover('const {n}:any={n:"a"};export function rows(x:string[]):string[]{return x.map(v=>n.n||v);}'),undefined);
+ assert.equal(discover('const {n}:any={n:"a"};export function rows(x:string[]):string[]{return x.map(v=>n.n+v);}'),undefined);
 });

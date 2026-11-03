@@ -1,0 +1,81 @@
+{
+  "text": "const {n}:any={n:\"a\"};export function rows(x:string[]):string[]{return x.map(v=>n.n+v);}",
+  "baseline": "6cfeb847",
+  "accepted": true,
+  "native": "function rows(x: string[]): string[] {\n  return x.map(v => \"a\" + v);\n}\nexport { rows };\n",
+  "built": 1,
+  "js": [
+    "undefinedb"
+  ],
+  "forcedNative": [
+    "ab"
+  ],
+  "snapshot": {
+    "fa9df6f5bf32983b8f96": {
+      "calls": 1,
+      "native": 1,
+      "fallback": 0,
+      "buckets": [
+        {
+          "fallbackAttempts": 1,
+          "fallbackCount": 0,
+          "cold": 0,
+          "atCall": null,
+          "pairs": [],
+          "js": [],
+          "times": [],
+          "epochs": 0,
+          "nextRecheck": 329,
+          "nextSample": 29,
+          "bucket": 0,
+          "state": "js",
+          "lane": "native",
+          "reason": "forced native",
+          "calls": 1,
+          "native": 1,
+          "shadows": 0,
+          "verified": 0,
+          "mismatches": 0,
+          "pending": false,
+          "fallbackReasons": {},
+          "nativeAttempts": 1,
+          "nativeFallbacks": 0,
+          "decision": {
+            "metric": null,
+            "ratio": null,
+            "votes": 0,
+            "samples": 0,
+            "required": 19,
+            "threshold": 0.9,
+            "thresholdHit": false,
+            "jsMedianMs": null,
+            "nativeMedianMs": null,
+            "epoch": 0
+          },
+          "policy": {
+            "samples": 24,
+            "required": 19,
+            "coldSamples": 2,
+            "promoteRatio": 0.9,
+            "demoteRatio": 1.05,
+            "recheckEvery": 200
+          },
+          "scheduling": {
+            "jsSamples": 20,
+            "sampleEvery": 20,
+            "perMinute": 50,
+            "maxPending": 2,
+            "nextSample": 29,
+            "nextRecheck": 329
+          },
+          "fallbackPolicy": {
+            "window": 20,
+            "threshold": 0.5
+          },
+          "boundaryShare": null,
+          "estimatedCpuSavedMs": null
+        }
+      ]
+    }
+  }
+}
