@@ -15,6 +15,8 @@ DEV_CENSUS_TEMP=/tmp/b1-verified-clones DEV_CENSUS_BATCH_MODE=1 \
 python3 research/eval-corpus/dev-census/run.py
 ```
 
+Bun-based repositories use the EV3-pinned Bun 1.4.4 platform package. The system Bun is older. Install the platform package with `npm pack --ignore-scripts`, verify its SHA-512 against `bun-tool-lock.json`, and extract it under `/tmp/b1-verified-bun/node_modules/@oven/`. The runner prefers that single platform binary; `DEV_CENSUS_BUN_BINARY` overrides it. `bun-install.json` records the disk check and integrity verification.
+
 The runner checks for at least 12,000,000,000 free bytes before every application
 install. It records disk skips and failed installs rather than inventing zero
 coverage. It removes each clone after scanning. Every application install disables
@@ -22,9 +24,11 @@ lifecycle scripts. Offline Prisma generation runs with network access denied and
 excludes custom generators or configuration. No application build or benchmark runs.
 
 The final run also scans GrowthBook in a second serial worker with separate
-`DEV_CENSUS_OUTPUT` and `DEV_CENSUS_TEMP` directories. Its completed result is
-copied into the main output before that worker reaches GrowthBook. Never run more
-than three installed clones. Do not copy partial results to skip unfinished work.
+`DEV_CENSUS_OUTPUT` and `DEV_CENSUS_TEMP` directories. A coordination marker prevents the main worker from duplicating GrowthBook.
+Replace that marker with the completed second-worker result before aggregation. Never run more
+than three installed clones. A coordination marker is not a measurement.
+
+The final run retries initial disk skips after removing the completed main worker caches. Each retry removes its own clone and caches before the next repository. `disk-skips.json` retains the initial reasons and free-byte counts.
 
 Copy completed per-repository JSON or gzip results into this directory. Preserve
 failed-scan and install records. Then aggregate and compare against EV3:

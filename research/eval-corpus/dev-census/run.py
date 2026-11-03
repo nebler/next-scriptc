@@ -80,7 +80,9 @@ for r in manifest['repositories']:
   if pm.startswith('pnpm'):cmd=['corepack',pm if '@' in pm else 'pnpm','install','--ignore-scripts','--frozen-lockfile','--store-dir',str(TMP/'store')]
   elif pm.startswith('yarn'):
    modern=(p/'.yarnrc.yml').exists();cmd=['corepack',pm if '@' in pm else 'yarn','install']+(['--mode=skip-build'] if modern else ['--ignore-scripts','--frozen-lockfile','--non-interactive'])
-  elif pm.startswith('bun'):cmd=[os.environ.get('DEV_CENSUS_BUN_BINARY','bun'),'install','--ignore-scripts','--frozen-lockfile']
+  elif pm.startswith('bun'):
+   pinnedBun=list(pathlib.Path('/tmp/b1-verified-bun/node_modules/@oven').glob('bun-*/bin/bun'))
+   cmd=[os.environ.get('DEV_CENSUS_BUN_BINARY',str(pinnedBun[0]) if len(pinnedBun)==1 else 'bun'),'install','--ignore-scripts','--frozen-lockfile']
   else:cmd=['npm','ci' if (p/'package-lock.json').exists() else 'install','--ignore-scripts','--no-audit','--no-fund']
   print(slug,'install',pm,flush=True);data['install']=run(cmd,p,600)
   # Scanner TypeScript fallback is isolated and does not substitute application deps.
