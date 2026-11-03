@@ -1,3 +1,5 @@
+import {fuzzBuiltPromotions} from './promotion-fuzz-build.mjs';
+import {applyFuzzResults,fuzzOptions} from './promotion-fuzz.mjs';
 import { infrastructureFailure, translateDiagnostics } from './diagnostics.mjs';
 import {assertDependencyHashes} from './dependency-closure.mjs';
 import {constructionProof} from './construction-proof.mjs';
@@ -68,6 +70,21 @@ async function compilePromotion(modules, output, {linux=false, target=linux?'lin
 }
 
 export async function buildPromotion(modules, output, options={}) {
- try {return await compilePromotion(modules,output,options);}
+ try {
+  if(options.fuzz)fuzzOptions(options.fuzz);
+  let accepted=await compilePromotion(modules,output,options);
+  if(options.fuzz&&accepted.length){
+   const results=await fuzzBuiltPromotions(accepted,output,options.fuzz);
+   await writeFile(path.join(output,'fuzz-results.json'),JSON.stringify(results,null,2));
+   let kept;
+   try {kept=applyFuzzResults(accepted,results,options.report??console.log);}
+   catch(error){for(const name of ['promotion.node','ids.json','encodings.json'])await rm(path.join(output,name),{force:true});throw error;}
+   if(kept.length!==accepted.length){
+    if(!kept.length)for(const name of ['promotion.node','ids.json','encodings.json'])await rm(path.join(output,name),{force:true});
+    accepted=await compilePromotion(kept,output,options);
+   }
+  }
+  return accepted;
+ }
  catch(error){const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
 }

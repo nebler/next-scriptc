@@ -105,7 +105,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | C2 | Native JSON decode speed | 1 | scriptc fork | after C1 |
 | A1 | Async outlining | 2 | discovery | after B1 |
 | E3 | Native-resident data across calls | 1 | dispatcher/boundary | queued |
-| T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | queued |
+| T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | implemented: opt-in host build gate, CLI, bounded shrinking, native/wasm semantics probes; [evidence](research/build-time-fuzzing.md) |
 | P1b | Fix friction backlog: automatic default for Next (F2), diagnostics at source file:line with fix hints (F6, F7), toolchain vs code refusals (F8), explicit-native rows in report (F5), function counts + dev notice (F10) | 3 | DX | done: default enabled; source diagnostics + hints; toolchain JS fallback; explicit report status; function counts + dev notice; [evidence](research/friction-fixes.md) |
 | P2 | Visibility: runtime report + CI report | 3 | report | after P1 |
 | L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |

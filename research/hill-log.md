@@ -1662,3 +1662,41 @@ and custom-directory artifact reporting remain open. Temporary consumers and
 servers are cleaned. Root README, main checkout, protected compiler sources,
 and external services are untouched. No Docker, deploy, push, PR, issue, public
 post, or secret. [Verbatim evidence and limits](friction-fixes.md).
+
+## 55. T1 build-time differential fuzzing and edge semantics (2026-11-03)
+
+Synchronous promotions now have a seeded, bounded differential fuzzer and an
+opt-in shared Node build gate. EV2 and fuzzing share TypeScript input synthesis.
+The CLI builds automatic and explicit candidates; next-scriptc delegates fuzz.
+The dispatcher encoder/decoder/canonical comparison supplies the oracle.
+Each function runs in a subprocess with a watchdog; JS calls have VM timeouts.
+Bounded shrinking reports source location, input, and JS/native output.
+Automatic failures demote and rebuild the addon index; explicit failures abort
+and remove deployable addon metadata. Inconclusive checks cannot pass the gate.
+
+Default build fuzzing stays off. Across 16 root-example candidates the additional
+fuzz phase took 7.254 s; compilation took 1.324 s, discovery 33.885 s. The configured
+execution allowance was 100 ms/function; startup/type analysis dominate it.
+Astro's single-function fuzz phase took 0.845 s. These are local single runs,
+with concurrent tests, not deployment or performance claims.
+
+All 16 root-example candidates, 17 per-app candidates, and 14 permanent differential fixtures checked
+without a native/JS mismatch. One immutable-array fixture is refused by discovery
+(TS2339 on __scriptcOriginal); its source is documented for B1, whose files are
+untouched. Specialized-signature generation and valid JSON-text coverage gaps
+found during implementation are fixed. An injected native n+1 / JS n fixture
+shrinks to [0], outputs 1/0, and exercises both demotion and forced failure.
+
+Nine numeric/ordering probes agree across JS, stock 0.4.6 native, and a local
+wasm32-wasi reactor through the Cloudflare bridge: signed zero, nonfinite JSON
+canonicalization, wrapping/rounding, float formatting, UTF-16 comparison, stable
+sort, Map/Set insertion order, and JSON key order. No compiler divergence or
+Candidate patch is claimed. Runtime shadows remain enabled.
+
+Node 24 suites pass: Next 101/101; core 53 passed, two existing skips.
+Tests include seeded generation, optional fields, edges, shrinking, fake and
+compiled divergent lanes, rebuild-ID consistency, explicit artifact cleanup,
+CLI delegation, and native/wasm semantic probes. No compiler-source edits,
+main-checkout edits, root README edits, deploys, Docker, account calls, pushes,
+PRs, issues, public posts, secrets, Papermark, or HELD_OUT work.
+[Design, limits, reproducers, overhead, and machine-readable findings](build-time-fuzzing.md).
