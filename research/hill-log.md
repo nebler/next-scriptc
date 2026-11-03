@@ -1876,7 +1876,7 @@ Four matched-LLVM alternating windows preserve every Node result. At 50k, the er
 
 Fork branch `next-scriptc/erased-specialization`, local commit `1bba92c707186ea32b0cb40cf02d9b0fd2c75178`, starts at fresh upstream `ee968de47`. Research branch `t3/c1d-erased` retains own-code fixtures and evidence. Original checkouts, root README, held-out apps, containers, and external services are untouched. No push, issue, PR, public post, Docker, deployment, or secret. Task-owned outputs and dependencies are cleaned. [Report and evidence](compiler-erased-specialization.md).
 
-## 64. Review note on the compiler hill so far (2026-11-03)
+## 65. Review note on the compiler hill so far (2026-11-03)
 
 Five compiler rounds (C1, C1b, C1c, C1d, C2) each landed a sound, measured slice:
 key arrays −13.6%; leaf teardown −12.6/−16.1%; opt-in scalar replacement −57% on
