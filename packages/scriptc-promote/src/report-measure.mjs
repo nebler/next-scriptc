@@ -29,6 +29,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
   const reference=path.join(temp,`reference-${index}.mjs`);await writeFile(reference,stripTypeScriptTypes(m.referenceNative??m.native));const js=(await import(pathToFileURL(reference).href))[fn.name];
   // Report each tuple separately: never blend dispatcher size buckets or distributions.
   for(const [inputIndex,args] of tuples.entries()){
+   try{
    const schema=fn.boundary,encoded=encodeArguments(schema,args),table=argumentTable(encoded),expected=canonicalResult(js(...args),schema,table);
    const invoke=()=>{const input=encodeArguments(schema,args),out=addon.run(index,input);if(out?.fallback)throw Error('Native fallback; no realizable saving');return decodeResult(schema,out,argumentTable(input));};
    if(canonicalResult(invoke(),schema,table)!==expected)throw Error('Native/JS mismatch');
@@ -43,6 +44,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
    if(stageIndex>=0){const totals=[],computes=[];for(let i=0;i<10;i++){const begin=performance.now(),input=encodeArguments(schema,args),out=timingAddon.run(stageIndex,input);if(out?.fallback)throw Error('Instrumented native fallback');decodeResult(schema,out.value,argumentTable(input));totals.push((performance.now()-begin)*1e6);computes.push(out.timings.compute*1e6);}const total=stats(totals).median,compute=stats(computes).median;boundaryShare=Math.max(0,Math.min(1,1-compute/total));boundaryStages={n:10,totalWallNs:total,computeWallNs:compute};}
    const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs,'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
    results.push({id,status:'ok',inputIndex,inputSource,bucket:estimateSize(args),metric:cpu?'thread-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
+   }catch(e){results.push({id,status:'unmeasured',inputIndex,inputSource,reason:e.message});}
   }
  }catch(e){results.push({id,status:'unmeasured',reason:e.message});}
 }

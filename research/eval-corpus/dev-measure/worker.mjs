@@ -42,6 +42,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
   const reference=path.join(temp,`reference-${index}.mjs`);await writeFile(reference,stripTypeScriptTypes(m.referenceNative??m.native));const js=(await import(pathToFileURL(reference).href))[fn.name];
   // Report each tuple separately: never blend dispatcher size buckets or distributions.
   for(const [inputIndex,args] of tuples.entries()){
+   try{
    const schema=fn.boundary,encoded=encodeArguments(schema,args),table=argumentTable(encoded),expected=canonicalResult(js(...args),schema,table);
    const invoke=()=>{const input=encodeArguments(schema,args),out=addon.run(index,input);if(out?.fallback)throw Error('Native fallback; no realizable saving');return decodeResult(schema,out,argumentTable(input));};
    if(canonicalResult(invoke(),schema,table)!==expected)throw Error('Native/JS mismatch');
@@ -64,6 +65,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
    }
    const protocolCI=bootstrap(pairs); const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs.slice(0,24),'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
    results.push({id,status:'ok',compileMs,cliffCheck,inputIndex,inputSource,inputProvenance:process.env.M1_INPUT_META?JSON.parse(await readFile(process.env.M1_INPUT_META,'utf8'))[id]??{kind:'synthetic'}:{kind:'synthetic'},arguments:args,bucket:estimateSize(args),metric:cpu?'process-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,protocolCI,protocolPass:cpu&&n.median/j.median<=.90&&protocolCI.upper<1,screenPass:j.median>=100000&&j.median/bytes>=100,jsIterationsPerBatch:iterations,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
+   }catch(e){results.push({id,status:'unmeasured',compileStatus:'compiled',inputIndex,inputSource,reason:e.message});}
   }
  }catch(e){results.push({id,status:'unmeasured',compileStatus:'compiled',reason:e.message});}
 }
