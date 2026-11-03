@@ -23,9 +23,9 @@ B1's full-scope route graph is the broader static reference.
 
 `hook.mjs` replaces only the report measurement child with `worker.mjs`, a research
 variant of `report-measure.mjs`. It uses the same stock compiler, boundary encoder,
-worker CPU clock, decoder, parity comparison, and lane policy. The research worker
+whole-process CPU clock, decoder, parity comparison, and lane policy. The research worker
 uses 30 warmups, a JS pilot targeting 2 ms batches, 60 alternating CPU pairs, and
-2,000 seeded circular block bootstrap resamples (block length five). It predicts
+2,000 seeded circular block bootstrap resamples (block length five). Native CPU includes owner scheduling, argument encoding, worker execution, and result decoding. It predicts
 the dispatcher from the first 24 pairs independently of the longer protocol gate.
 Boundary share remains the report's separate instrumented wall-time estimate.
 
@@ -37,3 +37,13 @@ fixture contents belong in committed artifacts.
 
 An endpoint CPU saving remains null without an endpoint harness. Unknown inputs,
 compiler refusals, failed installs, and resource failures cannot count as CPU wins.
+
+Test-shape inputs come from literal calls in test files and test directories.
+The generator retains numeric values and object keys and synthesizes string
+payloads of the same length. Calls through variables need manual fixtures or
+remain synthetic. This bounded extractor is not a complete fixture audit.
+Scalar-only synthesized tuples can repeat because numeric values stay 32.
+
+The initial thread-clock pilots are retained under `attempts/` and excluded
+from aggregation. All five early repositories were rerun with whole-process
+CPU and consumed JS batch results.
