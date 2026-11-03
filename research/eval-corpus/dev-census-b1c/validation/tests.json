@@ -1,14 +1,14 @@
 {
   "implementationCommit": "61af963",
   "next": {
-    "command": "pnpm --dir packages/next-scriptc test",
+    "command": "TMPDIR=/tmp npm_config_cache=/tmp/b1c-test-npm-cache pnpm --dir packages/next-scriptc test",
     "pass": 103,
     "fail": 0,
     "skipped": 0,
     "log": "next-tests.log.gz"
   },
   "core": {
-    "command": "pnpm --dir packages/scriptc-promote test",
+    "command": "TMPDIR=/tmp npm_config_cache=/tmp/b1c-test-npm-cache pnpm --dir packages/scriptc-promote test",
     "pass": 124,
     "fail": 0,
     "skipped": 2,
@@ -21,5 +21,6 @@
     "skipped": 0,
     "log": "targeted-tests.log.gz"
   },
-  "note": "The final targeted run uses the tighter native-divergence destructuring fixture; production source is unchanged."
+  "note": "Final full suites pin temporary fixtures and npm cache under /tmp; current tighter destructuring test and all production changes included. Targeted run uses explicit /tmp fixture paths.",
+  "freeBytesBeforeFullSuiteRepeat": 83417546752
 }
