@@ -1,0 +1,2466 @@
+{
+  "repository": "umami-software/umami",
+  "sha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "split": "DEV",
+  "adapterSha": "abd6393c3b2249b41ae44d1f34c7e511a6d2b914",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "src/app/api",
+    "src/lib",
+    "src/queries"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-final-clones/umami"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/umami-software/umami.git",
+      "559e3c607c23d2c72d9bd4f6481bda428255323c"
+    ],
+    "exit": 0,
+    "seconds": 1.14,
+    "output": "From https://github.com/umami-software/umami\n * branch            559e3c607c23d2c72d9bd4f6481bda428255323c -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.26,
+    "output": ""
+  },
+  "verifiedSha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "packageInventory": [
+    "package.json",
+    "packages/mcp/package.json",
+    "packages/api-client/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "src/app/api/record/route.test.ts",
+    "src/app/api/links/route.test.ts",
+    "src/app/api/pixels/route.test.ts",
+    "src/app/api/send/route.test.ts",
+    "src/app/api/websites/[websiteId]/annotations/route.test.ts",
+    "src/app/api/websites/[websiteId]/recorder/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/activity/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/values/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/fields/route.test.ts",
+    "src/app/api/teams/[teamId]/users/[userId]/route.test.ts",
+    "src/app/api/scripts/telemetry/contract.generated.ts",
+    "src/app/api/scripts/telemetry/route.ts",
+    "src/app/api/me/api-keys/route.test.ts",
+    "src/app/api/me/api-keys/[keyId]/route.test.ts",
+    "src/app/api/2fa/disable/route.test.ts",
+    "src/app/api/2fa/verify/route.test.ts",
+    "src/app/api/2fa/status/route.test.ts",
+    "src/app/api/2fa/setup/confirm/route.test.ts",
+    "src/app/api/2fa/setup/initiate/route.test.ts",
+    "src/app/api/admin/users/[userId]/2fa/route.test.ts",
+    "src/app/api/auth/logout/route.test.ts",
+    "src/app/api/auth/login/route.test.ts",
+    "src/lib/analytics-schema.test.ts",
+    "src/lib/filters.test.ts",
+    "src/lib/utils.test.ts",
+    "src/lib/schema.test.ts",
+    "src/lib/lang.test.ts",
+    "src/lib/match-configured-path.test.ts",
+    "src/lib/auth.test.ts",
+    "src/lib/generate.test.ts",
+    "src/lib/analytics-query.test.ts",
+    "src/lib/data.test.ts",
+    "src/lib/api-key.test.ts",
+    "src/lib/db.test.ts",
+    "src/lib/format.test.ts",
+    "src/lib/detect.test.ts",
+    "src/lib/prisma.test.ts",
+    "src/lib/request.test.ts",
+    "src/lib/response.test.ts",
+    "src/lib/sort.test.ts",
+    "src/lib/subscription.test.ts",
+    "src/lib/analytics-routes.test.ts",
+    "src/lib/get-base-url.test.ts",
+    "src/lib/clickhouse.test.ts",
+    "src/lib/charts.test.ts",
+    "src/lib/date.test.ts",
+    "src/lib/recorder.test.ts",
+    "src/lib/share.test.ts",
+    "src/lib/jwt.test.ts",
+    "src/lib/boards.test.ts",
+    "src/lib/saved-analytics-routes.test.ts",
+    "src/lib/boardComponentCompatibility.test.ts",
+    "src/lib/ip.test.ts",
+    "src/lib/params.test.ts",
+    "src/lib/replay.test.ts",
+    "src/lib/password.test.ts",
+    "src/lib/session.test.ts",
+    "src/lib/url.test.ts",
+    "src/lib/api-url.test.ts",
+    "src/lib/crypto.test.ts",
+    "src/lib/colors.test.ts",
+    "src/lib/mcp/dispatch.test.ts",
+    "src/lib/mcp/auth.test.ts",
+    "src/lib/two-factor/backup-codes.test.ts",
+    "src/lib/two-factor/totp.test.ts",
+    "src/lib/two-factor/crypto.test.ts",
+    "src/queries/prisma/user.test.ts",
+    "src/queries/prisma/website.test.ts",
+    "src/queries/sql/getChannelExpandedMetrics.test.ts",
+    "src/queries/sql/getChannelMetrics.test.ts",
+    "src/queries/sql/getWebsiteStats.test.ts",
+    "src/queries/sql/sessions/saveSessionData.test.ts",
+    "src/queries/sql/attribution/getAttribution.test.ts",
+    "src/queries/sql/funnels/getFunnel.test.ts",
+    "src/queries/sql/events/getWebsiteEvents.test.ts",
+    "src/queries/sql/events/getWebsiteEventStats.test.ts",
+    "src/queries/sql/performance/getPerformance.test.ts",
+    "src/queries/sql/revenue/revenueFilters.test.ts",
+    "src/queries/sql/pageviews/getPageviewExpandedMetrics.test.ts"
+  ],
+  "freeBytesBeforeInstall": 12549410816,
+  "packageManager": "pnpm",
+  "install": {
+    "command": [
+      "corepack",
+      "pnpm",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--store-dir",
+      "/tmp/m1-final-clones/store"
+    ],
+    "exit": 0,
+    "seconds": 33.24,
+    "output": "Downloading the pnpm 12.16.1 binary for darwin-arm64...\nScope: all 3 workspace projects\n? Verifying lockfile against supply-chain policies (1162 entries)...\nPackages are cloned from the content-addressable store to the virtual store.\n  Content-addressable store is at: <tmp>/store/v11\n  Virtual store is at:             node_modules/.pnpm\nDownloading @prisma/studio-core@0.33.0: 0.00 B/10.12 MB\nDownloading @swc/core-darwin-arm64@1.15.46: 0.00 B/10.52 MB\nProgress: resolved 1023, reused 0, downloaded 243, added 229\nDownloading @img/sharp-libvips-darwin-arm64@1.3.4: 0.00 B/8.34 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 0.00 B/32.47 MB\nDownloading @electric-sql/pglite@0.4.3: 0.00 B/8.29 MB\nProgress: resolved 1023, reused 0, downloaded 359, added 303\nProgress: resolved 1023, reused 0, downloaded 493, added 382\nDownloading next@16.4.2: 0.00 B/43.67 MB\nDownloading @rolldown/binding-darwin-arm64@1.1.5: 0.00 B/7.06 MB\n[WARN] Tarball download average speed 13 KiB/s (size 14 KiB) is below 50 KiB/s: https://registry.npmjs.org/exsolve/-/exsolve-1.1.1.tgz (GET)\nDownloading @prisma/client@7.10.0: 0.00 B/26.82 MB\n[WARN] Tarball download average speed 2 KiB/s (size 3 KiB) is below 50 KiB/s: https://registry.npmjs.org/ansi-styles/-/ansi-styles-3.2.1.tgz (GET)\n[WARN] Tarball download average speed 19 KiB/s (size 22 KiB) is below 50 KiB/s: https://registry.npmjs.org/dotenv/-/dotenv-16.6.1.tgz (GET)\nDownloading prisma@7.10.0: 0.00 B/14.17 MB\n[WARN] Tarball download average speed 11 KiB/s (size 18 KiB) is below 50 KiB/s: https://registry.npmjs.org/jest-diff/-/jest-diff-30.4.1.tgz (GET)\nDownloading @biomejs/cli-darwin-arm64@2.5.13: 0.00 B/22.08 MB\n[WARN] Tarball download average speed 9 KiB/s (size 13 KiB) is below 50 KiB/s: https://registry.npmjs.org/@rrweb/utils/-/utils-2.0.1.tgz (GET)\nDownloading @prisma/dev@0.24.17: 0.00 B/9.16 MB\nDownloading next@16.4.2: 6.10 MB/43.67 MB\nProgress: resolved 1023, reused 0, downloaded 1003, added 587\nProgress: resolved 1023, reused 0, downloaded 1004, added 597\nProgress: resolved 1023, reused 0, downloaded 1006, added 641\nProgress: resolved 1023, reused 0, downloaded 1012, added 704\nProgress: resolved 1023, reused 0, downloaded 1014, added 864\n[WARN] Request took 11089ms: https://registry.npmjs.org/playwright\n\u2713 Lockfile passes supply-chain policies (1162 entries in 15.9s)\nLockfile is up to date, resolution step is skipped\nProgress: resolved 1023, reused 0, downloaded 1018, added 1000\nDownloading @next/swc-darwin-arm64@16.4.2: 17.44 MB/32.47 MB\nDownloading @prisma/client@7.10.0: 13.61 MB/26.82 MB\nDownloading next@16.4.2: 23.09 MB/43.67 MB\nDownloading next@16.4.2: 30.90 MB/43.67 MB\nDownloading next@16.4.2: 37.78 MB/43.67 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 30.06 MB/32.47 MB\nProgress: resolved 1023, reused 0, downloaded 1022, added 1022\nPackages: +1023\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 1023, reused 0, downloaded 1022, added 1023, done\nAgent skills awaiting approval: @clickhouse/client, dotenv.\nRun \"pnpm approve\" to review them.\n\ndependencies:\n+ @clickhouse/client 1.23.1\n+ @dicebear/collection 9.4.3\n+ @dicebear/core 9.4.3\n+ @playwright/test 1.63.0\n+ @prisma/adapter-pg 7.10.0\n+ @prisma/client 7.10.0\n+ @prisma/extension-read-replicas 0.5.0\n+ @svgr/cli 8.1.0\n+ @tanstack/react-query 5.102.8\n+ @umami/api-client <- packages/api-client\n+ @umami/mcp <- packages/mcp\n+ @umami/react-zen 0.254.0\n+ bcryptjs 3.0.3\n+ chalk 5.6.2\n+ chart.js 4.5.1\n+ chartjs-adapter-date-fns 3.0.0\n+ colord 2.10.0\n+ date-fns 4.4.0\n+ date-fns-tz 3.2.0\n+ debug 4.4.3\n+ detect-browser 5.3.0\n+ dotenv 17.4.2\n+ esbuild 0.28.2\n+ immer 11.1.18\n+ ipaddr.js 2.5.0\n+ is-ci 4.1.0\n+ is-docker 4.0.0\n+ is-localhost-ip 3.0.1\n+ isbot 5.2.2\n+ jsonwebtoken 9.0.3\n+ jszip 3.10.2\n+ kafkajs 2.2.4\n+ lucide-react 1.44.0\n+ maxmind 5.0.7\n+ motion 12.43.0\n+ next 16.4.2\n+ next-intl 4.13.4\n+ node-fetch 3.3.2\n+ npm-run-all 4.1.5\n+ otplib 13.5.0\n+ papaparse 5.7.0\n+ prisma 7.10.0\n+ prop-types 15.8.1\n+ punycode 2.3.1\n+ qrcode 1.5.4\n+ react 19.3.1\n+ react-dom 19.3.1\n+ react-error-boundary 6.1.5\n+ react-resizable-panels 4.12.4\n+ react-simple-maps 3.0.0\n+ react-window 2.3.1\n+ redis 5.12.1\n+ rrweb 2.0.1\n+ rrweb-player 2.0.0-alpha.20\n+ semver 7.8.5\n+ serialize-error 13.0.1\n+ thenby 1.4.1\n+ ua-parser-js 2.0.10\n+ uuid 14.0.2\n+ zod 4.6.2\n+ zustand 5.0.15\n\ndevDependencies:\n+ @biomejs/biome 2.5.13\n+ @netlify/plugin-nextjs 5.15.13\n+ @rollup/plugin-commonjs 29.0.3\n+ @rollup/plugin-node-resolve 16.0.3\n+ @rollup/plugin-replace 6.0.3\n+ @rollup/plugin-terser 1.0.0\n+ @rollup/plugin-typescript 12.3.0\n+ @testing-library/jest-dom 7.0.1\n+ @testing-library/react 16.3.3\n+ @testing-library/user-event 14.6.7\n+ @types/jest 30.0.0\n+ @types/node 26.5.1\n+ @types/qrcode 1.5.6\n+ @types/react 19.3.0\n+ @types/react-dom 19.3.0\n+ babel-plugin-react-compiler 19.1.0-rc.2\n+ dotenv-cli 11.0.0\n+ jsdom 30.0.1\n+ msw 2.15.0\n+ openapi-typescript 7.13.0\n+ postcss 8.5.28\n+ postcss-flexbugs-fixes 5.0.2\n+ postcss-preset-env 11.3.2\n+ rollup 4.63.1\n+ tar 7.5.22\n+ tsup 8.5.1\n+ tsx 4.23.13\n+ typescript 6.0.3\n+ vitest 4.1.11\n+ zod-openapi 6.0.2\n\nDone in 26.1s using pnpm v12.16.1\n"
+  },
+  "generators": [
+    {
+      "schema": "prisma/schema.prisma",
+      "status": "not run: custom generator/config requires an application execution review"
+    }
+  ],
+  "cohort": [
+    {
+      "id": "src/lib/colors.ts#hex6",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#hex6",
+        "file": "src/lib/colors.ts",
+        "name": "hex6",
+        "line": 4,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "hex6"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "76773c2038a346d5b67a"
+      }
+    },
+    {
+      "id": "src/lib/colors.ts#getColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#getColor",
+        "file": "src/lib/colors.ts",
+        "name": "getColor",
+        "line": 51,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [
+          "src/lib/colors.ts#hex2RGB",
+          "src/lib/colors.ts#hex6",
+          "src/lib/colors.ts#rgb2Hex"
+        ],
+        "exportNames": [
+          "getColor"
+        ],
+        "boundary": {
+          "params": [
+            "string",
+            "number",
+            "number"
+          ],
+          "result": "string"
+        },
+        "promotionId": "982239cb66d13567dc6c"
+      }
+    },
+    {
+      "id": "src/lib/format.ts#stringToColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/format.ts#stringToColor",
+        "file": "src/lib/format.ts",
+        "name": "stringToColor",
+        "line": 72,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "stringToColor"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "0d7a2a4719b3601f3cd3"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": ".",
+      "file": "src/lib/colors.ts",
+      "process": {
+        "exit": 0,
+        "seconds": 14.001364946365356,
+        "output": "scriptc-promote coverage \u2014 next\n1 files; 8 top-level callable bindings (8 exported)\n8 considered; 6 diagnosed; 2 accepted; 0 explicit; 0 silently excluded\nDiagnostics are not a complete denominator; acceptance is not a speedup.\naccepted             src/lib/colors.ts#hex6\nrejected             src/lib/colors.ts#pick \u2014 [next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/colors.ts#clamp \u2014 [next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/colors.ts#hex2RGB \u2014 [next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/colors.ts#rgb2Hex \u2014 [next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/colors.ts#getPastel \u2014 [next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\naccepted             src/lib/colors.ts#getColor\nrejected             src/lib/colors.ts#getThemeColors \u2014 [next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-final-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nTop blockers:\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): src/lib/colors.ts#pick, src/lib/colors.ts#clamp, src/lib/colors.ts#hex2RGB, src/lib/colors.ts#rgb2Hex, src/lib/colors.ts#getPastel, src/lib/colors.ts#getThemeColors\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 43 ns/call [p10 41, p90 49], native 38000 ns/call [p10 24000, p90 232000], native 4222.22 ns/input byte, boundary 94.7%, intensity 4.73 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 41 ns/call [p10 40, p90 42], native 44000 ns/call [p10 27000, p90 80000], native 4888.89 ns/input byte, boundary 100.0%, intensity 4.58 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 69 ns/call [p10 60, p90 70], native 52000 ns/call [p10 32000, p90 207000], native 4333.33 ns/input byte, boundary 100.0%, intensity 5.77 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#getColor: unmeasured \u2014 Boundary argument count mismatch\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "34c838d7696a02994d54b041b7eb5852ec04c9d4de3ab61e8f744459e474b39a",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-final-clones/umami",
+        "sourceDir": "/tmp/m1-final-clones/umami",
+        "framework": "next",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 8,
+          "exportedFunctions": 8,
+          "considered": 8,
+          "diagnosed": 6,
+          "accepted": 2,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/lib/colors.ts",
+            "functions": [
+              {
+                "id": "src/lib/colors.ts#hex6",
+                "file": "src/lib/colors.ts",
+                "name": "hex6",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "hex6"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "e89b54eb26f5e01f34f9"
+              },
+              {
+                "id": "src/lib/colors.ts#pick",
+                "file": "src/lib/colors.ts",
+                "name": "pick",
+                "line": 14,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "pick"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#clamp",
+                "file": "src/lib/colors.ts",
+                "name": "clamp",
+                "line": 18,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "clamp"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#hex2RGB",
+                "file": "src/lib/colors.ts",
+                "name": "hex2RGB",
+                "line": 22,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "hex2RGB"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#rgb2Hex",
+                "file": "src/lib/colors.ts",
+                "name": "rgb2Hex",
+                "line": 37,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "rgb2Hex"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getPastel",
+                "file": "src/lib/colors.ts",
+                "name": "getPastel",
+                "line": 41,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getPastel"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getColor",
+                "file": "src/lib/colors.ts",
+                "name": "getColor",
+                "line": 51,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#hex6",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string",
+                    "number",
+                    "number"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "288869688e8c7ff76b80"
+              },
+              {
+                "id": "src/lib/colors.ts#getThemeColors",
+                "file": "src/lib/colors.ts",
+                "name": "getThemeColors",
+                "line": 58,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-final-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getThemeColors"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-final-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/lib/colors.ts#pick",
+            "diagnostic": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#clamp",
+            "diagnostic": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#hex2RGB",
+            "diagnostic": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#rgb2Hex",
+            "diagnostic": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getPastel",
+            "diagnostic": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getThemeColors",
+            "diagnostic": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-final-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/lib/colors.ts",
+            "name": "pick",
+            "message": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "clamp",
+            "message": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "hex2RGB",
+            "message": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "rgb2Hex",
+            "message": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getPastel",
+            "message": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getThemeColors",
+            "message": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-final-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "compileMs": 2600.466125,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 40.9424488219393,
+              "p10": 41.17849019355356,
+              "median": 42.551821810222826,
+              "p90": 49.4399382000779,
+              "max": 264.6452941933828
+            },
+            "native": {
+              "n": 60,
+              "min": 21999.99999999136,
+              "p10": 24000.00000000091,
+              "median": 38000.000000010914,
+              "p90": 231999.9999999709,
+              "max": 2561999.999999955
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 4.727980201135869,
+              "native": 4222.222222223435
+            },
+            "computeIntensity": 4.727980201135869,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9466665585840949,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 18750.0000001819,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1086.1220620185395,
+              "upper": 3737.0777186683845,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 46602,
+            "rawPairsNs": [
+              [
+                41.04974035449085,
+                40000.00000002046
+              ],
+              [
+                43.10973777949475,
+                36000.00000000137
+              ],
+              [
+                42.1226556800136,
+                507999.9999999814
+              ],
+              [
+                264.6452941933828,
+                277999.99999999156
+              ],
+              [
+                61.07034032874134,
+                2561999.999999955
+              ],
+              [
+                125.27359340800872,
+                68999.99999995998
+              ],
+              [
+                57.80867773915318,
+                62999.99999998818
+              ],
+              [
+                43.38869576413011,
+                34999.99999996817
+              ],
+              [
+                41.84369769537886,
+                31000.00000000591
+              ],
+              [
+                49.4399382000779,
+                45999.99999999227
+              ],
+              [
+                77.82927771340307,
+                28999.999999996362
+              ],
+              [
+                41.6934895498056,
+                25000.000000034106
+              ],
+              [
+                43.0453628599637,
+                81999.99999999363
+              ],
+              [
+                44.41869447663176,
+                53000.00000005412
+              ],
+              [
+                43.36723745762016,
+                48000.00000000182
+              ],
+              [
+                43.710570361786566,
+                24000.00000000091
+              ],
+              [
+                43.238487618556846,
+                231999.9999999709
+              ],
+              [
+                41.607656323763386,
+                38999.99999998727
+              ],
+              [
+                43.066821166473645,
+                43000.00000000637
+              ],
+              [
+                45.64181794772777,
+                27000.000000043656
+              ],
+              [
+                45.491609802154514,
+                45999.99999999227
+              ],
+              [
+                43.32432084459906,
+                26999.999999986812
+              ],
+              [
+                43.34577915111022,
+                33999.999999991815
+              ],
+              [
+                47.015149564397035,
+                36999.99999997772
+              ],
+              [
+                44.76202738079938,
+                82000.00000005048
+              ],
+              [
+                43.83932020084988,
+                36000.00000000137
+              ],
+              [
+                44.52598600918391,
+                57000.00000001637
+              ],
+              [
+                44.20411141152745,
+                31999.999999982265
+              ],
+              [
+                45.64181794772777,
+                310000.00000000227
+              ],
+              [
+                41.17849019355356,
+                34999.99999996817
+              ],
+              [
+                41.04974035449146,
+                40999.99999999681
+              ],
+              [
+                41.15703188704361,
+                28999.999999996362
+              ],
+              [
+                41.35015664563797,
+                35000.000000025015
+              ],
+              [
+                40.9424488219393,
+                26999.999999986812
+              ],
+              [
+                41.71494785631432,
+                82999.99999997
+              ],
+              [
+                41.32869833912681,
+                55000.000000006825
+              ],
+              [
+                41.15703188704361,
+                69999.99999999318
+              ],
+              [
+                41.88661430839874,
+                41999.999999973166
+              ],
+              [
+                44.22556971803739,
+                33999.999999991815
+              ],
+              [
+                42.315780438607355,
+                26000.00000001046
+              ],
+              [
+                43.45307068366115,
+                241999.99999996182
+              ],
+              [
+                41.35015664563797,
+                38000.000000010914
+              ],
+              [
+                41.41453156516902,
+                33000.00000001546
+              ],
+              [
+                41.285781726106926,
+                24000.00000000091
+              ],
+              [
+                42.01536414746206,
+                39999.99999996362
+              ],
+              [
+                41.17849019355356,
+                22999.999999967713
+              ],
+              [
+                41.371614952147915,
+                33999.999999991815
+              ],
+              [
+                42.9595296339215,
+                21999.99999999136
+              ],
+              [
+                41.32869833912681,
+                48000.00000000182
+              ],
+              [
+                42.702029955796085,
+                28999.999999996362
+              ],
+              [
+                42.465988584180614,
+                25999.999999953616
+              ],
+              [
+                42.551821810222826,
+                21999.99999999136
+              ],
+              [
+                42.59473842324393,
+                228000.00000000864
+              ],
+              [
+                41.30724003261687,
+                21999.99999999136
+              ],
+              [
+                41.24286511308582,
+                48000.00000000182
+              ],
+              [
+                41.371614952147915,
+                24000.00000000091
+              ],
+              [
+                41.22140680657588,
+                48999.99999997817
+              ],
+              [
+                41.17849019355356,
+                31000.00000000591
+              ],
+              [
+                41.371614952147915,
+                38000.000000010914
+              ],
+              [
+                41.199948500064714,
+                26000.00000001046
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "compileMs": 2600.466125,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 38.83495145631086,
+              "p10": 40.05703034829271,
+              "median": 41.24516260438506,
+              "p90": 41.92409532215308,
+              "max": 47.16885056690876
+            },
+            "native": {
+              "n": 60,
+              "min": 24000.00000000091,
+              "p10": 26999.999999986812,
+              "median": 43999.99999998272,
+              "p90": 80000.00000004092,
+              "max": 322000.00000000274
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 4.582795844931673,
+              "native": 4888.888888886969
+            },
+            "computeIntensity": 4.582795844931673,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 10124.999999788997,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1165.228364180516,
+              "upper": 1763.278612780803,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 58916,
+            "rawPairsNs": [
+              [
+                39.242311086971476,
+                49999.999999954525
+              ],
+              [
+                38.85192477425562,
+                48999.99999997817
+              ],
+              [
+                38.83495145631086,
+                77999.99999997453
+              ],
+              [
+                40.29465679951157,
+                40999.99999999681
+              ],
+              [
+                39.955190440628044,
+                80000.00000004092
+              ],
+              [
+                40.05703034829271,
+                43999.99999998272
+              ],
+              [
+                40.413470025121,
+                43999.99999998272
+              ],
+              [
+                39.70059067146443,
+                26999.999999986812
+              ],
+              [
+                39.123497861362054,
+                76999.99999999818
+              ],
+              [
+                40.48136329689712,
+                62000.00000001182
+              ],
+              [
+                41.075429424943295,
+                322000.00000000274
+              ],
+              [
+                41.56765564532575,
+                46000.00000004911
+              ],
+              [
+                41.228189286441264,
+                61000.00000003547
+              ],
+              [
+                40.8547762916692,
+                55000.000000006825
+              ],
+              [
+                40.7868830198921,
+                63000.00000004502
+              ],
+              [
+                40.82082965578161,
+                26999.999999986812
+              ],
+              [
+                40.93964288139008,
+                38000.000000010914
+              ],
+              [
+                41.39792246588303,
+                29999.999999972715
+              ],
+              [
+                40.66806979428364,
+                64000.00000002138
+              ],
+              [
+                41.550682327381004,
+                42000.00000003001
+              ],
+              [
+                41.36397582999545,
+                223000.00000001318
+              ],
+              [
+                41.46581573766012,
+                45999.99999999227
+              ],
+              [
+                41.92409532215308,
+                42999.99999994952
+              ],
+              [
+                41.66949555299139,
+                33999.999999991815
+              ],
+              [
+                41.53370900943721,
+                43000.00000000637
+              ],
+              [
+                41.58462896326955,
+                41999.999999973166
+              ],
+              [
+                40.61714984045034,
+                69000.00000001682
+              ],
+              [
+                41.02450947111192,
+                50000.000000011365
+              ],
+              [
+                40.617149840451304,
+                52000.00000002092
+              ],
+              [
+                41.550682327381004,
+                29999.999999972715
+              ],
+              [
+                42.34842827075845,
+                217000.0000000414
+              ],
+              [
+                42.00896191187492,
+                28000.00000002001
+              ],
+              [
+                41.245162604386024,
+                53999.999999973625
+              ],
+              [
+                41.04148278905571,
+                40999.99999999681
+              ],
+              [
+                41.05845610700047,
+                52000.00000002092
+              ],
+              [
+                41.14332269672038,
+                26000.00000001046
+              ],
+              [
+                41.075429424944254,
+                30000.00000002956
+              ],
+              [
+                47.16885056690876,
+                47000.000000025466
+              ],
+              [
+                41.19424265055368,
+                49000.00000003501
+              ],
+              [
+                41.26213592233078,
+                26999.999999986812
+              ],
+              [
+                41.21121596849748,
+                173000.0000000018
+              ],
+              [
+                41.53370900943721,
+                36000.00000000137
+              ],
+              [
+                41.04148278905571,
+                32000.00000003911
+              ],
+              [
+                41.007536153167166,
+                24000.00000000091
+              ],
+              [
+                41.31305587616311,
+                45999.99999999227
+              ],
+              [
+                42.19566840926048,
+                36000.00000000137
+              ],
+              [
+                41.46581573766012,
+                40000.00000007731
+              ],
+              [
+                41.21121596849748,
+                24999.999999977263
+              ],
+              [
+                41.53370900943721,
+                74999.99999993178
+              ],
+              [
+                41.85620205037695,
+                50999.99999993088
+              ],
+              [
+                42.24658836309377,
+                216999.99999998455
+              ],
+              [
+                41.33002919410594,
+                34000.0000001055
+              ],
+              [
+                41.24516260438506,
+                33000.00000001546
+              ],
+              [
+                41.39792246588303,
+                25999.999999953616
+              ],
+              [
+                41.737388824766555,
+                51000.000000044565
+              ],
+              [
+                41.448842419716335,
+                29999.999999972715
+              ],
+              [
+                41.65252223504568,
+                49000.00000009186
+              ],
+              [
+                41.2281892864432,
+                28000.00000002001
+              ],
+              [
+                41.63554891710188,
+                43999.99999998272
+              ],
+              [
+                41.39792246588303,
+                29999.999999972715
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "compileMs": 2600.466125,
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcdefgh"
+            ],
+            "bucket": 3,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 59.66349346911841,
+              "p10": 60.29997786141487,
+              "median": 69.21075935355573,
+              "p90": 70.17932255922233,
+              "max": 73.11268541067226
+            },
+            "native": {
+              "n": 60,
+              "min": 24999.999999977263,
+              "p10": 31999.99999992542,
+              "median": 52000.00000002092,
+              "p90": 206999.99999999363,
+              "max": 268000.0000000291
+            },
+            "inputJsonBytes": 12,
+            "nsPerInputJsonByte": {
+              "js": 5.767563279462977,
+              "native": 4333.3333333350765
+            },
+            "computeIntensity": 5.767563279462977,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 22291.999999652035,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 991.9267288012295,
+              "upper": 1232.0805656857178,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 36136,
+            "rawPairsNs": [
+              [
+                60.050918751382525,
+                43999.99999998272
+              ],
+              [
+                59.66349346911841,
+                44999.99999995907
+              ],
+              [
+                60.49369050254692,
+                259000.00000001455
+              ],
+              [
+                59.801859641356494,
+                31999.99999992542
+              ],
+              [
+                59.746513172459366,
+                56999.999999902684
+              ],
+              [
+                59.71883993801238,
+                36999.999999920874
+              ],
+              [
+                60.29997786141487,
+                51000.000000044565
+              ],
+              [
+                59.85720611025046,
+                28000.00000002001
+              ],
+              [
+                64.58932920079864,
+                216000.00000000818
+              ],
+              [
+                69.87491698029602,
+                51000.000000044565
+              ],
+              [
+                69.21075935355259,
+                53999.999999973625
+              ],
+              [
+                69.51516493247576,
+                44999.99999995907
+              ],
+              [
+                69.04471994686752,
+                63999.99999996453
+              ],
+              [
+                68.93402700907957,
+                28999.999999996362
+              ],
+              [
+                71.23090546822989,
+                188999.99999996452
+              ],
+              [
+                73.11268541067226,
+                49999.999999954525
+              ],
+              [
+                69.04471994686752,
+                59999.99999994543
+              ],
+              [
+                69.70887757361096,
+                33000.00000001546
+              ],
+              [
+                69.65353110471384,
+                46999.99999991178
+              ],
+              [
+                69.04471994686752,
+                33999.999999991815
+              ],
+              [
+                69.32145229134369,
+                206000.0000000173
+              ],
+              [
+                69.04471994686752,
+                25000.00000009095
+              ],
+              [
+                69.45981846358177,
+                76999.99999999818
+              ],
+              [
+                69.68120433916395,
+                43000.00000000637
+              ],
+              [
+                69.76422404250494,
+                52999.99999999727
+              ],
+              [
+                68.82333407128847,
+                48999.99999997817
+              ],
+              [
+                69.34912552579067,
+                268000.0000000291
+              ],
+              [
+                69.21075935355573,
+                47000.000000025466
+              ],
+              [
+                69.12773965021164,
+                62000.00000001182
+              ],
+              [
+                68.93402700907642,
+                52999.99999999727
+              ],
+              [
+                68.76798760239134,
+                64000.00000007822
+              ],
+              [
+                70.06862962143124,
+                38999.99999998727
+              ],
+              [
+                69.26610582244972,
+                192000.00000000728
+              ],
+              [
+                70.01328315253727,
+                37000.00000003456
+              ],
+              [
+                69.70887757361096,
+                70000.00000005003
+              ],
+              [
+                69.45981846358177,
+                32000.00000003911
+              ],
+              [
+                68.76798760239134,
+                58999.99999996908
+              ],
+              [
+                69.65353110471698,
+                27000.000000043656
+              ],
+              [
+                72.42085454947869,
+                206999.99999999363
+              ],
+              [
+                69.1830861191056,
+                42000.00000003001
+              ],
+              [
+                69.5151649324789,
+                50000.00000006821
+              ],
+              [
+                69.98560991808712,
+                31999.99999992542
+              ],
+              [
+                69.76422404250808,
+                72999.99999997907
+              ],
+              [
+                69.84724374584904,
+                35999.99999994452
+              ],
+              [
+                71.06486606154482,
+                208000.00000008367
+              ],
+              [
+                68.90635377462944,
+                52999.99999999727
+              ],
+              [
+                69.23843258800272,
+                86999.99999998909
+              ],
+              [
+                70.17932255922233,
+                48000.00000000182
+              ],
+              [
+                69.1830861191056,
+                76000.00000002183
+              ],
+              [
+                69.07239318131451,
+                56000.00000004002
+              ],
+              [
+                69.2937790568967,
+                210000.00000003638
+              ],
+              [
+                68.65729466460024,
+                43000.00000000637
+              ],
+              [
+                68.76798760239134,
+                38000.000000010914
+              ],
+              [
+                69.45981846358177,
+                28999.999999996362
+              ],
+              [
+                69.07239318131451,
+                68999.99999995998
+              ],
+              [
+                70.3730352003544,
+                24999.999999977263
+              ],
+              [
+                68.96170024352341,
+                195000.00000005003
+              ],
+              [
+                68.85100730573231,
+                53999.999999973625
+              ],
+              [
+                68.71264113349423,
+                62999.99999998818
+              ],
+              [
+                69.68120433916395,
+                52000.00000002092
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "reason": "Boundary argument count mismatch"
+          }
+        ]
+      },
+      "inputEvidenceFiles": [
+        "src/lib/colors.test.ts"
+      ]
+    },
+    {
+      "scanRoot": ".",
+      "file": "src/lib/format.ts",
+      "process": {
+        "exit": 0,
+        "seconds": 9.668637990951538,
+        "output": "-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/format.ts#formatShortTime \u2014 [next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nrejected             src/lib/format.ts#formatNumber \u2014 [next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/lib/format.ts#formatLongNumber \u2014 [next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\naccepted             src/lib/format.ts#stringToColor\nrejected             src/lib/format.ts#formatCurrency \u2014 [next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\nrejected             src/lib/format.ts#formatLongCurrency \u2014 [next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\nrejected             src/lib/format.ts#decodePunycodeDomain \u2014 [next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-final-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.\nrejected             src/lib/format.ts#truncateString \u2014 [next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nTop blockers:\n  2 \u00d7 unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): src/lib/format.ts#parseTime, src/lib/format.ts#formatTime, src/lib/format.ts#formatShortTime, src/lib/format.ts#formatNumber, src/lib/format.ts#formatLongNumber, src/lib/format.ts#formatCurrency, src/lib/format.ts#formatLongCurrency, src/lib/format.ts#decodePunycodeDomain, src/lib/format.ts#truncateString\nMeasured src/lib/format.ts#stringToColor: test-shape-derived, N=60, process-cpu, JS 80 ns/call [p10 76, p90 87], native 130000 ns/call [p10 39000, p90 230000], native 14444.44 ns/input byte, boundary 97.5%, intensity 8.88 JS ns/input byte, verdict JS\nMeasured src/lib/format.ts#stringToColor: test-shape-derived, N=60, process-cpu, JS 166 ns/call [p10 159, p90 169], native 55000 ns/call [p10 32000, p90 92000], native 5000.00 ns/input byte, boundary 94.3%, intensity 15.07 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "34c838d7696a02994d54b041b7eb5852ec04c9d4de3ab61e8f744459e474b39a",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-final-clones/umami",
+        "sourceDir": "/tmp/m1-final-clones/umami",
+        "framework": "next",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 10,
+          "exportedFunctions": 10,
+          "considered": 10,
+          "diagnosed": 9,
+          "accepted": 1,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/lib/format.ts",
+            "functions": [
+              {
+                "id": "src/lib/format.ts#parseTime",
+                "file": "src/lib/format.ts",
+                "name": "parseTime",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "parseTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatTime",
+                "file": "src/lib/format.ts",
+                "name": "formatTime",
+                "line": 20,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatShortTime",
+                "file": "src/lib/format.ts",
+                "name": "formatShortTime",
+                "line": 29,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatShortTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatNumber",
+                "line": 46,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatLongNumber",
+                "line": 50,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatNumber"
+                ],
+                "exportNames": [
+                  "formatLongNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#stringToColor",
+                "file": "src/lib/format.ts",
+                "name": "stringToColor",
+                "line": 72,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "stringToColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "05ef125fb9073a508b8f"
+              },
+              {
+                "id": "src/lib/format.ts#formatCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatCurrency",
+                "line": 88,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatLongCurrency",
+                "line": 107,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatCurrency"
+                ],
+                "exportNames": [
+                  "formatLongCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#decodePunycodeDomain",
+                "file": "src/lib/format.ts",
+                "name": "decodePunycodeDomain",
+                "line": 123,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-final-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "decodePunycodeDomain"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#truncateString",
+                "file": "src/lib/format.ts",
+                "name": "truncateString",
+                "line": 135,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "truncateString"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 2,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-final-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/lib/format.ts#parseTime",
+            "diagnostic": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatTime",
+            "diagnostic": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatShortTime",
+            "diagnostic": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#decodePunycodeDomain",
+            "diagnostic": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-final-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/lib/format.ts#truncateString",
+            "diagnostic": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/lib/format.ts",
+            "name": "parseTime",
+            "message": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatTime",
+            "message": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatShortTime",
+            "message": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatNumber",
+            "message": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongNumber",
+            "message": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatCurrency",
+            "message": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongCurrency",
+            "message": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "decodePunycodeDomain",
+            "message": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-final-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "truncateString",
+            "message": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-final-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "ok",
+            "compileMs": 875.295542,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/format.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 74.57716901888091,
+              "p10": 75.59877407393357,
+              "median": 79.95005486397515,
+              "p90": 87.02561580082528,
+              "max": 183.88890990956847
+            },
+            "native": {
+              "n": 60,
+              "min": 27000.000000043656,
+              "p10": 38999.99999998727,
+              "median": 130000.0000000523,
+              "p90": 230000.0000000182,
+              "max": 312000.0000000118
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 8.883339429330572,
+              "native": 14444.444444450255
+            },
+            "computeIntensity": 8.883339429330572,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9746565455280811,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 39458.00000019517,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1447.607087052749,
+              "upper": 1777.6287479049151,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 26429,
+            "rawPairsNs": [
+              [
+                183.88890990956847,
+                218999.9999999941
+              ],
+              [
+                86.53373188542804,
+                54000.000000002045
+              ],
+              [
+                87.21480192213126,
+                152999.9999999916
+              ],
+              [
+                79.11763593022847,
+                32000.00000001069
+              ],
+              [
+                83.8851261871434,
+                209999.99999997954
+              ],
+              [
+                82.44731166521738,
+                54999.9999999784
+              ],
+              [
+                89.29584925649905,
+                221000.00000000364
+              ],
+              [
+                79.00412425744533,
+                228000.00000000864
+              ],
+              [
+                83.2797305989641,
+                233000.0000000041
+              ],
+              [
+                82.63649778652336,
+                55000.000000006825
+              ],
+              [
+                90.2417798630289,
+                168000.00000000637
+              ],
+              [
+                79.68519429414637,
+                38999.99999998727
+              ],
+              [
+                80.6689621249387,
+                185999.99999997864
+              ],
+              [
+                78.17170532369647,
+                57999.999999992724
+              ],
+              [
+                85.3229407090694,
+                161999.9999999777
+              ],
+              [
+                77.83117030534702,
+                50999.99999998772
+              ],
+              [
+                83.09054447765813,
+                167000.00000003
+              ],
+              [
+                75.37175072836513,
+                33000.00000001546
+              ],
+              [
+                82.48514888947773,
+                189999.99999999773
+              ],
+              [
+                93.45794392523469,
+                74999.99999998863
+              ],
+              [
+                81.04733436755063,
+                250000
+              ],
+              [
+                74.57716901888091,
+                60999.99999997862
+              ],
+              [
+                80.895985470505,
+                196000.00000002637
+              ],
+              [
+                79.60951984562571,
+                86999.99999998909
+              ],
+              [
+                82.90135835634999,
+                180000.0000000068
+              ],
+              [
+                75.86363464376235,
+                37999.999999954074
+              ],
+              [
+                80.55545045215555,
+                215000.00000003184
+              ],
+              [
+                75.33391350410695,
+                45999.99999999227
+              ],
+              [
+                80.895985470505,
+                223999.99999998955
+              ],
+              [
+                75.59877407393357,
+                43000.00000000637
+              ],
+              [
+                79.11763593022847,
+                218000.00000001772
+              ],
+              [
+                79.38249650005724,
+                80999.99999996043
+              ],
+              [
+                78.77710091187687,
+                121000.00000003775
+              ],
+              [
+                80.44193877937239,
+                57000.00000001637
+              ],
+              [
+                84.67970789662868,
+                250000
+              ],
+              [
+                76.20416966211397,
+                55999.99999998318
+              ],
+              [
+                79.95005486397515,
+                181999.99999995952
+              ],
+              [
+                75.59877407393357,
+                59000.00000002592
+              ],
+              [
+                83.65810284157386,
+                168999.9999999827
+              ],
+              [
+                75.86363464376235,
+                121999.99999995725
+              ],
+              [
+                79.00412425744317,
+                230000.0000000182
+              ],
+              [
+                74.91770403723251,
+                49000.00000003501
+              ],
+              [
+                81.57705550720821,
+                312000.0000000118
+              ],
+              [
+                80.06356653675832,
+                66999.99999995044
+              ],
+              [
+                87.02561580082528,
+                252999.9999999859
+              ],
+              [
+                79.91221763971483,
+                34000.00000004866
+              ],
+              [
+                80.36626433084959,
+                225000.00000002273
+              ],
+              [
+                76.88523969881503,
+                27000.000000043656
+              ],
+              [
+                82.37163721669458,
+                209999.99999997954
+              ],
+              [
+                75.3339135041048,
+                59000.00000002592
+              ],
+              [
+                81.08517159181096,
+                192999.99999998364
+              ],
+              [
+                75.78796019523953,
+                52999.99999999727
+              ],
+              [
+                81.5013810586854,
+                218999.9999999941
+              ],
+              [
+                75.59877407393357,
+                45000.00000001592
+              ],
+              [
+                79.57168262136324,
+                130000.0000000523
+              ],
+              [
+                75.71228574671888,
+                33000.00000001546
+              ],
+              [
+                79.87438041545235,
+                180000.0000000068
+              ],
+              [
+                75.7501229709792,
+                50999.99999998772
+              ],
+              [
+                79.38249650005724,
+                224000.0000000464
+              ],
+              [
+                75.67444852245639,
+                61000.00000003547
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "ok",
+            "compileMs": 875.295542,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/format.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcdefg"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 156.5440987400351,
+              "p10": 158.85831833376182,
+              "median": 165.80097711493906,
+              "p90": 168.78374903574093,
+              "max": 176.75494985857605
+            },
+            "native": {
+              "n": 60,
+              "min": 27000.000000043656,
+              "p10": 31999.99999992542,
+              "median": 55000.000000006825,
+              "p90": 91999.99999998455,
+              "max": 247999.99999999045
+            },
+            "inputJsonBytes": 11,
+            "nsPerInputJsonByte": {
+              "js": 15.072816101358097,
+              "native": 5000.00000000062
+            },
+            "computeIntensity": 15.072816101358097,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9429938418335906,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 17542.000000048574,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 325.10127615760547,
+              "upper": 426.87015059231567,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 19445,
+            "rawPairsNs": [
+              [
+                174.38930316276486,
+                60000.00000000227
+              ],
+              [
+                166.82951915659405,
+                44999.99999995907
+              ],
+              [
+                158.54975572126358,
+                73999.99999995544
+              ],
+              [
+                165.1838518899484,
+                45000.00000001592
+              ],
+              [
+                165.80097711493906,
+                70999.99999996953
+              ],
+              [
+                159.21830804834167,
+                55000.000000006825
+              ],
+              [
+                166.6752378503493,
+                79999.99999998408
+              ],
+              [
+                168.4751864232456,
+                63000.00000004502
+              ],
+              [
+                160.40113139624728,
+                91999.99999998455
+              ],
+              [
+                169.34944715865294,
+                36000.00000000137
+              ],
+              [
+                168.3723322190795,
+                86999.99999998909
+              ],
+              [
+                160.09256878374902,
+                39999.99999996362
+              ],
+              [
+                168.01234250449966,
+                89999.99999997499
+              ],
+              [
+                167.34379017742157,
+                56999.99999995953
+              ],
+              [
+                158.85831833376182,
+                247999.99999999045
+              ],
+              [
+                159.88686037541683,
+                64999.99999999773
+              ],
+              [
+                167.44664438158765,
+                64000.00000002138
+              ],
+              [
+                167.1380817690923,
+                38000.000000010914
+              ],
+              [
+                159.47544355875542,
+                78000.00000003137
+              ],
+              [
+                167.49807148367216,
+                44000.00000003957
+              ],
+              [
+                166.3666752378481,
+                47000.000000025466
+              ],
+              [
+                176.75494985857605,
+                99999.99999996589
+              ],
+              [
+                168.47518642324266,
+                73999.99999995544
+              ],
+              [
+                167.39521727950606,
+                51000.000000044565
+              ],
+              [
+                158.9097454358434,
+                92000.00000004139
+              ],
+              [
+                166.46952944201422,
+                59000.00000002592
+              ],
+              [
+                165.64669580869136,
+                54999.99999994998
+              ],
+              [
+                160.40113139624432,
+                61999.99999995498
+              ],
+              [
+                168.78374903574093,
+                79999.99999998408
+              ],
+              [
+                169.09231164823916,
+                28999.999999996362
+              ],
+              [
+                158.3954744150159,
+                52999.99999999727
+              ],
+              [
+                166.2123939316034,
+                48000.00000000182
+              ],
+              [
+                165.54384160452528,
+                64000.00000002138
+              ],
+              [
+                159.16688094626008,
+                33999.999999991815
+              ],
+              [
+                165.23527899202702,
+                63000.00000010186
+              ],
+              [
+                165.59526870660392,
+                40999.99999993997
+              ],
+              [
+                158.3440473129314,
+                47000.000000025466
+              ],
+              [
+                164.46387246078575,
+                37000.00000003456
+              ],
+              [
+                164.7210079711995,
+                53999.999999973625
+              ],
+              [
+                161.0182566212438,
+                28000.00000002001
+              ],
+              [
+                168.52661352532425,
+                57999.999999992724
+              ],
+              [
+                168.11519670866576,
+                30999.99999994907
+              ],
+              [
+                156.64695294420412,
+                161000.0000000582
+              ],
+              [
+                160.91540241707477,
+                31999.99999992542
+              ],
+              [
+                166.62381074826482,
+                80999.9999999036
+              ],
+              [
+                166.52095654409578,
+                35999.99999994452
+              ],
+              [
+                158.70403702751415,
+                43000.00000000637
+              ],
+              [
+                168.5266135253301,
+                36000.00000005821
+              ],
+              [
+                167.44664438158765,
+                98000.00000007002
+              ],
+              [
+                159.32116225251067,
+                36999.999999920874
+              ],
+              [
+                165.4409874003592,
+                54999.99999994998
+              ],
+              [
+                167.24093597325546,
+                28000.00000002001
+              ],
+              [
+                158.96117253792792,
+                57999.999999992724
+              ],
+              [
+                167.3437901774245,
+                47000.000000025466
+              ],
+              [
+                169.14373875032078,
+                72999.99999997907
+              ],
+              [
+                159.73257906916916,
+                61000.00000003547
+              ],
+              [
+                165.64669580869136,
+                60000.00000005912
+              ],
+              [
+                163.48675752121818,
+                28000.00000002001
+              ],
+              [
+                156.5440987400351,
+                47000.000000025466
+              ],
+              [
+                168.73232193366226,
+                27000.000000043656
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      },
+      "inputEvidenceFiles": [
+        "src/lib/format.test.ts"
+      ]
+    }
+  ]
+}
