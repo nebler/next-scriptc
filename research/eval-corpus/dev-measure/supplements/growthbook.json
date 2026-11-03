@@ -1,0 +1,2851 @@
+{
+  "scans": [
+    {
+      "scanRoot": "packages/back-end",
+      "file": "src/util/armingApiKeyId.ts",
+      "process": {
+        "exit": 0,
+        "output": "0 ns/call [p10 35000, p90 243000], native 454.55 ns/input byte, boundary 94.1%, intensity 0.82 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "reason": "Per-tuple failure isolation regression rerun",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-dev-clones/growthbook/packages/back-end",
+        "sourceDir": "/tmp/m1-dev-clones/growthbook/packages/back-end",
+        "framework": "generic",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 4,
+          "exportedFunctions": 4,
+          "considered": 4,
+          "diagnosed": 1,
+          "accepted": 3,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/util/armingApiKeyId.ts",
+            "functions": [
+              {
+                "id": "src/util/armingApiKeyId.ts#encodeArmingApiKeyId",
+                "file": "src/util/armingApiKeyId.ts",
+                "name": "encodeArmingApiKeyId",
+                "line": 18,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "encodeArmingApiKeyId"
+                ],
+                "boundary": {
+                  "params": [
+                    "string",
+                    "json",
+                    "json"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "10d243c2107de6d7660e"
+              },
+              {
+                "id": "src/util/armingApiKeyId.ts#decodeArmingApiKeyId",
+                "file": "src/util/armingApiKeyId.ts",
+                "name": "decodeArmingApiKeyId",
+                "line": 33,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "decodeArmingApiKeyId"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "json"
+                },
+                "promotionId": "9019c9008650983e2405"
+              },
+              {
+                "id": "src/util/armingApiKeyId.ts#isArmingApiKeyId",
+                "file": "src/util/armingApiKeyId.ts",
+                "name": "isArmingApiKeyId",
+                "line": 55,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [
+                  "src/util/armingApiKeyId.ts#decodeArmingApiKeyId"
+                ],
+                "exportNames": [
+                  "isArmingApiKeyId"
+                ],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "boolean"
+                },
+                "promotionId": "e08038707bd4bb762a1b"
+              },
+              {
+                "id": "src/util/armingApiKeyId.ts#armerActor",
+                "file": "src/util/armingApiKeyId.ts",
+                "name": "armerActor",
+                "line": 63,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate armerActor: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/back-end/src/util/armingApiKeyId.ts:63:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export revisionActor Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/util/armingApiKeyId.ts#decodeArmingApiKeyId",
+                  "src/util/armingApiKeyId.ts#isArmingApiKeyId"
+                ],
+                "exportNames": [
+                  "armerActor"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/back-end/src/util/armingApiKeyId.ts:63:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export revisionActor Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/util/armingApiKeyId.ts#armerActor",
+            "diagnostic": "[next-scriptc] not a candidate armerActor: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/back-end/src/util/armingApiKeyId.ts:63:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export revisionActor Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/util/armingApiKeyId.ts",
+            "name": "armerActor",
+            "message": "[next-scriptc] not a candidate armerActor: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/back-end/src/util/armingApiKeyId.ts:63:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export revisionActor Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/util/armingApiKeyId.ts#encodeArmingApiKeyId",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "reason": "Boundary argument count mismatch"
+          },
+          {
+            "id": "src/util/armingApiKeyId.ts#decodeArmingApiKeyId",
+            "status": "ok",
+            "compileMs": 2345.413917,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "packages/back-end/test/util/api-key.util.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abc_efg"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 78.42939335823023,
+              "p10": 79.13596446957189,
+              "median": 82.16412637529235,
+              "p90": 132.12879781972603,
+              "max": 753.8104370647035
+            },
+            "native": {
+              "n": 60,
+              "min": 34999.99999996817,
+              "p10": 43000.00000000637,
+              "median": 65999.99999997408,
+              "p90": 257000.000000005,
+              "max": 5052999.999999997
+            },
+            "inputJsonBytes": 11,
+            "nsPerInputJsonByte": {
+              "js": 7.469466034117487,
+              "native": 5999.9999999976435
+            },
+            "computeIntensity": 7.469466034117487,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 14541.999999892141,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 962.944086966953,
+              "upper": 2558.416211079287,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 9907,
+            "rawPairsNs": [
+              [
+                84.28383970929725,
+                491999.9999999902
+              ],
+              [
+                645.9069344907671,
+                655000.0000000012
+              ],
+              [
+                753.8104370647035,
+                5052999.999999997
+              ],
+              [
+                224.38679721408664,
+                52999.99999999727
+              ],
+              [
+                184.41506005854427,
+                52999.99999999727
+              ],
+              [
+                237.71070959927508,
+                43000.00000000637
+              ],
+              [
+                89.93640859998179,
+                96999.99999997999
+              ],
+              [
+                88.22045018673903,
+                1424000.000000035
+              ],
+              [
+                104.3706470172597,
+                93999.99999999409
+              ],
+              [
+                109.61946098718208,
+                80000.00000004092
+              ],
+              [
+                92.15706066417795,
+                222000.00000003685
+              ],
+              [
+                79.13596446957189,
+                45000.00000001592
+              ],
+              [
+                78.42939335823023,
+                45999.99999999227
+              ],
+              [
+                79.6406581205253,
+                38000.000000010914
+              ],
+              [
+                98.61713939638392,
+                60000.00000000227
+              ],
+              [
+                132.12879781972603,
+                56999.99999995953
+              ],
+              [
+                118.60300797416083,
+                93999.99999999409
+              ],
+              [
+                102.95750479458785,
+                66000.00000003092
+              ],
+              [
+                98.61713939638392,
+                105999.99999999454
+              ],
+              [
+                103.7650146361179,
+                50000.000000011365
+              ],
+              [
+                121.12647622892788,
+                317000.0000000073
+              ],
+              [
+                81.3566165337623,
+                69000.00000001682
+              ],
+              [
+                81.96224891490411,
+                64999.99999999773
+              ],
+              [
+                80.2462905016671,
+                68999.99999995998
+              ],
+              [
+                80.65004542242637,
+                62999.99999998818
+              ],
+              [
+                79.33784192994867,
+                63000.00000004502
+              ],
+              [
+                78.73220954880112,
+                47000.000000025466
+              ],
+              [
+                80.549106692238,
+                40999.99999999681
+              ],
+              [
+                92.76269304532549,
+                65999.99999997408
+              ],
+              [
+                83.5772685979642,
+                42999.99999994952
+              ],
+              [
+                81.45755526395644,
+                257000.000000005
+              ],
+              [
+                80.75098415262052,
+                118999.99999997135
+              ],
+              [
+                79.23690319975454,
+                88000.00000002228
+              ],
+              [
+                79.43878066014278,
+                44000.00000003957
+              ],
+              [
+                79.13596446956615,
+                176999.9999999641
+              ],
+              [
+                89.02796002826335,
+                97999.99999995634
+              ],
+              [
+                87.91763399616241,
+                84000.00000000319
+              ],
+              [
+                100.33309780963239,
+                76999.99999999818
+              ],
+              [
+                84.88947209044193,
+                47000.000000025466
+              ],
+              [
+                80.24629050166135,
+                34999.99999996817
+              ],
+              [
+                85.99979812253714,
+                228999.99999998498
+              ],
+              [
+                80.04441304128459,
+                43000.00000000637
+              ],
+              [
+                80.44816796204387,
+                46999.999999968626
+              ],
+              [
+                79.13596446956615,
+                47000.000000025466
+              ],
+              [
+                78.93408700918364,
+                42000.00000003001
+              ],
+              [
+                98.41526193600714,
+                130999.9999999718
+              ],
+              [
+                82.16412637529235,
+                110999.99999998999
+              ],
+              [
+                79.74159685071369,
+                69999.99999999318
+              ],
+              [
+                79.23690319976028,
+                69000.00000001682
+              ],
+              [
+                81.15473907338554,
+                54999.99999994998
+              ],
+              [
+                83.98102351872349,
+                249000.00000002363
+              ],
+              [
+                82.46694256585752,
+                57000.00000001637
+              ],
+              [
+                78.63127081861848,
+                69999.99999999318
+              ],
+              [
+                80.24629050166135,
+                55999.99999998318
+              ],
+              [
+                80.549106692238,
+                51000.000000044565
+              ],
+              [
+                85.39416574139534,
+                47000.000000025466
+              ],
+              [
+                79.74159685071369,
+                83000.00000002683
+              ],
+              [
+                80.8519228828089,
+                60999.99999997862
+              ],
+              [
+                80.549106692238,
+                52999.99999999727
+              ],
+              [
+                80.8519228828089,
+                60000.00000000227
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/util/armingApiKeyId.ts#isArmingApiKeyId",
+            "status": "ok",
+            "compileMs": 2345.413917,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              "xxxxxxxx"
+            ],
+            "bucket": 3,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 100.63356416678839,
+              "p10": 101.95962870193122,
+              "median": 108.73729188154654,
+              "p90": 189.62722852512664,
+              "max": 348.165610726397
+            },
+            "native": {
+              "n": 60,
+              "min": 30999.99999994907,
+              "p10": 52999.999999883585,
+              "median": 83000.00000008367,
+              "p90": 149000.0000001146,
+              "max": 932000.0000000164
+            },
+            "inputJsonBytes": 12,
+            "nsPerInputJsonByte": {
+              "js": 9.061440990128878,
+              "native": 6916.666666673639
+            },
+            "computeIntensity": 9.061440990128878,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9389311739478392,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 16374.9999992433,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 681.6526748691072,
+              "upper": 1116.6700448737026,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 6787,
+            "rawPairsNs": [
+              [
+                258.58258435245455,
+                932000.0000000164
+              ],
+              [
+                301.0166494769589,
+                36999.99999980719
+              ],
+              [
+                189.62722852512664,
+                149000.0000001146
+              ],
+              [
+                312.36186827760696,
+                105999.99999999454
+              ],
+              [
+                102.9910122292385,
+                153000.00000002002
+              ],
+              [
+                348.165610726397,
+                75000.00000004547
+              ],
+              [
+                126.41815235007327,
+                106999.9999999709
+              ],
+              [
+                102.40165021366785,
+                76000.00000002183
+              ],
+              [
+                107.85324885810681,
+                95000.00000002728
+              ],
+              [
+                101.95962870193122,
+                74000.00000006912
+              ],
+              [
+                102.69633122143644,
+                97999.99999995634
+              ],
+              [
+                108.73729188154654,
+                98999.9999999327
+              ],
+              [
+                101.51760719022812,
+                105000.00000001819
+              ],
+              [
+                101.8122881980302,
+                72999.9999998654
+              ],
+              [
+                115.80963606896393,
+                83000.00000008367
+              ],
+              [
+                113.30484750257926,
+                71000.00000014006
+              ],
+              [
+                102.69633122143644,
+                100999.9999998854
+              ],
+              [
+                115.07293354945874,
+                60999.99999992178
+              ],
+              [
+                103.87505525267824,
+                358999.99999992363
+              ],
+              [
+                101.95962870193122,
+                93999.99999982356
+              ],
+              [
+                102.40165021363435,
+                77999.99999997453
+              ],
+              [
+                101.8122881980302,
+                39999.99999996362
+              ],
+              [
+                113.30484750257926,
+                57000.00000001637
+              ],
+              [
+                111.68410195963433,
+                101000.00000011278
+              ],
+              [
+                111.24208044793122,
+                98999.9999999327
+              ],
+              [
+                103.2856932370741,
+                65000.00000005457
+              ],
+              [
+                104.16973626048032,
+                108999.9999999236
+              ],
+              [
+                124.35538529542522,
+                76999.99999999818
+              ],
+              [
+                126.86017386180988,
+                110000.00000012733
+              ],
+              [
+                201.11978782967572,
+                103000.00000006548
+              ],
+              [
+                108.589951377612,
+                109999.99999989996
+              ],
+              [
+                172.6830705761051,
+                72999.9999998654
+              ],
+              [
+                110.65271843229355,
+                89999.99999991815
+              ],
+              [
+                103.58037424487615,
+                40999.99999993997
+              ],
+              [
+                101.66494769412915,
+                103000.00000006548
+              ],
+              [
+                109.47399440105174,
+                63999.99999985084
+              ],
+              [
+                101.66494769412915,
+                98999.9999999327
+              ],
+              [
+                107.26388684246915,
+                42999.99999989268
+              ],
+              [
+                126.71283335790885,
+                62000.00000012551
+              ],
+              [
+                115.07293354945874,
+                30999.99999994907
+              ],
+              [
+                104.02239575661278,
+                95000.00000002728
+              ],
+              [
+                102.99101222927202,
+                83000.00000008367
+              ],
+              [
+                102.54899071756888,
+                50999.99999993088
+              ],
+              [
+                102.84367172537097,
+                64000.00000007822
+              ],
+              [
+                100.63356416678839,
+                343000.00000007456
+              ],
+              [
+                108.29527036984344,
+                77999.99999997453
+              ],
+              [
+                126.41815235007327,
+                59999.99999994543
+              ],
+              [
+                104.61175777221693,
+                52999.999999883585
+              ],
+              [
+                103.43303374097512,
+                62000.00000012551
+              ],
+              [
+                104.31707676441486,
+                63000.00000010186
+              ],
+              [
+                120.67187269779873,
+                92000.00000009823
+              ],
+              [
+                170.32562251362148,
+                78999.99999995089
+              ],
+              [
+                144.98305584203973,
+                75000.00000004547
+              ],
+              [
+                104.02239575657929,
+                71000.00000014006
+              ],
+              [
+                102.99101222927202,
+                73000.00000009277
+              ],
+              [
+                113.74686901431589,
+                64000.00000007822
+              ],
+              [
+                124.94474731102937,
+                505999.9999998581
+              ],
+              [
+                110.65271843229355,
+                136999.9999999436
+              ],
+              [
+                134.66922056873247,
+                111999.99999985266
+              ],
+              [
+                128.18623839695275,
+                94000.00000005093
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/util/armingApiKeyId.ts#isArmingApiKeyId",
+            "status": "ok",
+            "compileMs": 2345.413917,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "bucket": 5,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 103.33261664157355,
+              "p10": 104.27864975273938,
+              "median": 105.86970543968992,
+              "p90": 108.62180176306461,
+              "max": 124.40335411739535
+            },
+            "native": {
+              "n": 60,
+              "min": 30999.99999994907,
+              "p10": 45000.00000007276,
+              "median": 77999.99999997453,
+              "p90": 295999.99999982177,
+              "max": 380000.00000010914
+            },
+            "inputJsonBytes": 36,
+            "nsPerInputJsonByte": {
+              "js": 2.940825151102498,
+              "native": 2166.6666666659594
+            },
+            "computeIntensity": 2.940825151102498,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 23124.99999970896,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 839.9298279825689,
+              "upper": 1157.2027296334938,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 23255,
+            "rawPairsNs": [
+              [
+                104.62266179316244,
+                76999.99999999818
+              ],
+              [
+                105.09567834874048,
+                60000.000000172804
+              ],
+              [
+                107.54676413674376,
+                124000.00000002365
+              ],
+              [
+                106.60073102558769,
+                85999.99999978536
+              ],
+              [
+                105.0526768436986,
+                128999.99999990541
+              ],
+              [
+                124.40335411739535,
+                94000.00000005093
+              ],
+              [
+                104.79466781336909,
+                321000.00000014005
+              ],
+              [
+                105.74070092453495,
+                84999.999999809
+              ],
+              [
+                104.92367232853384,
+                110000.00000012733
+              ],
+              [
+                106.60073102558769,
+                76999.99999999818
+              ],
+              [
+                105.35368737905044,
+                146999.99999993452
+              ],
+              [
+                107.07374758116575,
+                92999.9999998472
+              ],
+              [
+                104.88067082348219,
+                113000.00000005639
+              ],
+              [
+                103.76263169210968,
+                83000.00000008367
+              ],
+              [
+                104.27864975273938,
+                380000.00000010914
+              ],
+              [
+                105.86970543968992,
+                69999.99999993634
+              ],
+              [
+                107.97677918727015,
+                106999.9999999709
+              ],
+              [
+                105.61169640937996,
+                38999.99999998727
+              ],
+              [
+                106.04171145989655,
+                106999.9999999709
+              ],
+              [
+                103.59062567189326,
+                72000.00000011642
+              ],
+              [
+                107.93377768221848,
+                82000.00000010732
+              ],
+              [
+                108.0197806923218,
+                38000.000000010914
+              ],
+              [
+                106.12771446999989,
+                295999.99999982177
+              ],
+              [
+                104.19264674263607,
+                85000.00000003638
+              ],
+              [
+                105.13867985379214,
+                98999.9999999327
+              ],
+              [
+                113.86798537949423,
+                77999.99999997453
+              ],
+              [
+                107.46076112664045,
+                76000.00000002183
+              ],
+              [
+                103.54762416685139,
+                33999.99999987813
+              ],
+              [
+                104.66566329821411,
+                115000.0000000091
+              ],
+              [
+                104.45065577295581,
+                61999.99999989814
+              ],
+              [
+                104.14964523758442,
+                314000.00000007823
+              ],
+              [
+                103.33261664157355,
+                64999.999999827196
+              ],
+              [
+                104.92367232853384,
+                187000.0000001255
+              ],
+              [
+                105.0526768436986,
+                88999.99999994179
+              ],
+              [
+                106.60073102557793,
+                106999.9999999709
+              ],
+              [
+                107.63276714685686,
+                87999.99999996544
+              ],
+              [
+                106.64373253063935,
+                87999.99999996544
+              ],
+              [
+                106.77273704579434,
+                70999.99999991269
+              ],
+              [
+                106.94474306600098,
+                276999.9999998163
+              ],
+              [
+                114.25499892496894,
+                57999.999999992724
+              ],
+              [
+                110.68587400558339,
+                69000.00000018736
+              ],
+              [
+                107.46076112664045,
+                76999.99999999818
+              ],
+              [
+                106.81573855084599,
+                59000.00000019645
+              ],
+              [
+                104.9666738335855,
+                36000.00000005821
+              ],
+              [
+                106.51472801548437,
+                61999.99999989814
+              ],
+              [
+                108.62180176306461,
+                55000.000000063665
+              ],
+              [
+                105.7837024295866,
+                335000.0000000364
+              ],
+              [
+                105.09567834874048,
+                48999.99999997817
+              ],
+              [
+                106.85874005590742,
+                63999.99999985084
+              ],
+              [
+                107.1167490862174,
+                30999.99999994907
+              ],
+              [
+                104.9666738335855,
+                77999.99999997453
+              ],
+              [
+                106.47172651042294,
+                56999.999999789
+              ],
+              [
+                107.71877015695041,
+                63000.00000010186
+              ],
+              [
+                104.66566329821411,
+                38000.000000010914
+              ],
+              [
+                105.6976994194735,
+                331999.99999988
+              ],
+              [
+                111.6749086218009,
+                51999.99999990723
+              ],
+              [
+                105.18168135884379,
+                77999.99999997453
+              ],
+              [
+                105.52569339926687,
+                53999.99999985994
+              ],
+              [
+                105.05267684368883,
+                67999.99999998363
+              ],
+              [
+                106.60073102558769,
+                45000.00000007276
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/util/armingApiKeyId.ts#isArmingApiKeyId",
+            "status": "ok",
+            "compileMs": 2345.413917,
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "bucket": 7,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 106.05791437199858,
+              "p10": 106.81293302540294,
+              "median": 108.50062178006678,
+              "p90": 110.63243915437846,
+              "max": 112.67543080476258
+            },
+            "native": {
+              "n": 60,
+              "min": 27000.000000043656,
+              "p10": 35000.000000081855,
+              "median": 59999.99999994543,
+              "p90": 242999.99999993815,
+              "max": 342999.9999998472
+            },
+            "inputJsonBytes": 132,
+            "nsPerInputJsonByte": {
+              "js": 0.8219744074247484,
+              "native": 454.54545454504114
+            },
+            "computeIntensity": 0.8219744074247484,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9410306624278477,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 16958.00000015879,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 647.4744294758506,
+              "upper": 897.502030725744,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 22516,
+            "rawPairsNs": [
+              [
+                109.65535619114512,
+                57999.999999992724
+              ],
+              [
+                108.50062178006678,
+                32000.000000152795
+              ],
+              [
+                107.56795167880732,
+                69999.99999993634
+              ],
+              [
+                107.2570616450508,
+                43999.99999986903
+              ],
+              [
+                106.67969443950152,
+                97999.99999995634
+              ],
+              [
+                111.03215491206254,
+                43999.99999986903
+              ],
+              [
+                110.98774205009876,
+                342999.9999998472
+              ],
+              [
+                108.36738319417545,
+                37000.00000003456
+              ],
+              [
+                107.52353881684353,
+                77999.99999997453
+              ],
+              [
+                109.61094332919144,
+                45000.00000007276
+              ],
+              [
+                108.67827322792189,
+                76999.99999999818
+              ],
+              [
+                107.65677740274495,
+                51999.99999990723
+              ],
+              [
+                106.05791437199858,
+                57999.999999992724
+              ],
+              [
+                106.41321726771888,
+                56000.00000004002
+              ],
+              [
+                107.4347130929059,
+                251999.9999999527
+              ],
+              [
+                106.81293302540294,
+                42000.0000001437
+              ],
+              [
+                110.32154912063203,
+                83000.00000008367
+              ],
+              [
+                110.27713625866826,
+                63000.00000010186
+              ],
+              [
+                108.90033753775084,
+                86999.99999998909
+              ],
+              [
+                108.6338603659682,
+                58999.99999996908
+              ],
+              [
+                107.6123645407711,
+                84000.00000006003
+              ],
+              [
+                109.61094332919144,
+                64999.999999827196
+              ],
+              [
+                109.47770474329002,
+                240000.00000000908
+              ],
+              [
+                108.05649316041892,
+                57000.00000001637
+              ],
+              [
+                107.87884171255374,
+                68999.99999995998
+              ],
+              [
+                106.5464558536203,
+                35000.000000081855
+              ],
+              [
+                108.23414460827402,
+                47000.000000025466
+              ],
+              [
+                109.74418191508278,
+                58999.99999996908
+              ],
+              [
+                109.30005329543492,
+                70999.99999991269
+              ],
+              [
+                107.74560312666242,
+                34000.0000001055
+              ],
+              [
+                107.6123645407711,
+                269999.99999998184
+              ],
+              [
+                106.27997868182754,
+                53000.00000011096
+              ],
+              [
+                107.12382305915946,
+                63000.00000010186
+              ],
+              [
+                106.81293302540294,
+                43000.00000012005
+              ],
+              [
+                107.65677740274495,
+                60999.99999992178
+              ],
+              [
+                111.2986320838553,
+                47000.000000025466
+              ],
+              [
+                111.47628353171037,
+                108999.9999999236
+              ],
+              [
+                109.21122757150738,
+                102000.00000008913
+              ],
+              [
+                109.07798898561605,
+                257000.00000006185
+              ],
+              [
+                107.21264878308702,
+                60999.99999992178
+              ],
+              [
+                107.6123645407711,
+                58999.99999996908
+              ],
+              [
+                108.6338603659682,
+                32999.999999901775
+              ],
+              [
+                107.65677740273486,
+                49999.999999954525
+              ],
+              [
+                107.47912595487976,
+                30999.99999994907
+              ],
+              [
+                107.52353881684353,
+                44000.00000009641
+              ],
+              [
+                107.83442885060005,
+                28000.00000002001
+              ],
+              [
+                110.63243915437846,
+                333000.0000000837
+              ],
+              [
+                109.30005329543492,
+                64000.00000007822
+              ],
+              [
+                110.4103748445596,
+                69999.99999993634
+              ],
+              [
+                109.92183336294796,
+                40999.99999993997
+              ],
+              [
+                106.99058447325804,
+                57000.00000001637
+              ],
+              [
+                107.52353881684353,
+                43000.00000012005
+              ],
+              [
+                108.94475039971462,
+                73000.00000009277
+              ],
+              [
+                109.47770474330011,
+                36000.00000005821
+              ],
+              [
+                109.43329188132624,
+                242999.99999993815
+              ],
+              [
+                108.36738319417545,
+                59999.99999994543
+              ],
+              [
+                112.67543080476258,
+                119999.99999989086
+              ],
+              [
+                108.50062178006678,
+                62999.99999987449
+              ],
+              [
+                109.78859477704654,
+                68999.99999995998
+              ],
+              [
+                108.50062178006678,
+                27000.000000043656
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scanRoot": "packages/shared",
+      "file": "src/funnels.ts",
+      "process": {
+        "exit": 0,
+        "output": " ns/call [p10 111000, p90 174000], native 59.31 ns/input byte, boundary 100.0%, intensity 0.02 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "reason": "Per-tuple failure isolation regression rerun",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-dev-clones/growthbook/packages/shared",
+        "sourceDir": "/tmp/m1-dev-clones/growthbook/packages/shared",
+        "framework": "generic",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 9,
+          "exportedFunctions": 9,
+          "considered": 9,
+          "diagnosed": 8,
+          "accepted": 1,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/funnels.ts",
+            "functions": [
+              {
+                "id": "src/funnels.ts#conversionWindowToSeconds",
+                "file": "src/funnels.ts",
+                "name": "conversionWindowToSeconds",
+                "line": 22,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate conversionWindowToSeconds: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:22:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "conversionWindowToSeconds"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#getFunnelAnchorStepIndex",
+                "file": "src/funnels.ts",
+                "name": "getFunnelAnchorStepIndex",
+                "line": 39,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "getFunnelAnchorStepIndex"
+                ],
+                "boundary": {
+                  "params": [
+                    "json",
+                    "number"
+                  ],
+                  "result": "json"
+                },
+                "promotionId": "60c5ca4cc36aa0004ac6"
+              },
+              {
+                "id": "src/funnels.ts#buildPrevResolvedExpr",
+                "file": "src/funnels.ts",
+                "name": "buildPrevResolvedExpr",
+                "line": 60,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:73:12 - NSC1000: function buildPrevResolvedExpr: parameter {\n  steps,\n  index,\n  resolvedTsColumn,\n  alias = \"\",\n  exposureColumn,\n}.resolvedTsColumn: functions and constructors are not JSON data (type (stepIndex: number) => string) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/funnels.ts#getFunnelAnchorStepIndex"
+                ],
+                "exportNames": [
+                  "buildPrevResolvedExpr"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#getFunnelRuleViolations",
+                "file": "src/funnels.ts",
+                "name": "getFunnelRuleViolations",
+                "line": 127,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFunnelRuleViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:127:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getFunnelRuleViolations"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#getFunnelBuilderViolations",
+                "file": "src/funnels.ts",
+                "name": "getFunnelBuilderViolations",
+                "line": 218,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFunnelBuilderViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:218:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/funnels.ts#getFunnelRuleViolations"
+                ],
+                "exportNames": [
+                  "getFunnelBuilderViolations"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#getFunnelSaveBlockers",
+                "file": "src/funnels.ts",
+                "name": "getFunnelSaveBlockers",
+                "line": 225,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFunnelSaveBlockers: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:225:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/funnels.ts#getFunnelRuleViolations"
+                ],
+                "exportNames": [
+                  "getFunnelSaveBlockers"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#funnelDatasetToFunnelSettings",
+                "file": "src/funnels.ts",
+                "name": "funnelDatasetToFunnelSettings",
+                "line": 254,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate funnelDatasetToFunnelSettings: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:254:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "funnelDatasetToFunnelSettings"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#funnelSettingsToFunnelDataset",
+                "file": "src/funnels.ts",
+                "name": "funnelSettingsToFunnelDataset",
+                "line": 267,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate funnelSettingsToFunnelDataset: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:267:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "funnelSettingsToFunnelDataset"
+                ]
+              },
+              {
+                "id": "src/funnels.ts#deriveFunnelUnit",
+                "file": "src/funnels.ts",
+                "name": "deriveFunnelUnit",
+                "line": 282,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate deriveFunnelUnit: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:282:8 - NSC1000: dependency closure: transitive effect proof: unsafe type escape or reflective syntax at 18 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "deriveFunnelUnit"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:22:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:127:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:218:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:225:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:254:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:267:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:282:8 - NSC1000: dependency closure: transitive effect proof: unsafe type escape or reflective syntax at 18 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "parameter {\n  steps,\n  index,\n  resolvedTsColumn,\n  alias = \"\",\n  exposureColumn,\n}.resolvedTsColumn: functions and constructors are not JSON data (type (stepIndex: number) => string) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/funnels.ts#conversionWindowToSeconds",
+            "diagnostic": "[next-scriptc] not a candidate conversionWindowToSeconds: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:22:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#buildPrevResolvedExpr",
+            "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:73:12 - NSC1000: function buildPrevResolvedExpr: parameter {\n  steps,\n  index,\n  resolvedTsColumn,\n  alias = \"\",\n  exposureColumn,\n}.resolvedTsColumn: functions and constructors are not JSON data (type (stepIndex: number) => string) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#getFunnelRuleViolations",
+            "diagnostic": "[next-scriptc] not a candidate getFunnelRuleViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:127:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#getFunnelBuilderViolations",
+            "diagnostic": "[next-scriptc] not a candidate getFunnelBuilderViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:218:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#getFunnelSaveBlockers",
+            "diagnostic": "[next-scriptc] not a candidate getFunnelSaveBlockers: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:225:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#funnelDatasetToFunnelSettings",
+            "diagnostic": "[next-scriptc] not a candidate funnelDatasetToFunnelSettings: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:254:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#funnelSettingsToFunnelDataset",
+            "diagnostic": "[next-scriptc] not a candidate funnelSettingsToFunnelDataset: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:267:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/funnels.ts#deriveFunnelUnit",
+            "diagnostic": "[next-scriptc] not a candidate deriveFunnelUnit: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:282:8 - NSC1000: dependency closure: transitive effect proof: unsafe type escape or reflective syntax at 18 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/funnels.ts",
+            "name": "conversionWindowToSeconds",
+            "message": "[next-scriptc] not a candidate conversionWindowToSeconds: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:22:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "getFunnelRuleViolations",
+            "message": "[next-scriptc] not a candidate getFunnelRuleViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:127:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "getFunnelBuilderViolations",
+            "message": "[next-scriptc] not a candidate getFunnelBuilderViolations: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:218:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "getFunnelSaveBlockers",
+            "message": "[next-scriptc] not a candidate getFunnelSaveBlockers: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:225:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "funnelDatasetToFunnelSettings",
+            "message": "[next-scriptc] not a candidate funnelDatasetToFunnelSettings: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:254:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "funnelSettingsToFunnelDataset",
+            "message": "[next-scriptc] not a candidate funnelSettingsToFunnelDataset: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:267:8 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/growthbook/packages/shared/validators.d.ts: unresolved export FunnelDataset Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "deriveFunnelUnit",
+            "message": "[next-scriptc] not a candidate deriveFunnelUnit: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:282:8 - NSC1000: dependency closure: transitive effect proof: unsafe type escape or reflective syntax at 18 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/funnels.ts",
+            "name": "buildPrevResolvedExpr",
+            "message": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/growthbook/packages/shared/src/funnels.ts:73:12 - NSC1000: function buildPrevResolvedExpr: parameter {\n  steps,\n  index,\n  resolvedTsColumn,\n  alias = \"\",\n  exposureColumn,\n}.resolvedTsColumn: functions and constructors are not JSON data (type (stepIndex: number) => string) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/funnels.ts#getFunnelAnchorStepIndex",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "reason": "Cannot read properties of undefined (reading 'optional')"
+          },
+          {
+            "id": "src/funnels.ts#getFunnelAnchorStepIndex",
+            "status": "ok",
+            "compileMs": 2051.628041,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                }
+              ],
+              32
+            ],
+            "bucket": 5,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 35.577109602329,
+              "p10": 37.090203685742665,
+              "median": 37.94374393792688,
+              "p90": 41.82347235693403,
+              "max": 50.90203685741602
+            },
+            "native": {
+              "n": 60,
+              "min": 42000.0000001437,
+              "p10": 47000.000000025466,
+              "median": 62000.00000012551,
+              "p90": 105999.99999999454,
+              "max": 172000.00000002547
+            },
+            "inputJsonBytes": 582,
+            "nsPerInputJsonByte": {
+              "js": 0.065195436319462,
+              "native": 106.52920962220878
+            },
+            "computeIntensity": 0.065195436319462,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 31334.000000242668,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1640.1765958510841,
+              "upper": 2008.3637163961241,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 51550,
+            "rawPairsNs": [
+              [
+                48.74878758487191,
+                110999.99999987631
+              ],
+              [
+                50.82444228904206,
+                71000.00000014006
+              ],
+              [
+                38.46750727448976,
+                83000.00000008367
+              ],
+              [
+                44.53928225024343,
+                86999.99999998909
+              ],
+              [
+                42.03685741998339,
+                109000.00000015098
+              ],
+              [
+                38.09893307468364,
+                62999.99999987449
+              ],
+              [
+                37.94374393792688,
+                96000.00000000364
+              ],
+              [
+                37.090203685742665,
+                172000.00000002547
+              ],
+              [
+                35.577109602329,
+                101000.00000011278
+              ],
+              [
+                40.01939864209262,
+                55999.999999812644
+              ],
+              [
+                37.361784675071405,
+                80999.9999999036
+              ],
+              [
+                37.57516973811635,
+                55999.999999812644
+              ],
+              [
+                37.32298739088221,
+                58999.99999996908
+              ],
+              [
+                50.90203685741602,
+                74000.00000006912
+              ],
+              [
+                41.82347235693403,
+                76999.99999999818
+              ],
+              [
+                37.361784675071405,
+                64999.999999827196
+              ],
+              [
+                37.245392822499426,
+                51999.99999990723
+              ],
+              [
+                37.20659553831465,
+                47000.000000025466
+              ],
+              [
+                37.96314258001707,
+                104000.00000004184
+              ],
+              [
+                39.57322987390812,
+                51000.00000015825
+              ],
+              [
+                41.61008729388907,
+                60000.000000172804
+              ],
+              [
+                37.71096023278734,
+                60999.99999992178
+              ],
+              [
+                36.391852570319614,
+                62000.00000012551
+              ],
+              [
+                37.38118331717041,
+                61999.99999989814
+              ],
+              [
+                37.38118331717041,
+                46000.00000004911
+              ],
+              [
+                36.60523763336898,
+                51999.99999990723
+              ],
+              [
+                37.69156159068834,
+                105999.99999999454
+              ],
+              [
+                38.19592628516103,
+                62000.00000012551
+              ],
+              [
+                37.53637245392717,
+                59000.00000019645
+              ],
+              [
+                40.5625606207545,
+                54999.99999983629
+              ],
+              [
+                38.428709990300575,
+                86000.00000001273
+              ],
+              [
+                37.4199806013596,
+                48999.99999997817
+              ],
+              [
+                37.12900096993186,
+                46000.00000004911
+              ],
+              [
+                37.924345295827884,
+                70999.99999991269
+              ],
+              [
+                39.39864209505236,
+                44999.999999845386
+              ],
+              [
+                40.87293889427684,
+                47000.000000025466
+              ],
+              [
+                40.85354025218224,
+                74000.00000006912
+              ],
+              [
+                40.75654704170927,
+                47000.000000025466
+              ],
+              [
+                38.00193986421067,
+                72000.00000011642
+              ],
+              [
+                39.59262851600271,
+                52999.999999883585
+              ],
+              [
+                38.99127061105705,
+                94000.00000005093
+              ],
+              [
+                37.8467507274495,
+                63000.00000010186
+              ],
+              [
+                38.02133850630086,
+                51999.99999990723
+              ],
+              [
+                38.13773035887283,
+                42000.0000001437
+              ],
+              [
+                38.04073714839986,
+                137000.00000017099
+              ],
+              [
+                38.58389912706174,
+                86000.00000001273
+              ],
+              [
+                38.38991270611139,
+                98000.00000018372
+              ],
+              [
+                41.241513094082954,
+                63000.00000010186
+              ],
+              [
+                35.80989330746855,
+                51000.00000015825
+              ],
+              [
+                35.80989330746855,
+                46000.00000004911
+              ],
+              [
+                35.63530552861278,
+                56000.00000004002
+              ],
+              [
+                37.51697381183257,
+                53999.99999985994
+              ],
+              [
+                37.14839961202645,
+                62000.00000012551
+              ],
+              [
+                37.613967022305545,
+                125000
+              ],
+              [
+                38.44810863239958,
+                75000.00000004547
+              ],
+              [
+                37.30358874878762,
+                55000.000000063665
+              ],
+              [
+                37.34238603297681,
+                79999.99999992724
+              ],
+              [
+                37.361784675071405,
+                54000.00000008731
+              ],
+              [
+                37.284190106693025,
+                48999.99999997817
+              ],
+              [
+                37.8467507274495,
+                49999.999999954525
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/funnels.ts#getFunnelAnchorStepIndex",
+            "status": "ok",
+            "compileMs": 2051.628041,
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                },
+                {
+                  "optional": true
+                }
+              ],
+              32
+            ],
+            "bucket": 7,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 35.13745565293616,
+              "p10": 37.21103533185416,
+              "median": 37.94002818772167,
+              "p90": 45.55395357125335,
+              "max": 74.77846717102149
+            },
+            "native": {
+              "n": 60,
+              "min": 94000.00000005093,
+              "p10": 110999.99999987631,
+              "median": 136999.9999999436,
+              "p90": 174000.00000020553,
+              "max": 235000.00000012733
+            },
+            "inputJsonBytes": 2310,
+            "nsPerInputJsonByte": {
+              "js": 0.01642425462671934,
+              "native": 59.30735930733489
+            },
+            "computeIntensity": 0.01642425462671934,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 77290.99999960454,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 3318.884809697625,
+              "upper": 3663.787813143636,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 61729,
+            "rawPairsNs": [
+              [
+                37.87522882275698,
+                116999.9999999618
+              ],
+              [
+                38.037227235176076,
+                110999.99999987631
+              ],
+              [
+                38.36122406000321,
+                105999.99999999454
+              ],
+              [
+                37.794229616551114,
+                94000.00000005093
+              ],
+              [
+                37.89142866399815,
+                136999.9999999436
+              ],
+              [
+                37.826629299029776,
+                137000.00000017099
+              ],
+              [
+                37.6322312041357,
+                235000.00000012733
+              ],
+              [
+                52.422686257676354,
+                115999.99999998545
+              ],
+              [
+                38.960618185941335,
+                167999.99999989267
+              ],
+              [
+                38.62042151986934,
+                128999.99999990541
+              ],
+              [
+                37.859028981515806,
+                117999.99999993815
+              ],
+              [
+                37.907628505243004,
+                153999.99999999636
+              ],
+              [
+                37.680830727859224,
+                132000.00000006185
+              ],
+              [
+                38.24782517131131,
+                142000.00000005274
+              ],
+              [
+                38.053427076413556,
+                137999.99999991996
+              ],
+              [
+                39.9326086604338,
+                119999.99999989086
+              ],
+              [
+                38.085826758895905,
+                134999.99999999092
+              ],
+              [
+                38.24782517131131,
+                108999.9999999236
+              ],
+              [
+                37.72943025158274,
+                156000.00000017643
+              ],
+              [
+                38.264025012556175,
+                144000.00000000547
+              ],
+              [
+                37.859028981515806,
+                116999.9999999618
+              ],
+              [
+                42.11958722804369,
+                142999.99999980174
+              ],
+              [
+                35.72064993762943,
+                193999.99999995998
+              ],
+              [
+                42.297785481700274,
+                138000.00000014732
+              ],
+              [
+                38.15062612386428,
+                138999.99999989633
+              ],
+              [
+                37.87522882275698,
+                111999.99999985266
+              ],
+              [
+                37.745630092823916,
+                122000.00000007094
+              ],
+              [
+                37.81042945778861,
+                107999.99999994725
+              ],
+              [
+                37.92382834648418,
+                148000.00000013824
+              ],
+              [
+                50.9485007046928,
+                114000.00000003274
+              ],
+              [
+                45.55395357125335,
+                185999.99999992177
+              ],
+              [
+                35.25085454162806,
+                120999.99999986721
+              ],
+              [
+                35.13745565293616,
+                140000.00000010006
+              ],
+              [
+                37.66463088661805,
+                138000.00000014732
+              ],
+              [
+                37.535032156684984,
+                161000.0000000582
+              ],
+              [
+                37.66463088661805,
+                153999.99999999636
+              ],
+              [
+                37.13003612564461,
+                130000.00000010914
+              ],
+              [
+                48.77772197832408,
+                132000.00000006185
+              ],
+              [
+                37.794229616551114,
+                135999.99999996726
+              ],
+              [
+                37.69703056910039,
+                115000.0000000091
+              ],
+              [
+                38.16682596510545,
+                131000.00000008549
+              ],
+              [
+                35.81784898508015,
+                110999.99999987631
+              ],
+              [
+                35.785449302597804,
+                170999.99999982174
+              ],
+              [
+                41.309595165966634,
+                167999.99999989267
+              ],
+              [
+                38.701420726078894,
+                174000.00000020553
+              ],
+              [
+                39.025417550909715,
+                139000.0000001237
+              ],
+              [
+                37.94002818772167,
+                138999.99999989633
+              ],
+              [
+                38.55562215490465,
+                142000.00000005274
+              ],
+              [
+                37.51883231544381,
+                143000.0000000291
+              ],
+              [
+                37.421633267993094,
+                134999.99999999092
+              ],
+              [
+                37.21103533185416,
+                109999.99999989996
+              ],
+              [
+                38.733820408557555,
+                146999.99999993452
+              ],
+              [
+                39.02541755090603,
+                176999.99999990722
+              ],
+              [
+                74.77846717102149,
+                136999.9999999436
+              ],
+              [
+                51.07809943462586,
+                211000.00000001275
+              ],
+              [
+                39.15501628083909,
+                140999.999999849
+              ],
+              [
+                37.794229616551114,
+                130000.00000010914
+              ],
+              [
+                38.06962691765842,
+                105000.00000001819
+              ],
+              [
+                37.713230410345254,
+                128999.99999990541
+              ],
+              [
+                38.004827552690045,
+                110999.99999987631
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
