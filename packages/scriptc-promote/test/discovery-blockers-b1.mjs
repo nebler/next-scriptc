@@ -69,7 +69,7 @@ test('checked numeric array reads compile and replay undefined reads through JS'
   assert.equal((await buildPromotion(modules,path.join(dir,'out'),{catchFallback:false})).length,1);
   const d=loadPromotion(path.join(dir,'out/promotion.node'),{mode:'native',log:()=>{},crashGuard:{directory:path.join(dir,'markers')}}),id=modules[0].functions[0].id;
   let calls=0;const js=(x,i)=>{calls++;let sum=0;for(const v of x)sum+=v;return sum+x[i];};
-  for(const i of [0,1,2,-1,0.5,99]){const expected=js([2,3],i);const before=calls;assert.equal(d.dispatch(id,js,[[2,3],i]),expected);assert.equal(calls-before,i===0||i===1?0:1);}
+  for(const i of [0,1,2,-1,0.5,99,0]){const expected=js([2,3],i);const before=calls;assert.equal(d.dispatch(id,js,[[2,3],i]),expected);assert.equal(calls-before,i===0||i===1?0:1);}
   assert.equal(d.snapshot()[id].fallback,4);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
