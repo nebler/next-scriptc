@@ -4,7 +4,8 @@ R=pathlib.Path.cwd();slug=sys.argv[1];O=pathlib.Path(os.environ['DEV_CENSUS_OUTP
 
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
 b=R/'research/eval-corpus/dev-census-b1'/f'{slug}.json';b=b if b.exists() else b.with_suffix('.json.gz');base=read(b)
-d=read(O/f'{slug}.json');groups=collections.defaultdict(set);cohort=[]
+initial=O/f'{slug}.json';compressed=O/f'{slug}.json.gz'
+d=read(initial if initial.exists() else compressed);compressed.unlink(missing_ok=True);groups=collections.defaultdict(set);cohort=[]
 for s in base.get('scans',[]):
  for f in s.get('report',{}).get('files',[]):
   for fn in f['functions']:
