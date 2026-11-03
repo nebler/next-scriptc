@@ -5,13 +5,13 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 const require=createRequire(new URL('../../../packages/scriptc-promote/package.json',import.meta.url));
 const ts=require('typescript');
-const [root,file,namesJson,out]=process.argv.slice(2),names=JSON.parse(namesJson),inputs={},provenance={};
+const [root,file,namesJson,out]=process.argv.slice(2),names=JSON.parse(namesJson),inputs={},provenance={},rawInputs={};
 let files=[];try{files=execFileSync('rg',['-l','--glob','*.test.*','--glob','*.spec.*','--glob','**/test/**/*.ts','--glob','**/tests/**/*.ts',names.join('|'),root],{encoding:'utf8'}).trim().split('\n').filter(Boolean);}catch{}
-let bindings=new Map(),resolving=new Set();
+let bindings=new Map(),resolving=new Set(),rawStrings=false;
 function literal(n){
  if(ts.isIdentifier(n)&&bindings.has(n.text)){if(resolving.has(n.text))throw Error('cyclic fixture');resolving.add(n.text);try{return literal(bindings.get(n.text));}finally{resolving.delete(n.text);}}
  if(ts.isAsExpression(n)||ts.isTypeAssertionExpression(n)||ts.isParenthesizedExpression(n))return literal(n.expression);
- if(ts.isStringLiteral(n)||ts.isNoSubstitutionTemplateLiteral(n))return n.text.replace(/[A-Za-z]/g,(_,i)=>String.fromCharCode(97+i%26)).replace(/[0-9]/g,'3');
+ if(ts.isStringLiteral(n)||ts.isNoSubstitutionTemplateLiteral(n))return rawStrings?n.text:n.text.replace(/[A-Za-z]/g,(_,i)=>String.fromCharCode(97+i%26)).replace(/[0-9]/g,'3');
  if(ts.isNumericLiteral(n))return Number(n.text);
  if(n.kind===ts.SyntaxKind.TrueKeyword)return true;if(n.kind===ts.SyntaxKind.FalseKeyword)return false;if(n.kind===ts.SyntaxKind.NullKeyword)return null;
  if(ts.isPrefixUnaryExpression(n)&&n.operator===ts.SyntaxKind.MinusToken)return -literal(n.operand);
@@ -26,7 +26,10 @@ for(const test of files){
  if(ts.isFunctionLike(n))for(const param of n.parameters??[])if(ts.isIdentifier(param.name))bindings.delete(param.name.text);
  if(ts.isVariableDeclaration(n)&&ts.isIdentifier(n.name)&&n.initializer&&(n.parent.flags&ts.NodeFlags.Const))bindings.set(n.name.text,n.initializer);
  if(ts.isCallExpression(n)){const name=ts.isIdentifier(n.expression)?n.expression.text:ts.isPropertyAccessExpression(n.expression)?n.expression.name.text:'';
- if(names.includes(name))try{const args=n.arguments.map(literal),id=file+'#'+name;if(args.length&&(inputs[id]?.length??0)<3){(inputs[id]??=[]).push(args);provenance[id]={kind:'test-shape-derived',file:path.relative(root,test),note:'Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies.'};}}catch{}}
+ if(names.includes(name))try{const args=n.arguments.map(literal),id=file+'#'+name;let rawArgs;rawStrings=true;try{rawArgs=n.arguments.map(literal);}finally{rawStrings=false;}if(args.length&&(inputs[id]?.length??0)<3){(inputs[id]??=[]).push(args);(rawInputs[id]??=[]).push(rawArgs);provenance[id]={kind:'test-shape-derived',file:path.relative(root,test),note:'Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies.'};}}catch{}}
  ts.forEachChild(n,visit);bindings=previous;}visit(ast);
 }
 fs.writeFileSync(out,JSON.stringify(inputs));fs.writeFileSync(out+'.meta',JSON.stringify(provenance));
+
+// Raw literals remain temporary. Only schema literal tags survive into results.
+fs.writeFileSync(out+'.raw',JSON.stringify(rawInputs));

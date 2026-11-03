@@ -1,7 +1,7 @@
 import {measurementAddon} from '../../../packages/scriptc-promote/src/report-addon.mjs';
 import {execFileSync} from 'node:child_process';
 // Runs only for explicit --measure. Isolate addon failures from static reporting.
-import {stripTypeScriptTypes} from 'node:module';
+import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {readFile,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -12,6 +12,18 @@ import {synthesize} from '../../../packages/scriptc-promote/src/functions/promot
 import {estimateSize} from '../../../packages/scriptc-promote/src/functions/promotion.mjs';
 const temp=process.argv[2];
 const {modules,inputs,root}=JSON.parse(await readFile(path.join(temp,'request.json'),'utf8'));
+// Retain schema discriminants without committing copied fixture payloads.
+const ts=createRequire(new URL('../../../packages/scriptc-promote/package.json',import.meta.url))('typescript');
+const rawInput=process.env.M1_INPUT_RAW?JSON.parse(await readFile(process.env.M1_INPUT_RAW,'utf8')):{};
+const schemaRestored=new Set();
+for(const m of modules){
+ const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,key=Object.hasOwn(inputs,id)?id:fn.id;
+ if(!rawInput[key]||!inputs[key])continue;
+ const tags=new Set(),ast=ts.createSourceFile('closure.ts',m.native,ts.ScriptTarget.Latest,true);
+ function visit(n){if(ts.isLiteralTypeNode(n)&&ts.isStringLiteral(n.literal))tags.add(n.literal.text);ts.forEachChild(n,visit);}visit(ast);
+ function restore(v,r){if(typeof v==='string')return tags.has(r)?r:v;if(Array.isArray(v))return v.map((x,i)=>restore(x,r?.[i]));if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,restore(x,r?.[k])]));return v;}
+ inputs[key]=inputs[key].map((args,i)=>restore(args,rawInput[key][i]));schemaRestored.add(id);
+}
 const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:s[Math.floor(s.length*.1)],median:s[Math.floor(s.length*.5)],p90:s[Math.floor(s.length*.9)],max:s.at(-1)};};
 const results=[],logs=[];
 const validIds=new Set(modules.flatMap(m=>[m.functions[0].id,path.relative(root,m.source).split(path.sep).join('/')+'#'+m.functions[0].name]));
@@ -31,7 +43,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
     const coldBegin=performance.now();let sink=js(...args);const firstJsWallNs=(performance.now()-coldBegin)*1e6;for(let i=0;i<30;i++)sink=js(...args);let iterations=1;
     for(let r=0;r<8;r++){const begin=performance.now();for(let i=0;i<iterations;i++)sink=js(...args);const ms=performance.now()-begin;if(ms>=2)break;iterations=Math.min(10000000,Math.ceil(iterations*2.5/Math.max(ms,.001)));}
     const raw=[];for(let b=0;b<21;b++){const begin=process.cpuUsage();for(let i=0;i<iterations;i++)sink=js(...args);const cpu=process.cpuUsage(begin);raw.push((cpu.user+cpu.system)*1000/iterations);globalThis.__m1Sink=sink;}
-    const j=stats(raw),bytes=Buffer.byteLength(JSON.stringify(args));results.push({id,status:'compile-rejected',compileMs,cold:{sharedBatchCompileWallMs:compileMs,firstJsWallNs,firstNativeWallNs:null},inputIndex,inputSource:supplied?'test-shape-derived':'synthetic',arguments:args,js:j,metric:'process-cpu',native:null,inputJsonBytes:bytes,computeIntensity:j.median/bytes,screenPass:j.median>=100000&&j.median/bytes>=100,verdict:null,jsIterationsPerBatch:iterations,rawJsNs:raw,reason:logs.join('\n')||'Stock compiler rejected function'});
+    const j=stats(raw),bytes=Buffer.byteLength(JSON.stringify(args));results.push({id,status:'compile-rejected',schemaLiteralTagsRestored:schemaRestored.has(id),compileMs,cold:{sharedBatchCompileWallMs:compileMs,firstJsWallNs,firstNativeWallNs:null},inputIndex,inputSource:supplied?'test-shape-derived':'synthetic',arguments:args,js:j,metric:'process-cpu',native:null,inputJsonBytes:bytes,computeIntensity:j.median/bytes,screenPass:j.median>=100000&&j.median/bytes>=100,verdict:null,jsIterationsPerBatch:iterations,rawJsNs:raw,reason:logs.join('\n')||'Stock compiler rejected function'});
    }
   }catch(e){results.push({id,status:'compile-rejected',reason:logs.join('\n'),inputError:e.message,js:null,native:null,verdict:null,screenPass:null});}
   continue;
@@ -70,7 +82,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
     try{const trace=execFileSync(process.execPath,['--trace-deopt',probe],{encoding:'utf8',timeout:60000});const steady=trace.split('M1_BEGIN')[1]?.split('M1_END')[0]??'';cliffCheck={steadyDeopts:(steady.match(/bailout/g)??[]).length,trace,hasRemainder:/(?:%|remainder)/.test(m.referenceNative??m.native),scope:'1000 warm calls then 300 steady calls; diagnostic, not an optimized rewrite'};}catch(e){cliffCheck={status:'unavailable',reason:e.message};}
    }
    const protocolCI=bootstrap(pairs); const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs.slice(0,24),'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
-   results.push({id,status:'ok',compileMs,cold:{sharedBatchCompileWallMs:compileMs,firstJsWallNs,firstNativeWallNs},cliffCheck,inputIndex,inputSource,inputProvenance:inputSource.startsWith('synthetic')?{kind:inputSource}:process.env.M1_INPUT_META?JSON.parse(await readFile(process.env.M1_INPUT_META,'utf8'))[id]??{kind:'synthetic'}:{kind:'synthetic'},arguments:args,bucket:estimateSize(args),metric:cpu?'process-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,protocolCI,protocolPass:cpu&&n.median/j.median<=.90&&protocolCI.upper<1,screenPass:j.median>=100000&&j.median/bytes>=100,jsIterationsPerBatch:iterations,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
+   results.push({id,status:'ok',schemaLiteralTagsRestored:schemaRestored.has(id),compileMs,cold:{sharedBatchCompileWallMs:compileMs,firstJsWallNs,firstNativeWallNs},cliffCheck,inputIndex,inputSource,inputProvenance:inputSource.startsWith('synthetic')?{kind:inputSource}:process.env.M1_INPUT_META?JSON.parse(await readFile(process.env.M1_INPUT_META,'utf8'))[id]??{kind:'synthetic'}:{kind:'synthetic'},arguments:args,bucket:estimateSize(args),metric:cpu?'process-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,protocolCI,protocolPass:cpu&&n.median/j.median<=.90&&protocolCI.upper<1,screenPass:j.median>=100000&&j.median/bytes>=100,jsIterationsPerBatch:iterations,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
    }catch(e){results.push({id,status:'unmeasured',compileStatus:'compiled',inputIndex,inputSource,reason:e.message});}
    if(providedCount&&inputIndex===providedCount-1&&!results.slice(resultStart).some(r=>r.status==='ok'))try{tuples.push(...[8,32,128].map(size=>resize(synthesize(m,fn),size)));}catch(e){results.push({id,status:'unmeasured',compileStatus:'compiled',inputSource:'synthetic-fallback',reason:e.message});}
   }
@@ -79,6 +91,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
 await writeFile(path.join(temp,'result.json'),JSON.stringify(results));
 
 function resize(value,size){
+ if(value instanceof Uint8Array)return Uint8Array.from({length:size},(_,i)=>(i*17+13)&255);
  if(Array.isArray(value))return value.length===16?Array.from({length:size},(_,i)=>resize(value[i%value.length],size)):value.map(v=>resize(v,size));
  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,resize(v,size)]));
  if(value==='synthetic')return 'x'.repeat(size);
