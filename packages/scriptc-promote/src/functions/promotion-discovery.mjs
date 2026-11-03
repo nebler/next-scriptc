@@ -71,7 +71,9 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.loweringMap=lowered.loweringMap;module.opaqueInputs=lowered.inputs;}
   const checked=lowerCheckedIndexes(module.native,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));
   if(!checked.requiresFallback||constructionProof(checked.native,resolution.ts).eligible){module.native=checked.native;module.requiresFallback ||= checked.requiresFallback;}
-  let mutationProof;const localMutation=()=> (mutationProof??=constructionProof(module.native,resolution.ts)).eligible;
+  let mutationProof;
+  if(ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&n.declaration.type==='Identifier')){mutationProof=constructionProof(module.native,resolution.ts);if(!mutationProof.eligible)throw Error(`dependency closure: ${source}: unproved module initialization default expression (binding read requires a closed construction proof)`);}
+  const localMutation=()=> (mutationProof??=constructionProof(module.native,resolution.ts)).eligible;
   let work=false,decorated=false;
   const native=parse(module.native);
   traverse(native,{

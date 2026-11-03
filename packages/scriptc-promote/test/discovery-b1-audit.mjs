@@ -90,3 +90,13 @@ test('restored scalar table reads and borrowed-array iteration agree through nat
   for(const m of modules){const f=m.functions[0],js=f.name==='negativeZero'?x=>x.map(v=>true):f.name==='copies'?x=>x.map(v=>v.n):f.name==='prefix'?x=>{const out=[];x.some(v=>{out.push(v);return v===4;});return out;}:x=>x.map(v=>[2,4].includes(v));for(const values of [[],[1,2,4],[4,4,-1]]){const input=f.name==='copies'?values.map(n=>({n})):values;const saved=structuredClone(input);assert.deepEqual(d.dispatch(f.id,js,[input]),js(input));assert.deepEqual(input,saved);}assert.equal(d.snapshot()[f.id].native,3);}
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+test('default binding reads cannot hide early calls or mutable function metadata',()=>{
+ for(const text of [
+  'class Marker{static value=rows([1]);}export default Marker;const bias=2;export function rows(x:number[]){return x.map(v=>v+bias);}',
+  'const early=rows([1]);function Holder(){}export default Holder;const bias=2;export function rows(x:number[]){return x.map(v=>v+bias);}',
+  'declare const bias=2;class Marker{}export default Marker;export function rows(x:number[]){return x.map(v=>v+bias);}',
+  'import {Base} from "./other";class Marker extends Base{}export default Marker;export function rows(x:number[]){return x.map(v=>v+1);}',
+  'function helper(){return 2;}export function mutate(){Object.defineProperty(helper,"name",{value:"changed"});}class Marker{}export default Marker;export function rows(x:string[]){return x.map(v=>v+helper.name);}',
+ ])assert.equal(discover(text),undefined,text);
+ const text='class Marker extends Error{value=rows([1]);}export default Marker;export function rows(x:number[]){return x.map(v=>v+1);}';assert.ok(discover(text));
+});
