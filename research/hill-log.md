@@ -2088,3 +2088,36 @@ no measured value. Queued B1c: classify the 211 by category with minimal
 reproducers, decide per category whether the old acceptance was unsound (keep
 the refusal, add a test) or over-conservative (restore it, add a test), then
 re-run the census. M1 measures the current accepted set in parallel.
+
+## 72. M1: accepted does not mean faster (2026-11-03)
+
+Measured all 251 B1 DEV acceptances at immutable pins with stock scriptc 0.4.6.
+240 compiled; all 240 have exact-parity native comparisons across 691 input
+cases. Eleven stock compiler refusals remain. Independent frozen-protocol JS
+elapsed baselines cover 247 functions; four refused functions have bounded-input
+gaps and remain unknown. Zero pass both intensity thresholds, zero predict a
+native lane, and zero meet the native CPU gate. Case-weighted native/JS CPU
+ratios: minimum 1.35×, p10 49.60×, median 481.94×, p90 3,712.33×. The closest
+lead is n8n matchesRegistryQuery; NocoDB minOf/maxOf also lose at 8/32/128. No
+winner triggered a V8 cliff audit, so none is presented as a cliff-checked win.
+
+44 compiled functions use test-shape-derived inputs, 190 type synthesis, five
+synthetic fallback and one a source-contract probe. Those shapes/sizes are not
+production frequencies. Corrected unsuitable same-name Grist fixtures and n8n
+version strings with reproducible valid-input supplements. No third-party source
+or fixture files are committed. Installs were serial under /tmp, ignored
+lifecycle scripts, and met the 12 GB floor. All 17 DEV pins were verified; no
+HELD_OUT/Papermark measurement or protected-checkout edit occurred.
+
+Fixed report-only measurement isolation: one bad tuple no longer suppresses later
+inputs, and a poisoned native instance cannot contaminate later tuples/functions.
+The poisoning regression failed before the fix and passed after it. Discovery and
+dispatcher policy are unchanged. Next suite: 103 pass; Core: 111 pass, two existing
+skips. Raw observations, provenance, generator fingerprints, matching elapsed
+baselines, gate/vote validation, final test logs and a standalone chart are retained.
+
+Install-and-go CPU savings are not demonstrated by these accepted calls. Endpoint
+CPU remains null: no request-frequency or ≥5% endpoint-harness claim. Later B1c
+acceptances are outside this frozen starting cohort.
+
+[Measurement, ratios, closest leads, refusals and limits](eval-dev-measure.md).
