@@ -1,4 +1,8 @@
 import {sourceDiagnostic} from './diagnostics.mjs';
+import {normalizeModuleFunctions} from './module-functions.mjs';
+import {inertDefaultExpression} from './module-initialization.mjs';
+import {lowerCheckedIndexes} from './checked-index.mjs';
+import {parserOptions} from './parser-options.mjs';
 import {lowerOpaqueHandles} from './opaque-handles.mjs';
 import {babelModules} from '../babel.mjs';
 import { createRequire } from 'node:module';
@@ -11,7 +15,7 @@ import {specializeCallSites} from './call-site-specialization.mjs';
 import { checkFunctionTypes } from './types.mjs';
 const require = createRequire(import.meta.url);
 const babel = babelModules;
-const parse = text => babel.parser().parse(text, {sourceType:'module',plugins:['typescript','jsx']});
+const parse = (text,source,options) => babel.parser().parse(text, parserOptions(source,options));
 const traverse = babel.traverse().default;
 const sourceParseFailure=Symbol('sourceParseFailure');
 
@@ -29,7 +33,8 @@ function freshArray(p) {
 // Runtime imports require a closed module graph and a transitive effect proof.
 // Other callees and nonlocal mutation remain subject to the existing screen.
 export function promotionCandidates(text, source, report = console.log, resolution = {}) {
- let ast;try{ast=parse(text);}catch(error){error[sourceParseFailure]=true;throw error;}
+ if(text.includes('__scriptc_checked_index'))throw Error('reserved checked index helper');
+ let ast;try{ast=parse(text,source,resolution.options);}catch(error){error[sourceParseFailure]=true;throw error;}
  const names=[];let program;
  const handlers=new Set(['GET','HEAD','POST','PUT','DELETE','PATCH','OPTIONS']);
  if(/^route\./.test(path.basename(source))){
@@ -53,29 +58,40 @@ export function promotionCandidates(text, source, report = console.log, resoluti
  const candidates=[];
  for(const {name,forced,offset} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
-  if(module.imports.length) {
+  if(!module.imports.length&&ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&!babel.types().isDeclaration(n.declaration)&&!inertDefaultExpression(n.declaration)))throw Error(`dependency closure: ${source}: unproved module initialization default expression`);
+  const nativeBody=parse(module.native,source,resolution.options).program.body;
+  const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral','ArrowFunctionExpression','FunctionExpression'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
+  const moduleProof=nativeBody.some(n=>['TSEnumDeclaration','ClassDeclaration','TSModuleDeclaration'].includes(n.type)||n.type==='VariableDeclaration'&&n.declarations.some(d=>!scalar(d.init)))||ast.program.body.some(n=>n.type==='ImportDeclaration'&&!n.specifiers.length&&n.importKind!=='type'&&n.source.value!=='server-only');
+  if(module.imports.length||moduleProof) {
    Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
   }
   module.referenceNative??=module.native;
+  const normalized=normalizeModuleFunctions(module.native,source,resolution.options);
+  if(normalized.changed){const compilerTS=resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})),lowered=lowerOpaqueHandles(normalized.native,name,compilerTS),guarded=lowerCheckedIndexes(lowered.native,compilerTS);if(constructionProof(guarded.native,compilerTS).eligible){module.native=guarded.native;module.opaqueInputs=lowered.inputs;module.requiresFallback ||= guarded.requiresFallback;}}
   if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.loweringMap=lowered.loweringMap;module.opaqueInputs=lowered.inputs;}
-  let work=false;
+  const checked=lowerCheckedIndexes(module.native,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));
+  if(!checked.requiresFallback||constructionProof(checked.native,resolution.ts).eligible){module.native=checked.native;module.requiresFallback ||= checked.requiresFallback;}
+  let mutationProof;const localMutation=()=> (mutationProof??=constructionProof(module.native,resolution.ts)).eligible;
+  let work=false,decorated=false;
   const native=parse(module.native);
   traverse(native,{
+   Decorator(){decorated=true;},
    ImportDeclaration(p){if(p.node.importKind!=='type')throw Error('purity: runtime imports are opaque');},
    ReferencedIdentifier(p){if(['Date','crypto','process','fetch','console','performance'].includes(p.node.name))throw Error('purity: time, randomness or I/O');},
    MemberExpression(p){if(p.node.object.name==='Math'&&p.node.property.name==='random')throw Error('purity: randomness');},
-   'AssignmentExpression|UpdateExpression'(p){let target=p.node.left??p.node.argument;while(target.type==='MemberExpression')target=target.object;
+   'AssignmentExpression|UpdateExpression'(p){let target=p.node.left??p.node.argument;const member=target.type==='MemberExpression';if(member&&!localMutation())throw Error('purity: argument mutation');while(target.type==='MemberExpression')target=target.object;
     if(target.type==='Identifier'){const b=p.scope.getBinding(target.name);if(!b||b.scope.path.isProgram())throw Error('purity: module state mutation');
-     if(b.kind==='param')throw Error('purity: argument mutation');}},
+     if(b.kind==='param'&&!localMutation())throw Error('purity: argument mutation');}},
    'ForStatement|ForOfStatement|ForInStatement|WhileStatement|DoWhileStatement'(){work=true;},
    CallExpression(p){const c=p.node.callee;if(c.name===name||c.type==='MemberExpression'&&(['map','reduce','filter','forEach','sort','some','every','flatMap'].includes(c.property.name)||c.object.name==='JSON'&&c.property.name==='parse'))work=true;
     if(c.type==='MemberExpression'&&['set','add','push','delete','clear','splice','sort','reverse'].includes(c.property.name)){
      let target=c.object;while(target.type==='MemberExpression')target=target.object;const b=p.scope.getBinding(target.name);
-     if((!b||b.scope.path.isProgram()||b.kind==='param')&&!freshArray(p.get('callee.object')))throw Error('purity: nonlocal mutation');
+     if(!localMutation())throw Error('purity: nonlocal mutation');
     }
    }
   });
   if(!work&&!forced)throw Error('work: no loop, recursion, array callback or JSON parse');
+  if(decorated)throw Error('purity: decorated classes and members are unsupported');
   candidates.push({...module,functions:module.functions.map(fn=>({...fn,promotion:true,rawLinks:module.rawLinks,opaqueInputs:module.opaqueInputs,requiresFallback:module.requiresFallback})),promotion:true,forced});
  }catch(e){if(forced&&!resolution.reportOnly)throw Error(sourceDiagnostic(text,source,offset,e.message));report(`[next-scriptc] not a candidate ${name}: ${sourceDiagnostic(text,source,offset,e.message)}`);}}
  return candidates;
@@ -93,7 +109,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   if(e.isDirectory())await visit(file);
   else if(/\.[cm]?[jt]sx?$/.test(file)){
    try {
-   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,reportOnly:config?.reportOnly,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
+   modules.push(...promotionCandidates(await readFile(file,'utf8'),file,message=>{report(message);config?.onDiagnostic?.({source:file,name:message.match(/not a candidate ([^:]+):/)?.[1],message});},{ts,reportOnly:config?.reportOnly,runtimeConditionSets:config?.promotionRuntimeConditionSets,onConsidered:config?.onConsidered,options:parsed.options,unsupportedResolver:!!(config?.webpack||config?.turbopack?.resolveAlias||config?.turbopack?.resolveExtensions)}));
    } catch(error) {
     // A malformed/unsupported source file must not discard other files' results.
     // Forced annotations and non-parser failures retain their fail-fast behavior.
@@ -122,7 +138,7 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
    checkFunctionTypes(ts,strict.program,[{source:strict.source.fileName,functions}]);
    functions.forEach((fn,i)=>{m.functions[i].strictClosure=true;m.functions[i].boundary=fn.boundary;m.functions[i].resultShape=fn.resultShape;});
   }
-  try { boundaries(isolated||!!m.opaqueInputs); }
+  try { boundaries(isolated||!!m.opaqueInputs||!!m.requiresFallback); }
   catch(original) {
    if(!/any, unknown|expected JSON data/.test(original.message))throw original;
    const specialization=specializeCallSites(ts,program,m);
@@ -133,6 +149,6 @@ export async function discoverPromotions(projectDir, distDir, config, report=con
   }
   for(const fn of m.functions){
    fn.constructionProof=constructionProof(m.native,ts);
-   if((!!m.opaqueInputs||specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
+   if((m.requiresFallback||!!m.opaqueInputs||specialized||isolated&&fn.boundary.params.includes('json'))&&(!fn.constructionProof.eligible||!['json','number','string'].includes(fn.boundary.result)))throw Error('strict closure: JSON inputs require a construction proof and a per-call fallback result ABI');
   }return true;}catch(e){if(m.forced&&!config?.reportOnly)throw Error(sourceDiagnostic(m.originalText??'',m.source,m.functions[0].start,e.message));const message=`[next-scriptc] not a candidate: ${sourceDiagnostic(m.originalText??'',m.source,m.functions[0].start,e.message)}`;report(message);config?.onDiagnostic?.({source:m.source,name:m.functions[0].name,message});return false;}});
 }

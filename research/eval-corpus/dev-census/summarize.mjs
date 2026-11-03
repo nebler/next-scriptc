@@ -1,6 +1,6 @@
 // Aggregate only frozen DEV artifacts; message baselines are kept separate.
 import fs from 'node:fs';import path from 'node:path';import {gunzipSync,gzipSync} from 'node:zlib';
-const dir='research/eval-corpus/dev-census',manifest=JSON.parse(fs.readFileSync('research/eval-corpus/manifest.json'));
+const dir=process.env.DEV_CENSUS_OUTPUT??'research/eval-corpus/dev-census',manifest=JSON.parse(fs.readFileSync('research/eval-corpus/manifest.json'));
 const read=p=>JSON.parse(p.endsWith('.gz')?gunzipSync(fs.readFileSync(p)):fs.readFileSync(p));
 import {category,intrinsicRefusal} from './categories.mjs';
 import {isMeasuredSource} from './scope-policy.mjs';

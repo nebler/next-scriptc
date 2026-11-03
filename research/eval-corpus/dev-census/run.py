@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DEV-only, serial dependency-installed census. Run from the worktree root."""
 import json, os, pathlib, subprocess, shutil, time, gzip, signal, re, sys
-ROOT=pathlib.Path.cwd(); OUT=ROOT/'research/eval-corpus/dev-census'; TMP=pathlib.Path('/tmp/nsc-dev-census'); TMP.mkdir(exist_ok=True)
+ROOT=pathlib.Path.cwd(); OUT=pathlib.Path(os.environ.get('DEV_CENSUS_OUTPUT',ROOT/'research/eval-corpus/dev-census')); TMP=pathlib.Path(os.environ.get('DEV_CENSUS_TEMP','/tmp/nsc-dev-census')); TMP.mkdir(exist_ok=True)
 manifest=json.loads((ROOT/'research/eval-corpus/manifest.json').read_text())
 SCOPES={
 'toeverything/AFFiNE':['packages/backend/server/src','packages/common/env/src','packages/common/error/src','packages/common/s3-compat/src'],
@@ -72,7 +72,7 @@ for r in manifest['repositories']:
   for f in excluded:(p/f).unlink()
   data['excludedFiles']=excluded;data['scopes']=scopes
   data['freeBytesBeforeInstall']=shutil.disk_usage(p).free
-  if data['freeBytesBeforeInstall']<15_000_000_000:data['status']='skipped: <15 GB free';save(slug+'.json',data);continue
+  if data['freeBytesBeforeInstall']<12_000_000_000:data['status']='skipped: <12 GB free';save(slug+'.json',data);continue
   pkg=json.loads((p/'package.json').read_text()) if (p/'package.json').exists() else {}
   pm=pkg.get('packageManager') or ('bun' if (p/'bun.lock').exists() or (p/'bun.lockb').exists() else 'pnpm' if (p/'pnpm-lock.yaml').exists() else 'yarn' if (p/'yarn.lock').exists() else 'npm')
   if r['repository']=='nocodb/nocodb' and pm=='pnpm':pm='pnpm@10' # pinned CI selects pnpm/action-setup version 10
@@ -80,12 +80,14 @@ for r in manifest['repositories']:
   if pm.startswith('pnpm'):cmd=['corepack',pm if '@' in pm else 'pnpm','install','--ignore-scripts','--frozen-lockfile','--store-dir',str(TMP/'store')]
   elif pm.startswith('yarn'):
    modern=(p/'.yarnrc.yml').exists();cmd=['corepack',pm if '@' in pm else 'yarn','install']+(['--mode=skip-build'] if modern else ['--ignore-scripts','--frozen-lockfile','--non-interactive'])
-  elif pm.startswith('bun'):cmd=[os.environ.get('DEV_CENSUS_BUN_BINARY','bun'),'install','--ignore-scripts','--frozen-lockfile']
+  elif pm.startswith('bun'):
+   pinnedBun=list(pathlib.Path('/tmp/b1-verified-bun/node_modules/@oven').glob('bun-*/bin/bun'))
+   cmd=[os.environ.get('DEV_CENSUS_BUN_BINARY',str(pinnedBun[0]) if len(pinnedBun)==1 else 'bun'),'install','--ignore-scripts','--frozen-lockfile']
   else:cmd=['npm','ci' if (p/'package-lock.json').exists() else 'install','--ignore-scripts','--no-audit','--no-fund']
   print(slug,'install',pm,flush=True);data['install']=run(cmd,p,600)
   # Scanner TypeScript fallback is isolated and does not substitute application deps.
   (p/'node_modules').mkdir(exist_ok=True)
-  if not (p/'node_modules/typescript').exists():(p/'node_modules/typescript').symlink_to('/tmp/nsc-dev-tools/node_modules/typescript',target_is_directory=True)
+  if not (p/'node_modules/typescript').exists():(p/'node_modules/typescript').symlink_to('/tmp/b1-tools/node_modules/typescript',target_is_directory=True)
   data['generators']=[]
   for schema in p.rglob('*.prisma'):
    if 'node_modules' in schema.parts or '.git' in schema.parts:continue
@@ -103,7 +105,7 @@ for r in manifest['repositories']:
    data['generators'].append(record)
   save(slug+'.json',data)
   if os.environ.get('DEV_CENSUS_BATCH_MODE'):
-   subprocess.run(['python3',str(OUT/'scan-batches.py'),slug],cwd=ROOT,check=True)
+   subprocess.run(['python3',str(ROOT/'research/eval-corpus/dev-census/scan-batches.py'),slug],cwd=ROOT,check=True)
    result=OUT/(slug+'.json.gz');result=result if result.exists() else OUT/(slug+'.json')
    data=json.loads(gzip.decompress(result.read_bytes()) if result.suffix=='.gz' else result.read_bytes())
    continue

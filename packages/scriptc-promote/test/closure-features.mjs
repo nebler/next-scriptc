@@ -53,7 +53,7 @@ test('writes, shadowing, schema calls and noncanonical array keys fail closed',(
   'export enum E { A=2 } function mutate(){E.A=9;} export function value(n:number){return n+E.A;}',
   'const t=[2,3] as const;export function value(n:number){return n+t["01"]}',
   'const t={a:2} as const;function escape(){return t;} export function value(n:number){return n+t.a;}',
-  'const t=Object.freeze({a:2});export function value(n:number){return n+t.a;}',
+  'const t=Object.freeze({a:call()});export function value(n:number){return n+t.a;}',
   'const t=z.enum(["a"]);export function value(n:number){return n+t.enum.a;}',
  ]){write('helper.ts',helper);assert.throws(()=>close(text,file));}
  write('helper.ts','const t={a:2} as const;function read(t:{a:number}){return t.a;}export function value(n:number){return read({a:n})+t.a;}');assert.deepEqual(evaluate(close(text,file).native)([1]),[3]);

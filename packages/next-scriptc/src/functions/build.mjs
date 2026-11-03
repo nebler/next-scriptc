@@ -1,4 +1,5 @@
 import {translateDiagnostics,infrastructureFailure} from 'scriptc-promote/functions/diagnostics.mjs';
+import {nextRuntimeConditionSets} from 'scriptc-promote/functions/resolution-conditions.mjs';
 import { optionsKey } from "../options.mjs";
 import { discoverPromotions } from "./promotion-discovery.mjs";
 import { buildPromotion } from "./promotion-build.mjs";
@@ -31,7 +32,7 @@ export async function prepareFunctions(config, projectDir) {
   let promotions=[],promotionFile;
   let modules = await discoverFunctions(projectDir, distDir, config);
   if(config.rewrites?.[optionsKey]?.nativePromotion === 'auto'){
-    const candidates=await discoverPromotions(projectDir,distDir,config);
+    const candidates=await discoverPromotions(projectDir,distDir,{...config,promotionRuntimeConditionSets:nextRuntimeConditionSets(process.env.NODE_ENV==='development'?'development':'production')});
     // Next cleans distDir after modifyConfig, but preserves its cache.
     const output=promotionOutput;
     promotions=await buildPromotion(candidates,output,{fuzz:config.rewrites?.[optionsKey]?.fuzz,linux:!!process.env.NEXT_SCRIPTC_VERCEL,...(process.env.NEXT_SCRIPTC_STRICT_RESULTS==='1'?{constructionResults:false}:{})});

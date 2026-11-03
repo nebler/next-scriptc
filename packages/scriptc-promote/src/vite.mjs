@@ -1,3 +1,4 @@
+import {viteRuntimeConditionSets} from './functions/resolution-conditions.mjs';
 import path from 'node:path';
 import {mkdtemp, readFile, rm} from 'node:fs/promises';
 import os from 'node:os';
@@ -20,7 +21,7 @@ function promotionPlugin({sourceDir='src', tsconfig='tsconfig.json', build={}, r
   async buildStart() {
    modules=[]; references=undefined;
    if(!server(this))return;
-   const candidates=await discoverPromotions(config.root,path.resolve(config.root,config.build.outDir),{typescript:{tsconfigPath:tsconfig},promotionSourceDir:sourceDir,webpack:config.resolve.alias.some(alias=>!internalAliases.includes(String(alias.find)))},report);
+   const candidates=await discoverPromotions(config.root,path.resolve(config.root,config.build.outDir),{promotionRuntimeConditionSets:viteRuntimeConditionSets(config),typescript:{tsconfigPath:tsconfig},promotionSourceDir:sourceDir,webpack:config.resolve.alias.some(alias=>!internalAliases.includes(String(alias.find)))},report);
    const temporary=await mkdtemp(path.join(os.tmpdir(),'scriptc-vite-'));
    try {
     modules=await buildPromotion(candidates,temporary,{...build,report});

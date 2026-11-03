@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """Resume static CLI scans in explicit source-file batches at original paths."""
 import pathlib,json,gzip,subprocess,os,sys,signal,time,collections,importlib.util
-ROOT=pathlib.Path.cwd();BASE=ROOT/'research/eval-corpus/dev-census';TMP=pathlib.Path('/tmp/nsc-dev-census');slug=sys.argv[1]
+ROOT=pathlib.Path.cwd();BASE=pathlib.Path(os.environ.get('DEV_CENSUS_OUTPUT',ROOT/'research/eval-corpus/dev-census'));TMP=pathlib.Path(os.environ.get('DEV_CENSUS_TEMP','/tmp/nsc-dev-census'));slug=sys.argv[1]
+# Use EV3's explicitly labeled compatible hosts for packages without the Node TS API.
+if slug in ['n8n','unleash'] and ('dev-census-b1' in os.environ.get('DEV_CENSUS_OUTPUT','') or 'b1-verified' in os.environ.get('DEV_CENSUS_OUTPUT','')):
+ os.environ['DEV_CENSUS_ROOT_TYPESCRIPT']='1'
+ if slug=='unleash':
+  os.environ['DEV_CENSUS_TYPESCRIPT_HOST_DIRECTORY']='/tmp/b1-tools'
+  os.environ['DEV_CENSUS_TYPESCRIPT_HOST_REASON']='Protocol TypeScript 5.9.3 host; canonical TypeScript 7 failure retained in EV3'
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
 def existing(stem):
  p=BASE/(stem+'.json.gz');return p if p.exists() else BASE/(stem+'.json')
 p=TMP/slug;data=read(existing(slug));manifest=json.loads((ROOT/'research/eval-corpus/manifest.json').read_text());r=next(r for r in manifest['repositories'] if r['split']=='DEV' and r['repository']==data['repository']);assert data['sha']==r['sha'];assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=p,text=True).strip()==r['sha']
 # Load helper functions without starting its repository loop.
-args=sys.argv;sys.argv=['run.py','__helper_only__'];spec=importlib.util.spec_from_file_location('runner',BASE/'run.py');runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner);sys.argv=args
+args=sys.argv;sys.argv=['run.py','__helper_only__'];spec=importlib.util.spec_from_file_location('runner',ROOT/'research/eval-corpus/dev-census/run.py');runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner);sys.argv=args
 resume=existing('attempts/resume-'+slug);old=read(resume) if resume.exists() else {}
 data['scans']=old.get('scans',[]) if old.get('install',{}).get('exit')==0 else [];data['priorPartitionOmissions']=old.get('scopePartitionOmissions',[])
 covered=set();supp=existing('supplements/'+slug)
@@ -32,8 +38,9 @@ for scope in data['scopes']:
 data['explicitSelectionFiles']=sorted(selected);data['additionalExclusions']=exclusions
 batchSize=int(os.environ.get('DEV_CENSUS_BATCH_FILES','180'));heap=int(os.environ.get('DEV_CENSUS_NODE_HEAP_MIB','6144'));data['finalBatchLimits']={'files':batchSize,'heapMiB':heap,'timeoutSeconds':900}
 for root,files in groups.items():
- for i in range(0,len(files),batchSize):
-  batch=files[i:i+batchSize];print(slug,'batch',str(root.relative_to(p)),i,'/',len(files),flush=True)
+ groupBatchSize=min(batchSize,32) if slug=='growthbook' and root.name=='shared' else batchSize
+ for i in range(0,len(files),groupBatchSize):
+  batch=files[i:i+groupBatchSize];print(slug,'batch',str(root.relative_to(p)),i,'/',len(files),flush=True)
   env={**os.environ,'DEV_CENSUS_SOURCE_ROOT':str(root),'DEV_CENSUS_SOURCE_FILES':json.dumps([str(f) for f in batch])}
   def run(cmd):
    start=time.time();proc=subprocess.Popen(cmd,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env=env,start_new_session=True)
@@ -42,9 +49,9 @@ for root,files in groups.items():
    return {'command':cmd,'exit':code,'seconds':round(time.time()-start,2),'output':out.decode(errors='replace')}
   node=['node',f'--max-old-space-size={heap}']
   if os.environ.get('DEV_CENSUS_ROOT_TYPESCRIPT'):
-   env['DEV_CENSUS_TYPESCRIPT_HOST_ROOT']=os.environ.get('DEV_CENSUS_TYPESCRIPT_HOST_DIRECTORY',str(p));node+=['--import',str(BASE/'typescript-host.mjs')]
+   env['DEV_CENSUS_TYPESCRIPT_HOST_ROOT']=os.environ.get('DEV_CENSUS_TYPESCRIPT_HOST_DIRECTORY',str(p));node+=['--import',str(ROOT/'research/eval-corpus/dev-census/typescript-host.mjs')]
    data['typescriptHostOverride']=os.environ.get('DEV_CENSUS_TYPESCRIPT_HOST_REASON','Installed root TypeScript 6.0.2 Node API; package TypeScript 7 host lacks sys.readFile (canonical failures retained)')
-  node+=['--import',str(BASE/'file-scope.mjs')];target=TMP/(slug+'-batch-report.json')
+  node+=['--import',str(ROOT/'research/eval-corpus/dev-census/file-scope.mjs')];target=TMP/(slug+'-batch-report.json')
   item={'scope':str(root.relative_to(p)),'scanRoot':str(root.relative_to(p)),'sourceDir':'.','selectionFiles':[str(f.relative_to(p)) for f in batch],'reportProcess':({'exit':'not-retried','command':[],'seconds':0,'output':'Earlier EV2 memory failures retained; this is an explicit EV1-only resource-limited retry'} if os.environ.get('DEV_CENSUS_EV1_ONLY') else run(node+[str(ROOT/'packages/scriptc-promote/src/cli.mjs'),'report',str(root),'--source-dir','.','--json',str(target)]))}
   if target.exists():item['report']=read(target);target.unlink()
   item['ev1Process']=run(node+[str(ROOT/'research/eval-corpus/census.mjs'),str(root),'.'])
