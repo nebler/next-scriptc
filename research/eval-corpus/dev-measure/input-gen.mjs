@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 const require=createRequire(new URL('../../../packages/scriptc-promote/package.json',import.meta.url));
 const ts=require('typescript');
 const [root,file,namesJson,out]=process.argv.slice(2),names=JSON.parse(namesJson),inputs={},provenance={};
-let files=[];try{files=execFileSync('rg',['-l','--glob','*.test.*','--glob','*.spec.*',names.join('|'),root],{encoding:'utf8'}).trim().split('\n').filter(Boolean);}catch{}
+let files=[];try{files=execFileSync('rg',['-l','--glob','*.test.*','--glob','*.spec.*','--glob','**/test/**/*.ts','--glob','**/tests/**/*.ts',names.join('|'),root],{encoding:'utf8'}).trim().split('\n').filter(Boolean);}catch{}
 function literal(n){
  if(ts.isStringLiteral(n)||ts.isNoSubstitutionTemplateLiteral(n))return n.text.replace(/[A-Za-z]/g,(_,i)=>String.fromCharCode(97+i%26)).replace(/[0-9]/g,'3');
  if(ts.isNumericLiteral(n))return Number(n.text);
