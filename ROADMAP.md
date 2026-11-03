@@ -102,7 +102,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |
-| C2 | Native JSON decode speed | 1 | scriptc fork | after C1 |
+| C2 | Native JSON decode speed | 1 | scriptc fork | bounded slice done: ordered schema decode −8.1% flat / −3.8% nested at 60k; erased unchanged; emitted decoder design remains open ([evidence](research/native-json-decode.md)) |
 | A1 | Async outlining | 2 | discovery | after B1 |
 | E3 | Native-resident data across calls | 1 | dispatcher/boundary | queued |
 | T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | implemented: opt-in host build gate, CLI, bounded shrinking, native/wasm semantics probes; [evidence](research/build-time-fuzzing.md) |

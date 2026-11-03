@@ -1,0 +1,427 @@
+Analysis of sampling baseline (pid 19196) every 1 millisecond
+Process:         baseline [19196]
+Path:            /Users/USER/*/baseline
+Load Address:    0x104404000
+Identifier:      baseline
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  node [19144]
+Target Type:     live task
+
+Date/Time:       2026-11-03 01:31:40.400 +0100
+Launch Time:     2026-11-03 01:31:40.058 +0100
+OS Version:      macOS 26.6.1 (25G76)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         70.2M
+Physical footprint (peak):  70.2M
+Idle exit:                  untracked
+----
+
+Call graph:
+    2222 Thread_1922040   DispatchQueue_1: com.apple.main-thread  (serial)
+      2222 start  (in dyld) + 6992  [0x18ed984e4]
+        1240 main  (in baseline) + 380  [0x1044087b4]  bench.c:27
+        + 1239 scr_json_parse  (in baseline) + 172  [0x10443aad0]  scr_json.c:14805
+        + ! 1198 scr_json_value  (in baseline) + 2984  [0x10443b7f8]  scr_json.c:14767
+        + ! : 676 scr_json_value  (in baseline) + 2256  [0x10443b520]  scr_json.c:14767
+        + ! : | 167 scr_json_value  (in baseline) + 2984  [0x10443b7f8]  scr_json.c:14767
+        + ! : | + 102 scr_json_value  (in baseline) + 628  [0x10443aec4]  scr_json.c:14773
+        + ! : | + ! 41 scr_json_string_scr  (in baseline) + 52  [0x104454764]  scr_json.c:14346
+        + ! : | + ! : 23 scr_json_plain_bytes  (in baseline) + 28,0,...  [0x10440bdec,0x10440bdd0,...]  scr_json.c:430
+        + ! : | + ! : 9 scr_json_plain_bytes  (in baseline) + 96,84,...  [0x10440be30,0x10440be24,...]  scr_json.c:0
+        + ! : | + ! : 4 scr_json_plain_bytes  (in baseline) + 80  [0x10440be20]  scr_json.c:440
+        + ! : | + ! : 2 scr_json_plain_bytes  (in baseline) + 40  [0x10440bdf8]  scr_json.c:434
+        + ! : | + ! : 2 scr_json_plain_bytes  (in baseline) + 92  [0x10440be2c]  scr_json.c:442
+        + ! : | + ! : 1 scr_json_plain_bytes  (in baseline) + 72  [0x10440be18]  scr_json.c:439
+        + ! : | + ! 30 scr_str_new  (in baseline) + 48  [0x10445d1f4]  scr_string.c:407
+        + ! : | + ! : 13 scr_str_alloc  (in baseline) + 80  [0x10445d6b0]  scr_string.c:360
+        + ! : | + ! : 10 scr_str_alloc  (in baseline) + 20  [0x10445d674]  scr_string.c:0
+        + ! : | + ! : 6 scr_str_alloc  (in baseline) + 4  [0x10445d664]  scr_string.c:358
+        + ! : | + ! : 1 scr_str_alloc  (in baseline) + 28  [0x10445d67c]  scr_string.c:359
+        + ! : | + ! 15 scr_str_new  (in baseline) + 48,364,...  [0x10445d1f4,0x10445d330,...]  scr_string.c:410
+        + ! : | + ! 7 scr_str_alloc  (in baseline) + 116  [0x10445d6d4]  scr_string.c:369
+        + ! : | + ! 5 scr_json_string_scr  (in baseline) + 28,72,...  [0x10445474c,0x104454778,...]  scr_json.c:14346
+        + ! : | + ! 3 scr_str_new  (in baseline) + 0,8  [0x10445d1c4,0x10445d1cc]  scr_string.c:406
+        + ! : | + ! 1 scr_str_new  (in baseline) + 380  [0x10445d340]  scr_string.c:411
+        + ! : | + 22 scr_json_value  (in baseline) + 44,68,...  [0x10443ac7c,0x10443ac94,...]  scr_json.c:14753
+        + ! : | + 11 scr_json_value  (in baseline) + 636,640,...  [0x10443aecc,0x10443aed0,...]  scr_json.c:14775
+        + ! : | + 8 scr_json_value  (in baseline) + 16,24,...  [0x10443ac60,0x10443ac68,...]  scr_json.c:14752
+        + ! : | + 8 scr_str_new  (in baseline) + 1160,1176,...  [0x10445d64c,0x10445d65c,...]  scr_string.c:413
+        + ! : | + 6 scr_json_value  (in baseline) + 288  [0x10443ad70]  scr_json.c:14759
+        + ! : | + 6 scr_json_value  (in baseline) + 692  [0x10443af04]  scr_json.c:14776
+        + ! : | + 1 scr_json_string_scr  (in baseline) + 140  [0x1044547bc]  scr_json.c:14348
+        + ! : | + 1 scr_json_value  (in baseline) + 128  [0x10443acd0]  scr_json.c:14758
+        + ! : | + 1 scr_json_value  (in baseline) + 620  [0x10443aebc]  scr_json.c:14773
+        + ! : | + 1 scr_json_value  (in baseline) + 248  [0x10443ad48]  scr_json.c:14794
+        + ! : | 95 scr_json_value  (in baseline) + 336  [0x10443ada0]  scr_json.c:14791
+        + ! : | + 34 scr_json_number_value  (in baseline) + 188,192,...  [0x104455484,0x104455488,...]  scr_json.c:14398
+        + ! : | + 15 scr_json_number_value  (in baseline) + 256,264  [0x1044554c8,0x1044554d0]  scr_json.c:14407
+        + ! : | + 13 scr_json_number_value  (in baseline) + 172,220  [0x104455474,0x1044554a4]  scr_json.c:14397
+        + ! : | + 10 scr_json_number_value  (in baseline) + 216  [0x1044554a0]  scr_json.c:14404
+        + ! : | + 8 scr_json_number_value  (in baseline) + 24  [0x1044553e0]  scr_json.c:14379
+        + ! : | + 7 scr_json_number_value  (in baseline) + 620  [0x104455634]  scr_json.c:14447
+        + ! : | + 4 scr_json_number_value  (in baseline) + 640  [0x104455648]  scr_json.c:14451
+        + ! : | + 2 scr_json_number_value  (in baseline) + 72  [0x104455410]  scr_json.c:14389
+        + ! : | + 1 scr_json_number_value  (in baseline) + 428  [0x104455574]  scr_json.c:0
+        + ! : | + 1 scr_json_number_value  (in baseline) + 0  [0x1044553c8]  scr_json.c:14362
+        + ! : | 72 scr_json_value  (in baseline) + 2860  [0x10443b77c]  scr_json.c:14767
+        + ! : | + 44 scr_json_value  (in baseline) + 628  [0x10443aec4]  scr_json.c:14773
+        + ! : | + ! 22 scr_json_string_scr  (in baseline) + 52  [0x104454764]  scr_json.c:14346
+        + ! : | + ! : 9 scr_json_plain_bytes  (in baseline) + 20,28  [0x10440bde4,0x10440bdec]  scr_json.c:430
+        + ! : | + ! : 8 scr_json_plain_bytes  (in baseline) + 72  [0x10440be18]  scr_json.c:439
+        + ! : | + ! : 4 scr_json_plain_bytes  (in baseline) + 84,100  [0x10440be24,0x10440be34]  scr_json.c:0
+        + ! : | + ! : 1 scr_json_plain_bytes  (in baseline) + 80  [0x10440be20]  scr_json.c:440
+        + ! : | + ! 10 scr_str_new  (in baseline) + 48  [0x10445d1f4]  scr_string.c:407
+        + ! : | + ! : 6 scr_str_alloc  (in baseline) + 80,88  [0x10445d6b0,0x10445d6b8]  scr_string.c:360
+        + ! : | + ! : 4 scr_str_alloc  (in baseline) + 4  [0x10445d664]  scr_string.c:358
+        + ! : | + ! 4 scr_str_new  (in baseline) + 0,8  [0x10445d1c4,0x10445d1cc]  scr_string.c:406
+        + ! : | + ! 4 scr_str_new  (in baseline) + 48,364  [0x10445d1f4,0x10445d330]  scr_string.c:410
+        + ! : | + ! 3 scr_json_string_scr  (in baseline) + 52,28  [0x104454764,0x10445474c]  scr_json.c:14346
+        + ! : | + ! 1 scr_str_alloc  (in baseline) + 116  [0x10445d6d4]  scr_string.c:369
+        + ! : | + 8 scr_json_value  (in baseline) + 644,636,...  [0x10443aed4,0x10443aecc,...]  scr_json.c:14775
+        + ! : | + 8 scr_str_new  (in baseline) + 1176,1160  [0x10445d65c,0x10445d64c]  scr_string.c:413
+        + ! : | + 4 scr_json_value  (in baseline) + 28  [0x10443ac6c]  scr_json.c:14752
+        + ! : | + 3 scr_json_value  (in baseline) + 44,68,...  [0x10443ac7c,0x10443ac94,...]  scr_json.c:14753
+        + ! : | + 2 scr_json_value  (in baseline) + 128  [0x10443acd0]  scr_json.c:14758
+        + ! : | + 1 scr_json_value  (in baseline) + 628  [0x10443aec4]  scr_json.c:14774
+        + ! : | + 1 scr_json_value  (in baseline) + 692  [0x10443af04]  scr_json.c:14776
+        + ! : | + 1 scr_json_value  (in baseline) + 248  [0x10443ad48]  scr_json.c:14794
+        + ! : | 68 scr_json_value  (in baseline) + 472,288,...  [0x10443ae28,0x10443ad70,...]  scr_json.c:14759
+        + ! : | 36 scr_json_value  (in baseline) + 628  [0x10443aec4]  scr_json.c:14773
+        + ! : | + 16 scr_json_string_scr  (in baseline) + 52  [0x104454764]  scr_json.c:14346
+        + ! : | + ! 8 scr_json_plain_bytes  (in baseline) + 96,84,...  [0x10440be30,0x10440be24,...]  scr_json.c:0
+        + ! : | + ! 8 scr_json_plain_bytes  (in baseline) + 28,0  [0x10440bdec,0x10440bdd0]  scr_json.c:430
+        + ! : | + 9 scr_str_new  (in baseline) + 48  [0x10445d1f4]  scr_string.c:407
+        + ! : | + ! 5 scr_str_alloc  (in baseline) + 80  [0x10445d6b0]  scr_string.c:360
+        + ! : | + ! 2 scr_str_alloc  (in baseline) + 20  [0x10445d674]  scr_string.c:0
+        + ! : | + ! 2 scr_str_alloc  (in baseline) + 4  [0x10445d664]  scr_string.c:358
+        + ! : | + 4 scr_str_new  (in baseline) + 0,8  [0x10445d1c4,0x10445d1cc]  scr_string.c:406
+        + ! : | + 3 scr_str_new  (in baseline) + 48  [0x10445d1f4]  scr_string.c:410
+        + ! : | + 2 scr_str_new  (in baseline) + 272  [0x10445d2d4]  scr_string.c:412
+        + ! : | + 1 scr_json_string_scr  (in baseline) + 68  [0x104454774]  scr_json.c:14346
+        + ! : | + 1 scr_str_alloc  (in baseline) + 116  [0x10445d6d4]  scr_string.c:369
+        + ! : | 34 scr_json_value  (in baseline) + 44,68,...  [0x10443ac7c,0x10443ac94,...]  scr_json.c:14753
+        + ! : | 34 scr_json_value  (in baseline) + 2888  [0x10443b798]  scr_json.c:14767
+        + ! : | + 19 scr_dyn_arr_push  (in baseline) + 24,64  [0x10440e6d8,0x10440e700]  scr_json.c:1953
+        + ! : | + 7 scr_dyn_arr_push  (in baseline) + 124,128  [0x10440e73c,0x10440e740]  scr_json.c:1954
+        + ! : | + 7 scr_dyn_arr_push  (in baseline) + 212  [0x10440e794]  scr_json.c:1966
+        + ! : | + 1 scr_dyn_arr_push  (in baseline) + 248  [0x10440e7b8]  scr_json.c:1968
+        + ! : | 34 scr_json_value  (in baseline) + 2904,2916,...  [0x10443b7a8,0x10443b7b4,...]  scr_json.c:14767
+        + ! : | 33 scr_json_value  (in baseline) + 276,280,...  [0x10443ad64,0x10443ad68,...]  scr_json.c:14794
+        + ! : | 21 scr_json_value  (in baseline) + 368,396,...  [0x10443adc0,0x10443addc,...]  scr_json.c:14791
+        + ! : | 15 scr_json_value  (in baseline) + 20,16,...  [0x10443ac64,0x10443ac60,...]  scr_json.c:14752
+        + ! : | 14 scr_dyn_arr_push  (in baseline) + 256  [0x10440e7c0]  scr_json.c:1968
+        + ! : | 12 scr_json_value  (in baseline) + 128  [0x10443acd0]  scr_json.c:14758
+        + ! : | 8 scr_json_number_value  (in baseline) + 752  [0x1044556b8]  scr_json.c:14463
+        + ! : | 7 scr_dyn_alloc  (in baseline) + 136  [0x10441223c]  scr_json.c:1482
+        + ! : | 6 scr_json_value  (in baseline) + 860  [0x10443afac]  scr_json.c:14767
+        + ! : | + 3 scr_dyn_alloc  (in baseline) + 96,100  [0x104412214,0x104412218]  scr_json.c:1438
+        + ! : | + 2 scr_dyn_alloc  (in baseline) + 32  [0x1044121d4]  scr_json.c:1424
+        + ! : | + 1 scr_dyn_alloc  (in baseline) + 48  [0x1044121e4]  scr_json.c:1427
+        + ! : | 6 scr_str_new  (in baseline) + 1176,1168  [0x10445d65c,0x10445d654]  scr_string.c:413
+        + ! : | 3 scr_json_value  (in baseline) + 700,708  [0x10443af0c,0x10443af14]  scr_json.c:14784
+        + ! : | 2 scr_json_value  (in baseline) + 116  [0x10443acc4]  scr_json.c:14754
+        + ! : | 2 scr_json_value  (in baseline) + 496  [0x10443ae40]  scr_json.c:14760
+        + ! : | 2 scr_json_value  (in baseline) + 2792  [0x10443b738]  scr_json.c:14769
+        + ! : | 2 scr_json_value  (in baseline) + 640,644  [0x10443aed0,0x10443aed4]  scr_json.c:14775
+        + ! : | 2 scr_json_value  (in baseline) + 692  [0x10443af04]  scr_json.c:14776
+        + ! : | 1 scr_json_value  (in baseline) + 780  [0x10443af5c]  scr_json.c:14780
+        + ! : 334 scr_json_value  (in baseline) + 3344,2716,...  [0x10443b960,0x10443b6ec,...]  scr_json.c:14767
+        + ! : 45 scr_json_value  (in baseline) + 276,268,...  [0x10443ad64,0x10443ad5c,...]  scr_json.c:14794
+        + ! : 40 scr_json_value  (in baseline) + 3576  [0x10443ba48]  scr_json.c:14767
+        + ! : | 25 scr_json_fit_block  (in baseline) + 184  [0x10445532c]  scr_json.c:14492
+        + ! : | + 19 _platform_memmove  (in libsystem_platform.dylib) + 428,460,...  [0x18f16d50c,0x18f16d52c,...]
+        + ! : | + 6 DYLD-STUB$$memcpy  (in baseline) + 4,0  [0x10450bf14,0x10450bf10]
+        + ! : | 14 scr_json_fit_block  (in baseline) + 36,68  [0x104455298,0x1044552b8]  scr_json.c:14490
+        + ! : | 1 scr_json_fit_block  (in baseline) + 168  [0x10445531c]  scr_json.c:14492
+        + ! : 28 scr_json_value  (in baseline) + 2592  [0x10443b670]  scr_json.c:14767
+        + ! : | 11 scr_mem_realloc  (in baseline) + 588  [0x1044a9270]  scr_alloc.c:2886
+        + ! : | + 10 _platform_memmove  (in libsystem_platform.dylib) + 428,460,...  [0x18f16d50c,0x18f16d52c,...]
+        + ! : | + 1 DYLD-STUB$$memcpy  (in baseline) + 4  [0x10450bf14]
+        + ! : | 6 scr_mem_realloc  (in baseline) + 12  [0x1044a9030]  scr_alloc.c:2850
+        + ! : | 4 scr_mem_realloc  (in baseline) + 252,208  [0x1044a9120,0x1044a90f4]  scr_alloc.c:2884
+        + ! : | 3 scr_mem_realloc  (in baseline) + 164,172  [0x1044a90c8,0x1044a90d0]  scr_alloc.c:2861
+        + ! : | 2 scr_mem_realloc  (in baseline) + 44  [0x1044a9050]  scr_alloc.c:2854
+        + ! : | 1 scr_mem_realloc  (in baseline) + 84  [0x1044a9078]  scr_alloc.c:2857
+        + ! : | 1 scr_mem_realloc  (in baseline) + 600  [0x1044a927c]  scr_alloc.c:2887
+        + ! : 25 scr_json_value  (in baseline) + 2636  [0x10443b69c]  scr_json.c:14767
+        + ! : | 24 scr_str_release  (in baseline) + 4  [0x10445d998]  scr_string.c:479
+        + ! : | 1 scr_str_release  (in baseline) + 40  [0x10445d9bc]  scr_string.c:499
+        + ! : 12 scr_str_release  (in baseline) + 44  [0x10445d9c0]  scr_string.c:499
+        + ! : 9 scr_json_fit_block  (in baseline) + 244,248  [0x104455368,0x10445536c]  scr_json.c:14495
+        + ! : 9 scr_json_value  (in baseline) + 532  [0x10443ae64]  scr_json.c:14767
+        + ! : | 6 scr_dyn_alloc  (in baseline) + 96,100  [0x104412214,0x104412218]  scr_json.c:1438
+        + ! : | 2 scr_dyn_alloc  (in baseline) + 48  [0x1044121e4]  scr_json.c:1427
+        + ! : | 1 scr_dyn_alloc  (in baseline) + 32  [0x1044121d4]  scr_json.c:1424
+        + ! : 6 scr_json_value  (in baseline) + 24,28,...  [0x10443ac68,0x10443ac6c,...]  scr_json.c:14752
+        + ! : 3 scr_json_value  (in baseline) + 68,44  [0x10443ac94,0x10443ac7c]  scr_json.c:14753
+        + ! : 3 scr_json_value  (in baseline) + 128  [0x10443acd0]  scr_json.c:14758
+        + ! : 3 scr_json_value  (in baseline) + 140,472  [0x10443acdc,0x10443ae28]  scr_json.c:14759
+        + ! : 2 scr_json_value  (in baseline) + 2792  [0x10443b738]  scr_json.c:14769
+        + ! : 2 scr_mem_realloc  (in baseline) + 652  [0x1044a92b0]  scr_alloc.c:2889
+        + ! : 1 scr_json_value  (in baseline) + 496  [0x10443ae40]  scr_json.c:14760
+        + ! 21 scr_json_value  (in baseline) + 2888  [0x10443b798]  scr_json.c:14767
+        + ! : 13 scr_dyn_arr_push  (in baseline) + 24,64  [0x10440e6d8,0x10440e700]  scr_json.c:1953
+        + ! : 4 scr_dyn_arr_push  (in baseline) + 124  [0x10440e73c]  scr_json.c:1954
+        + ! : 4 scr_dyn_arr_push  (in baseline) + 212  [0x10440e794]  scr_json.c:1966
+        + ! 10 scr_dyn_arr_push  (in baseline) + 256  [0x10440e7c0]  scr_json.c:1968
+        + ! 7 scr_json_value  (in baseline) + 276,264  [0x10443ad64,0x10443ad58]  scr_json.c:14794
+        + ! 2 scr_json_value  (in baseline) + 2944,2956  [0x10443b7d0,0x10443b7dc]  scr_json.c:14767
+        + ! 1 scr_json_value  (in baseline) + 2860  [0x10443b77c]  scr_json.c:14767
+        + !   1 scr_json_value  (in baseline) + 2292  [0x10443b544]  scr_json.c:14767
+        + !     1 scr_dyn_obj_put  (in baseline) + 164  [0x10442a240]  scr_json.c:2296
+        + !       1 scr_layout_find  (in baseline) + 2548  [0x10440ce90]  scr_json.c:0
+        + 1 scr_json_parse  (in baseline) + 108  [0x10443aa90]  scr_json.c:14798
+        406 main  (in baseline) + 716  [0x104408904]  bench.c:33
+        + 406 scr_rc_destroy  (in baseline) + 152  [0x1044a4a50]  scr_cycle.c:342
+        +   401 scr_dyn_dispose  (in baseline) + 1244  [0x10444f438]  scr_json.c:1593
+        +   ! 366 scr_rc_destroy  (in baseline) + 152  [0x1044a4a50]  scr_cycle.c:342
+        +   ! : 266 scr_dyn_dispose  (in baseline) + 2400  [0x10444f8bc]  scr_json.c:1601
+        +   ! : | 179 scr_rc_destroy  (in baseline) + 152  [0x1044a4a50]  scr_cycle.c:342
+        +   ! : | + 97 scr_dyn_dispose  (in baseline) + 1244  [0x10444f438]  scr_json.c:1593
+        +   ! : | + ! 42 scr_dyn_release  (in baseline) + 888  [0x10440a7f8]  scr_json.c:1730
+        +   ! : | + ! : 11 scr_str_release  (in baseline) + 248  [0x10445da8c]  scr_string.c:490
+        +   ! : | + ! : 8 scr_str_release  (in baseline) + 312,292,...  [0x10445dacc,0x10445dab8,...]  scr_string.c:497
+        +   ! : | + ! : 6 scr_str_release  (in baseline) + 4  [0x10445d998]  scr_string.c:479
+        +   ! : | + ! : 6 scr_str_release  (in baseline) + 156  [0x10445da30]  scr_string.c:485
+        +   ! : | + ! : 5 scr_str_release  (in baseline) + 32  [0x10445d9b4]  scr_string.c:481
+        +   ! : | + ! : 3 scr_str_release  (in baseline) + 16  [0x10445d9a4]  scr_string.c:480
+        +   ! : | + ! : 2 scr_str_release  (in baseline) + 348  [0x10445daf0]  scr_string.c:499
+        +   ! : | + ! : 1 scr_str_release  (in baseline) + 60  [0x10445d9d0]  scr_string.c:482
+        +   ! : | + ! 23 scr_str_release  (in baseline) + 352,356  [0x10445daf4,0x10445daf8]  scr_string.c:499
+        +   ! : | + ! 8 scr_dyn_release  (in baseline) + 36  [0x10440a4a4]  scr_json.c:1703
+        +   ! : | + ! 7 scr_dyn_release  (in baseline) + 128,812  [0x10440a500,0x10440a7ac]  scr_json.c:1728
+        +   ! : | + ! 5 scr_dyn_release  (in baseline) + 4  [0x10440a484]  scr_json.c:1701
+        +   ! : | + ! 4 scr_dyn_release  (in baseline) + 28,824  [0x10440a49c,0x10440a7b8]  scr_json.c:0
+        +   ! : | + ! 4 scr_dyn_release  (in baseline) + 864  [0x10440a7e0]  scr_json.c:1730
+        +   ! : | + ! 2 scr_dyn_release  (in baseline) + 108,120  [0x10440a4ec,0x10440a4f8]  scr_json.c:1727
+        +   ! : | + ! 1 scr_dyn_release  (in baseline) + 836  [0x10440a7c4]  scr_json.c:1729
+        +   ! : | + ! 1 scr_dyn_release  (in baseline) + 920  [0x10440a818]  scr_json.c:1752
+        +   ! : | + 14 scr_dyn_release  (in baseline) + 924  [0x10440a81c]  scr_json.c:1752
+        +   ! : | + 12 scr_dyn_dispose  (in baseline) + 1192  [0x10444f404]  scr_json.c:1590
+        +   ! : | + ! 10 _free  (in libsystem_malloc.dylib) + 0,124  [0x18ef8fcd0,0x18ef8fd4c]
+        +   ! : | + ! 2 DYLD-STUB$$free  (in baseline) + 4  [0x10450bd34]
+        +   ! : | + 11 scr_dyn_dispose  (in baseline) + 24  [0x10444ef74]  scr_json.c:0
+        +   ! : | + 8 scr_dyn_dispose  (in baseline) + 1216  [0x10444f41c]  scr_json.c:1593
+        +   ! : | + 6 scr_dyn_dispose  (in baseline) + 1192  [0x10444f404]  scr_json.c:1591
+        +   ! : | + 5 scr_dyn_dispose  (in baseline) + 888,916,...  [0x10444f2d4,0x10444f2f0,...]  scr_json.c:1568
+        +   ! : | + 5 scr_dyn_dispose  (in baseline) + 976  [0x10444f32c]  scr_json.c:1571
+        +   ! : | + 5 scr_dyn_dispose  (in baseline) + 1496  [0x10444f534]  scr_json.c:1656
+        +   ! : | + 4 scr_dyn_dispose  (in baseline) + 32  [0x10444ef7c]  scr_json.c:1547
+        +   ! : | + 4 scr_dyn_dispose  (in baseline) + 1544,1540  [0x10444f564,0x10444f560]  scr_json.c:1660
+        +   ! : | + 3 scr_dyn_dispose  (in baseline) + 1024,996  [0x10444f35c,0x10444f340]  scr_json.c:1574
+        +   ! : | + 3 scr_dyn_dispose  (in baseline) + 1392  [0x10444f4cc]  scr_json.c:1594
+        +   ! : | + 1 scr_dyn_dispose  (in baseline) + 964  [0x10444f320]  scr_json.c:1570
+        +   ! : | + 1 scr_dyn_dispose  (in baseline) + 1184  [0x10444f3fc]  scr_json.c:1590
+        +   ! : | 18 scr_dyn_release  (in baseline) + 888  [0x10440a7f8]  scr_json.c:1730
+        +   ! : | + 5 scr_str_release  (in baseline) + 312  [0x10445dacc]  scr_string.c:497
+        +   ! : | + 4 scr_str_release  (in baseline) + 248  [0x10445da8c]  scr_string.c:490
+        +   ! : | + 2 scr_str_release  (in baseline) + 4  [0x10445d998]  scr_string.c:479
+        +   ! : | + 2 scr_str_release  (in baseline) + 16  [0x10445d9a4]  scr_string.c:480
+        +   ! : | + 2 scr_str_release  (in baseline) + 32  [0x10445d9b4]  scr_string.c:481
+        +   ! : | + 1 scr_str_release  (in baseline) + 52  [0x10445d9c8]  scr_string.c:482
+        +   ! : | + 1 scr_str_release  (in baseline) + 156  [0x10445da30]  scr_string.c:485
+        +   ! : | + 1 scr_str_release  (in baseline) + 348  [0x10445daf0]  scr_string.c:499
+        +   ! : | 13 scr_dyn_release  (in baseline) + 4,0  [0x10440a484,0x10440a480]  scr_json.c:1701
+        +   ! : | 9 scr_dyn_dispose  (in baseline) + 1788,1784  [0x10444f658,0x10444f654]  scr_json.c:1673
+        +   ! : | 7 scr_dyn_release  (in baseline) + 108,120  [0x10440a4ec,0x10440a4f8]  scr_json.c:1727
+        +   ! : | 7 scr_dyn_release  (in baseline) + 136  [0x10440a508]  scr_json.c:1737
+        +   ! : | 5 scr_dyn_release  (in baseline) + 36  [0x10440a4a4]  scr_json.c:1703
+        +   ! : | 5 scr_dyn_release  (in baseline) + 532  [0x10440a694]  scr_json.c:1743
+        +   ! : | 5 scr_rc_destroy  (in baseline) + 20  [0x1044a49cc]  scr_cycle.c:337
+        +   ! : | 4 scr_str_release  (in baseline) + 352,356  [0x10445daf4,0x10445daf8]  scr_string.c:499
+        +   ! : | 3 scr_dyn_release  (in baseline) + 128  [0x10440a500]  scr_json.c:1728
+        +   ! : | 2 scr_dyn_release  (in baseline) + 864  [0x10440a7e0]  scr_json.c:1730
+        +   ! : | 2 scr_dyn_release  (in baseline) + 164,172  [0x10440a524,0x10440a52c]  scr_json.c:1739
+        +   ! : | 2 scr_rc_destroy  (in baseline) + 144  [0x1044a4a48]  scr_cycle.c:341
+        +   ! : | 1 scr_dyn_release  (in baseline) + 824  [0x10440a7b8]  scr_json.c:0
+        +   ! : | 1 scr_dyn_release  (in baseline) + 836  [0x10440a7c4]  scr_json.c:1729
+        +   ! : | 1 scr_dyn_release  (in baseline) + 624  [0x10440a6f0]  scr_json.c:1751
+        +   ! : | 1 scr_dyn_release  (in baseline) + 96  [0x10440a4e0]  scr_json.c:1752
+        +   ! : | 1 scr_rc_destroy  (in baseline) + 160  [0x1044a4a58]  scr_cycle.c:343
+        +   ! : 26 scr_dyn_dispose  (in baseline) + 2364,2348  [0x10444f898,0x10444f888]  scr_json.c:1600
+        +   ! : 12 scr_dyn_release  (in baseline) + 924,100  [0x10440a81c,0x10440a4e4]  scr_json.c:1752
+        +   ! : 9 scr_dyn_dispose  (in baseline) + 932,944,...  [0x10444f300,0x10444f30c,...]  scr_json.c:1568
+        +   ! : 8 scr_dyn_obj_drop_keys  (in baseline) + 40  [0x10444fa18]  scr_json.c:1171
+        +   ! : 6 scr_dyn_dispose  (in baseline) + 976  [0x10444f32c]  scr_json.c:1571
+        +   ! : 5 scr_dyn_dispose  (in baseline) + 24  [0x10444ef74]  scr_json.c:0
+        +   ! : 4 scr_dyn_dispose  (in baseline) + 32  [0x10444ef7c]  scr_json.c:1547
+        +   ! : 4 scr_dyn_dispose  (in baseline) + 848  [0x10444f2ac]  scr_json.c:1564
+        +   ! : 4 scr_dyn_dispose  (in baseline) + 2376,2388  [0x10444f8a4,0x10444f8b0]  scr_json.c:1601
+        +   ! : 4 scr_dyn_dispose  (in baseline) + 2408  [0x10444f8c4]  scr_json.c:1602
+        +   ! : 3 scr_dyn_dispose  (in baseline) + 1496  [0x10444f534]  scr_json.c:1656
+        +   ! : 3 scr_dyn_dispose  (in baseline) + 1540  [0x10444f560]  scr_json.c:1657
+        +   ! : | 2 scr_dyn_obj_drop_keys  (in baseline) + 20  [0x10444fa04]  scr_json.c:1159
+        +   ! : | 1 scr_dyn_obj_drop_keys  (in baseline) + 28  [0x10444fa0c]  scr_json.c:1160
+        +   ! : 3 scr_dyn_dispose  (in baseline) + 1544  [0x10444f564]  scr_json.c:1660
+        +   ! : 2 scr_dyn_dispose  (in baseline) + 964  [0x10444f320]  scr_json.c:1570
+        +   ! : 2 scr_dyn_dispose  (in baseline) + 996,1024  [0x10444f340,0x10444f35c]  scr_json.c:1574
+        +   ! : 2 scr_dyn_dispose  (in baseline) + 2412  [0x10444f8c8]  scr_json.c:1614
+        +   ! : 1 scr_dyn_dispose  (in baseline) + 1516  [0x10444f548]  scr_json.c:1657
+        +   ! : 1 scr_dyn_dispose  (in baseline) + 1776  [0x10444f64c]  scr_json.c:1666
+        +   ! : 1 scr_rc_destroy  (in baseline) + 176  [0x1044a4a68]  scr_cycle.c:345
+        +   ! 7 scr_rc_destroy  (in baseline) + 20  [0x1044a49cc]  scr_cycle.c:337
+        +   ! 6 scr_dyn_dispose  (in baseline) + 1784,1788  [0x10444f654,0x10444f658]  scr_json.c:1673
+        +   ! 6 scr_rc_destroy  (in baseline) + 144  [0x1044a4a48]  scr_cycle.c:341
+        +   ! 5 scr_dyn_release  (in baseline) + 36  [0x10440a4a4]  scr_json.c:1703
+        +   ! 3 scr_dyn_release  (in baseline) + 136  [0x10440a508]  scr_json.c:1737
+        +   ! 3 scr_dyn_release  (in baseline) + 532  [0x10440a694]  scr_json.c:1743
+        +   ! 2 scr_dyn_release  (in baseline) + 4  [0x10440a484]  scr_json.c:1701
+        +   ! 1 scr_dyn_release  (in baseline) + 164  [0x10440a524]  scr_json.c:1739
+        +   ! 1 scr_rc_destroy  (in baseline) + 0  [0x1044a49b8]  scr_cycle.c:336
+        +   ! 1 scr_rc_destroy  (in baseline) + 160  [0x1044a4a58]  scr_cycle.c:343
+        +   4 scr_rc_destroy  (in baseline) + 176  [0x1044a4a68]  scr_cycle.c:345
+        +   1 scr_dyn_dispose  (in baseline) + 1232  [0x10444f42c]  scr_json.c:1593
+        178 main  (in baseline) + 644  [0x1044088bc]  bench.c:31
+        + 158 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + ! 80 scr_layout_find  (in baseline) + 336,268,...  [0x10440c5ec,0x10440c5a8,...]  scr_json.c:1014
+        + ! 72 scr_layout_find  (in baseline) + 276,76,...  [0x10440c5b0,0x10440c4e8,...]  scr_json.c:1015
+        + ! 6 scr_layout_find  (in baseline) + 32  [0x10440c4bc]  scr_json.c:1012
+        + 10 main  (in baseline) + 492,644,...  [0x104408824,0x1044088bc,...]  bench.c:31
+        + 3 scr_dyn_obj_get  (in baseline) + 12,20  [0x10440e03c,0x10440e044]  scr_json.c:1863
+        + 3 scr_dyn_obj_get  (in baseline) + 80  [0x10440e080]  scr_json.c:1868
+        + 2 scr_dyn_obj_get  (in baseline) + 0,4  [0x10440e030,0x10440e034]  scr_json.c:1862
+        + 2 scr_layout_find  (in baseline) + 2572  [0x10440cea8]  scr_json.c:1027
+        133 main  (in baseline) + 552  [0x104408860]  bench.c:31
+        + 71 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + ! 23 scr_layout_find  (in baseline) + 32  [0x10440c4bc]  scr_json.c:1012
+        + ! 15 scr_layout_find  (in baseline) + 0,16  [0x10440c49c,0x10440c4ac]  scr_json.c:1011
+        + ! 13 scr_layout_find  (in baseline) + 1428,1484,...  [0x10440ca30,0x10440ca68,...]  scr_json.c:1015
+        + ! 11 scr_layout_find  (in baseline) + 48,56,...  [0x10440c4cc,0x10440c4d4,...]  scr_json.c:0
+        + ! 6 scr_layout_find  (in baseline) + 44,1316,...  [0x10440c4c8,0x10440c9c0,...]  scr_json.c:1014
+        + ! 2 scr_layout_find  (in baseline) + 36,40  [0x10440c4c0,0x10440c4c4]  scr_json.c:1013
+        + ! 1 scr_layout_find  (in baseline) + 1228  [0x10440c968]  scr_key.h:0
+        + 34 scr_layout_find  (in baseline) + 2572,2576,...  [0x10440cea8,0x10440ceac,...]  scr_json.c:1027
+        + 12 scr_dyn_obj_get  (in baseline) + 12  [0x10440e03c]  scr_json.c:1863
+        + 9 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + 3 scr_dyn_obj_get  (in baseline) + 52  [0x10440e064]  scr_json.c:1867
+        + 2 main  (in baseline) + 552  [0x104408860]  bench.c:31
+        + 2 scr_dyn_obj_get  (in baseline) + 60  [0x10440e06c]  scr_json.c:0
+        95 main  (in baseline) + 580  [0x10440887c]  bench.c:31
+        + 72 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + ! 41 scr_layout_find  (in baseline) + 32  [0x10440c4bc]  scr_json.c:1012
+        + ! 12 scr_layout_find  (in baseline) + 0,16,...  [0x10440c49c,0x10440c4ac,...]  scr_json.c:1011
+        + ! 10 scr_layout_find  (in baseline) + 64,1244,...  [0x10440c4dc,0x10440c978,...]  scr_json.c:1015
+        + ! 6 scr_layout_find  (in baseline) + 1228,1232  [0x10440c968,0x10440c96c]  scr_key.h:0
+        + ! 2 scr_layout_find  (in baseline) + 40  [0x10440c4c4]  scr_json.c:1013
+        + ! 1 scr_layout_find  (in baseline) + 48  [0x10440c4cc]  scr_json.c:0
+        + 7 scr_dyn_obj_get  (in baseline) + 52  [0x10440e064]  scr_json.c:1867
+        + 6 scr_layout_find  (in baseline) + 2572,2568  [0x10440cea8,0x10440cea4]  scr_json.c:1027
+        + 4 scr_dyn_obj_get  (in baseline) + 72,80  [0x10440e078,0x10440e080]  scr_json.c:1868
+        + 2 scr_dyn_obj_get  (in baseline) + 60  [0x10440e06c]  scr_json.c:0
+        + 2 scr_dyn_obj_get  (in baseline) + 4  [0x10440e034]  scr_json.c:1862
+        + 2 scr_dyn_obj_get  (in baseline) + 12  [0x10440e03c]  scr_json.c:1863
+        73 main  (in baseline) + 612  [0x10440889c]  bench.c:31
+        + 32 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + ! 17 scr_layout_find  (in baseline) + 64,288,...  [0x10440c4dc,0x10440c5bc,...]  scr_json.c:1015
+        + ! 6 scr_layout_find  (in baseline) + 132,268,...  [0x10440c520,0x10440c5a8,...]  scr_json.c:1014
+        + ! 4 scr_layout_find  (in baseline) + 32  [0x10440c4bc]  scr_json.c:1012
+        + ! 2 scr_layout_find  (in baseline) + 2556  [0x10440ce98]  scr_json.c:1027
+        + ! 1 scr_layout_find  (in baseline) + 48  [0x10440c4cc]  scr_json.c:0
+        + ! 1 scr_layout_find  (in baseline) + 4  [0x10440c4a0]  scr_json.c:1011
+        + ! 1 scr_layout_find  (in baseline) + 40  [0x10440c4c4]  scr_json.c:1013
+        + 24 scr_layout_find  (in baseline) + 2572,2560,...  [0x10440cea8,0x10440ce9c,...]  scr_json.c:1027
+        + 11 scr_dyn_obj_get  (in baseline) + 12  [0x10440e03c]  scr_json.c:1863
+        + 2 scr_dyn_obj_get  (in baseline) + 60  [0x10440e06c]  scr_json.c:0
+        + 2 scr_dyn_obj_get  (in baseline) + 80  [0x10440e080]  scr_json.c:1868
+        + 1 main  (in baseline) + 612  [0x10440889c]  bench.c:31
+        + 1 scr_dyn_obj_get  (in baseline) + 88  [0x10440e088]  scr_json.c:1869
+        56 main  (in baseline) + 532  [0x10440884c]  bench.c:31
+        + 28 scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        + ! 15 scr_layout_find  (in baseline) + 1392,1300,...  [0x10440ca0c,0x10440c9b0,...]  scr_json.c:1015
+        + ! 9 scr_layout_find  (in baseline) + 32  [0x10440c4bc]  scr_json.c:1012
+        + ! 2 scr_layout_find  (in baseline) + 1228  [0x10440c968]  scr_key.h:0
+        + ! 1 scr_layout_find  (in baseline) + 48  [0x10440c4cc]  scr_json.c:0
+        + ! 1 scr_layout_find  (in baseline) + 1316  [0x10440c9c0]  scr_json.c:1014
+        + 14 scr_layout_find  (in baseline) + 2572,2576  [0x10440cea8,0x10440ceac]  scr_json.c:1027
+        + 7 scr_dyn_obj_get  (in baseline) + 80,72  [0x10440e080,0x10440e078]  scr_json.c:1868
+        + 4 scr_dyn_obj_get  (in baseline) + 12  [0x10440e03c]  scr_json.c:1863
+        + 1 main  (in baseline) + 532  [0x10440884c]  bench.c:31
+        + 1 scr_dyn_obj_get  (in baseline) + 52  [0x10440e064]  scr_json.c:1867
+        + 1 scr_dyn_obj_get  (in baseline) + 84  [0x10440e084]  scr_json.c:1869
+        41 scr_dyn_obj_get  (in baseline) + 96,148,...  [0x10440e090,0x10440e0c4,...]  scr_json.c:1873
+
+Total number in stack (recursive counted multiple, when >=5):
+        6       scr_layout_find  (in baseline) + 0  [0x10440c49c]  scr_json.c:1027
+        6       scr_str_release  (in baseline) + 0  [0x10445d994]  scr_string.c:499
+        5       scr_dyn_obj_get  (in baseline) + 0  [0x10440e030]  scr_json.c:1863
+        5       scr_dyn_obj_get  (in baseline) + 0  [0x10440e030]  scr_json.c:1868
+        5       scr_dyn_obj_get  (in baseline) + 72  [0x10440e078]  scr_json.c:1868
+        5       scr_json_value  (in baseline) + 0  [0x10443ac50]  scr_json.c:14794
+        5       scr_layout_find  (in baseline) + 0  [0x10440c49c]  scr_json.c:0
+        5       scr_layout_find  (in baseline) + 0  [0x10440c49c]  scr_json.c:1012
+        5       scr_layout_find  (in baseline) + 0  [0x10440c49c]  scr_json.c:1015
+
+Sort by top of stack, same collapsed (when >= 5):
+        scr_json_value  (in baseline)        713
+        scr_layout_find  (in baseline)        442
+        scr_dyn_dispose  (in baseline)        148
+        scr_str_release  (in baseline)        124
+        scr_dyn_obj_get  (in baseline)        121
+        scr_dyn_release  (in baseline)        120
+        scr_json_number_value  (in baseline)        103
+        scr_dyn_arr_push  (in baseline)        79
+        scr_json_plain_bytes  (in baseline)        79
+        scr_str_alloc  (in baseline)        58
+        scr_str_new  (in baseline)        58
+        _platform_memmove  (in libsystem_platform.dylib)        29
+        scr_rc_destroy  (in baseline)        28
+        scr_json_fit_block  (in baseline)        24
+        scr_dyn_alloc  (in baseline)        22
+        scr_mem_realloc  (in baseline)        19
+        main  (in baseline)        14
+        scr_dyn_obj_drop_keys  (in baseline)        11
+        _free  (in libsystem_malloc.dylib)        10
+        scr_json_string_scr  (in baseline)        10
+        DYLD-STUB$$memcpy  (in baseline)        7
+
+Binary Images:
+       0x104404000 -        0x10452cf47 +baseline (0) <E88EB7E8-8829-3E6A-B45C-7E4A6F9FC1A2> /Users/*/baseline
+       0x18ecf0000 -        0x18ed42b4b  libobjc.A.dylib (951.7) <40277974-D20C-3EC8-B25C-43AE30D8CC60> /usr/lib/libobjc.A.dylib
+       0x18ed43000 -        0x18ed77d58  libdyld.dylib (1387) <634959D0-592E-349C-B549-B91F2FF09858> /usr/lib/system/libdyld.dylib
+       0x18ed78000 -        0x18ee2b4ff  dyld (1.0.0 - 1387) <DF42DD9D-AD11-33A7-8849-9AD5DF30A274> /usr/lib/dyld
+       0x18ee2c000 -        0x18ee2f228  libsystem_blocks.dylib (96) <A712B95E-BCEE-3F12-9F9B-58E6C2060E53> /usr/lib/system/libsystem_blocks.dylib
+       0x18ee30000 -        0x18ee8455f  libxpc.dylib (3102.160.5) <40BBE226-77D4-332E-9DA8-F0B5BACFB86D> /usr/lib/system/libxpc.dylib
+       0x18ee85000 -        0x18eea59ff  libsystem_trace.dylib (1861.160.4) <E043667E-AD01-3228-837F-A381F32F2B30> /usr/lib/system/libsystem_trace.dylib
+       0x18eea6000 -        0x18ef545f7  libcorecrypto.dylib (1922.160.10) <D54389FC-4078-370D-A863-9FEF16E00DFD> /usr/lib/system/libcorecrypto.dylib
+       0x18ef55000 -        0x18efa5257  libsystem_malloc.dylib (812.160.5) <971CDCFE-4D20-300E-A1D6-EC8672FDD258> /usr/lib/system/libsystem_malloc.dylib
+       0x18efa6000 -        0x18efed23f  libdispatch.dylib (1542.160.2) <243E06A0-7BFF-3C3F-8A9B-D7732729B361> /usr/lib/system/libdispatch.dylib
+       0x18efee000 -        0x18eff0ffb  libsystem_featureflags.dylib (103) <5E7CDBD5-44AB-34C0-A0F5-FC72F6116CDC> /usr/lib/system/libsystem_featureflags.dylib
+       0x18eff1000 -        0x18f0721e7  libsystem_c.dylib (1752.160.4) <FDC4E366-5C14-3A1E-BC35-D933D28CDCF3> /usr/lib/system/libsystem_c.dylib
+       0x18f073000 -        0x18f103ae7  libc++.1.dylib (2100.43) <C6DC2145-7B94-3E01-ADE5-96A6C2D078BC> /usr/lib/libc++.1.dylib
+       0x18f104000 -        0x18f11e75f  libc++abi.dylib (2100.43) <DDE77B06-5E25-380B-85B7-BA1A27D09021> /usr/lib/libc++abi.dylib
+       0x18f11f000 -        0x18f15c2e7  libsystem_kernel.dylib (12377.161.13) <7CFB3A10-ADB2-32C4-99B5-922A111B3224> /usr/lib/system/libsystem_kernel.dylib
+       0x18f15d000 -        0x18f169b3b  libsystem_pthread.dylib (539.100.4) <12342372-0084-37A5-9EA6-2E4DC940C685> /usr/lib/system/libsystem_pthread.dylib
+       0x18f16a000 -        0x18f172963  libsystem_platform.dylib (375.120.2) <4C6BD0FE-25F2-38D8-BE5C-24DAC1DEDCFB> /usr/lib/system/libsystem_platform.dylib
+       0x18f173000 -        0x18f1a26eb  libsystem_info.dylib (600) <7402662E-F235-3F48-BB65-F64C8CF0F2BB> /usr/lib/system/libsystem_info.dylib
+       0x193140000 -        0x193149e5f  libsystem_darwin.dylib (1752.160.4) <A095E4FE-0EE1-34DF-B00A-7D349FBC55E0> /usr/lib/system/libsystem_darwin.dylib
+       0x1935ab000 -        0x1935bd1b6  libsystem_notify.dylib (348.160.3) <F9B1BAFF-4D09-3A1F-839B-189C21EB5FBB> /usr/lib/system/libsystem_notify.dylib
+       0x19587c000 -        0x195896f7b  libsystem_networkextension.dylib (2226.160.6) <01D14A9E-16DC-372C-8AA8-CC7AD39E797F> /usr/lib/system/libsystem_networkextension.dylib
+       0x195919000 -        0x195930fdf  libsystem_asl.dylib (406) <FF57F6FA-F3A1-343D-815D-57B769D31445> /usr/lib/system/libsystem_asl.dylib
+       0x1974d2000 -        0x1974da387  libsystem_symptoms.dylib (2169.160.3) <CE07A0DF-31B6-3528-B7CE-91CAD89AA519> /usr/lib/system/libsystem_symptoms.dylib
+       0x19b777000 -        0x19b7af5b7  libsystem_containermanager.dylib (725.160.3) <2E14025A-52C2-361D-8A8F-5DD45825A2C9> /usr/lib/system/libsystem_containermanager.dylib
+       0x19cb89000 -        0x19cb8d5d7  libsystem_configuration.dylib (1405.160.3) <A14ED142-2F56-33A6-A23C-EEB8417DC90E> /usr/lib/system/libsystem_configuration.dylib
+       0x19cb8e000 -        0x19cb9499f  libsystem_sandbox.dylib (2680.160.6) <6592D3CE-38C6-3C08-9EA5-75D64F37993F> /usr/lib/system/libsystem_sandbox.dylib
+       0x19e1e9000 -        0x19e1ec1fb  libquarantine.dylib (196.160.2) <78C5B827-8152-358D-90E9-B02F02A68B17> /usr/lib/system/libquarantine.dylib
+       0x19e988000 -        0x19e98ed03  libsystem_coreservices.dylib (191.5.1) <F335DA14-69E8-336E-85A3-11EE239255F0> /usr/lib/system/libsystem_coreservices.dylib
+       0x19ef17000 -        0x19ef54a77  libsystem_m.dylib (3312.100.1) <3739A40F-2C17-3503-92D6-098141E56E89> /usr/lib/system/libsystem_m.dylib
+       0x19ef56000 -        0x19ef59527  libmacho.dylib (1387) <3E43AF47-AD89-3BB4-82B9-A9533F4334DF> /usr/lib/system/libmacho.dylib
+       0x19ef73000 -        0x19ef803a7  libcommonCrypto.dylib (600035) <72D94140-1281-3886-971B-37C810403C03> /usr/lib/system/libcommonCrypto.dylib
+       0x19ef81000 -        0x19ef8aca3  libunwind.dylib (2100.2) <B21A1015-83D4-31D8-BA41-88688962D9A6> /usr/lib/system/libunwind.dylib
+       0x19ef93000 -        0x19ef9dbef  libcopyfile.dylib (240.160.2.0.1) <58F425CF-7D4F-34FD-9620-706A2A7F8BDC> /usr/lib/system/libcopyfile.dylib
+       0x19ef9e000 -        0x19efa1987  libcompiler_rt.dylib (103.3) <D60A9B54-A909-3FD5-93B9-3F38BE0A2BE8> /usr/lib/system/libcompiler_rt.dylib
+       0x19efa2000 -        0x19efa678b  libsystem_collections.dylib (1752.160.4) <BDA28F78-F479-3C22-B9C7-4ABCB6801592> /usr/lib/system/libsystem_collections.dylib
+       0x19efa7000 -        0x19efaa4cf  libsystem_secinit.dylib (168.100.7) <C85AF062-AA9B-35BB-904C-C055B2C21602> /usr/lib/system/libsystem_secinit.dylib
+       0x19efab000 -        0x19efadbf7  libremovefile.dylib (85.100.6) <DA9C2B48-7A9C-32EA-888D-6C7AEB5250E6> /usr/lib/system/libremovefile.dylib
+       0x19efae000 -        0x19efaef27  libkeymgr.dylib (31) <18EFA1CE-C535-3EAC-BC2C-7955593B7382> /usr/lib/system/libkeymgr.dylib
+       0x19efaf000 -        0x19efb7e37  libsystem_dnssd.dylib (2881.160.4) <2C4C3043-008E-3BD8-BC29-AB9AD235DBA9> /usr/lib/system/libsystem_dnssd.dylib
+       0x19efb8000 -        0x19efbd09b  libcache.dylib (95) <EA7C2E0B-52BF-3D45-9A33-38F54A535452> /usr/lib/system/libcache.dylib
+       0x19efbe000 -        0x19efbfce3  libSystem.B.dylib (1356) <4CC4CAD6-45A6-361E-9343-DE636A0B5C02> /usr/lib/libSystem.B.dylib
+       0x292f67000 -        0x292f6e349  libRosetta.dylib (367.9) <F41D814B-FE1F-311A-A778-5F0699628188> /usr/lib/libRosetta.dylib
+       0x294b7a000 -        0x294b7da4b  libsystem_darwindirectory.dylib (122) <6C03D78B-BFAB-3C7A-B713-50881791EE08> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x294b7e000 -        0x294b8839b  libsystem_eligibility.dylib (319.160.17) <A279E124-8499-3FFC-A788-655070028F97> /usr/lib/system/libsystem_eligibility.dylib
+       0x294b89000 -        0x294b9088b  libsystem_sanitizers.dylib (26.1) <C92FAEE5-DAED-3340-96B3-0C42B005ADF9> /usr/lib/system/libsystem_sanitizers.dylib
+       0x294b91000 -        0x294b91bb7  libsystem_trial.dylib (474.2.18.2) <2FF186A6-F448-38CD-9A30-8B5B1AEFCA10> /usr/lib/system/libsystem_trial.dylib
