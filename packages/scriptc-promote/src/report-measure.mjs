@@ -24,8 +24,6 @@ const timingAddonPath=path.join(temp,'stages/promotion.node');
 for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,index=built.indexOf(m);
  if(index<0){results.push({id,status:'compile-rejected',reason:logs.join('\n')||'Stock compiler rejected function'});continue;}
  try{
-  const addon=await measurementAddon(addonPath,path.join(temp,'plain',`measure-${index}.node`));
-  const timingAddon=stages.length?await measurementAddon(timingAddonPath,path.join(temp,'stages',`measure-${index}.node`)):null;
   let tuples=inputs[id]??inputs[fn.id],inputSource='user-provided';
   if(tuples===undefined){inputSource='synthetic';tuples=[synthesize(m,fn)];}
   if(!Array.isArray(tuples)||!tuples.length||tuples.some(t=>!Array.isArray(t)))throw Error('Expected a nonempty array of argument tuples');
@@ -33,6 +31,8 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
   // Report each tuple separately: never blend dispatcher size buckets or distributions.
   for(const [inputIndex,args] of tuples.entries()){
    try{
+   const addon=await measurementAddon(addonPath,path.join(temp,'plain',`measure-${index}-${inputIndex}.node`));
+   const timingAddon=stages.length?await measurementAddon(timingAddonPath,path.join(temp,'stages',`measure-${index}-${inputIndex}.node`)):null;
    const schema=fn.boundary,encoded=encodeArguments(schema,args),table=argumentTable(encoded),expected=canonicalResult(js(...args),schema,table);
    const invoke=()=>{const input=encodeArguments(schema,args),out=addon.run(index,input);if(out?.fallback)throw Error('Native fallback; no realizable saving');return decodeResult(schema,out,argumentTable(input));};
    if(canonicalResult(invoke(),schema,table)!==expected)throw Error('Native/JS mismatch');
