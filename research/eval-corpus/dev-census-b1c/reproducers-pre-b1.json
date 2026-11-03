@@ -68,10 +68,12 @@
   },
   {
     "name": "init",
-    "text": "const n=Math.max(2,3);export function rows(x:number[]){return x.map(v=>v+n);}",
+    "text": "const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}",
     "accepted": true,
-    "messages": [],
-    "native": "const n=Math.max(2,3);\nfunction rows(x:number[]){return x.map(v=>v+n);}\nexport { rows };\n"
+    "messages": [
+      "[next-scriptc] not a candidate change: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:19 - NSC1004: purity: module state mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ],
+    "native": "const table={n:2};\nconst n=table.n;\nfunction rows(x:number[]){return x.map(v=>v+n);}\nexport { rows };\n"
   },
   {
     "name": "arithmetic",

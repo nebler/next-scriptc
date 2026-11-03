@@ -75,10 +75,11 @@
   },
   {
     "name": "init",
-    "text": "const n=Math.max(2,3);export function rows(x:number[]){return x.map(v=>v+n);}",
+    "text": "const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}",
     "accepted": false,
     "messages": [
-      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:30 - NSC1003: dependency closure: /tmp/b1c-fixtures/init.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+      "[next-scriptc] not a candidate change: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:19 - NSC1004: dependency closure: /tmp/b1c-fixtures/init.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:101 - NSC1003: dependency closure: /tmp/b1c-fixtures/init.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
     ]
   },
   {

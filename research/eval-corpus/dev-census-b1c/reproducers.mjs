@@ -12,7 +12,7 @@ const cases={
  reverse:'export function rows(x:number[]){const a=x.map(v=>v+1);a.reverse();return a;}',
  alias:'export function rows(x:{n:number}[]){const a=x;for(const v of a)v.n++;return a.map(v=>v.n);}',
  aliaspush:'export function rows(x:number[]){const a=x;a.push(9);return a.map(v=>v+1);}',
- init:'const n=Math.max(2,3);export function rows(x:number[]){return x.map(v=>v+n);}',
+ init:'const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}',
  arithmetic:'const n=2*3;export function rows(x:number[]){return x.map(v=>v+n);}',
  exported:'export const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n);}',
  unresolved:'const table=[1,2];export function rows(x:number[]){return x.map(v=>table.includes(v)?1:0);}',

@@ -33,6 +33,8 @@ test('old alias mutation and externally mutable captures stay refused',()=>{
   'const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'export const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'const table={n:2};function mutate(){table.n=4;}export function rows(x:number[]){return x.map(v=>v+table.n);}',
+  'const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}',
+  'const table={r:/x/g};export function advance(){table.r.test("x");}export function rows(x:string[]){return x.map(v=>table.r.test(v));}',
   'const table={get n(){return 2;}};export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'const table=[1,2];export function rows(x:number[]){return x.map(v=>table.includes(v)?1:0);}',
   'const table={a:2,b:3};export function rows(x:("a"|"b")[]){return x.map(v=>table[v]);}',
