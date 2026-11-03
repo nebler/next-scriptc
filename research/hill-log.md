@@ -1891,3 +1891,30 @@ it needs a systematic inline-cache and shape-feedback design for erased values, 
 is a large compiler project best done with upstream maintainers. Further solo compiler
 rounds now have diminishing returns. Pause the compiler hill after C1d; the adapter
 and product hills (B1, M1, A1) are the better use of the next slots.
+
+## 66. W1 shared TypeScript browser wasm (2026-11-03)
+
+Stock scriptc 0.4.6 compiles D1's unchanged forecast as a wasm32-wasi reactor.
+Node WebAssembly medians at 1k/10k/100k paths are JS 1.318/13.840/138.894 ms
+versus wasm 0.209/2.065/20.463 ms. Real Chromium medians are JS 0.30/3.30/33.60
+ms versus wasm 0.20/2.10/20.50 ms, a 1.50–1.64× warmed win. Twelve seeded cases
+and every measured output agree exactly. Browser baseline JS is much faster than
+Node here. This is a local numeric result, not a held-out automatic win.
+
+Opt-in Next and Vite client builds emit content-hashed wasm assets and reuse the
+promoted source closure. JS answers until cached async loading completes, and
+only source-keyed calibrated workload-size buckets use wasm. First-three and
+periodic shadow comparisons disable wasm permanently on mismatch or trap.
+Missing assets and initialization failures also preserve JS. No SharedArrayBuffer
+or isolation headers. D1 now shows independent browser and server verification.
+The reactor is 324,844 raw / 123,244 gzip bytes, with about 17 MiB warmed memory.
+
+Next suite: 103 pass. Core: 79 pass, two existing skips. Example unit/build,
+Vite emitted-reactor parity and production Chromium JS→wasm service pass.
+The page also observes server native with 26 verified checks, zero mismatches
+and fallbacks, and exact equality. Browser startup/render does not await wasm;
+ready calls remain synchronous main-thread work. Standalone headless Chrome,
+webpack production execution, other browsers/devices and other frameworks remain
+unmeasured. B1 discovery/build files and root README are untouched. No compiler
+change, main-checkout mutation, hosting call, Docker, deploy, push, PR, issue,
+public post or secret. [Design, raw evidence, limits and reproduction](browser-wasm.md).

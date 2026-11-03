@@ -70,7 +70,7 @@ Rust on raw speed, especially object/string-heavy code today.
 | Profile-guided promotion | Pick candidates from production CPU profiles, not static guesses |
 | Zero-setup install | Prebuilt toolchain or one-step setup, JS fallback when missing |
 | Editor integration | "would be native" / "blocked: guard this index" squiggles |
-| Browser wasm | Same function faster on the client too |
+| Browser wasm | W1 opt-in Next/Vite client reactors, verified JS fallback; local D1 browser 1.5–1.64× |
 
 ### 4. Trust: stronger and cheaper safety
 | Hill | Why |
@@ -115,8 +115,9 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
 | P3 | Profile-guided promotion | 3 | report/build | done: CPU profiles + source maps, ranked static joins, hot blockers and suggestions; local Next captures ([evidence](research/profile-guided-promotion.md)) |
 | P4 | Zero-setup install, naming, docs | 3 | packaging | diagnostics/docs done: doctor + simulated failures; nine packed local setups; helper approval repair documented; naming options without renames. Host toolchain and script approval remain required ([evidence](research/install-and-docs.md)) |
-| — | Editor integration, browser wasm, equivalence proofs, whole-library native | 3/4 | — | later |
+| — | Editor integration, equivalence proofs, whole-library native | 3/4 | — | later |
 | D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | done: shared cash-runway simulation, automatic native service, exact browser parity, aggregate verification panel; local 7–8.5× numeric win ([evidence](research/shared-native-demo.md)) |
+| W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
 | HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without

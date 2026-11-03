@@ -1,0 +1,16 @@
+import {mkdir, writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {spawnSync} from 'node:child_process';
+import path from 'node:path';
+import {compilerPath} from '../../packages/scriptc-promote/src/paths.mjs';
+const root = path.resolve(import.meta.dirname, '../..');
+const out = path.resolve(process.argv[2] || '/tmp/w1-browser-wasm');
+const require = createRequire(path.join(root, 'examples/shared-native/package.json'));
+const pack = path.dirname(require.resolve('@scriptc/runtime-wasm32-wasi/package.json'));
+await mkdir(out, {recursive:true});
+const profile = {profile_format:1,name:'browser-forecast',entry:path.join(import.meta.dirname,'entry.ts'),emission:'llvm',abi:{prefix:'bench_',init_symbol:'bench_init',sink_register_symbol:'bench_sink',collect_symbol:'bench_collect'},exports:[{export:'run',symbol:'bench_run',params:['string'],returns:'string'}]};
+await writeFile(path.join(out,'profile.json'),JSON.stringify(profile));
+const result=spawnSync(compilerPath(),['build','--lib','--profile',path.join(out,'profile.json'),'-o',path.join(out,'compute.wasm')],{cwd:root,stdio:'inherit',env:{...process.env,SCRIPTC_TARGET:'wasm32-wasi',SCRIPTC_RUNTIME_PACK:pack,SCRIPTC_CHECKER_SERVER:'0'}});
+if(result.error)throw result.error;
+if(result.status!==0)throw new Error('Build failed: '+result.status);
+console.log(out);
