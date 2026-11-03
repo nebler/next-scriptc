@@ -1801,3 +1801,27 @@ compiler tree, external service, Docker, deploy, publication, push, PR, issue,
 public post, or secret is involved. P4's diagnostics/docs slice is complete;
 installation still needs toolchain and trusted build scripts.
 [Commands, findings, setup results, and remaining friction](install-and-docs.md).
+
+## 61. D1 shared TypeScript browser/native demo (2026-11-03)
+
+New `examples/shared-native` imports one seeded 36-month cash-runway function in
+a browser client and a Node route. Default automatic discovery compiles it; the
+production dispatcher actually serves native after ordinary paired verification.
+The panel exposes only P2 aggregate fields and exact canonical browser/server
+equality. A sample-collection action makes default verification visible locally.
+
+At 1k/10k/100k paths (71/72/73 JSON tuple bytes), adapter wall medians are JS
+1.555/15.927/159.421 ms versus native 0.221/1.923/18.712 ms (7.02–8.52×).
+`report --measure` independently predicts native at all sizes. Park–Miller's
+constant integer remainder is favorable here; initial integer PRNG variants
+lost to V8. This is a purpose-built numeric win, not a real-app automatic win.
+All inputs share bucket 0; browser execution remains JS.
+
+Production HTTP parity passes 12 seeded cases and observes 26 verified checks,
+zero mismatches/fallbacks and native service. Headless Chrome confirms the same
+result and native panel. Fuzz seed 42 passes 64 comparable cases; 9 refused and
+10 uncomparable cases are recorded separately. Doctor passes after private
+worktree helper repair. Next suite: 102 pass; core: 68 pass, two existing skips.
+No protected checkout, compiler tree, root README, discovery file, deploy, Docker,
+external hosting, push, PR, issue, post, or secret is involved.
+[Measurements, commands, limits, and raw evidence](shared-native-demo.md).
