@@ -151,9 +151,9 @@ matched cohort and separates uncovered prior acceptances from covered refusals.
 
 ## Fresh DEV results
 
-EV3 accepted 441 functions; this run accepts 251 in the recorded coverage. There are 21 newly accepted functions, 211 previously accepted functions now rejected in covered files, and 0 prior acceptances without current coverage. Missing coverage is unknown. First-refusal histograms are not causal estimates.
+EV3 accepted 441 functions. B1 accepts 251 in the recorded coverage. There are 21 newly accepted functions and 211 prior acceptances now refused in covered files. Every prior acceptance remains covered. Missing validator coverage is unknown, and first-refusal shifts are not causal estimates.
 
-The matched cohort contains 24292 function rows, with 441 accepted before and 251 after. Observed parser failures change from 1957 to 15; missing scopes are outside that after total.
+The matched cohort contains 24292 function rows, with 441 accepted before and 251 after. Observed parser failures change from 1,957 to 15. Missing scopes are outside that after total.
 
 | DEV repository | Before accepted | After accepted | Current coverage |
 |---|---:|---:|---|
@@ -232,14 +232,38 @@ NocoDB `minOf` and `maxOf` are the clear numerical aggregation leads; both previ
 
 ## Named candidates
 
-- `bestExhaustiveBinarySplit`: rejected; [next-scriptc] not a candidate bestExhaustiveBinarySplit: [next-scriptc] /tmp/b1-growthbook-clones/growthbook/packages/stats-ts/src/contextualBanditWeights.ts:373:1 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state.
-- `approximateBinaryKMeans`: rejected; [next-scriptc] not a candidate approximateBinaryKMeans: [next-scriptc] /tmp/b1-growthbook-clones/growthbook/packages/stats-ts/src/contextualBanditWeights.ts:477:1 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state.
-- `solveForecast`: rejected; [next-scriptc] not a candidate solveForecast: [next-scriptc] /tmp/b1-verified-clones/actual/packages/loot-core/src/server/budget/schedule-template.ts:684:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.
+| Candidate | Discovery refusal | Isolated construction probe |
+|---|---|---|
+| GrowthBook `bestExhaustiveBinarySplit` | argument mutation | unsupported `NewExpression` |
+| GrowthBook `approximateBinaryKMeans` | argument mutation | unsupported `NewExpression` |
+| Actual `solveForecast` | nonlocal mutation | unsupported `SpreadElement` |
 
-The isolated GrowthBook construction probes now pass captured scalar constants and stop at unsupported `NewExpression`. Actual still stops at `SpreadElement`; its hole allocation and indexed writes remain outside the construction language. No split-search or solver speedup is claimed.
+The GrowthBook probes now pass captured scalar constants. Actual's hole allocation
+and indexed writes also remain outside the construction language. Exact diagnostics,
+pinned locations, and prior states remain in the comparison artifact. No split-search
+or solver speedup is claimed.
 
 ## Final validation
 
 Next: 103 pass. Core: 110 pass, two existing skips. Targeted B1: 23 pass. Native differential checks cover indexed-read fallback, fresh helper mutation, copied arrays, scalar captures, invalid typed-array writes, and `Math.clz32`. The full suites also exercise NSC locations, T1 fuzzing, runtime snapshots, profile reporting, the editor plugin, typed decode-once, and browser hooks.
 
 [Raw results and aggregation](eval-corpus/dev-census-b1/summary.json.gz), [comparison and accepted leads](eval-corpus/dev-census-b1/comparison.json), [static named probes](eval-corpus/dev-census-b1/candidate-probes.json), and [reproduction](eval-corpus/dev-census-b1/reproduce.md).
+
+All 17 DEV entries are accounted for. Fifteen Node repositories installed successfully;
+Fider and Maybe remain non-Node controls. All 92 successful EV1/EV2 scan pairs agree
+on acceptance counts. One GrowthBook validator pair exhausted resources in both
+scanners. The minimum recorded space before an install was 12,768,923,648 bytes.
+Initial disk skips were retried after cache cleanup.
+
+The final Node-condition guard was added during the audit. All census commands lack
+condition flags, and `NODE_OPTIONS` was unset. The guard is inactive for these inputs.
+Both measurement and final source hashes remain in the implementation record.
+
+[Acceptance chart](eval-corpus/dev-census-b1/acceptance.html) and
+[census validation](eval-corpus/dev-census-b1/validation/census-checks.json) retain
+the totals, independent agreement checks, disk floor, and compressed-artifact checks.
+
+Task-owned application clones, tools, and temporary package caches are removed.
+Workspace dependencies remain available for review. Initial suite commands
+inherited npm cache configuration; final runs pin it under `/tmp`. Existing user
+caches were not removed.

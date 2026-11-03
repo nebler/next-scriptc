@@ -101,7 +101,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | bounded step done: leaf teardown eligible for inlining; generic −12.6%, spread −16.1%; CSV inconclusive; full escape/SSA work open |
 | C1c | Local record escape analysis and scalar replacement | 1 | scriptc fork | first opt-in version: alias groups, field writes, leaf strings, exact identity summaries; generic −57.0%; spread and D1/E1 unchanged; nested owned graphs and full gate open ([evidence](research/compiler-scalar-replacement.md)) |
 | C1d | Guarded specialization of erased operations | 1 | scriptc fork | bounded string-index slice: erased path −18.2%, CSV −5.5% but still 5.49× Node; typed control unchanged, copy/generic regressions retained; full gate open ([evidence](research/compiler-erased-specialization.md)) |
-| B1 | Cheap discovery blockers | 2 | discovery | running |
+| B1 | Cheap discovery blockers | 2 | discovery | bounded slice done: DEV 441 → 251 accepted (21 new, 211 prior acceptances refused); parser files 1,957 → 15; 32 GrowthBook validator files unknown ([evidence](research/discovery-blockers-b1.md)) |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |

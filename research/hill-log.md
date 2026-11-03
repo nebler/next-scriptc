@@ -2008,3 +2008,60 @@ B1 discovery/build files, dispatcher policy, root README, protected checkouts an
 compiler trees are untouched. Dependencies installed only in this worktree with
 an isolated /tmp store. No deploy, hosting call, Docker, push, PR, issue, public
 post, package publication, or secret.
+
+
+## 70. B1: bounded discovery blockers and a fresh DEV census (2026-11-03)
+
+The stalled B1 branch is integrated with current diagnostics, source maps, build
+fuzzing, runtime snapshots, profiling, editor support, typed decode-once, and
+browser hooks. Its WIP changes are squashed into tested commits. Declaration and
+erased-type visits skip runtime initialization proofs. Active server export
+conditions select implementations; ambiguity, custom resolvers, and unmodeled
+Node condition flags reject. Decorator dialect follows tsconfig, while reachable
+decorated classes remain unsupported. Inert defaults and private frozen literal
+tables qualify under M1/M2. Checked indexed reads force per-call JS replay, and
+fresh local mutation uses transitive caller provenance. Borrowed graphs still
+reject. Dispatcher sampling and thresholds are unchanged.
+
+All 17 frozen DEV entries are accounted for. Fifteen Node repositories install
+with scripts disabled; Fider and Maybe remain controls. Every install passes the
+12 GB floor, with 12,768,923,648 bytes the recorded minimum. Initial disk skips are
+retained and retried after cache cleanup. At most three installed application
+clones are active. The 92 successful independent EV1/EV2 pairs agree on accepted
+counts. GrowthBook exhausts resources for one 32-file validator batch. Twelve
+unknown files overlap EV3 and twenty differ, so matched results are retained.
+
+Observed files remain 10,376. Considered functions increase from 15,638 to 16,974,
+and parser-failed files decrease from 1,957 to 15. Acceptance falls from 441 to
+251: 21 functions are newly accepted and 211 prior acceptances now refuse in
+covered files. No prior acceptance loses coverage. Stricter source capture,
+constant-graph, and local provenance proofs account for losses; these refusals do
+not prove that every affected function mutates caller data. Real first refusals
+for declaration graphs change 387 to zero and export policy 423 to zero, while
+module initialization rises 2,023 to 2,255 and mutation 218 to 510. Histograms are
+first refusals, not causal gains or measured CPU coverage.
+
+NocoDB minOf/maxOf are newly eligible numerical aggregation leads. Other new
+acceptances are small string, token, or path helpers. GrowthBook's
+bestExhaustiveBinarySplit and approximateBinaryKMeans still first reject argument
+mutation. Their isolated proofs now pass scalar captures and stop at unsupported
+NewExpression. Actual solveForecast still first rejects nonlocal mutation, with
+SpreadElement and hole allocation/indexed writes outside the isolated proof.
+No application timing, compiler acceptance, HTTP saving, or native win is claimed.
+
+Next: 103 pass. Core: 110 pass, two existing skips. B1: 23 targeted checks pass,
+including real-Node condition selection, guard/replay usability, fresh helper
+mutation, copied arrays, scalar captures, clz32, and invalid typed-array indices.
+Three census classification regressions pass. Final compression and research-link
+checks pass. A late audit found Node --conditions could select a different JS
+branch; the new refusal is inactive for census invocations without condition
+flags. Measurement and final source hashes are retained.
+
+Task-owned application clones, tools, and caches are removed. Dependencies were
+installed only in this worktree and /tmp. Initial suite commands inherited npm
+cache configuration; final verification pins its cache to /tmp. Existing user
+caches are not removed. The protected checkouts, root README, and compiler trees
+remain untouched. No deploy, hosting call, Docker, push, PR, issue, public post,
+third-party source commit, or secret is part of this work.
+
+[Per-fix contract, per-repository results, histogram, candidate status, and limits](discovery-blockers-b1.md).
