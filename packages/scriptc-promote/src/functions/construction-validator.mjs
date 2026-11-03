@@ -3,7 +3,7 @@
 export function constructionValidator(shape, name, dynamic = false) {
  if (!shape) return '';
  let next=0; const out=[];
- const type=s=>s.kind==='handle'?'number':s.kind==='array'?`Array<${type(s.value)}>`:s.kind==='nullable'?`${type(s.value)}|null`:s.kind==='object'?`{${s.fields.map(([k,v])=>`${JSON.stringify(k)}:${type(v)}`).join(';')}}`:s.kind;
+ const type=constructionType;
  function visit(s){const id=`${name}_${next++}`;let body;
  if(s.kind==='handle')body='return typeof v==="number"&&Number.isInteger(v)&&v>=0;';
  else if(s.kind==='number')body='return typeof v==="number"&&Number.isFinite(v);';
@@ -16,3 +16,5 @@ export function constructionValidator(shape, name, dynamic = false) {
  out.push(`function ${id}(v:${dynamic?'any':type(s)}):boolean {${body}}`);return id;}
  const root=visit(shape);return out.join('\n')+`\nfunction ${name}(v:${dynamic?'any':type(shape)}):boolean{return ${root}(v); }\n`;
 }
+
+export const constructionType=s=>s.kind==='handle'?'number':s.kind==='array'?`Array<${constructionType(s.value)}>`:s.kind==='nullable'?`${constructionType(s.value)}|null`:s.kind==='object'?`{${s.fields.map(([k,v])=>`${JSON.stringify(k)}:${constructionType(v)}`).join(';')}}`:s.kind;
