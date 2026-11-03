@@ -24,7 +24,7 @@ export function answer(n:number){return [sum(n),squares(n)];}`);
   assert.doesNotMatch(client,/loadPromotion|promotion\.node|scriptc-promote:runtime/);
   await build({...common,plugins:[scriptcPromote({sourceDir:'src',report:console.log})],build:{ssr:'src/entry.ts',outDir:'server'}});
   for(const name of ['promotion.node','ids.json','encodings.json'])assert.ok((await readFile(path.join(root,'server/scriptc-promotion',name))).length);
-  assert.equal(JSON.parse(await readFile(path.join(root,'server/scriptc-promotion/ids.json'))).length,2);
+  assert.equal(JSON.parse(await readFile(path.join(root,'server/scriptc-promotion/ids.json'))).length,3);
   await cp(path.join(root,'server'),path.join(root,'relocated'),{recursive:true});
   await rm(path.join(root,'server'),{recursive:true});
   const entry=await import(pathToFileURL(path.join(root,'relocated/entry.js')));
@@ -32,7 +32,7 @@ export function answer(n:number){return [sum(n),squares(n)];}`);
   for(const fn of [entry.sum,entry.squares,entry.answer])for(let i=0;i<85;i++){fn(100);await new Promise(resolve=>setTimeout(resolve,2));}
   const instances=globalThis[Symbol.for('scriptc-promote.dispatchers')];
   const instance=[...instances].find(([file])=>file.includes(root))[1];
-  assert.equal(Object.values(instance.snapshot()).length,2);
+  assert.equal(Object.values(instance.snapshot()).length,3);
   for(const fn of Object.values(instance.snapshot()))assert.ok(fn.buckets.some(bucket=>bucket.verified>0));
   delete process.env.SCRIPTC_PROMOTE;
   console.log(`validated Vite ${actual}`);
