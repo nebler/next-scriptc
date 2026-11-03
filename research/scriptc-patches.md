@@ -15,6 +15,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 | Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | focused checks pass, full gate pending; **stacked on the int8 branch**. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
 | Dense native object key arrays | `next-scriptc/object-key-array-construction` | Local commit `0f66b43c5`; not pushed; focused validation only | 2026-11-02, `38cc546e0` | ASan/UBSan runtime tests, release/dev corpus + sanitized RC audit, 3 affected cases, lint/format; full gate pending |
 | Ordered JSON schema record decode | `next-scriptc/c2-json-decode` | Local commit `4bd7effcf`; not pushed; bounded typed-path improvement | 2026-11-03, `08c74e73a` | ASan/UBSan runtime + RC audit, 256 Node comparisons, 2 schema emission tests, lint/format, baseline completeness; full gate pending |
+| Local leaf record scalar replacement (C1c) | `next-scriptc/record-scalar-replacement` | Local commit `5bdafe19e`; opt-in, not pushed; generic −57.0%, broader ownership work open | 2026-11-03, `301c28c9f` | 724 LLVM backend tests, 16 corpus programs through both harnesses, new + weak-key sanitized RC audit, lint/format/build/baseline completeness; full gate pending |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Pushed `d49007483`; local fix `2a3ce4ba6` (quadratic range walk) is unpushed. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) | 2026-11-01–02: `d49007483` plain failed, sanitized incomplete; fix has focused checks only ([report](int8-gate-2026-11-01.md)) |
 
 ## int8 product ranges in wrapping sums
@@ -189,3 +190,7 @@ regex replacement compile. No SC failure is claimed for these constructs.
 - Four alternating process windows at 60k rows: typed flat decode 4.804 → 4.414 ms (−8.1%); nested 8.872 → 8.539 ms (−3.8%). Host variability is substantial; erased decode has no consistent gain. This is a runtime API microbenchmark with test record allocators, not an application result.
 - ASan/UBSan runtime tests pass with RC audit off/on, three cycle thresholds, and 128 Node differential inputs per mode. Two compiler schema-emission tests, lint, format, baseline completeness, and diff checks pass. Full builds/gates and other-platform execution remain outstanding.
 - [Benchmark, attribution, ownership argument, exact validation, limits, and emitted-decoder design](native-json-decode.md).
+
+## Local leaf record scalar replacement (C1c)
+
+`SCRIPTC_SCALAR_RECORDS=1` removes complete local number/boolean/string records after alias-group use analysis. Field mutation and exact identity helpers are supported. Nested owned graphs, arbitrary helpers, erased and escaping identities retain allocation. Four alternating windows give generic 0.1350 → 0.0580 ms at 50k; spread and D1/E1 boundary probes show no established gain. CSV remains about six times Node. The default-on experiment matches opt-in generic/spread timings. [Analysis, ownership argument, exact validation, failures, and raw evidence](compiler-scalar-replacement.md).
