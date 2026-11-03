@@ -22,6 +22,7 @@ for root,files in groups.items():
  for offset in range(0,len(files),5):
   batch=files[offset:offset+5];scanroot=P/root;target=P.parent/f'{slug}-measure.json'
   env={**os.environ,'DEV_CENSUS_SOURCE_ROOT':str(scanroot),'DEV_CENSUS_SOURCE_FILES':json.dumps([str(scanroot/f) for f in batch]),'TMPDIR':'/tmp','M1_RESEARCH':'1','NODE_OPTIONS':'--import='+str(R/'research/eval-corpus/dev-measure/hook.mjs')}
+  if os.environ.get('M1_WALL_ONLY'):env.update(M1_WALL_SCAN_ROOT=root,M1_WALL_REPO=d['repository'])
   cmd=['node','--max-old-space-size=6144']
   if slug in ['n8n','unleash']:
    env['DEV_CENSUS_TYPESCRIPT_HOST_ROOT']=str(R/'packages/scriptc-promote');cmd+=['--import',str(R/'research/eval-corpus/dev-census/typescript-host.mjs')]
@@ -34,7 +35,7 @@ for root,files in groups.items():
    evidence.extend(str(pathlib.Path(f).relative_to(P)) for f in hits.stdout.splitlines())
   inp.write_text(json.dumps(inputs));pathlib.Path(str(inp)+'.meta').write_text(json.dumps(meta));pathlib.Path(str(inp)+'.raw').write_text(json.dumps(raw));env['M1_INPUT_RAW']=str(inp)+'.raw';env['M1_INPUT_META']=str(inp)+'.meta'
   cmd+=['--import',str(R/'research/eval-corpus/dev-census/file-scope.mjs'),str(R/'packages/scriptc-promote/src/cli.mjs'),'report',str(scanroot),'--measure','--inputs',str(inp),'--json',str(target)]
-  print(slug,root,', '.join(batch),flush=True);start=time.time();workerHash=hashlib.sha256((R/'research/eval-corpus/dev-measure/worker.mjs').read_bytes()).hexdigest()
+  print(slug,root,', '.join(batch),flush=True);start=time.time();workerHash=hashlib.sha256((R/'research/eval-corpus/dev-measure'/('wall-worker.mjs' if os.environ.get('M1_WALL_ONLY') else 'worker.mjs')).read_bytes()).hexdigest()
   try:
    p=subprocess.run(cmd,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=400);result={'exit':p.returncode,'seconds':time.time()-start,'output':p.stdout.decode(errors='replace')[-6000:]}
   except subprocess.TimeoutExpired:result={'exit':'timeout','seconds':time.time()-start}
@@ -43,6 +44,7 @@ for root,files in groups.items():
   d['scans'].append(item);(O/f'{slug}.json').write_text(json.dumps(d,indent=2))
 d['status']='installed; B1 accepted source files measured' if d['install']['exit']==0 else 'install failed; provisional measurement'
 (O/f'{slug}.json').write_text(json.dumps(d,indent=2))
+for suffix in ['', '.meta', '.raw']:(P.parent/(slug+'-inputs.json'+suffix)).unlink(missing_ok=True)
 if shutil.disk_usage(P.parent).free<14_000_000_000:
  for cache in ['store','yarn-global','yarn-cache','cache','bun-cache','npm-cache']:
   shutil.rmtree(P.parent/cache,ignore_errors=True)
