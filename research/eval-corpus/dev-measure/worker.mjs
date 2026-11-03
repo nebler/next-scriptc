@@ -1,3 +1,4 @@
+import {execFileSync} from 'node:child_process';
 // Runs only for explicit --measure. Isolate addon failures from static reporting.
 import {createRequire,stripTypeScriptTypes} from 'node:module';
 import {readFile,writeFile} from 'node:fs/promises';
@@ -14,16 +15,16 @@ const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:
 const results=[],logs=[];
 const validIds=new Set(modules.flatMap(m=>[m.functions[0].id,path.relative(root,m.source).split(path.sep).join('/')+'#'+m.functions[0].name]));
 for(const id of Object.keys(inputs))if(!validIds.has(id))throw Error('Unknown function input ID: '+id);
-let built=[];
+const compileBegin=performance.now();let built=[];
 try{built=await buildPromotion(modules,path.join(temp,'plain'),{report:m=>logs.push(m)});}catch(e){logs.push(e.stderr?.toString()??e.message);}
-let stages=[];
+const compileMs=performance.now()-compileBegin;let stages=[];
 if(built.length)try{stages=await buildPromotion(built,path.join(temp,'stages'),{timing:true,report:m=>logs.push(m)});}catch{}
 const addon=built.length?require(path.join(temp,'plain/promotion.node')):null;
 const timingAddon=stages.length?require(path.join(temp,'stages/promotion.node')):null;
 for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,index=built.indexOf(m);
  if(index<0){results.push({id,status:'compile-rejected',reason:logs.join('\n')||'Stock compiler rejected function'});continue;}
  try{
-  let tuples=inputs[id]??inputs[fn.id],inputSource='user-provided';
+  let tuples=inputs[id]??inputs[fn.id],inputSource='test-shape-derived';
   if(tuples===undefined){inputSource='synthetic';tuples=[8,32,128].map(size=>resize(synthesize(m,fn),size));}
   if(!Array.isArray(tuples)||!tuples.length||tuples.some(t=>!Array.isArray(t)))throw Error('Expected a nonempty array of argument tuples');
   const reference=path.join(temp,`reference-${index}.mjs`);await writeFile(reference,stripTypeScriptTypes(m.referenceNative??m.native));const js=(await import(pathToFileURL(reference).href))[fn.name];
@@ -43,8 +44,14 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
    let boundaryShare=null,boundaryStages=null;
    const stageIndex=stages.indexOf(m);
    if(stageIndex>=0){const totals=[],computes=[];for(let i=0;i<10;i++){const begin=performance.now(),input=encodeArguments(schema,args),out=timingAddon.run(stageIndex,input);if(out?.fallback)throw Error('Instrumented native fallback');decodeResult(schema,out.value,argumentTable(input));totals.push((performance.now()-begin)*1e6);computes.push(out.timings.compute*1e6);}const total=stats(totals).median,compute=stats(computes).median;boundaryShare=Math.max(0,Math.min(1,1-compute/total));boundaryStages={n:10,totalWallNs:total,computeWallNs:compute};}
+   let cliffCheck=null;
+   if(stats(nativeNs).median/stats(jsNs).median<=.9){
+    const probe=path.join(temp,'deopt.mjs');
+    await writeFile(probe,`import {${fn.name} as f} from ${JSON.stringify(pathToFileURL(reference).href)};const args=${JSON.stringify(args)};let sink;for(let i=0;i<1000;i++)sink=f(...args);console.log('M1_BEGIN');for(let i=0;i<300;i++)sink=f(...args);console.log('M1_END');console.log(JSON.stringify(sink));`);
+    try{const trace=execFileSync(process.execPath,['--trace-deopt',probe],{encoding:'utf8',timeout:60000});const steady=trace.split('M1_BEGIN')[1]?.split('M1_END')[0]??'';cliffCheck={steadyDeopts:(steady.match(/bailout/g)??[]).length,trace,hasRemainder:/(?:%|remainder)/.test(m.referenceNative??m.native),scope:'1000 warm calls then 300 steady calls; diagnostic, not an optimized rewrite'};}catch(e){cliffCheck={status:'unavailable',reason:e.message};}
+   }
    const protocolCI=bootstrap(pairs); const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs.slice(0,24),'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
-   results.push({id,status:'ok',inputIndex,inputSource,bucket:estimateSize(args),metric:cpu?'thread-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,protocolCI,protocolPass:cpu&&n.median/j.median<=.90&&protocolCI.upper<1,screenPass:j.median>=100000&&j.median/bytes>=100,jsIterationsPerBatch:iterations,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
+   results.push({id,status:'ok',compileMs,cliffCheck,inputIndex,inputSource,inputProvenance:process.env.M1_INPUT_META?JSON.parse(await readFile(process.env.M1_INPUT_META,'utf8'))[id]??{kind:'synthetic'}:{kind:'synthetic'},arguments:args,bucket:estimateSize(args),metric:cpu?'thread-cpu':'wall',js:j,native:n,inputJsonBytes:bytes,nsPerInputJsonByte:{js:j.median/bytes,native:n.median/bytes},computeIntensity:j.median/bytes,computeIntensityUnit:'JS ns per input JSON byte',boundaryShare,boundaryStages,verdict,policy:stabilityDefaults,protocolCI,protocolPass:cpu&&n.median/j.median<=.90&&protocolCI.upper<1,screenPass:j.median>=100000&&j.median/bytes>=100,jsIterationsPerBatch:iterations,rawPairsNs:pairs,notes:['Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.','Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.','Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving.']});
   }
  }catch(e){results.push({id,status:'unmeasured',compileStatus:'compiled',reason:e.message});}
 }

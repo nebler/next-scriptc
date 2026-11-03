@@ -15,11 +15,15 @@ for root,files in groups.items():
  # One source file per process isolates compiler refusals and measurement failures.
  for file in sorted(files):
   scanroot=P/root;target=P.parent/f'{slug}-measure.json'
-  env={**os.environ,'DEV_CENSUS_SOURCE_ROOT':str(scanroot),'DEV_CENSUS_SOURCE_FILES':json.dumps([str(scanroot/file)]),'M1_RESEARCH':'1','NODE_OPTIONS':'--import='+str(R/'research/eval-corpus/dev-measure/hook.mjs')}
+  env={**os.environ,'DEV_CENSUS_SOURCE_ROOT':str(scanroot),'DEV_CENSUS_SOURCE_FILES':json.dumps([str(scanroot/file)]),'TMPDIR':'/tmp','M1_RESEARCH':'1','NODE_OPTIONS':'--import='+str(R/'research/eval-corpus/dev-measure/hook.mjs')}
   cmd=['node','--max-old-space-size=6144']
   if slug in ['n8n','unleash']:
    env['DEV_CENSUS_TYPESCRIPT_HOST_ROOT']=str(R/'packages/scriptc-promote');cmd+=['--import',str(R/'research/eval-corpus/dev-census/typescript-host.mjs')]
-  cmd+=['--import',str(R/'research/eval-corpus/dev-census/file-scope.mjs'),str(R/'packages/scriptc-promote/src/cli.mjs'),'report',str(scanroot),'--measure','--json',str(target)]
+  names=[c['function']['name'] for c in cohort if c['scanRoot']==root and c['function']['file']==file]
+  inp=P.parent/(slug+'-inputs.json')
+  subprocess.run(['node',str(R/'research/eval-corpus/dev-measure/input-gen.mjs'),str(P),file,json.dumps(names),str(inp)],check=True)
+  env['M1_INPUT_META']=str(inp)+'.meta'
+  cmd+=['--import',str(R/'research/eval-corpus/dev-census/file-scope.mjs'),str(R/'packages/scriptc-promote/src/cli.mjs'),'report',str(scanroot),'--measure','--inputs',str(inp),'--json',str(target)]
   print(slug,file,flush=True);start=time.time()
   try:
    p=subprocess.run(cmd,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=400);result={'exit':p.returncode,'seconds':time.time()-start,'output':p.stdout.decode(errors='replace')[-6000:]}
