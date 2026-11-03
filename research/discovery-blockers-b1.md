@@ -148,3 +148,98 @@ in common and 20 different files per run because batch enumeration changed.
 Equal file totals do not imply identical coverage. The comparison includes a
 matched cohort and separates uncovered prior acceptances from covered refusals.
 [Exact coverage gap](eval-corpus/dev-census-b1/coverage-gap.json).
+
+## Fresh DEV results
+
+EV3 accepted 441 functions; this run accepts 251 in the recorded coverage. There are 21 newly accepted functions, 211 previously accepted functions now rejected in covered files, and 0 prior acceptances without current coverage. Missing coverage is unknown. First-refusal histograms are not causal estimates.
+
+The matched cohort contains 24292 function rows, with 441 accepted before and 251 after. Observed parser failures change from 1957 to 15; missing scopes are outside that after total.
+
+| DEV repository | Before accepted | After accepted | Current coverage |
+|---|---:|---:|---|
+| toeverything/AFFiNE | 12 | 7 | installed; requested files covered |
+| actualbudget/actual | 5 | 2 | installed; requested files covered |
+| boardgameio/boardgame.io | 0 | 0 | installed; requested files covered |
+| lissy93/dashy | 0 | 0 | installed; requested files covered |
+| evidence-dev/evidence | 8 | 5 | installed; requested files covered |
+| excalidraw/excalidraw-room | 0 | 0 | installed; requested files covered |
+| getfider/fider | — | — | non-Node control |
+| gristlabs/grist-core | 27 | 11 | installed; requested files covered |
+| growthbook/growthbook | 174 | 98 | installed; scans partial |
+| linkwarden/linkwarden | 1 | 1 | installed; requested files covered |
+| maybe-finance/maybe | — | — | non-Node control |
+| n8n-io/n8n | 72 | 53 | installed; requested files covered |
+| nocodb/nocodb | 9 | 8 | installed; requested files covered |
+| openpanel-dev/openpanel | 38 | 18 | installed; requested files covered |
+| PostHog/posthog | 76 | 38 | installed; requested files covered |
+| umami-software/umami | 4 | 3 | installed; requested files covered |
+| Unleash/unleash | 15 | 7 | installed; requested files covered |
+
+## First-refusal histogram
+
+Counts below include all observed functions. The comparison artifact also contains a matched-function histogram to separate changed coverage.
+
+| Classification and first refusal | Before | After |
+|---|---:|---:|
+| environment-affected: runtime dependency boundary | 2414 | 3199 |
+| environment-affected: unsupported reference/type | 2014 | 2329 |
+| environment-affected: export/binding resolution | 1434 | 1964 |
+| environment-affected: transitive effect proof | 341 | 493 |
+| environment-affected: other closure/extraction | 339 | 460 |
+| environment-affected: JSON boundary/type proof | 323 | 265 |
+| environment-affected: computed/prototype member proof | 131 | 2 |
+| environment-affected: call-site specialization | 102 | 59 |
+| environment-affected: strict closure | 77 | 50 |
+| environment-affected: class/constructor proof | 20 | 23 |
+| environment-affected: module cycles | 0 | 3 |
+| real: work screen | 2404 | 2262 |
+| real: module initialization/effect proof | 2023 | 2255 |
+| real: unsupported reference/type | 1095 | 1218 |
+| real: package exports/resolver policy | 423 | 0 |
+| real: declaration/type-only graph handling | 387 | 0 |
+| real: parser syntax | 303 | 226 |
+| real: runtime dependency boundary | 250 | 280 |
+| real: effects | 233 | 201 |
+| real: mutation proof | 218 | 510 |
+| real: strict closure | 139 | 75 |
+| real: transitive effect proof | 136 | 211 |
+| real: namespace/module-object proof | 97 | 265 |
+| real: JSON boundary/type proof | 86 | 67 |
+| real: call-site specialization | 73 | 36 |
+| real: computed/prototype member proof | 60 | 2 |
+| real: export/binding resolution | 47 | 139 |
+| real: other closure/extraction | 13 | 113 |
+| real: class/constructor proof | 9 | 10 |
+| real: module cycles | 6 | 6 |
+
+Source-only module initialization and constant-graph checks, as well as stricter mutation provenance, account for acceptance losses. These conservative failures do not establish that every affected function mutates application inputs.
+
+## Compute-relevant leads
+
+These newly accepted names are static review leads. No timing or HTTP reachability is established.
+
+- [splitHeaderTokens](https://github.com/toeverything/AFFiNE/blob/91ac3ca384b791ffd1a87de352a82e766f11ae08/packages/backend/server/src/plugins/calendar/providers/caldav.ts#L111) in toeverything/AFFiNE.
+- [advisoryLockSubKey](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/evaluation.ee/evaluation-collection.service.ts#L40) in n8n-io/n8n.
+- [countCodePointsUpTo](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/modules/oauth-server/oauth-server.service.ts#L69) in n8n-io/n8n.
+- [tokenizeKnowledgeFilePattern](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/modules/agents/agent-knowledge-mirror.service.ts#L646) in n8n-io/n8n.
+- [tokenizeKnowledgeFileName](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/modules/agents/agent-knowledge-mirror.service.ts#L650) in n8n-io/n8n.
+- [compactKnowledgeFileName](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/modules/agents/agent-knowledge-mirror.service.ts#L660) in n8n-io/n8n.
+- [parseTagNames](https://github.com/n8n-io/n8n/blob/18c045bfacb12c8163ff770970b330af9730aaab/packages/cli/src/public-api/v1/controllers/workflows.public.controller.ts#L107) in n8n-io/n8n.
+- [minOf](https://github.com/nocodb/nocodb/blob/23c21f68c4af8bae1a768c71fc9ae1cca1eb8985/packages/nocodb-sdk/src/lib/aggregationCompute.ts#L224) in nocodb/nocodb.
+- [maxOf](https://github.com/nocodb/nocodb/blob/23c21f68c4af8bae1a768c71fc9ae1cca1eb8985/packages/nocodb-sdk/src/lib/aggregationCompute.ts#L230) in nocodb/nocodb.
+
+NocoDB `minOf` and `maxOf` are the clear numerical aggregation leads; both previously failed TS2532. The other entries are small string, token, or path helpers. None is an established CPU hotspot or native win.
+
+## Named candidates
+
+- `bestExhaustiveBinarySplit`: rejected; [next-scriptc] not a candidate bestExhaustiveBinarySplit: [next-scriptc] /tmp/b1-growthbook-clones/growthbook/packages/stats-ts/src/contextualBanditWeights.ts:373:1 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state.
+- `approximateBinaryKMeans`: rejected; [next-scriptc] not a candidate approximateBinaryKMeans: [next-scriptc] /tmp/b1-growthbook-clones/growthbook/packages/stats-ts/src/contextualBanditWeights.ts:477:1 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state.
+- `solveForecast`: rejected; [next-scriptc] not a candidate solveForecast: [next-scriptc] /tmp/b1-verified-clones/actual/packages/loot-core/src/server/budget/schedule-template.ts:684:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.
+
+The isolated GrowthBook construction probes now pass captured scalar constants and stop at unsupported `NewExpression`. Actual still stops at `SpreadElement`; its hole allocation and indexed writes remain outside the construction language. No split-search or solver speedup is claimed.
+
+## Final validation
+
+Next: 103 pass. Core: 110 pass, two existing skips. Targeted B1: 23 pass. Native differential checks cover indexed-read fallback, fresh helper mutation, copied arrays, scalar captures, invalid typed-array writes, and `Math.clz32`. The full suites also exercise NSC locations, T1 fuzzing, runtime snapshots, profile reporting, the editor plugin, typed decode-once, and browser hooks.
+
+[Raw results and aggregation](eval-corpus/dev-census-b1/summary.json.gz), [comparison and accepted leads](eval-corpus/dev-census-b1/comparison.json), [static named probes](eval-corpus/dev-census-b1/candidate-probes.json), and [reproduction](eval-corpus/dev-census-b1/reproduce.md).
