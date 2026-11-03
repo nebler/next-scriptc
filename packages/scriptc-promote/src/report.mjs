@@ -1,3 +1,4 @@
+import {mergeRuntime,ciSummary,formatCi} from './report-runtime.mjs';
 import {createHash} from 'node:crypto';
 import {extractFunctions} from './functions/extract.mjs';
 import {createRequire} from 'node:module';
@@ -75,6 +76,7 @@ export async function coverageReport(directory='.',options={}){
  const histogram=new Map();for(const d of diagnostics){const blocker=d.message.replace(/^.*?not a candidate(?: [^:]+)?: /,'').replace(/\[next-scriptc\] .*?: function .*?: /,'');histogram.set(blocker,(histogram.get(blocker)??0)+1);}
  const result={version:1,root,sourceDir,framework,fileErrors,counts:{files:sources.length,totalTopLevelFunctions:rows.length,exportedFunctions:rows.filter(r=>r.exported).length,considered:considered.size,diagnosed:rows.filter(r=>r.diagnostics.length).length,accepted:rows.filter(r=>r.status==='accepted').length,explicit:rows.filter(r=>r.explicit).length,silentExclusions:rows.filter(r=>r.status==='excluded').length},files:sources.map(f=>({file:relative(root,f),functions:rows.filter(r=>r.file===relative(root,f))})),routes,blockers:[...histogram].map(([diagnostic,count])=>({diagnostic,count,explanation:explanation(diagnostic)})).sort((a,b)=>b.count-a.count),nearestMisses:rows.filter(r=>r.diagnostics.length===1).map(r=>({id:r.id,diagnostic:r.diagnostics[0]})),diagnostics:diagnostics.map(({file,name,message})=>({file,name,message})),limitations:['Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.','Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.','Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.','Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.','Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.']};
  if(options.measure)result.measurements=await measurePromotions(modules,{...options,root});
+ if(options.runtime)mergeRuntime(result,JSON.parse(await readFile(options.runtime,'utf8')));
  return result;
 }
 export function formatReport(report){
@@ -85,6 +87,7 @@ export function formatReport(report){
  lines.push('Top blockers:');for(const b of report.blockers.slice(0,5))lines.push(`  ${b.count} × ${b.diagnostic}\n    ${b.explanation}`);
  lines.push(`Nearest misses (one emitted diagnostic, further blockers may exist): ${report.nearestMisses.map(r=>r.id).join(', ')||'none'}`);
  for(const m of report.measurements??[])lines.push(`Measured ${m.id}: ${m.status==='ok'?`${m.inputSource}, N=${m.js.n}, ${m.metric}, JS ${m.js.median.toFixed(0)} ns/call [p10 ${m.js.p10.toFixed(0)}, p90 ${m.js.p90.toFixed(0)}], native ${m.native.median.toFixed(0)} ns/call [p10 ${m.native.p10.toFixed(0)}, p90 ${m.native.p90.toFixed(0)}], native ${m.nsPerInputJsonByte.native.toFixed(2)} ns/input byte, boundary ${m.boundaryShare===null?'unavailable':(100*m.boundaryShare).toFixed(1)+'%'}, intensity ${m.computeIntensity.toFixed(2)} JS ns/input byte, verdict ${m.verdict}`:m.status+' — '+m.reason}`);
+ if(report.runtime){const r=report.runtime;lines.push(`${r.functionsRanNative} functions ran native for ${r.nativePercent.toFixed(1)}% of calls; estimated CPU saved is a dispatcher-measured estimate, not billing (${r.estimatedCpuSavedMs===null?'unavailable':r.estimatedCpuSavedMs.toFixed(3)+' ms'}).`);for(const file of report.files)for(const f of file.functions)if(f.runtime)lines.push(`Runtime ${f.id}: ${f.runtime.outcome}; ${f.runtime.native}/${f.runtime.calls} native calls; ${f.runtime.fallback} fallbacks; ${f.runtime.reasons.join(', ')}`);for(const route of report.routes)lines.push(`Runtime route ${route.entry}: ${(route.runtime??[]).map(f=>f.id+' '+f.outcome).join(', ')||'no observations'} (static reachability, not request attribution)`);if(r.unmatchedIds.length)lines.push(`Unmatched runtime IDs: ${r.unmatchedIds.join(', ')}`);}
  lines.push(...report.limitations.map(s=>'Note: '+s));return lines.join('\n')+'\n';
 }
 async function measurePromotions(modules,options){
@@ -104,10 +107,17 @@ async function measurePromotions(modules,options){
 export async function reportCommand(args=process.argv.slice(2)){
  if(args[0]==='report')args=args.slice(1);
  let directory='.',seenDir=false;const options={};
- for(let i=0;i<args.length;i++){const arg=args[i];if(arg==='--measure')options.measure=true;else if(['--framework','--source-dir','--json','--md','--inputs'].includes(arg)){if(!args[i+1]||args[i+1].startsWith('--'))throw Error(`Missing value for ${arg}`);options[{'--source-dir':'sourceDir'}[arg]??arg.slice(2)]=args[++i];}else if(arg.startsWith('-')||seenDir)throw Error(`Unexpected argument: ${arg}`);else{directory=arg;seenDir=true;}}
+ for(let i=0;i<args.length;i++){const arg=args[i];if(arg==='--measure')options.measure=true;else if(arg==='--ci')options.ci=true;else if(['--framework','--source-dir','--json','--md','--inputs','--runtime','--baseline','--fail-on','--fuzz-results','--build-results'].includes(arg)){if(!args[i+1]||args[i+1].startsWith('--'))throw Error(`Missing value for ${arg}`);options[{'--source-dir':'sourceDir'}[arg]??arg.slice(2)]=args[++i];}else if(arg.startsWith('-')||seenDir)throw Error(`Unexpected argument: ${arg}`);else{directory=arg;seenDir=true;}}
  options.root=path.resolve(directory);
- const report=await coverageReport(directory,options),terminal=formatReport(report);process.stdout.write(terminal);
+ if(options['fail-on']&&!['regressed-explicit','regressed-accepted','newly-blocked'].includes(options['fail-on']))throw Error('Unknown --fail-on rule');
+ if(options['fail-on']&&!options.ci)throw Error('--fail-on requires --ci');
+ if(options['fail-on']&&!options.baseline)throw Error('--fail-on requires --baseline');
+ const report=await coverageReport(directory,options);
+ if(options['fuzz-results'])report.fuzz=JSON.parse(await readFile(options['fuzz-results'],'utf8'));
+ if(options['build-results']){const evidence=JSON.parse(await readFile(options['build-results'],'utf8'));if(evidence.version!==1||!Array.isArray(evidence.functions))throw Error('Invalid build results');for(const f of report.files.flatMap(f=>f.functions)){const e=evidence.functions.find(e=>e.id===f.id);if(e)f.compileStatus=e.status;}report.buildEvidence='supplied build results';}
+ if(options.ci){report.ci=ciSummary(report,options.baseline?JSON.parse(await readFile(options.baseline,'utf8')):undefined);options.json??='scriptc-report.json';options.md??='scriptc-report.md';const key={'regressed-explicit':'regressedExplicit','regressed-accepted':'regressedAccepted','newly-blocked':'newlyBlocked'}[options['fail-on']];if(key&&report.ci[key].length)process.exitCode=2;}
+ const terminal=formatReport(report);process.stdout.write(terminal);
  if(options.json)await writeFile(options.json,JSON.stringify(report,null,2)+'\n');
- if(options.md)await writeFile(options.md,'# Promotion coverage report\n\n```text\n'+terminal.replaceAll('```','~~~')+'```\n');
+ if(options.md)await writeFile(options.md,options.ci?formatCi(report.ci):'# Promotion coverage report\n\n```text\n'+terminal.replaceAll('```','~~~')+'```\n');
  return report;
 }

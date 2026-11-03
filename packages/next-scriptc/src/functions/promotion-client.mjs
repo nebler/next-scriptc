@@ -1,3 +1,4 @@
+import {createDispatcher} from 'scriptc-promote/functions/promotion.mjs';
 import {existsSync} from 'node:fs';
 import path from 'node:path';
 import {loadPromotion} from './promotion-runtime.mjs';
@@ -11,7 +12,7 @@ export function promote(file,id,js,args){
  instance=instances.get(file);
  if(!instance){try{
   instance=loadPromotion(file,{onTiming:sample=>globalThis[Symbol.for('next-scriptc.promotion.timing')]?.(sample)});
- }catch(e){console.error('[next-scriptc] promotion unavailable',e.message);instance={dispatch:(_id,js,args)=>js(...args)};}instances.set(file,instance);}
+ }catch(e){console.error('[next-scriptc] promotion unavailable',e.message);instance=createDispatcher({mode:'js'});}instances.set(file,instance);}
  instances.set(requested,instance);
  return instance.dispatch(id,js,args);
 }

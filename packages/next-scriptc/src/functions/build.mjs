@@ -38,7 +38,7 @@ export async function prepareFunctions(config, projectDir) {
     if(promotions.length&&config.output)throw new Error('[next-scriptc] Auto promotion requires the local Next server (export/standalone unsupported).');
     promotionFile=path.join(distDir,'scriptc-promotion/promotion.node');
   }
-  counts.set(projectDir,{functions:[...modules,...promotions].reduce((n,m)=>n+m.functions.length,0),modules:new Set([...modules,...promotions].map(m=>m.source)).size});
+  counts.set(projectDir,{functions:[...modules,...promotions].reduce((n,m)=>n+m.functions.length,0),modules:new Set([...modules,...promotions].map(m=>m.source)).size,names:modules.flatMap(m=>m.functions.map(f=>({file:m.source,name:f.name,start:f.start}))) });
   if (!modules.length) { plans.delete(projectDir); return withFunctions(config,promotions,0,projectDir,promotionFile); }
   if (config.output) throw new Error("[next-scriptc] Native functions require the local Next server (output: export/standalone is unsupported).");
   const port = 40000 + createHash("sha256").update(projectDir).digest().readUInt16BE(0) % 10000;
@@ -69,6 +69,7 @@ export async function prepareFunctions(config, projectDir) {
   entry += `serveFunctions(async (id: string, body: string, trace: number[] | null): Promise<FunctionResult> => { switch (id) {\n${cases.join("\n")}\ndefault: throw new Error("Unknown native function");\n} });\n`;
   const file = path.join(output, "entry.ts");
   await writeFile(file, entry);
+  const writeBuildEvidence=async status=>writeFile(path.join(output,'build-results.json'),JSON.stringify({version:1,functions:modules.flatMap(m=>m.functions.map(f=>({id:`${path.relative(projectDir,m.source).split(path.sep).join('/')}#${f.name}`,status,explicit:true})))},null,2)+'\n');
   const compiler = compilerPath();
   console.log(`[next-scriptc] Compiling ${index} native function(s)`);
   let compilerOutput="";
@@ -79,12 +80,14 @@ export async function prepareFunctions(config, projectDir) {
     child.once("error", reject);
     child.once("exit", (code, signal) => code === 0 ? resolve() : reject(new Error(`[next-scriptc] Function compilation failed (${signal ?? `exit ${code}`}). See scriptc diagnostics above.`)));
   }); } catch(error) {
+    await writeBuildEvidence('blocked');
     const infrastructure=infrastructureFailure({message:error.message,stderr:compilerOutput,code:error.code,path:error.path});
     // "use native" promises compiled-or-fail, so a missing toolchain fails the build
     // here. Automatic promotions keep their JS fallback in buildPromotion.
     if(infrastructure){plans.delete(projectDir);throw Error(infrastructure.replace('The app continues in JS.','Functions marked "use native" require it, so the build stops.')+` Affected: ${modules.flatMap(m=>m.functions.map(f=>`${path.relative(projectDir,m.source)}#${f.name}`)).join(', ')}.`);}
     throw Error(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})))+"\n"+error.message);
   }
+  await writeBuildEvidence('compiled');
   if(compilerOutput)console.log(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module}))));
   const processes = [{ binary: "functions", port, routes: ["native functions"] }];
   plans.set(projectDir, { output, processes, functions:modules.map(m=>({source:m.source,hash:m.hash,names:m.functions.map(f=>f.name)})) });

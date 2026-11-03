@@ -123,6 +123,8 @@ const adapter = {
     buildPlans.delete(projectDir);
     const functions=functionCounts(projectDir);
     console.log(`[next-scriptc] Built ${functions.functions} native function(s) in ${functions.modules} module(s).`);
+    for(const f of (functions.names??[]).slice(0,20)){const text=await readFile(f.file,'utf8');console.log(`[next-scriptc] Native ${f.name} at ${path.relative(projectDir,f.file)}:${text.slice(0,f.start??0).split('\n').length}`);}
+    if((functions.names?.length??0)>20)console.log(`[next-scriptc] ... ${functions.names.length-20} more native functions`);
     console.log(`[next-scriptc] Built ${routes.length} native route(s) in ${processes.length} process(es).`);
   },
 };
