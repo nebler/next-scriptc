@@ -1,0 +1,915 @@
+{
+  "mappedNodes": 1393,
+  "totalNodes": 1955,
+  "bounds": {
+    "startUs": 114413708684,
+    "stopUs": 114421779902
+  },
+  "excludedUs": 86323,
+  "totalsUs": {
+    "html": 872575,
+    "flight": 3702173,
+    "application": 298791,
+    "serialization": 0,
+    "data": 0,
+    "routing": 569002,
+    "http": 464413,
+    "gc": 1750878,
+    "other": 403279,
+    "idle": 10107
+  },
+  "activeUs": 8061111,
+  "percent": {
+    "html": 10.824500493790497,
+    "flight": 45.926336952809606,
+    "application": 3.706573448746705,
+    "serialization": 0,
+    "data": 0,
+    "routing": 7.058605197224055,
+    "http": 5.761153766521761,
+    "gc": 21.72005819049012,
+    "other": 5.002771950417256
+  },
+  "topFrames": [
+    {
+      "frame": {
+        "functionName": "(garbage collector)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "gc",
+      "us": 1750878
+    },
+    {
+      "frame": {
+        "functionName": "ez",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1673,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 1222461
+    },
+    {
+      "frame": {
+        "functionName": "e_",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 2195,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 802787
+    },
+    {
+      "frame": {
+        "functionName": "e",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1392,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 536211
+    },
+    {
+      "frame": {
+        "functionName": "eZ",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 2115,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 438002
+    },
+    {
+      "frame": {
+        "functionName": "e",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 2199,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 283958
+    },
+    {
+      "frame": {
+        "functionName": "pullFlightData",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/app-render/stream-ops.node.ts",
+        "lineNumber": 979,
+        "columnNumber": 15
+      },
+      "category": "routing",
+      "us": 247502
+    },
+    {
+      "frame": {
+        "functionName": "L",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 52,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 235041
+    },
+    {
+      "frame": {
+        "functionName": "encodeInto",
+        "scriptId": "50",
+        "url": "node:internal/encoding",
+        "lineNumber": 359,
+        "columnNumber": 12
+      },
+      "category": "http",
+      "us": 149244
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 133207
+    },
+    {
+      "frame": {
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 106588
+    },
+    {
+      "frame": {
+        "functionName": "tu",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1262,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 106540
+    },
+    {
+      "frame": {
+        "functionName": "ac",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 4879,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 88459
+    },
+    {
+      "frame": {
+        "functionName": "t.createElement",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react/cjs/react.react-server.production.js",
+        "lineNumber": 377,
+        "columnNumber": 24
+      },
+      "category": "routing",
+      "us": 78833
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1301,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 73543
+    },
+    {
+      "frame": {
+        "functionName": "htmlEscapeJsonString",
+        "scriptId": "610",
+        "url": "webpack://next/src/shared/lib/htmlescape.ts",
+        "lineNumber": 23,
+        "columnNumber": 16
+      },
+      "category": "application",
+      "us": 70918
+    },
+    {
+      "frame": {
+        "functionName": "encodeInto",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 61417
+    },
+    {
+      "frame": {
+        "functionName": "ee",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 241,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 58498
+    },
+    {
+      "frame": {
+        "functionName": "ah",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5623,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 58332
+    },
+    {
+      "frame": {
+        "functionName": "e",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1270,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 58125
+    },
+    {
+      "frame": {
+        "functionName": "i",
+        "scriptId": "620",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/next/.next/server/app/page.js",
+        "lineNumber": 0,
+        "columnNumber": 2176
+      },
+      "category": "application",
+      "us": 48456
+    },
+    {
+      "frame": {
+        "functionName": "aw",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6142,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 46041
+    },
+    {
+      "frame": {
+        "functionName": "e2",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 2165,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 44708
+    },
+    {
+      "frame": {
+        "functionName": "ek",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 2101,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 42040
+    },
+    {
+      "frame": {
+        "functionName": "indexOfBuffer",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 42002
+    },
+    {
+      "frame": {
+        "functionName": "aT",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6505,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 39832
+    },
+    {
+      "frame": {
+        "functionName": "writev",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 38831
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 1510,
+        "columnNumber": 0
+      },
+      "category": "flight",
+      "us": 30417
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "620",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/next/.next/server/app/page.js",
+        "lineNumber": 0,
+        "columnNumber": 2401
+      },
+      "category": "application",
+      "us": 29792
+    },
+    {
+      "frame": {
+        "functionName": "aN",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6937,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 29458
+    },
+    {
+      "frame": {
+        "functionName": "eT",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1215,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 28459
+    },
+    {
+      "frame": {
+        "functionName": "decodeUTF8",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 25418
+    },
+    {
+      "frame": {
+        "functionName": "A",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 48,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 24334
+    },
+    {
+      "frame": {
+        "functionName": "j",
+        "scriptId": "620",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/next/.next/server/app/page.js",
+        "lineNumber": 0,
+        "columnNumber": 2368
+      },
+      "category": "application",
+      "us": 23916
+    },
+    {
+      "frame": {
+        "functionName": "af",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5613,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 22627
+    },
+    {
+      "frame": {
+        "functionName": "eN",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1506,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 22208
+    },
+    {
+      "frame": {
+        "functionName": "toString",
+        "scriptId": "24",
+        "url": "node:buffer",
+        "lineNumber": 917,
+        "columnNumber": 45
+      },
+      "category": "http",
+      "us": 22207
+    },
+    {
+      "frame": {
+        "functionName": "S",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 30,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 21040
+    },
+    {
+      "frame": {
+        "functionName": "fromList",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 1647,
+        "columnNumber": 17
+      },
+      "category": "http",
+      "us": 20543
+    },
+    {
+      "frame": {
+        "functionName": "e4",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 2234,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 17752
+    },
+    {
+      "frame": {
+        "functionName": "z",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 133,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 17750
+    },
+    {
+      "frame": {
+        "functionName": "nextTick",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 112,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 16957
+    },
+    {
+      "frame": {
+        "functionName": "eT",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 600,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 16957
+    },
+    {
+      "frame": {
+        "functionName": "runMicrotasks",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 16501
+    },
+    {
+      "frame": {
+        "functionName": "ap",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5899,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 15915
+    },
+    {
+      "frame": {
+        "functionName": "structuredClone",
+        "scriptId": "28",
+        "url": "node:internal/worker/js_transferable",
+        "lineNumber": 112,
+        "columnNumber": 24
+      },
+      "category": "other",
+      "us": 15833
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 1945,
+        "columnNumber": 0
+      },
+      "category": "flight",
+      "us": 15000
+    },
+    {
+      "frame": {
+        "functionName": "eH",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1653,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 14999
+    },
+    {
+      "frame": {
+        "functionName": "e7",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 2268,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 13083
+    },
+    {
+      "frame": {
+        "functionName": "th",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1291,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 11541
+    },
+    {
+      "frame": {
+        "functionName": "processTicksAndRejections",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 71,
+        "columnNumber": 34
+      },
+      "category": "other",
+      "us": 11292
+    },
+    {
+      "frame": {
+        "functionName": "createComponentTreeInternal",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/app-render/create-component-tree.tsx",
+        "lineNumber": 124,
+        "columnNumber": 15
+      },
+      "category": "routing",
+      "us": 10418
+    },
+    {
+      "frame": {
+        "functionName": "utf8Slice",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 10416
+    },
+    {
+      "frame": {
+        "functionName": "e$",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1344,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 10210
+    },
+    {
+      "frame": {
+        "functionName": "(idle)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "idle",
+      "us": 10107
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7637,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 9082
+    },
+    {
+      "frame": {
+        "functionName": "ex",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 2246,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 9002
+    },
+    {
+      "frame": {
+        "functionName": "trace",
+        "scriptId": "262",
+        "url": "../../../../src/server/lib/trace/tracer.ts",
+        "lineNumber": 350,
+        "columnNumber": 9
+      },
+      "category": "routing",
+      "us": 8958
+    },
+    {
+      "frame": {
+        "functionName": "loadManifest",
+        "scriptId": "576",
+        "url": "../../src/server/load-manifest.external.ts",
+        "lineNumber": 37,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 8667
+    },
+    {
+      "frame": {
+        "functionName": "run",
+        "scriptId": "280",
+        "url": "node:internal/async_local_storage/async_context_frame",
+        "lineNumber": 57,
+        "columnNumber": 5
+      },
+      "category": "other",
+      "us": 7667
+    },
+    {
+      "frame": {
+        "functionName": "eS",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 2000,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 7542
+    },
+    {
+      "frame": {
+        "functionName": "w",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react/cjs/react.react-server.production.js",
+        "lineNumber": 50,
+        "columnNumber": 9
+      },
+      "category": "routing",
+      "us": 7500
+    },
+    {
+      "frame": {
+        "functionName": "getLocalSpanRecorder",
+        "scriptId": "262",
+        "url": "../../../../src/server/lib/trace/tracer.ts",
+        "lineNumber": 26,
+        "columnNumber": 9
+      },
+      "category": "routing",
+      "us": 6125
+    },
+    {
+      "frame": {
+        "functionName": "V",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 979,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 6084
+    },
+    {
+      "frame": {
+        "functionName": "createUnsafeBuffer",
+        "scriptId": "25",
+        "url": "node:internal/buffer",
+        "lineNumber": 1105,
+        "columnNumber": 27
+      },
+      "category": "http",
+      "us": 6082
+    },
+    {
+      "frame": {
+        "functionName": "emit",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 488,
+        "columnNumber": 43
+      },
+      "category": "other",
+      "us": 6042
+    },
+    {
+      "frame": {
+        "functionName": "FastBuffer",
+        "scriptId": "25",
+        "url": "node:internal/buffer",
+        "lineNumber": 959,
+        "columnNumber": 0
+      },
+      "category": "http",
+      "us": 6042
+    },
+    {
+      "frame": {
+        "functionName": "aq",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7169,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 6042
+    },
+    {
+      "frame": {
+        "functionName": "eL",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 1516,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 6000
+    },
+    {
+      "frame": {
+        "functionName": "X",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.node.production.js",
+        "lineNumber": 1060,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 5959
+    },
+    {
+      "frame": {
+        "functionName": "Transform._write",
+        "scriptId": "107",
+        "url": "node:internal/streams/transform",
+        "lineNumber": 165,
+        "columnNumber": 37
+      },
+      "category": "http",
+      "us": 5875
+    },
+    {
+      "frame": {
+        "functionName": "writeUtf8String",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 5750
+    },
+    {
+      "frame": {
+        "functionName": "addRequestMeta",
+        "scriptId": "436",
+        "url": "../../src/server/request-meta.ts",
+        "lineNumber": 420,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 5750
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-server.node.production.js",
+        "lineNumber": 3826,
+        "columnNumber": 9
+      },
+      "category": "flight",
+      "us": 5709
+    },
+    {
+      "frame": {
+        "functionName": "Y",
+        "scriptId": "609",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/next/.next/server/chunks/894.js",
+        "lineNumber": 24,
+        "columnNumber": 32860
+      },
+      "category": "application",
+      "us": 5540
+    },
+    {
+      "frame": {
+        "functionName": "flushBuffered",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/stream-utils/node-buffered-transform-stream.ts",
+        "lineNumber": 23,
+        "columnNumber": 11
+      },
+      "category": "routing",
+      "us": 5083
+    },
+    {
+      "frame": {
+        "functionName": "streamToString",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/stream-utils/node-web-streams-helper.ts",
+        "lineNumber": 217,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 4666
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/app-render/segment-explorer-path.ts",
+        "lineNumber": 11,
+        "columnNumber": 7
+      },
+      "category": "routing",
+      "us": 4584
+    },
+    {
+      "frame": {
+        "functionName": "parse",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 4583
+    },
+    {
+      "frame": {
+        "functionName": "renderToStream",
+        "scriptId": "610",
+        "url": "webpack://next/src/server/app-render/app-render.tsx",
+        "lineNumber": 3555,
+        "columnNumber": 15
+      },
+      "category": "routing",
+      "us": 4582
+    }
+  ]
+}

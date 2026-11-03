@@ -1,0 +1,915 @@
+{
+  "mappedNodes": 0,
+  "totalNodes": 330,
+  "bounds": {
+    "startUs": 114392118640,
+    "stopUs": 114400156265
+  },
+  "excludedUs": 51889,
+  "totalsUs": {
+    "html": 4985471,
+    "flight": 0,
+    "application": 771833,
+    "serialization": 0,
+    "data": 0,
+    "routing": 484539,
+    "http": 1032658,
+    "gc": 246001,
+    "other": 493498,
+    "idle": 22944
+  },
+  "activeUs": 8014000,
+  "percent": {
+    "html": 62.20952083853257,
+    "flight": 0,
+    "application": 9.631058148240578,
+    "serialization": 0,
+    "data": 0,
+    "routing": 6.046156725729973,
+    "http": 12.885675068629897,
+    "gc": 3.069640628899426,
+    "other": 6.157948589967557
+  },
+  "topFrames": [
+    {
+      "frame": {
+        "functionName": "writeChunk",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 57,
+        "columnNumber": 19
+      },
+      "category": "html",
+      "us": 1294834
+    },
+    {
+      "frame": {
+        "functionName": "renderElement",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 4887,
+        "columnNumber": 22
+      },
+      "category": "html",
+      "us": 770430
+    },
+    {
+      "frame": {
+        "functionName": "pushStartInstance",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1309,
+        "columnNumber": 26
+      },
+      "category": "html",
+      "us": 678453
+    },
+    {
+      "frame": {
+        "functionName": "encodeInto",
+        "scriptId": "50",
+        "url": "node:internal/encoding",
+        "lineNumber": 359,
+        "columnNumber": 12
+      },
+      "category": "http",
+      "us": 635789
+    },
+    {
+      "frame": {
+        "functionName": "retryNode",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5631,
+        "columnNumber": 18
+      },
+      "category": "html",
+      "us": 412587
+    },
+    {
+      "frame": {
+        "functionName": "exports.createElement",
+        "scriptId": "201",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react/cjs/react.production.js",
+        "lineNumber": 452,
+        "columnNumber": 33
+      },
+      "category": "routing",
+      "us": 407544
+    },
+    {
+      "frame": {
+        "functionName": "escapeTextForBrowser",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 249,
+        "columnNumber": 29
+      },
+      "category": "html",
+      "us": 396291
+    },
+    {
+      "frame": {
+        "functionName": "renderNode",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6150,
+        "columnNumber": 19
+      },
+      "category": "html",
+      "us": 298751
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 263375
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "199",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/data.js",
+        "lineNumber": 0,
+        "columnNumber": 59
+      },
+      "category": "application",
+      "us": 252537
+    },
+    {
+      "frame": {
+        "functionName": "(garbage collector)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "gc",
+      "us": 246001
+    },
+    {
+      "frame": {
+        "functionName": "encodeInto",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 238869
+    },
+    {
+      "frame": {
+        "functionName": "pushStartGenericElement",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1270,
+        "columnNumber": 32
+      },
+      "category": "html",
+      "us": 230673
+    },
+    {
+      "frame": {
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 191333
+    },
+    {
+      "frame": {
+        "functionName": "getComponentNameFromType",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 3289,
+        "columnNumber": 33
+      },
+      "category": "html",
+      "us": 137000
+    },
+    {
+      "frame": {
+        "functionName": "flushSubtree",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6945,
+        "columnNumber": 21
+      },
+      "category": "html",
+      "us": 133919
+    },
+    {
+      "frame": {
+        "functionName": "performWork",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 6607,
+        "columnNumber": 20
+      },
+      "category": "html",
+      "us": 130507
+    },
+    {
+      "frame": {
+        "functionName": "records",
+        "scriptId": "199",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/data.js",
+        "lineNumber": 0,
+        "columnNumber": 23
+      },
+      "category": "application",
+      "us": 117712
+    },
+    {
+      "frame": {
+        "functionName": "Page",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 6,
+        "columnNumber": 20
+      },
+      "category": "application",
+      "us": 113715
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 6,
+        "columnNumber": 570
+      },
+      "category": "application",
+      "us": 113582
+    },
+    {
+      "frame": {
+        "functionName": "byteLengthOfChunk",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 142,
+        "columnNumber": 26
+      },
+      "category": "html",
+      "us": 91705
+    },
+    {
+      "frame": {
+        "functionName": "Row",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 5,
+        "columnNumber": 19
+      },
+      "category": "application",
+      "us": 84830
+    },
+    {
+      "frame": {
+        "functionName": "ReactElement",
+        "scriptId": "201",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react/cjs/react.production.js",
+        "lineNumber": 79,
+        "columnNumber": 21
+      },
+      "category": "routing",
+      "us": 76995
+    },
+    {
+      "frame": {
+        "functionName": "renderNodeDestructive",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5621,
+        "columnNumber": 30
+      },
+      "category": "html",
+      "us": 72750
+    },
+    {
+      "frame": {
+        "functionName": "getChildFormatContext",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 608,
+        "columnNumber": 30
+      },
+      "category": "html",
+      "us": 72457
+    },
+    {
+      "frame": {
+        "functionName": "renderChildrenArray",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 5907,
+        "columnNumber": 28
+      },
+      "category": "html",
+      "us": 72325
+    },
+    {
+      "frame": {
+        "functionName": "writev",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 62127
+    },
+    {
+      "frame": {
+        "functionName": "byteLength",
+        "scriptId": "24",
+        "url": "node:buffer",
+        "lineNumber": 853,
+        "columnNumber": 19
+      },
+      "category": "http",
+      "us": 53247
+    },
+    {
+      "frame": {
+        "functionName": "renderWithHooks",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 4832,
+        "columnNumber": 24
+      },
+      "category": "html",
+      "us": 49124
+    },
+    {
+      "frame": {
+        "functionName": "startChunkForTag",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 1299,
+        "columnNumber": 25
+      },
+      "category": "html",
+      "us": 44500
+    },
+    {
+      "frame": {
+        "functionName": "Cell",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 3,
+        "columnNumber": 20
+      },
+      "category": "application",
+      "us": 38623
+    },
+    {
+      "frame": {
+        "functionName": "pushAttribute",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 876,
+        "columnNumber": 22
+      },
+      "category": "html",
+      "us": 31752
+    },
+    {
+      "frame": {
+        "functionName": "Badge",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 4,
+        "columnNumber": 21
+      },
+      "category": "application",
+      "us": 26833
+    },
+    {
+      "frame": {
+        "functionName": "(idle)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "idle",
+      "us": 22944
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 6,
+        "columnNumber": 238
+      },
+      "category": "application",
+      "us": 22626
+    },
+    {
+      "frame": {
+        "functionName": "endChunkForTag",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 2378,
+        "columnNumber": 23
+      },
+      "category": "html",
+      "us": 18039
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7645,
+        "columnNumber": 18
+      },
+      "category": "html",
+      "us": 16416
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "scriptId": "9",
+        "url": "node:internal/bootstrap/node",
+        "lineNumber": 473,
+        "columnNumber": 7
+      },
+      "category": "other",
+      "us": 12123
+    },
+    {
+      "frame": {
+        "functionName": "run",
+        "scriptId": "206",
+        "url": "node:internal/async_local_storage/async_context_frame",
+        "lineNumber": 57,
+        "columnNumber": 5
+      },
+      "category": "other",
+      "us": 10208
+    },
+    {
+      "frame": {
+        "functionName": "nextTick",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 112,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 8917
+    },
+    {
+      "frame": {
+        "functionName": "sanitizeURL",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 294,
+        "columnNumber": 20
+      },
+      "category": "html",
+      "us": 7833
+    },
+    {
+      "frame": {
+        "functionName": "encode",
+        "scriptId": "50",
+        "url": "node:internal/encoding",
+        "lineNumber": 354,
+        "columnNumber": 8
+      },
+      "category": "http",
+      "us": 7542
+    },
+    {
+      "frame": {
+        "functionName": "createFormatContext",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 583,
+        "columnNumber": 28
+      },
+      "category": "html",
+      "us": 6041
+    },
+    {
+      "frame": {
+        "functionName": "flushCompletedQueues",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7177,
+        "columnNumber": 29
+      },
+      "category": "html",
+      "us": 6000
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "scriptId": "134",
+        "url": "node:_http_incoming",
+        "lineNumber": 120,
+        "columnNumber": 15
+      },
+      "category": "http",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 225,
+        "columnNumber": 5
+      },
+      "category": "http",
+      "us": 3041
+    },
+    {
+      "frame": {
+        "functionName": "_storeHeader",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 455,
+        "columnNumber": 21
+      },
+      "category": "http",
+      "us": 2918
+    },
+    {
+      "frame": {
+        "functionName": "parserOnIncoming",
+        "scriptId": "136",
+        "url": "node:_http_server",
+        "lineNumber": 1166,
+        "columnNumber": 25
+      },
+      "category": "http",
+      "us": 1916
+    },
+    {
+      "frame": {
+        "functionName": "_send",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 399,
+        "columnNumber": 48
+      },
+      "category": "http",
+      "us": 1542
+    },
+    {
+      "frame": {
+        "functionName": "writeToDestination",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 122,
+        "columnNumber": 27
+      },
+      "category": "html",
+      "us": 1542
+    },
+    {
+      "frame": {
+        "functionName": "pushStringAttribute",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 790,
+        "columnNumber": 28
+      },
+      "category": "html",
+      "us": 1542
+    },
+    {
+      "frame": {
+        "functionName": "writeOrBuffer",
+        "scriptId": "105",
+        "url": "node:internal/streams/writable",
+        "lineNumber": 549,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 1542
+    },
+    {
+      "frame": {
+        "functionName": "parserOnHeadersComplete",
+        "scriptId": "132",
+        "url": "node:_http_common",
+        "lineNumber": 76,
+        "columnNumber": 32
+      },
+      "category": "http",
+      "us": 1541
+    },
+    {
+      "frame": {
+        "functionName": "processTicksAndRejections",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 71,
+        "columnNumber": 34
+      },
+      "category": "other",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "uncork",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 300,
+        "columnNumber": 50
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "AsyncContextFrame",
+        "scriptId": "21",
+        "url": "node:internal/async_context_frame",
+        "lineNumber": 42,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "readableAddChunkPushByteMode",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 470,
+        "columnNumber": 37
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "FastBuffer",
+        "scriptId": "25",
+        "url": "node:internal/buffer",
+        "lineNumber": 959,
+        "columnNumber": 0
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "insert",
+        "scriptId": "10",
+        "url": "node:internal/timers",
+        "lineNumber": 425,
+        "columnNumber": 15
+      },
+      "category": "other",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "checkInvalidHeaderChar",
+        "scriptId": "132",
+        "url": "node:_http_common",
+        "lineNumber": 280,
+        "columnNumber": 31
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "_uint8ArrayToBuffer",
+        "scriptId": "91",
+        "url": "node:stream",
+        "lineNumber": 147,
+        "columnNumber": 57
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "ServerResponse",
+        "scriptId": "136",
+        "url": "node:_http_server",
+        "lineNumber": 203,
+        "columnNumber": 23
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "insertGuarded",
+        "scriptId": "10",
+        "url": "node:internal/timers",
+        "lineNumber": 399,
+        "columnNumber": 22
+      },
+      "category": "other",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "startFlowing",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7493,
+        "columnNumber": 21
+      },
+      "category": "html",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7465,
+        "columnNumber": 29
+      },
+      "category": "html",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "checkIsHttpToken",
+        "scriptId": "132",
+        "url": "node:_http_common",
+        "lineNumber": 242,
+        "columnNumber": 25
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "exports.renderToPipeableStream",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7853,
+        "columnNumber": 42
+      },
+      "category": "html",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "setImmediate",
+        "scriptId": "36",
+        "url": "node:timers",
+        "lineNumber": 214,
+        "columnNumber": 21
+      },
+      "category": "other",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "writevGeneric",
+        "scriptId": "110",
+        "url": "node:internal/stream_base_commons",
+        "lineNumber": 71,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "IncomingMessage",
+        "scriptId": "134",
+        "url": "node:_http_incoming",
+        "lineNumber": 57,
+        "columnNumber": 24
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "abort",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7542,
+        "columnNumber": 14
+      },
+      "category": "html",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "OutgoingMessage",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 109,
+        "columnNumber": 24
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "matchKnownFields",
+        "scriptId": "134",
+        "url": "node:_http_incoming",
+        "lineNumber": 346,
+        "columnNumber": 25
+      },
+      "category": "http",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "pushViewTransitionAttributes",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 707,
+        "columnNumber": 37
+      },
+      "category": "html",
+      "us": 1500
+    },
+    {
+      "frame": {
+        "functionName": "write_",
+        "scriptId": "135",
+        "url": "node:_http_outgoing",
+        "lineNumber": 958,
+        "columnNumber": 15
+      },
+      "category": "http",
+      "us": 1459
+    },
+    {
+      "frame": {
+        "functionName": "afterWrite",
+        "scriptId": "105",
+        "url": "node:internal/streams/writable",
+        "lineNumber": 700,
+        "columnNumber": 19
+      },
+      "category": "http",
+      "us": 1458
+    },
+    {
+      "frame": {
+        "functionName": "enqueueEarlyPreloadsAfterInitialWork",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 7478,
+        "columnNumber": 45
+      },
+      "category": "html",
+      "us": 1417
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "198",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/shared/tree.js",
+        "lineNumber": 6,
+        "columnNumber": 519
+      },
+      "category": "application",
+      "us": 1375
+    },
+    {
+      "frame": {
+        "functionName": "isAttributeNameSafe",
+        "scriptId": "205",
+        "url": "file:///private/tmp/nsc-ssr-r1/synthetic/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+        "lineNumber": 153,
+        "columnNumber": 28
+      },
+      "category": "html",
+      "us": 1083
+    },
+    {
+      "frame": {
+        "functionName": "ReadableState",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 269,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 125
+    }
+  ]
+}
