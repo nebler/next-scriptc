@@ -97,6 +97,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 |---|---|---|---|---|
 | EV3 | Dependency-installed DEV census | eval | census | done: 15,638 considered / 441 accepted; real blockers = module-init proofs, export conditions, .d.ts graph, decorators |
 | C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | done: RC/boxing ~26%, layout probes ~14%; key-array fix −13.6% on enumeration, CSV unchanged |
+| — | Compiler hill paused after C1d (entry 64): typed code at or past V8; erased gap needs a systematic inline-cache design with upstream | 1 | scriptc fork | paused |
 | C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | bounded step done: leaf teardown eligible for inlining; generic −12.6%, spread −16.1%; CSV inconclusive; full escape/SSA work open |
 | C1c | Local record escape analysis and scalar replacement | 1 | scriptc fork | first opt-in version: alias groups, field writes, leaf strings, exact identity summaries; generic −57.0%; spread and D1/E1 unchanged; nested owned graphs and full gate open ([evidence](research/compiler-scalar-replacement.md)) |
 | C1d | Guarded specialization of erased operations | 1 | scriptc fork | bounded string-index slice: erased path −18.2%, CSV −5.5% but still 5.49× Node; typed control unchanged, copy/generic regressions retained; full gate open ([evidence](research/compiler-erased-specialization.md)) |

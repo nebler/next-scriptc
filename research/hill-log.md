@@ -1875,3 +1875,19 @@ Four matched-LLVM alternating windows preserve every Node result. At 50k, the er
 719 LLVM backend tests, six affected corpus programs through both differential harnesses, ASan/RC audit for the new corpus, direct sanitized runtime checks with isolated RC audit, lint, format, preflight/order recheck, and baseline completeness pass. Full gates, other platforms and runtime variants remain open. The initial String.prototype fixture is refused with SC2020; no built-in prototype mutation execution coverage is claimed.
 
 Fork branch `next-scriptc/erased-specialization`, local commit `1bba92c707186ea32b0cb40cf02d9b0fd2c75178`, starts at fresh upstream `ee968de47`. Research branch `t3/c1d-erased` retains own-code fixtures and evidence. Original checkouts, root README, held-out apps, containers, and external services are untouched. No push, issue, PR, public post, Docker, deployment, or secret. Task-owned outputs and dependencies are cleaned. [Report and evidence](compiler-erased-specialization.md).
+
+## 64. Review note on the compiler hill so far (2026-11-03)
+
+Five compiler rounds (C1, C1b, C1c, C1d, C2) each landed a sound, measured slice:
+key arrays −13.6%; leaf teardown −12.6/−16.1%; opt-in scalar replacement −57% on
+closed typed records; typed decode −8.1%; guarded string indexing −18.2% on the erased
+walker and −5.5% on full CSV. CSV is still ~5.5× Node (38.5 vs 7.0 ms). C1d's patch
+also shows unexplained 5–8% regressions on the copy and generic controls, so it is
+not upstream-ready until those are explained.
+
+The pattern is clear: typed numeric and closed-record code is already at or past V8,
+and each erased-path cost is spread thin, so no single patch closes the gap. Closing
+it needs a systematic inline-cache and shape-feedback design for erased values, which
+is a large compiler project best done with upstream maintainers. Further solo compiler
+rounds now have diminishing returns. Pause the compiler hill after C1d; the adapter
+and product hills (B1, M1, A1) are the better use of the next slots.
