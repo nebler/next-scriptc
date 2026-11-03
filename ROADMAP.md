@@ -121,6 +121,8 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | done: shared cash-runway simulation, automatic native service, exact browser parity, aggregate verification panel; local 7–8.5× numeric win ([evidence](research/shared-native-demo.md)) |
 | W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
 | D1b | [Integer-PRNG remeasurement](research/shared-native-remeasure.md): native 1.36–1.68× optimized Node JS; float-modulo cliff labeled separately; default demo corrected | 6 | examples | done |
+| R1 | Where SSR CPU goes: Next + React Router, synthetic page + real apps, template-concatenation ceiling | 6 | research | done: Fizz 56.6% of Router synthetic, 24.0% of Epic, ~11% in Next (Flight 35–46%); byte-identical concat ceiling −62.5% render CPU; Next synthetic 15–17 CPU ms/req vs Router 2.7 ([evidence](research/ssr-cpu-breakdown-react.md)) |
+| R2 | Same harness for Astro, SvelteKit, Nuxt | 6 | research | running |
 | HO | Held-out milestone eval | 6 | eval | deferred: nothing in DEV changes the answer yet (entry 73) |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without
