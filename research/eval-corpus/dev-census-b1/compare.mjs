@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {gzipSync} from 'node:zlib';
+import {readJsonArtifact} from '../../lib/artifact.mjs';
+const before=readJsonArtifact(new URL('../dev-census/summary.json',import.meta.url));
+const after=readJsonArtifact(new URL('summary.json',import.meta.url));
+const prior=new Map(before.functions.map(f=>[f.repository+'#'+f.id,f]));
+const repositories=before.repos.map(b=>{const a=after.repos.find(a=>a.repository===b.repository);return {repository:b.repository,before:b.counts,after:a?.counts??null,status:a?.status??'not rerun',uncovered:a?.remainingPartitionOmissions?.length??null};});
+const newlyAccepted=after.functions.filter(f=>f.status==='accepted'&&prior.get(f.repository+'#'+f.id)?.status!=='accepted').map(f=>({repository:f.repository,id:f.id,name:f.name,url:f.url,previous:prior.get(f.repository+'#'+f.id)?.diagnostics??['previously unconsidered']}));
+const lost=before.functions.filter(f=>f.status==='accepted'&&after.functions.find(a=>a.repository===f.repository&&a.id===f.id)?.status!=='accepted').map(f=>({repository:f.repository,id:f.id,after:after.functions.find(a=>a.repository===f.repository&&a.id===f.id)?.diagnostics??['not covered']}));
+const histogram=Object.fromEntries([...new Set([...Object.keys(before.histogram),...Object.keys(after.histogram)])].map(state=>[state,Object.fromEntries([...new Set([...Object.keys(before.histogram[state]??{}),...Object.keys(after.histogram[state]??{})])].map(category=>[category,{before:before.histogram[state]?.[category]??0,after:after.histogram[state]?.[category]??0}]))]));
+const named=after.functions.filter(f=>['solveForecast','bestExhaustiveBinarySplit','approximateBinaryKMeans'].includes(f.name));
+const result={repositories,histogram,newlyAccepted,lost,named,note:'First-refusal shifts. Parser survival changes considered functions. Missing scopes remain unknown. Static compute names below are review leads, not measured wins.',computeLeads:newlyAccepted.filter(f=>/split|means|forecast|regress|sort|quantile|matrix|histogram|variance|distance|hash|encode|decode|parse|aggregate|calculate/i.test(f.name))};
+const bytes=Buffer.from(JSON.stringify(result,null,2)+'\n');const name=new URL('comparison.json',import.meta.url);if(bytes.length>256*1024)fs.writeFileSync(new URL('comparison.json.gz',import.meta.url),gzipSync(bytes,{level:9,mtime:0}));else fs.writeFileSync(name,bytes);
+console.log(JSON.stringify({repositories,newlyAccepted:newlyAccepted.length,lost:lost.length,named},null,2));
