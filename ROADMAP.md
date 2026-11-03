@@ -118,7 +118,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | — | Editor integration, equivalence proofs, whole-library native | 3/4 | — | later |
 | D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | done: shared cash-runway simulation, automatic native service, exact browser parity, aggregate verification panel; local 7–8.5× numeric win ([evidence](research/shared-native-demo.md)) |
 | W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
-| D1b | Re-measure the demo against well-written JS (integer PRNG); D1's 8× is mostly a Node float-modulo cliff (entry 67) | 6 | examples | running |
+| D1b | [Integer-PRNG remeasurement](research/shared-native-remeasure.md): native 1.36–1.68× optimized Node JS; float-modulo cliff labeled separately; default demo corrected | 6 | examples | done |
 | HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without

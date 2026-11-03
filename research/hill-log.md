@@ -1939,3 +1939,39 @@ shadows, automatic pickup, and that native removes a cliff a developer would
 otherwise have to discover with a profiler. It does not show an 8× advantage over
 good JS. Follow-up D1b: add an integer-PRNG variant and measure JS/native/wasm
 honestly before the demo is used in any pitch.
+
+
+## 68. D1b: honest integer-PRNG forecast comparison (2026-11-03)
+
+The demo now uses Mulberry32 with Math.imul/unsigned bit mixing and hoisted input
+fields. Model, rounding, source sharing, discovery, and default dispatcher policy
+remain. At 1k/10k/100k paths, warmed Node 26.13 JS medians are
+0.101/1.006/9.926 ms, adapter native 0.074/0.606/5.901 ms, and Node wasm
+0.076/0.704/6.994 ms. Native beats reasonable optimized JS by 1.36–1.68×,
+a modest local compute win. The README leads with that comparison.
+
+The old float-modulo generator, with the same field hoisting, measures Node JS
+1.323/13.860/139.804 ms versus native 0.204/1.883/18.685 and wasm
+0.208/2.054/20.499 ms. It remains a separately labeled V8 cliff, not the demo's
+headline. Real Chromium JS/wasm measures 0.1/0.1, 1.0/0.7, 9.9/7.0 ms for the
+integer variant, versus 0.3/0.2, 3.3/2.1, 33.6/20.5 for float modulo. Browser
+1k timing is clock-limited; only 10k/100k buckets retain fresh wasm calibration.
+All 12 seeded cases and every measured output agree across each variant's lanes;
+the PRNGs themselves produce different streams.
+
+After startup transitions, --trace-deopt has zero events in 300 marked warmed
+calls, without a generic-named-access bailout loop. Independent report --measure
+predicts native for all sizes. Production HTTP observes native with 24 decision
+pairs, 26 checks, zero mismatches/fallbacks, and 13 native calls. Three scalar
+controls at 3.6M iterations give JS/native milliseconds: floating modulo
+134.395/18.037, fractional Math.pow 39.930/37.776, and two-limb carry arithmetic
+2.795/3.331. Only modulo is a clear cliff; no new demo is built around these.
+
+Example unit tests: 3 pass. Production build and HTTP parity/dispatch pass.
+Node 26 package suites: Next 103 pass; core 79 pass, two existing skips.
+The browser integration test's source calibration is refreshed. Framework fixture
+copies now exclude installed node_modules before their existing fresh install,
+fixing an npm prepare failure from copied pnpm links. No production package or
+compiler code changes. Worktree and /tmp only; no main-checkout/node_modules
+mutation, root README edit, deploy, hosting call, Docker, push, PR, issue, public
+post, or secret. [Report, reproduction, raw samples, and limitations](shared-native-remeasure.md).
