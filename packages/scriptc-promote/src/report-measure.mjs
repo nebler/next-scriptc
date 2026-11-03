@@ -1,5 +1,6 @@
+import {measurementAddon} from './report-addon.mjs';
 // Runs only for explicit --measure. Isolate addon failures from static reporting.
-import {createRequire,stripTypeScriptTypes} from 'node:module';
+import {stripTypeScriptTypes} from 'node:module';
 import {readFile,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
@@ -8,7 +9,7 @@ import {encodeArguments,decodeResult,canonicalResult,argumentTable} from './func
 import {stabilityDefaults,decideLane} from './functions/promotion-policy.mjs';
 import {synthesize} from './functions/promotion-inputs.mjs';
 import {estimateSize} from './functions/promotion.mjs';
-const require=createRequire(import.meta.url),temp=process.argv[2];
+const temp=process.argv[2];
 const {modules,inputs,root}=JSON.parse(await readFile(path.join(temp,'request.json'),'utf8'));
 const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:s[Math.floor(s.length*.1)],median:s[Math.floor(s.length*.5)],p90:s[Math.floor(s.length*.9)],max:s.at(-1)};};
 const results=[],logs=[];
@@ -18,11 +19,13 @@ let built=[];
 try{built=await buildPromotion(modules,path.join(temp,'plain'),{report:m=>logs.push(m)});}catch(e){logs.push(e.stderr?.toString()??e.message);}
 let stages=[];
 if(built.length)try{stages=await buildPromotion(built,path.join(temp,'stages'),{timing:true,report:m=>logs.push(m)});}catch{}
-const addon=built.length?require(path.join(temp,'plain/promotion.node')):null;
-const timingAddon=stages.length?require(path.join(temp,'stages/promotion.node')):null;
+const addonPath=path.join(temp,'plain/promotion.node');
+const timingAddonPath=path.join(temp,'stages/promotion.node');
 for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,index=built.indexOf(m);
  if(index<0){results.push({id,status:'compile-rejected',reason:logs.join('\n')||'Stock compiler rejected function'});continue;}
  try{
+  const addon=await measurementAddon(addonPath,path.join(temp,'plain',`measure-${index}.node`));
+  const timingAddon=stages.length?await measurementAddon(timingAddonPath,path.join(temp,'stages',`measure-${index}.node`)):null;
   let tuples=inputs[id]??inputs[fn.id],inputSource='user-provided';
   if(tuples===undefined){inputSource='synthetic';tuples=[synthesize(m,fn)];}
   if(!Array.isArray(tuples)||!tuples.length||tuples.some(t=>!Array.isArray(t)))throw Error('Expected a nonempty array of argument tuples');

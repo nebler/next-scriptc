@@ -12,6 +12,7 @@ for s in base.get('scans',[]):
    if fn['status']=='accepted':
     root=s['scanRoot'];groups[root].add(f['file']);cohort.append({'id':str(pathlib.Path(root)/fn['id']),'scanRoot':root,'function':fn})
 d['cohort']=cohort;d['scans']=[]
+if os.environ.get('DEV_MEASURE_FINAL'):d['finalFixtureRefresh']=True
 for root,files in groups.items():
  files=sorted(files)
  for offset in range(0,len(files),5):
