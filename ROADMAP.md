@@ -113,6 +113,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | P3 | Profile-guided promotion | 3 | report/build | after P2 |
 | P4 | Zero-setup install, naming, docs | 3 | packaging | diagnostics/docs done: doctor + simulated failures; nine packed local setups; helper approval repair documented; naming options without renames. Host toolchain and script approval remain required ([evidence](research/install-and-docs.md)) |
 | — | Editor integration, browser wasm, equivalence proofs, whole-library native | 3/4 | — | later |
+| D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | running |
 | HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without
