@@ -150,3 +150,23 @@ for input format, synthetic inputs, and prediction limits.
 
 Apache-2.0, copyright next-scriptc contributors. See the
 [license](https://github.com/nebler/next-scriptc/blob/main/LICENSE).
+
+## Build-time differential fuzzing
+
+Run the local check:
+
+~~~sh
+pnpm exec next-scriptc fuzz . --seed 1 --budget-ms 100 --json fuzz.json
+~~~
+
+Enable the build gate with:
+
+~~~js
+withScriptc(config, { fuzz: { budgetMs: 100, seed: 1, maxCases: 256 } })
+~~~
+
+Automatic mismatches demote to JS; explicit synchronous "use native" mismatches
+fail the build. Fuzzing defaults to off and leaves runtime shadow verification
+enabled. Async native functions, routes, and Cloudflare builds use separate paths.
+See the [core fuzzing reference](../scriptc-promote/README.md#check-native-results-before-deployment)
+and [semantics and findings](../../research/build-time-fuzzing.md).

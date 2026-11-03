@@ -4,6 +4,7 @@ export interface PromotionOptions {
  tsconfig?: string;
  report?: (message: string) => void;
  build?: {
+  fuzz?: { budgetMs?: number; seed?: number; maxCases?: number };
   linux?: boolean;
   target?: string;
   timing?: boolean;

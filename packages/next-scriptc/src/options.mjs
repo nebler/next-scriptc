@@ -12,7 +12,7 @@ function object(value, label) {
 export function validateOptions(options) {
   object(options, "Options");
   for (const key of Object.keys(options)) {
-    if (key !== "routes" && key !== "nativePromotion" && key !== "target" && key !== "cloudflare") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
+    if (key !== "fuzz" && key !== "routes" && key !== "nativePromotion" && key !== "target" && key !== "cloudflare") throw new Error(`[next-scriptc] Unsupported option ${JSON.stringify(key)}.`);
   }
   if (options.nativePromotion !== undefined && !["auto", "off"].includes(options.nativePromotion)) throw new Error("[next-scriptc] nativePromotion must be auto or off.");
   if (options.target !== undefined && !["node", "cloudflare"].includes(options.target)) throw new Error("[next-scriptc] target must be node or cloudflare.");
@@ -23,6 +23,7 @@ export function validateOptions(options) {
     if (typeof options.cloudflare.entry !== "string" || !options.cloudflare.entry) throw new Error("[next-scriptc] cloudflare.entry must name a synchronous JSON string facade.");
   }
   if (options.target === "cloudflare" && options.nativePromotion === "auto") throw new Error("[next-scriptc] Cloudflare requires static verified dispatch; nativePromotion auto uses Node CPU timers.");
+  if (options.fuzz !== undefined) { object(options.fuzz, "Options.fuzz"); for (const [key,value] of Object.entries(options.fuzz)) if (!["seed","budgetMs","maxCases"].includes(key) || !Number.isSafeInteger(value) || value < (key === "seed" ? 0 : 1)) throw Error("[next-scriptc] Invalid fuzz option " + key); }
   const routes = options.routes === undefined ? {} : options.routes;
   object(routes, "Options.routes");
   const result = {};
@@ -39,7 +40,7 @@ export function validateOptions(options) {
     }
     Object.defineProperty(result, pattern, { value: { ...value, optimization: value.optimization ?? "release" }, enumerable: true });
   }
-  return { routes: result, ...(options.target ? { target: options.target } : {}), ...(options.cloudflare ? { cloudflare: { ...options.cloudflare } } : {}), nativePromotion: options.nativePromotion ?? (options.target === "cloudflare" ? "off" : "auto") };
+  return { routes: result, ...(options.fuzz ? {fuzz: {...options.fuzz}} : {}), ...(options.target ? { target: options.target } : {}), ...(options.cloudflare ? { cloudflare: { ...options.cloudflare } } : {}), nativePromotion: options.nativePromotion ?? (options.target === "cloudflare" ? "off" : "auto") };
 }
 
 export function planRoutes(discovered, options = {}) {

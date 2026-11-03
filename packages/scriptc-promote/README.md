@@ -137,3 +137,47 @@ directory, build status checks the manifest build ID, source hash, function name
 and artifact presence. Changed source or a missing artifact is reported as not
 built. Other paths are explicitly uninspected. This command does not compile
 explicit functions or verify execution.
+
+## Check native results before deployment
+
+Build and fuzz promoted synchronous functions without starting the app:
+
+~~~sh
+pnpm exec scriptc-promote fuzz ./my-app --seed 1 --budget-ms 100 --max-cases 256 --json fuzz.json
+pnpm exec next-scriptc fuzz ./my-next-app --seed 1
+~~~
+
+The command discovers automatic and explicit synchronous "use native" candidates,
+compiles a host addon, and compares its results with the extracted JS closure.
+A nonzero exit means a mismatch, compilation refusal, unavailable check, or no
+comparable calls. Discovery refusals remain visible in diagnostics. Async native
+functions and routes use a separate build path and are outside this command.
+
+Enable the same check in adapters:
+
+~~~js
+scriptcPromote({ build: { fuzz: { budgetMs: 100, seed: 1, maxCases: 256 } } })
+// Next:
+withScriptc(config, { fuzz: { budgetMs: 100, seed: 1 } })
+~~~
+
+The framework adapters accept the same build option.
+A mismatch demotes automatic candidates to JS and rebuilds the addon index.
+An explicit synchronous "use native" mismatch fails the build. An unavailable
+check also demotes or fails; zero comparable calls never pass the build gate.
+The build retains fuzz-results.json with seed, counts, and minimized diagnostics.
+
+Defaults are seed 1, 100 ms of execution per function, and 256 cases. Automatic
+build fuzzing is off: each function also needs a fresh process and TypeScript
+analysis, which cost more than the execution budget on the repository examples.
+The outer watchdog allows 10 seconds for process startup/type analysis plus the
+execution budget. A JS call has a 50 ms maximum; native hangs terminate the
+subprocess. Compilation has the existing compiler lifetime. Run on the target
+host; a cross-compiled addon cannot be verified on the build machine.
+
+The corpus includes finite numeric edges and boundary refusals, UTF-16 edges,
+JSON strings, arrays, objects, optional fields, and key ordering. Seeded case
+order is deterministic; a time budget determines how much of that sequence runs.
+Shrinking is bounded and preserves a mismatch, but does not prove global
+minimality. Runtime shadow verification remains necessary.
+See [design, semantics, overhead, and findings](../../research/build-time-fuzzing.md).

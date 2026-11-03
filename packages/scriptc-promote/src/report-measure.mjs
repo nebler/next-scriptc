@@ -6,32 +6,11 @@ import {pathToFileURL} from 'node:url';
 import {buildPromotion} from './functions/promotion-build.mjs';
 import {encodeArguments,decodeResult,canonicalResult,argumentTable} from './functions/promotion-encodings.mjs';
 import {stabilityDefaults,decideLane} from './functions/promotion-policy.mjs';
-import {strictClosureProgram} from './functions/construction-proof.mjs';
+import {synthesize} from './functions/promotion-inputs.mjs';
 import {estimateSize} from './functions/promotion.mjs';
 const require=createRequire(import.meta.url),temp=process.argv[2];
 const {modules,inputs,root}=JSON.parse(await readFile(path.join(temp,'request.json'),'utf8'));
 const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:s[Math.floor(s.length*.1)],median:s[Math.floor(s.length*.5)],p90:s[Math.floor(s.length*.9)],max:s.at(-1)};};
-function synthesize(module,fn){
- const ts=require('typescript'),strict=strictClosureProgram(module.referenceNative??module.native,ts),checker=strict.program.getTypeChecker();
- let declaration;function find(n){if(ts.isFunctionDeclaration(n)&&n.name?.text===fn.name)declaration=n;else if(ts.isVariableDeclaration(n)&&n.name?.text===fn.name)declaration=n.initializer;else ts.forEachChild(n,find);}find(strict.source);
- if(!declaration?.parameters)throw Error('Cannot synthesize this signature; supply --inputs');
- let budget=256;
- function value(type,seen=new Set()){
-  if(--budget<0||seen.has(type))throw Error('Recursive or large input type; supply --inputs');
-  if(type.isLiteral())return type.value;
-  if(type.flags&ts.TypeFlags.Number)return 32;
-  if(type.flags&ts.TypeFlags.String)return 'synthetic';
-  if(type.flags&ts.TypeFlags.BooleanLike)return type.intrinsicName!=='false';
-  if(type.flags&ts.TypeFlags.Null)return null;
-  if(type.isUnion()){const member=type.types.find(t=>!(t.flags&(ts.TypeFlags.Undefined|ts.TypeFlags.Null)));if(member)return value(member,seen);}
-  const next=new Set(seen).add(type);
-  if(checker.isArrayType(type)){const item=value(checker.getTypeArguments(type)[0],next);return Array.from({length:16},()=>structuredClone(item));}
-  if(checker.isTupleType(type))return checker.getTypeArguments(type).map(t=>value(t,next));
-  if(type.flags&ts.TypeFlags.Object&&!checker.getIndexInfosOfType(type).length&&!type.getCallSignatures().length&&!type.getConstructSignatures().length)return Object.fromEntries(checker.getPropertiesOfType(type).map(p=>[p.name,value(checker.getTypeOfSymbolAtLocation(p,p.valueDeclaration??declaration),next)]));
-  throw Error('No bounded JSON input type; supply --inputs');
- }
- return declaration.parameters.map(p=>value(checker.getTypeAtLocation(p)));
-}
 const results=[],logs=[];
 const validIds=new Set(modules.flatMap(m=>[m.functions[0].id,path.relative(root,m.source).split(path.sep).join('/')+'#'+m.functions[0].name]));
 for(const id of Object.keys(inputs))if(!validIds.has(id))throw Error('Unknown function input ID: '+id);

@@ -5,6 +5,7 @@ export type ScriptcOptions = {
   cloudflare?: { entry: string };
   /** Automatic discovery defaults to auto on Node, off on Cloudflare. */
   nativePromotion?: "auto" | "off";
+  fuzz?: { budgetMs?: number; seed?: number; maxCases?: number };
   routes?: Record<string, { group?: string; optimization?: "release" | "speed" | "dev" }>;
 };
 
