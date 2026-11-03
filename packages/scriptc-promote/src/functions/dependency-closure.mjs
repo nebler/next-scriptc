@@ -1,5 +1,5 @@
 import {normalizeModuleFunctions} from './module-functions.mjs';
-import {inertDefaultExpression} from './module-initialization.mjs';
+import {inertDefaultExpression,literalArithmetic} from './module-initialization.mjs';
 import {assertRuntimeExportTarget} from './runtime-export-target.mjs';
 import {nodeRuntimeConditions,hasNodeConditionFlags} from './resolution-conditions.mjs';
 import {lowerCheckedIndexes} from './checked-index.mjs';
@@ -82,7 +82,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, runtimeCo
    for(const statement of program.get('body')){
     const n=statement.isExportNamedDeclaration()?statement.get('declaration'):statement;
     if(statement.isImportDeclaration()){if(!statement.node.specifiers.length&&statement.node.importKind!=='type'&&statement.node.source.value!=='server-only')fail('unproved module initialization side-effect import');continue;}
-    if(statement.isExportDefaultDeclaration()){if(!babel.types().isDeclaration(statement.node.declaration)&&!inertDefaultExpression(statement.node.declaration))fail('unproved module initialization default expression');continue;}
+    if(statement.isExportDefaultDeclaration()){if(!babel.types().isDeclaration(statement.node.declaration)&&!inertDefaultExpression(statement.node.declaration,program.scope))fail('unproved module initialization default expression');continue;}
     if(statement.isExportDeclaration())continue;
     if(!n.isDeclaration()&&!n.isEmptyStatement())fail(`unproved module initialization ${n.node.type}`);
    }
@@ -165,6 +165,7 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
    }
    declaration.traverse({enter(p){if(['TSMappedType','TSConditionalType','TSInferType','TSTypeQuery','TSImportType'].includes(p.node.type))fail(`type ${local} is not bounded JSON data: ${p.node.type} ${p.node.name??''}`);}});
   }
+  if(declaration.isVariableDeclarator()&&declaration.parent.kind==='const'){const value=literalArithmetic(declaration.node.init);if(value!==undefined)declaration.node.init=babel.types().numericLiteral(value);}
   const init=declaration.node.init;
   const frozen=init?.type==='CallExpression'&&init.callee.type==='MemberExpression'&&!init.callee.computed&&init.callee.object.name==='Object'&&!declaration.scope.getBinding('Object')&&init.callee.property.name==='freeze'&&init.arguments.length===1;
   if(frozen){declaration.node.init=babel.types().tsAsExpression(init.arguments[0],babel.types().tsTypeReference(babel.types().identifier('const')));}
@@ -172,7 +173,7 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
   if(declaration.isVariableDeclarator()&&(['ObjectExpression','ArrayExpression'].includes(declaration.node.init?.type)||declaration.node.init?.type==='TSAsExpression'&&declaration.node.init.typeAnnotation.type==='TSTypeReference'&&declaration.node.init.typeAnnotation.typeName.name==='const')){
    if(record.reflective)fail('constant graph lexical eval');
    if(declaration.parent.kind!=='const'||[...record.exports.values()].includes(local))fail('constant graph exported reference can escape');
-   function graph(n){if(scalar(n))return n;if(n.type==='ArrayExpression')return n.elements.map(e=>{if(!e)fail('constant graph hole');return graph(e);});if(n.type==='ObjectExpression'){const out=new Map();for(const p of n.properties){if(p.type!=='ObjectProperty'||p.computed||p.shorthand||['__proto__','prototype','constructor','toJSON'].includes(p.key.name??p.key.value))fail('constant graph property');out.set(String(p.key.name??p.key.value),graph(p.value));}return out;}fail('constant graph requires literals');}
+   function graph(n){if(scalar(n))return n;const value=literalArithmetic(n);if(value!==undefined)return babel.types().numericLiteral(value);if(n.type==='ArrayExpression')return n.elements.map(e=>{if(!e)fail('constant graph hole');return graph(e);});if(n.type==='ObjectExpression'){const out=new Map();for(const p of n.properties){if(p.type!=='ObjectProperty'||p.computed||p.shorthand||['__proto__','prototype','constructor','toJSON'].includes(p.key.name??p.key.value))fail('constant graph property');out.set(String(p.key.name??p.key.value),graph(p.value));}return out;}fail('constant graph requires literals');}
    record.constants??=new Map();record.constants.set(local,graph(declaration.node.init.type==='TSAsExpression'?declaration.node.init.expression:declaration.node.init));return;
   }
   if(declaration.isVariableDeclarator()){

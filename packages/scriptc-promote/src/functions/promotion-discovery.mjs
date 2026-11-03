@@ -58,7 +58,7 @@ export function promotionCandidates(text, source, report = console.log, resoluti
  const candidates=[];
  for(const {name,forced,offset} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
-  if(!module.imports.length&&ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&!babel.types().isDeclaration(n.declaration)&&!inertDefaultExpression(n.declaration)))throw Error(`dependency closure: ${source}: unproved module initialization default expression`);
+  if(!module.imports.length&&ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&!babel.types().isDeclaration(n.declaration)&&!inertDefaultExpression(n.declaration,program.scope)))throw Error(`dependency closure: ${source}: unproved module initialization default expression`);
   const nativeBody=parse(module.native,source,resolution.options).program.body;
   const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral','ArrowFunctionExpression','FunctionExpression'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
   const moduleProof=nativeBody.some(n=>['TSEnumDeclaration','ClassDeclaration','TSModuleDeclaration'].includes(n.type)||n.type==='VariableDeclaration'&&n.declarations.some(d=>!scalar(d.init)))||ast.program.body.some(n=>n.type==='ImportDeclaration'&&!n.specifiers.length&&n.importKind!=='type'&&n.source.value!=='server-only');

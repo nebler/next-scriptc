@@ -51,6 +51,8 @@ export function localConstruction(source, checker, ts) {
    const v=expr(e.expression);
    if(name==='slice'){if(!checker.isArrayType(checker.getTypeAtLocation(e.expression)))fail(n,'array receiver required');n.arguments.forEach(expr);const a=alloc(n,'array');merge(field(a,'element'),elements(v,e.expression,n));return new Set([a]);}
    if(['map','filter','sort'].includes(name)){if([...v].some(o=>o.kind!=='array'&&o!==arg))fail(n,'array receiver required');if(name==='sort')local(v,['array'],n);const child=elements(v,e.expression,n);const result=callback(n.arguments[0],name==='sort'?[child,child]:[child,scalar,v]);if(name==='sort')return v;const a=alloc(n,'array');merge(field(a,'element'),name==='filter'?child:result);return new Set([a]);}
+   // Reordering a fresh container preserves every possible child reference.
+   if(name==='reverse'&&!n.arguments.length){if(!checker.isArrayType(checker.getTypeAtLocation(e.expression)))fail(n,'array receiver required');local(v,['array'],n);return v;}
    if(name==='push'){for(const a of n.arguments)write(v,'element',expr(a),n,['array']);return scalar;}
    if(name==='set'){if(n.arguments.length!==2)fail(n,'Map.set arity');write(v,'key',expr(n.arguments[0]),n,['Map']);write(v,'value',expr(n.arguments[1]),n,['Map']);return v;}
    if(name==='add'){write(v,'value',expr(n.arguments[0]),n,['Set']);return v;}
