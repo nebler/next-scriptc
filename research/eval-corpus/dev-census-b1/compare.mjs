@@ -12,7 +12,7 @@ const current=new Map(after.functions.map(f=>[f.repository+'#'+f.id,f]));
 const matchedBefore=before.functions.filter(f=>current.has(f.repository+'#'+f.id));
 const matchedAfter=after.functions.filter(f=>prior.has(f.repository+'#'+f.id));
 const countHistogram=rows=>{const h={};for(const f of rows)if(f.diagnostics.length){const state=h[f.classification]??={};state[f.category]=(state[f.category]??0)+1;}return h;};
-const matched={functions:matchedBefore.length,before:countHistogram(matchedBefore),after:countHistogram(matchedAfter)};
+const matched={functions:matchedBefore.length,beforeAccepted:matchedBefore.filter(f=>f.status==='accepted').length,afterAccepted:matchedAfter.filter(f=>f.status==='accepted').length,before:countHistogram(matchedBefore),after:countHistogram(matchedAfter)};
 const uncoveredPriorAcceptances=lost.filter(f=>!current.has(f.repository+'#'+f.id));
 const lostCoveredAcceptances=lost.filter(f=>current.has(f.repository+'#'+f.id));
 const named=after.functions.filter(f=>['solveForecast','bestExhaustiveBinarySplit','approximateBinaryKMeans'].includes(f.name));
