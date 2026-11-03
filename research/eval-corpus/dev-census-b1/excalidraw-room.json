@@ -1,0 +1,1319 @@
+{
+  "repository": "excalidraw/excalidraw-room",
+  "sha": "03ff435860b508d7cd9e005cfc90f7977ae2a593",
+  "split": "DEV",
+  "adapterSha": "42d2b1fb7efbd71565c3fe895fec7dd0bdb77205",
+  "status": "installed; requested files covered",
+  "scopes": [
+    "src"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/b1-verified-clones/excalidraw-room"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/excalidraw/excalidraw-room.git",
+      "03ff435860b508d7cd9e005cfc90f7977ae2a593"
+    ],
+    "exit": 0,
+    "seconds": 1.12,
+    "output": "From https://github.com/excalidraw/excalidraw-room\n * branch            03ff435860b508d7cd9e005cfc90f7977ae2a593 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "verifiedSha": "03ff435860b508d7cd9e005cfc90f7977ae2a593",
+  "packageInventory": [
+    "package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 13912137728,
+  "packageManager": "yarn",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--non-interactive"
+    ],
+    "exit": 0,
+    "seconds": 5.37,
+    "output": "yarn install v1.22.22\n[1/4] Resolving packages...\n(node:95120) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n[2/4] Fetching packages...\n[3/4] Linking dependencies...\n[4/4] Building fresh packages...\nwarning Ignored scripts due to flag.\nDone in 4.95s.\n"
+  },
+  "generators": [],
+  "scans": [
+    {
+      "scope": ".",
+      "scanRoot": ".",
+      "sourceDir": ".",
+      "selectionFiles": [
+        "src/index.ts"
+      ],
+      "reportProcess": {
+        "command": [
+          "node",
+          "--max-old-space-size=6144",
+          "--import",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-8eb51a97/research/eval-corpus/dev-census/file-scope.mjs",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-8eb51a97/packages/scriptc-promote/src/cli.mjs",
+          "report",
+          "/tmp/b1-verified-clones/excalidraw-room",
+          "--source-dir",
+          ".",
+          "--json",
+          "/tmp/b1-verified-clones/excalidraw-room-batch-report.json"
+        ],
+        "exit": 0,
+        "seconds": 0.55,
+        "output": "scriptc-promote coverage \u2014 generic\n1 files; 0 top-level callable bindings (0 exported)\n0 considered; 0 diagnosed; 0 accepted; 0 explicit; 0 silently excluded\nDiagnostics are not a complete denominator; acceptance is not a speedup.\nTop blockers:\nNearest misses (one emitted diagnostic, further blockers may exist): none\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "report": {
+        "version": 1,
+        "root": "/tmp/b1-verified-clones/excalidraw-room",
+        "sourceDir": "/tmp/b1-verified-clones/excalidraw-room",
+        "framework": "generic",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 0,
+          "exportedFunctions": 0,
+          "considered": 0,
+          "diagnosed": 0,
+          "accepted": 0,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/index.ts",
+            "functions": []
+          }
+        ],
+        "routes": [],
+        "blockers": [],
+        "nearestMisses": [],
+        "diagnostics": [],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ]
+      },
+      "ev1Process": {
+        "command": [
+          "node",
+          "--max-old-space-size=6144",
+          "--import",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-8eb51a97/research/eval-corpus/dev-census/file-scope.mjs",
+          "/Users/noah/.t3/worktrees/next-scriptc/t3-8eb51a97/research/eval-corpus/census.mjs",
+          "/tmp/b1-verified-clones/excalidraw-room",
+          "."
+        ],
+        "exit": 0,
+        "seconds": 0.47
+      },
+      "ev1": {
+        "sha": "03ff435860b508d7cd9e005cfc90f7977ae2a593",
+        "scopes": [
+          "."
+        ],
+        "files": 1,
+        "considered": [],
+        "diagnostics": [],
+        "fileErrors": [],
+        "accepted": [],
+        "counts": {},
+        "logs": [],
+        "errors": [],
+        "environment": {
+          "includesDeclarationImports": true,
+          "typescript": "4.2.3",
+          "configErrors": [],
+          "files": [
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/async_hooks.d.ts",
+              "imports": [
+                {
+                  "specifier": "async_hooks",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/buffer.d.ts",
+              "imports": [
+                {
+                  "specifier": "buffer",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/child_process.d.ts",
+              "imports": [
+                {
+                  "specifier": "child_process",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:events",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/cluster.d.ts",
+              "imports": [
+                {
+                  "specifier": "cluster",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:child_process",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/console.d.ts",
+              "imports": [
+                {
+                  "specifier": "node:util",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/constants.d.ts",
+              "imports": [
+                {
+                  "specifier": "node:os",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:crypto",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/crypto.d.ts",
+              "imports": [
+                {
+                  "specifier": "crypto",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/dgram.d.ts",
+              "imports": [
+                {
+                  "specifier": "dgram",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:dns",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/dns.d.ts",
+              "imports": [
+                {
+                  "specifier": "dns",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/domain.d.ts",
+              "imports": [
+                {
+                  "specifier": "domain",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/fs.d.ts",
+              "imports": [
+                {
+                  "specifier": "fs",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs/promises",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/fs/promises.d.ts",
+              "imports": [
+                {
+                  "specifier": "node:fs/promises",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/http.d.ts",
+              "imports": [
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/http2.d.ts",
+              "imports": [
+                {
+                  "specifier": "http2",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:tls",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:http",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/https.d.ts",
+              "imports": [
+                {
+                  "specifier": "https",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:tls",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/inspector.d.ts",
+              "imports": [
+                {
+                  "specifier": "inspector",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/module.d.ts",
+              "imports": [
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/net.d.ts",
+              "imports": [
+                {
+                  "specifier": "net",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:dns",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/os.d.ts",
+              "imports": [
+                {
+                  "specifier": "os",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/perf_hooks.d.ts",
+              "imports": [
+                {
+                  "specifier": "perf_hooks",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:async_hooks",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/process.d.ts",
+              "imports": [
+                {
+                  "specifier": "node:tty",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/punycode.d.ts",
+              "imports": [
+                {
+                  "specifier": "punycode",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/punycode/punycode.js",
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/querystring.d.ts",
+              "imports": [
+                {
+                  "specifier": "querystring",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/readline.d.ts",
+              "imports": [
+                {
+                  "specifier": "readline",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/repl.d.ts",
+              "imports": [
+                {
+                  "specifier": "repl",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:readline",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:vm",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:util",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/string_decoder.d.ts",
+              "imports": [
+                {
+                  "specifier": "string_decoder",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/timers.d.ts",
+              "imports": [
+                {
+                  "specifier": "timers",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/tls.d.ts",
+              "imports": [
+                {
+                  "specifier": "tls",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/trace_events.d.ts",
+              "imports": [
+                {
+                  "specifier": "trace_events",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/tty.d.ts",
+              "imports": [
+                {
+                  "specifier": "tty",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:net",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/url.d.ts",
+              "imports": [
+                {
+                  "specifier": "url",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:querystring",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/util.d.ts",
+              "imports": [
+                {
+                  "specifier": "util",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/v8.d.ts",
+              "imports": [
+                {
+                  "specifier": "v8",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/vm.d.ts",
+              "imports": [
+                {
+                  "specifier": "vm",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/worker_threads.d.ts",
+              "imports": [
+                {
+                  "specifier": "worker_threads",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:vm",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:url",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:fs/promises",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/zlib.d.ts",
+              "imports": [
+                {
+                  "specifier": "zlib",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "node:stream",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/node/wasi.d.ts",
+              "imports": [
+                {
+                  "specifier": "wasi",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/express-serve-static-core/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "range-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/range-parser/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "qs",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/qs/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/serve-static/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "express-serve-static-core",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/express-serve-static-core/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "mime",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/mime/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/connect/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/body-parser/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "connect",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/connect/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/express/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "body-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/body-parser/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "serve-static",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/serve-static/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "express-serve-static-core",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/express-serve-static-core/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "qs",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/qs/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/cors/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/server.d.ts",
+              "imports": [
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "cookie",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/cookie/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "cors",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/cors/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "stream",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/encodePacket.d.ts",
+              "imports": [
+                {
+                  "specifier": "./commons.js",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/commons.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/decodePacket.d.ts",
+              "imports": [
+                {
+                  "specifier": "./commons.js",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/commons.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "./encodePacket.js",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/encodePacket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./decodePacket.js",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/decodePacket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./commons.js",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/commons.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transport.d.ts",
+              "imports": [
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "engine.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/polling.d.ts",
+              "imports": [
+                {
+                  "specifier": "../transport",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transport.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/websocket.d.ts",
+              "imports": [
+                {
+                  "specifier": "../transport",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transport.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "./polling",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/polling.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./websocket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/websocket.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/userver.d.ts",
+              "imports": [
+                {
+                  "specifier": "./server",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/server.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/socket.d.ts",
+              "imports": [
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "./transport",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transport.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "engine.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/engine.io.d.ts",
+              "imports": [
+                {
+                  "specifier": "./server",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/server.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./transports/index",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transports/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "engine.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./server",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/server.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./userver",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/userver.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/socket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./transport",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/transport.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-parser/build/esm/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "@socket.io/component-emitter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@socket.io/component-emitter/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+              "imports": [
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/client.d.ts",
+              "imports": [
+                {
+                  "specifier": "socket.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "./index",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./typed-events",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "engine.io",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/engine.io.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "events",
+                  "resolved": null,
+                  "declaration": false
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/broadcast-operator.d.ts",
+              "imports": [
+                {
+                  "specifier": "socket.io-adapter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "socket.io-adapter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./typed-events",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+              "imports": [
+                {
+                  "specifier": "socket.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./typed-events",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./client",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/client.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./namespace",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/namespace.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "socket.io-adapter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "querystring",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "./broadcast-operator",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/broadcast-operator.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/namespace.d.ts",
+              "imports": [
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./index",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./typed-events",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./client",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/client.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "socket.io-adapter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./broadcast-operator",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/broadcast-operator.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/index.d.ts",
+              "imports": [
+                {
+                  "specifier": "https",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "http2",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "engine.io",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/engine.io/build/engine.io.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./namespace",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/namespace.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "socket.io-adapter",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-adapter/dist/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "socket.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "socket.io-parser",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io-parser/build/esm/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./broadcast-operator",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/broadcast-operator.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./typed-events",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/typed-events.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "./socket",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/socket.d.ts",
+                  "declaration": true
+                }
+              ]
+            },
+            {
+              "file": "src/index.ts",
+              "imports": [
+                {
+                  "specifier": "debug",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/debug/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "express",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/@types/express/index.d.ts",
+                  "declaration": true
+                },
+                {
+                  "specifier": "http",
+                  "resolved": null,
+                  "declaration": false
+                },
+                {
+                  "specifier": "socket.io",
+                  "resolved": "../../../private/tmp/b1-verified-clones/excalidraw-room/node_modules/socket.io/dist/index.d.ts",
+                  "declaration": true
+                }
+              ]
+            }
+          ]
+        },
+        "mode": "static discovery; caller supplies dependency installation status"
+      }
+    }
+  ],
+  "priorPartitionOmissions": [],
+  "explicitSelectionFiles": [
+    "src/index.ts"
+  ],
+  "additionalExclusions": [],
+  "finalBatchLimits": {
+    "files": 180,
+    "heapMiB": 6144,
+    "timeoutSeconds": 900
+  }
+}
