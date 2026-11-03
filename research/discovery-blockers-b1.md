@@ -139,3 +139,9 @@ DEV pins and server scopes. Installs disable lifecycle scripts and require at
 least 12,000,000,000 free bytes. At most three installed clones are allowed.
 Missing scans, failed installations, and disk skips are unknown coverage.
 Acceptance is static discovery, not compilation, HTTP reachability, or a CPU win.
+
+GrowthBook retains a 32-file validator resource gap in both runs, with 12 files
+in common and 20 different files per run because batch enumeration changed.
+Equal file totals do not imply identical coverage. The comparison includes a
+matched cohort and separates uncovered prior acceptances from covered refusals.
+[Exact coverage gap](eval-corpus/dev-census-b1/coverage-gap.json).
