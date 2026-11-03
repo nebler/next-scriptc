@@ -193,9 +193,13 @@ comparisons. Neither discovery nor dispatcher was edited.
 
 Final suites: `packages/next-scriptc` **103 pass**, `packages/scriptc-promote`
 **111 pass, two existing skips**, zero failures. Logs and source fingerprints are
-under `validation/`. The input-generation/native integration self-check also
+under `validation/`, including the red/green isolation regression. The
+input-generation/native integration self-check also
 passed. Artifact validation verifies the exact cohort and pins, install floor,
 raw sample counts, gates, argument joins, lane votes and null endpoint deltas.
 Compression, research-link and whitespace checks are recorded with the final
 artifacts. Reproduction retains failed attempts separately instead of converting
 resource failures or invalid inputs into performance evidence.
+
+Task-owned temporary clones, dependency caches, tools and source probes were
+removed after preserving results; [cleanup record](eval-corpus/dev-measure/cleanup.json).
