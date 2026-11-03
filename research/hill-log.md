@@ -1742,3 +1742,19 @@ An own-code runtime harness checks Node parity at 600, 6k, and 60k rows with opt
 Fork branch `next-scriptc/c2-json-decode`, commit `4bd7effcf29eb1b373b1235e0b2bf72b8d09ed29`, is local and unpushed. Two ASan/UBSan runtime tests pass with RC audit off/on, thresholds 1/7/256, and 256 Node differential comparisons. Two schema-emission tests, lint, format, and baseline completeness pass. Full gates, addon end-to-end execution, Linux, and wasm execution remain outstanding. The larger C2 goal remains open; the report specifies per-schema emitted decoders and their ownership/fallback contract.
 
 Task build outputs are removed. Root README, main checkout, protected compiler checkouts, Papermark, and external services are untouched. No push, PR, issue, public post, Docker, or secret. [Methods, profile attribution, raw evidence, before/after, failures, and remaining design](native-json-decode.md).
+
+## 58. Review note on C1, C1b and C2 (2026-11-03)
+
+Three compiler rounds landed sound, bounded slices: key arrays −13.6% on
+enumeration, leaf record teardown −12.6/−16.1% on its fixtures, ordered schema
+decode −8.1% flat at 60k. None moves the CSV gap or the boundary much. The large
+designs (escape analysis with scalar replacement; per-function emitted decoders)
+remain open and are multi-round projects.
+
+C2 also found that upstream already emits a direct typed decode
+(`scr_json_parse_schema`) for eligible record and array types. Our generated native
+entry (`promotion-signature.mjs`) decodes `JSON.parse(p) as Parameters<…>`, which
+can take that path, but construction guards call `JSON.parse(p)` a second time on
+the same argument. Whether a guarded input is decoded twice natively, and whether
+PM2's 27 ms decode was typed or erased, is unverified. Queued as E4 (adapter, cheap)
+before more compiler decode work.
