@@ -28,8 +28,8 @@ export async function total(values: number[]): Promise<number> {
 }
 ```
 
-Explicit code refusals fail the build. Infrastructure failures in automatic mode
-keep JS. Next async sidecars also fail when their toolchain cannot start. They are
+Explicit functions are compiled or the build fails, for code refusals and for a
+missing toolchain alike. Automatic promotions keep JS when the toolchain is missing. They are
 outside synchronous runtime snapshots and the fuzz CLI.
 Use `"use js"` to exclude a function from automatic discovery.
 Cloudflare has a separate static verified wasm lane and defaults to JS.

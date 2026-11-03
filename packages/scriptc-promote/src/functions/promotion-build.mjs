@@ -51,12 +51,19 @@ async function compilePromotion(modules, output, {linux=false, target=linux?'lin
   const env={...process.env,SCRIPTC_CHECKER_SERVER:'0',...(linux?{SCRIPTC_TARGET:triple,SCRIPTC_RUNTIME_PACK:runtime}:{})};
   execFileSync(compilerPath(),['build','--lib','--profile',path.join(output,'profile.json'),'-o',path.join(output,'functions.lib.a')],{cwd:output,env,encoding:'utf8',stdio:'pipe'});
  }
+ // "use native" promises compiled-or-fail, so a missing toolchain stops the build
+ // when any module is explicit. Automatic promotions keep their JS fallback.
+ function toolchainUnavailable(message){
+  const explicit=modules.filter(m=>m.forced);
+  if(explicit.length)throw Object.assign(Error(message.replace('The app continues in JS.','Functions marked "use native" require it, so the build stops.')+` Affected: ${explicit.flatMap(m=>m.functions.map(f=>`${path.relative(process.cwd(),m.source??'unknown').split(path.sep).join('/')}#${f.name}`)).join(', ')}.`),{explicitNative:true});
+  report(message);return [];
+ }
  // Incremental final-filter probes leave one combined archive, never link
  // multiple copies of the scriptc runtime. Restore the last accepted set after a refusal.
  try{await compile(modules);accepted.push(...modules);last=true;}
  catch(error){
-  const infrastructure=infrastructureFailure(error);if(infrastructure){report(infrastructure);return [];}
-  for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){const infrastructure=infrastructureFailure(e);if(infrastructure){report(infrastructure);return [];} const message=translateDiagnostics(e.stderr??e.message,[...accepted,m].map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})));if(m.forced)throw Error(message);last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${message}`);}}
+  const infrastructure=infrastructureFailure(error);if(infrastructure){return toolchainUnavailable(infrastructure);}
+  for(const m of modules){try{await compile([...accepted,m]);accepted.push(m);last=true;}catch(e){const infrastructure=infrastructureFailure(e);if(infrastructure){return toolchainUnavailable(infrastructure);} const message=translateDiagnostics(e.stderr??e.message,[...accepted,m].map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})));if(m.forced)throw Error(message);last=false;report(`[next-scriptc] not a candidate ${m.functions[0].name}: ${message}`);}}
  }
  if(!accepted.length)return [];
  if(!last)await compile(accepted);
@@ -65,7 +72,7 @@ async function compilePromotion(modules, output, {linux=false, target=linux?'lin
  c=c.replace('/* TABLE */',signatures.map(s=>s.native).join('\n')+'\nstatic void (*entries[])(Job *)={'+signatures.map((_,i)=>`invoke${i}`).join(',')+'};\nstatic const Schema schemas[]={'+signatures.map(s=>`{${s.kinds.length},{${s.kinds.join(',')}},${s.resultKind}}`).join(',')+'};');
  await writeFile(path.join(output,'addon.c'),c);
  const common=['-O2','-DSERIALIZED_RUNTIME',...(timing?['-DBOUNDARY_TIMING']:[]),'-fPIC','-I'+headers,path.join(output,'addon.c'),path.join(output,'functions.lib.a'),'-o',path.join(output,'promotion.node')];
- try { execFileSync(linux?'zig':'clang',linux?['cc','-target',triple,'-shared',...common,'-lm','-lpthread','-ldl','-Wl,--allow-shlib-undefined']:['-bundle','-undefined','dynamic_lookup',...common],{stdio:'pipe'}); } catch(error) {const infrastructure=infrastructureFailure(error);if(!infrastructure)throw error;report(infrastructure);return [];}
+ try { execFileSync(linux?'zig':'clang',linux?['cc','-target',triple,'-shared',...common,'-lm','-lpthread','-ldl','-Wl,--allow-shlib-undefined']:['-bundle','-undefined','dynamic_lookup',...common],{stdio:'pipe'}); } catch(error) {const infrastructure=infrastructureFailure(error);if(!infrastructure)throw error;return toolchainUnavailable(infrastructure);}
  await writeFile(path.join(output,'ids.json'),JSON.stringify(accepted.map(m=>m.functions[0].id)));
  await writeFile(path.join(output,'encodings.json'),JSON.stringify({timing,functions:Object.fromEntries(accepted.map(m=>[m.functions[0].id,{...m.functions[0].boundary,...(constructionResults&&!catchFallback&&m.functions[0].constructionProof?.eligible&&m.functions[0].constructionProof?.guards?.[m.functions[0].name]?.length?{parseInputs:m.functions[0].constructionProof.guards[m.functions[0].name].map(g=>g.index)}:{})}]))}));
  return accepted;
@@ -93,5 +100,5 @@ export async function buildPromotion(modules, output, options={}) {
   await writeFile(path.join(output,'build-results.json'),JSON.stringify(evidence,null,2)+'\n');
   return accepted;
  }
- catch(error){await mkdir(output,{recursive:true});await writeFile(path.join(output,'build-results.json'),JSON.stringify({version:1,functions:modules.flatMap(m=>m.functions.map(f=>({id:`${path.relative(process.cwd(),m.source??'unknown').split(path.sep).join('/')}#${f.name}`,status:'blocked',explicit:!!m.forced})))},null,2)+'\n');const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
+ catch(error){if(error.explicitNative)throw error;await mkdir(output,{recursive:true});await writeFile(path.join(output,'build-results.json'),JSON.stringify({version:1,functions:modules.flatMap(m=>m.functions.map(f=>({id:`${path.relative(process.cwd(),m.source??'unknown').split(path.sep).join('/')}#${f.name}`,status:'blocked',explicit:!!m.forced})))},null,2)+'\n');const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
 }

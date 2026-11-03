@@ -28,6 +28,11 @@ test('missing compiler and ar are infrastructure refusals with JS fallback',asyn
  assert.deepEqual(await buildPromotion([module],dir,{report:m=>logs.push(m)}),[]);assert.match(logs[0],/missing-scriptc.*continues in JS.*pnpm rebuild scriptc/s);assert.doesNotMatch(logs[0],/not a candidate/);
  const fake=path.join(dir,'fake-scriptc');await writeFile(fake,'#!/bin/sh\necho "error SC3004: spawnSync ar ENOENT" >&2\nexit 1\n');await chmod(fake,0o755);process.env.SCRIPTC_COMPILER=fake;logs.length=0;
  assert.deepEqual(await buildPromotion([module],dir,{report:m=>logs.push(m)}),[]);assert.match(logs[0],/unavailable \(ar\).*continues in JS.*Repair:/s);
+ const explicit={...module,forced:true};logs.length=0;
+ await assert.rejects(buildPromotion([explicit],dir,{report:m=>logs.push(m)}),/NSC2001: Toolchain unavailable \(ar\).*"use native" require it, so the build stops.*#sum/s);
+ process.env.SCRIPTC_COMPILER=path.join(dir,'missing-scriptc');
+ await assert.rejects(buildPromotion([module,explicit],dir,{report:m=>logs.push(m)}),/missing-scriptc.*build stops/s);
+ assert.equal(logs.length,0);
  }finally{if(old===undefined)delete process.env.SCRIPTC_COMPILER;else process.env.SCRIPTC_COMPILER=old;await rm(dir,{recursive:true,force:true});}
 });
 test('report lists async explicit functions with extraction and build status',async()=>{
