@@ -116,6 +116,14 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
  }
  const lookup=(value,key)=>value instanceof Map?value.get(String(key)):Array.isArray(value)?key==='length'?babel.types().numericLiteral(value.length):String(Number(key))===String(key)&&Number.isSafeInteger(Number(key))&&Number(key)>=0?value[Number(key)]:undefined:undefined;
  const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
+ // A scalar array can be recreated for a read-only call without sharing identity.
+ // some callbacks cannot receive the original receiver through a third/rest parameter.
+ function scalarArrayRead(member,value){
+  if(!Array.isArray(value)||!value.every(scalar)||member.node.computed)return false;
+  const call=member.parentPath;if(!call.isCallExpression()||member.key!=='callee'||call.node.arguments.length!==1)return false;
+  const arg=call.node.arguments[0],name=member.node.property.name;
+  return name==='includes'&&arg.type!=='SpreadElement'||name==='some'&&arg.type==='ArrowFunctionExpression'&&!arg.async&&arg.params.length<=2&&arg.params.every(p=>p.type==='Identifier');
+ }
  function linkExport(record, name, chain, typeOnly){
   const alias=record.reexports.get(name);
   if(alias){const file=resolve(alias.source,record.file,typeOnly);if(chain.includes(file))record.fail('module cycle');return linkExport(load(file,undefined,typeOnly),alias.local,[...chain,file],typeOnly);}
@@ -213,17 +221,19 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
    for(const ref of refs){
     if((ref.parentPath.isTSTypeAliasDeclaration()||ref.parentPath.isTSEnumDeclaration())&&ref.key==='id'||ref.isExportNamedDeclaration()||ref.parentPath.isExportSpecifier()||ref.findParent(p=>p.isTSType()))continue;
     if(isClass){if(!ref.findParent(p=>ast.program.body.includes(p.node)))continue;const call=ref.parentPath;if(!call.isNewExpression()||ref.key!=='callee'||!call.parentPath.isThrowStatement())fail('class value is not throw-only');continue;}
-    let read=ref,value=values;
+    let read=ref,value=values,arrayRead=false;
     while(read.parentPath.isMemberExpression()&&read.key==='object'){
      const member=read.parentPath.node,key=member.computed?member.property.value:member.property.name;
      if(member.computed&&!['StringLiteral','NumericLiteral'].includes(member.property.type))fail('constant graph requires literal member read');
+     if(scalarArrayRead(read.parentPath,value)){record.arrayReads??=new WeakMap();record.arrayReads.set(read.node,value);arrayRead=true;break;}
      value=lookup(value,key);
      if(!value)fail('constant graph unresolved member');read=read.parentPath;
     }
+    if(arrayRead)continue;
     if(!scalar(value)||read.parentPath.isAssignmentExpression()&&read.key==='left'||read.parentPath.isUpdateExpression()||read.parentPath.isUnaryExpression({operator:'delete'}))fail('constant graph mutation or escaping reference');
    }
   }
-  traverse(ast,{TSTypeReference(p){const n=p.node.typeName;if(n.type!=='TSQualifiedName'||n.left.type!=='Identifier')return;const target=defining(record,n.left.name),value=target.record.constants?.get(target.local)?.get(n.right.name);if(scalar(value))p.replaceWith(babel.types().tsLiteralType(babel.types().cloneNode(value,true)));},ThrowStatement(p){const n=p.node.argument;if(n?.type!=='NewExpression'||n.callee.type!=='Identifier'||p.scope.getBinding(n.callee.name)!==program.scope.getBinding(n.callee.name))return;const target=defining(record,n.callee.name);if(!target.record.throwClasses?.has(target.local))return;
+  traverse(ast,{enter(p){const values=record.arrayReads?.get(p.node);if(values){p.replaceWith(babel.types().arrayExpression(values.map(v=>babel.types().cloneNode(v,true))));p.skip();}},TSTypeReference(p){const n=p.node.typeName;if(n.type!=='TSQualifiedName'||n.left.type!=='Identifier')return;const target=defining(record,n.left.name),value=target.record.constants?.get(target.local)?.get(n.right.name);if(scalar(value))p.replaceWith(babel.types().tsLiteralType(babel.types().cloneNode(value,true)));},ThrowStatement(p){const n=p.node.argument;if(n?.type!=='NewExpression'||n.callee.type!=='Identifier'||p.scope.getBinding(n.callee.name)!==program.scope.getBinding(n.callee.name))return;const target=defining(record,n.callee.name);if(!target.record.throwClasses?.has(target.local))return;
    p.node.argument=babel.types().stringLiteral('__scriptc_throw_fallback__');record.requiresFallback=true;
   },MemberExpression:{exit(p){let n=p.node,keys=[];while(n.type==='MemberExpression'){keys.unshift(n.computed?n.property.value:n.property.name);n=n.object;}if(n.type!=='Identifier'||p.scope.getBinding(n.name)!==program.scope.getBinding(n.name))return;
    const target=defining(record,n.name);let value=target.record.constants?.get(target.local);if(!value)return;

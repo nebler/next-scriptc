@@ -1,7 +1,7 @@
-// Creation-only defaults are not observed by the retained closure. No calls,
-// spreads, computed keys or identifier reads are evaluated by this rule.
+// Unused defaults may create inert data or read an initialized declaration.
+// Calls, spreads, computed keys and other identifier reads remain unproved.
 export function inertDefaultExpression(n,scope){
- if(n?.type==='Identifier'){const binding=scope?.getBinding(n.name);return !!binding&&(binding.path.isFunctionDeclaration()||binding.path.isClassDeclaration()&&binding.path.node.end<n.start);}
+ if(n?.type==='Identifier'){const binding=scope?.getBinding(n.name);return !!binding&&!binding.path.node.declare&&(binding.path.isFunctionDeclaration()||binding.path.isClassDeclaration()&&binding.path.node.end<n.start);}
  if(!n)return false;
  if(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral','RegExpLiteral','FunctionExpression','ArrowFunctionExpression'].includes(n.type))return true;
  if(n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral')return true;

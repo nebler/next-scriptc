@@ -24,7 +24,7 @@ test('unused hoisted default function reads are inert; calls and TDZ reads rejec
  assert.ok(discover('class Other{}export default Other;export function rows(x:number[]){return x.map(v=>v+1);}'));
  assert.equal(discover('export default Later;class Later{}export function rows(x:number[]){return x.map(v=>v+1);}'),undefined);
  assert.ok(discover('function other(){return 2;}export default other;export function rows(x:number[]){return x.map(v=>v+1);}'));
- for(const prefix of ['export default Math.random();','export default later;const later=1;','export default missing;','const table={n:2};export default table;'])assert.equal(discover(prefix+'export function rows(x:number[]){return x.map(v=>v+1);}'),undefined);
+ for(const prefix of ['export default Math.random();','export default later;const later=1;','export default missing;','declare class Declared{}export default Declared;','const table={n:2};export default table;'])assert.equal(discover(prefix+'export function rows(x:number[]){return x.map(v=>v+1);}'),undefined);
 });
 test('old alias mutation and externally mutable captures stay refused',()=>{
  for(const source of [
@@ -36,7 +36,6 @@ test('old alias mutation and externally mutable captures stay refused',()=>{
   'const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}',
   'const table={r:/x/g};export function advance(){table.r.test("x");}export function rows(x:string[]){return x.map(v=>table.r.test(v));}',
   'const table={get n(){return 2;}};export function rows(x:number[]){return x.map(v=>v+table.n);}',
-  'const table=[1,2];export function rows(x:number[]){return x.map(v=>table.includes(v)?1:0);}',
   'const table={a:2,b:3};export function rows(x:("a"|"b")[]){return x.map(v=>table[v]);}',
  ])assert.equal(discover(source),undefined,source);
 });
@@ -46,7 +45,7 @@ import {checkFunctionTypes} from '../src/functions/types.mjs';
 test('restored reverse and arithmetic agree through the native ABI',async()=>{
  const dir=fs.mkdtempSync('/tmp/b1c-native-');try{
   const text='const table={n:2*3};export function rows(x:number[]){const a=x.map(v=>v+table.n);a.reverse();return a;}',file=dir+'/entry.ts';fs.writeFileSync(file,text);
-  const modules=promotionCandidates(text,file,()=>{},{ts});assert.equal(modules.length,1);checkFunctionTypes(ts,ts.createProgram([file],{strict:true,types:[]}),modules);
+  const modules=promotionCandidates(text,file,()=>{},{ts});assert.equal(modules.length,1);checkFunctionTypes(ts,ts.createProgram([file],{strict:true,types:[],target:ts.ScriptTarget.ES2022}),modules);
   assert.equal((await buildPromotion(modules,dir+'/out')).length,1);
   const d=loadPromotion(dir+'/out/promotion.node',{mode:'native',log:()=>{},crashGuard:{directory:dir+'/markers'}}),id=modules[0].functions[0].id;
   const js=x=>x.map(v=>v+6).reverse();for(const x of [[],[1,2],[-1,0,1]]){const original=[...x];assert.deepEqual(d.dispatch(id,js,[x]),js(x));assert.deepEqual(x,original);}assert.equal(d.snapshot()[id].native,3);
@@ -64,4 +63,30 @@ test('construction and replay limits retain B1 refusals',()=>{
   'const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n).concat(x);}',
   'const table={n:2};export function rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}',
  ])assert.equal(discover(text),undefined,text);
+});
+test('private scalar array reads are copied only after the original reference audit',()=>{
+ for(const expr of ['table.includes(v)','table.some(n=>n===v)','table.some((n,i)=>n+i===v)']){
+  const m=discover(`const table=[2,4];export function rows(x:number[]){return x.map(v=>${expr});}`);assert.ok(m,expr);assert.doesNotMatch(m.native,/const.*table/);assert.deepEqual(run(m.native)([1,2,4]),[1,2,4].map(v=>expr.includes('n+i')?[2,4].some((n,i)=>n+i===v):[2,4].includes(v)));
+ }
+ for(const prefix of [
+  'export const table=[2,4];',
+  'const table=[2,4];function change(){table.push(8);}',
+  'const table=[2,4];function leak(){return table;}',
+  'const table=[2,4];function alias(){const a=table;return a.length;}',
+ ])assert.equal(discover(prefix+'export function rows(x:number[]){return x.map(v=>table.includes(v));}'),undefined);
+ for(const expr of ['table.some((v,i,a)=>{a.push(8);return true;})','table.some((...args)=>true)','table.some(function(v){return true;})','table.some(v=>true,1)','table.includes(...x)','table.some'])assert.equal(discover(`const table=[2,4];export function rows(x:number[]){return x.map(v=>${expr});}`),undefined,expr);
+ assert.equal(discover('const table=[{n:2}];export function rows(x:number[]){return x.map(v=>table.some(n=>n.n===v));}'),undefined);
+});
+test('array callbacks preserve borrowed children and receiver provenance',()=>{
+ const m=discover('export function rows(x:{n:number}[]){const out:number[]=[];x.forEach(v=>out.push(v.n));return out;}');assert.ok(m);assert.deepEqual(run(m.native)([{n:2},{n:4}]),[2,4]);
+ for(const method of ['some','forEach'])for(const body of ['v.n++;return true;','let a=v;if(v.n)a={n:0};a.n++;return true;'])assert.equal(discover(`export function rows(x:{n:number}[]){const out:number[]=[];x.${method}(v=>{${body}});return x.map(v=>v.n);}`),undefined);
+ for(const method of ['some','forEach'])assert.equal(discover(`export function rows(x:number[]){const out:number[]=[];x.${method}((v,i,a)=>{a.push(7);return true;});return out;}`),undefined);
+});
+test('restored scalar table reads and borrowed-array iteration agree through native ABI',async()=>{
+ const dir=fs.mkdtempSync('/tmp/b1c-array-native-');try{
+  const text='const zeros=[-0,0];const table=[2,4];export function has(x:number[]){return x.map(v=>table.includes(v));}export function matches(x:number[]){return x.map(v=>table.some(n=>n===v));}export function copies(x:{n:number}[]){const out:number[]=[];x.forEach(v=>out.push(v.n));return out;}export function prefix(x:number[]){const out:number[]=[];x.some(v=>{out.push(v);return v===4;});return out;}export function negativeZero(x:number[]){return x.map(v=>zeros.some(n=>1/n<0));}',file=dir+'/entry.ts';fs.writeFileSync(file,text);
+  const modules=promotionCandidates(text,file,()=>{},{ts});assert.equal(modules.length,5);checkFunctionTypes(ts,ts.createProgram([file],{strict:true,types:[],target:ts.ScriptTarget.ES2022}),modules);assert.equal((await buildPromotion(modules,dir+'/out')).length,5);
+  const d=loadPromotion(dir+'/out/promotion.node',{mode:'native',log:()=>{},crashGuard:{directory:dir+'/markers'}});
+  for(const m of modules){const f=m.functions[0],js=f.name==='negativeZero'?x=>x.map(v=>true):f.name==='copies'?x=>x.map(v=>v.n):f.name==='prefix'?x=>{const out=[];x.some(v=>{out.push(v);return v===4;});return out;}:x=>x.map(v=>[2,4].includes(v));for(const values of [[],[1,2,4],[4,4,-1]]){const input=f.name==='copies'?values.map(n=>({n})):values;const saved=structuredClone(input);assert.deepEqual(d.dispatch(f.id,js,[input]),js(input));assert.deepEqual(input,saved);}assert.equal(d.snapshot()[f.id].native,3);}
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
