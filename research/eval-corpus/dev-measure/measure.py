@@ -37,3 +37,8 @@ for root,files in groups.items():
   d['scans'].append(item);(O/f'{slug}.json').write_text(json.dumps(d,indent=2))
 d['status']='installed; B1 accepted source files measured' if d['install']['exit']==0 else 'install failed; provisional measurement'
 (O/f'{slug}.json').write_text(json.dumps(d,indent=2))
+# Preserve caches while space permits; completed scans no longer need downloads.
+import shutil
+if shutil.disk_usage(P.parent).free<14_000_000_000:
+ for cache in ['store','yarn-global','yarn-cache','cache','bun-cache','npm-cache']:
+  shutil.rmtree(P.parent/cache,ignore_errors=True)
