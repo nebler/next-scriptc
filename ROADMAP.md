@@ -115,7 +115,8 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
 | P3 | Profile-guided promotion | 3 | report/build | done: CPU profiles + source maps, ranked static joins, hot blockers and suggestions; local Next captures ([evidence](research/profile-guided-promotion.md)) |
 | P4 | Zero-setup install, naming, docs | 3 | packaging | diagnostics/docs done: doctor + simulated failures; nine packed local setups; helper approval repair documented; naming options without renames. Host toolchain and script approval remain required ([evidence](research/install-and-docs.md)) |
-| — | Editor integration, equivalence proofs, whole-library native | 3/4 | — | later |
+| IDE1 | TypeScript language-service editor integration | 3 | editor | done: worker-backed NSC diagnostics and hints, hover, opt-in automatic suggestions, bounded cache; [design and latency](research/editor-plugin.md) |
+| — | Equivalence proofs, whole-library native | 3/4 | — | later |
 | D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | done: shared cash-runway simulation, automatic native service, exact browser parity, aggregate verification panel; local 7–8.5× numeric win ([evidence](research/shared-native-demo.md)) |
 | W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
 | D1b | [Integer-PRNG remeasurement](research/shared-native-remeasure.md): native 1.36–1.68× optimized Node JS; float-modulo cliff labeled separately; default demo corrected | 6 | examples | done |
