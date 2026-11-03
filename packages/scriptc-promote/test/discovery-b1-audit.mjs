@@ -44,7 +44,7 @@ import {loadPromotion} from '../src/functions/promotion-runtime.mjs';
 import {checkFunctionTypes} from '../src/functions/types.mjs';
 test('restored reverse and arithmetic agree through the native ABI',async()=>{
  const dir=fs.mkdtempSync('/tmp/b1c-native-');try{
-  const text='const table={n:2*3};export function rows(x:number[]){const a=x.map(v=>v+table.n);a.reverse();return a;}',file=dir+'/entry.ts';fs.writeFileSync(file,text);
+  const text='const base={n:2*3};const table={...base};export function rows(x:number[]){const a=x.map(v=>v+table.n);a.reverse();return a;}',file=dir+'/entry.ts';fs.writeFileSync(file,text);
   const modules=promotionCandidates(text,file,()=>{},{ts});assert.equal(modules.length,1);checkFunctionTypes(ts,ts.createProgram([file],{strict:true,types:[],target:ts.ScriptTarget.ES2022}),modules);
   assert.equal((await buildPromotion(modules,dir+'/out')).length,1);
   const d=loadPromotion(dir+'/out/promotion.node',{mode:'native',log:()=>{},crashGuard:{directory:dir+'/markers'}}),id=modules[0].functions[0].id;
@@ -99,4 +99,21 @@ test('default binding reads cannot hide early calls or mutable function metadata
   'function helper(){return 2;}export function mutate(){Object.defineProperty(helper,"name",{value:"changed"});}class Marker{}export default Marker;export function rows(x:string[]){return x.map(v=>v+helper.name);}',
  ])assert.equal(discover(text),undefined,text);
  const text='class Marker extends Error{value=rows([1]);}export default Marker;export function rows(x:number[]){return x.map(v=>v+1);}';assert.ok(discover(text));
+});
+test('extended proofs keep early captured reads and reflective helper changes refused',()=>{
+ for(const text of [
+  'const early=rows([1]);const bias=2*3;export function rows(x:number[]){return x.map(v=>v+bias);}',
+  'const early=rows([1]);const table=[1,2];export function rows(x:number[]){return x.map(v=>table.some(n=>n===v));}',
+  'const early=rows([1]);const bias=2;export function rows(x:number[]){const a=x.map(v=>v+bias);a.reverse();return a;}',
+  'function value(n:number){return n+1;}export function mutate(){eval("value=(n)=>n+9");}export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(value(v)));return out;}',
+ ])assert.equal(discover(text),undefined,text);
+ assert.ok(discover('const early=rows([1]);const unused=2;export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(v+1));return out;}'));
+});
+test('private scalar object snapshots fold only literal, nonescaping data',()=>{
+ const m=discover('const base={n:2};const table={...base,m:3};export function rows(x:number[]){return x.map(v=>v+table.n+table.m);}');assert.ok(m);assert.deepEqual(run(m.native)([1,2]),[6,7]);
+ for(const base of ['export const base={n:2};','const base={get n(){return 2;}};','const base={n:{v:2}};','const base={n:2};function change(){base.n=3;}'])assert.equal(discover(base+'const table={...base,m:3};export function rows(x:number[]){return x.map(v=>v+table.n);}'),undefined);
+ assert.equal(discover('const base={n:2};const early=rows([1]);const table={...base};export function rows(x:number[]){return x.map(v=>v+table.n);}'),undefined);
+});
+test('a destructured graph binding cannot be folded as the whole initializer',()=>{
+ assert.equal(discover('const {n}:any={n:"a"};export function rows(x:string[]):string[]{return x.map(v=>n.n||v);}'),undefined);
 });

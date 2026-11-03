@@ -6,12 +6,24 @@ function initializedDeclaration(n,scope){
  const binding=scope?.getBinding?.(n.name);
  return !!binding&&!binding.path.node.declare&&(binding.path.isFunctionDeclaration()||binding.path.isClassDeclaration()&&binding.path.node.end<n.start);
 }
-function hasDecorator(node){
- const seen=new Set(),pending=[node];while(pending.length){const n=pending.pop();if(!n||typeof n!=='object'||seen.has(n))continue;seen.add(n);if(n.type==='Decorator')return true;pending.push(...Object.values(n));}return false;
+function containsNode(node,match){
+ const seen=new Set(),pending=[node];while(pending.length){const n=pending.pop();if(!n||typeof n!=='object'||seen.has(n))continue;seen.add(n);if(match(n))return true;pending.push(...Object.values(n));}return false;
 }
-function creationOnlySetup(scope){
- if(!scope?.path?.isProgram())return false;if(setupCache.has(scope))return setupCache.get(scope);
- const value=n=>!n||inertDefaultExpression(n)||literalArithmetic(n)!==undefined;
+const hasDecorator=node=>containsNode(node,n=>n.type==='Decorator');
+export const hasLexicalEval=scope=>containsNode(scope?.path?.node,n=>n.type==='CallExpression'&&n.callee.type==='Identifier'&&n.callee.name==='eval');
+// Object spread is creation-only here only for a prior const literal whose
+// properties are scalar data. General spreads can invoke getters and stay out.
+function scalarSnapshot(scope,spread){
+ if(spread.argument?.type!=='Identifier')return false;
+ const b=scope.getBinding(spread.argument.name),d=b?.path;
+ if(b?.kind!=='const'||!d.isVariableDeclarator()||d.node.id.type!=='Identifier'||d.parent.declare||d.node.end>=spread.start)return false;
+ let n=d.node.init;while(n?.type==='TSAsExpression')n=n.expression;
+ const scalar=n=>n&&(['StringLiteral','BooleanLiteral','NullLiteral'].includes(n.type)||n.type==='NumericLiteral'&&Number.isFinite(n.value)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral'&&Number.isFinite(n.argument.value)||literalArithmetic(n)!==undefined);
+ return n?.type==='ObjectExpression'&&n.properties.every(p=>p.type==='ObjectProperty'&&!p.computed&&!p.shorthand&&scalar(p.value));
+}
+export function creationOnlySetup(scope){
+ if(!scope?.path?.isProgram())return false;if(setupCache.has(scope))return setupCache.get(scope);if(hasLexicalEval(scope)){setupCache.set(scope,false);return false;}
+ const value=n=>!n||literalArithmetic(n)!==undefined||n.type==='TSAsExpression'&&value(n.expression)||n.type==='ArrayExpression'&&n.elements.every(e=>e&&value(e))||n.type==='ObjectExpression'&&n.properties.every(p=>p.type==='SpreadElement'?scalarSnapshot(scope,p):!p.computed&&(p.type==='ObjectProperty'&&value(p.value)||p.type==='ObjectMethod'))||n.type==='CallExpression'&&n.callee.type==='MemberExpression'&&!n.callee.computed&&n.callee.object.name==='Object'&&!scope.getBinding('Object')&&n.callee.property.name==='freeze'&&n.arguments.length===1&&value(n.arguments[0])||inertDefaultExpression(n);
  function declaration(n){
   if(!n)return true;
   if(['FunctionDeclaration','TSDeclareFunction','TSTypeAliasDeclaration','TSInterfaceDeclaration','EmptyStatement'].includes(n.type))return !hasDecorator(n);

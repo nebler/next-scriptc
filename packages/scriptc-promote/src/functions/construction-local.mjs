@@ -7,7 +7,7 @@ export function localConstruction(source, checker, ts) {
  const typed=n=>typedArrays.has(checker.getTypeAtLocation(n).getSymbol()?.name);
  const bad=new Set(['__proto__','constructor','prototype','toJSON']);
  const sym=n=>ts.isShorthandPropertyAssignment(n.parent)?checker.getShorthandAssignmentValueSymbol(n.parent):checker.getSymbolAtLocation(n);
- const funcs=new Map(),heap=new Map(),env=new Map(),active=new Set();let changed=false;
+ const funcs=new Map(),heap=new Map(),env=new Map(),active=new Set();let changed=false,requiresCaptureInitialization=false;
  const scalar=new Set(),arg={kind:'argument'},opaque={kind:'opaque'};
  const union=(...vs)=>new Set(vs.flatMap(v=>[...v]));
  function merge(a,b){for(const x of b)if(!a.has(x)){a.add(x);changed=true;}return a;}
@@ -49,12 +49,12 @@ export function localConstruction(source, checker, ts) {
    if(ts.isIdentifier(e.expression)&&e.expression.text==='Array'&&name==='of'){const a=alloc(n,'array');for(const arg of n.arguments)merge(field(a,'element'),expr(arg));return new Set([a]);}
    if(ts.isIdentifier(e.expression)&&e.expression.text==='Object'&&['keys','values','entries'].includes(name)&&n.arguments.length===1){const v=expr(n.arguments[0]);local(v,['object'],n);const a=alloc(n,'array');let values=new Set();for(const o of v)for(const x of o.fields.values())values=union(values,x);if(name==='entries'){const pair=alloc(e,'tuple');merge(field(pair,'1'),values);values=new Set([pair]);}merge(field(a,'element'),name==='keys'?scalar:values);return new Set([a]);}
    const v=expr(e.expression);
-   if(['some','forEach'].includes(name)&&checker.isArrayType(checker.getTypeAtLocation(e.expression))&&n.arguments.length===1){if([...v].some(o=>o.kind!=='array'&&o!==arg))fail(n,'array receiver required');callback(n.arguments[0],[elements(v,e.expression,e.expression),scalar,v]);return scalar;}
-   if(name==='includes'&&checker.isArrayType(checker.getTypeAtLocation(e.expression))&&n.arguments.length===1){const plain=t=>!t.getProperty('__scriptcOpaqueHandle')&&(t.isUnion()?t.types.every(plain):!!(t.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null)));if([...v].some(o=>o.kind!=='array'&&o!==arg)||!plain(checker.getTypeArguments(checker.getTypeAtLocation(e.expression))[0])||!plain(checker.getTypeAtLocation(n.arguments[0])))fail(n,'scalar includes required');expr(n.arguments[0]);return scalar;}
+   if(['some','forEach'].includes(name)&&checker.isArrayType(checker.getTypeAtLocation(e.expression))&&n.arguments.length===1){if([...v].some(o=>o.kind!=='array'&&o!==arg))fail(n,'array receiver required');requiresCaptureInitialization=true;callback(n.arguments[0],[elements(v,e.expression,e.expression),scalar,v]);return scalar;}
+   if(name==='includes'&&checker.isArrayType(checker.getTypeAtLocation(e.expression))&&n.arguments.length===1){const plain=t=>!t.getProperty('__scriptcOpaqueHandle')&&(t.isUnion()?t.types.every(plain):!!(t.flags&(ts.TypeFlags.StringLike|ts.TypeFlags.NumberLike|ts.TypeFlags.BooleanLike|ts.TypeFlags.Null)));if([...v].some(o=>o.kind!=='array'&&o!==arg)||!plain(checker.getTypeArguments(checker.getTypeAtLocation(e.expression))[0])||!plain(checker.getTypeAtLocation(n.arguments[0])))fail(n,'scalar includes required');requiresCaptureInitialization=true;expr(n.arguments[0]);return scalar;}
    if(name==='slice'){if(!checker.isArrayType(checker.getTypeAtLocation(e.expression)))fail(n,'array receiver required');n.arguments.forEach(expr);const a=alloc(n,'array');merge(field(a,'element'),elements(v,e.expression,n));return new Set([a]);}
    if(['map','filter','sort'].includes(name)){if([...v].some(o=>o.kind!=='array'&&o!==arg))fail(n,'array receiver required');if(name==='sort')local(v,['array'],n);const child=elements(v,e.expression,n);const result=callback(n.arguments[0],name==='sort'?[child,child]:[child,scalar,v]);if(name==='sort')return v;const a=alloc(n,'array');merge(field(a,'element'),name==='filter'?child:result);return new Set([a]);}
    // Reordering a fresh container preserves every possible child reference.
-   if(name==='reverse'&&!n.arguments.length){if(!checker.isArrayType(checker.getTypeAtLocation(e.expression)))fail(n,'array receiver required');local(v,['array'],n);return v;}
+   if(name==='reverse'&&!n.arguments.length){if(!checker.isArrayType(checker.getTypeAtLocation(e.expression)))fail(n,'array receiver required');local(v,['array'],n);requiresCaptureInitialization=true;return v;}
    if(name==='push'){for(const a of n.arguments)write(v,'element',expr(a),n,['array']);return scalar;}
    if(name==='set'){if(n.arguments.length!==2)fail(n,'Map.set arity');write(v,'key',expr(n.arguments[0]),n,['Map']);write(v,'value',expr(n.arguments[1]),n,['Map']);return v;}
    if(name==='add'){write(v,'value',expr(n.arguments[0]),n,['Set']);return v;}
@@ -104,5 +104,5 @@ export function localConstruction(source, checker, ts) {
  // Only exported boundaries must be JSON. Helpers may return intermediate Maps.
  for(const n of funcs.values())if(exported.has(n.name.text)){if(!closed(returns.get(n)))fail(n,'non-JSON, borrowed or cyclic result provenance');const s=shape(checker.getReturnTypeOfSignature(checker.getSignatureFromDeclaration(n)));if(!s)fail(n,'unbounded result shape');shapes[n.name.text]=s;}
  for(const name of Object.keys(guards))if(!exported.has(name))fail(source,'parse guard in non-boundary helper');
- return {shapes,guards};
+ return {shapes,guards,requiresCaptureInitialization};
 }

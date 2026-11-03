@@ -103,7 +103,7 @@ export function constructionProof(text, ts) {
   function acyclic(n){if(active.has(n))fail(n,'recursive helper graph');if(done.has(n))return;active.add(n);for(const e of edges.get(n))acyclic(e);active.delete(n);done.add(n);}for(const n of edges.keys())acyclic(n);
   const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);
   return {eligible:true,reason:'immutable acyclic JSON construction (experimental; resource/compiler parity unproven)',version:1};
- }catch(e){try {const {shapes,guards}=localConstruction(source,checker,ts);const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);return {eligible:true,reason:'local allocation construction with typed value scan',version:2,shapes,guards};}catch(local){return {eligible:false,reason:local.message,version:2};}}
+ }catch(e){try {const {shapes,guards,requiresCaptureInitialization}=localConstruction(source,checker,ts);const errors=ts.getPreEmitDiagnostics(program);if(errors.length)fail(source,`checker diagnostic TS${errors[0].code}`);const result={eligible:true,reason:'local allocation construction with typed value scan',version:2,shapes,guards};if(requiresCaptureInitialization)Object.defineProperty(result,'requiresCaptureInitialization',{value:true});return result;}catch(local){return {eligible:false,reason:local.message,version:2};}}
 }
 
 // Shared by effect proofs and non-strict application boundary discovery.
