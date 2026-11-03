@@ -104,16 +104,16 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | B1 | Cheap discovery blockers | 2 | discovery | bounded slice done: DEV 441 → 251 accepted (21 new, 211 prior acceptances refused); parser files 1,957 → 15; 32 GrowthBook validator files unknown ([evidence](research/discovery-blockers-b1.md)) |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | B1c | Audit the 211 acceptances B1 lost: restore over-conservative refusals, keep and test real soundness fixes | 2 | discovery | running |
-| M1 | Measure DEV accepted functions (`report --measure`) | eval | report | done: B1 DEV 251 accepted / 240 compiled / 0 dense / 0 predicted native; four intensity unknowns, no endpoint claim ([evidence](research/eval-dev-measure.md)) |
+| M1 | Measure DEV accepted functions (`report --measure`) | eval | report | done: 251 accepted, 240 compiled, 0 pass the intensity screen, 0 predicted native; median native/JS 482×, best 1.35× (entry 73) |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |
 | C2 | Native JSON decode speed | 1 | scriptc fork | bounded slice done: ordered schema decode −8.1% flat / −3.8% nested at 60k; erased unchanged; emitted decoder design remains open ([evidence](research/native-json-decode.md)) |
 | E4 | Check boundary decode path: typed `scr_json_parse_schema` vs erased, and the double `JSON.parse` in construction guards | 1 | boundary | done: eligible JSON, E1 projections and K4 types already use schema decode; single typed construction preflight cuts guarded 60k decode 47.369 → 27.296 ms; AUTO stays JS ([evidence](research/boundary-decode-path.md)) |
-| A1 | Async outlining | 2 | discovery | after B1 |
+| A1 | Async outlining | 2 | discovery | deprioritized after M1: more coverage mostly adds small helpers (entry 73) |
 | E3 | Native-resident data across calls | 1 | dispatcher/boundary | queued |
 | T1 | Type-driven build-time fuzzing + numeric semantics | 4 | verification | implemented: opt-in host build gate, CLI, bounded shrinking, native/wasm semantics probes; [evidence](research/build-time-fuzzing.md) |
 | P1b | Fix friction backlog: automatic default for Next (F2), diagnostics at source file:line with fix hints (F6, F7), toolchain vs code refusals (F8), explicit-native rows in report (F5), function counts + dev notice (F10) | 3 | DX | done: default enabled; source diagnostics + hints; toolchain JS fallback; explicit report status; function counts + dev notice; [evidence](research/friction-fixes.md) |
 | P2 | Visibility: runtime report + CI report | 3 | report | done: aggregate runtime API + opt-in file capture, runtime report merge, CI baseline/failure rules, capped build names; [evidence](research/runtime-visibility.md) |
-| L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
+| L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | deprioritized after M1: more coverage mostly adds small helpers (entry 73) |
 | P3 | Profile-guided promotion | 3 | report/build | done: CPU profiles + source maps, ranked static joins, hot blockers and suggestions; local Next captures ([evidence](research/profile-guided-promotion.md)) |
 | P4 | Zero-setup install, naming, docs | 3 | packaging | diagnostics/docs done: doctor + simulated failures; nine packed local setups; helper approval repair documented; naming options without renames. Host toolchain and script approval remain required ([evidence](research/install-and-docs.md)) |
 | IDE1 | TypeScript language-service editor integration | 3 | editor | done: worker-backed NSC diagnostics and hints, hover, opt-in automatic suggestions, bounded cache; [design and latency](research/editor-plugin.md) |
@@ -121,7 +121,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | D1 | Demo: one TS function as JS in the browser and native on the server, with verified results | 6 | examples | done: shared cash-runway simulation, automatic native service, exact browser parity, aggregate verification panel; local 7–8.5× numeric win ([evidence](research/shared-native-demo.md)) |
 | W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
 | D1b | [Integer-PRNG remeasurement](research/shared-native-remeasure.md): native 1.36–1.68× optimized Node JS; float-modulo cliff labeled separately; default demo corrected | 6 | examples | done |
-| HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
+| HO | Held-out milestone eval | 6 | eval | deferred: nothing in DEV changes the answer yet (entry 73) |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without
 explicit approval; fork work on local branches under `/Users/noah/code/scriptc-wt/`;

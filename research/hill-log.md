@@ -2121,3 +2121,26 @@ CPU remains null: no request-frequency or ≥5% endpoint-harness claim. Later B1
 acceptances are outside this frozen starting cohort.
 
 [Measurement, ratios, closest leads, refusals and limits](eval-dev-measure.md).
+
+## 73. Review note on M1: the automatic-mode answer on DEV (2026-11-03)
+
+M1 measured every discovery-accepted function in the DEV split under the frozen
+protocol: 251 accepted, 240 compiled, 0 pass the intensity screen, 0 predicted
+native. Across 691 paired cases the native/JS CPU ratio has a median of 482× and a
+best case of 1.35× (n8n `matchesRegistryQuery`), i.e. every accepted function is
+cheaper in JS than the fixed cost of crossing into native. This is the decisive
+DEV result: on these 15 real Node apps, install-and-go automatic promotion finds
+nothing worth promoting today.
+
+It is consistent with everything before it (EV1, EV3, PM2, D1b): the functions
+discovery can prove safe in real apps are small helpers, and the few dense kernels
+(GrowthBook split search, Rybbit stats, Actual forecast) are either blocked,
+browser-only, or cheap. Widening discovery (A1 async outlining, L2 classes/Map/Set)
+would mostly add more small helpers; it is unlikely to change this answer without
+a compute-dense target behind it.
+
+Implication for the product: automatic mode is a safe default that costs ~60 ns per
+wrapped call and almost never acts in typical apps. The value case rests on the
+explicit `"use native"` mode for code developers know is hot, the shared
+browser/server story, verification, and cliff avoidance (D1b: 1.36–1.68× over good
+JS). The held-out eval (HO) is not worth spending until something here changes.
