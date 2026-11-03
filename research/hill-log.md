@@ -1918,3 +1918,24 @@ webpack production execution, other browsers/devices and other frameworks remain
 unmeasured. B1 discovery/build files and root README are untouched. No compiler
 change, main-checkout mutation, hosting call, Docker, deploy, push, PR, issue,
 public post or secret. [Design, raw evidence, limits and reproduction](browser-wasm.md).
+
+## 67. Correction: D1's server speedup is mostly a V8 float-modulo cliff (2026-11-03)
+
+W1 measured D1's `forecast` at 33.6 ms in Chromium JS against 138–159 ms in Node
+JS at 100k paths, with wasm at 20.5 ms in both. Checking it directly: on Node
+24.22 and 23.10 (arm64), the Park–Miller step `(state * 16807) % 2147483647` is a
+double modulo costing ~37 ns per operation (3.6M operations in 134 ms). Warming
+with small inputs to avoid the observed deopt loop (39 bailouts, mostly
+"insufficient type feedback for generic named access") only reaches 138 ms, so the
+modulo dominates. An integer-only PRNG of the same loop shape (`Math.imul`,
+mulberry32-style) runs 3.6M iterations in 26 ms in Node.
+
+So D1's 7–8.5× JS/native ratio mostly measures native avoiding a Node performance
+cliff. Against well-written JS the honest native advantage on this kind of loop is
+closer to the browser's 1.6× (wasm) plus native's edge over wasm; not yet measured
+with an integer PRNG. The example README now carries this correction. The demo
+still shows real things: identical results across browser and server, verified
+shadows, automatic pickup, and that native removes a cliff a developer would
+otherwise have to discover with a profiler. It does not show an 8× advantage over
+good JS. Follow-up D1b: add an integer-PRNG variant and measure JS/native/wasm
+honestly before the demo is used in any pitch.

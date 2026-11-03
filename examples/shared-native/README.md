@@ -44,6 +44,15 @@ medians include native argument encoding and result decoding:
 | 10,000 | 72 | 15.927 | 1.923 | 8.28× |
 | 100,000 | 73 | 159.421 | 18.712 | 8.52× |
 
+> **Correction (2026-11-03): this speedup is mostly a Node slow path.** The
+> Park–Miller step `(state * 16807) % 2147483647` is a floating-point modulo,
+> which costs about 37 ns per operation in Node 24 and 26 on arm64 (3.6M
+> operations in 134 ms). Chromium runs the same function's JS about 4× faster
+> (33.6 ms at 100k paths), and there wasm beats JS by only 1.64×. An
+> integer-only PRNG (`Math.imul`-based) makes Node JS about 5× faster. Read the
+> table as "native avoids a V8 performance cliff", not as "native is 8× faster
+> than well-written JS". See [hill-log entry 67](../../research/hill-log.md).
+
 The independent `report --measure` thread-CPU medians were 1.578/0.213,
 15.916/1.929, and 176.002/20.709 ms (JS/native); all three predict native.
 These are single-host runs under concurrent tests, without confidence intervals.
