@@ -8,10 +8,13 @@ const ts=require('typescript');
 const [root,file,namesJson,out]=process.argv.slice(2),names=JSON.parse(namesJson),inputs={},provenance={},rawInputs={};
 let files=[];try{files=execFileSync('rg',['-l','--glob','*.test.*','--glob','*.spec.*','--glob','**/test/**/*.ts','--glob','**/tests/**/*.ts',names.join('|'),root],{encoding:'utf8'}).trim().split('\n').filter(Boolean);}catch{}
 let bindings=new Map(),resolving=new Set(),rawStrings=false;
+function payload(text){return Array.from(text,(c,i)=>{const n=c.codePointAt(0);if(n>65535)return '🙂';if(n>=0xd800&&n<=0xdfff)return '\ud800';if(n>=2048)return '界';if(n>127)return 'é';if(/[A-Za-z]/.test(c))return String.fromCharCode(97+i%26);if(/[0-9]/.test(c))return '3';return c;}).join('');}
+function jsonPayload(v){if(typeof v==='string')return payload(v);if(Array.isArray(v))return v.map(jsonPayload);if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,jsonPayload(x)]));return v;}
+function synthString(text){try{return JSON.stringify(jsonPayload(JSON.parse(text)));}catch{return payload(text);}}
 function literal(n){
  if(ts.isIdentifier(n)&&bindings.has(n.text)){if(resolving.has(n.text))throw Error('cyclic fixture');resolving.add(n.text);try{return literal(bindings.get(n.text));}finally{resolving.delete(n.text);}}
  if(ts.isAsExpression(n)||ts.isTypeAssertionExpression(n)||ts.isParenthesizedExpression(n))return literal(n.expression);
- if(ts.isStringLiteral(n)||ts.isNoSubstitutionTemplateLiteral(n))return rawStrings?n.text:n.text.replace(/[A-Za-z]/g,(_,i)=>String.fromCharCode(97+i%26)).replace(/[0-9]/g,'3');
+ if(ts.isStringLiteral(n)||ts.isNoSubstitutionTemplateLiteral(n))return rawStrings?n.text:synthString(n.text);
  if(ts.isNumericLiteral(n))return Number(n.text);
  if(n.kind===ts.SyntaxKind.TrueKeyword)return true;if(n.kind===ts.SyntaxKind.FalseKeyword)return false;if(n.kind===ts.SyntaxKind.NullKeyword)return null;
  if(ts.isPrefixUnaryExpression(n)&&n.operator===ts.SyntaxKind.MinusToken)return -literal(n.operand);

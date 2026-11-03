@@ -19,9 +19,20 @@ const schemaRestored=new Set();
 for(const m of modules){
  const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,key=Object.hasOwn(inputs,id)?id:fn.id;
  if(!rawInput[key]||!inputs[key])continue;
- const tags=new Set(),ast=ts.createSourceFile('closure.ts',m.native,ts.ScriptTarget.Latest,true);
- function visit(n){if(ts.isLiteralTypeNode(n)&&ts.isStringLiteral(n.literal))tags.add(n.literal.text);ts.forEachChild(n,visit);}visit(ast);
- function restore(v,r){if(typeof v==='string')return tags.has(r)?r:v;if(Array.isArray(v))return v.map((x,i)=>restore(x,r?.[i]));if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,restore(x,r?.[k])]));return v;}
+ const tags=new Set(),prefixes=new Set(),suffixes=new Set(),constants=new Map(),ast=ts.createSourceFile('closure.ts',m.native,ts.ScriptTarget.Latest,true);
+ function constantsVisit(n){if(ts.isVariableDeclaration(n)&&ts.isIdentifier(n.name)&&n.initializer&&ts.isStringLiteral(n.initializer))constants.set(n.name.text,n.initializer.text);ts.forEachChild(n,constantsVisit);}constantsVisit(ast);
+ function visit(n){
+  if(ts.isLiteralTypeNode(n)&&ts.isStringLiteral(n.literal))tags.add(n.literal.text);
+  if(ts.isCallExpression(n)&&ts.isPropertyAccessExpression(n.expression)&&n.arguments[0]){const a=n.arguments[0],value=ts.isStringLiteral(a)?a.text:ts.isIdentifier(a)?constants.get(a.text):null;if(value){if(n.expression.name.text==='startsWith')prefixes.add(value);if(n.expression.name.text==='endsWith')suffixes.add(value);}}
+  if(n.kind===ts.SyntaxKind.RegularExpressionLiteral){const match=/^\/\^([A-Za-z_]+)/.exec(n.text);if(match)prefixes.add(match[1]);}
+  ts.forEachChild(n,visit);
+ }visit(ast);
+ function restore(v,r){if(typeof v==='string'){
+  if(tags.has(r))return r;
+  try{const a=JSON.parse(v),b=JSON.parse(r);return JSON.stringify(restore(a,b));}catch{}
+  if(typeof r==='string'){for(const p of [...prefixes].sort((a,b)=>b.length-a.length))if(r.startsWith(p)){v=p+v.slice(p.length);break;}for(const p of [...suffixes].sort((a,b)=>b.length-a.length))if(r.endsWith(p)){v=v.slice(0,-p.length)+p;break;}}
+  return v;
+ }if(Array.isArray(v))return v.map((x,i)=>restore(x,r?.[i]));if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,restore(x,r?.[k])]));return v;}
  inputs[key]=inputs[key].map((args,i)=>restore(args,rawInput[key][i]));schemaRestored.add(id);
 }
 const stats=a=>{const s=[...a].sort((a,b)=>a-b);return {n:s.length,min:s[0],p10:s[Math.floor(s.length*.1)],median:s[Math.floor(s.length*.5)],p90:s[Math.floor(s.length*.9)],max:s.at(-1)};};
