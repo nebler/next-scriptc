@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-import pathlib,json,gzip,statistics,collections
+import pathlib,json,gzip,statistics,collections,re
 R=pathlib.Path.cwd();D=R/'research/eval-corpus/dev-measure';rows=[];repos=[]
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
 for p in sorted((D/'results').glob('*.json*')):
  d=read(p);measurements={};seen={}
- for s in d.get('scans',[]):
+ supp=D/'supplements'/(p.name.split('.json')[0]+'.json');extras=read(supp).get('scans',[]) if supp.exists() else []
+ for s in [*d.get('scans',[]),*extras]:
+  if s in extras:
+   for m in s.get('report',{}).get('measurements',[]):measurements.pop(str(pathlib.Path(s['scanRoot'])/m['id']),None)
   for m in s.get('report',{}).get('measurements',[]):measurements.setdefault(str(pathlib.Path(s['scanRoot'])/m['id']),[]).append(m)
   for f in s.get('report',{}).get('files',[]):
    for fn in f['functions']:seen[str(pathlib.Path(s['scanRoot'])/fn['id'])]=fn
@@ -18,6 +21,9 @@ for p in sorted((D/'results').glob('*.json*')):
   row={'repository':d['repository'],'sha':d['sha'],'id':id,'compileStatus':'compiled' if compiled else 'compiler refusal' if refused else 'unknown','discoveryNow':seen.get(id,{}).get('status','unknown'),'measurements':ms,'endpointCpuDelta':None}
   row['b1RouteEntries']=[route['entry'] for scan in base.get('scans',[]) for route in scan.get('report',{}).get('routes',[]) if id in [str(pathlib.Path(scan['scanRoot'])/v) for v in route.get('reachable',[])]]
   row['screenPass']=any(m.get('screenPass') for m in ms) if any(m.get('screenPass') is not None for m in ms) else None;row['predictedNative']=any(m.get('verdict')=='native' for m in ok);row['protocolPass']=any(m.get('protocolPass') for m in ok)
+  row['compilerCodes']=sorted(set(re.findall(r'\bSC\d+\b','\n'.join(m.get('reason','') for m in ms))))
+  row['correctnessFailures']=[m.get('reason') for m in ms if 'mismatch' in m.get('reason','').lower() and 'argument count' not in m.get('reason','').lower()]
+  row['protocolPass']=row['protocolPass'] and not row['correctnessFailures']
   row['bestRatio']=min((m['native']['median']/m['js']['median'] for m in ok),default=None);rr.append(row);rows.append(row)
  repos.append({'repository':d['repository'],'status':d['status'],'installExit':d.get('install',{}).get('exit'),'freeBytesBeforeInstall':d.get('freeBytesBeforeInstall'),'accepted':len(rr),'compiled':sum(r['compileStatus']=='compiled' for r in rr),'screenPass':sum(r['screenPass'] is True for r in rr),'predictedNative':sum(r['predictedNative'] for r in rr)})
 ratios=[m['native']['median']/m['js']['median'] for r in rows for m in r['measurements'] if m['status']=='ok'];ratios.sort();q=lambda p:ratios[min(len(ratios)-1,int(len(ratios)*p))] if ratios else None
