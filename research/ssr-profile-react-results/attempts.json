@@ -1,0 +1,40 @@
+{
+  "attempts": [
+    {
+      "target": "ceiling pilot",
+      "status": "aborted",
+      "reason": "NODE_ENV was unset; React loaded development code. Stopped before output; rerun in production. No pilot measurements included."
+    },
+    {
+      "target": "Epic npm ci",
+      "status": "failed twice",
+      "reason": "Running npm ci with --prefix did not read clone .npmrc legacy-peer-deps. Corrected by using clone cwd and explicit --legacy-peer-deps."
+    },
+    {
+      "target": "blog first build",
+      "status": "failed",
+      "reason": "Removing Google font import left extra blank line; upstream Prettier lint rejected it. Fixed whitespace, reran build."
+    },
+    {
+      "target": "umami",
+      "status": "screened out before install",
+      "revision": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+      "reason": "Dashboard entry delegates to client component, chart board data loaded client side. No authenticated account or remote DB calls attempted. Chose bundled-content blog for data-bearing SSR instead."
+    },
+    {
+      "target": "router shutdown",
+      "status": "forced stop after complete capture",
+      "reason": "Production serve shutdown retained the profiler IPC channel after SIGTERM. Killed only measured task server after output saved. Runner now disconnects IPC and bounds shutdown to five seconds. No timed sample removed."
+    },
+    {
+      "target": "epic initial readiness",
+      "status": "failed before timed blocks",
+      "reason": "LiteFS directory missing in production cache setup. Set LITEFS_DIR to local prisma directory; no LiteFS mount or remote instance needed. Failure response log and result retained separately."
+    },
+    {
+      "target": "profile attribution",
+      "status": "recaptured all seven targets",
+      "reason": "Initial raw profiles included profiler-startup inspector post self time. Final -steady captures record monotonic bounds and explicitly clip out-of-window intervals. Original raw profiles retained. Throughput blocks unchanged; no in-window sample filtered."
+    }
+  ]
+}

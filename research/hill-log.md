@@ -2192,3 +2192,16 @@ aliases, shared mutable or exported tables, skipped module setup, reads before
 initialization, and calls outside the bounded proof. Several of those were real
 gaps in the pre-B1 discovery, now covered by regression tests. Accepted DEV
 functions: 251 → 258. Given M1 (entry 73), these are small helpers either way.
+
+## 76. React SSR CPU: Fizz headroom differs from Flight (2026-11-03)
+
+Production local measurements on Node 24.22.0 cover Next App Router and React
+Router framework SSR, a shared 500-row fixture, Epic Stack's SQLite users page,
+and a bundled-content Next blog. Fizz self shares are 10.8%, 56.6%, 24.0%, and
+11.4%, respectively; Next Flight shares are 45.9% and 34.7%. Byte-identical
+concatenation cuts synthetic render CPU 1.326 to 0.497 ms, or 62.5%. A bounded
+React Router transform prototype is justified; a broad Next rendering product
+is not established. Raw profiles, all latency blocks, failed attempts, attribution
+rules, and shared-host limitations are retained. No scriptc, push, or deploy.
+
+[Method, tables, ceiling, and verdict](ssr-cpu-breakdown-react.md).
