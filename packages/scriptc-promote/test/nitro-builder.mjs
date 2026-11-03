@@ -29,3 +29,9 @@ test('builder API isolates client and two server compilations without build.ssr'
   }
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('Nitro bundles transitive runtime imports from packed installations',()=>{
+ const nitro={options:{preset:'node-server'},hooks:{hook(){}}};
+ scriptcNitro().setup(nitro);
+ assert.ok(nitro.options.externals.inline.some(dir=>dir.endsWith('/src/')));
+});

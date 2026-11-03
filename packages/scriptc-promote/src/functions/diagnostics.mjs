@@ -42,5 +42,5 @@ export function infrastructureFailure(error) {
  if(!/ENOENT|EACCES|permission denied|SC3004|command not found/i.test(detail)||!/spawn|SC3004|command not found|permission denied/i.test(detail))return null;
  const tool=detail.match(/spawn(?:Sync)?\s+(\S+)\s+(?:ENOENT|EACCES)/)?.[1]??( /TypeScript server|permission denied/i.test(detail)?'scriptc helper':error.path??'scriptc toolchain');
  const command=/^(ar|clang)$/.test(tool)?(process.platform==='darwin'?'xcode-select --install':'sudo apt-get install build-essential'):tool==='zig'?'Install zig and add it to PATH':'pnpm approve-builds && pnpm rebuild scriptc';
- return `[next-scriptc] NSC2001: Toolchain unavailable (${tool}): ${detail.trim()}. The app continues in JS. Repair: ${command}.`;
+ return `[next-scriptc] NSC2001: Toolchain unavailable (${tool}): ${detail.trim()}. The app continues in JS. Run scriptc-promote doctor . (or next-scriptc doctor .). Repair: ${command}.`;
 }

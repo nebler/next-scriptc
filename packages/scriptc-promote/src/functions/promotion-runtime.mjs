@@ -1,4 +1,3 @@
-import {createRequire} from 'node:module';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {promotionCrashGuard} from './promotion-crash-guard.mjs';
@@ -11,7 +10,8 @@ export function loadPromotion(file, options={}) {
   let guard;
   try{guard=promotionCrashGuard(file,options.crashGuard);if(guard.disabled)throw Error('Previous native process did not exit cleanly; promotion disabled');guard.arm();}
   catch(e){(options.log??console.error)('[next-scriptc] promotion unavailable: '+e.message);return createDispatcher({...options,mode:'js'});}
-  const addon=createRequire(import.meta.url)(file);
+  // Obtain Node's loader at runtime so bundlers do not rewrite a dynamic addon require.
+  const addon=process.getBuiltinModule('module').createRequire(file)(file);
   const ids=JSON.parse(readFileSync(path.join(dir,'ids.json'),'utf8'));
   const encoding=JSON.parse(readFileSync(path.join(dir,'encodings.json'),'utf8'));
   const index=id=>{const i=ids.indexOf(id);if(i<0)throw Error('Unknown promotion id');return i;};

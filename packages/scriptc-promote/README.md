@@ -1,5 +1,9 @@
 # scriptc-promote
 
+Start with the [tested adapter quick starts](../../docs/quick-start.md) and
+[how promotion works](../../docs/how-it-works.md). Diagnose installs with
+`pnpm exec scriptc-promote doctor .` (`--json` for structured output).
+
 Framework-independent automatic promotion of synchronous, pure functions with
 supported JSON boundaries. Framework adapters discover compute candidates, build
 stock scriptc native addons, and shadow-check results before dispatching to native.
