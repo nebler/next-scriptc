@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pathlib,os,json,gzip,subprocess,time,collections,sys,hashlib
-R=pathlib.Path.cwd();slug=sys.argv[1];O=R/'research/eval-corpus/dev-measure/results';P=pathlib.Path('/tmp/m1-dev-clones')/slug
+R=pathlib.Path.cwd();slug=sys.argv[1];O=pathlib.Path(os.environ['DEV_CENSUS_OUTPUT']);P=pathlib.Path(os.environ['DEV_CENSUS_TEMP'])/slug
 
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
 b=R/'research/eval-corpus/dev-census-b1'/f'{slug}.json';b=b if b.exists() else b.with_suffix('.json.gz');base=read(b)
