@@ -1,0 +1,16 @@
+{
+  "failures": [
+    "First framework install used Vite 8.0.3, incompatible with SvelteKit 3.1.1 peer requirement ^8.0.12. Corrected to 8.3.5; install log retains failure.",
+    "First SvelteKit build used svelte.config.js. Kit 3 requires plugin configuration in vite.config.js; corrected and rebuilt. Build log retains failure.",
+    "First attempt to install historical React lock with current npm ci rejected unnamed root package metadata. npm install succeeded using the existing pinned versions; retained install log. Historical lock was not changed.",
+    "First build-renderers invocation used checkout cwd rather than temporary frameworks cwd. Corrected invocation succeeded; log retains failure.",
+    "During test development an unescaped slash in the new attribution regex caused a syntax error. Corrected before subsequent targets imported it; final remapping uses the corrected rules for every profile. No timing blocks discarded.",
+    "Final npm ci dry-run found that npm --prefix /tmp wrote package keys relative to the /private/tmp alias. Normalized only lock package-location keys to node_modules/ paths; no versions or integrity values changed. Original lock and failed/successful dry-run logs retained. Offline npm ci dry-run passed after correction."
+  ],
+  "notes": [
+    "Astro and Nuxt were rebuilt after adding per-app package metadata. Both initial and final build logs retained.",
+    "AstroPaper build warns that astro:transitions source maps may be incorrect. Unknown samples remain classified by available evidence.",
+    "No task installs or builds ran during timing. All targets and ceiling captures ran sequentially.",
+    "No real SvelteKit app was installed: Evidence current revision uses a custom binary adapter and Bun CLI; the screened local-content blog uses Svelte 3 and Kit 1. A Svelte 5 adapter-node migration exceeds this screen. No synthetic timing substituted for real-app data."
+  ]
+}

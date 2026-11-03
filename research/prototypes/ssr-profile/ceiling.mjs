@@ -1,33 +1,45 @@
+import { execFileSync } from "node:child_process";
 import { performance } from "node:perf_hooks";
 import { writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { Page } from "./shared/tree.js";
+import { normalizeMain } from "./normalize.mjs";
 import { concat } from "./shared/concat.js";
 if (process.env.NODE_ENV !== "production")
   throw Error("Set NODE_ENV=production before importing React");
-const render = () => renderToString(React.createElement(Page));
-const a = render(),
+let render, rendererName = "react";
+if (process.argv[3]) {
+  const mod = await import(process.argv[3]);
+  render = mod.render;
+  rendererName = mod.name;
+} else {
+  const {default:React}=await import("react");
+  const {renderToString}=await import("react-dom/server");
+  const {Page}=await import("./shared/tree.js");
+  render=()=>renderToString(React.createElement(Page));
+}
+const a = await render(),
   b = concat();
-if (a !== b) throw Error("HTML mismatch");
+if (normalizeMain(a, rendererName) !== b) throw Error("HTML mismatch");
 const result = {
   node: process.version,
+  host: execFileSync("ps",["-A","-o","pid,pcpu,comm","-r"],{encoding:"utf8"}).split("\n").slice(0,21),
   bytes: Buffer.byteLength(a),
   sha256: createHash("sha256").update(a).digest("hex"),
-  equal: true,
+  equal: a === b,
+  normalizedEqual: true,
+  renderer: rendererName,
   blocks: [],
 };
 let sink = 0;
 for (const [name, fn] of [
-  ["react", render],
+  [rendererName, render],
   ["concat", concat],
 ]) {
-  for (let i = 0; i < 500; i++) sink += fn().length;
+  for (let i = 0; i < 500; i++) sink += (await fn()).length;
   for (let block = 0; block < 5; block++) {
     const cpu = process.cpuUsage(),
       t = performance.now();
-    for (let i = 0; i < 2000; i++) sink += fn().length;
+    for (let i = 0; i < 2000; i++) sink += (await fn()).length;
     const elapsed = performance.now() - t,
       usage = process.cpuUsage(cpu);
     result.blocks.push({

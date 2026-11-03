@@ -8,6 +8,10 @@ export function category(frame, generated) {
   if (/react-server-dom|react-server.*webpack|react-server.*turbopack/.test(u))
     return "flight";
   if (/react-dom.*server|react-dom-server/.test(u)) return "html";
+  if (/devalue|nuxt.*(?:payload|serialize)|svelte.*serialize|astro.*runtime\/server\/serialize/.test(u)) return "serialization";
+  if (/astro\/(?:dist|src)\/runtime\/server|svelte\/(?:src|internal)\/.*server|@vue\/server-renderer|vue\/server-renderer/.test(u)) return "html";
+  if (/svelte\/src\/escaping\.js/.test(u)) return "html";
+  if (/@vue\/shared/.test(u) && /escapeHtml|ssr/.test(n)) return "html";
   if (/JSON|serialize|devalue|stringify|turbo-stream/.test(n + " " + u))
     return "serialization";
   if (/prisma|sqlite|query_engine|pg-protocol|pg\/|postgres/.test(u))
@@ -24,6 +28,10 @@ export function category(frame, generated) {
     )
   )
     return "http";
+  if (/\.astro$|\.svelte$|\.vue$|\/chunks\/pages\//.test(frame.url || "")) return "html";
+  // Mapped package ownership wins over the generated build/server location.
+  if (/node_modules\/(?:@sveltejs|svelte|@vue|vue|@nuxt|nuxt|nitropack|h3|astro)\//.test(frame.url || "")) return "routing";
+  if (/node_modules\/(?:dayjs|date-fns|tailwind-variants|@internationalized\/date)\//.test(u)) return "application";
   if (/\/shared\/|\/app\/|\/build\/server\/|\/\.next\/server\//.test(u))
     return "application";
   if (
@@ -32,6 +40,7 @@ export function category(frame, generated) {
     )
   )
     return "routing";
+  if (/astro\/|sveltejs|svelte\/|nuxt|nitro|h3\/|vue\/|@vue\//.test(u)) return "routing";
   return "other";
 }
 export function attribute(p, bounds) {

@@ -1,0 +1,1 @@
+<script setup>defineProps(["status"]);</script><template><span :class="status === 'Paid' ? 'paid' : 'pending'">{{status}}</span></template>
