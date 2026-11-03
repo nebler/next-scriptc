@@ -8,7 +8,14 @@ const repositories=before.repos.map(b=>{const a=after.repos.find(a=>a.repository
 const newlyAccepted=after.functions.filter(f=>f.status==='accepted'&&prior.get(f.repository+'#'+f.id)?.status!=='accepted').map(f=>({repository:f.repository,id:f.id,name:f.name,url:f.url,previous:prior.get(f.repository+'#'+f.id)?.diagnostics??['previously unconsidered']}));
 const lost=before.functions.filter(f=>f.status==='accepted'&&after.functions.find(a=>a.repository===f.repository&&a.id===f.id)?.status!=='accepted').map(f=>({repository:f.repository,id:f.id,after:after.functions.find(a=>a.repository===f.repository&&a.id===f.id)?.diagnostics??['not covered']}));
 const histogram=Object.fromEntries([...new Set([...Object.keys(before.histogram),...Object.keys(after.histogram)])].map(state=>[state,Object.fromEntries([...new Set([...Object.keys(before.histogram[state]??{}),...Object.keys(after.histogram[state]??{})])].map(category=>[category,{before:before.histogram[state]?.[category]??0,after:after.histogram[state]?.[category]??0}]))]));
+const current=new Map(after.functions.map(f=>[f.repository+'#'+f.id,f]));
+const matchedBefore=before.functions.filter(f=>current.has(f.repository+'#'+f.id));
+const matchedAfter=after.functions.filter(f=>prior.has(f.repository+'#'+f.id));
+const countHistogram=rows=>{const h={};for(const f of rows)if(f.diagnostics.length){const state=h[f.classification]??={};state[f.category]=(state[f.category]??0)+1;}return h;};
+const matched={functions:matchedBefore.length,before:countHistogram(matchedBefore),after:countHistogram(matchedAfter)};
+const uncoveredPriorAcceptances=lost.filter(f=>!current.has(f.repository+'#'+f.id));
+const lostCoveredAcceptances=lost.filter(f=>current.has(f.repository+'#'+f.id));
 const named=after.functions.filter(f=>['solveForecast','bestExhaustiveBinarySplit','approximateBinaryKMeans'].includes(f.name));
-const result={repositories,histogram,newlyAccepted,lost,named,note:'First-refusal shifts. Parser survival changes considered functions. Missing scopes remain unknown. Static compute names below are review leads, not measured wins.',computeLeads:newlyAccepted.filter(f=>/split|means|forecast|regress|sort|quantile|matrix|histogram|variance|distance|hash|encode|decode|parse|aggregate|calculate/i.test(f.name))};
+const result={repositories,histogram,matched,newlyAccepted,lostCoveredAcceptances,uncoveredPriorAcceptances,named,note:'First-refusal shifts. Parser survival changes considered functions. Missing scopes remain unknown. Static compute names below are review leads, not measured wins.',computeLeads:newlyAccepted.filter(f=>/split|means|forecast|regress|sort|quantile|matrix|histogram|variance|distance|hash|encode|decode|parse|aggregate|calculate/i.test(f.name))};
 const bytes=Buffer.from(JSON.stringify(result,null,2)+'\n');const name=new URL('comparison.json',import.meta.url);if(bytes.length>256*1024)fs.writeFileSync(new URL('comparison.json.gz',import.meta.url),gzipSync(bytes,{level:9,mtime:0}));else fs.writeFileSync(name,bytes);
 console.log(JSON.stringify({repositories,newlyAccepted:newlyAccepted.length,lost:lost.length,named},null,2));
