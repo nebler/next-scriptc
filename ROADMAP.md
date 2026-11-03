@@ -99,6 +99,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | C1 | Compiler object/string codegen: profile and fix | 1 | scriptc fork | done: RC/boxing ~26%, layout probes ~14%; key-array fix −13.6% on enumeration, CSV unchanged |
 | C1b | Escape analysis + scalar replacement of records (C1's top design) | 1 | scriptc fork | bounded step done: leaf teardown eligible for inlining; generic −12.6%, spread −16.1%; CSV inconclusive; full escape/SSA work open |
 | C1c | Local record escape analysis and scalar replacement | 1 | scriptc fork | first opt-in version: alias groups, field writes, leaf strings, exact identity summaries; generic −57.0%; spread and D1/E1 unchanged; nested owned graphs and full gate open ([evidence](research/compiler-scalar-replacement.md)) |
+| C1d | Guarded specialization of erased operations | 1 | scriptc fork | bounded string-index slice: erased path −18.2%, CSV −5.5% but still 5.49× Node; typed control unchanged, copy/generic regressions retained; full gate open ([evidence](research/compiler-erased-specialization.md)) |
 | B1 | Cheap discovery blockers | 2 | discovery | running |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | after B1 |

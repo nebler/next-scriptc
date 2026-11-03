@@ -1,0 +1,296 @@
+
+### install
+
+modules/@scriptc/llvm-linux-x64-gnu/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/cli-linux-x64-musl/node_modules/.bin/scriptc-llvm-linux-x64-musl. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/cli-linux-x64-musl/node_modules/@scriptc/llvm-linux-x64-musl/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/.bin/scriptc-llvm-codegen. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/@scriptc/llvm-darwin-x64/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/.bin/scriptc-llvm-linux-x64-musl. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/@scriptc/llvm-linux-x64-musl/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/.bin/scriptc-llvm-linux-arm64-musl. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/@scriptc/llvm-linux-arm64-musl/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/.bin/scriptc-llvm-linux-x64-gnu. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/@scriptc/llvm-linux-x64-gnu/bin/scriptc-llvm-codegen'
+ WARN  Failed to create bin at /Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/.bin/scriptc-llvm-linux-arm64-gnu. ENOENT: no such file or directory, open '/Users/noah/code/scriptc-wt/c1d-erased/packages/compiler/node_modules/@scriptc/llvm-linux-arm64-gnu/bin/scriptc-llvm-codegen'
+packages/cli postinstall$ node scripts/install-native.mjs
+packages/cli postinstall: Done
+
+devDependencies:
++ @scriptc/experimental 0.4.7 <- packages/experimental
++ @scriptc/node 0.4.7 <- packages/node
++ @scriptc/threads 0.4.7 <- packages/threads
++ @scriptc/types 0.4.7 <- packages/types
++ @types/node 24.13.3
++ effect 3.22.2
++ js-yaml 4.3.2
++ oxfmt 0.71.0
++ oxlint 1.86.0
++ rollup 4.62.2
++ smol-toml 1.7.1
++ three 0.186.1
++ tsx 4.23.0
++ typescript 5.9.3
++ vercel 58.1.0
++ vitest 3.2.7
+
+Done in 3.5s using pnpm v10.27.0
+
+
+### build3
+
+      |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["darwin"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: ../../packages/llvm-linux-arm64-gnu      |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: ../../packages/llvm-linux-arm64-musl     |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: ../../packages/llvm-linux-x64-gnu        |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: ../../packages/llvm-linux-x64-musl       |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: ../../packages/llvm-win32-x64-msvc       |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["win32"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+internal/compatibility build: > @internal/compatibility@0.0.0 check /Users/noah/code/scriptc-wt/c1d-erased/internal/compatibility
+internal/compatibility build: > node src/generate.mjs --check-local
+internal/compatibility build: Node compatibility snapshot is locally current (4996 source rows, 3880 public matrix rows, Node 24.22.1)
+internal/compatibility build: Done
+packages/cli-darwin-arm64 build$ node -e ""
+packages/cli-darwin-x64 build$ node -e ""
+packages/cli-linux-arm64-gnu build$ node -e ""
+packages/cli-linux-arm64-musl build$ node -e ""
+packages/cli-darwin-arm64 build: Done
+packages/cli-linux-x64-gnu build$ node -e ""
+packages/cli-darwin-x64 build: Done
+packages/cli-linux-x64-musl build$ node -e ""
+packages/cli-linux-arm64-musl build: Done
+packages/cli-win32-x64-msvc build$ node -e ""
+packages/cli-linux-arm64-gnu build: Done
+packages/compiler build$ node node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli-linux-x64-gnu build: Done
+packages/cli-linux-x64-musl build: Done
+packages/cli-win32-x64-msvc build: Done
+packages/compiler build: Done
+packages/cli build$ node ../../node_modules/typescript/bin/tsc -p tsconfig.json
+packages/cli build: Done
+
+
+### native
+
+nted: {"node":">=24.0.0"} (current: {"node":"v23.10.0","pnpm":"10.27.0"})
+packages/libnode-darwin-x64              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["darwin"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/libnode-linux-arm64-gnu         |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["glibc"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/libnode-linux-x64-gnu           |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["glibc"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-darwin-x64                 |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["darwin"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-arm64-gnu            |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-arm64-musl           |  WARN  Unsupported platform: wanted: {"cpu":["arm64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-x64-gnu              |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-linux-x64-musl             |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["linux"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/llvm-win32-x64-msvc             |  WARN  Unsupported platform: wanted: {"cpu":["x64"],"os":["win32"],"libc":["any"]} (current: {"os":"darwin","cpu":"arm64","libc":"unknown"})
+packages/node                            |  WARN  Unsupported engine: wanted: {"node":">=24.13.1"} (current: {"node":"v23.10.0","pnpm":"10.27.0"})
+packages/threads                         |  WARN  Unsupported engine: wanted: {"node":">=24.0.0"} (current: {"node":"v23.10.0","pnpm":"10.27.0"})
+packages/types                           |  WARN  Unsupported engine: wanted: {"node":">=24.0.0"} (current: {"node":"v23.10.0","pnpm":"10.27.0"})
+
+> @scriptc/runtime-darwin-arm64@0.4.7 build:native /Users/noah/code/scriptc-wt/c1d-erased/packages/runtime-darwin-arm64
+> node scripts/build.mjs
+
+built @scriptc/runtime-darwin-arm64@0.4.7: 6 flavors, 6 vendor archives
+
+
+### compile
+
+/Users/noah/.t3/worktrees/next-scriptc/c1d-erased/research/compiler-object-string/erased-path.ts:1:1 - error SC3003: could not read @scriptc/runtime-darwin-arm64/runtime-pack.json
+
+  1 | // Own-code reduction of the CSV escaped-dot scan and nested path walk.
+    | ^
+  2 | // @ts-nocheck
+
+  hint: reinstall scriptc with optional dependencies enabled for this host
+
+1 error.
+
+
+### fixture-error
+
+/Users/noah/code/scriptc-wt/c1d-erased/tests/corpus/erased-string-index.ts:27:1 - error SC2020: 'Object.defineProperty' is part of the standard library types but has no scriptc lowering yet
+
+  26 | // In-range immutable string characters precede prototype properties.
+  27 | Object.defineProperty(String.prototype, '1', {get() { calls++; return 'prototype'; }, configurable: true});
+     | ^~~~~~~~~~~~~~~~~~~~~
+  28 | console.log(read(values[0], 1), read(values[0], 8), calls);
+
+  hint: the type checker sees the full standard library, but only the supported surface compiles (https://scriptc.dev/limitations)
+
+/Users/noah/code/scriptc-wt/c1d-erased/tests/corpus/erased-string-index.ts:29:8 - error SC2020: 'String.prototype' is part of the standard library types but has no scriptc lowering yet
+
+  28 | console.log(read(values[0], 1), read(values[0], 8), calls);
+  29 | delete String.prototype[1];
+     |        ^~~~~~~~~~~~~~~~
+  30 |
+
+  hint: prototype objects are not values here (method lookup is static) — call the method on an instance instead
+
+2 errors.
+
+
+### llvm-final2
+
+st.ts (12 tests) 33ms
+ ✓ packages/compiler/src/backend/llvm/shapes.test.ts (18 tests) 10ms
+ ✓ packages/compiler/src/backend/llvm/intern-tables.test.ts (2 tests) 38ms
+ ✓ packages/compiler/src/backend/llvm/string-slices.test.ts (22 tests) 11ms
+ ✓ packages/compiler/src/backend/llvm/byte-windows.test.ts (8 tests) 12ms
+ ✓ packages/compiler/src/backend/llvm/regex-matchers.test.ts (42 tests) 13ms
+ ✓ packages/compiler/src/backend/llvm/constant-callbacks.test.ts (23 tests) 10ms
+ ✓ packages/compiler/src/backend/llvm/reference-effects.test.ts (10 tests) 11ms
+ ✓ packages/compiler/src/backend/llvm/runtime-registries.test.ts (7 tests) 7ms
+ ✓ packages/compiler/src/backend/llvm/speculative-integers.test.ts (14 tests) 6ms
+ ✓ packages/compiler/src/backend/llvm/loop-array-borrows.test.ts (9 tests) 5ms
+ ✓ packages/compiler/src/backend/llvm/debug-info.test.ts (10 tests) 5ms
+ ✓ packages/compiler/src/backend/llvm/reference-writes.test.ts (3 tests) 4ms
+ ✓ packages/compiler/src/backend/llvm/nullable-unions.test.ts (8 tests) 5ms
+ ✓ packages/compiler/src/backend/llvm/running-extrema.test.ts (8 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/dyn-handle-tags.test.ts (6 tests) 5ms
+ ✓ packages/compiler/src/backend/llvm/dense-array-loops.test.ts (6 tests) 4ms
+ ✓ packages/compiler/src/backend/llvm/blocks.test.ts (8 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/walk-borrows.test.ts (6 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/constant-choices.test.ts (3 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/local-extents.test.ts (4 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/string-key-hash.test.ts (14 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/lazy-captures.test.ts (5 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/periodic-guards.test.ts (4 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/nullable-fields.test.ts (1 test) 2ms
+ ✓ packages/compiler/src/backend/llvm/loop-callees.test.ts (2 tests) 3ms
+ ✓ packages/compiler/src/backend/llvm/integer-views.test.ts (2 tests) 2ms
+ ✓ packages/compiler/src/backend/llvm/rebound-parameters.test.ts (2 tests) 2ms
+ ✓ packages/compiler/src/backend/llvm/counted-loops.test.ts (1 test) 2ms
+ ✓ packages/compiler/src/backend/llvm/common.test.ts (1 test) 1ms
+
+ Test Files  76 passed (76)
+      Tests  719 passed (719)
+   Start at  02:56:34
+   Duration  34.52s (transform 6.25s, setup 0ms, collect 39.52s, tests 18.26s, environment 7ms, prepare 2.85s)
+
+
+
+### affected-final
+
+
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1d-erased
+> vitest run tests/harness/differential.test.ts tests/harness/llvm-differential.test.ts -t 'erased-string-index|1574-dyn-optional-method-number-keys|2678-large-string-sparse-index|2601-dyn-keyed-write-ops|3120-dynamic-property-descriptors|prototype-named-data-records'
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1d-erased
+
+ ✓ tests/harness/differential.test.ts (5003 tests | 4997 skipped) 4860ms
+   ✓ differential corpus (5003 programs) > 1574-dyn-optional-method-number-keys.ts  1289ms
+   ✓ differential corpus (5003 programs) > 2601-dyn-keyed-write-ops.js  866ms
+   ✓ differential corpus (5003 programs) > 2678-large-string-sparse-index.ts  662ms
+   ✓ differential corpus (5003 programs) > 3120-dynamic-property-descriptors.js  766ms
+   ✓ differential corpus (5003 programs) > erased-string-index.ts  732ms
+   ✓ differential corpus (5003 programs) > prototype-named-data-records.ts  537ms
+ ✓ tests/harness/llvm-differential.test.ts (5003 tests | 4997 skipped) 8961ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > 1574-dyn-optional-method-number-keys.ts  1922ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > 2601-dyn-keyed-write-ops.js  1355ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > 2678-large-string-sparse-index.ts  1380ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > 3120-dynamic-property-descriptors.js  1514ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > erased-string-index.ts  1470ms
+   ✓ llvm differential corpus (5003 programs, release+dev) > prototype-named-data-records.ts  1313ms
+
+ Test Files  2 passed (2)
+      Tests  12 passed | 9994 skipped (10006)
+   Start at  02:57:04
+   Duration  17.34s (transform 5.57s, setup 0ms, collect 16.24s, tests 13.82s, environment 0ms, prepare 77ms)
+
+
+
+### san-final
+
+
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1d-erased
+> vitest run tests/harness/differential.test.ts tests/harness/llvm-differential.test.ts -t erased-string-index
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1d-erased
+
+ ✓ tests/harness/differential.test.ts (5003 tests | 5002 skipped) 15940ms
+   ✓ differential corpus (5003 programs, sanitized) > erased-string-index.ts  15933ms
+ ✓ tests/harness/llvm-differential.test.ts (5003 tests | 5002 skipped) 29928ms
+   ✓ llvm differential corpus (5003 programs, release+dev, sanitized) > erased-string-index.ts  29920ms
+
+ Test Files  2 passed (2)
+      Tests  2 passed | 10004 skipped (10006)
+   Start at  02:57:22
+   Duration  37.92s (transform 5.46s, setup 0ms, collect 15.43s, tests 45.87s, environment 0ms, prepare 91ms)
+
+
+
+### runtime
+
+
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1d-erased
+> vitest run packages/runtime/src/scr_js_object.test.ts
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1d-erased
+
+ ❯ packages/runtime/src/scr_js_object.test.ts (2 tests | 1 failed) 56543ms
+   ✓ layouts and string indices preserve ownership (audit=false)  28050ms
+   × layouts and string indices preserve ownership (audit=true) 28493ms
+     → Command failed: /var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-js-object-4yl2MT/js-object
+scriptc RC AUDIT FAILED: 0 heap string(s), 0 array(s), 0 map(s), 0 box(es), 0 closure(s), 0 object(s), 0 union(s), 1 dyn value(s), 0 bytes value(s) live at exit
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  packages/runtime/src/scr_js_object.test.ts > layouts and string indices preserve ownership (audit=true)
+Error: Command failed: /var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-js-object-4yl2MT/js-object
+scriptc RC AUDIT FAILED: 0 heap string(s), 0 array(s), 0 map(s), 0 box(es), 0 closure(s), 0 object(s), 0 union(s), 1 dyn value(s), 0 bytes value(s) live at exit
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  02:56:54
+   Duration  56.76s (transform 21ms, setup 0ms, collect 14ms, tests 56.54s, environment 0ms, prepare 37ms)
+
+ ELIFECYCLE  Test failed. See above for more details.
+
+
+### runtime-final
+
+
+> scriptc-monorepo@ test /Users/noah/code/scriptc-wt/c1d-erased
+> vitest run packages/runtime/src/scr_js_object.test.ts
+
+
+ RUN  v3.2.7 /Users/noah/code/scriptc-wt/c1d-erased
+
+ ✓ packages/runtime/src/scr_js_object.test.ts (2 tests) 53189ms
+   ✓ layouts and string indices preserve ownership (audit=false)  26921ms
+   ✓ layouts and string indices preserve ownership (audit=true)  26267ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  02:58:08
+   Duration  53.42s (transform 20ms, setup 0ms, collect 14ms, tests 53.19s, environment 0ms, prepare 42ms)
+
+
+
+### lint-final2
+
+
+> scriptc-monorepo@ lint /Users/noah/code/scriptc-wt/c1d-erased
+> node docs/scripts/limitations-partials.mjs check && oxlint --deny-warnings packages scripts internal/compatibility/src tests/harness vitest.config.ts
+
+
+
+### format-final2
+
+
+> scriptc-monorepo@ format:check /Users/noah/code/scriptc-wt/c1d-erased
+> oxfmt --check "{packages,scripts,internal/compatibility/src,tests/harness}/**/*.{js,mjs,cjs,ts,mts,cts,tsx}" vitest.config.ts .oxlintrc.jsonc .oxfmtrc.jsonc
+
+Checking formatting...
+
+All matched files use the correct format.
+Finished in 299ms on 1876 files using 12 threads.
+
+
+### baselines-final
+
+
+> scriptc-monorepo@ test:ts7 /Users/noah/code/scriptc-wt/c1d-erased
+> node scripts/test-ts7.mjs --baselines-only
+
+Every TypeScript preflight/order fixture has a recorded baseline.
