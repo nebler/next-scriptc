@@ -1855,3 +1855,13 @@ production sampling, confidence and estimate limits. Discovery acceptance and
 dispatch policy are unchanged. No root README, main checkout, protected compiler
 tree, held-out app, external service, deploy, Docker, push, PR, issue, post or secret.
 [Design, sample output, mapping coverage and limits](profile-guided-promotion.md).
+
+## 63. C1c local leaf record scalar replacement (2026-11-03)
+
+An opt-in pass analyzes closed record literals and their local alias groups before LLVM emission. It scalarizes number, boolean, and string fields, including alias writes and exact one-parameter identity helpers. Returns, conditional escapes, captures, erased transitions, unknown calls, identity/reflection operations, and container stores reject the group. Nested owned fields keep the existing allocation/cleanup path. General helper summaries, owned-graph escape analysis, and lifetime-marked stack fallback remain open.
+
+Four alternating C1/CSV windows preserve every Node result. At 50k, generic improves 0.1350 → 0.0580 ms (57.0%), with improvement in all windows. Spread is 0.1715 → 0.1745 ms with mixed directions. JSON moves 11.1905 → 10.7335 ms but does not execute the removed generic allocation site. CSV moves 41.9505 → 41.2925 ms and remains about six times Node; no broad dynamic-ownership solution is claimed. Actual D1/E1 function boundary probes show subpercent changes. A temporary default-on build matches opt-in generic/spread medians. The committed flag remains off.
+
+Fork branch `next-scriptc/record-scalar-replacement`, local commit `5bdafe19eb5b21c2b1a34a9dea9c99075d6074e8`, starts at fresh upstream `301c28c9f`, without stacking C1b. Final checks pass 724 LLVM backend tests, six focused and ten broader corpus programs through both differential harnesses, and ASan/RC audit for the new fixture plus weak-key unions. Build, lint, format, new fixture preflight/order, and baseline completeness pass. A cache-option TypeScript error and a surviving expression-sequence alias were found and fixed. Full gates, other platforms, and library/worker integration remain outstanding.
+
+Both branches remain local. Original working trees, root README, Papermark, external services, and protected containers are untouched. Task-owned build outputs and dependencies are cleaned. No push, issue, PR, Docker, deployment, public post, or secret. [Report and raw evidence](compiler-scalar-replacement.md).
