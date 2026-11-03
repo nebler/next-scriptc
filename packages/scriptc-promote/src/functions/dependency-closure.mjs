@@ -1,5 +1,5 @@
 import {normalizeModuleFunctions} from './module-functions.mjs';
-import {inertDefaultExpression} from './module-initialization.mjs';
+import {inertDefaultExpression,literalArithmetic,creationOnlySetup,hasLexicalEval} from './module-initialization.mjs';
 import {assertRuntimeExportTarget} from './runtime-export-target.mjs';
 import {nodeRuntimeConditions,hasNodeConditionFlags} from './resolution-conditions.mjs';
 import {lowerCheckedIndexes} from './checked-index.mjs';
@@ -26,7 +26,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, runtimeCo
  ts??=require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]}));
  const host={...ts.sys,fileExists:f=>!declarationFile(f)&&ts.sys.fileExists(f)};
  const modules=new Map(), chunks=[], sourceNodes=[],resolverManifests=new Map();
- let typeProgram;
+ let typeProgram,initializationExtension=false,capturedInitialization=false;
  function resolveQuery(record,local){
   if(!typeProgram){const host=ts.createCompilerHost({...options,strict:true});const read=host.readFile;host.readFile=f=>path.resolve(f)===path.resolve(source)?text:read(f);typeProgram=ts.createProgram([source],{...options,strict:true,moduleResolution:options.moduleResolution??ts.ModuleResolutionKind.Bundler,module:ts.ModuleKind.ESNext},host);}
   const sf=typeProgram.getSourceFile(record.file)??typeProgram.getSourceFiles().find(sf=>fs.existsSync(sf.fileName)&&fs.realpathSync(sf.fileName)===record.file),checker=typeProgram.getTypeChecker();
@@ -74,6 +74,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, runtimeCo
 
 
   let program;traverse(ast,{Program(p){program=p;}});
+  const initializationReflective=hasLexicalEval(program.scope);
   const exports=new Map(), reexports=new Map(), types=new Map(), prefix='__dep_'+digest(file).slice(0,12)+'_';
   function checkRuntime(){
    if(declarationFile(file))fail('unresolved runtime declaration module');
@@ -82,7 +83,7 @@ export function dependencyClosure(text, source, name, {ts, options={}, runtimeCo
    for(const statement of program.get('body')){
     const n=statement.isExportNamedDeclaration()?statement.get('declaration'):statement;
     if(statement.isImportDeclaration()){if(!statement.node.specifiers.length&&statement.node.importKind!=='type'&&statement.node.source.value!=='server-only')fail('unproved module initialization side-effect import');continue;}
-    if(statement.isExportDefaultDeclaration()){if(!babel.types().isDeclaration(statement.node.declaration)&&!inertDefaultExpression(statement.node.declaration))fail('unproved module initialization default expression');continue;}
+    if(statement.isExportDefaultDeclaration()){if(!babel.types().isDeclaration(statement.node.declaration)&&!inertDefaultExpression(statement.node.declaration,program.scope))fail('unproved module initialization default expression');continue;}
     if(statement.isExportDeclaration())continue;
     if(!n.isDeclaration()&&!n.isEmptyStatement())fail(`unproved module initialization ${n.node.type}`);
    }
@@ -112,10 +113,19 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
   const record={checkRuntime,exports,reexports,file,hash:digest(code),package:packageInfo,ast,program,types,prefix,fail,needed:new Set(),runtimeNeeded:new Set(),imports:new Map()};
   program.traverse({ReferencedIdentifier(p){if(p.node.name==='eval')record.reflective=true;}});
   record.enumReferences=new Map();for(const [local,declaration] of types)if(declaration.isTSEnumDeclaration()){const refs=[];program.traverse({ReferencedIdentifier(p){if(p.node.name===local&&!p.scope.getBinding(local))refs.push(p);}});record.enumReferences.set(local,refs);}
+  record.initializationReflective=initializationReflective;
   modules.set(file,record);return record;
  }
  const lookup=(value,key)=>value instanceof Map?value.get(String(key)):Array.isArray(value)?key==='length'?babel.types().numericLiteral(value.length):String(Number(key))===String(key)&&Number.isSafeInteger(Number(key))&&Number(key)>=0?value[Number(key)]:undefined:undefined;
  const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
+ // A scalar array can be recreated for a read-only call without sharing identity.
+ // some callbacks cannot receive the original receiver through a third/rest parameter.
+ function scalarArrayRead(member,value){
+  if(!Array.isArray(value)||!value.every(scalar)||member.node.computed)return false;
+  const call=member.parentPath;if(!call.isCallExpression()||member.key!=='callee'||call.node.arguments.length!==1)return false;
+  const arg=call.node.arguments[0],name=member.node.property.name;
+  return name==='includes'&&arg.type!=='SpreadElement'||name==='some'&&arg.type==='ArrowFunctionExpression'&&!arg.async&&arg.params.length<=2&&arg.params.every(p=>p.type==='Identifier');
+ }
  function linkExport(record, name, chain, typeOnly){
   const alias=record.reexports.get(name);
   if(alias){const file=resolve(alias.source,record.file,typeOnly);if(chain.includes(file))record.fail('module cycle');return linkExport(load(file,undefined,typeOnly),alias.local,[...chain,file],typeOnly);}
@@ -131,6 +141,7 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
   if(needed.has(local)&&(typeOnly||record.runtimeNeeded.has(local)))return;
   if(!typeOnly)record.runtimeNeeded.add(local);
   needed.add(local);
+  if(!typeOnly&&(declaration.isVariableDeclarator()&&!(record===root&&local===name&&['ArrowFunctionExpression','FunctionExpression'].includes(declaration.node.init?.type))||declaration.isClassDeclaration()||declaration.isTSEnumDeclaration()))capturedInitialization=true;
   if(binding?.constantViolations.length)fail('module binding reassignment');
   if(declaration.isImportSpecifier()||declaration.isImportDefaultSpecifier()||declaration.isImportNamespaceSpecifier()){
    const statement=declaration.parentPath;
@@ -165,25 +176,27 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
    }
    declaration.traverse({enter(p){if(['TSMappedType','TSConditionalType','TSInferType','TSTypeQuery','TSImportType'].includes(p.node.type))fail(`type ${local} is not bounded JSON data: ${p.node.type} ${p.node.name??''}`);}});
   }
+  if(declaration.isVariableDeclarator()&&declaration.parent.kind==='const'){const value=literalArithmetic(declaration.node.init);if(value!==undefined){if(!scalar(declaration.node.init))initializationExtension=true;declaration.node.init=babel.types().numericLiteral(value);}}
   const init=declaration.node.init;
   const frozen=init?.type==='CallExpression'&&init.callee.type==='MemberExpression'&&!init.callee.computed&&init.callee.object.name==='Object'&&!declaration.scope.getBinding('Object')&&init.callee.property.name==='freeze'&&init.arguments.length===1;
   if(frozen){declaration.node.init=babel.types().tsAsExpression(init.arguments[0],babel.types().tsTypeReference(babel.types().identifier('const')));}
   if(declaration.isVariableDeclarator()&&declaration.node.init?.type==='TSAsExpression'&&declaration.node.init.typeAnnotation.type==='TSTypeReference'&&declaration.node.init.typeAnnotation.typeName.name==='const'&&scalar(declaration.node.init.expression))declaration.node.init=declaration.node.init.expression;
   if(declaration.isVariableDeclarator()&&(['ObjectExpression','ArrayExpression'].includes(declaration.node.init?.type)||declaration.node.init?.type==='TSAsExpression'&&declaration.node.init.typeAnnotation.type==='TSTypeReference'&&declaration.node.init.typeAnnotation.typeName.name==='const')){
+   if(declaration.node.id.type!=='Identifier'||!typeOnly&&declaration.parent.declare)fail('constant graph requires an initialized identifier binding');
    if(record.reflective)fail('constant graph lexical eval');
    if(declaration.parent.kind!=='const'||[...record.exports.values()].includes(local))fail('constant graph exported reference can escape');
-   function graph(n){if(scalar(n))return n;if(n.type==='ArrayExpression')return n.elements.map(e=>{if(!e)fail('constant graph hole');return graph(e);});if(n.type==='ObjectExpression'){const out=new Map();for(const p of n.properties){if(p.type!=='ObjectProperty'||p.computed||p.shorthand||['__proto__','prototype','constructor','toJSON'].includes(p.key.name??p.key.value))fail('constant graph property');out.set(String(p.key.name??p.key.value),graph(p.value));}return out;}fail('constant graph requires literals');}
+   function graph(n){if(scalar(n))return n;const value=literalArithmetic(n);if(value!==undefined){initializationExtension=true;return babel.types().numericLiteral(value);}if(n.type==='ArrayExpression')return n.elements.map(e=>{if(!e)fail('constant graph hole');return graph(e);});if(n.type==='ObjectExpression'){const out=new Map();for(const p of n.properties){if(p.type==='SpreadElement'){if(p.argument.type!=='Identifier')fail('constant graph spread requires a private scalar object');const b=program.scope.getBinding(p.argument.name);if(!b?.path.isVariableDeclarator()||b.path.node.id.type!=='Identifier'||b.path.parent.kind!=='const'||b.path.parent.declare)fail('constant graph spread requires a private scalar object');include(record,p.argument.name,chain);const base=record.constants?.get(p.argument.name);if(!(base instanceof Map)||![...base.values()].every(scalar))fail('constant graph spread requires scalar properties');for(const [key,value] of base)out.set(key,value);initializationExtension=true;continue;}if(p.type!=='ObjectProperty'||p.computed||p.shorthand||['__proto__','prototype','constructor','toJSON'].includes(p.key.name??p.key.value))fail('constant graph property');out.set(String(p.key.name??p.key.value),graph(p.value));}return out;}fail('constant graph requires literals');}
    record.constants??=new Map();record.constants.set(local,graph(declaration.node.init.type==='TSAsExpression'?declaration.node.init.expression:declaration.node.init));return;
   }
   if(declaration.isVariableDeclarator()){
-   if(declaration.parent.kind!=='const'||declaration.node.id.type!=='Identifier'||!(scalar(declaration.node.init)||['ArrowFunctionExpression','FunctionExpression'].includes(declaration.node.init?.type)))fail('unproved module initialization VariableDeclaration');
+   if(declaration.parent.kind!=='const'||!typeOnly&&declaration.parent.declare||declaration.node.id.type!=='Identifier'||!(scalar(declaration.node.init)||['ArrowFunctionExpression','FunctionExpression'].includes(declaration.node.init?.type)))fail('unproved module initialization VariableDeclaration');
   }else if(!declaration.isFunctionDeclaration()&&!declaration.isTSTypeAliasDeclaration()&&!declaration.isTSInterfaceDeclaration())fail(`unproved module initialization ${declaration.node.type}`);
   declaration.traverse({ReferencedIdentifier(p){
    const top=program.scope.getBinding(p.node.name);
    if(top&&top===p.scope.getBinding(p.node.name)||!p.scope.getBinding(p.node.name)&&types.has(p.node.name))include(record,p.node.name,chain,!!p.findParent(q=>q.isTSType()));
   }});
  }
- const root=load(source,text);include(root,name,[source]);
+ const root=load(source,text),originalSetupSafe=creationOnlySetup(root.program.scope);include(root,name,[source]);
  function targetName(record, local) {
   const imported=record.imports.get(local);
   return imported?targetName(imported.child,imported.target):record===root&&local===name?name:record.prefix+local;
@@ -212,17 +225,20 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
    for(const ref of refs){
     if((ref.parentPath.isTSTypeAliasDeclaration()||ref.parentPath.isTSEnumDeclaration())&&ref.key==='id'||ref.isExportNamedDeclaration()||ref.parentPath.isExportSpecifier()||ref.findParent(p=>p.isTSType()))continue;
     if(isClass){if(!ref.findParent(p=>ast.program.body.includes(p.node)))continue;const call=ref.parentPath;if(!call.isNewExpression()||ref.key!=='callee'||!call.parentPath.isThrowStatement())fail('class value is not throw-only');continue;}
-    let read=ref,value=values;
+    let read=ref,value=values,arrayRead=false;
     while(read.parentPath.isMemberExpression()&&read.key==='object'){
      const member=read.parentPath.node,key=member.computed?member.property.value:member.property.name;
      if(member.computed&&!['StringLiteral','NumericLiteral'].includes(member.property.type))fail('constant graph requires literal member read');
+     if(scalarArrayRead(read.parentPath,value)){record.arrayReads??=new WeakMap();record.arrayReads.set(read.node,value);initializationExtension=true;arrayRead=true;break;}
      value=lookup(value,key);
      if(!value)fail('constant graph unresolved member');read=read.parentPath;
     }
+    if(arrayRead)continue;
+    if(value instanceof Map&&[...value.values()].every(scalar)&&read.parentPath.isSpreadElement()&&read.key==='argument'&&read.parentPath.parentPath.isObjectExpression()){initializationExtension=true;continue;}
     if(!scalar(value)||read.parentPath.isAssignmentExpression()&&read.key==='left'||read.parentPath.isUpdateExpression()||read.parentPath.isUnaryExpression({operator:'delete'}))fail('constant graph mutation or escaping reference');
    }
   }
-  traverse(ast,{TSTypeReference(p){const n=p.node.typeName;if(n.type!=='TSQualifiedName'||n.left.type!=='Identifier')return;const target=defining(record,n.left.name),value=target.record.constants?.get(target.local)?.get(n.right.name);if(scalar(value))p.replaceWith(babel.types().tsLiteralType(babel.types().cloneNode(value,true)));},ThrowStatement(p){const n=p.node.argument;if(n?.type!=='NewExpression'||n.callee.type!=='Identifier'||p.scope.getBinding(n.callee.name)!==program.scope.getBinding(n.callee.name))return;const target=defining(record,n.callee.name);if(!target.record.throwClasses?.has(target.local))return;
+  traverse(ast,{enter(p){const values=record.arrayReads?.get(p.node);if(values){p.replaceWith(babel.types().arrayExpression(values.map(v=>babel.types().cloneNode(v,true))));p.skip();}},TSTypeReference(p){const n=p.node.typeName;if(n.type!=='TSQualifiedName'||n.left.type!=='Identifier')return;const target=defining(record,n.left.name),value=target.record.constants?.get(target.local)?.get(n.right.name);if(scalar(value))p.replaceWith(babel.types().tsLiteralType(babel.types().cloneNode(value,true)));},ThrowStatement(p){const n=p.node.argument;if(n?.type!=='NewExpression'||n.callee.type!=='Identifier'||p.scope.getBinding(n.callee.name)!==program.scope.getBinding(n.callee.name))return;const target=defining(record,n.callee.name);if(!target.record.throwClasses?.has(target.local))return;
    p.node.argument=babel.types().stringLiteral('__scriptc_throw_fallback__');record.requiresFallback=true;
   },MemberExpression:{exit(p){let n=p.node,keys=[];while(n.type==='MemberExpression'){keys.unshift(n.computed?n.property.value:n.property.name);n=n.object;}if(n.type!=='Identifier'||p.scope.getBinding(n.name)!==program.scope.getBinding(n.name))return;
    const target=defining(record,n.name);let value=target.record.constants?.get(target.local);if(!value)return;
@@ -266,7 +282,9 @@ packageInfo={name:p.name??null,version:p.version??null,manifest,manifestHash:dig
  const checked=lowerCheckedIndexes(lowered.native,ts);if(checked.requiresFallback)for(const record of modules.values())traverse(record.ast,{TryStatement(){record.fail('throw fallback excludes local catch/finally');}});lowered.native=checked.native;requiresFallback ||= checked.requiresFallback;
  const proof=constructionProof(lowered.native,ts);
  if(!proof.eligible)throw Error(`dependency closure: transitive effect proof: ${proof.reason}`);
- return {loweringMap:lowered.loweringMap,compilerSourceMap:{text:generated.code,segments:extracted.sourceMap,mappings:generated.rawMappings},referenceNative:extracted.native,rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),...[...resolverManifests].filter(([file])=>![...modules.values()].some(r=>r.package?.manifest===file)).map(([file,hash])=>({file,hash,package:null}))],closureHash:digest(combined)};
+ if(proof.requiresCaptureInitialization&&[...modules.values()].some(r=>r.initializationReflective))throw Error('dependency closure: lexical eval invalidates extended construction');
+ if(!originalSetupSafe&&capturedInitialization&&(initializationExtension||proof.requiresCaptureInitialization))throw Error('dependency closure: unproved captured initialization for extended construction');
+ return {hasInitializationCaptures:capturedInitialization,loweringMap:lowered.loweringMap,compilerSourceMap:{text:generated.code,segments:extracted.sourceMap,mappings:generated.rawMappings},referenceNative:extracted.native,rawLinks:Object.fromEntries([...root.imports].map(([local,{child,target}])=>[local,{source:child.file,name:target}])),native:lowered.native,opaqueInputs:lowered.inputs,requiresFallback,dependencies:[...[...(typeProgram?.getSourceFiles()??[])].filter(sf=>!typeProgram.isSourceFileDefaultLibrary(sf)&&!modules.has(sf.fileName)&&fs.existsSync(sf.fileName)).map(sf=>({file:sf.fileName,hash:digest(fs.readFileSync(sf.fileName)),package:null})),...[...modules.values()].reverse().map(({file,hash,package:packageInfo})=>({file,hash,package:packageInfo})),...[...resolverManifests].filter(([file])=>![...modules.values()].some(r=>r.package?.manifest===file)).map(([file,hash])=>({file,hash,package:null}))],closureHash:digest(combined)};
 }
 
 // Fail closed if a dependency changes between discovery, compilation and bundling.

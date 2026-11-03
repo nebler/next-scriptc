@@ -1,0 +1,27 @@
+{
+  "implementationCommit": "61af963",
+  "next": {
+    "command": "TMPDIR=/tmp npm_config_cache=/tmp/b1c-test-npm-cache pnpm --dir packages/next-scriptc test",
+    "pass": 103,
+    "fail": 0,
+    "skipped": 0,
+    "log": "next-tests.log.gz"
+  },
+  "core": {
+    "command": "TMPDIR=/tmp npm_config_cache=/tmp/b1c-test-npm-cache pnpm --dir packages/scriptc-promote test",
+    "pass": 124,
+    "fail": 0,
+    "skipped": 2,
+    "log": "core-tests.log.gz"
+  },
+  "targeted": {
+    "command": "node --test packages/scriptc-promote/test/discovery-b1-audit.mjs",
+    "pass": 14,
+    "fail": 0,
+    "skipped": 0,
+    "log": "targeted-tests.log.gz"
+  },
+  "note": "Repeated both full package suites and targeted audit in the finishing worktree. Temporary fixtures and npm cache are under /tmp. Discovery source is unchanged from implementationCommit.",
+  "freeBytesBeforeFullSuiteRepeat": 83417546752,
+  "verificationCommit": "2244bee"
+}

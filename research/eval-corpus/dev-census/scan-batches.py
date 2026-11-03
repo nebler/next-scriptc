@@ -3,7 +3,7 @@
 import pathlib,json,gzip,subprocess,os,sys,signal,time,collections,importlib.util
 ROOT=pathlib.Path.cwd();BASE=pathlib.Path(os.environ.get('DEV_CENSUS_OUTPUT',ROOT/'research/eval-corpus/dev-census'));TMP=pathlib.Path(os.environ.get('DEV_CENSUS_TEMP','/tmp/nsc-dev-census'));slug=sys.argv[1]
 # Use EV3's explicitly labeled compatible hosts for packages without the Node TS API.
-if slug in ['n8n','unleash'] and ('dev-census-b1' in os.environ.get('DEV_CENSUS_OUTPUT','') or 'b1-verified' in os.environ.get('DEV_CENSUS_OUTPUT','')):
+if slug in ['n8n','unleash']:
  os.environ['DEV_CENSUS_ROOT_TYPESCRIPT']='1'
  if slug=='unleash':
   os.environ['DEV_CENSUS_TYPESCRIPT_HOST_DIRECTORY']='/tmp/b1-tools'
@@ -11,6 +11,9 @@ if slug in ['n8n','unleash'] and ('dev-census-b1' in os.environ.get('DEV_CENSUS_
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
 def existing(stem):
  p=BASE/(stem+'.json.gz');return p if p.exists() else BASE/(stem+'.json')
+policy=read(BASE/'scan-policy.json') if (BASE/'scan-policy.json').exists() else {}
+validationMode=policy.get('validationMode','paired')
+if validationMode not in ['paired','report-and-environment']:raise ValueError('unsupported census validation mode')
 p=TMP/slug;data=read(existing(slug));manifest=json.loads((ROOT/'research/eval-corpus/manifest.json').read_text());r=next(r for r in manifest['repositories'] if r['split']=='DEV' and r['repository']==data['repository']);assert data['sha']==r['sha'];assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=p,text=True).strip()==r['sha']
 # Load helper functions without starting its repository loop.
 args=sys.argv;sys.argv=['run.py','__helper_only__'];spec=importlib.util.spec_from_file_location('runner',ROOT/'research/eval-corpus/dev-census/run.py');runner=importlib.util.module_from_spec(spec);spec.loader.exec_module(runner);sys.argv=args
@@ -54,7 +57,9 @@ for root,files in groups.items():
   node+=['--import',str(ROOT/'research/eval-corpus/dev-census/file-scope.mjs')];target=TMP/(slug+'-batch-report.json')
   item={'scope':str(root.relative_to(p)),'scanRoot':str(root.relative_to(p)),'sourceDir':'.','selectionFiles':[str(f.relative_to(p)) for f in batch],'reportProcess':({'exit':'not-retried','command':[],'seconds':0,'output':'Earlier EV2 memory failures retained; this is an explicit EV1-only resource-limited retry'} if os.environ.get('DEV_CENSUS_EV1_ONLY') else run(node+[str(ROOT/'packages/scriptc-promote/src/cli.mjs'),'report',str(root),'--source-dir','.','--json',str(target)]))}
   if target.exists():item['report']=read(target);target.unlink()
-  item['ev1Process']=run(node+[str(ROOT/'research/eval-corpus/census.mjs'),str(root),'.'])
+  item['validationMode']=validationMode
+  validator=ROOT/('research/eval-corpus/census.mjs' if validationMode=='paired' else 'research/eval-corpus/dev-census/environment-only.mjs')
+  item['ev1Process']=run(node+[str(validator),str(root),'.'])
   try:item['ev1']=json.loads(item['ev1Process']['output']);item['ev1Process'].pop('output')
   except (ValueError,KeyError):pass
   if os.environ.get('DEV_CENSUS_EV1_ONLY'):item['ev1Only']=True

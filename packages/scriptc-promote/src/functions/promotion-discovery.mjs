@@ -1,6 +1,6 @@
 import {sourceDiagnostic} from './diagnostics.mjs';
 import {normalizeModuleFunctions} from './module-functions.mjs';
-import {inertDefaultExpression} from './module-initialization.mjs';
+import {inertDefaultExpression,creationOnlySetup,hasLexicalEval} from './module-initialization.mjs';
 import {lowerCheckedIndexes} from './checked-index.mjs';
 import {parserOptions} from './parser-options.mjs';
 import {lowerOpaqueHandles} from './opaque-handles.mjs';
@@ -58,12 +58,15 @@ export function promotionCandidates(text, source, report = console.log, resoluti
  const candidates=[];
  for(const {name,forced,offset} of names){try{
   const module=extractFunctions(text,source,name);if(!module)continue;
-  if(!module.imports.length&&ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&!babel.types().isDeclaration(n.declaration)&&!inertDefaultExpression(n.declaration)))throw Error(`dependency closure: ${source}: unproved module initialization default expression`);
-  const nativeBody=parse(module.native,source,resolution.options).program.body;
+  if(!module.imports.length&&ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&!babel.types().isDeclaration(n.declaration)&&!inertDefaultExpression(n.declaration,program.scope)))throw Error(`dependency closure: ${source}: unproved module initialization default expression`);
+  const originalNative=parse(module.native,source,resolution.options),nativeBody=originalNative.program.body,runtimeNames=new Set();
+  traverse(originalNative,{ReferencedIdentifier(p){if(!p.findParent(q=>q.isTSType())&&!p.parentPath.isExportSpecifier()&&!(p.parentPath.isTSEnumDeclaration()&&p.key==='id'))runtimeNames.add(p.node.name);}});
+  let capturesInitialization=module.imports.some(d=>runtimeNames.has(d.reference))||nativeBody.some(n=>n.type==='VariableDeclaration'&&n.declarations.some(d=>d.id.name!==name&&runtimeNames.has(d.id.name))||['ClassDeclaration','TSEnumDeclaration','TSModuleDeclaration'].includes(n.type)&&runtimeNames.has(n.id?.name));
+  const originalSetupSafe=creationOnlySetup(program.scope),originalReflective=hasLexicalEval(program.scope);
   const scalar=n=>n&&(['StringLiteral','NumericLiteral','BooleanLiteral','NullLiteral','ArrowFunctionExpression','FunctionExpression'].includes(n.type)||n.type==='UnaryExpression'&&['+','-'].includes(n.operator)&&n.argument.type==='NumericLiteral');
   const moduleProof=nativeBody.some(n=>['TSEnumDeclaration','ClassDeclaration','TSModuleDeclaration'].includes(n.type)||n.type==='VariableDeclaration'&&n.declarations.some(d=>!scalar(d.init)))||ast.program.body.some(n=>n.type==='ImportDeclaration'&&!n.specifiers.length&&n.importKind!=='type'&&n.source.value!=='server-only');
   if(module.imports.length||moduleProof) {
-   Object.assign(module,dependencyClosure(text,source,name,resolution));module.imports=[];
+   Object.assign(module,dependencyClosure(text,source,name,resolution));capturesInitialization=module.hasInitializationCaptures;module.imports=[];
   }
   module.referenceNative??=module.native;
   const normalized=normalizeModuleFunctions(module.native,source,resolution.options);
@@ -71,7 +74,10 @@ export function promotionCandidates(text, source, report = console.log, resoluti
   if(!module.opaqueInputs){const lowered=lowerOpaqueHandles(module.native,name,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));module.native=lowered.native;module.loweringMap=lowered.loweringMap;module.opaqueInputs=lowered.inputs;}
   const checked=lowerCheckedIndexes(module.native,resolution.ts??require(require.resolve('typescript',{paths:[path.dirname(source),process.cwd()]})));
   if(!checked.requiresFallback||constructionProof(checked.native,resolution.ts).eligible){module.native=checked.native;module.requiresFallback ||= checked.requiresFallback;}
-  let mutationProof;const localMutation=()=> (mutationProof??=constructionProof(module.native,resolution.ts)).eligible;
+  let mutationProof;
+  if(originalReflective||capturesInitialization&&!originalSetupSafe){mutationProof=constructionProof(module.native,resolution.ts);if(mutationProof.eligible&&mutationProof.requiresCaptureInitialization)throw Error(`dependency closure: ${source}: ${originalReflective?'lexical eval invalidates extended construction':'unproved captured initialization for extended construction'}`);}
+  if(ast.program.body.some(n=>n.type==='ExportDefaultDeclaration'&&n.declaration.type==='Identifier')){mutationProof=constructionProof(module.native,resolution.ts);if(!mutationProof.eligible)throw Error(`dependency closure: ${source}: unproved module initialization default expression (binding read requires a closed construction proof)`);}
+  const localMutation=()=> (mutationProof??=constructionProof(module.native,resolution.ts)).eligible;
   let work=false,decorated=false;
   const native=parse(module.native);
   traverse(native,{

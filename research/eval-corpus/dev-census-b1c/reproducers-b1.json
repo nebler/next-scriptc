@@ -1,0 +1,243 @@
+[
+  {
+    "name": "tdzArithmetic",
+    "text": "const early=rows([1]);const bias=2*3;export function rows(x:number[]){return x.map(v=>v+bias);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/tdzArithmetic.ts:1:45 - NSC1003: dependency closure: /tmp/b1c-fixtures/tdzArithmetic.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "tdzTable",
+    "text": "const early=rows([1]);const table=[1,2];export function rows(x:number[]){return x.map(v=>table.some(n=>n===v));}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/tdzTable.ts:1:48 - NSC1000: dependency closure: /tmp/b1c-fixtures/tdzTable.ts: constant graph unresolved member Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "tdzReverse",
+    "text": "const early=rows([1]);const bias=2;export function rows(x:number[]){const a=x.map(v=>v+bias);a.reverse();return a;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/tdzReverse.ts:1:43 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "earlyLocal",
+    "text": "const early=rows([1]);export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(v+1));return out;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/earlyLocal.ts:1:30 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "lexicalHelper",
+    "text": "function value(n:number){return n+1;}export function mutate(){eval(\"value=(n)=>n+9\");}export function rows(x:number[]){const out:number[]=[];x.forEach(v=>out.push(value(v)));return out;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate value: [next-scriptc] /tmp/b1c-fixtures/lexicalHelper.ts:1:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/lexicalHelper.ts:1:63 - NSC1001: function mutate: unsupported reference eval Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/lexicalHelper.ts:1:94 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "tdzDefault",
+    "text": "class Marker{static value=rows([1]);}export default Marker;const bias=2;export function rows(x:number[]){return x.map(v=>v+bias);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/tdzDefault.ts:1:80 - NSC1003: dependency closure: /tmp/b1c-fixtures/tdzDefault.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "functionMetadata",
+    "text": "function helper(){return 2;}export function mutate(){Object.defineProperty(helper,\"name\",{value:\"changed\"});}class Marker{}export default Marker;export function rows(x:string[]){return x.map(v=>v+helper.name);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate helper: [next-scriptc] /tmp/b1c-fixtures/functionMetadata.ts:1:1 - NSC1003: dependency closure: /tmp/b1c-fixtures/functionMetadata.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/functionMetadata.ts:1:36 - NSC1003: dependency closure: /tmp/b1c-fixtures/functionMetadata.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/functionMetadata.ts:1:153 - NSC1003: dependency closure: /tmp/b1c-fixtures/functionMetadata.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "callbackPush",
+    "text": "export function rows(x:{n:number}[]){const out:number[]=[];x.forEach(v=>out.push(v.n));return out;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/callbackPush.ts:1:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "freshIndex",
+    "text": "export function rows(x:number[]){const a=[0,0];for(let i=0;i<2;i++)a[i]=i+1;return x.map(v=>v+a[0]);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/freshIndex.ts:1:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "defaultEffect",
+    "text": "const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate init: [next-scriptc] /tmp/b1c-fixtures/defaultEffect.ts:1:19 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultEffect.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/defaultEffect.ts:1:84 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultEffect.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "statefulLiteral",
+    "text": "const table={r:/x/g};export function advance(){table.r.test(\"x\");}export function rows(x:string[]){return x.map(v=>table.r.test(v));}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate advance: [next-scriptc] /tmp/b1c-fixtures/statefulLiteral.ts:1:29 - NSC1000: dependency closure: /tmp/b1c-fixtures/statefulLiteral.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/statefulLiteral.ts:1:74 - NSC1000: dependency closure: /tmp/b1c-fixtures/statefulLiteral.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "caught",
+    "text": "class Fault extends Error{};export function rows(x:string[]){return x.map(v=>{try{if(v===\"bad\")throw new Fault(\"bad\");return v.length;}catch{return -1;}});}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/caught.ts:1:36 - NSC1000: dependency closure: /tmp/b1c-fixtures/caught.ts: throw fallback excludes local catch/finally Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "constructor",
+    "text": "const table={n:2};export function rows(x:number[]){const y=new Set(x);return x.map(v=>v+table.n+y.size);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/constructor.ts:1:26 - NSC1000: dependency closure: /tmp/b1c-fixtures/constructor.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "unsupportedCall",
+    "text": "const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n).concat(x);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/unsupportedCall.ts:1:26 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "uninitialized",
+    "text": "const table={n:2};export function rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/uninitialized.ts:1:26 - NSC1000: dependency closure: transitive effect proof: initialized bindings required at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "reverse",
+    "text": "export function rows(x:number[]){const a=x.map(v=>v+1);a.reverse();return a;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/reverse.ts:1:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "alias",
+    "text": "export function rows(x:{n:number}[]){const a=x;for(const v of a)v.n++;return a.map(v=>v.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/alias.ts:1:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "aliaspush",
+    "text": "export function rows(x:number[]){const a=x;a.push(9);return a.map(v=>v+1);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/aliaspush.ts:1:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "init",
+    "text": "const table={n:2};function change(){table.n=9;return 0;}const setup=change();const n=table.n;export function rows(x:number[]){return x.map(v=>v+n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate change: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:19 - NSC1004: dependency closure: /tmp/b1c-fixtures/init.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/init.ts:1:101 - NSC1003: dependency closure: /tmp/b1c-fixtures/init.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "arithmetic",
+    "text": "const n=2*3;export function rows(x:number[]){return x.map(v=>v+n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/arithmetic.ts:1:20 - NSC1003: dependency closure: /tmp/b1c-fixtures/arithmetic.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "exported",
+    "text": "export const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/exported.ts:1:33 - NSC1000: dependency closure: /tmp/b1c-fixtures/exported.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "unresolved",
+    "text": "const table=[1,2];export function rows(x:number[]){return x.map(v=>table.some(n=>n===v));}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/unresolved.ts:1:26 - NSC1000: dependency closure: /tmp/b1c-fixtures/unresolved.ts: constant graph unresolved member Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "dynamic",
+    "text": "const table={a:2,b:3};export function rows(x:(\"a\"|\"b\")[]){return x.map(v=>table[v]);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/dynamic.ts:1:30 - NSC1000: dependency closure: /tmp/b1c-fixtures/dynamic.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "literals",
+    "text": "const table={n:2*3};export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/literals.ts:1:28 - NSC1000: dependency closure: /tmp/b1c-fixtures/literals.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "escape",
+    "text": "const table={n:2};export function mutate(){table.n=4;}export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate mutate: [next-scriptc] /tmp/b1c-fixtures/escape.ts:1:26 - NSC1004: dependency closure: /tmp/b1c-fixtures/escape.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/escape.ts:1:62 - NSC1004: dependency closure: /tmp/b1c-fixtures/escape.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state."
+    ]
+  },
+  {
+    "name": "property",
+    "text": "const base={n:2};const table={...base,m:3};export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/property.ts:1:51 - NSC1000: dependency closure: /tmp/b1c-fixtures/property.ts: constant graph property Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "default",
+    "text": "function helper(){return 2;}export default helper;export function rows(x:number[]){return x.map(v=>v+1);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate helper: [next-scriptc] /tmp/b1c-fixtures/default.ts:1:1 - NSC1003: dependency closure: /tmp/b1c-fixtures/default.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/default.ts:1:58 - NSC1003: dependency closure: /tmp/b1c-fixtures/default.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "defaultclass",
+    "text": "class Helper{}export default Helper;export function rows(x:number[]){return x.map(v=>v+1);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/defaultclass.ts:1:44 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultclass.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "defaultcall",
+    "text": "export default Math.random();export function rows(x:number[]){return x.map(v=>v+1);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/defaultcall.ts:1:37 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultcall.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  }
+]
