@@ -2065,3 +2065,26 @@ remain untouched. No deploy, hosting call, Docker, push, PR, issue, public post,
 third-party source commit, or secret is part of this work.
 
 [Per-fix contract, per-repository results, histogram, candidate status, and limits](discovery-blockers-b1.md).
+
+## 71. Review note on B1 (2026-11-03)
+
+B1 removed two whole blocker classes (declaration graph 387 → 0, export policy
+423 → 0) and fixed a real soundness bug: the old resolver proved the `node`
+branch of a package while JS, run with custom `--conditions`, executed a
+different branch. Parser failures fell from 1,957 files to 15.
+
+But accepted functions fell from 441 to 251: 21 new, 211 previously accepted now
+refused. The 211 group into nonlocal mutation (64), module-initialization
+`VariableDeclaration` (61), argument mutation (20) and several constant-graph
+audits (~60: exported reference can escape, unresolved member, requires
+literals). B1 says these are conservative and "do not establish that every
+affected function mutates application inputs". Some are probably soundness fixes:
+an exported mutable table folded into native goes stale if another module
+mutates it. Others are probably over-conservative replacements of M1/M2 paths
+that were sound.
+
+Merged anyway: soundness first, and the lost functions were small helpers with
+no measured value. Queued B1c: classify the 211 by category with minimal
+reproducers, decide per category whether the old acceptance was unsound (keep
+the refusal, add a test) or over-conservative (restore it, add a test), then
+re-run the census. M1 measures the current accepted set in parallel.
