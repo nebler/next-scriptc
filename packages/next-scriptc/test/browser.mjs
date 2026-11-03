@@ -5,7 +5,7 @@ import path from 'node:path';
 import {withBrowserWasm} from 'scriptc-promote/browser/next';
 test('Next browser build emits public reactor and scopes both bundler rules to clients',async()=>{
  const root=path.resolve(import.meta.dirname,'../../../examples/shared-native');
- const config=await withBrowserWasm({basePath:'/demo'},{root,sourceDir:'lib',report:()=>{},functions:[{source:'lib/forecast.ts',name:'forecast',sizePath:[0,'trials'],buckets:[9,13,16],key:'58aa1dd1ed19f90bd2292725504961ce7f09588e68332e67372b1c2906db815f'}]});
+ const config=await withBrowserWasm({basePath:'/demo'},{root,sourceDir:'lib',report:()=>{},functions:[{source:'lib/forecast.ts',name:'forecast',sizePath:[0,'trials'],buckets:[13,16],key:'45cf321c6222ebad27c34266fa52826915007581fa34c88ea5c6fdd0c17280e8'}]});
  const rule=config.turbopack.rules['*'].at(-1);assert.equal(rule.condition.all[1],'browser');assert.ok(JSON.stringify(rule.loaders[0].options));
  const registry=await readFile(path.join(root,'.scriptc/browser/registry.mjs'),'utf8');assert.match(registry,/\/demo\/scriptc\/\w+\.wasm/);
  const url=registry.match(/\/demo\/scriptc\/\w+\.wasm/)[0];await access(path.join(root,'public',url.slice('/demo/'.length)));

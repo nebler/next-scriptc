@@ -34,30 +34,42 @@ of paths does not demonstrate separate bucket decisions.
 
 ## Local measurements
 
+**Against well-written JS, native is 1.36–1.68× faster on this host.**
+The default uses a Mulberry32 integer PRNG and reads input fields before the hot
+loop. At 100k paths, Node JS takes 9.926 ms and adapter native takes 5.901 ms.
+This is a modest local compute win, not the earlier 8× claim.
+
 Apple M4 Pro, arm64 macOS, Node 26.13.0, stock scriptc 0.4.6, 2026-11-03.
-Adapter artifact, 30 warmups per lane then 51 alternating wall-time samples;
-medians include native argument encoding and result decoding:
+Each lane has 30 warmups followed by 51 alternating-order wall samples.
+Native includes checked argument encoding and result decoding. Wasm includes
+JSON, UTF-8, allocation, copying, and cleanup. Every measured output matches JS.
 
-| Paths | Input bytes (argument tuple) | Node JS ms | Native ms | JS/native |
-| --- | ---: | ---: | ---: | ---: |
-| 1,000 | 71 | 1.555 | 0.221 | 7.02× |
-| 10,000 | 72 | 15.927 | 1.923 | 8.28× |
-| 100,000 | 73 | 159.421 | 18.712 | 8.52× |
+| Paths | Node JS ms | Native ms | Node wasm ms | JS/native |
+| ---: | ---: | ---: | ---: | ---: |
+| 1,000 | 0.101 | 0.074 | 0.076 | 1.36× |
+| 10,000 | 1.006 | 0.606 | 0.704 | 1.66× |
+| 100,000 | 9.926 | 5.901 | 6.994 | 1.68× |
 
-> **Correction (2026-11-03): this speedup is mostly a Node slow path.** The
-> Park–Miller step `(state * 16807) % 2147483647` is a floating-point modulo,
-> which costs about 37 ns per operation in Node 24 and 26 on arm64 (3.6M
-> operations in 134 ms). Chromium runs the same function's JS about 4× faster
-> (33.6 ms at 100k paths), and there wasm beats JS by only 1.64×. An
-> integer-only PRNG (`Math.imul`-based) makes Node JS about 5× faster. Read the
-> table as "native avoids a V8 performance cliff", not as "native is 8× faster
-> than well-written JS". See [hill-log entry 67](../../research/hill-log.md).
+Real Chromium 152 runs integer JS/wasm in 0.1/0.1, 1.0/0.7, and 9.9/7.0 ms.
+The 1k browser result is clock-limited and does not establish a win.
+The independent `report --measure` thread-CPU medians are 0.100/0.074,
+1.001/0.596, and 9.964/5.899 ms (JS/native); all three predict native.
+Single-host samples have no confidence intervals. HTTP, cold start, compilation,
+download, dispatcher training, and runtime shadow overhead are outside these tables.
 
-The independent `report --measure` thread-CPU medians were 1.578/0.213,
-15.916/1.929, and 176.002/20.709 ms (JS/native); all three predict native.
-These are single-host runs under concurrent tests, without confidence intervals.
-The browser's displayed timing is a separate browser measurement. HTTP latency,
-cold start, compilation, and training overhead are outside the table.
+### Separate observation: Node float-modulo cliff
+
+The old Park–Miller `(state * 16807) % 2147483647` version measures Node JS/native
+at 1.323/0.204, 13.860/1.883, and 139.804/18.685 ms for the same sizes.
+Its Node wasm times are 0.208, 2.054, and 20.499 ms. Chromium JS is 0.3, 3.3,
+and 33.6 ms. The apparent 6.5–7.5× Node native speedup mostly reflects that
+floating-modulo slow path. Replacing the PRNG and hoisting input reads makes
+Node JS about 14× faster at 100k, while native also improves about 3.2×.
+The two PRNGs produce different seeded paths; equality holds across lanes within
+each variant, not between variants. The model and rounding rules stay the same.
+
+See [D1b results and reproduction](../../research/shared-native-remeasure.md)
+for raw samples, deopt checks, browser results, microbench controls, and limitations.
 
 ## Reproduce checks and evidence
 
@@ -83,15 +95,14 @@ then use `scriptc-promote report . --runtime /tmp/runway-PID.json` from this app
 
 This demonstrates source sharing, automatic discovery, native server execution,
 exact sampled verification, and a native win for this compute-dense model.
-A Park–Miller generator keeps integer products exactly representable; currency
+The Mulberry32 generator mixes unsigned 32-bit state with `Math.imul` and shifts; currency
 rounds down to whole dollars monthly. The model assumes independent revenue
 shocks, growing costs, and no borrowing. It is a demonstration model.
 
 It does not demonstrate universal equivalence, cryptographic
 randomness, production financial forecasting, real-app automatic wins, fleet
-observability, serverless savings, or superiority over Rust/SQL. The first integer
-PRNG variant lost to V8; the dispatcher correctly kept JS. Compute density alone
-is necessary here but does not guarantee a win for arbitrary numeric code.
+observability, serverless savings, or superiority over Rust/SQL. Earlier integer variants lost to V8. The current measured variant wins locally;
+compute density does not guarantee a win for arbitrary numeric code.
 No hand-written C/Rust comparison was added.
 
 Automatic discovery is deliberate: the flagship should show the default mode.
@@ -105,10 +116,10 @@ and limitations.
 ## Browser
 
 The opt-in Next wrapper compiles the same discovered forecast closure to a
-324,844-byte reactor (123,244 bytes gzip). Run twice: the first call uses JS
-while wasm loads, and later calls in measured buckets use wasm. Browser checks,
+roughly 324 KB reactor (raw bytes vary with build paths). At 10k or 100k paths, run twice: the first call uses JS
+while wasm loads, and later calls in measured buckets use wasm. The 1k bucket stays in JS. Browser checks,
 mismatches, fallbacks and the serving lane appear separately from server counters.
-Only buckets 9, 13 and 16 are enabled by the pinned source calibration key.
+Only buckets 13 and 16 (10k and 100k measured sizes) are enabled by the pinned source calibration key.
 Changing the function requires fresh calibration. Generated `public/scriptc` assets
 are ignored. See [browser setup](../../docs/browser.md) and
 [W1 measurements](../../research/browser-wasm.md).

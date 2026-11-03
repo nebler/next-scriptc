@@ -1,0 +1,836 @@
+{
+  "version": 1,
+  "root": "/Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native",
+  "sourceDir": "/Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native",
+  "framework": "next",
+  "fileErrors": [],
+  "counts": {
+    "files": 8,
+    "totalTopLevelFunctions": 12,
+    "exportedFunctions": 5,
+    "considered": 9,
+    "diagnosed": 8,
+    "accepted": 1,
+    "explicit": 0,
+    "silentExclusions": 3
+  },
+  "files": [
+    {
+      "file": "app/api/forecast/route.ts",
+      "functions": [
+        {
+          "id": "app/api/forecast/route.ts#POST",
+          "file": "app/api/forecast/route.ts",
+          "name": "POST",
+          "line": 5,
+          "exported": true,
+          "async": true,
+          "explicit": false,
+          "status": "excluded",
+          "diagnostics": [],
+          "calls": [
+            "lib/forecast.ts#forecast",
+            "lib/panel.mjs#panelFromSnapshot"
+          ],
+          "exportNames": [
+            "POST"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "app/layout.tsx",
+      "functions": [
+        {
+          "id": "app/layout.tsx#Layout",
+          "file": "app/layout.tsx",
+          "name": "Layout",
+          "line": 3,
+          "exported": true,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate Layout: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/app/layout.tsx:3:25 - NSC1000: function Layout: React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          ],
+          "calls": [],
+          "exportNames": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "app/page.tsx",
+      "functions": [
+        {
+          "id": "app/page.tsx#Page",
+          "file": "app/page.tsx",
+          "name": "Page",
+          "line": 9,
+          "exported": true,
+          "async": false,
+          "explicit": false,
+          "status": "excluded",
+          "diagnostics": [],
+          "calls": [
+            "lib/forecast.ts#forecast"
+          ],
+          "exportNames": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "bench/run.mjs",
+      "functions": [
+        {
+          "id": "bench/run.mjs#native",
+          "file": "bench/run.mjs",
+          "name": "native",
+          "line": 21,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate native: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function native: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          ],
+          "calls": []
+        },
+        {
+          "id": "bench/run.mjs#lanes",
+          "file": "bench/run.mjs",
+          "name": "lanes",
+          "line": 23,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "excluded",
+          "diagnostics": [],
+          "calls": []
+        },
+        {
+          "id": "bench/run.mjs#equal",
+          "file": "bench/run.mjs",
+          "name": "equal",
+          "line": 24,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate equal: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function equal: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          ],
+          "calls": []
+        },
+        {
+          "id": "bench/run.mjs#inputFor",
+          "file": "bench/run.mjs",
+          "name": "inputFor",
+          "line": 25,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate inputFor: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:25:7 - NSC1003: function inputFor: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+          ],
+          "calls": []
+        },
+        {
+          "id": "bench/run.mjs#median",
+          "file": "bench/run.mjs",
+          "name": "median",
+          "line": 34,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate median: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:34:7 - NSC1003: function median: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+          ],
+          "calls": []
+        }
+      ]
+    },
+    {
+      "file": "lib/forecast.ts",
+      "functions": [
+        {
+          "id": "lib/forecast.ts#nextState",
+          "file": "lib/forecast.ts",
+          "name": "nextState",
+          "line": 15,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate nextState: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:15:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          ],
+          "calls": []
+        },
+        {
+          "id": "lib/forecast.ts#randomBits",
+          "file": "lib/forecast.ts",
+          "name": "randomBits",
+          "line": 18,
+          "exported": false,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate randomBits: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:18:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          ],
+          "calls": []
+        },
+        {
+          "id": "lib/forecast.ts#forecast",
+          "file": "lib/forecast.ts",
+          "name": "forecast",
+          "line": 25,
+          "exported": true,
+          "async": false,
+          "explicit": false,
+          "status": "accepted",
+          "diagnostics": [],
+          "calls": [
+            "lib/forecast.ts#nextState",
+            "lib/forecast.ts#randomBits"
+          ],
+          "exportNames": [
+            "forecast"
+          ],
+          "boundary": {
+            "params": [
+              "json"
+            ],
+            "result": "json"
+          },
+          "promotionId": "3a49c2ea48519eb8ae19"
+        }
+      ]
+    },
+    {
+      "file": "lib/panel.mjs",
+      "functions": [
+        {
+          "id": "lib/panel.mjs#panelFromSnapshot",
+          "file": "lib/panel.mjs",
+          "name": "panelFromSnapshot",
+          "line": 2,
+          "exported": true,
+          "async": false,
+          "explicit": false,
+          "status": "rejected",
+          "diagnostics": [
+            "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs:2:86 - NSC1000: /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs: function panelFromSnapshot: call-site specialization: specialized parameters must be required identifiers Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          ],
+          "calls": [],
+          "exportNames": [
+            "panelFromSnapshot"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "next-env.d.ts",
+      "functions": []
+    },
+    {
+      "file": "next.config.mjs",
+      "functions": []
+    }
+  ],
+  "routes": [
+    {
+      "file": "app/api/forecast/route.ts",
+      "entry": "app/api/forecast/route.ts#POST",
+      "kind": "endpoint",
+      "reachable": [
+        "app/api/forecast/route.ts#POST",
+        "lib/forecast.ts#forecast",
+        "lib/forecast.ts#nextState",
+        "lib/forecast.ts#randomBits",
+        "lib/panel.mjs#panelFromSnapshot"
+      ]
+    },
+    {
+      "file": "app/page.tsx",
+      "entry": "app/page.tsx#Page",
+      "kind": "page",
+      "reachable": [
+        "app/page.tsx#Page",
+        "lib/forecast.ts#forecast",
+        "lib/forecast.ts#nextState",
+        "lib/forecast.ts#randomBits"
+      ]
+    }
+  ],
+  "blockers": [
+    {
+      "diagnostic": "unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+      "count": 2,
+      "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+    },
+    {
+      "diagnostic": "unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "count": 2,
+      "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+    },
+    {
+      "diagnostic": "React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+      "count": 1,
+      "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+    },
+    {
+      "diagnostic": "[next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:15:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+      "count": 1,
+      "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+    },
+    {
+      "diagnostic": "[next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:18:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+      "count": 1,
+      "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+    },
+    {
+      "diagnostic": "call-site specialization: specialized parameters must be required identifiers Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+      "count": 1,
+      "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+    }
+  ],
+  "nearestMisses": [
+    {
+      "id": "app/layout.tsx#Layout",
+      "diagnostic": "[next-scriptc] not a candidate Layout: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/app/layout.tsx:3:25 - NSC1000: function Layout: React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    },
+    {
+      "id": "bench/run.mjs#native",
+      "diagnostic": "[next-scriptc] not a candidate native: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function native: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+    },
+    {
+      "id": "bench/run.mjs#equal",
+      "diagnostic": "[next-scriptc] not a candidate equal: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function equal: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+    },
+    {
+      "id": "bench/run.mjs#inputFor",
+      "diagnostic": "[next-scriptc] not a candidate inputFor: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:25:7 - NSC1003: function inputFor: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+    },
+    {
+      "id": "bench/run.mjs#median",
+      "diagnostic": "[next-scriptc] not a candidate median: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:34:7 - NSC1003: function median: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+    },
+    {
+      "id": "lib/forecast.ts#nextState",
+      "diagnostic": "[next-scriptc] not a candidate nextState: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:15:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    },
+    {
+      "id": "lib/forecast.ts#randomBits",
+      "diagnostic": "[next-scriptc] not a candidate randomBits: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:18:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    },
+    {
+      "id": "lib/panel.mjs#panelFromSnapshot",
+      "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs:2:86 - NSC1000: /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs: function panelFromSnapshot: call-site specialization: specialized parameters must be required identifiers Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    }
+  ],
+  "diagnostics": [
+    {
+      "file": "app/layout.tsx",
+      "name": "Layout",
+      "message": "[next-scriptc] not a candidate Layout: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/app/layout.tsx:3:25 - NSC1000: function Layout: React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    },
+    {
+      "file": "bench/run.mjs",
+      "name": "native",
+      "message": "[next-scriptc] not a candidate native: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function native: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+    },
+    {
+      "file": "bench/run.mjs",
+      "name": "equal",
+      "message": "[next-scriptc] not a candidate equal: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:13:24 - NSC1001: function equal: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+    },
+    {
+      "file": "bench/run.mjs",
+      "name": "inputFor",
+      "message": "[next-scriptc] not a candidate inputFor: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:25:7 - NSC1003: function inputFor: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+    },
+    {
+      "file": "bench/run.mjs",
+      "name": "median",
+      "message": "[next-scriptc] not a candidate median: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/bench/run.mjs:34:7 - NSC1003: function median: unsupported module initialization ExpressionStatement; move setup into a declaration initializer Hint: Move module setup into a declaration initializer or keep this module in JS."
+    },
+    {
+      "file": "lib/forecast.ts",
+      "name": "nextState",
+      "message": "[next-scriptc] not a candidate nextState: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:15:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    },
+    {
+      "file": "lib/forecast.ts",
+      "name": "randomBits",
+      "message": "[next-scriptc] not a candidate randomBits: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/forecast.ts:18:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    },
+    {
+      "file": "lib/panel.mjs",
+      "name": "panelFromSnapshot",
+      "message": "[next-scriptc] not a candidate: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs:2:86 - NSC1000: /Users/noah/.t3/worktrees/next-scriptc/t3-b4952561/examples/shared-native/lib/panel.mjs: function panelFromSnapshot: call-site specialization: specialized parameters must be required identifiers Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    }
+  ],
+  "limitations": [
+    "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+    "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+    "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+    "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+    "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+  ],
+  "measurements": [
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 0,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 99124.99999998658,
+        "p10": 99208.00000000441,
+        "median": 99708.99999999006,
+        "p90": 106832.99999999463,
+        "max": 107124.99999999636
+      },
+      "native": {
+        "n": 24,
+        "min": 70707.99999999622,
+        "p10": 70750.00000006071,
+        "median": 73915.00000005635,
+        "p90": 76874.00000000367,
+        "max": 78624.00000001912
+      },
+      "inputJsonBytes": 71,
+      "nsPerInputJsonByte": {
+        "js": 1404.3521126759163,
+        "native": 1041.0563380289625
+      },
+      "computeIntensity": 1404.3521126759163,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.2689697067567346,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 80707.9999999587,
+        "computeWallNs": 58999.99290704727
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          100667.0000000156,
+          75165.99999999585
+        ],
+        [
+          100375.00000001387,
+          75915.9999999497
+        ],
+        [
+          99625.00000000319,
+          74831.99999995805
+        ],
+        [
+          100041.00000000448,
+          72041.99999998196
+        ],
+        [
+          99457.99999999849,
+          77082.99999998757
+        ],
+        [
+          100792.00000001265,
+          76874.00000000367
+        ],
+        [
+          99415.99999999085,
+          70750.00000006071
+        ],
+        [
+          100208.00000000918,
+          73790.99999999994
+        ],
+        [
+          99750.00000000023,
+          71207.9999999844
+        ],
+        [
+          107124.99999999636,
+          76206.00000001332
+        ],
+        [
+          106832.99999999463,
+          78624.00000001912
+        ],
+        [
+          106874.99999997385,
+          76416.00000002314
+        ],
+        [
+          104624.99999999863,
+          73958.00000000463
+        ],
+        [
+          99791.99999997945,
+          71458.0000000069
+        ],
+        [
+          99292.0000000197,
+          71833.00000002646
+        ],
+        [
+          99667.00000001083,
+          71792.99999998535
+        ],
+        [
+          99124.99999998658,
+          73915.00000005635
+        ],
+        [
+          99708.99999999006,
+          74999.00000001957
+        ],
+        [
+          99291.99999999127,
+          72375.00000002228
+        ],
+        [
+          99583.00000002395,
+          76040.00000003452
+        ],
+        [
+          99208.00000000441,
+          70707.99999999622
+        ],
+        [
+          99540.9999999879,
+          71541.99999996535
+        ],
+        [
+          99166.99999999424,
+          70710.00000001959
+        ],
+        [
+          99625.00000000319,
+          71958.0000000235
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    },
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 1,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 998457.9999999994,
+        "p10": 998625.0000000041,
+        "median": 1001040.9999999865,
+        "p90": 1008875.0000000175,
+        "max": 1022084.0000000066
+      },
+      "native": {
+        "n": 24,
+        "min": 593751.0000000258,
+        "p10": 593833.0000000178,
+        "median": 596166.9999999799,
+        "p90": 599790.999999982,
+        "max": 611582.999999996
+      },
+      "inputJsonBytes": 72,
+      "nsPerInputJsonByte": {
+        "js": 13903.347222222035,
+        "native": 8280.097222221943
+      },
+      "computeIntensity": 13903.347222222035,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.03635682900990789,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 603958.0000001478,
+        "computeWallNs": 582000.0022649765
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          1008875.0000000175,
+          611582.999999996
+        ],
+        [
+          999082.9999999846,
+          595251.0000000473
+        ],
+        [
+          1001958.0000000019,
+          597585.0000000378
+        ],
+        [
+          999875.0000000029,
+          596791.0000000244
+        ],
+        [
+          1001040.9999999865,
+          596042.0000000113
+        ],
+        [
+          1022084.0000000066,
+          599956.9999999892
+        ],
+        [
+          1006917.0000000156,
+          598582.9999999623
+        ],
+        [
+          999915.9999999847,
+          596541.9999999426
+        ],
+        [
+          1002416.9999999799,
+          596166.9999999799
+        ],
+        [
+          1000375.0000000196,
+          593833.0000000178
+        ],
+        [
+          1003915.9999999754,
+          599790.999999982
+        ],
+        [
+          998625.0000000041,
+          593876.0000000229
+        ],
+        [
+          1000709.0000000005,
+          598875.9999999616
+        ],
+        [
+          999625.0000000088,
+          595084.0000000142
+        ],
+        [
+          998457.9999999994,
+          594915.9999999552
+        ],
+        [
+          999416.999999994,
+          598916.0000000027
+        ],
+        [
+          1000791.9999999899,
+          595126.0000000502
+        ],
+        [
+          1004666.9999999836,
+          593833.0000000462
+        ],
+        [
+          1001707.9999999794,
+          593751.0000000258
+        ],
+        [
+          999166.0000000024,
+          593833.0000000178
+        ],
+        [
+          998458.9999999969,
+          599459.0000000244
+        ],
+        [
+          1018083.0000000185,
+          594833.0000000226
+        ],
+        [
+          1008791.9999999997,
+          596039.9999999879
+        ],
+        [
+          1002000.0000000095,
+          598749.9999999955
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    },
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 2,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 9900250.000000028,
+        "p10": 9911875.00000001,
+        "median": 9964416.000000028,
+        "p90": 10275208.00000002,
+        "max": 10599958.000000015
+      },
+      "native": {
+        "n": 24,
+        "min": 5853791.999999998,
+        "p10": 5860791.999999947,
+        "median": 5898585.000000025,
+        "p90": 5934831.999999915,
+        "max": 6022540.999999933
+      },
+      "inputJsonBytes": 73,
+      "nsPerInputJsonByte": {
+        "js": 136498.8493150689,
+        "native": 80802.53424657568
+      },
+      "computeIntensity": 136498.8493150689,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.005188520424711185,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 5870459.00000021,
+        "computeWallNs": 5840000.003576279
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          9998833.999999989,
+          5934831.999999915
+        ],
+        [
+          10101583.000000006,
+          5910417.000000052
+        ],
+        [
+          10147749.999999974,
+          5904250.999999931
+        ],
+        [
+          10032084.000000054,
+          5883458.000000246
+        ],
+        [
+          9957457.999999974,
+          5911916.000000133
+        ],
+        [
+          10599958.000000015,
+          5911415.999999917
+        ],
+        [
+          10587125.000000015,
+          5873875.000000112
+        ],
+        [
+          10239208.000000076,
+          5868083.00000007
+        ],
+        [
+          10275208.00000002,
+          5898585.000000025
+        ],
+        [
+          9934375.000000045,
+          5860791.999999947
+        ],
+        [
+          9964416.000000028,
+          5947043.000000121
+        ],
+        [
+          10022166.999999968,
+          6022540.999999933
+        ],
+        [
+          10042833.99999997,
+          5897125.999999957
+        ],
+        [
+          9911875.00000001,
+          5862791.000000016
+        ],
+        [
+          9915375.00000004,
+          5919540.999999868
+        ],
+        [
+          9912417.000000006,
+          5860043.000000132
+        ],
+        [
+          9932667.000000037,
+          5903415.999999993
+        ],
+        [
+          9915124.999999989,
+          5879083.000000037
+        ],
+        [
+          9908250.000000067,
+          5907832.999999869
+        ],
+        [
+          9919125.000000007,
+          5895875.000000047
+        ],
+        [
+          9976499.999999987,
+          5872124.999999982
+        ],
+        [
+          9945708.999999965,
+          5853791.999999998
+        ],
+        [
+          9926958.000000013,
+          5904541.999999993
+        ],
+        [
+          9900250.000000028,
+          5868791.999999985
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    }
+  ]
+}

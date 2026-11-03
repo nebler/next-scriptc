@@ -38,7 +38,8 @@ async function serve(root,framework,mode){
 for(const framework of ['astro','react-router'])test(`${framework}: production Node HTTP parity, client isolation and verified shadow`,{timeout:360000},async()=>{
  const root=await mkdtemp(path.join(tmpdir(),`scriptc-${framework}-`));
  try{
-  await cp(path.join(repo,'examples',framework+'-demo'),root,{recursive:true});
+  // Install a fresh fixture; copied pnpm links can trigger dependency prepare scripts.
+  await cp(path.join(repo,'examples',framework+'-demo'),root,{recursive:true,filter:source=>path.basename(source)!=='node_modules'});
   const manifest=JSON.parse(await readFile(path.join(root,'package.json')));manifest.dependencies['scriptc-promote']='file:'+path.join(repo,'packages/scriptc-promote');await writeFile(path.join(root,'package.json'),JSON.stringify(manifest));
   await run('npm',['install','--ignore-scripts','--legacy-peer-deps','--no-audit','--no-fund'],root);
   await writeFile(path.join(root,'inspect.mjs'),`process.on('message',()=>process.send([...globalThis[Symbol.for('scriptc-promote.dispatchers')]??[]].map(([,d])=>d.snapshot())));process.once('SIGTERM',()=>process.exit(0));`);

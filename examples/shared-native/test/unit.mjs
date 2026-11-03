@@ -26,3 +26,24 @@ test('panel is an aggregate allowlist, handles missing dispatchers', () => {
     buckets: [{bucket: 8, lane: 'native', reason: 'faster', ratio: .4, samples: 24}],
   });
 });
+
+test('Mulberry32 forecast has pinned outputs across unsigned seed boundaries', () => {
+  const cases = [
+    [1000, 1, 499, 181001523],
+    [1000, 42, 524, 195016098],
+    [1000, 2147483648, 491, 168259231],
+    [1000, 4294967295, 540, 241022735],
+    [10000, 42, 5168, 1924625910],
+    [100000, 42, 51926, 19493054141],
+  ];
+  for (const [trials, seed, solvent, totalEndingCash] of cases) {
+    assert.deepEqual(forecast({trials, seed, cash: 250000, revenue: 40000, costs: 50000}),
+      {solvent, trials, totalEndingCash});
+  }
+  const base = {trials: 100, seed: 0, cash: 250000, revenue: 40000, costs: 50000};
+  assert.deepEqual(forecast(base), forecast({...base, seed: 4294967296}));
+  assert.deepEqual(forecast({...base, seed: -1}), forecast({...base, seed: 4294967295}));
+  assert.equal(forecast({...base, trials: 0}).trials, 1);
+  assert.equal(forecast({...base, trials: 2.9}).trials, 2);
+  assert.equal(forecast({...base, trials: 100001}).trials, 100000);
+});
