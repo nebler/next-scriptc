@@ -122,7 +122,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | W1 | Browser wasm for shared promoted functions | 3 | client build/runtime | done: opt-in Next/Vite assets, cached async loader, calibrated buckets and sampled verification; local D1 Chromium 1.5–1.64× ([evidence](research/browser-wasm.md)) |
 | D1b | [Integer-PRNG remeasurement](research/shared-native-remeasure.md): native 1.36–1.68× optimized Node JS; float-modulo cliff labeled separately; default demo corrected | 6 | examples | done |
 | R1 | Where SSR CPU goes: Next + React Router, synthetic page + real apps, template-concatenation ceiling | 6 | research | done: Fizz 56.6% of Router synthetic, 24.0% of Epic, ~11% in Next (Flight 35–46%); byte-identical concat ceiling −62.5% render CPU; Next synthetic 15–17 CPU ms/req vs Router 2.7 ([evidence](research/ssr-cpu-breakdown-react.md)) |
-| R2 | Same harness for Astro, SvelteKit, Nuxt | 6 | research | running |
+| R2 | Same harness for Astro, SvelteKit, Nuxt | 6 | research | done: Svelte render 0.579 ms (57% below React, within 16% of concat); Vue 53% above React; HTML share Astro 52.9%, SvelteKit 41.8%, Nuxt 22.4%; real apps 5.9–10.2% ([evidence](research/ssr-cpu-breakdown-frameworks.md)) |
 | HO | Held-out milestone eval | 6 | eval | deferred: nothing in DEV changes the answer yet (entry 73) |
 
 Standing rules: no public posts, upstream issues/PRs or production deploys without
