@@ -111,7 +111,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | P2 | Visibility: runtime report + CI report | 3 | report | done: aggregate runtime API + opt-in file capture, runtime report merge, CI baseline/failure rules, capped build names; [evidence](research/runtime-visibility.md) |
 | L2 | Classes/methods, Map/Set/Date, `in`, computed keys | 2 | discovery | after A1 |
 | P3 | Profile-guided promotion | 3 | report/build | after P2 |
-| P4 | Zero-setup install, naming, docs | 3 | packaging | after P1 |
+| P4 | Zero-setup install, naming, docs | 3 | packaging | diagnostics/docs done: doctor + simulated failures; nine packed local setups; helper approval repair documented; naming options without renames. Host toolchain and script approval remain required ([evidence](research/install-and-docs.md)) |
 | — | Editor integration, browser wasm, equivalence proofs, whole-library native | 3/4 | — | later |
 | HO | Held-out milestone eval | 6 | eval | after B1+A1 land and a boundary or compiler lever moves |
 

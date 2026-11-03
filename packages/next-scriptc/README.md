@@ -1,5 +1,9 @@
 # next-scriptc
 
+Start with the [tested adapter quick starts](../../docs/quick-start.md) and
+[how promotion works](../../docs/how-it-works.md). Diagnose installs with
+`pnpm exec next-scriptc doctor .` (`--json` for structured output).
+
 An experimental Next.js adapter that compiles App Router `route.native.ts`
 handlers and `"use native"` functions to native executables with scriptc, without
 a Next.js fork. Development runs the original TypeScript on Node.

@@ -1768,3 +1768,36 @@ Construction preflights concern asserted JSON string parses inside functions. De
 At 600/6k/60k records, explicit guarded decode falls 0.354/4.437/47.369 to 0.206/2.551/27.296 ms. Guarded 60k total wall falls 75.874 to 57.864 ms, versus JS 21.870 ms in the after window. All 18 E1 and guarded dispatcher buckets settle on JS, with zero mismatches or fallbacks. Sequential host medians have no confidence intervals, and unrelated agents remain active. E1 source is unchanged across modes; its variation is not a speedup claim.
 
 PM2's published stages sum to 195.621 ms at 60k. The default-path estimate remains unchanged because this fix removes no default preflight. A conditional all-decode substitution gives 184.195 ms, not an application or hosted result. No Papermark source or run is used. Next passes 102 tests; promotion passes 64 with two existing skips; five targeted tests and T1 differential checks pass. Main, discovery files, root README, compiler sources and external services are untouched. No Docker, deployment, push, PR, issue, post or secret. [IR evidence, raw samples, estimates and limits](boundary-decode-path.md).
+
+## 60. P4 install doctor and tested adapter guides (2026-11-03)
+
+Both CLIs now provide read-only doctor checks with JSON output, failure status,
+and repair instructions for Node, scriptc/version, completed postinstall and helper
+execute access, toolchain, framework/config wiring, TypeScript, and cache space.
+Simulated failures cover missing dependencies/tools, permissions, invalid cache,
+old Node, build artifacts, and Next CLI delegation. Config inspection is textual;
+approval is inferred from installed artifacts, not a package-manager policy API.
+
+Fresh stock installs confirm the helper blocker. Platform tarballs ship the
+checker/comptime helpers as 0644, and scriptc postinstall restores execution modes.
+pnpm 11 leaves the placeholder when builds are unapproved; plain rebuild exits 0
+without repairing it. `pnpm approve-builds scriptc` plus `pnpm rebuild scriptc`
+works. npm succeeds in this environment; Bun trust and Yarn node-modules with
+scripts enabled also repair it. No automatic chmod crosses the package boundary:
+helpers belong to separate @scriptc packages. Infrastructure errors point to doctor.
+
+New docs cover Next, Vite SSR, SvelteKit, Nitro/Nuxt, Astro, React Router, TanStack,
+and local Cloudflare wasm generation, plus shared setup and how it works.
+Nine independent packed consumers build and return the expected checksum, or
+produce the local wasm artifact. Fresh checks found and fixed Nitro transitive
+runtime externalization and Turbopack's dynamic addon require rewriting. Astro's
+repeat check isolates the crash directory after a shared preexisting lease.
+No hosted Worker, OpenNext packaging, official scaffolder, or speedup is claimed.
+Real-app automatic wins remain unproven. Naming options change no package names.
+
+Node 24 suites pass: Next 102; core 68 with two existing skips. All temporary apps
+are removed after checks. No root README, discovery file, main checkout, protected
+compiler tree, external service, Docker, deploy, publication, push, PR, issue,
+public post, or secret is involved. P4's diagnostics/docs slice is complete;
+installation still needs toolchain and trusted build scripts.
+[Commands, findings, setup results, and remaining friction](install-and-docs.md).
