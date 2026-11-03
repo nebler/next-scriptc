@@ -1,0 +1,176 @@
+$ node --test --test-concurrency=1 test/*.mjs
+(node:39736) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ guarded entry parses once per input and retains checked parameter conversion (1.57825ms)
+✔ guard checks raw parsed value, with unchanged rejection and short circuit semantics (66.747958ms)
+✔ string parse sites reuse preflight with the same checked cast and original string (20.214709ms)
+[scriptc-promote] Promoted sum at unknown:1
+✔ stock native guarded string decode agrees with JS on T1 edges (3253.099959ms)
+✔ repeated and conditional parse sites keep their allocation semantics (5.219125ms)
+✔ shared synthesis covers unions, tuples, optional fields and records (768.474875ms)
+✔ edge corpus and seeded generation (0.908167ms)
+✔ shrinks array and number failures within bounds (0.72625ms)
+✔ fake native mismatch minimizes, demotes automatic and rejects forced (1.302625ms)
+✔ dispatcher exclusions are counted, never sent to native (0.384667ms)
+✔ numeric JSON contract and native fallback gating (0.311959ms)
+✔ shared build removes divergent native lane, rebuilds IDs, and fails explicit (9064.37ms)
+✔ specialized type drives generation while reference retains original closure (193.859791ms)
+✔ opaque schema provides bounded representatives for unknown handles (219.138541ms)
+✔ Next CLI delegates fuzz with deterministic settings (4558.707667ms)
+(node:40783) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ imported interfaces and aliases link transitively with collision renaming (6424.533208ms)
+✔ literal enums follow named reexports and reject computed members and writes (2675.550917ms)
+✔ private literal graphs admit scalar lookups and reject mutation and escape (772.445084ms)
+[scriptc-promote] Promoted rows at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/closure-features-L0fUfn/entry.ts:1
+✔ throw-only classes compile with mandatory fallback and preserve original JS errors (4471.169042ms)
+✔ writes, shadowing, schema calls and noncanonical array keys fail closed (916.11375ms)
+✔ checker resolves real Zod infer and type queries without copying schema values (4906.080542ms)
+(node:41423) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unreachable calls, allocation, classes and clocks disappear in source and dependency (4329.638292ms)
+✔ reachable equivalents retain initialization and effect rejection (9.052459ms)
+✔ bare statements reject in source and every visited dependency (7.723417ms)
+✔ diamond requests accumulate exports and transitively renamed helpers once (753.995875ms)
+✔ reachable import cycles reject, unreachable import cycles are dropped (559.554834ms)
+✔ shadow rejects divergence from an excluded initializer that patches a prototype (781.351541ms)
+✔ automatic extraction prunes sibling declarators before traversing references (843.870667ms)
+✔ imported bindings exported under aliases link to the final defining module (651.811375ms)
+✔ the server-only marker is admitted; other side-effect imports still reject (791.932333ms)
+✔ extracted compiler positions map to original source and indexed access hints (18.029333ms)
+✔ extractor and work screen carry stable codes, locations and repair hints (387.664917ms)
+✔ missing compiler and ar are infrastructure refusals with JS fallback (944.609ms)
+✔ report lists async explicit functions with extraction and build status (166.448417ms)
+✔ flattened imported helper diagnostics preserve original source positions (732.965125ms)
+✔ absolute promotion runtime imports become relative for packed Next consumers (4.592417ms)
+✔ Next explicit report distinguishes absent, current and stale build artifacts (421.190042ms)
+✔ unsupported parser syntax retains healthy files and exact file error (1233.825042ms)
+
+> build
+> astro build
+
+01:46:02 [@astrojs/node] Enabling sessions with filesystem storage
+01:46:02 [content] Syncing content
+01:46:02 [content] Synced content
+01:46:02 [types] Generated 106ms
+01:46:02 [build] output: "server"
+01:46:02 [build] mode: "server"
+01:46:02 [build] directory: /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-astro-3rW0OL/dist/
+01:46:02 [build] adapter: @astrojs/node
+01:46:02 [build] Collecting build info...
+01:46:02 [build] ✓ Completed in 123ms.
+01:46:02 [build] Building server entrypoints...
+[next-scriptc] not a candidate GET: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-astro-3rW0OL/src/pages/compute.ts:3:13 - NSC1001: function GET: unsupported reference Response Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.
+[scriptc-promote] Promoted checksum at src/lib/checksum.ts:2
+[scriptc-promote] census: 1 eligible, 1 compiled
+01:46:05 [vite] ✓ built in 2.97s
+01:46:05 [build] ✓ Completed in 2.99s.
+
+ building client (vite) 
+01:46:05 [vite] transforming...
+01:46:05 [vite] ✓ 2 modules transformed.
+01:46:05 [vite] rendering chunks...
+01:46:05 [vite] ✓ built in 9ms
+
+ prerendering static routes 
+01:46:05 ✓ Completed in 7ms.
+
+01:46:05 [build] Rearranging server assets...
+01:46:05 [build] Server built in 3.14s
+01:46:05 [build] Complete!
+
+{"framework":"astro","requests":241,"byteIdentical":true,"states":[{"537a48eab48fe0d7ab62":{"calls":242,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":9,"nativeFallbacks":0,"fallbackCount":0}]}}],"transitions":["next-scriptc {\"fn\":\"537a48eab48fe0d7ab62\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}"]}
+✔ astro: production Node HTTP parity, client isolation and verified shadow (9176.512167ms)
+
+> build
+> react-router build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+Generated an empty chunk: "compute".
+rendering chunks...
+computing gzip size...
+build/client/.vite/manifest.json                  1.62 kB │ gzip:  0.45 kB
+build/client/assets/compute-l0sNRNKZ.js           0.00 kB │ gzip:  0.02 kB
+build/client/assets/page-61pQIUlh.js              0.19 kB │ gzip:  0.18 kB
+build/client/assets/root-DueVtl-8.js              0.20 kB │ gzip:  0.18 kB
+build/client/assets/chunk-4WY6JWTD-CwTwJOAC.js  113.71 kB │ gzip: 38.51 kB
+build/client/assets/entry.client-B0Yr2NSj.js    190.32 kB │ gzip: 59.98 kB
+✓ built in 649ms
+vite v7.3.7 building ssr environment for production...
+[next-scriptc] not a candidate Root: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-DLw9WH/app/root.tsx:2:25 - NSC1000: function Root: React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with "use js".
+[next-scriptc] not a candidate loader: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-DLw9WH/app/routes/compute.ts:3:13 - NSC1001: function loader: unsupported reference Response Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.
+[next-scriptc] not a candidate Page: [next-scriptc] /private/var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/scriptc-react-router-DLw9WH/app/routes/page.tsx:3:25 - NSC1000: function Page: React/JSX is unsupported Hint: Use supported types and a closed pure helper, or opt out with "use js".
+[scriptc-promote] Promoted checksum at app/lib/checksum.ts:2
+[scriptc-promote] Promoted loader at app/routes/page.tsx:2
+[scriptc-promote] census: 2 eligible, 2 compiled
+transforming...
+✓ 16 modules transformed.
+rendering chunks...
+build/server/scriptc-promotion/ids.json                0.05 kB
+build/server/scriptc-promotion/encodings.json          0.15 kB
+build/server/.vite/manifest.json                       0.17 kB
+build/server/scriptc-promotion/build-results.json      0.26 kB
+build/server/scriptc-promotion/promotion.node      1,333.84 kB
+build/server/index.js                                 37.03 kB
+✓ built in 3.94s
+
+{"framework":"react-router","requests":241,"byteIdentical":true,"states":[{"bd5c1acf29286d0f0f16":{"calls":242,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":10,"nativeFallbacks":0,"fallbackCount":0}]},"ead4e43fe1fcd7a1a6ff":{"calls":120,"native":0,"fallback":0,"buckets":[{"bucket":0,"state":"shadow","verified":4,"nativeFallbacks":0,"fallbackCount":0}]}}],"transitions":["next-scriptc {\"fn\":\"bd5c1acf29286d0f0f16\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}","next-scriptc {\"fn\":\"ead4e43fe1fcd7a1a6ff\",\"bucket\":0,\"state\":\"shadow\",\"calls\":20,\"js\":null,\"native\":null,\"n\":0}"]}
+✔ react-router: production Node HTTP parity, client isolation and verified shadow (10161.201083ms)
+﹣ nuxt: production Node HTTP parity and verified shadow (0.472166ms) # SKIP
+﹣ tanstack: production Node HTTP parity and verified shadow (0.085333ms) # SKIP
+✔ generated projection matches legacy bytes and rejection on seeded inputs (29.702291ms)
+✔ H1/H2 handle identity, snapshots and present undefined match legacy (0.427833ms)
+✔ integer field order retains handle capture order and no-eval uses the walker (41.899416ms)
+✔ Nitro skips dev and rejects non-Node output (0.683709ms)
+[scriptc-promote] Promoted checksum at .builder-pjYbiC/src/entry.ts:1
+[scriptc-promote] census: 1 eligible, 1 compiled
+[scriptc-promote] Promoted checksum at .builder-pjYbiC/src/entry.ts:1
+[scriptc-promote] census: 1 eligible, 1 compiled
+✔ builder API isolates client and two server compilations without build.ssr (3772.223458ms)
+✔ opaque classification admits copies, rejects whole-value inspections (3778.52825ms)
+✔ call tables preserve arbitrary references, reject fabricated and foreign handles (1154.658166ms)
+[scriptc-promote] Promoted rows at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/opaque-handles-Rl4HM9/input.ts:2
+✔ real addon preserves Dates and identity, shadows decoded results, differential seed 20935 (2428.760542ms)
+✔ read-and-pass projections keep handles at the same position and validate own data reads (1705.861125ms)
+✔ coverage: next counts, exact diagnostics and route reachability (933.140667ms)
+✔ coverage: nitro counts, exact diagnostics and route reachability (676.7465ms)
+✔ coverage: sveltekit counts, exact diagnostics and route reachability (671.212459ms)
+✔ coverage CLI JSON, Markdown, source scope and Next delegation (1086.43ms)
+✔ coverage measurement: compute-dense native and object-heavy JS (4857.666708ms)
+✔ snapshot is detached, aggregates only, includes mismatch and fallback reasons (5.937625ms)
+✔ opt-in snapshots write periodically and on normal exit; off installs no exit listener (239.710958ms)
+✔ runtime fixture merges function and route observations (992.770875ms)
+✔ CI baseline catches explicit and accepted regressions, CLI writes files and exits 2 (1908.261333ms)
+✔ CI compile evidence and removed accepted functions are regressions (0.660875ms)
+✔ CI CLI consumes compiler and fuzz evidence before regression exit (1861.499541ms)
+[scriptc-promote] Promoted run at semantics.ts:1
+(node:42699) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ numeric and ordering semantics on stock native and local Cloudflare reactor (2934.120375ms)
+[next-scriptc] not a candidate answer: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-8908d919/packages/scriptc-promote/.vite-test-VnyNZK/src/entry.ts:4:8 - NSC1000: dependency closure: transitive effect proof: module statement excluded at 6 Hint: Use supported types and a closed pure helper, or opt out with "use js".
+[scriptc-promote] Promoted sum at .vite-test-VnyNZK/src/entry.ts:2
+[scriptc-promote] Promoted squares at .vite-test-VnyNZK/src/entry.ts:3
+[scriptc-promote] census: 2 eligible, 2 compiled
+next-scriptc {"fn":"62281169e0d6173873a3","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+next-scriptc {"fn":"c6f90af55b7a297fc9f0","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+validated Vite 6.4.5
+✔ vite6: client isolation, native SSR, grouped rewrites and relocated artifacts (4083.247375ms)
+[next-scriptc] not a candidate answer: [next-scriptc] /Users/noah/.t3/worktrees/next-scriptc/t3-8908d919/packages/scriptc-promote/.vite-test-c9B8VM/src/entry.ts:4:8 - NSC1000: dependency closure: transitive effect proof: module statement excluded at 6 Hint: Use supported types and a closed pure helper, or opt out with "use js".
+[scriptc-promote] Promoted sum at .vite-test-c9B8VM/src/entry.ts:2
+[scriptc-promote] Promoted squares at .vite-test-c9B8VM/src/entry.ts:3
+[scriptc-promote] census: 2 eligible, 2 compiled
+next-scriptc {"fn":"c1e170468b7b027f7b2c","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+next-scriptc {"fn":"1dd3af9f22a777dca226","bucket":0,"state":"shadow","calls":20,"js":null,"native":null,"n":0}
+validated Vite 7.3.7
+✔ vite: client isolation, native SSR, grouped rewrites and relocated artifacts (3684.892166ms)
+✔ dev and webworker targets disable all promotion hooks (0.256458ms)
+ℹ tests 66
+ℹ suites 0
+ℹ pass 64
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 2
+ℹ todo 0
+ℹ duration_ms 110395.768833

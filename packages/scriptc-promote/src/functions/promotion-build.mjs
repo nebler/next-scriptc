@@ -1,3 +1,4 @@
+import {constructionDecode} from './promotion-decode.mjs';
 import {fuzzBuiltPromotions} from './promotion-fuzz-build.mjs';
 import {applyFuzzResults,fuzzOptions} from './promotion-fuzz.mjs';
 import { infrastructureFailure, translateDiagnostics } from './diagnostics.mjs';
@@ -40,8 +41,9 @@ async function compilePromotion(modules, output, {linux=false, target=linux?'lin
   let entry=`import {serialize} from './json.ts';\n`+(timing?'declare function boundaryStage(stage:number):void;\n':'');
   const exports=[];
   for(const [i,m] of list.entries()){
-   await writeFile(path.join(output,`module-${i}.ts`),m.native);
-   const fn=m.functions[0], sig=signature(fn,i,timing,constructionResults,catchFallback);entry+=`import {${fn.name} as f${i}} from './module-${i}.ts';\n`+sig.source;
+   const fn=m.functions[0];
+   await writeFile(path.join(output,`module-${i}.ts`),constructionDecode(m.native,fn,constructionResults&&(fn.boundary.result==='number'||fn.boundary.result==='json'&&!!(fn.resultShape??fn.constructionProof?.shapes?.[fn.name]))&&!catchFallback&&!fn.requiresFallback&&!fn.boundary.opaque&&!fn.strictClosure));
+   const sig=signature(fn,i,timing,constructionResults,catchFallback);entry+=`import {${fn.name} as f${i}} from './module-${i}.ts';\n`+sig.source;
    exports.push(sig.profile);
   }
   const profile={profile_format:1,name:'promotion',entry:'entry.ts',emission:'llvm',abi:{prefix:'rev_',init_symbol:'rev_init',sink_register_symbol:'rev_sink',collect_symbol:'rev_collect',localize_runtime:true,instance_per_thread:false},exports,...(timing?{callbacks:[{name:'boundaryStage',params:['f64'],returns:'void'}],abi:{prefix:'rev_',init_symbol:'rev_init',sink_register_symbol:'rev_sink',collect_symbol:'rev_collect',callback_register_symbol:'rev_callbacks',localize_runtime:true,instance_per_thread:false}}:{})};

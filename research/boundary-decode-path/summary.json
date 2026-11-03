@@ -1,0 +1,1009 @@
+{
+  "node": "v26.13.0",
+  "host": {
+    "model": "Apple M4 Pro",
+    "speed": 2400,
+    "times": {
+      "user": 18958710,
+      "nice": 0,
+      "sys": 14392360,
+      "idle": 19350660,
+      "irq": 0
+    }
+  },
+  "load": [
+    16.3388671875,
+    18.63720703125,
+    19.2138671875
+  ],
+  "fuzz": [
+    {
+      "name": "plain",
+      "mode": "default",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 18,
+      "fallbacks": 0,
+      "throws": 7,
+      "elapsedMs": 27.201374999999985
+    },
+    {
+      "name": "plain",
+      "mode": "before",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 18,
+      "fallbacks": 0,
+      "throws": 7,
+      "elapsedMs": 9.362166000000798
+    },
+    {
+      "name": "plain",
+      "mode": "after",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 18,
+      "fallbacks": 0,
+      "throws": 7,
+      "elapsedMs": 19.77191700000185
+    },
+    {
+      "name": "event",
+      "mode": "default",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 6,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 7.736458999999741
+    },
+    {
+      "name": "event",
+      "mode": "before",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 6,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 4.206583999999566
+    },
+    {
+      "name": "event",
+      "mode": "after",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 6,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 4.417416999996931
+    },
+    {
+      "name": "union",
+      "mode": "default",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 17,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 3.72383400000399
+    },
+    {
+      "name": "union",
+      "mode": "before",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 17,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 7.487499999995634
+    },
+    {
+      "name": "union",
+      "mode": "after",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 17,
+      "fallbacks": 0,
+      "throws": 0,
+      "elapsedMs": 3.396082999999635
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 20,
+      "fallbacks": 0,
+      "throws": 6,
+      "elapsedMs": 7.760792000000038
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 20,
+      "fallbacks": 0,
+      "throws": 6,
+      "elapsedMs": 4.967041999999765
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 20,
+      "fallbacks": 0,
+      "throws": 6,
+      "elapsedMs": 6.134333999999399
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 10,
+      "fallbacks": 10,
+      "throws": 104,
+      "elapsedMs": 4.75912500000004
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 64,
+      "fallbacks": 10,
+      "throws": 50,
+      "elapsedMs": 1.7087920000012673
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "status": "passed",
+      "seed": 20935,
+      "cases": 128,
+      "rejected": 64,
+      "fallbacks": 10,
+      "throws": 50,
+      "elapsedMs": 1.717000000004191
+    }
+  ],
+  "lanes": [
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 600,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 6000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 60000,
+      "buckets": [
+        {
+          "state": "js-final",
+          "verified": 26,
+          "mismatches": 0,
+          "nativeFallbacks": 0
+        }
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "name": "plain",
+      "mode": "default",
+      "n": 600,
+      "medians": {
+        "encode": 1.322208000000046,
+        "nativeDecode": 0.3579999953508377,
+        "total": 2.0396670000000086,
+        "totalCPU": 1.6649999999999998,
+        "js": 0.012665999999967426,
+        "jsCPU": 0.015
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "default",
+      "n": 6000,
+      "medians": {
+        "encode": 13.3728329999999,
+        "nativeDecode": 2.7579999938607216,
+        "total": 20.212875999999824,
+        "totalCPU": 13.008000000000001,
+        "js": 0.031582999999955064,
+        "jsCPU": 0.032
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "default",
+      "n": 60000,
+      "medians": {
+        "encode": 126.625,
+        "nativeDecode": 32.29100000113249,
+        "total": 176.12887599999885,
+        "totalCPU": 141.858,
+        "js": 0.29637499999989814,
+        "jsCPU": 0.293
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "before",
+      "n": 600,
+      "medians": {
+        "encode": 0.8788750000003347,
+        "nativeDecode": 0.24000000208616257,
+        "total": 1.1887090000000171,
+        "totalCPU": 1.1780000000000002,
+        "js": 0.007999999999810825,
+        "jsCPU": 0.008
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "before",
+      "n": 6000,
+      "medians": {
+        "encode": 13.217540999999983,
+        "nativeDecode": 3.9539999961853027,
+        "total": 18.335832000000664,
+        "totalCPU": 13.339,
+        "js": 0.03162500000144064,
+        "jsCPU": 0.032
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "before",
+      "n": 60000,
+      "medians": {
+        "encode": 128.8089170000003,
+        "nativeDecode": 34.57100000232458,
+        "total": 175.26679200000035,
+        "totalCPU": 140.16899999999998,
+        "js": 0.2711250000011205,
+        "jsCPU": 0.26
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "after",
+      "n": 600,
+      "medians": {
+        "encode": 0.8426669999971637,
+        "nativeDecode": 0.22699999809265137,
+        "total": 1.1710000000020955,
+        "totalCPU": 1.15,
+        "js": 0.0033750000002328306,
+        "jsCPU": 0.004
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "after",
+      "n": 6000,
+      "medians": {
+        "encode": 15.723500000000058,
+        "nativeDecode": 3.082999996840954,
+        "total": 20.731958999997005,
+        "totalCPU": 13.151000000000002,
+        "js": 0.026624999998603016,
+        "jsCPU": 0.027
+      }
+    },
+    {
+      "name": "plain",
+      "mode": "after",
+      "n": 60000,
+      "medians": {
+        "encode": 135.49945899999875,
+        "nativeDecode": 37.407999999821186,
+        "total": 188.98774999999296,
+        "totalCPU": 136.516,
+        "js": 0.3537499999983993,
+        "jsCPU": 0.35
+      }
+    },
+    {
+      "name": "event",
+      "mode": "default",
+      "n": 600,
+      "medians": {
+        "encode": 1.8938750000015716,
+        "nativeDecode": 0.10199999809265137,
+        "total": 3.1866250000020955,
+        "totalCPU": 1.502,
+        "js": 0.006417000000510598,
+        "jsCPU": 0.007
+      }
+    },
+    {
+      "name": "event",
+      "mode": "default",
+      "n": 6000,
+      "medians": {
+        "encode": 18.811750000000757,
+        "nativeDecode": 1.188000001013279,
+        "total": 21.061126000000513,
+        "totalCPU": 14.34,
+        "js": 0.03162499999962165,
+        "jsCPU": 0.033
+      }
+    },
+    {
+      "name": "event",
+      "mode": "default",
+      "n": 60000,
+      "medians": {
+        "encode": 182.84358300000167,
+        "nativeDecode": 12.79899999499321,
+        "total": 199.42524900000717,
+        "totalCPU": 151.324,
+        "js": 0.3302079999994021,
+        "jsCPU": 0.315
+      }
+    },
+    {
+      "name": "event",
+      "mode": "before",
+      "n": 600,
+      "medians": {
+        "encode": 1.2472080000006827,
+        "nativeDecode": 0.0989999994635582,
+        "total": 1.4016239999982645,
+        "totalCPU": 1.357,
+        "js": 0.005624999997962732,
+        "jsCPU": 0.006
+      }
+    },
+    {
+      "name": "event",
+      "mode": "before",
+      "n": 6000,
+      "medians": {
+        "encode": 16.230083000002196,
+        "nativeDecode": 1.0099999979138374,
+        "total": 18.229083999991417,
+        "totalCPU": 14.574,
+        "js": 0.031541999996989034,
+        "jsCPU": 0.032
+      }
+    },
+    {
+      "name": "event",
+      "mode": "before",
+      "n": 60000,
+      "medians": {
+        "encode": 128.87716699999874,
+        "nativeDecode": 9.793999999761581,
+        "total": 141.7707919999957,
+        "totalCPU": 140.345,
+        "js": 0.3075840000019525,
+        "jsCPU": 0.309
+      }
+    },
+    {
+      "name": "event",
+      "mode": "after",
+      "n": 600,
+      "medians": {
+        "encode": 1.185750000004191,
+        "nativeDecode": 0.10000000149011612,
+        "total": 1.3320419999945443,
+        "totalCPU": 1.326,
+        "js": 0.003250000001571607,
+        "jsCPU": 0.004
+      }
+    },
+    {
+      "name": "event",
+      "mode": "after",
+      "n": 6000,
+      "medians": {
+        "encode": 11.97937500000262,
+        "nativeDecode": 0.9970000013709068,
+        "total": 13.320833999998285,
+        "totalCPU": 13.269,
+        "js": 0.035708000003069174,
+        "jsCPU": 0.036
+      }
+    },
+    {
+      "name": "event",
+      "mode": "after",
+      "n": 60000,
+      "medians": {
+        "encode": 125.15574999999808,
+        "nativeDecode": 10.053999997675419,
+        "total": 137.90962500000023,
+        "totalCPU": 138.975,
+        "js": 0.38191699999879347,
+        "jsCPU": 0.383
+      }
+    },
+    {
+      "name": "union",
+      "mode": "default",
+      "n": 600,
+      "medians": {
+        "encode": 0.29424999999901047,
+        "nativeDecode": 0.053999997675418854,
+        "total": 0.3691249999901629,
+        "totalCPU": 0.372,
+        "js": 0.0027079999999841675,
+        "jsCPU": 0.003
+      }
+    },
+    {
+      "name": "union",
+      "mode": "default",
+      "n": 6000,
+      "medians": {
+        "encode": 2.9493750000037835,
+        "nativeDecode": 0.528999999165535,
+        "total": 3.5298340000008466,
+        "totalCPU": 3.509,
+        "js": 0.008166999999957625,
+        "jsCPU": 0.009
+      }
+    },
+    {
+      "name": "union",
+      "mode": "default",
+      "n": 60000,
+      "medians": {
+        "encode": 33.20799999999872,
+        "nativeDecode": 5.272999994456768,
+        "total": 38.80270799999562,
+        "totalCPU": 41.173,
+        "js": 0.08999999999650754,
+        "jsCPU": 0.091
+      }
+    },
+    {
+      "name": "union",
+      "mode": "before",
+      "n": 600,
+      "medians": {
+        "encode": 0.38650000000052387,
+        "nativeDecode": 0.05300000309944153,
+        "total": 0.4543329999942216,
+        "totalCPU": 0.468,
+        "js": 0.0027090000003227033,
+        "jsCPU": 0.003
+      }
+    },
+    {
+      "name": "union",
+      "mode": "before",
+      "n": 6000,
+      "medians": {
+        "encode": 2.9421670000010636,
+        "nativeDecode": 0.5190000012516975,
+        "total": 3.5105420000109007,
+        "totalCPU": 3.507,
+        "js": 0.01166699999885168,
+        "jsCPU": 0.012
+      }
+    },
+    {
+      "name": "union",
+      "mode": "before",
+      "n": 60000,
+      "medians": {
+        "encode": 33.229041999999026,
+        "nativeDecode": 5.203000001609325,
+        "total": 38.7822079999969,
+        "totalCPU": 41.23,
+        "js": 0.11241599999630125,
+        "jsCPU": 0.113
+      }
+    },
+    {
+      "name": "union",
+      "mode": "after",
+      "n": 600,
+      "medians": {
+        "encode": 0.29125000000203727,
+        "nativeDecode": 0.05300000309944153,
+        "total": 0.35983300000225427,
+        "totalCPU": 0.362,
+        "js": 0.0010420000035082921,
+        "jsCPU": 0.001
+      }
+    },
+    {
+      "name": "union",
+      "mode": "after",
+      "n": 6000,
+      "medians": {
+        "encode": 2.9283330000034766,
+        "nativeDecode": 0.5249999985098839,
+        "total": 3.5138330000045244,
+        "totalCPU": 3.509,
+        "js": 0.008542000003217254,
+        "jsCPU": 0.009
+      }
+    },
+    {
+      "name": "union",
+      "mode": "after",
+      "n": 60000,
+      "medians": {
+        "encode": 33.63133299999754,
+        "nativeDecode": 5.225000001490116,
+        "total": 39.28312400000141,
+        "totalCPU": 41.484,
+        "js": 0.1106660000004922,
+        "jsCPU": 0.111
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 600,
+      "medians": {
+        "encode": 0.22399999999998954,
+        "nativeDecode": 0.03800000250339508,
+        "total": 0.2920419999999808,
+        "totalCPU": 0.299,
+        "js": 0.008167000000014468,
+        "jsCPU": 0.009
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 6000,
+      "medians": {
+        "encode": 2.545583000000022,
+        "nativeDecode": 0.3870000019669533,
+        "total": 3.073458999999957,
+        "totalCPU": 3.07,
+        "js": 0.057999999999992724,
+        "jsCPU": 0.061
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "default",
+      "n": 60000,
+      "medians": {
+        "encode": 32.34795900000017,
+        "nativeDecode": 3.7980000004172325,
+        "total": 37.076460000000225,
+        "totalCPU": 59.596000000000004,
+        "js": 0.3007500000001073,
+        "jsCPU": 0.298
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 600,
+      "medians": {
+        "encode": 0.212666999999783,
+        "nativeDecode": 0.039000004529953,
+        "total": 0.2780410000000302,
+        "totalCPU": 0.28,
+        "js": 0.008084000000053493,
+        "jsCPU": 0.009
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 6000,
+      "medians": {
+        "encode": 2.353541000000405,
+        "nativeDecode": 0.38599999994039536,
+        "total": 2.8785829999997077,
+        "totalCPU": 2.872,
+        "js": 0.027041999999710242,
+        "jsCPU": 0.028
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "before",
+      "n": 60000,
+      "medians": {
+        "encode": 41.19079200000033,
+        "nativeDecode": 4.727000005543232,
+        "total": 46.9097499999998,
+        "totalCPU": 76.789,
+        "js": 0.39916600000015023,
+        "jsCPU": 0.395
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 600,
+      "medians": {
+        "encode": 0.2587089999997261,
+        "nativeDecode": 0.04800000041723251,
+        "total": 0.3332489999993413,
+        "totalCPU": 0.336,
+        "js": 0.0034590000004754984,
+        "jsCPU": 0.004
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 6000,
+      "medians": {
+        "encode": 2.473500000000058,
+        "nativeDecode": 0.41199999302625656,
+        "total": 3.014083000000028,
+        "totalCPU": 3.015,
+        "js": 0.030292000000372354,
+        "jsCPU": 0.031
+      }
+    },
+    {
+      "name": "e1",
+      "mode": "after",
+      "n": 60000,
+      "medians": {
+        "encode": 37.78283399999964,
+        "nativeDecode": 4.23200000077486,
+        "total": 43.71929099999761,
+        "totalCPU": 70.174,
+        "js": 0.3773750000000291,
+        "jsCPU": 0.378
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 600,
+      "medians": {
+        "encode": 0.001167000000009466,
+        "nativeDecode": 0.22999999672174454,
+        "total": 0.3158319999999435,
+        "totalCPU": 0.305,
+        "js": 0.20325000000002547,
+        "jsCPU": 0.204
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 6000,
+      "medians": {
+        "encode": 0.0031669999999621723,
+        "nativeDecode": 2.162000000476837,
+        "total": 2.627207999999996,
+        "totalCPU": 2.632,
+        "js": 1.914541999999983,
+        "jsCPU": 1.91
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "default",
+      "n": 60000,
+      "medians": {
+        "encode": 0.00520799999958399,
+        "nativeDecode": 27.219999998807907,
+        "total": 37.85420900000008,
+        "totalCPU": 37.802,
+        "js": 20.78691699999945,
+        "jsCPU": 21.148
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 600,
+      "medians": {
+        "encode": 0.18150000000241562,
+        "nativeDecode": 0.3539999946951866,
+        "total": 0.5914160000029369,
+        "totalCPU": 0.594,
+        "js": 0.18920900000011898,
+        "jsCPU": 0.19
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 6000,
+      "medians": {
+        "encode": 2.1821670000026643,
+        "nativeDecode": 4.436999998986721,
+        "total": 7.036791999998968,
+        "totalCPU": 7.04,
+        "js": 2.0844169999982114,
+        "jsCPU": 2.086
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "before",
+      "n": 60000,
+      "medians": {
+        "encode": 18.063083000000915,
+        "nativeDecode": 47.369000002741814,
+        "total": 75.87437599999976,
+        "totalCPU": 75.91499999999999,
+        "js": 18.757999999997992,
+        "jsCPU": 18.661
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 600,
+      "medians": {
+        "encode": 0.1805000000022119,
+        "nativeDecode": 0.20600000023841858,
+        "total": 0.4394170000014128,
+        "totalCPU": 0.442,
+        "js": 0.1867080000010901,
+        "jsCPU": 0.188
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 6000,
+      "medians": {
+        "encode": 2.0311250000013388,
+        "nativeDecode": 2.5510000064969063,
+        "total": 5.127832999991369,
+        "totalCPU": 5.2299999999999995,
+        "js": 2.1011670000007143,
+        "jsCPU": 2.103
+      }
+    },
+    {
+      "name": "guarded",
+      "mode": "after",
+      "n": 60000,
+      "medians": {
+        "encode": 20.505291000001307,
+        "nativeDecode": 27.295999996364117,
+        "total": 57.8640000000014,
+        "totalCPU": 57.69800000000001,
+        "js": 21.870459000005212,
+        "jsCPU": 22.908
+      }
+    }
+  ]
+}

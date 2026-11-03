@@ -1758,3 +1758,13 @@ can take that path, but construction guards call `JSON.parse(p)` a second time o
 the same argument. Whether a guarded input is decoded twice natively, and whether
 PM2's 27 ms decode was typed or erased, is unverified. Queued as E4 (adapter, cheap)
 before more compiler decode work.
+
+## 59. E4 boundary decode paths and shared construction preflight (2026-11-03)
+
+Stock npm scriptc 0.4.6 LLVM confirms schema decode for plain record arrays, E1 projected read-and-pass handles, K4 call-site specializations, and an independently constructed event record. The nullable-record array uses erased decode. Parameters<typeof f>[N] preserves concrete types here. Schema helpers contain an erased fallback branch, not a second unconditional parse.
+
+Construction preflights concern asserted JSON string parses inside functions. Default catches omit them; opaque boundaries force catches. A native-only typed parameter now shares a single top-level parse with its unchanged value guard and original assertion. Repeated or conditional parses retain their original path to preserve allocation identity. A crashing dynamic-to-typed experiment was discarded; the typed handoff passes stock-native edge checks.
+
+At 600/6k/60k records, explicit guarded decode falls 0.354/4.437/47.369 to 0.206/2.551/27.296 ms. Guarded 60k total wall falls 75.874 to 57.864 ms, versus JS 21.870 ms in the after window. All 18 E1 and guarded dispatcher buckets settle on JS, with zero mismatches or fallbacks. Sequential host medians have no confidence intervals, and unrelated agents remain active. E1 source is unchanged across modes; its variation is not a speedup claim.
+
+PM2's published stages sum to 195.621 ms at 60k. The default-path estimate remains unchanged because this fix removes no default preflight. A conditional all-decode substitution gives 184.195 ms, not an application or hosted result. No Papermark source or run is used. Next passes 102 tests; promotion passes 64 with two existing skips; five targeted tests and T1 differential checks pass. Main, discovery files, root README, compiler sources and external services are untouched. No Docker, deployment, push, PR, issue, post or secret. [IR evidence, raw samples, estimates and limits](boundary-decode-path.md).

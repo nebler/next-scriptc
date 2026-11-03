@@ -1,0 +1,186 @@
+$ node --test --test-concurrency=2 test/*.mjs
+✔ per-type encoding preserves UTF-8, NUL, empty and large strings without JSON wrapping (6.583584ms)
+✔ strict number rules, shape validation and canonical bytes (1.695541ms)
+✔ Uint8Array snapshots raw bytes including offset views; other views refused (0.290125ms)
+✔ generated signatures are mixed ABI and timing-free unless opted in (0.692792ms)
+✔ mixed raw shadow verification compares canonical result bytes and captures arguments (6.253875ms)
+✔ stage hooks are opt-in and expose all seven stages (0.645375ms)
+✔ undefined arguments skip one shadow without demoting later representable calls (1.307333ms)
+(node:36693) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[scriptc-promote] Promoted mixed at ../../.checks/boundary/fixture.ts:1
+[scriptc-promote] Promoted bytes at ../../.checks/boundary/fixture.ts:2
+[scriptc-promote] Promoted numeric at ../../.checks/boundary/fixture.ts:3
+[scriptc-promote] Promoted flag at ../../.checks/boundary/fixture.ts:4
+[scriptc-promote] Promoted nil at ../../.checks/boundary/fixture.ts:5
+[scriptc-promote] Promoted object at ../../.checks/boundary/fixture.ts:6
+[scriptc-promote] Promoted mixed at ../../.checks/boundary/fixture.ts:1
+[scriptc-promote] Promoted bytes at ../../.checks/boundary/fixture.ts:2
+[scriptc-promote] Promoted numeric at ../../.checks/boundary/fixture.ts:3
+[scriptc-promote] Promoted flag at ../../.checks/boundary/fixture.ts:4
+[scriptc-promote] Promoted nil at ../../.checks/boundary/fixture.ts:5
+[scriptc-promote] Promoted object at ../../.checks/boundary/fixture.ts:6
+✔ host addon typed ABI round trips sync/async, timing and canonical shadow parity (12289.89825ms)
+[scriptc-promote] Promoted generic at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-xnfpgT/f.ts:2
+[scriptc-promote] Promoted broad at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-xnfpgT/f.ts:3
+[scriptc-promote] Promoted loose at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-xnfpgT/f.ts:4
+[scriptc-promote] Promoted scalarValue at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-xnfpgT/f.ts:5
+[scriptc-promote] Promoted scalar at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-xnfpgT/f.ts:6
+✔ private fresh JSON call sites specialize and shape mismatches fall back without poisoning (10160.924833ms)
+✔ specialization chooses visible call types and rejects only missing or disagreeing evidence (8903.29375ms)
+[scriptc-promote] Promoted f at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/specialization-unseen-FSPfF2/f.ts:1
+✔ an exported specialization falls back for unseen callers with other shapes (3589.431375ms)
+✔ imported call sites in other modules choose the specialization (1897.216208ms)
+✔ Cloudflare target preserves JS Next configuration and skips Node startup (1.796125ms)
+✔ static lane keeps byte verification and permanently falls back on mismatch or trap (0.270541ms)
+✔ each input byte bucket verifies three calls and periodically rechecks (0.199791ms)
+✔ new input size buckets must pass their own shadows (0.132625ms)
+✔ compiler override is an absolute file path and default remains installed scriptc (3.763208ms)
+✔ local mutation tracks aliases, density, cycles, opaque escape and keys (7572.196041ms)
+✔ guarded parse cannot hide behind another exported helper (187.511166ms)
+✔ fallback status skips shadows and answers native calls without demoting other functions (10.56825ms)
+✔ native arithmetic fallback leaves the same instance usable, sync, async and timed (5116.801375ms)
+✔ asserted parse is checked dynamically before typed reads, including undefined (2636.043542ms)
+✔ non-finite JS shadow results skip verification without demotion (1.609041ms)
+✔ native scalar arithmetic uses the same fallback status (2960.485667ms)
+✔ whole closure allowlist rejects adversarial construction and keeps strict wrapper (12469.492292ms)
+(node:38197) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ screened native results match bytes and survive adversarial boundary data (2711.703959ms)
+✔ Next defaults to automatic promotion and preserves explicit choices (0.971834ms)
+✔ dev emits production native testing instructions once per project (0.842209ms)
+✔ build prints functions and modules separately from route counts (101.652125ms)
+✔ runtime app imports flatten with collision-free helpers and hashes (2126.953334ms)
+✔ package exports and main resolve runtime JavaScript instead of declarations (1784.207458ms)
+✔ reachable initialization, state, dynamic access and cycles fail closed (10.697458ms)
+[scriptc-promote] Promoted rows at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/closure-native-wEoqCf/entry.ts:1
+(node:38744) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ flattened app closure compiles and forced-native bytes match original JS (3638.011917ms)
+✔ TS paths follow the application options; unused imports are audited (790.445333ms)
+✔ dependency content and manifest changes invalidate the build (760.027125ms)
+✔ bundler configuration retains every grouped closure dependency (2.631125ms)
+[next-scriptc] Compiling 1 native function(s)
+✔ explicit "use native" functions fail the build when the toolchain is missing (718.809042ms)
+✔ Node/native JSON parity, typed encoding, HTTP framing, concurrency and crash rejection (2960.710083ms)
+✔ JSON signature checker accepts data types and identifies rejected type paths (472.843833ms)
+✔ discovery checks imported inferred types using extended project tsconfig (1396.160666ms)
+✔ checker emits per-type ABI metadata including inferred, union and byte types (163.190792ms)
+✔ sidecar shares eager startup, strips IPC env, restarts once, and fails loudly (520.357875ms)
+✔ extracts only the dependency closure; keeps types and source bodies (20.022833ms)
+✔ file directive selects named exported async declarations and aliases (3.952209ms)
+✔ rejects the old directive without treating strings or comments as directives (2.846667ms)
+✔ rejects unsupported scopes, APIs and exports with the function name (5.350125ms)
+✔ JSON boundary rejects lossy values instead of silently coercing them (6.110333ms)
+✔ discovery supports inline route functions and rejects indirect Next/client imports through aliases (1028.423291ms)
+✔ Turbopack conditions target discovered paths literally and preserve user rules (5.111125ms)
+✔ function startup checks build identity and reports missing/non-executable binaries (62.55025ms)
+✔ sidecar warm-up is optional, bounded and does not block concurrent real calls (3324.184667ms)
+✔ Node JSON runtime stays synchronized with the native TypeScript source (2.492666ms)
+(node:39573) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39582) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ candidate JS calls raw helpers while app calls dispatch, with aliases and shadowed names (2056.91725ms)
+✔ outer decides under nested helper load with a global rolling quota (212.659041ms)
+✔ linked helper through a re-export calls raw JS, external import still dispatches (1045.252166ms)
+[scriptc-promote] Promoted scalars at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/nonstrict-UGhM7r/f.ts:1
+[scriptc-promote] Promoted rows at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/nonstrict-UGhM7r/f.ts:2
+[scriptc-promote] Promoted nullable at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/nonstrict-UGhM7r/f.ts:3
+[scriptc-promote] Promoted label at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/nonstrict-UGhM7r/f.ts:4
+[scriptc-promote] Promoted inferred at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/nonstrict-UGhM7r/f.ts:7
+✔ non-strict callers use strict closure types and invalid inputs fall back per call (11795.595292ms)
+[scriptc-promote] Promoted optional at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/optional-boundaries-4Kv74x/route.ts:2
+[scriptc-promote] Promoted arrow at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/optional-boundaries-4Kv74x/route.ts:5
+[scriptc-promote] Promoted defaults at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/optional-boundaries-4Kv74x/route.ts:6
+[scriptc-promote] Promoted hidden at ../../../../../../../../var/folders/4x/9xsch0y129j47fl92k4zx9cm0000gn/T/optional-boundaries-4Kv74x/route.ts:7
+✔ stock optional boundaries and lowered bindings preserve JS values and keys (5641.544167ms)
+✔ rest, effectful defaults and computed bindings fail closed (4.288792ms)
+✔ route handler aliases are excluded while named sync helpers remain discoverable (187.101125ms)
+✔ segfault lease disables the same build, reset and new build recover (899.430916ms)
+✔ live leases coexist and reused process identities fail closed (223.015208ms)
+(node:40378) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"seed":20935,"cases":40,"inputs":680,"checks":1360,"native":2266,"fallback":534,"candidates":17,"elapsedMs":32070.18075}
+✔ seeded real-addon strict/construction differential fuzz (32098.780917ms)
+✔ discovery screens sync exports, work, opt out, dependencies and purity (1032.733209ms)
+✔ promotion and size isolation (12.534042ms)
+✔ mismatch never answers natively; panic demotes all (15.346625ms)
+✔ queue cap and shadow rate cap fall back without awaiting native (5.389375ms)
+✔ slower native settles on js-final (1.714875ms)
+✔ loader preserves JS bodies for multiple candidates (459.536625ms)
+✔ compile refusal is reported and leaves JS available (541.450542ms)
+✔ explicit sync hint bypasses work screen while use js opts out (202.420125ms)
+✔ M2 empirical seeded simulations converge with scheduling bias removed (823.352125ms)
+✔ sign confidence, effect margin and hysteresis use complete disjoint epochs (0.336125ms)
+✔ cold discard, scheduling exclusion, periodic correction and mismatch safety (3.641875ms)
+✔ ordinary JS routing has zero clock and encoding work; shadow caps remain bounded (552.262666ms)
+✔ sample addon ABI works with owner thread, sync/async and stage timing (974.719958ms)
+✔ fresh array chains may be sorted; opaque and aliased containers stay rejected (947.94975ms)
+✔ promotion artifacts survive Next cleanup in cache and publish at build completion (11.607792ms)
+✔ fallback windows demote only their bucket and function, even in native mode (0.722667ms)
+✔ shadow fallback attempts count, never verify, and stop after demotion (6.604167ms)
+✔ fallback threshold is strict and windows reset after mixed successes (0.381333ms)
+✔ thread CPU pairs reject contention bias without changing D1 policy (73.447875ms)
+✔ JS calls during a pending shadow never become sample pairs (4.097833ms)
+✔ CPU pairs include caller encode/decode costs and skip invalid CPU samples (1.282ms)
+✔ demo result shapes retain exact canonical bytes (14.376083ms)
+✔ descriptor-map symbol check rejects hidden and array symbols before encoding (0.943583ms)
+✔ signed zero and byte results keep caller behavior (1.62425ms)
+✔ application checker emits bounded shapes and retains generic fallback (569.943208ms)
+[scriptc-promote] Promoted rows at unknown:1
+✔ native strict validator round trips typed rows and survives signed zero (2645.145792ms)
+⚠ Duplicate page detected. pages/route.js and pages/route.ts both resolve to /route.
+✔ native extension preserves Next matching and user extension precedence (339.56275ms)
+✔ discovery rejects legacy directives, non-route native files and conflicting routes (102.311167ms)
+✔ route options validate keys, values, defaults, groups and process membership (2.387084ms)
+[next-scriptc] /aaa-static is prerendered by Next; serving the static output (native not needed)
+[next-scriptc] Compiling /items/new, /items/[id], /items/[[...rest]] (speed)
+warning SC6104: parameter 'routes' (declared '{ module: ModuleLoader; pattern: string; }[]') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '{ module: ModuleLoader; pattern: string; }[]' cannot be compiled: the array shape is supported, but its element type '{ module: ModuleLoader; pattern: string; }' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'module' (declared 'ModuleLoader') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type 'ModuleLoader' cannot be compiled: the union shape is supported, but its arm 'RouteModule' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'route' (declared '{ module: ModuleLoader; pattern: string; }') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '{ module: ModuleLoader; pattern: string; }' cannot be compiled: the record shape is supported, but its member 'module.GET()' has type 'RouteResponse', which does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'get' (declared '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined') keeps its compilable shape with checked-dynamic pieces where its type has no static lowering (values of type '((request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse) | undefined' cannot be compiled: the union shape is supported, but its arm '(request: NextRequest, context: RouteContext) => Promise<RouteResponse> | RouteResponse' does not compile); reads of those pieces into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: local 'response' (declared 'RouteResponse') is held as a checked-dynamic value: its type has no static lowering (values of type 'RouteResponse' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'NextResponse' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+warning SC6104: parameter 'body' (declared 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined') is held as a checked-dynamic value: its type has no static lowering (values of type 'string | ReadableStream<Uint8Array<ArrayBufferLike>> | Uint8Array<ArrayBufferLike> | null | undefined' cannot be compiled: the union shape is supported, and unions in the 'string | object' family ride the checked-dynamic representation wholesale, but 'Uint8Array<ArrayBufferLike>' arms have a typed representation whose semantics (identity, methods, dispatch) do not survive that collapse); reads into typed code are checked
+  hint: restate the declared type inside the compilable set to keep this slot static; scriptc coverage lists dynamic slots, and --fail-on=dynamic-slots fails on them
+
+The program compiled. Declared types that compile keep these slots static.
+/Users/noah/.t3/worktrees/next-scriptc/t3-8908d919/packages/next-scriptc/test/.grouped-dIeaxf/.next/scriptc/route-0
+[next-scriptc] Built 0 native function(s) in 0 module(s).
+[next-scriptc] Built 3 native route(s) in 1 process(es).
+✔ grouped build drops prerenders, sorts static/dynamic/catch-all, and validates manifest (4208.447917ms)
+Compiled native.ts named function/variable/alias/re-exports; native-only next/server and inherited aliases; unsupported middleware helper rejected.
+✔ discovery exports, Next extensions, rewrite phases, and typed native entries (19392.584708ms)
+✔ literal rewrite segments remain literal in external destination URLs (3.122583ms)
+[next-scriptc] /feed.xml is prerendered by Next; serving the static output (native not needed)
+[next-scriptc] Built 0 native function(s) in 0 module(s).
+[next-scriptc] Built 0 native route(s) in 0 process(es).
+✔ build completion leaves prerendered handlers with Next and preserves user rewrites (11.901042ms)
+✔ local route rewrites preserve automatic promotion options for function preparation (0.284667ms)
+✔ sidecar packaging preserves shared Node aliases and excludes executable/Edge outputs (272.841292ms)
+✔ native replacement preserves shared Node aliases, variants and prerender files (24.26325ms)
+✔ grouped routes share one Function across nested aliases and preserve independent Functions (27.729375ms)
+✔ native packaging follows traced source paths, chunks and NFT files, including uncertain traces (13.5005ms)
+✔ bootstrap starts one shared child before the launcher and preserves exports and bundling groups (536.644875ms)
+✔ Vercel completion publishes cached promotion before the output adapter and bundles traced Node functions (59.194375ms)
+ℹ tests 102
+ℹ suites 0
+ℹ pass 102
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93575.002792
