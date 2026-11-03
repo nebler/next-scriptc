@@ -33,7 +33,10 @@ browser, Svelte, and Electron branches no longer invalidate an entire package.
 The selected source and its package manifest remain hashed dependencies. Selected
 side effects and CommonJS mutable exports still reject. Application custom
 conditions require a matching explicit runtime condition integration. Unknown
-active conditions and custom resolvers reject.
+active conditions and custom resolvers reject. Runtime import graphs also reject
+unmodeled Node `--conditions`, `-C`, and `NODE_OPTIONS` condition flags. A real
+Node regression shows why: JS selected a custom branch while the old resolver
+proved the Node branch. Erased type imports remain independent of these flags.
 
 ## Parsing
 
