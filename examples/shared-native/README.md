@@ -2,7 +2,7 @@
 
 One ordinary TypeScript function forecasts 36 months of cash runway across seeded
 Monte Carlo paths. `lib/forecast.ts` is imported by both the client component and
-`POST /api/forecast`. The browser runs JavaScript; the production Node adapter
+`POST /api/forecast`. The browser starts in JavaScript and loads a verified wasm lane; the production Node adapter
 compiles the same source and automatically selects native after verification.
 
 From the repository root (Node >=24 and the stock scriptc toolchain):
@@ -19,7 +19,7 @@ paths and then runs the selected input. It normally takes a few seconds. It uses
 the default dispatcher policy; there are no reduced verification thresholds or
 forced native lanes. The 24 paired samples need hundreds of calls because
 shadows are sampled. Rechecks and the process quota can delay later collection.
-Development (`pnpm --filter shared-native dev`) runs JS without observations.
+The browser lane also builds when Next loads its development configuration. Server native observations require a production build.
 
 The result includes survival probability and summed ending cash, browser time,
 server call time, and exact equality using the dispatcher's `canonicalResult`.
@@ -78,7 +78,7 @@ A Park–Miller generator keeps integer products exactly representable; currency
 rounds down to whole dollars monthly. The model assumes independent revenue
 shocks, growing costs, and no borrowing. It is a demonstration model.
 
-It does not demonstrate browser wasm, universal equivalence, cryptographic
+It does not demonstrate universal equivalence, cryptographic
 randomness, production financial forecasting, real-app automatic wins, fleet
 observability, serverless savings, or superiority over Rust/SQL. The first integer
 PRNG variant lost to V8; the dispatcher correctly kept JS. Compute density alone
@@ -92,3 +92,14 @@ speedup, bypass runtime verification, or force the native lane.
 
 See [the research record](../../research/shared-native-demo.md) for raw evidence
 and limitations.
+
+## Browser
+
+The opt-in Next wrapper compiles the same discovered forecast closure to a
+324,844-byte reactor (123,244 bytes gzip). Run twice: the first call uses JS
+while wasm loads, and later calls in measured buckets use wasm. Browser checks,
+mismatches, fallbacks and the serving lane appear separately from server counters.
+Only buckets 9, 13 and 16 are enabled by the pinned source calibration key.
+Changing the function requires fresh calibration. Generated `public/scriptc` assets
+are ignored. See [browser setup](../../docs/browser.md) and
+[W1 measurements](../../research/browser-wasm.md).

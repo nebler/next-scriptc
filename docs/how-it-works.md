@@ -102,3 +102,10 @@ object and string workloads today. Existing native libraries may already solve
 the expensive part. Do not move work out of SQL or rewrite Rust merely to adopt
 this experiment. The [roadmap](../ROADMAP.md) records the product rationale and
 current limits.
+
+## Browser
+
+An opt-in [browser lane](browser.md) builds selected shared functions as static
+wasm reactors for Next client components and Vite client builds. JS answers until
+async initialization completes. Only calibrated size buckets use wasm; sampled
+verification, traps, and initialization failures preserve JS fallback.
