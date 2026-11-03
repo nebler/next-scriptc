@@ -14,6 +14,7 @@ Every change we make to scriptc is listed here. Each change lives on its own bra
 | Cached record prototype reflection | `next-scriptc/result-reflection` | experimental, focused parity only. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
 | Immutable global limits in arithmetic loops | `next-scriptc/wasm-counted-globals` | focused checks pass, full gate pending; **stacked on the int8 branch**. Pushed to the fork 2026-11-02. | 2026-11-01, `a07d5a791` | focused only |
 | Dense native object key arrays | `next-scriptc/object-key-array-construction` | Local commit `0f66b43c5`; not pushed; focused validation only | 2026-11-02, `38cc546e0` | ASan/UBSan runtime tests, release/dev corpus + sanitized RC audit, 3 affected cases, lint/format; full gate pending |
+| Ordered JSON schema record decode | `next-scriptc/c2-json-decode` | Local commit `4bd7effcf`; not pushed; bounded typed-path improvement | 2026-11-03, `08c74e73a` | ASan/UBSan runtime + RC audit, 256 Node comparisons, 2 schema emission tests, lint/format, baseline completeness; full gate pending |
 | int8 product ranges in wrapping sums | `next-scriptc/int8-range-analysis` | Pushed `d49007483`; local fix `2a3ce4ba6` (quadratic range walk) is unpushed. **PR on hold.** | 2026-11-01, `0a7dd5650` (clean) | 2026-11-01–02: `d49007483` plain failed, sanitized incomplete; fix has focused checks only ([report](int8-gate-2026-11-01.md)) |
 
 ## int8 product ranges in wrapping sums
@@ -180,3 +181,11 @@ regex replacement compile. No SC failure is claimed for these constructs.
 - Four alternating windows, 50 warmups and 35 samples per process: at 50k, generic pooled median 0.119 → 0.104 ms (−12.6%); spread 0.1705 → 0.143 ms (−16.1%). Both improve in every window. Large CSV 41.457 → 41.1485 ms has mixed directions across windows, so no CSV gain is established. Every suite checksum and full CSV output matches Node.
 - Final validation: 719 LLVM backend tests; six selected corpus programs through both harnesses, including release/dev; new fixture and weak-key union program under ASan/RC audit; build, lint, formatting, single-fixture preflight/order, and baseline completeness pass. Two implementation mistakes were found and fixed, including a missing shape-union slow entry. Full gates and other platforms remain outstanding. Node 26.12.0 differs from the repository pin.
 - [Design, ownership proof, full results, failures, exact commands, and remaining work](compiler-escape-analysis.md), [raw measurements](compiler-object-string/escape-results.json).
+
+## Ordered JSON schema record decode (C2)
+
+- Local branch `next-scriptc/c2-json-decode`, commit `4bd7effcf29eb1b373b1235e0b2bf72b8d09ed29`, based on fresh upstream `08c74e73a7869ab045f04c032bcc12be3a4901df`. No push.
+- The schema parser uses a compact declaration-order prefix and direct record dispatch for array elements. Existing field readers, source views, duplicate-key decline, checked fallback, number/string semantics, and depth handling remain. The runtime test source list also gains its required context implementation.
+- Four alternating process windows at 60k rows: typed flat decode 4.804 → 4.414 ms (−8.1%); nested 8.872 → 8.539 ms (−3.8%). Host variability is substantial; erased decode has no consistent gain. This is a runtime API microbenchmark with test record allocators, not an application result.
+- ASan/UBSan runtime tests pass with RC audit off/on, three cycle thresholds, and 128 Node differential inputs per mode. Two compiler schema-emission tests, lint, format, baseline completeness, and diff checks pass. Full builds/gates and other-platform execution remain outstanding.
+- [Benchmark, attribution, ownership argument, exact validation, limits, and emitted-decoder design](native-json-decode.md).

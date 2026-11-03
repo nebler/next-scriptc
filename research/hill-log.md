@@ -1732,3 +1732,13 @@ Existing framework tests check native SSR and byte parity. Root README, discover
 main checkout, compiler sources and external services are untouched. No deploy,
 Docker, push, PR, issue, public post or secret.
 [Design, overhead method, sample outputs and limits](runtime-visibility.md).
+
+## 57. C2 native JSON decode: ordered schema prefix (2026-11-03)
+
+Fresh upstream already decodes eligible typed boundary inputs straight into native layouts. It also has key transitions, expected-key matching, unescaped string scanning, and a short decimal fast path. C2 therefore targets the remaining interpreted schema dispatch. A compact declaration-order prefix and direct record-array dispatch preserve the existing general parser and checked fallback. Duplicate keys, own-data `__proto__`, optional fields, source views, strings, numbers, depth, and partial ownership remain covered.
+
+An own-code runtime harness checks Node parity at 600, 6k, and 60k rows with optional scalars and nested string arrays. Four alternating windows give 60k typed flat decode 4.804 → 4.414 ms (−8.1%) and nested 8.872 → 8.539 ms (−3.8%). Erased decode has no consistent improvement. These are local descriptive medians with substantial host variation and C test record allocators, excluding addon copies and encoding. No application or hosted saving is inferred. Profiles identify schema dispatch/record construction, allocation, and destruction as material; numeric conversion and string scanning are smaller shares. A discarded scanner-inlining trial had no consistent gain.
+
+Fork branch `next-scriptc/c2-json-decode`, commit `4bd7effcf29eb1b373b1235e0b2bf72b8d09ed29`, is local and unpushed. Two ASan/UBSan runtime tests pass with RC audit off/on, thresholds 1/7/256, and 256 Node differential comparisons. Two schema-emission tests, lint, format, and baseline completeness pass. Full gates, addon end-to-end execution, Linux, and wasm execution remain outstanding. The larger C2 goal remains open; the report specifies per-schema emitted decoders and their ownership/fallback contract.
+
+Task build outputs are removed. Root README, main checkout, protected compiler checkouts, Papermark, and external services are untouched. No push, PR, issue, public post, Docker, or secret. [Methods, profile attribution, raw evidence, before/after, failures, and remaining design](native-json-decode.md).
