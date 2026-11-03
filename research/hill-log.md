@@ -1700,3 +1700,35 @@ CLI delegation, and native/wasm semantic probes. No compiler-source edits,
 main-checkout edits, root README edits, deploys, Docker, account calls, pushes,
 PRs, issues, public posts, secrets, Papermark, or HELD_OUT work.
 [Design, limits, reproducers, overhead, and machine-readable findings](build-time-fuzzing.md).
+
+## 56. P2 runtime visibility and CI reports (2026-11-03)
+
+The shared Node dispatcher now exposes detached aggregate snapshots through a
+supported API, with opt-in periodic JSON capture and a normal-exit flush. Next and
+Vite adapters share registration. Snapshot files contain counters, timing pairs,
+bucket lanes, vote explanations, thresholds, verification and fallback reasons.
+They exclude input values, outputs, input hashes and errors. No HTTP endpoint or
+dispatch policy change is introduced. Dev paths without wrappers have no runtime
+observations; explicit async sidecars remain outside the dispatcher snapshot.
+
+`report --runtime` merges observations into function and route rows. Route context
+is static reachability, not request attribution. `report --ci` writes JSON and
+Markdown, compares accepted/explicit/blocked rows to a baseline, accepts build and
+fuzz evidence, and can exit 2 on regressions. Build output caps compiled names at
+20 with source file and line. READMEs document capture and an Actions snippet;
+no workflow is added.
+
+A local stock-native fixture built one function and checked 1,200 HTTP responses.
+599 calls ran native, 49.9%, with zero fallbacks. Its dispatcher estimated
+479.998 ms CPU saved, excluding shadow cost and billing implications. Off-option
+microbench medians were 55.53 vs 57.45 ns/call on Node 26 and 44.81 vs 41.67 on
+Node 24. These noisy single-machine measurements show no consistent slowdown.
+There are no extra clocks or file work on off-option call paths.
+
+Node 24 validation: Next 102 passed; core 59 passed and two existing skips.
+Six visibility tests cover privacy, detached state, capture, runtime merge,
+baseline differences, compile/fuzz evidence, removed functions, and CLI exit codes.
+Existing framework tests check native SSR and byte parity. Root README, discovery,
+main checkout, compiler sources and external services are untouched. No deploy,
+Docker, push, PR, issue, public post or secret.
+[Design, overhead method, sample outputs and limits](runtime-visibility.md).

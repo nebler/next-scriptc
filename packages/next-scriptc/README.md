@@ -171,3 +171,23 @@ fail the build. Fuzzing defaults to off and leaves runtime shadow verification
 enabled. Async native functions, routes, and Cloudflare builds use separate paths.
 See the [core fuzzing reference](../scriptc-promote/README.md#check-native-results-before-deployment)
 and [semantics and findings](../../research/build-time-fuzzing.md).
+
+
+## Runtime visibility and CI
+
+Use the shared dispatcher capture in production Node servers:
+
+```sh
+SCRIPTC_PROMOTE_SNAPSHOT='/tmp/promote-%p.json' pnpm start
+pnpm exec next-scriptc report . --runtime /tmp/promote-12345.json
+pnpm exec next-scriptc report . --ci --json current.json --md current.md
+```
+
+Read the current process from your server code with
+`import {runtimeSnapshot, writeRuntimeSnapshot} from 'next-scriptc/promotion'`.
+The same snapshot API works with Vite adapters. See the
+[core runtime and CI guide](../scriptc-promote/README.md#observe-runtime-decisions)
+for the programmatic API, schema, interval, baseline comparisons, failure rules,
+and sample GitHub Actions steps. Dev mode uses ordinary JS and has no promoted
+call observations. Async explicit sidecars are outside the synchronous dispatcher
+snapshot. Production acceptance or compilation alone does not prove native calls.

@@ -84,7 +84,12 @@ export async function buildPromotion(modules, output, options={}) {
     accepted=await compilePromotion(kept,output,options);
    }
   }
+  await mkdir(output,{recursive:true});
+  const evidence={version:1,functions:[]};
+  for(const m of modules){const text=m.source?await readFile(m.source,'utf8').catch(()=>m.native):m.native;for(const f of m.functions){const line=text.slice(0,f.start??0).split('\n').length;const compiled=accepted.some(a=>a.functions.some(fn=>fn.id===f.id));evidence.functions.push({id:`${path.relative(process.cwd(),m.source??'unknown').split(path.sep).join('/')}#${f.name}`,status:compiled?'compiled':'blocked',explicit:!!m.forced});if(compiled&&evidence.functions.filter(f=>f.status==='compiled').length<=20)(options.report??console.log)(`[scriptc-promote] Promoted ${f.name} at ${path.relative(process.cwd(),m.source??'unknown')}:${line}`);}}
+  if(accepted.length>20)(options.report??console.log)(`[scriptc-promote] ... ${accepted.length-20} more promoted functions`);
+  await writeFile(path.join(output,'build-results.json'),JSON.stringify(evidence,null,2)+'\n');
   return accepted;
  }
- catch(error){const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
+ catch(error){await mkdir(output,{recursive:true});await writeFile(path.join(output,'build-results.json'),JSON.stringify({version:1,functions:modules.flatMap(m=>m.functions.map(f=>({id:`${path.relative(process.cwd(),m.source??'unknown').split(path.sep).join('/')}#${f.name}`,status:'blocked',explicit:!!m.forced})))},null,2)+'\n');const message=infrastructureFailure(error);if(!message)throw error; (options.report??console.log)(message);return [];}
 }

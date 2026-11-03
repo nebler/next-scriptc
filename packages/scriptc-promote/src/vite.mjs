@@ -25,6 +25,7 @@ function promotionPlugin({sourceDir='src', tsconfig='tsconfig.json', build={}, r
    try {
     modules=await buildPromotion(candidates,temporary,{...build,report});
     report(`[scriptc-promote] census: ${candidates.length} eligible, ${modules.length} compiled`);
+    for(const name of ['build-results.json','fuzz-results.json']){try{this.emitFile({type:'asset',fileName:`scriptc-promotion/${name}`,source:await readFile(path.join(temporary,name))});}catch(error){if(error.code!=='ENOENT')throw error;}}
     if(!modules.length)return;
     references={};
     for(const name of promotionArtifacts)references[name]=this.emitFile({type:'asset',fileName:`scriptc-promotion/${name}`,source:await readFile(path.join(temporary,name))});
@@ -37,6 +38,7 @@ function promotionPlugin({sourceDir='src', tsconfig='tsconfig.json', build={}, r
    return `import {fileURLToPath} from 'node:url';
 import {existsSync} from 'node:fs';
 import path from 'node:path';
+import {createDispatcher} from ${JSON.stringify(fileURLToPath(new URL('./functions/promotion.mjs',import.meta.url)))};
 import {loadPromotion} from ${JSON.stringify(fileURLToPath(new URL('./functions/promotion-runtime.mjs',import.meta.url)))};
 let file=fileURLToPath(import.meta.ROLLUP_FILE_URL_${references['promotion.node']});
 const complete=file=>['promotion.node','ids.json','encodings.json'].every(name=>existsSync(path.join(path.dirname(file),name)));
@@ -44,7 +46,7 @@ if(!complete(file)){let directory=path.dirname(fileURLToPath(import.meta.url));f
 let dispatcher;
 export function promote(_file,id,js,args){
  if(process.env.SCRIPTC_PROMOTE==='0')return js(...args);
- if(!dispatcher){try{dispatcher=loadPromotion(file);(globalThis[Symbol.for('scriptc-promote.dispatchers')]??=new Map()).set(file,dispatcher);}catch(error){console.error('[scriptc-promote] promotion unavailable',error.message);dispatcher={dispatch:(_id,fn,args)=>fn(...args)};}}
+ if(!dispatcher){try{dispatcher=loadPromotion(file);(globalThis[Symbol.for('scriptc-promote.dispatchers')]??=new Map()).set(file,dispatcher);}catch(error){console.error('[scriptc-promote] promotion unavailable',error.message);dispatcher=createDispatcher({mode:'js'});}}
  return dispatcher.dispatch(id,js,args);
 }`;
   },

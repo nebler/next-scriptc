@@ -110,7 +110,7 @@ estimates boundary share from wall time. Decision samples use the ordinary addon
 These predictions do not claim application savings or observed promotion. Real
 traffic, size buckets, shadow quotas, startup, fallback, and periodic rechecks
 still determine runtime behavior. The dispatcher exposes process-local
-`snapshot()` state; importing observations from running apps is a follow-up.
+`snapshot()` state. Use `--runtime` with the capture API below to import observations.
 See [coverage report design and limits](../../research/coverage-report.md).
 
 ## Defaults and diagnostics
@@ -181,3 +181,116 @@ order is deterministic; a time budget determines how much of that sequence runs.
 Shrinking is bounded and preserves a mismatch, but does not prove global
 minimality. Runtime shadow verification remains necessary.
 See [design, semantics, overhead, and findings](../../research/build-time-fuzzing.md).
+
+## Observe runtime decisions
+
+Static acceptance means a function qualifies for compilation. Capture the running
+Node process to establish whether calls actually used native execution. This works
+with the Next wrapper and all Node Vite adapters that use the shared dispatcher.
+Dev modes that leave functions unwrapped have no dispatcher observations.
+
+```sh
+SCRIPTC_PROMOTE_SNAPSHOT='/tmp/promote-%p.json' \
+SCRIPTC_PROMOTE_SNAPSHOT_INTERVAL_MS=1000 pnpm start
+scriptc-promote report . --runtime /tmp/promote-12345.json
+```
+
+`%p` expands to the process ID. Use it with multiple workers. The parent directory
+must exist. The default interval is 10 seconds, with a minimum of 100 ms. The timer
+is unref'ed. Atomic file replacement also runs on normal Node exit. Abrupt exits,
+signals, and native crashes can leave only the most recent periodic snapshot.
+Write failures log a fixed warning and keep the app running. Keep files in a
+private directory. Each file contains one process, and each dispatcher starts at
+zero after restart. Do not add repeated snapshots of the same process together.
+
+For a live in-process read or explicit flush:
+
+```js
+import {runtimeSnapshot, writeRuntimeSnapshot} from 'scriptc-promote/runtime';
+const snapshot = runtimeSnapshot();
+writeRuntimeSnapshot('/tmp/promote.json');
+```
+
+The version 1 schema contains `dispatchers[].functions[id]`, with `calls`,
+`native`, `fallback`, and `buckets`. Each bucket includes its internal `state`,
+public `lane` (`learning`, `js`, `native`, or `settled`), reason, shadows, verified
+and mismatch counts, fallback reasons, ratio, votes, thresholds, and scheduling
+limits. `settled` covers JS-final and demoted states. Bucket numbers are log2 input
+size estimates, not byte lengths. A scalar-only signature has bucket zero.
+`decision` describes the last complete voting epoch, or the partial first epoch.
+Copies are detached from dispatcher state. Inputs, results, input hashes, and
+error messages are excluded. IDs, counters, and timing aggregates remain.
+
+No timer, file writes, per-call snapshot allocation, or extra clocks run when the
+environment option is off. Registration costs one weak reference per dispatcher.
+Native successes and exceptional paths maintain additional aggregate counters.
+Boundary share is currently `null`; capture does not enable boundary timing.
+CPU savings use the last paired thread-CPU medians times native call counts.
+Wall-clock-only dispatchers report CPU savings as unavailable. This estimate
+excludes shadow cost, may apply one epoch to older calls, and is not billing.
+Route rows show observed reachable functions through the static reference graph.
+They do not measure requests or attribute shared helpers to a specific route.
+Unmatched IDs are printed, for example after source paths or builds change.
+
+Run `node scripts/runtime-visibility-demo.mjs` from this repository for a small
+native build and 1,200 localhost requests. One captured run printed:
+
+```text
+1 functions ran native for 49.9% of calls; estimated CPU saved is a dispatcher-measured estimate, not billing (479.998 ms).
+Runtime compute.ts#numeric: promoted & running native; 599/1200 native calls; 0 fallbacks; native
+```
+
+This is a synthetic compute fixture, not evidence of an application speedup.
+See [runtime visibility evidence](../../research/runtime-visibility.md).
+
+## Produce a CI report
+
+```sh
+scriptc-promote report . --ci --baseline previous.json \
+  --fail-on regressed-explicit --json current.json --md current.md
+```
+
+`--ci` writes `scriptc-report.json` and `scriptc-report.md` by default. JSON retains
+the coverage report and adds a sorted `ci` summary. Markdown is suitable for a PR
+comment. No comment is posted. Counts distinguish static accepted, explicit, and
+blocked functions. Diffs list newly accepted, newly blocked, regressed accepted,
+and regressed explicit IDs. Removed functions count as regressions. No baseline
+means every current accepted or blocked row is new.
+
+Exit status is 0 for success, 1 for invalid options or report errors, and 2 when
+`--fail-on regressed-explicit`, `regressed-accepted`, or `newly-blocked` matches.
+A failure rule requires a baseline. Without `--fail-on`, changes are informational.
+
+Static reports cannot establish compiler success. Add
+`--build-results path/to/build-results.json` from the same build to include compiler
+refusals in regressions. The shared build writes this file beside `promotion.node`,
+including on a failed explicit synchronous build. Vite emits build and available
+fuzz evidence under the server output's `scriptc-promotion` directory. Its version 1 `functions` array
+contains `{id: 'relative/file.ts#name', status: 'compiled' | 'blocked'}` rows.
+Build from the application root so IDs match the report. Supplied evidence must
+belong to the current source revision. Next async sidecar builds write their evidence to
+`.next/cache/scriptc-functions/build-results.json`. Supply that file when checking
+async explicit functions. A failed build must also fail your CI build step.
+
+Use `--fuzz-results path/to/fuzz-results.json` to include existing fuzz evidence.
+Neither flag compiles code or runs fuzzing. Keep build and fuzz failures fatal in
+CI independently. The report labels absent evidence as not supplied.
+
+Example GitHub Actions steps, for documentation only:
+
+```yaml
+- run: pnpm install --frozen-lockfile
+- run: pnpm build
+- run: pnpm exec scriptc-promote report . --ci --json current.json --md current.md
+- uses: actions/upload-artifact@v4
+  with:
+    name: promotion-report
+    path: |
+      current.json
+      current.md
+```
+
+Download a trusted previous `current.json` as `previous.json` before adding
+`--baseline previous.json --fail-on regressed-accepted`. Keep the baseline from
+an earlier revision of this application. Build output lists up to 20 compiled
+promotion names with source file and line. Compilation does not prove native use.
