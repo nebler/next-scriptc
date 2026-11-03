@@ -1,0 +1,560 @@
+{
+  "date": "2026-11-03",
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "node": "v26.13.0",
+    "scriptc": "0.4.6"
+  },
+  "adapter": {
+    "node": "v26.13.0",
+    "rows": [
+      {
+        "trials": 1000,
+        "inputBytes": 71,
+        "samples": 51,
+        "jsMs": 1.5552500000001146,
+        "nativeMs": 0.22145799999998417,
+        "ratio": 0.14239382735892483
+      },
+      {
+        "trials": 10000,
+        "inputBytes": 72,
+        "samples": 51,
+        "jsMs": 15.926707999999962,
+        "nativeMs": 1.9227500000001783,
+        "ratio": 0.1207248855193542
+      },
+      {
+        "trials": 100000,
+        "inputBytes": 73,
+        "samples": 51,
+        "jsMs": 159.42108400000143,
+        "nativeMs": 18.711583000000246,
+        "ratio": 0.11737207231635734
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 0,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 1527166.9999999916,
+        "p10": 1536000.0000000014,
+        "median": 1578332.9999999865,
+        "p90": 1608457.9999999846,
+        "max": 1624167
+      },
+      "native": {
+        "n": 24,
+        "min": 201040.00000003452,
+        "p10": 202582.99999997576,
+        "median": 212874.99999999683,
+        "p90": 228082.99999994118,
+        "max": 258624.999999995
+      },
+      "inputJsonBytes": 71,
+      "nsPerInputJsonByte": {
+        "js": 22230.042253520936,
+        "native": 2998.2394366196736
+      },
+      "computeIntensity": 22230.042253520936,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.14906856421153003,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 218583.999999737,
+        "computeWallNs": 185999.99696016312
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          1541124.999999994,
+          228124.99999994884
+        ],
+        [
+          1604458.0000000224,
+          214999.999999975
+        ],
+        [
+          1577082.9999999877,
+          212457.00000000055
+        ],
+        [
+          1624167,
+          228082.99999994118
+        ],
+        [
+          1589249.9999999928,
+          214957.99999999575
+        ],
+        [
+          1587083.000000007,
+          201040.00000003452
+        ],
+        [
+          1572833.0000000028,
+          224083.00000003577
+        ],
+        [
+          1597374.9999999995,
+          212874.99999999683
+        ],
+        [
+          1572749.999999985,
+          214417.00000002584
+        ],
+        [
+          1579541.000000006,
+          209750.00000001388
+        ],
+        [
+          1587916.000000007,
+          226709.00000002803
+        ],
+        [
+          1615959.0000000037,
+          203165.00000004112
+        ],
+        [
+          1580916.9999999995,
+          258624.999999995
+        ],
+        [
+          1578332.9999999865,
+          228041.0000000188
+        ],
+        [
+          1567958.0000000044,
+          216791.9999999981
+        ],
+        [
+          1550749.9999999937,
+          208584.0000000303
+        ],
+        [
+          1538124.9999999795,
+          209834.00000000076
+        ],
+        [
+          1608457.9999999846,
+          219249.99999998818
+        ],
+        [
+          1536000.0000000014,
+          210747.99999999529
+        ],
+        [
+          1527166.9999999916,
+          210042.99999998466
+        ],
+        [
+          1527999.9999999916,
+          208417.99999996624
+        ],
+        [
+          1587999.999999994,
+          202582.99999997576
+        ],
+        [
+          1568500.0000000002,
+          208791.99999998833
+        ],
+        [
+          1552082.9999999818,
+          201248.99999999002
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    },
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 1,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 15844542.000000047,
+        "p10": 15871624.999999994,
+        "median": 15916458.000000034,
+        "p90": 15984749.999999963,
+        "max": 16023874.999999976
+      },
+      "native": {
+        "n": 24,
+        "min": 1873292.000000106,
+        "p10": 1882874.0000000154,
+        "median": 1929291.9999999185,
+        "p90": 1944083.9999999753,
+        "max": 1983832.0000000068
+      },
+      "inputJsonBytes": 72,
+      "nsPerInputJsonByte": {
+        "js": 221061.91666666712,
+        "native": 26795.72222222109
+      },
+      "computeIntensity": 221061.91666666712,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.023775120030699592,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 1903249.9999998435,
+        "computeWallNs": 1858000.0028014183
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          15904334.000000063,
+          1953998.9999999534
+        ],
+        [
+          15946250.000000078,
+          1894332.9999999604
+        ],
+        [
+          15905750.000000011,
+          1924251.0000000265
+        ],
+        [
+          15982541.000000084,
+          1886833.999999908
+        ],
+        [
+          15900875.000000041,
+          1925041.0000000785
+        ],
+        [
+          15978707.999999983,
+          1873292.000000106
+        ],
+        [
+          15900834.000000032,
+          1941666.9999999385
+        ],
+        [
+          15911916.999999903,
+          1908500.0000001173
+        ],
+        [
+          15871624.999999994,
+          1929291.9999999185
+        ],
+        [
+          15934250.00000002,
+          1917916.9999999886
+        ],
+        [
+          15925833.000000011,
+          1933585.0000001073
+        ],
+        [
+          16023874.999999976,
+          1882874.0000000154
+        ],
+        [
+          15907833.000000097,
+          1931332.999999995
+        ],
+        [
+          15953375.00000005,
+          1877417.0000001504
+        ],
+        [
+          15960500.000000024,
+          1936708.999999837
+        ],
+        [
+          15886583.99999997,
+          1983832.0000000068
+        ],
+        [
+          15913916.99999997,
+          1944042.0000000813
+        ],
+        [
+          16007624.99999996,
+          1944083.9999999753
+        ],
+        [
+          15915124.999999989,
+          1938291.9999999332
+        ],
+        [
+          15916458.000000034,
+          1891208.0000001197
+        ],
+        [
+          15862375.000000043,
+          1930834.9999997744
+        ],
+        [
+          15945416.000000022,
+          1902125.999999953
+        ],
+        [
+          15844542.000000047,
+          1931789.999999978
+        ],
+        [
+          15984749.999999963,
+          1896916.9999999166
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    },
+    {
+      "id": "lib/forecast.ts#forecast",
+      "status": "ok",
+      "inputIndex": 2,
+      "inputSource": "user-provided",
+      "bucket": 0,
+      "metric": "thread-cpu",
+      "js": {
+        "n": 24,
+        "min": 158739083.99999982,
+        "p10": 159479249.9999994,
+        "median": 176002415.99999934,
+        "p90": 205398165.99999994,
+        "max": 219117208.00000057
+      },
+      "native": {
+        "n": 24,
+        "min": 18665417.00000016,
+        "p10": 18676375.999999437,
+        "median": 20709084.000000983,
+        "p90": 23331664.999999702,
+        "max": 24311792.000000425
+      },
+      "inputJsonBytes": 73,
+      "nsPerInputJsonByte": {
+        "js": 2410991.999999991,
+        "native": 283686.0821917943
+      },
+      "computeIntensity": 2410991.999999991,
+      "computeIntensityUnit": "JS ns per input JSON byte",
+      "boundaryShare": 0.029076838667490557,
+      "boundaryStages": {
+        "n": 10,
+        "totalWallNs": 26014416.999998502,
+        "computeWallNs": 25257999.99386072
+      },
+      "verdict": "native",
+      "policy": {
+        "samples": 24,
+        "required": 19,
+        "coldSamples": 2,
+        "promoteRatio": 0.9,
+        "demoteRatio": 1.05,
+        "recheckEvery": 200
+      },
+      "rawPairsNs": [
+        [
+          166050833.99999967,
+          20737749.999998413
+        ],
+        [
+          176002415.99999934,
+          20733373.999999456
+        ],
+        [
+          166484542.00000015,
+          18697208.99999993
+        ],
+        [
+          165091792.00000018,
+          18756459.00000018
+        ],
+        [
+          168962708.00000003,
+          19335250.000000086
+        ],
+        [
+          170157333.00000012,
+          20668416.999999862
+        ],
+        [
+          158739083.99999982,
+          18665417.00000016
+        ],
+        [
+          176108874.9999999,
+          19171833.000003062
+        ],
+        [
+          162562958.00000045,
+          19342831.999999363
+        ],
+        [
+          167174542.00000066,
+          18725917.000000663
+        ],
+        [
+          159479249.9999994,
+          18676375.999999437
+        ],
+        [
+          158939250.00000036,
+          18672292.99999872
+        ],
+        [
+          205583541.9999994,
+          20772124.999999505
+        ],
+        [
+          169641374.99999925,
+          20722125.999998752
+        ],
+        [
+          175049625.00000057,
+          20747374.99999992
+        ],
+        [
+          183406458.99999982,
+          20658669.000000373
+        ],
+        [
+          219117208.00000057,
+          24311792.000000425
+        ],
+        [
+          198662875,
+          20709084.000000983
+        ],
+        [
+          192376790.99999967,
+          23378083.999999944
+        ],
+        [
+          205398165.99999994,
+          23331664.999999702
+        ],
+        [
+          196316249.99999985,
+          20669083.00000068
+        ],
+        [
+          198969542.00000072,
+          22296583.99999789
+        ],
+        [
+          185502583.99999985,
+          21175623.999999516
+        ],
+        [
+          205150082.99999863,
+          21062665.99999981
+        ]
+      ],
+      "notes": [
+        "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+        "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+        "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+      ]
+    }
+  ],
+  "fuzz": {
+    "settings": {
+      "seed": 42,
+      "budgetMs": 2000,
+      "maxCases": 64
+    },
+    "discoveryMs": 1352.1791660000001,
+    "buildMs": 1167.4295000000002,
+    "fuzzMs": 1174.1095419999997,
+    "discovered": 1,
+    "compiled": 1,
+    "elapsedMs": 3693.778125,
+    "results": [
+      {
+        "source": "examples/shared-native/lib/forecast.ts",
+        "name": "forecast",
+        "forced": false,
+        "id": "cf6e8fbf43f9152e6dfa",
+        "status": "passed",
+        "seed": 42,
+        "cases": 64,
+        "rejected": 9,
+        "fallbacks": 0,
+        "throws": 10,
+        "elapsedMs": 566.7191250000001
+      }
+    ]
+  },
+  "observedServer": {
+    "seededCases": 12,
+    "panel": {
+      "observed": true,
+      "lanes": [
+        "native"
+      ],
+      "shadows": 26,
+      "mismatches": 0,
+      "fallbacks": 0,
+      "nativeCalls": 1,
+      "buckets": [
+        {
+          "bucket": 0,
+          "lane": "native",
+          "reason": "native",
+          "ratio": 0.1393571550397186,
+          "samples": 24
+        }
+      ]
+    }
+  },
+  "finalServerCheck": {
+    "seededCases": 12,
+    "panel": {
+      "observed": true,
+      "lanes": [
+        "native"
+      ],
+      "shadows": 26,
+      "mismatches": 0,
+      "fallbacks": 0,
+      "nativeCalls": 26,
+      "buckets": [
+        {
+          "bucket": 0,
+          "lane": "native",
+          "reason": "native",
+          "ratio": 0.1394784241668102,
+          "samples": 24
+        }
+      ]
+    }
+  }
+}

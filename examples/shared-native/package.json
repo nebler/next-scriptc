@@ -1,0 +1,28 @@
+{
+  "name": "shared-native",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next-scriptc start",
+    "test": "node --test test/unit.mjs",
+    "test:server": "node test/server.mjs",
+    "bench": "node bench/run.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "next-scriptc": "workspace:*",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "scriptc-promote": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@11.1.3"
+}
