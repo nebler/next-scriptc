@@ -22,7 +22,19 @@ if(built.length)try{stages=await buildPromotion(built,path.join(temp,'stages'),{
 const addon=built.length?require(path.join(temp,'plain/promotion.node')):null;
 const timingAddon=stages.length?require(path.join(temp,'stages/promotion.node')):null;
 for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).split(path.sep).join('/')+'#'+fn.name,index=built.indexOf(m);
- if(index<0){results.push({id,status:'compile-rejected',reason:logs.join('\n')||'Stock compiler rejected function'});continue;}
+ if(index<0){
+  try {
+   const reference=path.join(temp,'refused-'+results.length+'.mjs');await writeFile(reference,stripTypeScriptTypes(m.referenceNative??m.native));const js=(await import(pathToFileURL(reference).href))[fn.name];
+   const supplied=inputs[id]??inputs[fn.id],tuples=supplied??[8,32,128].map(size=>resize(synthesize(m,fn),size));
+   for(const [inputIndex,args] of tuples.entries()){
+    let sink;for(let i=0;i<30;i++)sink=js(...args);let iterations=1;
+    for(let r=0;r<8;r++){const begin=performance.now();for(let i=0;i<iterations;i++)sink=js(...args);const ms=performance.now()-begin;if(ms>=2)break;iterations=Math.min(10000000,Math.ceil(iterations*2.5/Math.max(ms,.001)));}
+    const raw=[];for(let b=0;b<21;b++){const begin=process.cpuUsage();for(let i=0;i<iterations;i++)sink=js(...args);const cpu=process.cpuUsage(begin);raw.push((cpu.user+cpu.system)*1000/iterations);}
+    const j=stats(raw),bytes=Buffer.byteLength(JSON.stringify(args));results.push({id,status:'compile-rejected',compileMs,inputIndex,inputSource:supplied?'test-shape-derived':'synthetic',arguments:args,js:j,metric:'process-cpu',native:null,inputJsonBytes:bytes,computeIntensity:j.median/bytes,screenPass:j.median>=100000&&j.median/bytes>=100,verdict:null,jsIterationsPerBatch:iterations,rawJsNs:raw,reason:logs.join('\n')||'Stock compiler rejected function'});
+   }
+  }catch(e){results.push({id,status:'compile-rejected',reason:logs.join('\n'),inputError:e.message,js:null,native:null,verdict:null,screenPass:null});}
+  continue;
+ }
  try{
   let tuples=inputs[id]??inputs[fn.id],inputSource='test-shape-derived';
   if(tuples===undefined){inputSource='synthetic';tuples=[8,32,128].map(size=>resize(synthesize(m,fn),size));}
@@ -37,7 +49,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
    const pairs=[],jsNs=[],nativeNs=[];
    const cpu=!!addon.runShadow&&!!addon.threadCpuMs,now=cpu?addon.threadCpuMs:()=>performance.now();
    let sink, iterations=1;
-   for(let round=0;round<8;round++){const begin=performance.now();for(let i=0;i<iterations;i++)sink=js(...args);const ms=performance.now()-begin;if(ms>=2)break;iterations=Math.min(100000,Math.max(iterations+1,Math.ceil(iterations*2.5/Math.max(ms,.001))));}
+   for(let round=0;round<8;round++){const begin=performance.now();for(let i=0;i<iterations;i++)sink=js(...args);const ms=performance.now()-begin;if(ms>=2)break;iterations=Math.min(10000000,Math.max(iterations+1,Math.ceil(iterations*2.5/Math.max(ms,.001))));}
    async function pair(){let j,n;const runJS=()=>{const begin=now();for(let i=0;i<iterations;i++)sink=js(...args);j=(now()-begin)*1e6/iterations;};const runNative=async()=>{const begin=now(),input=encodeArguments(schema,args),encode=now()-begin;const out=cpu?await addon.runShadow(index,input):{value:addon.run(index,input)};if(out.value?.fallback)throw Error('Native fallback');const decodeBegin=now(),value=decodeResult(schema,out.value,argumentTable(input));n=(cpu?out.cpuMs+encode+now()-decodeBegin:now()-begin)*1e6;if(canonicalResult(value,schema,argumentTable(input))!==expected)throw Error('Native/JS mismatch');};if(pairs.length%2){await runNative();runJS();}else{runJS();await runNative();}return [j,n];}
    for(let i=0;i<stabilityDefaults.coldSamples;i++)await pair();
    for(let i=0;i<60;i++){const [j,n]=await pair();jsNs.push(j);nativeNs.push(n);pairs.push([j,n]);}
