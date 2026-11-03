@@ -1975,3 +1975,36 @@ fixing an npm prepare failure from copied pnpm links. No production package or
 compiler code changes. Worktree and /tmp only; no main-checkout/node_modules
 mutation, root README edit, deploy, hosting call, Docker, push, PR, issue, public
 post, or secret. [Report, reproduction, raw samples, and limitations](shared-native-remeasure.md).
+
+## 69. IDE1: TypeScript editor integration (2026-11-03)
+
+`scriptc-promote/ts-plugin` loads through tsconfig without an editor extension.
+A CommonJS export and legacy-resolver shim support tsserver's loader. Marked
+functions receive original-source NSC diagnostics with build repair hints and
+eligible/blocked hover text. File directives retain the async explicit contract.
+Unmarked candidate and blocker suggestions are opt-in. No automatic code edits.
+
+A worker calls existing read-only discovery and extraction with unsaved-buffer
+overlays. Source/project versions invalidate displayed results; dependency
+content hashes and resolution existence validate reuse. Requests schedule
+bounded, debounced work and return cached results. Worker failures preserve the
+TypeScript service. Limits include 32 files, 256 buffers, two million source
+characters, 256 results, and a five-second worker deadline. Compiler-only errors,
+actual speed, and runtime verification remain build/runtime checks.
+
+On Node 26.13.0 / TypeScript 5.9.3, 200 paired warmed semantic-diagnostic requests
+add p50/p95 0.011/0.054 ms for demo/native-example and 0.008/0.017 ms for
+shared-native/forecast. Worker analysis takes 426/1,208 ms; cached worker round
+trips take 13.4/17.1 ms. Initial readiness is 1,271/1,971 ms including TypeScript,
+debounce and startup. These local results do not claim large-project or editor
+UI performance. Stock scriptc's checker is not invoked or measured.
+
+Eight real-language-service and worker tests cover spans/codes/hints, eligible
+results, hover, unsaved changes, automatic hints, file directives, nested shapes,
+cache invalidation, failure recovery, and both plugin resolvers. Next suite:
+103 pass. Core suite: 87 pass, two existing skips. `git diff --check` passes.
+[Setup](../docs/editor.md) and [design, latency harness, limits](editor-plugin.md).
+B1 discovery/build files, dispatcher policy, root README, protected checkouts and
+compiler trees are untouched. Dependencies installed only in this worktree with
+an isolated /tmp store. No deploy, hosting call, Docker, push, PR, issue, public
+post, package publication, or secret.
