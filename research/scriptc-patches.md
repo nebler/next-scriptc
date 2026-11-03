@@ -194,3 +194,11 @@ regex replacement compile. No SC failure is claimed for these constructs.
 ## Local leaf record scalar replacement (C1c)
 
 `SCRIPTC_SCALAR_RECORDS=1` removes complete local number/boolean/string records after alias-group use analysis. Field mutation and exact identity helpers are supported. Nested owned graphs, arbitrary helpers, erased and escaping identities retain allocation. Four alternating windows give generic 0.1350 → 0.0580 ms at 50k; spread and D1/E1 boundary probes show no established gain. CSV remains about six times Node. The default-on experiment matches opt-in generic/spread timings. [Analysis, ownership argument, exact validation, failures, and raw evidence](compiler-scalar-replacement.md).
+
+## Guarded erased string indices (C1d)
+
+- Local branch `next-scriptc/erased-specialization`, commit `1bba92c707186ea32b0cb40cf02d9b0fd2c75178`, from upstream `ee968de47ff4d4f0cb71186ede42f51cc72c79e5`. Not pushed.
+- The existing numeric-key probe answers immutable in-range primitive string characters directly, with UTF-16 semantics and existing keyed fallback. No new object cache or compiler ownership transform.
+- Four matched-LLVM alternating windows: erased reduction 38.4090 → 31.4085 ms (−18.2%); 4,096-row CSV 40.7580 → 38.5330 ms (−5.5%), still 5.49× Node. Typed control unchanged. Copy/generic summary regressions of 5.0%/8.0% remain visible and unexplained.
+- 719 LLVM backend tests, six affected corpus programs through both harnesses, sanitized new corpus with RC audit, direct ASan/UBSan runtime checks with isolated RC audit, lint, formatting, preflight/order recheck, and baseline completeness pass. Full gates and other variants/platforms remain open.
+- [Reproducer, profiles, soundness, excluded mixed-compiler experiment, exact commands, and results](compiler-erased-specialization.md).
