@@ -4,5 +4,46 @@
   "split": "DEV",
   "adapterSha": "c72abca224e386a30675105863efc9c0a1c244d4",
   "status": "non-Node control",
-  "scopes": []
+  "scopes": [],
+  "verifiedSha": "37e56c3c6588bd5cedbad3c91f7b5c5a05a8c123",
+  "pinCheck": [
+    {
+      "command": [
+        "git",
+        "init",
+        "-q",
+        "/tmp/m1-control-pin-check/fider"
+      ],
+      "exit": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/m1-control-pin-check/fider",
+        "fetch",
+        "--depth",
+        "1",
+        "https://github.com/getfider/fider",
+        "37e56c3c6588bd5cedbad3c91f7b5c5a05a8c123"
+      ],
+      "exit": 0,
+      "output": "From https://github.com/getfider/fider\n * branch            37e56c3c6588bd5cedbad3c91f7b5c5a05a8c123 -> FETCH_HEAD\n"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/m1-control-pin-check/fider",
+        "checkout",
+        "-q",
+        "--detach",
+        "FETCH_HEAD"
+      ],
+      "exit": 0,
+      "output": ""
+    }
+  ],
+  "dependencyInstall": "Not applicable: non-Node control, no B1 accepted functions."
 }

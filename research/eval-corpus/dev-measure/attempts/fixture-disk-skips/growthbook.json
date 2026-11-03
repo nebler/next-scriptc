@@ -1,0 +1,86 @@
+{
+  "repository": "growthbook/growthbook",
+  "sha": "b73ffdb3e8189fd918d721155ce69742fdc6fbfd",
+  "split": "DEV",
+  "adapterSha": "2e681585aba3758ef8d7cf33d4e126cde45e0348",
+  "status": "skipped: <12 GB free",
+  "scopes": [
+    "packages/back-end/src",
+    "packages/shared/src",
+    "packages/stats-ts/src"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-fixture-clones/growthbook"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/growthbook/growthbook.git",
+      "b73ffdb3e8189fd918d721155ce69742fdc6fbfd"
+    ],
+    "exit": 0,
+    "seconds": 10.23,
+    "output": "From https://github.com/growthbook/growthbook\n * branch            b73ffdb3e8189fd918d721155ce69742fdc6fbfd -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 1.45,
+    "output": ""
+  },
+  "verifiedSha": "b73ffdb3e8189fd918d721155ce69742fdc6fbfd",
+  "packageInventory": [
+    "package.json",
+    "packages/stats-ts/package.json",
+    "packages/sdk-js/package.json",
+    "packages/dbt/package.json",
+    "packages/shared/package.json",
+    "packages/remote-saved-groups-csv-parser/package.json",
+    "packages/front-end/package.json",
+    "packages/stats/package.json",
+    "packages/sdk-react/package.json",
+    "packages/back-end/package.json",
+    "packages/sdk-js/plugins/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "packages/back-end/src/scripts/generate-openapi.ts",
+    "packages/back-end/src/scripts/test-rest-api.ts",
+    "packages/back-end/src/scripts/migrate-encryption-key-env.ts",
+    "packages/back-end/src/scripts/generate-openapi-docs.ts",
+    "packages/back-end/src/scripts/migrate-encryption-key.ts",
+    "packages/back-end/src/scripts/diff-features.ts",
+    "packages/back-end/src/api/specs/metric-group.spec.ts",
+    "packages/back-end/src/api/specs/ramp-schedule-template.spec.ts",
+    "packages/back-end/src/api/specs/analytics-exploration.spec.ts",
+    "packages/back-end/src/api/specs/holdout.spec.ts",
+    "packages/back-end/src/api/specs/learning.spec.ts",
+    "packages/back-end/src/api/specs/auto-run.spec.ts",
+    "packages/back-end/src/api/specs/experiment-template.spec.ts",
+    "packages/back-end/src/api/specs/dashboard.spec.ts",
+    "packages/back-end/src/api/specs/team.spec.ts",
+    "packages/back-end/src/api/specs/ramp-schedule.spec.ts",
+    "packages/back-end/src/api/specs/custom-field.spec.ts",
+    "packages/shared/src/validators/population.spec.ts",
+    "packages/shared/src/validators/interleaving.spec.ts",
+    "packages/shared/src/validators/contextual-bandit.spec.ts",
+    "packages/shared/src/validators/contextual-bandit-query.spec.ts"
+  ],
+  "freeBytesBeforeInstall": 11100037120
+}

@@ -1,0 +1,4348 @@
+{
+  "repository": "actualbudget/actual",
+  "sha": "741d1615b7a818784f7859269430a003753a40dd",
+  "split": "DEV",
+  "adapterSha": "8f8a305366a5386e72d869baec17247407d21ac2",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "packages/sync-server/src",
+    "packages/loot-core/src/server",
+    "packages/loot-core/src/shared"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-dev-clones/actual"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/actualbudget/actual.git",
+      "741d1615b7a818784f7859269430a003753a40dd"
+    ],
+    "exit": 0,
+    "seconds": 6.27,
+    "output": "From https://github.com/actualbudget/actual\n * branch            741d1615b7a818784f7859269430a003753a40dd -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.74,
+    "output": ""
+  },
+  "verifiedSha": "741d1615b7a818784f7859269430a003753a40dd",
+  "packageInventory": [
+    "package.json",
+    "packages/desktop-electron/package.json",
+    "packages/crdt/package.json",
+    "packages/loot-core/package.json",
+    "packages/vite-plugin-peggy/package.json",
+    "packages/docs/package.json",
+    "packages/cli/package.json",
+    "packages/component-library/package.json",
+    "packages/plugins-service/package.json",
+    "packages/eslint-plugin-actual/package.json",
+    "packages/api/package.json",
+    "packages/ci-actions/package.json",
+    "packages/mobile-client/package.json",
+    "packages/desktop-client/package.json",
+    "packages/sync-server/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "packages/sync-server/src/secrets.test.js",
+    "packages/sync-server/src/app-admin.test.js",
+    "packages/sync-server/src/load-config.test.js",
+    "packages/sync-server/src/simplefin-config.test.ts",
+    "packages/sync-server/src/config-file-env.test.ts",
+    "packages/sync-server/src/deleted-budget-bank-sync.test.ts",
+    "packages/sync-server/src/load-config-file-env.test.ts",
+    "packages/sync-server/src/app-cors-proxy.test.js",
+    "packages/sync-server/src/app-https-config.test.ts",
+    "packages/sync-server/src/app-sync.test.ts",
+    "packages/sync-server/src/app-openid.test.ts",
+    "packages/sync-server/src/migrations.test.ts",
+    "packages/sync-server/src/app-account.test.js",
+    "packages/sync-server/src/util/server-listen.test.ts",
+    "packages/sync-server/src/util/ssrf.test.ts",
+    "packages/sync-server/src/util/sensitive-logging.test.ts",
+    "packages/sync-server/src/util/paths.test.ts",
+    "packages/sync-server/src/util/atomic-write.test.ts",
+    "packages/sync-server/src/util/middlewares.test.ts",
+    "packages/sync-server/src/app-sync/validation.test.ts",
+    "packages/sync-server/src/app-simplefin/fetch.integration.test.ts",
+    "packages/sync-server/src/app-simplefin/app-simplefin.test.js",
+    "packages/sync-server/src/app-simplefin/ssrf.test.ts",
+    "packages/sync-server/src/app-gocardless/app-gocardless.test.ts",
+    "packages/sync-server/src/accounts/password.test.js",
+    "packages/sync-server/src/accounts/openid.test.ts",
+    "packages/sync-server/src/scripts/enable-openid.js",
+    "packages/sync-server/src/scripts/disable-openid.js",
+    "packages/sync-server/src/scripts/reset-password.js",
+    "packages/sync-server/src/scripts/run-migrations.js",
+    "packages/sync-server/src/scripts/health-check.ts",
+    "packages/sync-server/src/app-enablebanking/tests/transactions.spec.ts",
+    "packages/sync-server/src/app-enablebanking/tests/callback-logging.test.ts",
+    "packages/sync-server/src/app-enablebanking/tests/configure-permissions.test.ts",
+    "packages/sync-server/src/app-enablebanking/tests/poll-auth.spec.ts",
+    "packages/sync-server/src/app-enablebanking/services/tests/fixtures.ts",
+    "packages/sync-server/src/app-enablebanking/services/tests/normalization.spec.ts",
+    "packages/sync-server/src/app-enablebanking/services/tests/enablebanking-service.spec.ts",
+    "packages/sync-server/src/app-enablebanking/utils/tests/errors.spec.ts",
+    "packages/sync-server/src/app-enablebanking/utils/tests/jwt.spec.ts",
+    "packages/sync-server/src/app-gocardless/util/gocardless-error-details.test.ts",
+    "packages/sync-server/src/app-gocardless/tests/utils.spec.ts",
+    "packages/sync-server/src/app-gocardless/tests/bank-factory.spec.ts",
+    "packages/sync-server/src/app-gocardless/services/tests/fixtures.ts",
+    "packages/sync-server/src/app-gocardless/services/tests/gocardless-service.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/ing_pl_ingbplpw.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/easybank_bawaatww.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/alior_albpplpw.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/mbank_retail_brexplpw.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/virgin_nrnbgb22.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/bancsabadell_bsabesbbb.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/raiffeisen_at_rzbaatww.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/revolut_revolt21.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/nbg_ethngraaxxx.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/ing_ingddeff.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/abnamro_abnanl2a.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/kbc_kredbebb.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/commerzbank_cobadeff.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/nationwide_naiagb21.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/cbc_cregbebb.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/belfius_gkccbebb.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/swedbank_habalv22.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/bper_retail_bpmoit22.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/fortuneo_ftnofrp1xxx.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/abanca_caglesmm.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/sandboxfinance_sfin0000.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/boursobank_bousfrppxxx.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/spk_marburg_biedenkopf_heladef1mar.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/lhv_lhvbee22.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/integration_bank.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/ssk_dusseldorf_dussdeddxxx.spec.ts",
+    "packages/sync-server/src/app-gocardless/banks/tests/fixtures/commerzbank-hostile.mjs",
+    "packages/sync-server/src/app-sync/tests/services/files-service.test.js",
+    "packages/loot-core/src/server/cloud-import.test.ts",
+    "packages/loot-core/src/server/cloud-storage.test.ts",
+    "packages/loot-core/src/server/sheet.test.ts",
+    "packages/loot-core/src/server/post.test.ts",
+    "packages/loot-core/src/server/api.test.ts",
+    "packages/loot-core/src/server/main.test.ts",
+    "packages/loot-core/src/server/forecast/app.test.ts",
+    "packages/loot-core/src/server/forecast/forecast-projection.test.ts",
+    "packages/loot-core/src/server/forecast/forecast-filters.test.ts",
+    "packages/loot-core/src/server/forecast/forecast-tracking-budget.test.ts",
+    "packages/loot-core/src/server/encryption/index.test.ts",
+    "packages/loot-core/src/server/encryption/encryption.test.ts",
+    "packages/loot-core/src/server/__mocks__/post.ts",
+    "packages/loot-core/src/server/payees/app.test.ts",
+    "packages/loot-core/src/server/util/zip.test.ts",
+    "packages/loot-core/src/server/importers/progress.test.ts",
+    "packages/loot-core/src/server/importers/ynab5.test.ts",
+    "packages/loot-core/src/server/importers/ynab4.test.ts",
+    "packages/loot-core/src/server/spreadsheet/graph-data-structure.test.ts",
+    "packages/loot-core/src/server/spreadsheet/spreadsheet.test.ts",
+    "packages/loot-core/src/server/tests/mockSyncServer.ts",
+    "packages/loot-core/src/server/schedules/app.test.ts",
+    "packages/loot-core/src/server/schedules/occurrences.test.ts",
+    "packages/loot-core/src/server/tags/app.test.ts",
+    "packages/loot-core/src/server/dashboard/app.test.ts",
+    "packages/loot-core/src/server/transactions/transfer.test.ts",
+    "packages/loot-core/src/server/transactions/merge.test.ts",
+    "packages/loot-core/src/server/transactions/index.test.ts",
+    "packages/loot-core/src/server/transactions/transaction-rules.test.ts",
+    "packages/loot-core/src/server/migrate/additive-migrations.test.ts",
+    "packages/loot-core/src/server/migrate/migrations.test.ts",
+    "packages/loot-core/src/server/accounts/app-bank-sync.test.ts",
+    "packages/loot-core/src/server/accounts/link.test.ts",
+    "packages/loot-core/src/server/accounts/sync.test.ts",
+    "packages/loot-core/src/server/accounts/split-formula-import.test.ts",
+    "packages/loot-core/src/server/rules/rule-utils.test.ts",
+    "packages/loot-core/src/server/rules/customFunctions.test.ts",
+    "packages/loot-core/src/server/rules/formula-action.test.ts",
+    "packages/loot-core/src/server/rules/index.test.ts",
+    "packages/loot-core/src/server/rules/balanceOfFormula.test.ts",
+    "packages/loot-core/src/server/rules/formula-action-integration.test.ts",
+    "packages/loot-core/src/server/rules/split-parent-context.test.ts",
+    "packages/loot-core/src/server/db/index.test.ts",
+    "packages/loot-core/src/server/account-groups/app.test.ts",
+    "packages/loot-core/src/server/sync/migrate.test.ts",
+    "packages/loot-core/src/server/sync/deferred.test.ts",
+    "packages/loot-core/src/server/sync/compare-messages.test.ts",
+    "packages/loot-core/src/server/sync/sync.test.ts",
+    "packages/loot-core/src/server/sync/sync.property.test.ts",
+    "packages/loot-core/src/server/sync/serialization.test.ts",
+    "packages/loot-core/src/server/budgetfiles/backups.test.ts",
+    "packages/loot-core/src/server/aql/compiler.test.ts",
+    "packages/loot-core/src/server/aql/exec.test.ts",
+    "packages/loot-core/src/server/aql/views.test.ts",
+    "packages/loot-core/src/server/aql/schema-helpers.test.ts",
+    "packages/loot-core/src/server/reports/app.test.ts",
+    "packages/loot-core/src/server/reports/formula-card-integration.test.ts",
+    "packages/loot-core/src/server/formulas/bootstrap.test.ts",
+    "packages/loot-core/src/server/budget/template-notes.test.ts",
+    "packages/loot-core/src/server/budget/app.test.ts",
+    "packages/loot-core/src/server/budget/base.test.ts",
+    "packages/loot-core/src/server/budget/sort-categories.test.ts",
+    "packages/loot-core/src/server/budget/schedule-template.test.ts",
+    "packages/loot-core/src/server/budget/category-template-context.test.ts",
+    "packages/loot-core/src/server/budget/cleanup-template-notes.test.ts",
+    "packages/loot-core/src/server/budget/goal-template.test.ts",
+    "packages/loot-core/src/server/budget/actions.test.ts",
+    "packages/loot-core/src/server/budget/cleanup-template.test.ts",
+    "packages/loot-core/src/server/budget/schedule-template.db.test.ts",
+    "packages/loot-core/src/server/aql/schema/executors.test.ts",
+    "packages/loot-core/src/server/aql/schema/index.test.ts",
+    "packages/loot-core/src/server/transactions/export/export-to-csv.test.ts",
+    "packages/loot-core/src/server/transactions/import/ofx2json.test.ts",
+    "packages/loot-core/src/server/transactions/import/parse-file.test.ts",
+    "packages/loot-core/src/shared/rules.test.ts",
+    "packages/loot-core/src/shared/errors.test.ts",
+    "packages/loot-core/src/shared/transfer.test.ts",
+    "packages/loot-core/src/shared/async.test.ts",
+    "packages/loot-core/src/shared/merge.test.ts",
+    "packages/loot-core/src/shared/schedules.test.ts",
+    "packages/loot-core/src/shared/transactions.test.ts",
+    "packages/loot-core/src/shared/months.test.ts",
+    "packages/loot-core/src/shared/util.test.ts",
+    "packages/loot-core/src/shared/tags.test.ts",
+    "packages/loot-core/src/shared/location-utils.test.ts",
+    "packages/loot-core/src/shared/forecast-contributors.test.ts",
+    "packages/loot-core/src/shared/normalisation.test.ts",
+    "packages/loot-core/src/shared/arithmetic.test.ts",
+    "packages/loot-core/src/shared/currencies.test.ts",
+    "packages/loot-core/src/shared/__mocks__/platform.ts"
+  ],
+  "freeBytesBeforeInstall": 13037862912,
+  "packageManager": "yarn@4.17.1",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn@4.17.1",
+      "install",
+      "--mode=skip-build"
+    ],
+    "exit": 0,
+    "seconds": 50.41,
+    "output": "\u27a4 YN0000: \u00b7 Yarn 4.17.1\n\u27a4 YN0000: \u250c Resolution step\n\u27a4 YN0000: \u2514 Completed\n\u27a4 YN0000: \u250c Post-resolution validation\n\u27a4 YN0060: \u2502 @capacitor/core is listed by your project with version 8.4.2 (pc73ef1), which doesn't satisfy what @capacitor/ios and other dependencies request (^8.5.0).\n\u27a4 YN0060: \u2502 react is listed by your project with version 19.3.0 (pfeaecd), which doesn't satisfy what @react-spring/zdog (via react-spring) and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 react-dom is listed by your project with version 19.3.0 (p145d5f), which doesn't satisfy what @react-spring/zdog (via react-spring) and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0002: \u2502 @actual-app/ci-actions@workspace:packages/ci-actions doesn't provide vite (p686484), requested by vitest.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library [dc3cf] doesn't provide @babel/core (p50edc6), requested by @rolldown/plugin-babel and other dependencies.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library [dc3cf] doesn't provide @testing-library/dom (pf4b1d9), requested by @testing-library/react.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library [dc3cf] doesn't provide eslint (p315b77), requested by eslint-plugin-storybook.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library [dc3cf] doesn't provide rolldown (p0388dc), requested by @rolldown/plugin-babel.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library [dc3cf] doesn't provide typescript (p0be690), requested by @storybook/react-vite.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library doesn't provide @babel/core (p41f118), requested by @rolldown/plugin-babel and other dependencies.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library doesn't provide @testing-library/dom (pfa5575), requested by @testing-library/react.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library doesn't provide eslint (p306d4d), requested by eslint-plugin-storybook.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library doesn't provide rolldown (pb86c65), requested by @rolldown/plugin-babel.\n\u27a4 YN0002: \u2502 @actual-app/components@workspace:packages/component-library doesn't provide typescript (p9a9955), requested by @storybook/react-vite.\n\u27a4 YN0002: \u2502 @actual-app/web@workspace:packages/desktop-client doesn't provide react-is (p874ff5), requested by recharts.\n\u27a4 YN0002: \u2502 actual@workspace:. doesn't provide vite (pe55402), requested by vitest.\n\u27a4 YN0002: \u2502 desktop-electron@workspace:packages/desktop-electron doesn't provide vite (pe1a8c7), requested by vitest.\n\u27a4 YN0002: \u2502 eslint-plugin-actual@workspace:packages/eslint-plugin-actual doesn't provide eslint (pc54032), requested by eslint-vitest-rule-tester.\n\u27a4 YN0002: \u2502 eslint-plugin-actual@workspace:packages/eslint-plugin-actual doesn't provide vite (pa6e5d0), requested by vitest.\n\u27a4 YN0086: \u2502 Some peer dependencies are incorrectly met by your project; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code.\n\u27a4 YN0086: \u2502 Some peer dependencies are incorrectly met by dependencies; run yarn explain peer-requirements for details.\n\u27a4 YN0000: \u2514 Completed\n\u27a4 YN0000: \u250c Fetch step\n\u27a4 YN0013: \u2502 2483 packages were added to the project (+ 383.44 MiB).\n\u27a4 YN0000: \u2514 Completed in 33s 315ms\n\u27a4 YN0000: \u250c Link step\n\u27a4 YN0000: \u2514 Completed in 15s 368ms\n\u27a4 YN0000: \u00b7 Done with warnings in 49s 179ms\n"
+  },
+  "generators": [],
+  "cohort": [
+    {
+      "id": "packages/loot-core/src/server/importers/ynab4.ts#countLive",
+      "scanRoot": "packages/loot-core",
+      "function": {
+        "id": "src/server/importers/ynab4.ts#countLive",
+        "file": "src/server/importers/ynab4.ts",
+        "name": "countLive",
+        "line": 543,
+        "exported": false,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "boundary": {
+          "params": [
+            "json"
+          ],
+          "result": "number"
+        },
+        "promotionId": "01a3dea5c03b4fb8515f"
+      }
+    },
+    {
+      "id": "packages/loot-core/src/server/importers/ynab5.ts#countLive",
+      "scanRoot": "packages/loot-core",
+      "function": {
+        "id": "src/server/importers/ynab5.ts#countLive",
+        "file": "src/server/importers/ynab5.ts",
+        "name": "countLive",
+        "line": 1259,
+        "exported": false,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "boundary": {
+          "params": [
+            "json"
+          ],
+          "result": "number"
+        },
+        "promotionId": "0622e284c461c3259465"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": "packages/loot-core",
+      "file": "src/server/importers/ynab4.ts",
+      "process": {
+        "exit": 0,
+        "seconds": 11.649384021759033,
+        "output": "ype 'string | undefined' is not assignable to parameter of type 'string'.   Type 'undefined' is not assignable to type 'string'. Hint: Guard the indexed value, use a tuple, or add a non-null check.\nrejected             src/server/importers/ynab4.ts#findLatestDevice \u2014 [next-scriptc] not a candidate findLatestDevice: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:399:24 - NSC1001: function findLatestDevice: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\nexcluded             src/server/importers/ynab4.ts#doImport\nrejected             src/server/importers/ynab4.ts#getBudgetName \u2014 [next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nrejected             src/server/importers/ynab4.ts#getFile \u2014 [next-scriptc] not a candidate: [next-scriptc] /__next_scriptc_construction__.ts:1:51 - NSC1000: function getFile: return: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nrejected             src/server/importers/ynab4.ts#join \u2014 [next-scriptc] not a candidate join: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:491:10 - NSC1000: function join: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nrejected             src/server/importers/ynab4.ts#parseFile \u2014 [next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:516:19 - NSC1001: function parseFile: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\naccepted             src/server/importers/ynab4.ts#countLive\nTop blockers:\n  2 \u00d7 unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:270:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:300:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\n    The existing boundary/type checker could not prove a supported argument or result contract.\nNearest misses (one emitted diagnostic, further blockers may exist): src/server/importers/ynab4.ts#fillInBudgets, src/server/importers/ynab4.ts#getBudgetNotes, src/server/importers/ynab4.ts#estimateRecentness, src/server/importers/ynab4.ts#findLatestDevice, src/server/importers/ynab4.ts#getBudgetName, src/server/importers/ynab4.ts#getFile, src/server/importers/ynab4.ts#join, src/server/importers/ynab4.ts#parseFile\nMeasured src/server/importers/ynab4.ts#countLive: synthetic, N=60, thread-cpu, JS 18 ns/call [p10 18, p90 20], native 19999 ns/call [p10 15917, p90 31584], native 116.95 ns/input byte, boundary 100.0%, intensity 0.11 JS ns/input byte, verdict JS\nMeasured src/server/importers/ynab4.ts#countLive: synthetic, N=60, thread-cpu, JS 46 ns/call [p10 46, p90 47], native 34085 ns/call [p10 27916, p90 46875], native 50.50 ns/input byte, boundary 100.0%, intensity 0.07 JS ns/input byte, verdict JS\nMeasured src/server/importers/ynab4.ts#countLive: synthetic, N=60, thread-cpu, JS 164 ns/call [p10 162, p90 165], native 101375 ns/call [p10 84333, p90 123082], native 37.67 ns/input byte, boundary 100.0%, intensity 0.06 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "1867ea6436e6cd9aa28a666ad2ebe700a65c47445e8e152f223f81c33f703573",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-dev-clones/actual/packages/loot-core",
+        "sourceDir": "/tmp/m1-dev-clones/actual/packages/loot-core",
+        "framework": "vite",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 15,
+          "exportedFunctions": 5,
+          "considered": 9,
+          "diagnosed": 8,
+          "accepted": 1,
+          "explicit": 0,
+          "silentExclusions": 6
+        },
+        "files": [
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "functions": [
+              {
+                "id": "src/server/importers/ynab4.ts#importAccounts",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "importAccounts",
+                "line": 16,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#importCategories",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "importCategories",
+                "line": 40,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#importPayees",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "importPayees",
+                "line": 119,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#importTransactions",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "importTransactions",
+                "line": 141,
+                "exported": true,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "importTransactions"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#fillInBudgets",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "fillInBudgets",
+                "line": 270,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate fillInBudgets: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:270:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#getBudgetNotes",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "getBudgetNotes",
+                "line": 300,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getBudgetNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:300:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getBudgetNotes"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#importBudgets",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "importBudgets",
+                "line": 326,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab4.ts#fillInBudgets",
+                  "src/server/importers/ynab4.ts#getBudgetNotes"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#estimateRecentness",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "estimateRecentness",
+                "line": 382,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:382:42 - NSC1000: strict closure: TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.   Type 'undefined' is not assignable to type 'string'. Hint: Guard the indexed value, use a tuple, or add a non-null check."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#findLatestDevice",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "findLatestDevice",
+                "line": 393,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findLatestDevice: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:399:24 - NSC1001: function findLatestDevice: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/server/importers/ynab4.ts#estimateRecentness"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#doImport",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "doImport",
+                "line": 424,
+                "exported": true,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab4.ts#countLive",
+                  "src/server/importers/ynab4.ts#importAccounts",
+                  "src/server/importers/ynab4.ts#importBudgets",
+                  "src/server/importers/ynab4.ts#importCategories",
+                  "src/server/importers/ynab4.ts#importPayees",
+                  "src/server/importers/ynab4.ts#importTransactions"
+                ],
+                "exportNames": [
+                  "doImport"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#getBudgetName",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "getBudgetName",
+                "line": 461,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getBudgetName"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#getFile",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "getFile",
+                "line": 480,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate: [next-scriptc] /__next_scriptc_construction__.ts:1:51 - NSC1000: function getFile: return: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#join",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "join",
+                "line": 491,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate join: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:491:10 - NSC1000: function join: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#parseFile",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "parseFile",
+                "line": 500,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:516:19 - NSC1001: function parseFile: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/server/importers/ynab4.ts#findLatestDevice",
+                  "src/server/importers/ynab4.ts#getFile",
+                  "src/server/importers/ynab4.ts#join"
+                ],
+                "exportNames": [
+                  "parseFile"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab4.ts#countLive",
+                "file": "src/server/importers/ynab4.ts",
+                "name": "countLive",
+                "line": 543,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "number"
+                },
+                "promotionId": "20bfcbbc0abab52703d8"
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 2,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:270:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:300:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:382:42 - NSC1000: strict closure: TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.   Type 'undefined' is not assignable to type 'string'. Hint: Guard the indexed value, use a tuple, or add a non-null check.",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "return: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/server/importers/ynab4.ts#fillInBudgets",
+            "diagnostic": "[next-scriptc] not a candidate fillInBudgets: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:270:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#getBudgetNotes",
+            "diagnostic": "[next-scriptc] not a candidate getBudgetNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:300:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#estimateRecentness",
+            "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:382:42 - NSC1000: strict closure: TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.   Type 'undefined' is not assignable to type 'string'. Hint: Guard the indexed value, use a tuple, or add a non-null check."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#findLatestDevice",
+            "diagnostic": "[next-scriptc] not a candidate findLatestDevice: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:399:24 - NSC1001: function findLatestDevice: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#getBudgetName",
+            "diagnostic": "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#getFile",
+            "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /__next_scriptc_construction__.ts:1:51 - NSC1000: function getFile: return: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#join",
+            "diagnostic": "[next-scriptc] not a candidate join: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:491:10 - NSC1000: function join: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#parseFile",
+            "diagnostic": "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:516:19 - NSC1001: function parseFile: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "fillInBudgets",
+            "message": "[next-scriptc] not a candidate fillInBudgets: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:270:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "getBudgetNotes",
+            "message": "[next-scriptc] not a candidate getBudgetNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:300:8 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "findLatestDevice",
+            "message": "[next-scriptc] not a candidate findLatestDevice: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:399:24 - NSC1001: function findLatestDevice: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "getBudgetName",
+            "message": "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:461:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "join",
+            "message": "[next-scriptc] not a candidate join: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:491:10 - NSC1000: function join: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "parseFile",
+            "message": "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:516:19 - NSC1001: function parseFile: unsupported reference Buffer Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "estimateRecentness",
+            "message": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab4.ts:382:42 - NSC1000: strict closure: TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.   Type 'undefined' is not assignable to type 'string'. Hint: Guard the indexed value, use a tuple, or add a non-null check."
+          },
+          {
+            "file": "src/server/importers/ynab4.ts",
+            "name": "getFile",
+            "message": "[next-scriptc] not a candidate: [next-scriptc] /__next_scriptc_construction__.ts:1:51 - NSC1000: function getFile: return: expected JSON data; any, unknown, undefined, void, bigint, symbol and unresolved generics are unsupported (type undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/server/importers/ynab4.ts#countLive",
+            "status": "ok",
+            "compileMs": 2069.311417,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                }
+              ]
+            ],
+            "bucket": 3,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 17.633941670089754,
+              "p10": 17.749271365139087,
+              "median": 18.40658803278317,
+              "p90": 19.510132425718087,
+              "max": 20.8622733407658
+            },
+            "native": {
+              "n": 60,
+              "min": 13251.000000082058,
+              "p10": 15916.999999944892,
+              "median": 19998.999999984335,
+              "p90": 31583.999999838852,
+              "max": 61833.999999976186
+            },
+            "inputJsonBytes": 171,
+            "nsPerInputJsonByte": {
+              "js": 0.10764086568879046,
+              "native": 116.9532163741774
+            },
+            "computeIntensity": 0.10764086568879046,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 23750.00000029104,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1076.0084005768988,
+              "upper": 1353.8470143393401,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 102246,
+            "rawPairsNs": [
+              [
+                19.510132425718087,
+                25999.999999953616
+              ],
+              [
+                19.0182598830268,
+                21542.000000067674
+              ],
+              [
+                19.080208516714553,
+                25541.999999973086
+              ],
+              [
+                18.536177454373952,
+                19292.999999947824
+              ],
+              [
+                19.020303972771543,
+                23665.999999934684
+              ],
+              [
+                19.251775130566784,
+                20459.0000000735
+              ],
+              [
+                19.552921385677223,
+                61833.999999976186
+              ],
+              [
+                20.73105060344596,
+                30625.000000100044
+              ],
+              [
+                19.927429923909227,
+                31583.99999995254
+              ],
+              [
+                18.495012029810194,
+                34540.999999876476
+              ],
+              [
+                18.25335954462708,
+                25458.999999955267
+              ],
+              [
+                20.8622733407658,
+                21956.000000045606
+              ],
+              [
+                18.69836472820454,
+                18375.0000001055
+              ],
+              [
+                18.647428750269707,
+                26166.99999987304
+              ],
+              [
+                18.41677914050361,
+                29789.99999993448
+              ],
+              [
+                18.37357940652879,
+                24291.000000062013
+              ],
+              [
+                18.36828824599441,
+                27917.999999999665
+              ],
+              [
+                18.288412260626203,
+                26709.000000209926
+              ],
+              [
+                18.008851202003765,
+                28250.00000007094
+              ],
+              [
+                18.370723549087476,
+                24126.00000002385
+              ],
+              [
+                19.435156387535937,
+                19998.999999984335
+              ],
+              [
+                18.468526886137244,
+                21082.999999975982
+              ],
+              [
+                18.453866165913794,
+                21708.999999873413
+              ],
+              [
+                18.55207049664557,
+                22292.000000106782
+              ],
+              [
+                18.488909101579235,
+                16501.00000006205
+              ],
+              [
+                18.295747510905326,
+                15457.999999966887
+              ],
+              [
+                18.182862899281623,
+                15998.999999851549
+              ],
+              [
+                18.126625980478728,
+                15082.99999989049
+              ],
+              [
+                18.573254699450455,
+                15916.999999944892
+              ],
+              [
+                18.142519022749234,
+                17123.000000083266
+              ],
+              [
+                18.084648788217283,
+                20834.000000036212
+              ],
+              [
+                18.452643624200423,
+                18457.000000012158
+              ],
+              [
+                18.257437943782882,
+                17708.999999968
+              ],
+              [
+                18.203245114723615,
+                17125.000000078217
+              ],
+              [
+                18.238288050389055,
+                19125.99999991471
+              ],
+              [
+                17.913492948379627,
+                16417.000000046755
+              ],
+              [
+                18.007227666608387,
+                28123.999999820626
+              ],
+              [
+                17.748449817107723,
+                18290.99999997652
+              ],
+              [
+                17.633941670089754,
+                22585.00000004915
+              ],
+              [
+                18.540255853529754,
+                13834.000000088054
+              ],
+              [
+                18.463225945269183,
+                38042.00000001856
+              ],
+              [
+                17.8539991784523,
+                16916.000000037457
+              ],
+              [
+                18.250914461201447,
+                18791.000000078384
+              ],
+              [
+                19.557811552530712,
+                19876.000000067506
+              ],
+              [
+                18.640093499990584,
+                21708.00000010331
+              ],
+              [
+                17.76883203254971,
+                18208.00000007239
+              ],
+              [
+                17.708927488605585,
+                16165.999999884662
+              ],
+              [
+                17.869080453025113,
+                13834.000000088054
+              ],
+              [
+                17.72685484028715,
+                17706.99999997305
+              ],
+              [
+                17.749271365139087,
+                19043.000000124266
+              ],
+              [
+                17.773311425386403,
+                14958.000000092397
+              ],
+              [
+                18.900084110869834,
+                31583.999999838852
+              ],
+              [
+                18.783942648122814,
+                42876.00000009206
+              ],
+              [
+                17.795317176221545,
+                21790.999999893756
+              ],
+              [
+                17.778201592237668,
+                17584.00000005622
+              ],
+              [
+                17.655125872894644,
+                13251.000000082058
+              ],
+              [
+                17.699958922597407,
+                16415.999999935593
+              ],
+              [
+                18.48564247012112,
+                19790.99999994105
+              ],
+              [
+                18.40658803278317,
+                19666.000000142958
+              ],
+              [
+                18.457123017038224,
+                16916.000000151143
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#countLive",
+            "status": "ok",
+            "compileMs": 2069.311417,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                }
+              ]
+            ],
+            "bucket": 5,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 45.52141275910512,
+              "p10": 45.59937613201939,
+              "median": 46.346528476554376,
+              "p90": 47.34520024149691,
+              "max": 48.518313543973285
+            },
+            "native": {
+              "n": 60,
+              "min": 25624.999999990905,
+              "p10": 27915.999999891028,
+              "median": 34084.9999998909,
+              "p90": 46875,
+              "max": 65958.00000013696
+            },
+            "inputJsonBytes": 675,
+            "nsPerInputJsonByte": {
+              "js": 0.06866152366896945,
+              "native": 50.49629629613466
+            },
+            "computeIntensity": 0.06866152366896945,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 38749.99999970896,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 727.3534687076707,
+              "upper": 811.4741727232272,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 49690,
+            "rawPairsNs": [
+              [
+                48.01519420406403,
+                36749.99999986994
+              ],
+              [
+                46.09496880659975,
+                41250.99999998838
+              ],
+              [
+                45.59937613201939,
+                30042.999999977837
+              ],
+              [
+                46.473958542967,
+                32709.00000018173
+              ],
+              [
+                48.202193600322296,
+                34624.99999989177
+              ],
+              [
+                46.14610585630925,
+                31624.999999849024
+              ],
+              [
+                45.653894143689094,
+                47541.9999999076
+              ],
+              [
+                46.119279533104475,
+                46875
+              ],
+              [
+                46.097484403299795,
+                41292.99999999603
+              ],
+              [
+                47.01316160193254,
+                31542.00000005858
+              ],
+              [
+                47.596759911449254,
+                32373.999999890657
+              ],
+              [
+                47.228657677602136,
+                27083.999999945263
+              ],
+              [
+                47.34520024149691,
+                35957.999999936874
+              ],
+              [
+                45.694968806600684,
+                28624.999999919964
+              ],
+              [
+                45.62537733950651,
+                33208.999999942534
+              ],
+              [
+                47.06848460454865,
+                37789.99999985899
+              ],
+              [
+                47.17498490642134,
+                39916.9999999458
+              ],
+              [
+                45.58597303280149,
+                42583.9999999198
+              ],
+              [
+                46.53517810424566,
+                56917.00000011224
+              ],
+              [
+                46.346528476554376,
+                33666.999999923064
+              ],
+              [
+                46.14695109680044,
+                30623.999999988882
+              ],
+              [
+                46.42030589655974,
+                30040.9999998692
+              ],
+              [
+                45.974200040248995,
+                28458.999999998014
+              ],
+              [
+                46.630770778829245,
+                30250.999999907435
+              ],
+              [
+                45.943187764137605,
+                31543.000000056054
+              ],
+              [
+                46.51002213725202,
+                31500.00000005093
+              ],
+              [
+                46.27524652847551,
+                41082.99999995779
+              ],
+              [
+                48.110786878647616,
+                29540.999999881024
+              ],
+              [
+                46.346508351780834,
+                39334.00000005349
+              ],
+              [
+                46.497464278527616,
+                35291.00000002927
+              ],
+              [
+                45.93060978063965,
+                27167.999999960557
+              ],
+              [
+                47.289857114107264,
+                27585.0000000446
+              ],
+              [
+                46.398510766752786,
+                30207.00000013221
+              ],
+              [
+                46.384262427048256,
+                27915.999999891028
+              ],
+              [
+                46.982109076271776,
+                58168.00000002331
+              ],
+              [
+                45.568343731132174,
+                33376.000000089334
+              ],
+              [
+                46.079029985912825,
+                30248.999999912485
+              ],
+              [
+                45.62620245522187,
+                30041.000000096574
+              ],
+              [
+                45.552425035218796,
+                28876.00000008206
+              ],
+              [
+                45.92137250955939,
+                34499.999999866304
+              ],
+              [
+                45.52141275910512,
+                34084.9999998909
+              ],
+              [
+                46.57039645804178,
+                27122.999999960484
+              ],
+              [
+                46.04548198832785,
+                34709.00000002075
+              ],
+              [
+                45.573395049305816,
+                32459.000000017113
+              ],
+              [
+                45.52893942443173,
+                43751.00000004295
+              ],
+              [
+                46.30122761118909,
+                25624.999999990905
+              ],
+              [
+                48.518313543973285,
+                42293.00000008607
+              ],
+              [
+                46.621553632522534,
+                34751.0000000284
+              ],
+              [
+                46.50332058764308,
+                36708.99999985977
+              ],
+              [
+                46.31549607566945,
+                27707.99999996143
+              ],
+              [
+                47.06345341114855,
+                35583.999999744265
+              ],
+              [
+                45.996860535318405,
+                34377.00000006316
+              ],
+              [
+                47.14815858321656,
+                65958.00000013696
+              ],
+              [
+                46.393479573354966,
+                36500.000000046384
+              ],
+              [
+                46.740611793117345,
+                46874.0000002299
+              ],
+              [
+                46.17210706379637,
+                28501.00000000566
+              ],
+              [
+                45.98341718655799,
+                34457.999999972344
+              ],
+              [
+                47.11461058563159,
+                29876.000000285785
+              ],
+              [
+                46.13686858522899,
+                47998.99999989066
+              ],
+              [
+                46.56621050513288,
+                44750.999999905616
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/server/importers/ynab4.ts#countLive",
+            "status": "ok",
+            "compileMs": 2069.311417,
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                },
+                {
+                  "isTombstone": true
+                }
+              ]
+            ],
+            "bucket": 7,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 161.23365925529313,
+              "p10": 161.959215108505,
+              "median": 163.65296008572244,
+              "p90": 165.24912938655052,
+              "max": 166.6973613715397
+            },
+            "native": {
+              "n": 60,
+              "min": 77209.00000026631,
+              "p10": 84333.00000012878,
+              "median": 101374.9999999618,
+              "p90": 123082.00000006764,
+              "max": 132290.99999989558
+            },
+            "inputJsonBytes": 2691,
+            "nsPerInputJsonByte": {
+              "js": 0.060814923851996446,
+              "native": 37.67186919359413
+            },
+            "computeIntensity": 0.060814923851996446,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 78833.00000048621,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 592.5899678994015,
+              "upper": 648.5402864286295,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 14932,
+            "rawPairsNs": [
+              [
+                164.72173854808958,
+                82248.0000001633
+              ],
+              [
+                164.6743236003243,
+                86832.99999995597
+              ],
+              [
+                166.26480042860936,
+                85458.9999999007
+              ],
+              [
+                163.65296008572244,
+                84333.00000012878
+              ],
+              [
+                163.45486204125186,
+                79916.99999990943
+              ],
+              [
+                161.27832842217688,
+                79499.00000005527
+              ],
+              [
+                161.9898874899511,
+                101790.0000000509
+              ],
+              [
+                163.35721939458983,
+                94373.99999990247
+              ],
+              [
+                162.82701580498224,
+                121042.00000010224
+              ],
+              [
+                165.04259308866293,
+                106916.0000000693
+              ],
+              [
+                163.6753281542968,
+                96916.00000007838
+              ],
+              [
+                162.1071524243211,
+                97456.99999996304
+              ],
+              [
+                162.61217519420768,
+                114248.99999997251
+              ],
+              [
+                164.23620412536573,
+                87500.00000020463
+              ],
+              [
+                164.5654969193713,
+                118456.99999980752
+              ],
+              [
+                164.43436914010135,
+                119457.00000001125
+              ],
+              [
+                162.60661666220233,
+                129248.99999984518
+              ],
+              [
+                164.07433699438462,
+                104665.99999995196
+              ],
+              [
+                164.5152692204746,
+                103833.00000012241
+              ],
+              [
+                164.7664077149733,
+                89916.00000013023
+              ],
+              [
+                166.6973613715397,
+                92874.00000016532
+              ],
+              [
+                166.13373961961966,
+                88459.99999994092
+              ],
+              [
+                164.54038306991532,
+                97875.00000015825
+              ],
+              [
+                164.88916421109124,
+                81706.99999982389
+              ],
+              [
+                162.31636753281765,
+                130042.99999965951
+              ],
+              [
+                164.30592017144795,
+                101374.9999999618
+              ],
+              [
+                165.0342887757912,
+                123082.00000006764
+              ],
+              [
+                161.91454594159845,
+                99373.00000001414
+              ],
+              [
+                165.45285293329917,
+                132290.99999989558
+              ],
+              [
+                163.73392713636073,
+                107332.00000026955
+              ],
+              [
+                164.11344762925538,
+                110289.9999998499
+              ],
+              [
+                163.09770961693155,
+                97915.99999994105
+              ],
+              [
+                161.5685105812965,
+                102665.99999977188
+              ],
+              [
+                163.08652558264816,
+                82874.99999983083
+              ],
+              [
+                163.79252611839416,
+                103834.00000023357
+              ],
+              [
+                164.62690865256658,
+                92707.99999990231
+              ],
+              [
+                164.47341280471468,
+                99000.99999981649
+              ],
+              [
+                163.96832306457065,
+                104207.99999997143
+              ],
+              [
+                163.3377310474195,
+                126418.00000005787
+              ],
+              [
+                163.04748191803486,
+                88667.0000002141
+              ],
+              [
+                161.97039914278838,
+                102458.00000006966
+              ],
+              [
+                162.17686847039573,
+                94083.99999983885
+              ],
+              [
+                162.1461960889344,
+                110875.00000030559
+              ],
+              [
+                163.83438253415412,
+                130375.00000018554
+              ],
+              [
+                166.02210018751245,
+                111832.00000004945
+              ],
+              [
+                164.38132869007327,
+                92126.00000000748
+              ],
+              [
+                164.01292526118934,
+                107791.99999979028
+              ],
+              [
+                162.12389499062508,
+                106622.99999989955
+              ],
+              [
+                161.59087864987848,
+                115332.00000008037
+              ],
+              [
+                162.36103669969376,
+                95623.99999981608
+              ],
+              [
+                162.135012054651,
+                105875.99999962549
+              ],
+              [
+                162.51171979639906,
+                87167.00000013589
+              ],
+              [
+                165.24912938655052,
+                119209.00000018264
+              ],
+              [
+                163.0754085186222,
+                105039.00000026078
+              ],
+              [
+                163.6362844896987,
+                99000.00000016007
+              ],
+              [
+                162.42800696490963,
+                77209.00000026631
+              ],
+              [
+                161.959215108505,
+                110251.00000006205
+              ],
+              [
+                162.58987409591356,
+                98042.00000007768
+              ],
+              [
+                161.23365925529313,
+                91292.00000006676
+              ],
+              [
+                161.26995713901727,
+                93165.00000022643
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      },
+      "inputEvidenceFiles": []
+    },
+    {
+      "scanRoot": "packages/loot-core",
+      "file": "src/server/importers/ynab5.ts",
+      "process": {
+        "exit": 0,
+        "seconds": 9.647836208343506,
+        "output": "  src/server/importers/ynab5.ts#getTagsToCreate \u2014 [next-scriptc] not a candidate getTagsToCreate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:533:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nexcluded             src/server/importers/ynab5.ts#importFlagsAsTags\nexcluded             src/server/importers/ynab5.ts#importTransactions\nexcluded             src/server/importers/ynab5.ts#importScheduledTransactions\nexcluded             src/server/importers/ynab5.ts#importBudgets\nrejected             src/server/importers/ynab5.ts#parseFile \u2014 [next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1187:8 - NSC1000: dependency closure: transitive effect proof: opaque or uninitialized reference at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".\nrejected             src/server/importers/ynab5.ts#getBudgetName \u2014 [next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1203:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nexcluded             src/server/importers/ynab5.ts#doImport\naccepted             src/server/importers/ynab5.ts#countLive\nTop blockers:\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:25:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:51:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:59:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:66:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:73:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): src/server/importers/ynab5.ts#normalizeError, src/server/importers/ynab5.ts#equalsIgnoreCase, src/server/importers/ynab5.ts#findByNameIgnoreCase, src/server/importers/ynab5.ts#findIdByName, src/server/importers/ynab5.ts#amountFromYnab, src/server/importers/ynab5.ts#getDayOfMonth, src/server/importers/ynab5.ts#getYnabMonthlyPatterns, src/server/importers/ynab5.ts#getYnabTwiceMonthlyPatterns, src/server/importers/ynab5.ts#mapYnabFrequency, src/server/importers/ynab5.ts#getScheduleDateValue, src/server/importers/ynab5.ts#getFlaggedTransactions, src/server/importers/ynab5.ts#getFlagTag, src/server/importers/ynab5.ts#getFlagNameConflicts, src/server/importers/ynab5.ts#buildTransactionNotes, src/server/importers/ynab5.ts#buildRuleUpdate, src/server/importers/ynab5.ts#importAccounts, src/server/importers/ynab5.ts#importPayees, src/server/importers/ynab5.ts#getTagsToCreate, src/server/importers/ynab5.ts#parseFile, src/server/importers/ynab5.ts#getBudgetName\nMeasured src/server/importers/ynab5.ts#countLive: synthetic, N=60, thread-cpu, JS 18 ns/call [p10 18, p90 20], native 18748 ns/call [p10 15502, p90 28291], native 134.88 ns/input byte, boundary 100.0%, intensity 0.13 JS ns/input byte, verdict JS\nMeasured src/server/importers/ynab5.ts#countLive: synthetic, N=60, thread-cpu, JS 47 ns/call [p10 46, p90 48], native 32667 ns/call [p10 27501, p90 50417], native 59.72 ns/input byte, boundary 100.0%, intensity 0.09 JS ns/input byte, verdict JS\nMeasured src/server/importers/ynab5.ts#countLive: synthetic, N=60, thread-cpu, JS 163 ns/call [p10 161, p90 165], native 84583 ns/call [p10 80542, p90 95833], native 38.82 ns/input byte, boundary 100.0%, intensity 0.07 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "1867ea6436e6cd9aa28a666ad2ebe700a65c47445e8e152f223f81c33f703573",
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-dev-clones/actual/packages/loot-core",
+        "sourceDir": "/tmp/m1-dev-clones/actual/packages/loot-core",
+        "framework": "vite",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 28,
+          "exportedFunctions": 6,
+          "considered": 21,
+          "diagnosed": 20,
+          "accepted": 1,
+          "explicit": 0,
+          "silentExclusions": 7
+        },
+        "files": [
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "functions": [
+              {
+                "id": "src/server/importers/ynab5.ts#normalizeError",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "normalizeError",
+                "line": 25,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate normalizeError: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:25:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#equalsIgnoreCase",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "equalsIgnoreCase",
+                "line": 51,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate equalsIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:51:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#findByNameIgnoreCase",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "findByNameIgnoreCase",
+                "line": 59,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findByNameIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:59:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#equalsIgnoreCase"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#findIdByName",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "findIdByName",
+                "line": 66,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findIdByName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:66:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#findByNameIgnoreCase"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#amountFromYnab",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "amountFromYnab",
+                "line": 73,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate amountFromYnab: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:73:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getDayOfMonth",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getDayOfMonth",
+                "line": 79,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getDayOfMonth: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:79:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getYnabMonthlyPatterns",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getYnabMonthlyPatterns",
+                "line": 83,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getYnabMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:83:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getDayOfMonth"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getYnabTwiceMonthlyPatterns",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getYnabTwiceMonthlyPatterns",
+                "line": 99,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getYnabTwiceMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:99:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getDayOfMonth"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#mapYnabFrequency",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "mapYnabFrequency",
+                "line": 110,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate mapYnabFrequency: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:110:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getYnabMonthlyPatterns",
+                  "src/server/importers/ynab5.ts#getYnabTwiceMonthlyPatterns"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getScheduleDateValue",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getScheduleDateValue",
+                "line": 172,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getScheduleDateValue: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:172:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#mapYnabFrequency"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getFlaggedTransactions",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getFlaggedTransactions",
+                "line": 194,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFlaggedTransactions: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:194:1 - NSC1000: dependency closure: transitive effect proof: unsupported expression SpreadElement at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getFlagTag",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getFlagTag",
+                "line": 198,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFlagTag: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:198:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getFlagNameConflicts",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getFlagNameConflicts",
+                "line": 216,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getFlagNameConflicts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:216:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getFlaggedTransactions"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#buildTransactionNotes",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "buildTransactionNotes",
+                "line": 249,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate buildTransactionNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:249:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 14 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getFlagTag"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#buildRuleUpdate",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "buildRuleUpdate",
+                "line": 259,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate buildRuleUpdate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:259:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RuleEntity Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importAccounts",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importAccounts",
+                "line": 272,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate importAccounts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:272:1 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importCategories",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importCategories",
+                "line": 294,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#equalsIgnoreCase",
+                  "src/server/importers/ynab5.ts#findIdByName",
+                  "src/server/importers/ynab5.ts#normalizeError"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importPayees",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importPayees",
+                "line": 458,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate importPayees: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:458:8 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "importPayees"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importPayeeLocations",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importPayeeLocations",
+                "line": 476,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getTagsToCreate",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getTagsToCreate",
+                "line": 533,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getTagsToCreate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:533:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getFlaggedTransactions"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importFlagsAsTags",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importFlagsAsTags",
+                "line": 569,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#getTagsToCreate"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importTransactions",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importTransactions",
+                "line": 588,
+                "exported": true,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#amountFromYnab",
+                  "src/server/importers/ynab5.ts#buildTransactionNotes",
+                  "src/server/importers/ynab5.ts#findIdByName"
+                ],
+                "exportNames": [
+                  "importTransactions"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importScheduledTransactions",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importScheduledTransactions",
+                "line": 872,
+                "exported": true,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#amountFromYnab",
+                  "src/server/importers/ynab5.ts#buildRuleUpdate",
+                  "src/server/importers/ynab5.ts#buildTransactionNotes",
+                  "src/server/importers/ynab5.ts#getScheduleDateValue",
+                  "src/server/importers/ynab5.ts#normalizeError"
+                ],
+                "exportNames": [
+                  "importScheduledTransactions"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#importBudgets",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "importBudgets",
+                "line": 1131,
+                "exported": false,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#findIdByName"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#parseFile",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "parseFile",
+                "line": 1187,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1187:8 - NSC1000: dependency closure: transitive effect proof: opaque or uninitialized reference at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "parseFile"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#getBudgetName",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "getBudgetName",
+                "line": 1203,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1203:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getBudgetName"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#doImport",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "doImport",
+                "line": 1207,
+                "exported": true,
+                "async": true,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [
+                  "src/server/importers/ynab5.ts#countLive",
+                  "src/server/importers/ynab5.ts#getFlagNameConflicts",
+                  "src/server/importers/ynab5.ts#getTagsToCreate",
+                  "src/server/importers/ynab5.ts#importAccounts",
+                  "src/server/importers/ynab5.ts#importBudgets",
+                  "src/server/importers/ynab5.ts#importCategories",
+                  "src/server/importers/ynab5.ts#importFlagsAsTags",
+                  "src/server/importers/ynab5.ts#importPayeeLocations",
+                  "src/server/importers/ynab5.ts#importPayees",
+                  "src/server/importers/ynab5.ts#importScheduledTransactions",
+                  "src/server/importers/ynab5.ts#importTransactions"
+                ],
+                "exportNames": [
+                  "doImport"
+                ]
+              },
+              {
+                "id": "src/server/importers/ynab5.ts#countLive",
+                "file": "src/server/importers/ynab5.ts",
+                "name": "countLive",
+                "line": 1259,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "number"
+                },
+                "promotionId": "bb1d75339378722daa0b"
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:25:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:51:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:59:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:66:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:73:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:79:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:83:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:99:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:110:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:172:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:194:1 - NSC1000: dependency closure: transitive effect proof: unsupported expression SpreadElement at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:198:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:216:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:249:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 14 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:259:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RuleEntity Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:272:1 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:458:8 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:533:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1187:8 - NSC1000: dependency closure: transitive effect proof: opaque or uninitialized reference at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1203:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/server/importers/ynab5.ts#normalizeError",
+            "diagnostic": "[next-scriptc] not a candidate normalizeError: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:25:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#equalsIgnoreCase",
+            "diagnostic": "[next-scriptc] not a candidate equalsIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:51:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#findByNameIgnoreCase",
+            "diagnostic": "[next-scriptc] not a candidate findByNameIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:59:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#findIdByName",
+            "diagnostic": "[next-scriptc] not a candidate findIdByName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:66:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#amountFromYnab",
+            "diagnostic": "[next-scriptc] not a candidate amountFromYnab: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:73:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getDayOfMonth",
+            "diagnostic": "[next-scriptc] not a candidate getDayOfMonth: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:79:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getYnabMonthlyPatterns",
+            "diagnostic": "[next-scriptc] not a candidate getYnabMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:83:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getYnabTwiceMonthlyPatterns",
+            "diagnostic": "[next-scriptc] not a candidate getYnabTwiceMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:99:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#mapYnabFrequency",
+            "diagnostic": "[next-scriptc] not a candidate mapYnabFrequency: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:110:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getScheduleDateValue",
+            "diagnostic": "[next-scriptc] not a candidate getScheduleDateValue: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:172:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getFlaggedTransactions",
+            "diagnostic": "[next-scriptc] not a candidate getFlaggedTransactions: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:194:1 - NSC1000: dependency closure: transitive effect proof: unsupported expression SpreadElement at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getFlagTag",
+            "diagnostic": "[next-scriptc] not a candidate getFlagTag: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:198:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getFlagNameConflicts",
+            "diagnostic": "[next-scriptc] not a candidate getFlagNameConflicts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:216:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#buildTransactionNotes",
+            "diagnostic": "[next-scriptc] not a candidate buildTransactionNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:249:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 14 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#buildRuleUpdate",
+            "diagnostic": "[next-scriptc] not a candidate buildRuleUpdate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:259:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RuleEntity Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#importAccounts",
+            "diagnostic": "[next-scriptc] not a candidate importAccounts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:272:1 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#importPayees",
+            "diagnostic": "[next-scriptc] not a candidate importPayees: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:458:8 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getTagsToCreate",
+            "diagnostic": "[next-scriptc] not a candidate getTagsToCreate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:533:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#parseFile",
+            "diagnostic": "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1187:8 - NSC1000: dependency closure: transitive effect proof: opaque or uninitialized reference at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#getBudgetName",
+            "diagnostic": "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1203:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "normalizeError",
+            "message": "[next-scriptc] not a candidate normalizeError: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:25:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "equalsIgnoreCase",
+            "message": "[next-scriptc] not a candidate equalsIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:51:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "findByNameIgnoreCase",
+            "message": "[next-scriptc] not a candidate findByNameIgnoreCase: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:59:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "findIdByName",
+            "message": "[next-scriptc] not a candidate findIdByName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:66:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "amountFromYnab",
+            "message": "[next-scriptc] not a candidate amountFromYnab: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:73:1 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getDayOfMonth",
+            "message": "[next-scriptc] not a candidate getDayOfMonth: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:79:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: namespace import requires module-object proof Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getYnabMonthlyPatterns",
+            "message": "[next-scriptc] not a candidate getYnabMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:83:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getYnabTwiceMonthlyPatterns",
+            "message": "[next-scriptc] not a candidate getYnabTwiceMonthlyPatterns: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:99:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurPattern Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "mapYnabFrequency",
+            "message": "[next-scriptc] not a candidate mapYnabFrequency: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:110:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getScheduleDateValue",
+            "message": "[next-scriptc] not a candidate getScheduleDateValue: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:172:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RecurConfig Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getFlaggedTransactions",
+            "message": "[next-scriptc] not a candidate getFlaggedTransactions: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:194:1 - NSC1000: dependency closure: transitive effect proof: unsupported expression SpreadElement at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getFlagTag",
+            "message": "[next-scriptc] not a candidate getFlagTag: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:198:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 3 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getFlagNameConflicts",
+            "message": "[next-scriptc] not a candidate getFlagNameConflicts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:216:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "buildTransactionNotes",
+            "message": "[next-scriptc] not a candidate buildTransactionNotes: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:249:1 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 14 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "buildRuleUpdate",
+            "message": "[next-scriptc] not a candidate buildRuleUpdate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:259:1 - NSC1000: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/types/models/index.ts: unresolved export RuleEntity Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "importAccounts",
+            "message": "[next-scriptc] not a candidate importAccounts: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:272:1 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "importPayees",
+            "message": "[next-scriptc] not a candidate importPayees: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:458:8 - NSC1003: dependency closure: /private/tmp/m1-dev-clones/actual/packages/loot-core/src/server/main-app.ts: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getTagsToCreate",
+            "message": "[next-scriptc] not a candidate getTagsToCreate: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:533:1 - NSC1000: dependency closure: /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts: constant graph requires literal member read Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "parseFile",
+            "message": "[next-scriptc] not a candidate parseFile: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1187:8 - NSC1000: dependency closure: transitive effect proof: opaque or uninitialized reference at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/server/importers/ynab5.ts",
+            "name": "getBudgetName",
+            "message": "[next-scriptc] not a candidate getBudgetName: [next-scriptc] /tmp/m1-dev-clones/actual/packages/loot-core/src/server/importers/ynab5.ts:1203:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/server/importers/ynab5.ts#countLive",
+            "status": "ok",
+            "compileMs": 886.499416,
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                }
+              ]
+            ],
+            "bucket": 3,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 17.623104153163563,
+              "p10": 17.67047913446627,
+              "median": 18.0456498977913,
+              "p90": 19.57380465672788,
+              "max": 20.854315201674936
+            },
+            "native": {
+              "n": 60,
+              "min": 14042.000000017651,
+              "p10": 15501.999999855798,
+              "median": 18748.00000007326,
+              "p90": 28291.000000081112,
+              "max": 53209.99999992182
+            },
+            "inputJsonBytes": 139,
+            "nsPerInputJsonByte": {
+              "js": 0.1298248194085705,
+              "native": 134.87769784225367
+            },
+            "computeIntensity": 0.1298248194085705,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 23208.00000006784,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1047.648291269207,
+              "upper": 1229.9799283283046,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 100285,
+            "rawPairsNs": [
+              [
+                17.798025626962584,
+                28332.999999975073
+              ],
+              [
+                19.481557560951348,
+                21376.000000145723
+              ],
+              [
+                20.622475943560943,
+                28291.000000081112
+              ],
+              [
+                20.854315201674936,
+                15083.000000117863
+              ],
+              [
+                19.696365358727228,
+                17040.999999949236
+              ],
+              [
+                17.853706935235135,
+                21542.999999951462
+              ],
+              [
+                19.16329461036032,
+                19915.999999966516
+              ],
+              [
+                17.676292566187062,
+                22166.99999996763
+              ],
+              [
+                17.948018148276777,
+                25208.000000020547
+              ],
+              [
+                19.57380465672788,
+                26418.000000148822
+              ],
+              [
+                19.79525352744611,
+                21415.999999931046
+              ],
+              [
+                19.025776536870072,
+                26081.99999997396
+              ],
+              [
+                19.514802811985856,
+                28584.00000002348
+              ],
+              [
+                18.08969437104243,
+                27167.00000007677
+              ],
+              [
+                18.086782669391546,
+                21166.999999991276
+              ],
+              [
+                19.174103804157912,
+                16083.000000207903
+              ],
+              [
+                19.214817769357463,
+                17208.999999866137
+              ],
+              [
+                17.84206012863388,
+                18208.00000007239
+              ],
+              [
+                17.623104153163563,
+                23124.000000052547
+              ],
+              [
+                17.626424689634174,
+                15501.999999855798
+              ],
+              [
+                17.84830233833634,
+                18748.00000007326
+              ],
+              [
+                17.680440743880364,
+                17999.999999915417
+              ],
+              [
+                17.68335244553011,
+                16790.000000014516
+              ],
+              [
+                17.83209851921978,
+                17083.999999954358
+              ],
+              [
+                17.642638480331694,
+                18166.99999994853
+              ],
+              [
+                17.634740988183847,
+                15332.000000057633
+              ],
+              [
+                17.623522959565392,
+                16416.99999993307
+              ],
+              [
+                17.658842299445983,
+                14958.999999976186
+              ],
+              [
+                17.85992920177452,
+                33584.00000001893
+              ],
+              [
+                17.67047913446627,
+                14418.999999975313
+              ],
+              [
+                17.75813930298686,
+                20793.000000139727
+              ],
+              [
+                18.13372887271259,
+                20457.00000007855
+              ],
+              [
+                18.023632646956223,
+                20503.000000189786
+              ],
+              [
+                17.70787256319521,
+                20875.000000046384
+              ],
+              [
+                18.03360422795015,
+                20292.00000004039
+              ],
+              [
+                17.993717903974428,
+                19416.999999975815
+              ],
+              [
+                17.988732113476328,
+                15915.000000063628
+              ],
+              [
+                18.268773994116856,
+                16165.000000000873
+              ],
+              [
+                18.077648701202413,
+                18042.00000003675
+              ],
+              [
+                18.018238021638393,
+                16834.000000017113
+              ],
+              [
+                18.201874657226984,
+                20375.999999941996
+              ],
+              [
+                18.048980405842876,
+                17624.000000068918
+              ],
+              [
+                18.024879094579614,
+                16835.00000001459
+              ],
+              [
+                18.342304432368113,
+                14042.000000017651
+              ],
+              [
+                18.083880939322768,
+                24709.999999913634
+              ],
+              [
+                20.33080719948223,
+                31959.000000142623
+              ],
+              [
+                18.61736052251054,
+                53209.99999992182
+              ],
+              [
+                18.00535473899358,
+                23792.9999999551
+              ],
+              [
+                18.342723238769942,
+                17874.00000011985
+              ],
+              [
+                18.034441840753814,
+                16666.00000010021
+              ],
+              [
+                18.0456498977913,
+                18208.99999984249
+              ],
+              [
+                18.33649100064845,
+                24042.000000122243
+              ],
+              [
+                18.031111332702235,
+                27248.999999983425
+              ],
+              [
+                18.063937777334907,
+                16043.00000008152
+              ],
+              [
+                18.460298150271193,
+                17416.000000025633
+              ],
+              [
+                17.99247145634877,
+                15375.000000062755
+              ],
+              [
+                17.990397367502684,
+                18291.000000090207
+              ],
+              [
+                18.363494041979365,
+                15582.999999878666
+              ],
+              [
+                18.1806850476146,
+                24167.000000034022
+              ],
+              [
+                18.113785710724727,
+                16789.99999990083
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#countLive",
+            "status": "ok",
+            "compileMs": 886.499416,
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                }
+              ]
+            ],
+            "bucket": 5,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 45.89887640449479,
+              "p10": 45.95831949194081,
+              "median": 46.57873961895573,
+              "p90": 47.696629213483256,
+              "max": 48.00115290669263
+            },
+            "native": {
+              "n": 60,
+              "min": 26041.000000077474,
+              "p10": 27501.000000029308,
+              "median": 32666.99999994671,
+              "p90": 50417.00000003857,
+              "max": 68959.00000017718
+            },
+            "inputJsonBytes": 547,
+            "nsPerInputJsonByte": {
+              "js": 0.08515308888291724,
+              "native": 59.720292504472965
+            },
+            "computeIntensity": 0.08515308888291724,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 44583.99999975882,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 719.6432311799616,
+              "upper": 823.0267297071885,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 51175,
+            "rawPairsNs": [
+              [
+                47.56637029799726,
+                68959.00000017718
+              ],
+              [
+                46.774127992184724,
+                41583.000000059656
+              ],
+              [
+                45.932271617001,
+                47166.99999994489
+              ],
+              [
+                45.951812408402596,
+                28625.00000003365
+              ],
+              [
+                45.89887640449479,
+                43042.0000001277
+              ],
+              [
+                45.99089399120577,
+                47125.00000005093
+              ],
+              [
+                48.00115290669263,
+                39750.000000026375
+              ],
+              [
+                45.940400586223724,
+                32666.99999994671
+              ],
+              [
+                46.5030190522729,
+                39208.99999991434
+              ],
+              [
+                47.221944308743446,
+                27417.999999897802
+              ],
+              [
+                47.21461651196841,
+                36666.99999996581
+              ],
+              [
+                46.09428431851513,
+                31250.99999988379
+              ],
+              [
+                45.95831949194081,
+                37875.000000099135
+              ],
+              [
+                45.9851685393261,
+                32081.999999945765
+              ],
+              [
+                45.95505617977603,
+                38167.00000004403
+              ],
+              [
+                46.00717147044479,
+                29167.00000014316
+              ],
+              [
+                46.534753297507464,
+                31458.999999927073
+              ],
+              [
+                46.52582315583707,
+                30625.999999983833
+              ],
+              [
+                46.399609184172185,
+                32457.000000022163
+              ],
+              [
+                46.880000000000315,
+                32500.000000027285
+              ],
+              [
+                46.17162677088468,
+                29998.999999861553
+              ],
+              [
+                46.74483634587146,
+                28458.000000114225
+              ],
+              [
+                46.095105031754166,
+                28209.00000006077
+              ],
+              [
+                46.657703957009765,
+                28334.00000019992
+              ],
+              [
+                46.0527601367862,
+                33416.00000010203
+              ],
+              [
+                46.031577918906535,
+                27501.000000029308
+              ],
+              [
+                45.917596482657345,
+                33749.99999994088
+              ],
+              [
+                46.57873961895573,
+                30249.99999990996
+              ],
+              [
+                46.32715192965415,
+                57207.99999994597
+              ],
+              [
+                46.31820224719017,
+                35709.00000011079
+              ],
+              [
+                46.450903761601914,
+                31957.999999917774
+              ],
+              [
+                45.9876306790432,
+                31499.999999937245
+              ],
+              [
+                46.008793356131505,
+                29041.999999890322
+              ],
+              [
+                46.03402051783229,
+                26666.000000091117
+              ],
+              [
+                46.259560332194056,
+                55083.999999851585
+              ],
+              [
+                46.20338055691281,
+                51749.99999996999
+              ],
+              [
+                46.63003419638545,
+                58876.999999824875
+              ],
+              [
+                47.601367855398834,
+                30708.000000117863
+              ],
+              [
+                47.559843673667686,
+                34497.999999871354
+              ],
+              [
+                46.42485588666432,
+                29499.99999998454
+              ],
+              [
+                47.441778212016885,
+                34041.000000001986
+              ],
+              [
+                47.20810942843018,
+                27165.999999965607
+              ],
+              [
+                47.25616023449091,
+                32831.99999998487
+              ],
+              [
+                47.87005373717625,
+                40959.00000004349
+              ],
+              [
+                47.472711284808206,
+                50417.00000003857
+              ],
+              [
+                47.94169027845525,
+                40126.00000010025
+              ],
+              [
+                47.316404494382404,
+                28040.999999916494
+              ],
+              [
+                47.51425500732628,
+                26041.000000077474
+              ],
+              [
+                47.40189545676603,
+                42956.99999988756
+              ],
+              [
+                47.62579384465194,
+                28332.999999975073
+              ],
+              [
+                47.696629213483256,
+                36000.00000005821
+              ],
+              [
+                47.839120664387146,
+                37665.99999994469
+              ],
+              [
+                47.442598925255915,
+                26417.00000003766
+              ],
+              [
+                47.82526624328253,
+                27043.000000048778
+              ],
+              [
+                47.46213971665752,
+                44875.00000027467
+              ],
+              [
+                46.24003908158382,
+                30417.999999940548
+              ],
+              [
+                46.70331216414253,
+                48498.99999987883
+              ],
+              [
+                47.326995603320015,
+                31417.000000033113
+              ],
+              [
+                46.59337567171446,
+                34875.99999994018
+              ],
+              [
+                46.56244259892536,
+                28291.000000081112
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/server/importers/ynab5.ts#countLive",
+            "status": "ok",
+            "compileMs": 886.499416,
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                },
+                {
+                  "deleted": true
+                }
+              ]
+            ],
+            "bucket": 7,
+            "metric": "thread-cpu",
+            "js": {
+              "n": 60,
+              "min": 160.60892088266985,
+              "p10": 161.1639531754638,
+              "median": 162.99724165769382,
+              "p90": 164.5867195909578,
+              "max": 166.44241119482862
+            },
+            "native": {
+              "n": 60,
+              "min": 78707.99999955125,
+              "p10": 80542.00000003676,
+              "median": 84583.00000006602,
+              "p90": 95833.00000008421,
+              "max": 119250.00000019281
+            },
+            "inputJsonBytes": 2179,
+            "nsPerInputJsonByte": {
+              "js": 0.07480369052670667,
+              "native": 38.81734740709776
+            },
+            "computeIntensity": 0.07480369052670667,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 79291.00000001199,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 519.8294239036429,
+              "upper": 551.6371750033761,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 14864,
+            "rawPairsNs": [
+              [
+                163.21589074273783,
+                83083.99999998527
+              ],
+              [
+                164.5867195909578,
+                89583.00000006147
+              ],
+              [
+                162.15635091496412,
+                83874.99999992087
+              ],
+              [
+                163.67283369213936,
+                88416.9999999358
+              ],
+              [
+                162.85427879440905,
+                107457.00000006764
+              ],
+              [
+                164.20546286329252,
+                79708.00000009604
+              ],
+              [
+                162.7394375672748,
+                82000.00000010732
+              ],
+              [
+                164.25316200215346,
+                85831.99999986845
+              ],
+              [
+                162.7506054897745,
+                82499.99999986813
+              ],
+              [
+                160.87526910656712,
+                79623.99999996705
+              ],
+              [
+                160.60892088266985,
+                95833.00000008421
+              ],
+              [
+                161.30415769644432,
+                84583.00000006602
+              ],
+              [
+                160.7042518837427,
+                84292.00000000492
+              ],
+              [
+                160.92848493002887,
+                81542.99999989689
+              ],
+              [
+                162.45909580193222,
+                93832.99999990413
+              ],
+              [
+                162.1282965554321,
+                82957.00000007855
+              ],
+              [
+                160.75753498385347,
+                83874.99999992087
+              ],
+              [
+                161.5564451022625,
+                85668.00000016883
+              ],
+              [
+                161.70781754575037,
+                82582.99999988594
+              ],
+              [
+                162.76177341226656,
+                88042.99999997056
+              ],
+              [
+                163.05052475780462,
+                119250.00000019281
+              ],
+              [
+                163.5046420882682,
+                91707.00000004217
+              ],
+              [
+                163.17391011840948,
+                88876.00000014118
+              ],
+              [
+                162.29931377825653,
+                80542.00000003676
+              ],
+              [
+                163.7289424112034,
+                89750.00000009459
+              ],
+              [
+                163.46259418729088,
+                84706.99999998033
+              ],
+              [
+                163.59156350914557,
+                83041.99999997763
+              ],
+              [
+                162.54036598492598,
+                83084.99999998276
+              ],
+              [
+                163.56068353066794,
+                85623.99999982517
+              ],
+              [
+                162.96925457481848,
+                81999.99999987995
+              ],
+              [
+                163.34768568353815,
+                91376.0000005368
+              ],
+              [
+                163.73452637243798,
+                81832.0000003041
+              ],
+              [
+                165.1725645855727,
+                89957.0000001404
+              ],
+              [
+                162.58799784714557,
+                88581.00000020386
+              ],
+              [
+                163.52146124865916,
+                88750.99999977465
+              ],
+              [
+                163.12621097954855,
+                80832.9999997568
+              ],
+              [
+                164.59230355220765,
+                85374.00000000162
+              ],
+              [
+                161.23970667384145,
+                81332.99999985866
+              ],
+              [
+                163.3953175457577,
+                90126.00000005477
+              ],
+              [
+                163.09257265876667,
+                84543.00000016701
+              ],
+              [
+                163.3308665231472,
+                85501.00000002203
+              ],
+              [
+                163.1038078579154,
+                93501.00000006023
+              ],
+              [
+                162.99724165769382,
+                116458.99999984977
+              ],
+              [
+                161.9348762109898,
+                104290.9999996482
+              ],
+              [
+                163.66166576964733,
+                97123.9999998943
+              ],
+              [
+                161.44712055974435,
+                88958.00000004783
+              ],
+              [
+                161.27892895588084,
+                88915.99999969912
+              ],
+              [
+                162.09748385359583,
+                78872.99999993047
+              ],
+              [
+                161.43871097954886,
+                78707.99999955125
+              ],
+              [
+                161.1639531754638,
+                79832.00000012403
+              ],
+              [
+                161.06027987082922,
+                85042.00000015771
+              ],
+              [
+                161.2480489773879,
+                85290.99999987011
+              ],
+              [
+                161.19200753498816,
+                80876.00000021666
+              ],
+              [
+                165.20896124865882,
+                81000.00000013097
+              ],
+              [
+                163.1823196985973,
+                84499.99999993452
+              ],
+              [
+                164.8502421959018,
+                83457.99999983683
+              ],
+              [
+                162.96084499462302,
+                80707.9999999587
+              ],
+              [
+                164.29514262647413,
+                80459.00000001893
+              ],
+              [
+                163.9083019375743,
+                83583.00000008967
+              ],
+              [
+                166.44241119482862,
+                80707.00000030229
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      },
+      "inputEvidenceFiles": []
+    }
+  ]
+}

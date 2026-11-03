@@ -1,0 +1,2653 @@
+{
+  "repository": "umami-software/umami",
+  "sha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "split": "DEV",
+  "adapterSha": "df47eaf0c742adbad4656c6dec2956d2c03411c5",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "src/app/api",
+    "src/lib",
+    "src/queries"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-stale-clones/umami"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/umami-software/umami.git",
+      "559e3c607c23d2c72d9bd4f6481bda428255323c"
+    ],
+    "exit": 0,
+    "seconds": 1.56,
+    "output": "From https://github.com/umami-software/umami\n * branch            559e3c607c23d2c72d9bd4f6481bda428255323c -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.28,
+    "output": ""
+  },
+  "verifiedSha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "packageInventory": [
+    "package.json",
+    "packages/mcp/package.json",
+    "packages/api-client/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "src/app/api/record/route.test.ts",
+    "src/app/api/links/route.test.ts",
+    "src/app/api/pixels/route.test.ts",
+    "src/app/api/send/route.test.ts",
+    "src/app/api/websites/[websiteId]/annotations/route.test.ts",
+    "src/app/api/websites/[websiteId]/recorder/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/activity/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/values/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/fields/route.test.ts",
+    "src/app/api/teams/[teamId]/users/[userId]/route.test.ts",
+    "src/app/api/scripts/telemetry/contract.generated.ts",
+    "src/app/api/scripts/telemetry/route.ts",
+    "src/app/api/me/api-keys/route.test.ts",
+    "src/app/api/me/api-keys/[keyId]/route.test.ts",
+    "src/app/api/2fa/disable/route.test.ts",
+    "src/app/api/2fa/verify/route.test.ts",
+    "src/app/api/2fa/status/route.test.ts",
+    "src/app/api/2fa/setup/confirm/route.test.ts",
+    "src/app/api/2fa/setup/initiate/route.test.ts",
+    "src/app/api/admin/users/[userId]/2fa/route.test.ts",
+    "src/app/api/auth/logout/route.test.ts",
+    "src/app/api/auth/login/route.test.ts",
+    "src/lib/analytics-schema.test.ts",
+    "src/lib/filters.test.ts",
+    "src/lib/utils.test.ts",
+    "src/lib/schema.test.ts",
+    "src/lib/lang.test.ts",
+    "src/lib/match-configured-path.test.ts",
+    "src/lib/auth.test.ts",
+    "src/lib/generate.test.ts",
+    "src/lib/analytics-query.test.ts",
+    "src/lib/data.test.ts",
+    "src/lib/api-key.test.ts",
+    "src/lib/db.test.ts",
+    "src/lib/format.test.ts",
+    "src/lib/detect.test.ts",
+    "src/lib/prisma.test.ts",
+    "src/lib/request.test.ts",
+    "src/lib/response.test.ts",
+    "src/lib/sort.test.ts",
+    "src/lib/subscription.test.ts",
+    "src/lib/analytics-routes.test.ts",
+    "src/lib/get-base-url.test.ts",
+    "src/lib/clickhouse.test.ts",
+    "src/lib/charts.test.ts",
+    "src/lib/date.test.ts",
+    "src/lib/recorder.test.ts",
+    "src/lib/share.test.ts",
+    "src/lib/jwt.test.ts",
+    "src/lib/boards.test.ts",
+    "src/lib/saved-analytics-routes.test.ts",
+    "src/lib/boardComponentCompatibility.test.ts",
+    "src/lib/ip.test.ts",
+    "src/lib/params.test.ts",
+    "src/lib/replay.test.ts",
+    "src/lib/password.test.ts",
+    "src/lib/session.test.ts",
+    "src/lib/url.test.ts",
+    "src/lib/api-url.test.ts",
+    "src/lib/crypto.test.ts",
+    "src/lib/colors.test.ts",
+    "src/lib/mcp/dispatch.test.ts",
+    "src/lib/mcp/auth.test.ts",
+    "src/lib/two-factor/backup-codes.test.ts",
+    "src/lib/two-factor/totp.test.ts",
+    "src/lib/two-factor/crypto.test.ts",
+    "src/queries/prisma/user.test.ts",
+    "src/queries/prisma/website.test.ts",
+    "src/queries/sql/getChannelExpandedMetrics.test.ts",
+    "src/queries/sql/getChannelMetrics.test.ts",
+    "src/queries/sql/getWebsiteStats.test.ts",
+    "src/queries/sql/sessions/saveSessionData.test.ts",
+    "src/queries/sql/attribution/getAttribution.test.ts",
+    "src/queries/sql/funnels/getFunnel.test.ts",
+    "src/queries/sql/events/getWebsiteEvents.test.ts",
+    "src/queries/sql/events/getWebsiteEventStats.test.ts",
+    "src/queries/sql/performance/getPerformance.test.ts",
+    "src/queries/sql/revenue/revenueFilters.test.ts",
+    "src/queries/sql/pageviews/getPageviewExpandedMetrics.test.ts"
+  ],
+  "freeBytesBeforeInstall": 87875829760,
+  "packageManager": "pnpm",
+  "install": {
+    "command": [
+      "corepack",
+      "pnpm",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--store-dir",
+      "/tmp/m1-stale-clones/store"
+    ],
+    "exit": 0,
+    "seconds": 31.09,
+    "output": "Downloading the pnpm 12.16.1 binary for darwin-arm64...\nScope: all 3 workspace projects\n? Verifying lockfile against supply-chain policies (1162 entries)...\nPackages are cloned from the content-addressable store to the virtual store.\n  Content-addressable store is at: <tmp>/store/v11\n  Virtual store is at:             node_modules/.pnpm\nProgress: resolved 284, reused 284, downloaded 0, added 281\nProgress: resolved 585, reused 585, downloaded 0, added 585\nProgress: resolved 1023, reused 587, downloaded 41, added 624\nDownloading @next/swc-darwin-arm64@16.4.2: 0.00 B/32.47 MB\nDownloading @electric-sql/pglite@0.4.3: 0.00 B/8.29 MB\nDownloading @biomejs/cli-darwin-arm64@2.5.13: 0.00 B/22.08 MB\nDownloading @prisma/dev@0.24.17: 0.00 B/9.16 MB\nDownloading next@16.4.2: 0.00 B/43.67 MB\nDownloading @swc/core-darwin-arm64@1.15.46: 0.00 B/10.52 MB\nDownloading @img/sharp-libvips-darwin-arm64@1.3.4: 0.00 B/8.34 MB\nDownloading @prisma/client@7.10.0: 0.00 B/26.82 MB\nDownloading @prisma/studio-core@0.33.0: 0.00 B/10.12 MB\nDownloading prisma@7.10.0: 0.00 B/14.17 MB\n[WARN] Tarball download average speed 34 KiB/s (size 90 KiB) is below 50 KiB/s: https://registry.npmjs.org/@biomejs/biome/-/biome-2.5.13.tgz (GET)\nProgress: resolved 1023, reused 587, downloaded 419, added 864\nProgress: resolved 1023, reused 587, downloaded 422, added 991\nDownloading @img/sharp-libvips-darwin-arm64@1.3.4: 4.35 MB/8.34 MB\n[WARN] Request took 11219ms: https://registry.npmjs.org/@prisma%2Ffetch-engine\n[WARN] Request took 12775ms: https://registry.npmjs.org/@prisma%2Fget-platform\n[WARN] Request took 12868ms: https://registry.npmjs.org/@prisma%2Fdebug\n[WARN] Request took 13672ms: https://registry.npmjs.org/@prisma%2Fclient\n\u2713 Lockfile passes supply-chain policies (1162 entries in 14.6s)\nLockfile is up to date, resolution step is skipped\nDownloading @prisma/client@7.10.0: 5.22 MB/26.82 MB\nDownloading @prisma/client@7.10.0: 7.36 MB/26.82 MB\nDownloading @prisma/client@7.10.0: 9.76 MB/26.82 MB\nDownloading @prisma/client@7.10.0: 12.92 MB/26.82 MB\nDownloading @prisma/client@7.10.0: 18.69 MB/26.82 MB\nDownloading @prisma/client@7.10.0: 26.16 MB/26.82 MB\nDownloading next@16.4.2: 42.01 MB/43.67 MB\nProgress: resolved 1023, reused 587, downloaded 436, added 1023\nPackages: +1023\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 1023, reused 587, downloaded 436, added 1023, done\nAgent skills awaiting approval: @clickhouse/client, dotenv.\nRun \"pnpm approve\" to review them.\n\ndependencies:\n+ @clickhouse/client 1.23.1\n+ @dicebear/collection 9.4.3\n+ @dicebear/core 9.4.3\n+ @playwright/test 1.63.0\n+ @prisma/adapter-pg 7.10.0\n+ @prisma/client 7.10.0\n+ @prisma/extension-read-replicas 0.5.0\n+ @svgr/cli 8.1.0\n+ @tanstack/react-query 5.102.8\n+ @umami/api-client <- packages/api-client\n+ @umami/mcp <- packages/mcp\n+ @umami/react-zen 0.254.0\n+ bcryptjs 3.0.3\n+ chalk 5.6.2\n+ chart.js 4.5.1\n+ chartjs-adapter-date-fns 3.0.0\n+ colord 2.10.0\n+ date-fns 4.4.0\n+ date-fns-tz 3.2.0\n+ debug 4.4.3\n+ detect-browser 5.3.0\n+ dotenv 17.4.2\n+ esbuild 0.28.2\n+ immer 11.1.18\n+ ipaddr.js 2.5.0\n+ is-ci 4.1.0\n+ is-docker 4.0.0\n+ is-localhost-ip 3.0.1\n+ isbot 5.2.2\n+ jsonwebtoken 9.0.3\n+ jszip 3.10.2\n+ kafkajs 2.2.4\n+ lucide-react 1.44.0\n+ maxmind 5.0.7\n+ motion 12.43.0\n+ next 16.4.2\n+ next-intl 4.13.4\n+ node-fetch 3.3.2\n+ npm-run-all 4.1.5\n+ otplib 13.5.0\n+ papaparse 5.7.0\n+ prisma 7.10.0\n+ prop-types 15.8.1\n+ punycode 2.3.1\n+ qrcode 1.5.4\n+ react 19.3.1\n+ react-dom 19.3.1\n+ react-error-boundary 6.1.5\n+ react-resizable-panels 4.12.4\n+ react-simple-maps 3.0.0\n+ react-window 2.3.1\n+ redis 5.12.1\n+ rrweb 2.0.1\n+ rrweb-player 2.0.0-alpha.20\n+ semver 7.8.5\n+ serialize-error 13.0.1\n+ thenby 1.4.1\n+ ua-parser-js 2.0.10\n+ uuid 14.0.2\n+ zod 4.6.2\n+ zustand 5.0.15\n\ndevDependencies:\n+ @biomejs/biome 2.5.13\n+ @netlify/plugin-nextjs 5.15.13\n+ @rollup/plugin-commonjs 29.0.3\n+ @rollup/plugin-node-resolve 16.0.3\n+ @rollup/plugin-replace 6.0.3\n+ @rollup/plugin-terser 1.0.0\n+ @rollup/plugin-typescript 12.3.0\n+ @testing-library/jest-dom 7.0.1\n+ @testing-library/react 16.3.3\n+ @testing-library/user-event 14.6.7\n+ @types/jest 30.0.0\n+ @types/node 26.5.1\n+ @types/qrcode 1.5.6\n+ @types/react 19.3.0\n+ @types/react-dom 19.3.0\n+ babel-plugin-react-compiler 19.1.0-rc.2\n+ dotenv-cli 11.0.0\n+ jsdom 30.0.1\n+ msw 2.15.0\n+ openapi-typescript 7.13.0\n+ postcss 8.5.28\n+ postcss-flexbugs-fixes 5.0.2\n+ postcss-preset-env 11.3.2\n+ rollup 4.63.1\n+ tar 7.5.22\n+ tsup 8.5.1\n+ tsx 4.23.13\n+ typescript 6.0.3\n+ vitest 4.1.11\n+ zod-openapi 6.0.2\n\nDone in 24.3s using pnpm v12.16.1\n"
+  },
+  "generators": [
+    {
+      "schema": "prisma/schema.prisma",
+      "status": "not run: custom generator/config requires an application execution review"
+    }
+  ],
+  "cohort": [
+    {
+      "id": "src/lib/colors.ts#hex6",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#hex6",
+        "file": "src/lib/colors.ts",
+        "name": "hex6",
+        "line": 4,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "hex6"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "76773c2038a346d5b67a"
+      }
+    },
+    {
+      "id": "src/lib/colors.ts#getColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#getColor",
+        "file": "src/lib/colors.ts",
+        "name": "getColor",
+        "line": 51,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [
+          "src/lib/colors.ts#hex2RGB",
+          "src/lib/colors.ts#hex6",
+          "src/lib/colors.ts#rgb2Hex"
+        ],
+        "exportNames": [
+          "getColor"
+        ],
+        "boundary": {
+          "params": [
+            "string",
+            "number",
+            "number"
+          ],
+          "result": "string"
+        },
+        "promotionId": "982239cb66d13567dc6c"
+      }
+    },
+    {
+      "id": "src/lib/format.ts#stringToColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/format.ts#stringToColor",
+        "file": "src/lib/format.ts",
+        "name": "stringToColor",
+        "line": 72,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "stringToColor"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "0d7a2a4719b3601f3cd3"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": ".",
+      "selectionFiles": [
+        "src/lib/colors.ts",
+        "src/lib/format.ts"
+      ],
+      "process": {
+        "exit": 0,
+        "seconds": 11.274303913116455,
+        "output": "Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\naccepted             src/lib/format.ts#stringToColor\nrejected             src/lib/format.ts#formatCurrency \u2014 [next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\nrejected             src/lib/format.ts#formatLongCurrency \u2014 [next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\nrejected             src/lib/format.ts#decodePunycodeDomain \u2014 [next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.\nrejected             src/lib/format.ts#truncateString \u2014 [next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nTop blockers:\n  2 \u00d7 unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): src/lib/colors.ts#pick, src/lib/colors.ts#clamp, src/lib/colors.ts#hex2RGB, src/lib/colors.ts#rgb2Hex, src/lib/colors.ts#getPastel, src/lib/colors.ts#getThemeColors, src/lib/format.ts#parseTime, src/lib/format.ts#formatTime, src/lib/format.ts#formatShortTime, src/lib/format.ts#formatNumber, src/lib/format.ts#formatLongNumber, src/lib/format.ts#formatCurrency, src/lib/format.ts#formatLongCurrency, src/lib/format.ts#decodePunycodeDomain, src/lib/format.ts#truncateString\nMeasured src/lib/colors.ts#hex6: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#hex6: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#hex6: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/colors.ts#getColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/format.ts#stringToColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/lib/format.ts#stringToColor: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "e3a8ad498b20168a78f16fd48290f2c8854c8bad0b02659d00487903fddbcd88",
+      "driverSha256": "4cb372946a5f420e26f6557048173da77bb883185b5200d7fef2d41c8d17f1a9",
+      "inputGeneratorSha256": "4c2a728fcfb6f2128a8b799a54d9a6c4365bbf3efb62a79f93db0e4b1247b440",
+      "inputEvidenceFiles": [
+        "src/lib/colors.test.ts",
+        "src/lib/format.test.ts"
+      ],
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-stale-clones/umami",
+        "sourceDir": "/tmp/m1-stale-clones/umami",
+        "framework": "next",
+        "fileErrors": [],
+        "counts": {
+          "files": 2,
+          "totalTopLevelFunctions": 18,
+          "exportedFunctions": 18,
+          "considered": 18,
+          "diagnosed": 15,
+          "accepted": 3,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/lib/colors.ts",
+            "functions": [
+              {
+                "id": "src/lib/colors.ts#hex6",
+                "file": "src/lib/colors.ts",
+                "name": "hex6",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "hex6"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "a9391b9659bdb65a5910"
+              },
+              {
+                "id": "src/lib/colors.ts#pick",
+                "file": "src/lib/colors.ts",
+                "name": "pick",
+                "line": 14,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "pick"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#clamp",
+                "file": "src/lib/colors.ts",
+                "name": "clamp",
+                "line": 18,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "clamp"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#hex2RGB",
+                "file": "src/lib/colors.ts",
+                "name": "hex2RGB",
+                "line": 22,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "hex2RGB"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#rgb2Hex",
+                "file": "src/lib/colors.ts",
+                "name": "rgb2Hex",
+                "line": 37,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "rgb2Hex"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getPastel",
+                "file": "src/lib/colors.ts",
+                "name": "getPastel",
+                "line": 41,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getPastel"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getColor",
+                "file": "src/lib/colors.ts",
+                "name": "getColor",
+                "line": 51,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#hex6",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string",
+                    "number",
+                    "number"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "db620d70830292b531a7"
+              },
+              {
+                "id": "src/lib/colors.ts#getThemeColors",
+                "file": "src/lib/colors.ts",
+                "name": "getThemeColors",
+                "line": 58,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-stale-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getThemeColors"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "src/lib/format.ts",
+            "functions": [
+              {
+                "id": "src/lib/format.ts#parseTime",
+                "file": "src/lib/format.ts",
+                "name": "parseTime",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "parseTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatTime",
+                "file": "src/lib/format.ts",
+                "name": "formatTime",
+                "line": 20,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatShortTime",
+                "file": "src/lib/format.ts",
+                "name": "formatShortTime",
+                "line": 29,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatShortTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatNumber",
+                "line": 46,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatLongNumber",
+                "line": 50,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatNumber"
+                ],
+                "exportNames": [
+                  "formatLongNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#stringToColor",
+                "file": "src/lib/format.ts",
+                "name": "stringToColor",
+                "line": 72,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "stringToColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "a94841209368d5ec1ce9"
+              },
+              {
+                "id": "src/lib/format.ts#formatCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatCurrency",
+                "line": 88,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatLongCurrency",
+                "line": 107,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatCurrency"
+                ],
+                "exportNames": [
+                  "formatLongCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#decodePunycodeDomain",
+                "file": "src/lib/format.ts",
+                "name": "decodePunycodeDomain",
+                "line": 123,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "decodePunycodeDomain"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#truncateString",
+                "file": "src/lib/format.ts",
+                "name": "truncateString",
+                "line": 135,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "truncateString"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 2,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-stale-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/lib/colors.ts#pick",
+            "diagnostic": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#clamp",
+            "diagnostic": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#hex2RGB",
+            "diagnostic": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#rgb2Hex",
+            "diagnostic": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getPastel",
+            "diagnostic": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getThemeColors",
+            "diagnostic": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-stale-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/lib/format.ts#parseTime",
+            "diagnostic": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatTime",
+            "diagnostic": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatShortTime",
+            "diagnostic": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#decodePunycodeDomain",
+            "diagnostic": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/lib/format.ts#truncateString",
+            "diagnostic": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/lib/colors.ts",
+            "name": "pick",
+            "message": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "clamp",
+            "message": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "hex2RGB",
+            "message": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "rgb2Hex",
+            "message": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getPastel",
+            "message": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getThemeColors",
+            "message": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-stale-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "parseTime",
+            "message": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatTime",
+            "message": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatShortTime",
+            "message": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatNumber",
+            "message": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongNumber",
+            "message": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatCurrency",
+            "message": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongCurrency",
+            "message": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "decodePunycodeDomain",
+            "message": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "truncateString",
+            "message": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-stale-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcde"
+            ],
+            "inputJsonBytes": 9,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 38.071485200845665,
+              "p10": 38.137552854122625,
+              "median": 40.61508985200846,
+              "p90": 93.43617864693447,
+              "max": 119.3734095365233
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 38.06392045454495,
+              "p10": 38.116213002114016,
+              "median": 40.54352206659667,
+              "p90": 43.437904134161734,
+              "max": 77.43385757790661
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 4.512787761334273,
+              "wall": 4.504835785177408
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 60544,
+            "rawBatches": [
+              {
+                "cpuNs": 119.3734095365233,
+                "elapsedNs": 77.43385757790661,
+                "iterations": 47942,
+                "totalWallNs": 3712333.9999999986
+              },
+              {
+                "cpuNs": 43.510909015059866,
+                "elapsedNs": 43.437904134161734,
+                "iterations": 47942,
+                "totalWallNs": 2082499.9999999818
+              },
+              {
+                "cpuNs": 113.1784239289141,
+                "elapsedNs": 69.5527929581576,
+                "iterations": 47942,
+                "totalWallNs": 3334499.999999991
+              },
+              {
+                "cpuNs": 42.151162790697676,
+                "elapsedNs": 39.38114429175503,
+                "iterations": 60544,
+                "totalWallNs": 2384292.0000000163
+              },
+              {
+                "cpuNs": 67.96709830866807,
+                "elapsedNs": 38.71014468816132,
+                "iterations": 60544,
+                "totalWallNs": 2343667.000000039
+              },
+              {
+                "cpuNs": 93.43617864693447,
+                "elapsedNs": 39.235233879493215,
+                "iterations": 60544,
+                "totalWallNs": 2375458.0000000373
+              },
+              {
+                "cpuNs": 61.83932346723044,
+                "elapsedNs": 40.95025105708318,
+                "iterations": 60544,
+                "totalWallNs": 2479292.000000044
+              },
+              {
+                "cpuNs": 38.99643234672305,
+                "elapsedNs": 38.998496960888204,
+                "iterations": 60544,
+                "totalWallNs": 2361125.0000000154
+              },
+              {
+                "cpuNs": 40.56553911205074,
+                "elapsedNs": 40.553151427060946,
+                "iterations": 60544,
+                "totalWallNs": 2455249.999999978
+              },
+              {
+                "cpuNs": 40.5490221987315,
+                "elapsedNs": 40.54352206659667,
+                "iterations": 60544,
+                "totalWallNs": 2454667.000000029
+              },
+              {
+                "cpuNs": 40.61508985200846,
+                "elapsedNs": 40.612331527483654,
+                "iterations": 60544,
+                "totalWallNs": 2458832.99999997
+              },
+              {
+                "cpuNs": 42.002510570824526,
+                "elapsedNs": 42.174550739958164,
+                "iterations": 60544,
+                "totalWallNs": 2553416.000000027
+              },
+              {
+                "cpuNs": 40.36733615221987,
+                "elapsedNs": 40.363900634249035,
+                "iterations": 60544,
+                "totalWallNs": 2443791.9999999735
+              },
+              {
+                "cpuNs": 42.39891649048626,
+                "elapsedNs": 41.36936773255881,
+                "iterations": 60544,
+                "totalWallNs": 2504667.0000000405
+              },
+              {
+                "cpuNs": 38.48440803382664,
+                "elapsedNs": 38.47271405919677,
+                "iterations": 60544,
+                "totalWallNs": 2329292.0000000093
+              },
+              {
+                "cpuNs": 38.7651955602537,
+                "elapsedNs": 39.00882003171201,
+                "iterations": 60544,
+                "totalWallNs": 2361749.999999972
+              },
+              {
+                "cpuNs": 38.137552854122625,
+                "elapsedNs": 38.116213002114016,
+                "iterations": 60544,
+                "totalWallNs": 2307707.999999991
+              },
+              {
+                "cpuNs": 38.071485200845665,
+                "elapsedNs": 38.06392045454495,
+                "iterations": 60544,
+                "totalWallNs": 2304541.9999999693
+              },
+              {
+                "cpuNs": 38.071485200845665,
+                "elapsedNs": 38.06872687632092,
+                "iterations": 60544,
+                "totalWallNs": 2304832.999999974
+              },
+              {
+                "cpuNs": 40.4664376321353,
+                "elapsedNs": 40.54832848837264,
+                "iterations": 60544,
+                "totalWallNs": 2454958.000000033
+              },
+              {
+                "cpuNs": 41.85385835095138,
+                "elapsedNs": 41.96602470930254,
+                "iterations": 60544,
+                "totalWallNs": 2540791.000000013
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcde"
+            ],
+            "inputJsonBytes": 9,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 38.02784591222714,
+              "p10": 38.02784591222714,
+              "median": 39.31602816354621,
+              "p90": 67.0560623974307,
+              "max": 138.02961054544812
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 37.990347456282116,
+              "p10": 38.02417547512726,
+              "median": 39.128535883816625,
+              "p90": 44.31361061603365,
+              "max": 45.277541512996486
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 4.368447573727356,
+              "wall": 4.347615098201847
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 56669,
+            "rawBatches": [
+              {
+                "cpuNs": 58.515237607863206,
+                "elapsedNs": 44.96506026222398,
+                "iterations": 56669,
+                "totalWallNs": 2548124.9999999707
+              },
+              {
+                "cpuNs": 45.351073779314966,
+                "elapsedNs": 45.277541512996486,
+                "iterations": 56669,
+                "totalWallNs": 2565832.9999999977
+              },
+              {
+                "cpuNs": 55.285958813460624,
+                "elapsedNs": 44.31361061603365,
+                "iterations": 56669,
+                "totalWallNs": 2511208.0000000107
+              },
+              {
+                "cpuNs": 45.08637879616722,
+                "elapsedNs": 42.950431452821846,
+                "iterations": 56669,
+                "totalWallNs": 2433957.9999999614
+              },
+              {
+                "cpuNs": 67.0560623974307,
+                "elapsedNs": 39.128535883816625,
+                "iterations": 56669,
+                "totalWallNs": 2217375.000000004
+              },
+              {
+                "cpuNs": 39.38661349238561,
+                "elapsedNs": 39.34103301628778,
+                "iterations": 56669,
+                "totalWallNs": 2229417.000000012
+              },
+              {
+                "cpuNs": 138.02961054544812,
+                "elapsedNs": 39.565282606011124,
+                "iterations": 56669,
+                "totalWallNs": 2242125.0000000442
+              },
+              {
+                "cpuNs": 39.31602816354621,
+                "elapsedNs": 39.42485309428459,
+                "iterations": 56669,
+                "totalWallNs": 2234167.0000000135
+              },
+              {
+                "cpuNs": 95.41371825865994,
+                "elapsedNs": 39.595422541424675,
+                "iterations": 56669,
+                "totalWallNs": 2243832.999999995
+              },
+              {
+                "cpuNs": 38.9631015193492,
+                "elapsedNs": 38.939578958514154,
+                "iterations": 56669,
+                "totalWallNs": 2206667.0000000386
+              },
+              {
+                "cpuNs": 38.20430923432565,
+                "elapsedNs": 38.19548606822028,
+                "iterations": 56669,
+                "totalWallNs": 2164499.9999999753
+              },
+              {
+                "cpuNs": 38.09843124106654,
+                "elapsedNs": 38.09181386648736,
+                "iterations": 56669,
+                "totalWallNs": 2158624.999999972
+              },
+              {
+                "cpuNs": 38.08078490885669,
+                "elapsedNs": 38.04918032786867,
+                "iterations": 56669,
+                "totalWallNs": 2156208.9999999898
+              },
+              {
+                "cpuNs": 38.02784591222714,
+                "elapsedNs": 38.01240537154291,
+                "iterations": 56669,
+                "totalWallNs": 2154124.999999965
+              },
+              {
+                "cpuNs": 38.02784591222714,
+                "elapsedNs": 38.02417547512726,
+                "iterations": 56669,
+                "totalWallNs": 2154791.9999999865
+              },
+              {
+                "cpuNs": 43.621733222749654,
+                "elapsedNs": 40.929944061126804,
+                "iterations": 56669,
+                "totalWallNs": 2319458.999999995
+              },
+              {
+                "cpuNs": 38.23960189874535,
+                "elapsedNs": 38.28077079179083,
+                "iterations": 56669,
+                "totalWallNs": 2169332.9999999944
+              },
+              {
+                "cpuNs": 38.398418888634,
+                "elapsedNs": 38.33003935132072,
+                "iterations": 56669,
+                "totalWallNs": 2172124.999999994
+              },
+              {
+                "cpuNs": 38.02784591222714,
+                "elapsedNs": 37.990347456282116,
+                "iterations": 56669,
+                "totalWallNs": 2152875.000000051
+              },
+              {
+                "cpuNs": 38.7160528684113,
+                "elapsedNs": 38.68737757857077,
+                "iterations": 56669,
+                "totalWallNs": 2192375.000000027
+              },
+              {
+                "cpuNs": 39.58072314669396,
+                "elapsedNs": 39.66087278759127,
+                "iterations": 56669,
+                "totalWallNs": 2247542.00000001
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcdefgh"
+            ],
+            "inputJsonBytes": 12,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 58.465286236297196,
+              "p10": 58.66356966830014,
+              "median": 61.1562756706229,
+              "p90": 141.14947738152566,
+              "max": 233.69118771775769
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 58.44758235844001,
+              "p10": 58.658867518340955,
+              "median": 60.982777667620155,
+              "p90": 63.76820666798904,
+              "max": 68.5151970087527
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 5.096356305885242,
+              "wall": 5.081898138968346
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 35303,
+            "rawBatches": [
+              {
+                "cpuNs": 68.57774126844744,
+                "elapsedNs": 68.5151970087527,
+                "iterations": 35303,
+                "totalWallNs": 2418791.9999999963
+              },
+              {
+                "cpuNs": 86.67818598985922,
+                "elapsedNs": 67.12837435911882,
+                "iterations": 35303,
+                "totalWallNs": 2369832.9999999716
+              },
+              {
+                "cpuNs": 64.98031328782257,
+                "elapsedNs": 63.172166671387544,
+                "iterations": 35303,
+                "totalWallNs": 2230166.9999999944
+              },
+              {
+                "cpuNs": 87.9245389910206,
+                "elapsedNs": 60.714840098575245,
+                "iterations": 35303,
+                "totalWallNs": 2143416.000000002
+              },
+              {
+                "cpuNs": 59.88159646488967,
+                "elapsedNs": 59.85210888593007,
+                "iterations": 35303,
+                "totalWallNs": 2112958.9999999893
+              },
+              {
+                "cpuNs": 116.02413392629522,
+                "elapsedNs": 60.982777667620155,
+                "iterations": 35303,
+                "totalWallNs": 2152874.9999999944
+              },
+              {
+                "cpuNs": 123.72886156983826,
+                "elapsedNs": 61.94348922187995,
+                "iterations": 35303,
+                "totalWallNs": 2186791.000000028
+              },
+              {
+                "cpuNs": 60.618077783757755,
+                "elapsedNs": 60.59918420530895,
+                "iterations": 35303,
+                "totalWallNs": 2139333.000000022
+              },
+              {
+                "cpuNs": 60.27816332889556,
+                "elapsedNs": 60.25926975044674,
+                "iterations": 35303,
+                "totalWallNs": 2127333.0000000214
+              },
+              {
+                "cpuNs": 233.69118771775769,
+                "elapsedNs": 63.76820666798904,
+                "iterations": 35303,
+                "totalWallNs": 2251209.000000017
+              },
+              {
+                "cpuNs": 141.14947738152566,
+                "elapsedNs": 62.28224230235442,
+                "iterations": 35303,
+                "totalWallNs": 2198750.000000018
+              },
+              {
+                "cpuNs": 61.07129705690735,
+                "elapsedNs": 61.054782879641955,
+                "iterations": 35303,
+                "totalWallNs": 2155417
+              },
+              {
+                "cpuNs": 61.1562756706229,
+                "elapsedNs": 61.140922867744834,
+                "iterations": 35303,
+                "totalWallNs": 2158457.999999996
+              },
+              {
+                "cpuNs": 199.16154434467325,
+                "elapsedNs": 62.47698495878531,
+                "iterations": 35303,
+                "totalWallNs": 2205624.9999999977
+              },
+              {
+                "cpuNs": 58.97515791859049,
+                "elapsedNs": 58.94210123785469,
+                "iterations": 35303,
+                "totalWallNs": 2080832.9999999842
+              },
+              {
+                "cpuNs": 66.25499249355579,
+                "elapsedNs": 63.49080814661687,
+                "iterations": 35303,
+                "totalWallNs": 2241416.0000000154
+              },
+              {
+                "cpuNs": 58.861853100303094,
+                "elapsedNs": 58.804010990567775,
+                "iterations": 35303,
+                "totalWallNs": 2075958.0000000142
+              },
+              {
+                "cpuNs": 58.465286236297196,
+                "elapsedNs": 58.44758235844001,
+                "iterations": 35303,
+                "totalWallNs": 2063375.0000000077
+              },
+              {
+                "cpuNs": 58.66356966830014,
+                "elapsedNs": 58.658867518340955,
+                "iterations": 35303,
+                "totalWallNs": 2070833.9999999907
+              },
+              {
+                "cpuNs": 58.5785910545846,
+                "elapsedNs": 58.54318329887016,
+                "iterations": 35303,
+                "totalWallNs": 2066750.0000000133
+              },
+              {
+                "cpuNs": 58.72022207744384,
+                "elapsedNs": 58.70251819958546,
+                "iterations": 35303,
+                "totalWallNs": 2072374.9999999655
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcde"
+            ],
+            "inputJsonBytes": 9,
+            "nativeArgumentsMatched": false,
+            "replay": "generated",
+            "jsCpu": {
+              "n": 21,
+              "min": 206.75035331282734,
+              "p10": 212.1653994375586,
+              "median": 215.39422976773253,
+              "p90": 531.090511405062,
+              "max": 4282.188841201717
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 206.5702053371004,
+              "p10": 210.241915371186,
+              "median": 214.4916154567151,
+              "p90": 257.3560045828537,
+              "max": 1352.1548640915546
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 23.932692196414724,
+              "wall": 23.83240171741279
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 12029,
+            "rawBatches": [
+              {
+                "cpuNs": 4282.188841201717,
+                "elapsedNs": 1352.1548640915546,
+                "iterations": 2796,
+                "totalWallNs": 3780624.9999999865
+              },
+              {
+                "cpuNs": 933.8610561399854,
+                "elapsedNs": 262.08207478386623,
+                "iterations": 9601,
+                "totalWallNs": 2516249.9999999
+              },
+              {
+                "cpuNs": 422.1435267159671,
+                "elapsedNs": 257.3560045828537,
+                "iterations": 9601,
+                "totalWallNs": 2470874.999999978
+              },
+              {
+                "cpuNs": 531.090511405062,
+                "elapsedNs": 215.73273617332333,
+                "iterations": 9601,
+                "totalWallNs": 2071250.0000000773
+              },
+              {
+                "cpuNs": 214.3526715967087,
+                "elapsedNs": 215.56348297052116,
+                "iterations": 9601,
+                "totalWallNs": 2069624.9999999737
+              },
+              {
+                "cpuNs": 214.04020414540153,
+                "elapsedNs": 213.88397041975827,
+                "iterations": 9601,
+                "totalWallNs": 2053500.0000000992
+              },
+              {
+                "cpuNs": 213.62358087699198,
+                "elapsedNs": 213.6235808769966,
+                "iterations": 9601,
+                "totalWallNs": 2051000.0000000445
+              },
+              {
+                "cpuNs": 226.6430580147901,
+                "elapsedNs": 226.5996250390543,
+                "iterations": 9601,
+                "totalWallNs": 2175582.9999999604
+              },
+              {
+                "cpuNs": 258.30642641391523,
+                "elapsedNs": 253.83647536715208,
+                "iterations": 9601,
+                "totalWallNs": 2437084.000000027
+              },
+              {
+                "cpuNs": 212.1653994375586,
+                "elapsedNs": 211.98739714613367,
+                "iterations": 9601,
+                "totalWallNs": 2035291.0000000293
+              },
+              {
+                "cpuNs": 212.99864597437767,
+                "elapsedNs": 212.85980627018307,
+                "iterations": 9601,
+                "totalWallNs": 2043667.0000000277
+              },
+              {
+                "cpuNs": 213.51942505988958,
+                "elapsedNs": 213.4109988542827,
+                "iterations": 9601,
+                "totalWallNs": 2048958.999999968
+              },
+              {
+                "cpuNs": 215.39422976773253,
+                "elapsedNs": 215.33777731486177,
+                "iterations": 9601,
+                "totalWallNs": 2067457.999999988
+              },
+              {
+                "cpuNs": 214.56098323091345,
+                "elapsedNs": 214.4916154567151,
+                "iterations": 9601,
+                "totalWallNs": 2059333.9999999215
+              },
+              {
+                "cpuNs": 216.2274763045516,
+                "elapsedNs": 217.74638058535962,
+                "iterations": 9601,
+                "totalWallNs": 2090583.0000000377
+              },
+              {
+                "cpuNs": 212.6861785230705,
+                "elapsedNs": 212.64274554734502,
+                "iterations": 9601,
+                "totalWallNs": 2041583.0000000596
+              },
+              {
+                "cpuNs": 335.38173106968026,
+                "elapsedNs": 213.56712842412756,
+                "iterations": 9601,
+                "totalWallNs": 2050458.0000000487
+              },
+              {
+                "cpuNs": 232.3716279554213,
+                "elapsedNs": 224.6510780127084,
+                "iterations": 9601,
+                "totalWallNs": 2156875.0000000135
+              },
+              {
+                "cpuNs": 209.3274586416161,
+                "elapsedNs": 210.241915371186,
+                "iterations": 12029,
+                "totalWallNs": 2528999.9999999963
+              },
+              {
+                "cpuNs": 206.75035331282734,
+                "elapsedNs": 206.5702053371004,
+                "iterations": 12029,
+                "totalWallNs": 2484832.9999999804
+              },
+              {
+                "cpuNs": 510.76564967994017,
+                "elapsedNs": 208.54809211072725,
+                "iterations": 12029,
+                "totalWallNs": 2508624.999999938
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcde"
+            ],
+            "inputJsonBytes": 9,
+            "nativeArgumentsMatched": false,
+            "replay": "generated",
+            "jsCpu": {
+              "n": 21,
+              "min": 206.59751742900866,
+              "p10": 208.21288896446183,
+              "median": 214.16425777928924,
+              "p90": 573.6269341948648,
+              "max": 893.3004591055943
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 206.5514368304768,
+              "p10": 208.1455534773017,
+              "median": 211.99625913959585,
+              "p90": 223.56240435300265,
+              "max": 233.78957660262546
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 23.79602864214325,
+              "wall": 23.55513990439954
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 11762,
+            "rawBatches": [
+              {
+                "cpuNs": 756.5039959190614,
+                "elapsedNs": 215.9460976024448,
+                "iterations": 11762,
+                "totalWallNs": 2539957.9999999558
+              },
+              {
+                "cpuNs": 233.37867709573203,
+                "elapsedNs": 228.93291957149486,
+                "iterations": 11762,
+                "totalWallNs": 2692708.9999999227
+              },
+              {
+                "cpuNs": 573.6269341948648,
+                "elapsedNs": 211.99625913959585,
+                "iterations": 11762,
+                "totalWallNs": 2493499.9999999264
+              },
+              {
+                "cpuNs": 488.26730147934023,
+                "elapsedNs": 211.9750042509768,
+                "iterations": 11762,
+                "totalWallNs": 2493249.9999999893
+              },
+              {
+                "cpuNs": 441.7616051691889,
+                "elapsedNs": 215.07464716885121,
+                "iterations": 11762,
+                "totalWallNs": 2529708.000000028
+              },
+              {
+                "cpuNs": 492.17820098622684,
+                "elapsedNs": 214.6815167488516,
+                "iterations": 11762,
+                "totalWallNs": 2525083.9999999925
+              },
+              {
+                "cpuNs": 214.16425777928924,
+                "elapsedNs": 214.35198095561992,
+                "iterations": 11762,
+                "totalWallNs": 2521208.0000000014
+              },
+              {
+                "cpuNs": 214.58935555177692,
+                "elapsedNs": 215.1916340758441,
+                "iterations": 11762,
+                "totalWallNs": 2531084.000000078
+              },
+              {
+                "cpuNs": 893.3004591055943,
+                "elapsedNs": 233.78957660262546,
+                "iterations": 11762,
+                "totalWallNs": 2749833.0000000806
+              },
+              {
+                "cpuNs": 231.42322734228873,
+                "elapsedNs": 221.67786090800317,
+                "iterations": 11762,
+                "totalWallNs": 2607374.9999999334
+              },
+              {
+                "cpuNs": 209.74324094541745,
+                "elapsedNs": 209.74324094541615,
+                "iterations": 11762,
+                "totalWallNs": 2466999.9999999846
+              },
+              {
+                "cpuNs": 210.3383778269002,
+                "elapsedNs": 210.25335827239894,
+                "iterations": 11762,
+                "totalWallNs": 2472999.999999956
+              },
+              {
+                "cpuNs": 210.16833871790513,
+                "elapsedNs": 210.10108825029167,
+                "iterations": 11762,
+                "totalWallNs": 2471208.9999999306
+              },
+              {
+                "cpuNs": 211.8687298078558,
+                "elapsedNs": 212.68704301989374,
+                "iterations": 11762,
+                "totalWallNs": 2501624.99999999
+              },
+              {
+                "cpuNs": 206.59751742900866,
+                "elapsedNs": 206.5514368304768,
+                "iterations": 11762,
+                "totalWallNs": 2429458.000000068
+              },
+              {
+                "cpuNs": 229.04267981635778,
+                "elapsedNs": 223.56240435300265,
+                "iterations": 11762,
+                "totalWallNs": 2629541.000000017
+              },
+              {
+                "cpuNs": 207.53273252848155,
+                "elapsedNs": 207.44771297397898,
+                "iterations": 11762,
+                "totalWallNs": 2439999.999999941
+              },
+              {
+                "cpuNs": 209.99829960891006,
+                "elapsedNs": 210.49421867029127,
+                "iterations": 11762,
+                "totalWallNs": 2475832.999999966
+              },
+              {
+                "cpuNs": 208.21288896446183,
+                "elapsedNs": 208.1455534773017,
+                "iterations": 11762,
+                "totalWallNs": 2448208.0000000224
+              },
+              {
+                "cpuNs": 208.55296718245197,
+                "elapsedNs": 208.53171229383074,
+                "iterations": 11762,
+                "totalWallNs": 2452750.0000000373
+              },
+              {
+                "cpuNs": 211.78371025335827,
+                "elapsedNs": 211.76959700731706,
+                "iterations": 11762,
+                "totalWallNs": 2490834.0000000633
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "a"
+            ],
+            "inputJsonBytes": 5,
+            "nativeArgumentsMatched": false,
+            "replay": "generated",
+            "jsCpu": {
+              "n": 21,
+              "min": 180.4720715437619,
+              "p10": 181.2051018912183,
+              "median": 182.96437472511363,
+              "p90": 245.2719542589063,
+              "max": 305.966867028295
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 180.46899281630957,
+              "p10": 181.16845037384488,
+              "median": 182.91247617650998,
+              "p90": 192.338000293212,
+              "max": 195.26095880369812
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 36.59287494502273,
+              "wall": 36.582495235302
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 13642,
+            "rawBatches": [
+              {
+                "cpuNs": 182.1580413429116,
+                "elapsedNs": 181.73654889312263,
+                "iterations": 13642,
+                "totalWallNs": 2479249.999999979
+              },
+              {
+                "cpuNs": 181.93813223867468,
+                "elapsedNs": 181.93505351121266,
+                "iterations": 13642,
+                "totalWallNs": 2481957.999999963
+              },
+              {
+                "cpuNs": 181.2051018912183,
+                "elapsedNs": 181.16845037384488,
+                "iterations": 13642,
+                "totalWallNs": 2471499.9999999916
+              },
+              {
+                "cpuNs": 182.96437472511363,
+                "elapsedNs": 182.91247617650998,
+                "iterations": 13642,
+                "totalWallNs": 2495291.9999999492
+              },
+              {
+                "cpuNs": 182.96437472511363,
+                "elapsedNs": 182.97654302888262,
+                "iterations": 13642,
+                "totalWallNs": 2496166.0000000168
+              },
+              {
+                "cpuNs": 206.49464887846358,
+                "elapsedNs": 195.26095880369812,
+                "iterations": 13642,
+                "totalWallNs": 2663750.00000005
+              },
+              {
+                "cpuNs": 182.1580413429116,
+                "elapsedNs": 182.16112007037248,
+                "iterations": 13642,
+                "totalWallNs": 2485042.0000000214
+              },
+              {
+                "cpuNs": 182.23134437765722,
+                "elapsedNs": 182.24050725700155,
+                "iterations": 13642,
+                "totalWallNs": 2486125.0000000154
+              },
+              {
+                "cpuNs": 181.49831403020085,
+                "elapsedNs": 181.39752235742168,
+                "iterations": 13642,
+                "totalWallNs": 2474624.9999999464
+              },
+              {
+                "cpuNs": 183.9173141768069,
+                "elapsedNs": 183.6424277965142,
+                "iterations": 13642,
+                "totalWallNs": 2505250.0000000466
+              },
+              {
+                "cpuNs": 245.2719542589063,
+                "elapsedNs": 183.45000733030102,
+                "iterations": 13642,
+                "totalWallNs": 2502624.9999999665
+              },
+              {
+                "cpuNs": 193.4467086937399,
+                "elapsedNs": 192.338000293212,
+                "iterations": 13642,
+                "totalWallNs": 2623874.999999998
+              },
+              {
+                "cpuNs": 181.058495821727,
+                "elapsedNs": 180.96686702829498,
+                "iterations": 13642,
+                "totalWallNs": 2468750
+              },
+              {
+                "cpuNs": 180.4720715437619,
+                "elapsedNs": 180.46899281630957,
+                "iterations": 13642,
+                "totalWallNs": 2461958.000000095
+              },
+              {
+                "cpuNs": 270.70810731564285,
+                "elapsedNs": 182.75663392464256,
+                "iterations": 13642,
+                "totalWallNs": 2493165.999999974
+              },
+              {
+                "cpuNs": 182.59785955138543,
+                "elapsedNs": 182.4665005131185,
+                "iterations": 13642,
+                "totalWallNs": 2489207.9999999623
+              },
+              {
+                "cpuNs": 183.03767775985926,
+                "elapsedNs": 183.01935200117433,
+                "iterations": 13642,
+                "totalWallNs": 2496750.00000002
+              },
+              {
+                "cpuNs": 200.4838000293212,
+                "elapsedNs": 192.95499193666666,
+                "iterations": 13642,
+                "totalWallNs": 2632292.0000000065
+              },
+              {
+                "cpuNs": 305.966867028295,
+                "elapsedNs": 183.0285148805194,
+                "iterations": 13642,
+                "totalWallNs": 2496875.0000000456
+              },
+              {
+                "cpuNs": 183.9173141768069,
+                "elapsedNs": 184.33272247471274,
+                "iterations": 13642,
+                "totalWallNs": 2514667.000000031
+              },
+              {
+                "cpuNs": 183.84401114206128,
+                "elapsedNs": 184.23185749890737,
+                "iterations": 13642,
+                "totalWallNs": 2513291.0000000945
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 3,
+            "inputSource": "synthetic-fallback",
+            "arguments": [
+              "xxxxxxxx",
+              32,
+              32
+            ],
+            "inputJsonBytes": 18,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 228.4563506931435,
+              "p10": 231.45372798801048,
+              "median": 236.69913825402773,
+              "p90": 504.12139378044213,
+              "max": 705.1330086174597
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 228.32755713748574,
+              "p10": 229.80666916447615,
+              "median": 232.68312101910354,
+              "p90": 252.4783626826553,
+              "max": 254.57025103036202
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 13.149952125223763,
+              "wall": 12.926840056616863
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 10676,
+            "rawBatches": [
+              {
+                "cpuNs": 448.0142375421506,
+                "elapsedNs": 231.44201948295037,
+                "iterations": 10676,
+                "totalWallNs": 2470874.999999978
+              },
+              {
+                "cpuNs": 235.20044960659422,
+                "elapsedNs": 235.2784750843035,
+                "iterations": 10676,
+                "totalWallNs": 2511833.000000024
+              },
+              {
+                "cpuNs": 705.1330086174597,
+                "elapsedNs": 253.75843012363916,
+                "iterations": 10676,
+                "totalWallNs": 2709124.9999999716
+              },
+              {
+                "cpuNs": 504.12139378044213,
+                "elapsedNs": 229.80666916447615,
+                "iterations": 10676,
+                "totalWallNs": 2453415.9999999474
+              },
+              {
+                "cpuNs": 506.27575871112776,
+                "elapsedNs": 229.87692019482827,
+                "iterations": 10676,
+                "totalWallNs": 2454165.9999999865
+              },
+              {
+                "cpuNs": 412.60771824653426,
+                "elapsedNs": 234.31060322217726,
+                "iterations": 10676,
+                "totalWallNs": 2501499.9999999646
+              },
+              {
+                "cpuNs": 461.4087673285875,
+                "elapsedNs": 230.47414762082414,
+                "iterations": 10676,
+                "totalWallNs": 2460541.9999999185
+              },
+              {
+                "cpuNs": 479.8613713001124,
+                "elapsedNs": 229.4593480704478,
+                "iterations": 10676,
+                "totalWallNs": 2449708.0000001006
+              },
+              {
+                "cpuNs": 374.3911577369801,
+                "elapsedNs": 242.3231547396132,
+                "iterations": 10676,
+                "totalWallNs": 2587042.0000001104
+              },
+              {
+                "cpuNs": 234.54477332334207,
+                "elapsedNs": 235.04823904084776,
+                "iterations": 10676,
+                "totalWallNs": 2509375.000000091
+              },
+              {
+                "cpuNs": 259.83514424878234,
+                "elapsedNs": 252.4783626826553,
+                "iterations": 10676,
+                "totalWallNs": 2695459.000000028
+              },
+              {
+                "cpuNs": 232.7650805545148,
+                "elapsedNs": 232.68312101910354,
+                "iterations": 10676,
+                "totalWallNs": 2484124.9999999492
+              },
+              {
+                "cpuNs": 232.7650805545148,
+                "elapsedNs": 232.73388909703493,
+                "iterations": 10676,
+                "totalWallNs": 2484666.999999945
+              },
+              {
+                "cpuNs": 236.69913825402773,
+                "elapsedNs": 238.46318846008825,
+                "iterations": 10676,
+                "totalWallNs": 2545832.999999902
+              },
+              {
+                "cpuNs": 231.45372798801048,
+                "elapsedNs": 231.3796365679881,
+                "iterations": 10676,
+                "totalWallNs": 2470208.9999998407
+              },
+              {
+                "cpuNs": 231.54739602847508,
+                "elapsedNs": 231.54346197078365,
+                "iterations": 10676,
+                "totalWallNs": 2471958.000000086
+              },
+              {
+                "cpuNs": 231.45372798801048,
+                "elapsedNs": 231.4342450355795,
+                "iterations": 10676,
+                "totalWallNs": 2470791.999999847
+              },
+              {
+                "cpuNs": 261.3338328962158,
+                "elapsedNs": 254.57025103036202,
+                "iterations": 10676,
+                "totalWallNs": 2717792.000000145
+              },
+              {
+                "cpuNs": 231.92206819033345,
+                "elapsedNs": 232.078212813777,
+                "iterations": 10676,
+                "totalWallNs": 2477666.999999883
+              },
+              {
+                "cpuNs": 233.0460846759086,
+                "elapsedNs": 233.28409516671917,
+                "iterations": 10676,
+                "totalWallNs": 2490540.999999894
+              },
+              {
+                "cpuNs": 228.4563506931435,
+                "elapsedNs": 228.32755713748574,
+                "iterations": 10676,
+                "totalWallNs": 2437624.999999798
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 4,
+            "inputSource": "synthetic-fallback",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32,
+              32
+            ],
+            "inputJsonBytes": 42,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 411.4400401404917,
+              "p10": 413.2798126777053,
+              "median": 416.4576016056197,
+              "p90": 422.4786753637732,
+              "max": 472.4870379662151
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 411.31460110388207,
+              "p10": 413.24502425152144,
+              "median": 417.1195852149223,
+              "p90": 424.5761833082661,
+              "max": 451.65730055195473
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 9.915657181086184,
+              "wall": 9.931418695593388
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 5979,
+            "rawBatches": [
+              {
+                "cpuNs": 414.45057701956847,
+                "elapsedNs": 413.8929586887176,
+                "iterations": 5979,
+                "totalWallNs": 2474665.9999998426
+              },
+              {
+                "cpuNs": 413.6143167753805,
+                "elapsedNs": 413.6352232814822,
+                "iterations": 5979,
+                "totalWallNs": 2473124.999999982
+              },
+              {
+                "cpuNs": 413.6143167753805,
+                "elapsedNs": 413.24502425152144,
+                "iterations": 5979,
+                "totalWallNs": 2470791.999999847
+              },
+              {
+                "cpuNs": 419.8026425823716,
+                "elapsedNs": 420.7504599431546,
+                "iterations": 5979,
+                "totalWallNs": 2515667.0000001215
+              },
+              {
+                "cpuNs": 413.9488208730557,
+                "elapsedNs": 413.7467803980604,
+                "iterations": 5979,
+                "totalWallNs": 2473792.0000000033
+              },
+              {
+                "cpuNs": 411.4400401404917,
+                "elapsedNs": 411.31460110388207,
+                "iterations": 5979,
+                "totalWallNs": 2459250.000000111
+              },
+              {
+                "cpuNs": 472.4870379662151,
+                "elapsedNs": 451.65730055195473,
+                "iterations": 5979,
+                "totalWallNs": 2700459.0000001374
+              },
+              {
+                "cpuNs": 422.4786753637732,
+                "elapsedNs": 424.5761833082661,
+                "iterations": 5979,
+                "totalWallNs": 2538541.000000123
+              },
+              {
+                "cpuNs": 413.2798126777053,
+                "elapsedNs": 413.25890617159695,
+                "iterations": 5979,
+                "totalWallNs": 2470874.999999978
+              },
+              {
+                "cpuNs": 413.9488208730557,
+                "elapsedNs": 413.92791436693153,
+                "iterations": 5979,
+                "totalWallNs": 2474874.9999998836
+              },
+              {
+                "cpuNs": 413.2798126777053,
+                "elapsedNs": 413.2936945977814,
+                "iterations": 5979,
+                "totalWallNs": 2471083.000000135
+              },
+              {
+                "cpuNs": 417.2938618498077,
+                "elapsedNs": 417.6492724535657,
+                "iterations": 5979,
+                "totalWallNs": 2497124.999999869
+              },
+              {
+                "cpuNs": 417.1266098009701,
+                "elapsedNs": 417.1195852149223,
+                "iterations": 5979,
+                "totalWallNs": 2493958.0000000205
+              },
+              {
+                "cpuNs": 412.6108044823549,
+                "elapsedNs": 412.56899147015343,
+                "iterations": 5979,
+                "totalWallNs": 2466750.0000000475
+              },
+              {
+                "cpuNs": 414.2833249707309,
+                "elapsedNs": 414.13697942798314,
+                "iterations": 5979,
+                "totalWallNs": 2476124.999999911
+              },
+              {
+                "cpuNs": 416.4576016056197,
+                "elapsedNs": 417.36360595418773,
+                "iterations": 5979,
+                "totalWallNs": 2495417.0000000885
+              },
+              {
+                "cpuNs": 421.4751630707476,
+                "elapsedNs": 423.94898812507336,
+                "iterations": 5979,
+                "totalWallNs": 2534790.9999998137
+              },
+              {
+                "cpuNs": 418.9663823381836,
+                "elapsedNs": 419.00819535038175,
+                "iterations": 5979,
+                "totalWallNs": 2505249.9999999325
+              },
+              {
+                "cpuNs": 417.96287004515807,
+                "elapsedNs": 418.02558956345086,
+                "iterations": 5979,
+                "totalWallNs": 2499374.999999873
+              },
+              {
+                "cpuNs": 420.97340692423484,
+                "elapsedNs": 422.23482187658647,
+                "iterations": 5979,
+                "totalWallNs": 2524542.0000001104
+              },
+              {
+                "cpuNs": 460.7793945475832,
+                "elapsedNs": 450.1518648603465,
+                "iterations": 5979,
+                "totalWallNs": 2691458.0000000116
+              }
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 5,
+            "inputSource": "synthetic-fallback",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32,
+              32
+            ],
+            "inputJsonBytes": 138,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 1153.5,
+              "p10": 1155.5,
+              "median": 1158.5,
+              "p90": 1172.5,
+              "max": 1241.5
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 1153.2290000000103,
+              "p10": 1154.8334999999952,
+              "median": 1157.916499999942,
+              "p90": 1170.1249999999845,
+              "max": 1177.5625000000218
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 8.394927536231885,
+              "wall": 8.390699275361898
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 2000,
+            "rawBatches": [
+              {
+                "cpuNs": 1157.5,
+                "elapsedNs": 1155.5419999999685,
+                "iterations": 2000,
+                "totalWallNs": 2311083.999999937
+              },
+              {
+                "cpuNs": 1163.5,
+                "elapsedNs": 1164.041500000053,
+                "iterations": 2000,
+                "totalWallNs": 2328083.000000106
+              },
+              {
+                "cpuNs": 1159,
+                "elapsedNs": 1158.5625000000164,
+                "iterations": 2000,
+                "totalWallNs": 2317125.0000000326
+              },
+              {
+                "cpuNs": 1163,
+                "elapsedNs": 1165.8330000000205,
+                "iterations": 2000,
+                "totalWallNs": 2331666.000000041
+              },
+              {
+                "cpuNs": 1162,
+                "elapsedNs": 1166.249999999991,
+                "iterations": 2000,
+                "totalWallNs": 2332499.999999982
+              },
+              {
+                "cpuNs": 1158,
+                "elapsedNs": 1157.916499999942,
+                "iterations": 2000,
+                "totalWallNs": 2315832.999999884
+              },
+              {
+                "cpuNs": 1164,
+                "elapsedNs": 1167.31249999998,
+                "iterations": 2000,
+                "totalWallNs": 2334624.99999996
+              },
+              {
+                "cpuNs": 1241.5,
+                "elapsedNs": 1165.0624999999764,
+                "iterations": 2000,
+                "totalWallNs": 2330124.9999999525
+              },
+              {
+                "cpuNs": 1153.5,
+                "elapsedNs": 1153.2290000000103,
+                "iterations": 2000,
+                "totalWallNs": 2306458.0000000205
+              },
+              {
+                "cpuNs": 1157.5,
+                "elapsedNs": 1157.1669999999585,
+                "iterations": 2000,
+                "totalWallNs": 2314333.999999917
+              },
+              {
+                "cpuNs": 1166.5,
+                "elapsedNs": 1170.1249999999845,
+                "iterations": 2000,
+                "totalWallNs": 2340249.9999999693
+              },
+              {
+                "cpuNs": 1155.5,
+                "elapsedNs": 1154.8334999999952,
+                "iterations": 2000,
+                "totalWallNs": 2309666.99999999
+              },
+              {
+                "cpuNs": 1156,
+                "elapsedNs": 1155.1459999999452,
+                "iterations": 2000,
+                "totalWallNs": 2310291.99999989
+              },
+              {
+                "cpuNs": 1158.5,
+                "elapsedNs": 1157.5624999999263,
+                "iterations": 2000,
+                "totalWallNs": 2315124.999999853
+              },
+              {
+                "cpuNs": 1157,
+                "elapsedNs": 1156.9375000000264,
+                "iterations": 2000,
+                "totalWallNs": 2313875.0000000526
+              },
+              {
+                "cpuNs": 1173,
+                "elapsedNs": 1172.8544999999713,
+                "iterations": 2000,
+                "totalWallNs": 2345708.9999999427
+              },
+              {
+                "cpuNs": 1162,
+                "elapsedNs": 1161.9375000000218,
+                "iterations": 2000,
+                "totalWallNs": 2323875.000000044
+              },
+              {
+                "cpuNs": 1155.5,
+                "elapsedNs": 1155.4585000000088,
+                "iterations": 2000,
+                "totalWallNs": 2310917.0000000177
+              },
+              {
+                "cpuNs": 1157.5,
+                "elapsedNs": 1157.6459999999997,
+                "iterations": 2000,
+                "totalWallNs": 2315291.9999999995
+              },
+              {
+                "cpuNs": 1172.5,
+                "elapsedNs": 1177.5625000000218,
+                "iterations": 2000,
+                "totalWallNs": 2355125.000000044
+              },
+              {
+                "cpuNs": 1156,
+                "elapsedNs": 1154.8124999999345,
+                "iterations": 2000,
+                "totalWallNs": 2309624.999999869
+              }
+            ]
+          },
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcde"
+            ],
+            "inputJsonBytes": 9,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 75.96882971660202,
+              "p10": 76.66771499458363,
+              "median": 80.7911381346752,
+              "p90": 88.51382045637209,
+              "max": 124.43652374462732
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 75.88873746374814,
+              "p10": 76.77838347835328,
+              "median": 81.20173323549002,
+              "p90": 84.5956948666805,
+              "max": 88.15854212530984
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 8.976793126075021,
+              "wall": 9.022414803943336
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 28617,
+            "rawBatches": [
+              {
+                "cpuNs": 86.6617744697208,
+                "elapsedNs": 83.48037879582074,
+                "iterations": 28617,
+                "totalWallNs": 2388958.0000000023
+              },
+              {
+                "cpuNs": 75.96882971660202,
+                "elapsedNs": 75.88873746374814,
+                "iterations": 28617,
+                "totalWallNs": 2171708.0000000806
+              },
+              {
+                "cpuNs": 80.7911381346752,
+                "elapsedNs": 81.20173323549002,
+                "iterations": 28617,
+                "totalWallNs": 2323750.000000018
+              },
+              {
+                "cpuNs": 81.90935457944579,
+                "elapsedNs": 81.96903938218746,
+                "iterations": 28617,
+                "totalWallNs": 2345708.0000000587
+              },
+              {
+                "cpuNs": 88.51382045637209,
+                "elapsedNs": 84.5170702729154,
+                "iterations": 28617,
+                "totalWallNs": 2418625.00000002
+              },
+              {
+                "cpuNs": 77.4714330642625,
+                "elapsedNs": 77.43068805255918,
+                "iterations": 28617,
+                "totalWallNs": 2215834.000000086
+              },
+              {
+                "cpuNs": 79.8476430094,
+                "elapsedNs": 80.01216060383753,
+                "iterations": 28617,
+                "totalWallNs": 2289708.0000000186
+              },
+              {
+                "cpuNs": 84.42534158017962,
+                "elapsedNs": 84.5956948666805,
+                "iterations": 28617,
+                "totalWallNs": 2420874.999999796
+              },
+              {
+                "cpuNs": 86.62683020582172,
+                "elapsedNs": 85.30768424362633,
+                "iterations": 28617,
+                "totalWallNs": 2441249.9999998547
+              },
+              {
+                "cpuNs": 76.49299367508823,
+                "elapsedNs": 76.45951707027277,
+                "iterations": 28617,
+                "totalWallNs": 2188041.999999996
+              },
+              {
+                "cpuNs": 77.96065275884963,
+                "elapsedNs": 78.45860851940951,
+                "iterations": 28617,
+                "totalWallNs": 2245249.999999942
+              },
+              {
+                "cpuNs": 77.92570849495056,
+                "elapsedNs": 77.93007652793946,
+                "iterations": 28617,
+                "totalWallNs": 2230125.000000044
+              },
+              {
+                "cpuNs": 82.50340706573016,
+                "elapsedNs": 81.5977565782556,
+                "iterations": 28617,
+                "totalWallNs": 2335082.9999999404
+              },
+              {
+                "cpuNs": 77.33165600866617,
+                "elapsedNs": 77.3272879756767,
+                "iterations": 28617,
+                "totalWallNs": 2212874.99999994
+              },
+              {
+                "cpuNs": 77.6461543837579,
+                "elapsedNs": 77.66505923053053,
+                "iterations": 28617,
+                "totalWallNs": 2222541.000000092
+              },
+              {
+                "cpuNs": 82.9926267603173,
+                "elapsedNs": 83.07125135409035,
+                "iterations": 28617,
+                "totalWallNs": 2377250.0000000037
+              },
+              {
+                "cpuNs": 89.84170248453717,
+                "elapsedNs": 88.15854212530984,
+                "iterations": 28617,
+                "totalWallNs": 2522832.9999999916
+              },
+              {
+                "cpuNs": 124.43652374462732,
+                "elapsedNs": 81.8642065904927,
+                "iterations": 28617,
+                "totalWallNs": 2342708.0000001295
+              },
+              {
+                "cpuNs": 78.79931509242758,
+                "elapsedNs": 79.04829297270746,
+                "iterations": 28617,
+                "totalWallNs": 2262124.9999999693
+              },
+              {
+                "cpuNs": 76.66771499458363,
+                "elapsedNs": 76.77838347835328,
+                "iterations": 28617,
+                "totalWallNs": 2197167.000000036
+              },
+              {
+                "cpuNs": 86.17255477513366,
+                "elapsedNs": 83.21829681657987,
+                "iterations": 28617,
+                "totalWallNs": 2381458.000000066
+              }
+            ]
+          },
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "arguments": [
+              "abcdefg"
+            ],
+            "inputJsonBytes": 11,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 154.18040940264908,
+              "p10": 157.5310193183603,
+              "median": 158.89220459661797,
+              "p90": 415.73739594785616,
+              "max": 658.7089681168525
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 154.08879116276816,
+              "p10": 156.29202659546442,
+              "median": 158.2028689597411,
+              "p90": 163.8352442280444,
+              "max": 167.20763310820445
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 14.444745872419816,
+              "wall": 14.3820789963401
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 19101,
+            "rawBatches": [
+              {
+                "cpuNs": 158.3163185173551,
+                "elapsedNs": 158.2028689597411,
+                "iterations": 19101,
+                "totalWallNs": 3021833.000000015
+              },
+              {
+                "cpuNs": 157.63572587822628,
+                "elapsedNs": 157.62049107376086,
+                "iterations": 19101,
+                "totalWallNs": 3010708.999999906
+              },
+              {
+                "cpuNs": 158.10690539762317,
+                "elapsedNs": 158.09596356211406,
+                "iterations": 19101,
+                "totalWallNs": 3019790.999999941
+              },
+              {
+                "cpuNs": 173.0275901785247,
+                "elapsedNs": 167.20763310820445,
+                "iterations": 19101,
+                "totalWallNs": 3193832.9999998133
+              },
+              {
+                "cpuNs": 156.90277995916443,
+                "elapsedNs": 156.9049787969198,
+                "iterations": 19101,
+                "totalWallNs": 2997041.999999965
+              },
+              {
+                "cpuNs": 157.5310193183603,
+                "elapsedNs": 157.46777655619502,
+                "iterations": 19101,
+                "totalWallNs": 3007791.9999998813
+              },
+              {
+                "cpuNs": 158.0021988377572,
+                "elapsedNs": 157.41107795403386,
+                "iterations": 19101,
+                "totalWallNs": 3006709.000000001
+              },
+              {
+                "cpuNs": 160.4628029946076,
+                "elapsedNs": 156.29202659546442,
+                "iterations": 19101,
+                "totalWallNs": 2985333.999999966
+              },
+              {
+                "cpuNs": 154.18040940264908,
+                "elapsedNs": 154.08879116276816,
+                "iterations": 19101,
+                "totalWallNs": 2943250.0000000345
+              },
+              {
+                "cpuNs": 166.74519658656615,
+                "elapsedNs": 163.8352442280444,
+                "iterations": 19101,
+                "totalWallNs": 3129416.9999998757
+              },
+              {
+                "cpuNs": 158.89220459661797,
+                "elapsedNs": 159.17360347625987,
+                "iterations": 19101,
+                "totalWallNs": 3040375.00000004
+              },
+              {
+                "cpuNs": 270.71881053347994,
+                "elapsedNs": 159.63603999790104,
+                "iterations": 19101,
+                "totalWallNs": 3049207.999999908
+              },
+              {
+                "cpuNs": 261.0334537458772,
+                "elapsedNs": 157.9891105177728,
+                "iterations": 19101,
+                "totalWallNs": 3017749.999999978
+              },
+              {
+                "cpuNs": 158.3686717972881,
+                "elapsedNs": 158.51484215485382,
+                "iterations": 19101,
+                "totalWallNs": 3027791.999999863
+              },
+              {
+                "cpuNs": 464.8971258049317,
+                "elapsedNs": 156.07821580022227,
+                "iterations": 19101,
+                "totalWallNs": 2981250.0000000456
+              },
+              {
+                "cpuNs": 408.66970315690276,
+                "elapsedNs": 165.70032982565613,
+                "iterations": 19101,
+                "totalWallNs": 3165041.9999998575
+              },
+              {
+                "cpuNs": 158.3686717972881,
+                "elapsedNs": 158.266164075181,
+                "iterations": 19101,
+                "totalWallNs": 3023042.000000032
+              },
+              {
+                "cpuNs": 157.9498455578242,
+                "elapsedNs": 157.89094811789036,
+                "iterations": 19101,
+                "totalWallNs": 3015874.9999998235
+              },
+              {
+                "cpuNs": 658.7089681168525,
+                "elapsedNs": 160.81398879640707,
+                "iterations": 19101,
+                "totalWallNs": 3071708.0000001714
+              },
+              {
+                "cpuNs": 215.38139364431183,
+                "elapsedNs": 158.85074079891288,
+                "iterations": 19101,
+                "totalWallNs": 3034208.000000035
+              },
+              {
+                "cpuNs": 415.73739594785616,
+                "elapsedNs": 163.50149206848693,
+                "iterations": 19101,
+                "totalWallNs": 3123042.0000001686
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "finalFixtureRefresh": true
+}

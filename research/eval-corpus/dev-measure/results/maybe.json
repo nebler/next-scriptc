@@ -4,5 +4,46 @@
   "split": "DEV",
   "adapterSha": "2e681585aba3758ef8d7cf33d4e126cde45e0348",
   "status": "non-Node control",
-  "scopes": []
+  "scopes": [],
+  "verifiedSha": "77b5469832758d1cbee1a940f3012a1ae1c74cd3",
+  "pinCheck": [
+    {
+      "command": [
+        "git",
+        "init",
+        "-q",
+        "/tmp/m1-control-pin-check/maybe"
+      ],
+      "exit": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/m1-control-pin-check/maybe",
+        "fetch",
+        "--depth",
+        "1",
+        "https://github.com/maybe-finance/maybe",
+        "77b5469832758d1cbee1a940f3012a1ae1c74cd3"
+      ],
+      "exit": 0,
+      "output": "From https://github.com/maybe-finance/maybe\n * branch            77b5469832758d1cbee1a940f3012a1ae1c74cd3 -> FETCH_HEAD\n"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/tmp/m1-control-pin-check/maybe",
+        "checkout",
+        "-q",
+        "--detach",
+        "FETCH_HEAD"
+      ],
+      "exit": 0,
+      "output": ""
+    }
+  ],
+  "dependencyInstall": "Not applicable: non-Node control, no B1 accepted functions."
 }

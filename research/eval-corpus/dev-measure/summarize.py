@@ -2,14 +2,18 @@
 import pathlib,json,gzip,statistics,collections,re
 R=pathlib.Path.cwd();D=R/'research/eval-corpus/dev-measure';rows=[];repos=[]
 def read(p):return json.loads(gzip.decompress(p.read_bytes()) if p.suffix=='.gz' else p.read_bytes())
+def stored(p):return p if p.exists() else p.with_name(p.name+'.gz')
 for p in sorted((D/'results').glob('*.json*')):
  d=read(p);measurements={};seen={}
- supp=D/'supplements'/(p.name.split('.json')[0]+'.json');extras=read(supp).get('scans',[]) if supp.exists() and not d.get('finalFixtureRefresh') else []
- valid=D/'supplements/valid-inputs'/(p.name.split('.json')[0]+'.json');extras+=read(valid).get('scans',[]) if valid.exists() else []
+ supp=stored(D/'supplements'/(p.name.split('.json')[0]+'.json'));extras=read(supp).get('scans',[]) if supp.exists() and not d.get('finalFixtureRefresh') else []
+ valid=stored(D/'supplements/valid-inputs'/(p.name.split('.json')[0]+'.json'));extras+=read(valid).get('scans',[]) if valid.exists() else []
  wallfile=D/'wall'/p.name;wallfile=wallfile if wallfile.exists() else wallfile.with_name(wallfile.name.replace('.json.gz','.json') if wallfile.name.endswith('.gz') else wallfile.name+'.gz')
  wallrows={}
+ wallExtras=read(valid).get('wallScans',[]) if valid.exists() else []
  if wallfile.exists():
-  for scan in read(wallfile).get('scans',[]):
+  for scan in [*read(wallfile).get('scans',[]),*wallExtras]:
+   if scan in wallExtras:
+    for m in scan.get('report',{}).get('measurements',[]):wallrows.pop(str(pathlib.Path(scan['scanRoot'])/m['id']),None)
    for m in scan.get('report',{}).get('measurements',[]):wallrows.setdefault(str(pathlib.Path(scan['scanRoot'])/m['id']),[]).append(m)
  for s in [*d.get('scans',[]),*extras]:
   if s in extras:
@@ -26,12 +30,22 @@ for p in sorted((D/'results').glob('*.json*')):
   ms=measurements.get(id,[]);ok=[m for m in ms if m['status']=='ok'];compiled=bool(ok or any(m.get('compileStatus')=='compiled' for m in ms));refused=any(m['status']=='compile-rejected' for m in ms)
   row={'repository':d['repository'],'sha':d['sha'],'id':id,'compileStatus':'compiled' if compiled else 'compiler refusal' if refused else 'unknown','discoveryNow':seen.get(id,{}).get('status','unknown'),'measurements':ms,'endpointCpuDelta':None}
   row['b1RouteEntries']=[route['entry'] for scan in base.get('scans',[]) for route in scan.get('report',{}).get('routes',[]) if id in [str(pathlib.Path(scan['scanRoot'])/v) for v in route.get('reachable',[])]]
-  row['intensityCases']=wallrows.get(id,[]);validwall=[m for m in row['intensityCases'] if m['status']=='js-baseline'];row['screenPass']=any(m['screenPass'] for m in validwall) if validwall else None;
+  row['intensityCases']=wallrows.get(id,[]);
+  if valid.exists() and any(str(pathlib.Path(scan['scanRoot'])/m['id'])==id for scan in read(valid).get('scans',[]) for m in scan.get('report',{}).get('measurements',[])):
+   allowed={json.dumps(m['arguments']) for m in ms if 'arguments' in m};row['excludedEarlierInputCases']=sum('arguments' in w and json.dumps(w['arguments']) not in allowed for w in row['intensityCases']);row['intensityCases']=[w for w in row['intensityCases'] if 'arguments' not in w or json.dumps(w['arguments']) in allowed]
+  validwall=[m for m in row['intensityCases'] if m['status']=='js-baseline'];row['screenPass']=any(m['screenPass'] for m in validwall) if validwall else None;
   for m in ok:
-   match=next((w for w in validwall if json.dumps(w['arguments'],sort_keys=True)==json.dumps(m['arguments'],sort_keys=True)),None)
+   match=next((w for w in validwall if json.dumps(w['arguments'])==json.dumps(m['arguments'])),None)
    if match:m['intensityBaseline']={k:v for k,v in match.items() if k not in ['arguments','rawBatches']};m['screenPass']=match['screenPass']
   row['predictedNative']=any(m.get('verdict')=='native' for m in ok);row['protocolPass']=any(m.get('protocolPass') for m in ok)
-  row['compilerCodes']=sorted(set(re.findall(r'\bSC\d+\b','\n'.join(m.get('reason','') for m in ms if m['status']=='compile-rejected'))))
+  # Build logs include other modules in the same batch. Attribute only this
+  # function's diagnostic section; retain the complete verbatim log above.
+  sections=[]
+  for m in ms:
+   if m['status']!='compile-rejected':continue
+   for chunk in re.split(r'(?=\[next-scriptc\] not a candidate )',m.get('reason','')):
+    if chunk.startswith('[next-scriptc] not a candidate '+id.split('#')[-1]+':'):sections.append(chunk.split('[scriptc-promote] Promoted')[0])
+  row['compilerCodes']=sorted(set(re.findall(r'\bSC\d+\b','\n'.join(sections))))
   row['correctnessFailures']=[m.get('reason') for m in ms if ('mismatch' in m.get('reason','').lower() or 'SC4013' in m.get('reason','') or 'Native fallback' in m.get('reason','')) and 'argument count' not in m.get('reason','').lower()]
   row['protocolPass']=row['protocolPass'] and not row['correctnessFailures']
   row['bestRatio']=min((m['native']['median']/m['js']['median'] for m in ok),default=None);rr.append(row);rows.append(row)

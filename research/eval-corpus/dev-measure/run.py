@@ -8,7 +8,8 @@ s=(ROOT/'research/eval-corpus/dev-census/run.py').read_text()
 s=s.replace("for f in excluded:(p/f).unlink()", "# Keep fixtures for input provenance review; explicit source selection excludes them.")
 s=s.replace("'/tmp/b1-tools/node_modules/typescript'", "str(ROOT/'packages/scriptc-promote/node_modules/typescript')")
 s=s.replace("if slug=='growthbook' and pathlib.Path('/tmp/nsc-dev-growthbook').exists():", "if False:")
-s=s.replace("subprocess.run(['python3',str(ROOT/'research/eval-corpus/dev-census/scan-batches.py'),slug],cwd=ROOT,check=True)","subprocess.run(['python3',str(ROOT/'research/eval-corpus/dev-measure/measure.py'),slug],cwd=ROOT,check=True)")
+scanScript=os.environ.get('DEV_MEASURE_SCAN_SCRIPT','research/eval-corpus/dev-measure/measure.py')
+s=s.replace("subprocess.run(['python3',str(ROOT/'research/eval-corpus/dev-census/scan-batches.py'),slug],cwd=ROOT,check=True)",f"subprocess.run(['python3',str(ROOT/{scanScript!r}),slug],cwd=ROOT,check=True)")
 # Release only task-owned download caches when the next install would miss the floor.
 s=s.replace("data['freeBytesBeforeInstall']=shutil.disk_usage(p).free", """if shutil.disk_usage(p).free<14_000_000_000:
    for cache in ['store','yarn-global','yarn-cache','cache','bun-cache','npm-cache']:

@@ -12,7 +12,7 @@ for r in ratios:
  for i,b in enumerate(limits):
   if r<=b:counts[i]+=1;break
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11,'axes.spines.top':False,'axes.spines.right':False,'axes.spines.left':False})
-fig,ax=plt.subplots(figsize=(8,4.4),dpi=180);fig.subplots_adjust(left=.20,right=.92,top=.83,bottom=.19)
+fig,ax=plt.subplots(figsize=(8,4.8),dpi=180);fig.subplots_adjust(left=.20,right=.92,top=.83,bottom=.27)
 ax.barh(range(6),counts,color=['#b65b24']+['#315e8c']*5,height=.58);ax.set_yticks(range(6),labels);ax.invert_yaxis();ax.set_xlim(0,max(1,max(counts))*1.14)
 ax.set_xlabel('Measured input cases');ax.tick_params(axis='y',length=0,pad=10);ax.spines['bottom'].set_color('#aab4bf');ax.xaxis.grid(True,color='#e5e9ed',linewidth=.6);ax.set_axisbelow(True)
 for i,n in enumerate(counts):ax.text(n+max(1,max(counts))*.02,i,str(n),va='center',fontsize=11)
