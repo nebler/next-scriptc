@@ -180,3 +180,14 @@ test('private literal tables and arrow closures share the proven module path',()
  const text='const table={n:3};export const rows=(x:number[])=>x.map(v=>v+table.n);';const modules=promotionCandidates(text,write('entry.ts',text),()=>{},{ts});assert.equal(modules.length,1);assert.match(modules[0].native,/function rows/);assert.deepEqual(evaluate(modules[0].native)([2]),[5]);
  const reflection='export const rows=(x:number[])=>{let n=0;for(const v of x)n+=v;return typeof rows.prototype;}';const candidates=promotionCandidates(reflection,write('entry.ts',reflection),()=>{},{ts});if(candidates.length)assert.match(candidates[0].native,/const rows/);
 }));
+test('fresh typed-array writes preserve invalid-index JS semantics without replay',async()=>{
+ const dir=fs.mkdtempSync('/tmp/b1-typed-writes-');try{
+  const text='export function rows(index:number):number{const data=new Float64Array(2);data[index]=9;let sum=0;for(const value of data)sum+=value;return sum;}',file=path.join(dir,'entry.ts');fs.writeFileSync(file,text);
+  const modules=promotionCandidates(text,file,console.log,{ts});assert.equal(modules.length,1);checkFunctionTypes(ts,ts.createProgram([file],{strict:true,target:ts.ScriptTarget.ESNext,types:[]}),modules);
+  assert.equal((await buildPromotion(modules,path.join(dir,'out'),{catchFallback:false})).length,1);
+  const d=loadPromotion(path.join(dir,'out/promotion.node'),{mode:'native',log:()=>{},crashGuard:{directory:path.join(dir,'markers')}}),id=modules[0].functions[0].id,js=evaluate(text.replace('export function','function'));
+  const indices=[-(2**32),-1,-0,0,0.5,1,2,99,2**32+1,Number.MAX_SAFE_INTEGER];
+  for(const index of indices)assert.equal(d.dispatch(id,js,[index]),js(index));
+  assert.equal(d.snapshot()[id].native,indices.length);assert.equal(d.snapshot()[id].fallback,0);
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
