@@ -37,8 +37,8 @@ failed-scan and install records. Then aggregate and compare against EV3:
 DEV_CENSUS_OUTPUT=research/eval-corpus/dev-census-b1 \
 node research/eval-corpus/dev-census/summarize.mjs
 node research/eval-corpus/dev-census-b1/compare.mjs
-TMPDIR=/tmp pnpm --dir packages/next-scriptc test
-TMPDIR=/tmp pnpm --dir packages/scriptc-promote test
+TMPDIR=/tmp npm_config_cache=/tmp/b1-test-npm-cache pnpm --dir packages/next-scriptc test
+TMPDIR=/tmp npm_config_cache=/tmp/b1-test-npm-cache pnpm --dir packages/scriptc-promote test
 node scripts/compress-artifacts.mjs --check
 node scripts/check-research-links.mjs
 ```
@@ -52,3 +52,7 @@ support, request reachability, or speed.
 Large artifacts use deterministic level-9 gzip. Drop redundant process logs.
 Remove task-owned temporary clones, tools, and package caches after all workers
 finish. Never install dependencies in or link to the main checkout.
+
+The initial full-suite commands inherited npm cache configuration. Final suite
+runs explicitly use `/tmp/b1-test-npm-cache`. Fixture dependency installations
+use `/tmp` prefixes. Existing user caches are not removed.
