@@ -1,0 +1,2113 @@
+{
+  "repository": "linkwarden/linkwarden",
+  "sha": "eff7c6b735f6b20a4766745dc86c6bdc52bd9840",
+  "split": "DEV",
+  "adapterSha": "a23ab5a5b4b189d5deced2ef6ec81d6f55fe4e99",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "apps/web/pages/api",
+    "apps/web/lib/api",
+    "apps/worker",
+    "packages/prisma",
+    "packages/types"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-stale-clones/linkwarden"
+    ],
+    "exit": 0,
+    "seconds": 0.04,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/linkwarden/linkwarden.git",
+      "eff7c6b735f6b20a4766745dc86c6bdc52bd9840"
+    ],
+    "exit": 0,
+    "seconds": 1.9,
+    "output": "From https://github.com/linkwarden/linkwarden\n * branch            eff7c6b735f6b20a4766745dc86c6bdc52bd9840 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.3,
+    "output": ""
+  },
+  "verifiedSha": "eff7c6b735f6b20a4766745dc86c6bdc52bd9840",
+  "packageInventory": [
+    "package.json",
+    "apps/extension/package.json",
+    "apps/web/package.json",
+    "apps/mobile/package.json",
+    "apps/worker/package.json",
+    "packages/types/package.json",
+    "packages/prisma/package.json",
+    "packages/filesystem/package.json",
+    "packages/lib/package.json",
+    "packages/router/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [
+    "apps/web/app/api",
+    "packages/utils"
+  ],
+  "excludedFiles": [
+    "apps/web/pages/api/v1/config/index.test.ts",
+    "apps/web/pages/api/v1/preserved/token.test.ts",
+    "apps/web/pages/api/v1/preserved/view.test.ts",
+    "apps/web/pages/api/v1/archives/[linkId].test.ts",
+    "apps/web/lib/api/ssoEmailVerified.test.ts",
+    "apps/web/lib/api/preserved/createPreservedFormatUrl.test.ts",
+    "apps/web/lib/api/archives/resolveAccessibleArchive.test.ts",
+    "apps/web/lib/api/controllers/migration/importFromHTMLFile.test.ts"
+  ],
+  "freeBytesBeforeInstall": 91685797888,
+  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8",
+      "install",
+      "--mode=skip-build"
+    ],
+    "exit": 0,
+    "seconds": 62.14,
+    "output": "\u27a4 YN0000: \u00b7 Yarn 4.12.0\n\u27a4 YN0000: \u250c Resolution step\n\u27a4 YN0000: \u2514 Completed in 0s 235ms\n\u27a4 YN0000: \u250c Post-resolution validation\n\u27a4 YN0060: \u2502 @react-native-menu/menu is listed by your project with version 2.0.0 (pe45499), which doesn't satisfy what zeego requests (1.2.2).\n\u27a4 YN0060: \u2502 @tanstack/react-query is listed by your project with version 5.51.15 (pd2ce3f), which doesn't satisfy what @tanstack/react-query-persist-client and other dependencies request (^5.76.1).\n\u27a4 YN0060: \u2502 @types/react is listed by your project with version 19.2.14 (p95b39f), which doesn't satisfy what react-remove-scroll (via expo-router) and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 @types/react is listed by your project with version 19.2.14 (pb597a2), which doesn't satisfy what react-remove-scroll (via vaul) and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 nodemailer is listed by your project with version 9.0.4 (p098473), which doesn't satisfy what next-auth requests (^7.0.7).\n\u27a4 YN0060: \u2502 react is listed by your project with version 19.1.0 (p3ba759), which doesn't satisfy what @tanstack/react-query and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 react is listed by your project with version 19.1.0 (pc2543d), which doesn't satisfy what @atlaskit/tree and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 react is listed by your project with version 19.1.0 (pff2d4f), which doesn't satisfy what @tanstack/react-query and other dependencies request (but they have non-overlapping ranges!).\n\u27a4 YN0060: \u2502 react-dom is listed by your project with version 19.1.0 (p80a49f), which doesn't satisfy what @headlessui/react and other dependencies request (^18.2.0).\n\u27a4 YN0060: \u2502 react-native-ios-context-menu is listed by your project with version 3.2.1 (p9bcfd8), which doesn't satisfy what zeego requests (3.1.0).\n\u27a4 YN0060: \u2502 react-native-ios-utilities is listed by your project with version 5.2.0 (pb10f05), which doesn't satisfy what zeego and other dependencies request (5.1.2).\n\u27a4 YN0002: \u2502 @linkwarden/mobile@workspace:apps/mobile doesn't provide @tanstack/react-query-devtools (p7e1bda), requested by @linkwarden/router.\n\u27a4 YN0002: \u2502 @linkwarden/mobile@workspace:apps/mobile doesn't provide @types/react-native (p65f91d), requested by @expo/vector-icons and other dependencies.\n\u27a4 YN0002: \u2502 @linkwarden/mobile@workspace:apps/mobile doesn't provide next-auth (p3b9889), requested by @linkwarden/router.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [9279d] doesn't provide i18next (pd940ff), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [9279d] doesn't provide react-dom (p4697eb), requested by next and other dependencies.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [9279d] doesn't provide react-i18next (pcb5064), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [f2e87] doesn't provide i18next (pf04e4c), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [f2e87] doesn't provide react-dom (p61b148), requested by next and other dependencies.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router [f2e87] doesn't provide react-i18next (pa7ce53), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router doesn't provide i18next (p814057), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router doesn't provide react (pc8f8ed), requested by next-i18next and other dependencies.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router doesn't provide react-dom (p20a95e), requested by next and other dependencies.\n\u27a4 YN0002: \u2502 @linkwarden/router@workspace:packages/router doesn't provide react-i18next (pbcdf59), requested by next-i18next.\n\u27a4 YN0002: \u2502 @linkwarden/web@workspace:apps/web doesn't provide @prisma/client (p240691), requested by @auth/prisma-adapter.\n\u27a4 YN0086: \u2502 Some peer dependencies are incorrectly met by your project; run yarn explain peer-requirements <hash> for details, where <hash> is the six-letter p-prefixed code.\n\u27a4 YN0086: \u2502 Some peer dependencies are incorrectly met by dependencies; run yarn explain peer-requirements for details.\n\u27a4 YN0000: \u2514 Completed\n\u27a4 YN0000: \u250c Fetch step\n\u27a4 YN0013: \u2502 2215 packages were added to the project (+ 1.31 GiB).\n\u27a4 YN0000: \u2514 Completed in 26s 601ms\n\u27a4 YN0000: \u250c Link step\n\u27a4 YN0000: \u2514 Completed in 33s 202ms\n\u27a4 YN0000: \u00b7 Done with warnings in 1m 1s\n"
+  },
+  "generators": [
+    {
+      "schema": "packages/prisma/schema.prisma",
+      "process": {
+        "command": [
+          "sandbox-exec",
+          "-p",
+          "(version 1)(allow default)(deny network*)",
+          "node",
+          "/tmp/m1-stale-clones/linkwarden/node_modules/prisma/build/index.js",
+          "generate",
+          "--schema",
+          "/tmp/m1-stale-clones/linkwarden/packages/prisma/schema.prisma",
+          "--no-engine"
+        ],
+        "exit": 1,
+        "seconds": 3.41,
+        "output": "Error: request to https://binaries.prisma.sh/all_commits/9b628578b3b7cae625e8c927178f15a170e74a9c/darwin-arm64/schema-engine.gz.sha256 failed, reason: getaddrinfo ENOTFOUND binaries.prisma.sh\n"
+      },
+      "status": "offline generation failed"
+    }
+  ],
+  "cohort": [
+    {
+      "id": "apps/web/lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+      "scanRoot": "apps/web",
+      "function": {
+        "id": "lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+        "file": "lib/api/searchQueryBuilder.ts",
+        "name": "buildMeiliQuery",
+        "line": 85,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "buildMeiliQuery"
+        ],
+        "boundary": {
+          "params": [
+            "json"
+          ],
+          "result": "string"
+        },
+        "promotionId": "c87d48b81866ca138492"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": "apps/web",
+      "selectionFiles": [
+        "lib/api/searchQueryBuilder.ts"
+      ],
+      "process": {
+        "exit": 0,
+        "seconds": 14.516494035720825,
+        "output": "scriptc-promote coverage \u2014 next\n1 files; 4 top-level callable bindings (4 exported)\n4 considered; 3 diagnosed; 1 accepted; 0 explicit; 0 silently excluded\nDiagnostics are not a complete denominator; acceptance is not a speedup.\nrejected             lib/api/searchQueryBuilder.ts#parseSearchTokens \u2014 [next-scriptc] not a candidate parseSearchTokens: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:74:38 - NSC1001: function parseSearchTokens: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\naccepted             lib/api/searchQueryBuilder.ts#buildMeiliQuery\nrejected             lib/api/searchQueryBuilder.ts#buildMeiliFilters \u2014 [next-scriptc] not a candidate buildMeiliFilters: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.\nrejected             lib/api/searchQueryBuilder.ts#escapeForMeilisearch \u2014 [next-scriptc] not a candidate escapeForMeilisearch: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nTop blockers:\n  1 \u00d7 unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.\n    Native promotion requires deterministic work without observable external effects or mutation.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): lib/api/searchQueryBuilder.ts#parseSearchTokens, lib/api/searchQueryBuilder.ts#buildMeiliFilters, lib/api/searchQueryBuilder.ts#escapeForMeilisearch\nMeasured lib/api/searchQueryBuilder.ts#buildMeiliQuery: synthetic, N=60, process-cpu, JS 26 ns/call [p10 26, p90 28], native 46000 ns/call [p10 34000, p90 188000], native 98.50 ns/input byte, boundary 100.0%, intensity 0.06 JS ns/input byte, verdict JS\nMeasured lib/api/searchQueryBuilder.ts#buildMeiliQuery: synthetic, N=60, process-cpu, JS 57 ns/call [p10 56, p90 58], native 78000 ns/call [p10 64000, p90 237000], native 22.97 ns/input byte, boundary 100.0%, intensity 0.02 JS ns/input byte, verdict JS\nMeasured lib/api/searchQueryBuilder.ts#buildMeiliQuery: synthetic, N=60, process-cpu, JS 189 ns/call [p10 188, p90 192], native 186000 ns/call [p10 171000, p90 228000], native 4.88 ns/input byte, boundary 99.4%, intensity 0.00 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "b234d910ccfaffa58062927ecb68afeba4f9c7529b6a7f3660c8984a61843b21",
+      "driverSha256": "f96569d2817a254d391a7ab14a366a78f1509036f9f249c11218ae5bf4365b50",
+      "inputGeneratorSha256": "4c2a728fcfb6f2128a8b799a54d9a6c4365bbf3efb62a79f93db0e4b1247b440",
+      "inputEvidenceFiles": [],
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-stale-clones/linkwarden/apps/web",
+        "sourceDir": "/tmp/m1-stale-clones/linkwarden/apps/web",
+        "framework": "next",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 4,
+          "exportedFunctions": 4,
+          "considered": 4,
+          "diagnosed": 3,
+          "accepted": 1,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "lib/api/searchQueryBuilder.ts",
+            "functions": [
+              {
+                "id": "lib/api/searchQueryBuilder.ts#parseSearchTokens",
+                "file": "lib/api/searchQueryBuilder.ts",
+                "name": "parseSearchTokens",
+                "line": 20,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseSearchTokens: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:74:38 - NSC1001: function parseSearchTokens: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "parseSearchTokens"
+                ]
+              },
+              {
+                "id": "lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+                "file": "lib/api/searchQueryBuilder.ts",
+                "name": "buildMeiliQuery",
+                "line": 85,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "buildMeiliQuery"
+                ],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "2507e5d49221c6cd784e"
+              },
+              {
+                "id": "lib/api/searchQueryBuilder.ts#buildMeiliFilters",
+                "file": "lib/api/searchQueryBuilder.ts",
+                "name": "buildMeiliFilters",
+                "line": 93,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate buildMeiliFilters: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+                ],
+                "calls": [
+                  "lib/api/searchQueryBuilder.ts#escapeForMeilisearch"
+                ],
+                "exportNames": [
+                  "buildMeiliFilters"
+                ]
+              },
+              {
+                "id": "lib/api/searchQueryBuilder.ts#escapeForMeilisearch",
+                "file": "lib/api/searchQueryBuilder.ts",
+                "name": "escapeForMeilisearch",
+                "line": 209,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate escapeForMeilisearch: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "escapeForMeilisearch"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.",
+            "count": 1,
+            "explanation": "Native promotion requires deterministic work without observable external effects or mutation."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "lib/api/searchQueryBuilder.ts#parseSearchTokens",
+            "diagnostic": "[next-scriptc] not a candidate parseSearchTokens: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:74:38 - NSC1001: function parseSearchTokens: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "lib/api/searchQueryBuilder.ts#buildMeiliFilters",
+            "diagnostic": "[next-scriptc] not a candidate buildMeiliFilters: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "id": "lib/api/searchQueryBuilder.ts#escapeForMeilisearch",
+            "diagnostic": "[next-scriptc] not a candidate escapeForMeilisearch: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "lib/api/searchQueryBuilder.ts",
+            "name": "parseSearchTokens",
+            "message": "[next-scriptc] not a candidate parseSearchTokens: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:74:38 - NSC1001: function parseSearchTokens: unsupported reference process Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "lib/api/searchQueryBuilder.ts",
+            "name": "buildMeiliFilters",
+            "message": "[next-scriptc] not a candidate buildMeiliFilters: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:93:8 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "file": "lib/api/searchQueryBuilder.ts",
+            "name": "escapeForMeilisearch",
+            "message": "[next-scriptc] not a candidate escapeForMeilisearch: [next-scriptc] /tmp/m1-stale-clones/linkwarden/apps/web/lib/api/searchQueryBuilder.ts:209:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5183.642542,
+            "cold": {
+              "sharedBatchCompileWallMs": 5183.642542,
+              "firstJsWallNs": 15250.00000037835,
+              "firstNativeWallNs": 647874.999999658
+            },
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxx",
+                  "value": "xxxxxxxx",
+                  "isNegative": true
+                }
+              ]
+            ],
+            "bucket": 3,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 25.859584105411948,
+              "p10": 26.02429483220349,
+              "median": 26.47724933086387,
+              "p90": 28.28906732551474,
+              "max": 51.554457484041706
+            },
+            "native": {
+              "n": 60,
+              "min": 33000.00000012915,
+              "p10": 34000.0000001055,
+              "median": 46000.00000004911,
+              "p90": 188000.00000010186,
+              "max": 2875000
+            },
+            "inputJsonBytes": 467,
+            "nsPerInputJsonByte": {
+              "js": 0.05669646537658216,
+              "native": 98.50107066391674
+            },
+            "computeIntensity": 0.05669646537658216,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 19040.99999956088,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 2056.5076020073743,
+              "upper": 7664.642625487744,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 24285,
+            "rawPairsNs": [
+              [
+                25.900761787107495,
+                53000.00000011096
+              ],
+              [
+                26.8890261478287,
+                51999.99999990723
+              ],
+              [
+                26.18900555898568,
+                51000.00000015825
+              ],
+              [
+                26.02429483220349,
+                38000.000000010914
+              ],
+              [
+                26.64196005764606,
+                55000.000000063665
+              ],
+              [
+                51.554457484041706,
+                63999.99999985084
+              ],
+              [
+                26.02429483220349,
+                42999.99999989268
+              ],
+              [
+                28.659666460774663,
+                84000.00000006003
+              ],
+              [
+                26.600782375959874,
+                2875000
+              ],
+              [
+                27.589046736671722,
+                92000.00000009823
+              ],
+              [
+                26.72431542103715,
+                68999.99999995998
+              ],
+              [
+                25.983117150507944,
+                54000.00000008731
+              ],
+              [
+                26.230183240681228,
+                55000.000000063665
+              ],
+              [
+                26.230183240690593,
+                46000.00000004911
+              ],
+              [
+                26.64196005764606,
+                48999.99999997817
+              ],
+              [
+                26.600782375950512,
+                43999.99999986903
+              ],
+              [
+                27.094914556306435,
+                60999.99999992178
+              ],
+              [
+                26.518427012559417,
+                50000.0000001819
+              ],
+              [
+                26.47724933086387,
+                258000.00000003818
+              ],
+              [
+                26.18900555898568,
+                36000.00000005821
+              ],
+              [
+                27.136092238001982,
+                48999.99999997817
+              ],
+              [
+                26.271360922376772,
+                37999.99999978354
+              ],
+              [
+                26.230183240681228,
+                34999.99999985448
+              ],
+              [
+                26.106650195594586,
+                38999.99999998727
+              ],
+              [
+                26.353716285777228,
+                70000.00000016371
+              ],
+              [
+                36.44224830142026,
+                52999.999999883585
+              ],
+              [
+                27.136092238001982,
+                47000.000000025466
+              ],
+              [
+                26.31253860407232,
+                38000.000000010914
+              ],
+              [
+                26.147827877290133,
+                188000.00000010186
+              ],
+              [
+                25.941939468803035,
+                39999.99999996362
+              ],
+              [
+                25.983117150507944,
+                36000.00000005821
+              ],
+              [
+                25.941939468803035,
+                34000.0000001055
+              ],
+              [
+                26.18900555898568,
+                39999.99999996362
+              ],
+              [
+                28.28906732551474,
+                39999.99999996362
+              ],
+              [
+                26.02429483220349,
+                34000.0000001055
+              ],
+              [
+                26.147827877290133,
+                38000.000000010914
+              ],
+              [
+                26.230183240681228,
+                33000.00000012915
+              ],
+              [
+                26.683137739341603,
+                33999.99999987813
+              ],
+              [
+                27.218447601393077,
+                328999.9999999509
+              ],
+              [
+                25.859584105411948,
+                66000.00000003092
+              ],
+              [
+                26.72431542103715,
+                75999.99999979445
+              ],
+              [
+                26.683137739341603,
+                52000.000000134605
+              ],
+              [
+                27.136092238001982,
+                44999.999999845386
+              ],
+              [
+                26.47724933086387,
+                33999.99999987813
+              ],
+              [
+                27.547869054976175,
+                49000.000000205546
+              ],
+              [
+                26.72431542103715,
+                37000.00000003456
+              ],
+              [
+                28.000823553636554,
+                43000.00000012005
+              ],
+              [
+                26.065472513889677,
+                43000.00000012005
+              ],
+              [
+                26.847848466133154,
+                332000.00000010733
+              ],
+              [
+                26.02429483220349,
+                34000.0000001055
+              ],
+              [
+                28.618488779079115,
+                51999.99999990723
+              ],
+              [
+                26.18900555898568,
+                37000.00000003456
+              ],
+              [
+                28.330245007200926,
+                59999.99999994543
+              ],
+              [
+                26.06547251389904,
+                38000.000000010914
+              ],
+              [
+                26.847848466133154,
+                37000.00000003456
+              ],
+              [
+                26.230183240681228,
+                33000.00000012915
+              ],
+              [
+                26.72431542103715,
+                39999.99999996362
+              ],
+              [
+                26.02429483220349,
+                36000.00000005821
+              ],
+              [
+                27.259625283097986,
+                232999.99999994726
+              ],
+              [
+                26.18900555898568,
+                35000.000000081855
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5183.642542,
+            "cold": {
+              "sharedBatchCompileWallMs": 5183.642542,
+              "firstJsWallNs": 708.0000004862086,
+              "firstNativeWallNs": 63084.00000034453
+            },
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                }
+              ]
+            ],
+            "bucket": 5,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 56.206429124706844,
+              "p10": 56.30325329202222,
+              "median": 57.077846630517705,
+              "p90": 58.26394268009115,
+              "max": 65.57416731215707
+            },
+            "native": {
+              "n": 60,
+              "min": 57999.999999992724,
+              "p10": 63999.99999985084,
+              "median": 77999.99999997453,
+              "p90": 237000.00000008004,
+              "max": 423999.9999999782
+            },
+            "inputJsonBytes": 3395,
+            "nsPerInputJsonByte": {
+              "js": 0.016812325958915377,
+              "native": 22.97496318114125
+            },
+            "computeIntensity": 0.016812325958915377,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 47583.99999991525,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 1637.425220725455,
+              "upper": 2106.177599513063,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 41312,
+            "rawPairsNs": [
+              [
+                56.64213787761227,
+                71999.99999988904
+              ],
+              [
+                56.95681642138037,
+                75000.00000004547
+              ],
+              [
+                65.57416731215707,
+                92000.00000009823
+              ],
+              [
+                56.835786212237515,
+                91000.00000012187
+              ],
+              [
+                56.254841208361775,
+                87999.99999996544
+              ],
+              [
+                56.254841208361775,
+                80999.9999999036
+              ],
+              [
+                57.077846630517705,
+                135999.99999996726
+              ],
+              [
+                56.448489542992526,
+                81999.99999987995
+              ],
+              [
+                56.30325329202222,
+                423999.9999999782
+              ],
+              [
+                56.59372579395734,
+                63000.00000010186
+              ],
+              [
+                57.6103795507385,
+                92999.9999998472
+              ],
+              [
+                57.077846630517705,
+                86999.99999998909
+              ],
+              [
+                56.787374128582584,
+                90000.00000014552
+              ],
+              [
+                56.73896204492764,
+                76000.00000002183
+              ],
+              [
+                57.126258714172636,
+                237000.00000008004
+              ],
+              [
+                58.02188226181096,
+                71000.00000014006
+              ],
+              [
+                58.36076684740652,
+                86999.99999998909
+              ],
+              [
+                58.57862122385373,
+                80999.9999999036
+              ],
+              [
+                58.26394268009115,
+                126999.9999999527
+              ],
+              [
+                57.126258714172636,
+                75000.00000004547
+              ],
+              [
+                57.828233927185714,
+                338999.9999999418
+              ],
+              [
+                61.77381874515655,
+                152000.00000004366
+              ],
+              [
+                57.34411309062535,
+                63999.99999985084
+              ],
+              [
+                56.23063516653981,
+                58999.99999996908
+              ],
+              [
+                56.6179318357848,
+                76000.00000002183
+              ],
+              [
+                57.90085205267362,
+                57999.999999992724
+              ],
+              [
+                56.85999225407049,
+                250000
+              ],
+              [
+                57.126258714178135,
+                77999.99999997453
+              ],
+              [
+                57.87664601084616,
+                77999.99999997453
+              ],
+              [
+                57.416731216113256,
+                59999.99999994543
+              ],
+              [
+                57.416731216113256,
+                68999.99999995998
+              ],
+              [
+                56.30325329202222,
+                66000.00000003092
+              ],
+              [
+                57.949264136328566,
+                209000.00000006
+              ],
+              [
+                57.658791634387946,
+                77999.99999997453
+              ],
+              [
+                57.29570100697042,
+                78999.99999995089
+              ],
+              [
+                56.32745933384968,
+                71000.00000014006
+              ],
+              [
+                57.077846630523204,
+                78999.99999995089
+              ],
+              [
+                57.828233927185714,
+                61999.99999989814
+              ],
+              [
+                57.0052285050353,
+                180000.00000006368
+              ],
+              [
+                57.634585592565976,
+                76000.00000002183
+              ],
+              [
+                56.400077459337595,
+                91000.00000012187
+              ],
+              [
+                57.56196746708357,
+                76000.00000002183
+              ],
+              [
+                57.755615801703314,
+                96000.00000000364
+              ],
+              [
+                57.82823392719123,
+                95000.00000002728
+              ],
+              [
+                56.6179318357848,
+                244000.00000014188
+              ],
+              [
+                57.27149496514295,
+                80999.9999999036
+              ],
+              [
+                57.02943454686276,
+                81000.00000013097
+              ],
+              [
+                56.32745933384968,
+                65000.00000005457
+              ],
+              [
+                56.206429124706844,
+                70999.99999991269
+              ],
+              [
+                56.47269558481449,
+                64000.00000007822
+              ],
+              [
+                56.98102246320783,
+                285000.00000008184
+              ],
+              [
+                56.254841208367274,
+                64000.00000007822
+              ],
+              [
+                56.20642912471234,
+                59999.99999994543
+              ],
+              [
+                56.85999225406498,
+                67000.00000000728
+              ],
+              [
+                57.416731216107756,
+                76000.00000002183
+              ],
+              [
+                56.787374128582584,
+                68999.99999995998
+              ],
+              [
+                56.76316808675512,
+                171000.00000004913
+              ],
+              [
+                58.89329976762182,
+                69999.99999993634
+              ],
+              [
+                56.95681642138037,
+                76999.99999999818
+              ],
+              [
+                57.223082881482505,
+                67999.99999998363
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "lib/api/searchQueryBuilder.ts#buildMeiliQuery",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5183.642542,
+            "cold": {
+              "sharedBatchCompileWallMs": 5183.642542,
+              "firstJsWallNs": 833.0000000569271,
+              "firstNativeWallNs": 177750.00000074215
+            },
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              [
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                },
+                {
+                  "field": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "isNegative": true
+                }
+              ]
+            ],
+            "bucket": 7,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 187.5641126804981,
+              "p10": 187.95865225282586,
+              "median": 189.30008679871494,
+              "p90": 192.21967963387903,
+              "max": 352.95510139666663
+            },
+            "native": {
+              "n": 60,
+              "min": 164999.99999996362,
+              "p10": 171000.00000004913,
+              "median": 185999.99999992177,
+              "p90": 228000.00000006548,
+              "max": 467999.9999998472
+            },
+            "inputJsonBytes": 38147,
+            "nsPerInputJsonByte": {
+              "js": 0.0049623846383389245,
+              "native": 4.875874904970817
+            },
+            "computeIntensity": 0.0049623846383389245,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9936708732496476,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 158000.00000035652,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 968.6369426750728,
+              "upper": 1109.4031077151733,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 12673,
+            "rawPairsNs": [
+              [
+                190.72042925906604,
+                190000.00000005457
+              ],
+              [
+                187.5641126804981,
+                188000.00000010186
+              ],
+              [
+                187.6430205949601,
+                178000.00000011094
+              ],
+              [
+                189.77353428550464,
+                175999.99999993088
+              ],
+              [
+                190.24698177227634,
+                200000.00000004546
+              ],
+              [
+                190.1680738578144,
+                185999.99999992177
+              ],
+              [
+                193.00875877851655,
+                227999.99999983812
+              ],
+              [
+                188.5110076540595,
+                214000.00000016915
+              ],
+              [
+                189.06336305531113,
+                193999.99999995998
+              ],
+              [
+                189.93135011442854,
+                180000.00000006368
+              ],
+              [
+                187.95865225282586,
+                177999.99999988358
+              ],
+              [
+                189.221178884253,
+                181000.00000004002
+              ],
+              [
+                188.5899155685215,
+                197999.9999998654
+              ],
+              [
+                187.8797443383639,
+                180000.00000006368
+              ],
+              [
+                188.11646808174973,
+                467999.9999998472
+              ],
+              [
+                187.72192850942204,
+                173000.0000000018
+              ],
+              [
+                192.2196796338611,
+                197999.9999998654
+              ],
+              [
+                188.9844551408492,
+                184999.99999994543
+              ],
+              [
+                187.95865225282586,
+                192999.99999998364
+              ],
+              [
+                188.74773139746333,
+                175000.0000001819
+              ],
+              [
+                188.9844551408492,
+                207000.00000010733
+              ],
+              [
+                190.9571530024519,
+                193999.99999995998
+              ],
+              [
+                190.24698177227634,
+                198999.99999984173
+              ],
+              [
+                188.19537599621168,
+                193999.99999995998
+              ],
+              [
+                188.7477313974454,
+                193999.99999995998
+              ],
+              [
+                270.1017912096585,
+                228000.00000006548
+              ],
+              [
+                352.95510139666663,
+                229000.00000004185
+              ],
+              [
+                189.85244219994865,
+                191999.99999977992
+              ],
+              [
+                188.7477313974454,
+                202999.99999997453
+              ],
+              [
+                188.5110076540595,
+                174999.99999995454
+              ],
+              [
+                189.53681054208286,
+                437999.9999998745
+              ],
+              [
+                188.27428391067366,
+                167999.99999989267
+              ],
+              [
+                194.42910123884965,
+                201999.9999999982
+              ],
+              [
+                189.22117888423506,
+                181999.999999789
+              ],
+              [
+                190.08916594335247,
+                206000.00000013097
+              ],
+              [
+                189.06336305531113,
+                173000.0000000018
+              ],
+              [
+                191.82514006155134,
+                187000.0000001255
+              ],
+              [
+                190.72042925904807,
+                174999.99999995454
+              ],
+              [
+                190.1680738578144,
+                177000.0000001346
+              ],
+              [
+                187.800836423884,
+                166999.99999991633
+              ],
+              [
+                187.80083642390193,
+                180000.00000006368
+              ],
+              [
+                188.19537599621168,
+                170000.00000007276
+              ],
+              [
+                189.45790262763887,
+                174999.99999995454
+              ],
+              [
+                189.14227096977308,
+                178000.00000011094
+              ],
+              [
+                192.21967963387903,
+                188000.00000010186
+              ],
+              [
+                192.377495462785,
+                173000.0000000018
+              ],
+              [
+                188.11646808174973,
+                445999.9999999127
+              ],
+              [
+                189.9313501144106,
+                176000.00000015827
+              ],
+              [
+                190.72042925906604,
+                181000.00000004002
+              ],
+              [
+                189.69462637102473,
+                192999.99999998364
+              ],
+              [
+                189.61571845656277,
+                173000.0000000018
+              ],
+              [
+                188.9844551408492,
+                164999.99999996362
+              ],
+              [
+                189.37899471315896,
+                171000.00000004913
+              ],
+              [
+                188.51100765407747,
+                165999.99999994
+              ],
+              [
+                188.9844551408492,
+                195999.9999999127
+              ],
+              [
+                188.82663931192528,
+                176000.00000015827
+              ],
+              [
+                189.30008679871494,
+                173999.99999997817
+              ],
+              [
+                189.45790262763887,
+                166999.99999991633
+              ],
+              [
+                190.01025802887256,
+                230999.99999999453
+              ],
+              [
+                189.69462637102473,
+                191000.0000000309
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "retrySelection": {
+    "apps/web": [
+      "lib/api/searchQueryBuilder.ts"
+    ]
+  },
+  "finalFixtureRefresh": true
+}

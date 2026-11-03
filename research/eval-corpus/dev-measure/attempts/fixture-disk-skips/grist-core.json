@@ -1,0 +1,56 @@
+{
+  "repository": "gristlabs/grist-core",
+  "sha": "1c2c7c88252e21e17ac87b00e898794821ef3326",
+  "split": "DEV",
+  "adapterSha": "2e681585aba3758ef8d7cf33d4e126cde45e0348",
+  "status": "skipped: <12 GB free",
+  "scopes": [
+    "app/server",
+    "app/common"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-fixture-clones/grist-core"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/gristlabs/grist-core.git",
+      "1c2c7c88252e21e17ac87b00e898794821ef3326"
+    ],
+    "exit": 0,
+    "seconds": 3.49,
+    "output": "From https://github.com/gristlabs/grist-core\n * branch            1c2c7c88252e21e17ac87b00e898794821ef3326 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 1.41,
+    "output": ""
+  },
+  "verifiedSha": "1c2c7c88252e21e17ac87b00e898794821ef3326",
+  "packageInventory": [
+    "package.json",
+    "sandbox/pyodide/package.json",
+    "sandbox/pyodide/worker/package.json",
+    "test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/node_modules/dependency_test/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 9876541440
+}

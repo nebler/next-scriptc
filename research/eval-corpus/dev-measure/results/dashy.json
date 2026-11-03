@@ -1,0 +1,69 @@
+{
+  "repository": "lissy93/dashy",
+  "sha": "85eb4f858db4d068f96b2aeb27a87521c4d51536",
+  "split": "DEV",
+  "adapterSha": "c9804b4170e361d01fec73a81f3365bead7c944f",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "services"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-dev-clones/dashy"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/lissy93/dashy.git",
+      "85eb4f858db4d068f96b2aeb27a87521c4d51536"
+    ],
+    "exit": 0,
+    "seconds": 17.91,
+    "output": "From https://github.com/lissy93/dashy\n * branch            85eb4f858db4d068f96b2aeb27a87521c4d51536 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.44,
+    "output": ""
+  },
+  "verifiedSha": "85eb4f858db4d068f96b2aeb27a87521c4d51536",
+  "packageInventory": [
+    "package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 13984120832,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--non-interactive"
+    ],
+    "exit": 0,
+    "seconds": 26.42,
+    "output": "yarn install v1.22.22\n[1/5] Validating package.json...\n[2/5] Resolving packages...\n(node:43064) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n[3/5] Fetching packages...\n[4/5] Linking dependencies...\nwarning \" > @vue/test-utils@2.5.1\" has unmet peer dependency \"@vue/compiler-dom@3.x\".\nwarning \" > vite-plugin-pwa@2.0.0\" has unmet peer dependency \"workbox-build@^7.4.1\".\nwarning \" > vite-plugin-pwa@2.0.0\" has unmet peer dependency \"workbox-window@^7.4.1\".\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\nwarning Workspaces can only be enabled in private projects.\n[5/5] Building fresh packages...\nwarning Ignored scripts due to flag.\nDone in 25.44s.\n"
+  },
+  "generators": [],
+  "cohort": [],
+  "scans": []
+}

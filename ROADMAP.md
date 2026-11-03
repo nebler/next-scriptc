@@ -104,7 +104,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | B1 | Cheap discovery blockers | 2 | discovery | bounded slice done: DEV 441 → 251 accepted (21 new, 211 prior acceptances refused); parser files 1,957 → 15; 32 GrowthBook validator files unknown ([evidence](research/discovery-blockers-b1.md)) |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
 | B1c | Audit the 211 acceptances B1 lost: restore over-conservative refusals, keep and test real soundness fixes | 2 | discovery | running |
-| M1 | Measure DEV accepted functions (`report --measure`) | eval | report | running |
+| M1 | Measure DEV accepted functions (`report --measure`) | eval | report | done: B1 DEV 251 accepted / 240 compiled / 0 dense / 0 predicted native; four intensity unknowns, no endpoint claim ([evidence](research/eval-dev-measure.md)) |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |
 | C2 | Native JSON decode speed | 1 | scriptc fork | bounded slice done: ordered schema decode −8.1% flat / −3.8% nested at 60k; erased unchanged; emitted decoder design remains open ([evidence](research/native-json-decode.md)) |
 | E4 | Check boundary decode path: typed `scr_json_parse_schema` vs erased, and the double `JSON.parse` in construction guards | 1 | boundary | done: eligible JSON, E1 projections and K4 types already use schema decode; single typed construction preflight cuts guarded 60k decode 47.369 → 27.296 ms; AUTO stays JS ([evidence](research/boundary-decode-path.md)) |

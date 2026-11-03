@@ -1,0 +1,97 @@
+{
+  "repository": "evidence-dev/evidence",
+  "sha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "split": "DEV",
+  "adapterSha": "2e681585aba3758ef8d7cf33d4e126cde45e0348",
+  "status": "skipped: <12 GB free",
+  "scopes": [
+    "core/src/connection",
+    "core/src/connectors",
+    "core/src/metrics",
+    "core/src/sql-dialect"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-fixture-clones/evidence"
+    ],
+    "exit": 0,
+    "seconds": 0.04,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/evidence-dev/evidence.git",
+      "590143b9ecd2993b0907d4ba85ec5920c097776f"
+    ],
+    "exit": 0,
+    "seconds": 3.08,
+    "output": "From https://github.com/evidence-dev/evidence\n * branch            590143b9ecd2993b0907d4ba85ec5920c097776f -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.85,
+    "output": ""
+  },
+  "verifiedSha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "packageInventory": [
+    "package.json",
+    "core/package.json",
+    "cli/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "core/src/connection/connection-wiring.svelte.test.ts",
+    "core/src/connection/multi-connection-registry.test.ts",
+    "core/src/connection/connection.test.ts",
+    "core/src/connection/enforcement.test.ts",
+    "core/src/connectors/enrich-warehouse-error.test.ts",
+    "core/src/connectors/normalize-sparkline-rows.test.ts",
+    "core/src/connectors/schema-allowlist.test.ts",
+    "core/src/connectors/connection-placeholder.test.ts",
+    "core/src/connectors/clickhouse/resolve.test.ts",
+    "core/src/connectors/clickhouse/connection-schema.test.ts",
+    "core/src/connectors/databricks/type-mapping.test.ts",
+    "core/src/connectors/databricks/resolve.test.ts",
+    "core/src/connectors/databricks/connection-schema.test.ts",
+    "core/src/connectors/databricks/normalize-date-rows.test.ts",
+    "core/src/connectors/databricks/normalize-numeric-rows.test.ts",
+    "core/src/connectors/motherduck/type-mapping.test.ts",
+    "core/src/connectors/bigquery/type-mapping.test.ts",
+    "core/src/connectors/bigquery/normalize-date-rows.test.ts",
+    "core/src/connectors/bigquery/client-options.test.ts",
+    "core/src/connectors/bigquery/normalize-numeric-rows.test.ts",
+    "core/src/connectors/snowflake/decrypt-pem.test.ts",
+    "core/src/connectors/snowflake/type-mapping.test.ts",
+    "core/src/connectors/snowflake/connection-options.test.ts",
+    "core/src/connectors/snowflake/connection-schema.test.ts",
+    "core/src/connectors/snowflake/normalize-date-rows.test.ts",
+    "core/src/connectors/redshift/type-mapping.test.ts",
+    "core/src/connectors/postgres/type-mapping.test.ts",
+    "core/src/connectors/postgres/connection-options.test.ts",
+    "core/src/connectors/postgres/pg-type-parsers.test.ts",
+    "core/src/connectors/postgres/normalize-date-rows.test.ts",
+    "core/src/connectors/postgres/normalize-numeric-rows.test.ts",
+    "core/src/connectors/sqlserver/resolve.test.ts",
+    "core/src/connectors/fabric/resolve.test.ts",
+    "core/src/connectors/mssql/type-mapping.test.ts",
+    "core/src/connectors/mssql/normalize-date-rows.test.ts",
+    "core/src/metrics/resolve-metric.test.ts",
+    "core/src/metrics/metrics-catalog.test.ts",
+    "core/src/metrics/metric-schema.test.ts",
+    "core/src/metrics/compile-metric.test.ts"
+  ],
+  "freeBytesBeforeInstall": 9930244096
+}

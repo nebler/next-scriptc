@@ -1,0 +1,3430 @@
+{
+  "repository": "umami-software/umami",
+  "sha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "split": "DEV",
+  "adapterSha": "a23ab5a5b4b189d5deced2ef6ec81d6f55fe4e99",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "src/app/api",
+    "src/lib",
+    "src/queries"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-fixture-clones/umami"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/umami-software/umami.git",
+      "559e3c607c23d2c72d9bd4f6481bda428255323c"
+    ],
+    "exit": 0,
+    "seconds": 1.6,
+    "output": "From https://github.com/umami-software/umami\n * branch            559e3c607c23d2c72d9bd4f6481bda428255323c -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.25,
+    "output": ""
+  },
+  "verifiedSha": "559e3c607c23d2c72d9bd4f6481bda428255323c",
+  "packageInventory": [
+    "package.json",
+    "packages/mcp/package.json",
+    "packages/api-client/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "src/app/api/record/route.test.ts",
+    "src/app/api/links/route.test.ts",
+    "src/app/api/pixels/route.test.ts",
+    "src/app/api/send/route.test.ts",
+    "src/app/api/websites/[websiteId]/annotations/route.test.ts",
+    "src/app/api/websites/[websiteId]/recorder/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/route.test.ts",
+    "src/app/api/websites/[websiteId]/sessions/[sessionId]/activity/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/values/route.test.ts",
+    "src/app/api/websites/[websiteId]/event-data/fields/route.test.ts",
+    "src/app/api/teams/[teamId]/users/[userId]/route.test.ts",
+    "src/app/api/scripts/telemetry/contract.generated.ts",
+    "src/app/api/scripts/telemetry/route.ts",
+    "src/app/api/me/api-keys/route.test.ts",
+    "src/app/api/me/api-keys/[keyId]/route.test.ts",
+    "src/app/api/2fa/disable/route.test.ts",
+    "src/app/api/2fa/verify/route.test.ts",
+    "src/app/api/2fa/status/route.test.ts",
+    "src/app/api/2fa/setup/confirm/route.test.ts",
+    "src/app/api/2fa/setup/initiate/route.test.ts",
+    "src/app/api/admin/users/[userId]/2fa/route.test.ts",
+    "src/app/api/auth/logout/route.test.ts",
+    "src/app/api/auth/login/route.test.ts",
+    "src/lib/analytics-schema.test.ts",
+    "src/lib/filters.test.ts",
+    "src/lib/utils.test.ts",
+    "src/lib/schema.test.ts",
+    "src/lib/lang.test.ts",
+    "src/lib/match-configured-path.test.ts",
+    "src/lib/auth.test.ts",
+    "src/lib/generate.test.ts",
+    "src/lib/analytics-query.test.ts",
+    "src/lib/data.test.ts",
+    "src/lib/api-key.test.ts",
+    "src/lib/db.test.ts",
+    "src/lib/format.test.ts",
+    "src/lib/detect.test.ts",
+    "src/lib/prisma.test.ts",
+    "src/lib/request.test.ts",
+    "src/lib/response.test.ts",
+    "src/lib/sort.test.ts",
+    "src/lib/subscription.test.ts",
+    "src/lib/analytics-routes.test.ts",
+    "src/lib/get-base-url.test.ts",
+    "src/lib/clickhouse.test.ts",
+    "src/lib/charts.test.ts",
+    "src/lib/date.test.ts",
+    "src/lib/recorder.test.ts",
+    "src/lib/share.test.ts",
+    "src/lib/jwt.test.ts",
+    "src/lib/boards.test.ts",
+    "src/lib/saved-analytics-routes.test.ts",
+    "src/lib/boardComponentCompatibility.test.ts",
+    "src/lib/ip.test.ts",
+    "src/lib/params.test.ts",
+    "src/lib/replay.test.ts",
+    "src/lib/password.test.ts",
+    "src/lib/session.test.ts",
+    "src/lib/url.test.ts",
+    "src/lib/api-url.test.ts",
+    "src/lib/crypto.test.ts",
+    "src/lib/colors.test.ts",
+    "src/lib/mcp/dispatch.test.ts",
+    "src/lib/mcp/auth.test.ts",
+    "src/lib/two-factor/backup-codes.test.ts",
+    "src/lib/two-factor/totp.test.ts",
+    "src/lib/two-factor/crypto.test.ts",
+    "src/queries/prisma/user.test.ts",
+    "src/queries/prisma/website.test.ts",
+    "src/queries/sql/getChannelExpandedMetrics.test.ts",
+    "src/queries/sql/getChannelMetrics.test.ts",
+    "src/queries/sql/getWebsiteStats.test.ts",
+    "src/queries/sql/sessions/saveSessionData.test.ts",
+    "src/queries/sql/attribution/getAttribution.test.ts",
+    "src/queries/sql/funnels/getFunnel.test.ts",
+    "src/queries/sql/events/getWebsiteEvents.test.ts",
+    "src/queries/sql/events/getWebsiteEventStats.test.ts",
+    "src/queries/sql/performance/getPerformance.test.ts",
+    "src/queries/sql/revenue/revenueFilters.test.ts",
+    "src/queries/sql/pageviews/getPageviewExpandedMetrics.test.ts"
+  ],
+  "freeBytesBeforeInstall": 14387007488,
+  "packageManager": "pnpm",
+  "install": {
+    "command": [
+      "corepack",
+      "pnpm",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--store-dir",
+      "/tmp/m1-fixture-clones/store"
+    ],
+    "exit": 0,
+    "seconds": 37.47,
+    "output": "Downloading the pnpm 12.16.1 binary for darwin-arm64...\nScope: all 3 workspace projects\n? Verifying lockfile against supply-chain policies (1162 entries)...\nPackages are cloned from the content-addressable store to the virtual store.\n  Content-addressable store is at: <tmp>/store/v11\n  Virtual store is at:             node_modules/.pnpm\nDownloading @biomejs/cli-darwin-arm64@2.5.13: 0.00 B/22.08 MB\nDownloading @rolldown/binding-darwin-arm64@1.1.5: 0.00 B/7.06 MB\nDownloading @prisma/dev@0.24.17: 0.00 B/9.16 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 0.00 B/32.47 MB\nDownloading @prisma/client@7.10.0: 0.00 B/26.82 MB\nDownloading @prisma/studio-core@0.33.0: 0.00 B/10.12 MB\nDownloading next@16.4.2: 0.00 B/43.67 MB\nDownloading @prisma/client@7.10.0: 1.56 MB/26.82 MB\nDownloading @swc/core-darwin-arm64@1.15.46: 0.00 B/10.52 MB\nDownloading @prisma/dev@0.24.17: 2.41 MB/9.16 MB\nProgress: resolved 1023, reused 0, downloaded 529, added 478\nDownloading @img/sharp-libvips-darwin-arm64@1.3.4: 0.00 B/8.34 MB\n[WARN] Tarball download average speed 6 KiB/s (size 6 KiB) is below 50 KiB/s: https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.6.tgz (GET)\nDownloading @electric-sql/pglite@0.4.3: 0.00 B/8.29 MB\n[WARN] Tarball download average speed 5 KiB/s (size 6 KiB) is below 50 KiB/s: https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz (GET)\n[WARN] Tarball download average speed 5 KiB/s (size 7 KiB) is below 50 KiB/s: https://registry.npmjs.org/@prisma/debug/-/debug-7.10.0.tgz (GET)\nProgress: resolved 1023, reused 0, downloaded 796, added 790\nDownloading prisma@7.10.0: 0.00 B/14.17 MB\nProgress: resolved 1023, reused 0, downloaded 901, added 871\n[WARN] Tarball download average speed 46 KiB/s (size 99 KiB) is below 50 KiB/s: https://registry.npmjs.org/next-intl/-/next-intl-4.13.4.tgz (GET)\nDownloading @next/swc-darwin-arm64@16.4.2: 4.32 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 4.99 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 5.83 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 7.04 MB/32.47 MB\n\u2713 Lockfile passes supply-chain policies (1162 entries in 14.9s)\nLockfile is up to date, resolution step is skipped\nDownloading @next/swc-darwin-arm64@16.4.2: 9.84 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 13.02 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 17.23 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 21.29 MB/32.47 MB\nDownloading @next/swc-darwin-arm64@16.4.2: 25.95 MB/32.47 MB\nProgress: resolved 1023, reused 0, downloaded 1020, added 1020\nDownloading next@16.4.2: 41.52 MB/43.67 MB\nProgress: resolved 1023, reused 0, downloaded 1022, added 1023\nPackages: +1023\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 1023, reused 0, downloaded 1022, added 1023, done\nAgent skills awaiting approval: @clickhouse/client, dotenv.\nRun \"pnpm approve\" to review them.\n\ndependencies:\n+ @clickhouse/client 1.23.1\n+ @dicebear/collection 9.4.3\n+ @dicebear/core 9.4.3\n+ @playwright/test 1.63.0\n+ @prisma/adapter-pg 7.10.0\n+ @prisma/client 7.10.0\n+ @prisma/extension-read-replicas 0.5.0\n+ @svgr/cli 8.1.0\n+ @tanstack/react-query 5.102.8\n+ @umami/api-client <- packages/api-client\n+ @umami/mcp <- packages/mcp\n+ @umami/react-zen 0.254.0\n+ bcryptjs 3.0.3\n+ chalk 5.6.2\n+ chart.js 4.5.1\n+ chartjs-adapter-date-fns 3.0.0\n+ colord 2.10.0\n+ date-fns 4.4.0\n+ date-fns-tz 3.2.0\n+ debug 4.4.3\n+ detect-browser 5.3.0\n+ dotenv 17.4.2\n+ esbuild 0.28.2\n+ immer 11.1.18\n+ ipaddr.js 2.5.0\n+ is-ci 4.1.0\n+ is-docker 4.0.0\n+ is-localhost-ip 3.0.1\n+ isbot 5.2.2\n+ jsonwebtoken 9.0.3\n+ jszip 3.10.2\n+ kafkajs 2.2.4\n+ lucide-react 1.44.0\n+ maxmind 5.0.7\n+ motion 12.43.0\n+ next 16.4.2\n+ next-intl 4.13.4\n+ node-fetch 3.3.2\n+ npm-run-all 4.1.5\n+ otplib 13.5.0\n+ papaparse 5.7.0\n+ prisma 7.10.0\n+ prop-types 15.8.1\n+ punycode 2.3.1\n+ qrcode 1.5.4\n+ react 19.3.1\n+ react-dom 19.3.1\n+ react-error-boundary 6.1.5\n+ react-resizable-panels 4.12.4\n+ react-simple-maps 3.0.0\n+ react-window 2.3.1\n+ redis 5.12.1\n+ rrweb 2.0.1\n+ rrweb-player 2.0.0-alpha.20\n+ semver 7.8.5\n+ serialize-error 13.0.1\n+ thenby 1.4.1\n+ ua-parser-js 2.0.10\n+ uuid 14.0.2\n+ zod 4.6.2\n+ zustand 5.0.15\n\ndevDependencies:\n+ @biomejs/biome 2.5.13\n+ @netlify/plugin-nextjs 5.15.13\n+ @rollup/plugin-commonjs 29.0.3\n+ @rollup/plugin-node-resolve 16.0.3\n+ @rollup/plugin-replace 6.0.3\n+ @rollup/plugin-terser 1.0.0\n+ @rollup/plugin-typescript 12.3.0\n+ @testing-library/jest-dom 7.0.1\n+ @testing-library/react 16.3.3\n+ @testing-library/user-event 14.6.7\n+ @types/jest 30.0.0\n+ @types/node 26.5.1\n+ @types/qrcode 1.5.6\n+ @types/react 19.3.0\n+ @types/react-dom 19.3.0\n+ babel-plugin-react-compiler 19.1.0-rc.2\n+ dotenv-cli 11.0.0\n+ jsdom 30.0.1\n+ msw 2.15.0\n+ openapi-typescript 7.13.0\n+ postcss 8.5.28\n+ postcss-flexbugs-fixes 5.0.2\n+ postcss-preset-env 11.3.2\n+ rollup 4.63.1\n+ tar 7.5.22\n+ tsup 8.5.1\n+ tsx 4.23.13\n+ typescript 6.0.3\n+ vitest 4.1.11\n+ zod-openapi 6.0.2\n\nDone in 27.8s using pnpm v12.16.1\n"
+  },
+  "generators": [
+    {
+      "schema": "prisma/schema.prisma",
+      "status": "not run: custom generator/config requires an application execution review"
+    }
+  ],
+  "cohort": [
+    {
+      "id": "src/lib/colors.ts#hex6",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#hex6",
+        "file": "src/lib/colors.ts",
+        "name": "hex6",
+        "line": 4,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "hex6"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "76773c2038a346d5b67a"
+      }
+    },
+    {
+      "id": "src/lib/colors.ts#getColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/colors.ts#getColor",
+        "file": "src/lib/colors.ts",
+        "name": "getColor",
+        "line": 51,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [
+          "src/lib/colors.ts#hex2RGB",
+          "src/lib/colors.ts#hex6",
+          "src/lib/colors.ts#rgb2Hex"
+        ],
+        "exportNames": [
+          "getColor"
+        ],
+        "boundary": {
+          "params": [
+            "string",
+            "number",
+            "number"
+          ],
+          "result": "string"
+        },
+        "promotionId": "982239cb66d13567dc6c"
+      }
+    },
+    {
+      "id": "src/lib/format.ts#stringToColor",
+      "scanRoot": ".",
+      "function": {
+        "id": "src/lib/format.ts#stringToColor",
+        "file": "src/lib/format.ts",
+        "name": "stringToColor",
+        "line": 72,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "stringToColor"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "0d7a2a4719b3601f3cd3"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": ".",
+      "selectionFiles": [
+        "src/lib/colors.ts",
+        "src/lib/format.ts"
+      ],
+      "process": {
+        "exit": 0,
+        "seconds": 17.92523503303528,
+        "output": "it fields and assignments.\nrejected             src/lib/format.ts#decodePunycodeDomain \u2014 [next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-fixture-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.\nrejected             src/lib/format.ts#truncateString \u2014 [next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\nTop blockers:\n  2 \u00d7 unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.\n    The existing boundary/type checker could not prove a supported argument or result contract.\n  1 \u00d7 [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\n  1 \u00d7 [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".\n    No substantial compute pattern was found; small calls often cost more to cross the boundary.\nNearest misses (one emitted diagnostic, further blockers may exist): src/lib/colors.ts#pick, src/lib/colors.ts#clamp, src/lib/colors.ts#hex2RGB, src/lib/colors.ts#rgb2Hex, src/lib/colors.ts#getPastel, src/lib/colors.ts#getThemeColors, src/lib/format.ts#parseTime, src/lib/format.ts#formatTime, src/lib/format.ts#formatShortTime, src/lib/format.ts#formatNumber, src/lib/format.ts#formatLongNumber, src/lib/format.ts#formatCurrency, src/lib/format.ts#formatLongCurrency, src/lib/format.ts#decodePunycodeDomain, src/lib/format.ts#truncateString\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 42 ns/call [p10 41, p90 45], native 33000 ns/call [p10 24000, p90 86000], native 3666.67 ns/input byte, boundary 90.9%, intensity 4.68 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 41 ns/call [p10 39, p90 42], native 27000 ns/call [p10 24000, p90 156000], native 3000.00 ns/input byte, boundary 100.0%, intensity 4.60 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#hex6: test-shape-derived, N=60, process-cpu, JS 70 ns/call [p10 68, p90 71], native 27000 ns/call [p10 23000, p90 161000], native 2250.00 ns/input byte, boundary 100.0%, intensity 5.82 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#getColor: unmeasured \u2014 Boundary argument count mismatch\nMeasured src/lib/colors.ts#getColor: unmeasured \u2014 Boundary argument count mismatch\nMeasured src/lib/colors.ts#getColor: unmeasured \u2014 Boundary argument count mismatch\nMeasured src/lib/colors.ts#getColor: synthetic-fallback, N=60, process-cpu, JS 242 ns/call [p10 239, p90 245], native 33000 ns/call [p10 25000, p90 210000], native 1833.33 ns/input byte, boundary 100.0%, intensity 13.44 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#getColor: synthetic-fallback, N=60, process-cpu, JS 427 ns/call [p10 420, p90 434], native 32000 ns/call [p10 24000, p90 79000], native 761.90 ns/input byte, boundary 92.3%, intensity 10.18 JS ns/input byte, verdict JS\nMeasured src/lib/colors.ts#getColor: synthetic-fallback, N=60, process-cpu, JS 1166 ns/call [p10 1159, p90 1180], native 31000 ns/call [p10 24000, p90 48000], native 224.64 ns/input byte, boundary 91.1%, intensity 8.45 JS ns/input byte, verdict JS\nMeasured src/lib/format.ts#stringToColor: test-shape-derived, N=60, process-cpu, JS 78 ns/call [p10 76, p90 117], native 42000 ns/call [p10 27000, p90 267000], native 4666.67 ns/input byte, boundary 100.0%, intensity 8.70 JS ns/input byte, verdict JS\nMeasured src/lib/format.ts#stringToColor: test-shape-derived, N=60, process-cpu, JS 168 ns/call [p10 163, p90 169], native 32000 ns/call [p10 24000, p90 240000], native 2909.09 ns/input byte, boundary 100.0%, intensity 15.26 JS ns/input byte, verdict JS\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "b234d910ccfaffa58062927ecb68afeba4f9c7529b6a7f3660c8984a61843b21",
+      "driverSha256": "f96569d2817a254d391a7ab14a366a78f1509036f9f249c11218ae5bf4365b50",
+      "inputGeneratorSha256": "4c2a728fcfb6f2128a8b799a54d9a6c4365bbf3efb62a79f93db0e4b1247b440",
+      "inputEvidenceFiles": [
+        "src/lib/colors.test.ts",
+        "src/lib/format.test.ts"
+      ],
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-fixture-clones/umami",
+        "sourceDir": "/tmp/m1-fixture-clones/umami",
+        "framework": "next",
+        "fileErrors": [],
+        "counts": {
+          "files": 2,
+          "totalTopLevelFunctions": 18,
+          "exportedFunctions": 18,
+          "considered": 18,
+          "diagnosed": 15,
+          "accepted": 3,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/lib/colors.ts",
+            "functions": [
+              {
+                "id": "src/lib/colors.ts#hex6",
+                "file": "src/lib/colors.ts",
+                "name": "hex6",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "hex6"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "fcd9a21a5a97eacaf016"
+              },
+              {
+                "id": "src/lib/colors.ts#pick",
+                "file": "src/lib/colors.ts",
+                "name": "pick",
+                "line": 14,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "pick"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#clamp",
+                "file": "src/lib/colors.ts",
+                "name": "clamp",
+                "line": 18,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "clamp"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#hex2RGB",
+                "file": "src/lib/colors.ts",
+                "name": "hex2RGB",
+                "line": 22,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "hex2RGB"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#rgb2Hex",
+                "file": "src/lib/colors.ts",
+                "name": "rgb2Hex",
+                "line": 37,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "rgb2Hex"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getPastel",
+                "file": "src/lib/colors.ts",
+                "name": "getPastel",
+                "line": 41,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getPastel"
+                ]
+              },
+              {
+                "id": "src/lib/colors.ts#getColor",
+                "file": "src/lib/colors.ts",
+                "name": "getColor",
+                "line": 51,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [
+                  "src/lib/colors.ts#hex2RGB",
+                  "src/lib/colors.ts#hex6",
+                  "src/lib/colors.ts#rgb2Hex"
+                ],
+                "exportNames": [
+                  "getColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string",
+                    "number",
+                    "number"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "45a0231819468da164c1"
+              },
+              {
+                "id": "src/lib/colors.ts#getThemeColors",
+                "file": "src/lib/colors.ts",
+                "name": "getThemeColors",
+                "line": 58,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-fixture-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "getThemeColors"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "src/lib/format.ts",
+            "functions": [
+              {
+                "id": "src/lib/format.ts#parseTime",
+                "file": "src/lib/format.ts",
+                "name": "parseTime",
+                "line": 4,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "parseTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatTime",
+                "file": "src/lib/format.ts",
+                "name": "formatTime",
+                "line": 20,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatShortTime",
+                "file": "src/lib/format.ts",
+                "name": "formatShortTime",
+                "line": 29,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#parseTime"
+                ],
+                "exportNames": [
+                  "formatShortTime"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatNumber",
+                "line": 46,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongNumber",
+                "file": "src/lib/format.ts",
+                "name": "formatLongNumber",
+                "line": 50,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatNumber"
+                ],
+                "exportNames": [
+                  "formatLongNumber"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#stringToColor",
+                "file": "src/lib/format.ts",
+                "name": "stringToColor",
+                "line": 72,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "stringToColor"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "b290bea4b66e8a2acf8a"
+              },
+              {
+                "id": "src/lib/format.ts#formatCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatCurrency",
+                "line": 88,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "formatCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#formatLongCurrency",
+                "file": "src/lib/format.ts",
+                "name": "formatLongCurrency",
+                "line": 107,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/lib/format.ts#formatCurrency"
+                ],
+                "exportNames": [
+                  "formatLongCurrency"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#decodePunycodeDomain",
+                "file": "src/lib/format.ts",
+                "name": "decodePunycodeDomain",
+                "line": 123,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-fixture-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "decodePunycodeDomain"
+                ]
+              },
+              {
+                "id": "src/lib/format.ts#truncateString",
+                "file": "src/lib/format.ts",
+                "name": "truncateString",
+                "line": 135,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "truncateString"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 2,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-fixture-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-fixture-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/lib/colors.ts#pick",
+            "diagnostic": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#clamp",
+            "diagnostic": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#hex2RGB",
+            "diagnostic": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#rgb2Hex",
+            "diagnostic": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getPastel",
+            "diagnostic": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/colors.ts#getThemeColors",
+            "diagnostic": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-fixture-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/lib/format.ts#parseTime",
+            "diagnostic": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatTime",
+            "diagnostic": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatShortTime",
+            "diagnostic": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongNumber",
+            "diagnostic": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/lib/format.ts#formatCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#formatLongCurrency",
+            "diagnostic": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/lib/format.ts#decodePunycodeDomain",
+            "diagnostic": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-fixture-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/lib/format.ts#truncateString",
+            "diagnostic": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/lib/colors.ts",
+            "name": "pick",
+            "message": "[next-scriptc] not a candidate pick: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:14:21 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "clamp",
+            "message": "[next-scriptc] not a candidate clamp: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:18:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "hex2RGB",
+            "message": "[next-scriptc] not a candidate hex2RGB: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:22:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "rgb2Hex",
+            "message": "[next-scriptc] not a candidate rgb2Hex: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getPastel",
+            "message": "[next-scriptc] not a candidate getPastel: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:41:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/colors.ts",
+            "name": "getThemeColors",
+            "message": "[next-scriptc] not a candidate getThemeColors: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/colors.ts:58:8 - NSC1000: dependency closure: /private/tmp/m1-fixture-clones/umami/src/lib/constants.ts: constant graph exported reference can escape Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "parseTime",
+            "message": "[next-scriptc] not a candidate parseTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:4:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatTime",
+            "message": "[next-scriptc] not a candidate formatTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:20:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatShortTime",
+            "message": "[next-scriptc] not a candidate formatShortTime: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:29:17 - NSC1000: function formatShortTime: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatNumber",
+            "message": "[next-scriptc] not a candidate formatNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:46:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongNumber",
+            "message": "[next-scriptc] not a candidate formatLongNumber: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:50:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatCurrency",
+            "message": "[next-scriptc] not a candidate formatCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "formatLongCurrency",
+            "message": "[next-scriptc] not a candidate formatLongCurrency: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:92:26 - NSC1001: function formatLongCurrency: unsupported reference Intl Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "decodePunycodeDomain",
+            "message": "[next-scriptc] not a candidate decodePunycodeDomain: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:123:8 - NSC1003: dependency closure: /private/tmp/m1-fixture-clones/umami/node_modules/.pnpm/punycode@2.3.1/node_modules/punycode/punycode.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/lib/format.ts",
+            "name": "truncateString",
+            "message": "[next-scriptc] not a candidate truncateString: [next-scriptc] /tmp/m1-fixture-clones/umami/src/lib/format.ts:135:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 18957.99999965675,
+              "firstNativeWallNs": 384000.00000001455
+            },
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 40.98078248219929,
+              "p10": 41.325319653931395,
+              "median": 42.090957813337646,
+              "p90": 45.230074266901454,
+              "max": 143.4423091646893
+            },
+            "native": {
+              "n": 60,
+              "min": 22999.999999967713,
+              "p10": 24000.00000000091,
+              "median": 32999.999999958614,
+              "p90": 85999.9999999559,
+              "max": 4613999.999999976
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 4.676773090370849,
+              "native": 3666.666666662068
+            },
+            "computeIntensity": 4.676773090370849,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9087436461570735,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 10957.999999845924,
+              "computeWallNs": 999.9871253967285
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 938.523336118947,
+              "upper": 5508.34562669005,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 52244,
+            "rawPairsNs": [
+              [
+                126.0240410382054,
+                4613999.999999976
+              ],
+              [
+                143.4423091646893,
+                76999.99999999818
+              ],
+              [
+                54.53257790368252,
+                67000.00000000728
+              ],
+              [
+                42.91401883469908,
+                32999.999999958614
+              ],
+              [
+                80.56427532348218,
+                38999.99999998727
+              ],
+              [
+                41.803843503560714,
+                26999.999999986812
+              ],
+              [
+                41.45930633182751,
+                47000.000000025466
+              ],
+              [
+                45.17265140494628,
+                34999.99999996817
+              ],
+              [
+                46.83791440165383,
+                35000.000000025015
+              ],
+              [
+                44.98124186509391,
+                67999.99999998363
+              ],
+              [
+                43.83278462598506,
+                65999.99999997408
+              ],
+              [
+                45.17265140494628,
+                38000.000000010914
+              ],
+              [
+                44.82811423321418,
+                228999.99999998498
+              ],
+              [
+                41.57415205573786,
+                33999.999999991815
+              ],
+              [
+                42.129239721307044,
+                36000.00000000137
+              ],
+              [
+                45.21093331291676,
+                24000.00000000091
+              ],
+              [
+                44.42615419952581,
+                33999.999999991815
+              ],
+              [
+                44.56014087742084,
+                26000.00000001046
+              ],
+              [
+                45.07694663501955,
+                70000.00000005003
+              ],
+              [
+                44.48357706147989,
+                33000.00000001546
+              ],
+              [
+                43.98591225786697,
+                32999.999999958614
+              ],
+              [
+                44.88553709516935,
+                24000.00000000091
+              ],
+              [
+                44.65584564734758,
+                32999.999999958614
+              ],
+              [
+                45.230074266901454,
+                25000.000000034106
+              ],
+              [
+                43.87106653395662,
+                318999.99999995995
+              ],
+              [
+                41.842125411531185,
+                38000.000000010914
+              ],
+              [
+                41.918689227471056,
+                34999.99999996817
+              ],
+              [
+                41.401883469872345,
+                24000.00000000091
+              ],
+              [
+                41.55501110175316,
+                30000.00000002956
+              ],
+              [
+                41.57415205573895,
+                23000.000000024556
+              ],
+              [
+                42.09095781333656,
+                29000.000000053205
+              ],
+              [
+                43.2394150524454,
+                24000.00000000091
+              ],
+              [
+                43.335119822372135,
+                36000.00000000137
+              ],
+              [
+                42.224944491232684,
+                85999.9999999559
+              ],
+              [
+                41.45930633182751,
+                31999.999999982265
+              ],
+              [
+                42.090957813337646,
+                27000.000000043656
+              ],
+              [
+                43.2202740984618,
+                202000.00000005504
+              ],
+              [
+                41.440165377842824,
+                26999.999999986812
+              ],
+              [
+                41.70813873363506,
+                31000.00000000591
+              ],
+              [
+                42.74175024883248,
+                24000.00000000091
+              ],
+              [
+                41.516729193783775,
+                25000.000000034106
+              ],
+              [
+                41.325319653931395,
+                28000.00000002001
+              ],
+              [
+                41.497588239798,
+                26999.999999986812
+              ],
+              [
+                42.83745501875813,
+                22999.999999967713
+              ],
+              [
+                41.26789679197623,
+                32000.00000003911
+              ],
+              [
+                41.82298445754541,
+                25000.000000034106
+              ],
+              [
+                41.44016537784174,
+                31999.999999982265
+              ],
+              [
+                42.358931169129896,
+                26000.00000001046
+              ],
+              [
+                41.26789679197623,
+                233000.0000000041
+              ],
+              [
+                41.612433963708334,
+                45999.99999999227
+              ],
+              [
+                41.70813873363397,
+                48000.00000000182
+              ],
+              [
+                41.70813873363506,
+                34999.99999996817
+              ],
+              [
+                41.63157491769411,
+                35000.000000025015
+              ],
+              [
+                41.70813873363506,
+                23000.000000024556
+              ],
+              [
+                41.880407319500584,
+                22999.999999967713
+              ],
+              [
+                40.98078248219929,
+                31999.999999982265
+              ],
+              [
+                41.09562820610962,
+                32000.00000003911
+              ],
+              [
+                41.28703774596201,
+                24000.00000000091
+              ],
+              [
+                41.172192022050574,
+                24999.999999977263
+              ],
+              [
+                41.976112089425136,
+                26999.999999986812
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 1000.0000002037268,
+              "firstNativeWallNs": 12208.000000100583
+            },
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 38.597112744665445,
+              "p10": 38.91595075724033,
+              "median": 41.413515189088045,
+              "p90": 42.157470551766814,
+              "max": 47.15259941546425
+            },
+            "native": {
+              "n": 60,
+              "min": 22000.000000048203,
+              "p10": 24000.00000000091,
+              "median": 27000.000000043656,
+              "p90": 155999.99999994907,
+              "max": 222999.99999995634
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 4.60150168767645,
+              "native": 3000.000000004851
+            },
+            "computeIntensity": 4.60150168767645,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 10124.999999788997,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 898.3559167641113,
+              "upper": 1365.1263701488244,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 56455,
+            "rawPairsNs": [
+              [
+                39.854751572048535,
+                36999.999999920874
+              ],
+              [
+                38.91595075724033,
+                43000.00000000637
+              ],
+              [
+                38.597112744665445,
+                25999.999999953616
+              ],
+              [
+                40.43928792843684,
+                29999.999999972715
+              ],
+              [
+                39.67761934283959,
+                38000.000000010914
+              ],
+              [
+                38.82738464263586,
+                25000.00000009095
+              ],
+              [
+                39.69533256576008,
+                216999.99999998455
+              ],
+              [
+                38.6856788592679,
+                24000.00000000091
+              ],
+              [
+                38.91595075724033,
+                24000.00000000091
+              ],
+              [
+                38.72110530511089,
+                23000.000000024556
+              ],
+              [
+                38.95137720308332,
+                24000.00000000091
+              ],
+              [
+                38.75653175095188,
+                27000.000000043656
+              ],
+              [
+                39.30564166150121,
+                34999.99999996817
+              ],
+              [
+                39.075369763528776,
+                25999.999999953616
+              ],
+              [
+                39.0045168718448,
+                25000.00000009095
+              ],
+              [
+                39.39420777610366,
+                24999.999999977263
+              ],
+              [
+                39.97874413249399,
+                222999.99999995634
+              ],
+              [
+                42.529448233105185,
+                52000.00000002092
+              ],
+              [
+                42.72429368523463,
+                40999.99999993997
+              ],
+              [
+                41.679213532903475,
+                24999.999999977263
+              ],
+              [
+                41.46665485785154,
+                37999.99999989723
+              ],
+              [
+                41.661500309980966,
+                28999.999999996362
+              ],
+              [
+                41.785492870426424,
+                27000.000000043656
+              ],
+              [
+                41.98033832255787,
+                27000.000000043656
+              ],
+              [
+                41.67921353290146,
+                28999.999999996362
+              ],
+              [
+                42.37002922681674,
+                24000.00000000091
+              ],
+              [
+                42.38774244973723,
+                201000.00000002183
+              ],
+              [
+                41.75006642458544,
+                24999.999999977263
+              ],
+              [
+                41.59064741829698,
+                30000.000000086402
+              ],
+              [
+                41.271809405722095,
+                24999.999999977263
+              ],
+              [
+                41.5729341953765,
+                26999.99999992997
+              ],
+              [
+                41.48436808077202,
+                23000.000000024556
+              ],
+              [
+                41.32494907448358,
+                27000.000000043656
+              ],
+              [
+                41.519794526613005,
+                25999.999999953616
+              ],
+              [
+                41.43122841200854,
+                26999.99999992997
+              ],
+              [
+                41.28952262864259,
+                37999.99999989723
+              ],
+              [
+                41.590647418299,
+                173000.0000000018
+              ],
+              [
+                41.46665485785154,
+                26000.000000067303
+              ],
+              [
+                41.46665485784951,
+                36000.00000005821
+              ],
+              [
+                47.15259941546425,
+                56000.00000004002
+              ],
+              [
+                41.271809405720084,
+                25999.999999953616
+              ],
+              [
+                41.30723585156308,
+                22000.000000048203
+              ],
+              [
+                41.413515189088045,
+                28000.00000002001
+              ],
+              [
+                41.8917722079534,
+                23000.000000024556
+              ],
+              [
+                42.10433088300332,
+                55000.000000063665
+              ],
+              [
+                42.08661766008283,
+                27000.000000043656
+              ],
+              [
+                41.927198653794385,
+                155999.99999994907
+              ],
+              [
+                42.157470551766814,
+                24000.00000000091
+              ],
+              [
+                41.18324329111763,
+                46000.00000004911
+              ],
+              [
+                41.30723585156308,
+                25999.999999953616
+              ],
+              [
+                41.44894163493104,
+                33000.00000001546
+              ],
+              [
+                40.72269949517276,
+                38000.000000010914
+              ],
+              [
+                40.740412718093246,
+                28000.00000002001
+              ],
+              [
+                40.93525817022269,
+                24000.00000000091
+              ],
+              [
+                41.32494907448358,
+                25999.999999953616
+              ],
+              [
+                41.413515189088045,
+                26000.000000067303
+              ],
+              [
+                41.50208130369251,
+                177999.99999999726
+              ],
+              [
+                42.033477991319344,
+                24000.00000000091
+              ],
+              [
+                41.25409618279959,
+                33000.00000001546
+              ],
+              [
+                41.76777964750593,
+                24999.999999977263
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#hex6",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 999.9999992942321,
+              "firstNativeWallNs": 42583.00000037707
+            },
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/colors.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcdefgh"
+            ],
+            "bucket": 3,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 59.33963811293761,
+              "p10": 68.46881320723762,
+              "median": 69.80812332586163,
+              "p90": 70.7374405510326,
+              "max": 78.11731263324626
+            },
+            "native": {
+              "n": 60,
+              "min": 21999.999999934516,
+              "p10": 23000.000000024556,
+              "median": 27000.000000043656,
+              "p90": 160999.99999994453,
+              "max": 204000.00000006458
+            },
+            "inputJsonBytes": 12,
+            "nsPerInputJsonByte": {
+              "js": 5.817343610488469,
+              "native": 2250.000000003638
+            },
+            "computeIntensity": 5.817343610488469,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 12917.000000015832,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 533.2083596880711,
+              "upper": 753.6993074222902,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 36586,
+            "rawPairsNs": [
+              [
+                59.33963811293761,
+                24999.999999977263
+              ],
+              [
+                59.42163669163008,
+                26000.000000067303
+              ],
+              [
+                59.61296670857815,
+                26999.99999992997
+              ],
+              [
+                59.42163669163008,
+                22000.000000048203
+              ],
+              [
+                59.694965287267514,
+                24000.00000000091
+              ],
+              [
+                60.13229104028677,
+                36000.00000005821
+              ],
+              [
+                73.30672935002505,
+                36999.999999920874
+              ],
+              [
+                70.2454490788809,
+                24000.00000000091
+              ],
+              [
+                70.27278193844712,
+                24000.00000000091
+              ],
+              [
+                70.68277483190015,
+                22000.000000048203
+              ],
+              [
+                70.3821133766996,
+                23000.000000024556
+              ],
+              [
+                70.46411195539207,
+                33999.999999991815
+              ],
+              [
+                78.11731263324626,
+                29999.999999972715
+              ],
+              [
+                69.0428032580756,
+                27000.000000043656
+              ],
+              [
+                70.87410484884822,
+                52999.99999999727
+              ],
+              [
+                75.5480238342507,
+                48999.99999997817
+              ],
+              [
+                69.75345760673228,
+                36000.00000005821
+              ],
+              [
+                70.0267862023728,
+                24000.00000000091
+              ],
+              [
+                69.56212758979044,
+                168999.9999999827
+              ],
+              [
+                69.42546329196861,
+                23000.000000024556
+              ],
+              [
+                70.10878478106528,
+                31000.000000062755
+              ],
+              [
+                69.2887989941499,
+                24999.999999977263
+              ],
+              [
+                68.79680752200439,
+                24000.00000000091
+              ],
+              [
+                70.35478051713959,
+                24999.999999977263
+              ],
+              [
+                70.76477341059574,
+                178999.99999997363
+              ],
+              [
+                69.45279615153484,
+                24999.999999977263
+              ],
+              [
+                70.32744765757336,
+                23000.000000024556
+              ],
+              [
+                69.09746897720494,
+                21999.999999934516
+              ],
+              [
+                68.46881320723762,
+                28000.00000002001
+              ],
+              [
+                69.28879899415301,
+                28999.999999996362
+              ],
+              [
+                70.05411906193594,
+                161000.0000000582
+              ],
+              [
+                69.37079757284236,
+                24000.00000000091
+              ],
+              [
+                69.61679330891357,
+                31999.99999992542
+              ],
+              [
+                70.08145192149907,
+                28000.00000002001
+              ],
+              [
+                69.3981304324055,
+                34999.99999996817
+              ],
+              [
+                70.05411906193594,
+                22999.99999991087
+              ],
+              [
+                70.16345050019153,
+                190000.00000005457
+              ],
+              [
+                69.83545618542476,
+                23000.000000024556
+              ],
+              [
+                70.0267862023728,
+                23000.000000024556
+              ],
+              [
+                69.12480183676806,
+                28999.999999996362
+              ],
+              [
+                69.75345760673228,
+                31000.000000062755
+              ],
+              [
+                69.7534576067354,
+                31999.99999992542
+              ],
+              [
+                69.80812332586163,
+                117000.0000000755
+              ],
+              [
+                69.23413327502365,
+                26000.000000067303
+              ],
+              [
+                69.94478762368036,
+                49000.00000009186
+              ],
+              [
+                69.69879188760603,
+                28999.999999996362
+              ],
+              [
+                69.6441261684798,
+                36000.00000005821
+              ],
+              [
+                70.10878478106528,
+                28000.00000002001
+              ],
+              [
+                70.7374405510326,
+                204000.00000006458
+              ],
+              [
+                70.0267862023728,
+                23000.000000024556
+              ],
+              [
+                70.2454490788809,
+                26999.99999992997
+              ],
+              [
+                69.61679330891668,
+                25999.999999953616
+              ],
+              [
+                69.50746187066109,
+                29999.999999972715
+              ],
+              [
+                69.34346471327613,
+                25000.00000009095
+              ],
+              [
+                70.05411906193594,
+                160999.99999994453
+              ],
+              [
+                69.97212048324347,
+                21999.999999934516
+              ],
+              [
+                70.35478051713648,
+                21999.999999934516
+              ],
+              [
+                69.72612474716917,
+                28999.999999996362
+              ],
+              [
+                69.78079046629851,
+                24999.999999977263
+              ],
+              [
+                70.3821133766996,
+                25000.00000009095
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "reason": "Boundary argument count mismatch"
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "reason": "Boundary argument count mismatch"
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "unmeasured",
+            "compileStatus": "compiled",
+            "inputIndex": 2,
+            "inputSource": "test-shape-derived",
+            "reason": "Boundary argument count mismatch"
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 173709.0000005992,
+              "firstNativeWallNs": 486292.0000005033
+            },
+            "cliffCheck": null,
+            "inputIndex": 3,
+            "inputSource": "synthetic-fallback",
+            "inputProvenance": {
+              "kind": "synthetic-fallback"
+            },
+            "arguments": [
+              "xxxxxxxx",
+              32,
+              32
+            ],
+            "bucket": 3,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 236.37440758292544,
+              "p10": 239.09952606635417,
+              "median": 241.9431279620754,
+              "p90": 245.26066350712838,
+              "max": 441.70616113742153
+            },
+            "native": {
+              "n": 60,
+              "min": 22999.99999991087,
+              "p10": 24999.999999863576,
+              "median": 33000.00000012915,
+              "p90": 209999.99999980902,
+              "max": 1162000.0000000345
+            },
+            "inputJsonBytes": 18,
+            "nsPerInputJsonByte": {
+              "js": 13.441284886781967,
+              "native": 1833.3333333405083
+            },
+            "computeIntensity": 13.441284886781967,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 12499.999999818101,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 187.90794439249458,
+              "upper": 441.0487061418322,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 8440,
+            "rawPairsNs": [
+              [
+                238.03317535545196,
+                52999.999999883585
+              ],
+              [
+                238.3886255924104,
+                27000.000000043656
+              ],
+              [
+                239.45497630331258,
+                50999.99999993088
+              ],
+              [
+                237.55924170614713,
+                36000.00000005821
+              ],
+              [
+                236.37440758292544,
+                34999.99999985448
+              ],
+              [
+                236.72985781991082,
+                28000.00000002001
+              ],
+              [
+                441.70616113742153,
+                34999.99999985448
+              ],
+              [
+                239.09952606635417,
+                22999.99999991087
+              ],
+              [
+                238.3886255924104,
+                1162000.0000000345
+              ],
+              [
+                243.12796208529707,
+                67000.00000000728
+              ],
+              [
+                245.26066350712838,
+                35999.999999830834
+              ],
+              [
+                245.02369668246251,
+                36000.00000005821
+              ],
+              [
+                243.48341232228242,
+                34000.0000001055
+              ],
+              [
+                240.40284360189528,
+                33000.00000012915
+              ],
+              [
+                242.06161137439486,
+                39000.00000021464
+              ],
+              [
+                241.9431279620754,
+                27000.000000043656
+              ],
+              [
+                241.2322274881316,
+                282000.0000001528
+              ],
+              [
+                248.45971563980805,
+                40000.000000190994
+              ],
+              [
+                240.04739336490994,
+                51000.00000015825
+              ],
+              [
+                241.4691943127975,
+                38000.000000010914
+              ],
+              [
+                241.82464454978287,
+                31999.99999992542
+              ],
+              [
+                244.54976303315766,
+                31000.000000176442
+              ],
+              [
+                240.8767772511732,
+                36000.00000005821
+              ],
+              [
+                240.8767772511732,
+                25000.00000009095
+              ],
+              [
+                243.83886255924085,
+                209999.99999980902
+              ],
+              [
+                243.48341232225548,
+                26000.000000067303
+              ],
+              [
+                240.8767772511732,
+                30999.99999994907
+              ],
+              [
+                240.99526066351962,
+                24999.999999863576
+              ],
+              [
+                240.8767772511732,
+                24999.999999863576
+              ],
+              [
+                243.72037914692137,
+                25000.00000009095
+              ],
+              [
+                241.9431279620754,
+                28000.00000002001
+              ],
+              [
+                240.5213270142148,
+                25000.00000009095
+              ],
+              [
+                242.18009478674128,
+                216000.0000001219
+              ],
+              [
+                265.40284360189685,
+                24999.999999863576
+              ],
+              [
+                241.1137440758391,
+                57999.999999992724
+              ],
+              [
+                241.8246445497559,
+                32999.999999901775
+              ],
+              [
+                242.18009478671436,
+                32000.000000152795
+              ],
+              [
+                245.26066350712838,
+                25000.00000009095
+              ],
+              [
+                241.8246445497559,
+                28000.00000002001
+              ],
+              [
+                240.63981042656118,
+                22999.99999991087
+              ],
+              [
+                242.41706161138023,
+                275999.9999998399
+              ],
+              [
+                242.89099526068506,
+                23999.999999887223
+              ],
+              [
+                242.06161137439486,
+                28999.999999996362
+              ],
+              [
+                240.99526066349267,
+                26000.000000067303
+              ],
+              [
+                241.9431279620754,
+                35000.000000081855
+              ],
+              [
+                242.6540284360192,
+                24000.000000114596
+              ],
+              [
+                240.75829383885375,
+                33000.00000012915
+              ],
+              [
+                242.53554502369968,
+                35000.000000081855
+              ],
+              [
+                243.12796208529707,
+                212000.00000021647
+              ],
+              [
+                244.31279620851873,
+                37000.00000003456
+              ],
+              [
+                240.75829383885375,
+                38000.000000010914
+              ],
+              [
+                239.92890995261743,
+                23999.999999887223
+              ],
+              [
+                243.24644549761655,
+                41999.99999991633
+              ],
+              [
+                242.53554502369968,
+                26000.000000067303
+              ],
+              [
+                245.97156398104525,
+                34000.0000001055
+              ],
+              [
+                245.02369668246251,
+                24999.999999863576
+              ],
+              [
+                242.18009478671436,
+                204999.99999992724
+              ],
+              [
+                242.18009478674128,
+                33999.99999987813
+              ],
+              [
+                241.94312796210232,
+                28999.999999996362
+              ],
+              [
+                240.8767772511732,
+                27000.000000043656
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 3708.9999996169354,
+              "firstNativeWallNs": 13916.000000790518
+            },
+            "cliffCheck": null,
+            "inputIndex": 4,
+            "inputSource": "synthetic-fallback",
+            "inputProvenance": {
+              "kind": "synthetic-fallback"
+            },
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32,
+              32
+            ],
+            "bucket": 5,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 417.20067453624495,
+              "p10": 420.4047217538221,
+              "median": 427.48735244520776,
+              "p90": 434.06408094428576,
+              "max": 440.6408094435554
+            },
+            "native": {
+              "n": 60,
+              "min": 22000.000000389264,
+              "p10": 23999.999999887223,
+              "median": 32000.000000152795,
+              "p90": 78999.99999972351,
+              "max": 333999.99999983265
+            },
+            "inputJsonBytes": 42,
+            "nsPerInputJsonByte": {
+              "js": 10.178270296314471,
+              "native": 761.9047619083999
+            },
+            "computeIntensity": 10.178270296314471,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9230767671927602,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 13000.00000082946,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 92.55560895008792,
+              "upper": 159.41763957473037,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 5930,
+            "rawPairsNs": [
+              [
+                423.44013490724575,
+                29999.999999972715
+              ],
+              [
+                418.3811129848604,
+                35999.999999830834
+              ],
+              [
+                417.20067453624495,
+                221000.00000000364
+              ],
+              [
+                421.2478920741686,
+                24000.000000114596
+              ],
+              [
+                420.2360876897069,
+                39999.99999996362
+              ],
+              [
+                419.730185497476,
+                25999.99999983993
+              ],
+              [
+                420.4047217538221,
+                32999.999999901775
+              ],
+              [
+                427.3187183810924,
+                28999.999999996362
+              ],
+              [
+                417.8752107925912,
+                25000.00000009095
+              ],
+              [
+                423.1028667790535,
+                22999.99999991087
+              ],
+              [
+                422.0910623946301,
+                32999.999999901775
+              ],
+              [
+                422.4283305227456,
+                25999.99999983993
+              ],
+              [
+                421.7537942664378,
+                33000.00000012915
+              ],
+              [
+                419.5615514333991,
+                35000.000000081855
+              ],
+              [
+                424.9578414839767,
+                326000.0000000218
+              ],
+              [
+                428.1618887015156,
+                37000.00000003456
+              ],
+              [
+                426.64418212478455,
+                35000.000000081855
+              ],
+              [
+                427.65598650924636,
+                23999.999999887223
+              ],
+              [
+                426.47554806070764,
+                25000.00000009095
+              ],
+              [
+                430.0168634064388,
+                22999.99999991087
+              ],
+              [
+                429.34232715009256,
+                31999.99999992542
+              ],
+              [
+                431.5345699831314,
+                24000.000000114596
+              ],
+              [
+                431.7032040472084,
+                31999.99999992542
+              ],
+              [
+                423.94603709951497,
+                28000.00000002001
+              ],
+              [
+                425.63237774028454,
+                26000.000000067303
+              ],
+              [
+                427.3187183810924,
+                23000.000000138243
+              ],
+              [
+                435.581787521055,
+                252000.0000001801
+              ],
+              [
+                427.48735244520776,
+                42000.0000001437
+              ],
+              [
+                427.99325463743855,
+                38000.000000010914
+              ],
+              [
+                428.33052276559255,
+                29999.999999972715
+              ],
+              [
+                429.00505902190037,
+                28999.999999996362
+              ],
+              [
+                428.6677908937464,
+                23000.000000138243
+              ],
+              [
+                432.2091062394776,
+                59000.00000019645
+              ],
+              [
+                435.9190556492473,
+                52000.000000134605
+              ],
+              [
+                424.4519392917842,
+                78999.99999972351
+              ],
+              [
+                432.20910623940085,
+                30999.99999994907
+              ],
+              [
+                427.82462057339995,
+                41999.99999991633
+              ],
+              [
+                434.06408094428576,
+                40000.00000041837
+              ],
+              [
+                440.6408094435554,
+                333999.99999983265
+              ],
+              [
+                424.78920741993807,
+                28000.000000247383
+              ],
+              [
+                423.44013490724575,
+                39000.00000021464
+              ],
+              [
+                428.1618887015539,
+                43000.00000012005
+              ],
+              [
+                428.4991568297078,
+                34000.0000001055
+              ],
+              [
+                431.0286677909005,
+                28999.999999996362
+              ],
+              [
+                430.1854974704774,
+                40999.9999997126
+              ],
+              [
+                428.6677908938231,
+                28999.999999996362
+              ],
+              [
+                424.11467116363025,
+                30999.99999994907
+              ],
+              [
+                431.5345699831697,
+                23999.999999887223
+              ],
+              [
+                428.49915682963115,
+                38000.000000010914
+              ],
+              [
+                426.98145025290023,
+                27999.999999792635
+              ],
+              [
+                432.3777403035162,
+                228000.00000006548
+              ],
+              [
+                428.83642495786177,
+                27000.000000043656
+              ],
+              [
+                423.77740303539963,
+                32999.999999901775
+              ],
+              [
+                424.6205733558227,
+                25999.99999983993
+              ],
+              [
+                423.60876897136103,
+                32000.000000152795
+              ],
+              [
+                435.0758853288242,
+                32000.000000152795
+              ],
+              [
+                427.6559865092847,
+                28999.999999996362
+              ],
+              [
+                426.98145025297686,
+                22000.000000389264
+              ],
+              [
+                436.930860033709,
+                74000.00000006912
+              ],
+              [
+                425.9696458684384,
+                35999.99999960346
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/colors.ts#getColor",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 5374.99999973079,
+              "firstNativeWallNs": 33250.00000040745
+            },
+            "cliffCheck": null,
+            "inputIndex": 5,
+            "inputSource": "synthetic-fallback",
+            "inputProvenance": {
+              "kind": "synthetic-fallback"
+            },
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32,
+              32
+            ],
+            "bucket": 7,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 1157.2031909903094,
+              "p10": 1159.0802440167995,
+              "median": 1165.649929610689,
+              "p90": 1180.1970905677488,
+              "max": 1275.9267949319806
+            },
+            "native": {
+              "n": 60,
+              "min": 22999.999999683496,
+              "p10": 23999.999999887223,
+              "median": 30999.99999994907,
+              "p90": 47999.999999774445,
+              "max": 399000.00000034197
+            },
+            "inputJsonBytes": 138,
+            "nsPerInputJsonByte": {
+              "js": 8.446738620367311,
+              "native": 224.63768115905123
+            },
+            "computeIntensity": 8.446738620367311,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9114415491829517,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 11291.999999230029,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 25.85981358507904,
+              "upper": 50.14586926582711,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 2131,
+            "rawPairsNs": [
+              [
+                1167.9962458939617,
+                326000.0000000218
+              ],
+              [
+                1158.6109807602304,
+                34999.99999985448
+              ],
+              [
+                1157.2031909903094,
+                32999.999999901775
+              ],
+              [
+                1164.711403097124,
+                34000.0000001055
+              ],
+              [
+                1159.0802440167995,
+                32999.999999901775
+              ],
+              [
+                1160.957297043503,
+                30000.00000020009
+              ],
+              [
+                1161.8958235570683,
+                28999.999999996362
+              ],
+              [
+                1168.4655091507445,
+                30000.00000020009
+              ],
+              [
+                1160.0187705303647,
+                38999.99999975989
+              ],
+              [
+                1167.9962458939617,
+                26999.99999958891
+              ],
+              [
+                1158.1417175034478,
+                26000.000000294676
+              ],
+              [
+                1160.488033786934,
+                23000.000000138243
+              ],
+              [
+                1158.6109807602304,
+                26000.000000294676
+              ],
+              [
+                1168.465509150531,
+                25999.99999983993
+              ],
+              [
+                1162.8343500704202,
+                37000.000000261934
+              ],
+              [
+                1158.6109807602304,
+                27000.000000043656
+              ],
+              [
+                1162.3650868136376,
+                32999.999999901775
+              ],
+              [
+                1170.8118254340175,
+                25999.99999983993
+              ],
+              [
+                1160.9572970437166,
+                30000.00000020009
+              ],
+              [
+                1160.9572970437166,
+                23000.000000138243
+              ],
+              [
+                1161.8958235570683,
+                30999.99999994907
+              ],
+              [
+                1175.5044580009896,
+                26000.000000294676
+              ],
+              [
+                1164.711403097124,
+                32999.999999901775
+              ],
+              [
+                1178.3200375410452,
+                23999.999999887223
+              ],
+              [
+                1158.6109807602304,
+                65000.00000005457
+              ],
+              [
+                1159.5495072735823,
+                34000.0000001055
+              ],
+              [
+                1165.6499296104757,
+                37000.000000261934
+              ],
+              [
+                1165.180666353693,
+                30999.99999994907
+              ],
+              [
+                1162.8343500704202,
+                34000.0000001055
+              ],
+              [
+                1164.711403097124,
+                27000.000000043656
+              ],
+              [
+                1167.9962458939617,
+                26999.99999958891
+              ],
+              [
+                1173.6274049740728,
+                36999.99999980719
+              ],
+              [
+                1160.0187705303647,
+                399000.00000034197
+              ],
+              [
+                1182.543406851235,
+                38000.000000010914
+              ],
+              [
+                1168.4655091507445,
+                32999.999999901775
+              ],
+              [
+                1176.9122477711242,
+                25000.00000009095
+              ],
+              [
+                1180.1970905677488,
+                52000.000000134605
+              ],
+              [
+                1178.7893007978278,
+                32000.000000152795
+              ],
+              [
+                1176.9122477711242,
+                33999.999999650754
+              ],
+              [
+                1167.05771938061,
+                25000.00000009095
+              ],
+              [
+                1163.772876583772,
+                28999.999999996362
+              ],
+              [
+                1164.711403097124,
+                25000.00000009095
+              ],
+              [
+                1163.772876583772,
+                28999.999999996362
+              ],
+              [
+                1171.7503519475827,
+                26999.99999958891
+              ],
+              [
+                1167.05771938061,
+                34000.0000001055
+              ],
+              [
+                1169.4040356640962,
+                23999.999999887223
+              ],
+              [
+                1167.5269826373926,
+                32999.999999901775
+              ],
+              [
+                1181.1356170811007,
+                23999.999999887223
+              ],
+              [
+                1166.119192867258,
+                28000.000000247383
+              ],
+              [
+                1174.0966682308551,
+                22999.999999683496
+              ],
+              [
+                1175.0351947442073,
+                30999.99999994907
+              ],
+              [
+                1165.649929610689,
+                22999.999999683496
+              ],
+              [
+                1165.180666353693,
+                25999.99999983993
+              ],
+              [
+                1185.3589863912903,
+                23000.000000138243
+              ],
+              [
+                1163.3036133269895,
+                53999.999999632564
+              ],
+              [
+                1176.9122477709109,
+                30999.99999994907
+              ],
+              [
+                1173.1581417175034,
+                32999.999999901775
+              ],
+              [
+                1275.9267949319806,
+                47999.999999774445
+              ],
+              [
+                1164.711403097124,
+                39999.99999996362
+              ],
+              [
+                1194.2749882682394,
+                27000.000000043656
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 50124.99999975262,
+              "firstNativeWallNs": 321208.9999997261
+            },
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/format.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcde"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 72.91740769723917,
+              "p10": 75.62068720209679,
+              "median": 78.28839723981012,
+              "p90": 117.27253325745271,
+              "max": 138.61421355907854
+            },
+            "native": {
+              "n": 60,
+              "min": 23999.999999887223,
+              "p10": 26999.99999958891,
+              "median": 41999.99999991633,
+              "p90": 267000.0000002801,
+              "max": 376999.99999995274
+            },
+            "inputJsonBytes": 9,
+            "nsPerInputJsonByte": {
+              "js": 8.698710804423348,
+              "native": 4666.666666657369
+            },
+            "computeIntensity": 8.698710804423348,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 11416.000000281201,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 931.4006747487991,
+              "upper": 1267.599362809296,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 28114,
+            "rawPairsNs": [
+              [
+                72.91740769723917,
+                286000.0000000582
+              ],
+              [
+                76.40321547982084,
+                28999.999999996362
+              ],
+              [
+                82.87685850465702,
+                63000.00000010186
+              ],
+              [
+                80.67155154015896,
+                27000.000000043656
+              ],
+              [
+                81.77420502242417,
+                271000.00000018557
+              ],
+              [
+                81.062815679021,
+                27000.000000043656
+              ],
+              [
+                80.99167674468391,
+                42000.000000371074
+              ],
+              [
+                76.61663228284827,
+                36000.00000005821
+              ],
+              [
+                76.58106281567166,
+                210999.99999978536
+              ],
+              [
+                79.24877285338499,
+                68999.99999995998
+              ],
+              [
+                78.14611937113597,
+                41999.99999991633
+              ],
+              [
+                76.72334068436199,
+                36000.00000005821
+              ],
+              [
+                77.54143842926268,
+                174999.99999972715
+              ],
+              [
+                75.72739560362666,
+                29999.99999974534
+              ],
+              [
+                76.18979867682579,
+                30000.00000020009
+              ],
+              [
+                75.62068720211296,
+                24000.00000034197
+              ],
+              [
+                75.8341040051242,
+                155000.0000002001
+              ],
+              [
+                75.69182613645005,
+                25000.00000009095
+              ],
+              [
+                75.58511773493633,
+                25000.00000009095
+              ],
+              [
+                81.45407981788304,
+                34000.0000001055
+              ],
+              [
+                81.63192715373383,
+                183999.9999997417
+              ],
+              [
+                78.00384150244562,
+                25000.00000009095
+              ],
+              [
+                77.47029949490943,
+                32000.000000152795
+              ],
+              [
+                78.60852244433508,
+                28999.999999996362
+              ],
+              [
+                75.26499253041138,
+                182000.00000024374
+              ],
+              [
+                75.79853453794757,
+                27999.999999792635
+              ],
+              [
+                75.62068720209679,
+                39999.99999996362
+              ],
+              [
+                76.47435441415794,
+                29999.99999974534
+              ],
+              [
+                75.58511773493633,
+                179999.9999998363
+              ],
+              [
+                78.32396670698675,
+                23999.999999887223
+              ],
+              [
+                78.28839723981012,
+                31000.000000403816
+              ],
+              [
+                75.22942306323475,
+                39999.99999996362
+              ],
+              [
+                77.96827203528518,
+                160999.99999960346
+              ],
+              [
+                81.66749662089427,
+                26999.99999958891
+              ],
+              [
+                80.10244006546232,
+                23999.999999887223
+              ],
+              [
+                75.58511773493633,
+                27000.000000043656
+              ],
+              [
+                80.45813473713154,
+                267000.0000002801
+              ],
+              [
+                77.57700789642314,
+                47000.000000025466
+              ],
+              [
+                77.7192857650973,
+                45000.00000007276
+              ],
+              [
+                78.71523084583262,
+                30000.00000020009
+              ],
+              [
+                78.11054990395932,
+                268999.9999997781
+              ],
+              [
+                76.15422920964916,
+                28000.000000247383
+              ],
+              [
+                79.92459272959535,
+                28999.999999996362
+              ],
+              [
+                76.1186597424887,
+                28999.999999996362
+              ],
+              [
+                77.3635910934119,
+                262999.99999991996
+              ],
+              [
+                129.259443693534,
+                39999.99999996362
+              ],
+              [
+                118.83758981290084,
+                139999.99999987267
+              ],
+              [
+                138.61421355907854,
+                56999.999999789
+              ],
+              [
+                133.24322401649144,
+                376999.99999995274
+              ],
+              [
+                97.78046524862332,
+                61999.99999989814
+              ],
+              [
+                138.25851888739314,
+                126000.00000020373
+              ],
+              [
+                117.27253325745271,
+                74000.00000006912
+              ],
+              [
+                81.56078821939674,
+                335000.0000000364
+              ],
+              [
+                85.90026321405576,
+                61000.00000014916
+              ],
+              [
+                79.07092551753419,
+                79999.99999992724
+              ],
+              [
+                79.2487728533688,
+                54999.99999983629
+              ],
+              [
+                81.56078821939674,
+                244999.99999989086
+              ],
+              [
+                78.57295297715845,
+                47999.999999774445
+              ],
+              [
+                77.00789642171031,
+                36999.99999980719
+              ],
+              [
+                78.64409191149554,
+                29999.99999974534
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "src/lib/format.ts#stringToColor",
+            "status": "ok",
+            "schemaLiteralTagsRestored": true,
+            "compileMs": 3808.0617500000003,
+            "cold": {
+              "sharedBatchCompileWallMs": 3808.0617500000003,
+              "firstJsWallNs": 24207.99999981682,
+              "firstNativeWallNs": 14624.999999796273
+            },
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "test-shape-derived",
+            "inputProvenance": {
+              "kind": "test-shape-derived",
+              "file": "src/lib/format.test.ts",
+              "note": "Literal sizes, numbers and object keys retained; string payloads synthesized. No production frequencies."
+            },
+            "arguments": [
+              "abcdefg"
+            ],
+            "bucket": 2,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 162.5994694960241,
+              "p10": 163.23607427054486,
+              "median": 167.85145888595304,
+              "p90": 169.12466843501866,
+              "max": 176.33952254642276
+            },
+            "native": {
+              "n": 60,
+              "min": 21000.000000185537,
+              "p10": 23999.999999887223,
+              "median": 32000.000000152795,
+              "p90": 240000.00000023647,
+              "max": 323000.00000032014
+            },
+            "inputJsonBytes": 11,
+            "nsPerInputJsonByte": {
+              "js": 15.25922353508664,
+              "native": 2909.0909091047997
+            },
+            "computeIntensity": 15.25922353508664,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 12250.000001586159,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 332.93102353550285,
+              "upper": 461.0898858596771,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 18850,
+            "rawPairsNs": [
+              [
+                162.5994694960241,
+                25999.99999983993
+              ],
+              [
+                163.87267904508974,
+                39999.99999996362
+              ],
+              [
+                165.0928381962666,
+                323000.00000032014
+              ],
+              [
+                166.41909814324515,
+                25000.00000009095
+              ],
+              [
+                166.47214854110982,
+                34000.0000001055
+              ],
+              [
+                169.7612732095394,
+                25999.99999983993
+              ],
+              [
+                168.80636604773417,
+                25000.00000009095
+              ],
+              [
+                169.17771883288333,
+                22000.000000389264
+              ],
+              [
+                168.85941644562294,
+                186000.00000014916
+              ],
+              [
+                163.1830238726802,
+                39999.99999996362
+              ],
+              [
+                168.1697612732134,
+                32000.000000152795
+              ],
+              [
+                169.12466843501866,
+                22999.999999683496
+              ],
+              [
+                168.59416445625138,
+                30000.00000020009
+              ],
+              [
+                170.23872679046616,
+                26000.000000294676
+              ],
+              [
+                169.071618037154,
+                240000.00000023647
+              ],
+              [
+                168.54111405833845,
+                23999.999999887223
+              ],
+              [
+                168.7533156498695,
+                34000.0000001055
+              ],
+              [
+                167.3209549071616,
+                27999.999999792635
+              ],
+              [
+                168.38196286472032,
+                48000.00000022919
+              ],
+              [
+                168.1697612732134,
+                32000.000000152795
+              ],
+              [
+                168.01061007957114,
+                280000.0000002001
+              ],
+              [
+                168.06366047743583,
+                26000.000000294676
+              ],
+              [
+                168.06366047745996,
+                24000.00000034197
+              ],
+              [
+                168.48806366047378,
+                21000.000000185537
+              ],
+              [
+                168.11671087532463,
+                33000.00000035652
+              ],
+              [
+                167.95755968170647,
+                23999.999999887223
+              ],
+              [
+                167.1087533156547,
+                204999.99999992724
+              ],
+              [
+                168.70026525200484,
+                29999.99999974534
+              ],
+              [
+                168.96551724137643,
+                38000.000000010914
+              ],
+              [
+                167.37400530505042,
+                28999.999999996362
+              ],
+              [
+                165.09283819629073,
+                36000.00000005821
+              ],
+              [
+                168.9124668434876,
+                28999.999999996362
+              ],
+              [
+                164.45623342174585,
+                285000.0000003092
+              ],
+              [
+                167.48010610077975,
+                32000.000000152795
+              ],
+              [
+                168.48806366047378,
+                30999.99999994907
+              ],
+              [
+                167.21485411140816,
+                25000.00000009095
+              ],
+              [
+                166.84350132625897,
+                35999.99999960346
+              ],
+              [
+                163.23607427054486,
+                32999.999999901775
+              ],
+              [
+                162.75862068964224,
+                166000.00000016735
+              ],
+              [
+                166.63129973475205,
+                24000.00000034197
+              ],
+              [
+                167.85145888595304,
+                28999.999999996362
+              ],
+              [
+                166.7374005305055,
+                23000.000000138243
+              ],
+              [
+                165.46419098143988,
+                52000.000000134605
+              ],
+              [
+                164.24403183023892,
+                28999.999999996362
+              ],
+              [
+                164.56233421749928,
+                250000
+              ],
+              [
+                164.19098143235013,
+                23000.000000138243
+              ],
+              [
+                163.87267904508974,
+                34000.0000001055
+              ],
+              [
+                169.07161803712987,
+                27999.999999792635
+              ],
+              [
+                168.80636604773417,
+                36000.00000005821
+              ],
+              [
+                168.7533156498695,
+                27000.000000043656
+              ],
+              [
+                162.8647214853957,
+                248000.0000000473
+              ],
+              [
+                169.17771883288333,
+                27000.000000043656
+              ],
+              [
+                166.7374005305055,
+                38000.000000010914
+              ],
+              [
+                164.031830238732,
+                23999.999999887223
+              ],
+              [
+                162.81167108753104,
+                30999.99999994907
+              ],
+              [
+                167.0026525198771,
+                64000.00000030559
+              ],
+              [
+                162.97082228114914,
+                230000.0000000182
+              ],
+              [
+                169.0185676392411,
+                42999.999999665306
+              ],
+              [
+                167.0026525198771,
+                69999.99999970896
+              ],
+              [
+                176.33952254642276,
+                45999.99999982174
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "finalFixtureRefresh": true
+}

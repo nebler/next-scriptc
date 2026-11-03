@@ -1,0 +1,69 @@
+{
+  "status": "pass",
+  "accepted": 251,
+  "compiled": 240,
+  "compilerRefused": 11,
+  "nativeCases": 691,
+  "jsBaselineCases": 729,
+  "unknownIntensity": [
+    {
+      "repository": "gristlabs/grist-core",
+      "id": "app/common/PredicateFormula.ts#describeNode",
+      "reason": [
+        "Recursive or large input type; bounded synthesis unavailable"
+      ]
+    },
+    {
+      "repository": "gristlabs/grist-core",
+      "id": "app/common/PredicateFormula.ts#getRecColIds",
+      "reason": [
+        "Recursive or large input type; bounded synthesis unavailable"
+      ]
+    },
+    {
+      "repository": "gristlabs/grist-core",
+      "id": "app/common/PredicateFormula.ts#getChoiceColIds",
+      "reason": [
+        "Recursive or large input type; bounded synthesis unavailable"
+      ]
+    },
+    {
+      "repository": "PostHog/posthog",
+      "id": "nodejs/src/cdp/services/monitoring/hog-watcher.service.ts#sameWatcherStates",
+      "reason": [
+        "No bounded input type"
+      ]
+    }
+  ],
+  "inputSourceCases": {
+    "synthetic": 567,
+    "synthetic-fallback": 15,
+    "test-shape-derived": 106,
+    "synthetic-source-contract": 3
+  },
+  "inputSourceFunctions": {
+    "synthetic": 190,
+    "synthetic-fallback": 5,
+    "test-shape-derived": 44,
+    "synthetic-source-contract": 1
+  },
+  "nativeWorkerBatches": {
+    "b234d910ccfaffa58062927ecb68afeba4f9c7529b6a7f3660c8984a61843b21": 49
+  },
+  "minimumFreeBeforeFinalInstall": 12497154048,
+  "allNativeCasesHaveMatchingElapsedBaseline": true,
+  "pairedPolicyRecomputed": true,
+  "endpointCpuMeasured": false,
+  "cliffAuditsTriggered": 0,
+  "checks": [
+    "exact pinned DEV cohort; no held-out",
+    "successful installs with disk floor",
+    "single frozen native worker and input generator",
+    "60 CPU pairs and bootstrap settings",
+    "21 elapsed batches at minimum duration or iteration cap",
+    "identical saved arguments across CPU and elapsed passes",
+    "native lane from first 24 pairs",
+    "no accepted correctness failures",
+    "unknowns remain null"
+  ]
+}

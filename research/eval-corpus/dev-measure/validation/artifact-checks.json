@@ -1,0 +1,38 @@
+[
+  {
+    "command": [
+      "node",
+      "scripts/compress-artifacts.mjs",
+      "--check"
+    ],
+    "exit": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "node",
+      "scripts/check-research-links.mjs"
+    ],
+    "exit": 0,
+    "output": "Checked 977 relative research links; none broken.\n"
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "output": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit": 0,
+    "output": ""
+  }
+]

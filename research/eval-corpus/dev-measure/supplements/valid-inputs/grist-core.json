@@ -1,0 +1,1507 @@
+{
+  "repository": "gristlabs/grist-core",
+  "sha": "1c2c7c88252e21e17ac87b00e898794821ef3326",
+  "split": "DEV",
+  "adapterSha": "7d65d0e7554ac410d0626203f541078135ff35ce",
+  "status": "installed; synthetic valid-object probe complete",
+  "scopes": [
+    "app/server",
+    "app/common"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-stale-clones/grist-core"
+    ],
+    "exit": 0,
+    "seconds": 0.03,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/gristlabs/grist-core.git",
+      "1c2c7c88252e21e17ac87b00e898794821ef3326"
+    ],
+    "exit": 0,
+    "seconds": 4.64,
+    "output": "From https://github.com/gristlabs/grist-core\n * branch            1c2c7c88252e21e17ac87b00e898794821ef3326 -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 2.71,
+    "output": ""
+  },
+  "verifiedSha": "1c2c7c88252e21e17ac87b00e898794821ef3326",
+  "packageInventory": [
+    "package.json",
+    "sandbox/pyodide/package.json",
+    "sandbox/pyodide/worker/package.json",
+    "test/fixtures/plugins/installedPlugins/plugins/node-mini-csv/nodebox/node_modules/dependency_test/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [],
+  "freeBytesBeforeInstall": 79744331776,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "install": {
+    "command": [
+      "corepack",
+      "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--non-interactive"
+    ],
+    "exit": 0,
+    "seconds": 13.48,
+    "output": "yarn install v1.22.22\n[1/4] Resolving packages...\nwarning Resolution field \"@gristlabs/sqlite3@6.0.1-grist.1\" is incompatible with requested version \"@gristlabs/sqlite3@^5.1.4-grist.7\"\n[2/4] Fetching packages...\n[3/4] Linking dependencies...\nwarning \" > marked-katex-extension@5.1.13\" has incorrect peer dependency \"katex@>=0.16 <0.19\".\nwarning \"@storybook/addon-essentials > @storybook/addon-docs > @mdx-js/react@3.1.1\" has unmet peer dependency \"@types/react@>=16\".\n[4/4] Building fresh packages...\nwarning Ignored scripts due to flag.\nDone in 12.15s.\n"
+  },
+  "generators": [],
+  "scans": [
+    {
+      "scanRoot": "app/common",
+      "selectionFiles": [
+        "ACLPermissions.ts"
+      ],
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-stale-clones/grist-core/app/common",
+        "sourceDir": "/tmp/m1-stale-clones/grist-core/app/common",
+        "framework": "generic",
+        "fileErrors": [],
+        "counts": {
+          "files": 1,
+          "totalTopLevelFunctions": 15,
+          "exportedFunctions": 13,
+          "considered": 13,
+          "diagnosed": 10,
+          "accepted": 3,
+          "explicit": 0,
+          "silentExclusions": 2
+        },
+        "files": [
+          {
+            "file": "ACLPermissions.ts",
+            "functions": [
+              {
+                "id": "ACLPermissions.ts#ALL_PERMISSION_PROPS",
+                "file": "ACLPermissions.ts",
+                "name": "ALL_PERMISSION_PROPS",
+                "line": 64,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "ALL_PERMISSION_PROPS"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#REVERSE_ALIASES",
+                "file": "ACLPermissions.ts",
+                "name": "REVERSE_ALIASES",
+                "line": 70,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "excluded",
+                "diagnostics": [],
+                "calls": []
+              },
+              {
+                "id": "ACLPermissions.ts#emptyPermissionSet",
+                "file": "ACLPermissions.ts",
+                "name": "emptyPermissionSet",
+                "line": 76,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate emptyPermissionSet: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:76:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "emptyPermissionSet"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#parsePermissions",
+                "file": "ACLPermissions.ts",
+                "name": "parsePermissions",
+                "line": 83,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parsePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:83:8 - NSC1004: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#emptyPermissionSet"
+                ],
+                "exportNames": [
+                  "parsePermissions"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#permissionSetToText",
+                "file": "ACLPermissions.ts",
+                "name": "permissionSetToText",
+                "line": 108,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate permissionSetToText: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:108:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#REVERSE_ALIASES"
+                ],
+                "exportNames": [
+                  "permissionSetToText"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#makePartialPermissions",
+                "file": "ACLPermissions.ts",
+                "name": "makePartialPermissions",
+                "line": 127,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate makePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:127:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/grist-core/node_modules/lodash/mapValues.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "makePartialPermissions"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#combinePartialPermission",
+                "file": "ACLPermissions.ts",
+                "name": "combinePartialPermission",
+                "line": 138,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate combinePartialPermission: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:138:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "combinePartialPermission"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#mergePartialPermissions",
+                "file": "ACLPermissions.ts",
+                "name": "mergePartialPermissions",
+                "line": 151,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate mergePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:151:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#combinePartialPermission",
+                  "ACLPermissions.ts#mergePermissions"
+                ],
+                "exportNames": [
+                  "mergePartialPermissions"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#trimPermissions",
+                "file": "ACLPermissions.ts",
+                "name": "trimPermissions",
+                "line": 158,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate trimPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:158:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#emptyPermissionSet"
+                ],
+                "exportNames": [
+                  "trimPermissions"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#mergePermissions",
+                "file": "ACLPermissions.ts",
+                "name": "mergePermissions",
+                "line": 171,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate mergePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:171:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#ALL_PERMISSION_PROPS"
+                ],
+                "exportNames": [
+                  "mergePermissions"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#toMixed",
+                "file": "ACLPermissions.ts",
+                "name": "toMixed",
+                "line": 185,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate toMixed: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:185:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#mergePermissions"
+                ],
+                "exportNames": [
+                  "toMixed"
+                ]
+              },
+              {
+                "id": "ACLPermissions.ts#summarizePermissionSet",
+                "file": "ACLPermissions.ts",
+                "name": "summarizePermissionSet",
+                "line": 193,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "summarizePermissionSet"
+                ],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "d67445d8f6d3d54868af"
+              },
+              {
+                "id": "ACLPermissions.ts#summarizePermissions",
+                "file": "ACLPermissions.ts",
+                "name": "summarizePermissions",
+                "line": 212,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "summarizePermissions"
+                ],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "94ffd129b5abab920373"
+              },
+              {
+                "id": "ACLPermissions.ts#isEmpty",
+                "file": "ACLPermissions.ts",
+                "name": "isEmpty",
+                "line": 218,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "boolean"
+                },
+                "promotionId": "b49f88bea6700ebe90a9"
+              },
+              {
+                "id": "ACLPermissions.ts#splitSchemaEditPermissionSet",
+                "file": "ACLPermissions.ts",
+                "name": "splitSchemaEditPermissionSet",
+                "line": 227,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:228:77 - NSC1000: function splitSchemaEditPermissionSet: return.schemaEdit: optional properties are unsupported; use a required property with | null (type PartialPermissionSet | undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [
+                  "ACLPermissions.ts#emptyPermissionSet",
+                  "ACLPermissions.ts#isEmpty"
+                ],
+                "exportNames": [
+                  "splitSchemaEditPermissionSet"
+                ]
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:76:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:83:8 - NSC1004: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:108:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:127:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/grist-core/node_modules/lodash/mapValues.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:138:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:151:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:158:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state.",
+            "count": 1,
+            "explanation": "Native promotion requires deterministic work without observable external effects or mutation."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:171:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:185:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "return.schemaEdit: optional properties are unsupported; use a required property with | null (type PartialPermissionSet | undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "ACLPermissions.ts#emptyPermissionSet",
+            "diagnostic": "[next-scriptc] not a candidate emptyPermissionSet: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:76:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "ACLPermissions.ts#parsePermissions",
+            "diagnostic": "[next-scriptc] not a candidate parsePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:83:8 - NSC1004: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "id": "ACLPermissions.ts#permissionSetToText",
+            "diagnostic": "[next-scriptc] not a candidate permissionSetToText: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:108:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "ACLPermissions.ts#makePartialPermissions",
+            "diagnostic": "[next-scriptc] not a candidate makePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:127:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/grist-core/node_modules/lodash/mapValues.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "ACLPermissions.ts#combinePartialPermission",
+            "diagnostic": "[next-scriptc] not a candidate combinePartialPermission: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:138:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "ACLPermissions.ts#mergePartialPermissions",
+            "diagnostic": "[next-scriptc] not a candidate mergePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:151:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "ACLPermissions.ts#trimPermissions",
+            "diagnostic": "[next-scriptc] not a candidate trimPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:158:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "id": "ACLPermissions.ts#mergePermissions",
+            "diagnostic": "[next-scriptc] not a candidate mergePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:171:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "ACLPermissions.ts#toMixed",
+            "diagnostic": "[next-scriptc] not a candidate toMixed: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:185:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "ACLPermissions.ts#splitSchemaEditPermissionSet",
+            "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:228:77 - NSC1000: function splitSchemaEditPermissionSet: return.schemaEdit: optional properties are unsupported; use a required property with | null (type PartialPermissionSet | undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "ACLPermissions.ts",
+            "name": "emptyPermissionSet",
+            "message": "[next-scriptc] not a candidate emptyPermissionSet: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:76:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "parsePermissions",
+            "message": "[next-scriptc] not a candidate parsePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:83:8 - NSC1004: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: constant graph mutation or escaping reference Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "permissionSetToText",
+            "message": "[next-scriptc] not a candidate permissionSetToText: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:108:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "makePartialPermissions",
+            "message": "[next-scriptc] not a candidate makePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:127:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/grist-core/node_modules/lodash/mapValues.js: unproved module initialization ExpressionStatement Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "combinePartialPermission",
+            "message": "[next-scriptc] not a candidate combinePartialPermission: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:138:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "mergePartialPermissions",
+            "message": "[next-scriptc] not a candidate mergePartialPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:151:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "trimPermissions",
+            "message": "[next-scriptc] not a candidate trimPermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:158:8 - NSC1004: purity: argument mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "mergePermissions",
+            "message": "[next-scriptc] not a candidate mergePermissions: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:171:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "toMixed",
+            "message": "[next-scriptc] not a candidate toMixed: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:185:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "ACLPermissions.ts",
+            "name": "splitSchemaEditPermissionSet",
+            "message": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/grist-core/app/common/ACLPermissions.ts:228:77 - NSC1000: function splitSchemaEditPermissionSet: return.schemaEdit: optional properties are unsupported; use a required property with | null (type PartialPermissionSet | undefined) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "ACLPermissions.ts#isEmpty",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5959.716958,
+            "cold": {
+              "sharedBatchCompileWallMs": 5959.716958,
+              "firstJsWallNs": 34292.00000027777,
+              "firstNativeWallNs": 787666.9999986916
+            },
+            "cliffCheck": null,
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              {
+                "read": "",
+                "create": "",
+                "update": "",
+                "delete": "",
+                "schemaEdit": ""
+              }
+            ],
+            "bucket": 0,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 22.157551667430795,
+              "p10": 22.27585146277473,
+              "median": 22.50062107392606,
+              "p90": 23.245909784572415,
+              "max": 59.32734736368755
+            },
+            "native": {
+              "n": 60,
+              "min": 30999.99999994907,
+              "p10": 39999.99999996362,
+              "median": 68999.99999995998,
+              "p90": 281000.00000040384,
+              "max": 481999.9999999709
+            },
+            "inputJsonBytes": 65,
+            "nsPerInputJsonByte": {
+              "js": 0.34616340113732397,
+              "native": 1061.538461537846
+            },
+            "computeIntensity": 0.34616340113732397,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9483877612694587,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 19374.99999985448,
+              "computeWallNs": 999.9871253967285
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 4439.001110606605,
+              "upper": 5654.034403947926,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 84531,
+            "rawPairsNs": [
+              [
+                59.32734736368755,
+                261999.99999971624
+              ],
+              [
+                50.726952242372754,
+                106000.00000022192
+              ],
+              [
+                39.60677148028482,
+                481999.9999999709
+              ],
+              [
+                23.044800132494178,
+                82999.99999962893
+              ],
+              [
+                23.541659272926875,
+                73999.99999961437
+              ],
+              [
+                23.198589866442372,
+                45000.00000007276
+              ],
+              [
+                23.06846009156727,
+                330000.00000038196
+              ],
+              [
+                22.50062107392606,
+                45000.00000007276
+              ],
+              [
+                22.429641196722926,
+                50999.99999993088
+              ],
+              [
+                22.71356070554084,
+                54000.00000008731
+              ],
+              [
+                22.725390685072004,
+                273999.9999998872
+              ],
+              [
+                22.642580828337707,
+                39999.99999996362
+              ],
+              [
+                22.429641196722926,
+                110000.00000012733
+              ],
+              [
+                22.73722066460855,
+                79000.00000017826
+              ],
+              [
+                22.68990074647313,
+                280999.99999994907
+              ],
+              [
+                22.370491299050958,
+                40999.9999997126
+              ],
+              [
+                22.63075084880116,
+                81999.99999987995
+              ],
+              [
+                22.429641196717547,
+                49999.99999972715
+              ],
+              [
+                22.27585146278011,
+                281000.00000040384
+              ],
+              [
+                22.287681442311275,
+                52000.000000134605
+              ],
+              [
+                22.346831339983243,
+                92000.00000009823
+              ],
+              [
+                22.583430930665738,
+                47000.000000025466
+              ],
+              [
+                22.891010398551366,
+                425999.99999993085
+              ],
+              [
+                22.50062107392606,
+                71000.00000036744
+              ],
+              [
+                22.27585146278011,
+                67000.00000000728
+              ],
+              [
+                22.831860500884776,
+                43999.99999986903
+              ],
+              [
+                22.4651311353218,
+                289999.9999999636
+              ],
+              [
+                22.240361524175857,
+                38999.99999975989
+              ],
+              [
+                22.44147117625409,
+                77000.00000022555
+              ],
+              [
+                22.35866131951441,
+                35000.00000030923
+              ],
+              [
+                22.50062107392606,
+                222999.99999995634
+              ],
+              [
+                22.19304160604043,
+                32000.000000152795
+              ],
+              [
+                22.157551667430795,
+                36999.99999980719
+              ],
+              [
+                23.234079805041247,
+                30999.99999994907
+              ],
+              [
+                23.52982929339571,
+                224000.00000016007
+              ],
+              [
+                22.87918041901482,
+                50999.99999993088
+              ],
+              [
+                22.157551667436174,
+                57999.999999992724
+              ],
+              [
+                22.54794099206686,
+                61999.99999989814
+              ],
+              [
+                22.57160095113457,
+                271999.9999999345
+              ],
+              [
+                22.3350013604467,
+                48999.99999997817
+              ],
+              [
+                22.323171380915532,
+                81000.00000013097
+              ],
+              [
+                23.139439968770404,
+                53000.00000033833
+              ],
+              [
+                22.914670357619077,
+                240999.99999998545
+              ],
+              [
+                23.021140173426467,
+                61000.00000014916
+              ],
+              [
+                22.3350013604467,
+                72999.9999998654
+              ],
+              [
+                22.311341401378986,
+                36000.00000005821
+              ],
+              [
+                22.4651311353218,
+                195999.9999999127
+              ],
+              [
+                22.429641196717547,
+                56000.00000004002
+              ],
+              [
+                22.27585146277473,
+                68999.99999995998
+              ],
+              [
+                22.25219150370702,
+                41999.99999991633
+              ],
+              [
+                22.16938164696734,
+                266999.9999998254
+              ],
+              [
+                22.27585146278011,
+                39999.99999996362
+              ],
+              [
+                23.021140173431846,
+                85000.00000003638
+              ],
+              [
+                22.429641196717547,
+                52000.000000134605
+              ],
+              [
+                22.701730726009675,
+                342999.9999998472
+              ],
+              [
+                22.370491299045575,
+                59999.99999994543
+              ],
+              [
+                22.73722066460855,
+                70999.99999991269
+              ],
+              [
+                22.311341401378986,
+                59000.00000019645
+              ],
+              [
+                22.41781121718638,
+                186999.99999989814
+              ],
+              [
+                23.245909784572415,
+                54999.99999983629
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "ACLPermissions.ts#isEmpty",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5959.716958,
+            "cold": {
+              "sharedBatchCompileWallMs": 5959.716958,
+              "firstJsWallNs": 416.9999992882367,
+              "firstNativeWallNs": 20000.000000436557
+            },
+            "cliffCheck": null,
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              {
+                "read": "",
+                "create": "",
+                "update": "",
+                "delete": "",
+                "schemaEdit": ""
+              }
+            ],
+            "bucket": 0,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 21.883063409282382,
+              "p10": 22.278342025802868,
+              "median": 22.59676091133673,
+              "p90": 24.639033763378393,
+              "max": 26.099368652209197
+            },
+            "native": {
+              "n": 60,
+              "min": 26000.000000294676,
+              "p10": 36999.99999980719,
+              "median": 67000.00000000728,
+              "p90": 272999.99999968347,
+              "max": 419999.99999961804
+            },
+            "inputJsonBytes": 65,
+            "nsPerInputJsonByte": {
+              "js": 0.3476424755590266,
+              "native": 1030.7692307693428
+            },
+            "computeIntensity": 0.3476424755590266,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 1,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 82415.9999992844,
+              "computeWallNs": 0
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 3381.1134575302804,
+              "upper": 5270.637472283146,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 91075,
+            "rawPairsNs": [
+              [
+                22.135602525392,
+                39999.99999996362
+              ],
+              [
+                21.905023332417137,
+                45999.99999982174
+              ],
+              [
+                21.883063409282382,
+                36000.00000005821
+              ],
+              [
+                23.332418336535824,
+                28999.999999996362
+              ],
+              [
+                26.099368652209197,
+                57000.000000243745
+              ],
+              [
+                22.36618171836686,
+                67000.00000000728
+              ],
+              [
+                22.21246225637863,
+                85000.00000003638
+              ],
+              [
+                23.716716991488934,
+                50999.99999993088
+              ],
+              [
+                25.780949766675334,
+                123000.0000000473
+              ],
+              [
+                22.37716167993424,
+                100999.99999965803
+              ],
+              [
+                22.278342025802868,
+                88000.00000019281
+              ],
+              [
+                22.31128191051499,
+                47999.999999774445
+              ],
+              [
+                25.506450727420976,
+                48000.00000022919
+              ],
+              [
+                22.28932198737524,
+                28000.000000247383
+              ],
+              [
+                22.33324183365474,
+                90999.9999998945
+              ],
+              [
+                22.41010156464636,
+                57000.000000243745
+              ],
+              [
+                24.595113917098892,
+                65000.00000005457
+              ],
+              [
+                22.60774087290411,
+                38000.000000010914
+              ],
+              [
+                22.67362064232835,
+                71999.99999966167
+              ],
+              [
+                22.59676091133673,
+                36999.99999980719
+              ],
+              [
+                24.726873455942382,
+                52999.999999883585
+              ],
+              [
+                22.33324183365474,
+                26999.99999958891
+              ],
+              [
+                22.20148229481125,
+                72999.9999998654
+              ],
+              [
+                23.486137798519064,
+                72999.9999998654
+              ],
+              [
+                24.562174032391766,
+                373000.00000004726
+              ],
+              [
+                22.5638210266296,
+                76999.99999977081
+              ],
+              [
+                22.35520175679449,
+                86999.99999998909
+              ],
+              [
+                22.57480098819698,
+                35000.00000030923
+              ],
+              [
+                22.72852045018022,
+                230999.99999976717
+              ],
+              [
+                23.112819105133333,
+                48000.00000022919
+              ],
+              [
+                22.49794125720536,
+                59999.99999994543
+              ],
+              [
+                22.20148229481125,
+                40999.9999997126
+              ],
+              [
+                22.72852045017523,
+                249000.00000025102
+              ],
+              [
+                22.39912160307399,
+                63000.00000010186
+              ],
+              [
+                24.276695031565033,
+                150999.99999983993
+              ],
+              [
+                24.639033763378393,
+                90999.9999998945
+              ],
+              [
+                22.51990118034511,
+                341000.00000034925
+              ],
+              [
+                23.617897337362557,
+                71000.00000036744
+              ],
+              [
+                23.541037606370935,
+                67000.00000000728
+              ],
+              [
+                24.968432610484626,
+                83000.00000008367
+              ],
+              [
+                22.32226187208237,
+                272999.99999968347
+              ],
+              [
+                22.662640680760973,
+                52999.999999883585
+              ],
+              [
+                22.57480098819698,
+                65000.00000005457
+              ],
+              [
+                22.43206148778611,
+                26000.000000294676
+              ],
+              [
+                22.39912160307399,
+                340999.9999998945
+              ],
+              [
+                22.98105956628984,
+                68000.000000211
+              ],
+              [
+                22.36618171836686,
+                68999.99999995998
+              ],
+              [
+                22.95909964315009,
+                66000.0000002583
+              ],
+              [
+                22.684600603900723,
+                419999.99999961804
+              ],
+              [
+                22.44304144935349,
+                57999.999999992724
+              ],
+              [
+                22.541861103489854,
+                72999.9999998654
+              ],
+              [
+                22.56382102662461,
+                48999.99999997817
+              ],
+              [
+                22.57480098819698,
+                275999.9999998399
+              ],
+              [
+                22.62970079604885,
+                57000.000000243745
+              ],
+              [
+                22.475981334065608,
+                72999.9999998654
+              ],
+              [
+                23.01399945100196,
+                48999.99999997817
+              ],
+              [
+                22.882239912158468,
+                214000.00000039654
+              ],
+              [
+                22.98105956628984,
+                51999.99999967986
+              ],
+              [
+                23.00301948942959,
+                72000.00000011642
+              ],
+              [
+                22.882239912158468,
+                70000.00000016371
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          },
+          {
+            "id": "ACLPermissions.ts#isEmpty",
+            "status": "ok",
+            "schemaLiteralTagsRestored": false,
+            "compileMs": 5959.716958,
+            "cold": {
+              "sharedBatchCompileWallMs": 5959.716958,
+              "firstJsWallNs": 959.000000875676,
+              "firstNativeWallNs": 25750.000000698492
+            },
+            "cliffCheck": null,
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "inputProvenance": {
+              "kind": "synthetic"
+            },
+            "arguments": [
+              {
+                "read": "",
+                "create": "",
+                "update": "",
+                "delete": "",
+                "schemaEdit": ""
+              }
+            ],
+            "bucket": 0,
+            "metric": "process-cpu",
+            "js": {
+              "n": 60,
+              "min": 22.183916660417573,
+              "p10": 22.28027537178543,
+              "median": 22.644297170263506,
+              "p90": 25.385167182365226,
+              "max": 25.888373786149184
+            },
+            "native": {
+              "n": 60,
+              "min": 21000.000000185537,
+              "p10": 43000.00000012005,
+              "median": 68000.000000211,
+              "p90": 119999.99999989086,
+              "max": 311000.0000001491
+            },
+            "inputJsonBytes": 65,
+            "nsPerInputJsonByte": {
+              "js": 0.34837380261943857,
+              "native": 1046.1538461570924
+            },
+            "computeIntensity": 0.34837380261943857,
+            "computeIntensityUnit": "JS ns per input JSON byte",
+            "boundaryShare": 0.9796784729105718,
+            "boundaryStages": {
+              "n": 10,
+              "totalWallNs": 49209.00000070105,
+              "computeWallNs": 1000.0020265579224
+            },
+            "verdict": "JS",
+            "policy": {
+              "samples": 24,
+              "required": 19,
+              "coldSamples": 2,
+              "promoteRatio": 0.9,
+              "demoteRatio": 1.05,
+              "recheckEvery": 200
+            },
+            "protocolCI": {
+              "lower": 2859.677466386878,
+              "upper": 3954.707832768213,
+              "resamples": 2000,
+              "block": 5,
+              "seed": 1
+            },
+            "protocolPass": false,
+            "screenPass": false,
+            "jsIterationsPerBatch": 93401,
+            "rawPairsNs": [
+              [
+                22.419460177086446,
+                61000.00000014916
+              ],
+              [
+                24.742775773280254,
+                45999.99999982174
+              ],
+              [
+                22.55864498238746,
+                65000.00000005457
+              ],
+              [
+                23.457992955110313,
+                43000.00000012005
+              ],
+              [
+                23.896960417982367,
+                86999.99999998909
+              ],
+              [
+                23.2010363914773,
+                68999.99999995998
+              ],
+              [
+                25.695656363423204,
+                75000.00000027285
+              ],
+              [
+                22.54793845890539,
+                61000.00000014916
+              ],
+              [
+                23.147503774047465,
+                80000.00000038199
+              ],
+              [
+                22.58005802935647,
+                43999.99999986903
+              ],
+              [
+                24.86054753161226,
+                94999.99999979991
+              ],
+              [
+                22.580058029361336,
+                61000.00000014916
+              ],
+              [
+                22.772775452082445,
+                110000.00000012733
+              ],
+              [
+                22.419460177086446,
+                37000.000000261934
+              ],
+              [
+                25.031851907369223,
+                69999.99999970896
+              ],
+              [
+                22.751362405113436,
+                48000.00000022919
+              ],
+              [
+                22.719242834657482,
+                60999.99999969441
+              ],
+              [
+                22.47299279451141,
+                41999.99999991633
+              ],
+              [
+                24.7106562028243,
+                59000.00000019645
+              ],
+              [
+                22.879840686932376,
+                48999.99999997817
+              ],
+              [
+                22.655003693750448,
+                38000.000000010914
+              ],
+              [
+                22.312394942241383,
+                48999.99999997817
+              ],
+              [
+                24.67853663237322,
+                68000.000000211
+              ],
+              [
+                22.826308069507412,
+                41999.99999991633
+              ],
+              [
+                23.243862485410453,
+                61000.00000014916
+              ],
+              [
+                22.25886232481642,
+                59000.00000019645
+              ],
+              [
+                24.04685174677032,
+                50999.99999993088
+              ],
+              [
+                22.644297170263506,
+                48000.00000022919
+              ],
+              [
+                22.2909818952675,
+                61000.00000014916
+              ],
+              [
+                22.408753653599504,
+                32999.999999901775
+              ],
+              [
+                24.175330028584394,
+                57999.999999992724
+              ],
+              [
+                22.537231935418443,
+                51999.99999967986
+              ],
+              [
+                22.2909818952675,
+                57999.999999992724
+              ],
+              [
+                22.505112364967363,
+                61999.99999989814
+              ],
+              [
+                25.203156283121324,
+                125999.99999974898
+              ],
+              [
+                22.28027537178543,
+                67000.00000000728
+              ],
+              [
+                22.30168841875444,
+                150999.99999983993
+              ],
+              [
+                22.665710217237386,
+                103000.00000006548
+              ],
+              [
+                25.72777593387429,
+                94999.99999979991
+              ],
+              [
+                22.30168841875444,
+                58999.9999997417
+              ],
+              [
+                22.28027537178056,
+                103000.00000006548
+              ],
+              [
+                22.226742754360465,
+                84000.0000002874
+              ],
+              [
+                25.52435198766624,
+                79999.99999992724
+              ],
+              [
+                23.447286431623372,
+                93999.99999959618
+              ],
+              [
+                22.183916660417573,
+                96000.00000000364
+              ],
+              [
+                22.36592755966148,
+                61999.99999989814
+              ],
+              [
+                25.824134645242147,
+                88000.00000019281
+              ],
+              [
+                22.772775452082445,
+                99999.99999990905
+              ],
+              [
+                22.30168841875444,
+                135999.99999996726
+              ],
+              [
+                22.38734060663536,
+                96000.00000000364
+              ],
+              [
+                25.888373786149184,
+                76999.99999977081
+              ],
+              [
+                22.751362405113436,
+                106999.9999999709
+              ],
+              [
+                22.344514512692466,
+                119999.99999989086
+              ],
+              [
+                22.312394942236512,
+                99999.99999990905
+              ],
+              [
+                25.385167182365226,
+                167000.00000037107
+              ],
+              [
+                22.44087322405546,
+                106000.00000022192
+              ],
+              [
+                22.25886232481155,
+                70999.99999991269
+              ],
+              [
+                22.333807989205525,
+                21000.000000185537
+              ],
+              [
+                22.419460177086446,
+                311000.0000001491
+              ],
+              [
+                22.205329707391453,
+                71999.99999966167
+              ]
+            ],
+            "notes": [
+              "Native includes checked argument encoding, native execution and result decoding. JS uses the extracted original closure with raw internal calls.",
+              "Decision uses an uninstrumented addon and dispatcher paired thresholds; stage share uses a separate instrumented wall probe.",
+              "Prediction excludes wrapper overhead, training quotas, traffic distribution, periodic rechecks and host deployment costs. It is not an observed promotion or application saving."
+            ]
+          }
+        ]
+      },
+      "workerSha256": "b234d910ccfaffa58062927ecb68afeba4f9c7529b6a7f3660c8984a61843b21",
+      "inputGeneratorSha256": "4c2a728fcfb6f2128a8b799a54d9a6c4365bbf3efb62a79f93db0e4b1247b440",
+      "reason": "Reject unrelated same-name array fixtures; replay the accepted signature with type-generated permission objects."
+    }
+  ]
+}

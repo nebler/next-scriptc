@@ -1,0 +1,3482 @@
+{
+  "repository": "evidence-dev/evidence",
+  "sha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "split": "DEV",
+  "adapterSha": "7d65d0e7554ac410d0626203f541078135ff35ce",
+  "status": "installed; B1 accepted source files measured",
+  "scopes": [
+    "core/src/connection",
+    "core/src/connectors",
+    "core/src/metrics",
+    "core/src/sql-dialect"
+  ],
+  "init": {
+    "command": [
+      "git",
+      "init",
+      "-q",
+      "/tmp/m1-stale-clones/evidence"
+    ],
+    "exit": 0,
+    "seconds": 0.02,
+    "output": ""
+  },
+  "fetch": {
+    "command": [
+      "git",
+      "fetch",
+      "--depth=1",
+      "https://github.com/evidence-dev/evidence.git",
+      "590143b9ecd2993b0907d4ba85ec5920c097776f"
+    ],
+    "exit": 0,
+    "seconds": 3.89,
+    "output": "From https://github.com/evidence-dev/evidence\n * branch            590143b9ecd2993b0907d4ba85ec5920c097776f -> FETCH_HEAD\n"
+  },
+  "checkout": {
+    "command": [
+      "git",
+      "checkout",
+      "-q",
+      "FETCH_HEAD"
+    ],
+    "exit": 0,
+    "seconds": 0.33,
+    "output": ""
+  },
+  "verifiedSha": "590143b9ecd2993b0907d4ba85ec5920c097776f",
+  "packageInventory": [
+    "package.json",
+    "core/package.json",
+    "cli/package.json"
+  ],
+  "scopePartitionOmissions": [],
+  "missingPlannedScopes": [],
+  "excludedFiles": [
+    "core/src/connection/connection-wiring.svelte.test.ts",
+    "core/src/connection/multi-connection-registry.test.ts",
+    "core/src/connection/connection.test.ts",
+    "core/src/connection/enforcement.test.ts",
+    "core/src/connectors/enrich-warehouse-error.test.ts",
+    "core/src/connectors/normalize-sparkline-rows.test.ts",
+    "core/src/connectors/schema-allowlist.test.ts",
+    "core/src/connectors/connection-placeholder.test.ts",
+    "core/src/connectors/clickhouse/resolve.test.ts",
+    "core/src/connectors/clickhouse/connection-schema.test.ts",
+    "core/src/connectors/databricks/type-mapping.test.ts",
+    "core/src/connectors/databricks/resolve.test.ts",
+    "core/src/connectors/databricks/connection-schema.test.ts",
+    "core/src/connectors/databricks/normalize-date-rows.test.ts",
+    "core/src/connectors/databricks/normalize-numeric-rows.test.ts",
+    "core/src/connectors/motherduck/type-mapping.test.ts",
+    "core/src/connectors/bigquery/type-mapping.test.ts",
+    "core/src/connectors/bigquery/normalize-date-rows.test.ts",
+    "core/src/connectors/bigquery/client-options.test.ts",
+    "core/src/connectors/bigquery/normalize-numeric-rows.test.ts",
+    "core/src/connectors/snowflake/decrypt-pem.test.ts",
+    "core/src/connectors/snowflake/type-mapping.test.ts",
+    "core/src/connectors/snowflake/connection-options.test.ts",
+    "core/src/connectors/snowflake/connection-schema.test.ts",
+    "core/src/connectors/snowflake/normalize-date-rows.test.ts",
+    "core/src/connectors/redshift/type-mapping.test.ts",
+    "core/src/connectors/postgres/type-mapping.test.ts",
+    "core/src/connectors/postgres/connection-options.test.ts",
+    "core/src/connectors/postgres/pg-type-parsers.test.ts",
+    "core/src/connectors/postgres/normalize-date-rows.test.ts",
+    "core/src/connectors/postgres/normalize-numeric-rows.test.ts",
+    "core/src/connectors/sqlserver/resolve.test.ts",
+    "core/src/connectors/fabric/resolve.test.ts",
+    "core/src/connectors/mssql/type-mapping.test.ts",
+    "core/src/connectors/mssql/normalize-date-rows.test.ts",
+    "core/src/metrics/resolve-metric.test.ts",
+    "core/src/metrics/metrics-catalog.test.ts",
+    "core/src/metrics/metric-schema.test.ts",
+    "core/src/metrics/compile-metric.test.ts"
+  ],
+  "freeBytesBeforeInstall": 84156510208,
+  "packageManager": "pnpm@9.15.0",
+  "install": {
+    "command": [
+      "corepack",
+      "pnpm@9.15.0",
+      "install",
+      "--ignore-scripts",
+      "--frozen-lockfile",
+      "--store-dir",
+      "/tmp/m1-stale-clones/store"
+    ],
+    "exit": 0,
+    "seconds": 17.39,
+    "output": "Scope: all 3 workspace projects\n(node:34608) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n(Use `node --trace-deprecation ...` to show where the warning was created)\nLockfile is up to date, resolution step is skipped\nProgress: resolved 1, reused 0, downloaded 0, added 0\nPackages: +956\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nProgress: resolved 956, reused 952, downloaded 0, added 41\nProgress: resolved 956, reused 952, downloaded 0, added 157\nProgress: resolved 956, reused 952, downloaded 0, added 321\nProgress: resolved 956, reused 952, downloaded 0, added 370\nProgress: resolved 956, reused 952, downloaded 0, added 429\nProgress: resolved 956, reused 952, downloaded 0, added 531\nProgress: resolved 956, reused 952, downloaded 0, added 666\nProgress: resolved 956, reused 952, downloaded 0, added 721\nProgress: resolved 956, reused 952, downloaded 0, added 769\nProgress: resolved 956, reused 952, downloaded 0, added 807\nProgress: resolved 956, reused 952, downloaded 0, added 829\nProgress: resolved 956, reused 952, downloaded 0, added 850\nProgress: resolved 956, reused 952, downloaded 0, added 915\nProgress: resolved 956, reused 952, downloaded 0, added 948\nProgress: resolved 956, reused 952, downloaded 0, added 951\nProgress: resolved 956, reused 952, downloaded 0, added 952\nProgress: resolved 956, reused 952, downloaded 0, added 956, done\n\ndevDependencies:\n+ @vitest/coverage-v8 4.1.2\n+ vitest 4.1.2\n\nDone in 17.3s\n"
+  },
+  "generators": [],
+  "cohort": [
+    {
+      "id": "core/src/metrics/metric-schema.ts#canonicalCycle",
+      "scanRoot": "core",
+      "function": {
+        "id": "src/metrics/metric-schema.ts#canonicalCycle",
+        "file": "src/metrics/metric-schema.ts",
+        "name": "canonicalCycle",
+        "line": 166,
+        "exported": false,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "boundary": {
+          "params": [
+            "json"
+          ],
+          "result": "json"
+        },
+        "promotionId": "c7a398620a72a677561e"
+      }
+    },
+    {
+      "id": "core/src/sql-dialect/common.ts#wrapWithLimit",
+      "scanRoot": "core",
+      "function": {
+        "id": "src/sql-dialect/common.ts#wrapWithLimit",
+        "file": "src/sql-dialect/common.ts",
+        "name": "wrapWithLimit",
+        "line": 364,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [
+          "src/sql-dialect/common.ts#pickUniqueWrapName"
+        ],
+        "exportNames": [
+          "wrapWithLimit"
+        ],
+        "boundary": {
+          "params": [
+            "string",
+            "number"
+          ],
+          "result": "string"
+        },
+        "promotionId": "f97b3cf4c19caf61628f"
+      }
+    },
+    {
+      "id": "core/src/sql-dialect/common.ts#pickUniqueWrapName",
+      "scanRoot": "core",
+      "function": {
+        "id": "src/sql-dialect/common.ts#pickUniqueWrapName",
+        "file": "src/sql-dialect/common.ts",
+        "name": "pickUniqueWrapName",
+        "line": 378,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "pickUniqueWrapName"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "c3f8ae5ee3e14377bc08"
+      }
+    },
+    {
+      "id": "core/src/sql-dialect/common.ts#stripLeadingIgnorable",
+      "scanRoot": "core",
+      "function": {
+        "id": "src/sql-dialect/common.ts#stripLeadingIgnorable",
+        "file": "src/sql-dialect/common.ts",
+        "name": "stripLeadingIgnorable",
+        "line": 400,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "stripLeadingIgnorable"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "string"
+        },
+        "promotionId": "0352402fb85fddf2762d"
+      }
+    },
+    {
+      "id": "core/src/sql-dialect/common.ts#scanTopLevelClauses",
+      "scanRoot": "core",
+      "function": {
+        "id": "src/sql-dialect/common.ts#scanTopLevelClauses",
+        "file": "src/sql-dialect/common.ts",
+        "name": "scanTopLevelClauses",
+        "line": 472,
+        "exported": true,
+        "async": false,
+        "explicit": false,
+        "status": "accepted",
+        "diagnostics": [],
+        "calls": [],
+        "exportNames": [
+          "scanTopLevelClauses"
+        ],
+        "boundary": {
+          "params": [
+            "string"
+          ],
+          "result": "json"
+        },
+        "promotionId": "765bc22e95b65eb1c3b9"
+      }
+    }
+  ],
+  "scans": [
+    {
+      "scanRoot": "core",
+      "selectionFiles": [
+        "src/metrics/metric-schema.ts",
+        "src/sql-dialect/common.ts"
+      ],
+      "process": {
+        "exit": 0,
+        "seconds": 15.075242042541504,
+        "output": "  src/sql-dialect/common.ts#scanTopLevelClauses\nTop blockers:\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:78:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:82:1 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:87:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:92:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.\n    The existing extractor could not close and validate this function; see the exact diagnostic.\n  1 \u00d7 [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:97:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.\n    The existing extractor could not close and validate this function; see the exact diagnostic.\nNearest misses (one emitted diagnostic, further blockers may exist): src/metrics/metric-schema.ts#metricRefRegex, src/metrics/metric-schema.ts#crossViewRefRegex, src/metrics/metric-schema.ts#extractMetricRefs, src/metrics/metric-schema.ts#extractCrossViewRefs, src/metrics/metric-schema.ts#isCalculatedMetric, src/metrics/metric-schema.ts#findAllMetricCycles, src/metrics/metric-schema.ts#findCommentGotcha, src/metrics/metric-schema.ts#parseMetricsView, src/sql-dialect/common.ts#isSimpleIdentifier, src/sql-dialect/common.ts#escapeBackslashStringLiteral, src/sql-dialect/common.ts#escapeRedshiftStringLiteral, src/sql-dialect/common.ts#escapeAnsiStringLiteral, src/sql-dialect/common.ts#escapeSqlValue, src/sql-dialect/common.ts#defaultStringLiteralEscapesBackslash\nMeasured src/metrics/metric-schema.ts#canonicalCycle: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/metrics/metric-schema.ts#canonicalCycle: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/metrics/metric-schema.ts#canonicalCycle: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#wrapWithLimit: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#wrapWithLimit: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#wrapWithLimit: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#pickUniqueWrapName: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#pickUniqueWrapName: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#pickUniqueWrapName: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#stripLeadingIgnorable: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#stripLeadingIgnorable: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#stripLeadingIgnorable: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#scanTopLevelClauses: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#scanTopLevelClauses: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nMeasured src/sql-dialect/common.ts#scanTopLevelClauses: js-baseline \u2014 Independent JS elapsed/process-CPU baseline; no native execution in this pass.\nNote: Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.\nNote: Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.\nNote: Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.\nNote: Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.\nNote: Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions.\n"
+      },
+      "workerSha256": "e3a8ad498b20168a78f16fd48290f2c8854c8bad0b02659d00487903fddbcd88",
+      "driverSha256": "4cb372946a5f420e26f6557048173da77bb883185b5200d7fef2d41c8d17f1a9",
+      "inputGeneratorSha256": "4c2a728fcfb6f2128a8b799a54d9a6c4365bbf3efb62a79f93db0e4b1247b440",
+      "inputEvidenceFiles": [
+        "core/src/sql-dialect.test.ts"
+      ],
+      "report": {
+        "version": 1,
+        "root": "/tmp/m1-stale-clones/evidence/core",
+        "sourceDir": "/tmp/m1-stale-clones/evidence/core",
+        "framework": "vite",
+        "fileErrors": [],
+        "counts": {
+          "files": 2,
+          "totalTopLevelFunctions": 19,
+          "exportedFunctions": 15,
+          "considered": 19,
+          "diagnosed": 14,
+          "accepted": 5,
+          "explicit": 0,
+          "silentExclusions": 0
+        },
+        "files": [
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "functions": [
+              {
+                "id": "src/metrics/metric-schema.ts#metricRefRegex",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "metricRefRegex",
+                "line": 78,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate metricRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:78:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "metricRefRegex"
+                ]
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#crossViewRefRegex",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "crossViewRefRegex",
+                "line": 82,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate crossViewRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:82:1 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#extractMetricRefs",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "extractMetricRefs",
+                "line": 87,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate extractMetricRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:87:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "src/metrics/metric-schema.ts#metricRefRegex"
+                ],
+                "exportNames": [
+                  "extractMetricRefs"
+                ]
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#extractCrossViewRefs",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "extractCrossViewRefs",
+                "line": 92,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate extractCrossViewRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:92:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "src/metrics/metric-schema.ts#crossViewRefRegex"
+                ],
+                "exportNames": [
+                  "extractCrossViewRefs"
+                ]
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#isCalculatedMetric",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "isCalculatedMetric",
+                "line": 97,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate isCalculatedMetric: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:97:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "src/metrics/metric-schema.ts#extractMetricRefs"
+                ],
+                "exportNames": [
+                  "isCalculatedMetric"
+                ]
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#findAllMetricCycles",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "findAllMetricCycles",
+                "line": 106,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate findAllMetricCycles: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:106:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+                ],
+                "calls": [
+                  "src/metrics/metric-schema.ts#canonicalCycle"
+                ]
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#findCommentGotcha",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "findCommentGotcha",
+                "line": 145,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:149:23 - NSC1000: strict closure: TS7010: 'findCommentGotcha', which lacks return-type annotation, implicitly has an 'any' return type. Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": []
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#canonicalCycle",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "canonicalCycle",
+                "line": 166,
+                "exported": false,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "boundary": {
+                  "params": [
+                    "json"
+                  ],
+                  "result": "json"
+                },
+                "promotionId": "24197ea6796c5ac3641e"
+              },
+              {
+                "id": "src/metrics/metric-schema.ts#parseMetricsView",
+                "file": "src/metrics/metric-schema.ts",
+                "name": "parseMetricsView",
+                "line": 256,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate parseMetricsView: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:256:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/evidence/node_modules/.pnpm/js-yaml@4.3.2/node_modules/js-yaml/dist/js-yaml.mjs: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [
+                  "src/metrics/metric-schema.ts#extractCrossViewRefs",
+                  "src/metrics/metric-schema.ts#extractMetricRefs",
+                  "src/metrics/metric-schema.ts#findAllMetricCycles",
+                  "src/metrics/metric-schema.ts#findCommentGotcha"
+                ],
+                "exportNames": [
+                  "parseMetricsView"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "functions": [
+              {
+                "id": "src/sql-dialect/common.ts#isSimpleIdentifier",
+                "file": "src/sql-dialect/common.ts",
+                "name": "isSimpleIdentifier",
+                "line": 20,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate isSimpleIdentifier: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:20:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "isSimpleIdentifier",
+                  "isSimpleIdentifier"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#escapeBackslashStringLiteral",
+                "file": "src/sql-dialect/common.ts",
+                "name": "escapeBackslashStringLiteral",
+                "line": 28,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate escapeBackslashStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:28:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "escapeBackslashStringLiteral"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#escapeRedshiftStringLiteral",
+                "file": "src/sql-dialect/common.ts",
+                "name": "escapeRedshiftStringLiteral",
+                "line": 37,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate escapeRedshiftStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "escapeRedshiftStringLiteral"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#escapeAnsiStringLiteral",
+                "file": "src/sql-dialect/common.ts",
+                "name": "escapeAnsiStringLiteral",
+                "line": 45,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate escapeAnsiStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:45:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "escapeAnsiStringLiteral"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#escapeSqlValue",
+                "file": "src/sql-dialect/common.ts",
+                "name": "escapeSqlValue",
+                "line": 53,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate escapeSqlValue: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:162:2 - NSC1001: function escapeSqlValue: unsupported reference dateGrain Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+                ],
+                "calls": [
+                  "src/sql-dialect/common.ts#escapeBackslashStringLiteral"
+                ],
+                "exportNames": [
+                  "escapeSqlValue",
+                  "escapeSqlValue"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#defaultStringLiteralEscapesBackslash",
+                "file": "src/sql-dialect/common.ts",
+                "name": "defaultStringLiteralEscapesBackslash",
+                "line": 67,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "rejected",
+                "diagnostics": [
+                  "[next-scriptc] not a candidate defaultStringLiteralEscapesBackslash: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:67:17 - NSC1000: function defaultStringLiteralEscapesBackslash: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+                ],
+                "calls": [],
+                "exportNames": [
+                  "defaultStringLiteralEscapesBackslash"
+                ]
+              },
+              {
+                "id": "src/sql-dialect/common.ts#wrapWithLimit",
+                "file": "src/sql-dialect/common.ts",
+                "name": "wrapWithLimit",
+                "line": 364,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [
+                  "src/sql-dialect/common.ts#pickUniqueWrapName"
+                ],
+                "exportNames": [
+                  "wrapWithLimit"
+                ],
+                "boundary": {
+                  "params": [
+                    "string",
+                    "number"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "2503fdb41d9314c5b769"
+              },
+              {
+                "id": "src/sql-dialect/common.ts#pickUniqueWrapName",
+                "file": "src/sql-dialect/common.ts",
+                "name": "pickUniqueWrapName",
+                "line": 378,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "pickUniqueWrapName"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "e76e6a49461189b8c8d7"
+              },
+              {
+                "id": "src/sql-dialect/common.ts#stripLeadingIgnorable",
+                "file": "src/sql-dialect/common.ts",
+                "name": "stripLeadingIgnorable",
+                "line": 400,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "stripLeadingIgnorable"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "string"
+                },
+                "promotionId": "e6902f0593d2c5c90a22"
+              },
+              {
+                "id": "src/sql-dialect/common.ts#scanTopLevelClauses",
+                "file": "src/sql-dialect/common.ts",
+                "name": "scanTopLevelClauses",
+                "line": 472,
+                "exported": true,
+                "async": false,
+                "explicit": false,
+                "status": "accepted",
+                "diagnostics": [],
+                "calls": [],
+                "exportNames": [
+                  "scanTopLevelClauses"
+                ],
+                "boundary": {
+                  "params": [
+                    "string"
+                  ],
+                  "result": "json"
+                },
+                "promotionId": "f34a6cf5206463fa416d"
+              }
+            ]
+          }
+        ],
+        "routes": [],
+        "blockers": [
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:78:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:82:1 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:87:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:92:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:97:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:106:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state.",
+            "count": 1,
+            "explanation": "Native promotion requires deterministic work without observable external effects or mutation."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:256:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/evidence/node_modules/.pnpm/js-yaml@4.3.2/node_modules/js-yaml/dist/js-yaml.mjs: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:20:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS.",
+            "count": 1,
+            "explanation": "The existing extractor could not close and validate this function; see the exact diagnostic."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:28:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:45:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\".",
+            "count": 1,
+            "explanation": "No substantial compute pattern was found; small calls often cost more to cross the boundary."
+          },
+          {
+            "diagnostic": "unsupported reference dateGrain Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments.",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          },
+          {
+            "diagnostic": "[next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:149:23 - NSC1000: strict closure: TS7010: 'findCommentGotcha', which lacks return-type annotation, implicitly has an 'any' return type. Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+            "count": 1,
+            "explanation": "The existing boundary/type checker could not prove a supported argument or result contract."
+          }
+        ],
+        "nearestMisses": [
+          {
+            "id": "src/metrics/metric-schema.ts#metricRefRegex",
+            "diagnostic": "[next-scriptc] not a candidate metricRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:78:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#crossViewRefRegex",
+            "diagnostic": "[next-scriptc] not a candidate crossViewRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:82:1 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#extractMetricRefs",
+            "diagnostic": "[next-scriptc] not a candidate extractMetricRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:87:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#extractCrossViewRefs",
+            "diagnostic": "[next-scriptc] not a candidate extractCrossViewRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:92:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#isCalculatedMetric",
+            "diagnostic": "[next-scriptc] not a candidate isCalculatedMetric: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:97:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#findAllMetricCycles",
+            "diagnostic": "[next-scriptc] not a candidate findAllMetricCycles: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:106:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#findCommentGotcha",
+            "diagnostic": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:149:23 - NSC1000: strict closure: TS7010: 'findCommentGotcha', which lacks return-type annotation, implicitly has an 'any' return type. Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#parseMetricsView",
+            "diagnostic": "[next-scriptc] not a candidate parseMetricsView: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:256:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/evidence/node_modules/.pnpm/js-yaml@4.3.2/node_modules/js-yaml/dist/js-yaml.mjs: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#isSimpleIdentifier",
+            "diagnostic": "[next-scriptc] not a candidate isSimpleIdentifier: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:20:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#escapeBackslashStringLiteral",
+            "diagnostic": "[next-scriptc] not a candidate escapeBackslashStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:28:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#escapeRedshiftStringLiteral",
+            "diagnostic": "[next-scriptc] not a candidate escapeRedshiftStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#escapeAnsiStringLiteral",
+            "diagnostic": "[next-scriptc] not a candidate escapeAnsiStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:45:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#escapeSqlValue",
+            "diagnostic": "[next-scriptc] not a candidate escapeSqlValue: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:162:2 - NSC1001: function escapeSqlValue: unsupported reference dateGrain Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "id": "src/sql-dialect/common.ts#defaultStringLiteralEscapesBackslash",
+            "diagnostic": "[next-scriptc] not a candidate defaultStringLiteralEscapesBackslash: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:67:17 - NSC1000: function defaultStringLiteralEscapesBackslash: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "diagnostics": [
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "metricRefRegex",
+            "message": "[next-scriptc] not a candidate metricRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:78:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "crossViewRefRegex",
+            "message": "[next-scriptc] not a candidate crossViewRefRegex: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:82:1 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "extractMetricRefs",
+            "message": "[next-scriptc] not a candidate extractMetricRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:87:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "extractCrossViewRefs",
+            "message": "[next-scriptc] not a candidate extractCrossViewRefs: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:92:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "isCalculatedMetric",
+            "message": "[next-scriptc] not a candidate isCalculatedMetric: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:97:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "findAllMetricCycles",
+            "message": "[next-scriptc] not a candidate findAllMetricCycles: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:106:1 - NSC1004: purity: nonlocal mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "parseMetricsView",
+            "message": "[next-scriptc] not a candidate parseMetricsView: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:256:8 - NSC1003: dependency closure: /private/tmp/m1-stale-clones/evidence/node_modules/.pnpm/js-yaml@4.3.2/node_modules/js-yaml/dist/js-yaml.mjs: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "isSimpleIdentifier",
+            "message": "[next-scriptc] not a candidate isSimpleIdentifier: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:20:8 - NSC1003: dependency closure: /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts: unproved module initialization VariableDeclaration Hint: Move module setup into a declaration initializer or keep this module in JS."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "escapeBackslashStringLiteral",
+            "message": "[next-scriptc] not a candidate escapeBackslashStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:28:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "escapeRedshiftStringLiteral",
+            "message": "[next-scriptc] not a candidate escapeRedshiftStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:37:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "escapeAnsiStringLiteral",
+            "message": "[next-scriptc] not a candidate escapeAnsiStringLiteral: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:45:8 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "escapeSqlValue",
+            "message": "[next-scriptc] not a candidate escapeSqlValue: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:162:2 - NSC1001: function escapeSqlValue: unsupported reference dateGrain Hint: Use a supported local helper; replace class parameter properties with explicit fields and assignments."
+          },
+          {
+            "file": "src/sql-dialect/common.ts",
+            "name": "defaultStringLiteralEscapesBackslash",
+            "message": "[next-scriptc] not a candidate defaultStringLiteralEscapesBackslash: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/sql-dialect/common.ts:67:17 - NSC1000: function defaultStringLiteralEscapesBackslash: parameters must be identifiers or JSON destructuring with literal defaults (rest unsupported) Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          },
+          {
+            "file": "src/metrics/metric-schema.ts",
+            "name": "findCommentGotcha",
+            "message": "[next-scriptc] not a candidate: [next-scriptc] /tmp/m1-stale-clones/evidence/core/src/metrics/metric-schema.ts:149:23 - NSC1000: strict closure: TS7010: 'findCommentGotcha', which lacks return-type annotation, implicitly has an 'any' return type. Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+          }
+        ],
+        "limitations": [
+          "Discovery diagnostics are not a complete denominator. Async/generator handlers, directives, unused private functions and other early exclusions may be silent.",
+          "Nearest misses have exactly one emitted diagnostic; discovery stops at the first failure, so fixing it may reveal others.",
+          "Reachability is a conservative identifier-reference graph through local TypeScript-resolved symbols, not a request trace. Dynamic imports, framework magic, namespace property calls and dependency code may be missing; references may overcount calls.",
+          "Static acceptance does not guarantee stock compiler acceptance or a speedup. No application config files are executed. Wrapped top-level callbacks count as one callable binding.",
+          "Runtime state is process-local (dispatcher.snapshot()). No running app is contacted. Capture snapshots in the app for observed decisions."
+        ],
+        "measurements": [
+          {
+            "id": "src/metrics/metric-schema.ts#canonicalCycle",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "arguments": [
+              [
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx",
+                "xxxxxxxx"
+              ]
+            ],
+            "inputJsonBytes": 91,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 82.0874668157049,
+              "p10": 83.31004610870477,
+              "median": 87.64146988961855,
+              "p90": 440.4953629144222,
+              "max": 2155.642717061865
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 82.03363839597765,
+              "p10": 83.27804946206615,
+              "median": 85.25454100880522,
+              "p90": 124.4261676014886,
+              "max": 551.7619896594748
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.963093075710094,
+              "wall": 0.9368630880088485
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 28628,
+            "rawBatches": [
+              {
+                "cpuNs": 2155.642717061865,
+                "elapsedNs": 452.1900517026227,
+                "iterations": 5609,
+                "totalWallNs": 2536334.0000000107
+              },
+              {
+                "cpuNs": 1697.6288108397218,
+                "elapsedNs": 551.7619896594748,
+                "iterations": 5609,
+                "totalWallNs": 3094832.999999994
+              },
+              {
+                "cpuNs": 440.4953629144222,
+                "elapsedNs": 124.4261676014886,
+                "iterations": 18007,
+                "totalWallNs": 2240542.000000005
+              },
+              {
+                "cpuNs": 87.04764566159005,
+                "elapsedNs": 86.99088305155692,
+                "iterations": 28628,
+                "totalWallNs": 2490374.9999999716
+              },
+              {
+                "cpuNs": 115.76079362861535,
+                "elapsedNs": 95.8007195752399,
+                "iterations": 28628,
+                "totalWallNs": 2742582.999999968
+              },
+              {
+                "cpuNs": 91.58865446416097,
+                "elapsedNs": 85.99098784406658,
+                "iterations": 28628,
+                "totalWallNs": 2461749.999999938
+              },
+              {
+                "cpuNs": 83.51963113036189,
+                "elapsedNs": 83.41193936006762,
+                "iterations": 28628,
+                "totalWallNs": 2387917.000000016
+              },
+              {
+                "cpuNs": 179.7540869079223,
+                "elapsedNs": 87.61817102137745,
+                "iterations": 28628,
+                "totalWallNs": 2508332.9999999935
+              },
+              {
+                "cpuNs": 189.04568953472125,
+                "elapsedNs": 83.83837501746551,
+                "iterations": 28628,
+                "totalWallNs": 2400125.000000003
+              },
+              {
+                "cpuNs": 111.14992315215872,
+                "elapsedNs": 84.44529830934813,
+                "iterations": 28628,
+                "totalWallNs": 2417500.000000018
+              },
+              {
+                "cpuNs": 82.78608355456197,
+                "elapsedNs": 82.7686181360911,
+                "iterations": 28628,
+                "totalWallNs": 2369500.0000000163
+              },
+              {
+                "cpuNs": 90.22635182338969,
+                "elapsedNs": 87.93548274416736,
+                "iterations": 28628,
+                "totalWallNs": 2517417.0000000233
+              },
+              {
+                "cpuNs": 85.26617297750454,
+                "elapsedNs": 85.25454100880522,
+                "iterations": 28628,
+                "totalWallNs": 2440667.000000076
+              },
+              {
+                "cpuNs": 84.88193377113316,
+                "elapsedNs": 84.84990219365626,
+                "iterations": 28628,
+                "totalWallNs": 2429082.9999999916
+              },
+              {
+                "cpuNs": 89.42294257370406,
+                "elapsedNs": 87.51341344138423,
+                "iterations": 28628,
+                "totalWallNs": 2505333.999999948
+              },
+              {
+                "cpuNs": 84.35797121699036,
+                "elapsedNs": 84.35650412183722,
+                "iterations": 28628,
+                "totalWallNs": 2414957.9999999558
+              },
+              {
+                "cpuNs": 84.74221042336174,
+                "elapsedNs": 84.72037865026957,
+                "iterations": 28628,
+                "totalWallNs": 2425374.999999917
+              },
+              {
+                "cpuNs": 87.64146988961855,
+                "elapsedNs": 87.04617856644083,
+                "iterations": 28628,
+                "totalWallNs": 2491958.000000068
+              },
+              {
+                "cpuNs": 84.91686460807601,
+                "elapsedNs": 84.91539751292156,
+                "iterations": 28628,
+                "totalWallNs": 2430957.9999999185
+              },
+              {
+                "cpuNs": 82.0874668157049,
+                "elapsedNs": 82.03363839597765,
+                "iterations": 28628,
+                "totalWallNs": 2348459.000000048
+              },
+              {
+                "cpuNs": 83.31004610870477,
+                "elapsedNs": 83.27804946206615,
+                "iterations": 28628,
+                "totalWallNs": 2384084.00000003
+              }
+            ]
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#canonicalCycle",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "arguments": [
+              [
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              ]
+            ],
+            "inputJsonBytes": 1123,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 245.0398854571487,
+              "p10": 246.88075271016567,
+              "median": 262.52812436080995,
+              "p90": 345.1626099406832,
+              "max": 851.9124565350787
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 244.94180814072325,
+              "p10": 246.80834526488744,
+              "median": 253.9544896706873,
+              "p90": 273.9525465330363,
+              "max": 285.92247903456723
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.23377393086447903,
+              "wall": 0.22613934966223267
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 9778,
+            "rawBatches": [
+              {
+                "cpuNs": 254.7555737369605,
+                "elapsedNs": 254.16751892003117,
+                "iterations": 9778,
+                "totalWallNs": 2485250.0000000647
+              },
+              {
+                "cpuNs": 252.71016567805276,
+                "elapsedNs": 252.7229494784123,
+                "iterations": 9778,
+                "totalWallNs": 2471124.9999999152
+              },
+              {
+                "cpuNs": 279.0959296379628,
+                "elapsedNs": 273.9525465330363,
+                "iterations": 9778,
+                "totalWallNs": 2678708.000000029
+              },
+              {
+                "cpuNs": 271.11883820822254,
+                "elapsedNs": 270.9441603599979,
+                "iterations": 9778,
+                "totalWallNs": 2649292.0000000596
+              },
+              {
+                "cpuNs": 272.85743505829413,
+                "elapsedNs": 272.6741664962259,
+                "iterations": 9778,
+                "totalWallNs": 2666208.000000097
+              },
+              {
+                "cpuNs": 271.7324606258949,
+                "elapsedNs": 271.6046226222143,
+                "iterations": 9778,
+                "totalWallNs": 2655750.0000000116
+              },
+              {
+                "cpuNs": 276.53916956432806,
+                "elapsedNs": 275.08611167928115,
+                "iterations": 9778,
+                "totalWallNs": 2689792.000000011
+              },
+              {
+                "cpuNs": 250.25567600736346,
+                "elapsedNs": 250.11075884639558,
+                "iterations": 9778,
+                "totalWallNs": 2445583.000000056
+              },
+              {
+                "cpuNs": 345.1626099406832,
+                "elapsedNs": 253.9544896706873,
+                "iterations": 9778,
+                "totalWallNs": 2483166.9999999804
+              },
+              {
+                "cpuNs": 246.88075271016567,
+                "elapsedNs": 246.80834526488744,
+                "iterations": 9778,
+                "totalWallNs": 2413292.0000000694
+              },
+              {
+                "cpuNs": 278.6868480261812,
+                "elapsedNs": 272.45684188995756,
+                "iterations": 9778,
+                "totalWallNs": 2664083.000000005
+              },
+              {
+                "cpuNs": 248.00572714256495,
+                "elapsedNs": 248.53415831458204,
+                "iterations": 9778,
+                "totalWallNs": 2430166.9999999832
+              },
+              {
+                "cpuNs": 246.98302311311107,
+                "elapsedNs": 246.90212722438412,
+                "iterations": 9778,
+                "totalWallNs": 2414209.000000028
+              },
+              {
+                "cpuNs": 296.0728165268971,
+                "elapsedNs": 248.59807731642428,
+                "iterations": 9778,
+                "totalWallNs": 2430791.9999999967
+              },
+              {
+                "cpuNs": 500.8181632235631,
+                "elapsedNs": 285.92247903456723,
+                "iterations": 9778,
+                "totalWallNs": 2795749.999999998
+              },
+              {
+                "cpuNs": 253.01697688688893,
+                "elapsedNs": 253.63479239108491,
+                "iterations": 9778,
+                "totalWallNs": 2480041.0000000284
+              },
+              {
+                "cpuNs": 851.9124565350787,
+                "elapsedNs": 252.21579055021925,
+                "iterations": 9778,
+                "totalWallNs": 2466166.000000044
+              },
+              {
+                "cpuNs": 262.52812436080995,
+                "elapsedNs": 257.28247085293697,
+                "iterations": 9778,
+                "totalWallNs": 2515708.0000000177
+              },
+              {
+                "cpuNs": 245.0398854571487,
+                "elapsedNs": 244.94180814072325,
+                "iterations": 9778,
+                "totalWallNs": 2395040.999999992
+              },
+              {
+                "cpuNs": 254.1419513192882,
+                "elapsedNs": 255.38627531192373,
+                "iterations": 9778,
+                "totalWallNs": 2497166.99999999
+              },
+              {
+                "cpuNs": 246.36940069543874,
+                "elapsedNs": 246.33104929433716,
+                "iterations": 9778,
+                "totalWallNs": 2408625.000000029
+              }
+            ]
+          },
+          {
+            "id": "src/metrics/metric-schema.ts#canonicalCycle",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "arguments": [
+              [
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+              ]
+            ],
+            "inputJsonBytes": 16771,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 1487.5366568914956,
+              "p10": 1489.7360703812317,
+              "median": 1499.266862170088,
+              "p90": 1580.6451612903227,
+              "max": 1653.225806451613
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 1486.3152492668594,
+              "p10": 1488.1173020527342,
+              "median": 1498.9002932551107,
+              "p90": 1578.6290322581165,
+              "max": 1627.0469208211114
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.08939639032675976,
+              "wall": 0.08937453301861015
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 1364,
+            "rawBatches": [
+              {
+                "cpuNs": 1489.7360703812317,
+                "elapsedNs": 1486.3152492668594,
+                "iterations": 1364,
+                "totalWallNs": 2027333.9999999963
+              },
+              {
+                "cpuNs": 1526.392961876833,
+                "elapsedNs": 1529.6620234604038,
+                "iterations": 1364,
+                "totalWallNs": 2086458.9999999907
+              },
+              {
+                "cpuNs": 1535.9237536656892,
+                "elapsedNs": 1540.4750733138142,
+                "iterations": 1364,
+                "totalWallNs": 2101208.0000000424
+              },
+              {
+                "cpuNs": 1493.4017595307919,
+                "elapsedNs": 1493.0351906158699,
+                "iterations": 1364,
+                "totalWallNs": 2036500.0000000463
+              },
+              {
+                "cpuNs": 1499.266862170088,
+                "elapsedNs": 1498.7778592375744,
+                "iterations": 1364,
+                "totalWallNs": 2044333.0000000515
+              },
+              {
+                "cpuNs": 1488.2697947214076,
+                "elapsedNs": 1488.1173020527342,
+                "iterations": 1364,
+                "totalWallNs": 2029791.9999999295
+              },
+              {
+                "cpuNs": 1543.9882697947214,
+                "elapsedNs": 1547.745601173032,
+                "iterations": 1364,
+                "totalWallNs": 2111125.0000000154
+              },
+              {
+                "cpuNs": 1653.225806451613,
+                "elapsedNs": 1627.0469208211114,
+                "iterations": 1364,
+                "totalWallNs": 2219291.999999996
+              },
+              {
+                "cpuNs": 1491.2023460410558,
+                "elapsedNs": 1491.2331378299116,
+                "iterations": 1364,
+                "totalWallNs": 2034041.9999999995
+              },
+              {
+                "cpuNs": 1487.5366568914956,
+                "elapsedNs": 1487.2008797654075,
+                "iterations": 1364,
+                "totalWallNs": 2028542.0000000158
+              },
+              {
+                "cpuNs": 1498.533724340176,
+                "elapsedNs": 1496.9758064516163,
+                "iterations": 1364,
+                "totalWallNs": 2041875.0000000047
+              },
+              {
+                "cpuNs": 1559.384164222874,
+                "elapsedNs": 1560.0872434017833,
+                "iterations": 1364,
+                "totalWallNs": 2127959.0000000326
+              },
+              {
+                "cpuNs": 1563.782991202346,
+                "elapsedNs": 1568.060117302034,
+                "iterations": 1364,
+                "totalWallNs": 2138833.9999999744
+              },
+              {
+                "cpuNs": 1497.8005865102639,
+                "elapsedNs": 1497.2815249266678,
+                "iterations": 1364,
+                "totalWallNs": 2042291.9999999749
+              },
+              {
+                "cpuNs": 1489.7360703812317,
+                "elapsedNs": 1489.277859237472,
+                "iterations": 1364,
+                "totalWallNs": 2031374.9999999118
+              },
+              {
+                "cpuNs": 1590.909090909091,
+                "elapsedNs": 1578.6290322581165,
+                "iterations": 1364,
+                "totalWallNs": 2153250.000000071
+              },
+              {
+                "cpuNs": 1580.6451612903227,
+                "elapsedNs": 1584.3416422287871,
+                "iterations": 1364,
+                "totalWallNs": 2161042.0000000657
+              },
+              {
+                "cpuNs": 1563.782991202346,
+                "elapsedNs": 1567.9684750732763,
+                "iterations": 1364,
+                "totalWallNs": 2138708.999999949
+              },
+              {
+                "cpuNs": 1499.266862170088,
+                "elapsedNs": 1498.9002932551107,
+                "iterations": 1364,
+                "totalWallNs": 2044499.999999971
+              },
+              {
+                "cpuNs": 1490.4692082111437,
+                "elapsedNs": 1489.7360703811771,
+                "iterations": 1364,
+                "totalWallNs": 2031999.9999999255
+              },
+              {
+                "cpuNs": 1508.0645161290322,
+                "elapsedNs": 1511.027126099657,
+                "iterations": 1364,
+                "totalWallNs": 2061040.999999932
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#wrapWithLimit",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxx",
+              32
+            ],
+            "inputJsonBytes": 15,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 52.9707374546154,
+              "p10": 53.307364928226214,
+              "median": 54.798143739931234,
+              "p90": 57.68352208516675,
+              "max": 232.08059823511024
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 52.96672196975294,
+              "p10": 53.27228353651279,
+              "median": 54.76508211305739,
+              "p90": 56.84596888600236,
+              "max": 99.80906008800541
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 3.653209582662082,
+              "wall": 3.651005474203826
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 41589,
+            "rawBatches": [
+              {
+                "cpuNs": 232.08059823511024,
+                "elapsedNs": 99.80906008800541,
+                "iterations": 41589,
+                "totalWallNs": 4150959.0000000573
+              },
+              {
+                "cpuNs": 55.97633989756907,
+                "elapsedNs": 55.95130924042933,
+                "iterations": 41589,
+                "totalWallNs": 2326959.0000002156
+              },
+              {
+                "cpuNs": 55.37521940897834,
+                "elapsedNs": 55.34117194450571,
+                "iterations": 41589,
+                "totalWallNs": 2301584.000000048
+              },
+              {
+                "cpuNs": 64.58438529418837,
+                "elapsedNs": 60.275361273411356,
+                "iterations": 41589,
+                "totalWallNs": 2506791.999999905
+              },
+              {
+                "cpuNs": 54.365336988145906,
+                "elapsedNs": 54.33929644858224,
+                "iterations": 41589,
+                "totalWallNs": 2259917.0000000866
+              },
+              {
+                "cpuNs": 55.80802616076366,
+                "elapsedNs": 55.925244656038764,
+                "iterations": 41589,
+                "totalWallNs": 2325874.9999999963
+              },
+              {
+                "cpuNs": 54.798143739931234,
+                "elapsedNs": 54.76508211305739,
+                "iterations": 41589,
+                "totalWallNs": 2277624.9999999437
+              },
+              {
+                "cpuNs": 57.68352208516675,
+                "elapsedNs": 56.84596888600236,
+                "iterations": 41589,
+                "totalWallNs": 2364166.999999952
+              },
+              {
+                "cpuNs": 54.31724734905865,
+                "elapsedNs": 54.28719132462881,
+                "iterations": 41589,
+                "totalWallNs": 2257749.9999999874
+              },
+              {
+                "cpuNs": 54.53365072495131,
+                "elapsedNs": 54.4875568058857,
+                "iterations": 41589,
+                "totalWallNs": 2266082.9999999804
+              },
+              {
+                "cpuNs": 57.25071533338142,
+                "elapsedNs": 56.67265382673209,
+                "iterations": 41589,
+                "totalWallNs": 2356958.999999961
+              },
+              {
+                "cpuNs": 54.48556108586405,
+                "elapsedNs": 54.42744475702532,
+                "iterations": 41589,
+                "totalWallNs": 2263582.999999926
+              },
+              {
+                "cpuNs": 53.980619875447836,
+                "elapsedNs": 53.97261295053826,
+                "iterations": 41589,
+                "totalWallNs": 2244666.9999999357
+              },
+              {
+                "cpuNs": 53.13905119142081,
+                "elapsedNs": 53.133039986534556,
+                "iterations": 41589,
+                "totalWallNs": 2209749.9999999856
+              },
+              {
+                "cpuNs": 55.735891702132776,
+                "elapsedNs": 55.20991127461221,
+                "iterations": 41589,
+                "totalWallNs": 2296124.9999998473
+              },
+              {
+                "cpuNs": 53.307364928226214,
+                "elapsedNs": 53.27228353651279,
+                "iterations": 41589,
+                "totalWallNs": 2215541.0000000303
+              },
+              {
+                "cpuNs": 53.475678665031616,
+                "elapsedNs": 53.457645050374076,
+                "iterations": 41589,
+                "totalWallNs": 2223250.0000000075
+              },
+              {
+                "cpuNs": 56.21678809300536,
+                "elapsedNs": 55.72887061482697,
+                "iterations": 41589,
+                "totalWallNs": 2317708.0000000386
+              },
+              {
+                "cpuNs": 52.9707374546154,
+                "elapsedNs": 52.96672196975294,
+                "iterations": 41589,
+                "totalWallNs": 2202833.000000055
+              },
+              {
+                "cpuNs": 53.71612686046791,
+                "elapsedNs": 53.69809324581014,
+                "iterations": 41589,
+                "totalWallNs": 2233249.999999998
+              },
+              {
+                "cpuNs": 56.62555002524706,
+                "elapsedNs": 55.940272668256604,
+                "iterations": 41589,
+                "totalWallNs": 2326500.000000124
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#wrapWithLimit",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32
+            ],
+            "inputJsonBytes": 39,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 78.68928500430721,
+              "p10": 78.82181432641973,
+              "median": 79.55072559803857,
+              "p90": 84.18925187197668,
+              "max": 85.6802067457425
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 78.66996885561663,
+              "p10": 78.76797428930493,
+              "median": 79.63080644092473,
+              "p90": 82.77423629978107,
+              "max": 84.46948512358222
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 2.0397621948215017,
+              "wall": 2.0418155497673007
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 30182,
+            "rawBatches": [
+              {
+                "cpuNs": 79.18626996222915,
+                "elapsedNs": 79.12000530117022,
+                "iterations": 30182,
+                "totalWallNs": 2387999.99999992
+              },
+              {
+                "cpuNs": 79.55072559803857,
+                "elapsedNs": 79.55347558147146,
+                "iterations": 30182,
+                "totalWallNs": 2401082.9999999716
+              },
+              {
+                "cpuNs": 84.45431051620172,
+                "elapsedNs": 83.11798422901265,
+                "iterations": 30182,
+                "totalWallNs": 2508667.0000000596
+              },
+              {
+                "cpuNs": 79.65012258962295,
+                "elapsedNs": 79.63080644092473,
+                "iterations": 30182,
+                "totalWallNs": 2403416.99999999
+              },
+              {
+                "cpuNs": 79.15313763170101,
+                "elapsedNs": 79.1421045656332,
+                "iterations": 30182,
+                "totalWallNs": 2388666.9999999413
+              },
+              {
+                "cpuNs": 79.41819627592605,
+                "elapsedNs": 79.40027168510446,
+                "iterations": 30182,
+                "totalWallNs": 2396458.9999998226
+              },
+              {
+                "cpuNs": 78.95434364853224,
+                "elapsedNs": 78.88807898747882,
+                "iterations": 30182,
+                "totalWallNs": 2381000.0000000857
+              },
+              {
+                "cpuNs": 84.18925187197668,
+                "elapsedNs": 82.73832085348884,
+                "iterations": 30182,
+                "totalWallNs": 2497208.0000000005
+              },
+              {
+                "cpuNs": 79.78265191173547,
+                "elapsedNs": 79.78954343648726,
+                "iterations": 30182,
+                "totalWallNs": 2408208.0000000587
+              },
+              {
+                "cpuNs": 79.31879928434167,
+                "elapsedNs": 79.29670001987887,
+                "iterations": 30182,
+                "totalWallNs": 2393332.999999984
+              },
+              {
+                "cpuNs": 79.41819627592605,
+                "elapsedNs": 79.40163011065644,
+                "iterations": 30182,
+                "totalWallNs": 2396499.999999833
+              },
+              {
+                "cpuNs": 83.49347293088596,
+                "elapsedNs": 82.77423629978107,
+                "iterations": 30182,
+                "totalWallNs": 2498291.999999992
+              },
+              {
+                "cpuNs": 78.68928500430721,
+                "elapsedNs": 78.66996885561663,
+                "iterations": 30182,
+                "totalWallNs": 2374417.000000221
+              },
+              {
+                "cpuNs": 78.75554966536346,
+                "elapsedNs": 78.74312504141885,
+                "iterations": 30182,
+                "totalWallNs": 2376625.000000104
+              },
+              {
+                "cpuNs": 78.82181432641973,
+                "elapsedNs": 78.76797428930493,
+                "iterations": 30182,
+                "totalWallNs": 2377374.9999998016
+              },
+              {
+                "cpuNs": 82.69829699821085,
+                "elapsedNs": 82.09638194951117,
+                "iterations": 30182,
+                "totalWallNs": 2477833.000000146
+              },
+              {
+                "cpuNs": 79.4844609369823,
+                "elapsedNs": 79.63769796567978,
+                "iterations": 30182,
+                "totalWallNs": 2403625.000000147
+              },
+              {
+                "cpuNs": 81.00854814127625,
+                "elapsedNs": 80.93539195546441,
+                "iterations": 30182,
+                "totalWallNs": 2442791.999999827
+              },
+              {
+                "cpuNs": 80.94228348022,
+                "elapsedNs": 80.90500960837525,
+                "iterations": 30182,
+                "totalWallNs": 2441874.999999982
+              },
+              {
+                "cpuNs": 85.6802067457425,
+                "elapsedNs": 84.46948512358222,
+                "iterations": 30182,
+                "totalWallNs": 2549457.9999999586
+              },
+              {
+                "cpuNs": 80.18023987807302,
+                "elapsedNs": 80.17888145251591,
+                "iterations": 30182,
+                "totalWallNs": 2419958.999999835
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#wrapWithLimit",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              32
+            ],
+            "inputJsonBytes": 135,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 131.4257738127618,
+              "p10": 133.16651253875864,
+              "median": 135.5600282870043,
+              "p90": 428.82010553228525,
+              "max": 655.2793341674374
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 131.42805853233062,
+              "p10": 133.14388293532102,
+              "median": 134.78937061414996,
+              "p90": 141.50073437415233,
+              "max": 144.730675080248
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 1.0041483576815133,
+              "wall": 0.9984397823270368
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 18383,
+            "rawBatches": [
+              {
+                "cpuNs": 139.96627318718382,
+                "elapsedNs": 139.9186748626402,
+                "iterations": 18383,
+                "totalWallNs": 2572124.9999999143
+              },
+              {
+                "cpuNs": 140.07506935755862,
+                "elapsedNs": 140.3674590654411,
+                "iterations": 18383,
+                "totalWallNs": 2580375.0000000037
+              },
+              {
+                "cpuNs": 206.0599466898765,
+                "elapsedNs": 139.7259968449105,
+                "iterations": 18383,
+                "totalWallNs": 2568582.9999999898
+              },
+              {
+                "cpuNs": 134.47206658325626,
+                "elapsedNs": 134.7304574878985,
+                "iterations": 18383,
+                "totalWallNs": 2476750.000000038
+              },
+              {
+                "cpuNs": 133.65609530544526,
+                "elapsedNs": 133.40221944187311,
+                "iterations": 18383,
+                "totalWallNs": 2452332.9999999534
+              },
+              {
+                "cpuNs": 321.9822662242289,
+                "elapsedNs": 134.6148615568641,
+                "iterations": 18383,
+                "totalWallNs": 2474624.999999833
+              },
+              {
+                "cpuNs": 134.25447424250666,
+                "elapsedNs": 134.22276015884614,
+                "iterations": 18383,
+                "totalWallNs": 2467417.0000000685
+              },
+              {
+                "cpuNs": 428.82010553228525,
+                "elapsedNs": 144.4586302562138,
+                "iterations": 18383,
+                "totalWallNs": 2655582.9999999786
+              },
+              {
+                "cpuNs": 134.30887232769408,
+                "elapsedNs": 134.2703040852912,
+                "iterations": 18383,
+                "totalWallNs": 2468290.9999999083
+              },
+              {
+                "cpuNs": 135.34243594625468,
+                "elapsedNs": 135.57819724744604,
+                "iterations": 18383,
+                "totalWallNs": 2492333.9999998007
+              },
+              {
+                "cpuNs": 132.78572594244682,
+                "elapsedNs": 132.79932546373578,
+                "iterations": 18383,
+                "totalWallNs": 2441249.9999998547
+              },
+              {
+                "cpuNs": 655.2793341674374,
+                "elapsedNs": 134.78937061414996,
+                "iterations": 18383,
+                "totalWallNs": 2477832.9999999185
+              },
+              {
+                "cpuNs": 375.9995648153185,
+                "elapsedNs": 144.730675080248,
+                "iterations": 18383,
+                "totalWallNs": 2660584.000000199
+              },
+              {
+                "cpuNs": 140.89104063536965,
+                "elapsedNs": 137.02197682641463,
+                "iterations": 18383,
+                "totalWallNs": 2518874.99999998
+              },
+              {
+                "cpuNs": 135.5600282870043,
+                "elapsedNs": 135.42174835445863,
+                "iterations": 18383,
+                "totalWallNs": 2489458.000000013
+              },
+              {
+                "cpuNs": 539.5202088886472,
+                "elapsedNs": 141.50073437415233,
+                "iterations": 18383,
+                "totalWallNs": 2601208.0000000424
+              },
+              {
+                "cpuNs": 134.52646466844368,
+                "elapsedNs": 134.50606538650422,
+                "iterations": 18383,
+                "totalWallNs": 2472625.000000107
+              },
+              {
+                "cpuNs": 142.74057553174129,
+                "elapsedNs": 139.6829679595184,
+                "iterations": 18383,
+                "totalWallNs": 2567791.999999827
+              },
+              {
+                "cpuNs": 133.32970679432083,
+                "elapsedNs": 133.31159223195706,
+                "iterations": 18383,
+                "totalWallNs": 2450667.0000000666
+              },
+              {
+                "cpuNs": 131.4257738127618,
+                "elapsedNs": 131.42805853233062,
+                "iterations": 18383,
+                "totalWallNs": 2416041.9999998338
+              },
+              {
+                "cpuNs": 133.16651253875864,
+                "elapsedNs": 133.14388293532102,
+                "iterations": 18383,
+                "totalWallNs": 2447584.000000006
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#pickUniqueWrapName",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxx"
+            ],
+            "inputJsonBytes": 12,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 13.045868000172437,
+              "p10": 13.1751950683278,
+              "median": 14.961150603405521,
+              "p90": 84.1254752851711,
+              "max": 103.45373891001267
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 13.041826529292022,
+              "p10": 13.172500754408231,
+              "median": 14.946513197774063,
+              "p90": 20.418281343276327,
+              "max": 32.370763762605726
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 1.2467625502837933,
+              "wall": 1.245542766481172
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 185576,
+            "rawBatches": [
+              {
+                "cpuNs": 39.764046421741725,
+                "elapsedNs": 20.418281343276327,
+                "iterations": 98833,
+                "totalWallNs": 2018000.000000029
+              },
+              {
+                "cpuNs": 30.507797432082437,
+                "elapsedNs": 16.191271284510016,
+                "iterations": 145176,
+                "totalWallNs": 2350584.000000026
+              },
+              {
+                "cpuNs": 90.78635587149391,
+                "elapsedNs": 32.370763762605726,
+                "iterations": 145176,
+                "totalWallNs": 4699458.000000049
+              },
+              {
+                "cpuNs": 15.2435664297129,
+                "elapsedNs": 15.22835730423662,
+                "iterations": 145176,
+                "totalWallNs": 2210791.9999998556
+              },
+              {
+                "cpuNs": 14.94737422163443,
+                "elapsedNs": 14.941347054610418,
+                "iterations": 145176,
+                "totalWallNs": 2169125.000000122
+              },
+              {
+                "cpuNs": 14.961150603405521,
+                "elapsedNs": 14.946513197774063,
+                "iterations": 145176,
+                "totalWallNs": 2169875.0000000475
+              },
+              {
+                "cpuNs": 84.1254752851711,
+                "elapsedNs": 15.259925883066034,
+                "iterations": 145176,
+                "totalWallNs": 2215374.9999999944
+              },
+              {
+                "cpuNs": 15.711963409930016,
+                "elapsedNs": 15.735211054168419,
+                "iterations": 145176,
+                "totalWallNs": 2284374.9999999544
+              },
+              {
+                "cpuNs": 15.760180746128837,
+                "elapsedNs": 15.747265388217448,
+                "iterations": 145176,
+                "totalWallNs": 2286124.999999856
+              },
+              {
+                "cpuNs": 15.78773350967102,
+                "elapsedNs": 15.779694990907728,
+                "iterations": 145176,
+                "totalWallNs": 2290833.0000000205
+              },
+              {
+                "cpuNs": 103.45373891001267,
+                "elapsedNs": 21.27791094946867,
+                "iterations": 145176,
+                "totalWallNs": 3089042.0000000633
+              },
+              {
+                "cpuNs": 14.94737422163443,
+                "elapsedNs": 14.940775334766009,
+                "iterations": 145176,
+                "totalWallNs": 2169041.99999999
+              },
+              {
+                "cpuNs": 14.933597839863339,
+                "elapsedNs": 14.935891607427177,
+                "iterations": 145176,
+                "totalWallNs": 2168332.9999998477
+              },
+              {
+                "cpuNs": 63.15093403868408,
+                "elapsedNs": 15.723156720119391,
+                "iterations": 145176,
+                "totalWallNs": 2282625.0000000526
+              },
+              {
+                "cpuNs": 13.493124110876407,
+                "elapsedNs": 13.488409061516329,
+                "iterations": 185576,
+                "totalWallNs": 2503124.9999999544
+              },
+              {
+                "cpuNs": 13.369185670560848,
+                "elapsedNs": 13.39590248739174,
+                "iterations": 185576,
+                "totalWallNs": 2485958.0000002095
+              },
+              {
+                "cpuNs": 13.466180971677373,
+                "elapsedNs": 13.463939302496899,
+                "iterations": 185576,
+                "totalWallNs": 2498584.0000001644
+              },
+              {
+                "cpuNs": 14.716342630512566,
+                "elapsedNs": 14.405822951242893,
+                "iterations": 185576,
+                "totalWallNs": 2673374.999999851
+              },
+              {
+                "cpuNs": 13.15902918480838,
+                "elapsedNs": 13.158581928697007,
+                "iterations": 185576,
+                "totalWallNs": 2441916.9999998757
+              },
+              {
+                "cpuNs": 13.1751950683278,
+                "elapsedNs": 13.172500754408231,
+                "iterations": 185576,
+                "totalWallNs": 2444500.000000062
+              },
+              {
+                "cpuNs": 13.045868000172437,
+                "elapsedNs": 13.041826529292022,
+                "iterations": 185576,
+                "totalWallNs": 2420249.999999896
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#pickUniqueWrapName",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 36,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 24.553794495632882,
+              "p10": 24.673715347870406,
+              "median": 25.02348450022985,
+              "p90": 26.632422601083285,
+              "max": 27.541822397217835
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 24.543391361700213,
+              "p10": 24.67246617232652,
+              "median": 24.875252333459436,
+              "p90": 26.054054324146026,
+              "max": 27.095866727958164
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.6950967916730514,
+              "wall": 0.6909792314849843
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 100066,
+            "rawBatches": [
+              {
+                "cpuNs": 25.02348450022985,
+                "elapsedNs": 25.005996042611912,
+                "iterations": 100066,
+                "totalWallNs": 2502250.0000000037
+              },
+              {
+                "cpuNs": 25.333280035176784,
+                "elapsedNs": 25.297883396959577,
+                "iterations": 100066,
+                "totalWallNs": 2531458.000000157
+              },
+              {
+                "cpuNs": 25.033477904582977,
+                "elapsedNs": 25.033477904581794,
+                "iterations": 100066,
+                "totalWallNs": 2504999.9999998817
+              },
+              {
+                "cpuNs": 26.632422601083285,
+                "elapsedNs": 26.054054324146026,
+                "iterations": 100066,
+                "totalWallNs": 2607124.9999999963
+              },
+              {
+                "cpuNs": 24.69370215657666,
+                "elapsedNs": 24.683708752223808,
+                "iterations": 100066,
+                "totalWallNs": 2470000.0000000275
+              },
+              {
+                "cpuNs": 24.553794495632882,
+                "elapsedNs": 24.543391361700213,
+                "iterations": 100066,
+                "totalWallNs": 2455958.9999998934
+              },
+              {
+                "cpuNs": 24.85359662622669,
+                "elapsedNs": 24.851927727701323,
+                "iterations": 100066,
+                "totalWallNs": 2486833.0000001607
+              },
+              {
+                "cpuNs": 24.673715347870406,
+                "elapsedNs": 24.668718645695606,
+                "iterations": 100066,
+                "totalWallNs": 2468500.0000001765
+              },
+              {
+                "cpuNs": 24.79363620010793,
+                "elapsedNs": 24.79238702456348,
+                "iterations": 100066,
+                "totalWallNs": 2480874.9999999693
+              },
+              {
+                "cpuNs": 27.541822397217835,
+                "elapsedNs": 27.095866727958164,
+                "iterations": 100066,
+                "totalWallNs": 2711374.9999998617
+              },
+              {
+                "cpuNs": 24.72368236963604,
+                "elapsedNs": 24.70952171566752,
+                "iterations": 100066,
+                "totalWallNs": 2472582.999999986
+              },
+              {
+                "cpuNs": 24.673715347870406,
+                "elapsedNs": 24.67246617232652,
+                "iterations": 100066,
+                "totalWallNs": 2468875.0000000256
+              },
+              {
+                "cpuNs": 24.873583434932943,
+                "elapsedNs": 24.875252333459436,
+                "iterations": 100066,
+                "totalWallNs": 2489166.999999952
+              },
+              {
+                "cpuNs": 24.803629604461054,
+                "elapsedNs": 24.79779345631964,
+                "iterations": 100066,
+                "totalWallNs": 2481416.000000081
+              },
+              {
+                "cpuNs": 24.773649391401676,
+                "elapsedNs": 24.75700037975092,
+                "iterations": 100066,
+                "totalWallNs": 2477334.0000001555
+              },
+              {
+                "cpuNs": 25.44320748306118,
+                "elapsedNs": 25.436961605341963,
+                "iterations": 100066,
+                "totalWallNs": 2545375.000000149
+              },
+              {
+                "cpuNs": 27.07213239262087,
+                "elapsedNs": 26.841864369514123,
+                "iterations": 100066,
+                "totalWallNs": 2685957.9999998
+              },
+              {
+                "cpuNs": 25.193372374233007,
+                "elapsedNs": 25.184218415845514,
+                "iterations": 100066,
+                "totalWallNs": 2520083.999999997
+              },
+              {
+                "cpuNs": 25.11342513940799,
+                "elapsedNs": 25.115923490495984,
+                "iterations": 100066,
+                "totalWallNs": 2513249.999999971
+              },
+              {
+                "cpuNs": 25.193372374233007,
+                "elapsedNs": 25.090530250036313,
+                "iterations": 100066,
+                "totalWallNs": 2510709.0000001336
+              },
+              {
+                "cpuNs": 25.61309535706434,
+                "elapsedNs": 24.81944916355159,
+                "iterations": 100066,
+                "totalWallNs": 2483582.9999999534
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#pickUniqueWrapName",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 132,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 33.372931458408154,
+              "p10": 34.326049120092826,
+              "median": 35.66593916622924,
+              "p90": 37.21302870403625,
+              "max": 39.22977042296323
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 33.35855181368871,
+              "p10": 34.32548277481407,
+              "median": 35.60148631102114,
+              "p90": 36.796336712986594,
+              "max": 37.15490233997465
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.27019650883507,
+              "wall": 0.269708229628948
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 72394,
+            "rawBatches": [
+              {
+                "cpuNs": 36.39804403679863,
+                "elapsedNs": 35.50766638119087,
+                "iterations": 72394,
+                "totalWallNs": 2570541.999999932
+              },
+              {
+                "cpuNs": 33.4972511534105,
+                "elapsedNs": 33.47653120424174,
+                "iterations": 72394,
+                "totalWallNs": 2423499.999999876
+              },
+              {
+                "cpuNs": 33.372931458408154,
+                "elapsedNs": 33.35855181368871,
+                "iterations": 72394,
+                "totalWallNs": 2414959.0000001807
+              },
+              {
+                "cpuNs": 37.84844047849269,
+                "elapsedNs": 36.9333093902831,
+                "iterations": 72394,
+                "totalWallNs": 2673750.0000001546
+              },
+              {
+                "cpuNs": 35.66593916622924,
+                "elapsedNs": 35.6601790203627,
+                "iterations": 72394,
+                "totalWallNs": 2581583.000000137
+              },
+              {
+                "cpuNs": 39.22977042296323,
+                "elapsedNs": 37.15490233997465,
+                "iterations": 72394,
+                "totalWallNs": 2689792.000000125
+              },
+              {
+                "cpuNs": 36.67431002569273,
+                "elapsedNs": 36.50164378263606,
+                "iterations": 72394,
+                "totalWallNs": 2642500.0000001546
+              },
+              {
+                "cpuNs": 34.42274221620576,
+                "elapsedNs": 34.419288891343356,
+                "iterations": 72394,
+                "totalWallNs": 2491749.999999911
+              },
+              {
+                "cpuNs": 34.326049120092826,
+                "elapsedNs": 34.32548277481407,
+                "iterations": 72394,
+                "totalWallNs": 2484958.9999998896
+              },
+              {
+                "cpuNs": 35.36204657844573,
+                "elapsedNs": 35.1675138823648,
+                "iterations": 72394,
+                "totalWallNs": 2545916.9999999176
+              },
+              {
+                "cpuNs": 35.98364505345747,
+                "elapsedNs": 35.96637842915146,
+                "iterations": 72394,
+                "totalWallNs": 2603749.9999999907
+              },
+              {
+                "cpuNs": 35.610685968450426,
+                "elapsedNs": 35.60148631102114,
+                "iterations": 72394,
+                "totalWallNs": 2577334.0000000643
+              },
+              {
+                "cpuNs": 35.610685968450426,
+                "elapsedNs": 35.60090615244279,
+                "iterations": 72394,
+                "totalWallNs": 2577291.999999943
+              },
+              {
+                "cpuNs": 36.72956322347156,
+                "elapsedNs": 36.50797027377832,
+                "iterations": 72394,
+                "totalWallNs": 2642957.999999908
+              },
+              {
+                "cpuNs": 35.5554327706716,
+                "elapsedNs": 35.55772577837773,
+                "iterations": 72394,
+                "totalWallNs": 2574165.9999998775
+              },
+              {
+                "cpuNs": 35.5554327706716,
+                "elapsedNs": 35.56348592424576,
+                "iterations": 72394,
+                "totalWallNs": 2574582.9999998477
+              },
+              {
+                "cpuNs": 36.5776169295798,
+                "elapsedNs": 36.37963090863966,
+                "iterations": 72394,
+                "totalWallNs": 2633667.0000000596
+              },
+              {
+                "cpuNs": 35.66593916622924,
+                "elapsedNs": 35.65845235792862,
+                "iterations": 72394,
+                "totalWallNs": 2581457.999999884
+              },
+              {
+                "cpuNs": 35.693565765118656,
+                "elapsedNs": 35.69587258612564,
+                "iterations": 72394,
+                "totalWallNs": 2584166.9999999795
+              },
+              {
+                "cpuNs": 37.21302870403625,
+                "elapsedNs": 36.796336712986594,
+                "iterations": 72394,
+                "totalWallNs": 2663833.9999999516
+              },
+              {
+                "cpuNs": 35.251540182888085,
+                "elapsedNs": 35.24232671215689,
+                "iterations": 72394,
+                "totalWallNs": 2551332.999999886
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#stripLeadingIgnorable",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxx"
+            ],
+            "inputJsonBytes": 12,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 10.32165844618319,
+              "p10": 10.329968960230035,
+              "median": 11.87166059703873,
+              "p90": 65.03096839363087,
+              "max": 69.28945479677823
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 10.321483925389273,
+              "p10": 10.321828811721819,
+              "median": 11.852606395704981,
+              "p90": 11.893814295966253,
+              "max": 11.96758021212858
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.9893050497532275,
+              "wall": 0.9877171996420818
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 240659,
+            "rawBatches": [
+              {
+                "cpuNs": 11.882293521890533,
+                "elapsedNs": 11.858369440974615,
+                "iterations": 188095,
+                "totalWallNs": 2230500.00000012
+              },
+              {
+                "cpuNs": 11.983306307982668,
+                "elapsedNs": 11.96758021212858,
+                "iterations": 188095,
+                "totalWallNs": 2251042.000000325
+              },
+              {
+                "cpuNs": 11.87166059703873,
+                "elapsedNs": 11.86966692362954,
+                "iterations": 188095,
+                "totalWallNs": 2232625.0000000983
+              },
+              {
+                "cpuNs": 11.89824290916824,
+                "elapsedNs": 11.896913793563002,
+                "iterations": 188095,
+                "totalWallNs": 2237750.000000233
+              },
+              {
+                "cpuNs": 11.850394747335123,
+                "elapsedNs": 11.851500571520768,
+                "iterations": 188095,
+                "totalWallNs": 2229208.000000199
+              },
+              {
+                "cpuNs": 11.850394747335123,
+                "elapsedNs": 11.852165129324142,
+                "iterations": 188095,
+                "totalWallNs": 2229333.0000002244
+              },
+              {
+                "cpuNs": 65.07881655546399,
+                "elapsedNs": 11.893814295966253,
+                "iterations": 188095,
+                "totalWallNs": 2237166.9999997723
+              },
+              {
+                "cpuNs": 11.892926446742338,
+                "elapsedNs": 11.892038597516859,
+                "iterations": 188095,
+                "totalWallNs": 2236832.9999999334
+              },
+              {
+                "cpuNs": 11.876977059464632,
+                "elapsedNs": 11.878306175070971,
+                "iterations": 188095,
+                "totalWallNs": 2234249.9999999744
+              },
+              {
+                "cpuNs": 11.850394747335123,
+                "elapsedNs": 11.85217044578595,
+                "iterations": 188095,
+                "totalWallNs": 2229334.000000108
+              },
+              {
+                "cpuNs": 65.03096839363087,
+                "elapsedNs": 11.872325154843033,
+                "iterations": 188095,
+                "totalWallNs": 2233125.0000002002
+              },
+              {
+                "cpuNs": 11.887609984316436,
+                "elapsedNs": 11.889603657725896,
+                "iterations": 188095,
+                "totalWallNs": 2236374.9999999525
+              },
+              {
+                "cpuNs": 11.855711209761026,
+                "elapsedNs": 11.852606395704981,
+                "iterations": 188095,
+                "totalWallNs": 2229416.0000001285
+              },
+              {
+                "cpuNs": 11.876977059464632,
+                "elapsedNs": 11.877418325845067,
+                "iterations": 188095,
+                "totalWallNs": 2234082.9999998277
+              },
+              {
+                "cpuNs": 11.861027672186927,
+                "elapsedNs": 11.852388420744257,
+                "iterations": 188095,
+                "totalWallNs": 2229374.999999891
+              },
+              {
+                "cpuNs": 69.28945479677823,
+                "elapsedNs": 11.734984980993923,
+                "iterations": 188095,
+                "totalWallNs": 2207292.000000052
+              },
+              {
+                "cpuNs": 10.325813703206611,
+                "elapsedNs": 10.321828811721819,
+                "iterations": 240659,
+                "totalWallNs": 2484041.000000161
+              },
+              {
+                "cpuNs": 10.413074100698498,
+                "elapsedNs": 10.410996472185776,
+                "iterations": 240659,
+                "totalWallNs": 2505499.9999997565
+              },
+              {
+                "cpuNs": 10.32165844618319,
+                "elapsedNs": 10.321483925389273,
+                "iterations": 240659,
+                "totalWallNs": 2483958.000000257
+              },
+              {
+                "cpuNs": 10.383987301534537,
+                "elapsedNs": 10.381045379562867,
+                "iterations": 240659,
+                "totalWallNs": 2498292.00000022
+              },
+              {
+                "cpuNs": 10.329968960230035,
+                "elapsedNs": 10.321658446182871,
+                "iterations": 240659,
+                "totalWallNs": 2483999.9999999236
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#stripLeadingIgnorable",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 36,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 11.854344521667638,
+              "p10": 11.854344521667638,
+              "median": 11.897364320334981,
+              "p90": 11.964284007150846,
+              "max": 12.29410246360047
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 11.850558779383688,
+              "p10": 11.85075953844689,
+              "median": 11.897560299416917,
+              "p90": 11.913697503895357,
+              "max": 12.036179650678335
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.3304823422315273,
+              "wall": 0.33048778609491436
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 209206,
+            "rawBatches": [
+              {
+                "cpuNs": 11.868684454556753,
+                "elapsedNs": 11.851553014732506,
+                "iterations": 209206,
+                "totalWallNs": 2479416.0000001285
+              },
+              {
+                "cpuNs": 11.964284007150846,
+                "elapsedNs": 11.910705237901283,
+                "iterations": 209206,
+                "totalWallNs": 2491791.000000376
+              },
+              {
+                "cpuNs": 12.29410246360047,
+                "elapsedNs": 11.876652677266295,
+                "iterations": 209206,
+                "totalWallNs": 2484667.0000001723
+              },
+              {
+                "cpuNs": 11.897364320334981,
+                "elapsedNs": 11.898559314742808,
+                "iterations": 209206,
+                "totalWallNs": 2489250.000000084
+              },
+              {
+                "cpuNs": 11.921264208483505,
+                "elapsedNs": 11.914094242040338,
+                "iterations": 209206,
+                "totalWallNs": 2492500.000000291
+              },
+              {
+                "cpuNs": 11.911704253224094,
+                "elapsedNs": 11.908516008144797,
+                "iterations": 209206,
+                "totalWallNs": 2491332.9999999404
+              },
+              {
+                "cpuNs": 11.854344521667638,
+                "elapsedNs": 11.850759538444716,
+                "iterations": 209206,
+                "totalWallNs": 2479249.9999998654
+              },
+              {
+                "cpuNs": 12.040763649226122,
+                "elapsedNs": 12.036179650678335,
+                "iterations": 209206,
+                "totalWallNs": 2518040.999999812
+              },
+              {
+                "cpuNs": 11.854344521667638,
+                "elapsedNs": 11.850558779383688,
+                "iterations": 209206,
+                "totalWallNs": 2479207.999999744
+              },
+              {
+                "cpuNs": 11.863904476927049,
+                "elapsedNs": 11.861318509027617,
+                "iterations": 209206,
+                "totalWallNs": 2481458.9999996317
+              },
+              {
+                "cpuNs": 11.897364320334981,
+                "elapsedNs": 11.898960832862688,
+                "iterations": 209206,
+                "totalWallNs": 2489333.9999998715
+              },
+              {
+                "cpuNs": 11.873464432186458,
+                "elapsedNs": 11.864903492250626,
+                "iterations": 209206,
+                "totalWallNs": 2482208.9999997844
+              },
+              {
+                "cpuNs": 11.902144297964686,
+                "elapsedNs": 11.898956052885614,
+                "iterations": 209206,
+                "totalWallNs": 2489332.999999988
+              },
+              {
+                "cpuNs": 11.863904476927049,
+                "elapsedNs": 11.86091699090991,
+                "iterations": 209206,
+                "totalWallNs": 2481375.0000002985
+              },
+              {
+                "cpuNs": 11.911704253224094,
+                "elapsedNs": 11.913697503895357,
+                "iterations": 209206,
+                "totalWallNs": 2492416.999999932
+              },
+              {
+                "cpuNs": 11.854344521667638,
+                "elapsedNs": 11.85075953844689,
+                "iterations": 209206,
+                "totalWallNs": 2479250.0000003204
+              },
+              {
+                "cpuNs": 11.897364320334981,
+                "elapsedNs": 11.897560299416917,
+                "iterations": 209206,
+                "totalWallNs": 2489040.9999998156
+              },
+              {
+                "cpuNs": 11.859124499297343,
+                "elapsedNs": 11.862111985315403,
+                "iterations": 209206,
+                "totalWallNs": 2481624.9999998943
+              },
+              {
+                "cpuNs": 11.90692427559439,
+                "elapsedNs": 11.902545816085697,
+                "iterations": 209206,
+                "totalWallNs": 2490084.000000024
+              },
+              {
+                "cpuNs": 11.873464432186458,
+                "elapsedNs": 11.872666175923403,
+                "iterations": 209206,
+                "totalWallNs": 2483833.0000002314
+              },
+              {
+                "cpuNs": 11.902144297964686,
+                "elapsedNs": 11.897961817538972,
+                "iterations": 209206,
+                "totalWallNs": 2489125.000000058
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#stripLeadingIgnorable",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 132,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 11.489644045385765,
+              "p10": 11.523058049672304,
+              "median": 11.857198092537699,
+              "p90": 12.052908689073144,
+              "max": 12.25339271479238
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 11.481686738934956,
+              "p10": 11.519878945837354,
+              "median": 11.852028468732943,
+              "p90": 12.08234642684787,
+              "max": 12.2973464507165
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 0.08982725827680074,
+              "wall": 0.08978809446009806
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 209493,
+            "rawBatches": [
+              {
+                "cpuNs": 11.904932384375611,
+                "elapsedNs": 11.90572954704851,
+                "iterations": 209493,
+                "totalWallNs": 2494166.9999998338
+              },
+              {
+                "cpuNs": 11.871518380089071,
+                "elapsedNs": 11.872711737385645,
+                "iterations": 209493,
+                "totalWallNs": 2487250.000000131
+              },
+              {
+                "cpuNs": 11.852424663353906,
+                "elapsedNs": 11.851627500680348,
+                "iterations": 209493,
+                "totalWallNs": 2482833.000000028
+              },
+              {
+                "cpuNs": 11.976533822132481,
+                "elapsedNs": 12.00020525745653,
+                "iterations": 209493,
+                "totalWallNs": 2513959.000000341
+              },
+              {
+                "cpuNs": 11.857198092537699,
+                "elapsedNs": 11.852028468732943,
+                "iterations": 209493,
+                "totalWallNs": 2482917.0000002705
+              },
+              {
+                "cpuNs": 11.637620350083296,
+                "elapsedNs": 11.671230064966116,
+                "iterations": 209493,
+                "totalWallNs": 2445040.9999999464
+              },
+              {
+                "cpuNs": 12.052908689073144,
+                "elapsedNs": 12.086523177384539,
+                "iterations": 209493,
+                "totalWallNs": 2532041.9999998193
+              },
+              {
+                "cpuNs": 12.25339271479238,
+                "elapsedNs": 12.2973464507165,
+                "iterations": 209493,
+                "totalWallNs": 2576207.9999999516
+              },
+              {
+                "cpuNs": 11.97176039294869,
+                "elapsedNs": 11.970366551627468,
+                "iterations": 209493,
+                "totalWallNs": 2507708.000000093
+              },
+              {
+                "cpuNs": 11.90015895519182,
+                "elapsedNs": 11.900158955191525,
+                "iterations": 209493,
+                "totalWallNs": 2492999.999999938
+              },
+              {
+                "cpuNs": 11.86674495090528,
+                "elapsedNs": 11.863561073640085,
+                "iterations": 209493,
+                "totalWallNs": 2485333.0000000824
+              },
+              {
+                "cpuNs": 12.057682118256935,
+                "elapsedNs": 12.08234642684787,
+                "iterations": 209493,
+                "totalWallNs": 2531166.999999641
+              },
+              {
+                "cpuNs": 12.000400968051439,
+                "elapsedNs": 11.997021380189754,
+                "iterations": 209493,
+                "totalWallNs": 2513292.000000092
+              },
+              {
+                "cpuNs": 11.819010659067368,
+                "elapsedNs": 11.847054555521881,
+                "iterations": 209493,
+                "totalWallNs": 2481874.9999999455
+              },
+              {
+                "cpuNs": 11.523058049672304,
+                "elapsedNs": 11.51490025919766,
+                "iterations": 209493,
+                "totalWallNs": 2412291.0000000955
+              },
+              {
+                "cpuNs": 11.61852663334813,
+                "elapsedNs": 11.612559846868114,
+                "iterations": 209493,
+                "totalWallNs": 2432749.999999942
+              },
+              {
+                "cpuNs": 11.556472053958844,
+                "elapsedNs": 11.554882502040005,
+                "iterations": 209493,
+                "totalWallNs": 2420666.999999867
+              },
+              {
+                "cpuNs": 11.489644045385765,
+                "elapsedNs": 11.481686738934956,
+                "iterations": 209493,
+                "totalWallNs": 2405332.9999997006
+              },
+              {
+                "cpuNs": 11.532604908039886,
+                "elapsedNs": 11.52822767347772,
+                "iterations": 209493,
+                "totalWallNs": 2415082.9999998678
+              },
+              {
+                "cpuNs": 11.518284620488513,
+                "elapsedNs": 11.519878945837354,
+                "iterations": 209493,
+                "totalWallNs": 2413334.0000003045
+              },
+              {
+                "cpuNs": 11.5803391998778,
+                "elapsedNs": 11.583322593117948,
+                "iterations": 209493,
+                "totalWallNs": 2426625.000000058
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#scanTopLevelClauses",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 0,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxx"
+            ],
+            "inputJsonBytes": 12,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 149.6317353663264,
+              "p10": 150.53624499289313,
+              "median": 163.3285954257656,
+              "p90": 467.1146142912521,
+              "max": 531.5286212688978
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 149.5644786147963,
+              "p10": 150.5174441142327,
+              "median": 154.97538441659475,
+              "p90": 165.05685489082828,
+              "max": 230.40231296032758
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 13.610716285480466,
+              "wall": 12.914615368049562
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 15478,
+            "rawBatches": [
+              {
+                "cpuNs": 163.36954759202206,
+                "elapsedNs": 162.75133776553741,
+                "iterations": 12334,
+                "totalWallNs": 2007375.0000001383
+              },
+              {
+                "cpuNs": 160.93810569841065,
+                "elapsedNs": 160.94883059825517,
+                "iterations": 15478,
+                "totalWallNs": 2491165.9999997937
+              },
+              {
+                "cpuNs": 428.4791316707585,
+                "elapsedNs": 230.40231296032758,
+                "iterations": 15478,
+                "totalWallNs": 3566166.99999995
+              },
+              {
+                "cpuNs": 165.3960460007753,
+                "elapsedNs": 165.5979454709993,
+                "iterations": 15478,
+                "totalWallNs": 2563125.000000127
+              },
+              {
+                "cpuNs": 205.32368523064994,
+                "elapsedNs": 158.0765602790947,
+                "iterations": 15478,
+                "totalWallNs": 2446708.9999998277
+              },
+              {
+                "cpuNs": 154.28349916009822,
+                "elapsedNs": 154.21352887971747,
+                "iterations": 15478,
+                "totalWallNs": 2386917.000000267
+              },
+              {
+                "cpuNs": 163.3285954257656,
+                "elapsedNs": 161.39843649050735,
+                "iterations": 15478,
+                "totalWallNs": 2498125.0000000726
+              },
+              {
+                "cpuNs": 218.89132962915104,
+                "elapsedNs": 155.70487143043735,
+                "iterations": 15478,
+                "totalWallNs": 2410000.000000309
+              },
+              {
+                "cpuNs": 154.4127148210363,
+                "elapsedNs": 154.3185166041923,
+                "iterations": 15478,
+                "totalWallNs": 2388541.9999996885
+              },
+              {
+                "cpuNs": 154.1542834991601,
+                "elapsedNs": 154.15964594908073,
+                "iterations": 15478,
+                "totalWallNs": 2386082.9999998715
+              },
+              {
+                "cpuNs": 285.50200284274456,
+                "elapsedNs": 160.60699056724712,
+                "iterations": 15478,
+                "totalWallNs": 2485874.999999851
+              },
+              {
+                "cpuNs": 149.82555885773357,
+                "elapsedNs": 149.79596847137742,
+                "iterations": 15478,
+                "totalWallNs": 2318541.9999999795
+              },
+              {
+                "cpuNs": 438.1703062411164,
+                "elapsedNs": 154.97538441659475,
+                "iterations": 15478,
+                "totalWallNs": 2398709.0000000536
+              },
+              {
+                "cpuNs": 154.08967566869106,
+                "elapsedNs": 154.06544773224493,
+                "iterations": 15478,
+                "totalWallNs": 2384624.999999687
+              },
+              {
+                "cpuNs": 153.8958521772839,
+                "elapsedNs": 153.8797002196673,
+                "iterations": 15478,
+                "totalWallNs": 2381750.0000000107
+              },
+              {
+                "cpuNs": 531.5286212688978,
+                "elapsedNs": 159.33363483655236,
+                "iterations": 15478,
+                "totalWallNs": 2466166.0000001574
+              },
+              {
+                "cpuNs": 152.02222509368136,
+                "elapsedNs": 151.96840677090117,
+                "iterations": 15478,
+                "totalWallNs": 2352167.0000000084
+              },
+              {
+                "cpuNs": 467.1146142912521,
+                "elapsedNs": 150.83505620880993,
+                "iterations": 15478,
+                "totalWallNs": 2334624.99999996
+              },
+              {
+                "cpuNs": 150.53624499289313,
+                "elapsedNs": 150.5174441142327,
+                "iterations": 15478,
+                "totalWallNs": 2329709.0000000936
+              },
+              {
+                "cpuNs": 496.5757849851402,
+                "elapsedNs": 165.05685489082828,
+                "iterations": 15478,
+                "totalWallNs": 2554750.0000002403
+              },
+              {
+                "cpuNs": 149.6317353663264,
+                "elapsedNs": 149.5644786147963,
+                "iterations": 15478,
+                "totalWallNs": 2314958.999999817
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#scanTopLevelClauses",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 1,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 36,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 609.6163428001993,
+              "p10": 611.1111111111111,
+              "median": 614.598903836572,
+              "p90": 646.7364225211759,
+              "max": 716.4922770303937
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 609.6890881912889,
+              "p10": 610.7580966616911,
+              "median": 616.0211758844351,
+              "p90": 639.0341305430888,
+              "max": 644.6292974589468
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 17.072191773238114,
+              "wall": 17.111699330123198
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 4014,
+            "rawBatches": [
+              {
+                "cpuNs": 645.2416542102641,
+                "elapsedNs": 622.4775784753798,
+                "iterations": 4014,
+                "totalWallNs": 2498625.0000001746
+              },
+              {
+                "cpuNs": 671.6492277030394,
+                "elapsedNs": 643.0515695067126,
+                "iterations": 4014,
+                "totalWallNs": 2581208.999999944
+              },
+              {
+                "cpuNs": 610.8619830592925,
+                "elapsedNs": 610.6335326357563,
+                "iterations": 4014,
+                "totalWallNs": 2451082.999999926
+              },
+              {
+                "cpuNs": 613.1041355256602,
+                "elapsedNs": 612.9588938715083,
+                "iterations": 4014,
+                "totalWallNs": 2460417.000000234
+              },
+              {
+                "cpuNs": 617.3393124065769,
+                "elapsedNs": 616.3116591928587,
+                "iterations": 4014,
+                "totalWallNs": 2473875.0000001346
+              },
+              {
+                "cpuNs": 716.4922770303937,
+                "elapsedNs": 644.6292974589468,
+                "iterations": 4014,
+                "totalWallNs": 2587542.0000002123
+              },
+              {
+                "cpuNs": 611.3602391629297,
+                "elapsedNs": 611.2668161435232,
+                "iterations": 4014,
+                "totalWallNs": 2453625.000000102
+              },
+              {
+                "cpuNs": 614.598903836572,
+                "elapsedNs": 614.5261584454225,
+                "iterations": 4014,
+                "totalWallNs": 2466707.999999926
+              },
+              {
+                "cpuNs": 615.5954160438465,
+                "elapsedNs": 616.6335326357887,
+                "iterations": 4014,
+                "totalWallNs": 2475167.000000056
+              },
+              {
+                "cpuNs": 616.8410563029397,
+                "elapsedNs": 618.3878923766279,
+                "iterations": 4014,
+                "totalWallNs": 2482208.9999997844
+              },
+              {
+                "cpuNs": 636.2730443447932,
+                "elapsedNs": 630.5640259092519,
+                "iterations": 4014,
+                "totalWallNs": 2531083.999999737
+              },
+              {
+                "cpuNs": 613.8515196811161,
+                "elapsedNs": 613.8410563028949,
+                "iterations": 4014,
+                "totalWallNs": 2463957.9999998203
+              },
+              {
+                "cpuNs": 613.6023916292975,
+                "elapsedNs": 614.8064275037756,
+                "iterations": 4014,
+                "totalWallNs": 2467833.000000155
+              },
+              {
+                "cpuNs": 614.3497757847533,
+                "elapsedNs": 616.0211758844351,
+                "iterations": 4014,
+                "totalWallNs": 2472709.0000001225
+              },
+              {
+                "cpuNs": 635.774788241156,
+                "elapsedNs": 630.6053811659193,
+                "iterations": 4014,
+                "totalWallNs": 2531250
+              },
+              {
+                "cpuNs": 612.6058794220229,
+                "elapsedNs": 612.5229197807369,
+                "iterations": 4014,
+                "totalWallNs": 2458666.9999998775
+              },
+              {
+                "cpuNs": 612.6058794220229,
+                "elapsedNs": 614.0072247135199,
+                "iterations": 4014,
+                "totalWallNs": 2464625.000000069
+              },
+              {
+                "cpuNs": 611.1111111111111,
+                "elapsedNs": 610.7580966616911,
+                "iterations": 4014,
+                "totalWallNs": 2451583.000000028
+              },
+              {
+                "cpuNs": 646.7364225211759,
+                "elapsedNs": 639.0341305430888,
+                "iterations": 4014,
+                "totalWallNs": 2565082.9999999586
+              },
+              {
+                "cpuNs": 609.6163428001993,
+                "elapsedNs": 609.6890881912889,
+                "iterations": 4014,
+                "totalWallNs": 2447291.9999998338
+              },
+              {
+                "cpuNs": 615.8445440956651,
+                "elapsedNs": 617.0485799700336,
+                "iterations": 4014,
+                "totalWallNs": 2476832.999999715
+              }
+            ]
+          },
+          {
+            "id": "src/sql-dialect/common.ts#scanTopLevelClauses",
+            "status": "js-baseline",
+            "reason": "Independent JS elapsed/process-CPU baseline; no native execution in this pass.",
+            "inputIndex": 2,
+            "inputSource": "synthetic",
+            "arguments": [
+              "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ],
+            "inputJsonBytes": 132,
+            "nativeArgumentsMatched": true,
+            "replay": "regenerated-exact",
+            "jsCpu": {
+              "n": 21,
+              "min": 2151.172893136403,
+              "p10": 2170.2867072111208,
+              "median": 2181.5812337098178,
+              "p90": 2292.7888792354474,
+              "max": 2308.427454387489
+            },
+            "jsWall": {
+              "n": 21,
+              "min": 2150.267593397257,
+              "p10": 2173.038227628059,
+              "median": 2183.5716768029615,
+              "p90": 2253.040834057253,
+              "max": 2277.621198957704
+            },
+            "nsPerInputJsonByte": {
+              "cpu": 16.52713055840771,
+              "wall": 16.54220967274971
+            },
+            "screenPass": false,
+            "iterationsPerBatch": 1151,
+            "rawBatches": [
+              {
+                "cpuNs": 2290.1824500434404,
+                "elapsedNs": 2244.823631624985,
+                "iterations": 1151,
+                "totalWallNs": 2583792.0000003576
+              },
+              {
+                "cpuNs": 2185.9252823631623,
+                "elapsedNs": 2189.8349261508506,
+                "iterations": 1151,
+                "totalWallNs": 2520499.999999629
+              },
+              {
+                "cpuNs": 2151.172893136403,
+                "elapsedNs": 2150.267593397257,
+                "iterations": 1151,
+                "totalWallNs": 2474958.0000002426
+              },
+              {
+                "cpuNs": 2175.4995655951348,
+                "elapsedNs": 2180.9652476108186,
+                "iterations": 1151,
+                "totalWallNs": 2510291.000000052
+              },
+              {
+                "cpuNs": 2308.427454387489,
+                "elapsedNs": 2253.040834057253,
+                "iterations": 1151,
+                "totalWallNs": 2593249.999999898
+              },
+              {
+                "cpuNs": 2181.5812337098178,
+                "elapsedNs": 2186.974804517598,
+                "iterations": 1151,
+                "totalWallNs": 2517207.999999755
+              },
+              {
+                "cpuNs": 2182.4500434404868,
+                "elapsedNs": 2190.0886185927507,
+                "iterations": 1151,
+                "totalWallNs": 2520792.000000256
+              },
+              {
+                "cpuNs": 2168.5490877497828,
+                "elapsedNs": 2168.8019113813452,
+                "iterations": 1151,
+                "totalWallNs": 2496290.9999999283
+              },
+              {
+                "cpuNs": 2257.167680278019,
+                "elapsedNs": 2239.827975673411,
+                "iterations": 1151,
+                "totalWallNs": 2578042.000000096
+              },
+              {
+                "cpuNs": 2170.2867072111208,
+                "elapsedNs": 2176.3683753258983,
+                "iterations": 1151,
+                "totalWallNs": 2505000.000000109
+              },
+              {
+                "cpuNs": 2172.8931364031278,
+                "elapsedNs": 2179.0469157256034,
+                "iterations": 1151,
+                "totalWallNs": 2508083.0000001695
+              },
+              {
+                "cpuNs": 2178.1059947871418,
+                "elapsedNs": 2178.3588184190703,
+                "iterations": 1151,
+                "totalWallNs": 2507291.00000035
+              },
+              {
+                "cpuNs": 2292.7888792354474,
+                "elapsedNs": 2275.521285838152,
+                "iterations": 1151,
+                "totalWallNs": 2619124.9999997127
+              },
+              {
+                "cpuNs": 2176.3683753258038,
+                "elapsedNs": 2179.155516941564,
+                "iterations": 1151,
+                "totalWallNs": 2508207.9999997406
+              },
+              {
+                "cpuNs": 2188.5317115551693,
+                "elapsedNs": 2194.5047784537524,
+                "iterations": 1151,
+                "totalWallNs": 2525875.000000269
+              },
+              {
+                "cpuNs": 2174.6307558644658,
+                "elapsedNs": 2173.038227628059,
+                "iterations": 1151,
+                "totalWallNs": 2501166.9999998957
+              },
+              {
+                "cpuNs": 2300.6081668114684,
+                "elapsedNs": 2277.621198957704,
+                "iterations": 1151,
+                "totalWallNs": 2621542.0000003176
+              },
+              {
+                "cpuNs": 2177.2371850564728,
+                "elapsedNs": 2176.7662901825283,
+                "iterations": 1151,
+                "totalWallNs": 2505458.00000009
+              },
+              {
+                "cpuNs": 2184.1876629018243,
+                "elapsedNs": 2183.5716768029615,
+                "iterations": 1151,
+                "totalWallNs": 2513291.0000002086
+              },
+              {
+                "cpuNs": 2173.7619461337968,
+                "elapsedNs": 2174.087749782823,
+                "iterations": 1151,
+                "totalWallNs": 2502375.000000029
+              },
+              {
+                "cpuNs": 2281.4943527367504,
+                "elapsedNs": 2250.6872284969854,
+                "iterations": 1151,
+                "totalWallNs": 2590541.0000000303
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "finalFixtureRefresh": true
+}
