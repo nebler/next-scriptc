@@ -103,7 +103,7 @@ Held-out repos and Papermark are measured only at milestones, never tuned agains
 | C1d | Guarded specialization of erased operations | 1 | scriptc fork | bounded string-index slice: erased path −18.2%, CSV −5.5% but still 5.49× Node; typed control unchanged, copy/generic regressions retained; full gate open ([evidence](research/compiler-erased-specialization.md)) |
 | B1 | Cheap discovery blockers | 2 | discovery | bounded slice done: DEV 441 → 251 accepted (21 new, 211 prior acceptances refused); parser files 1,957 → 15; 32 GrowthBook validator files unknown ([evidence](research/discovery-blockers-b1.md)) |
 | P1 | Friction log, then actionable errors | 3 | DX | audit + small fixes done: [friction log](research/friction-log.md); larger diagnostic/runtime visibility work prioritized there |
-| B1c | Audit the 211 acceptances B1 lost: restore over-conservative refusals, keep and test real soundness fixes | 2 | discovery | running |
+| B1c | Audit the 211 acceptances B1 lost: restore over-conservative refusals, keep and test real soundness fixes | 2 | discovery | bounded audit done: 0/211 restored, 211 still refused; 7 other gains, DEV 251 → 258 with unaffected entries carried forward; 32 GrowthBook files unknown ([evidence](research/discovery-b1-audit.md)) |
 | M1 | Measure DEV accepted functions (`report --measure`) | eval | report | running |
 | E2 | Source-text passthrough | 1 | boundary | done, negative: runtime provenance check costs 2× the encoder; full-text parse 10× projected decode. Code kept on branch only |
 | C2 | Native JSON decode speed | 1 | scriptc fork | bounded slice done: ordered schema decode −8.1% flat / −3.8% nested at 60k; erased unchanged; emitted decoder design remains open ([evidence](research/native-json-decode.md)) |

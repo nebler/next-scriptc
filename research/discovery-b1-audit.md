@@ -180,6 +180,74 @@ counts are excluded. The final census starts fresh at implementation commit
 `61af963`, using full report discovery plus fresh resolver evidence. Every batch
 records this mode; no independent EV1/EV2 agreement claim is made.
 
+The final comparison observes **0 accepted again, 211 still refused, and 0
+unknown** in the lost-211 cohort. Narrowly restoring nine minimized examples does
+not discharge every proof obligation in the corresponding application functions.
+Fourteen cohort functions reach a different first blocker: twelve move past an
+unresolved-member screen, and the two PostHog scalar spreads reach the separate
+literal-member-read requirement. These are partial proof gains, not restored
+application acceptances.
+
+| B1 first-refusal category | Accepted again | Still refused | Unknown |
+|---|---:|---:|---:|
+| nonlocal mutation | 0 | 64 | 0 |
+| unproved module initialization VariableDeclaration | 0 | 61 | 0 |
+| constant graph unresolved member | 0 | 16 | 0 |
+| argument mutation | 0 | 20 | 0 |
+| constant graph requires literal member read | 0 | 4 | 0 |
+| constant graph requires literals | 0 | 11 | 0 |
+| constant graph exported reference can escape | 0 | 18 | 0 |
+| throw fallback excludes local catch/finally | 0 | 1 | 0 |
+| unsupported NewExpression | 0 | 1 | 0 |
+| call outside local allocation allowlist at 3 | 0 | 1 | 0 |
+| initialized bindings required at 11 | 0 | 1 | 0 |
+| constant graph mutation or escaping reference | 0 | 7 | 0 |
+| constant graph property | 0 | 2 | 0 |
+| unproved module initialization default expression | 0 | 4 | 0 |
+| Total | 0 | 211 | 0 |
+
+The 11 affected repositories retain the same 10,145 observed files. Accepted
+functions increase from **250 to 257**, with seven new covered acceptances, no
+newly covered acceptances, and no covered acceptance losses. GrowthBook rises
+from 98 to 103; OpenPanel rises from 18 to 20. The seven gains were
+refused in B1 and sit outside the lost-211 cohort. Their prior first blocker
+was the local allocation call allowlist. They are listed individually in the
+comparison. All other affected repository acceptance counts are unchanged.
+
+| Repository | B1 accepted | B1c accepted |
+|---|---:|---:|
+| toeverything/AFFiNE | 7 | 7 |
+| actualbudget/actual | 2 | 2 |
+| evidence-dev/evidence | 5 | 5 |
+| gristlabs/grist-core | 11 | 11 |
+| growthbook/growthbook | 98 | 103 |
+| n8n-io/n8n | 53 | 53 |
+| nocodb/nocodb | 8 | 8 |
+| openpanel-dev/openpanel | 18 | 20 |
+| PostHog/posthog | 38 | 38 |
+| umami-software/umami | 3 | 3 |
+| Unleash/unleash | 7 | 7 |
+
+Carrying forward the six unaffected DEV entries gives **251 to 258** overall.
+That is a carried-forward total, not a fresh scan of all DEV repositories. No
+HELD_OUT repository or Papermark was scanned. Static acceptance does not establish
+compiler support, runtime reachability, or speed.
+
+All 11 application installs succeeded. Ten repositories cover every requested
+file. GrowthBook retains one aborted 32-file report batch from the verified final
+run. Those files remain unknown; none contains a lost-211 cohort function. Thus
+zero cohort unknowns does not mean complete census coverage. The final run has
+86 successful report batches and one failed report batch; all 87 resolver batches
+succeed. The [provenance record](eval-corpus/dev-census-b1c/provenance.json) verifies
+that each recorded adapter commit has discovery source identical to `61af963`.
+The five existing results were verified before reuse. All six remaining
+repositories were freshly installed and scanned, with n8n's interrupted attempt
+retained separately. No failed install required retry. Every install recorded at
+least 12 GB free; the minimum is GrowthBook's 14,336,303,104 bytes. Application
+clones were installed and cleaned serially. The
+[validation record](eval-corpus/dev-census-b1c/validation.json) records source
+hashes, mode, install status, and the comparison denominator.
+
 ## Relationship to the pinned examples
 
 The [source-model metadata](eval-corpus/dev-census-b1c/source-models.json) identifies

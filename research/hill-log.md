@@ -2088,3 +2088,41 @@ no measured value. Queued B1c: classify the 211 by category with minimal
 reproducers, decide per category whether the old acceptance was unsound (keep
 the refusal, add a test) or over-conservative (restore it, add a test), then
 re-run the census. M1 measures the current accepted set in parallel.
+
+
+## 72. B1c: audit the lost 211 and finish the affected DEV census (2026-11-03)
+
+The audit distinguishes demonstrated semantic gaps from construction proof limits.
+Nine of 29 original minimized examples regain acceptance through bounded fresh
+array reversal, borrowed-array callbacks, scalar-array reads, numeric literal
+arithmetic, scalar object snapshots, and inert default reads. Counterexamples
+retain borrowed-write, stale-capture, initialization-order, helper-metadata, and
+lexical-evaluation refusals. A separate destructuring graph-binding bug is fixed
+and covered by the implementation branch's native reproducer. Dispatcher policy
+is unchanged. The finishing run makes no discovery code changes.
+
+All 11 affected DEV repositories install with scripts disabled. Five existing
+results have verified final-implementation provenance; six repositories receive
+fresh serial installs and scans. Every install records at least 12 GB free,
+with 14,336,303,104 bytes the minimum. Each application clone is removed after
+scanning. All 87 resolver batches succeed; 86 report batches succeed. GrowthBook's
+retained aborted 32-file batch stays unknown. No HELD_OUT repository or Papermark
+is scanned. No application source or dependencies are committed.
+
+All 211 lost functions are covered: zero regain acceptance, 211 remain refused,
+and zero are unknown. Fourteen reach a different first blocker. Minimized proof
+restorations therefore do not imply restored application eligibility. Seven
+other covered functions become accepted, five in GrowthBook and two in OpenPanel.
+No covered acceptance is lost and no acceptance is newly covered. Affected-repo
+acceptance rises 250 to 257 across the same 10,145 observed files. Carrying forward
+the six unaffected DEV entries gives 251 to 258 overall. This is static discovery,
+not compiler acceptance, runtime reachability, or a speed measurement.
+
+Fresh full suites pass: Next 103; core 124, with two existing skips; targeted audit
+14. Compression, research links, and whitespace checks pass. The WIP report commit
+is rewritten with a clean message; test evidence and final census/report work
+are committed in bounded steps. Temporary Python caches are removed. Protected
+checkouts, compiler trees, root README, and M1 files remain untouched. No deploy,
+hosting call, Docker, push, PR, issue, public post, or secret is involved.
+
+[Per-pattern verdicts, category counts, repository totals, reproducers, and limits](discovery-b1-audit.md).
