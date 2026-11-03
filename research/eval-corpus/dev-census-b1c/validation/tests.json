@@ -1,0 +1,25 @@
+{
+  "implementationCommit": "61af963",
+  "next": {
+    "command": "pnpm --dir packages/next-scriptc test",
+    "pass": 103,
+    "fail": 0,
+    "skipped": 0,
+    "log": "next-tests.log.gz"
+  },
+  "core": {
+    "command": "pnpm --dir packages/scriptc-promote test",
+    "pass": 124,
+    "fail": 0,
+    "skipped": 2,
+    "log": "core-tests.log.gz"
+  },
+  "targeted": {
+    "command": "node --test packages/scriptc-promote/test/discovery-b1-audit.mjs",
+    "pass": 14,
+    "fail": 0,
+    "skipped": 0,
+    "log": "targeted-tests.log.gz"
+  },
+  "note": "The final targeted run uses the tighter native-divergence destructuring fixture; production source is unchanged."
+}
