@@ -59,7 +59,7 @@ for(const m of modules){const fn=m.functions[0],id=path.relative(root,m.source).
    let cliffCheck=null;
    if(stats(nativeNs).median/stats(jsNs).median<=.9){
     const probe=path.join(temp,'deopt.mjs');
-    await writeFile(probe,`import {${fn.name} as f} from ${JSON.stringify(pathToFileURL(reference).href)};const args=${JSON.stringify(args)};let sink;for(let i=0;i<1000;i++)sink=f(...args);console.log('M1_BEGIN');for(let i=0;i<300;i++)sink=f(...args);console.log('M1_END');console.log(JSON.stringify(sink));`);
+    await writeFile(probe,`import {${fn.name} as f} from ${JSON.stringify(pathToFileURL(reference).href)};const args=${JSON.stringify(args)};let sink;for(let i=0;i<1000;i++)sink=f(...args);console.log('M1_BEGIN');for(let i=0;i<300;i++)sink=f(...args);console.log('M1_END');console.log(typeof sink);`);
     try{const trace=execFileSync(process.execPath,['--trace-deopt',probe],{encoding:'utf8',timeout:60000});const steady=trace.split('M1_BEGIN')[1]?.split('M1_END')[0]??'';cliffCheck={steadyDeopts:(steady.match(/bailout/g)??[]).length,trace,hasRemainder:/(?:%|remainder)/.test(m.referenceNative??m.native),scope:'1000 warm calls then 300 steady calls; diagnostic, not an optimized rewrite'};}catch(e){cliffCheck={status:'unavailable',reason:e.message};}
    }
    const protocolCI=bootstrap(pairs); const bytes=Buffer.byteLength(JSON.stringify(args)),j=stats(jsNs),n=stats(nativeNs),verdict=decideLane(pairs.slice(0,24),'js-final')==='native'?'native':pairs.filter(([a,b])=>b>=a).length>=stabilityDefaults.required?'JS':'unclear';
