@@ -25,6 +25,7 @@ if sys.argv[1:]==['merge']:
   A=D/'attempts/before-final-collector';A.mkdir(parents=True,exist_ok=True)
   if old.exists() and old.read_bytes()!=p.read_bytes():shutil.copy2(old,A/old.name)
   if slug in plan:
+   shutil.copy2(p,A/(slug+'-candidate'+''.join(p.suffixes)))
    new=next((N/(slug+e) for e in ['.json.gz','.json'] if (N/(slug+e)).exists()),None);assert new,slug
    fresh=read(new);assert fresh['install']['exit']==0,(slug,fresh['status'])
    kept=[s for s in d['scans'] if not set(files(s)).intersection(plan[slug].get(s['scanRoot'],[]))]
