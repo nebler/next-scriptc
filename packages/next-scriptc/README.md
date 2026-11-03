@@ -124,7 +124,8 @@ Build summaries print native function and module counts separately from native r
 promotion compiles candidates and shadow-checks them before deciding whether to
 use native for a workload. An accepted report row alone does not show that a
 request ran native. Compiler failures in automatic promotion retain the JS path;
-toolchain failures name the unavailable tool and preserve JS execution.
+toolchain failures name the unavailable tool and preserve JS execution. Functions
+marked `"use native"` are compile-or-fail: a missing toolchain stops the build.
 For helper permission or SC3004 failures, run `pnpm approve-builds` and
 `pnpm rebuild scriptc`. For missing `ar` or Clang on macOS, run
 `xcode-select --install`; on Debian/Ubuntu, run `sudo apt-get install build-essential`.

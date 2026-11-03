@@ -125,8 +125,8 @@ are unchanged.
 
 Extractor and discovery diagnostics include source positions, stable `NSC1000`
 through `NSC1005` codes, and repair hints. Compiler SC codes remain intact.
-`NSC2001` means a toolchain failure, names the unavailable tool, and confirms
-that the app continues in JS. For helper permission failures or SC3004, run
+`NSC2001` means a toolchain failure and names the unavailable tool. Automatic
+promotion continues in JS; functions marked `"use native"` stop the build. For helper permission failures or SC3004, run
 `pnpm approve-builds` followed by `pnpm rebuild scriptc`. Missing `ar` or Clang
 requires `xcode-select --install` on macOS or
 `sudo apt-get install build-essential` on Debian/Ubuntu.

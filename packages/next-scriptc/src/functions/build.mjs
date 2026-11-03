@@ -80,7 +80,9 @@ export async function prepareFunctions(config, projectDir) {
     child.once("exit", (code, signal) => code === 0 ? resolve() : reject(new Error(`[next-scriptc] Function compilation failed (${signal ?? `exit ${code}`}). See scriptc diagnostics above.`)));
   }); } catch(error) {
     const infrastructure=infrastructureFailure({message:error.message,stderr:compilerOutput,code:error.code,path:error.path});
-    if(infrastructure){plans.delete(projectDir);console.log(infrastructure);counts.set(projectDir,{functions:promotions.reduce((n,m)=>n+m.functions.length,0),modules:new Set(promotions.map(m=>m.source)).size});return withFunctions(config,promotions,0,projectDir,promotionFile);}
+    // "use native" promises compiled-or-fail, so a missing toolchain fails the build
+    // here. Automatic promotions keep their JS fallback in buildPromotion.
+    if(infrastructure){plans.delete(projectDir);throw Error(infrastructure.replace('The app continues in JS.','Functions marked "use native" require it, so the build stops.')+` Affected: ${modules.flatMap(m=>m.functions.map(f=>`${path.relative(projectDir,m.source)}#${f.name}`)).join(', ')}.`);}
     throw Error(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module})))+"\n"+error.message);
   }
   if(compilerOutput)console.log(translateDiagnostics(compilerOutput,modules.map((module,i)=>({file:path.join(output,`module-${i}.ts`),module}))));
