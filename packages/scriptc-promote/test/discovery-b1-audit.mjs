@@ -30,6 +30,7 @@ test('old alias mutation and externally mutable captures stay refused',()=>{
  for(const source of [
   'export function rows(x:number[]){const a=x;a.push(9);return a.map(v=>v+1);}',
   'export function rows(x:{n:number}[]){const a=x;for(const v of a)v.n++;return a.map(v=>v.n);}',
+  'const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'export const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'const table={n:2};function mutate(){table.n=4;}export function rows(x:number[]){return x.map(v=>v+table.n);}',
   'const table={get n(){return 2;}};export function rows(x:number[]){return x.map(v=>v+table.n);}',
@@ -53,4 +54,12 @@ test('borrowed mutation and stale captures have observable JS counterexamples',(
  const input=[{n:1}],js=x=>{const a=x;for(const v of a)v.n++;return a.map(v=>v.n);};
  const decoded=structuredClone(input);assert.deepEqual(js(decoded),[2]);assert.equal(input[0].n,1);js(input);assert.equal(input[0].n,2);
  const table={n:2},folded=2;table.n=9;assert.equal([1].map(v=>v+table.n)[0],10);assert.equal([1].map(v=>v+folded)[0],3);
+});
+test('construction and replay limits retain B1 refusals',()=>{
+ for(const text of [
+  'class Fault extends Error{};export function rows(x:string[]){return x.map(v=>{try{if(v==="bad")throw new Fault("bad");return v.length;}catch{return -1;}});}',
+  'const table={n:2};export function rows(x:number[]){const y=new Set(x);return x.map(v=>v+table.n+y.size);}',
+  'const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n).concat(x);}',
+  'const table={n:2};export function rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}',
+ ])assert.equal(discover(text),undefined,text);
 });

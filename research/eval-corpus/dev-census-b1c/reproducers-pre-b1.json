@@ -1,5 +1,51 @@
 [
   {
+    "name": "defaultEffect",
+    "text": "const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": true,
+    "messages": [
+      "[next-scriptc] not a candidate init: [next-scriptc] /tmp/b1c-fixtures/defaultEffect.ts:1:19 - NSC1004: purity: module state mutation Hint: Use local fresh values and avoid mutating arguments or module state."
+    ],
+    "native": "const table={n:2};\nfunction rows(x:number[]){return x.map(v=>v+table.n);}\nexport { rows };\n"
+  },
+  {
+    "name": "statefulLiteral",
+    "text": "const table={r:/x/g};export function advance(){table.r.test(\"x\");}export function rows(x:string[]){return x.map(v=>table.r.test(v));}",
+    "accepted": true,
+    "messages": [
+      "[next-scriptc] not a candidate advance: [next-scriptc] /tmp/b1c-fixtures/statefulLiteral.ts:1:29 - NSC1005: work: no loop, recursion, array callback or JSON parse Hint: Keep small helpers in JS, or mark a known hot synchronous helper with \"use native\"."
+    ],
+    "native": "const table={r:/x/g};\nfunction rows(x:string[]){return x.map(v=>table.r.test(v));}\nexport { rows };\n"
+  },
+  {
+    "name": "caught",
+    "text": "class Fault extends Error{};export function rows(x:string[]){return x.map(v=>{try{if(v===\"bad\")throw new Fault(\"bad\");return v.length;}catch{return -1;}});}",
+    "accepted": true,
+    "messages": [],
+    "native": "class Fault extends Error{}\nfunction rows(x:string[]){return x.map(v=>{try{if(v===\"bad\")throw new Fault(\"bad\");return v.length;}catch{return -1;}});}\nexport { rows };\n"
+  },
+  {
+    "name": "constructor",
+    "text": "const table={n:2};export function rows(x:number[]){const y=new Set(x);return x.map(v=>v+table.n+y.size);}",
+    "accepted": true,
+    "messages": [],
+    "native": "const table={n:2};\nfunction rows(x:number[]){const y=new Set(x);return x.map(v=>v+table.n+y.size);}\nexport { rows };\n"
+  },
+  {
+    "name": "unsupportedCall",
+    "text": "const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n).concat(x);}",
+    "accepted": true,
+    "messages": [],
+    "native": "const table={n:2};\nfunction rows(x:number[]){return x.map(v=>v+table.n).concat(x);}\nexport { rows };\n"
+  },
+  {
+    "name": "uninitialized",
+    "text": "const table={n:2};export function rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}",
+    "accepted": true,
+    "messages": [],
+    "native": "const table={n:2};\nfunction rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}\nexport { rows };\n"
+  },
+  {
     "name": "reverse",
     "text": "export function rows(x:number[]){const a=x.map(v=>v+1);a.reverse();return a;}",
     "accepted": true,

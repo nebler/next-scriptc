@@ -1,5 +1,55 @@
 [
   {
+    "name": "defaultEffect",
+    "text": "const table={n:2};function init(){table.n=9;return 0;}export default init();export function rows(x:number[]){return x.map(v=>v+table.n);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate init: [next-scriptc] /tmp/b1c-fixtures/defaultEffect.ts:1:19 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultEffect.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS.",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/defaultEffect.ts:1:84 - NSC1003: dependency closure: /tmp/b1c-fixtures/defaultEffect.ts: unproved module initialization default expression Hint: Move module setup into a declaration initializer or keep this module in JS."
+    ]
+  },
+  {
+    "name": "statefulLiteral",
+    "text": "const table={r:/x/g};export function advance(){table.r.test(\"x\");}export function rows(x:string[]){return x.map(v=>table.r.test(v));}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate advance: [next-scriptc] /tmp/b1c-fixtures/statefulLiteral.ts:1:29 - NSC1000: dependency closure: /tmp/b1c-fixtures/statefulLiteral.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\".",
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/statefulLiteral.ts:1:74 - NSC1000: dependency closure: /tmp/b1c-fixtures/statefulLiteral.ts: constant graph requires literals Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "caught",
+    "text": "class Fault extends Error{};export function rows(x:string[]){return x.map(v=>{try{if(v===\"bad\")throw new Fault(\"bad\");return v.length;}catch{return -1;}});}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/caught.ts:1:36 - NSC1000: dependency closure: /tmp/b1c-fixtures/caught.ts: throw fallback excludes local catch/finally Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "constructor",
+    "text": "const table={n:2};export function rows(x:number[]){const y=new Set(x);return x.map(v=>v+table.n+y.size);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/constructor.ts:1:26 - NSC1000: dependency closure: /tmp/b1c-fixtures/constructor.ts: unsupported NewExpression Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "unsupportedCall",
+    "text": "const table={n:2};export function rows(x:number[]){return x.map(v=>v+table.n).concat(x);}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/unsupportedCall.ts:1:26 - NSC1000: dependency closure: transitive effect proof: call outside local allocation allowlist at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
+    "name": "uninitialized",
+    "text": "const table={n:2};export function rows(x:number[]){let s:number;s=0;for(const v of x)s+=v;return s+table.n;}",
+    "accepted": false,
+    "messages": [
+      "[next-scriptc] not a candidate rows: [next-scriptc] /tmp/b1c-fixtures/uninitialized.ts:1:26 - NSC1000: dependency closure: transitive effect proof: initialized bindings required at 2 Hint: Use supported types and a closed pure helper, or opt out with \"use js\"."
+    ]
+  },
+  {
     "name": "reverse",
     "text": "export function rows(x:number[]){const a=x.map(v=>v+1);a.reverse();return a;}",
     "accepted": true,
