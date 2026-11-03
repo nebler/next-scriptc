@@ -49,3 +49,8 @@ test('restored reverse and arithmetic agree through the native ABI',async()=>{
   const js=x=>x.map(v=>v+6).reverse();for(const x of [[],[1,2],[-1,0,1]]){const original=[...x];assert.deepEqual(d.dispatch(id,js,[x]),js(x));assert.deepEqual(x,original);}assert.equal(d.snapshot()[id].native,3);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+test('borrowed mutation and stale captures have observable JS counterexamples',()=>{
+ const input=[{n:1}],js=x=>{const a=x;for(const v of a)v.n++;return a.map(v=>v.n);};
+ const decoded=structuredClone(input);assert.deepEqual(js(decoded),[2]);assert.equal(input[0].n,1);js(input);assert.equal(input[0].n,2);
+ const table={n:2},folded=2;table.n=9;assert.equal([1].map(v=>v+table.n)[0],10);assert.equal([1].map(v=>v+folded)[0],3);
+});

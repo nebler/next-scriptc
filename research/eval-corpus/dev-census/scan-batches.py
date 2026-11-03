@@ -3,7 +3,7 @@
 import pathlib,json,gzip,subprocess,os,sys,signal,time,collections,importlib.util
 ROOT=pathlib.Path.cwd();BASE=pathlib.Path(os.environ.get('DEV_CENSUS_OUTPUT',ROOT/'research/eval-corpus/dev-census'));TMP=pathlib.Path(os.environ.get('DEV_CENSUS_TEMP','/tmp/nsc-dev-census'));slug=sys.argv[1]
 # Use EV3's explicitly labeled compatible hosts for packages without the Node TS API.
-if slug in ['n8n','unleash'] and ('dev-census-b1' in os.environ.get('DEV_CENSUS_OUTPUT','') or 'b1-verified' in os.environ.get('DEV_CENSUS_OUTPUT','')):
+if slug in ['n8n','unleash']:
  os.environ['DEV_CENSUS_ROOT_TYPESCRIPT']='1'
  if slug=='unleash':
   os.environ['DEV_CENSUS_TYPESCRIPT_HOST_DIRECTORY']='/tmp/b1-tools'
