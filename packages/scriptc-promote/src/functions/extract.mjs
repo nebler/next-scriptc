@@ -1,4 +1,5 @@
 import { sourceDiagnostic } from './diagnostics.mjs';
+import {parserOptions} from './parser-options.mjs';
 import {babelModules} from '../babel.mjs';
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
@@ -21,7 +22,7 @@ const forbidden = (name) => /^(?:next|react|react-dom)(?:\/|$)/.test(name);
 
 export function extractFunctions(text, source, autoName = null, skipSync = false) {
   if (!autoName && !text.includes("use native") && !text.includes("use scriptc")) return null;
-  const ast = parse(text, { sourceType: "module", plugins: ["typescript", "jsx"] });
+  const ast = parse(text, parserOptions(source) );
   const fileLevel = marked(ast.program, source);
   const client = ast.program.directives.some((directive) => directive.value.value === "use client");
   const functions = [];
@@ -171,7 +172,7 @@ export async function discoverFunctions(projectDir, distDir, config) {
           const file = resolved.resolvedFileName;
           visited.add(file);
           if (!/\.[cm]?[jt]sx?$/.test(file)) return;
-          const ast = parse(await readFile(file, "utf8"), { sourceType: "module", plugins: ["typescript", "jsx"] });
+          const ast = parse(await readFile(file, "utf8"), parserOptions(file));
           traverse(ast, {
             JSXElement() { fail(`unsupported React/JSX in ${file}`); },
             JSXFragment() { fail(`unsupported React/JSX in ${file}`); },

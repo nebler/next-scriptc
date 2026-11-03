@@ -20,7 +20,11 @@ test('package exports and main resolve runtime JavaScript instead of declaration
  const result=dependencyClosure(text,file,'rows');assert.equal(promotionCandidates(text,file).length,1);assert.equal(result.dependencies[0].package.version,'1.2.3');assert.doesNotMatch(result.native,/require|exports\./);
  assert.throws(()=>dependencyClosure(text,file,'rows',{unsupportedResolver:true}),/custom application resolver/);
  write('node_modules/tiny/package.json',JSON.stringify({name:'tiny',version:'1.2.3',type:'module',exports:{node:'./index.js',default:'./index.js'}}));
- assert.throws(()=>dependencyClosure(text,file,'rows'),/unsupported package export condition node/);
+ assert.match(dependencyClosure(text,file,'rows').native,/twice/);
+ write('node_modules/tiny/index.js','console.log("effect");export function twice(){return 2;}');
+ assert.throws(()=>dependencyClosure(text,file,'rows'),/module initialization/);
+ fs.rmSync(path.join(dir,'node_modules/tiny/index.js'));
+ assert.throws(()=>dependencyClosure(text,file,'rows'),/unresolved runtime import/);
 }));
 test('reachable initialization, state, dynamic access and cycles fail closed',()=>fixture((dir,write)=>{
  const entry='import {twice} from "./helper";export function rows(x:number[]){return x.map(v=>twice(v));}',file=write('entry.ts',entry);

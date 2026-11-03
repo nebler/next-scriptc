@@ -30,7 +30,7 @@ test('coverage measurement: compute-dense native and object-heavy JS', {timeout:
  const report=await coverageReport(root,{measure:true,root,inputs:input});
  const numeric=report.measurements.find(r=>r.id.endsWith('#numeric')),objects=report.measurements.find(r=>r.id.endsWith('#objects'));
  if(numeric?.status==='compile-rejected'&&/not found|permission|ENOENT|headers|checker|llvm/i.test(numeric.reason)){t.skip('Native build prerequisites unavailable: '+numeric.reason.slice(0,200));return;}
- assert.ok(numeric,JSON.stringify(report));assert.equal(numeric.status,'ok',JSON.stringify(numeric));assert.equal(objects.status,'ok',JSON.stringify(objects));assert.equal(numeric.verdict,'native');assert.equal(objects.verdict,'JS');assert.equal(numeric.js.n,24);assert.equal(objects.inputSource,'user-provided');assert.ok(objects.boundaryShare>0);assert.ok(objects.computeIntensity>0);const synthetic=report.measurements.find(r=>r.id.endsWith('#synthetic'));assert.equal(synthetic.status,'ok',JSON.stringify(synthetic));assert.equal(synthetic.inputSource,'synthetic');
+ assert.ok(numeric,JSON.stringify(report));assert.equal(numeric.status,'ok',JSON.stringify(numeric));assert.equal(objects.status,'ok',JSON.stringify(objects));assert.equal(numeric.verdict,'native',JSON.stringify(numeric));assert.equal(objects.verdict,'JS');assert.equal(numeric.js.n,24);assert.equal(objects.inputSource,'user-provided');assert.ok(objects.boundaryShare>0);assert.ok(objects.computeIntensity>0);const synthetic=report.measurements.find(r=>r.id.endsWith('#synthetic'));assert.equal(synthetic.status,'ok',JSON.stringify(synthetic));assert.equal(synthetic.inputSource,'synthetic');
  }finally{await rm(root,{recursive:true,force:true});}
  }finally{await rm(dir,{recursive:true,force:true});}
 });
