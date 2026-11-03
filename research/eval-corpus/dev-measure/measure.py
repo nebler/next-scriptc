@@ -12,7 +12,10 @@ for s in base.get('scans',[]):
   for fn in f['functions']:
    if fn['status']=='accepted':
     root=s['scanRoot'];groups[root].add(f['file']);cohort.append({'id':str(pathlib.Path(root)/fn['id']),'scanRoot':root,'function':fn})
+retryPlan=json.loads(os.environ.get('DEV_MEASURE_RETRY_PLAN','{}')).get(slug)
+if retryPlan is not None:groups={root:files.intersection(retryPlan.get(root,[])) for root,files in groups.items()}
 d['cohort']=cohort;d['scans']=[]
+if retryPlan is not None:d['retrySelection']=retryPlan
 if os.environ.get('DEV_MEASURE_FINAL'):d['finalFixtureRefresh']=True
 for root,files in groups.items():
  files=sorted(files)
