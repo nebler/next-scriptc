@@ -1,0 +1,211 @@
+{
+  "date": "2026-11-03",
+  "node": "v26.13.0",
+  "method": "Inspector sampling in production Next servers; local HTTP load, no deployment",
+  "apps": {
+    "shared-native": {
+      "captures": [
+        {
+          "sampledUs": 2866520,
+          "idleUs": 46748,
+          "totalUs": 2819772,
+          "samples": 1439,
+          "timing": "timeDeltas"
+        }
+      ],
+      "totalUs": 2819772,
+      "idleUs": 46748,
+      "mappedSelfShare": 0.8728237602189113,
+      "functions": [
+        {
+          "id": "lib/forecast.ts#forecast",
+          "line": 20,
+          "status": "accepted",
+          "async": false,
+          "selfUs": 2461164,
+          "inclusiveUs": 2461164,
+          "selfShare": 0.8728237602189113,
+          "inclusiveShare": 0.8728237602189113,
+          "confidence": [
+            "source-map"
+          ],
+          "potential": {
+            "share": 0.7728359887949722,
+            "ratio": 0.11455665620154676,
+            "kind": "optimistic estimate using best --measure native/JS CPU ratio; assumes JS baseline and representative inputs"
+          },
+          "exclusionReason": null
+        },
+        {
+          "id": "app/api/forecast/route.ts#POST",
+          "line": 5,
+          "status": "excluded",
+          "async": true,
+          "selfUs": 0,
+          "inclusiveUs": 2672683,
+          "selfShare": 0,
+          "inclusiveShare": 0.947836562672443,
+          "confidence": [
+            "source-map"
+          ],
+          "potential": {
+            "share": 0,
+            "kind": "CPU share ceiling only; no measured CPU ratio"
+          },
+          "exclusionReason": "Async functions are excluded from automatic synchronous promotion."
+        }
+      ],
+      "measurements": [
+        {
+          "id": "lib/forecast.ts#forecast",
+          "status": "ok",
+          "metric": "thread-cpu",
+          "inputSource": "user-provided",
+          "jsMedian": 1983624.999999961,
+          "nativeMedian": 326832.9999999082
+        },
+        {
+          "id": "lib/forecast.ts#forecast",
+          "status": "ok",
+          "metric": "thread-cpu",
+          "inputSource": "user-provided",
+          "jsMedian": 19977834.00000003,
+          "nativeMedian": 2459875.9999998948
+        },
+        {
+          "id": "lib/forecast.ts#forecast",
+          "status": "ok",
+          "metric": "thread-cpu",
+          "inputSource": "user-provided",
+          "jsMedian": 206280374.99999937,
+          "nativeMedian": 23630790.00000107
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "dlopen",
+          "selfUs": 197776
+        },
+        {
+          "name": "post",
+          "selfUs": 81151
+        },
+        {
+          "name": "(garbage collector)",
+          "selfUs": 18161
+        },
+        {
+          "name": "spawn",
+          "selfUs": 6046
+        },
+        {
+          "name": "analyze",
+          "selfUs": 4669
+        },
+        {
+          "name": "Request",
+          "selfUs": 3098
+        },
+        {
+          "name": "read",
+          "selfUs": 3037
+        },
+        {
+          "name": "renderToResponseWithComponentsImpl",
+          "selfUs": 2991
+        }
+      ],
+      "buildId": "7fbLpA2rhV_TwcVrhoDdQ",
+      "captureSha256": "889d24ed6236a676fff972b76a2b82edbbae6fd19b188ece0aeb45204d3cc9b2"
+    },
+    "demo": {
+      "captures": [
+        {
+          "sampledUs": 953623,
+          "idleUs": 101041,
+          "totalUs": 852582,
+          "samples": 571,
+          "timing": "timeDeltas"
+        }
+      ],
+      "totalUs": 852582,
+      "idleUs": 101041,
+      "mappedSelfShare": 0.4504950843437933,
+      "functions": [
+        {
+          "id": "app/api/primes/route.native.ts#GET",
+          "line": 1,
+          "status": "excluded",
+          "async": false,
+          "selfUs": 378620,
+          "inclusiveUs": 378692,
+          "selfShare": 0.4440863166240901,
+          "inclusiveShare": 0.44417076597910815,
+          "confidence": [
+            "source-map"
+          ],
+          "potential": {
+            "share": 0.4440863166240901,
+            "kind": "CPU share ceiling only; no measured CPU ratio"
+          },
+          "exclusionReason": "Native route handlers use the separate route compiler; extract a pure synchronous helper for function promotion."
+        },
+        {
+          "id": "app/api/search/route.native.ts#GET",
+          "line": 13,
+          "status": "excluded",
+          "async": false,
+          "selfUs": 5464,
+          "inclusiveUs": 32484,
+          "selfShare": 0.006408767719703208,
+          "inclusiveShare": 0.03810073400564403,
+          "confidence": [
+            "source-map"
+          ],
+          "potential": {
+            "share": 0.006408767719703208,
+            "kind": "CPU share ceiling only; no measured CPU ratio"
+          },
+          "exclusionReason": "Native route handlers use the separate route compiler; extract a pure synchronous helper for function promotion."
+        }
+      ],
+      "unmapped": [
+        {
+          "name": "post",
+          "selfUs": 73110
+        },
+        {
+          "name": "u",
+          "selfUs": 37579
+        },
+        {
+          "name": "addTerm",
+          "selfUs": 18241
+        },
+        {
+          "name": "add",
+          "selfUs": 15814
+        },
+        {
+          "name": "(garbage collector)",
+          "selfUs": 15674
+        },
+        {
+          "name": "(program)",
+          "selfUs": 15052
+        },
+        {
+          "name": "termResults",
+          "selfUs": 14241
+        },
+        {
+          "name": "paragraph",
+          "selfUs": 10586
+        }
+      ],
+      "buildId": "SH6iJvfnABI-IzfZIj81E",
+      "captureSha256": "a6478f84681e4f14a8d2c2dcb4d9ff57ef6d55f41c402a5903a4b5e3e2fc0182"
+    }
+  },
+  "sourceRevision": "94aa0ced6878a94898911b4b4290d395d7bc777a"
+}

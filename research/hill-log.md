@@ -1825,3 +1825,33 @@ worktree helper repair. Next suite: 102 pass; core: 68 pass, two existing skips.
 No protected checkout, compiler tree, root README, discovery file, deploy, Docker,
 external hosting, push, PR, issue, post, or secret is involved.
 [Measurements, commands, limits, and raw evidence](shared-native-demo.md).
+
+## 62. P3 profile-guided promotion (2026-11-03)
+
+`report --profile` now joins repeated standard V8 CPU captures to discovery
+through local external, inline, indexed, Next/Turbopack and webpack source maps.
+AST ranges attribute self/inclusive time, including excluded nested functions and
+methods. File/name fallbacks carry heuristic labels. Idle is excluded; GC/native
+and unknown CPU remain visible. Ranking uses self CPU potential, with an explicitly
+conditional estimate from CPU measurements or snapshots, otherwise a share ceiling.
+Hot blocked rows preserve exact diagnostics and repair hints. Async and native-route
+exclusions suggest inspecting a pure synchronous core. `--suggest` never edits code.
+
+Local built Next servers receive short HTTP loads under inspector sampling.
+D1 forecast ranks first, accepted, at 87.28% of non-idle sampled CPU; the best
+measured ratio gives a conditional 77.28% potential, not an observed endpoint
+saving. Demo's JS baseline loads primes, Markdown and search: prime GET ranks
+first at 44.41%, with its separate native-route compiler exclusion explained.
+All mapped app rows in these minified/bundled captures use source maps. Mapped
+self coverage is 87.28%/45.05%, not a mapping accuracy rate. Unmapped library,
+setup, GC and profiler work remains in the denominator. A reusable local capture
+script completes a second pair of captures.
+
+Four profile tests cover parsing, maps/sourceRoot, known attribution, recursion,
+real discovery/CLI joins, statuses, ranking, async methods, idle, ratios and honest
+heuristics. Next suite: 102 pass; core: 72 pass, two existing skips. Both production
+builds and diff checks pass. Docs explain capture for Next, Nitro and Vite SSR,
+production sampling, confidence and estimate limits. Discovery acceptance and
+dispatch policy are unchanged. No root README, main checkout, protected compiler
+tree, held-out app, external service, deploy, Docker, push, PR, issue, post or secret.
+[Design, sample output, mapping coverage and limits](profile-guided-promotion.md).

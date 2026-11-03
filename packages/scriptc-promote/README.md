@@ -1,5 +1,7 @@
 # scriptc-promote
 
+Use [Find what to promote](../../docs/find-what-to-promote.md) to rank server CPU hotspots with `report --profile file.cpuprofile --suggest`.
+
 Start with the [tested adapter quick starts](../../docs/quick-start.md) and
 [how promotion works](../../docs/how-it-works.md). Diagnose installs with
 `pnpm exec scriptc-promote doctor .` (`--json` for structured output).

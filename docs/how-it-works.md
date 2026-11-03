@@ -76,6 +76,9 @@ Run `doctor` before building to check installation, helpers, toolchain, config,
 TypeScript, and writable cache space. Failed checks return status 1 and repair
 instructions. It never repairs files automatically.
 
+Use [Find what to promote](find-what-to-promote.md) to rank server CPU hotspots
+and inspect blockers with `report --profile file.cpuprofile --suggest`.
+
 Run `report` to see accepted, explicit, blocked, and excluded functions with source
 positions. Add `--runtime snapshot.json` for observed dispatcher activity.
 Run `fuzz` to compile and compare bounded seeded cases with the JS reference.
