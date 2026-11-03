@@ -1,0 +1,915 @@
+{
+  "mappedNodes": 146,
+  "totalNodes": 336,
+  "bounds": {
+    "startUs": 115195472761,
+    "stopUs": 115203492263
+  },
+  "excludedUs": 129510,
+  "totalsUs": {
+    "html": 3327713,
+    "flight": 0,
+    "application": 1487327,
+    "serialization": 13666,
+    "data": 0,
+    "routing": 1709168,
+    "http": 798669,
+    "gc": 160374,
+    "other": 472028,
+    "idle": 49461
+  },
+  "activeUs": 7968945,
+  "percent": {
+    "html": 41.758513830877234,
+    "flight": 0,
+    "application": 18.664038966262158,
+    "serialization": 0.17149070548234427,
+    "data": 0,
+    "routing": 21.447857903398756,
+    "http": 10.022267690390635,
+    "gc": 2.0124872238420517,
+    "other": 5.923343679746817
+  },
+  "topFrames": [
+    {
+      "frame": {
+        "functionName": "hash",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/utils/hash.js",
+        "lineNumber": 4,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 1565665
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "237",
+        "url": "../../../../../../shared/data.js",
+        "lineNumber": 1,
+        "columnNumber": 34
+      },
+      "category": "application",
+      "us": 1064494
+    },
+    {
+      "frame": {
+        "functionName": "#traverse_components",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 648,
+        "columnNumber": 2
+      },
+      "category": "html",
+      "us": 1021542
+    },
+    {
+      "frame": {
+        "functionName": "escape_html",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/escaping.js",
+        "lineNumber": 8,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 553131
+    },
+    {
+      "frame": {
+        "functionName": "#collect_ondestroy",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 662,
+        "columnNumber": 2
+      },
+      "category": "html",
+      "us": 545866
+    },
+    {
+      "frame": {
+        "functionName": "encode",
+        "scriptId": "50",
+        "url": "node:internal/encoding",
+        "lineNumber": 354,
+        "columnNumber": 8
+      },
+      "category": "http",
+      "us": 469795
+    },
+    {
+      "frame": {
+        "functionName": "records",
+        "scriptId": "237",
+        "url": "../../../../../../shared/data.js",
+        "lineNumber": 0,
+        "columnNumber": 16
+      },
+      "category": "application",
+      "us": 421292
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "237",
+        "url": "../../../../src/lib/Row.svelte",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 282544
+    },
+    {
+      "frame": {
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 224749
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 410,
+        "columnNumber": 7
+      },
+      "category": "html",
+      "us": 210831
+    },
+    {
+      "frame": {
+        "functionName": "#collect_on_destroy",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 638,
+        "columnNumber": 2
+      },
+      "category": "html",
+      "us": 188669
+    },
+    {
+      "frame": {
+        "functionName": "#collect_content",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 800,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 176705
+    },
+    {
+      "frame": {
+        "functionName": "(garbage collector)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "gc",
+      "us": 160374
+    },
+    {
+      "frame": {
+        "functionName": "encodeUtf8String",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 145251
+    },
+    {
+      "frame": {
+        "functionName": "writev",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 121414
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "237",
+        "url": "../../../../src/lib/Page.svelte",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 120297
+    },
+    {
+      "frame": {
+        "functionName": "Cell",
+        "scriptId": "237",
+        "url": "../../../../src/lib/Cell.svelte",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 79001
+    },
+    {
+      "frame": {
+        "functionName": "webidl.util.getCopyOfBytesHeldByBufferSource",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5185,
+        "columnNumber": 59
+      },
+      "category": "other",
+      "us": 62709
+    },
+    {
+      "frame": {
+        "functionName": "(idle)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "idle",
+      "us": 49461
+    },
+    {
+      "frame": {
+        "functionName": "Badge",
+        "scriptId": "237",
+        "url": "../../../../src/lib/Badge.svelte",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 36709
+    },
+    {
+      "frame": {
+        "functionName": "render_response",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/page/render.js",
+        "lineNumber": 58,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 31624
+    },
+    {
+      "frame": {
+        "functionName": "attr",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/shared/attributes.js",
+        "lineNumber": 24,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 29833
+    },
+    {
+      "frame": {
+        "functionName": "child",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 287,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 29042
+    },
+    {
+      "frame": {
+        "functionName": "Renderer",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 180,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 20917
+    },
+    {
+      "frame": {
+        "functionName": "#run_on_destroy",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 680,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 14916
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 6932,
+        "columnNumber": 9
+      },
+      "category": "other",
+      "us": 13541
+    },
+    {
+      "frame": {
+        "functionName": "_Request",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 12089,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 12207
+    },
+    {
+      "frame": {
+        "functionName": "AsyncContextFrame",
+        "scriptId": "21",
+        "url": "node:internal/async_context_frame",
+        "lineNumber": 42,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 10417
+    },
+    {
+      "frame": {
+        "functionName": "run",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 8875
+    },
+    {
+      "frame": {
+        "functionName": "internal_respond",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/respond.js",
+        "lineNumber": 92,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 8875
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5057,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 8583
+    },
+    {
+      "frame": {
+        "functionName": "parse",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 7541
+    },
+    {
+      "frame": {
+        "functionName": "set TextDecoder",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 7501
+    },
+    {
+      "frame": {
+        "functionName": "probe",
+        "scriptId": "129",
+        "url": "../../../node_modules/@sveltejs/kit/src/exports/node/index.js",
+        "lineNumber": 269,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 7417
+    },
+    {
+      "frame": {
+        "functionName": "__name",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 3,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 7333
+    },
+    {
+      "frame": {
+        "functionName": "getRequest",
+        "scriptId": "129",
+        "url": "../../../node_modules/@sveltejs/kit/src/exports/node/index.js",
+        "lineNumber": 120,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 7166
+    },
+    {
+      "frame": {
+        "functionName": "parserOnHeadersComplete",
+        "scriptId": "158",
+        "url": "node:_http_common",
+        "lineNumber": 76,
+        "columnNumber": 32
+      },
+      "category": "http",
+      "us": 6126
+    },
+    {
+      "frame": {
+        "functionName": "runMicrotasks",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 6125
+    },
+    {
+      "frame": {
+        "functionName": "boundary",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 328,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 6084
+    },
+    {
+      "frame": {
+        "functionName": "fn",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/respond.js",
+        "lineNumber": 489,
+        "columnNumber": 7
+      },
+      "category": "routing",
+      "us": 6084
+    },
+    {
+      "frame": {
+        "functionName": "build",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/page/render.js",
+        "lineNumber": 661,
+        "columnNumber": 1
+      },
+      "category": "routing",
+      "us": 6083
+    },
+    {
+      "frame": {
+        "functionName": "stringify",
+        "scriptId": "152",
+        "url": "../../../../node_modules/devalue/src/uneval.js",
+        "lineNumber": 217,
+        "columnNumber": 10
+      },
+      "category": "serialization",
+      "us": 6083
+    },
+    {
+      "frame": {
+        "functionName": "webidl.converters.ByteString",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5218,
+        "columnNumber": 43
+      },
+      "category": "other",
+      "us": 6041
+    },
+    {
+      "frame": {
+        "functionName": "get_cookies",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/cookie.js",
+        "lineNumber": 41,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 6002
+    },
+    {
+      "frame": {
+        "functionName": "setResponse",
+        "scriptId": "129",
+        "url": "../../../node_modules/@sveltejs/kit/src/exports/node/index.js",
+        "lineNumber": 208,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 6000
+    },
+    {
+      "frame": {
+        "functionName": "fill",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11129,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 5958
+    },
+    {
+      "frame": {
+        "functionName": "_Response",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11649,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 5915
+    },
+    {
+      "frame": {
+        "functionName": "readableByteStreamControllerEnqueue",
+        "scriptId": "208",
+        "url": "node:internal/webstreams/readablestream",
+        "lineNumber": 3254,
+        "columnNumber": 44
+      },
+      "category": "http",
+      "us": 5750
+    },
+    {
+      "frame": {
+        "functionName": "decode_pathname",
+        "scriptId": "151",
+        "url": "../../../../node_modules/@sveltejs/kit/src/utils/url.js",
+        "lineNumber": 83,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 4584
+    },
+    {
+      "frame": {
+        "functionName": "append",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11244,
+        "columnNumber": 12
+      },
+      "category": "other",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5084,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "_addHeaderLine",
+        "scriptId": "160",
+        "url": "node:_http_incoming",
+        "lineNumber": 452,
+        "columnNumber": 23
+      },
+      "category": "http",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "record_span",
+        "scriptId": "151",
+        "url": "../../../../node_modules/@sveltejs/kit/src/exports/internal/server/telemetry.js",
+        "lineNumber": 32,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 4541
+    },
+    {
+      "frame": {
+        "functionName": "render_page",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/page/index.js",
+        "lineNumber": 41,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 4500
+    },
+    {
+      "frame": {
+        "functionName": "isValidHeaderValue",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5519,
+        "columnNumber": 31
+      },
+      "category": "other",
+      "us": 4416
+    },
+    {
+      "frame": {
+        "functionName": "ssr",
+        "scriptId": "129",
+        "url": "../../../node_modules/@sveltejs/adapter-node/src/handler.js",
+        "lineNumber": 42,
+        "columnNumber": 12
+      },
+      "category": "routing",
+      "us": 4292
+    },
+    {
+      "frame": {
+        "functionName": "emit",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 488,
+        "columnNumber": 43
+      },
+      "category": "other",
+      "us": 4208
+    },
+    {
+      "frame": {
+        "functionName": "push",
+        "scriptId": "220",
+        "url": "../../../../node_modules/svelte/src/internal/server/renderer.js",
+        "lineNumber": 530,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 4167
+    },
+    {
+      "frame": {
+        "functionName": "_write",
+        "scriptId": "105",
+        "url": "node:internal/streams/writable",
+        "lineNumber": 451,
+        "columnNumber": 15
+      },
+      "category": "http",
+      "us": 4000
+    },
+    {
+      "frame": {
+        "functionName": "collect_remote_data",
+        "scriptId": "151",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/remote-functions.js",
+        "lineNumber": 361,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 3583
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/components/root.svelte",
+        "lineNumber": 0,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 3167
+    },
+    {
+      "frame": {
+        "functionName": "addEventListener",
+        "scriptId": "60",
+        "url": "node:internal/event_target",
+        "lineNumber": 635,
+        "columnNumber": 18
+      },
+      "category": "other",
+      "us": 3084
+    },
+    {
+      "frame": {
+        "functionName": "nextTick",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 112,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 3083
+    },
+    {
+      "frame": {
+        "functionName": "setHeader",
+        "scriptId": "161",
+        "url": "node:_http_outgoing",
+        "lineNumber": 699,
+        "columnNumber": 56
+      },
+      "category": "http",
+      "us": 3082
+    },
+    {
+      "frame": {
+        "functionName": "processTicksAndRejections",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 71,
+        "columnNumber": 34
+      },
+      "category": "other",
+      "us": 3073
+    },
+    {
+      "frame": {
+        "functionName": "build_error_chain",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/error-chain.js",
+        "lineNumber": 13,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "respond_to",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/instance.js",
+        "lineNumber": 121,
+        "columnNumber": 15
+      },
+      "category": "routing",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "safe_key",
+        "scriptId": "152",
+        "url": "../../../../node_modules/devalue/src/uneval.js",
+        "lineNumber": 676,
+        "columnNumber": 9
+      },
+      "category": "serialization",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "removeListener",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 679,
+        "columnNumber": 27
+      },
+      "category": "other",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "Readable.read",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 656,
+        "columnNumber": 34
+      },
+      "category": "http",
+      "us": 3041
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11433,
+        "columnNumber": 9
+      },
+      "category": "other",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "is_csrf_forbidden",
+        "scriptId": "218",
+        "url": "../../../../node_modules/@sveltejs/kit/src/runtime/server/csrf.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "_storeHeader",
+        "scriptId": "161",
+        "url": "node:_http_outgoing",
+        "lineNumber": 455,
+        "columnNumber": 21
+      },
+      "category": "http",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11294,
+        "columnNumber": 9
+      },
+      "category": "other",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "ArrayBufferViewGetByteLength",
+        "scriptId": "209",
+        "url": "node:internal/webstreams/util",
+        "lineNumber": 117,
+        "columnNumber": 37
+      },
+      "category": "http",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "writevGeneric",
+        "scriptId": "110",
+        "url": "node:internal/stream_base_commons",
+        "lineNumber": 71,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 2959
+    },
+    {
+      "frame": {
+        "functionName": "set",
+        "scriptId": "163",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11463,
+        "columnNumber": 9
+      },
+      "category": "other",
+      "us": 2958
+    },
+    {
+      "frame": {
+        "functionName": "getLibuvNow",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 2917
+    },
+    {
+      "frame": {
+        "functionName": "add_data_suffix",
+        "scriptId": "151",
+        "url": "../../../../node_modules/@sveltejs/kit/src/pathname.js",
+        "lineNumber": 9,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 2916
+    },
+    {
+      "frame": {
+        "functionName": "removeEventListener",
+        "scriptId": "60",
+        "url": "node:internal/event_target",
+        "lineNumber": 736,
+        "columnNumber": 21
+      },
+      "category": "other",
+      "us": 2708
+    }
+  ]
+}

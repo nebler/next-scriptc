@@ -1,16 +1,8 @@
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { resolve } from "node:path";
 const root = process.argv[2];
-const labels = [
-  "plain-string",
-  "plain-stream",
-  "concat",
-  "next",
-  "router",
-  "epic-users",
-  "blog",
-];
+const labels = readdirSync(root).filter(f => f.endsWith(".json.gz") && !f.endsWith("-steady.json.gz")).map(f=>f.slice(0,-8)).filter(label => { const x=JSON.parse(gunzipSync(readFileSync(resolve(root,label+".json.gz")))); return Array.isArray(x.blocks); });
 const median = (a) => [...a].sort((a, b) => a - b)[Math.floor(a.length / 2)];
 const range = (a) => ({
   median: median(a),

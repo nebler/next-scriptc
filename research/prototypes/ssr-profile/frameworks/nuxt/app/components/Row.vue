@@ -1,0 +1,1 @@
+<script setup>import Cell from "./Cell.vue";import Badge from "./Badge.vue";defineProps(["r"]);</script><template><tr><Cell  :value="r.id"/><td><strong>{{r.name}}</strong></td><Cell  :value="r.email"/><Cell  :value="r.amount"/><Cell  :value="r.date"/><td><Badge  :status="r.status"/></td></tr></template>

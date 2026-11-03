@@ -2205,3 +2205,19 @@ is not established. Raw profiles, all latency blocks, failed attempts, attributi
 rules, and shared-host limitations are retained. No scriptc, push, or deploy.
 
 [Method, tables, ceiling, and verdict](ssr-cpu-breakdown-react.md).
+
+## 77. SSR beyond React: compiled templates retain runtime costs (2026-11-03)
+
+The same 500-row fixture now covers Astro Node SSR, SvelteKit adapter-node on
+Svelte 5, and Nuxt Vue SSR on Nitro node-server. Request CPU at C1 is 2.425,
+1.305, and 3.774 ms; sampled HTML shares are 52.9%, 41.8%, and 22.4%.
+Isolated Svelte rendering costs 0.579 ms versus fresh React's 1.351 ms and paired
+concat's 0.498 ms. Vue costs 2.068 ms despite compiled templates, with component
+setup prominent. Real AstroPaper and Nuxt dashboard HTML shares are only 5.9%
+and 10.2%. No practical Svelte 5 real-app candidate survived this screen.
+A bounded plain React/React Router transform remains worth prototyping;
+Next's earlier Flight bottleneck remains. All raw blocks, profiles, normalized
+HTML checks, failed attempts, host activity, and reproduction sources are retained.
+No push or deploy.
+
+[Method, cross-framework tables, attribution, and limits](ssr-cpu-breakdown-frameworks.md).

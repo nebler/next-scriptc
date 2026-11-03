@@ -1,0 +1,292 @@
+{
+  "astro-site": {
+    "revision": "60db50e16292754c9d56d0de25b871231af020af",
+    "package": {
+      "name": "@example/minimal",
+      "type": "module",
+      "version": "0.0.1",
+      "private": true,
+      "scripts": {
+        "dev": "MINIFLARE_WORKERD_V8_FLAGS=--no-maglev astro dev",
+        "start": "MINIFLARE_WORKERD_V8_FLAGS=--no-maglev astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "deploy": "wrangler deploy",
+        "lint": "biome lint",
+        "format": "pnpm run format:code && pnpm run format:imports",
+        "format:code": "biome format --write && prettier -w \"**/*.astro\" --ignore-unknown --cache",
+        "format:imports": "biome check --formatter-enabled=false --linter-enabled=false --write",
+        "format-unsafe": "biome check --write --unsafe",
+        "typecheck": "astro check",
+        "update:integrations": "node --env-file-if-exists=.env ./scripts/update-integrations.mjs",
+        "update:showcase": "node --env-file-if-exists=.env ./scripts/update-showcase.mjs",
+        "update:stats": "node ./scripts/update-stats.mjs",
+        "update:themes": "node ./scripts/update-themes.mjs"
+      },
+      "dependencies": {
+        "@astro-community/astro-embed-youtube": "^0.5.10",
+        "@astrojs/check": "0.9.10",
+        "@astrojs/cloudflare": "^14.3.3",
+        "@astrojs/mdx": "^8.0.2",
+        "@astrojs/rss": "4.0.19",
+        "@astrojs/sitemap": "3.7.4",
+        "@astrojs/tailwind": "^6.0.2",
+        "@biomejs/biome": "2.6.4",
+        "@preact/signals-core": "^1.14.5",
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@types/node": "^26.6.6",
+        "astro": "^7.3.5",
+        "astro-embed": "^0.14.0",
+        "astro-expressive-code": "^0.44.3",
+        "astro-icon": "^1.2.0",
+        "chart.js": "4.4.8",
+        "date-fns": "^4.4.0",
+        "prettier": "^3.9.10",
+        "prettier-plugin-astro": "^1.1.2",
+        "sharp": "^0.35.5",
+        "smartypants": "^0.2.2",
+        "tailwindcss": "^3.4.19",
+        "typescript": "^6.0.3",
+        "xss": "^1.0.17"
+      },
+      "devDependencies": {
+        "@actions/core": "^3.0.1",
+        "@octokit/graphql": "^9.0.5",
+        "@playwright/test": "^1.64.1",
+        "linkedom": "^0.18.14",
+        "mdast-util-from-markdown": "^2.1.0",
+        "mdast-util-to-string": "^4.0.0",
+        "p-limit": "^7.3.3",
+        "p-retry": "^8.0.1",
+        "wrangler": "^4.156.0",
+        "yaml": "^2.9.1"
+      },
+      "packageManager": "pnpm@11.28.10"
+    },
+    "licenseFirstLine": "missing"
+  },
+  "evidence": {
+    "revision": "c96f5deb1f3cfb8bb73ad4a44a420f3fe7c83cc7",
+    "package": {
+      "name": "evidence",
+      "private": true,
+      "type": "module",
+      "packageManager": "pnpm@9.15.0",
+      "devDependencies": {
+        "vitest": "^4.1.2",
+        "@vitest/coverage-v8": "^4.1.2"
+      },
+      "scripts": {
+        "test": "pnpm -r test",
+        "test:coverage": "pnpm -r test -- --coverage",
+        "check": "pnpm --filter @evidence/core check && pnpm --filter @evidence/cli check",
+        "cli:build": "pnpm --filter @evidence/cli build",
+        "cli:check": "pnpm --filter @evidence/cli check",
+        "cli:lint": "pnpm --filter @evidence/cli lint",
+        "cli:test": "pnpm --filter @evidence/cli test",
+        "docs:dev": "cd docs && mint dev",
+        "evd": "bun cli/cli/index.ts --project cli/test-environment"
+      },
+      "pnpm": {
+        "overrides": {
+          "@opentelemetry/core": ">=2.8.0",
+          "zod": ">=3.24.2",
+          "lodash": ">=4.18.1",
+          "lodash-es": ">=4.18.1",
+          "lodash-amd": ">=4.18.1",
+          "lodash.template": ">=4.18.1",
+          "minimatch": ">=10.2.4",
+          "@isaacs/brace-expansion": ">=5.0.1",
+          "tar": ">=7.5.22",
+          "axios": ">=1.20.0",
+          "esbuild": ">=0.28.1",
+          "undici": ">=8.12.2",
+          "@codemirror/state": ">=6.6.0",
+          "cookie": ">=0.7.2",
+          "protobufjs": ">=8.6.6",
+          "path-to-regexp": ">=8.4.2",
+          "qs": ">=6.16.1",
+          "fast-xml-parser": ">=5.7.0",
+          "ip-address": ">=10.7.0",
+          "form-data": ">=2.5.6",
+          "hono": ">=4.13.5",
+          "@hono/node-server": ">=1.19.15 <2",
+          "postcss": ">=8.5.23",
+          "nanoid": ">=3.3.17",
+          "postcss>nanoid": ">=3.3.17 <4",
+          "joi": ">=18.2.9",
+          "thrift": ">=0.23.0",
+          "unzipper": ">=0.12.5",
+          "uuid": ">=11.1.1 <12",
+          "vite": ">=7.3.5 <8",
+          "dompurify": ">=3.4.17",
+          "fast-uri": ">=4.1.3",
+          "brace-expansion": ">=5.0.12",
+          "ts-deepmerge": ">=8.0.0",
+          "maplibre-gl": ">=6.4.1",
+          "toml": ">=4.2.0 <5",
+          "browserslist": ">=4.28.7",
+          "js-yaml@4": ">=4.3.2 <5",
+          "proxy-addr": ">=2.0.8",
+          "svelte": ">=5.57.2 <6",
+          "basic-ftp": ">=6.2.1",
+          "source-map-js": ">=1.2.2"
+        },
+        "patchedDependencies": {
+          "ssf": "patches/ssf.patch",
+          "echarts@6.1.0": "patches/echarts@6.1.0.patch",
+          "zrender": "patches/zrender.patch"
+        }
+      }
+    },
+    "licenseFirstLine": "MIT License"
+  },
+  "svelte-blog": {
+    "revision": "685281b6a7eea47ba0b892412406208413323164",
+    "package": {
+      "name": "sveltekit-blog-template",
+      "version": "0.0.1",
+      "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-check --tsconfig ./jsconfig.json",
+        "check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
+        "lint": "prettier --check . && eslint --ignore-path .gitignore .",
+        "format": "prettier --write ."
+      },
+      "devDependencies": {
+        "@sveltejs/adapter-auto": "^2.1.0",
+        "@sveltejs/kit": "^1.22.3",
+        "@tailwindcss/typography": "^0.5.7",
+        "@vcarl/remark-headings": "^0.0.1",
+        "autoprefixer": "^10.4.7",
+        "cssnano": "^5.0.15",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-svelte3": "^3.3.0",
+        "mdsvex": "^0.10.6",
+        "mdsvex-relative-images": "^1.0.3",
+        "postcss": "^8.4.14",
+        "postcss-load-config": "^4.0.1",
+        "prettier": "^2.8.1",
+        "prettier-plugin-svelte": "^2.5.1",
+        "rehype-autolink-headings": "^5.1.0",
+        "rehype-slug": "^4.0.1",
+        "remark-reading-time": "^1.0.1",
+        "svelte": "^3.54.0",
+        "svelte-preprocess": "^4.10.7",
+        "tailwindcss": "^3.1.5",
+        "typescript": "^4.9.4",
+        "unist-util-visit": "^3.1.0",
+        "vite": "^4.0.0"
+      },
+      "type": "module",
+      "dependencies": {
+        "clsx": "^1.1.1",
+        "date-fns": "^2.28.0",
+        "heroicons-svelte": "^0.0.1",
+        "node-html-parser": "^5.2.0",
+        "reading-time": "^1.5.0",
+        "reading-time-estimator": "^1.4.33"
+      }
+    },
+    "licenseFirstLine": "MIT License"
+  },
+  "astro-paper": {
+    "revision": "befb05d9d5f359497a1cb4146f5c37fab22f7678",
+    "package": {
+      "name": "astro-paper-v6",
+      "type": "module",
+      "version": "7.0.0",
+      "engines": {
+        "node": ">=22.23.4"
+      },
+      "scripts": {
+        "dev": "astro dev",
+        "build": "astro check && astro build && pagefind --site dist && node copy-pagefind.mjs",
+        "preview": "astro preview",
+        "sync": "astro sync",
+        "astro": "astro",
+        "format:check": "prettier --check .",
+        "format": "prettier --write .",
+        "lint": "eslint ."
+      },
+      "dependencies": {
+        "@astrojs/markdown-remark": "^7.3.4",
+        "@astrojs/mdx": "^7.0.8",
+        "@astrojs/node": "^11.1.9",
+        "@astrojs/rss": "^4.0.19",
+        "@astrojs/sitemap": "^3.7.4",
+        "@tailwindcss/vite": "^4.3.3",
+        "astro": "^7.4.2",
+        "dayjs": "^1.11.23",
+        "lodash.kebabcase": "^4.1.1",
+        "rehype-callouts": "^2.2.0",
+        "remark-collapse": "^0.1.2",
+        "remark-toc": "^9.0.0",
+        "satori": "^0.33.5",
+        "sharp": "^0.35.5",
+        "slugify": "^1.6.9",
+        "tailwindcss": "^4.3.3"
+      },
+      "devDependencies": {
+        "@astrojs/check": "^0.9.12",
+        "@pagefind/default-ui": "^1.5.2",
+        "@shikijs/transformers": "^4.5.0",
+        "@tailwindcss/typography": "^0.5.20",
+        "@types/lodash.kebabcase": "^4.1.9",
+        "@typescript-eslint/parser": "^8.72.1",
+        "eslint": "^10.13.0",
+        "eslint-plugin-astro": "^2.1.1",
+        "pagefind": "^1.5.2",
+        "prettier": "3.9.3",
+        "prettier-plugin-astro": "0.14.1",
+        "prettier-plugin-tailwindcss": "^0.8.1",
+        "typescript": "^6.0.3"
+      }
+    },
+    "licenseFirstLine": "MIT License"
+  },
+  "dashboard": {
+    "revision": "82afa8d630945ea60f35a2bf187721dc6e28a568",
+    "package": {
+      "name": "nuxt-ui-template-dashboard",
+      "private": true,
+      "type": "module",
+      "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint .",
+        "typecheck": "nuxt typecheck"
+      },
+      "dependencies": {
+        "@iconify-json/lucide": "^1.2.150",
+        "@iconify-json/simple-icons": "^1.2.101",
+        "@internationalized/date": "^3.12.4",
+        "@nuxt/ui": "^4.12.0",
+        "@tanstack/charts": "^1.1.0",
+        "@tanstack/table-core": "^8.21.3",
+        "@vueuse/core": "^14.4.0",
+        "@vueuse/nuxt": "^14.4.0",
+        "date-fns": "^4.4.0",
+        "nuxt": "^4.6.3",
+        "scule": "^1.3.0",
+        "tailwindcss": "^4.3.3",
+        "vue": "^3.5.44",
+        "zod": "^4.6.7"
+      },
+      "devDependencies": {
+        "@nuxt/eslint": "^1.17.0",
+        "eslint": "^10.14.0",
+        "eslint-plugin-better-tailwindcss": "^4.10.0",
+        "typescript": "^6.0.3",
+        "vue-tsc": "^3.3.14"
+      },
+      "packageManager": "pnpm@12.16.1"
+    },
+    "licenseFirstLine": "MIT License"
+  }
+}

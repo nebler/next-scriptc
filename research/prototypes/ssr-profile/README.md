@@ -98,3 +98,69 @@ After saving results, stop all task servers, remove `/tmp/nsc-ssr-r1` including 
 Final category tables use the standalone `*-attribution.json` outputs and `summary.json`. Inline attribution in the first `*.json.gz` captures preserves the original broad URL classification. Original and fresh `*-steady` captures are both retained; only the latter supplies the report's category split.
 
 Run `node --test "$HARNESS/test/attribute.test.mjs"` to check interval clipping and mapped package ownership.
+
+## Extend to Astro, SvelteKit, and Nuxt
+
+The second report is [../../ssr-cpu-breakdown-frameworks.md](../../ssr-cpu-breakdown-frameworks.md).
+Keep the original React dependency graph and use `frameworks/package-lock.json.gz`
+for the new frameworks. Use Node 24.22.0 for every command below. Prepare the
+same isolated Node installation as above, substituting `/tmp/nsc-ssr-r2` for
+`/tmp/nsc-ssr-r1`. Copy this entire fixture into `/tmp/nsc-ssr-r2/synthetic`.
+Set `HARNESS` to the checkout's fixture directory and `OUT` to the checkout's
+`research/ssr-profile-frameworks-results` directory.
+
+```sh
+cd /tmp/nsc-ssr-r2/synthetic/frameworks
+gzip -dc package-lock.json.gz > package-lock.json
+npm ci --cache /tmp/nsc-ssr-r2/cache --no-audit --no-fund
+cd astro
+ASTRO_TELEMETRY_DISABLED=1 ../node_modules/.bin/astro build
+cd ../svelte
+../node_modules/.bin/vite build
+cd ../nuxt
+NUXT_TELEMETRY_DISABLED=1 ../node_modules/.bin/nuxt build
+cd ..
+node build-renderers.mjs
+```
+
+Finish all builds and installations before starting any timing. Run separately:
+
+```sh
+VERIFY=1 NORMALIZE=astro node "$HARNESS/run.mjs" astro http://127.0.0.1:4180/ "$OUT" /tmp/nsc-ssr-r2/synthetic/frameworks/astro dist/server/entry.mjs
+VERIFY=1 NORMALIZE=svelte node "$HARNESS/run.mjs" svelte http://127.0.0.1:4180/ "$OUT" /tmp/nsc-ssr-r2/synthetic/frameworks/svelte build/index.js
+VERIFY=1 NORMALIZE=nuxt node "$HARNESS/run.mjs" nuxt http://127.0.0.1:4180/ "$OUT" /tmp/nsc-ssr-r2/synthetic/frameworks/nuxt .output/server/index.mjs
+NODE_ENV=production node /tmp/nsc-ssr-r2/synthetic/ceiling.mjs "$OUT/svelte-ceiling.json" file:///tmp/nsc-ssr-r2/synthetic/frameworks/render-svelte.mjs
+NODE_ENV=production node /tmp/nsc-ssr-r2/synthetic/ceiling.mjs "$OUT/vue-ceiling.json" file:///tmp/nsc-ssr-r2/synthetic/frameworks/render-vue.mjs
+NODE_ENV=production node /tmp/nsc-ssr-r2/synthetic/ceiling.mjs "$OUT/astro-ceiling.json" file:///tmp/nsc-ssr-r2/synthetic/frameworks/render-astro.mjs
+```
+
+`ceiling.mjs` still defaults to plain React and concat. An optional module exports
+`name` and `render`. Async results are awaited for every renderer, including concat.
+Svelte and Vue use Vite's production SSR compiler, with native component boundaries.
+Astro's container renders the built index document, then extracts main. Its number
+therefore includes container and document overhead and is not a pure main render.
+The normalizer never runs inside the timed loop or server response path.
+
+For real apps, clone the exact revisions in
+[../../ssr-profile-frameworks-results/real-apps.json](../../ssr-profile-frameworks-results/real-apps.json)
+as `astro-paper` and `dashboard` under `/tmp/nsc-ssr-r2`. Restore each retained
+`*-install-lock.json.gz` to the clone's `package-lock.json`. For AstroPaper, also
+add `@astrojs/node` version `11.1.9` to its dependencies before `npm ci`.
+Run `node "$HARNESS/prepare-framework-apps.mjs"` once before building. This
+switches AstroPaper to dynamic Node SSR, substitutes a local monospace font,
+disables Nuxt font downloads and telemetry, and enables server source maps.
+Build with `node node_modules/astro/bin/astro.mjs build` in AstroPaper and
+`node node_modules/nuxt/bin/nuxt.mjs build` in dashboard. Skip upstream
+AstroPaper's pagefind postbuild because the measured page is SSR.
+
+```sh
+EXPECT=AstroPaper node "$HARNESS/run.mjs" astro-paper http://127.0.0.1:4180/ "$OUT" /tmp/nsc-ssr-r2/astro-paper dist/server/entry.mjs
+EXPECT=james.anderson@example.com node "$HARNESS/run.mjs" dashboard http://127.0.0.1:4180/ "$OUT" /tmp/nsc-ssr-r2/dashboard .output/server/index.mjs
+```
+
+Remap every profile with the same `remap.mjs`, passing the installed
+`/tmp/nsc-ssr-r2/synthetic/frameworks` as dependency root and its corresponding
+result as the fourth argument. The summarizer now discovers result files rather
+than hard-coding React labels. Run both attribution and normalization tests with
+`node --test "$HARNESS"/test/*.test.mjs`. Delete all task clones, builds, installs,
+and package stores after remapping and saving results.

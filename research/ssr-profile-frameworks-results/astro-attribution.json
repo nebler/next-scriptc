@@ -1,0 +1,915 @@
+{
+  "mappedNodes": 132,
+  "totalNodes": 369,
+  "bounds": {
+    "startUs": 115162396943,
+    "stopUs": 115170432092
+  },
+  "excludedUs": 111976,
+  "totalsUs": {
+    "html": 4228502,
+    "flight": 0,
+    "application": 636629,
+    "serialization": 0,
+    "data": 0,
+    "routing": 1912706,
+    "http": 600752,
+    "gc": 263834,
+    "other": 356434,
+    "idle": 36292
+  },
+  "activeUs": 7998857,
+  "percent": {
+    "html": 52.863827919413986,
+    "flight": 0,
+    "application": 7.958999642073861,
+    "serialization": 0,
+    "data": 0,
+    "routing": 23.912241461498812,
+    "http": 7.510473058838281,
+    "gc": 3.298396258365414,
+    "other": 4.456061659809645
+  },
+  "topFrames": [
+    {
+      "frame": {
+        "functionName": "renderStreaming",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/streaming.js",
+        "lineNumber": 65,
+        "columnNumber": 22
+      },
+      "category": "html",
+      "us": 1860529
+    },
+    {
+      "frame": {
+        "functionName": "createAstro",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/fetch/fetch-state.js",
+        "lineNumber": 414,
+        "columnNumber": 1
+      },
+      "category": "routing",
+      "us": 1525705
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/render.js",
+        "lineNumber": 211,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 563460
+    },
+    {
+      "frame": {
+        "functionName": "escapeHTML",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/escape.js",
+        "lineNumber": 11,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 460713
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "../../../../../shared/data.js",
+        "lineNumber": 1,
+        "columnNumber": 34
+      },
+      "category": "application",
+      "us": 434624
+    },
+    {
+      "frame": {
+        "functionName": "encodeUtf8String",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 326416
+    },
+    {
+      "frame": {
+        "functionName": "(garbage collector)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "gc",
+      "us": 263834
+    },
+    {
+      "frame": {
+        "functionName": "records",
+        "scriptId": "373",
+        "url": "../../../../../shared/data.js",
+        "lineNumber": 0,
+        "columnNumber": 16
+      },
+      "category": "application",
+      "us": 202005
+    },
+    {
+      "frame": {
+        "functionName": "renderAstroComponent",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/component.js",
+        "lineNumber": 310,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 193998
+    },
+    {
+      "frame": {
+        "functionName": "encode",
+        "scriptId": "50",
+        "url": "node:internal/encoding",
+        "lineNumber": 354,
+        "columnNumber": 8
+      },
+      "category": "http",
+      "us": 173834
+    },
+    {
+      "frame": {
+        "functionName": "(program)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 161746
+    },
+    {
+      "frame": {
+        "functionName": "stringifyChunk",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/common.js",
+        "lineNumber": 14,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 154539
+    },
+    {
+      "frame": {
+        "functionName": "renderComponent",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/component.js",
+        "lineNumber": 318,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 140541
+    },
+    {
+      "frame": {
+        "functionName": "registerIfPropagating",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/head-propagation/runtime.js",
+        "lineNumber": 15,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 137415
+    },
+    {
+      "frame": {
+        "functionName": "renderChild",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/any.js",
+        "lineNumber": 6,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 117421
+    },
+    {
+      "frame": {
+        "functionName": "write",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/render.js",
+        "lineNumber": 179,
+        "columnNumber": 23
+      },
+      "category": "html",
+      "us": 114291
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/astro/dist/server/chunks/index_Lc1mOfiq.mjs",
+        "lineNumber": 20,
+        "columnNumber": 29
+      },
+      "category": "routing",
+      "us": 107790
+    },
+    {
+      "frame": {
+        "functionName": "fn",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/astro-component.js",
+        "lineNumber": 8,
+        "columnNumber": 7
+      },
+      "category": "html",
+      "us": 100998
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/astro/dist/server/chunks/index_Lc1mOfiq.mjs",
+        "lineNumber": 28,
+        "columnNumber": 30
+      },
+      "category": "routing",
+      "us": 98375
+    },
+    {
+      "frame": {
+        "functionName": "toAttributeString",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/util.js",
+        "lineNumber": 32,
+        "columnNumber": 13
+      },
+      "category": "html",
+      "us": 79671
+    },
+    {
+      "frame": {
+        "functionName": "init",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/instance.js",
+        "lineNumber": 45,
+        "columnNumber": 1
+      },
+      "category": "html",
+      "us": 75921
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/astro/dist/server/chunks/index_Lc1mOfiq.mjs",
+        "lineNumber": 36,
+        "columnNumber": 28
+      },
+      "category": "routing",
+      "us": 65002
+    },
+    {
+      "frame": {
+        "functionName": "classifyAttribute",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/util.js",
+        "lineNumber": 92,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 52500
+    },
+    {
+      "frame": {
+        "functionName": "writev",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "http",
+      "us": 49627
+    },
+    {
+      "frame": {
+        "functionName": "isPromise",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/util.js",
+        "lineNumber": 0,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 48127
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/astro/dist/server/chunks/index_Lc1mOfiq.mjs",
+        "lineNumber": 43,
+        "columnNumber": 29
+      },
+      "category": "routing",
+      "us": 37958
+    },
+    {
+      "frame": {
+        "functionName": "(idle)",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "idle",
+      "us": 36292
+    },
+    {
+      "frame": {
+        "functionName": "addAttribute",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/util.js",
+        "lineNumber": 109,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 31332
+    },
+    {
+      "frame": {
+        "functionName": "chunkToByteArrayOrString",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/common.js",
+        "lineNumber": 137,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 28543
+    },
+    {
+      "frame": {
+        "functionName": "lstat",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 20501
+    },
+    {
+      "frame": {
+        "functionName": "stat",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 15623
+    },
+    {
+      "frame": {
+        "functionName": "isAstroComponentFactory",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/factory.js",
+        "lineNumber": 1,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 13167
+    },
+    {
+      "frame": {
+        "functionName": "normalize",
+        "scriptId": "38",
+        "url": "node:path",
+        "lineNumber": 1291,
+        "columnNumber": 11
+      },
+      "category": "other",
+      "us": 11876
+    },
+    {
+      "frame": {
+        "functionName": "renderPage",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/page.js",
+        "lineNumber": 22,
+        "columnNumber": 22
+      },
+      "category": "html",
+      "us": 11750
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 1579,
+        "columnNumber": 40
+      },
+      "category": "other",
+      "us": 10500
+    },
+    {
+      "frame": {
+        "functionName": "_Request",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 12089,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 9167
+    },
+    {
+      "frame": {
+        "functionName": "HTMLString",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/escape.js",
+        "lineNumber": 49,
+        "columnNumber": 0
+      },
+      "category": "html",
+      "us": 9124
+    },
+    {
+      "frame": {
+        "functionName": "createAstroPagePartial",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/fetch/fetch-state.js",
+        "lineNumber": 441,
+        "columnNumber": 1
+      },
+      "category": "routing",
+      "us": 9085
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "../../../src/components/Page.astro",
+        "lineNumber": 5,
+        "columnNumber": 136
+      },
+      "category": "html",
+      "us": 7750
+    },
+    {
+      "frame": {
+        "functionName": "removeEventListener",
+        "scriptId": "60",
+        "url": "node:internal/event_target",
+        "lineNumber": 736,
+        "columnNumber": 21
+      },
+      "category": "other",
+      "us": 7708
+    },
+    {
+      "frame": {
+        "functionName": "render",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/app/base.js",
+        "lineNumber": 202,
+        "columnNumber": 7
+      },
+      "category": "routing",
+      "us": 7583
+    },
+    {
+      "frame": {
+        "functionName": "renderStreamToAsyncIterable",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/render.js",
+        "lineNumber": 93,
+        "columnNumber": 15
+      },
+      "category": "html",
+      "us": 7543
+    },
+    {
+      "frame": {
+        "functionName": "parserOnIncoming",
+        "scriptId": "283",
+        "url": "node:_http_server",
+        "lineNumber": 1166,
+        "columnNumber": 25
+      },
+      "category": "http",
+      "us": 6625
+    },
+    {
+      "frame": {
+        "functionName": "writevGeneric",
+        "scriptId": "110",
+        "url": "node:internal/stream_base_commons",
+        "lineNumber": 71,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 6250
+    },
+    {
+      "frame": {
+        "functionName": "FetchState",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/fetch/fetch-state.js",
+        "lineNumber": 218,
+        "columnNumber": 1
+      },
+      "category": "routing",
+      "us": 6042
+    },
+    {
+      "frame": {
+        "functionName": "emit",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 488,
+        "columnNumber": 43
+      },
+      "category": "other",
+      "us": 6042
+    },
+    {
+      "frame": {
+        "functionName": "render",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/routing/handler.js",
+        "lineNumber": 122,
+        "columnNumber": 15
+      },
+      "category": "routing",
+      "us": 5875
+    },
+    {
+      "frame": {
+        "functionName": "createResult",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/fetch/fetch-state.js",
+        "lineNumber": 295,
+        "columnNumber": 7
+      },
+      "category": "routing",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "createOutgoingHttpHeaders",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/app/createOutgoingHttpHeaders.js",
+        "lineNumber": 7,
+        "columnNumber": 13
+      },
+      "category": "routing",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "parse",
+        "scriptId": "0",
+        "url": "",
+        "lineNumber": -1,
+        "columnNumber": -1
+      },
+      "category": "other",
+      "us": 4542
+    },
+    {
+      "frame": {
+        "functionName": "collapseDuplicateLeadingSlashes",
+        "scriptId": "244",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/node_modules/@astrojs/internal-helpers/dist/path.js",
+        "lineNumber": 14,
+        "columnNumber": 47
+      },
+      "category": "other",
+      "us": 4501
+    },
+    {
+      "frame": {
+        "functionName": "pull",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 1578,
+        "columnNumber": 14
+      },
+      "category": "other",
+      "us": 4500
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5127,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 4458
+    },
+    {
+      "frame": {
+        "functionName": "handlePages",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/pages/handler.js",
+        "lineNumber": 23,
+        "columnNumber": 22
+      },
+      "category": "routing",
+      "us": 4458
+    },
+    {
+      "frame": {
+        "functionName": "resolveStaticPath",
+        "scriptId": "128",
+        "url": "../../../../node_modules/@astrojs/node/dist/serve-static.js",
+        "lineNumber": 13,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 4416
+    },
+    {
+      "frame": {
+        "functionName": "#getOrCreateModuleJobAfterResolve",
+        "scriptId": "72",
+        "url": "node:internal/modules/esm/loader",
+        "lineNumber": 525,
+        "columnNumber": 35
+      },
+      "category": "other",
+      "us": 4375
+    },
+    {
+      "frame": {
+        "functionName": "",
+        "scriptId": "373",
+        "url": "../../../src/components/Page.astro",
+        "lineNumber": 5,
+        "columnNumber": 439
+      },
+      "category": "html",
+      "us": 4209
+    },
+    {
+      "frame": {
+        "functionName": "resolve",
+        "scriptId": "38",
+        "url": "node:path",
+        "lineNumber": 1244,
+        "columnNumber": 9
+      },
+      "category": "other",
+      "us": 4167
+    },
+    {
+      "frame": {
+        "functionName": "_addListener",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 544,
+        "columnNumber": 21
+      },
+      "category": "other",
+      "us": 4083
+    },
+    {
+      "frame": {
+        "functionName": "renderAllHeadContent",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/head.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      },
+      "category": "html",
+      "us": 3626
+    },
+    {
+      "frame": {
+        "functionName": "clearIncoming",
+        "scriptId": "283",
+        "url": "node:_http_server",
+        "lineNumber": 1082,
+        "columnNumber": 22
+      },
+      "category": "http",
+      "us": 3083
+    },
+    {
+      "frame": {
+        "functionName": "_Response",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 11649,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "createRequestFromNodeRequest",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/app/node.js",
+        "lineNumber": 32,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "Readable",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 327,
+        "columnNumber": 17
+      },
+      "category": "http",
+      "us": 3042
+    },
+    {
+      "frame": {
+        "functionName": "next",
+        "scriptId": "326",
+        "url": "file:///private/tmp/nsc-ssr-r2/synthetic/frameworks/node_modules/send/index.js",
+        "lineNumber": 646,
+        "columnNumber": 16
+      },
+      "category": "other",
+      "us": 3041
+    },
+    {
+      "frame": {
+        "functionName": "getAPIContext",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/fetch/fetch-state.js",
+        "lineNumber": 1002,
+        "columnNumber": 1
+      },
+      "category": "routing",
+      "us": 3041
+    },
+    {
+      "frame": {
+        "functionName": "write_",
+        "scriptId": "282",
+        "url": "node:_http_outgoing",
+        "lineNumber": 958,
+        "columnNumber": 15
+      },
+      "category": "http",
+      "us": 3041
+    },
+    {
+      "frame": {
+        "functionName": "removeListener",
+        "scriptId": "22",
+        "url": "node:events",
+        "lineNumber": 679,
+        "columnNumber": 27
+      },
+      "category": "other",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "webidl.converters.USVString",
+        "scriptId": "310",
+        "url": "node:internal/deps/undici/undici",
+        "lineNumber": 5235,
+        "columnNumber": 42
+      },
+      "category": "other",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "AsyncContextFrame",
+        "scriptId": "21",
+        "url": "node:internal/async_context_frame",
+        "lineNumber": 42,
+        "columnNumber": 13
+      },
+      "category": "other",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "validateComponentProps",
+        "scriptId": "132",
+        "url": "../../../../node_modules/astro/dist/runtime/server/render/astro/instance.js",
+        "lineNumber": 79,
+        "columnNumber": 9
+      },
+      "category": "html",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "setOriginPathname",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/routing/rewrite.js",
+        "lineNumber": 150,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 3000
+    },
+    {
+      "frame": {
+        "functionName": "nextTick",
+        "scriptId": "32",
+        "url": "node:internal/process/task_queues",
+        "lineNumber": 112,
+        "columnNumber": 17
+      },
+      "category": "other",
+      "us": 2958
+    },
+    {
+      "frame": {
+        "functionName": "run",
+        "scriptId": "75",
+        "url": "node:internal/modules/esm/module_job",
+        "lineNumber": 549,
+        "columnNumber": 11
+      },
+      "category": "other",
+      "us": 2957
+    },
+    {
+      "frame": {
+        "functionName": "normalizeString",
+        "scriptId": "38",
+        "url": "node:path",
+        "lineNumber": 91,
+        "columnNumber": 24
+      },
+      "category": "other",
+      "us": 2875
+    },
+    {
+      "frame": {
+        "functionName": "matchRequest",
+        "scriptId": "128",
+        "url": "../../../../node_modules/astro/dist/core/routing/match-request.js",
+        "lineNumber": 33,
+        "columnNumber": 16
+      },
+      "category": "routing",
+      "us": 2875
+    },
+    {
+      "frame": {
+        "functionName": "join",
+        "scriptId": "38",
+        "url": "node:path",
+        "lineNumber": 1328,
+        "columnNumber": 6
+      },
+      "category": "other",
+      "us": 2834
+    },
+    {
+      "frame": {
+        "functionName": "tracePromise",
+        "scriptId": "31",
+        "url": "node:diagnostics_channel",
+        "lineNumber": 367,
+        "columnNumber": 14
+      },
+      "category": "other",
+      "us": 2833
+    },
+    {
+      "frame": {
+        "functionName": "FastBuffer",
+        "scriptId": "25",
+        "url": "node:internal/buffer",
+        "lineNumber": 959,
+        "columnNumber": 0
+      },
+      "category": "http",
+      "us": 2792
+    },
+    {
+      "frame": {
+        "functionName": "Readable.on",
+        "scriptId": "100",
+        "url": "node:internal/streams/readable",
+        "lineNumber": 1152,
+        "columnNumber": 32
+      },
+      "category": "http",
+      "us": 2792
+    }
+  ]
+}

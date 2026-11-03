@@ -1,0 +1,6 @@
+---
+import {records,links} from "../../../../shared/data.js";
+import Row from "./Row.astro";
+const rows=records();
+---
+<main id="benchmark"><header><h1>Ledger &amp; reports</h1><nav><a href="/">Home</a><a href="/about">About</a></nav></header><aside><ul>{links.map(l=><li><a href={l.href}>{l.text}</a></li>)}</ul></aside><section><h2>Accounts</h2><p>A clear view of every account. Reliable reports for teams &lt;large&gt; &amp; small.</p><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody>{rows.map(r=><Row r={r}/>)}</tbody></table></section><footer>Example Company © 2026</footer></main>

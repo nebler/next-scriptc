@@ -1,0 +1,1 @@
+<script>let {status}=$props();</script><span class={status === "Paid" ? "paid" : "pending"}>{status}</span>

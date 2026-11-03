@@ -1,0 +1,1 @@
+<script setup>defineProps(["value"]);</script><template><td>{{value}}</td></template>

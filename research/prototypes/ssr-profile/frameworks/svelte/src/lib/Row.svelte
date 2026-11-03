@@ -1,0 +1,1 @@
+<script>import Cell from "./Cell.svelte";import Badge from "./Badge.svelte";let {r}=$props();</script><tr><Cell value={r.id}/><td><strong>{r.name}</strong></td><Cell value={r.email}/><Cell value={r.amount}/><Cell value={r.date}/><td><Badge status={r.status}/></td></tr>

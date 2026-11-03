@@ -1,0 +1,1 @@
+<script>let {value}=$props();</script><td>{value}</td>
